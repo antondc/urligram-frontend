@@ -1,0 +1,16 @@
+.DS*Store
+.DS_Store?
+.*_
+.Spotlight-V100
+.Trashes
+yarn.lock
+package-lock.json
+node_modules
+ehthumbs.db
+Thumbs.db
+media.zip
+media/*
+dist/*
+# Dont track the built view
+src/server/views/index.ejs
+__snapshots__

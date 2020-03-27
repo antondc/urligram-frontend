@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html <%="htmlWebpackPlugin.options.toHtml" %>
+  >
+  <head>
+    <meta name="viewport" content="width=device-width" />
+    <%= htmlWebpackPlugin.options.toHead %>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Antonio Díaz, full stack developer" />
+    <meta name="keywords" content="Software development, web design, JavaScript, Python, Go, C" />
+    <meta name="author" content="Antonio Díaz" />
+    <link rel="icon" type="image/png" href="/favicon/favicon.png" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-15271563-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'UA-15271563-2');
+    </script>
+  </head>
+  <body class="<%= htmlWebpackPlugin.options.deviceDetector %> preload">
+    <div id="app"><%= htmlWebpackPlugin.options.body %></div>
+    <script>
+      window.data = <%= htmlWebpackPlugin.options.data %>
+    </script>
+  </body>
+</html>

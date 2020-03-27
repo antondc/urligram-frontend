@@ -1,0 +1,18 @@
+{
+    "PORT_SERVER_DEVELOPMENT": "4000",
+    "PORT_SERVER_PRODUCTION": "16887",
+    "PORT_API_DEVELOPMENT": "3000",
+    "PORT_API_PRODUCTION": "12187",
+    "ENDPOINT_SERVER_DEVELOPMENT": "http://0.0.0.0:4000",
+    "ENDPOINT_SERVER_PRODUCTION": "http://antoniodiaz.me:16887",
+    "ENDPOINT_API_DEVELOPMENT": "http://0.0.0.0:3000",
+    "ENDPOINT_API_PRODUCTION": "https://api.antoniodiaz.me",
+    "SECRET": "superSecret",
+    "SESSION_DURATION": 3600,
+    "ENABLE_ISOMORPHISM": true,
+    "MEDIA": "media",
+    "MEDIA_FOLDER": "media",
+    "MEDIA_IMAGES": "media/images",
+    "TEMP_FILES": "media/temp_files",
+    "DEFAULT_IMAGE": "/img/default-image.png"
+}
