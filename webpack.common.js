@@ -47,7 +47,7 @@ module.exports = {
         },
         {
           test: /\.(js|jsx|ts|tsx)$/,
-          use: ['awesome-typescript-loader'],
+          loader: ['ts-loader'],
           exclude: /node_modules/,
         },
         {
@@ -104,7 +104,7 @@ module.exports = {
         },
         {
           test: /\.(js|jsx|ts|tsx)$/,
-          use: ['awesome-typescript-loader'],
+          loader: ['ts-loader'],
           exclude: /node_modules/,
         },
         {
