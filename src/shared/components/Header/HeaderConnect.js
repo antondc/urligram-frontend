@@ -13,7 +13,7 @@ export const HeaderConnect = connect(
   dispatch => {
     return {
       logOut(history) {
-        // dispatch(actions.logOut(history));
+        dispatch(actions.logOut(history));
       },
     };
   }

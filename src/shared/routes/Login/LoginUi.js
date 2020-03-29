@@ -15,8 +15,12 @@ class LoginUi extends Component {
   }
 
   componentWillMount() {
-    if (this.props.logged) {
-      this.props.history.replace('/control');
+    const {
+      UserSession: { logged },
+      history,
+    } = this.props;
+    if (logged) {
+      history.replace('/control');
     }
   }
 
@@ -27,19 +31,22 @@ class LoginUi extends Component {
   };
 
   onSubmit = () => {
+    const { requestToken } = this.props;
     const { username, password } = this.state;
-    this.props.requestToken(username, password, this.props.history);
+    requestToken(username, password, this.props.history);
   };
 
   render() {
     return (
       <div className="Login">
         <h1 className="NotFound-h1">LOGIN PAGE</h1>
-        <form onSubmit={this.onSubmit}>
+        <form>
           Sign in
           <input name="username" type="text" label="User name" autoFocus onChange={this.onChange} />
           <input name="password" type="text" label="Password" autoFocus onChange={this.onChange} />
-          <button>Enter</button>
+          <button type="button" onClick={this.onSubmit}>
+            Enter
+          </button>
         </form>
       </div>
     );
