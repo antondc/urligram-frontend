@@ -80,7 +80,7 @@ router.get('/:lang([a-z]{2})?/:rest(*[a-z])?/:item([0-9])?', function(req: any, 
           };
           // Sending the Router with Route component; App component sent inside render method; backend data passed via context
           const context: any = { data }; // TODO: Check this type
-          const store = storeFactory(true, data);
+          const store = storeFactory(data);
           const appString = config.ENABLE_ISOMORPHISM
             ? renderToString(
                 <Provider store={store}>

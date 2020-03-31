@@ -18,7 +18,7 @@ const config = require('./../../config.test.json');
 
 window.data = window.data || {};
 
-const store = storeFactory(false, window.data);
+const store = storeFactory(window.data);
 const renderApp = config.ENABLE_ISOMORPHISM ? hydrate : render;
 
 // Sending the Router with Route component; App component sent inside render method to insert data
