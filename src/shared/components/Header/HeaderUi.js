@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { withCookies } from 'react-cookie';
 import actions from '../../redux/actions';
 import { withRouter } from 'react-router';
 
@@ -50,4 +49,4 @@ const mapStateToProps = state => ({
 
 export default connect(mapStateToProps, {
   logOut_: actions.logOut,
-})(withCookies(withRouter(HeaderUi)));
+})(withRouter(HeaderUi));

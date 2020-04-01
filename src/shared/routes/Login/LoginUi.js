@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { withCookies } from 'react-cookie';
 import { withRouter } from 'react-router';
 
 import './Login.less';
@@ -52,4 +51,4 @@ class LoginUi extends Component {
   }
 }
 
-export default withCookies(withRouter(LoginUi));
+export default withRouter(LoginUi);

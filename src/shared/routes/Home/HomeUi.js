@@ -1,5 +1,4 @@
 import React from 'react';
-import { withCookies } from 'react-cookie';
 import './Home.less';
 
 class HomeUi extends React.Component {
@@ -13,4 +12,4 @@ class HomeUi extends React.Component {
   }
 }
 
-export default withCookies(HomeUi);
+export default HomeUi;
