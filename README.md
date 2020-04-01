@@ -29,10 +29,11 @@ Local server will run in port `4000`, production conf in `config.test.json`.
 ## TODO
 
 - Restructure state:
-- Store cookie as object with user info and retrieve it
-  - AllRoutes.js
-  - actions.requestToken
-  - LoginUi
+  - Navigated route to routerLocations
+- Rename Control
+- Transform js and jsx files to ts and tsx
+- Modularize Redux
+- Add reselect
 
 ## Docs
 

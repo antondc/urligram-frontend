@@ -2,7 +2,7 @@ import * as React from 'react';
 import { render, hydrate } from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Route } from 'react-router-dom';
-import App from '../shared/common/App/AppConnect';
+import App from '../shared/common/Layout';
 import storeFactory from '../shared/redux/index';
 import { CookiesProvider } from 'react-cookie';
 

@@ -1,15 +1,15 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import Header from '../../components/Header/HeaderUi';
-import Footer from '../../components/Footer/Footer';
+import { connect } from 'react-redux';
+import Header from '../../components/Header';
+import Footer from '../../components/Footer';
 import Main from '../../routes/Main';
 import Routes from '../../routes/routes';
 import { findActiveRoute } from '../../tools/utils';
 
-import './App.less';
+import './Layout.less';
 
-class AppUi extends React.Component {
-  // TODO: Rename this as Layout??
+class Layout extends React.Component {
   render() {
     const activeRoute = findActiveRoute(this.props.location.pathname, Routes);
     if (isBrowser) {
@@ -20,10 +20,10 @@ class AppUi extends React.Component {
     }
 
     return (
-      <div className={'App' + ' App--' + this.props.NavigatedRoute.route}>
+      <div className={'Layout' + ' Layout--' + this.props.NavigatedRoute.route}>
         {/*
         TODO: find proper place for popups and spinners
-        <div className="App-popUp">
+        <div className="Layout-popUp">
           <Fade mounted={this.props.Saving.isSaving} time={300}>
             <Loader />
           </Fade>
@@ -43,4 +43,9 @@ class AppUi extends React.Component {
   }
 }
 
-export default AppUi;
+const mapStateToProps = state => ({
+  Saving: state.Saving,
+  NavigatedRoute: state.NavigatedRoute,
+});
+
+export default connect(mapStateToProps)(Layout);

@@ -2,10 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import actions from '../../redux/actions';
-
 import './Header.less';
 
-class HeaderUi extends React.Component {
+class Header extends React.Component {
   render() {
     const {
       UserSession: { logged },
@@ -48,4 +47,4 @@ const mapStateToProps = state => ({
 
 export default connect(mapStateToProps, {
   logOut: actions.logOut,
-})(HeaderUi);
+})(Header);

@@ -8,7 +8,7 @@ import { StaticRouter, Route, matchPath } from 'react-router-dom';
 import { renderToString } from 'react-dom/server';
 import Routes from '../../shared/routes/routes';
 import storeFactory from '../../shared/redux/index';
-import App from '../../shared/common/App/AppConnect';
+import Layout from '../../shared/common/Layout';
 import { findActiveRoute, checkIfFileUrls } from '../../shared/tools/utils';
 const config = require('./../../../config.test.json');
 import Helmet from 'react-helmet';
@@ -94,7 +94,7 @@ router.get('/:lang([a-z]{2})?/:rest(*[a-z])?/:item([0-9])?', function(req: any, 
                       <Route
                         path="/"
                         render={props => {
-                          return <App {...props} />;
+                          return <Layout {...props} />;
                         }}
                       />
                     </StaticRouter>
