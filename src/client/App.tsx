@@ -29,7 +29,7 @@ renderApp(
         <Route
           path="/"
           render={props => {
-            return <App {...props} isAuthed={true} />;
+            return <App {...props} />;
           }}
         />
       </BrowserRouter>

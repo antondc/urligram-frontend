@@ -1,6 +1,5 @@
 import React from 'react';
 import { withCookies } from 'react-cookie';
-import WithAuth from '../../common/WithAuth/WithAuth';
 import './Control.less';
 
 class ControlUi extends React.Component {
@@ -13,4 +12,4 @@ class ControlUi extends React.Component {
   }
 }
 
-export default withCookies(WithAuth(ControlUi));
+export default withCookies(ControlUi);

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import Header from '../../components/Header/HeaderConnect';
+import Header from '../../components/Header/HeaderUi';
 import Footer from '../../components/Footer/Footer';
 import Main from '../../routes/Main/MainConnect';
 import Routes from '../../routes/routes';
@@ -34,7 +34,7 @@ class AppUi extends React.Component {
         <Route
           path="/:lang([a-z]{2})?"
           render={props => {
-            return <Main data={this.props.data} {...props} isAuthed={true} />;
+            return <Main data={this.props.data} {...props} />;
           }}
         />
         <Footer />

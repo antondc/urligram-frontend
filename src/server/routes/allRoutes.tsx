@@ -74,10 +74,15 @@ router.get('/:lang([a-z]{2})?/:rest(*[a-z])?/:item([0-9])?', function(req: any, 
             domain: domain,
           };
           data.NavigatedRoute = actions.setNavigatedRoute({ route: activeRoute.name }).data;
+
           // Adding initial user to data for store
-          data.UserSession = {
-            logged: req.cookies.sessionUniversalCookie ? true : false,
-          };
+          if (req.cookies.sessionUser) {
+            const sessionUser = JSON.parse(req.cookies.sessionUser);
+            data.UserSession = {
+              ...sessionUser,
+            };
+          }
+
           // Sending the Router with Route component; App component sent inside render method; backend data passed via context
           const context: any = { data }; // TODO: Check this type
           const store = storeFactory(data);
@@ -89,7 +94,7 @@ router.get('/:lang([a-z]{2})?/:rest(*[a-z])?/:item([0-9])?', function(req: any, 
                       <Route
                         path="/"
                         render={props => {
-                          return <App {...props} isAuthed={true} />;
+                          return <App {...props} />;
                         }}
                       />
                     </StaticRouter>

@@ -2,7 +2,6 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import { HomePage, UserSession, FirstLoad, Language, Languages, NavigatedRoute } from './reducers';
 
-
 const middleware = [thunk];
 
 // Configuration for Redux devtools

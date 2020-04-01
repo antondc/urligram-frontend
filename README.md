@@ -26,6 +26,14 @@ Local server will run in port `4000`, production conf in `config.test.json`.
 - NVM
 - NPM
 
+## TODO
+
+- Restructure state:
+- Store cookie as object with user info and retrieve it
+  - AllRoutes.js
+  - actions.requestToken
+  - LoginUi
+
 ## Docs
 
 ### Webpack build

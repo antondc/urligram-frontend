@@ -2,15 +2,16 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "type": "node",
+      "name": "Linking: Launch Chrome",
+      "type": "chrome",
       "request": "launch",
-      "name": "Launch Program",
-      "program": "${workspaceFolder}/dist/server.js"
+      "url": "http://0.0.0.0:4000",
+      "webRoot": "${workspaceFolder}"
     },
     {
       "type": "node",
       "request": "attach",
-      "name": "Attach by Process ID",
+      "name": "Linking: Attach Node by Process ID",
       "processId": "${command:PickProcess}",
       "port": 9228,
       "skipFiles": ["${workspaceRoot}/node_modules/**/*.js"],
@@ -19,5 +20,10 @@
       "outFiles": ["${workspaceRoot}/dist/*.js"]
     }
   ],
-  "compounds": []
+  "compounds": [
+    {
+      "name": "Linking full",
+      "configurations": ["Linking: Launch Chrome", "Linking: Attach Node by Process ID"]
+    }
+  ]
 }

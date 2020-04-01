@@ -33,12 +33,17 @@ const actions = {
             sessionCookie.removeChangeListener();
             history.push('/control');
           });
-          sessionCookie.set('sessionUniversalCookie', response.token, {
+          const user = { ...response.user, logged: true };
+          sessionCookie.set('sessionToken', response.token, {
+            maxAge: config.SESSION_DURATION,
+            path: '/',
+          });
+          sessionCookie.set('sessionUser', user, {
             maxAge: config.SESSION_DURATION,
             path: '/',
           });
 
-          return dispatch(actions.logIn(response.user));
+          return dispatch(actions.logIn(user));
         })
         .catch(error => {
           return dispatch(actions.logFailed(error));
@@ -46,27 +51,26 @@ const actions = {
     };
   },
 
-  logIn: user => {
-    return {
-      type: C.LOG_IN,
-      data: {
-        user,
-        logged: true,
-      },
-    };
-  },
-
-  logOut: history => {
+  logOut: (/*history*/) => {
     sessionCookie.addChangeListener(function() {
       sessionCookie.removeChangeListener();
-      history.push('/login');
+      // history.push('/login');
     });
-    sessionCookie.remove('sessionUniversalCookie', { path: '/' });
-
+    sessionCookie.remove('sessionToken', { path: '/' });
+    sessionCookie.remove('sessionUser', { path: '/' });
     return {
       type: C.LOG_OUT,
       data: {
         logged: false,
+      },
+    };
+  },
+
+  logIn: user => {
+    return {
+      type: C.LOG_IN,
+      data: {
+        ...user,
       },
     };
   },

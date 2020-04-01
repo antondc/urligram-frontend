@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { withCookies } from 'react-cookie';
-import WithAuth from '../../common/WithAuth/WithAuth';
+import actions from '../../redux/actions';
 import { withRouter } from 'react-router';
 
 import './Header.less';
@@ -11,7 +12,7 @@ class HeaderUi extends React.Component {
     const {
       UserSession: { logged },
       Language,
-      logOut,
+      logOut_,
     } = this.props;
 
     return (
@@ -25,7 +26,7 @@ class HeaderUi extends React.Component {
               <Link className="Header-item" to="/control">
                 Control
               </Link>
-              <Link className="Header-item" to="/" onClick={logOut}>
+              <Link className="Header-item" to="/" onClick={logOut_}>
                 Log out
               </Link>
             </>
@@ -41,4 +42,12 @@ class HeaderUi extends React.Component {
   }
 }
 
-export default withCookies(WithAuth(withRouter(HeaderUi)));
+const mapStateToProps = state => ({
+  Language: state.Language,
+  NavigatedRoute: state.NavigatedRoute,
+  UserSession: state.UserSession,
+});
+
+export default connect(mapStateToProps, {
+  logOut_: actions.logOut,
+})(withCookies(withRouter(HeaderUi)));
