@@ -2,7 +2,7 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import Header from '../../components/Header/HeaderUi';
 import Footer from '../../components/Footer/Footer';
-import Main from '../../routes/Main/MainConnect';
+import Main from '../../routes/Main';
 import Routes from '../../routes/routes';
 import { findActiveRoute } from '../../tools/utils';
 

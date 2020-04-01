@@ -25,7 +25,7 @@ class HeaderUi extends React.Component {
               <Link className="Header-item" to="/control">
                 Control
               </Link>
-              <Link className="Header-item" to="/" onClick={logOut_}>
+              <Link className="Header-item" to="/login" onClick={logOut_}>
                 Log out
               </Link>
             </>

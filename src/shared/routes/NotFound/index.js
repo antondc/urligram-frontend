@@ -1,5 +1,4 @@
 import React from 'react';
-import Helmet from 'react-helmet';
 import './NotFound.less';
 
 class NotFound extends React.Component {

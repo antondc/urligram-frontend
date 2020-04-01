@@ -1,8 +1,7 @@
-import Home from './Home/HomeConnect';
-import Control from './Control/ControlConnect';
-import Login from './Login/LoginConnect';
-import NotFound from './NotFound/NotFound';
-
+import Home from './Home';
+import Control from './Control';
+import Login from './Login';
+import NotFound from './NotFound';
 // import actions from '../redux/actions';
 
 const Routes = {

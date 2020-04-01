@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
+import actions from '../../redux/actions';
 
 import './Login.less';
 
@@ -13,11 +15,8 @@ class LoginUi extends Component {
   }
 
   componentWillMount() {
-    const {
-      UserSession: { logged },
-      history,
-    } = this.props;
-    if (logged) {
+    const { isLogged, history } = this.props;
+    if (isLogged) {
       history.replace('/control');
     }
   }
@@ -51,4 +50,12 @@ class LoginUi extends Component {
   }
 }
 
-export default withRouter(LoginUi);
+const mapStateToProps = state => ({
+  isLogged: state.UserSession.isLogged,
+});
+
+export default withRouter(
+  connect(mapStateToProps, {
+    requestToken: actions.requestToken,
+  })(LoginUi)
+);

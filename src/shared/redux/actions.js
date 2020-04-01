@@ -2,7 +2,8 @@ import C from './constants';
 import { v4 } from 'uuid';
 import fetch from 'isomorphic-fetch';
 import Cookies from 'universal-cookie';
-const sessionCookie = new Cookies();
+const cookies1 = new Cookies();
+const cookies = new Cookies();
 import { handleResponse } from '../tools/errors';
 const config = require('../../../config.test.json');
 
@@ -29,16 +30,16 @@ const actions = {
       })
         .then(handleResponse)
         .then(response => {
-          sessionCookie.addChangeListener(function() {
-            sessionCookie.removeChangeListener();
+          cookies.addChangeListener(function() {
+            cookies.removeChangeListener();
             history.push('/control');
           });
           const user = { ...response.user, logged: true };
-          sessionCookie.set('sessionToken', response.token, {
+          cookies.set('sessionToken', response.token, {
             maxAge: config.SESSION_DURATION,
             path: '/',
           });
-          sessionCookie.set('sessionUser', user, {
+          cookies.set('sessionUser', user, {
             maxAge: config.SESSION_DURATION,
             path: '/',
           });
@@ -51,13 +52,9 @@ const actions = {
     };
   },
 
-  logOut: (/*history*/) => {
-    sessionCookie.addChangeListener(function() {
-      sessionCookie.removeChangeListener();
-      // history.push('/login');
-    });
-    sessionCookie.remove('sessionToken', { path: '/' });
-    sessionCookie.remove('sessionUser', { path: '/' });
+  logOut: () => {
+    cookies.remove('sessionToken', { path: '/' });
+    cookies.remove('sessionUser', { path: '/' });
     return {
       type: C.LOG_OUT,
       data: {

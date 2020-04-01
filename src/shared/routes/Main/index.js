@@ -6,19 +6,25 @@ import Routes from '../../routes/routes';
 import Control from '../../common/Control';
 import './Main.less';
 
-class MainUi extends React.Component {
+class Main extends React.Component {
   render() {
+    const { isLogged, location } = this.props;
+
     return (
       <div className="Main">
         <section className="Main-initial">
-          <Switch location={this.props.location}>
-            <Route
-              exact={Routes.Login.exact}
-              path={Routes.Login.path}
-              render={props => {
-                return <Routes.Login.component {...props} {...Routes.Login} />;
-              }}
-            />
+          <Switch location={location}>
+            {isLogged && <Redirect from="/login" to="/control" />}
+            {!isLogged && <Redirect from="/control" to="/login" />}
+            <Route path={Routes.Login.path} exact={Routes.Login.exact}>
+              <Route
+                exact={Routes.Login.exact}
+                path={Routes.Login.path}
+                render={props => {
+                  return <Routes.Login.component {...props} {...Routes.Login} />;
+                }}
+              />
+            </Route>
             <Route
               exact={Routes.Home.exact}
               path={Routes.Home.path}
@@ -28,7 +34,6 @@ class MainUi extends React.Component {
             />
 
             <Control>
-              {!this.props.isLogged && <Redirect to="/" />}
               <Route
                 exact={Routes.Control.exact}
                 path={Routes.Control.path}
@@ -55,4 +60,4 @@ const mapStateToProps = state => ({
   isLogged: state.UserSession.logged,
 });
 
-export default connect(mapStateToProps)(MainUi);
+export default connect(mapStateToProps)(Main);
