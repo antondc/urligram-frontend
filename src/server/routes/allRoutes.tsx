@@ -1,6 +1,6 @@
-const express = require('express');
-const router = express.Router();
 import React from 'react';
+import express from 'express';
+import Helmet from 'react-helmet';
 import serialize from 'serialize-javascript';
 import { Provider } from 'react-redux';
 import { CookiesProvider } from 'react-cookie';
@@ -10,9 +10,10 @@ import Routes from '../../shared/routes/routes';
 import storeFactory from '../../shared/redux/index';
 import Layout from '../../shared/common/Layout';
 import { findActiveRoute, checkIfFileUrls } from '../../shared/tools/utils';
-const config = require('./../../../config.test.json');
-import Helmet from 'react-helmet';
+import config from './../../../config.test.json';
 import actions from '../../shared/redux/actions';
+
+const router = express.Router();
 
 // TODO: this should be in a declaration file
 export interface Global {

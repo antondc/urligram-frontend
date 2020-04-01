@@ -1,11 +1,9 @@
 import C from './constants';
-import { v4 } from 'uuid';
 import fetch from 'isomorphic-fetch';
 import Cookies from 'universal-cookie';
-const cookies1 = new Cookies();
 const cookies = new Cookies();
 import { handleResponse } from '../tools/errors';
-const config = require('../../../config.test.json');
+import config from '../../../config.test.json';
 
 const actions = {
   requestToken: (username, password, history) => {

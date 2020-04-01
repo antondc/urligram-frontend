@@ -5,7 +5,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import App from '../shared/common/Layout';
 import storeFactory from '../shared/redux/index';
 import { CookiesProvider } from 'react-cookie';
-
+import config from './../../config.test.json';
 // https://stackoverflow.com/a/45352250/7499416
 
 interface CustomWindow extends Window {
@@ -13,8 +13,6 @@ interface CustomWindow extends Window {
 }
 
 declare let window: CustomWindow;
-
-const config = require('./../../config.test.json');
 
 window.data = window.data || {};
 

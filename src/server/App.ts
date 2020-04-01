@@ -1,17 +1,14 @@
 import serveGzip from './tools/serveGzip';
 import * as bodyParser from 'body-parser';
-
-const express = require('express');
-const path = require('path');
-const cookieParser = require('cookie-parser');
-const logger = require('morgan');
-
+import express from 'express';
+import path from 'path';
+import cookieParser from 'cookie-parser';
+import logger from 'morgan';
 import allRoutes from './routes/allRoutes';
-
-const cors = require('cors');
-const config = require('./../../config.test.json');
-const device = require('express-device');
-const cookiesMiddleware = require('universal-cookie-express');
+import cors from 'cors';
+import http from 'http';
+const device = require('express-device'); // TODO: replace for https://www.npmjs.com/package/express-useragent
+import cookiesMiddleware from 'universal-cookie-express';
 
 const app = express();
 
@@ -68,7 +65,6 @@ app.use(function(err: any, req: any, res: any, next: any) {
 });
 
 // Launching app
-const http = require('http');
 export default app;
 const server = http.createServer(app);
 
