@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
 import actions from '../../redux/actions';
 
 import './Login.less';
@@ -12,13 +11,6 @@ class LoginUi extends Component {
       username: undefined,
       password: undefined,
     };
-  }
-
-  componentWillMount() {
-    const { isLogged, history } = this.props;
-    if (isLogged) {
-      history.replace('/control');
-    }
   }
 
   onChange = e => {
@@ -54,8 +46,6 @@ const mapStateToProps = state => ({
   isLogged: state.UserSession.isLogged,
 });
 
-export default withRouter(
-  connect(mapStateToProps, {
-    requestToken: actions.requestToken,
-  })(LoginUi)
-);
+export default connect(mapStateToProps, {
+  requestToken: actions.requestToken,
+})(LoginUi);

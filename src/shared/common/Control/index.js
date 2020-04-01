@@ -40,11 +40,11 @@ class Control extends React.Component {
   };
 
   componentWillMount = () => {
-    const { auth, logOut_ } = this.props;
+    const { auth, logOut } = this.props;
     const { isLogged } = this.state;
 
     if (auth && !isLogged && isBrowser) {
-      logOut_();
+      logOut();
     }
   };
 
@@ -56,6 +56,6 @@ class Control extends React.Component {
 
 export default withCookies(
   connect(null, {
-    logOut_: actions.logOut,
+    logOut: actions.logOut,
   })(Control)
 );
