@@ -28,12 +28,16 @@ Local server will run in port `4000`, production conf in `config.test.json`.
 
 ## TODO
 
+- Webpack enable imports from root: e.g. config.test.json
+- Transform js and jsx files to ts and tsx
+- Add reselect
+- Modularize Redux
 - Restructure state:
   - Navigated route to routerLocations
-- Rename Control
-- Transform js and jsx files to ts and tsx
-- Modularize Redux
-- Add reselect
+- Rename Control/Control
+- Move shared/Control logic to an action, reducer or a middleware:
+  - https://medium.com/@jeffbski/where-do-i-put-my-business-logic-in-a-react-redux-application-9253ef91ce1
+  - https://scalac.io/react-redux-jwt-authentication/
 
 ## Docs
 
