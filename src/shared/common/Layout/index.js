@@ -7,7 +7,7 @@ import Main from '../../routes/Main';
 import Routes from '../../routes/routes';
 import { findActiveRoute } from '../../tools/utils';
 import actions from '../../redux/actions';
-import Cookies from '../../services/Cookies';
+import Cookies, { COOKIE_INVALID } from '../../services/Cookies';
 
 import './Layout.less';
 
@@ -20,8 +20,8 @@ class Layout extends React.Component {
     const { logOut } = this.props;
 
     if (this.props.location !== prevProps.location) {
-      const isCookieValid = this.cookies.verifyCookies();
-      if (!isCookieValid) {
+      const cookieState = this.cookies.verifyCookies();
+      if (cookieState === COOKIE_INVALID) {
         logOut();
       }
     }

@@ -1,9 +1,9 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import { HomePage, UserSession, FirstLoad, Language, Languages, NavigatedRoute } from './reducers';
-import { verifyCookies } from './middleware/verifyCookies';
+import { verifyCookiesMiddleWare } from './middleware/verifyCookiesMiddleWare';
 
-const middleware = [thunk, verifyCookies];
+const middleware = [thunk, verifyCookiesMiddleWare];
 
 // Configuration for Redux devtools
 const reduxDevToolsWrapper = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;

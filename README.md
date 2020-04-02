@@ -42,6 +42,36 @@ Local server will run in port `4000`, production conf in `config.test.json`.
 
 ## Docs
 
+### Cookies
+
+-The cookies dependencies are:
+
+    - universal-cookie: https://github.com/reactivestack/cookies/tree/master/packages/universal-cookie#readme, to set and retrieve cookies both from browser and node
+    - @types/universal-cookie: https://www.npmjs.com/package/@types/universal-cookie, types for universal-cookie
+    - cookie-parser: https://github.com/expressjs/cookie-parser, official parser to access cookies on express
+
+- Cookies are set with following steps:
+
+  - Client
+
+    - User navigates to /login
+    - User populates form and submit: src/shared/routes/Login/index.js
+    - Action requestToken is called: src/shared/redux/actions.js
+    - Request to API is called, the response has a token with user data
+    - Token is saved to cookies
+    - Reducer is triggered and user data is saved on store: src/shared/redux/reducers.js
+    - User navigates
+    - The HTTP request has cookie included
+    - For all
+      -Server
+    - For all requests, cookies are checked: src/server/routes/allRoutes.tsx
+    - If cookie is ok, user data is included in window.data
+
+  - Client
+    - Logic to check cookies is in Cookies: src/shared/services/Cookies.ts
+    - For every redux action a Redux middleware will use Cookies to test cookies: if is undefined or true, next action. If is false, remove cookie.
+    - For every reload Layout component use Cookies to test cookies. If 
+
 ### Webpack build
 
 - Webpack building is done in parallel: client and server. Common configurations are stored in `webpack.dev.js`, also split in dev and prod.
