@@ -3,7 +3,6 @@ import express from 'express';
 import Helmet from 'react-helmet';
 import serialize from 'serialize-javascript';
 import { Provider } from 'react-redux';
-import { CookiesProvider } from 'react-cookie';
 import { StaticRouter, Route, matchPath } from 'react-router-dom';
 import { renderToString } from 'react-dom/server';
 import Routes from '../../shared/routes/routes';
@@ -12,6 +11,8 @@ import Layout from '../../shared/common/Layout';
 import { findActiveRoute, checkIfFileUrls } from '../../shared/tools/utils';
 import config from './../../../config.test.json';
 import actions from '../../shared/redux/actions';
+import jwt from 'jsonwebtoken';
+import { User } from '../../shared/redux/types';
 
 const router = express.Router();
 
@@ -73,15 +74,21 @@ router.get('/:lang([a-z]{2})?/:rest(*[a-z])?/:item([0-9])?', function(req: any, 
           data.FirstLoad = {
             url: url,
             domain: domain,
+            date: new Date(),
           };
           data.NavigatedRoute = actions.setNavigatedRoute({ route: activeRoute.name }).data;
 
-          // Adding initial user to data for store
-          if (req.cookies.sessionUser) {
-            const sessionUser = JSON.parse(req.cookies.sessionUser);
-            data.UserSession = {
-              ...sessionUser,
-            };
+          // Adding initial user to data from JWT to store
+          if (req.cookies.sessionToken) {
+            try {
+              const sessionUser = jwt.verify(req.cookies.sessionToken, config.SECRET) as User;
+              data.UserSession = {
+                ...sessionUser,
+              };
+            } catch (err) {
+              data.UserSession = { date: new Date() };
+              console.log(err);
+            }
           }
 
           // Sending the Router with Route component; App component sent inside render method; backend data passed via context
@@ -90,16 +97,14 @@ router.get('/:lang([a-z]{2})?/:rest(*[a-z])?/:item([0-9])?', function(req: any, 
           const appString = config.ENABLE_ISOMORPHISM
             ? renderToString(
                 <Provider store={store}>
-                  <CookiesProvider cookies={req.universalCookies}>
-                    <StaticRouter location={req.url} context={context}>
-                      <Route
-                        path="/"
-                        render={props => {
-                          return <Layout {...props} />;
-                        }}
-                      />
-                    </StaticRouter>
-                  </CookiesProvider>
+                  <StaticRouter location={req.url} context={context}>
+                    <Route
+                      path="/"
+                      render={props => {
+                        return <Layout {...props} />;
+                      }}
+                    />
+                  </StaticRouter>
                 </Provider>
               )
             : '';

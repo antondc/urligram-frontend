@@ -6,11 +6,28 @@ import Footer from '../../components/Footer';
 import Main from '../../routes/Main';
 import Routes from '../../routes/routes';
 import { findActiveRoute } from '../../tools/utils';
+import actions from '../../redux/actions';
+import Cookies from '../../services/Cookies';
 
 import './Layout.less';
 
 class Layout extends React.Component {
-  render() {
+  constructor() {
+    this.cookies = new Cookies();
+  }
+
+  componentDidUpdate = prevProps => {
+    const { logOut } = this.props;
+
+    if (this.props.location !== prevProps.location) {
+      const isCookieValid = this.cookies.verifyCookies();
+      if (!isCookieValid) {
+        logOut();
+      }
+    }
+  };
+
+  render = () => {
     const activeRoute = findActiveRoute(this.props.location.pathname, Routes);
     if (isBrowser) {
       window.addEventListener('load', () => {
@@ -40,7 +57,7 @@ class Layout extends React.Component {
         <Footer />
       </div>
     );
-  }
+  };
 }
 
 const mapStateToProps = state => ({
@@ -48,4 +65,6 @@ const mapStateToProps = state => ({
   NavigatedRoute: state.NavigatedRoute,
 });
 
-export default connect(mapStateToProps)(Layout);
+export default connect(mapStateToProps, {
+  logOut: actions.logOut,
+})(Layout);

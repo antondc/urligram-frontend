@@ -38,6 +38,7 @@ Local server will run in port `4000`, production conf in `config.test.json`.
 - Move shared/Control logic to an action, reducer or a middleware:
   - https://medium.com/@jeffbski/where-do-i-put-my-business-logic-in-a-react-redux-application-9253ef91ce1
   - https://scalac.io/react-redux-jwt-authentication/
+- const device = require('express-device'); replace for https://www.npmjs.com/package/express-useragent
 
 ## Docs
 

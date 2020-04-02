@@ -3,7 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 import Routes from '../../routes/routes';
-import Control from '../../common/Control';
+
 import './Main.less';
 
 class Main extends React.Component {
@@ -14,8 +14,8 @@ class Main extends React.Component {
       <div className="Main">
         <section className="Main-initial">
           <Switch location={location}>
-            {isLogged && <Redirect from="/login" to="/control" />}
-            {!isLogged && <Redirect from="/control" to="/login" />}
+            {isLogged && <Redirect from="/:lang?/login" to="/control" />}
+            {!isLogged && <Redirect from="/:lang?/control" to="/login" />}
             <Route path={Routes.Login.path} exact={Routes.Login.exact}>
               <Route
                 exact={Routes.Login.exact}
@@ -32,16 +32,14 @@ class Main extends React.Component {
                 return <Routes.Home.component {...props} {...Routes.Home} />;
               }}
             />
+            <Route
+              exact={Routes.Control.exact}
+              path={Routes.Control.path}
+              render={props => {
+                return <Routes.Control.component {...props} {...Routes.Control} />;
+              }}
+            />
 
-            <Control>
-              <Route
-                exact={Routes.Control.exact}
-                path={Routes.Control.path}
-                render={props => {
-                  return <Routes.Control.component {...props} {...Routes.Control} />;
-                }}
-              />
-            </Control>
             <Route
               exact={Routes.NotFound.exact}
               path={Routes.NotFound.path}
@@ -57,7 +55,7 @@ class Main extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  isLogged: state.UserSession.logged,
+  isLogged: !!state.UserSession.id,
 });
 
 export default connect(mapStateToProps)(Main);

@@ -28,21 +28,12 @@ const actions = {
       })
         .then(handleResponse)
         .then(response => {
-          cookies.addChangeListener(function() {
-            cookies.removeChangeListener();
-            history.push('/control');
-          });
-          const user = { ...response.user, logged: true };
           cookies.set('sessionToken', response.token, {
             maxAge: config.SESSION_DURATION,
             path: '/',
           });
-          cookies.set('sessionUser', user, {
-            maxAge: config.SESSION_DURATION,
-            path: '/',
-          });
 
-          return dispatch(actions.logIn(user));
+          return dispatch(actions.logIn(response.user));
         })
         .catch(error => {
           return dispatch(actions.logFailed(error));
@@ -52,12 +43,9 @@ const actions = {
 
   logOut: () => {
     cookies.remove('sessionToken', { path: '/' });
-    cookies.remove('sessionUser', { path: '/' });
     return {
       type: C.LOG_OUT,
-      data: {
-        logged: false,
-      },
+      data: {},
     };
   },
 
@@ -83,6 +71,9 @@ const actions = {
   firstLoad: () => {
     return {
       type: C.FIRST_LOAD,
+      data: {
+        date: new Date(),
+      },
     };
   },
 

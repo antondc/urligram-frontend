@@ -68,7 +68,7 @@ export const UserSession = (state = '', action) => {
     case C.LOG_IN:
       return action.data;
     case C.LOG_OUT:
-      return action.data;
+      return {};
     case C.LOG_FAILED:
       return action.data;
     default:
@@ -79,7 +79,9 @@ export const UserSession = (state = '', action) => {
 export const FirstLoad = (state = {}, action) => {
   switch (action.type) {
     case 'FIRST_LOAD':
-      return true;
+      return Object.assign({}, state, {
+        ...action.data,
+      });
     default:
       return state;
   }

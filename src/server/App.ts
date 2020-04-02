@@ -8,7 +8,6 @@ import allRoutes from './routes/allRoutes';
 import cors from 'cors';
 import http from 'http';
 const device = require('express-device'); // TODO: replace for https://www.npmjs.com/package/express-useragent
-import cookiesMiddleware from 'universal-cookie-express';
 
 const app = express();
 
@@ -45,10 +44,6 @@ device.enableDeviceHelpers(app);
 
 // Logger - - - - - - - - - - - - - - - -
 app.use(logger('dev'));
-// - - - - - - - - - - - - - - - - - - - -
-
-// Setting universal cookies - - - - - - -
-app.use(cookiesMiddleware());
 // - - - - - - - - - - - - - - - - - - - -
 
 // API - - - - - - - - - - - - - - - - -

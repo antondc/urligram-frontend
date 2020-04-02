@@ -1,10 +1,10 @@
-interface Route {
+export interface Route {
   url: string;
   pageType: string;
   pageTitle: string;
 }
 
-interface Language {
+export interface Language {
   id: number;
   order: number;
   name: string;
@@ -17,7 +17,7 @@ interface Language {
   updatedAt: Date;
 }
 
-interface User {
+export interface User {
   id: string;
   order: number;
   name: string;
@@ -26,9 +26,10 @@ interface User {
   level: string;
   logged: boolean;
   token?: string;
+  iat: number;
 }
 
-interface State {
+export interface State {
   navigation: {
     history: Route[];
     currentPath: Route;
@@ -39,5 +40,10 @@ interface State {
     Languages: {
       [key: string]: Language;
     };
+  };
+  FirstLoad: {
+    url: string;
+    domain: string;
+    date: Date;
   };
 }
