@@ -28,6 +28,8 @@ Local server will run in port `4000`, production conf in `config.test.json`.
 
 ## TODO
 
+- Webpack HMR
+- Check «Move code from componentWillMount to componentDidMount»
 - Webpack enable imports from root: e.g. config.test.json
 - Transform js and jsx files to ts and tsx
 - Add reselect
@@ -35,10 +37,8 @@ Local server will run in port `4000`, production conf in `config.test.json`.
 - Restructure state:
   - Navigated route to routerLocations
 - Rename Control/Control
-- Move shared/Control logic to an action, reducer or a middleware:
-  - https://medium.com/@jeffbski/where-do-i-put-my-business-logic-in-a-react-redux-application-9253ef91ce1
-  - https://scalac.io/react-redux-jwt-authentication/
 - const device = require('express-device'); replace for https://www.npmjs.com/package/express-useragent
+- Clean unused dependencies
 
 ## Docs
 
@@ -68,9 +68,12 @@ Local server will run in port `4000`, production conf in `config.test.json`.
     - If cookie is ok, user data is included in window.data
 
   - Client
+
     - Logic to check cookies is in Cookies: src/shared/services/Cookies.ts
-    - For every redux action a Redux middleware will use Cookies to test cookies: if is undefined or true, next action. If is false, remove cookie.
-    - For every reload Layout component use Cookies to test cookies. If 
+    - For every redux action a Redux middleware will use Cookies to test cookies: If cookies state === COOKIES_INVALID, it will call actions.logOut
+    - For every reload Layout component use Cookies to test cookies. If cookies state === COOKIES_INVALID, it will call actions.logOut
+
+  - On Main we have the <Redirect /> component that is loaded depending on the login status of the user, and allows or disallows to access to specific routes: src/shared/routes/Main/index.js
 
 ### Webpack build
 
