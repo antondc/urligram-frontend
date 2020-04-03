@@ -21,9 +21,7 @@ module.exports = merge.multiple(common, {
             {
               loader: 'css-loader',
               options: {
-                // modules: true,
                 importLoaders: 1,
-                localIdentName: '[name]-[local]-[hash:4]',
                 sourceMap: true,
               },
             },
@@ -60,11 +58,9 @@ module.exports = merge.multiple(common, {
             {
               loader: 'css-loader',
               options: {
-                // modules: true,
                 importLoaders: 1,
-                localIdentName: '[name]-[local]-[hash:4]',
                 sourceMap: true,
-                minimize: true,
+                // minimize: true,
               },
             },
             // Prefixing and solving css issues
@@ -75,7 +71,7 @@ module.exports = merge.multiple(common, {
                   return [
                     require('postcss-flexbugs-fixes'),
                     autoprefixer({
-                      browsers: ['>0.25%'],
+                      Browserslist: ['>0.25%'],
                       flexbox: 'no-2009',
                     }),
                   ];

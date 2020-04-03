@@ -5,6 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const autoprefixer = require('autoprefixer');
 const config = require('./config.test.json');
 const webpack = require('webpack');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = merge.multiple(common, {
   server: {
@@ -21,9 +22,7 @@ module.exports = merge.multiple(common, {
             {
               loader: 'css-loader',
               options: {
-                // modules: true,
                 importLoaders: 1,
-                localIdentName: '[name]-[local]-[hash:4]',
                 sourceMap: false,
               },
             },
@@ -75,11 +74,8 @@ module.exports = merge.multiple(common, {
             {
               loader: 'css-loader',
               options: {
-                // modules: true,
                 importLoaders: 1,
-                localIdentName: '[name]-[local]-[hash:4]',
                 sourceMap: false,
-                minimize: true,
               },
             },
             // Prefixing and solving css issues
@@ -90,7 +86,7 @@ module.exports = merge.multiple(common, {
                   return [
                     require('postcss-flexbugs-fixes'),
                     autoprefixer({
-                      browsers: ['>0.25%'],
+                      Browserslist: ['>0.25%'],
                       flexbox: 'no-2009',
                     }),
                   ];
@@ -117,6 +113,7 @@ module.exports = merge.multiple(common, {
           ENDPOINT_SERVER: JSON.stringify(config.ENDPOINT_SERVER_PRODUCTION),
         },
       }),
+      new OptimizeCssAssetsPlugin(),
     ],
   },
 });

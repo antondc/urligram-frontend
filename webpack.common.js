@@ -2,7 +2,7 @@ const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals'); // Remove node_modules when creating the bundle
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const path = require('path');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
@@ -70,7 +70,6 @@ module.exports = {
         isBrowser: false,
       }),
       new CompressionPlugin({
-        asset: '[path].gz[query]',
         algorithm: 'gzip',
         test: /\.js$/,
       }),
@@ -142,21 +141,16 @@ module.exports = {
         data: '<%- data %>',
       }),
       // Clean only files, no folders
-      new CleanWebpackPlugin(
-        [
-          'dist/styles-*.css',
-          'dist/styles-*.gz',
-          'dist/styles-*.map',
-          'dist/bundle-*.js',
-          'dist/bundle-*.gz',
-          'dist/bundle-*.map',
+      new CleanWebpackPlugin({
+        cleanOnceBeforeBuildPatterns: [
+          'styles-*.css',
+          'styles-*.gz',
+          'styles-*.map',
+          'bundle-*.js',
+          'bundle-*.gz',
+          'bundle-*.map',
         ],
-        {
-          watch: true,
-          verbose: false,
-          beforeEmit: true,
-        }
-      ),
+      }),
       new MiniCssExtractPlugin({
         filename: 'styles-[hash:4].css',
         chunkFilename: 'styles-[hash:4].css',
@@ -186,7 +180,6 @@ module.exports = {
       }),
 
       new CompressionPlugin({
-        asset: '[path].gz[query]',
         algorithm: 'gzip',
         test: /\.svg$|\.woff$|\.woff2$|\.ttf$|\.eot$|\.otf$|\.js$|\.css$|\.html$/,
       }),
