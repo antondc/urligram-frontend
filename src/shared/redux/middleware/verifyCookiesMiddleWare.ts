@@ -6,7 +6,7 @@ const cookies = new Cookies();
 export const verifyCookiesMiddleWare: Middleware = ({ dispatch }: MiddlewareAPI) => (next: Dispatch<AnyAction>) => (
   action: Action
 ) => {
-  const token = cookies.getCookies('sessionToken');
+  const token = cookies.getCookie('sessionToken');
   const tokenState = cookies.verifyToken(token);
   if (tokenState === INVALID) {
     dispatch(actions.logOut());

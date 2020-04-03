@@ -1,9 +1,9 @@
 import C from './constants';
 import fetch from 'isomorphic-fetch';
-import Cookies from 'universal-cookie';
-const cookies = new Cookies();
+import Cookies from '../services/Cookies';
 import { handleResponse } from '../tools/errors';
-import config from '../../../config.test.json';
+
+const cookies = new Cookies();
 
 const actions = {
   requestToken: (username, password, history) => {
@@ -28,10 +28,7 @@ const actions = {
       })
         .then(handleResponse)
         .then(response => {
-          cookies.set('sessionToken', response.token, {
-            maxAge: config.SESSION_DURATION,
-            path: '/',
-          });
+          cookies.setCookie('sessionToken', response.token);
 
           return dispatch(actions.logIn(response.user));
         })
@@ -42,7 +39,7 @@ const actions = {
   },
 
   logOut: () => {
-    cookies.remove('sessionToken', { path: '/' });
+    cookies.removeCookie('sessionToken');
     return {
       type: C.LOG_OUT,
       data: {},

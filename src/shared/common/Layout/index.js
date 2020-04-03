@@ -20,7 +20,7 @@ class Layout extends React.Component {
     const { logOut } = this.props;
 
     if (this.props.location !== prevProps.location) {
-      const token = this.cookies.getCookies('sessionToken');
+      const token = this.cookies.getCookie('sessionToken');
       const tokenState = this.cookies.verifyToken(token);
       if (tokenState === INVALID) {
         logOut();

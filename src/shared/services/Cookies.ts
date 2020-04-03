@@ -12,11 +12,26 @@ class Cookies {
   private cookies = new UniversalCookie();
   constructor() {}
 
-  getCookies = (cookieName: string): CookieRetrievalResult => {
+  getCookie = (cookieName: string): CookieRetrievalResult => {
     const cookie: string = this.cookies.get(cookieName);
     if (!cookie) return EMPTY;
 
     return cookie;
+  };
+
+  setCookie = (cookieName: string, content: string): void => {
+    const stringifiedContent = JSON.stringify(content);
+
+    this.cookies.set(cookieName, stringifiedContent, {
+      maxAge: config.SESSION_DURATION,
+      path: '/',
+    });
+  };
+
+  removeCookie = (cookieName: string): void => {
+    this.cookies.remove(cookieName, {
+      path: '/',
+    });
   };
 
   verifyToken = (token: string): TokenValidationResult => {
