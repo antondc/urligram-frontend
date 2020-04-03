@@ -11,9 +11,9 @@ import Layout from '../../shared/common/Layout';
 import { findActiveRoute, checkIfFileUrls } from '../../shared/tools/utils';
 import config from './../../../config.test.json';
 import actions from '../../shared/redux/actions';
-import jwt from 'jsonwebtoken';
 import { User } from '../../shared/redux/types';
-
+import Cookies from '../../shared/services/Cookies';
+const cookies = new Cookies();
 const router = express.Router();
 
 // TODO: this should be in a declaration file
@@ -78,15 +78,16 @@ router.get('/:lang([a-z]{2})?/:rest(*[a-z])?/:item([0-9])?', function(req: any, 
           };
           data.NavigatedRoute = actions.setNavigatedRoute({ route: activeRoute.name }).data;
 
-          // Adding initial user to data from JWT to store
+          // Adding initial user to data from Token to store
           if (req.cookies.sessionToken) {
             try {
-              const sessionUser = jwt.verify(req.cookies.sessionToken, config.SECRET) as User;
+              const user: User = cookies.verifyToken(req.cookies.sessionToken) as User;
+
               data.UserSession = {
-                ...sessionUser,
+                ...user,
               };
             } catch (err) {
-              data.UserSession = { date: new Date() };
+              data.UserSession = {};
               console.log(err);
             }
           }

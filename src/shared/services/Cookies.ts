@@ -2,25 +2,30 @@ import UniversalCookie from 'universal-cookie';
 import jwt from 'jsonwebtoken';
 import config from '../../../config.test.json';
 
-export const COOKIE_EMPTY = 'empty';
-export const COOKIE_VALID = 'valid';
-export const COOKIE_INVALID = 'invalid';
+export const EMPTY = 'empty';
+export const INVALID = 'invalid';
 
-type CookieState = typeof COOKIE_EMPTY | typeof COOKIE_VALID | typeof COOKIE_INVALID;
+type CookieRetrievalResult = string | typeof EMPTY | typeof INVALID;
+type TokenValidationResult = {} | typeof EMPTY | typeof INVALID;
 
 class Cookies {
   private cookies = new UniversalCookie();
-  public state: CookieState;
   constructor() {}
 
-  verifyCookies = (): CookieState => {
-    const token: string = this.cookies.get('sessionToken');
-    if (!token) return COOKIE_EMPTY;
+  getCookies = (cookieName: string): CookieRetrievalResult => {
+    const cookie: string = this.cookies.get(cookieName);
+    if (!cookie) return EMPTY;
+
+    return cookie;
+  };
+
+  verifyToken = (token: string): TokenValidationResult => {
+    if (!token || token === EMPTY) return EMPTY;
     try {
-      jwt.verify(token, config.SECRET);
-      return COOKIE_VALID;
+      const cookieContent = jwt.verify(token, config.SECRET);
+      return cookieContent;
     } catch (err) {
-      return COOKIE_INVALID;
+      return INVALID;
     }
   };
 }

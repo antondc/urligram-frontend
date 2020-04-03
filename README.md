@@ -28,6 +28,7 @@ Local server will run in port `4000`, production conf in `config.test.json`.
 
 ## TODO
 
+- Eliminar cookies library
 - Webpack HMR
 - Check «Move code from componentWillMount to componentDidMount»
 - Webpack enable imports from root: e.g. config.test.json
