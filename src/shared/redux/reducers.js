@@ -68,7 +68,7 @@ export const UserSession = (state = '', action) => {
     case C.LOG_IN:
       return action.data;
     case C.LOG_OUT:
-      return {};
+      return action.data;
     case C.LOG_FAILED:
       return action.data;
     default:

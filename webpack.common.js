@@ -67,7 +67,6 @@ module.exports = {
       new FriendlyErrorsWebpackPlugin(),
       // Setting a variable to identify browser from server
       new webpack.DefinePlugin({
-        isServer: true,
         isBrowser: false,
       }),
       new CompressionPlugin({
@@ -183,7 +182,6 @@ module.exports = {
       ]),
       // Setting a variable to identify browser from server
       new webpack.DefinePlugin({
-        isServer: false,
         isBrowser: true,
       }),
 

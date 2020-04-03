@@ -1,37 +1,62 @@
-import UniversalCookie from 'universal-cookie';
 import jwt from 'jsonwebtoken';
 import config from '../../../config.test.json';
 
 export const EMPTY = 'empty';
 export const INVALID = 'invalid';
 
-type CookieRetrievalResult = string | typeof EMPTY | typeof INVALID;
+type CookieRemoveResult = void | typeof EMPTY;
+type CookieRetrievalResult = string | typeof EMPTY;
 type TokenValidationResult = {} | typeof EMPTY | typeof INVALID;
 
 class Cookies {
-  private cookies = new UniversalCookie();
   constructor() {}
 
-  getCookie = (cookieName: string): CookieRetrievalResult => {
-    const cookie: string = this.cookies.get(cookieName);
-    if (!cookie) return EMPTY;
+  findCookie = (cookieName: string): string | undefined => {
+    if (!isBrowser) return;
 
+    const cookieStartsWith = cookieName + '=';
+    const decodedCookies = decodeURIComponent(document.cookie);
+    const decodedCookiesArray = decodedCookies.split(';');
+    const cookiesArray = decodedCookiesArray.map(item => item.trim());
+    const cookie = cookiesArray.find(item => item.startsWith(cookieStartsWith));
     return cookie;
   };
 
-  setCookie = (cookieName: string, content: string): void => {
-    const stringifiedContent = JSON.stringify(content);
+  getCookie = (cookieName: string | typeof EMPTY): CookieRetrievalResult => {
+    if (!isBrowser) return;
 
-    this.cookies.set(cookieName, stringifiedContent, {
-      maxAge: config.SESSION_DURATION,
-      path: '/',
-    });
+    const cookie = this.findCookie(cookieName);
+
+    if (!cookie) return EMPTY;
+
+    const cookieContent = cookie.split('=')[1];
+
+    return cookieContent;
   };
 
-  removeCookie = (cookieName: string): void => {
-    this.cookies.remove(cookieName, {
-      path: '/',
-    });
+  setCookie = (cookieName: string, content: string): void => {
+    if (!isBrowser) return;
+
+    const stringifiedContent = content;
+    const today = new Date();
+    today.setSeconds(today.getSeconds() + config.SESSION_DURATION);
+    var expires = 'expires=' + today.toUTCString();
+
+    const cookie = cookieName + '=' + stringifiedContent + ';' + expires + '; path=/';
+    document.cookie = cookie;
+  };
+
+  removeCookie = (cookieName: string): CookieRemoveResult => {
+    if (!isBrowser) return;
+
+    const cookie = this.findCookie(cookieName);
+
+    if (!cookie) return EMPTY;
+
+    var expiredDate = 'expires=' + 'Thu, 01 Jan 1970 00:00:00 UTC';
+    const expiredCookie = cookieName + '=;' + expiredDate + '; path=/';
+
+    document.cookie = expiredCookie;
   };
 
   verifyToken = (token: string): TokenValidationResult => {
