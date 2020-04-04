@@ -1,13 +1,14 @@
 {
   "version": "0.2.0",
   "configurations": [
-    {
-      "name": "Linking: Launch Chrome",
-      "type": "chrome",
-      "request": "launch",
-      "url": "http://0.0.0.0:4000",
-      "webRoot": "${workspaceFolder}"
-    },
+    /* NOT WORKING */
+    // {
+    //   "name": "Linking: Launch Chrome",
+    //   "type": "chrome",
+    //   "request": "launch",
+    //   "url": "http://0.0.0.0:4000",
+    //   "webRoot": "${workspaceRoot}/dist/**/*"
+    // },
     {
       "type": "node",
       "request": "attach",

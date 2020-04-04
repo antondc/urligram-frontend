@@ -14,7 +14,9 @@
     "server": "nodemon ./dist/server.js",
     "debugServer": "nodemon --inspect=9228 ./dist/server.js",
     "test": "jest",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "build:server": "webpack --config ./webpack.server.dev.js",
+    "dev": "webpack --watch --config ./webpack.server.dev.js & node --inspect=9228 ./dist/server.js"
   },
   "jest": {
     "testRegex": "./src/shared/*/.*test.js$",
@@ -51,6 +53,9 @@
     "@types/react-redux": "^7.1.7",
     "@types/react-router-dom": "^5.1.3",
     "@types/serialize-javascript": "^1.5.0",
+    "@types/webpack": "^4.41.10",
+    "@types/webpack-dev-middleware": "^3.7.0",
+    "@types/webpack-hot-middleware": "^2.25.0",
     "autoprefixer": "^9.7.5",
     "case-sensitive-paths-webpack-plugin": "^2.2.0",
     "compression-webpack-plugin": "^3.1.0",
@@ -83,6 +88,8 @@
     "webpack-bundle-analyzer": "^3.6.1",
     "webpack-cli": "^3.2.3",
     "webpack-dev-server": "^3.1.14",
+    "webpack-dev-middleware": "^3.7.2",
+    "webpack-hot-middleware": "^2.25.0",
     "webpack-node-externals": "^1.7.2"
   },
   "dependencies": {

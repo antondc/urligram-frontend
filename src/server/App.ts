@@ -8,12 +8,15 @@ import allRoutes from './routes/allRoutes';
 import cors from 'cors';
 import http from 'http';
 const device = require('express-device'); // TODO: replace for https://www.npmjs.com/package/express-useragent
-
+import webpack from 'webpack';
+import webpackDevMiddleware from 'webpack-dev-middleware';
+import webpackHotMiddleware from 'webpack-hot-middleware';
+const webpackConfig = require('../../webpack.client.dev.js');
+const compiler = webpack(webpackConfig);
 const app = express();
 
 // Serving static files- - - - - - - - - -
 app.use(serveGzip);
-app.use(express.static('dist'));
 app.use(express.static('media/docs'));
 app.use(express.static('media/images'));
 app.use('/media', express.static('media'));
@@ -46,9 +49,29 @@ device.enableDeviceHelpers(app);
 app.use(logger('dev'));
 // - - - - - - - - - - - - - - - - - - - -
 
+app.use(
+  webpackDevMiddleware(compiler, {
+    logLevel: 'warn',
+    publicPath: webpackConfig.output.publicPath,
+    writeToDisk: true,
+  })
+);
+
+app.use(
+  webpackHotMiddleware(compiler, {
+    log: console.log,
+    path: '/__webpack_hmr',
+    heartbeat: 10 * 1000,
+  })
+);
+
 // API - - - - - - - - - - - - - - - - -
 app.use('/', allRoutes);
 // - - - - - - - - - - - - - - - - - - - -
+
+app.get('/', (req: any, res: any) => {
+  res.render('index');
+});
 
 // error handler
 app.use(function(err: any, req: any, res: any, next: any) {
@@ -63,4 +86,4 @@ app.use(function(err: any, req: any, res: any, next: any) {
 export default app;
 const server = http.createServer(app);
 
-server.listen(process.env.PORT_SERVER);
+server.listen(4000);

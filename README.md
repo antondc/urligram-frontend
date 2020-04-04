@@ -28,18 +28,24 @@ Local server will run in port `4000`, production conf in `config.test.json`.
 
 ## TODO
 
-- Eliminar cookies library
-- Webpack HMR
-- Check «Move code from componentWillMount to componentDidMount»
-- Webpack enable imports from root: e.g. config.test.json
-- Transform js and jsx files to ts and tsx
-- Add reselect
-- Modularize Redux
+- Clean and sort packages on package.json and clean unused dependencies ❌
+- Open browser on start. Wont work «webpack --watch --config ./webpack.server.dev.js & node --inspect=9228 ./dist/server.js & open http://0.0.0.0:4000"» ❌
+- Webpack add mini-css-extract-plugin to production build ❌
+- Webpack add autoprefixer ❌
+- Replace express-device for https://www.npmjs.com/package/express-useragent ❌
+- Remove default Languages first load from allRoutes ❌
+- Webpack enable imports from root: e.g. config.test.json ❌
+- Transform js and jsx files to ts and tsx ❌
+- Add reselect ❌
+- Modularize Redux ❌
 - Restructure state:
-  - Navigated route to routerLocations
-- Rename Control/Control
-- const device = require('express-device'); replace for https://www.npmjs.com/package/express-useragent
-- Clean unused dependencies
+  - Navigated route to routerLocations ❌
+- const device = require('express-device'); replace for https://www.npmjs.com/package/express-useragent ❌
+- Reconfigure webpack production css build ❌
+- Check «Move code from componentWillMount to componentDidMount» 👍
+- Webpack HMR 👍
+- Rename Control/Control 👍
+- Eliminar cookies library 👍
 
 ## Docs
 
