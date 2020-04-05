@@ -28,7 +28,6 @@ Local server will run in port `4000`, production conf in `config.test.json`.
 
 ## TODO
 
-- Clean and sort packages on package.json and clean unused dependencies ❌
 - Open browser on start. Wont work «webpack --watch --config ./webpack.server.dev.js & node --inspect=9228 ./dist/server.js & open http://0.0.0.0:4000"» ❌
 - Webpack add mini-css-extract-plugin to production build ❌
 - Webpack add autoprefixer ❌
@@ -42,6 +41,7 @@ Local server will run in port `4000`, production conf in `config.test.json`.
   - Navigated route to routerLocations ❌
 - const device = require('express-device'); replace for https://www.npmjs.com/package/express-useragent ❌
 - Reconfigure webpack production css build ❌
+- Clean and sort packages on package.json and clean unused dependencies 👍
 - Check «Move code from componentWillMount to componentDidMount» 👍
 - Webpack HMR 👍
 - Rename Control/Control 👍
