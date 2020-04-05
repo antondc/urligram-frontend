@@ -1,18 +1,18 @@
 {
+  "compileOnSave": false,
   "compilerOptions": {
+    "baseUrl": "./",
     "outDir": "./dist/",
     "noImplicitAny": true,
-    "module": "ESNext",
-    "target": "es5",
     "jsx": "react",
     "allowJs": true,
     "sourceMap": true,
-    "esModuleInterop": true,
     "moduleResolution": "node",
-    "keyofStringsOnly": true,
-    "resolveJsonModule": true
-  },
-  "include": ["src/**/*"],
-  "files": ["config.test.json"],
-  "exclude": ["node_modules", "**/*.test.*", "**/*.config.*"]
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es5",
+    "resolveJsonModule": true,
+    "esModuleInterop": true
+  }
 }

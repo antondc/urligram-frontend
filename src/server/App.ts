@@ -11,7 +11,7 @@ const device = require('express-device'); // TODO: replace for https://www.npmjs
 import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
-const webpackConfig = require('../../webpack.client.dev.js');
+const webpackConfig = require('../../webpack.client.dev');
 const compiler = webpack(webpackConfig);
 const app = express();
 

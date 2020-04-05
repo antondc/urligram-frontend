@@ -1,13 +1,14 @@
-const path = require('path');
-const webpack = require('webpack');
-const nodeExternals = require('webpack-node-externals');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
-const config = require('./config.test.json');
-const CompressionPlugin = require('compression-webpack-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
+import path from 'path';
+import webpack from 'webpack';
+import nodeExternals from 'webpack-node-externals';
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
+import FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin';
+import config from './config.test.json';
+import CompressionPlugin from 'compression-webpack-plugin';
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
+import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
+import { API_DEVELOPMENT_ENDPOINT, SERVER_DEVELOPMENT_ENDPOINT } from './src/shared/constants/endpoints';
 
 module.exports = {
   name: 'server',
@@ -31,7 +32,7 @@ module.exports = {
   },
   externals: [nodeExternals()],
   resolve: {
-    extensions: ['.js', '.ts', '.tsx', '.d.ts', '.json'],
+    extensions: ['.js', '.ts', '.tsx', '.d.ts'],
   },
   module: {
     rules: [
@@ -73,8 +74,8 @@ module.exports = {
       'process.env': {
         PORT_SERVER: config.PORT_SERVER_DEVELOPMENT,
         PORT_API: config.PORT_API_DEVELOPMENT,
-        ENDPOINT_API: JSON.stringify(config.ENDPOINT_API_DEVELOPMENT),
-        ENDPOINT_SERVER: JSON.stringify(config.ENDPOINT_SERVER_DEVELOPMENT),
+        ENDPOINT_API: API_DEVELOPMENT_ENDPOINT,
+        ENDPOINT_SERVER: SERVER_DEVELOPMENT_ENDPOINT,
       },
     }),
     new FriendlyErrorsWebpackPlugin(),
