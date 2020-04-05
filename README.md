@@ -29,6 +29,8 @@ Local server will run in port `4000`, production conf in `config.test.json`.
 ## TODO
 
 - Remove default Languages first load from allRoutes ❌
+  - Cargar todo el glosario y no el LoadLanguage
+  - Renombrar «Languages.languages»en allRoutes.
 - Transform js and jsx files to ts and tsx ❌
 - Add reselect ❌
 - Modularize Redux ❌

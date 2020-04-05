@@ -14,6 +14,7 @@ import actions from '../../shared/redux/actions';
 import { User } from '../../shared/redux/types';
 import Cookies from '../../shared/services/Cookies';
 import { urlBuild } from '../../shared/tools/utils/url';
+
 const cookies = new Cookies();
 const router = express.Router();
 
@@ -45,19 +46,9 @@ router.get('/:lang([a-z]{2})?/:rest(*[a-z])?/:item([0-9])?', function(req: any, 
   allLanguages
     .then((languages: any) => {
       // Comparing param language with existing languages; if not exist, undefined.
-      let langParam = undefined;
-      languages.Languages.map((item: any) => {
-        if (req.params.lang === item.slug) {
-          langParam = req.params.lang;
-        }
-      });
+      const langParam = languages.Languages.find((item: any) => req.params.lang === item.slug)?.slug;
       // Looking for default language in all Languages
-      let defaultLanguage: any = {};
-      languages.Languages.map((item: any) => {
-        if (item.isDefault === true) {
-          defaultLanguage = item;
-        }
-      });
+      const defaultLanguage = languages.Languages.find((item: any) => !!item.isDefault);
 
       // Setting proper language
       const lang = langParam || defaultLanguage.slug;
