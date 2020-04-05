@@ -13,11 +13,11 @@
     "hmr"
   ],
   "scripts": {
-    "dev": "webpack --watch --config ./webpack.server.dev.ts & node --inspect=9228 ./dist/server.js",
+    "dev": "webpack --watch --config ./webpack.server.dev.ts & nodemon --inspect=9228 ./dist/server.js",
     "prod": "webpack --config ./webpack.server.prod.ts & webpack --config ./webpack.server.prod.ts",
     "build:server:dev": "webpack --config ./webpack.server.dev.ts",
     "build:client:dev": "webpack --config ./webpack.client.dev.ts",
-    "run:server": "node --inspect=9228 ./dist/server.js",
+    "run:server": "nodemon --inspect=9228 ./dist/server.js",
     "build:client:prod": "webpack --config ./webpack.client.prod.ts",
     "build:server:prod": "webpack --config ./webpack.server.prod.ts",
     "test": "jest",
@@ -104,6 +104,7 @@
     "isomorphic-fetch": "^2.2.1",
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.10.0",
+    "nodemon": "^2.0.2",
     "react": "^16.13.1",
     "react-dom": "^16.8.0",
     "react-helmet": "^5.2.0",
