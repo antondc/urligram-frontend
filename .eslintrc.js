@@ -22,7 +22,7 @@ module.exports = {
     'no-duplicate-imports': ['warn', { includeExports: false }],
     'no-redeclare': 0,
     'no-dupe-keys': 0,
-    'no-debugger': 0,
+    'no-debugger': 1,
     'newline-before-return': 'error',
     'no-multi-spaces': 'error',
     'react/prop-types': 'off',

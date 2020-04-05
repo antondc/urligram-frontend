@@ -35,6 +35,7 @@ Local server will run in port `4000`, production conf in `config.test.json`.
 - Restructure state:
   - Navigated route to routerLocations ❌
 - Replace express-device for https://www.npmjs.com/package/express-useragent 👍
+- Update Jest 👍
 - Webpack add autoprefixer 👍
 - const device = require('express-device'); replace for https://www.npmjs.com/package/express-useragent 👍
 - Webpack configure webpack production css build 👍

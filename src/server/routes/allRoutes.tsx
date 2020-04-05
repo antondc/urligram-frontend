@@ -13,6 +13,7 @@ import config from './../../../config.test.json';
 import actions from '../../shared/redux/actions';
 import { User } from '../../shared/redux/types';
 import Cookies from '../../shared/services/Cookies';
+import { urlBuild } from '../../shared/tools/utils/url';
 const cookies = new Cookies();
 const router = express.Router();
 
@@ -34,12 +35,13 @@ router.get('/:lang([a-z]{2})?/:rest(*[a-z])?/:item([0-9])?', function(req: any, 
   }
 
   // Requesting original url
-  let url = req.protocol + '://' + req.get('host') + req.originalUrl;
-  let domain = req.protocol + '://' + req.get('host');
+  const url = urlBuild({ protocol: req.protocol, host: req.host, path: req.originalUrl });
+  const domain = urlBuild({ protocol: req.protocol, host: req.host });
 
   // Get the routes and return the one that matches actual url
   const activeRoute = findActiveRoute(req.url, Routes);
   const allLanguages = actions.loadLanguages();
+
   allLanguages
     .then((languages: any) => {
       // Comparing param language with existing languages; if not exist, undefined.

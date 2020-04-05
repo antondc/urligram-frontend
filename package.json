@@ -20,7 +20,7 @@
     "run:server": "nodemon --inspect=9228 ./dist/server.js",
     "build:client:prod": "webpack --config ./webpack.client.prod.ts",
     "build:server:prod": "webpack --config ./webpack.server.prod.ts",
-    "test": "jest",
+    "test": "jest --watch",
     "precommit": "lint-staged"
   },
   "devDependencies": {
@@ -114,13 +114,6 @@
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
     "serialize-javascript": "^3.0.0"
-  },
-  "jest": {
-    "testRegex": "./src/shared/*/.*test.js$",
-    "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|svg|ttf|woff|woff2)$": "<rootDir>/src/shared/tools/jest/fileMock.js",
-      "\\.(css|less)$": "<rootDir>/src/shared/tools/jest/styleMock.js"
-    }
   },
   "lint-staged": {
     "*.js": [

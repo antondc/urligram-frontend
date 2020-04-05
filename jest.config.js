@@ -3,7 +3,7 @@ module.exports = {
   transform: {
     '^.+\\.(jsx?|tsx?)$': 'ts-jest',
   },
-  testRegex: './src/*/.*test.tsx$',
+  testRegex: './src/*/.*test.(jsx?|tsx?)$',
   setupFiles: ['<rootDir>/src/shared/tools/jest/setupTests.ts'],
   moduleNameMapper: {
     '\\.(jpg|jpeg|png|gif|eot|otf|svg|ttf|woff|woff2)$': '<rootDir>/tools/jest/fileMock.js',
