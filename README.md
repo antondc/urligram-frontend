@@ -28,16 +28,16 @@ Local server will run in port `4000`, production conf in `config.test.json`.
 
 ## TODO
 
-- Webpack configure webpack production css build 👍
-- Webpack add autoprefixer ❌
-- Replace express-device for https://www.npmjs.com/package/express-useragent ❌
 - Remove default Languages first load from allRoutes ❌
 - Transform js and jsx files to ts and tsx ❌
 - Add reselect ❌
 - Modularize Redux ❌
 - Restructure state:
   - Navigated route to routerLocations ❌
-- const device = require('express-device'); replace for https://www.npmjs.com/package/express-useragent ❌
+- Replace express-device for https://www.npmjs.com/package/express-useragent 👍
+- Webpack add autoprefixer 👍
+- const device = require('express-device'); replace for https://www.npmjs.com/package/express-useragent 👍
+- Webpack configure webpack production css build 👍
 - Webpack enable imports from root: e.g. config.test.json 👍
 - Open browser on start. Wont work «webpack --watch --config ./webpack.server.dev.js & node --inspect=9228 ./dist/server.js & open http://0.0.0.0:4000"» 👍
 - Clean and sort packages on package.json and clean unused dependencies 👍
@@ -85,6 +85,8 @@ Local server will run in port `4000`, production conf in `config.test.json`.
 - Used less without css modules. The reason is the lack of selector nesting. Instead, a custom variant of BEM is used:
 
       MyModule-myElement--myModifier
+
+- Autoprefixes are coming from a webpack loader
 
 ### Webpack build
 

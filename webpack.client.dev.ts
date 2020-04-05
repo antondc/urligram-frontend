@@ -60,7 +60,7 @@ module.exports = {
       toHtml: '<%- toHtml %>',
       toHead: '<%- toHead %>',
       deviceDetector:
-        '<% if (is_desktop) { %>isDesktop<% } else if (is_tablet) { %>isTablet<% } else if (is_phone || is_mobile) { %>isMobile<% } %>',
+        '<% if (isDesktop) { %>isDesktop<% } else if (isTablet) { %>isTablet<% } else if (isMobile) { %>isMobile<% } %> <%- browser %> <% if (isBot) { %>isBot<% } %>',
       body: '<%- body %>',
       data: '<%- data %>',
     }),

@@ -7,7 +7,9 @@ import logger from 'morgan';
 import allRoutes from './routes/allRoutes';
 import cors from 'cors';
 import http from 'http';
-const device = require('express-device'); // TODO: replace for https://www.npmjs.com/package/express-useragent
+import useragent from 'express-useragent';
+// var useragent = require('express-useragent');
+
 import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
@@ -40,8 +42,9 @@ app.use(cookieParser()); // Parsing cookies
 // - - - - - - - - - - - - - - - - - - - -
 
 // Detecting devices - - - - - - - - - - -
-app.use(device.capture({ parseUserAgent: true }));
-device.enableDeviceHelpers(app);
+// app.use(device.capture({ parseUserAgent: true }));
+// device.enableDeviceHelpers(app);
+app.use(useragent.express());
 
 // - - - - - - - - - - - - - - - - - - - -
 

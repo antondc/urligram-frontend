@@ -29,7 +29,7 @@ declare var global: Global;
 router.get('/:lang([a-z]{2})?/:rest(*[a-z])?/:item([0-9])?', function(req: any, res: any, next: any) {
   // TODO: check express types
   // Check for old browsers; the check for client is in App.js
-  if (req.device.parser.useragent.family == 'IE') {
+  if (req.useragent.browser == 'IE') {
     global.isIE = true;
   }
 
@@ -117,6 +117,11 @@ router.get('/:lang([a-z]{2})?/:rest(*[a-z])?/:item([0-9])?', function(req: any, 
             toHead: helmet.title.toString() + helmet.meta.toString() + helmet.link.toString(),
             body: appString,
             data: dataForTemplate, // Data for the template
+            isDesktop: req.useragent.isDesktop,
+            isMobile: req.useragent.isMobile,
+            isTablet: req.useragent.isTablet,
+            browser: req.useragent.browser,
+            isBot: req.useragent.isBot,
           });
         })
         .catch(next);
