@@ -12,6 +12,7 @@
     "keyofStringsOnly": true,
     "resolveJsonModule": true
   },
-  "include": ["src"],
+  "include": ["src/**/*"],
+  "files": ["config.test.json"],
   "exclude": ["node_modules", "**/*.test.*", "**/*.config.*"]
 }
