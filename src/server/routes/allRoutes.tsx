@@ -8,7 +8,7 @@ import { renderToString } from 'react-dom/server';
 import Routes from '../../shared/routes/routes';
 import storeFactory from '../../shared/redux/index';
 import Layout from '../../shared/common/Layout';
-import { findActiveRoute, checkIfFileUrls } from '../../shared/tools/utils';
+import { findActiveRoute, checkIfFileUrls } from '../../shared/tools/utils/utils';
 import config from './../../../config.test.json';
 import actions from '../../shared/redux/actions';
 import { User } from '../../shared/redux/types';

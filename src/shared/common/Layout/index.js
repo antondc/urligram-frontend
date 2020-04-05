@@ -5,7 +5,7 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import Main from '../../routes/Main';
 import Routes from '../../routes/routes';
-import { findActiveRoute } from '../../tools/utils';
+import { findActiveRoute } from '../../tools/utils/utils';
 import actions from '../../redux/actions';
 import Cookies, { INVALID } from '../../services/Cookies';
 

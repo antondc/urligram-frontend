@@ -1,5 +1,5 @@
 import config from '../../../config.test.json';
-import { buildEndpoint } from '../tools/url';
+import { buildEndpoint } from '../tools/utils/url';
 
 export const API_DEVELOPMENT_ENDPOINT = buildEndpoint(
   config.API_DEVELOPMENT_PROTOCOL,
