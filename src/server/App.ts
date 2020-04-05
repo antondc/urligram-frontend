@@ -11,7 +11,7 @@ const device = require('express-device'); // TODO: replace for https://www.npmjs
 import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
-const webpackConfig = require('../../webpack.client.dev');
+const webpackConfig = require('../../webpack.client.dev.ts');
 const compiler = webpack(webpackConfig);
 const app = express();
 
@@ -49,21 +49,23 @@ device.enableDeviceHelpers(app);
 app.use(logger('dev'));
 // - - - - - - - - - - - - - - - - - - - -
 
-app.use(
-  webpackDevMiddleware(compiler, {
-    logLevel: 'warn',
-    publicPath: webpackConfig.output.publicPath,
-    writeToDisk: true,
-  })
-);
+if (process.env.NODE_ENV === 'development') {
+  app.use(
+    webpackDevMiddleware(compiler, {
+      logLevel: 'warn',
+      publicPath: webpackConfig.output.publicPath,
+      writeToDisk: true,
+    })
+  );
 
-app.use(
-  webpackHotMiddleware(compiler, {
-    log: console.log,
-    path: '/__webpack_hmr',
-    heartbeat: 10 * 1000,
-  })
-);
+  app.use(
+    webpackHotMiddleware(compiler, {
+      log: console.log,
+      path: '/__webpack_hmr',
+      heartbeat: 10 * 1000,
+    })
+  );
+}
 
 // API - - - - - - - - - - - - - - - - -
 app.use('/', allRoutes);

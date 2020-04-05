@@ -14,9 +14,12 @@
   ],
   "scripts": {
     "dev": "webpack --watch --config ./webpack.server.dev.ts & node --inspect=9228 ./dist/server.js",
-    "build:server": "webpack --config ./webpack.server.dev.ts",
-    "build:client": "webpack --config ./webpack.client.dev.ts",
-    "run:server": "node --inspect=9228 ./dist/server.ts",
+    "prod": "webpack --config ./webpack.server.prod.ts & webpack --config ./webpack.server.prod.ts",
+    "build:server:dev": "webpack --config ./webpack.server.dev.ts",
+    "build:client:dev": "webpack --config ./webpack.client.dev.ts",
+    "run:server": "node --inspect=9228 ./dist/server.js",
+    "build:client:prod": "webpack --config ./webpack.client.prod.ts",
+    "build:server:prod": "webpack --config ./webpack.server.prod.ts",
     "test": "jest",
     "precommit": "lint-staged"
   },
@@ -89,6 +92,7 @@
     "webpack-node-externals": "^1.7.2"
   },
   "dependencies": {
+    "@types/mini-css-extract-plugin": "^0.9.1",
     "axios": "^0.19.2",
     "body-parser": "^1.18.3",
     "cookie-parser": "~1.4.3",

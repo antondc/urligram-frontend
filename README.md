@@ -28,19 +28,18 @@ Local server will run in port `4000`, production conf in `config.test.json`.
 
 ## TODO
 
-- Open browser on start. Wont work «webpack --watch --config ./webpack.server.dev.js & node --inspect=9228 ./dist/server.js & open http://0.0.0.0:4000"» ❌
-- Webpack add mini-css-extract-plugin to production build ❌
+- Webpack configure webpack production css build 👍
 - Webpack add autoprefixer ❌
 - Replace express-device for https://www.npmjs.com/package/express-useragent ❌
 - Remove default Languages first load from allRoutes ❌
-- Webpack enable imports from root: e.g. config.test.json ❌
 - Transform js and jsx files to ts and tsx ❌
 - Add reselect ❌
 - Modularize Redux ❌
 - Restructure state:
   - Navigated route to routerLocations ❌
 - const device = require('express-device'); replace for https://www.npmjs.com/package/express-useragent ❌
-- Reconfigure webpack production css build ❌
+- Webpack enable imports from root: e.g. config.test.json 👍
+- Open browser on start. Wont work «webpack --watch --config ./webpack.server.dev.js & node --inspect=9228 ./dist/server.js & open http://0.0.0.0:4000"» 👍
 - Clean and sort packages on package.json and clean unused dependencies 👍
 - Check «Move code from componentWillMount to componentDidMount» 👍
 - Webpack HMR 👍
@@ -53,8 +52,6 @@ Local server will run in port `4000`, production conf in `config.test.json`.
 
 -The cookies dependencies are:
 
-    - universal-cookie: https://github.com/reactivestack/cookies/tree/master/packages/universal-cookie#readme, to set and retrieve cookies both from browser and node
-    - @types/universal-cookie: https://www.npmjs.com/package/@types/universal-cookie, types for universal-cookie
     - cookie-parser: https://github.com/expressjs/cookie-parser, official parser to access cookies on express
 
 - Cookies are set with following steps:
@@ -69,8 +66,9 @@ Local server will run in port `4000`, production conf in `config.test.json`.
     - Reducer is triggered and user data is saved on store: src/shared/redux/reducers.js
     - User navigates
     - The HTTP request has cookie included
-    - For all
-      -Server
+
+  - Server
+
     - For all requests, cookies are checked: src/server/routes/allRoutes.tsx
     - If cookie is ok, user data is included in window.data
 
@@ -80,15 +78,22 @@ Local server will run in port `4000`, production conf in `config.test.json`.
     - For every redux action a Redux middleware will use Cookies to test cookies: If cookies state === COOKIES_INVALID, it will call actions.logOut
     - For every reload Layout component use Cookies to test cookies. If cookies state === COOKIES_INVALID, it will call actions.logOut
 
-  - On Main we have the <Redirect /> component that is loaded depending on the login status of the user, and allows or disallows to access to specific routes: src/shared/routes/Main/index.js
+- On <Main/> we have the <Redirect /> component that is loaded depending on the login status of the user, and allows or disallows to access to specific routes: src/shared/routes/Main/index.js
+
+### CSS
+
+- Used less without css modules. The reason is the lack of selector nesting. Instead, a custom variant of BEM is used:
+
+      MyModule-myElement--myModifier
 
 ### Webpack build
 
-- Webpack building is done in parallel: client and server. Common configurations are stored in `webpack.dev.js`, also split in dev and prod.
+- Webpack building is done in parallel: client and server.
 
-### Cookies
-
-- Cookies set with `universal-cookie`: https://www.npmjs.com/package/universal-cookie. Httponly not in use because client needs access to the cookie. Secure not in use because local deployment needs access via http.
+      webpack.client.dev.ts
+      webpack.client.prod.ts
+      webpack.server.dev.ts
+      webpack.server.prod.ts
 
 ### API calls library
 
