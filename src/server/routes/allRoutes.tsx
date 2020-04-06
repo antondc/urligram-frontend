@@ -112,10 +112,12 @@ router.get('/:lang([a-z]{2})?/:rest(*[a-z])?/:item([0-9])?', function(req: any, 
             isBot: req.useragent.isBot,
           });
         })
-        .catch(next);
+        .catch((error: any) => {
+          res.render('error', { error });
+        });
     })
-    .catch((err: any) => {
-      console.log(err);
+    .catch((error: any) => {
+      res.render('error', { error });
     });
 });
 
