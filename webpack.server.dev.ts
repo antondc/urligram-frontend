@@ -37,23 +37,13 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
-      },
-      {
         test: /\.(js|jsx|ts|tsx)$/,
         loader: ['ts-loader'],
         exclude: /node_modules/,
       },
       {
         test: /\.(less|css)$/,
-        use: [
-          {
-            loader: 'isomorphic-style-loader',
-          },
-          'css-loader',
-          'less-loader',
-        ],
+        use: ['css-loader', 'less-loader'],
       },
     ],
   },

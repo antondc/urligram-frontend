@@ -26,13 +26,13 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(less|css)$/,
-        use: ['style-loader', 'css-loader', 'less-loader'],
-      },
-      {
         test: /\.(js|jsx|ts|tsx)$/,
         loader: ['ts-loader'],
         exclude: /node_modules/,
+      },
+      {
+        test: /\.(less|css)$/,
+        use: ['style-loader', 'css-loader', 'less-loader'],
       },
     ],
   },
