@@ -13,6 +13,7 @@ const Routes = {
     component: Login,
     hasHeader: false,
     hasFooter: false,
+    loadInitialData: () => {},
   },
 
   Control: {
@@ -23,6 +24,7 @@ const Routes = {
     component: Control,
     hasHeader: true,
     hasFooter: true,
+    loadInitialData: () => {},
   },
 
   Home: {

@@ -22,7 +22,6 @@ const router = express.Router();
 export interface Global {
   document: Document;
   window: Window;
-  isIE: any;
 }
 
 // TODO: this should be in a declaration file
@@ -30,10 +29,6 @@ declare var global: Global;
 
 router.get('/:lang([a-z]{2})?/:rest(*[a-z])?/:item([0-9])?', function(req: any, res: any, next: any) {
   // TODO: check express types
-  // Check for old browsers; the check for client is in App.js
-  if (req.useragent.browser == 'IE') {
-    global.isIE = true;
-  }
 
   // Requesting original url
   const url = urlBuild({ protocol: req.protocol, host: req.host, path: req.originalUrl });

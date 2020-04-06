@@ -39,15 +39,6 @@ class Layout extends React.Component {
 
     return (
       <div className={'Layout' + ' Layout--' + this.props.NavigatedRoute.route}>
-        {/*
-        TODO: find proper place for popups and spinners
-        <div className="Layout-popUp">
-          <Fade mounted={this.props.Saving.isSaving} time={300}>
-            <Loader />
-          </Fade>
-        </div>
-        {global.isIE ? <BrowserPopup /> : null}
-        */}
         <Header activeRoute={activeRoute} />
         <Route
           path="/:lang([a-z]{2})?"
