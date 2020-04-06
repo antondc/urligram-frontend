@@ -4,10 +4,14 @@ import './Home.less';
 
 class Home extends React.Component {
   render() {
-    if (this.props.HomePage.HomePageTranslations) return;
+    const {
+      HomePage: { createdAt },
+    } = this.props;
+
     return (
       <div className="Home">
         <h1 className="NotFound-h1">HOME PAGE</h1>
+        {createdAt && <div>{createdAt}</div>}
       </div>
     );
   }

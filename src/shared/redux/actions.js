@@ -193,6 +193,58 @@ const actions = {
       data: params,
     };
   },
+
+  requestHomePage: () => {
+    return {
+      type: C.LOAD_HOMEPAGE_STARTED,
+    };
+  },
+
+  receiveHomePage: (id, data) => {
+    return {
+      type: C.LOAD_HOMEPAGE_SUCCESS,
+      id,
+      data,
+    };
+  },
+
+  loadHomePage: params => {
+    const url = '/api/v1/homepage/';
+    const encodedURI = isBrowser
+      ? encodeURI(process.env.ENDPOINT_API + url)
+      : encodeURI(process.env.ENDPOINT_API + url);
+    return isBrowser
+      ? function(dispatch) {
+          dispatch(actions.requestHomePage());
+
+          return fetch(encodedURI, {
+            credentials: 'include',
+          })
+            .then(
+              response => {
+                return response.json();
+              },
+              error => {
+                return console.log('An error occurred.', error);
+              }
+            )
+            .then(data => {
+              return dispatch(actions.receiveHomePage(1, data));
+            });
+        }
+      : fetch(encodedURI, {
+          credentials: 'include',
+        })
+          .then(response => {
+            return response.json();
+          })
+          .then(data => {
+            return data;
+          })
+          .catch(error => {
+            return Promise.reject(Error(error.message));
+          });
+  },
 };
 
 export default actions;

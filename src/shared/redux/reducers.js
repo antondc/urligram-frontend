@@ -86,3 +86,19 @@ export const FirstLoad = (state = {}, action) => {
       return state;
   }
 };
+
+export const WhatPage = (state = {}, action) => {
+  switch (action.type) {
+    case C.LOAD_WHATPAGE_STARTED:
+      return Object.assign({}, state, {
+        isFetching: true,
+      });
+    case C.LOAD_WHATPAGE_SUCCESS:
+      return Object.assign({}, state, {
+        ...action.data.WhatPage,
+        isFetching: false,
+      });
+    default:
+      return state;
+  }
+};

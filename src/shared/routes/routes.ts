@@ -2,7 +2,7 @@ import Home from './Home';
 import Control from './Control';
 import Login from './Login';
 import NotFound from './NotFound';
-// import actions from '../redux/actions';
+import actions from '../redux/actions';
 
 const Routes = {
   Login: {
@@ -35,7 +35,9 @@ const Routes = {
     component: Home,
     hasHeader: true,
     hasFooter: true,
-    loadInitialData: () => {},
+    loadInitialData: (params: any) => {
+      return actions.loadHomePage(params);
+    },
   },
 
   NotFound: {
