@@ -4,7 +4,7 @@ import { handleResponse } from '../tools/errors';
 
 const actions = {
   requestLogIn: (username, password, history) => {
-    // Get a token from api server using the fetch api
+    // Request a cookie from api server using the fetch api
     const url = '/api/v1/login';
     const encodedURI = isBrowser
       ? encodeURI(process.env.ENDPOINT_API + url)
@@ -25,17 +25,13 @@ const actions = {
         }),
       })
         .then(handleResponse)
-        .then(response => {
-          return dispatch(actions.logIn(response.user));
-        })
-        .catch(error => {
-          return dispatch(actions.logFailed(error));
-        });
+        .then(response => dispatch(actions.logIn(response.user)))
+        .catch(error => dispatch(actions.logFailed(error)));
     };
   },
 
   requestLogOut: (username, password, history) => {
-    // Get a token from api server using the fetch api
+    // Remove the cookie on server using the fetch api
     const url = '/api/v1/login';
     const encodedURI = isBrowser
       ? encodeURI(process.env.ENDPOINT_API + url)
@@ -50,13 +46,8 @@ const actions = {
         },
         credentials: 'include',
       })
-        .then(handleResponse)
-        .then(response => {
-          return dispatch(actions.logOut());
-        })
-        .catch(error => {
-          return dispatch(actions.logFailed(error));
-        });
+        .then(() => dispatch(actions.logOut()))
+        .catch(error => dispatch(actions.logFailed(error)));
     };
   },
 
@@ -108,8 +99,8 @@ const actions = {
     };
   },
 
-  loadLanguage: lang => {
-    const url = '/api/v1/language/' + lang;
+  loadLanguage: params => {
+    const url = '/api/v1/language/' + params.lang;
     const encodedURI = isBrowser
       ? encodeURI(process.env.ENDPOINT_API + url)
       : encodeURI(process.env.ENDPOINT_API + url);
@@ -121,30 +112,15 @@ const actions = {
           return fetch(encodedURI, {
             credentials: 'include',
           })
-            .then(
-              response => {
-                return response.json();
-              },
-              error => {
-                return console.log('An error occurred.', error);
-              }
-            )
-            .then(data => {
-              return dispatch(actions.receiveLanguage(data));
-            });
+            .then(response => response.json())
+            .then(data => dispatch(actions.receiveLanguage(data)));
         }
       : fetch(encodedURI, {
           credentials: 'include',
         })
-          .then(response => {
-            return response.json();
-          })
-          .then(data => {
-            return data;
-          })
-          .catch(error => {
-            return Promise.reject(Error(error.message));
-          });
+          .then(response => response.json())
+          .then(data => data)
+          .catch(error => Promise.reject(Error(error.message)));
   },
 
   requestLanguages: () => {
@@ -173,30 +149,15 @@ const actions = {
           return fetch(encodedURI, {
             credentials: 'include',
           })
-            .then(
-              response => {
-                return response.json();
-              },
-              error => {
-                return console.log('An error occurred.', error);
-              }
-            )
-            .then(data => {
-              return dispatch(actions.receiveLanguages(data));
-            });
+            .then(response => response.json())
+            .then(data => dispatch(actions.receiveLanguages(data)));
         }
       : fetch(encodedURI, {
           credentials: 'include',
         })
-          .then(response => {
-            return response.json();
-          })
-          .then(data => {
-            return data;
-          })
-          .catch(error => {
-            return Promise.reject(Error(error.message));
-          });
+          .then(response => response.json())
+          .then(data => data)
+          .catch(error => Promise.reject(Error(error.message)));
   },
 
   startNavigatedRoute: params => {
@@ -229,7 +190,7 @@ const actions = {
     };
   },
 
-  loadHomePage: params => {
+  loadHomePage: () => {
     const url = '/api/v1/homepage/';
     const encodedURI = isBrowser
       ? encodeURI(process.env.ENDPOINT_API + url)
@@ -241,30 +202,53 @@ const actions = {
           return fetch(encodedURI, {
             credentials: 'include',
           })
-            .then(
-              response => {
-                return response.json();
-              },
-              error => {
-                return console.log('An error occurred.', error);
-              }
-            )
-            .then(data => {
-              return dispatch(actions.receiveHomePage(1, data));
-            });
+            .then(response => response.json())
+            .then(data => dispatch(actions.receiveHomePage(1, data)));
         }
       : fetch(encodedURI, {
           credentials: 'include',
         })
-          .then(response => {
-            return response.json();
+          .then(response => response.json())
+          .then(data => data)
+          .catch(error => Promise.reject(Error(error.message)));
+  },
+
+  requestWhoPage: () => {
+    return {
+      type: C.LOAD_WHOPAGE_STARTED,
+    };
+  },
+
+  receiveWhoPage: (id, data) => {
+    return {
+      type: C.LOAD_WHOPAGE_SUCCESS,
+      id,
+      data,
+    };
+  },
+
+  loadWhoPage: () => {
+    const url = '/api/v1/whopage/1';
+    const encodedURI = isBrowser
+      ? encodeURI(process.env.ENDPOINT_API + url)
+      : encodeURI(process.env.ENDPOINT_API + url);
+
+    return isBrowser
+      ? function(dispatch) {
+          dispatch(actions.requestWhoPage());
+
+          return fetch(encodedURI, {
+            credentials: 'include',
           })
-          .then(data => {
-            return data;
-          })
-          .catch(error => {
-            return Promise.reject(Error(error.message));
-          });
+            .then(response => response.json())
+            .then(data => dispatch(actions.receiveWhoPage(1, data)));
+        }
+      : fetch(encodedURI, {
+          credentials: 'include',
+        })
+          .then(response => response.json())
+          .then(data => data)
+          .catch(error => Promise.reject(Error(error.message)));
   },
 };
 

@@ -3,17 +3,16 @@ import express from 'express';
 import Helmet from 'react-helmet';
 import serialize from 'serialize-javascript';
 import { Provider } from 'react-redux';
-import { StaticRouter, Route, matchPath } from 'react-router-dom';
+import { StaticRouter, Route } from 'react-router-dom';
 import { renderToString } from 'react-dom/server';
 import Routes from '../../shared/routes/routes';
 import storeFactory from '../../shared/redux/index';
 import Layout from '../../shared/common/Layout';
-import { findActiveRoute, checkIfFileUrls } from '../../shared/tools/utils/utils';
+import { findActiveRoute } from '../../shared/tools/utils/utils';
 import config from './../../../config.test.json';
 import actions from '../../shared/redux/actions';
 import { User } from '../../shared/redux/types';
 import Authentication from '../../shared/services/Authentication';
-import { urlBuild } from '../../shared/tools/utils/url';
 
 const authentication = new Authentication();
 const router = express.Router();
@@ -30,41 +29,27 @@ declare var global: Global;
 router.get('/:lang([a-z]{2})?/:rest(*[a-z])?/:item([0-9])?', function(req: any, res: any, next: any) {
   // TODO: check express types
 
-  // Requesting original url
-  const url = urlBuild({ protocol: req.protocol, host: req.host, path: req.originalUrl });
-  const domain = urlBuild({ protocol: req.protocol, host: req.host });
-
   // Get the routes and return the one that matches actual url
   const activeRoute = findActiveRoute(req.url, Routes);
   const allLanguages = actions.loadLanguages();
 
   allLanguages
-    .then((languages: any) => {
-      // Comparing param language with existing languages; if not exist, undefined.
-      const langParam = languages.Languages.find((item: any) => req.params.lang === item.slug)?.slug;
-      // Looking for default language in all Languages
-      const defaultLanguage = languages.Languages.find((item: any) => !!item.isDefault);
+    .then(({ Languages }: any) => {
+      // Looking for default language in all Languages and setting it
+      const defaultLanguage = Languages.find((item: any) => !!item.isDefault);
+      req.params.lang = defaultLanguage.slug;
+      const currentLanguage = actions.loadLanguage(req.params);
 
-      // Setting proper language
-      const lang = langParam || defaultLanguage.slug;
-      const params = {
-        lang: lang,
-        item: req.params.item,
-      };
+      // Retrieve initial data loaders and pass req.params to them. If empty, send an arraywith a resolved promise
+      const initialData = activeRoute.loadInitialData
+        ? activeRoute.loadInitialData.map((item: any) => item(req.params))
+        : [Promise.resolve()];
 
-      const currentLanguage = actions.loadLanguage(lang);
-      const pageData = activeRoute.loadInitialData ? activeRoute.loadInitialData(params) : Promise.resolve({});
-      Promise.all([pageData, currentLanguage])
+      Promise.all([...initialData, currentLanguage])
         .then((data: any[] | any) => {
           // TODO: type error, array or object?
           data = Object.assign({}, ...data);
-          data.Languages = languages.Languages;
-          data.FirstLoad = {
-            url: url,
-            domain: domain,
-            date: new Date(),
-          };
-          data.NavigatedRoute = actions.setNavigatedRoute({ route: activeRoute.name }).data;
+          data.Languages = Languages;
 
           // Adding initial user to data from Token to store
           if (req.cookies.sessionToken) {
@@ -96,7 +81,7 @@ router.get('/:lang([a-z]{2})?/:rest(*[a-z])?/:item([0-9])?', function(req: any, 
               )
             : '';
           const helmet = Helmet.renderStatic();
-          const dataForTemplate = serialize(data); // TODO: this may be processed with JSON.stringify
+          const dataForTemplate = serialize(data); // TODO: this might be processed with JSON.stringify
           // Render template with component; frontend data passed via template
           res.render('index', {
             toHtml: helmet.htmlAttributes.toString(),

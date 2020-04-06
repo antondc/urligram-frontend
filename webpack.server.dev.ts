@@ -55,7 +55,7 @@ module.exports = {
       dry: false,
       verbose: true,
       protectWebpackAssets: false,
-      cleanOnceBeforeBuildPatterns: ['./server.js', './server.js.map', './server.js.gz'],
+      cleanOnceBeforeBuildPatterns: ['./dist/server.js', './dist/server.js.map', './dist/server.js.gz'],
     }),
 
     // Setting a variable to identify browser from server

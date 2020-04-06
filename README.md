@@ -28,15 +28,15 @@ Local server will run in port `4000`, production conf in `config.test.json`.
 
 ## TODO
 
-- Remove default Languages first load from allRoutes ❌
-  - loadInitialRoute a array de acciones
-  - Cargar todo el glosario y no el LoadLanguage
-  - Renombrar «Languages.languages»en allRoutes.
+- Cargar todo el glosario y no solo el current Language, cargar junto con initial data ❌
 - Transform js and jsx files to ts and tsx ❌
 - Add reselect ❌
 - Modularize Redux ❌
-- Restructure state:
-  - Navigated route to routerLocations ❌
+- Restructure state: ❌
+- Navigated route to routerLocations ❌
+- Remove default Languages first load from allRoutes 👍
+- loadInitialRoute a array de acciones 👍
+- Renombrar «Languages.languages»en allRoutes. 👍
 - Use httpOnly and retrieve cookies on server only 👍
 - Replace express-device for https://www.npmjs.com/package/express-useragent 👍
 - Update Jest 👍

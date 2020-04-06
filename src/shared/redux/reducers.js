@@ -102,3 +102,19 @@ export const WhatPage = (state = {}, action) => {
       return state;
   }
 };
+
+export const WhoPage = (state = {}, action) => {
+  switch (action.type) {
+    case C.LOAD_WHOPAGE_STARTED:
+      return Object.assign({}, state, {
+        isFetching: true,
+      });
+    case C.LOAD_WHOPAGE_SUCCESS:
+      return Object.assign({}, state, {
+        ...action.data.WhoPage,
+        isFetching: false,
+      });
+    default:
+      return state;
+  }
+};
