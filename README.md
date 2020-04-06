@@ -29,6 +29,7 @@ Local server will run in port `4000`, production conf in `config.test.json`.
 ## TODO
 
 - Remove default Languages first load from allRoutes ❌
+  - loadInitialRoute a array de acciones
   - Cargar todo el glosario y no el LoadLanguage
   - Renombrar «Languages.languages»en allRoutes.
 - Transform js and jsx files to ts and tsx ❌
@@ -48,6 +49,20 @@ Local server will run in port `4000`, production conf in `config.test.json`.
 - Webpack HMR 👍
 - Rename Control/Control 👍
 - Eliminar cookies library 👍
+
+## Development
+
+- Using webpack-hot-middleware and webpack-dev-middleware:
+
+  - https://github.com/webpack-contrib/webpack-hot-middleware
+  - https://github.com/webpack/webpack-hot-middleware
+
+Restarting the server has to be done after the bundles are built, but nodemon will disconnect webpack-hot-middleware https://medium.com/@binyamin/get-nodemon-to-restart-after-webpack-re-build-8746db80548e
+
+Have a look to this repository:
+
+- https://medium.com/@binyamin/get-nodemon-to-restart-after-webpack-re-build-8746db80548e
+- https://github.com/glenjamin/ultimate-hot-reloading-example
 
 ## Docs
 
