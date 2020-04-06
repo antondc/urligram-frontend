@@ -20,9 +20,9 @@ class LoginUi extends Component {
   };
 
   onSubmit = () => {
-    const { requestToken } = this.props;
+    const { requestLogIn } = this.props;
     const { username, password } = this.state;
-    requestToken(username, password, this.props.history);
+    requestLogIn(username, password, this.props.history);
   };
 
   render() {
@@ -47,5 +47,5 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, {
-  requestToken: actions.requestToken,
+  requestLogIn: actions.requestLogIn,
 })(LoginUi);

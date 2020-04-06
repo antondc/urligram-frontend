@@ -12,10 +12,10 @@ import { findActiveRoute, checkIfFileUrls } from '../../shared/tools/utils/utils
 import config from './../../../config.test.json';
 import actions from '../../shared/redux/actions';
 import { User } from '../../shared/redux/types';
-import Cookies from '../../shared/services/Cookies';
+import Authentication from '../../shared/services/Authentication';
 import { urlBuild } from '../../shared/tools/utils/url';
 
-const cookies = new Cookies();
+const authentication = new Authentication();
 const router = express.Router();
 
 // TODO: this should be in a declaration file
@@ -69,14 +69,12 @@ router.get('/:lang([a-z]{2})?/:rest(*[a-z])?/:item([0-9])?', function(req: any, 
           // Adding initial user to data from Token to store
           if (req.cookies.sessionToken) {
             try {
-              const user: User = cookies.verifyToken(req.cookies.sessionToken) as User;
-
+              const user = authentication.verifyToken(req.cookies.sessionToken) as User;
               data.UserSession = {
                 ...user,
               };
             } catch (err) {
               data.UserSession = {};
-              console.log(err);
             }
           }
 

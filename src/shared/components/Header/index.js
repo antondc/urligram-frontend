@@ -6,7 +6,7 @@ import './Header.less';
 
 class Header extends React.Component {
   render() {
-    const { isLogged, Language, logOut } = this.props;
+    const { isLogged, Language, requestLogOut } = this.props;
 
     return (
       <header className={'Header'}>
@@ -19,7 +19,7 @@ class Header extends React.Component {
               <Link className="Header-item" to="/control">
                 Control
               </Link>
-              <Link className="Header-item" to="/login" onClick={logOut}>
+              <Link className="Header-item" to="/login" onClick={requestLogOut}>
                 Log out
               </Link>
             </>
@@ -42,5 +42,5 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, {
-  logOut: actions.logOut,
+  requestLogOut: actions.requestLogOut,
 })(Header);

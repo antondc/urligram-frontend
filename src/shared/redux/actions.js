@@ -1,12 +1,9 @@
 import C from './constants';
 import fetch from 'isomorphic-fetch';
-import Cookies from '../services/Cookies';
 import { handleResponse } from '../tools/errors';
 
-const cookies = new Cookies();
-
 const actions = {
-  requestToken: (username, password, history) => {
+  requestLogIn: (username, password, history) => {
     // Get a token from api server using the fetch api
     const url = '/api/v1/login';
     const encodedURI = isBrowser
@@ -20,6 +17,7 @@ const actions = {
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
+        credentials: 'include',
         body: JSON.stringify({
           name: username,
           password: password,
@@ -28,8 +26,6 @@ const actions = {
       })
         .then(handleResponse)
         .then(response => {
-          cookies.setCookie('sessionToken', response.token);
-
           return dispatch(actions.logIn(response.user));
         })
         .catch(error => {
@@ -38,8 +34,33 @@ const actions = {
     };
   },
 
+  requestLogOut: (username, password, history) => {
+    // Get a token from api server using the fetch api
+    const url = '/api/v1/login';
+    const encodedURI = isBrowser
+      ? encodeURI(process.env.ENDPOINT_API + url)
+      : encodeURI(process.env.ENDPOINT_API + url);
+
+    return function(dispatch) {
+      fetch(encodedURI, {
+        method: 'DELETE',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+      })
+        .then(handleResponse)
+        .then(response => {
+          return dispatch(actions.logOut());
+        })
+        .catch(error => {
+          return dispatch(actions.logFailed(error));
+        });
+    };
+  },
+
   logOut: () => {
-    cookies.removeCookie('sessionToken');
     return {
       type: C.LOG_OUT,
       data: {},

@@ -37,6 +37,7 @@ Local server will run in port `4000`, production conf in `config.test.json`.
 - Modularize Redux ❌
 - Restructure state:
   - Navigated route to routerLocations ❌
+- Use httpOnly and retrieve cookies on server only 👍
 - Replace express-device for https://www.npmjs.com/package/express-useragent 👍
 - Update Jest 👍
 - Webpack add autoprefixer 👍
@@ -68,9 +69,11 @@ Have a look to this repository:
 
 ### Cookies
 
--The cookies dependencies are:
+- Cookies are accesssed from backend only thanks to HttpOnly
 
-    - cookie-parser: https://github.com/expressjs/cookie-parser, official parser to access cookies on express
+- The cookies dependencies are:
+
+  - cookie-parser: https://github.com/expressjs/cookie-parser, official parser to access cookies on express
 
 - Cookies are set with following steps:
 
@@ -78,9 +81,8 @@ Have a look to this repository:
 
     - User navigates to /login
     - User populates form and submit: src/shared/routes/Login/index.js
-    - Action requestToken is called: src/shared/redux/actions.js
-    - Request to API is called, the response has a token with user data
-    - Token is saved to cookies
+    - Action requestLogIn is called: src/shared/redux/actions.js
+    - Request to GET /login is called, the response has a cookie with user data, along with user data itself
     - Reducer is triggered and user data is saved on store: src/shared/redux/reducers.js
     - User navigates
     - The HTTP request has cookie included
@@ -92,9 +94,7 @@ Have a look to this repository:
 
   - Client
 
-    - Logic to check cookies is in Cookies: src/shared/services/Cookies.ts
-    - For every redux action a Redux middleware will use Cookies to test cookies: If cookies state === COOKIES_INVALID, it will call actions.logOut
-    - For every reload Layout component use Cookies to test cookies. If cookies state === COOKIES_INVALID, it will call actions.logOut
+    - Token validator is wrapped in src/shared/services/Cookies.ts to handle error
 
 - On <Main/> we have the <Redirect /> component that is loaded depending on the login status of the user, and allows or disallows to access to specific routes: src/shared/routes/Main/index.js
 
