@@ -16,22 +16,6 @@ export const HomePage = (state = {}, action) => {
   }
 };
 
-export const Language = (state = {}, action) => {
-  switch (action.type) {
-    case C.LOAD_LANGUAGE_STARTED:
-      return Object.assign({}, state, {
-        isFetching: true,
-      });
-    case C.LOAD_LANGUAGE_SUCCESS:
-      return Object.assign({}, state, {
-        isFetching: false,
-        ...action.data.Language,
-      });
-    default:
-      return state;
-  }
-};
-
 export const Languages = (state = [], action) => {
   switch (action.type) {
     case C.LOAD_LANGUAGES_STARTED:
@@ -46,7 +30,7 @@ export const Languages = (state = [], action) => {
   }
 };
 
-export const UserSession = (state = '', action) => {
+export const User = (state = '', action) => {
   switch (action.type) {
     case C.LOG_IN:
       return action.data;

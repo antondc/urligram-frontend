@@ -33,9 +33,10 @@ export interface State {
   navigation: {
     history: Route[];
     currentPath: Route;
+    previousPath: Route;
   };
-  user: User;
-  language: {
+  User: User;
+  Languages: {
     Current: Language;
     Languages: {
       [key: string]: Language;

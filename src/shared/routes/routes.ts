@@ -13,16 +13,18 @@ const Routes = {
     component: Login,
     hasHeader: false,
     hasFooter: false,
+    loadInitialData: [actions.loadHomePage, actions.loadWhoPage],
   },
 
   Control: {
     name: 'Control',
-    path: '/control',
+    path: '/:lang([a-z]{2})?/control',
     exact: true,
     auth: true,
     component: Control,
     hasHeader: true,
     hasFooter: true,
+    loadInitialData: [actions.loadHomePage, actions.loadWhoPage],
   },
 
   Home: {

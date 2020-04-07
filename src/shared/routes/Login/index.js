@@ -43,7 +43,7 @@ class LoginUi extends Component {
 }
 
 const mapStateToProps = state => ({
-  isLogged: state.UserSession.isLogged,
+  isLogged: state.User.isLogged,
 });
 
 export default connect(mapStateToProps, {

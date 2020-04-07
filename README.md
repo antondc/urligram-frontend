@@ -28,12 +28,16 @@ Local server will run in port `4000`, production conf in `config.test.json`.
 
 ## TODO
 
-- Cargar todo el glosario y no solo el current Language, cargar junto con initial data ❌
+- Para enviar Languages como objeto con nombre en key y language en contenido; actualmente array ❌
+- Modificar allroutes para consumit Languages como objeto ❌
+- Después de añadir reselect, crear selector para defaultLanguage ❌
+- Type allRoutes response ❌
 - Transform js and jsx files to ts and tsx ❌
 - Add reselect ❌
 - Modularize Redux ❌
-- Restructure state: ❌
 - Navigated route to routerLocations ❌
+- Restructure state: 👍
+- Cargar todo el glosario y no solo el current Language, cargar junto con initial data 👍
 - Remove default Languages first load from allRoutes 👍
 - loadInitialRoute a array de acciones 👍
 - Renombrar «Languages.languages»en allRoutes. 👍

@@ -6,12 +6,16 @@ import './Header.less';
 
 class Header extends React.Component {
   render() {
-    const { isLogged, Language, requestLogOut } = this.props;
+    const {
+      isLogged,
+      Language: { slug },
+      requestLogOut,
+    } = this.props;
 
     return (
       <header className={'Header'}>
         <nav className="Header-navigation">
-          <Link className="Header-item" to={'/' + Language.slug}>
+          <Link className="Header-item" to={'/' + slug}>
             Home
           </Link>
           {isLogged && (
@@ -25,7 +29,7 @@ class Header extends React.Component {
             </>
           )}
           {!isLogged && (
-            <Link className="Header-item" to={'/' + Language.slug + '/login'}>
+            <Link className="Header-item" to={'/' + slug + '/login'}>
               Login
             </Link>
           )}
@@ -36,8 +40,8 @@ class Header extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  Language: state.Language,
-  isLogged: !!state.UserSession.id,
+  Language: state.Languages,
+  isLogged: !!state.User.id,
 });
 
 export default connect(mapStateToProps, {

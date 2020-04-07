@@ -55,7 +55,7 @@ class Main extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  isLogged: !!state.UserSession.id,
+  isLogged: !!state.User.id,
 });
 
 export default connect(mapStateToProps)(Main);

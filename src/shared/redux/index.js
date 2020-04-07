@@ -1,6 +1,6 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-import { HomePage, WhoPage, UserSession, Language, Languages } from './reducers';
+import { HomePage, WhoPage, User, Languages } from './reducers';
 
 const middleware = [thunk];
 
@@ -12,8 +12,7 @@ const storeFactory = (initialState = {}) => {
     combineReducers({
       HomePage,
       WhoPage,
-      UserSession,
-      Language,
+      User,
       Languages,
     }),
     initialState
