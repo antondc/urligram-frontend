@@ -18,15 +18,10 @@ const authentication = new Authentication();
 const router = express.Router();
 
 // TODO: this should be in a declaration file
-export interface Global {
-  document: Document;
-  window: Window;
-}
 
-// TODO: this should be in a declaration file
-declare var global: Global;
+export const regexRoute: string = '/:lang([a-z]{2})?/:firstparam?/:secondparam?/:thirdparam?';
 
-router.get('/:lang([a-z]{2})?/:rest(*[a-z])?/:item([0-9])?', function(req: any, res: any, next: any) {
+router.get(regexRoute, function(req: any, res: any, next: any) {
   // TODO: check express types
 
   // Get the routes and return the one that matches actual url
