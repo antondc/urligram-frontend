@@ -11,7 +11,7 @@ import Layout from '../../shared/common/Layout';
 import { findActiveRoute } from '../../shared/tools/utils/utils';
 import config from './../../../config.test.json';
 import actions from '../../shared/redux/actions';
-import { User } from '../../shared/redux/types';
+import { User } from '../../shared/redux/modules/User/user';
 import Authentication from '../../shared/services/Authentication';
 
 const authentication = new Authentication();

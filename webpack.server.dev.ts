@@ -32,7 +32,7 @@ module.exports = {
   },
   externals: [nodeExternals()],
   resolve: {
-    extensions: ['.js', '.ts', '.tsx', '.d.ts'],
+    extensions: ['.js', '.ts', '.tsx', '.ts'],
   },
   module: {
     rules: [

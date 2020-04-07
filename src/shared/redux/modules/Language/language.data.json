@@ -1,0 +1,25 @@
+{
+  "status": "ok",
+  "data": {
+    "Languages": {
+      "isFetching": false,
+      "byKey": {
+        "1": {
+          "id": 1,
+          "slug": "en",
+          "isDefault": true
+        },
+        "2": {
+          "id": 2,
+          "slug": "es",
+          "isDefault": false
+        },
+        "3": {
+          "id": 3,
+          "slug": "ru",
+          "isDefault": false
+        }
+      }
+    }
+  }
+}

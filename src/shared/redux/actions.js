@@ -1,9 +1,9 @@
 import C from './constants';
 import fetch from 'isomorphic-fetch';
 import { handleResponse } from '../tools/errors';
-import mockDataOne from './modules/MockDataOne/data.json';
-import mockDataTwo from './modules/MockDataTwo/data.json';
-import languages from './modules/Language/data.json';
+import mockDataOne from './modules/MockDataOne/mockDataOne.data.json';
+import mockDataTwo from './modules/MockDataTwo/mockDataTwo.data.json';
+import languages from './modules/Language/language.data.json';
 
 const actions = {
   requestLogIn: (username, password, history) => {
@@ -106,10 +106,10 @@ const actions = {
     if (isBrowser) {
       return dispatch => {
         dispatch(actions.requestLanguages());
-        dispatch(actions.receiveLanguages(languages));
+        dispatch(actions.receiveLanguages(languages.data));
       };
     }
-    return languages;
+    return languages.data;
   },
 
   requestMockDataOne: () => {
@@ -129,10 +129,10 @@ const actions = {
     if (isBrowser) {
       return dispatch => {
         dispatch(actions.requestMockDataOne());
-        dispatch(actions.receiveMockDataOne(mockDataOne));
+        dispatch(actions.receiveMockDataOne(mockDataOne.data));
       };
     }
-    return mockDataOne;
+    return mockDataOne.data;
   },
 
   requestMockDataTwo: () => {
@@ -152,10 +152,10 @@ const actions = {
     if (isBrowser) {
       return dispatch => {
         dispatch(actions.requestMockDataTwo());
-        dispatch(actions.receiveMockDataTwo(mockDataTwo));
+        dispatch(actions.receiveMockDataTwo(mockDataTwo.data));
       };
     }
-    return mockDataTwo;
+    return mockDataTwo.data;
   },
 };
 
