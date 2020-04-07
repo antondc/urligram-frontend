@@ -1,6 +1,9 @@
 import C from './constants';
 import fetch from 'isomorphic-fetch';
 import { handleResponse } from '../tools/errors';
+import mockDataOne from './modules/MockDataOne/data.json';
+import mockDataTwo from './modules/MockDataTwo/data.json';
+import languages from './modules/Language/data.json';
 
 const actions = {
   requestLogIn: (username, password, history) => {
@@ -10,7 +13,7 @@ const actions = {
       ? encodeURI(process.env.ENDPOINT_API + url)
       : encodeURI(process.env.ENDPOINT_API + url);
 
-    return function(dispatch) {
+    return dispatch => {
       fetch(encodedURI, {
         method: 'POST',
         headers: {
@@ -37,7 +40,7 @@ const actions = {
       ? encodeURI(process.env.ENDPOINT_API + url)
       : encodeURI(process.env.ENDPOINT_API + url);
 
-    return function(dispatch) {
+    return dispatch => {
       fetch(encodedURI, {
         method: 'DELETE',
         headers: {
@@ -86,43 +89,6 @@ const actions = {
     };
   },
 
-  requestLanguage: () => {
-    return {
-      type: C.LOAD_LANGUAGE_STARTED,
-    };
-  },
-
-  receiveLanguage: data => {
-    return {
-      type: C.LOAD_LANGUAGE_SUCCESS,
-      data,
-    };
-  },
-
-  loadLanguage: params => {
-    const url = '/api/v1/language/' + params.lang;
-    const encodedURI = isBrowser
-      ? encodeURI(process.env.ENDPOINT_API + url)
-      : encodeURI(process.env.ENDPOINT_API + url);
-
-    return isBrowser
-      ? function(dispatch) {
-          dispatch(actions.requestLanguage());
-
-          return fetch(encodedURI, {
-            credentials: 'include',
-          })
-            .then(response => response.json())
-            .then(data => dispatch(actions.receiveLanguage(data)));
-        }
-      : fetch(encodedURI, {
-          credentials: 'include',
-        })
-          .then(response => response.json())
-          .then(data => data)
-          .catch(error => Promise.reject(Error(error.message)));
-  },
-
   requestLanguages: () => {
     return {
       type: C.LOAD_LANGUAGES_STARTED,
@@ -137,102 +103,59 @@ const actions = {
   },
 
   loadLanguages: () => {
-    const url = '/api/v1/language/';
-    const encodedURI = isBrowser
-      ? encodeURI(process.env.ENDPOINT_API + url)
-      : encodeURI(process.env.ENDPOINT_API + url);
-
-    return isBrowser
-      ? function(dispatch) {
-          dispatch(actions.requestLanguages());
-
-          return fetch(encodedURI, {
-            credentials: 'include',
-          })
-            .then(response => response.json())
-            .then(data => dispatch(actions.receiveLanguages(data)));
-        }
-      : fetch(encodedURI, {
-          credentials: 'include',
-        })
-          .then(response => response.json())
-          .then(data => data)
-          .catch(error => Promise.reject(Error(error.message)));
+    if (isBrowser) {
+      return dispatch => {
+        dispatch(actions.requestLanguages());
+        dispatch(actions.receiveLanguages(languages));
+      };
+    }
+    return languages;
   },
 
-  requestHomePage: () => {
+  requestMockDataOne: () => {
     return {
-      type: C.LOAD_HOMEPAGE_STARTED,
+      type: C.LOAD_MOCK_DATA_ONE_STARTED,
     };
   },
 
-  receiveHomePage: (id, data) => {
+  receiveMockDataOne: data => {
     return {
-      type: C.LOAD_HOMEPAGE_SUCCESS,
-      id,
+      type: C.LOAD_MOCK_DATA_ONE_SUCCESS,
       data,
     };
   },
 
-  loadHomePage: () => {
-    const url = '/api/v1/homepage/';
-    const encodedURI = isBrowser
-      ? encodeURI(process.env.ENDPOINT_API + url)
-      : encodeURI(process.env.ENDPOINT_API + url);
-    return isBrowser
-      ? function(dispatch) {
-          dispatch(actions.requestHomePage());
-
-          return fetch(encodedURI, {
-            credentials: 'include',
-          })
-            .then(response => response.json())
-            .then(data => dispatch(actions.receiveHomePage(1, data)));
-        }
-      : fetch(encodedURI, {
-          credentials: 'include',
-        })
-          .then(response => response.json())
-          .then(data => data)
-          .catch(error => Promise.reject(Error(error.message)));
+  loadMockDataOne: () => {
+    if (isBrowser) {
+      return dispatch => {
+        dispatch(actions.requestMockDataOne());
+        dispatch(actions.receiveMockDataOne(mockDataOne));
+      };
+    }
+    return mockDataOne;
   },
 
-  requestWhoPage: () => {
+  requestMockDataTwo: () => {
     return {
-      type: C.LOAD_WHOPAGE_STARTED,
+      type: C.LOAD_MOCK_DATA_TWO_STARTED,
     };
   },
 
-  receiveWhoPage: (id, data) => {
+  receiveMockDataTwo: data => {
     return {
-      type: C.LOAD_WHOPAGE_SUCCESS,
-      id,
+      type: C.LOAD_MOCK_DATA_TWO_SUCCESS,
       data,
     };
   },
 
-  loadWhoPage: () => {
-    const url = '/api/v1/whopage/1';
-    const encodedURI = isBrowser
-      ? encodeURI(process.env.ENDPOINT_API + url)
-      : encodeURI(process.env.ENDPOINT_API + url);
-
-    return isBrowser
-      ? function(dispatch) {
-          dispatch(actions.requestWhoPage());
-
-          return fetch(encodedURI, {
-            credentials: 'include',
-          })
-            .then(response => response.json())
-            .then(data => dispatch(actions.receiveWhoPage(1, data)));
-        }
-      : fetch(encodedURI, {
-          credentials: 'include',
-        })
-          .then(response => response.json())
-          .then(data => data)
-          .catch(error => Promise.reject(Error(error.message)));
+  loadMockDataTwo: () => {
+    if (isBrowser) {
+      return dispatch => {
+        dispatch(actions.requestMockDataTwo());
+        dispatch(actions.receiveMockDataTwo(mockDataTwo));
+      };
+    }
+    return mockDataTwo;
   },
 };
 

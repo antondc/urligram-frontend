@@ -1,30 +1,16 @@
 import C from './constants';
 
-export const HomePage = (state = {}, action) => {
-  switch (action.type) {
-    case C.LOAD_HOMEPAGE_STARTED:
-      return Object.assign({}, state, {
-        isFetching: true,
-      });
-    case C.LOAD_HOMEPAGE_SUCCESS:
-      return Object.assign({}, state, {
-        ...action.data.HomePage,
-        isFetching: false,
-      });
-    default:
-      return state;
-  }
-};
-
 export const Languages = (state = [], action) => {
   switch (action.type) {
     case C.LOAD_LANGUAGES_STARTED:
-      return Object.assign([], state, {});
+      return Object.assign({}, state, {
+        isFetching: true,
+      });
     case C.LOAD_LANGUAGES_SUCCESS:
-      return Object.assign([], state, {
+      return Object.assign({}, state, {
+        isFetching: false,
         ...action.data.Languages,
       });
-
     default:
       return state;
   }
@@ -43,15 +29,15 @@ export const User = (state = '', action) => {
   }
 };
 
-export const WhatPage = (state = {}, action) => {
+export const MockDataOne = (state = {}, action) => {
   switch (action.type) {
-    case C.LOAD_WHATPAGE_STARTED:
+    case C.LOAD_MOCK_DATA_ONE_STARTED:
       return Object.assign({}, state, {
         isFetching: true,
       });
-    case C.LOAD_WHATPAGE_SUCCESS:
+    case C.LOAD_MOCK_DATA_ONE_SUCCESS:
       return Object.assign({}, state, {
-        ...action.data.WhatPage,
+        ...action.data.MockDataOne,
         isFetching: false,
       });
     default:
@@ -59,15 +45,15 @@ export const WhatPage = (state = {}, action) => {
   }
 };
 
-export const WhoPage = (state = {}, action) => {
+export const MockDataTwo = (state = {}, action) => {
   switch (action.type) {
-    case C.LOAD_WHOPAGE_STARTED:
+    case C.LOAD_MOCK_DATA_TWO_STARTED:
       return Object.assign({}, state, {
         isFetching: true,
       });
-    case C.LOAD_WHOPAGE_SUCCESS:
+    case C.LOAD_MOCK_DATA_TWO_SUCCESS:
       return Object.assign({}, state, {
-        ...action.data.WhoPage,
+        ...action.data.MockDataTwo,
         isFetching: false,
       });
     default:

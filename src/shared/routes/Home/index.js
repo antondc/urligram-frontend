@@ -5,7 +5,7 @@ import './Home.less';
 class Home extends React.Component {
   render() {
     const {
-      HomePage: { createdAt },
+      MockDataOne: { createdAt },
     } = this.props;
 
     return (
@@ -19,7 +19,7 @@ class Home extends React.Component {
 
 const mapStateToProps = state => ({
   Item: state.Item,
-  HomePage: state.HomePage,
+  MockDataOne: state.MockDataOne,
 });
 
 export default connect(mapStateToProps)(Home);

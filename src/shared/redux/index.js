@@ -1,6 +1,6 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-import { HomePage, WhoPage, User, Languages } from './reducers';
+import { MockDataOne, MockDataTwo, User, Languages } from './reducers';
 
 const middleware = [thunk];
 
@@ -10,8 +10,8 @@ const reduxDevToolsWrapper = (typeof window !== 'undefined' && window.__REDUX_DE
 const storeFactory = (initialState = {}) => {
   return reduxDevToolsWrapper(applyMiddleware(...middleware))(createStore)(
     combineReducers({
-      HomePage,
-      WhoPage,
+      MockDataOne,
+      MockDataTwo,
       User,
       Languages,
     }),

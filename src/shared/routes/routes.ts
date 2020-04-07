@@ -13,7 +13,7 @@ const Routes = {
     component: Login,
     hasHeader: false,
     hasFooter: false,
-    loadInitialData: [actions.loadHomePage, actions.loadWhoPage],
+    loadInitialData: [actions.loadMockDataOne, actions.loadMockDataTwo],
   },
 
   Control: {
@@ -24,7 +24,7 @@ const Routes = {
     component: Control,
     hasHeader: true,
     hasFooter: true,
-    loadInitialData: [actions.loadHomePage, actions.loadWhoPage],
+    loadInitialData: [actions.loadMockDataOne, actions.loadMockDataTwo],
   },
 
   Home: {
@@ -35,7 +35,7 @@ const Routes = {
     component: Home,
     hasHeader: true,
     hasFooter: true,
-    loadInitialData: [actions.loadHomePage, actions.loadWhoPage],
+    loadInitialData: [actions.loadMockDataOne, actions.loadMockDataTwo],
   },
 
   NotFound: {
