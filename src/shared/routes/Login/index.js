@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import actions from '../../redux/actions';
+import { logIn } from '../../redux/modules/User/actions/logIn';
 
 import './Login.less';
 
@@ -20,9 +20,9 @@ class LoginUi extends Component {
   };
 
   onSubmit = () => {
-    const { requestLogIn } = this.props;
+    const { logIn } = this.props;
     const { username, password } = this.state;
-    requestLogIn(username, password, this.props.history);
+    logIn(username, password, this.props.history);
   };
 
   render() {
@@ -47,5 +47,5 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, {
-  requestLogIn: actions.requestLogIn,
+  logIn: logIn,
 })(LoginUi);

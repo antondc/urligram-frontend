@@ -1,4 +1,5 @@
 import C from './constants';
+import { LOG_IN_STARTED, LOG_IN_SUCCESS, LOG_OUT, LOG_FAILED } from './modules/User/user.types';
 
 export const Languages = (state = [], action) => {
   switch (action.type) {
@@ -11,19 +12,6 @@ export const Languages = (state = [], action) => {
         isFetching: false,
         ...action.data.Languages,
       });
-    default:
-      return state;
-  }
-};
-
-export const User = (state = '', action) => {
-  switch (action.type) {
-    case C.LOG_IN:
-      return action.data;
-    case C.LOG_OUT:
-      return action.data;
-    case C.LOG_FAILED:
-      return action.data;
     default:
       return state;
   }
@@ -56,6 +44,24 @@ export const MockDataTwo = (state = {}, action) => {
         ...action.data.MockDataTwo,
         isFetching: false,
       });
+    default:
+      return state;
+  }
+};
+
+export const User = (state = '', action) => {
+  switch (action.type) {
+    case LOG_IN_STARTED:
+      return Object.assign({}, state, {
+        loading: true,
+      });
+    case LOG_IN_SUCCESS:
+      return Object.assign({}, state, {
+        ...action.data,
+        loading: false,
+      });
+    case LOG_OUT || LOG_FAILED:
+      return {};
     default:
       return state;
   }

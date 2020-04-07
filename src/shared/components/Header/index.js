@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import actions from '../../redux/actions';
+import { logOut } from '../../redux/modules/User/actions/logOut';
 import './Header.less';
 
 class Header extends React.Component {
@@ -9,7 +9,7 @@ class Header extends React.Component {
     const {
       isLogged,
       Language: { slug },
-      requestLogOut,
+      logOut,
     } = this.props;
 
     return (
@@ -23,7 +23,7 @@ class Header extends React.Component {
               <Link className="Header-item" to="/control">
                 Control
               </Link>
-              <Link className="Header-item" to="/login" onClick={requestLogOut}>
+              <Link className="Header-item" to="/login" onClick={logOut}>
                 Log out
               </Link>
             </>
@@ -45,5 +45,5 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, {
-  requestLogOut: actions.requestLogOut,
+  logOut: logOut,
 })(Header);
