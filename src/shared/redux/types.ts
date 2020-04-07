@@ -41,9 +41,4 @@ export interface State {
       [key: string]: Language;
     };
   };
-  FirstLoad: {
-    url: string;
-    domain: string;
-    date: Date;
-  };
 }

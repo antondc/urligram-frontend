@@ -20,7 +20,7 @@ class Layout extends React.Component {
     }
 
     return (
-      <div className={'Layout' + ' Layout--' + this.props.NavigatedRoute.route}>
+      <div className={'Layout'}>
         <Header activeRoute={activeRoute} />
         <Route
           path="/:lang([a-z]{2})?"
@@ -36,7 +36,6 @@ class Layout extends React.Component {
 
 const mapStateToProps = state => ({
   Saving: state.Saving,
-  NavigatedRoute: state.NavigatedRoute,
 });
 
 export default connect(mapStateToProps)(Layout);

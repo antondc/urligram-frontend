@@ -160,22 +160,6 @@ const actions = {
           .catch(error => Promise.reject(Error(error.message)));
   },
 
-  startNavigatedRoute: params => {
-    return {
-      type: C.NAVIGATED_ROUTE_STARTED,
-      data: params,
-    };
-  },
-
-  setNavigatedRoute: params => {
-    actions.startNavigatedRoute(params);
-
-    return {
-      type: C.NAVIGATED_ROUTE_FINISHED,
-      data: params,
-    };
-  },
-
   requestHomePage: () => {
     return {
       type: C.LOAD_HOMEPAGE_STARTED,

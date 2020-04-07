@@ -18,11 +18,8 @@ class Home extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  FirstLoad: state.FirstLoad,
   Item: state.Item,
-  Language: state.Language,
   HomePage: state.HomePage,
-  NavigatedRoute: state.NavigatedRoute,
 });
 
 export default connect(mapStateToProps)(Home);

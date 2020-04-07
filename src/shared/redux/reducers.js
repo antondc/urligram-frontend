@@ -46,23 +46,6 @@ export const Languages = (state = [], action) => {
   }
 };
 
-export const NavigatedRoute = (state = {}, action) => {
-  switch (action.type) {
-    case C.NAVIGATED_ROUTE_STARTED:
-      return Object.assign({}, state, {
-        resolved: false,
-        ...action.data,
-      });
-    case C.NAVIGATED_ROUTE_FINISHED:
-      return Object.assign({}, state, {
-        ...action.data,
-        resolved: true,
-      });
-    default:
-      return state;
-  }
-};
-
 export const UserSession = (state = '', action) => {
   switch (action.type) {
     case C.LOG_IN:
@@ -71,17 +54,6 @@ export const UserSession = (state = '', action) => {
       return action.data;
     case C.LOG_FAILED:
       return action.data;
-    default:
-      return state;
-  }
-};
-
-export const FirstLoad = (state = {}, action) => {
-  switch (action.type) {
-    case 'FIRST_LOAD':
-      return Object.assign({}, state, {
-        ...action.data,
-      });
     default:
       return state;
   }

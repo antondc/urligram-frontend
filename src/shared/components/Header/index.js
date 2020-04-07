@@ -37,7 +37,6 @@ class Header extends React.Component {
 
 const mapStateToProps = state => ({
   Language: state.Language,
-  NavigatedRoute: state.NavigatedRoute,
   isLogged: !!state.UserSession.id,
 });
 
