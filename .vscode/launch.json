@@ -1,14 +1,6 @@
 {
   "version": "0.2.0",
   "configurations": [
-    /* NOT WORKING */
-    // {
-    //   "name": "Linking: Launch Chrome",
-    //   "type": "chrome",
-    //   "request": "launch",
-    //   "url": "http://0.0.0.0:4000",
-    //   "webRoot": "${workspaceRoot}/dist/**/*"
-    // },
     {
       "type": "node",
       "request": "attach",
@@ -19,12 +11,6 @@
       "restart": true,
       "sourceMaps": true,
       "outFiles": ["${workspaceRoot}/dist/*.js"]
-    }
-  ],
-  "compounds": [
-    {
-      "name": "Linking full",
-      "configurations": ["Linking: Launch Chrome", "Linking: Attach Node by Process ID"]
     }
   ]
 }
