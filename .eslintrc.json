@@ -37,7 +37,7 @@
     "react/prop-types": "off",
     "@typescript-eslint/no-var-requires": 0,
     "@typescript-eslint/no-explicit-any": 0,
-    "arrow-body-style": ["error", "always"],
+    "arrow-body-style": 0,
     "@typescript-eslint/explicit-function-return-type": 0
   }
 }

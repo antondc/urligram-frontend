@@ -29,14 +29,15 @@ Local server will run in port `4000`, production conf in `config.test.json`.
 ## TODO
 
 - Modularize Redux 🕒
+- Add css constants ❌
 - Después de añadir reselect, crear selector para defaultLanguage ❌
 - Type allRoutes response ❌
 - Transform js and jsx files to ts and tsx ❌
 - Add reselect ❌
-- Create axios instance ❌
+- Create axios client ❌
+- Navigated route to routerLocations ❌
 - Para enviar Languages como objeto con nombre en key y language en contenido; actualmente array 👍
 - Modificar allroutes para consumit Languages como objeto 👍
-- Navigated route to routerLocations ❌
 - Restructure state: 👍
 - Cargar todo el glosario y no solo el current Language, cargar junto con initial data 👍
 - Remove default Languages first load from allRoutes 👍

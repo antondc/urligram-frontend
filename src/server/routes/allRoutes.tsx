@@ -10,9 +10,9 @@ import storeFactory from '../../shared/redux/index';
 import Layout from '../../shared/common/Layout';
 import { findActiveRoute } from '../../shared/tools/utils/utils';
 import config from './../../../config.test.json';
-import actions from '../../shared/redux/actions';
 import { UserState } from '../../shared/redux/modules/User/user.types';
 import Authentication from '../../shared/services/Authentication';
+import { loadLanguages } from '../../shared/redux/modules/Languages/actions/loadLanguages';
 
 const authentication = new Authentication();
 const router = express.Router();
@@ -30,7 +30,7 @@ router.get(regexRoute, function (req: any, res: any) {
     ? activeRoute.loadInitialData.map((item: any) => item(req.params))
     : [Promise.resolve()];
 
-  Promise.all([actions.loadLanguages(), ...initialData])
+  Promise.all([loadLanguages(), ...initialData])
     .then((response: any) => {
       const data = Object.assign({}, ...response);
 

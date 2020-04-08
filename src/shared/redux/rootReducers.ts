@@ -1,5 +1,7 @@
+import { Languages } from './modules/Languages/languages.reducer';
 import { User } from './modules/User/user.reducer';
-import { MockDataOne, MockDataTwo, Languages } from './reducers';
+import { MockDataOne } from './modules/MockDataOne/mockDataOne.reducer';
+import { MockDataTwo } from './modules/MockDataTwo/mockDataTwo.reducer';
 
 export const RootReducers = {
   User,

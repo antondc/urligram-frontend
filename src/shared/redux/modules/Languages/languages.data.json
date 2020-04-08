@@ -2,7 +2,6 @@
   "status": "ok",
   "data": {
     "Languages": {
-      "isFetching": false,
       "byKey": {
         "1": {
           "id": 1,
