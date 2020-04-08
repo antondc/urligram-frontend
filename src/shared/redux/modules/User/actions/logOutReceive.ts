@@ -1,6 +1,6 @@
-import { LOG_OUT } from '../user.types';
+import { LOG_OUT, LogActionsTypes } from '../user.types';
 
-export const logOutReceive = () => {
+export const logOutReceive = (): LogActionsTypes => {
   return {
     type: LOG_OUT,
   };

@@ -11,15 +11,15 @@ import Layout from '../../shared/common/Layout';
 import { findActiveRoute } from '../../shared/tools/utils/utils';
 import config from './../../../config.test.json';
 import actions from '../../shared/redux/actions';
-import { User } from '../../shared/redux/modules/User/user.types';
+import { UserState } from '../../shared/redux/modules/User/user.types';
 import Authentication from '../../shared/services/Authentication';
 
 const authentication = new Authentication();
 const router = express.Router();
 
-export const regexRoute: string = '/:lang([a-z]{2})?/:firstparam?/:secondparam?/:thirdparam?';
+export const regexRoute = '/:lang([a-z]{2})?/:firstparam?/:secondparam?/:thirdparam?';
 
-router.get(regexRoute, function(req: any, res: any, next: any) {
+router.get(regexRoute, function (req: any, res: any) {
   // TODO: check express types
 
   // Get the routes and return the one that matches actual url
@@ -36,7 +36,7 @@ router.get(regexRoute, function(req: any, res: any, next: any) {
 
       // Adding initial user to data from Token to store
       try {
-        const user = authentication.verifyToken(req.cookies.sessionToken) as User;
+        const user = authentication.verifyToken(req.cookies.sessionToken) as UserState;
         data.User = {
           ...user,
         };
@@ -49,17 +49,12 @@ router.get(regexRoute, function(req: any, res: any, next: any) {
       const store = storeFactory(data);
       const appComponentAsString = config.ENABLE_ISOMORPHISM
         ? renderToString(
-            <Provider store={store}>
-              <StaticRouter location={req.url} context={context}>
-                <Route
-                  path="/"
-                  render={props => {
-                    return <Layout {...props} />;
-                  }}
-                />
-              </StaticRouter>
-            </Provider>
-          )
+          <Provider store={store}>
+            <StaticRouter location={req.url} context={context}>
+              <Route path="/" render={(props): React.ReactNode => <Layout {...props} />} />
+            </StaticRouter>
+          </Provider>
+        )
         : '';
       const helmet = Helmet.renderStatic();
       const dataForTemplate = serialize(data); // TODO: this might be processed with JSON.stringify

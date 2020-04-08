@@ -1,16 +1,17 @@
+import { Dispatch, Action } from 'redux';
+import { ThunkAction } from 'redux-thunk';
 import { UserApiResponse } from './../user.types';
-import { Dispatch } from 'redux';
 import { logInRequest } from './logInRequest';
 import { logInReceive } from './logInReceive';
 import { logInFailure } from './logInFailure';
 import { handleResponse } from '../../../../tools/errors';
 
 // Request a cookie from api server using the fetch api
-export const logIn = (username: string, password: string) => {
-  const url: string = '/api/v1/login';
+export const logIn = (username: string, password: string): ThunkAction<any, any, any, Action> => {
+  const url = '/api/v1/login';
   const encodedURI = isBrowser ? encodeURI(process.env.ENDPOINT_API + url) : encodeURI(process.env.ENDPOINT_API + url);
 
-  return (dispatch: Dispatch) => {
+  return (dispatch: Dispatch): void => {
     dispatch(logInRequest());
     fetch(encodedURI, {
       method: 'POST',
@@ -27,6 +28,6 @@ export const logIn = (username: string, password: string) => {
     })
       .then(handleResponse)
       .then((response: UserApiResponse) => dispatch(logInReceive(response.user)))
-      .catch(error => dispatch(logInFailure(error)));
+      .catch((error) => dispatch(logInFailure(error)));
   };
 };

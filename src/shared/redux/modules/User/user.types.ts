@@ -5,17 +5,44 @@ export const LOG_FAILED = 'LOG_FAILED';
 
 export interface UserApiResponse {
   status: 'ok' | 'error';
-  user: User;
+  user: UserState;
 }
 
-export interface User {
-  id: string;
-  order: number;
-  name: string;
-  email: string;
-  active: boolean;
-  level: string;
-  logged: boolean;
+export interface UserState {
+  loading?: boolean;
+  id?: string;
+  order?: number;
+  name?: string;
+  email?: string;
+  active?: boolean;
+  level?: string;
+  logged?: boolean;
   token?: string;
-  iat: number;
+  iat?: number;
 }
+
+interface LogInFailureAction {
+  type: typeof LOG_FAILED;
+  data: {
+    loading: false;
+    error: string;
+  };
+}
+
+interface LogInReceiveAction {
+  type: typeof LOG_IN_SUCCESS;
+  data: UserState;
+}
+
+interface LogInRequestAction {
+  type: typeof LOG_IN_STARTED;
+  data: {
+    loading: true;
+  };
+}
+
+interface LogOutReceiveAction {
+  type: typeof LOG_OUT;
+}
+
+export type LogActionsTypes = LogInFailureAction | LogInReceiveAction | LogInRequestAction | LogOutReceiveAction;

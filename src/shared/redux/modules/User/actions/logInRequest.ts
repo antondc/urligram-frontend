@@ -1,6 +1,6 @@
-import { LOG_IN_STARTED } from '../user.types';
+import { LOG_IN_STARTED, LogActionsTypes } from '../user.types';
 
-export const logInRequest = () => {
+export const logInRequest = (): LogActionsTypes => {
   return {
     type: LOG_IN_STARTED,
     data: {

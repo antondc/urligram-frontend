@@ -1,12 +1,11 @@
-import { LOG_FAILED } from '../user.types';
+import { LOG_FAILED, LogActionsTypes } from '../user.types';
 
-export const logInFailure = (error: any) => {
-  // TODO: type error
+export const logInFailure = (error): LogActionsTypes => {
   return {
     type: LOG_FAILED,
     data: {
-      logged: false,
-      message: error,
+      loading: false,
+      error: error,
     },
   };
 };

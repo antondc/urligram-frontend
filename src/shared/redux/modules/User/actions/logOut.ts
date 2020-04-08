@@ -1,12 +1,13 @@
-import { Dispatch } from 'redux';
+import { Dispatch, Action } from 'redux';
 import { logOutReceive } from './logOutReceive';
 import { logInFailure } from './logInFailure';
+import { ThunkAction } from 'redux-thunk';
 
-export const logOut = () => {
+export const logOut = (): ThunkAction<any, any, any, Action> => {
   // Remove the cookie on server using the fetch api
   const encodedURI = encodeURI(process.env.ENDPOINT_API + '/api/v1/login');
 
-  return (dispatch: Dispatch) => {
+  return (dispatch: Dispatch): void => {
     fetch(encodedURI, {
       method: 'DELETE',
       headers: {
@@ -16,6 +17,6 @@ export const logOut = () => {
       credentials: 'include',
     })
       .then(() => dispatch(logOutReceive()))
-      .catch(error => dispatch(logInFailure(error)));
+      .catch((error) => dispatch(logInFailure(error)));
   };
 };
