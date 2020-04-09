@@ -176,6 +176,24 @@ https://github.com/microsoft/TypeScript/issues/25260
 
 Needed `"keyofStringsOnly": true`
 
+### React-router Switch and location
+
+In previous implementation Swith and StaticRouter were receiving `location`
+
+```jsx
+<Switch location={location}></Switch>
+```
+
+and
+
+```jsx
+<StaticRouter location={req.url} context={context}>
+  <Route path="/" render={(props): React.ReactNode => <Layout {...props} />} />
+</StaticRouter>
+```
+
+This prop was removed, as it seems unnecessary
+
 ## License
 
 The MIT License (MIT)

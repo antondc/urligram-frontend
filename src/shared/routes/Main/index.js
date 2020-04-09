@@ -13,7 +13,7 @@ class Main extends React.Component {
     return (
       <div className="Main">
         <section className="Main-initial">
-          <Switch location={location}>
+          <Switch>
             {isLogged && <Redirect from="/:lang?/login" to="/control" />}
             {!isLogged && <Redirect from="/:lang?/control" to="/login" />}
             <Route path={Routes.Login.path} exact={Routes.Login.exact}>
