@@ -4,6 +4,7 @@ import { regexRoute } from './allRoutes';
 describe('All routes regex', () => {
   const testRegex = (route: string) => {
     const regexp = match(regexRoute);
+
     return regexp(route);
   };
 

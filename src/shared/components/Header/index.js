@@ -39,7 +39,7 @@ class Header extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   Language: state.Languages,
   isLogged: !!state.User.id,
 });

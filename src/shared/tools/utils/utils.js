@@ -7,10 +7,10 @@ import { matchPath } from 'react-router-dom';
 // HTML Entity Decode https://stackoverflow.com/questions/5796718/html-entity-decode
 // &amp;amp; malformed in XML https://stackoverflow.com/questions/18019716/is-ampamp-valid/25273781
 // Remove spaces from string to check differences
-export const getTextFromHtml = html => {
+export const getTextFromHtml = (html) => {
   html = html.replace('&amp;amp;', '&');
 
-  var element = document.createElement('div');
+  const element = document.createElement('div');
   html = html.replace(/<script[^>]*>([\S\s]*?)<\/script>/gim, '');
   html = html.replace(/<\/?\w(?:[^"'>]|"[^"]*"|'[^']*')*>/gim, '');
   element.innerHTML = html;
@@ -24,8 +24,8 @@ export const getTextFromHtml = html => {
 
 // Create a new random UUIID
 // @returns INT with UUIID
-export const randomUid = function() {
-  let uid = Math.random() * 10000;
+export const randomUid = function () {
+  const uid = Math.random() * 10000;
 
   return parseInt(uid, 10);
 };
@@ -33,30 +33,30 @@ export const randomUid = function() {
 // Logs React state to browser console
 // @param {content} object
 // @returns Object
-export const logState = function(content) {
+export const logState = function (content) {
   console.log(JSON.parse(JSON.stringify(content)));
 };
 
 // Transform given url into relative
 // @param {content} string
 // @returns string
-export const toRelative = function(url) {
+export const toRelative = function (url) {
   return url.charAt(0) === '/' ? url.slice(1) : url;
 };
 
 // Transform given url into absolute
 // @param {url} string
 // @returns string
-export const toAbsolute = function(url) {
+export const toAbsolute = function (url) {
   return url && url[0] !== '/' ? '/' + url : url;
 };
 
 // Logs FormData to browser console
 // @param {formdata} Object
 // @returns Object
-export const logFormData = formdata => {
+export const logFormData = (formdata) => {
   // Display the key/value pairs
-  for (var pair of formdata.entries()) {
+  for (const pair of formdata.entries()) {
     console.log(pair[0] + ': ' + pair[1]);
   }
 };
@@ -64,14 +64,14 @@ export const logFormData = formdata => {
 // Given an object check it there are keys with 'original' or 'remove'; first case return value, second case iterate and return each value
 // @param {object} Object
 // @returns Object
-export const checkIfFileUrls = object => {
-  var results = [];
-  var repeat = object => {
-    for (var key in object) {
+export const checkIfFileUrls = (object) => {
+  const results = [];
+  const repeat = (object) => {
+    for (const key in object) {
       if (key === 'original') {
         results.push(object[key]);
       } else if (key === 'remove') {
-        object[key].forEach(item => {
+        object[key].forEach((item) => {
           results.push(item);
         });
       }
@@ -95,7 +95,7 @@ export const checkIfFileUrls = object => {
 export const moveFields = ({ oldIndex, newIndex }, form, fields) => {
   let order = 0;
   fields.move(oldIndex, newIndex);
-  form.getFieldState(fields.name).value.forEach(item => {
+  form.getFieldState(fields.name).value.forEach((item) => {
     item.order = order++;
   });
 };
@@ -103,9 +103,9 @@ export const moveFields = ({ oldIndex, newIndex }, form, fields) => {
 // For final-form-arrays: get array of language slugs and return an object with keys and language props
 // @param {languages} Array of objects
 // @returns Object
-export const setTranslations = languages => {
+export const setTranslations = (languages) => {
   const translations = {};
-  languages.map(item => {
+  languages.map((item) => {
     translations[item.slug] = {
       language: item.slug,
     };
@@ -122,9 +122,9 @@ export const getMaxIdFromField = (fields, field) => {
   if (!fields.value) {
     return 0;
   }
-  var maxField = Math.max.apply(
+  const maxField = Math.max.apply(
     Math,
-    fields.value.map(function(item) {
+    fields.value.map(function (item) {
       return item[field] + 1;
     })
   );
@@ -136,9 +136,9 @@ export const getMaxIdFromField = (fields, field) => {
 // @param {fields} Object
 // @returns Object
 export const pushNewItem = (fields, lang) => {
-  var newOrder = Math.max.apply(
+  const newOrder = Math.max.apply(
     Math,
-    fields.value.map(function(item) {
+    fields.value.map(function (item) {
       return item.order + 1;
     })
   );
@@ -156,7 +156,7 @@ export const pushNewItem = (fields, lang) => {
 // @returns Array
 export const upsertToArray = (data, model, chainedPromises = []) => {
   if (data instanceof Array) {
-    data.forEach(element => {
+    data.forEach((element) => {
       if (element.hasOwnProperty('remove')) {
         chainedPromises.push(
           model.destroy({
@@ -202,36 +202,36 @@ export const upsertToArray = (data, model, chainedPromises = []) => {
 // @param {array} Array
 // @param {separator} String
 // @returns Array
-export const arrayLastItem = function(array, separator) {
+export const arrayLastItem = function (array, separator) {
   return array.split(separator)[array.split(separator).length - 1];
 };
 
 // Remove extension of file name
 // @param {fileName} String
 // @returns String
-export const removeExtension = function(fileName) {
+export const removeExtension = function (fileName) {
   return fileName.replace(/\.[^/.]+$/, '');
 };
 
 // Get extension of file name
 // @param {fileName} String
 // @returns String
-export const getExtension = function(fileName) {
+export const getExtension = function (fileName) {
   return fileName.split('.').pop();
 };
 
 // Camelcase to Underscore
 // @param {string} String
 // @returns String
-export const deCamelize = function(string) {
+export const deCamelize = function (string) {
   return string.replace(/([a-z])([A-Z])/g, '$1_$2').toLowerCase();
 };
 
 // Camelize a string, cutting the string by multiple separators like hyphens, underscores and spaces.
 // @param {text} String Text to camelize
 // @return string Camelized text
-export const camelize = function(text) {
-  return text.replace(/^([A-Z])|[\s-_]+(\w)/g, function(match, p1, p2, offset) {
+export const camelize = function (text) {
+  return text.replace(/^([A-Z])|[\s-_]+(\w)/g, function (match, p1, p2, offset) {
     if (p2) return p2.toUpperCase();
 
     return p1.toLowerCase();
@@ -242,16 +242,16 @@ export const camelize = function(text) {
 // @param {url} String Current url
 // @param {Routes} object Object with routes
 // @return object of active route
-export const findActiveRoute = function(url, Routes) {
+export const findActiveRoute = function (url, Routes) {
   return (
-    Object.values(Routes).find(route => {
+    Object.values(Routes).find((route) => {
       return matchPath(url, route);
     }) || {}
   );
 };
 
-export const addLanguagesToPaths = function(routes, joinedSlugs) {
-  let routesWithPaths = Object.assign({}, routes);
+export const addLanguagesToPaths = function (routes, joinedSlugs) {
+  const routesWithPaths = Object.assign({}, routes);
 
   for (const route in routesWithPaths) {
     routesWithPaths[route].path = routesWithPaths[route].path.replace(':lang?', ':lang(' + joinedSlugs + ')?');
@@ -264,12 +264,12 @@ export const addLanguagesToPaths = function(routes, joinedSlugs) {
 // @param {data} object Data to transform
 // @return object of translated content
 
-export const normalizeTranslatedData = function(data) {
-  var clonedData = JSON.parse(JSON.stringify(data));
-  const transform = function(data) {
-    for (var prop in data) {
+export const normalizeTranslatedData = function (data) {
+  const clonedData = JSON.parse(JSON.stringify(data));
+  const transform = function (data) {
+    for (const prop in data) {
       if (data[prop].length > 0 && data[prop] instanceof Array && data[prop][0].hasOwnProperty('language')) {
-        var transformedData = data[prop].reduce(function(prev, current, index) {
+        const transformedData = data[prop].reduce(function (prev, current) {
           prev[current.language] = current;
 
           return prev;
@@ -278,7 +278,7 @@ export const normalizeTranslatedData = function(data) {
       } else if (data[prop] instanceof Object && !(data[prop] instanceof Array)) {
         transform(data[prop]);
       } else if (data[prop] instanceof Array) {
-        data[prop].forEach(item => {
+        data[prop].forEach((item) => {
           transform(item);
         });
       }
@@ -287,12 +287,12 @@ export const normalizeTranslatedData = function(data) {
     return data;
   };
   if (clonedData instanceof Array) {
-    var newData = [];
-    clonedData.map(item => {
+    const newData = [];
+    clonedData.map((item) => {
       newData.push(transform(item));
     });
   } else if (clonedData instanceof Object && !(clonedData instanceof Array)) {
-    var newData = {};
+    const newData = {};
 
     newData = transform(clonedData);
   }
@@ -304,15 +304,15 @@ export const normalizeTranslatedData = function(data) {
 // @param {data} object Data to transform
 // @return object of translated content
 
-export const denormalizeTranslatedData = function(data) {
-  const transform = function(data) {
-    for (var prop in data) {
+export const denormalizeTranslatedData = function (data) {
+  const transform = function (data) {
+    for (const prop in data) {
       if (
         data[prop] instanceof Object &&
         data[prop][Object.keys(data[prop])[0]] instanceof Object &&
         data[prop][Object.keys(data[prop])[0]].hasOwnProperty('language')
       ) {
-        let newData = [];
+        const newData = [];
         for (const key in data[prop]) {
           newData.push(data[prop][key]);
         }
@@ -320,7 +320,7 @@ export const denormalizeTranslatedData = function(data) {
       } else if (data[prop] instanceof Object && !(data[prop] instanceof Array)) {
         transform(data[prop]);
       } else if (data[prop] instanceof Array) {
-        data[prop].forEach(item => {
+        data[prop].forEach((item) => {
           transform(item);
         });
       }
@@ -329,7 +329,7 @@ export const denormalizeTranslatedData = function(data) {
     return data;
   };
 
-  let newData = transform(data);
+  const newData = transform(data);
 
   return newData;
 };
@@ -353,12 +353,12 @@ const sortBy = (type, field) => {
 };
 
 // Sorter for Redux
-export const sortFunction = sort => {
+export const sortFunction = (sort) => {
   return sort === 'SORTED_BY_TITLE'
     ? sortBy('string', 'title')
     : sort === 'SORTED_BY_RATING'
-    ? sortBy('number', 'rating')
-    : sortBy('date', 'timestamp');
+      ? sortBy('number', 'rating')
+      : sortBy('date', 'timestamp');
 };
 
 export const getSelectionRange = () => {
@@ -391,18 +391,18 @@ export const getSelectionCoords = (selectionRange, id) => {
 // traverseObject(valueJSON, function(key, value) {
 //     console.log(key, ': ', value);
 // });
-export const traverseObject = function(object) {
-  const traverse = function(object) {
+export const traverseObject = function (object) {
+  const traverse = function (object) {
     for (const key in object) {
       if (object[key] instanceof Array) {
         if (key === 'slides') {
-          object[key].forEach(function(item) {
+          object[key].forEach(function (item) {
             if (item.tempImg) {
               imagesList.push(item);
             }
           });
         } else {
-          object[key].forEach(function(item) {
+          object[key].forEach(function (item) {
             traverse(item);
           });
         }
@@ -425,19 +425,19 @@ export const traverseObject = function(object) {
 // traverseObject(valueJSON, function(key, value) {
 //     console.log(key, ': ', value);
 // });
-export const extractImages = function(object) {
-  var imagesList = [];
-  const traverse = function(object) {
+export const extractImages = function (object) {
+  const imagesList = [];
+  const traverse = function (object) {
     for (const key in object) {
       if (object[key] instanceof Array) {
         if (key === 'slides') {
-          object[key].forEach(function(item) {
+          object[key].forEach(function (item) {
             if (item.tempImg) {
               imagesList.push(item);
             }
           });
         } else {
-          object[key].forEach(function(item) {
+          object[key].forEach(function (item) {
             traverse(item);
           });
         }

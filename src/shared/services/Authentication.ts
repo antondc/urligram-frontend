@@ -6,6 +6,7 @@ class Authentication {
     if (!token) return null;
     try {
       const tokenContent = jwt.verify(token, config.SECRET);
+
       return tokenContent;
     } catch (err) {
       return null;

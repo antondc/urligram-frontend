@@ -5,8 +5,8 @@ import './Fade.less';
 interface Props {
   mounted: boolean;
   time: number;
-  classname: string;
-  fadeOutFinished: () => void;
+  classname?: string;
+  fadeOutFinished?: () => void;
   children: React.ReactNode | React.ReactNode[];
 }
 

@@ -8,11 +8,11 @@ export const Languages = (state = initialState, action) => {
   switch (action.type) {
     case LOAD_LANGUAGES_STARTED:
       return Object.assign({}, state, {
-        isFetching: true,
+        loading: true,
       });
     case LOAD_LANGUAGES_SUCCESS:
       return Object.assign({}, state, {
-        isFetching: false,
+        loading: false,
         ...action.data.Languages,
       });
     default:

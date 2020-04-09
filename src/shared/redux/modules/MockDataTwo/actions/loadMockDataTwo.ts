@@ -9,7 +9,9 @@ export const loadMockDataTwo = () => {
     return (dispatch: Dispatch) => {
       const response: MockDataTwoApiResponse = mockDataTwo;
       dispatch(requestMockDataTwo());
-      dispatch(receiveMockDataTwo(response.data.MockDataTwo));
+      setTimeout(() => {
+        dispatch(receiveMockDataTwo(response.data.MockDataTwo));
+      }, 1000);
     };
   }
 

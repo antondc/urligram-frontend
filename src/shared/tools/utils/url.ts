@@ -6,9 +6,10 @@
 
 type UrlToAbsolute = (url: string) => string;
 
-export const urlToAbsolute: UrlToAbsolute = (string: string = ''): string => {
+export const urlToAbsolute: UrlToAbsolute = (string = ''): string => {
   if (string === '') return '';
   const formattedString = string.replace(/(^[^\/])/, '/$1').replace(/([\/]$)/, '');
+
   return formattedString;
 };
 

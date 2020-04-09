@@ -3,7 +3,7 @@
 
 import { getExtension } from '../../shared/tools/utils/utils';
 
-var serveGzip = function(req: any, res: any, next: any) {
+const serveGzip = function (req: any, res: any, next: any) {
   // TODO: express types
   switch (getExtension(req.url)) {
     case 'js':

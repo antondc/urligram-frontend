@@ -4,12 +4,12 @@ export const MockDataOne = (state = {}, action) => {
   switch (action.type) {
     case LOAD_MOCK_DATA_ONE_STARTED:
       return Object.assign({}, state, {
-        isFetching: true,
+        loading: true,
       });
     case LOAD_MOCK_DATA_ONE_SUCCESS:
       return Object.assign({}, state, {
         ...action.data,
-        isFetching: false,
+        loading: false,
       });
     default:
       return state;
