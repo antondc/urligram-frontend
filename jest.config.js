@@ -6,8 +6,8 @@ module.exports = {
   testRegex: './src/*/.*test.(jsx?|tsx?)$',
   setupFiles: ['<rootDir>/src/shared/tools/jest/setupTests.ts'],
   moduleNameMapper: {
-    '\\.(jpg|jpeg|png|gif|eot|otf|svg|ttf|woff|woff2)$': '<rootDir>/src/shared/tools/jest/fileMock.js',
-    '\\.(css|less)$': '<rootDir>/src/shared/tools/jest/styleMock.js',
+    '\\.(jpg|jpeg|png|gif|eot|otf|svg|ttf|woff|woff2)$': '<rootDir>/src/shared/tools/jest/fileMock.ts',
+    '\\.(css|less)$': '<rootDir>/src/shared/tools/jest/styleMock.ts',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
 };
