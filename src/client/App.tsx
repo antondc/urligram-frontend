@@ -1,11 +1,10 @@
-import * as React from 'react';
+import React from 'react';
 import { render, hydrate } from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Route } from 'react-router-dom';
 import App from '../shared/common/Layout';
 import storeFactory from '../shared/redux/index';
 import config from './../../config.test.json';
-// https://stackoverflow.com/a/45352250/7499416
 
 interface CustomWindow extends Window {
   data: any;
@@ -22,12 +21,7 @@ const renderApp = config.ENABLE_ISOMORPHISM ? hydrate : render;
 renderApp(
   <Provider store={store}>
     <BrowserRouter>
-      <Route
-        path="/"
-        render={props => {
-          return <App {...props} />;
-        }}
-      />
+      <Route path="/" component={App} />
     </BrowserRouter>
   </Provider>,
   document.getElementById('app')

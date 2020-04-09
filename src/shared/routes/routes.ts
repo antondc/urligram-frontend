@@ -2,7 +2,6 @@ import Home from './Home';
 import Control from './Control';
 import Login from './Login';
 import NotFound from './NotFound';
-import { loadMockDataTwo } from './../redux/modules/MockDataTwo/actions/loadMockDataTwo';
 import { loadMockDataOne } from './../redux/modules/MockDataOne/actions/loadMockDataOne';
 
 const Routes = {
@@ -14,7 +13,7 @@ const Routes = {
     component: Login,
     hasHeader: false,
     hasFooter: false,
-    loadInitialData: [loadMockDataOne, loadMockDataTwo],
+    loadInitialData: [loadMockDataOne],
   },
 
   Control: {
@@ -25,7 +24,7 @@ const Routes = {
     component: Control,
     hasHeader: true,
     hasFooter: true,
-    loadInitialData: [loadMockDataOne, loadMockDataTwo],
+    loadInitialData: [loadMockDataOne],
   },
 
   Home: {
@@ -36,12 +35,13 @@ const Routes = {
     component: Home,
     hasHeader: true,
     hasFooter: true,
-    loadInitialData: [loadMockDataOne, loadMockDataTwo],
+    loadInitialData: [loadMockDataOne],
   },
 
   NotFound: {
     name: 'NotFound',
     path: '*',
+    exact: false,
     hasHeader: true,
     hasFooter: true,
     auth: false,

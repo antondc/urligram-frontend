@@ -4,25 +4,34 @@ import { logIn } from '../../redux/modules/User/actions/logIn';
 
 import './Login.less';
 
-class LoginUi extends Component {
-  constructor() {
-    super();
+interface Props {
+  isLogged: boolean;
+  logIn: (username: string, password: string) => void;
+}
+interface State {
+  username: string;
+  password: undefined;
+}
+
+class LoginUi extends Component<Props, State> {
+  constructor(props) {
+    super(props);
     this.state = {
       username: undefined,
       password: undefined,
     };
   }
 
-  onChange = e => {
+  onChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value,
-    });
+    } as Pick<State, keyof State>);
   };
 
   onSubmit = () => {
     const { logIn } = this.props;
     const { username, password } = this.state;
-    logIn(username, password, this.props.history);
+    logIn(username, password);
   };
 
   render() {
@@ -31,8 +40,8 @@ class LoginUi extends Component {
         <h1 className="NotFound-h1">LOGIN PAGE</h1>
         <form>
           Sign in
-          <input name="username" type="text" label="User name" autoFocus onChange={this.onChange} />
-          <input name="password" type="text" label="Password" autoFocus onChange={this.onChange} />
+          <input name="username" type="text" placeholder="User name" autoFocus onChange={this.onChange} />
+          <input name="password" type="text" placeholder="Password" autoFocus onChange={this.onChange} />
           <button type="button" onClick={this.onSubmit}>
             Enter
           </button>
@@ -42,7 +51,7 @@ class LoginUi extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   isLogged: state.User.isLogged,
 });
 
