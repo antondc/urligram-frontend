@@ -2,7 +2,11 @@
 @c: .Fade;
 
 @{c} {
-  height: 0;
+  visibility: hidden;
+
+  &--mounted {
+    visibility: visible;
+  }
 
   &--transition {
     transition: opacity var(--time) ease-in-out;

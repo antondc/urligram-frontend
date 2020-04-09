@@ -5,7 +5,7 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import Main from '../../routes/Main';
 import Fade from '../Fade/Fade';
-
+import Loader from '../Loader';
 import './Layout.less';
 
 interface Props {
@@ -22,12 +22,16 @@ const Layout: React.FC<Props> = ({ loading }) => {
 
   return (
     <div className={'Layout'}>
-      <Fade time={150} mounted={loading}>
-        <div className="Layout-loader">loading…</div>}
-      </Fade>
-      <Header />
-      <Route path="/:lang([a-z]{2})?" component={Main} />
-      <Footer />
+      <div className="Layout-modal">
+        <Fade time={150} mounted={loading}>
+          <Loader />
+        </Fade>
+      </div>
+      <div className="Layout-content">
+        <Header />
+        <Route path="/:lang([a-z]{2})?" component={Main} />
+        <Footer />
+      </div>
     </div>
   );
 };
