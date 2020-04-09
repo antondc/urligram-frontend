@@ -1,0 +1,46 @@
+/* stylelint-disable */
+
+// Local base colors
+@baseColors: {
+  blue: turquoise;
+  red: red;
+  yellow: gold;
+  black: black;
+};
+
+// Local gradients
+@gradientColors: {
+  blue-1: lighten(@baseColors[blue], 14%);
+  blue-2: lighten(@baseColors[blue], 22%);
+  blue-3: lighten(@baseColors[blue], 32%);
+  blue-4: lighten(@baseColors[blue], 35%);
+  blue-5: lighten(@baseColors[blue], 42%);
+  red-1: lighten(@baseColors[red], 14%);
+  red-2: lighten(@baseColors[red], 22%);
+  red-3: lighten(@baseColors[red], 32%);
+  red-4: lighten(@baseColors[red], 45%);
+  red-5: lighten(@baseColors[red], 49%);
+  yellow-1: lighten(@baseColors[yellow], 14%);
+  yellow-2: lighten(@baseColors[yellow], 22%);
+  yellow-3: lighten(@baseColors[yellow], 32%);
+  yellow-4: lighten(@baseColors[yellow], 45%);
+  yellow-5: lighten(@baseColors[yellow], 49%);
+  black-1: lighten(@baseColors[black], 14%);
+  black-2: lighten(@baseColors[black], 40%);
+  black-3: lighten(@baseColors[black], 70%);
+  black-4: lighten(@baseColors[black], 97%);
+  black-5: lighten(@baseColors[black], 99%);
+};
+
+// Exported colors
+@c-base: @gradientColors[black-1];
+@c-background: @gradientColors[yellow-5];
+@c-traslucid: fade(@baseColors[black], 30%);
+@c-traslucid--light: fade(@baseColors[black], 5%);
+@c-traslucid--hard: fade(@baseColors[black], 15%);
+@c-accent: @gradientColors[black-2];
+@c-success: @gradientColors[blue-2];
+@c-alert: @gradientColors[yellow-2];
+@c-error: @gradientColors[red-2];
+@c-disabled: @gradientColors[black-3];
+@c-transparent: transparent;

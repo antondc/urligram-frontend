@@ -1,0 +1,25 @@
+@import './typography.less';
+@import './constants.less';
+
+.default() {
+  font-family: @ff-sans;
+  font-size: @fs-normal;
+  line-height: @fh-normal;
+  color: @c-base;
+}
+
+body {
+  .default();
+}
+
+a {
+  text-decoration: none;
+  text-decoration: underline;
+  color: @c-base;
+
+  &:hover {
+    text-decoration: none;
+    text-decoration: underline;
+    color: @c-base;
+  }
+}

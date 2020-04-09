@@ -29,13 +29,13 @@ Local server will run in port `4000`, production conf in `config.test.json`.
 ## TODO
 
 - Send Constants to ./build
-- Add css constants ❌
-- Después de añadir reselect, crear selector para defaultLanguage ❌
-- Type allRoutes response ❌
-- Transform js and jsx files to ts and tsx ❌
-- Add reselect ❌
-- Create axios client ❌
 - Navigated route to routerLocations ❌
+- Add reselect ❌
+- Después de añadir reselect, crear selector para defaultLanguage y usarlo en Header ❌
+- Type allRoutes response ❌
+- Create axios client ❌
+- Transform js and jsx files to ts and tsx 👍
+- Add css files 👍
 - Modularize Redux 👍
 - Para enviar Languages como objeto con nombre en key y language en contenido; actualmente array 👍
 - Modificar allroutes para consumit Languages como objeto 👍

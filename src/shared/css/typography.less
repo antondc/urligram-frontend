@@ -1,0 +1,45 @@
+/* stylelint-disable */
+
+/* Typography */
+// Font family
+@ff-sans: 'Arial', 'Helvetica', sans-serif;
+@ff-serif: 'Times New Roman', 'Times', serif;
+
+// Font size
+@fs-huge: 36px;
+@fs-biggest: 34px;
+@fs-big: 28px;
+@fs-medium: 20px;
+@fs-normal: 16px;
+@fs-small: 12px;
+@fs-micro: 10px;
+@fs-nano: 8px;
+
+// line height
+@fh-huge: 42px;
+@fh-biggest: 38px;
+@fh-big: 32px;
+@fh-medium: 26px;
+@fh-normal: 20px;
+@fh-small: 16px;
+@fh-micro: 12px;
+@fh-nano: 10px;
+
+// Font weight
+@fw-extraThin: 100;
+@fw-thin: 200;
+@fw-light: 300;
+@fw-regular: 400;
+@fw-medium: 500;
+@fw-semibold: 600;
+@fw-bold: 700;
+@fw-extraBold: 800;
+@fw-black: 900;
+
+.font-size(@sizeValue) {
+  @remValue: @sizeValue;
+  @pxValue: (@sizeValue * 10);
+
+  font-size: ~'@{pxValue}px';
+  font-size: ~'@{remValue}rem';
+}
