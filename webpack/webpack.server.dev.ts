@@ -3,22 +3,31 @@ import webpack from 'webpack';
 import nodeExternals from 'webpack-node-externals';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin';
-import config from './config.test.json';
+import config from '../config.test.json';
 import CompressionPlugin from 'compression-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
-import { API_DEVELOPMENT_ENDPOINT, SERVER_DEVELOPMENT_ENDPOINT } from './src/shared/constants/endpoints';
+import {
+  API_DEVELOPMENT_ENDPOINT,
+  SERVER_DEVELOPMENT_ENDPOINT,
+  WEBPACK_SRC_SERVER,
+  WEBPACK_ROOT,
+  WEBPACK_SRC,
+  WEBPACK_DIST,
+  WEBPACK_ASSETS,
+} from './constants';
 
 module.exports = {
   name: 'server',
-  entry: ['./src/server/App.ts'],
+  entry: [WEBPACK_SRC_SERVER],
   mode: 'development',
+  context: WEBPACK_SRC,
   output: {
     filename: 'server.js',
-    path: __dirname + '/dist',
+    path: WEBPACK_DIST,
     libraryTarget: 'commonjs2',
-    publicPath: '/',
+    publicPath: WEBPACK_ROOT,
   },
   target: 'node',
   devtool: '#source-map',
@@ -55,9 +64,13 @@ module.exports = {
       dry: false,
       verbose: true,
       protectWebpackAssets: false,
-      cleanOnceBeforeBuildPatterns: ['./dist/server.js', './dist/server.js.map', './dist/server.js.gz'],
+      cleanOnceBeforeBuildPatterns: [
+        path.join(WEBPACK_DIST, 'server*'),
+        path.join(WEBPACK_DIST, 'img'),
+        path.join(WEBPACK_DIST, 'svg'),
+        path.join(WEBPACK_DIST, 'favicon'),
+      ],
     }),
-
     // Setting a variable to identify browser from server
     new webpack.DefinePlugin({
       isBrowser: false,
@@ -73,28 +86,24 @@ module.exports = {
       algorithm: 'gzip',
       test: /\.svg$|\.woff$|\.woff2$|\.ttf$|\.eot$|\.otf$|\.js$|\.css$|\.html$/,
     }),
-    // Copying files to /assets
     new CopyWebpackPlugin([
       {
-        from: path.join('src', 'shared', 'assets', 'img'),
-        to: path.join('img'),
-      },
-      // Copying the SVGs in /shared/assets/svg to dist/svg, to we have
-      // static access to them.
-      // If we set files-loading for each component this may be unnecesary
-      {
-        from: path.join('src', 'shared', 'assets', 'svg'),
-        to: path.join('svg'),
+        from: path.join(WEBPACK_ASSETS, 'img'),
+        to: path.join(WEBPACK_DIST, 'img'),
       },
       {
-        from: path.join('src', 'shared', 'assets', 'favicon'),
-        to: path.join('favicon'),
+        from: path.join(WEBPACK_ASSETS, 'svg'),
+        to: path.join(WEBPACK_DIST, 'svg'),
+      },
+      {
+        from: path.join(WEBPACK_ASSETS, 'favicon'),
+        to: path.join(WEBPACK_DIST, 'favicon'),
       },
     ]),
     new BundleAnalyzerPlugin({
       analyzerMode: 'static',
       openAnalyzer: false,
-      reportFilename: 'webpack-report.html',
+      reportFilename: 'server-report.html',
     }),
   ],
 };

@@ -8,12 +8,12 @@ import allRoutes from './routes/allRoutes';
 import cors from 'cors';
 import http from 'http';
 import useragent from 'express-useragent';
-// var useragent = require('express-useragent');
-
 import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
-const webpackConfig = require('../../webpack.client.dev.ts');
+const webpackConfig = require('../../webpack/webpack.client.dev.ts');
+import { WEBPACK_ROOT } from '../../webpack/constants';
+
 const compiler = webpack(webpackConfig);
 const app = express();
 
@@ -56,7 +56,7 @@ if (process.env.NODE_ENV === 'development') {
   app.use(
     webpackDevMiddleware(compiler, {
       logLevel: 'warn',
-      publicPath: webpackConfig.output.publicPath,
+      publicPath: WEBPACK_ROOT,
       writeToDisk: true,
     })
   );
@@ -79,7 +79,7 @@ app.get('/', (req: any, res: any) => {
 });
 
 // error handler
-app.use(function(err: any, req: any, res: any, next: any) {
+app.use(function (err: any, req: any, res: any, next: any) {
   if (err.name === 'UnauthorizedError') {
     return res.redirect(303, '/login');
   }

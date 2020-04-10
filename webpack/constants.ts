@@ -1,0 +1,49 @@
+import path from 'path';
+import config from '../config.test.json';
+import { urlBuild } from '../src/shared/tools/utils/url';
+
+export const WEBPACK_ROOT = path.resolve(process.cwd());
+
+export const WEBPACK_BUILD = path.resolve(process.cwd(), 'webpack');
+
+export const WEBPACK_DIST = path.resolve(process.cwd(), 'dist');
+
+export const WEBPACK_SRC = path.resolve(process.cwd(), 'src');
+
+export const WEBPACK_SRC_CLIENT = path.resolve(process.cwd(), 'src', 'client', 'App.tsx');
+
+export const WEBPACK_SRC_SERVER = path.resolve(process.cwd(), 'src', 'server', 'App.ts');
+
+export const WEBPACK_ASSETS = path.resolve(process.cwd(), 'src', 'shared', 'assets');
+
+export const API_DEVELOPMENT_ENDPOINT = JSON.stringify(
+  urlBuild({
+    protocol: config.API_DEVELOPMENT_PROTOCOL,
+    host: config.API_DEVELOPMENT_HOST,
+    port: config.API_DEVELOPMENT_PORT,
+  })
+);
+
+export const API_PRODUCTION_ENDPOINT = JSON.stringify(
+  urlBuild({
+    protocol: config.API_PRODUCTION_PROTOCOL,
+    host: config.API_PRODUCTION_HOST,
+    port: config.API_PRODUCTION_PORT,
+  })
+);
+
+export const SERVER_DEVELOPMENT_ENDPOINT = JSON.stringify(
+  urlBuild({
+    protocol: config.SERVER_DEVELOPMENT_PROTOCOL,
+    host: config.SERVER_DEVELOPMENT_HOST,
+    port: config.SERVER_DEVELOPMENT_PORT,
+  })
+);
+
+export const SERVER_PRODUCTION_ENDPOINT = JSON.stringify(
+  urlBuild({
+    protocol: config.SERVER_PRODUCTION_PROTOCOL,
+    host: config.SERVER_PRODUCTION_HOST,
+    port: config.SERVER_PRODUCTION_PORT,
+  })
+);

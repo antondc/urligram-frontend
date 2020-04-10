@@ -1,22 +1,30 @@
-import HtmlWebPackPlugin from 'html-webpack-plugin';
+import path from 'path';
 import webpack from 'webpack';
+import HtmlWebPackPlugin from 'html-webpack-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin';
-import config from './config.test.json';
+import config from '../config.test.json';
 import CompressionPlugin from 'compression-webpack-plugin';
 import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
-import { API_DEVELOPMENT_ENDPOINT, SERVER_DEVELOPMENT_ENDPOINT } from './src/shared/constants/endpoints';
+import {
+  API_DEVELOPMENT_ENDPOINT,
+  SERVER_DEVELOPMENT_ENDPOINT,
+  WEBPACK_SRC_CLIENT,
+  WEBPACK_ROOT,
+  WEBPACK_SRC,
+  WEBPACK_DIST,
+} from './constants';
 
 module.exports = {
   name: 'client',
-  entry: ['webpack-hot-middleware/client?reload=true', '../src/client/App.tsx'],
-  context: __dirname,
+  entry: ['webpack-hot-middleware/client?reload=true', WEBPACK_SRC_CLIENT],
+  context: WEBPACK_SRC,
   mode: 'development',
   target: 'web',
   output: {
     filename: 'client-[hash:4].js',
-    publicPath: '/',
+    publicPath: WEBPACK_ROOT,
   },
   devtool: '#source-map',
   externals: {},
@@ -36,7 +44,7 @@ module.exports = {
       },
     ],
   },
-  stats: 'verbose',
+  stats: 'errors-only',
   plugins: [
     new CaseSensitivePathsPlugin(),
     new webpack.HotModuleReplacementPlugin(),
@@ -44,19 +52,14 @@ module.exports = {
       dry: false,
       verbose: true,
       protectWebpackAssets: false,
-      cleanOnceBeforeBuildPatterns: ['./client-*.js', './client-*.js.map', './client-*.js.gz'],
-      cleanAfterEveryBuildPatterns: [
-        '*.hot-update.json',
-        '*.hot-update.js',
-        '*.hot-update.js.gz',
-        '*.hot-update.js.map',
-      ],
+      cleanOnceBeforeBuildPatterns: [path.join(WEBPACK_DIST, 'client-*')],
+      cleanAfterEveryBuildPatterns: [path.join(WEBPACK_DIST, 'hot-update-*')],
     }),
     new HtmlWebPackPlugin({
       baseUrl: '',
       inject: true,
-      template: './../src/server/views/indexBase.ejs',
-      filename: '../src/server/views/index.ejs',
+      template: path.join(WEBPACK_SRC, 'server/views/indexBase.ejs'),
+      filename: path.join(WEBPACK_SRC, 'server/views/index.ejs'),
       toHtml: '<%- toHtml %>',
       toHead: '<%- toHead %>',
       deviceDetector:
@@ -82,7 +85,7 @@ module.exports = {
     new BundleAnalyzerPlugin({
       analyzerMode: 'static',
       openAnalyzer: false,
-      reportFilename: 'webpack-report.html',
+      reportFilename: 'client-report.html',
     }),
   ],
 };
