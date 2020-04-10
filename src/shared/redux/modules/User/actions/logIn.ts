@@ -4,7 +4,7 @@ import { UserApiResponse } from './../user.types';
 import { logInRequest } from './logInRequest';
 import { logInReceive } from './logInReceive';
 import { logInFailure } from './logInFailure';
-import { handleResponse } from '../../../../tools/errors';
+import { handleResponse } from 'Tools/errors';
 
 // Request a cookie from api server using the fetch api
 export const logIn = (username: string, password: string): ThunkAction<any, any, any, Action> => {

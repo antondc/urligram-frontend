@@ -30,6 +30,17 @@ module.exports = {
   externals: {},
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
+    alias: {
+      Root: path.resolve(WEBPACK_ROOT),
+      Redux: path.resolve(WEBPACK_ROOT, 'src/shared/redux/'),
+      Modules: path.resolve(WEBPACK_ROOT, 'src/shared/redux/modules/'),
+      Common: path.resolve(WEBPACK_ROOT, 'src/shared/common/'),
+      Components: path.resolve(WEBPACK_ROOT, 'src/shared/components/'),
+      Assets: path.resolve(WEBPACK_ROOT, 'src/shared/assets/'),
+      Routes: path.resolve(WEBPACK_ROOT, 'src/shared/routes/'),
+      Tools: path.resolve(WEBPACK_ROOT, 'src/shared/tools/'),
+      Services: path.resolve(WEBPACK_ROOT, 'src/shared/services/'),
+    },
   },
   module: {
     rules: [

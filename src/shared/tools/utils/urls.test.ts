@@ -1,5 +1,5 @@
 import { urlBuild, urlToAbsolute } from './url';
-import config from '../../../../config.test.json';
+import config from 'Root/config.test.json';
 
 describe('urlToAbsolute', () => {
   test('it should return a string with leading slash and no trailing slash', () => {

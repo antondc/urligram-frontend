@@ -1,4 +1,4 @@
-import { LOG_IN_STARTED, LogActionsTypes } from '../user.types';
+import { LOG_IN_STARTED, LogActionsTypes } from 'Modules/User/user.types';
 
 export const logInRequest = (): LogActionsTypes => {
   return {

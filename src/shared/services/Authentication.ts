@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import config from '../../../config.test.json';
+import config from 'Root/config.test.json';
 
 class Authentication {
   verifyToken = (token: string): {} | null => {

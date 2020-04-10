@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
-import Routes from '../routes';
+import Routes from 'Routes/routes';
 
 import './Main.less';
 

@@ -12,6 +12,18 @@
     "importHelpers": true,
     "target": "es5",
     "resolveJsonModule": true,
-    "esModuleInterop": true
-  }
+    "esModuleInterop": true,
+    "paths": {
+      "Root/*": ["./*"],
+      "Redux/*": ["./src/shared/redux/*"],
+      "Modules/*": ["./src/shared/redux/modules/*"],
+      "Common/*": ["./src/shared/common/*"],
+      "Components/*": ["./src/shared/components/*"],
+      "Assets/*": ["./src/shared/assets/*"],
+      "Routes/*": ["./src/shared/routes/*"],
+      "Tools/*": ["./src/shared/tools/*"],
+      "Services/*": ["./src/shared/services/*"]
+    }
+  },
+  "include": ["./src/**/*", "./*"]
 }

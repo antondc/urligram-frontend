@@ -1,11 +1,11 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
-import Main from '../../routes/Main';
-import Fade from '../Fade/Fade';
-import Loader from '../Loader';
+import Header from 'Components/Header';
+import Footer from 'Components/Footer';
+import Main from 'Routes/Main';
+import Fade from 'Common/Fade/Fade';
+import Loader from 'Common/Loader';
 import './Layout.less';
 
 interface Props {

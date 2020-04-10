@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { logOut } from '../../redux/modules/User/actions/logOut';
+import { logOut } from 'Modules/User/actions/logOut';
 import './Header.less';
 
 interface Props {

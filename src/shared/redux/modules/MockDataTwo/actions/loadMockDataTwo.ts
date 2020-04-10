@@ -1,8 +1,8 @@
 import { Dispatch } from 'redux';
-import { MockDataTwoApiResponse } from '../mockDataTwo.types';
+import { MockDataTwoApiResponse } from 'Modules/MockDataTwo/mockDataTwo.types';
 import { requestMockDataTwo } from './requestMockDataTwo';
 import { receiveMockDataTwo } from './receiveMockDataTwo';
-import mockDataTwo from '../mockDataTwo.data.json';
+import mockDataTwo from 'Modules/MockDataTwo/mockDataTwo.data.json';
 
 export const loadMockDataTwo = () => {
   if (isBrowser) {

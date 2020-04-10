@@ -1,8 +1,8 @@
 import { Dispatch } from 'redux';
 import { receiveLanguages } from './receiveLanguages';
 import { requestLanguages } from './requestLanguages';
-import languages from '../languages.data.json';
-import { LanguagesApiResponse } from '../languages.types';
+import languages from 'Modules/Languages/languages.data.json';
+import { LanguagesApiResponse } from 'Modules/Languages/languages.types';
 
 export const loadLanguages = () => {
   if (isBrowser) {

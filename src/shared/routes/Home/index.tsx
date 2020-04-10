@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { loadMockDataTwo } from '../../redux/modules/MockDataTwo/actions/loadMockDataTwo';
-import Button from '../../components/Button';
+import { loadMockDataTwo } from 'Modules/MockDataTwo/actions/loadMockDataTwo';
+import Button from 'Components/Button';
 
 import './Home.less';
 

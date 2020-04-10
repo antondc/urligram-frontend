@@ -1,4 +1,4 @@
-import { LOAD_MOCK_DATA_ONE_STARTED, MockDataOnesActionsTypes } from '../mockDataOne.types';
+import { LOAD_MOCK_DATA_ONE_STARTED, MockDataOnesActionsTypes } from 'Modules/MockDataOne/mockDataOne.types';
 
 export const requestMockDataOne = (): MockDataOnesActionsTypes => {
   return {
