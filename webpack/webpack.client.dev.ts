@@ -63,8 +63,8 @@ module.exports = {
       dry: false,
       verbose: true,
       protectWebpackAssets: false,
-      cleanOnceBeforeBuildPatterns: [path.join(WEBPACK_DIST, 'client-*')],
-      cleanAfterEveryBuildPatterns: [path.join(WEBPACK_DIST, 'hot-update-*')],
+      cleanOnceBeforeBuildPatterns: [path.join(WEBPACK_DIST, 'client-*'), path.join(WEBPACK_DIST, '*hot-update*')],
+      cleanAfterEveryBuildPatterns: [],
     }),
     new HtmlWebPackPlugin({
       baseUrl: '',

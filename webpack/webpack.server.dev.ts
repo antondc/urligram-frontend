@@ -80,6 +80,7 @@ module.exports = {
         path.join(WEBPACK_DIST, 'img'),
         path.join(WEBPACK_DIST, 'svg'),
         path.join(WEBPACK_DIST, 'favicon'),
+        path.join(WEBPACK_DIST, '*hot-update*'),
       ],
     }),
     // Setting a variable to identify browser from server
