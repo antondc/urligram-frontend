@@ -50,7 +50,7 @@ router.get(regexRoute, function (req: any, res: any) {
       const appComponentAsString = config.ENABLE_ISOMORPHISM
         ? renderToString(
           <Provider store={store}>
-            <StaticRouter context={context}>
+            <StaticRouter location={req.url} context={context}>
               <Route path="/" render={(props): React.ReactNode => <Layout {...props} />} />
             </StaticRouter>
           </Provider>
