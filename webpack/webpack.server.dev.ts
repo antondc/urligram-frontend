@@ -64,6 +64,7 @@ module.exports = {
       {
         test: /\.(less|css)$/,
         use: ['css-loader', 'less-loader'],
+        exclude: /node_modules/,
       },
     ],
   },

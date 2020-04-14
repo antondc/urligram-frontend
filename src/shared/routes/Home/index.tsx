@@ -1,25 +1,28 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { loadMockDataTwo } from 'Modules/MockDataTwo/actions/loadMockDataTwo';
-import Button from 'Components/Button';
-
+import { H1, Border, Button, Span } from '@antoniodcorrea/components';
 import './Home.less';
 
 interface Props {
-  createdAt: Date;
+  updatedAt: Date;
   loadMockDataTwo: () => void;
 }
 
-const Home: React.FC<Props> = ({ createdAt, loadMockDataTwo }) => (
-  <div className="Home">
-    <h1 className="Home-h1">HOME PAGE</h1>
-    {createdAt && <div>Date retrieved from SSR: {createdAt}</div>}
-    <Button onClick={loadMockDataTwo}>Load Mock Data Two</Button>
-  </div>
-);
+const Home: React.FC<Props> = ({ updatedAt, loadMockDataTwo }) => {
+  return (
+    <div className="Home">
+      <Border grow>
+        <H1>HOME PAGE</H1>
+        {updatedAt && <Span>Updated at: {updatedAt}</Span>}
+        <Button text="Load Mock Data Two" onClick={loadMockDataTwo} />
+      </Border>
+    </div>
+  );
+};
 
 const mapStateToProps = (state) => ({
-  createdAt: state.MockDataOne.createdAt,
+  updatedAt: state.MockDataTwo.updatedAt,
 });
 
 export default connect(mapStateToProps, {

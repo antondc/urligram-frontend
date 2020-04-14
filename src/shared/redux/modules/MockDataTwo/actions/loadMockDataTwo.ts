@@ -10,7 +10,8 @@ export const loadMockDataTwo = () => {
       const response: MockDataTwoApiResponse = mockDataTwo;
       dispatch(requestMockDataTwo());
       setTimeout(() => {
-        dispatch(receiveMockDataTwo(response.data.MockDataTwo));
+        const updatedMockDataTwo = Object.assign(response.data.MockDataTwo, { updatedAt: new Date().toISOString() });
+        dispatch(receiveMockDataTwo(updatedMockDataTwo));
       }, 1000);
     };
   }

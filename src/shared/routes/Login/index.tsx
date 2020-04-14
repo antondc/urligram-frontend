@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { logIn } from 'Modules/User/actions/logIn';
-import Button from 'Components/Button';
+import { Button } from '@antoniodcorrea/components';
 
 import './Login.less';
 
@@ -43,9 +43,7 @@ class Login extends Component<Props, State> {
           Sign in
           <input name="username" type="text" placeholder="User name" autoFocus onChange={this.onChange} />
           <input name="password" type="text" placeholder="Password" autoFocus onChange={this.onChange} />
-          <Button type="button" onClick={this.onSubmit}>
-            Enter
-          </Button>
+          <Button text="Enter" onClick={this.onSubmit} />
         </form>
       </div>
     );
