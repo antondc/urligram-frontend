@@ -26,38 +26,6 @@ Local server will run in port `4000`, production conf in `config.test.json`.
 - NVM
 - NPM
 
-## TODO
-
-- Send Constants to ./build
-- Navigated route to routerLocations ❌
-- Add reselect ❌
-- Después de añadir reselect, crear selector para defaultLanguage y usarlo en Header ❌
-- Type allRoutes response ❌
-- Create axios client ❌
-- Transform js and jsx files to ts and tsx 👍
-- Add css files 👍
-- Modularize Redux 👍
-- Para enviar Languages como objeto con nombre en key y language en contenido; actualmente array 👍
-- Modificar allroutes para consumit Languages como objeto 👍
-- Restructure state: 👍
-- Cargar todo el glosario y no solo el current Language, cargar junto con initial data 👍
-- Remove default Languages first load from allRoutes 👍
-- loadInitialRoute a array de acciones 👍
-- Renombrar «Languages.languages»en allRoutes. 👍
-- Use httpOnly and retrieve cookies on server only 👍
-- Replace express-device for https://www.npmjs.com/package/express-useragent 👍
-- Update Jest 👍
-- Webpack add autoprefixer 👍
-- const device = require('express-device'); replace for https://www.npmjs.com/package/express-useragent 👍
-- Webpack configure webpack production css build 👍
-- Webpack enable imports from root: e.g. config.test.json 👍
-- Open browser on start. Wont work «webpack --watch --config ./webpack.server.dev.js & node --inspect=9228 ./dist/server.js & open http://0.0.0.0:4000"» 👍
-- Clean and sort packages on package.json and clean unused dependencies 👍
-- Check «Move code from componentWillMount to componentDidMount» 👍
-- Webpack HMR 👍
-- Rename Control/Control 👍
-- Eliminar cookies library 👍
-
 ## Development
 
 - Using webpack-hot-middleware and webpack-dev-middleware:
