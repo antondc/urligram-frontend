@@ -40,7 +40,7 @@ class Fade extends React.Component<Props, State> {
     const { mounted } = this.state;
 
     return (
-      <div className={'Fade ' + (classname ? classname : '') + (mounted ? ' Fade--mounted' : '')}>
+      <div className={'Fade ' + (classname ? classname : '')}>
         <CSSTransition
           in={mounted}
           appear={true}
