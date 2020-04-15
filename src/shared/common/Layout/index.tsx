@@ -1,29 +1,35 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { selectLanguageLoading } from '../../redux/modules/Languages/selectors/selectLanguageLoading';
 import Header from 'Components/Header';
 import Footer from 'Components/Footer';
 import Main from 'Routes/Main';
 import Fade from 'Common/Fade/Fade';
 import Loader from 'Common/Loader';
+import { selectMockDataTwoLoading } from '../../redux/modules/MockDataTwo/selectors/selectMockDataTwoLoading';
+
 import './Layout.less';
 
 interface Props {
-  loading: boolean;
+  languagesLoading: boolean;
+  mockDataTwoLoading: boolean;
 }
 
-const Layout: React.FC<Props> = ({ loading }) => {
+const Layout: React.FC<Props> = ({ languagesLoading, mockDataTwoLoading }) => {
   if (isBrowser) {
     window.addEventListener('load', () => {
       document.body.classList.remove('preload'); // Preventing animations on load
       document.body.classList.add('isLoaded'); // Showing page on load
     });
   }
+  const showLoader = languagesLoading || mockDataTwoLoading;
 
   return (
     <div className={'Layout'}>
       <div className="Layout-modal">
-        <Fade time={150} mounted={loading}>
+        <Fade time={150} mounted={showLoader}>
           <Loader />
         </Fade>
       </div>
@@ -36,8 +42,9 @@ const Layout: React.FC<Props> = ({ loading }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  loading: state.MockDataTwo.loading,
+const mapStateToProps = createStructuredSelector({
+  languagesLoading: selectLanguageLoading,
+  mockDataTwoLoading: selectMockDataTwoLoading,
 });
 
-export default connect(mapStateToProps)(Layout);
+export default connect(mapStateToProps, {})(Layout);

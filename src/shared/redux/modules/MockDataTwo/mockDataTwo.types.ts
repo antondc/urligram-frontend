@@ -6,6 +6,7 @@ export interface MockDataTwoState {
   order: number;
   createdAt: string;
   updatedAt: string;
+  loading?: boolean;
 }
 
 interface RequestMockDataTwosAction {

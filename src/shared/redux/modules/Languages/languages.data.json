@@ -3,21 +3,30 @@
   "data": {
     "Languages": {
       "byKey": {
-        "1": {
+        "en": {
           "id": 1,
           "slug": "en",
+          "name": "English",
           "isDefault": true
         },
-        "2": {
+        "es": {
           "id": 2,
           "slug": "es",
+          "name": "Español",
           "isDefault": false
         },
-        "3": {
+        "ru": {
           "id": 3,
           "slug": "ru",
+          "name": "Русский",
           "isDefault": false
         }
+      },
+      "currentLanguage": {
+        "id": 2,
+        "slug": "es",
+        "name": "Español",
+        "isDefault": false
       }
     }
   }
