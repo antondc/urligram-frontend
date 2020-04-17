@@ -13,9 +13,7 @@ Local server will run in port `4000`, production conf in `config.test.json`.
 
 - React
 - Redux
-- React-Final-form
 - TypeScript
-- Node/Express REST API
 - Webpack
 - Gitlab CI/CD
 - Jest & Enzyme
@@ -33,12 +31,7 @@ Local server will run in port `4000`, production conf in `config.test.json`.
   - https://github.com/webpack-contrib/webpack-hot-middleware
   - https://github.com/webpack/webpack-hot-middleware
 
-Restarting the server has to be done after the bundles are built, but nodemon will disconnect webpack-hot-middleware https://medium.com/@binyamin/get-nodemon-to-restart-after-webpack-re-build-8746db80548e
 
-Have a look to this repository:
-
-- https://medium.com/@binyamin/get-nodemon-to-restart-after-webpack-re-build-8746db80548e
-- https://github.com/glenjamin/ultimate-hot-reloading-example
 
 ## Docs
 
