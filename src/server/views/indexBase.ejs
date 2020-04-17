@@ -23,7 +23,7 @@
       gtag('config', 'UA-15271563-2');
     </script>
   </head>
-  <body class="<%= htmlWebpackPlugin.options.deviceDetector %> preload">
+  <body class="<%= htmlWebpackPlugin.options.deviceDetector %> preload" style="opacity: 0;">
     <div id="app"><%= htmlWebpackPlugin.options.body %></div>
     <script>
       window.data = <%= htmlWebpackPlugin.options.data %>

@@ -10,6 +10,13 @@
 
 body {
   .default();
+
+  opacity: 0;
+  transition: opacity @td-fast ease;
+
+  &.isLoaded {
+    opacity: 1 !important;
+  }
 }
 
 a {

@@ -4,10 +4,11 @@ import { createStructuredSelector } from 'reselect';
 import { loadMockDataTwo } from 'Modules/MockDataTwo/actions/loadMockDataTwo';
 import { selectMockDataTwoUpdatedAt } from '../../redux/modules/MockDataTwo/selectors/selectMockDataTwoUpdatedAt';
 import { selectDefaultLanguage } from '../../redux/modules/Languages/selectors/selectDefaultLanguage';
-import { H1, Border, Button, Span, Layout, Hr } from '@antoniodcorrea/components';
-import './Home.less';
 import { selectCurrentLanguage } from '../../redux/modules/Languages/selectors/selectCurrentLanguage';
 import { LanguageState } from '../../redux/modules/Languages/languages.types';
+import { H1, Border, Button, Span, Layout, Hr } from '@antoniodcorrea/components';
+
+import './Home.less';
 
 interface Props {
   updatedAt: string;

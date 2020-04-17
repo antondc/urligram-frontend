@@ -7,9 +7,8 @@ import Header from 'Components/Header';
 import Footer from 'Components/Footer';
 import Main from 'Routes/Main';
 import Fade from 'Common/Fade/Fade';
-import Loader from 'Common/Loader';
 import { selectMockDataTwoLoading } from '../../redux/modules/MockDataTwo/selectors/selectMockDataTwoLoading';
-
+import { SpinnerCircle } from '@antoniodcorrea/components';
 import './Layout.less';
 
 interface Props {
@@ -30,7 +29,7 @@ const Layout: React.FC<Props> = ({ languagesLoading, mockDataTwoLoading }) => {
     <div className={'Layout'}>
       <div className="Layout-modal">
         <Fade time={150} mounted={showLoader}>
-          <Loader />
+          <SpinnerCircle />
         </Fade>
       </div>
       <div className="Layout-content">
