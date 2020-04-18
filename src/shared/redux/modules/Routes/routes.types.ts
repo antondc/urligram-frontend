@@ -8,11 +8,17 @@ export interface RoutesState {
 
 export interface RouteState {
   name: string;
-  pathname: string;
-  regex: string;
+  path: string;
+  pathname?: string;
   exact: boolean;
   auth: boolean;
-  queryparams?: {};
+  component: any;
+  hasHeader: boolean;
+  hasFooter: boolean;
+  queryParams?: {
+    [key: string]: string | number;
+  };
+  loadInitialData: Function[];
 }
 
 interface PushNewRouteAction {

@@ -5,10 +5,10 @@ import serialize from 'serialize-javascript';
 import { Provider } from 'react-redux';
 import { StaticRouter, Route } from 'react-router-dom';
 import { renderToString } from 'react-dom/server';
+import { findActiveRoute } from 'Root/src/shared/tools/utils/url';
 import Routes from '../../shared/routes/routes';
 import storeFactory from '../../shared/redux/index';
 import Layout from '../../shared/common/Layout';
-import { findActiveRoute } from '../../shared/tools/utils/utils';
 import config from './../../../config.test.json';
 import { UserState } from '../../shared/redux/modules/User/user.types';
 import Authentication from '../../shared/services/Authentication';
@@ -43,6 +43,13 @@ router.get(regexRoute, function (req: any, res: any) {
       } catch (err) {
         data.User = {};
       }
+
+      // Load routes data
+      data.Routes = {
+        routes: Routes,
+        history: [activeRoute],
+        currentRoute: activeRoute,
+      };
 
       // Sending the Router with Route component; App component sent inside render method; backend data passed via context
       const context: any = { data }; // TODO: Check this type

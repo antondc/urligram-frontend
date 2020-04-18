@@ -48,33 +48,16 @@ export const urlBuild: UrlBuild = ({ domain, protocol = 'https://', host, port =
   return url;
 };
 
-export /**
- * Check an object with routes and return the one which path prop matches passed url.
+/**
+ * Iterate over src/shared/routes/routes.ts and return the one which path prop matching passed url.
  * @param {string} url
  * @param {RoutesState} Routes
  * @returns object of active route
  */
-const findActiveRoute = (url: string, Routes) =>
-  Object.values(Routes).find((route) => {
-    return matchPath(url, route);
-  }) || {};
 
-export /**
- * Check an object with routes and return the one which path prop matches passed url.
- * @param {string} url
- * @param {RoutesState} Routes
- * @returns object of active route
- */
-const findActiveRouteForState = (url: string, Routes) => {
-  const result: any = Object.values(Routes).find((route) => matchPath(url, route)) || {};
+export const findActiveRoute = (url: string, Routes: { [key: string]: RouteState }) => {
+  const route = Object.values(Routes).find((route) => matchPath(url, route)) as RouteState;
+  const enhancedRoute: RouteState = Object.assign({ pathname: url }, route);
 
-  const formattedRoute: RouteState = {
-    name: result.name,
-    pathname: url,
-    regex: result.path,
-    exact: result.exact,
-    auth: result.auth,
-  };
-
-  return formattedRoute;
+  return enhancedRoute;
 };

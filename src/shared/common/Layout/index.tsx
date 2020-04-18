@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, matchPath } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { pushNewRoute } from 'Modules/Routes/actions/pushNewRoute';
@@ -11,7 +11,7 @@ import Main from 'Routes/Main';
 import Fade from 'Common/Fade/Fade';
 import { SpinnerCircle } from '@antoniodcorrea/components';
 import './Layout.less';
-import { findActiveRouteForState } from '../../tools/utils/url';
+import { findActiveRoute } from '../../tools/utils/url';
 import Routes from '../../routes/routes';
 
 interface Props {
@@ -27,13 +27,11 @@ class Layout extends React.Component<Props> {
       document.body.classList.remove('preload'); // Preventing animations on load
       document.body.classList.add('isLoaded'); // Showing page on load
     });
-    const activeRoute = findActiveRouteForState(location.pathname, Routes);
-    this.props.pushNewRoute(activeRoute);
   }
 
   componentDidUpdate = (prevProps) => {
     if (this.props.location !== prevProps.location) {
-      const activeRoute = findActiveRouteForState(location.pathname, Routes);
+      const activeRoute = findActiveRoute(location.pathname, Routes);
       this.props.pushNewRoute(activeRoute);
     }
   };

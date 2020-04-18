@@ -47,6 +47,7 @@ const Routes = {
     auth: false,
     header: false,
     component: NotFound,
+    loadInitialData: [],
   },
 };
 
