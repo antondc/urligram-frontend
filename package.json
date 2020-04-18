@@ -24,7 +24,7 @@
     "test:precommit": "jest --no-cache"
   },
   "devDependencies": {
-    "@antoniodcorrea/components": "0.0.1",
+    "@antoniodcorrea/components": "^0.1.0",
     "@types/axios": "^0.14.0",
     "@types/body-parser": "^1.19.0",
     "@types/case-sensitive-paths-webpack-plugin": "^2.1.4",

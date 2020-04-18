@@ -1,6 +1,8 @@
-import { RoutesState, RouteState } from '../../redux/modules/Routes/routes.types';
 import { matchPath } from 'react-router-dom';
-import get from 'lodash/get';
+import { match } from 'path-to-regexp';
+import * as queryStringParser from 'query-string';
+import { RouteState } from '../../redux/modules/Routes/routes.types';
+
 /**
  * Receives a path starting or ending with or without slashes, and returns with a starting slash only
  * @param {string} [string='']
@@ -49,15 +51,32 @@ export const urlBuild: UrlBuild = ({ domain, protocol = 'https://', host, port =
 };
 
 /**
- * Iterate over src/shared/routes/routes.ts and return the one which path prop matching passed url.
- * @param {string} url
- * @param {RoutesState} Routes
- * @returns object of active route
+ * Iterates over src/shared/routes/routes.ts and return the one which path prop matching passed url.
+ * @param {*} { path, routes, queryString, queryParams }
+ * @returns
  */
 
-export const findActiveRoute = (url: string, Routes: { [key: string]: RouteState }) => {
-  const route = Object.values(Routes).find((route) => matchPath(url, route)) as RouteState;
-  const enhancedRoute: RouteState = Object.assign({ pathname: url }, route);
+type FindActiveRoute = (options: {
+  path?: string;
+  queryString?: string;
+  queryParams?: {
+    [key: string]: string;
+  };
+  routes: RouteState[];
+}) => RouteState;
 
-  return enhancedRoute;
+export const findActiveRoute: FindActiveRoute = ({ path, routes, queryString, queryParams }) => {
+  const route = routes.find((route) => matchPath(path, route)) as RouteState; // Find the Route whose path matches the url path
+  const regexp = match(route.path, { decode: decodeURIComponent }); // Create a regexp with the route's path
+  const parsedPath = regexp(path); // Parse the path to extract the params
+  const finalParams = parsedPath ? parsedPath.params : undefined; // Extract the params
+  const finalQueryParams = queryParams || queryStringParser.parse(queryString) || undefined; // If there are queryParams, use them; otherwise parse the string if present, or undefined
+
+  const finalRoute: RouteState = Object.assign(route, {
+    pathname: path,
+    params: finalParams,
+    queryParams: finalQueryParams,
+  });
+
+  return finalRoute;
 };

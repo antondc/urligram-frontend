@@ -12,7 +12,7 @@ import Fade from 'Common/Fade/Fade';
 import { SpinnerCircle } from '@antoniodcorrea/components';
 import './Layout.less';
 import { findActiveRoute } from '../../tools/utils/url';
-import Routes from '../../routes/routes';
+import { routesList } from '../../routes/routes';
 
 interface Props {
   languagesLoading: boolean;
@@ -31,7 +31,11 @@ class Layout extends React.Component<Props> {
 
   componentDidUpdate = (prevProps) => {
     if (this.props.location !== prevProps.location) {
-      const activeRoute = findActiveRoute(location.pathname, Routes);
+      const activeRoute = findActiveRoute({
+        path: location.pathname,
+        routes: routesList,
+        queryString: location.search,
+      });
       this.props.pushNewRoute(activeRoute);
     }
   };

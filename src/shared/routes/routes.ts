@@ -40,7 +40,7 @@ const Routes = {
 
   NotFound: {
     name: 'NotFound',
-    path: '*',
+    path: '/:path*',
     exact: false,
     hasHeader: true,
     hasFooter: true,
@@ -50,5 +50,8 @@ const Routes = {
     loadInitialData: [],
   },
 };
+
+export const routesPathsList = Object.values(Routes).map((item) => item.path);
+export const routesList = Object.values(Routes);
 
 export default Routes;

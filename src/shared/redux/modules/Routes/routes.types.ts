@@ -15,6 +15,9 @@ export interface RouteState {
   component: any;
   hasHeader: boolean;
   hasFooter: boolean;
+  params?: {
+    [key: string]: string | number;
+  };
   queryParams?: {
     [key: string]: string | number;
   };

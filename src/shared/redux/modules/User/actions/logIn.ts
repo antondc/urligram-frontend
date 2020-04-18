@@ -8,7 +8,7 @@ import { handleResponse } from 'Tools/errors';
 
 // Request a cookie from api server using the fetch api
 export const logIn = (username: string, password: string): ThunkAction<any, any, any, Action> => {
-  const url = '/api/v1/login';
+  const url = '/api/v1/login/';
   const encodedURI = isBrowser ? encodeURI(process.env.ENDPOINT_API + url) : encodeURI(process.env.ENDPOINT_API + url);
 
   return (dispatch: Dispatch): void => {

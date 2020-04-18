@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import { StaticRouter, Route } from 'react-router-dom';
 import { renderToString } from 'react-dom/server';
 import { findActiveRoute } from 'Root/src/shared/tools/utils/url';
-import Routes from '../../shared/routes/routes';
+import Routes, { routesList, routesPathsList } from '../../shared/routes/routes';
 import storeFactory from '../../shared/redux/index';
 import Layout from '../../shared/common/Layout';
 import config from './../../../config.test.json';
@@ -17,13 +17,11 @@ import { loadLanguages } from '../../shared/redux/modules/Languages/actions/load
 const authentication = new Authentication();
 const router = express.Router();
 
-export const regexRoute = '/:lang([a-z]{2})?/:firstparam?/:secondparam?/:thirdparam?';
-
-router.get(regexRoute, function (req: any, res: any) {
+router.get(routesPathsList, function (req: any, res: any) {
   // TODO: check express types
 
   // Get the routes and return the one that matches actual url
-  const activeRoute = findActiveRoute(req.url, Routes);
+  const activeRoute = findActiveRoute({ path: req.path, routes: routesList, queryParams: req.query });
 
   // Retrieve initial data loaders and pass req.params to them. If empty, send an arraywith a resolved promise
   const initialData = activeRoute.loadInitialData
