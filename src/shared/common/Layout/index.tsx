@@ -1,23 +1,23 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { Location } from 'history';
 import { createStructuredSelector } from 'reselect';
+import { SpinnerCircle } from '@antoniodcorrea/components';
 import { pushNewRoute } from 'Modules/Routes/actions/pushNewRoute';
-import { selectLanguageLoading } from '../../redux/modules/Languages/selectors/selectLanguageLoading';
 import { selectMockDataTwoLoading } from '../../redux/modules/MockDataTwo/selectors/selectMockDataTwoLoading';
 import Header from 'Components/Header';
 import Footer from 'Components/Footer';
 import Main from 'Routes/Main';
 import Fade from 'Common/Fade/Fade';
-import { SpinnerCircle } from '@antoniodcorrea/components';
-import './Layout.less';
 import { findActiveRoute } from '../../tools/utils/url';
 import { routesList } from '../../routes/routes';
 
+import './Layout.less';
+
 interface Props {
-  languagesLoading: boolean;
   mockDataTwoLoading: boolean;
-  location: any;
+  location: Location;
   pushNewRoute: (route) => void;
 }
 
@@ -41,8 +41,8 @@ class Layout extends React.Component<Props> {
   };
 
   render = () => {
-    const { languagesLoading, mockDataTwoLoading } = this.props;
-    const showLoader = languagesLoading || mockDataTwoLoading;
+    const { mockDataTwoLoading } = this.props;
+    const showLoader = mockDataTwoLoading;
 
     return (
       <div className={'Layout'}>
@@ -62,7 +62,6 @@ class Layout extends React.Component<Props> {
 }
 
 const mapStateToProps = createStructuredSelector({
-  languagesLoading: selectLanguageLoading,
   mockDataTwoLoading: selectMockDataTwoLoading,
 });
 
