@@ -12,8 +12,7 @@ import { selectCurrentLanguage } from '../../redux/modules/Languages/selectors/s
 import { selectCurrentRouteParamLanguage } from '../../redux/modules/Routes/selectors/selectCurrentRouteParamLanguage';
 import { selectCurrentPathname } from '../../redux/modules/Routes/selectors/selectCurrentPathname';
 
-import './Header.less';
-import LanguagesSwitch from '../LanguagesSwitch';
+import './LanguagesSwitch.less';
 
 interface Props {
   isLogged: boolean;
@@ -26,40 +25,40 @@ interface Props {
   switchCurrentLanguage: (slug: string) => void;
 }
 
-const Header: React.FC<Props> = ({
-  isLogged,
-  defaultLanguageSlug,
+const LanguagesSwitch: React.FC<Props> = ({
   languagesList,
   currentLanguage,
-  logOut,
   switchCurrentLanguage,
   currentRouteParamLanguage,
   currentPathname,
 }) => {
+  const languagesWithLink = languagesList.map((item) => {
+    const link = !!currentRouteParamLanguage
+      ? currentPathname.replace('/' + currentRouteParamLanguage, '/' + item.slug)
+      : '/' + item.slug + currentPathname;
+
+    const isCurrent = currentLanguage.slug === item.slug;
+
+    return { ...item, link, isCurrent };
+  });
+
   return (
-    <header className={'Header'}>
-      <nav className="Header-navigation">
-        <Link className="Header-item" to={'/' + defaultLanguageSlug}>
-          Home
-        </Link>
-        {isLogged && (
-          <>
-            <Link className="Header-item" to={'/' + defaultLanguageSlug + '/control'}>
-              Control
-            </Link>
-            <Link className="Header-item" to={'/' + defaultLanguageSlug + '/login'} onClick={logOut}>
-              Log out
-            </Link>
-          </>
-        )}
-        {!isLogged && (
-          <Link className="Header-item" to={'/' + defaultLanguageSlug + '/login'}>
-            Login
+    <div className="LanguagesSwitch">
+      {languagesWithLink.map((item) => {
+        return (
+          <Link
+            className={'LanguagesSwitch-language' + (item.isCurrent ? ' LanguagesSwitch-languageActive' : '')}
+            to={item.link}
+            key={item.id}
+            onClick={() => {
+              switchCurrentLanguage(item.slug);
+            }}
+          >
+            {item.slug}
           </Link>
-        )}
-        <LanguagesSwitch />
-      </nav>
-    </header>
+        );
+      })}
+    </div>
   );
 };
 
@@ -75,4 +74,4 @@ const mapStateToProps = createStructuredSelector({
 export default connect(mapStateToProps, {
   logOut: logOut,
   switchCurrentLanguage: switchCurrentLanguage,
-})(Header);
+})(LanguagesSwitch);
