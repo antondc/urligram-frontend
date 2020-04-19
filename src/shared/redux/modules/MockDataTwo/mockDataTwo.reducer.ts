@@ -12,6 +12,6 @@ export const MockDataTwo = (state = {}, action) => {
         loading: false,
       });
     default:
-      return state;
+      return Object.assign({}, state);
   }
 };

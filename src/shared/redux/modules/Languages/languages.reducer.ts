@@ -41,6 +41,6 @@ export const Languages = (state = initialState, action) => {
         currentLanguage: action.data,
       });
     default:
-      return state;
+      return Object.assign({}, state);
   }
 };

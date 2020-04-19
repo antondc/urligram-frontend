@@ -3,60 +3,40 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { Link } from 'react-router-dom';
 import { logOut } from 'Modules/User/actions/logOut';
-import { selectDefaultLanguageSlug } from '../../redux/modules/Languages/selectors/selectDefaultLanguageSlug';
-import { selectLanguagesList } from '../../redux/modules/Languages/selectors/selectLanguagesList';
-import { switchCurrentLanguage } from '../../redux/modules/Languages/actions/switchCurrentLanguage';
-import { LanguageState } from '../../redux/modules/Languages/languages.types';
-import { selectUserLoggedIn } from '../../redux/modules/User/selectors/selectUserLoggedIn';
-import { selectCurrentLanguage } from '../../redux/modules/Languages/selectors/selectCurrentLanguage';
-import { selectCurrentRouteParamLanguage } from '../../redux/modules/Routes/selectors/selectCurrentRouteParamLanguage';
-import { selectCurrentPathname } from '../../redux/modules/Routes/selectors/selectCurrentPathname';
+import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
+import { selectUserLoggedIn } from 'Modules/User/selectors/selectUserLoggedIn';
+import LanguagesSwitch from 'Components/LanguagesSwitch';
 
 import './Header.less';
-import LanguagesSwitch from '../LanguagesSwitch';
 
 interface Props {
   isLogged: boolean;
-  defaultLanguageSlug: string;
-  languagesList: LanguageState[];
-  currentLanguage: LanguageState;
-  currentRouteParamLanguage: string;
-  currentPathname: string;
+  defaultCurrentSlug: string;
   logOut: () => void;
-  switchCurrentLanguage: (slug: string) => void;
 }
 
-const Header: React.FC<Props> = ({
-  isLogged,
-  defaultLanguageSlug,
-  languagesList,
-  currentLanguage,
-  logOut,
-  switchCurrentLanguage,
-  currentRouteParamLanguage,
-  currentPathname,
-}) => {
+const Header: React.FC<Props> = ({ isLogged, defaultCurrentSlug, logOut }) => {
   return (
     <header className={'Header'}>
       <nav className="Header-navigation">
-        <Link className="Header-item" to={'/' + defaultLanguageSlug}>
+        {/* <Link className="Header-item" to={'/' + defaultCurrentSlug}>
           Home
         </Link>
         {isLogged && (
           <>
-            <Link className="Header-item" to={'/' + defaultLanguageSlug + '/control'}>
+            <Link className="Header-item" to={'/' + defaultCurrentSlug + '/control'}>
               Control
             </Link>
-            <Link className="Header-item" to={'/' + defaultLanguageSlug + '/login'} onClick={logOut}>
+            <Link className="Header-item" to={'/' + defaultCurrentSlug + '/login'} onClick={logOut}>
               Log out
             </Link>
           </>
         )}
         {!isLogged && (
-          <Link className="Header-item" to={'/' + defaultLanguageSlug + '/login'}>
+          <Link className="Header-item" to={'/' + defaultCurrentSlug + '/login'}>
             Login
           </Link>
-        )}
+        )} */}
         <LanguagesSwitch />
       </nav>
     </header>
@@ -64,15 +44,10 @@ const Header: React.FC<Props> = ({
 };
 
 const mapStateToProps = createStructuredSelector({
-  defaultLanguageSlug: selectDefaultLanguageSlug,
+  defaultCurrentSlug: selectCurrentLanguageSlug,
   isLogged: selectUserLoggedIn,
-  languagesList: selectLanguagesList,
-  currentLanguage: selectCurrentLanguage,
-  currentRouteParamLanguage: selectCurrentRouteParamLanguage,
-  currentPathname: selectCurrentPathname,
 });
 
 export default connect(mapStateToProps, {
   logOut: logOut,
-  switchCurrentLanguage: switchCurrentLanguage,
 })(Header);

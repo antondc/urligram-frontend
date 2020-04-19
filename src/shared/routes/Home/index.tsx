@@ -2,10 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { loadMockDataTwo } from 'Modules/MockDataTwo/actions/loadMockDataTwo';
-import { selectMockDataTwoUpdatedAt } from '../../redux/modules/MockDataTwo/selectors/selectMockDataTwoUpdatedAt';
-import { selectDefaultLanguage } from '../../redux/modules/Languages/selectors/selectDefaultLanguage';
-import { selectCurrentLanguage } from '../../redux/modules/Languages/selectors/selectCurrentLanguage';
-import { LanguageState } from '../../redux/modules/Languages/languages.types';
+import { selectMockDataTwoUpdatedAt } from 'Modules/MockDataTwo/selectors/selectMockDataTwoUpdatedAt';
+import { selectDefaultLanguage } from 'Modules/Languages/selectors/selectDefaultLanguage';
+import { selectCurrentLanguage } from 'Modules/Languages/selectors/selectCurrentLanguage';
+import { LanguageState } from 'Modules/Languages/languages.types';
 import { H1, Border, Button, Span, Layout, Hr } from '@antoniodcorrea/components';
 
 import './Home.less';

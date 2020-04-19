@@ -28,7 +28,7 @@ router.get(routesPathsList, function (req: any, res: any) {
     ? activeRoute.loadInitialData.map((item: any) => item(req.params))
     : [Promise.resolve()];
 
-  Promise.all([loadLanguages(), ...initialData])
+  Promise.all([loadLanguages(req.params.lang), ...initialData])
     .then((response: any) => {
       const data = Object.assign({}, ...response);
 

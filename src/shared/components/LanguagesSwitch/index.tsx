@@ -3,20 +3,18 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { Link } from 'react-router-dom';
 import { logOut } from 'Modules/User/actions/logOut';
-import { selectDefaultLanguageSlug } from '../../redux/modules/Languages/selectors/selectDefaultLanguageSlug';
-import { selectLanguagesList } from '../../redux/modules/Languages/selectors/selectLanguagesList';
-import { switchCurrentLanguage } from '../../redux/modules/Languages/actions/switchCurrentLanguage';
-import { LanguageState } from '../../redux/modules/Languages/languages.types';
-import { selectUserLoggedIn } from '../../redux/modules/User/selectors/selectUserLoggedIn';
-import { selectCurrentLanguage } from '../../redux/modules/Languages/selectors/selectCurrentLanguage';
-import { selectCurrentRouteParamLanguage } from '../../redux/modules/Routes/selectors/selectCurrentRouteParamLanguage';
-import { selectCurrentPathname } from '../../redux/modules/Routes/selectors/selectCurrentPathname';
+import { selectLanguagesList } from 'Modules/Languages/selectors/selectLanguagesList';
+import { switchCurrentLanguage } from 'Modules/Languages/actions/switchCurrentLanguage';
+import { LanguageState } from 'Modules/Languages/languages.types';
+import { selectUserLoggedIn } from 'Modules/User/selectors/selectUserLoggedIn';
+import { selectCurrentLanguage } from 'Modules/Languages/selectors/selectCurrentLanguage';
+import { selectCurrentRouteParamLanguage } from 'Modules/Routes/selectors/selectCurrentRouteParamLanguage';
+import { selectCurrentPathname } from 'Modules/Routes/selectors/selectCurrentPathname';
 
 import './LanguagesSwitch.less';
 
 interface Props {
   isLogged: boolean;
-  defaultLanguageSlug: string;
   languagesList: LanguageState[];
   currentLanguage: LanguageState;
   currentRouteParamLanguage: string;
@@ -63,7 +61,6 @@ const LanguagesSwitch: React.FC<Props> = ({
 };
 
 const mapStateToProps = createStructuredSelector({
-  defaultLanguageSlug: selectDefaultLanguageSlug,
   isLogged: selectUserLoggedIn,
   languagesList: selectLanguagesList,
   currentLanguage: selectCurrentLanguage,

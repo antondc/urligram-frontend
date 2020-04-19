@@ -1,7 +1,3 @@
-import Home from './Home';
-import Control from './Control';
-import Login from './Login';
-import NotFound from './NotFound';
 import { loadMockDataOne } from './../redux/modules/MockDataOne/actions/loadMockDataOne';
 
 const Routes = {
@@ -10,7 +6,6 @@ const Routes = {
     path: '/:lang([a-z]{2})?/login',
     exact: true,
     auth: false,
-    component: Login,
     hasHeader: false,
     hasFooter: false,
     loadInitialData: [loadMockDataOne],
@@ -21,7 +16,6 @@ const Routes = {
     path: '/:lang([a-z]{2})?/control',
     exact: true,
     auth: true,
-    component: Control,
     hasHeader: true,
     hasFooter: true,
     loadInitialData: [loadMockDataOne],
@@ -32,7 +26,6 @@ const Routes = {
     path: '/:lang([a-z]{2})?',
     exact: true,
     auth: false,
-    component: Home,
     hasHeader: true,
     hasFooter: true,
     loadInitialData: [loadMockDataOne],
@@ -46,7 +39,6 @@ const Routes = {
     hasFooter: true,
     auth: false,
     header: false,
-    component: NotFound,
     loadInitialData: [],
   },
 };

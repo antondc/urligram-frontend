@@ -16,6 +16,6 @@ export const User = (state = initialState, action): UserState => {
     case LOG_OUT || LOG_FAILED:
       return {};
     default:
-      return state;
+      return Object.assign({}, state);
   }
 };

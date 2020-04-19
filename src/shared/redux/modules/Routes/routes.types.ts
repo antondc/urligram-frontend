@@ -12,9 +12,8 @@ export interface RouteState {
   pathname?: string;
   exact: boolean;
   auth: boolean;
-  component: any;
-  hasHeader: boolean;
-  hasFooter: boolean;
+  hasHeader?: boolean;
+  hasFooter?: boolean;
   params?: {
     [key: string]: string | number;
   };

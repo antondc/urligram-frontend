@@ -1,7 +1,7 @@
 import { matchPath } from 'react-router-dom';
 import { match } from 'path-to-regexp';
 import * as queryStringParser from 'query-string';
-import { RouteState } from '../../redux/modules/Routes/routes.types';
+import { RouteState } from 'Modules/Routes/routes.types';
 
 /**
  * Receives a path starting or ending with or without slashes, and returns with a starting slash only
