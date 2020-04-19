@@ -5,21 +5,19 @@ import serialize from 'serialize-javascript';
 import { Provider } from 'react-redux';
 import { StaticRouter, Route } from 'react-router-dom';
 import { renderToString } from 'react-dom/server';
-import { findActiveRoute } from 'Root/src/shared/tools/utils/url';
-import Routes, { routesList, routesPathsList } from '../../shared/routes/routes';
-import storeFactory from '../../shared/redux/index';
-import Layout from '../../shared/common/Layout';
-import config from './../../../config.test.json';
-import { UserState } from '../../shared/redux/modules/User/user.types';
-import Authentication from '../../shared/services/Authentication';
-import { loadLanguages } from '../../shared/redux/modules/Languages/actions/loadLanguages';
+import { findActiveRoute } from 'Tools/utils/url';
+import config from 'Root/config.test.json';
+import Routes, { routesList, routesPathsList } from 'Routes/routes';
+import Authentication from 'Services/Authentication';
+import storeFactory from 'Redux/index';
+import Layout from 'Common/Layout';
+import { UserState } from 'Modules/User/user.types';
+import { loadLanguages } from 'Modules/Languages/actions/loadLanguages';
 
 const authentication = new Authentication();
 const router = express.Router();
 
 router.get(routesPathsList, function (req: any, res: any) {
-  // TODO: check express types
-
   // Get the routes and return the one that matches actual url
   const activeRoute = findActiveRoute({ path: req.path, routes: routesList, queryParams: req.query });
 
@@ -62,7 +60,7 @@ router.get(routesPathsList, function (req: any, res: any) {
         )
         : '';
       const helmet = Helmet.renderStatic();
-      const dataForTemplate = serialize(data); // TODO: this might be processed with JSON.stringify
+      const dataForTemplate = serialize(data); // Serializing for security reasons: https://redux.js.org/recipes/server-rendering#security-considerations
       // Render template with component; frontend data passed via template
       res.render('index', {
         toHtml: helmet.htmlAttributes.toString(),
