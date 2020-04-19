@@ -7,6 +7,8 @@ import { selectDefaultLanguage } from 'Modules/Languages/selectors/selectDefault
 import { selectCurrentLanguage } from 'Modules/Languages/selectors/selectCurrentLanguage';
 import { LanguageState } from 'Modules/Languages/languages.types';
 import { H1, Border, Button, Span, Layout, Hr } from '@antoniodcorrea/components';
+import { selectCurrentGlossary } from '../../redux/modules/Languages/selectors/selectCurrentGlossary';
+import { GlossaryState } from '../../redux/modules/Languages/languages.types';
 
 import './Home.less';
 
@@ -14,16 +16,17 @@ interface Props {
   updatedAt: string;
   defaultLanguage: {};
   currentLanguage: LanguageState;
+  currentGlossary: GlossaryState;
   loadMockDataTwo: () => void;
 }
 
-const Home: React.FC<Props> = ({ updatedAt, loadMockDataTwo, defaultLanguage, currentLanguage }) => {
+const Home: React.FC<Props> = ({ updatedAt, loadMockDataTwo, defaultLanguage, currentLanguage, currentGlossary }) => {
   return (
     <div className="Home">
       <Border grow>
         <Layout horizontal="center">
           <H1 center grow>
-            HOME PAGE
+            {currentGlossary.Home}
           </H1>
           {updatedAt && (
             <Span grow center>
@@ -49,6 +52,7 @@ const mapStateToProps = createStructuredSelector({
   updatedAt: selectMockDataTwoUpdatedAt,
   defaultLanguage: selectDefaultLanguage,
   currentLanguage: selectCurrentLanguage,
+  currentGlossary: selectCurrentGlossary,
 });
 
 export default connect(mapStateToProps, {

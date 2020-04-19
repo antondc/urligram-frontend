@@ -4,12 +4,20 @@ export const SWITCH_CURRENT_LANGUAGE = 'SWITCH_CURRENT_LANGUAGE';
 export const SWITCH_CURRENT_LANGUAGE_RECEIVE = 'SWITCH_CURRENT_LANGUAGE_RECEIVE';
 export const SWITCH_CURRENT_LANGUAGE_REQUEST = 'SWITCH_CURRENT_LANGUAGE_REQUEST';
 
+export interface GlossaryState {
+  Home: string;
+  Login: string;
+  LogOut: string;
+  Control: string;
+}
+
 export interface LanguageState {
   id: number;
   slug: string;
   name: string;
   isDefault: boolean;
   loading?: boolean;
+  glossary: GlossaryState;
 }
 
 export type LanguagesState = {

@@ -6,35 +6,38 @@ import { logOut } from 'Modules/User/actions/logOut';
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
 import { selectUserLoggedIn } from 'Modules/User/selectors/selectUserLoggedIn';
 import LanguagesSwitch from 'Components/LanguagesSwitch';
+import { selectCurrentGlossary } from '../../redux/modules/Languages/selectors/selectCurrentGlossary';
+import { GlossaryState } from '../../redux/modules/Languages/languages.types';
 
 import './Header.less';
 
 interface Props {
   isLogged: boolean;
   defaultCurrentSlug: string;
+  currentGlossary: GlossaryState;
   logOut: () => void;
 }
 
-const Header: React.FC<Props> = ({ isLogged, defaultCurrentSlug, logOut }) => {
+const Header: React.FC<Props> = ({ isLogged, defaultCurrentSlug, currentGlossary, logOut }) => {
   return (
     <header className={'Header'}>
       <nav className="Header-navigation">
         <Link className="Header-item" to={'/' + defaultCurrentSlug}>
-          Home
+          {currentGlossary.Home}
         </Link>
         {isLogged && (
           <>
             <Link className="Header-item" to={'/' + defaultCurrentSlug + '/control'}>
-              Control
+              {currentGlossary.Control}
             </Link>
             <Link className="Header-item" to={'/' + defaultCurrentSlug + '/login'} onClick={logOut}>
-              Log out
+              {currentGlossary.LogOut}
             </Link>
           </>
         )}
         {!isLogged && (
           <Link className="Header-item" to={'/' + defaultCurrentSlug + '/login'}>
-            Login
+            {currentGlossary.Login}
           </Link>
         )}
         <LanguagesSwitch />
@@ -46,6 +49,7 @@ const Header: React.FC<Props> = ({ isLogged, defaultCurrentSlug, logOut }) => {
 const mapStateToProps = createStructuredSelector({
   defaultCurrentSlug: selectCurrentLanguageSlug,
   isLogged: selectUserLoggedIn,
+  currentGlossary: selectCurrentGlossary,
 });
 
 export default connect(mapStateToProps, {

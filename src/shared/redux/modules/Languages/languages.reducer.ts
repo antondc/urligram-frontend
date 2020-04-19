@@ -13,6 +13,12 @@ const initialState: LanguagesState = {
     slug: '',
     name: '',
     isDefault: false,
+    glossary: {
+      Home: '',
+      Login: '',
+      LogOut: '',
+      Control: '',
+    },
   },
 };
 

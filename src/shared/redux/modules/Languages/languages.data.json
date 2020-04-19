@@ -7,26 +7,50 @@
           "id": 1,
           "slug": "en",
           "name": "English",
-          "isDefault": true
+          "isDefault": true,
+          "glossary": {
+            "Home": "Home",
+            "Login": "Login",
+            "LogOut": "Log out",
+            "Control": "Control"
+          }
         },
         "es": {
           "id": 2,
           "slug": "es",
           "name": "Español",
-          "isDefault": false
+          "isDefault": false,
+          "glossary": {
+            "Home": "Casa",
+            "Login": "Ingresar",
+            "LogOut": "Salir",
+            "Control": "Control"
+          }
         },
         "ru": {
           "id": 3,
           "slug": "ru",
           "name": "Русский",
-          "isDefault": false
+          "isDefault": false,
+          "glossary": {
+            "Home": "Дом",
+            "Login": "Войти",
+            "LogOut": "Выйти",
+            "Control": "Контроль"
+          }
         }
       },
       "currentLanguage": {
         "id": 2,
         "slug": "es",
         "name": "Español",
-        "isDefault": false
+        "isDefault": false,
+        "glossary": {
+          "Home": "Casa",
+          "Login": "Ingresar",
+          "LogOut": "Salir",
+          "Control": "Control"
+        }
       }
     }
   }

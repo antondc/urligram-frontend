@@ -3,6 +3,7 @@ import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Location } from 'history';
 import { createStructuredSelector } from 'reselect';
+import { selectLanguageLoading } from '../../redux/modules/Languages/selectors/selectLanguageLoading';
 import { SpinnerCircle } from '@antoniodcorrea/components';
 import { pushNewRoute } from 'Modules/Routes/actions/pushNewRoute';
 import { selectMockDataTwoLoading } from '../../redux/modules/MockDataTwo/selectors/selectMockDataTwoLoading';
@@ -18,6 +19,7 @@ import './Layout.less';
 interface Props {
   mockDataTwoLoading: boolean;
   location: Location;
+  languageLoading: boolean;
   pushNewRoute: (route) => void;
 }
 
@@ -41,7 +43,8 @@ class Layout extends React.Component<Props> {
   };
 
   render = () => {
-    const { mockDataTwoLoading } = this.props;
+    const { languageLoading, mockDataTwoLoading } = this.props;
+    const mounted = !languageLoading;
     const showLoader = mockDataTwoLoading;
 
     return (
@@ -51,17 +54,20 @@ class Layout extends React.Component<Props> {
             <SpinnerCircle />
           </Fade>
         </div>
-        <div className="Layout-content">
-          <Header />
-          <Route path="/:lang([a-z]{2})?" component={Main} />
-          <Footer />
-        </div>
+        <Fade mounted={mounted} time={150}>
+          <div className="Layout-content">
+            <Header />
+            <Route path="/:lang([a-z]{2})?" component={Main} />
+            <Footer />
+          </div>
+        </Fade>
       </div>
     );
   };
 }
 
 const mapStateToProps = createStructuredSelector({
+  languageLoading: selectLanguageLoading,
   mockDataTwoLoading: selectMockDataTwoLoading,
 });
 
