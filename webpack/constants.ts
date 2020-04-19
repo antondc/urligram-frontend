@@ -21,6 +21,7 @@ export const API_DEVELOPMENT_ENDPOINT = JSON.stringify(
     protocol: config.API_DEVELOPMENT_PROTOCOL,
     host: config.API_DEVELOPMENT_HOST,
     port: config.API_DEVELOPMENT_PORT,
+    path: config.API_DEVELOPMENT_PATH,
   })
 );
 
@@ -29,6 +30,7 @@ export const API_PRODUCTION_ENDPOINT = JSON.stringify(
     protocol: config.API_PRODUCTION_PROTOCOL,
     host: config.API_PRODUCTION_HOST,
     port: config.API_PRODUCTION_PORT,
+    path: config.API_PRODUCTION_PATH,
   })
 );
 

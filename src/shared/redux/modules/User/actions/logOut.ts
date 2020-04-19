@@ -2,20 +2,13 @@ import { Dispatch, Action } from 'redux';
 import { logOutReceive } from './logOutReceive';
 import { logInFailure } from './logInFailure';
 import { ThunkAction } from 'redux-thunk';
+import { apiBase } from 'Services/Api';
 
 export const logOut = (): ThunkAction<any, any, any, Action> => {
-  // Remove the cookie on server using the fetch api
-  const encodedURI = encodeURI(process.env.ENDPOINT_API + '/api/v1/login/');
-
+  // Remove the cookie on server using the base api
   return (dispatch: Dispatch): void => {
-    fetch(encodedURI, {
-      method: 'DELETE',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      credentials: 'include',
-    })
+    apiBase
+      .delete('login')
       .then(() => dispatch(logOutReceive()))
       .catch((error) => dispatch(logInFailure(error)));
   };

@@ -19,7 +19,7 @@ const Header: React.FC<Props> = ({ isLogged, defaultCurrentSlug, logOut }) => {
   return (
     <header className={'Header'}>
       <nav className="Header-navigation">
-        {/* <Link className="Header-item" to={'/' + defaultCurrentSlug}>
+        <Link className="Header-item" to={'/' + defaultCurrentSlug}>
           Home
         </Link>
         {isLogged && (
@@ -36,7 +36,7 @@ const Header: React.FC<Props> = ({ isLogged, defaultCurrentSlug, logOut }) => {
           <Link className="Header-item" to={'/' + defaultCurrentSlug + '/login'}>
             Login
           </Link>
-        )} */}
+        )}
         <LanguagesSwitch />
       </nav>
     </header>

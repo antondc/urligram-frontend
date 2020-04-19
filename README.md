@@ -31,8 +31,6 @@ Local server will run in port `4000`, production conf in `config.test.json`.
   - https://github.com/webpack-contrib/webpack-hot-middleware
   - https://github.com/webpack/webpack-hot-middleware
 
-
-
 ## Docs
 
 ### Cookies
@@ -83,9 +81,9 @@ Local server will run in port `4000`, production conf in `config.test.json`.
       webpack.server.dev.ts
       webpack.server.prod.ts
 
-### API calls library
+### API calls
 
-- Fetch is available both on frontend and backend thanks to `isomorphic-fetch`, which adds fetch as a global variable
+- An API client is created for each case in Services/Api. Currently using axios
 
 ### React router
 
