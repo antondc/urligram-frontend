@@ -1,0 +1,35 @@
+@import '../../css/imports.less';
+
+@c: .PageTransitions;
+
+@{c} {
+  &-initial {
+    opacity: 0;
+    transition: opacity @td-fast ease;
+  }
+
+  &-appear {
+    opacity: 0;
+    transition: opacity @td-fast ease;
+  }
+
+  &-appear-active {
+    opacity: 1;
+    transition: opacity @td-fast ease;
+  }
+
+  &-enter-active {
+    position: fixed;
+    opacity: 0;
+  }
+
+  &-enter-done {
+    opacity: 1;
+    transition: opacity @td-fast ease;
+  }
+
+  &-exit {
+    opacity: 0;
+    transition: opacity @td-fast ease;
+  }
+}
