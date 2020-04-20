@@ -1,4 +1,4 @@
-import { loadMockDataOne } from './../redux/modules/MockDataOne/actions/loadMockDataOne';
+import { loadMockDataOne } from '../redux/modules/MockDataOne/actions/loadMockDataOne';
 
 const Routes = {
   Login: {

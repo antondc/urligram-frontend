@@ -85,42 +85,6 @@ Local server will run in port `4000`, production conf in `config.test.json`.
 
 - An API client is created for each case in Services/Api. Currently using axios
 
-### React router
-
-- Due to server side rendering we need routes to be described in an object. It is possible to iterate the routes:
-
-      import Routes from '../../routes/routes';
-      {Object.values(Routes).map(({ path, exact, component: Component, ...rest }) => {
-          return (
-              <Route
-                  key={path}
-                  path={path}
-                  exact={exact}
-                  render={(props) => {
-                      return <Component {...props} {...rest} />;
-                  }}
-              />
-          );
-      })}
-
-  Is simpler to maintain them flat tough:
-
-      import Routes from '../../routes/routes';
-      <Route
-          exact={Routes.Projects.exact}
-          path={Routes.Projects.path}
-          render={(props) => {
-              return <Routes.Projects.component {...props} {...Routes.Projects} />;
-          }}
-      />
-      <Route
-          exact={Routes.ProjectsDetail.exact}
-          path={Routes.ProjectsDetail.path}
-          render={(props) => {
-              return <Routes.ProjectsDetail.component {...props} {...Routes.ProjectsDetail} />;
-          }}
-      />
-
 ### Globals
 
 Globals are set in globals.d.ts as in https://bit.ly/2t5bgjr.

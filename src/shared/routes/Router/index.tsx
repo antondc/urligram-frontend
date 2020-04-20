@@ -3,22 +3,22 @@ import { Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 import { Location } from 'history';
-import Routes from 'Routes/routes';
-import Login from '../Login';
-import Home from '../Home';
-import Control from '../Control';
-import NotFound from '../NotFound';
+import Routes from 'Routes/index';
+import Login from 'Routes/Login';
+import Home from 'Routes/Home';
+import Control from 'Routes/Control';
+import NotFound from 'Routes/NotFound';
 import PageTransitions from 'Common/PageTransitions';
 
-import './Main.less';
+import './Router.less';
 
 interface Props {
   isLogged: boolean;
   location: Location;
 }
 
-const Main: React.FC<Props> = ({ isLogged, location }) => (
-  <div className="Main">
+const Router: React.FC<Props> = ({ isLogged, location }) => (
+  <div className="Router">
     <PageTransitions location={location}>
       {/* Location needed for animations */}
       <Switch location={location}>
@@ -37,4 +37,4 @@ const mapStateToProps = (state) => ({
   isLogged: !!state.User.id,
 });
 
-export default connect(mapStateToProps)(Main);
+export default connect(mapStateToProps)(Router);

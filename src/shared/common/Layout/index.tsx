@@ -3,16 +3,16 @@ import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Location } from 'history';
 import { createStructuredSelector } from 'reselect';
-import { selectLanguageLoading } from '../../redux/modules/Languages/selectors/selectLanguageLoading';
 import { SpinnerCircle } from '@antoniodcorrea/components';
+import { findActiveRoute } from 'Tools/utils/url';
+import { selectLanguageLoading } from 'Modules/Languages/selectors/selectLanguageLoading';
 import { pushNewRoute } from 'Modules/Routes/actions/pushNewRoute';
-import { selectMockDataTwoLoading } from '../../redux/modules/MockDataTwo/selectors/selectMockDataTwoLoading';
+import { selectMockDataTwoLoading } from 'Modules/MockDataTwo/selectors/selectMockDataTwoLoading';
+import Fade from 'Common/Fade/Fade';
+import { routesList } from 'Routes/index';
 import Header from 'Components/Header';
 import Footer from 'Components/Footer';
-import Main from 'Routes/Main';
-import Fade from 'Common/Fade/Fade';
-import { findActiveRoute } from '../../tools/utils/url';
-import { routesList } from '../../routes/routes';
+import Router from 'Routes/Router';
 
 import './Layout.less';
 
@@ -57,7 +57,7 @@ class Layout extends React.Component<Props> {
         <Fade mounted={mounted} time={150}>
           <div className="Layout-content">
             <Header />
-            <Route path="/:lang([a-z]{2})?" component={Main} />
+            <Route path="/:lang([a-z]{2})?" component={Router} />
             <Footer />
           </div>
         </Fade>

@@ -7,7 +7,7 @@ import { StaticRouter, Route } from 'react-router-dom';
 import { renderToString } from 'react-dom/server';
 import { findActiveRoute } from 'Tools/utils/url';
 import config from 'Root/config.test.json';
-import Routes, { routesList, routesPathsList } from 'Routes/routes';
+import Routes, { routesList, routesPathsList } from 'Routes/index';
 import Authentication from 'Services/Authentication';
 import storeFactory from 'Redux/index';
 import Layout from 'Common/Layout';
