@@ -18,6 +18,7 @@ const initialState: LanguagesState = {
       Login: '',
       LogOut: '',
       Control: '',
+      NotFound: '',
     },
   },
 };

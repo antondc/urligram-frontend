@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { logIn } from 'Modules/User/actions/logIn';
 import { Button } from '@antoniodcorrea/components';
+import { createStructuredSelector } from 'reselect';
 
 import './Login.less';
 
 interface Props {
-  isLogged: boolean;
   logIn: (username: string, password: string) => void;
 }
 interface State {
@@ -50,10 +50,8 @@ class Login extends Component<Props, State> {
   }
 }
 
-const mapStateToProps = (state) => ({
-  isLogged: state.User.isLogged,
-});
+const mapStateToProps = createStructuredSelector({});
 
 export default connect(mapStateToProps, {
-  logIn: logIn,
+  logIn,
 })(Login);

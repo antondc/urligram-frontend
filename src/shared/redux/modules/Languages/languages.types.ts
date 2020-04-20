@@ -9,6 +9,7 @@ export interface GlossaryState {
   Login: string;
   LogOut: string;
   Control: string;
+  NotFound: string;
 }
 
 export interface LanguageState {

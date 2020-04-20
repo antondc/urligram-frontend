@@ -12,7 +12,8 @@
             "Home": "Home",
             "Login": "Login",
             "LogOut": "Log out",
-            "Control": "Control"
+            "Control": "Control",
+            "NotFound": "Page not found"
           }
         },
         "es": {
@@ -24,7 +25,8 @@
             "Home": "Casa",
             "Login": "Ingresar",
             "LogOut": "Salir",
-            "Control": "Control"
+            "Control": "Control",
+            "NotFound": "Página no encontrada"
           }
         },
         "ru": {
@@ -36,7 +38,8 @@
             "Home": "Дом",
             "Login": "Войти",
             "LogOut": "Выйти",
-            "Control": "Контроль"
+            "Control": "Контроль",
+            "NotFound": "Задание 404"
           }
         }
       },
@@ -49,7 +52,8 @@
           "Home": "Casa",
           "Login": "Ingresar",
           "LogOut": "Salir",
-          "Control": "Control"
+          "Control": "Control",
+          "NotFound": "Page not found"
         }
       }
     }
