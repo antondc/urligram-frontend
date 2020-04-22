@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Location } from 'history';
 import { createStructuredSelector } from 'reselect';
 import { SpinnerCircle } from '@antoniodcorrea/components';
-import { findActiveRouteKey } from 'Tools/utils/url';
+import findActiveRouteKey from 'Tools/utils/url/findActiveRouteKey';
 import { selectLanguageLoading } from 'Modules/Languages/selectors/selectLanguageLoading';
 import { pushNewRoute } from 'Modules/Routes/actions/pushNewRoute';
 import { selectMockDataTwoLoading } from 'Modules/MockDataTwo/selectors/selectMockDataTwoLoading';

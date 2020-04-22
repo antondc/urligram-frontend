@@ -1,14 +1,5 @@
-import { urlBuild, urlToAbsolute } from './url';
+import urlBuild from './urlBuild';
 import config from 'Root/config.test.json';
-
-describe('urlToAbsolute', () => {
-  test('it should return a string with leading slash and no trailing slash', () => {
-    const input = '/one/two/three/';
-    const output = '/one/two/three';
-
-    expect(urlToAbsolute(input)).toEqual(output);
-  });
-});
 
 describe('urlBuild', () => {
   test('it should return a full url', () => {

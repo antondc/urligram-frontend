@@ -1,6 +1,6 @@
 import path from 'path';
 import config from '../config.test.json';
-import { urlBuild } from '../src/shared/tools/utils/url';
+import urlBuild from '../src/shared/tools/utils/url/urlBuild';
 
 export const WEBPACK_ROOT = path.resolve(process.cwd());
 

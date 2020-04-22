@@ -1,7 +1,7 @@
 // Middleware to serve gzipped files
 // Has to be called before static middleware
 
-import { getExtension } from '../../shared/tools/utils/utils';
+import getExtension from 'Tools/utils/file/getExtension';
 
 const serveGzip = function (req: any, res: any, next: any) {
   // TODO: express types
