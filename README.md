@@ -1,108 +1,105 @@
-# antoniodiaz.me
+# Frontend Starter Kit
 
-## Installing / Getting started
+Starter kit for frontend projects.
+
+### Prerequisites
+
+- TypeScript
+
+## Install
 
 Install packages
 
-    npm i
-    npm run start
+    nvm use
+    npm ci
+    npm run prod
 
 Local server will run in port `4000`, production conf in `config.test.json`.
+
+## Development
+
+    nvm use
+    npm ci
+    npm run start
+
+Hot module reloading with `webpack-hot-middleware` and `webpack-dev-middleware.
 
 ## Stack
 
 - React
 - Redux
+- Express
+- Reselect
+- Less
 - TypeScript
 - Webpack
 - Gitlab CI/CD
 - Jest & Enzyme
-- Less (BEM)
-
-### Prerequisites
-
-- NVM
-- NPM
-
-## Development
-
-- Using webpack-hot-middleware and webpack-dev-middleware:
-
-  - https://github.com/webpack-contrib/webpack-hot-middleware
-  - https://github.com/webpack/webpack-hot-middleware
 
 ## Docs
 
 ### Cookies
 
-- Cookies are accesssed from backend only thanks to HttpOnly
+Cookies are accesssed from backend only thanks to HttpOnly.
 
-- The cookies dependencies are:
+Cookie-parser: https://github.com/expressjs/cookie-parser, official `Express` parser to access cookies.
 
-  - cookie-parser: https://github.com/expressjs/cookie-parser, official parser to access cookies on express
+Cookies are set in the following steps:
 
-- Cookies are set with following steps:
+- Client
 
-  - Client
+  - User navigates to `/login`
+  - User populates form and submit: src/shared/routes/Login/index.js
+  - Action `logIn` is called: `src/shared/redux/actions.js`
+  - Request to `GET` `/login` is called, the response has a cookie with user data, along with user data itself
+  - Reducer is triggered and user data is saved on store: `src/shared/redux/reducers.js`
+  - User navigates
+  - The `HTTP` request has the cookie included
 
-    - User navigates to /login
-    - User populates form and submit: src/shared/routes/Login/index.js
-    - Action logIn is called: src/shared/redux/actions.js
-    - Request to GET /login is called, the response has a cookie with user data, along with user data itself
-    - Reducer is triggered and user data is saved on store: src/shared/redux/reducers.js
-    - User navigates
-    - The HTTP request has cookie included
+- Server
 
-  - Server
+  - For all requests, cookies are checked at `src/server/routes/allRoutes.tsx`
+  - If cookie can be decrypted, user data is included in `window.__PRELOADED_STATE__`
 
-    - For all requests, cookies are checked: src/server/routes/allRoutes.tsx
-    - If cookie is ok, user data is included in window.data
+- Client
 
-  - Client
+  - Token validator is wrapped in `src/shared/services/Cookies.ts` to handle error
 
-    - Token validator is wrapped in src/shared/services/Cookies.ts to handle error
-
-- On <Main/> we have the <Redirect /> component that is loaded depending on the login status of the user, and allows or disallows to access to specific routes: src/shared/routes/Main/index.js
+On `<Router/>` we have `<Redirect />` components that are loaded depending on the login status of the user, and allows or disallows to access to specific routes: `src/shared/routes/Router/index.js`
 
 ### CSS
 
-- Used less without css modules. The reason is the lack of selector nesting. Instead, a custom variant of BEM is used:
+Used `less`.
+The use of `css modules` is discouraged: the reason is the lack of selector nesting. Instead, a custom variant of `BEM` is used:
 
-      MyModule-myElement--myModifier
+    MyModule-myElement--myModifier
 
-- Autoprefixes are coming from a webpack loader
+Autoprefixes are set at webpack
 
 ### Webpack build
 
-- Webpack building is done in parallel: client and server.
+Webpack building is done in parallel: client and server.
 
-      webpack.client.dev.ts
-      webpack.client.prod.ts
-      webpack.server.dev.ts
-      webpack.server.prod.ts
+    webpack.client.dev.ts
+    webpack.client.prod.ts
+    webpack.server.dev.ts
+    webpack.server.prod.ts
 
 ### API calls
 
-- An API client is created for each case in Services/Api. Currently using axios
+An `API` client is created for each case in `src/shared/services/Api`. Currently using axios.
 
 ### Globals
 
-Globals are set in globals.d.ts as in https://bit.ly/2t5bgjr.
-Currently empty due to issues with exports
+Globals are set in globals.d.ts, see https://stackoverflow.com/questions/12709074/how-do-you-explicitly-set-a-new-property-on-window-in-typescript/45352250#45352250.
 
 ### Enzyme
 
-- Enzyme needs adapter for React 16, see: https://github.com/Microsoft/TypeScript-React-Starter/issues/131
+Enzyme needs adapter for React 16, see: https://github.com/Microsoft/TypeScript-React-Starter/issues/131
 
-### TypeScript breaking change
+### React-router `<Switch />` and `location`
 
-https://github.com/microsoft/TypeScript/issues/25260
-
-Needed `"keyofStringsOnly": true`
-
-### React-router Switch and location
-
-In previous implementation Swith and StaticRouter were receiving `location`
+In previous implementation `<Swith />` and `<StaticRouter />` were receiving `location`
 
 ```jsx
 <Switch location={location}></Switch>
@@ -122,4 +119,4 @@ This prop was removed, as it seems unnecessary
 
 The MIT License (MIT)
 
-Copyright (c) 2018 Antonio Díaz
+Copyright (c) 2020 Antonio Díaz

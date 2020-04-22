@@ -1,5 +1,5 @@
 {
-  "name": "react-redux-typescript-starter-kit",
+  "name": "frontend-starter-kit",
   "version": "0.0.1",
   "author": "Antonio Díaz Correa",
   "description": "Starter kit for universal sites using react, redux and typescript",
@@ -8,6 +8,7 @@
     "typescript",
     "react",
     "redux",
+    "express",
     "jwt",
     "universal",
     "hmr"
