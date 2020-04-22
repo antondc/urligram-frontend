@@ -1,6 +1,7 @@
 import { matchPath } from 'react-router-dom';
 import { match } from 'path-to-regexp';
 import * as queryStringParser from 'query-string';
+import cloneDeep from 'lodash/cloneDeep';
 import { RouteState } from 'Modules/Routes/routes.types';
 
 /**
@@ -51,32 +52,46 @@ export const urlBuild: UrlBuild = ({ domain, protocol = 'https://', host, port =
 };
 
 /**
- * Iterates over src/shared/routes/routes.ts and return the one which path prop matching passed url.
+ * Iterates over src/shared/routes/routes.ts and return the keyof the route which path prop matches passed url.
  * @param {*} { path, routes, queryString, queryParams }
  * @returns
  */
 
-type FindActiveRoute = (options: {
-  path?: string;
+type FindActiveRouteKey = (options: { urlPath?: string; routes: RouteState[] }) => string;
+
+export const findActiveRouteKey: FindActiveRouteKey = ({ urlPath, routes }) => {
+  const routeKey = routes.find((route) => matchPath(urlPath, route));
+  if (!routeKey) return null;
+
+  return routeKey.name;
+};
+
+/**
+ * Receives a route object, an url path, and a query string or/and query params object; extracts the params and query params to enhance the route with them.
+ * @param {*} { route, path, queryString, queryParams }
+ * @returns
+ */
+
+type EnhanceRouteWithParams = (options: {
+  route: RouteState;
+  urlPath?: string;
   queryString?: string;
   queryParams?: {
     [key: string]: string;
   };
-  routes: RouteState[];
 }) => RouteState;
 
-export const findActiveRoute: FindActiveRoute = ({ path, routes, queryString, queryParams }) => {
-  const route = routes.find((route) => matchPath(path, route)) as RouteState; // Find the Route whose path matches the url path
+export const enhanceRouteWithParams: EnhanceRouteWithParams = ({ route, urlPath, queryString, queryParams }) => {
   const regexp = match(route.path, { decode: decodeURIComponent }); // Create a regexp with the route's path
-  const parsedPath = regexp(path); // Parse the path to extract the params
+  const parsedPath = regexp(urlPath); // Parse the url path to extract the params
   const finalParams = parsedPath ? parsedPath.params : undefined; // Extract the params
   const finalQueryParams = queryParams || queryStringParser.parse(queryString) || undefined; // If there are queryParams, use them; otherwise parse the string if present, or undefined
 
-  const finalRoute: RouteState = Object.assign(route, {
-    pathname: path,
+  const enhancedRoute: RouteState = Object.assign(cloneDeep(route), {
+    pathname: urlPath,
     params: finalParams,
     queryParams: finalQueryParams,
   });
 
-  return finalRoute;
+  return enhancedRoute;
 };

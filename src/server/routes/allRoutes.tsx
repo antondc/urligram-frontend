@@ -5,9 +5,9 @@ import serialize from 'serialize-javascript';
 import { Provider } from 'react-redux';
 import { StaticRouter, Route } from 'react-router-dom';
 import { renderToString } from 'react-dom/server';
-import { findActiveRoute } from 'Tools/utils/url';
+import { findActiveRouteKey, enhanceRouteWithParams } from 'Tools/utils/url';
 import config from 'Root/config.test.json';
-import Routes, { routesList, routesPathsList } from 'Routes/index';
+import Routes, { routesWithoutOmmitedValues, routesList, routesPathsList } from 'Routes/index';
 import Authentication from 'Services/Authentication';
 import storeFactory from 'Redux/index';
 import Layout from 'Common/Layout';
@@ -18,19 +18,17 @@ const authentication = new Authentication();
 const router = express.Router();
 
 router.get(routesPathsList, function (req: any, res: any) {
-  // Get the routes and return the one that matches actual url
-  const activeRoute = findActiveRoute({ path: req.path, routes: routesList, queryParams: req.query });
+  // Get active route key
+  const activeRouteKey = findActiveRouteKey({ urlPath: req.path, routes: routesList });
 
-  // Retrieve initial data loaders and pass req.params to them. If empty, send an arraywith a resolved promise
-  const initialData = activeRoute.loadInitialData
-    ? activeRoute.loadInitialData.map((item: any) => item(req.params))
-    : [Promise.resolve()];
+  // Retrieve initial data from loaders passing req.params.
+  const initialDataLoaders = Routes[activeRouteKey].loadInitialData.map((item: any) => item(req.params));
 
-  Promise.all([loadLanguages(req.params.lang), ...initialData])
+  Promise.all([loadLanguages(req.params.lang), ...initialDataLoaders])
     .then((response: any) => {
       const data = Object.assign({}, ...response);
 
-      // Adding initial user to data from Token to store
+      // Validate user data from token
       try {
         const user = authentication.verifyToken(req.cookies.sessionToken) as UserState;
         data.User = {
@@ -41,13 +39,19 @@ router.get(routesPathsList, function (req: any, res: any) {
       }
 
       // Load routes data
+      const enhancedRoute = enhanceRouteWithParams({
+        route: routesWithoutOmmitedValues[activeRouteKey],
+        urlPath: req.path,
+        queryParams: req.query,
+      });
+
       data.Routes = {
-        routes: Routes,
-        history: [activeRoute],
-        currentRoute: activeRoute,
+        routes: routesWithoutOmmitedValues,
+        history: [enhancedRoute],
+        currentRoute: enhancedRoute,
       };
 
-      // Sending the Router with Route component; App component sent inside render method; backend data passed via context
+      // Send the Router with Route component; App component sent within render method; backend data passed via context
       const context: any = { data }; // TODO: Check this type
       const store = storeFactory(data);
       const appComponentAsString = config.ENABLE_ISOMORPHISM
@@ -61,7 +65,8 @@ router.get(routesPathsList, function (req: any, res: any) {
         : '';
       const helmet = Helmet.renderStatic();
       const dataForTemplate = serialize(data); // Serializing for security reasons: https://redux.js.org/recipes/server-rendering#security-considerations
-      // Render template with component; frontend data passed via template
+
+      // Render template with component; frontend data passed via .ejs template
       res.render('index', {
         toHtml: helmet.htmlAttributes.toString(),
         toHead: helmet.title.toString() + helmet.meta.toString() + helmet.link.toString(),

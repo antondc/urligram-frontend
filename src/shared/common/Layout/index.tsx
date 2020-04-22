@@ -4,12 +4,12 @@ import { connect } from 'react-redux';
 import { Location } from 'history';
 import { createStructuredSelector } from 'reselect';
 import { SpinnerCircle } from '@antoniodcorrea/components';
-import { findActiveRoute } from 'Tools/utils/url';
+import { findActiveRouteKey } from 'Tools/utils/url';
 import { selectLanguageLoading } from 'Modules/Languages/selectors/selectLanguageLoading';
 import { pushNewRoute } from 'Modules/Routes/actions/pushNewRoute';
 import { selectMockDataTwoLoading } from 'Modules/MockDataTwo/selectors/selectMockDataTwoLoading';
 import Fade from 'Common/Fade/Fade';
-import { routesList } from 'Routes/index';
+import { routesList, routesWithoutOmmitedValues } from 'Routes/index';
 import Header from 'Components/Header';
 import Footer from 'Components/Footer';
 import Router from 'Routes/Router';
@@ -33,12 +33,11 @@ class Layout extends React.Component<Props> {
 
   componentDidUpdate = (prevProps) => {
     if (this.props.location !== prevProps.location) {
-      const activeRoute = findActiveRoute({
-        path: location.pathname,
+      const activeRouteKey = findActiveRouteKey({
+        urlPath: location.pathname,
         routes: routesList,
-        queryString: location.search,
       });
-      this.props.pushNewRoute(activeRoute);
+      this.props.pushNewRoute(routesWithoutOmmitedValues[activeRouteKey]);
     }
   };
 

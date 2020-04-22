@@ -1,4 +1,5 @@
-import { loadMockDataOne } from '../redux/modules/MockDataOne/actions/loadMockDataOne';
+import omit from 'lodash/omit';
+import { loadMockDataOne } from 'Modules/MockDataOne/actions/loadMockDataOne';
 
 const Routes = {
   Login: {
@@ -42,6 +43,14 @@ const Routes = {
     loadInitialData: [],
   },
 };
+
+// Export routes without specific values values
+export const routesWithoutOmmitedValues = Object.entries(Routes).reduce((acc, [key, value]) => {
+  const valuesToRemove = ['loadInitialData' /* etc. */];
+  const routeWithoutOmmitedValues = omit(value, valuesToRemove);
+
+  return { ...acc, [key]: routeWithoutOmmitedValues };
+}, {});
 
 export const routesPathsList = Object.values(Routes).map((item) => item.path);
 export const routesList = Object.values(Routes);
