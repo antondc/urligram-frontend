@@ -7,14 +7,15 @@ import storeFactory from '../shared/redux/index';
 import config from './../../config.test.json';
 
 interface CustomWindow extends Window {
-  data: any;
+  __PRELOADED_STATE__: any;
 }
 
 declare let window: CustomWindow;
 
-window.data = window.data || {};
+const preloadedState = window.__PRELOADED_STATE__ || {};
+delete window.__PRELOADED_STATE__; // Allow state to be garbage collected: https://redux.js.org/recipes/server-rendering#clientjs
 
-const store = storeFactory(window.data);
+const store = storeFactory(preloadedState);
 const renderApp = config.ENABLE_ISOMORPHISM ? hydrate : render;
 
 // Sending the Router with Route component; App component sent inside render method to insert data

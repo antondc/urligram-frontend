@@ -26,7 +26,7 @@
   <body class="<%= htmlWebpackPlugin.options.deviceDetector %> preload" style="opacity: 0;">
     <div id="app"><%= htmlWebpackPlugin.options.body %></div>
     <script>
-      window.data = <%= htmlWebpackPlugin.options.data %>
+      window.__PRELOADED_STATE__ = <%= htmlWebpackPlugin.options.data %>
     </script>
   </body>
 </html>
