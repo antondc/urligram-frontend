@@ -20,7 +20,7 @@ Local server will run in port `4000`, production conf in `config.test.json`.
 
     nvm use
     npm ci
-    npm run start
+    npm run dev
 
 Hot module reloading with `webpack-hot-middleware` and `webpack-dev-middleware.
 
@@ -101,13 +101,13 @@ Enzyme needs adapter for React 16, see: https://github.com/Microsoft/TypeScript-
 
 In previous implementation `<Swith />` and `<StaticRouter />` were receiving `location`
 
-```jsx
+```
 <Switch location={location}></Switch>
 ```
 
 and
 
-```jsx
+```
 <StaticRouter location={req.url} context={context}>
   <Route path="/" render={(props): React.ReactNode => <Layout {...props} />} />
 </StaticRouter>
