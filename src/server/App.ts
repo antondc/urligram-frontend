@@ -1,5 +1,5 @@
 import serveGzip from './tools/serveGzip';
-import * as bodyParser from 'body-parser';
+import bodyParser from 'body-parser';
 import express from 'express';
 import path from 'path';
 import cookieParser from 'cookie-parser';
