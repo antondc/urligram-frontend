@@ -3,10 +3,14 @@
 @c: .Layout;
 
 @{c} {
-  padding: 0 @outer-padding;
+  padding: 0 @lay-outerPadding;
 
-  @media @desktopSmall {
-    padding: 0 @outer-padding-small;
+  @media @br-desktopSmall {
+    padding: 0 @lay-outerPaddingSmall;
+  }
+
+  @media @br-mobile {
+    padding: 0 @lay-outerPaddingMicro;
   }
 
   &-modal {

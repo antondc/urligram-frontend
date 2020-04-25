@@ -13,8 +13,6 @@ import PageTransitions from 'Common/PageTransitions';
 import { selectUserLoggedIn } from '../../redux/modules/User/selectors/selectUserLoggedIn';
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
 
-import './Router.less';
-
 interface Props {
   userLoggedIn: boolean;
   location: Location;
@@ -22,19 +20,17 @@ interface Props {
 }
 
 const Router: React.FC<Props> = ({ userLoggedIn, location, defaultCurrentSlug }) => (
-  <div className="Router">
-    <PageTransitions location={location}>
-      {/* Location needed for animations */}
-      <Switch location={location}>
-        {userLoggedIn && <Redirect from="/:lang?/login" to={'/' + defaultCurrentSlug + '/control'} />}
-        {!userLoggedIn && <Redirect from="/:lang?/control" to={'/' + defaultCurrentSlug + '/login'} />}
-        <Route exact={Routes.Login.exact} path={Routes.Login.path} component={Login} />;
-        <Route exact={Routes.Home.exact} path={Routes.Home.path} component={Home} />
-        <Route exact={Routes.Control.exact} path={Routes.Control.path} component={Control} />
-        <Route exact={Routes.NotFound.exact} path={Routes.NotFound.path} component={NotFound} />
-      </Switch>
-    </PageTransitions>
-  </div>
+  <PageTransitions location={location}>
+    {/* Location needed for animations */}
+    <Switch location={location}>
+      {userLoggedIn && <Redirect from="/:lang?/login" to={'/' + defaultCurrentSlug + '/control'} />}
+      {!userLoggedIn && <Redirect from="/:lang?/control" to={'/' + defaultCurrentSlug + '/login'} />}
+      <Route exact={Routes.Login.exact} path={Routes.Login.path} component={Login} />;
+      <Route exact={Routes.Home.exact} path={Routes.Home.path} component={Home} />
+      <Route exact={Routes.Control.exact} path={Routes.Control.path} component={Control} />
+      <Route exact={Routes.NotFound.exact} path={Routes.NotFound.path} component={NotFound} />
+    </Switch>
+  </PageTransitions>
 );
 
 const mapStateToProps = createStructuredSelector({

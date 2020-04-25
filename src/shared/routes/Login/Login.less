@@ -6,7 +6,11 @@
   align-items: center;
 
   &-content {
-    .calcgrid(@property: width; @columns: 2; @parent-columns: 12; @has-gutter-appended: 1; @has-paddings: 0; @has-parent-paddings: 0);
+    .calcgrid(@property: width; @columns: 2; @parentColumns: 12; @addGutter: 2; @hasParentPaddings: 0);
+
+    @media @br-mobile {
+      .calcgrid(@property: width; @columns: 2; @parentColumns: 2; @addGutter: 2; @hasParentPaddings: 0);
+    }
   }
 
   &-form {
