@@ -5,6 +5,7 @@ import { Location } from 'history';
 import { createStructuredSelector } from 'reselect';
 import { SpinnerCircle, Fade } from '@antoniodcorrea/components';
 import findActiveRouteKey from 'Tools/utils/url/findActiveRouteKey';
+import enhanceRouteWithParams from 'Tools/utils/url/enhanceRouteWithParams';
 import { selectLanguageLoading } from 'Modules/Languages/selectors/selectLanguageLoading';
 import { pushNewRoute } from 'Modules/Routes/actions/pushNewRoute';
 import { selectMockDataTwoLoading } from 'Modules/MockDataTwo/selectors/selectMockDataTwoLoading';
@@ -37,7 +38,12 @@ class Layout extends React.Component<Props> {
         urlPath: location.pathname,
         routes: routesList,
       });
-      this.props.pushNewRoute(routesWithoutOmmitedValues[activeRouteKey]);
+      const enhancedRoute = enhanceRouteWithParams({
+        route: routesWithoutOmmitedValues[activeRouteKey],
+        urlPath: location.pathname,
+        queryString: '?slkdj=lasjd',
+      });
+      this.props.pushNewRoute(enhancedRoute);
     }
   };
 
