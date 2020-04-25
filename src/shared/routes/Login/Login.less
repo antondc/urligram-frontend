@@ -1,6 +1,14 @@
 @import '../../css/imports.less';
 
 .Login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &-content {
+    .calcgrid(@property: width; @columns: 2; @parent-columns: 12; @has-gutter-appended: 1; @has-paddings: 0; @has-parent-paddings: 0);
+  }
+
   &-form {
     display: flex;
     flex-direction: column;

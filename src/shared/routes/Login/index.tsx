@@ -38,13 +38,15 @@ class Login extends Component<Props, State> {
   render() {
     return (
       <div className="Login">
-        <h1 className="Login-h1">LOGIN PAGE</h1>
-        <form className="Login-form">
-          Sign in
-          <input name="username" type="text" placeholder="User name" autoFocus onChange={this.onChange} />
-          <input name="password" type="text" placeholder="Password" autoFocus onChange={this.onChange} />
-          <Button text="Enter" onClick={this.onSubmit} />
-        </form>
+        <div className="Login-content">
+          <h1 className="Login-h1">LOGIN PAGE</h1>
+          <form className="Login-form">
+            Sign in
+            <input name="username" type="text" placeholder="User name" autoFocus onChange={this.onChange} />
+            <input name="password" type="text" placeholder="Password" autoFocus onChange={this.onChange} />
+            <Button text="Enter" onClick={this.onSubmit} />
+          </form>
+        </div>
       </div>
     );
   }

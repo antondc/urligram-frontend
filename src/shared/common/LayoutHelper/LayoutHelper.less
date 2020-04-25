@@ -1,0 +1,61 @@
+@import '../../css/imports.less';
+
+@c: .LayoutHelper;
+
+@{c} {
+  &-columns,
+  &-rows {
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    padding: 0;
+    font-size: 0;
+    z-index: @z-index-1000;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  &-column {
+    display: inline-block;
+    position: relative;
+    height: 100vh;
+    background-color: @c-traslucid--lightest;
+
+    .calcgrid(@property: width; @columns: 1; @parent-columns: 12; @has-gutter-appended: 0; @has-paddings: 0; @has-parent-paddings: 1);
+  }
+
+  &-gutter {
+    display: inline-block;
+    position: relative;
+    height: 100vh;
+    width: @gutter;
+
+    @media @desktopSmall {
+      width: @gutter-small;
+    }
+  }
+
+  &-externalPadding {
+    display: inline-block;
+    position: relative;
+    height: 100vh;
+    width: @outer-padding;
+
+    @media @desktopSmall {
+      width: @outer-padding-small;
+    }
+  }
+
+  &-row {
+    height: 10px;
+    width: 100vw;
+    background-color: @c-traslucid--lightest;
+  }
+
+  &-rowGap {
+    height: 10px;
+    width: 100vw;
+  }
+}

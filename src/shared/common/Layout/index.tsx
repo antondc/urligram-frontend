@@ -3,15 +3,15 @@ import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Location } from 'history';
 import { createStructuredSelector } from 'reselect';
-import { SpinnerCircle } from '@antoniodcorrea/components';
+import { SpinnerCircle, Fade } from '@antoniodcorrea/components';
 import findActiveRouteKey from 'Tools/utils/url/findActiveRouteKey';
 import { selectLanguageLoading } from 'Modules/Languages/selectors/selectLanguageLoading';
 import { pushNewRoute } from 'Modules/Routes/actions/pushNewRoute';
 import { selectMockDataTwoLoading } from 'Modules/MockDataTwo/selectors/selectMockDataTwoLoading';
-import Fade from 'Common/Fade/Fade';
 import { routesList, routesWithoutOmmitedValues } from 'Routes/index';
 import Header from 'Components/Header';
 import Footer from 'Components/Footer';
+import LayoutHelper from 'Common/LayoutHelper';
 import Router from 'Routes/Router';
 
 import './Layout.less';
@@ -48,12 +48,13 @@ class Layout extends React.Component<Props> {
 
     return (
       <div className={'Layout'}>
+        <LayoutHelper />
         <div className="Layout-modal">
-          <Fade time={150} mounted={showLoader}>
+          <Fade speed="fast" mounted={showLoader}>
             <SpinnerCircle />
           </Fade>
         </div>
-        <Fade mounted={mounted} time={150}>
+        <Fade mounted={mounted} speed="fast">
           <div className="Layout-content">
             <Header />
             <Route path="/:lang([a-z]{2})?" component={Router} />

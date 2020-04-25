@@ -1,0 +1,23 @@
+@import './breakpoints.less';
+
+.calcgrid(@property: 'width'; @columns: 0; @parent-columns: 12; @has-gutter-appended: 0; @has-paddings: 0; @has-parent-paddings: 0) {
+  @total-padding-width: @outer-padding * 2 * @has-parent-paddings;
+  @total-gutter-width: @gutter * (@parent-columns - 1) + (@gutter * @has-gutter-appended);
+  @total-fix-widths: @total-padding-width + @total-gutter-width;
+  @appended-gutter: @gutter * @has-gutter-appended;
+
+  @{property}: calc(((100vw - @total-fix-widths) / @parent-columns * @columns) + @appended-gutter);
+
+  // all same, but building rule smaller screen size
+  @media @desktopSmall {
+    @gutter: @gutter-small;
+    @outer-padding: @outer-padding-small;
+
+    @total-padding-width: @outer-padding * 2 * @has-parent-paddings;
+    @total-gutter-width: @gutter * (@parent-columns - 1) + (@gutter * @has-gutter-appended);
+    @total-fix-widths: @total-padding-width + @total-gutter-width;
+    @appended-gutter: @gutter * @has-gutter-appended;
+
+    @{property}: calc((100vw - @total-fix-widths) / @parent-columns * @columns + @appended-gutter);
+  }
+}
