@@ -8,8 +8,11 @@ import { selectUserLoggedIn } from 'Modules/User/selectors/selectUserLoggedIn';
 // import LanguagesSwitch from 'Components/LanguagesSwitch';
 import { selectCurrentGlossary } from '../../redux/modules/Languages/selectors/selectCurrentGlossary';
 import { GlossaryState } from '../../redux/modules/Languages/languages.types';
-import { Border, H3, H4, User, Input } from '@antoniodcorrea/components';
+import { Border, H3, H4, User, Fade } from '@antoniodcorrea/components';
 import Logo from 'Assets/svg/logo.svg';
+import UserModal from '../UserModal';
+import { selectuiUserModalMounted } from '../../redux/modules/Ui/selectors/selectUiUserModalMounted';
+import { switchUserModal } from '../../redux/modules/Ui/actions/switchUserModal';
 
 import './Header.less';
 
@@ -17,10 +20,19 @@ interface Props {
   isLogged: boolean;
   defaultCurrentSlug: string;
   currentGlossary: GlossaryState;
+  userModalMounted: boolean;
   logOut: () => void;
+  switchUserModal: () => void;
 }
 
-const Header: React.FC<Props> = ({ isLogged, defaultCurrentSlug, currentGlossary, logOut }) => {
+const Header: React.FC<Props> = ({
+  isLogged,
+  defaultCurrentSlug,
+  currentGlossary,
+  logOut,
+  switchUserModal,
+  userModalMounted,
+}) => {
   return (
     <header>
       <Border className="Header">
@@ -39,7 +51,12 @@ const Header: React.FC<Props> = ({ isLogged, defaultCurrentSlug, currentGlossary
             <H4>Lists</H4>
           </Link>
         </nav>
-        <User className="Header-user" />
+        <div className="Header-user">
+          <User className="Header-userLogo" onClick={switchUserModal} />
+          <Fade mounted={userModalMounted}>
+            <UserModal />
+          </Fade>
+        </div>
       </Border>
     </header>
   );
@@ -49,8 +66,10 @@ const mapStateToProps = createStructuredSelector({
   defaultCurrentSlug: selectCurrentLanguageSlug,
   isLogged: selectUserLoggedIn,
   currentGlossary: selectCurrentGlossary,
+  userModalMounted: selectuiUserModalMounted,
 });
 
 export default connect(mapStateToProps, {
-  logOut: logOut,
+  logOut,
+  switchUserModal,
 })(Header);

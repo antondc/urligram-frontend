@@ -3,6 +3,7 @@ import { Routes } from './modules/Routes/routes.reducer';
 import { User } from './modules/User/user.reducer';
 import { MockDataOne } from './modules/MockDataOne/mockDataOne.reducer';
 import { MockDataTwo } from './modules/MockDataTwo/mockDataTwo.reducer';
+import { Ui } from './modules/Ui/ui.reducer';
 
 export const RootReducers = {
   Languages,
@@ -10,4 +11,5 @@ export const RootReducers = {
   User,
   MockDataOne,
   MockDataTwo,
+  Ui,
 };

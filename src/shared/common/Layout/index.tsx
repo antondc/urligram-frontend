@@ -55,16 +55,16 @@ class Layout extends React.Component<Props> {
     return (
       <div className="Layout">
         <LayoutHelper />
-        <div className="Layout-modal">
-          <Fade speed="fast" mounted={showLoader}>
-            <SpinnerCircle />
-          </Fade>
-        </div>
         <Fade mounted={mounted} speed="fast">
           <div className="Layout-content">
             <Header />
             <Route path="/:lang([a-z]{2})?" component={Router} />
             <Footer />
+          </div>
+          <div className="Layout-modal">
+            <Fade speed="fast" mounted={showLoader}>
+              <SpinnerCircle />
+            </Fade>
           </div>
         </Fade>
       </div>
