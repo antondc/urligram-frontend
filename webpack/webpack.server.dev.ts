@@ -66,6 +66,10 @@ module.exports = {
         use: ['css-loader', 'less-loader'],
         exclude: /node_modules/,
       },
+      {
+        test: /\.svg$/,
+        use: ['@svgr/webpack'],
+      },
     ],
   },
   // Messages on the console

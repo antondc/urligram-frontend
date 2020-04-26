@@ -6,7 +6,7 @@ import { selectMockDataTwoUpdatedAt } from 'Modules/MockDataTwo/selectors/select
 import { selectDefaultLanguage } from 'Modules/Languages/selectors/selectDefaultLanguage';
 import { selectCurrentLanguage } from 'Modules/Languages/selectors/selectCurrentLanguage';
 import { LanguageState } from 'Modules/Languages/languages.types';
-import { H1, Border, Button, Span, Layout, Hr } from '@antoniodcorrea/components';
+import { H1, Border, Button, Span, Flex, Hr } from '@antoniodcorrea/components';
 import { selectCurrentGlossary } from '../../redux/modules/Languages/selectors/selectCurrentGlossary';
 import { GlossaryState } from '../../redux/modules/Languages/languages.types';
 
@@ -24,7 +24,7 @@ const Home: React.FC<Props> = ({ updatedAt, loadMockDataTwo, defaultLanguage, cu
   return (
     <div className="Home">
       <Border grow>
-        <Layout horizontal="center">
+        <Flex horizontal="center">
           <H1 center grow>
             {currentGlossary.Home}
           </H1>
@@ -34,6 +34,7 @@ const Home: React.FC<Props> = ({ updatedAt, loadMockDataTwo, defaultLanguage, cu
             </Span>
           )}
           <Hr type="spacer" />
+
           <Button text="Load Mock Data Two" onClick={loadMockDataTwo} />
           <Hr type="spacer" />
           <Span grow center>
@@ -42,7 +43,7 @@ const Home: React.FC<Props> = ({ updatedAt, loadMockDataTwo, defaultLanguage, cu
           <Hr type="spacer" />
           <Span bold> Current language is: {currentLanguage.name}</Span>
           <Hr type="spacer" />
-        </Layout>
+        </Flex>
       </Border>
     </div>
   );

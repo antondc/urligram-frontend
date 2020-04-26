@@ -54,6 +54,10 @@ module.exports = {
         use: ['style-loader', 'css-loader', 'less-loader'],
         exclude: /node_modules/,
       },
+      {
+        test: /\.svg$/,
+        use: ['@svgr/webpack'],
+      },
     ],
   },
   stats: 'errors-only',

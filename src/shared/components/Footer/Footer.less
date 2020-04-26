@@ -3,7 +3,13 @@
 
 @{c} {
   display: flex;
-  justify-content: space-around;
-  padding: @lay-outerPadding;
-  border-top: 1px solid black;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 30px;
+  background: @c-background;
+
+  &-content {
+    display: flex;
+    justify-content: space-around;
+  }
 }

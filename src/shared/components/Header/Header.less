@@ -3,12 +3,37 @@
 @c: .Header;
 
 @{c} {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 86px;
+  background: @c-background;
+
+  &-content {
+    //
+  }
+
+  &-brand {
+    display: flex;
+  }
+
+  &-logo {
+    min-height: 35px;
+    min-width: 45px;
+    margin-right: 20px;
+    fill: @c-brand;
+  }
+
   &-navigation {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
-    height: 80px;
-    border-bottom: 1px solid black;
+    width: 100%;
+  }
+
+  &-user {
+    height: 40px;
+    width: 40px;
   }
 
   &-item {

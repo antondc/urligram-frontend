@@ -53,7 +53,7 @@ class Layout extends React.Component<Props> {
     const showLoader = mockDataTwoLoading;
 
     return (
-      <div className={'Layout'}>
+      <div className="Layout">
         <LayoutHelper />
         <div className="Layout-modal">
           <Fade speed="fast" mounted={showLoader}>

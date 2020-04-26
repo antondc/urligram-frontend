@@ -3,15 +3,7 @@
 @c: .Layout;
 
 @{c} {
-  padding: 0 @lay-outerPadding;
-
-  @media @br-desktopSmall {
-    padding: 0 @lay-outerPaddingSmall;
-  }
-
-  @media @br-mobile {
-    padding: 0 @lay-outerPaddingMicro;
-  }
+  background: @c-background;
 
   &-modal {
     //
@@ -22,5 +14,14 @@
     flex-direction: column;
     justify-content: space-between;
     height: 100vh;
+    padding: @lay-outerPadding;
+
+    @media @br-desktopSmall {
+      padding: @lay-outerPaddingSmall;
+    }
+
+    @media @br-mobile {
+      padding: @lay-outerPaddingMicro;
+    }
   }
 }

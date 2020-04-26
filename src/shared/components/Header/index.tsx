@@ -5,9 +5,11 @@ import { Link } from 'react-router-dom';
 import { logOut } from 'Modules/User/actions/logOut';
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
 import { selectUserLoggedIn } from 'Modules/User/selectors/selectUserLoggedIn';
-import LanguagesSwitch from 'Components/LanguagesSwitch';
+// import LanguagesSwitch from 'Components/LanguagesSwitch';
 import { selectCurrentGlossary } from '../../redux/modules/Languages/selectors/selectCurrentGlossary';
 import { GlossaryState } from '../../redux/modules/Languages/languages.types';
+import { Border, H3, H4, User, Input } from '@antoniodcorrea/components';
+import Logo from 'Assets/svg/logo.svg';
 
 import './Header.less';
 
@@ -20,28 +22,25 @@ interface Props {
 
 const Header: React.FC<Props> = ({ isLogged, defaultCurrentSlug, currentGlossary, logOut }) => {
   return (
-    <header className={'Header'}>
-      <nav className="Header-navigation">
-        <Link className="Header-item" to={'/' + defaultCurrentSlug}>
-          {currentGlossary.Home}
-        </Link>
-        {isLogged && (
-          <>
-            <Link className="Header-item" to={'/' + defaultCurrentSlug + '/control'}>
-              {currentGlossary.Control}
-            </Link>
-            <Link className="Header-item" to={'/' + defaultCurrentSlug + '/login'} onClick={logOut}>
-              {currentGlossary.LogOut}
-            </Link>
-          </>
-        )}
-        {!isLogged && (
-          <Link className="Header-item" to={'/' + defaultCurrentSlug + '/login'}>
-            {currentGlossary.Login}
+    <header>
+      <Border className="Header">
+        <div className="Header-brand">
+          <Logo className="Header-logo" />
+          <H3>Linking</H3>
+        </div>
+        <nav className="Header-navigation">
+          <Link className="Header-link" to="">
+            <H4>Tags</H4>
           </Link>
-        )}
-        <LanguagesSwitch />
-      </nav>
+          <Link className="Header-link" to="">
+            <H4>Trending</H4>
+          </Link>
+          <Link className="Header-link" to="">
+            <H4>Lists</H4>
+          </Link>
+        </nav>
+        <User className="Header-user" />
+      </Border>
     </header>
   );
 };
