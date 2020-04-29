@@ -1,12 +1,14 @@
 @import '../../css/imports.less';
-@c: .Footer;
+
+@c: .Sidebar;
 
 @{c} {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-shrink: 0;
   background: @c-background;
+
+  .calcgrid(@property: width; @columns: 3; @parentColumns: 12; @addGutter: 0; @hasParentPaddings: 0);
 
   &-content {
     display: flex;

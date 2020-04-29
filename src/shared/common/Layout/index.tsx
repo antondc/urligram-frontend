@@ -3,7 +3,7 @@ import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Location } from 'history';
 import { createStructuredSelector } from 'reselect';
-import { SpinnerCircle, Fade } from '@antoniodcorrea/components';
+import { SpinnerCircle, Fade, Hr } from '@antoniodcorrea/components';
 import findActiveRouteKey from 'Tools/utils/url/findActiveRouteKey';
 import enhanceRouteWithParams from 'Tools/utils/url/enhanceRouteWithParams';
 import { selectLanguageLoading } from 'Modules/Languages/selectors/selectLanguageLoading';
@@ -57,8 +57,12 @@ class Layout extends React.Component<Props> {
         <LayoutHelper />
         <Fade mounted={mounted} speed="fast">
           <div className="Layout-content">
-            <Header />
-            <Route path="/:lang([a-z]{2})?" component={Router} />
+            <div className="Layout-top">
+              <Header />
+              <Hr type="spacer" />
+              <Route path="/:lang([a-z]{2})?" component={Router} />
+              <Hr type="spacer" />
+            </div>
             <Footer />
           </div>
           <div className="Layout-modal">
