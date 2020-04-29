@@ -5,13 +5,14 @@
 @{c} {
   &-columns,
   &-rows {
-    position: fixed;
-    height: 100vh;
-    width: 100vw;
+    position: absolute;
+    height: 100%;
+    width: 100%;
     top: 0;
     left: 0;
     padding: 0;
     font-size: 0;
+    overflow: hidden;
     z-index: @z-index-1000;
     pointer-events: none;
     user-select: none;
@@ -20,7 +21,7 @@
   &-column {
     display: inline-block;
     position: relative;
-    height: 100vh;
+    height: 100%;
     background-color: @c-traslucid--lightest;
 
     .calcgrid(@property: width; @columns: 1; @parentColumns: 12; @addGutter: 0; @hasParentPaddings: 1);
@@ -33,7 +34,7 @@
   &-gutter {
     display: inline-block;
     position: relative;
-    height: 100vh;
+    height: 100%;
     width: @lay-gutter;
 
     @media @br-desktopSmall {
@@ -48,7 +49,7 @@
   &-externalPadding {
     display: inline-block;
     position: relative;
-    height: 100vh;
+    height: 100%;
     width: @lay-outerPadding;
 
     @media @br-desktopSmall {
@@ -62,12 +63,12 @@
 
   &-row {
     height: 10px;
-    width: 100vw;
+    width: 100%;
     background-color: @c-traslucid--lightest;
   }
 
   &-rowGap {
     height: 10px;
-    width: 100vw;
+    width: 100%;
   }
 }
