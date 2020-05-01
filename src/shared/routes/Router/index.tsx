@@ -10,21 +10,21 @@ import Home from 'Routes/Home';
 import Control from 'Routes/Control';
 import NotFound from 'Routes/NotFound';
 import PageTransitions from 'Common/PageTransitions';
-import { selectUserLoggedIn } from '../../redux/modules/User/selectors/selectUserLoggedIn';
+import { selectSessionLoggedIn } from '../../redux/modules/Session/selectors/selectSessionLoggedIn';
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
 
 interface Props {
-  userLoggedIn: boolean;
+  loggedIn: boolean;
   location: Location;
   defaultCurrentSlug: string;
 }
 
-const Router: React.FC<Props> = ({ userLoggedIn, location, defaultCurrentSlug }) => (
+const Router: React.FC<Props> = ({ loggedIn, location, defaultCurrentSlug }) => (
   <PageTransitions location={location}>
     {/* Location needed for animations */}
     <Switch location={location}>
-      {userLoggedIn && <Redirect from="/:lang?/login" to={'/' + defaultCurrentSlug + '/control'} />}
-      {!userLoggedIn && <Redirect from="/:lang?/control" to={'/' + defaultCurrentSlug + '/login'} />}
+      {loggedIn && <Redirect from="/:lang?/login" to={'/' + defaultCurrentSlug + '/control'} />}
+      {!loggedIn && <Redirect from="/:lang?/control" to={'/' + defaultCurrentSlug + '/login'} />}
       <Route exact={Routes.Login.exact} path={Routes.Login.path} component={Login} />;
       <Route exact={Routes.Home.exact} path={Routes.Home.path} component={Home} />
       <Route exact={Routes.Control.exact} path={Routes.Control.path} component={Control} />
@@ -34,7 +34,7 @@ const Router: React.FC<Props> = ({ userLoggedIn, location, defaultCurrentSlug })
 );
 
 const mapStateToProps = createStructuredSelector({
-  userLoggedIn: selectUserLoggedIn,
+  loggedIn: selectSessionLoggedIn,
   defaultCurrentSlug: selectCurrentLanguageSlug,
 });
 

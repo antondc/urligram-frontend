@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { Link } from 'react-router-dom';
-import { logOut } from 'Modules/User/actions/logOut';
+import { logOut } from 'Modules/Session/actions/logOut';
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
-import { selectUserLoggedIn } from 'Modules/User/selectors/selectUserLoggedIn';
+import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 // import LanguagesSwitch from 'Components/LanguagesSwitch';
 import { selectCurrentGlossary } from '../../redux/modules/Languages/selectors/selectCurrentGlossary';
 import { GlossaryState } from '../../redux/modules/Languages/languages.types';
@@ -64,7 +64,7 @@ const Header: React.FC<Props> = ({
 
 const mapStateToProps = createStructuredSelector({
   defaultCurrentSlug: selectCurrentLanguageSlug,
-  isLogged: selectUserLoggedIn,
+  isLogged: selectSessionLoggedIn,
   currentGlossary: selectCurrentGlossary,
   userModalMounted: selectuiUserModalMounted,
 });

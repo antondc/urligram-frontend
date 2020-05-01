@@ -12,7 +12,7 @@ import Routes, { routesWithoutOmmitedValues, routesList, routesPathsList } from 
 import Authentication from 'Services/Authentication';
 import storeFactory from 'Redux/index';
 import Layout from 'Common/Layout';
-import { UserState } from 'Modules/User/user.types';
+import { SessionState } from 'Modules/Session/Session.types';
 import { loadLanguages } from 'Modules/Languages/actions/loadLanguages';
 
 const authentication = new Authentication();
@@ -29,14 +29,14 @@ router.get(routesPathsList, function (req: any, res: any) {
     .then((response: any) => {
       const data = Object.assign({}, ...response);
 
-      // Validate user data from token
+      // Validate session data from token
       try {
-        const user = authentication.verifyToken(req.cookies.sessionToken) as UserState;
-        data.User = {
-          ...user,
+        const session = authentication.verifyToken(req.cookies.sessionToken) as SessionState;
+        data.Session = {
+          ...session,
         };
       } catch (err) {
-        data.User = {};
+        data.Session = {};
       }
 
       // Load routes data

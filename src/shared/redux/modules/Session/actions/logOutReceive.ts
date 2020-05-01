@@ -1,4 +1,4 @@
-import { LOG_OUT, LogActionsTypes } from 'Modules/User/user.types';
+import { LOG_OUT, LogActionsTypes } from 'Modules/Session/session.types';
 
 export const logOutReceive = (): LogActionsTypes => {
   return {

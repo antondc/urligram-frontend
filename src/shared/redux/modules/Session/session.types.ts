@@ -3,11 +3,11 @@ export const LOG_IN_SUCCESS = 'LOG_IN_SUCCESS';
 export const LOG_OUT = 'LOG_OUT';
 export const LOG_FAILED = 'LOG_FAILED';
 
-export interface UserApiResponse {
-  user: UserState;
+export interface SessionApiResponse {
+  user: SessionState;
 }
 
-export interface UserState {
+export interface SessionState {
   loading?: boolean;
   id?: string;
   order?: number;
@@ -30,7 +30,7 @@ interface LogInFailureAction {
 
 interface LogInReceiveAction {
   type: typeof LOG_IN_SUCCESS;
-  data: UserState;
+  data: SessionState;
 }
 
 interface LogInRequestAction {

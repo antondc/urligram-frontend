@@ -2,11 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { Link } from 'react-router-dom';
-import { logOut } from 'Modules/User/actions/logOut';
+import { logOut } from 'Modules/Session/actions/logOut';
 import { selectLanguagesList } from 'Modules/Languages/selectors/selectLanguagesList';
 import { switchCurrentLanguage } from 'Modules/Languages/actions/switchCurrentLanguage';
 import { LanguageState } from 'Modules/Languages/languages.types';
-import { selectUserLoggedIn } from 'Modules/User/selectors/selectUserLoggedIn';
+import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import { selectCurrentLanguage } from 'Modules/Languages/selectors/selectCurrentLanguage';
 import { selectCurrentRouteParamLanguage } from 'Modules/Routes/selectors/selectCurrentRouteParamLanguage';
 import { selectCurrentPathname } from 'Modules/Routes/selectors/selectCurrentPathname';
@@ -61,7 +61,7 @@ const LanguagesSwitch: React.FC<Props> = ({
 };
 
 const mapStateToProps = createStructuredSelector({
-  isLogged: selectUserLoggedIn,
+  isLogged: selectSessionLoggedIn,
   languagesList: selectLanguagesList,
   currentLanguage: selectCurrentLanguage,
   currentRouteParamLanguage: selectCurrentRouteParamLanguage,

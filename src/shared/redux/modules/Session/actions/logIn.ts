@@ -1,6 +1,6 @@
 import { Dispatch, Action } from 'redux';
 import { ThunkAction } from 'redux-thunk';
-import { UserApiResponse } from './../user.types';
+import { SessionApiResponse } from './../session.types';
 import { logInRequest } from './logInRequest';
 import { logInReceive } from './logInReceive';
 import { logInFailure } from './logInFailure';
@@ -16,7 +16,7 @@ export const logIn = (username: string, password: string): ThunkAction<any, any,
         name: username,
         password: password,
       })
-      .then((response: AxiosResponse<UserApiResponse>) => {
+      .then((response: AxiosResponse<SessionApiResponse>) => {
         dispatch(logInReceive(response.data.user));
       })
       .catch((error) => dispatch(logInFailure(error)));

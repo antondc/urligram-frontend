@@ -1,4 +1,4 @@
-import { LOG_FAILED, LogActionsTypes } from 'Modules/User/user.types';
+import { LOG_FAILED, LogActionsTypes } from 'Modules/Session/session.types';
 
 export const logInFailure = (error): LogActionsTypes => {
   return {
