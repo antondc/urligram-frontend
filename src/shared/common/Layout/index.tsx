@@ -12,6 +12,7 @@ import { selectMockDataTwoLoading } from 'Modules/MockDataTwo/selectors/selectMo
 import { routesList, routesWithoutOmmitedValues } from 'Routes/index';
 import Header from 'Components/Header';
 import Footer from 'Components/Footer';
+import Background from 'Assets/svg/background.svg';
 import LayoutHelper from 'Common/LayoutHelper';
 import Router from 'Routes/Router';
 
@@ -54,9 +55,10 @@ class Layout extends React.Component<Props> {
 
     return (
       <div className="Layout">
-        <LayoutHelper />
+        <Background className="Layout-background" />
         <Fade mounted={mounted} speed="fast">
           <div className="Layout-content">
+            <LayoutHelper />
             <div className="Layout-top">
               <Header />
               <Hr type="spacer" />

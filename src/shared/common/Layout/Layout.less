@@ -4,19 +4,30 @@
 
 @{c} {
   position: relative;
-  max-width: @lay-maxWidth;
-  margin: 0 auto;
-  background: @c-background;
 
   &-modal {
     //
   }
 
+  &-background {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: @c-background;
+    fill: @c-accent;
+    z-index: -1;
+    pointer-events: none;
+    user-select: none;
+  }
+
   &-content {
     display: flex;
+    position: relative;
     flex-direction: column;
     justify-content: space-between;
+    max-width: @lay-maxWidth;
     min-height: 100vh;
+    margin: 0 auto;
     padding: 30px @lay-outerPadding;
 
     @media @br-desktopSmall {
