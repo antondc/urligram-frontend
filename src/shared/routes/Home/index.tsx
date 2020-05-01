@@ -8,10 +8,16 @@ import { LanguageState } from 'Modules/Languages/languages.types';
 import { H1, Button, Span, Flex, Hr, P } from '@antoniodcorrea/components';
 import { selectCurrentGlossary } from 'Redux/modules/Languages/selectors/selectCurrentGlossary';
 import { GlossaryState } from 'Redux/modules/Languages/languages.types';
+import Main from 'Components/Main';
 import Sidebar from 'Components/Sidebar';
+import SidebarListUsers from 'Components/SidebarListUsers';
+import SidebarListLists from 'Components/SidebarListLists';
+import SidebarListTags from 'Components/SidebarListTags';
+import mockLists from 'Tools/mockData/mockLists.json';
+import mockTags from 'Tools/mockData/mockTags.json';
+import mockUsers from 'Tools/mockData/mockUsers.json';
 
 import './Home.less';
-import Main from '../../components/Main';
 
 interface Props {
   updatedAt: string;
@@ -24,7 +30,13 @@ const Home: React.FC<Props> = ({ updatedAt, loadMockDataTwo, currentLanguage, cu
   return (
     <div className="Home">
       <Flex horizontal="between" vertical="top">
-        <Sidebar>Sidebar left</Sidebar>
+        <Sidebar>
+          <SidebarListLists title="Popular Lists" items={mockLists.mockLists} />
+          <Hr type="spacer" />
+          <SidebarListLists title="Popular Lists" items={mockLists.mockLists} />
+          <Hr type="spacer" />
+          <SidebarListLists title="Popular Lists" items={mockLists.mockLists} />
+        </Sidebar>
         <Main>
           <H1 center grow>
             {currentGlossary.Home}
@@ -53,7 +65,11 @@ const Home: React.FC<Props> = ({ updatedAt, loadMockDataTwo, currentLanguage, cu
             assumenda omnis?
           </P>
         </Main>
-        <Sidebar>Sidebar Right</Sidebar>
+        <Sidebar>
+          <SidebarListTags title="Trending Tags" items={mockTags.tags} />
+          <Hr type="spacer" />
+          <SidebarListUsers title="Popular Users" items={mockUsers.mockUsers} />
+        </Sidebar>
       </Flex>
     </div>
   );

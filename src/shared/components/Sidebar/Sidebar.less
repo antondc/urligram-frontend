@@ -3,15 +3,7 @@
 @c: .Sidebar;
 
 @{c} {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: block;
   background: @c-background;
-
   .calcgrid(@property: width; @columns: 3; @parentColumns: 12; @addGutter: 0; @hasParentPaddings: 0);
-
-  &-content {
-    display: flex;
-    justify-content: space-around;
-  }
 }
