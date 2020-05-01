@@ -1,0 +1,38 @@
+import React from 'react';
+import { Border, H4, Span, Tag } from '@antoniodcorrea/components';
+
+import './LinkCard.less';
+
+interface Props {
+  id: number;
+  title: string;
+  url: string;
+  tags: {
+    id: number;
+    name: string;
+  }[];
+  img: string;
+  vote?: boolean;
+}
+
+const LinkCard: React.FC<Props> = ({ id, title, url, tags, img, vote }) => (
+  <Border grow className="LinkCard">
+    <div className="LinkCard-left">
+      <H4>{title}</H4>
+      <Span>{url}</Span>
+      <div className="LinkCard-tags">
+        {tags.map((item) => (
+          <Tag className="LinkCard-tag" key={item.id}>
+            {item.name}
+          </Tag>
+        ))}
+      </div>
+    </div>
+    <div className="LinkCard-right">
+      <img className="LinkCard-image" src={img} />
+      <div className="LinkCard-vote">{JSON.stringify(vote)}</div>
+    </div>
+  </Border>
+);
+
+export default LinkCard;

@@ -1,0 +1,6 @@
+export const lists = [
+  { id: 1, name: 'my list', count: 10 },
+  { id: 2, name: 'my list', count: 10 },
+  { id: 3, name: 'my list', count: 10 },
+  { id: 4, name: 'my list', count: 10 },
+];

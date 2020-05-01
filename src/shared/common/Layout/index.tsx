@@ -58,13 +58,13 @@ class Layout extends React.Component<Props> {
         <Background className="Layout-background" />
         <Fade mounted={mounted} speed="fast">
           <div className="Layout-content">
-            <LayoutHelper />
             <div className="Layout-top">
               <Header />
               <Hr type="spacer" />
               <Route path="/:lang([a-z]{2})?" component={Router} />
               <Hr type="spacer" />
             </div>
+            <LayoutHelper />
             <Footer />
           </div>
           <div className="Layout-modal">
