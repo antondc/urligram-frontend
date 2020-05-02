@@ -18,8 +18,10 @@
     border-color: @c-base;
     transition: box-shadow @td-fast @ease-custom, border @td-fast @ease-custom, color @td-fast @ease-custom;
     box-shadow: 4px 4px 0 -2px @c-background, 4px 4px 0 0 @c-base;
+  }
 
-    &:hover {
+  &:hover {
+    @{c}-content {
       color: @c-accent;
       border-color: @c-accent;
       cursor: pointer;
