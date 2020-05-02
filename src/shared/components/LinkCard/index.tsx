@@ -1,5 +1,8 @@
 import React from 'react';
-import { Border, H4, Span, Tag } from '@antoniodcorrea/components';
+import H4 from 'Ui/H4';
+import Span from 'Ui/Span';
+import Tag from 'Ui/Tag';
+import Border from 'Ui/Border';
 
 import './LinkCard.less';
 

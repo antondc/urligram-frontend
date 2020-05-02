@@ -1,6 +1,6 @@
 import React from 'react';
-import { Span } from '../Span';
-import { Notification } from '../Notification';
+import Span from '../Span';
+import Notification from '../Notification';
 
 import './Tag.less';
 
@@ -14,7 +14,7 @@ interface Props {
   notification?: Notification;
 }
 
-export const Tag: React.FC<Props> = ({ children, size = 'small', variant, notification, className }) => (
+const Tag: React.FC<Props> = ({ children, size = 'small', variant, notification, className }) => (
   <div
     className={
       'Tag ' + (size ? 'Tag--' + size : '') + (variant ? ' Tag--' + variant : '') + (className ? ' ' + className : '')
@@ -26,3 +26,5 @@ export const Tag: React.FC<Props> = ({ children, size = 'small', variant, notifi
     </div>
   </div>
 );
+
+export default Tag;

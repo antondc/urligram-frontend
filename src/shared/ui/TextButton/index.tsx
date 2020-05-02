@@ -1,6 +1,6 @@
 import React from 'react';
-import { Span } from '../Span';
-import { SvgIcon } from '../Svg';
+import Span from '../Span';
+import SvgIcon from '../Svg';
 import './TextButton.less';
 
 export type TextButtonIcon = 'ArrowRight';
@@ -13,7 +13,7 @@ interface Props {
   onClick?: () => void;
 }
 
-export const TextButton: React.FC<Props> = ({ text, icon, variant, disabled, onClick }): JSX.Element => (
+const TextButton: React.FC<Props> = ({ text, icon, variant, disabled, onClick }): JSX.Element => (
   <button
     className={'TextButton ' + (variant ? ' TextButton--' + variant : '') + (disabled ? ' TextButton--disabled' : '')}
     onClick={onClick}
@@ -24,3 +24,5 @@ export const TextButton: React.FC<Props> = ({ text, icon, variant, disabled, onC
     {<SvgIcon name={icon} size="small" className="TextButton-icon" />}
   </button>
 );
+
+export default TextButton;

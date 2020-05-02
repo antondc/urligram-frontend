@@ -1,6 +1,7 @@
 import React from 'react';
-import { Span } from '../Span';
-import { SvgIcon, IconsType } from '../Svg';
+import Span from '../Span';
+import SvgIcon, { IconsType } from '../Svg';
+
 import './Button.less';
 
 interface Props {
@@ -16,7 +17,7 @@ interface Props {
   onClick?: (value) => void;
 }
 
-export const Button: React.FC<Props> = ({
+const Button: React.FC<Props> = ({
   text,
   size = 'medium',
   variant,
@@ -49,3 +50,5 @@ export const Button: React.FC<Props> = ({
     </button>
   );
 };
+
+export default Button;

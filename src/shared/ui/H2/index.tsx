@@ -7,6 +7,8 @@ interface Props {
   center?: boolean;
 }
 
-export const H2: React.SFC<Props> = ({ children, grow, center }) => (
+const H2: React.SFC<Props> = ({ children, grow, center }) => (
   <h2 className={'H2' + (grow ? ' H2-grow' : '') + (center ? ' H2-center' : '')}>{children}</h2>
 );
+
+export default H2;

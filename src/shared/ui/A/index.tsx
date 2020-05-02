@@ -12,7 +12,7 @@ interface Props {
   onClick?: (any) => void;
 }
 
-export const A: React.FC<Props> = ({
+const A: React.FC<Props> = ({
   children,
   className,
   href,
@@ -32,3 +32,5 @@ export const A: React.FC<Props> = ({
     {children}
   </a>
 );
+
+export default A;

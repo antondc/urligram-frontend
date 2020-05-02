@@ -1,7 +1,7 @@
 import React, { Fragment, Component } from 'react';
 import './Pagination.less';
-import { A } from '../A';
-import { Border } from '../Border';
+import A from 'Ui/A';
+import Border from 'Ui/Border';
 
 interface Props {
   totalItems: number;
@@ -83,3 +83,5 @@ export class Pagination extends Component<Props> {
     );
   };
 }
+
+export default Pagination;

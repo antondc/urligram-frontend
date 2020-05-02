@@ -73,8 +73,10 @@ interface IconProps extends Props {
   name: IconsType;
 }
 
-export const SvgIcon: React.FC<IconProps> = ({ name, size, className }) => {
+const SvgIcon: React.FC<IconProps> = ({ name, size, className }) => {
   const Component = Icons[name];
 
   return <Component size={size} className={className} />;
 };
+
+export default SvgIcon;

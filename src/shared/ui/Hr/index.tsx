@@ -9,6 +9,8 @@ interface Props {
   size?: HrSize;
 }
 
-export const Hr: React.FC<Props> = ({ type, size = 'normal' }) => (
+const Hr: React.FC<Props> = ({ type, size = 'normal' }) => (
   <hr className={'Hr' + (type ? ' Hr-' + type : '') + (size ? ' Hr-' + size : '')} />
 );
+
+export default Hr;

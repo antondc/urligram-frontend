@@ -1,7 +1,7 @@
 import React from 'react';
 
 import './Footer.less';
-import { Border } from '@antoniodcorrea/components';
+import Border from 'Ui/Border';
 
 const Footer: React.FC = () => (
   <footer>

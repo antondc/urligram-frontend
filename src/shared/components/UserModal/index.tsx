@@ -1,7 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { Border, H3, Span, User, Fade, Cross, Hr } from '@antoniodcorrea/components';
+import Span from 'Ui/Span';
+import User from 'Assets/svg/user.svg';
+import Cross from 'Assets/svg/cross.svg';
+import Hr from 'Ui/Hr';
+import Border from 'Ui/Border';
 
 import { switchUserModal } from '../../redux/modules/Ui/actions/switchUserModal';
 

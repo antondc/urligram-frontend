@@ -1,0 +1,68 @@
+@import '../../css/imports.less';
+
+@c: .Fade;
+
+@{c} {
+  .default();
+
+  max-height: 100%;
+  max-width: 100%;
+
+  &-transition {
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+
+    &--fastest {
+      transition: opacity @td-fastest ease-in-out;
+    }
+
+    &--fast {
+      transition: opacity @td-fast ease-in-out;
+    }
+
+    &--normal {
+      transition: opacity @td-normal ease-in-out;
+    }
+
+    &--slow {
+      transition: opacity @td-slow ease-in-out;
+    }
+  }
+
+  &-initial {
+    opacity: 0.03;
+  }
+
+  &-appear {
+    opacity: 0;
+  }
+
+  &-appear-active {
+    opacity: 1;
+  }
+
+  &-enter {
+    opacity: 0;
+  }
+
+  &-enter-active {
+    opacity: 1;
+  }
+
+  &-enter-done {
+    opacity: 1;
+  }
+
+  &-exit {
+    opacity: 0;
+  }
+
+  &-exit-active {
+    opacity: 0;
+  }
+
+  &-exit-done {
+    opacity: 0;
+  }
+}

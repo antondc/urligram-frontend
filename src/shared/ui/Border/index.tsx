@@ -8,7 +8,7 @@ interface Props {
   grow?: boolean;
 }
 
-export const Border: React.FC<Props> = ({ children, padding = 'normal', grow, className }) => (
+const Border: React.FC<Props> = ({ children, padding = 'normal', grow, className }) => (
   <div
     className={
       'Border' +
@@ -20,3 +20,5 @@ export const Border: React.FC<Props> = ({ children, padding = 'normal', grow, cl
     {children}
   </div>
 );
+
+export default Border;

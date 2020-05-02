@@ -5,7 +5,7 @@ interface Props {
   state?: string;
 }
 
-export const SpinnerSquaredSmooth: React.FC<Props> = ({ state }) => {
+const SpinnerSquaredSmooth: React.FC<Props> = ({ state }) => {
   return (
     <div className={'SpinnerSquaredSmooth' + (state ? 'Tag-' + state : '')}>
       <div className="SpinnerSquaredSmooth-square">
@@ -17,3 +17,5 @@ export const SpinnerSquaredSmooth: React.FC<Props> = ({ state }) => {
     </div>
   );
 };
+
+export default SpinnerSquaredSmooth;

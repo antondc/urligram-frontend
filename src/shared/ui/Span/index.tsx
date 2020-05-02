@@ -13,7 +13,7 @@ interface Props {
   center?: boolean;
 }
 
-export const Span: React.SFC<Props> = ({
+const Span: React.SFC<Props> = ({
   children,
   size = 'normal',
   bold = false,
@@ -40,3 +40,5 @@ export const Span: React.SFC<Props> = ({
     {children}
   </span>
 );
+
+export default Span;

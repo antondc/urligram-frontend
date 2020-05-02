@@ -8,7 +8,11 @@ import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLo
 // import LanguagesSwitch from 'Components/LanguagesSwitch';
 import { selectCurrentGlossary } from '../../redux/modules/Languages/selectors/selectCurrentGlossary';
 import { GlossaryState } from '../../redux/modules/Languages/languages.types';
-import { Border, H3, H4, User, Fade } from '@antoniodcorrea/components';
+import Fade from 'Ui/Fade';
+import H3 from 'Ui/H3';
+import H4 from 'Ui/H4';
+import User from 'Assets/svg/user.svg';
+import Border from 'Ui/Border';
 import Logo from 'Assets/svg/logo.svg';
 import UserModal from '../UserModal';
 import { selectuiUserModalMounted } from '../../redux/modules/Ui/selectors/selectUiUserModalMounted';
@@ -52,7 +56,7 @@ const Header: React.FC<Props> = ({
           </Link>
         </nav>
         <div className="Header-user">
-          <User className="Header-userLogo" onClick={switchUserModal} />
+          <User name="User" className="Header-userLogo" onClick={switchUserModal} />
           <Fade mounted={userModalMounted}>
             <UserModal />
           </Fade>

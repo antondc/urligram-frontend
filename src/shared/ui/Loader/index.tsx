@@ -8,7 +8,7 @@ interface Props {
   grow?: boolean;
 }
 
-export const Loader: React.FC<Props> = ({ loaded, className, error, grow }) => {
+const Loader: React.FC<Props> = ({ loaded, className, error, grow }) => {
   return (
     <div
       className={
@@ -19,3 +19,5 @@ export const Loader: React.FC<Props> = ({ loaded, className, error, grow }) => {
     </div>
   );
 };
+
+export default Loader;

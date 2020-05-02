@@ -1,7 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { H4, Hr, Border, Tag } from '@antoniodcorrea/components';
+import H4 from 'Ui/H4';
+import Hr from 'Ui/Hr';
+import Tag from 'Ui/Tag';
+import Border from 'Ui/Border';
 
 import './SidebarListTags.less';
 

@@ -10,7 +10,7 @@ interface Props {
   size?: NotificationSize;
 }
 
-export const Notification: React.FC<Props> = ({ className, type, size = 'normal' }) => (
+const Notification: React.FC<Props> = ({ className, type, size = 'normal' }) => (
   <div
     className={
       'Notification' +
@@ -20,3 +20,5 @@ export const Notification: React.FC<Props> = ({ className, type, size = 'normal'
     }
   />
 );
+
+export default Notification;

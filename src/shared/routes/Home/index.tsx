@@ -1,5 +1,6 @@
 import React from 'react';
-import { Flex, Hr } from '@antoniodcorrea/components';
+import Flex from 'Ui/Flex';
+import Hr from 'Ui/Hr';
 import Main from 'Components/Main';
 import Sidebar from 'Components/Sidebar';
 import SidebarListUsers from 'Components/SidebarListUsers';

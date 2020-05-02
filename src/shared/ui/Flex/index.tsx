@@ -10,7 +10,7 @@ interface Props {
   vertical?: FlexVertical;
 }
 
-export const Flex: React.FC<Props> = ({ children, horizontal, vertical }) => (
+const Flex: React.FC<Props> = ({ children, horizontal, vertical }) => (
   <div
     className={
       'Flex' + (horizontal ? ' Flex-horizontal--' + horizontal : '') + (vertical ? ' Flex-vertical--' + vertical : '')
@@ -19,3 +19,5 @@ export const Flex: React.FC<Props> = ({ children, horizontal, vertical }) => (
     {children}
   </div>
 );
+
+export default Flex;

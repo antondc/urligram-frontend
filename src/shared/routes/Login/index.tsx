@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { logIn } from 'Modules/Session/actions/logIn';
-import { Button } from '@antoniodcorrea/components';
+import Button from 'Ui/Button';
 import { createStructuredSelector } from 'reselect';
 
 import './Login.less';
