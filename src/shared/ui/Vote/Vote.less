@@ -1,0 +1,35 @@
+@import '../../css/imports.less';
+
+@c: .Vote;
+
+@{c} {
+  &-icon {
+    path[data-id='background'] {
+      transition: fill @td-fastest @ease, opacity @td-fastest @ease;
+    }
+  }
+
+  &-minus {
+    transform: rotate(180deg);
+  }
+
+  &:hover {
+    cursor: pointer;
+
+    path[data-id='background'] {
+      opacity: 0;
+    }
+  }
+
+  &--active {
+    path[data-id='background'] {
+      opacity: 1;
+    }
+  }
+
+  @{c}-icon:not(@{c}--active):hover {
+    path[data-id='background'] {
+      opacity: 1;
+    }
+  }
+}
