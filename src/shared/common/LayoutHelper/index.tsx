@@ -13,7 +13,7 @@ class LayoutHelper extends React.Component<{}, State> {
   constructor(props) {
     super(props);
     this.state = {
-      mounted: true,
+      mounted: false,
     };
   }
 
