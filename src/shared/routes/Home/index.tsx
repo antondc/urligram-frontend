@@ -26,11 +26,11 @@ const Home: React.FC = () => {
           <SidebarListLists title="Popular Lists" items={lists} />
         </Sidebar>
         <Main>
-          {links.map((item) => (
-            <>
-              <LinkCard {...item} key={item.id} />
-              <Hr type="spacer" />
-            </>
+          {links.map((item, index) => (
+            <React.Fragment key={item.id}>
+              {!!index && <Hr type="spacer" />}
+              <LinkCard {...item} />
+            </React.Fragment>
           ))}
         </Main>
         <Sidebar>

@@ -20,7 +20,7 @@ const SidebarListTags: React.FC<Props> = ({ title, items }) => {
   return (
     <Border grow className="SidebarListTags">
       <H4>{title}</H4>
-      <Hr type="spacer" />
+      <Hr type="spacer" size="small" />
       <div className="SidebarListTags-tags">
         {items.map((item) => (
           <Tag size="big" className="SidebarListTags-tag" key={item.id}>

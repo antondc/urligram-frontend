@@ -23,15 +23,15 @@ const SidebarListLists: React.FC<Props> = ({ title, items }) => {
       <H4>{title}</H4>
       <Hr type="spacer" size="small" />
       <dl className="SidebarListLists-lists">
-        {items.map((item) => (
+        {items.map((item, index) => (
           <React.Fragment key={item.id}>
+            {!!index && <Hr type="spacer" size="micro" />}
             <div className="SidebarListLists-list">
               <dl className="SidebarListLists-listName">
                 <Span bold>+ {item.name}</Span>
               </dl>
               <dd className="SidebarListLists-listDescription">{item.count} items</dd>
             </div>
-            <Hr type="spacer" size="micro" />
           </React.Fragment>
         ))}
       </dl>

@@ -25,16 +25,16 @@ const SidebarListUsers: React.FC<Props> = ({ title, items }) => {
       <H4>{title}</H4>
       <Hr type="spacer" size="small" />
       <dl>
-        {items.map((item) => {
+        {items.map((item, index) => {
           return (
             <React.Fragment key={item.id}>
+              {!!index && <Hr type="spacer" size="micro" />}
               <div className="SidebarListUsers-user">
                 <dt className="SidebarListUsers-userName">
                   <Span bold>@emile13</Span>
                 </dt>
                 <dd className="SidebarListUsers-userDescription">10 · 34</dd>
               </div>
-              <Hr type="spacer" size="micro" />
             </React.Fragment>
           );
         })}
