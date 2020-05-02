@@ -84,6 +84,7 @@
       "letter-spacing",
       "text-transform",
       "text-decoration",
+      "text-decoration-color",
       "text-align",
       "white-space",
       "color",

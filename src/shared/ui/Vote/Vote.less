@@ -3,14 +3,19 @@
 @c: .Vote;
 
 @{c} {
+  display: flex;
+
   &-icon {
+    height: 16px;
+    width: 16px;
+
     path[data-id='background'] {
       transition: fill @td-fastest @ease, opacity @td-fastest @ease;
     }
   }
 
   &-minus {
-    transform: rotate(180deg);
+    transform: rotate(180deg) translateX(-4px);
   }
 
   &:hover {
@@ -23,7 +28,7 @@
 
   &--active {
     path[data-id='background'] {
-      opacity: 1;
+      opacity: 2;
     }
   }
 

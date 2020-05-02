@@ -6,19 +6,20 @@
   .default();
 
   text-decoration: underline;
+  text-decoration-color: @c-transparent;
   color: inherit;
   transition: text-decoration-color @td-fastest @ease-custom;
-  text-decoration-color: @c-transparent;
 
   &:hover {
-    cursor: pointer;
+    text-decoration: underline;
     text-decoration-color: @c-base;
+    cursor: pointer;
   }
 
   &:active {
+    text-decoration-color: @c-base;
     color: @c-accent;
     cursor: pointer;
-    text-decoration-color: @c-base;
   }
 
   &-disabled {

@@ -1,9 +1,10 @@
 import React from 'react';
-import H4 from 'Ui/H4';
 import Span from 'Ui/Span';
+import Hr from 'Ui/Hr';
 import Tag from 'Ui/Tag';
 import Border from 'Ui/Border';
 import Vote from 'Ui/Vote';
+import A from 'Ui/A';
 
 import './LinkCard.less';
 
@@ -27,8 +28,13 @@ const LinkCard: React.FC<Props> = ({ id, title, url, tags, img, vote }) => {
   return (
     <Border grow className="LinkCard">
       <div className="LinkCard-left">
-        <H4>{title}</H4>
-        <Span>{url}</Span>
+        <div className="LinkCard-leftTop">
+          <Span bold>{title}</Span>
+          <Hr type="spacer" size="zero" />
+          <A href={url} styled targetBlank>
+            {url}
+          </A>
+        </div>
         <div className="LinkCard-tags">
           {tags.map((item) => (
             <Tag className="LinkCard-tag" key={item.id}>

@@ -2,7 +2,7 @@ import React from 'react';
 import './Hr.less';
 
 export type HrType = 'spacer' | 'shrink';
-export type HrSize = 'block' | 'nano' | 'micro' | 'small' | 'normal' | 'big';
+export type HrSize = 'zero' | 'nano' | 'micro' | 'small' | 'normal' | 'big';
 
 interface Props {
   type?: HrType;
