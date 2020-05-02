@@ -1,0 +1,4 @@
+<svg id="square" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28.3 28.3">
+  <path data-id="foreground" d="M0 28.3 h28.3 V0 H0 v28.3 z M3.5 3.5 h21.3 v21.3 H3.5 V3.5 z" />
+  <path data-id="background" d="M3.5 3.5 h21.3 v21.3 H3.5 V3.5 z" />
+</svg>

@@ -52,6 +52,7 @@ module.exports = {
       Routes: path.resolve(WEBPACK_ROOT, 'src/shared/routes/'),
       Tools: path.resolve(WEBPACK_ROOT, 'src/shared/tools/'),
       Services: path.resolve(WEBPACK_ROOT, 'src/shared/services/'),
+      Ui: path.resolve(WEBPACK_ROOT, 'src/shared/ui/'),
     },
   },
   module: {

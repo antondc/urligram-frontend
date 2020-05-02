@@ -22,7 +22,8 @@
       "Assets/*": ["./src/shared/assets/*"],
       "Routes/*": ["./src/shared/routes/*"],
       "Tools/*": ["./src/shared/tools/*"],
-      "Services/*": ["./src/shared/services/*"]
+      "Services/*": ["./src/shared/services/*"],
+      "Ui/*": ["./src/shared/ui/*"]
     }
   },
   "include": ["./src/**/*", "./*"]

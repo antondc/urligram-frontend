@@ -1,0 +1,89 @@
+@import '../../css/imports.less';
+
+@c: .Button;
+
+@{c} {
+  .default();
+
+  display: inline-block;
+  height: 50px;
+  user-select: none;
+
+  @{c}-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100% - 4px);
+    margin: 0 4px 4px 0;
+    padding: 1px 30px 0;
+    background: @c-background;
+    border: 2px solid;
+    border-color: @c-base;
+    transition: box-shadow @td-fast, border @td-fast, color @td-fast, background @td-fast;
+    box-shadow: 4px 4px 0 -2px @c-background, 4px 4px 0 0 @c-base;
+
+    @{c}-svg {
+      height: 15px;
+      margin-left: 5px;
+      padding-bottom: 1px;
+      transition: fill @td-fast;
+    }
+
+    &:hover {
+      @{c}:not(@{c}--success)& {
+        color: @c-accent;
+        border-color: @c-accent;
+        cursor: pointer;
+        box-shadow: 4px 4px 0 -2px @c-background, 4px 4px 0 0 @c-accent;
+
+        @{c}-svg {
+          fill: @c-accent;
+        }
+      }
+    }
+  }
+
+  &--grow {
+    width: 100%;
+  }
+
+  &--success {
+    @{c}-content {
+      color: @c-background;
+      background: @c-base;
+      pointer-events: none;
+
+      @{c}-svg {
+        fill: @c-background;
+      }
+    }
+  }
+
+  &--error {
+    @{c}-content {
+      color: @c-error;
+      background: @c-background;
+      border-color: @c-error;
+      box-shadow: 4px 4px 0 -2px @c-background, 4px 4px 0 0 @c-error;
+      pointer-events: none;
+
+      @{c}-svg {
+        fill: @c-error;
+      }
+    }
+  }
+
+  &--disabled {
+    @{c}-content {
+      color: @c-disabled;
+      background: @c-background;
+      border-color: @c-disabled;
+      box-shadow: 4px 4px 0 -2px @c-background, 4px 4px 0 0 @c-disabled;
+      pointer-events: none;
+
+      @{c}-svg {
+        fill: @c-disabled;
+      }
+    }
+  }
+}

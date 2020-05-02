@@ -1,0 +1,30 @@
+@import '../../css/imports.less';
+
+@c: .Border;
+
+@{c} {
+  .default();
+
+  display: inline-block;
+  background: @c-background;
+  border: 2px solid;
+  border-color: @c-base;
+  transition: box-shadow @td-fast @ease-custom, border @td-fast @ease-custom, color @td-fast @ease-custom;
+  box-shadow: 4px 4px 0 -2px @c-background, 4px 4px 0 0 @c-base;
+
+  &-small {
+    padding: 10px;
+  }
+
+  &-normal {
+    padding: 20px;
+  }
+
+  &-big {
+    padding: 40px;
+  }
+
+  &--grow {
+    width: 100%;
+  }
+}
