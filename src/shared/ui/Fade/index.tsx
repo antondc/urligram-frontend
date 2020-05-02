@@ -27,7 +27,7 @@ const Fade: React.FC<Props> = ({
   speed = 'fast',
 }) => {
   return (
-    <div className={'Fade ' + (classname || '') + (' Fade-' + speed)}>
+    <div className={(classname ? classname + ' ' : '') + 'Fade' + (' Fade-' + speed)}>
       <CSSTransition
         in={mounted}
         appear

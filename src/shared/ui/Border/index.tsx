@@ -11,10 +11,10 @@ interface Props {
 const Border: React.FC<Props> = ({ children, padding = 'normal', grow, className }) => (
   <div
     className={
+      (className ? className + ' ' : '') +
       'Border' +
       (padding ? ' Border-' + padding : '') +
-      (grow ? ' Border--grow' : '') +
-      (className ? ' ' + className : '')
+      (grow ? ' Border--grow' : '')
     }
   >
     {children}
