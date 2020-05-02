@@ -5,8 +5,12 @@ import A from 'Ui/A';
 
 import './Navigation.less';
 
-const Navigation: React.FC = () => (
-  <Border className="Navigation">
+interface Props {
+  className?: string;
+}
+
+const Navigation: React.FC<Props> = ({ className }) => (
+  <Border className={(className ? className + ' ' : '') + 'Navigation'}>
     <A className="Navigation-page" href="" styled>
       <Span bold>Page</Span>
     </A>

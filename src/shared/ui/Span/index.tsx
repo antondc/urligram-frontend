@@ -26,6 +26,7 @@ const Span: React.SFC<Props> = ({
 }) => (
   <span
     className={
+      (className ? className + ' ' : '') +
       'Span' +
       (' Span-' + size) +
       (bold ? ' Span--bold' : '') +
@@ -33,8 +34,7 @@ const Span: React.SFC<Props> = ({
       (disabled ? ' Span--disabled' : '') +
       (uppercase ? ' Span--uppercase' : '') +
       (grow ? ' Span--grow' : '') +
-      (center ? ' Span--center' : '') +
-      (className ? ' ' + className : '')
+      (center ? ' Span--center' : '')
     }
   >
     {children}

@@ -1,6 +1,7 @@
 import React from 'react';
 import Flex from 'Ui/Flex';
 import Hr from 'Ui/Hr';
+import Button from 'Ui/Button';
 import Main from 'Components/Main';
 import Sidebar from 'Components/Sidebar';
 import SidebarListUsers from 'Components/SidebarListUsers';
@@ -32,6 +33,10 @@ const Home: React.FC = () => {
               <LinkCard {...item} />
             </React.Fragment>
           ))}
+          <Hr type="spacer" size="big" />
+          <Flex horizontal="center">
+            <Button text="Load more" />
+          </Flex>
         </Main>
         <Sidebar>
           <SidebarListTags title="Trending Tags" items={tags} />

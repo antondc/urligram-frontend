@@ -42,7 +42,7 @@ const Header: React.FC<Props> = ({
       <Border className="Header">
         <div className="Header-brand">
           <Logo className="Header-logo" />
-          <H3>Linking</H3>
+          <H3 className="Header-title">Linking</H3>
         </div>
         <nav className="Header-navigation">
           <Link className="Header-link" to="">
