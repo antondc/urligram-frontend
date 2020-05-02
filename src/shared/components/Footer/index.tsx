@@ -1,12 +1,8 @@
 import React from 'react';
-
-import './Footer.less';
 import Border from 'Ui/Border';
 
-const Footer: React.FC = () => (
-  <footer>
-    <Border className="Footer">FOOTER</Border>
-  </footer>
-);
+import './Footer.less';
+
+const Footer: React.FC = () => <Border className="Footer">FOOTER</Border>;
 
 export default Footer;

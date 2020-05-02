@@ -1,0 +1,12 @@
+@import '../../css/imports.less';
+
+@c: .Navigation;
+
+@{c} {
+  padding: 10px 20px;
+  .calcgrid(@property: width; @columns: 3; @parentColumns: 12; @addGutter: 0; @hasParentPaddings: 0);
+
+  &-spacer {
+    margin: 0 10px;
+  }
+}
