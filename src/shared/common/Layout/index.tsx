@@ -18,6 +18,8 @@ import SubHeader from 'Components/SubHeader';
 import Background from 'Assets/svg/background.svg';
 import LayoutHelper from 'Common/LayoutHelper';
 import Router from 'Routes/Router';
+import UserModal from 'Components/UserModal';
+import { selectuiUserModalMounted } from '../../redux/modules/Ui/selectors/selectUiUserModalMounted';
 
 import './Layout.less';
 
@@ -25,6 +27,7 @@ interface Props {
   mockDataTwoLoading: boolean;
   location: Location;
   languageLoading: boolean;
+  userModalMounted: boolean;
   pushNewRoute: (route) => void;
 }
 
@@ -52,14 +55,14 @@ class Layout extends React.Component<Props> {
   };
 
   render = () => {
-    const { languageLoading, mockDataTwoLoading } = this.props;
+    const { languageLoading, mockDataTwoLoading, userModalMounted } = this.props;
     const mounted = !languageLoading;
     const showLoader = mockDataTwoLoading;
 
     return (
       <div className="Layout">
         <Background className="Layout-background" />
-        <Fade mounted={mounted} speed="fast">
+        <Fade mounted={mounted}>
           <div className="Layout-content">
             <div className="Layout-top">
               <Header />
@@ -71,9 +74,14 @@ class Layout extends React.Component<Props> {
             </div>
             <LayoutHelper />
             <Footer />
+            <div className="Layout-contentModals">
+              <Fade mounted={userModalMounted}>
+                <UserModal />
+              </Fade>
+            </div>
           </div>
-          <div className="Layout-modal">
-            <Fade speed="fast" mounted={showLoader}>
+          <div className="Layout-fullpageModals">
+            <Fade mounted={showLoader}>
               <SpinnerCircle />
             </Fade>
           </div>
@@ -86,6 +94,7 @@ class Layout extends React.Component<Props> {
 const mapStateToProps = createStructuredSelector({
   languageLoading: selectLanguageLoading,
   mockDataTwoLoading: selectMockDataTwoLoading,
+  userModalMounted: selectuiUserModalMounted,
 });
 
 export default connect(mapStateToProps, {

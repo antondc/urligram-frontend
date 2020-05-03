@@ -14,18 +14,26 @@ interface Props {
 
 const Filter: React.FC<Props> = ({ className, activeFilter }) => (
   <Border className={(className ? className + ' ' : '') + 'Filter'}>
-    <Span className="Filter-filter" bold size="small">
-      My vote
-    </Span>
-    {activeFilter === 'MyVote' && <FilterDown className="Filter-icon" />}
-    <Span className="Filter-filter" bold size="small">
-      Number of votes
-    </Span>
-    {activeFilter === 'Number of votes' && <FilterDown className="Filter-icon" />}
-    <Span className="Filter-filter" bold size="small">
-      Ranking
-    </Span>
-    {activeFilter === 'Ranking' && <FilterDown className="Filter-icon" />}
+    <div className="Filter-filter">
+      <Span className="Filter-filterName" bold size="small">
+        My vote
+      </Span>
+      <FilterDown className={'Filter-filterIcon' + (activeFilter === 'MyVote' ? ' Filter-filterIcon--active' : '')} />
+    </div>
+    <div className="Filter-filter">
+      <Span className="Filter-filterName" bold size="small">
+        №. votes
+      </Span>
+      <FilterDown
+        className={'Filter-filterIcon' + (activeFilter === 'NumberVotes' ? ' Filter-filterIcon--active' : '')}
+      />
+    </div>
+    <div className="Filter-filter">
+      <Span className="Filter-filterName" bold size="small">
+        Ranking
+      </Span>
+      <FilterDown className={'Filter-filterIcon' + (activeFilter === 'Ranking' ? ' Filter-filterIcon--active' : '')} />
+    </div>
   </Border>
 );
 
