@@ -6,9 +6,10 @@ interface Props {
   padding?: 'small' | 'normal' | 'big';
   className?: string;
   grow?: boolean;
+  onClick?: (any) => void;
 }
 
-const Border: React.FC<Props> = ({ children, padding = 'normal', grow, className }) => (
+const Border: React.FC<Props> = ({ children, padding = 'normal', grow, className, onClick }) => (
   <div
     className={
       (className ? className + ' ' : '') +
@@ -16,6 +17,7 @@ const Border: React.FC<Props> = ({ children, padding = 'normal', grow, className
       (padding ? ' Border-' + padding : '') +
       (grow ? ' Border--grow' : '')
     }
+    onClick={onClick}
   >
     {children}
   </div>

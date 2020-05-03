@@ -2,12 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { Link } from 'react-router-dom';
-import { logOut } from 'Modules/Session/actions/logOut';
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
-import { switchUserModal } from '../../redux/modules/Ui/actions/switchUserModal';
-import { selectCurrentGlossary } from '../../redux/modules/Languages/selectors/selectCurrentGlossary';
-import { GlossaryState } from '../../redux/modules/Languages/languages.types';
+import { switchUserModal } from 'Modules/Ui/actions/switchUserModal';
+import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
+import { selectCurrentGlossary } from 'Modules/Languages/selectors/selectCurrentGlossary';
+import { GlossaryState } from 'Modules/Languages/languages.types';
 import H3 from 'Ui/H3';
 import H4 from 'Ui/H4';
 import User from 'Assets/svg/user.svg';
@@ -20,11 +20,17 @@ interface Props {
   isLogged: boolean;
   defaultCurrentSlug: string;
   currentGlossary: GlossaryState;
-  logOut: () => void;
   switchUserModal: () => void;
+  switchLoginModal: () => void;
 }
 
-const Header: React.FC<Props> = ({ isLogged, defaultCurrentSlug, currentGlossary, logOut, switchUserModal }) => {
+const Header: React.FC<Props> = ({
+  isLogged,
+  defaultCurrentSlug,
+  currentGlossary,
+  switchUserModal,
+  switchLoginModal,
+}) => {
   return (
     <header>
       <Border className="Header">
@@ -44,7 +50,11 @@ const Header: React.FC<Props> = ({ isLogged, defaultCurrentSlug, currentGlossary
           </Link>
         </nav>
         <div className="Header-user">
-          <User name="User" className="Header-userLogo" onClick={switchUserModal} />
+          <User
+            name="User"
+            className={'Header-userLogo' + (isLogged ? ' Header-userLogo--isActive' : '')}
+            onClick={isLogged ? switchUserModal : switchLoginModal}
+          />
         </div>
       </Border>
     </header>
@@ -58,6 +68,6 @@ const mapStateToProps = createStructuredSelector({
 });
 
 export default connect(mapStateToProps, {
-  logOut,
   switchUserModal,
+  switchLoginModal,
 })(Header);

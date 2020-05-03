@@ -19,7 +19,7 @@ interface Props {
 
 const ModalMessage: React.FC<Props> = ({ message, switchMessageModal }) => (
   <BaseModal>
-    <Border className="ModalMessage">
+    <Border className="ModalMessage" grow>
       <Cross className="ModalMessage-cross" onClick={switchMessageModal} />
       <Span className="ModalMessage-message" bold>
         {message}

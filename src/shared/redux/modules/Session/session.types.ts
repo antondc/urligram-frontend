@@ -7,6 +7,11 @@ export interface SessionApiResponse {
   user: SessionState;
 }
 
+export interface Credentials {
+  username: string;
+  password: string;
+}
+
 export interface SessionState {
   loading?: boolean;
   id?: string;

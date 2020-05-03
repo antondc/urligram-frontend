@@ -12,8 +12,10 @@ import { selectLanguageLoading } from 'Modules/Languages/selectors/selectLanguag
 import { pushNewRoute } from 'Modules/Routes/actions/pushNewRoute';
 import { selectMockDataTwoLoading } from 'Modules/MockDataTwo/selectors/selectMockDataTwoLoading';
 import { selectuiUserModalMounted } from 'Modules/Ui/selectors/selectUiUserModalMounted';
+import { selectUiLoginModalMounted } from 'Modules/Ui/selectors/selectUiLoginModalMounted';
 import { selectuiMessageModalMounted } from 'Modules/Ui/selectors/selectUiMessageModalMounted';
 import { routesList, routesWithoutOmmitedValues } from 'Routes/index';
+import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import Header from 'Components/Header';
 import Footer from 'Components/Footer';
 import SubHeader from 'Components/SubHeader';
@@ -22,9 +24,10 @@ import LayoutHelper from 'Common/LayoutHelper';
 import Router from 'Routes/Router';
 import UserModal from 'Components/UserModal';
 import ModalMessage from 'Components/ModalMessage';
+import LoginModal from 'Components/LoginModal';
+import LayoutContent from '../LayoutContent';
 
 import './Layout.less';
-import LayoutContent from '../LayoutContent';
 
 interface Props {
   mockDataTwoLoading: boolean;
@@ -32,6 +35,8 @@ interface Props {
   languageLoading: boolean;
   userModalMounted: boolean;
   messageModalMounted: boolean;
+  loginModalMounted: boolean;
+  isLogged: boolean;
   pushNewRoute: (route) => void;
 }
 
@@ -59,7 +64,14 @@ class Layout extends React.Component<Props> {
   };
 
   render = () => {
-    const { languageLoading, mockDataTwoLoading, userModalMounted, messageModalMounted } = this.props;
+    const {
+      languageLoading,
+      mockDataTwoLoading,
+      userModalMounted,
+      messageModalMounted,
+      loginModalMounted,
+      isLogged,
+    } = this.props;
     const mounted = !languageLoading;
     const showLoader = mockDataTwoLoading;
 
@@ -88,6 +100,9 @@ class Layout extends React.Component<Props> {
           <Fade mounted={messageModalMounted} speed="fastest">
             <ModalMessage message="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus gravida augue sed ipsum pulvinar, vel pretium tellus commodo. Aliquam erat volutpat. Morbi placerat justo massa, eget laoreet enim cursus et. Aliquam id scelerisque ipsum, ac rutrum erat. Donec sed blandit metus. Maecenas pellentesque, neque vel " />
           </Fade>
+          <Fade mounted={loginModalMounted} speed="fastest">
+            <LoginModal />
+          </Fade>
         </Fade>
       </div>
     );
@@ -99,6 +114,8 @@ const mapStateToProps = createStructuredSelector({
   mockDataTwoLoading: selectMockDataTwoLoading,
   userModalMounted: selectuiUserModalMounted,
   messageModalMounted: selectuiMessageModalMounted,
+  loginModalMounted: selectUiLoginModalMounted,
+  isLogged: selectSessionLoggedIn,
 });
 
 export default connect(mapStateToProps, {
