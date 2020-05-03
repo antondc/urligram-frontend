@@ -11,6 +11,8 @@ import enhanceRouteWithParams from 'Tools/utils/url/enhanceRouteWithParams';
 import { selectLanguageLoading } from 'Modules/Languages/selectors/selectLanguageLoading';
 import { pushNewRoute } from 'Modules/Routes/actions/pushNewRoute';
 import { selectMockDataTwoLoading } from 'Modules/MockDataTwo/selectors/selectMockDataTwoLoading';
+import { selectuiUserModalMounted } from 'Modules/Ui/selectors/selectUiUserModalMounted';
+import { selectuiMessageModalMounted } from 'Modules/Ui/selectors/selectUiMessageModalMounted';
 import { routesList, routesWithoutOmmitedValues } from 'Routes/index';
 import Header from 'Components/Header';
 import Footer from 'Components/Footer';
@@ -19,15 +21,17 @@ import Background from 'Assets/svg/background.svg';
 import LayoutHelper from 'Common/LayoutHelper';
 import Router from 'Routes/Router';
 import UserModal from 'Components/UserModal';
-import { selectuiUserModalMounted } from '../../redux/modules/Ui/selectors/selectUiUserModalMounted';
+import ModalMessage from 'Components/ModalMessage';
 
 import './Layout.less';
+import LayoutContent from '../LayoutContent';
 
 interface Props {
   mockDataTwoLoading: boolean;
   location: Location;
   languageLoading: boolean;
   userModalMounted: boolean;
+  messageModalMounted: boolean;
   pushNewRoute: (route) => void;
 }
 
@@ -55,7 +59,7 @@ class Layout extends React.Component<Props> {
   };
 
   render = () => {
-    const { languageLoading, mockDataTwoLoading, userModalMounted } = this.props;
+    const { languageLoading, mockDataTwoLoading, userModalMounted, messageModalMounted } = this.props;
     const mounted = !languageLoading;
     const showLoader = mockDataTwoLoading;
 
@@ -63,7 +67,7 @@ class Layout extends React.Component<Props> {
       <div className="Layout">
         <Background className="Layout-background" />
         <Fade mounted={mounted}>
-          <div className="Layout-content">
+          <LayoutContent>
             <div className="Layout-top">
               <Header />
               <Hr type="spacer" />
@@ -74,17 +78,16 @@ class Layout extends React.Component<Props> {
             </div>
             <LayoutHelper />
             <Footer />
-            <div className="Layout-contentModals">
-              <Fade mounted={userModalMounted}>
-                <UserModal />
-              </Fade>
-            </div>
-          </div>
-          <div className="Layout-fullpageModals">
-            <Fade mounted={showLoader}>
-              <SpinnerCircle />
+            <Fade mounted={userModalMounted}>
+              <UserModal />
             </Fade>
-          </div>
+          </LayoutContent>
+          <Fade mounted={showLoader} speed="fastest">
+            <SpinnerCircle />
+          </Fade>
+          <Fade mounted={messageModalMounted} speed="fastest">
+            <ModalMessage message="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus gravida augue sed ipsum pulvinar, vel pretium tellus commodo. Aliquam erat volutpat. Morbi placerat justo massa, eget laoreet enim cursus et. Aliquam id scelerisque ipsum, ac rutrum erat. Donec sed blandit metus. Maecenas pellentesque, neque vel " />
+          </Fade>
         </Fade>
       </div>
     );
@@ -95,6 +98,7 @@ const mapStateToProps = createStructuredSelector({
   languageLoading: selectLanguageLoading,
   mockDataTwoLoading: selectMockDataTwoLoading,
   userModalMounted: selectuiUserModalMounted,
+  messageModalMounted: selectuiMessageModalMounted,
 });
 
 export default connect(mapStateToProps, {

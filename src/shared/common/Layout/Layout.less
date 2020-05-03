@@ -5,10 +5,6 @@
 @{c} {
   position: relative;
 
-  &-modal {
-    //
-  }
-
   &-background {
     position: absolute;
     height: 100%;
@@ -18,24 +14,5 @@
     z-index: -1;
     pointer-events: none;
     user-select: none;
-  }
-
-  &-content {
-    display: flex;
-    position: relative;
-    flex-direction: column;
-    justify-content: space-between;
-    max-width: @lay-maxWidth;
-    min-height: 100vh;
-    margin: 0 auto;
-    padding: 30px @lay-outerPadding;
-
-    @media @br-desktopSmall {
-      padding: 30px @lay-outerPaddingSmall;
-    }
-
-    @media @br-mobile {
-      padding: 30px @lay-outerPaddingMicro;
-    }
   }
 }

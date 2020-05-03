@@ -1,0 +1,21 @@
+@import '../../css/imports.less';
+
+@c: .ModalMessage;
+
+@{c} {
+  position: relative;
+  flex-grow: 0;
+  padding: 60px 60px 40px;
+
+  &-cross {
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    top: 20px;
+    right: 20px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

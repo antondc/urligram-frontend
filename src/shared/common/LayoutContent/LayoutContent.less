@@ -1,0 +1,22 @@
+@import '../../css/imports.less';
+
+@c: .LayoutContent;
+
+@{c} {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  justify-content: space-between;
+  max-width: @lay-maxWidth;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 30px @lay-outerPadding;
+
+  @media @br-desktopSmall {
+    padding: 30px @lay-outerPaddingSmall;
+  }
+
+  @media @br-mobile {
+    padding: 30px @lay-outerPaddingMicro;
+  }
+}
