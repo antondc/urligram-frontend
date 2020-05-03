@@ -3,13 +3,28 @@
 
 @{c} {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-between;
   flex-shrink: 0;
+  padding: 30px 40px;
   background: @c-background;
 
-  &-content {
+  &-section {
+    //
+  }
+
+  &-lastSection {
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  &-lang {
+    height: 35px;
+    width: 35px;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 }

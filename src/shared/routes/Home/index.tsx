@@ -42,6 +42,10 @@ const Home: React.FC = () => {
           <SidebarListTags title="Trending Tags" items={tags} />
           <Hr type="spacer" />
           <SidebarListUsers title="Popular Users" items={users} />
+          <Hr type="spacer" />
+          <SidebarListUsers title="Following" items={users} />
+          <Hr type="spacer" />
+          <SidebarListUsers title="Followers" items={users} />
         </Sidebar>
       </Flex>
     </div>

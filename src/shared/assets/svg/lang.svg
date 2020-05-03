@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
+  <circle data-id="background" fill="none" cx="18" cy="18" r="16" />
+  <path
+    data-id="foreground"
+    d="M18 0c9.941 0 18 8.059 18 18s-8.059 18-18 18S0 27.941 0 18 8.059 0 18 0zm0 2C9.163 2 2 9.163 2 18s7.163 16 16 16 16-7.163 16-16S26.837 2 18 2z"
+  />
+  <path
+    data-id="foreground"
+    d="M17.071 22v-1.447h-4.799v-2.338h4.313v-1.447h-4.313v-1.905h4.635V13.41h-6.369V22h6.533zm3.1 0v-5.602L23.634 22h1.74v-8.59h-1.611v5.736l-3.516-5.736H18.56V22h1.61z"
+  />
+</svg>
