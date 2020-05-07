@@ -12,7 +12,7 @@ import Routes, { routesWithoutOmmitedValues, routesList, routesPathsList } from 
 import Authentication from 'Services/Authentication';
 import storeFactory from 'Redux/index';
 import Layout from 'Common/Layout';
-import { SessionState } from 'Modules/Session/Session.types';
+import { SessionState } from '../../shared/redux/modules/Session/session.types';
 import { loadLanguages } from 'Modules/Languages/actions/loadLanguages';
 
 const authentication = new Authentication();
