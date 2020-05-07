@@ -1,8 +1,8 @@
+import Http from 'Services/Http';
 import { Dispatch } from 'redux';
 import { logInRequest } from './logInRequest';
 import { logInReceive } from './logInReceive';
 import { logInFailure } from './logInFailure';
-import { apiBase } from 'Services/Api';
 import { SessionApiResponse } from './../session.types';
 import { switchLoginModal } from '../../Ui/actions/switchLoginModal';
 
@@ -10,7 +10,7 @@ import { switchLoginModal } from '../../Ui/actions/switchLoginModal';
 export const logIn = ({ username, password }: any) => async (dispatch: Dispatch): Promise<void> => {
   try {
     await dispatch(logInRequest());
-    const response = await apiBase.post<SessionApiResponse>('login', {
+    const response = await Http.post<SessionApiResponse>('login', {
       name: username,
       password: password,
     });
