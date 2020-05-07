@@ -10,22 +10,22 @@ before_script:
   - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
 
 stages:
-  - install
+  # - install
   #- test
-  - build
+  # - build
   - deploy_production
 
 cache:
   paths:
     - node_modules/
 
-install:
-  stage: install
-  script:
-    - npm install
-  artifacts:
-    paths:
-      - node_modules/
+# install:
+#   stage: install
+#   script:
+#     - npm install
+#   artifacts:
+#     paths:
+#       - node_modules/
 
 #test:
 #    stage: test
@@ -35,14 +35,17 @@ install:
 #        paths:
 #            - node_modules/
 
-build:
-  stage: build
-  script:
-    - npm build
+# build:
+#   stage: build
+#   script:
+#     - npm build
 
 deploy_production:
   stage: deploy_production
   only:
     - master
   script:
-    # - ssh antoniodiaz@antoniodiaz.me "cd www/antoniodiaz && rm -rf node_modules dist/* && git pull && npm i && npm run build && git checkout master"
+    - ssh antoniodiaz@antoniodiaz.me 'cd www/linking && rm -rf node_modules dist/*'
+    - ssh antoniodiaz@antoniodiaz.me 'cd www/linking && git pull'
+    - ssh antoniodiaz@antoniodiaz.me 'export NPM_TOKEN=${NPM_TOKEN} && cd www/linking && export NVM_DIR="$HOME/.nvm" && . "$NVM_DIR/nvm.sh" --no-use && eval "[ -f .nvmrc ] && nvm install || nvm install stable" && nvm use --delete-prefix && npm ci && npm run prod'
+    - ssh antoniodiaz@antoniodiaz.me 'cd www/linking && mkdir -p tmp/always_restart.txt'
