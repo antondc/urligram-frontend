@@ -19,6 +19,7 @@ const app = express();
 
 // Serving static files- - - - - - - - - -
 app.use(serveGzip);
+app.use(express.static('dist'));
 app.use(express.static('media/docs'));
 app.use(express.static('media/images'));
 app.use('/media', express.static('media'));
