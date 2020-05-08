@@ -4,6 +4,7 @@ stages:
   - install
   - test
   - build
+  - deploy_staging
   - deploy_production
 
 cache:
@@ -30,6 +31,24 @@ build:
   stage: build
   script:
     - npm build
+
+deploy_staging:
+  stage: deploy_production
+  only:
+    - staging
+  before_script:
+    - apt-get update -qq
+    - apt-get install -qq git
+    - 'which ssh-agent || ( apt-get install -qq openssh-client )'
+    - eval $(ssh-agent -s)
+    - ssh-add <(echo "$K8S_SECRET_SSH_PRIVATE_KEY" | base64 -d)
+    - mkdir -p ~/.ssh
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+  script:
+    - ssh antoniodiaz@antoniodiaz.me 'cd www/linking_frontend_staging && rm -rf node_modules dist/*'
+    - ssh antoniodiaz@antoniodiaz.me 'cd www/linking_frontend_staging && git pull'
+    - ssh antoniodiaz@antoniodiaz.me 'export NPM_TOKEN=${NPM_TOKEN} && cd www/linking_frontend_staging && export NVM_DIR="$HOME/.nvm" && . "$NVM_DIR/nvm.sh" --no-use && eval "[ -f .nvmrc ] && nvm install || nvm install stable" && nvm use --delete-prefix && npm ci && npm run prod'
+    - ssh antoniodiaz@antoniodiaz.me 'cd www/linking_frontend_staging && mkdir -p tmp/always_restart.txt'
 
 deploy_production:
   stage: deploy_production
