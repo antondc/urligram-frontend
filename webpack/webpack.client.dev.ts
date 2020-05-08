@@ -1,48 +1,19 @@
-import path from 'path';
+import merge from 'webpack-merge';
 import webpack from 'webpack';
-import HtmlWebPackPlugin from 'html-webpack-plugin';
-import { CleanWebpackPlugin } from 'clean-webpack-plugin';
-import FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin';
-import config from '../config.test.json';
-import CompressionPlugin from 'compression-webpack-plugin';
-import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
-import {
-  API_DEVELOPMENT_ENDPOINT,
-  SERVER_DEVELOPMENT_ENDPOINT,
-  WEBPACK_SRC_CLIENT,
-  WEBPACK_ROOT,
-  WEBPACK_SRC,
-  WEBPACK_DIST,
-} from './constants';
+import config from '../config.test.json';
+import webpackClientCommonConfig from './webpack.client.common';
+import { API_DEVELOPMENT_ENDPOINT, SERVER_DEVELOPMENT_ENDPOINT, WEBPACK_ROOT, WEBPACK_SRC_CLIENT } from './constants';
 
-module.exports = {
-  name: 'client',
-  entry: ['webpack-hot-middleware/client?reload=true', WEBPACK_SRC_CLIENT],
-  context: WEBPACK_SRC,
+const webpackClientDevConfig = {
   mode: 'development',
-  target: 'web',
+  entry: ['webpack-hot-middleware/client?reload=true', WEBPACK_SRC_CLIENT],
   output: {
     filename: 'client-[hash:4].js',
     publicPath: WEBPACK_ROOT,
   },
   devtool: '#source-map',
-  externals: {},
-  resolve: {
-    extensions: ['.js', '.jsx', '.ts', '.tsx'],
-    alias: {
-      Root: path.resolve(WEBPACK_ROOT),
-      Redux: path.resolve(WEBPACK_ROOT, 'src/shared/redux/'),
-      Modules: path.resolve(WEBPACK_ROOT, 'src/shared/redux/modules/'),
-      Common: path.resolve(WEBPACK_ROOT, 'src/shared/common/'),
-      Components: path.resolve(WEBPACK_ROOT, 'src/shared/components/'),
-      Assets: path.resolve(WEBPACK_ROOT, 'src/shared/assets/'),
-      Routes: path.resolve(WEBPACK_ROOT, 'src/shared/routes/'),
-      Tools: path.resolve(WEBPACK_ROOT, 'src/shared/tools/'),
-      Services: path.resolve(WEBPACK_ROOT, 'src/shared/services/'),
-      Ui: path.resolve(WEBPACK_ROOT, 'src/shared/ui/'),
-    },
-  },
+  stats: 'detailed',
   module: {
     rules: [
       {
@@ -61,30 +32,9 @@ module.exports = {
       },
     ],
   },
-  stats: 'errors-only',
   plugins: [
-    new CaseSensitivePathsPlugin(),
+    ...webpackClientCommonConfig.plugins,
     new webpack.HotModuleReplacementPlugin(),
-    new CleanWebpackPlugin({
-      dry: false,
-      verbose: true,
-      protectWebpackAssets: false,
-      cleanOnceBeforeBuildPatterns: [path.join(WEBPACK_DIST, 'client-*'), path.join(WEBPACK_DIST, '*hot-update*')],
-      cleanAfterEveryBuildPatterns: [],
-    }),
-    new HtmlWebPackPlugin({
-      baseUrl: '',
-      inject: true,
-      template: path.join(WEBPACK_SRC, 'server/views/indexBase.ejs'),
-      filename: path.join(WEBPACK_SRC, 'server/views/index.ejs'),
-      toHtml: '<%- toHtml %>',
-      toHead: '<%- toHead %>',
-      deviceDetector:
-        '<% if (isDesktop) { %>isDesktop<% } else if (isTablet) { %>isTablet<% } else if (isMobile) { %>isMobile<% } %> <%- browser %> <% if (isBot) { %>isBot<% } %>',
-      body: '<%- body %>',
-      data: '<%- data %>',
-    }),
-
     new webpack.DefinePlugin({
       isBrowser: true,
       'process.env': {
@@ -94,11 +44,6 @@ module.exports = {
         ENDPOINT_SERVER: SERVER_DEVELOPMENT_ENDPOINT,
       },
     }),
-    new FriendlyErrorsWebpackPlugin(),
-    new CompressionPlugin({
-      algorithm: 'gzip',
-      test: /\.svg$|\.woff$|\.woff2$|\.ttf$|\.eot$|\.otf$|\.js$|\.css$|\.html$/,
-    }),
     new BundleAnalyzerPlugin({
       analyzerMode: 'static',
       openAnalyzer: false,
@@ -106,3 +51,5 @@ module.exports = {
     }),
   ],
 };
+
+export default merge(webpackClientDevConfig, webpackClientCommonConfig);
