@@ -1,14 +1,5 @@
 image: node:latest
 
-before_script:
-  - apt-get update -qq
-  - apt-get install -qq git
-  - 'which ssh-agent || ( apt-get install -qq openssh-client )'
-  - eval $(ssh-agent -s)
-  - ssh-add <(echo "$K8S_SECRET_SSH_PRIVATE_KEY" | base64 -d)
-  - mkdir -p ~/.ssh
-  - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
-
 stages:
   - install
   - test
@@ -44,6 +35,14 @@ deploy_production:
   stage: deploy_production
   only:
     - master
+  before_script:
+    - apt-get update -qq
+    - apt-get install -qq git
+    - 'which ssh-agent || ( apt-get install -qq openssh-client )'
+    - eval $(ssh-agent -s)
+    - ssh-add <(echo "$K8S_SECRET_SSH_PRIVATE_KEY" | base64 -d)
+    - mkdir -p ~/.ssh
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
   script:
     - ssh antoniodiaz@antoniodiaz.me 'cd www/linking && rm -rf node_modules dist/*'
     - ssh antoniodiaz@antoniodiaz.me 'cd www/linking && git pull'

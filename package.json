@@ -21,7 +21,8 @@
     "run:server": "node --inspect=9228 ./dist/server.js",
     "build:client:prod": "webpack --config ./webpack/webpack.client.prod.ts",
     "build:server:prod": "webpack --config ./webpack/webpack.server.prod.ts",
-    "test": "jest --watch --no-cache",
+    "test": "jest --no-cache",
+    "test:watch": "jest --watch --no-cache",
     "test:precommit": "jest --no-cache"
   },
   "devDependencies": {
