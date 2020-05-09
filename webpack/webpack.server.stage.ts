@@ -9,7 +9,7 @@ const webpackServerProdConfig = {
   mode: 'production',
   target: 'node',
   devtool: '#source-map',
-  stats: 'detailed',
+  stats: 'errors-only',
   plugins: [
     // Setting a variable to identify browser from server
     new webpack.DefinePlugin({

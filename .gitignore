@@ -15,3 +15,5 @@ src/server/views/index.ejs
 __snapshots__
 .htaccess
 tmp
+.htpasswd
+*www-linking_frontend_*.pid

@@ -13,7 +13,7 @@ const webpackClientProdConfig = {
     publicPath: '/',
   },
   devtool: 'none',
-  stats: 'detailed',
+  stats: 'errors-only',
   module: {
     rules: [
       {
