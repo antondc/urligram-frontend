@@ -1,5 +1,14 @@
 image: node:latest
 
+before_script:
+  - apt-get update -qq
+  - apt-get install -qq git
+  - 'which ssh-agent || ( apt-get install -qq openssh-client )'
+  - eval $(ssh-agent -s)
+  - ssh-add <(echo "$K8S_SECRET_SSH_PRIVATE_KEY" | base64 -d)
+  - mkdir -p ~/.ssh
+  - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+
 stages:
   - install
   - test
@@ -33,17 +42,9 @@ build:
     - npm build
 
 deploy_staging:
-  stage: deploy_production
+  stage: deploy_staging
   only:
     - staging
-  before_script:
-    - apt-get update -qq
-    - apt-get install -qq git
-    - 'which ssh-agent || ( apt-get install -qq openssh-client )'
-    - eval $(ssh-agent -s)
-    - ssh-add <(echo "$K8S_SECRET_SSH_PRIVATE_KEY" | base64 -d)
-    - mkdir -p ~/.ssh
-    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
   script:
     - ssh antoniodiaz@antoniodiaz.me 'cd www/linking_frontend_staging && rm -rf node_modules dist/*'
     - ssh antoniodiaz@antoniodiaz.me 'cd www/linking_frontend_staging && git pull'
@@ -54,16 +55,8 @@ deploy_production:
   stage: deploy_production
   only:
     - master
-  before_script:
-    - apt-get update -qq
-    - apt-get install -qq git
-    - 'which ssh-agent || ( apt-get install -qq openssh-client )'
-    - eval $(ssh-agent -s)
-    - ssh-add <(echo "$K8S_SECRET_SSH_PRIVATE_KEY" | base64 -d)
-    - mkdir -p ~/.ssh
-    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
   script:
     - ssh antoniodiaz@antoniodiaz.me 'cd www/linking && rm -rf node_modules dist/*'
     - ssh antoniodiaz@antoniodiaz.me 'cd www/linking && git pull'
-    - ssh antoniodiaz@antoniodiaz.me 'export NPM_TOKEN=${NPM_TOKEN} && cd www/linking && export NVM_DIR="$HOME/.nvm" && . "$NVM_DIR/nvm.sh" --no-use && eval "[ -f .nvmrc ] && nvm install || nvm install stable" && nvm use --delete-prefix && git checkout master &&  npm ci && npm run prod'
+    - ssh antoniodiaz@antoniodiaz.me 'export NPM_TOKEN=${NPM_TOKEN} && cd www/linking && export NVM_DIR="$HOME/.nvm" && . "$NVM_DIR/nvm.sh" --no-use && eval "[ -f .nvmrc ] && nvm install || nvm install stable" && nvm use --delete-prefix && git checkout master && npm ci && npm run prod'
     - ssh antoniodiaz@antoniodiaz.me 'cd www/linking && mkdir -p tmp/always_restart.txt'
