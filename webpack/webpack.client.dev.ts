@@ -1,9 +1,8 @@
 import merge from 'webpack-merge';
 import webpack from 'webpack';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
-import config from '../config.test.json';
 import webpackClientCommonConfig from './webpack.client.common';
-import { API_DEVELOPMENT_ENDPOINT, SERVER_DEVELOPMENT_ENDPOINT, WEBPACK_ROOT, WEBPACK_SRC_CLIENT } from './constants';
+import { API_DEVELOPMENT_ENDPOINT, WEBPACK_ROOT, WEBPACK_SRC_CLIENT } from './constants';
 
 const webpackClientDevConfig = {
   mode: 'development',
@@ -13,7 +12,7 @@ const webpackClientDevConfig = {
     publicPath: WEBPACK_ROOT,
   },
   devtool: '#source-map',
-  stats: 'detailed',
+  stats: 'normal',
   module: {
     rules: [
       {
@@ -38,10 +37,7 @@ const webpackClientDevConfig = {
     new webpack.DefinePlugin({
       isBrowser: true,
       'process.env': {
-        PORT_SERVER: config.PORT_SERVER_DEVELOPMENT,
-        PORT_API: config.PORT_API_DEVELOPMENT,
         ENDPOINT_API: API_DEVELOPMENT_ENDPOINT,
-        ENDPOINT_SERVER: SERVER_DEVELOPMENT_ENDPOINT,
       },
     }),
     new BundleAnalyzerPlugin({

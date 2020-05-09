@@ -48,7 +48,7 @@ deploy_staging:
   script:
     - ssh antoniodiaz@antoniodiaz.me 'cd www/linking_frontend_staging && rm -rf node_modules dist/* tmp'
     - ssh antoniodiaz@antoniodiaz.me 'cd www/linking_frontend_staging && git pull'
-    - ssh antoniodiaz@antoniodiaz.me 'export NPM_TOKEN=${NPM_TOKEN} && cd www/linking_frontend_staging && export NVM_DIR="$HOME/.nvm" && . "$NVM_DIR/nvm.sh" --no-use && eval "[ -f .nvmrc ] && nvm install || nvm install stable" && nvm use --delete-prefix && git checkout staging && npm ci && npm run prod'
+    - ssh antoniodiaz@antoniodiaz.me 'export NPM_TOKEN=${NPM_TOKEN} && cd www/linking_frontend_staging && export NVM_DIR="$HOME/.nvm" && . "$NVM_DIR/nvm.sh" --no-use && eval "[ -f .nvmrc ] && nvm install || nvm install stable" && nvm use --delete-prefix && git checkout staging && npm ci && npm run stage'
     - ssh antoniodiaz@antoniodiaz.me 'cd www/linking_frontend_staging && mkdir -p tmp/always_restart.txt'
 
 deploy_production:

@@ -1,24 +1,15 @@
 import path from 'path';
-import webpack from 'webpack';
 import HtmlWebPackPlugin from 'html-webpack-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin';
 import CompressionPlugin from 'compression-webpack-plugin';
 import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
-import config from '../config.test.json';
-import {
-  API_DEVELOPMENT_ENDPOINT,
-  SERVER_DEVELOPMENT_ENDPOINT,
-  WEBPACK_ROOT,
-  WEBPACK_SRC,
-  WEBPACK_DIST,
-} from './constants';
+import { WEBPACK_ROOT, WEBPACK_SRC, WEBPACK_DIST } from './constants';
 
 const webpackClientCommonConfig = {
   name: 'client',
   context: WEBPACK_SRC,
   target: 'web',
-  stats: 'errors-only',
   externals: {},
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
@@ -55,16 +46,6 @@ const webpackClientCommonConfig = {
         '<% if (isDesktop) { %>isDesktop<% } else if (isTablet) { %>isTablet<% } else if (isMobile) { %>isMobile<% } %> <%- browser %> <% if (isBot) { %>isBot<% } %>',
       body: '<%- body %>',
       data: '<%- data %>',
-    }),
-
-    new webpack.DefinePlugin({
-      isBrowser: true,
-      'process.env': {
-        PORT_SERVER: config.PORT_SERVER_DEVELOPMENT,
-        PORT_API: config.PORT_API_DEVELOPMENT,
-        ENDPOINT_API: API_DEVELOPMENT_ENDPOINT,
-        ENDPOINT_SERVER: SERVER_DEVELOPMENT_ENDPOINT,
-      },
     }),
     new FriendlyErrorsWebpackPlugin(),
     new CompressionPlugin({

@@ -1,5 +1,5 @@
 import urlBuild from './urlBuild';
-import config from 'Root/config.test.json';
+import { SERVER_PRODUCTION_PROTOCOL, SERVER_PRODUCTION_HOST, SERVER_PRODUCTION_PORT } from 'Root/config.test.json';
 
 describe('urlBuild', () => {
   test('it should return a full url', () => {
@@ -40,11 +40,11 @@ describe('urlBuild', () => {
 describe('urlBuild', () => {
   test('it should return a full url', () => {
     const input = {
-      protocol: config.SERVER_PRODUCTION_PROTOCOL,
-      host: config.SERVER_PRODUCTION_HOST,
-      port: config.SERVER_PRODUCTION_PORT,
+      protocol: SERVER_PRODUCTION_PROTOCOL,
+      host: SERVER_PRODUCTION_HOST,
+      port: SERVER_PRODUCTION_PORT,
     };
-    const output = 'http://antoniodiaz.me:16887';
+    const output = 'http://antoniodiaz.me:19079';
     expect(urlBuild(input)).toEqual(output);
   });
 });

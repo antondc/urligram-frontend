@@ -11,7 +11,6 @@ import useragent from 'express-useragent';
 import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
-// const webpackConfig = require('../../webpack/webpack.client.dev.ts');
 import webpackConfig from '../../webpack/webpack.client.dev';
 import { WEBPACK_ROOT } from '../../webpack/constants';
 
@@ -93,4 +92,4 @@ app.use(function (err: any, req: any, res: any, next: any) {
 export default app;
 const server = http.createServer(app);
 
-server.listen(4000);
+server.listen(process.env.SERVER_PORT);

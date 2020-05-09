@@ -2,7 +2,7 @@ import merge from 'webpack-merge';
 import webpack from 'webpack';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import webpackClientCommonConfig from './webpack.client.common';
-import { API_PRODUCTION_ENDPOINT, WEBPACK_SRC_CLIENT, WEBPACK_DIST } from './constants';
+import { API_STAGING_ENDPOINT, WEBPACK_SRC_CLIENT, WEBPACK_DIST } from './constants';
 
 const webpackClientProdConfig = {
   entry: [WEBPACK_SRC_CLIENT],
@@ -12,7 +12,7 @@ const webpackClientProdConfig = {
     path: WEBPACK_DIST,
     publicPath: '/',
   },
-  devtool: 'none',
+  devtool: '#source-map',
   stats: 'detailed',
   module: {
     rules: [
@@ -37,7 +37,7 @@ const webpackClientProdConfig = {
     new webpack.DefinePlugin({
       isBrowser: true,
       'process.env': {
-        ENDPOINT_API: API_PRODUCTION_ENDPOINT,
+        ENDPOINT_API: API_STAGING_ENDPOINT,
       },
     }),
     new MiniCssExtractPlugin({

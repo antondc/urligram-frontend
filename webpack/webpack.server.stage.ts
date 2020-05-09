@@ -1,14 +1,14 @@
 import merge from 'webpack-merge';
 import webpack from 'webpack';
 import webpackServerCommonConfig from './webpack.server.common';
-import { API_PRODUCTION_ENDPOINT } from './constants';
+import { API_STAGING_ENDPOINT } from './constants';
 import { SERVER_PRODUCTION_PORT } from '../config.test.json';
 
 const webpackServerProdConfig = {
   name: 'server',
   mode: 'production',
   target: 'node',
-  devtool: 'none',
+  devtool: '#source-map',
   stats: 'detailed',
   plugins: [
     // Setting a variable to identify browser from server
@@ -16,7 +16,7 @@ const webpackServerProdConfig = {
       isBrowser: false,
       'process.env': {
         SERVER_PORT: SERVER_PRODUCTION_PORT,
-        ENDPOINT_API: API_PRODUCTION_ENDPOINT,
+        ENDPOINT_API: API_STAGING_ENDPOINT,
       },
     }),
   ],
