@@ -23,7 +23,6 @@ export const API_STAGING_ENDPOINT = JSON.stringify(
   urlBuild({
     protocol: config.API_STAGING_PROTOCOL,
     host: config.API_STAGING_HOST,
-    port: config.API_STAGING_PORT,
     path: config.API_STAGING_PATH,
   })
 );
