@@ -7,9 +7,10 @@ interface Props {
   className?: string;
   grow?: boolean;
   onClick?: (any) => void;
+  onMouseLeave?: (any) => void;
 }
 
-const Border: React.FC<Props> = ({ children, padding = 'normal', grow, className, onClick }) => (
+const Border: React.FC<Props> = ({ children, padding = 'normal', grow, className, onClick, onMouseLeave }) => (
   <div
     className={
       (className ? className + ' ' : '') +
@@ -18,6 +19,7 @@ const Border: React.FC<Props> = ({ children, padding = 'normal', grow, className
       (grow ? ' Border--grow' : '')
     }
     onClick={onClick}
+    onMouseLeave={onMouseLeave}
   >
     {children}
   </div>

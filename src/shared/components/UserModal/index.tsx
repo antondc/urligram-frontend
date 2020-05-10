@@ -20,7 +20,7 @@ interface Props {
 
 const UserModal: React.FC<Props> = ({ logOut, switchUserModal, switchMessageModal }) => {
   return (
-    <Border className="UserModal" onClick={switchUserModal}>
+    <Border className="UserModal" onClick={switchUserModal} onMouseLeave={switchUserModal}>
       <Cross className="UserModal-cross" />
       <User className="UserModal-userLogo" onClick={switchMessageModal} />
       <ul>
