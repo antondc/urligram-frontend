@@ -8,6 +8,7 @@ import { switchMessageModal } from 'Modules/Ui/actions/switchMessageModal';
 import { logOut } from 'Modules/Session/actions/logOut';
 import Cross from 'Assets/svg/cross.svg';
 import Hr from 'Ui/Hr';
+import A from 'Ui/A';
 import Border from 'Ui/Border';
 
 import './UserModal.less';
@@ -20,36 +21,50 @@ interface Props {
 
 const UserModal: React.FC<Props> = ({ logOut, switchUserModal, switchMessageModal }) => {
   return (
-    <Border className="UserModal" onClick={switchUserModal} onMouseLeave={switchUserModal}>
+    <Border className="UserModal" onClick={switchUserModal}>
       <Cross className="UserModal-cross" />
       <User className="UserModal-userLogo" onClick={switchMessageModal} />
       <ul>
         <li>
-          <Span bold>My account</Span>
+          <A href="">
+            <Span bold>My account</Span>
+          </A>
         </li>
         <Hr type="spacer" size="small" />
         <li>
-          <Span bold>My tags</Span>
+          <A href="">
+            <Span bold>My tags</Span>
+          </A>
         </li>
         <Hr type="spacer" size="small" />
         <li>
-          <Span bold>Followers</Span>
+          <A href="">
+            <Span bold>Followers</Span>
+          </A>
         </li>
         <Hr type="spacer" size="small" />
         <li>
-          <Span bold>Following</Span>
+          <A href="">
+            <Span bold>Following</Span>
+          </A>
         </li>
         <Hr type="spacer" size="small" />
         <li>
-          <Span bold>Recommended</Span>
+          <A href="">
+            <Span bold>Recommended</Span>
+          </A>
         </li>
         <Hr type="spacer" size="small" />
         <li>
-          <Span bold>My lists</Span>
+          <A href="">
+            <Span bold>My lists</Span>
+          </A>
         </li>
         <Hr type="spacer" size="small" />
         <li className="UserModal-logOut" onClick={logOut}>
-          <Span bold>Log out</Span>
+          <A href="">
+            <Span bold>Log out</Span>
+          </A>
         </li>
       </ul>
     </Border>
