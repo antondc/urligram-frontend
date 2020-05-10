@@ -21,7 +21,7 @@ interface Props {
 
 const UserModal: React.FC<Props> = ({ logOut, switchUserModal, switchMessageModal }) => {
   return (
-    <Border className="UserModal" onClick={switchUserModal}>
+    <Border className="UserModal" onClick={switchUserModal} onMouseLeave={switchUserModal}>
       <Cross className="UserModal-cross" />
       <User className="UserModal-userLogo" onClick={switchMessageModal} />
       <ul>
@@ -62,9 +62,7 @@ const UserModal: React.FC<Props> = ({ logOut, switchUserModal, switchMessageModa
         </li>
         <Hr type="spacer" size="small" />
         <li className="UserModal-logOut" onClick={logOut}>
-          <A href="">
-            <Span bold>Log out</Span>
-          </A>
+          <Span bold>Log out</Span>
         </li>
       </ul>
     </Border>

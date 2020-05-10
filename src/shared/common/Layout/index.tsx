@@ -14,8 +14,9 @@ import { selectMockDataTwoLoading } from 'Modules/MockDataTwo/selectors/selectMo
 import { selectuiUserModalMounted } from 'Modules/Ui/selectors/selectUiUserModalMounted';
 import { selectUiLoginModalMounted } from 'Modules/Ui/selectors/selectUiLoginModalMounted';
 import { selectuiMessageModalMounted } from 'Modules/Ui/selectors/selectUiMessageModalMounted';
-import { routesList, routesWithoutOmmitedValues } from 'Routes/index';
+import { selectUiAnyModalMounted } from 'Root/src/shared/redux/modules/Ui/selectors/selectUiAnyModalMounted';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
+import { routesList, routesWithoutOmmitedValues } from 'Routes/index';
 import Header from 'Components/Header';
 import Footer from 'Components/Footer';
 import SubHeader from 'Components/SubHeader';
@@ -36,6 +37,7 @@ interface Props {
   userModalMounted: boolean;
   messageModalMounted: boolean;
   loginModalMounted: boolean;
+  anyModalMounted: boolean;
   isLogged: boolean;
   pushNewRoute: (route) => void;
 }
@@ -49,6 +51,8 @@ class Layout extends React.Component<Props> {
   }
 
   componentDidUpdate = (prevProps) => {
+    const { anyModalMounted } = this.props;
+
     if (this.props.location !== prevProps.location) {
       const activeRouteKey = findActiveRouteKey({
         urlPath: location.pathname,
@@ -60,6 +64,13 @@ class Layout extends React.Component<Props> {
         queryString: location.search,
       });
       this.props.pushNewRoute(enhancedRoute);
+    }
+
+    // Lock screen on Modal mount
+    if (anyModalMounted) {
+      document.body.classList.add('scrollLocked');
+    } else {
+      document.body.classList.remove('scrollLocked');
     }
   };
 
@@ -114,6 +125,7 @@ const mapStateToProps = createStructuredSelector({
   mockDataTwoLoading: selectMockDataTwoLoading,
   userModalMounted: selectuiUserModalMounted,
   messageModalMounted: selectuiMessageModalMounted,
+  anyModalMounted: selectUiAnyModalMounted,
   loginModalMounted: selectUiLoginModalMounted,
   isLogged: selectSessionLoggedIn,
 });

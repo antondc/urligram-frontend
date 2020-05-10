@@ -14,8 +14,17 @@ body {
   opacity: 0;
   transition: opacity @td-fast ease;
 
+  // No transitions on load
+  &.preload * {
+    transition: none !important;
+  }
+
   &.isLoaded {
     opacity: 1 !important;
+  }
+
+  &.scrollLocked {
+    overflow: hidden !important;
   }
 }
 

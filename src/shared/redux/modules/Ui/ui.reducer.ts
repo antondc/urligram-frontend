@@ -1,4 +1,4 @@
-import { UiState, SWITCH_USER_MODAL, SWITCH_MESSAGE_MODAL, SWITCH_LOGIN_MODAL } from './ui.types';
+import { UiState, SWITCH_USER_MODAL, SWITCH_MESSAGE_MODAL, SWITCH_LOGIN_MODAL, UNMOUNT_ALL_MODALS } from './ui.types';
 
 const initialState: UiState = {
   userModal: {
@@ -32,6 +32,14 @@ export const Ui = (state = initialState, action): UiState => {
           mounted: !state.loginModal.mounted,
         },
       });
+    case UNMOUNT_ALL_MODALS:
+      return Object.assign(
+        {},
+        state,
+        Object.entries(state)
+          .map(([key, value]) => ({ [key]: { ...value, mounted: false } }))
+          .reduce((acc, curr) => ({ ...acc, ...curr }), {})
+      );
 
     default:
       return Object.assign({}, state);
