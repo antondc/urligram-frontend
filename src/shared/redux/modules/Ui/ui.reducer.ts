@@ -1,4 +1,5 @@
 import { UiState, SWITCH_USER_MODAL, SWITCH_MESSAGE_MODAL, SWITCH_LOGIN_MODAL, UNMOUNT_ALL_MODALS } from './ui.types';
+import value from '*.svg';
 
 const initialState: UiState = {
   userModal: {
@@ -36,9 +37,7 @@ export const Ui = (state = initialState, action): UiState => {
       return Object.assign(
         {},
         state,
-        Object.entries(state)
-          .map(([key, value]) => ({ [key]: { ...value, mounted: false } }))
-          .reduce((acc, curr) => ({ ...acc, ...curr }), {})
+        Object.entries(state).reduce((acc, [key, value]) => ({ ...acc, [key]: { ...value, mounted: false } }), {})
       );
 
     default:
