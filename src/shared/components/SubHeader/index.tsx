@@ -6,7 +6,6 @@ import './SubHeader.less';
 
 const SubHeader: React.FC = ({}) => (
   <div className="SubHeader">
-    <Navigation className="SubHeader-navigation" />
     <Filter className="SubHeader-filter" />
   </div>
 );
