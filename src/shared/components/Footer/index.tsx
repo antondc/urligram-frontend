@@ -27,20 +27,9 @@ const Footer: React.FC = () => {
           </li>
           <li>
             <A href="">
-              <Span bold>Sitemap</Span>
+              <Span bold>My Account</Span>
             </A>
             <Hr type="spacer" size="micro" />
-          </li>
-          <li>
-            <A href="">
-              <Span bold>Blog</Span>
-            </A>
-            <Hr type="spacer" size="micro" />
-          </li>
-          <li>
-            <A href="">
-              <Span bold>Media</Span>
-            </A>
           </li>
         </ul>
       </div>
@@ -48,13 +37,7 @@ const Footer: React.FC = () => {
         <ul>
           <li>
             <A href="">
-              <Span bold>My Account</Span>
-            </A>
-            <Hr type="spacer" size="micro" />
-          </li>
-          <li>
-            <A href="">
-              <Span bold>Create Account</Span>
+              <Span bold>Create account</Span>
             </A>
             <Hr type="spacer" size="micro" />
           </li>
@@ -64,21 +47,10 @@ const Footer: React.FC = () => {
             </A>
             <Hr type="spacer" size="micro" />
           </li>
-          <li>
-            <A href="">
-              <Span bold>My Links</Span>
-            </A>
-          </li>
         </ul>
       </div>
       <div className="Footer-section">
         <ul>
-          <li>
-            <A href="">
-              <Span bold>Extension</Span>
-            </A>
-            <Hr type="spacer" size="micro" />
-          </li>
           <li>
             <A href="">
               <Span bold>Disclaimer</Span>
@@ -87,14 +59,9 @@ const Footer: React.FC = () => {
           </li>
           <li>
             <A href="">
-              <Span bold>Our Team</Span>
-            </A>
-            <Hr type="spacer" size="micro" />
-          </li>
-          <li>
-            <A href="">
               <Span bold>Contact Us</Span>
             </A>
+            <Hr type="spacer" size="micro" />
           </li>
         </ul>
       </div>
