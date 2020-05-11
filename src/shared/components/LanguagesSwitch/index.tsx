@@ -1,8 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { Link } from 'react-router-dom';
-import { logOut } from 'Modules/Session/actions/logOut';
 import { selectLanguagesList } from 'Modules/Languages/selectors/selectLanguagesList';
 import { switchCurrentLanguage } from 'Modules/Languages/actions/switchCurrentLanguage';
 import { LanguageState } from 'Modules/Languages/languages.types';
@@ -10,6 +8,8 @@ import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLo
 import { selectCurrentLanguage } from 'Modules/Languages/selectors/selectCurrentLanguage';
 import { selectCurrentRouteParamLanguage } from 'Modules/Routes/selectors/selectCurrentRouteParamLanguage';
 import { selectCurrentPathname } from 'Modules/Routes/selectors/selectCurrentPathname';
+import LanguageItem from '../LanguageItem';
+import Border from '../../ui/Border';
 
 import './LanguagesSwitch.less';
 
@@ -19,7 +19,6 @@ interface Props {
   currentLanguage: LanguageState;
   currentRouteParamLanguage: string;
   currentPathname: string;
-  logOut: () => void;
   switchCurrentLanguage: (slug: string) => void;
 }
 
@@ -41,22 +40,38 @@ const LanguagesSwitch: React.FC<Props> = ({
   });
 
   return (
-    <div className="LanguagesSwitch">
-      {languagesWithLink.map((item) => {
-        return (
-          <Link
-            className={'LanguagesSwitch-language' + (item.isCurrent ? ' LanguagesSwitch-languageActive' : '')}
-            to={item.link}
-            key={item.id}
-            onClick={() => {
-              switchCurrentLanguage(item.slug);
-            }}
-          >
-            {item.slug}
-          </Link>
-        );
-      })}
-    </div>
+    <Border className="LanguagesSwitch">
+      {languagesWithLink
+        .filter((item) => !item.isCurrent)
+        .map((item) => {
+          return (
+            <LanguageItem
+              key={item.id}
+              lang={item.slug}
+              href={item.link}
+              isCurrent={item.isCurrent}
+              onClick={() => {
+                switchCurrentLanguage(item.slug);
+              }}
+            />
+          );
+        })}
+      {languagesWithLink
+        .filter((item) => item.isCurrent)
+        .map((item) => {
+          return (
+            <LanguageItem
+              key={item.id}
+              lang={item.slug}
+              href={item.link}
+              isCurrent={item.isCurrent}
+              onClick={() => {
+                switchCurrentLanguage(item.slug);
+              }}
+            />
+          );
+        })}
+    </Border>
   );
 };
 
@@ -69,6 +84,5 @@ const mapStateToProps = createStructuredSelector({
 });
 
 export default connect(mapStateToProps, {
-  logOut: logOut,
   switchCurrentLanguage: switchCurrentLanguage,
 })(LanguagesSwitch);

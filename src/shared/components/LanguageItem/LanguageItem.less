@@ -1,0 +1,49 @@
+@import '../../css/imports.less';
+
+@c: .LanguageItem;
+
+@{c} {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 35px;
+  width: 35px;
+  margin-bottom: 10px;
+  padding-bottom: 3px;
+  background: @c-background;
+  border: 2px solid;
+  border-color: @c-base;
+  transition: border-color @td-fast @ease;
+  user-select: none;
+  border-radius: 50%;
+  font-variant: small-caps;
+
+  &-text {
+    transition: color @td-fast @ease;
+  }
+
+  &:hover:not(@{c}--active) {
+    border-color: @c-accent;
+    cursor: pointer;
+
+    @{c}-text {
+      color: @c-accent;
+    }
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  &--active {
+    border-color: @c-success;
+
+    @{c}-text {
+      color: @c-success;
+    }
+
+    &:hover {
+      pointer-events: none;
+    }
+  }
+}

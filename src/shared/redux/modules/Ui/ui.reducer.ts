@@ -1,9 +1,19 @@
-import { UiState, SWITCH_USER_MODAL, SWITCH_MESSAGE_MODAL, SWITCH_LOGIN_MODAL } from './ui.types';
+import {
+  UiState,
+  SWITCH_USER_MODAL,
+  SWITCH_MESSAGE_MODAL,
+  SWITCH_LOGIN_MODAL,
+  SWITCH_LANGUAGES_MODAL,
+} from './ui.types';
 
 const initialState: UiState = {
   screenLocked: false,
   userModal: {
-    type: 'popup',
+    type: 'modal',
+    mounted: false,
+  },
+  languagesModal: {
+    type: 'modal',
     mounted: false,
   },
   messageModal: {
@@ -24,6 +34,13 @@ export const Ui = (state = initialState, action): UiState => {
         userModal: {
           ...state.userModal,
           mounted: !state.userModal.mounted,
+        },
+      });
+    case SWITCH_LANGUAGES_MODAL:
+      return Object.assign({}, state, {
+        languagesModal: {
+          ...state.languagesModal,
+          mounted: !state.languagesModal.mounted,
         },
       });
     case SWITCH_MESSAGE_MODAL:

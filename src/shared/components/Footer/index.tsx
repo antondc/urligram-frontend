@@ -1,14 +1,27 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
+import { selectUiLanguagesModalMounted } from 'Modules/Ui/selectors/selectUiLanguagesModalMounted';
+import { switchLanguagesModal } from 'Modules/Ui/actions/switchLanguagesModal';
 import Border from 'Ui/Border';
 import Input from 'Ui/Input';
 import Span from 'Ui/Span';
 import A from 'Ui/A';
 import Hr from 'Ui/Hr';
-import Lang from 'Assets/svg/lang.svg';
+import LanguagesSwitch from 'Components/LanguagesSwitch';
+import LanguageItem from 'Components/LanguageItem';
+import Fade from 'Ui/Fade';
 
 import './Footer.less';
 
-const Footer: React.FC = () => {
+interface Props {
+  currentLanguageSlug: string;
+  uiLanguagesModalMounted: boolean;
+  switchLanguagesModal: () => void;
+}
+
+const Footer: React.FC<Props> = ({ currentLanguageSlug, uiLanguagesModalMounted, switchLanguagesModal }) => {
   const [email, setEmail] = useState(undefined);
   const onInputType = (e) => {
     setEmail(e.target.value);
@@ -66,11 +79,23 @@ const Footer: React.FC = () => {
         </ul>
       </div>
       <div className="Footer-section Footer-lastSection">
-        <Lang className="Footer-lang" />
+        <div className="Footer-languages" onMouseLeave={uiLanguagesModalMounted ? switchLanguagesModal : undefined}>
+          <LanguageItem lang={currentLanguageSlug} onClick={switchLanguagesModal} />
+          <Fade mounted={uiLanguagesModalMounted}>
+            <LanguagesSwitch />
+          </Fade>
+        </div>
         <Input name="mailing" label="Sign up to our mailing list" value={email} onChange={onInputType} />
       </div>
     </Border>
   );
 };
 
-export default Footer;
+const mapStateToProps = createStructuredSelector({
+  currentLanguageSlug: selectCurrentLanguageSlug,
+  uiLanguagesModalMounted: selectUiLanguagesModalMounted,
+});
+
+export default connect(mapStateToProps, {
+  switchLanguagesModal,
+})(Footer);
