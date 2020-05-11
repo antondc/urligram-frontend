@@ -31,16 +31,17 @@ const A: React.FC<Props> = ({
     onClick={onClick}
     title={title}
   >
-    {!frontend && (
+    {href && !frontend && (
       <a href={href} target={targetBlank ? '_blank' : '_self'}>
         {children}
       </a>
     )}
-    {frontend && (
+    {href && frontend && (
       <Link to={href} target={targetBlank ? '_blank' : '_self'}>
         {children}
       </Link>
     )}
+    {!href && <>{children}</>}
   </span>
 );
 

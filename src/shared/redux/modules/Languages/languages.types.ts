@@ -10,6 +10,9 @@ export interface GlossaryState {
   LogOut: string;
   Control: string;
   NotFound: string;
+  Tags: string;
+  Trending: string;
+  Lists: string;
 }
 
 export interface LanguageState {

@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { Link } from 'react-router-dom';
-import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import { switchUserModal } from 'Modules/Ui/actions/switchUserModal';
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
@@ -18,19 +17,12 @@ import './Header.less';
 
 interface Props {
   isLogged: boolean;
-  defaultCurrentSlug: string;
   currentGlossary: GlossaryState;
   switchUserModal: () => void;
   switchLoginModal: () => void;
 }
 
-const Header: React.FC<Props> = ({
-  isLogged,
-  defaultCurrentSlug,
-  currentGlossary,
-  switchUserModal,
-  switchLoginModal,
-}) => {
+const Header: React.FC<Props> = ({ isLogged, currentGlossary, switchUserModal, switchLoginModal }) => {
   return (
     <header>
       <Border className="Header">
@@ -40,13 +32,13 @@ const Header: React.FC<Props> = ({
         </div>
         <nav className="Header-navigation">
           <Link className="Header-link" to="">
-            <H4>Tags</H4>
+            <H4>{currentGlossary.Tags}</H4>
           </Link>
           <Link className="Header-link" to="">
-            <H4>Trending</H4>
+            <H4>{currentGlossary.Trending}</H4>
           </Link>
           <Link className="Header-link" to="">
-            <H4>Lists</H4>
+            <H4>{currentGlossary.Lists}</H4>
           </Link>
         </nav>
         <div className="Header-user">
@@ -62,7 +54,6 @@ const Header: React.FC<Props> = ({
 };
 
 const mapStateToProps = createStructuredSelector({
-  defaultCurrentSlug: selectCurrentLanguageSlug,
   isLogged: selectSessionLoggedIn,
   currentGlossary: selectCurrentGlossary,
 });

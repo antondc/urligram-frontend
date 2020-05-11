@@ -13,7 +13,10 @@
             "Login": "Login",
             "LogOut": "Log out",
             "Control": "Control",
-            "NotFound": "Page not found"
+            "NotFound": "Page not found",
+            "Tags": "Tags",
+            "Trending": "Trending",
+            "Lists": "Lists"
           }
         },
         "es": {
@@ -26,7 +29,10 @@
             "Login": "Ingresar",
             "LogOut": "Salir",
             "Control": "Control",
-            "NotFound": "Página no encontrada"
+            "NotFound": "Página no encontrada",
+            "Tags": "Etiquetas",
+            "Trending": "Lo más",
+            "Lists": "Listas"
           }
         },
         "ru": {
@@ -39,7 +45,10 @@
             "Login": "Войти",
             "LogOut": "Выйти",
             "Control": "Контроль",
-            "NotFound": "Задание 404"
+            "NotFound": "Задание 404",
+            "Tags": "Теги",
+            "Trending": "Трендинг",
+            "Lists": "Списки"
           }
         }
       },
@@ -53,7 +62,10 @@
           "Login": "Ingresar",
           "LogOut": "Salir",
           "Control": "Control",
-          "NotFound": "Page not found"
+          "NotFound": "Página no encontrada",
+          "Tags": "Tags",
+          "Trending": "Trending",
+          "Lists": "Lists"
         }
       }
     }

@@ -19,6 +19,9 @@ const initialState: LanguagesState = {
       LogOut: '',
       Control: '',
       NotFound: '',
+      Tags: '',
+      Trending: '',
+      Lists: '',
     },
   },
 };
