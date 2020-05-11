@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { selectLanguagesList } from 'Modules/Languages/selectors/selectLanguagesList';
 import { switchCurrentLanguage } from 'Modules/Languages/actions/switchCurrentLanguage';
+import { switchLanguagesModal } from 'Modules/Ui/actions/switchLanguagesModal';
 import { LanguageState } from 'Modules/Languages/languages.types';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import { selectCurrentLanguage } from 'Modules/Languages/selectors/selectCurrentLanguage';
@@ -19,6 +20,7 @@ interface Props {
   currentLanguage: LanguageState;
   currentRouteParamLanguage: string;
   currentPathname: string;
+  switchLanguagesModal: () => void;
   switchCurrentLanguage: (slug: string) => void;
 }
 
@@ -26,6 +28,7 @@ const LanguagesSwitch: React.FC<Props> = ({
   languagesList,
   currentLanguage,
   switchCurrentLanguage,
+  switchLanguagesModal,
   currentRouteParamLanguage,
   currentPathname,
 }) => {
@@ -40,7 +43,7 @@ const LanguagesSwitch: React.FC<Props> = ({
   });
 
   return (
-    <Border className="LanguagesSwitch">
+    <Border className="LanguagesSwitch" onClick={switchLanguagesModal}>
       {languagesWithLink
         .filter((item) => !item.isCurrent)
         .map((item) => {
@@ -84,5 +87,6 @@ const mapStateToProps = createStructuredSelector({
 });
 
 export default connect(mapStateToProps, {
-  switchCurrentLanguage: switchCurrentLanguage,
+  switchCurrentLanguage,
+  switchLanguagesModal,
 })(LanguagesSwitch);

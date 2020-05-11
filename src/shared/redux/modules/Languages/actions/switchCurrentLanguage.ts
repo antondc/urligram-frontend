@@ -11,7 +11,11 @@ export const switchCurrentLanguage = (slug: string) => {
     if (currentLanguage.slug !== slug) {
       const newCurrentLanguage = byKey[slug];
       dispatch(switchCurrentLanguageRequest());
-      dispatch(switchCurrentLanguageReceive(newCurrentLanguage));
+      // Timeout due to language loading faster than page reload
+      // TODO: navigate here
+      setTimeout(() => {
+        dispatch(switchCurrentLanguageReceive(newCurrentLanguage));
+      }, 300);
     }
   };
 };
