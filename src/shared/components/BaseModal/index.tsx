@@ -1,27 +1,20 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
 import LayoutContent from 'Common/LayoutContent';
-import { unMountAllModals } from 'Modules/Ui/actions/unMountAllModals';
 
 import './BaseModal.less';
 
 interface Props {
   children: React.ReactNode | React.ReactNode[];
-  unMountAllModals: () => void;
+  onClick?: () => void;
 }
 
-const BaseModal: React.FC<Props> = ({ children, unMountAllModals }) => (
+const BaseModal: React.FC<Props> = ({ children, onClick }) => (
   <div className="BaseModal">
     <LayoutContent className="BaseModal-center">
-      <div className="BaseModal-background" onClick={unMountAllModals} />
+      <div className="BaseModal-background" onClick={onClick} />
       <div className="BaseModal-content">{children}</div>
     </LayoutContent>
   </div>
 );
 
-const mapStateToProps = createStructuredSelector({});
-
-export default connect(mapStateToProps, {
-  unMountAllModals,
-})(BaseModal);
+export default BaseModal;

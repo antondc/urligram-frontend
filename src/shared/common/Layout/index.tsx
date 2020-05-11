@@ -11,10 +11,10 @@ import enhanceRouteWithParams from 'Tools/utils/url/enhanceRouteWithParams';
 import { selectLanguageLoading } from 'Modules/Languages/selectors/selectLanguageLoading';
 import { pushNewRoute } from 'Modules/Routes/actions/pushNewRoute';
 import { selectMockDataTwoLoading } from 'Modules/MockDataTwo/selectors/selectMockDataTwoLoading';
-import { selectuiUserModalMounted } from 'Modules/Ui/selectors/selectUiUserModalMounted';
+import { selectUiUserModalMounted } from 'Modules/Ui/selectors/selectUiUserModalMounted';
 import { selectUiLoginModalMounted } from 'Modules/Ui/selectors/selectUiLoginModalMounted';
-import { selectuiMessageModalMounted } from 'Modules/Ui/selectors/selectUiMessageModalMounted';
-import { selectUiAnyModalMounted } from 'Root/src/shared/redux/modules/Ui/selectors/selectUiAnyModalMounted';
+import { selectUiMessageModalMounted } from 'Modules/Ui/selectors/selectUiMessageModalMounted';
+import { selectUiScreenLocked } from 'Root/src/shared/redux/modules/Ui/selectors/selectUiScreenLocked';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import { routesList, routesWithoutOmmitedValues } from 'Routes/index';
 import Header from 'Components/Header';
@@ -37,7 +37,7 @@ interface Props {
   userModalMounted: boolean;
   messageModalMounted: boolean;
   loginModalMounted: boolean;
-  anyModalMounted: boolean;
+  uiScreenLocked: boolean;
   isLogged: boolean;
   pushNewRoute: (route) => void;
 }
@@ -51,7 +51,7 @@ class Layout extends React.Component<Props> {
   }
 
   componentDidUpdate = (prevProps) => {
-    const { anyModalMounted } = this.props;
+    const { uiScreenLocked } = this.props;
 
     if (this.props.location !== prevProps.location) {
       const activeRouteKey = findActiveRouteKey({
@@ -67,7 +67,7 @@ class Layout extends React.Component<Props> {
     }
 
     // Lock screen on Modal mount
-    if (anyModalMounted) {
+    if (uiScreenLocked) {
       document.body.classList.add('scrollLocked');
     } else {
       document.body.classList.remove('scrollLocked');
@@ -123,9 +123,9 @@ class Layout extends React.Component<Props> {
 const mapStateToProps = createStructuredSelector({
   languageLoading: selectLanguageLoading,
   mockDataTwoLoading: selectMockDataTwoLoading,
-  userModalMounted: selectuiUserModalMounted,
-  messageModalMounted: selectuiMessageModalMounted,
-  anyModalMounted: selectUiAnyModalMounted,
+  userModalMounted: selectUiUserModalMounted,
+  messageModalMounted: selectUiMessageModalMounted,
+  uiScreenLocked: selectUiScreenLocked,
   loginModalMounted: selectUiLoginModalMounted,
   isLogged: selectSessionLoggedIn,
 });

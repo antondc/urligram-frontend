@@ -1,23 +1,26 @@
 export const SWITCH_USER_MODAL = 'SWITCH_USER_MODAL';
 export const SWITCH_MESSAGE_MODAL = 'SWITCH_MESSAGE_MODAL';
 export const SWITCH_LOGIN_MODAL = 'SWITCH_LOGIN_MODAL';
-export const UNMOUNT_ALL_MODALS = 'UNMOUNT_ALL_MODALS';
 
 export interface UiState {
+  screenLocked: boolean;
   userModal: UiUserModalState;
   messageModal: UiMessageModalState;
   loginModal: UiLoginModalState;
 }
 
 export interface UiUserModalState {
+  type: 'popup';
   mounted: boolean;
 }
 
 export interface UiMessageModalState {
+  type: 'popup';
   mounted: boolean;
 }
 
 export interface UiLoginModalState {
+  type: 'popup';
   mounted: boolean;
 }
 
@@ -33,8 +36,4 @@ interface SwitchLoginModal {
   type: typeof SWITCH_LOGIN_MODAL;
 }
 
-interface UnMountAllModals {
-  type: typeof UNMOUNT_ALL_MODALS;
-}
-
-export type UiActionsTypes = SwitchUserModal | SwitchMessageModal | SwitchLoginModal | UnMountAllModals;
+export type UiActionsTypes = SwitchUserModal | SwitchMessageModal | SwitchLoginModal;

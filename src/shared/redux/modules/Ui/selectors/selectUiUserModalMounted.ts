@@ -3,6 +3,6 @@ import get from 'lodash/get';
 import { UiUserModalState } from './../ui.types';
 import { selectUiUserModal } from './selectUiUserModal';
 
-export const selectuiUserModalMounted = createSelector(selectUiUserModal, (uiUserModal: UiUserModalState): boolean =>
+export const selectUiUserModalMounted = createSelector(selectUiUserModal, (uiUserModal: UiUserModalState): boolean =>
   get(uiUserModal, 'mounted', false)
 );

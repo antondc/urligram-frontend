@@ -37,7 +37,7 @@ const LoginModal: React.FC<Props> = ({ logIn, switchLoginModal }) => {
   };
 
   return (
-    <BaseModal>
+    <BaseModal onClick={switchLoginModal}>
       <Border className="LoginModal" grow>
         <Cross className="LoginModal-cross" onClick={switchLoginModal} />
         <Flex horizontal="center">
