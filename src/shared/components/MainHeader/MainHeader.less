@@ -1,20 +1,26 @@
 @import '../../css/imports.less';
 
-@c: .Filter;
+@c: .MainHeader;
 
 @{c} {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
-  padding: 5px 10px;
 
-  &-spacer {
-    margin: 0 10px;
+  &-filters {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
   &-filter {
     display: flex;
     align-items: center;
+    margin-right: 10px;
+
+    &:last-child {
+      margin-right: 0;
+    }
   }
 
   &-filterName {
@@ -36,7 +42,7 @@
     height: 10px;
     width: 10px;
     margin: 2px 0 0;
-    opacity: 0;
+    opacity: 0.2;
     transition: opacity @td-fast @ease;
 
     &--active {

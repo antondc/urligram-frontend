@@ -1,13 +1,7 @@
 import React from 'react';
-import Navigation from 'Components/Navigation';
-import Filter from 'Components/Filter';
 
 import './SubHeader.less';
 
-const SubHeader: React.FC = ({}) => (
-  <div className="SubHeader">
-    <Filter className="SubHeader-filter" />
-  </div>
-);
+const SubHeader: React.FC = ({}) => <div className="SubHeader"></div>;
 
 export default SubHeader;

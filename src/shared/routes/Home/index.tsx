@@ -7,6 +7,7 @@ import Sidebar from 'Components/Sidebar';
 import SidebarListUsers from 'Components/SidebarListUsers';
 import SidebarListLists from 'Components/SidebarListLists';
 import SidebarListTags from 'Components/SidebarListTags';
+import MainHeader from 'Components/MainHeader';
 import LinkCard from 'Components/LinkCard';
 import { lists } from 'Root/src/shared/tools/mockData/mockLists';
 import { tags } from 'Root/src/shared/tools/mockData/mockTags';
@@ -27,6 +28,7 @@ const Home: React.FC = () => {
           <SidebarListLists title="Popular Lists" items={lists} />
         </Sidebar>
         <Main>
+          <MainHeader title="My links" />
           {links.map((item, index) => (
             <React.Fragment key={item.id}>
               {!!index && <Hr type="spacer" />}
