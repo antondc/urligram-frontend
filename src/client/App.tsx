@@ -1,10 +1,11 @@
 import React from 'react';
 import { render, hydrate } from 'react-dom';
 import { Provider } from 'react-redux';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { Router, Route } from 'react-router-dom';
 import App from '../shared/common/Layout';
 import storeFactory from '../shared/redux/index';
 import config from './../../config.test.json';
+import history from 'Services/History';
 
 interface CustomWindow extends Window {
   __PRELOADED_STATE__: any;
@@ -21,9 +22,9 @@ const renderApp = config.ENABLE_ISOMORPHISM ? hydrate : render;
 // Sending the Router with Route component; App component sent inside render method to insert data
 renderApp(
   <Provider store={store}>
-    <BrowserRouter>
+    <Router history={history}>
       <Route path="/" component={App} />
-    </BrowserRouter>
+    </Router>
   </Provider>,
   document.getElementById('app')
 );
