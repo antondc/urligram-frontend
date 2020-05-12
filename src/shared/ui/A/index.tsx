@@ -33,20 +33,15 @@ const A: React.FC<Props> = ({
 
   return (
     <>
-      {href && !frontend && (
+      {!frontend && (
         <a className={_className} onClick={onClick} title={title} href={href} target={target}>
           {children}
         </a>
       )}
-      {href && frontend && (
+      {frontend && (
         <Link className={_className} onClick={onClick} title={title} to={href} target={target}>
           {children}
         </Link>
-      )}
-      {!href && (
-        <span className={_className} onClick={onClick}>
-          {children}
-        </span>
       )}
     </>
   );

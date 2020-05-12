@@ -4,6 +4,7 @@ import { createStructuredSelector } from 'reselect';
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
 import { selectUiLanguagesModalMounted } from 'Modules/Ui/selectors/selectUiLanguagesModalMounted';
 import { switchLanguagesModal } from 'Modules/Ui/actions/switchLanguagesModal';
+import { selectCurrentPathname } from 'Modules/Routes/selectors/selectCurrentPathname.ts';
 import Border from 'Ui/Border';
 import Input from 'Ui/Input';
 import Span from 'Ui/Span';
@@ -18,10 +19,16 @@ import './Footer.less';
 interface Props {
   currentLanguageSlug: string;
   uiLanguagesModalMounted: boolean;
+  currentPathName: string;
   switchLanguagesModal: () => void;
 }
 
-const Footer: React.FC<Props> = ({ currentLanguageSlug, uiLanguagesModalMounted, switchLanguagesModal }) => {
+const Footer: React.FC<Props> = ({
+  currentLanguageSlug,
+  uiLanguagesModalMounted,
+  currentPathName,
+  switchLanguagesModal,
+}) => {
   const [email, setEmail] = useState(undefined);
   const onInputType = (e) => {
     setEmail(e.target.value);
@@ -80,7 +87,7 @@ const Footer: React.FC<Props> = ({ currentLanguageSlug, uiLanguagesModalMounted,
       </div>
       <div className="Footer-section Footer-lastSection">
         <div className="Footer-languages" onMouseLeave={uiLanguagesModalMounted ? switchLanguagesModal : undefined}>
-          <LanguageItem lang={currentLanguageSlug} onClick={switchLanguagesModal} />
+          <LanguageItem lang={currentLanguageSlug} onClick={switchLanguagesModal} href={currentPathName} />
           <Fade mounted={uiLanguagesModalMounted}>
             <LanguagesSwitch />
           </Fade>
@@ -94,6 +101,7 @@ const Footer: React.FC<Props> = ({ currentLanguageSlug, uiLanguagesModalMounted,
 const mapStateToProps = createStructuredSelector({
   currentLanguageSlug: selectCurrentLanguageSlug,
   uiLanguagesModalMounted: selectUiLanguagesModalMounted,
+  currentPathName: selectCurrentPathname,
 });
 
 export default connect(mapStateToProps, {
