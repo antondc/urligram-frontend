@@ -8,6 +8,7 @@ export type FadeSpeed = 'slow' | 'normal' | 'fast' | 'fastest';
 interface Props {
   classname?: string;
   mounted?: boolean;
+  unmountOnExit?: boolean;
   children?: object;
   onEnter?: () => void;
   onEntered?: () => void;
@@ -24,6 +25,7 @@ const Fade: React.FC<Props> = ({
   onExit,
   onEntered,
   mounted,
+  unmountOnExit = true,
   speed = 'fast',
 }) => {
   return (
@@ -31,7 +33,7 @@ const Fade: React.FC<Props> = ({
       <CSSTransition
         in={mounted}
         appear
-        unmountOnExit
+        unmountOnExit={unmountOnExit}
         className={'Fade-transition Fade-transition--' + speed + (classname ? classname + '-transition' : '')}
         classNames={'Fade'}
         timeout={{

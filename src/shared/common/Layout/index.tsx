@@ -88,8 +88,8 @@ class Layout extends React.Component<Props> {
 
     return (
       <div className="Layout">
-        <Background className="Layout-background" />
-        <Fade mounted={mounted}>
+        <Fade mounted={mounted} unmountOnExit={false}>
+          <Background className="Layout-background" />
           <LayoutContent>
             <div className="Layout-top">
               <Header />

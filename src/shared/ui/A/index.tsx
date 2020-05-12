@@ -25,24 +25,31 @@ const A: React.FC<Props> = ({
   onClick,
   disabled = false,
   title,
-}) => (
-  <span
-    className={(styled ? 'A' : '') + (styled && disabled ? ' A-disabled' : '') + (className ? ' ' + className : '')}
-    onClick={onClick}
-    title={title}
-  >
-    {href && !frontend && (
-      <a href={href} target={targetBlank ? '_blank' : '_self'}>
-        {children}
-      </a>
-    )}
-    {href && frontend && (
-      <Link to={href} target={targetBlank ? '_blank' : '_self'}>
-        {children}
-      </Link>
-    )}
-    {!href && <>{children}</>}
-  </span>
-);
+}) => {
+  const _className =
+    (styled ? 'A' : '') + (styled && disabled ? ' A-disabled' : '') + (className ? ' ' + className : '');
+
+  const target = targetBlank ? '_blank' : '_self';
+
+  return (
+    <>
+      {href && !frontend && (
+        <a className={_className} onClick={onClick} title={title} href={href} target={target}>
+          {children}
+        </a>
+      )}
+      {href && frontend && (
+        <Link className={_className} onClick={onClick} title={title} to={href} target={target}>
+          {children}
+        </Link>
+      )}
+      {!href && (
+        <span className={_className} onClick={onClick}>
+          {children}
+        </span>
+      )}
+    </>
+  );
+};
 
 export default A;

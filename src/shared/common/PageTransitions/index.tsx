@@ -7,9 +7,10 @@ import './PageTransitions.less';
 interface Props {
   children: React.ReactNode | React.ReactNode[];
   location: Location;
+  scrollToTop?: boolean;
 }
 
-const PageTransitions: React.FC<Props> = ({ children, location: { pathname } }) => (
+const PageTransitions: React.FC<Props> = ({ children, location: { pathname }, scrollToTop }) => (
   <div className="PageTransitions">
     <TransitionGroup component={null}>
       <CSSTransition
@@ -21,9 +22,10 @@ const PageTransitions: React.FC<Props> = ({ children, location: { pathname } }) 
           exit: 150,
         }}
         onExited={() => {
-          window.scrollTo({
-            top: 0,
-          });
+          scrollToTop &&
+            window.scrollTo({
+              top: 0,
+            });
         }}
       >
         {children}
