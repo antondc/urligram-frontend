@@ -11,27 +11,25 @@ interface Props {
 }
 
 const PageTransitions: React.FC<Props> = ({ children, location: { pathname }, scrollToTop }) => (
-  <div className="PageTransitions">
-    <TransitionGroup component={null}>
-      <CSSTransition
-        key={pathname} // Important for Link component
-        appear={true}
-        classNames="PageTransitions"
-        timeout={{
-          enter: 150,
-          exit: 150,
-        }}
-        onExited={() => {
-          scrollToTop &&
-            window.scrollTo({
-              top: 0,
-            });
-        }}
-      >
-        {children}
-      </CSSTransition>
-    </TransitionGroup>
-  </div>
+  <TransitionGroup component={null}>
+    <CSSTransition
+      key={pathname} // Important for Link component
+      appear={true}
+      classNames="PageTransitions"
+      timeout={{
+        enter: 2000,
+        exit: 2000,
+      }}
+      onExited={() => {
+        scrollToTop &&
+          window.scrollTo({
+            top: 0,
+          });
+      }}
+    >
+      {children}
+    </CSSTransition>
+  </TransitionGroup>
 );
 
 export default PageTransitions;
