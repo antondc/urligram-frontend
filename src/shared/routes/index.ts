@@ -34,7 +34,7 @@ const Routes = {
 
   NotFound: {
     name: 'NotFound',
-    path: '/:path*',
+    path: '/:lang([a-z]{2})?/:path*',
     exact: false,
     hasHeader: true,
     hasFooter: true,
