@@ -87,10 +87,10 @@ const Footer: React.FC<Props> = ({
       </div>
       <div className="Footer-section Footer-lastSection">
         <div className="Footer-languages" onMouseLeave={uiLanguagesModalMounted ? switchLanguagesModal : undefined}>
-          <LanguageItem lang={currentLanguageSlug} onClick={switchLanguagesModal} href={currentPathName} />
           <Fade mounted={uiLanguagesModalMounted}>
             <LanguagesSwitch />
           </Fade>
+          <LanguageItem lang={currentLanguageSlug} onClick={switchLanguagesModal} href={currentPathName} />
         </div>
         <Input name="mailing" label="Sign up to our mailing list" value={email} onChange={onInputType} />
       </div>

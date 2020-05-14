@@ -12,58 +12,61 @@
     height: 100%;
     width: 100%;
     opacity: 0;
-    will-change: opacity;
-
-    &--fastest {
-      transition: opacity @td-fastest ease-in-out;
-    }
-
-    &--fast {
-      transition: opacity @td-fast ease-in-out;
-    }
-
-    &--normal {
-      transition: opacity @td-normal ease-in-out;
-    }
-
-    &--slow {
-      transition: opacity @td-slow ease-in-out;
-    }
+    will-change: opacity, transform;
   }
 
-  &-initial {
-    opacity: 0.03;
+  &--fastest {
+    transition: opacity @td-fastest, transform @td-fastest;
   }
 
-  &-appear {
-    opacity: 0;
+  &--fast {
+    transition: opacity @td-fast, transform @td-fast;
   }
 
-  &-appear-active {
-    opacity: 1;
+  &--normal {
+    transition: opacity @td-normal, transform @td-normal;
   }
 
-  &-enter {
-    opacity: 0;
+  &--slow {
+    transition: opacity @td-slow, transform @td-slow;
   }
 
-  &-enter-active {
-    opacity: 1;
+  &--up {
+    transform: translateY(40px);
   }
 
-  &-enter-done {
-    opacity: 1;
+  &--down {
+    transform: translateY(-40px);
   }
 
-  &-exit {
-    opacity: 0;
+  &--left {
+    transform: translateX(-40px);
   }
 
-  &-exit-active {
-    opacity: 0;
+  &--right {
+    transform: translateX(40px);
   }
 
+  &--fullScreen {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  &-appear,
+  &-enter,
+  &-exit,
+  &-exit-active,
   &-exit-done {
     opacity: 0;
+  }
+
+  &-appear-active,
+  &-enter-active,
+  &-enter-done {
+    opacity: 1;
+    transform: translate(0);
   }
 }
