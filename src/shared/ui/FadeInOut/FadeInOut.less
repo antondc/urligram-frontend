@@ -1,0 +1,60 @@
+@import '../../css/imports.less';
+
+@c: .FadeInOut;
+
+@{c} {
+  &-transition {
+    opacity: 0;
+    will-change: opacity;
+
+    &--fastest {
+      transition: opacity @td-fastest ease-in-out;
+    }
+
+    &--fast {
+      transition: opacity @td-fast ease-in-out;
+    }
+
+    &--normal {
+      transition: opacity @td-normal ease-in-out;
+    }
+
+    &--slow {
+      transition: opacity @td-slow ease-in-out;
+    }
+  }
+
+  &-initial {
+    opacity: 0;
+    // transition: opacity @td-sluggish ease;
+  }
+
+  &-appear {
+    opacity: 0;
+    // transition: opacity @td-sluggish ease;
+  }
+
+  &-appear-active {
+    opacity: 1;
+    // transition: opacity @td-sluggish ease;
+  }
+
+  &-enter-active {
+    position: fixed;
+    opacity: 0;
+  }
+
+  &-enter-done {
+    opacity: 1;
+    // transition: opacity @td-sluggish ease;
+  }
+
+  &-exit {
+    opacity: 0;
+    // transition: opacity @td-sluggish ease;
+  }
+
+  &-exit-done {
+    opacity: 0;
+  }
+}

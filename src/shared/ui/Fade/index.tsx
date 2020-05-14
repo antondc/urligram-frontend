@@ -1,6 +1,7 @@
 import React from 'react';
 import { CSSTransition } from 'react-transition-group';
 import { speedMap } from './speedMap';
+
 import './Fade.less';
 
 export type FadeSpeed = 'slow' | 'normal' | 'fast' | 'fastest';

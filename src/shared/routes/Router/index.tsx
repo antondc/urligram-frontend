@@ -9,9 +9,9 @@ import Login from 'Routes/Login';
 import Home from 'Routes/Home';
 import Control from 'Routes/Control';
 import NotFound from 'Routes/NotFound';
-import PageTransitions from 'Common/PageTransitions';
 import { selectSessionLoggedIn } from '../../redux/modules/Session/selectors/selectSessionLoggedIn';
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
+import FadeInOut from 'Ui/FadeInOut';
 
 interface Props {
   loggedIn: boolean;
@@ -19,9 +19,8 @@ interface Props {
   defaultCurrentSlug: string;
 }
 
-const Router: React.FC<Props> = ({ loggedIn, location, defaultCurrentSlug }) => (
-  <PageTransitions location={location}>
-    {/* Location needed for animations */}
+const Router: React.FC<Props> = ({ loggedIn, location, location: { pathname }, defaultCurrentSlug }) => (
+  <FadeInOut valueToUpdate={pathname}>
     <Switch location={location}>
       {loggedIn && <Redirect from="/:lang?/login" to={'/' + defaultCurrentSlug + '/control'} />}
       {!loggedIn && <Redirect from="/:lang?/control" to={'/' + defaultCurrentSlug + '/login'} />}
@@ -30,7 +29,7 @@ const Router: React.FC<Props> = ({ loggedIn, location, defaultCurrentSlug }) => 
       <Route exact={Routes.Control.exact} path={Routes.Control.path} component={Control} />
       <Route exact={Routes.NotFound.exact} path={Routes.NotFound.path} component={NotFound} />
     </Switch>
-  </PageTransitions>
+  </FadeInOut>
 );
 
 const mapStateToProps = createStructuredSelector({
