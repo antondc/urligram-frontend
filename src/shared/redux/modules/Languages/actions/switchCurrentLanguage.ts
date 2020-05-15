@@ -14,6 +14,6 @@ export const switchCurrentLanguage = (slug: string) => (dispatch: Dispatch, getS
     // TODO: navigate here
     setTimeout(() => {
       dispatch(switchCurrentLanguageReceive(newCurrentLanguage));
-    }, 300);
+    }, 150);
   }
 };

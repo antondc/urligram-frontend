@@ -5,7 +5,6 @@ import { Location } from 'history';
 import { createStructuredSelector } from 'reselect';
 import SpinnerCircle from 'Ui/SpinnerCircle';
 import Fade from 'Ui/Fade';
-import FadeInOut from 'Ui/FadeInOut';
 import Hr from 'Ui/Hr';
 import findActiveRouteKey from 'Tools/utils/url/findActiveRouteKey';
 import enhanceRouteWithParams from 'Tools/utils/url/enhanceRouteWithParams';
@@ -18,7 +17,6 @@ import { selectUiMessageModalMounted } from 'Modules/Ui/selectors/selectUiMessag
 import { selectUiScreenLocked } from 'Root/src/shared/redux/modules/Ui/selectors/selectUiScreenLocked';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import { routesList, routesWithoutOmmitedValues } from 'Routes/index';
-import { selectCurrentRouteParamLanguageOrDefault } from 'Modules/Routes/selectors/selectCurrentRouteParamLanguageOrDefault';
 import Header from 'Components/Header';
 import Footer from 'Components/Footer';
 import SubHeader from 'Components/SubHeader';
@@ -41,7 +39,6 @@ interface Props {
   loginModalMounted: boolean;
   uiScreenLocked: boolean;
   isLogged: boolean;
-  currentRouteParamLanguage: string;
   pushNewRoute: (route) => void;
 }
 
@@ -85,14 +82,14 @@ class Layout extends React.Component<Props> {
       messageModalMounted,
       loginModalMounted,
       isLogged,
-      currentRouteParamLanguage,
     } = this.props;
 
+    const mounted = !languageLoading;
     const showLoader = mockDataTwoLoading;
 
     return (
       <div className="Layout">
-        <FadeInOut valueToUpdate={currentRouteParamLanguage}>
+        <Fade mounted={mounted} unmountOnExit={false} speed="fast">
           <Background className="Layout-background" />
           <LayoutContent>
             <div className="Layout-top">
@@ -118,7 +115,7 @@ class Layout extends React.Component<Props> {
           <Fade mounted={loginModalMounted} speed="fastest" fullScreen>
             <LoginModal />
           </Fade>
-        </FadeInOut>
+        </Fade>
       </div>
     );
   };
@@ -132,7 +129,6 @@ const mapStateToProps = createStructuredSelector({
   uiScreenLocked: selectUiScreenLocked,
   loginModalMounted: selectUiLoginModalMounted,
   isLogged: selectSessionLoggedIn,
-  currentRouteParamLanguage: selectCurrentRouteParamLanguageOrDefault,
 });
 
 export default connect(mapStateToProps, {
