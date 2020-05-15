@@ -102,17 +102,17 @@ class Layout extends React.Component<Props> {
             </div>
             <LayoutHelper />
             <Footer />
-            <Fade mounted={userModalMounted}>
+            <Fade mounted={userModalMounted} position="absolute">
               <UserModal />
             </Fade>
           </LayoutContent>
-          <Fade mounted={showLoader} speed="fastest" fullScreen>
+          <Fade mounted={showLoader} speed="fastest" position="fixed">
             <SpinnerCircle />
           </Fade>
-          <Fade mounted={messageModalMounted} speed="fastest" fullScreen>
+          <Fade mounted={messageModalMounted} speed="fastest" position="fixed">
             <ModalMessage message="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus gravida augue sed ipsum pulvinar, vel pretium tellus commodo. Aliquam erat volutpat. Morbi placerat justo massa, eget laoreet enim cursus et. Aliquam id scelerisque ipsum, ac rutrum erat. Donec sed blandit metus. Maecenas pellentesque, neque vel " />
           </Fade>
-          <Fade mounted={loginModalMounted} speed="fastest" fullScreen>
+          <Fade mounted={loginModalMounted} speed="fastest" position="fixed">
             <LoginModal />
           </Fade>
         </Fade>
