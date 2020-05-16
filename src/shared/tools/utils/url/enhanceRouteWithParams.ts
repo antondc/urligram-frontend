@@ -5,27 +5,26 @@ import { RouteState } from 'Modules/Routes/routes.types';
 
 /**
  * Receives a route object, an url path, and a query string or/and query params object; extracts the params and query params to enhance the route with them.
- * @param {*} { route, path, queryString, queryParams }
+ * @param {*} { route, path, search, queryParams }
  * @returns
  */
 
 type EnhanceRouteWithParams = (options: {
   route: RouteState;
-  urlPath?: string;
-  queryString?: string;
   queryParams?: {
     [key: string]: string;
   };
+  location?: { hash?: string; key?: string; pathname?: string; search?: string; state?: string };
 }) => RouteState;
 
-const enhanceRouteWithParams: EnhanceRouteWithParams = ({ route, urlPath, queryString, queryParams }) => {
+const enhanceRouteWithParams: EnhanceRouteWithParams = ({ route, queryParams, location }) => {
   const regexp = match(route.path, { decode: decodeURIComponent }); // Create a regexp with the route's path
-  const parsedPath = regexp(urlPath); // Parse the url path to extract the params
+  const parsedPath = regexp(location.pathname); // Parse the url path to extract the params
   const finalParams = parsedPath ? parsedPath.params : undefined; // Extract the params
-  const finalQueryParams = queryParams || queryStringParser.parse(queryString) || undefined; // If there are queryParams, use them; otherwise parse the string if present, or undefined
+  const finalQueryParams = queryParams || queryStringParser.parse(location.search) || undefined; // If there are queryParams, use them; otherwise parse the string if present, or undefined
 
   const enhancedRoute: RouteState = Object.assign(cloneDeep(route), {
-    pathname: urlPath,
+    ...location,
     params: finalParams,
     queryParams: finalQueryParams,
   });

@@ -60,8 +60,7 @@ class Layout extends React.Component<Props> {
       });
       const enhancedRoute = enhanceRouteWithParams({
         route: routesWithoutOmmitedValues[activeRouteKey],
-        urlPath: location.pathname,
-        queryString: location.search,
+        location: location,
       });
       this.props.pushNewRoute(enhancedRoute);
     }

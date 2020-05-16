@@ -42,7 +42,7 @@ router.get(routesPathsList, function (req: any, res: any) {
       // Load routes data
       const enhancedRoute = enhanceRouteWithParams({
         route: routesWithoutOmmitedValues[activeRouteKey],
-        urlPath: req.path,
+        location: { pathname: req.path },
         queryParams: req.query,
       });
 
