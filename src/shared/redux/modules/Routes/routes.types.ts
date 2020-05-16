@@ -7,11 +7,11 @@ export interface RoutesState {
 }
 
 export interface LocationState {
-  hash?: string;
+  hash: string;
   key?: string;
   pathname?: string;
-  search?: string;
-  state?: {};
+  search: string;
+  state: {};
 }
 
 export interface RouteState {

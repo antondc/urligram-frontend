@@ -3,20 +3,20 @@ import { Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 import { createStructuredSelector } from 'reselect';
-import { Location } from 'history';
 import Routes from 'Routes/index';
 import Login from 'Routes/Login';
 import Home from 'Routes/Home';
 import Control from 'Routes/Control';
 import NotFound from 'Routes/NotFound';
-import { selectSessionLoggedIn } from '../../redux/modules/Session/selectors/selectSessionLoggedIn';
+import { LocationState } from 'Modules/Routes/routes.types';
+import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
 import FadeInOut from 'Ui/FadeInOut';
 import { selectPathWithoutLanguageParam } from 'Modules/Routes/selectors/selectPathWithoutLanguageParam';
 
 interface Props {
   loggedIn: boolean;
-  location: Location;
+  location: LocationState;
   defaultCurrentSlug: string;
   pathWithoutLanguageParam: string;
 }
