@@ -6,6 +6,14 @@ export interface RoutesState {
   currentRoute?: RouteState;
 }
 
+export interface LocationState {
+  hash?: string;
+  key?: string;
+  pathname?: string;
+  search?: string;
+  state?: {};
+}
+
 export interface RouteState {
   name: string;
   path: string;

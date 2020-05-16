@@ -51,16 +51,16 @@ class Layout extends React.Component<Props> {
   }
 
   componentDidUpdate = (prevProps) => {
-    const { uiScreenLocked } = this.props;
+    const { uiScreenLocked, location } = this.props;
 
-    if (this.props.location !== prevProps.location) {
+    if (location !== prevProps.location) {
       const activeRouteKey = findActiveRouteKey({
         urlPath: location.pathname,
         routes: routesList,
       });
       const enhancedRoute = enhanceRouteWithParams({
         route: routesWithoutOmmitedValues[activeRouteKey],
-        location: location,
+        location,
       });
       this.props.pushNewRoute(enhancedRoute);
     }

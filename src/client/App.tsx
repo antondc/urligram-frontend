@@ -2,9 +2,9 @@ import React from 'react';
 import { render, hydrate } from 'react-dom';
 import { Provider } from 'react-redux';
 import { Router, Route } from 'react-router-dom';
-import App from '../shared/common/Layout';
-import storeFactory from '../shared/redux/index';
-import config from './../../config.test.json';
+import Layout from 'Common/Layout';
+import storeFactory from 'Redux/index';
+import config from 'Root/config.test.json';
 import history from 'Services/History';
 
 interface CustomWindow extends Window {
@@ -19,11 +19,11 @@ delete window.__PRELOADED_STATE__; // Allow state to be garbage collected: https
 const store = storeFactory(preloadedState);
 const renderApp = config.ENABLE_ISOMORPHISM ? hydrate : render;
 
-// Sending the Router with Route component; App component sent inside render method to insert data
+// Sending the Router with Route component; Layout component sent inside render method to insert data
 renderApp(
   <Provider store={store}>
     <Router history={history}>
-      <Route path="/" component={App} />
+      <Route path="/" component={Layout} />
     </Router>
   </Provider>,
   document.getElementById('app')

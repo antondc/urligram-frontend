@@ -10,6 +10,7 @@ import enhanceRouteWithParams from 'Tools/utils/url/enhanceRouteWithParams';
 import config from 'Root/config.test.json';
 import Routes, { routesWithoutOmmitedValues, routesList, routesPathsList } from 'Routes/index';
 import Authentication from 'Services/Authentication';
+import history from 'Services/History';
 import storeFactory from 'Redux/index';
 import Layout from 'Common/Layout';
 import { SessionState } from 'Modules/Session/session.types';
@@ -42,7 +43,7 @@ router.get(routesPathsList, function (req: any, res: any) {
       // Load routes data
       const enhancedRoute = enhanceRouteWithParams({
         route: routesWithoutOmmitedValues[activeRouteKey],
-        location: { pathname: req.path },
+        location: history.location,
         queryParams: req.query,
       });
 
@@ -58,7 +59,7 @@ router.get(routesPathsList, function (req: any, res: any) {
       const appComponentAsString = config.ENABLE_ISOMORPHISM
         ? renderToString(
           <Provider store={store}>
-            <StaticRouter location={req.url} context={context}>
+            <StaticRouter location={history.location} context={context}>
               <Route path="/" render={(props): React.ReactNode => <Layout {...props} />} />
             </StaticRouter>
           </Provider>

@@ -1,11 +1,11 @@
 import { match } from 'path-to-regexp';
 import * as queryStringParser from 'query-string';
 import cloneDeep from 'lodash/cloneDeep';
-import { RouteState } from 'Modules/Routes/routes.types';
+import { RouteState, LocationState } from 'Modules/Routes/routes.types';
 
 /**
- * Receives a route object, an url path, and a query string or/and query params object; extracts the params and query params to enhance the route with them.
- * @param {*} { route, path, search, queryParams }
+ * Receives a route object, a queryParams object and a reaact-router-dom location object; extracts the params and query params to enhance the route with them.
+ * @param {*} { route, queryParams, location }
  * @returns
  */
 
@@ -14,7 +14,7 @@ type EnhanceRouteWithParams = (options: {
   queryParams?: {
     [key: string]: string;
   };
-  location?: { hash?: string; key?: string; pathname?: string; search?: string; state?: string };
+  location: LocationState;
 }) => RouteState;
 
 const enhanceRouteWithParams: EnhanceRouteWithParams = ({ route, queryParams, location }) => {
