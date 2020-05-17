@@ -1,6 +1,5 @@
 import React from 'react';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import { speedMap } from './speedMap';
+import { CSSTransition, SwitchTransition } from 'react-transition-group';
 
 import './FadeInOut.less';
 
@@ -14,18 +13,14 @@ interface Props {
   scrollToTop?: boolean;
 }
 
-const FadeInOut: React.FC<Props> = ({ children, classname, valueToUpdate, speed = 'normal', scrollToTop }) => (
-  <TransitionGroup component={null}>
+const FadeInOut: React.FC<Props> = ({ children, classname, valueToUpdate, speed = 'fast', scrollToTop }) => (
+  <SwitchTransition>
     <CSSTransition
       key={valueToUpdate}
+      addEndListener={(node, done) => node.addEventListener('transitionend', done, false)}
       appear
-      unmountOnExit
       classNames="FadeInOut"
-      className={'FadeInOut-transition FadeInOut-transition--' + speed + (classname ? classname + '-transition' : '')}
-      timeout={{
-        enter: speedMap[speed],
-        exit: speedMap[speed],
-      }}
+      className={'FadeInOut FadeInOut--' + speed + (classname ? classname : '')}
       onExited={() => {
         scrollToTop &&
           window.scrollTo({
@@ -35,7 +30,7 @@ const FadeInOut: React.FC<Props> = ({ children, classname, valueToUpdate, speed 
     >
       <div>{children}</div>
     </CSSTransition>
-  </TransitionGroup>
+  </SwitchTransition>
 );
 
 export default FadeInOut;

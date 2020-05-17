@@ -3,52 +3,32 @@
 @c: .FadeInOut;
 
 @{c} {
-  &-transition {
-    opacity: 0;
-    will-change: opacity;
+  opacity: 0;
+  will-change: opacity;
 
-    &--fastest {
-      transition: opacity @td-fastest ease-in-out;
-    }
-
-    &--fast {
-      transition: opacity @td-fast ease-in-out;
-    }
-
-    &--normal {
-      transition: opacity @td-normal ease-in-out;
-    }
-
-    &--slow {
-      transition: opacity @td-slow ease-in-out;
-    }
+  &--fastest {
+    transition: opacity @td-fastest ease-in-out;
   }
 
-  &-initial {
-    opacity: 0;
+  &--fast {
+    transition: opacity @td-fast ease-in-out;
   }
 
-  &-appear {
-    opacity: 0;
+  &--normal {
+    transition: opacity @td-normal ease-in-out;
   }
 
-  &-appear-active {
-    opacity: 1;
+  &--slow {
+    transition: opacity @td-slow ease-in-out;
   }
 
-  &-enter-active {
-    position: fixed;
-    opacity: 0;
-  }
-
+  &-appear,
+  &-enter-active,
   &-enter-done {
     opacity: 1;
   }
 
-  &-exit {
-    opacity: 0;
-  }
-
+  &-exit-active,
   &-exit-done {
     opacity: 0;
   }
