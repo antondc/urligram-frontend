@@ -1,13 +1,13 @@
 import { matchPath } from 'react-router-dom';
-import { RouteState } from 'Modules/Routes/routes.types';
+import { Route } from 'Routes/index';
 
 /**
- * Iterates over src/shared/routes/routes.ts and return the keyof the route which path prop matches passed url.
- * @param {*} { path, routes, queryString, queryParams }
+ * Iterates over src/shared/routes/routes.ts and return the keyof the route whose path prop matches passed url.
+ * @param {*} { urlPath, routes }
  * @returns
  */
 
-type FindActiveRouteKey = (options: { urlPath?: string; routes: RouteState[] }) => string;
+type FindActiveRouteKey = (options: { urlPath?: string; routes: Route[] }) => string;
 
 const findActiveRouteKey: FindActiveRouteKey = ({ urlPath, routes }) => {
   const routeKey = routes.find((route) => matchPath(urlPath, route));

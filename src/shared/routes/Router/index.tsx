@@ -8,7 +8,7 @@ import Login from 'Routes/Login';
 import Home from 'Routes/Home';
 import Control from 'Routes/Control';
 import NotFound from 'Routes/NotFound';
-import { LocationState } from 'Modules/Routes/routes.types';
+import { Location } from 'Services/History';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
 import FadeInOut from 'Ui/FadeInOut';
@@ -16,7 +16,7 @@ import { selectPathWithoutLanguageParam } from 'Modules/Routes/selectors/selectP
 
 interface Props {
   loggedIn: boolean;
-  location: LocationState;
+  location: Location;
   defaultCurrentSlug: string;
   pathWithoutLanguageParam: string;
 }

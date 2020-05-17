@@ -1,7 +1,22 @@
 import omit from 'lodash/omit';
 import { loadMockDataOne } from 'Modules/MockDataOne/actions/loadMockDataOne';
 
-const Routes = {
+export interface Route {
+  name: string;
+  path: string;
+  exact: boolean;
+  auth: boolean;
+  hasHeader?: boolean;
+  hasFooter?: boolean;
+  header?: boolean;
+  loadInitialData?: Function[];
+}
+
+export interface RoutesInterface {
+  [key: string]: Route;
+}
+
+const Routes: RoutesInterface = {
   Login: {
     name: 'Login',
     path: '/:lang([a-z]{2})?/login',
@@ -45,14 +60,15 @@ const Routes = {
 };
 
 // Export routes without specific values values
-export const routesWithoutOmmitedValues = Object.entries(Routes).reduce((acc, [key, value]) => {
+export const routesWithoutOmmitedValues: RoutesInterface = Object.entries(Routes).reduce((acc, [key, value]) => {
   const valuesToRemove = ['loadInitialData' /* etc. */];
   const routeWithoutOmmitedValues = omit(value, valuesToRemove);
 
   return { ...acc, [key]: routeWithoutOmmitedValues };
 }, {});
 
-export const routesPathsList = Object.values(Routes).map((item) => item.path);
-export const routesList = Object.values(Routes);
+export const routesPathsList: string[] = Object.values(Routes).map((item) => item.path);
+
+export const routesList: Route[] = Object.values(Routes);
 
 export default Routes;
