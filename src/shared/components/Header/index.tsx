@@ -46,7 +46,7 @@ const Header: React.FC<Props> = ({
           <Link className="Header-link" to={'/' + currentLanguageSlug + '/login'}>
             <H4>{currentGlossary.Trending}</H4>
           </Link>
-          <Link className="Header-link" to={'/' + currentLanguageSlug + '/not-found'}>
+          <Link className="Header-link" to={'/' + currentLanguageSlug + '/control'}>
             <H4>{currentGlossary.Lists}</H4>
           </Link>
         </nav>
