@@ -1,5 +1,6 @@
 import React from 'react';
 import { CSSTransition, SwitchTransition } from 'react-transition-group';
+import { speedMap } from './speedMap';
 
 import './FadeInOut.less';
 
@@ -17,10 +18,13 @@ const FadeInOut: React.FC<Props> = ({ children, classname, valueToUpdate, speed 
   <SwitchTransition>
     <CSSTransition
       key={valueToUpdate}
-      addEndListener={(node, done) => node.addEventListener('transitionend', done, false)}
       appear
       classNames="FadeInOut"
       className={'FadeInOut FadeInOut--' + speed + (classname ? classname : '')}
+      timeout={{
+        enter: speedMap[speed],
+        exit: speedMap[speed],
+      }}
       onExited={() => {
         scrollToTop &&
           window.scrollTo({
