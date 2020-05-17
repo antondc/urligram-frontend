@@ -4,17 +4,18 @@ import { logIn } from 'Modules/Session/actions/logIn';
 import Button from 'Ui/Button';
 import { createStructuredSelector } from 'reselect';
 
-import './Login.less';
+import './SignIn.less';
 
 interface Props {
   logIn: (username: string, password: string) => void;
 }
+
 interface State {
   username: string;
   password: undefined;
 }
 
-class Login extends Component<Props, State> {
+class SignIn extends Component<Props, State> {
   constructor(props) {
     super(props);
     this.state = {
@@ -37,11 +38,11 @@ class Login extends Component<Props, State> {
 
   render() {
     return (
-      <div className="Login">
-        <div className="Login-content">
-          <h1 className="Login-h1">LOGIN PAGE</h1>
-          <form className="Login-form">
-            Log in
+      <div className="SignIn">
+        <div className="SignIn-content">
+          <h1 className="SignIn-h1">SIGN IN PAGE</h1>
+          <form className="SignIn-form">
+            Sign in
             <input name="username" type="text" placeholder="Session name" autoFocus onChange={this.onChange} />
             <input name="password" type="text" placeholder="Password" autoFocus onChange={this.onChange} />
             <Button text="Enter" onClick={this.onSubmit} />
@@ -56,4 +57,4 @@ const mapStateToProps = createStructuredSelector({});
 
 export default connect(mapStateToProps, {
   logIn,
-})(Login);
+})(SignIn);

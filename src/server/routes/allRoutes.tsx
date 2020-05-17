@@ -26,6 +26,9 @@ router.get(routesPathsList, function (req: any, res: any) {
   // Retrieve initial data from loaders passing req.params.
   const initialDataLoaders = Routes[activeRouteKey].loadInitialData.map((item: any) => item(req.params));
 
+  // Add curent path to history.location
+  const location = { ...history.location, pathname: req.path };
+
   Promise.all([loadLanguages(req.params.lang), ...initialDataLoaders])
     .then((response: any) => {
       const data = Object.assign({}, ...response);
@@ -43,7 +46,7 @@ router.get(routesPathsList, function (req: any, res: any) {
       // Load routes data
       const enhancedRoute = enhanceRouteWithParams({
         route: routesWithoutOmmitedValues[activeRouteKey],
-        location: history.location,
+        location: location,
         queryParams: req.query,
       });
 
@@ -59,7 +62,7 @@ router.get(routesPathsList, function (req: any, res: any) {
       const appComponentAsString = config.ENABLE_ISOMORPHISM
         ? renderToString(
           <Provider store={store}>
-            <StaticRouter location={history.location} context={context}>
+            <StaticRouter location={location} context={context}>
               <Route path="/" render={(props): React.ReactNode => <Layout {...props} />} />
             </StaticRouter>
           </Provider>

@@ -27,6 +27,16 @@ const Routes: RoutesInterface = {
     loadInitialData: [loadMockDataOne],
   },
 
+  SignIn: {
+    name: 'SignIn',
+    path: '/:lang([a-z]{2})?/sign-in',
+    exact: true,
+    auth: false,
+    hasHeader: false,
+    hasFooter: false,
+    loadInitialData: [loadMockDataOne],
+  },
+
   Control: {
     name: 'Control',
     path: '/:lang([a-z]{2})?/control',
