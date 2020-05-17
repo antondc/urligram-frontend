@@ -19,7 +19,7 @@ const A: React.FC<Props> = ({
   children,
   className,
   href,
-  frontend,
+  frontend = true,
   styled = true,
   targetBlank = false,
   onClick,

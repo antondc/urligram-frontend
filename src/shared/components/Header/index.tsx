@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { Link } from 'react-router-dom';
+import A from 'Ui/A';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import { switchUserModal } from 'Modules/Ui/actions/switchUserModal';
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
@@ -35,20 +35,20 @@ const Header: React.FC<Props> = ({
   return (
     <header>
       <Border className="Header">
-        <div className="Header-brand">
+        <A className="Header-brand" href={'/' + currentLanguageSlug + '/'} styled={false}>
           <Logo className="Header-logo" />
           <H3 className="Header-title">Linking</H3>
-        </div>
+        </A>
         <nav className="Header-navigation">
-          <Link className="Header-link" to={'/' + currentLanguageSlug + '/'}>
+          <A className="Header-link" href={'/' + currentLanguageSlug + '/'}>
             <H4>{currentGlossary.Tags}</H4>
-          </Link>
-          <Link className="Header-link" to={'/' + currentLanguageSlug + '/login'}>
+          </A>
+          <A className="Header-link" href={'/' + currentLanguageSlug + '/login'}>
             <H4>{currentGlossary.Trending}</H4>
-          </Link>
-          <Link className="Header-link" to={'/' + currentLanguageSlug + '/control'}>
+          </A>
+          <A className="Header-link" href={'/' + currentLanguageSlug + '/control'}>
             <H4>{currentGlossary.Lists}</H4>
-          </Link>
+          </A>
         </nav>
         <div className="Header-user">
           <User
