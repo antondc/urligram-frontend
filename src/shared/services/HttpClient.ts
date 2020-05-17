@@ -1,7 +1,7 @@
 import axios, { AxiosInstance } from 'axios';
 import { stringify } from 'qs';
 
-class Http {
+class HttpClient {
   private static instance: AxiosInstance;
 
   constructor() {
@@ -13,13 +13,13 @@ class Http {
     axiosInstance.defaults.paramsSerializer = this.paramsSerializer;
     axiosInstance.defaults.withCredentials = true;
 
-    Http.instance = axiosInstance;
+    HttpClient.instance = axiosInstance;
   }
 
   public static getInstance = () => {
-    if (!Http.instance) new Http();
+    if (!HttpClient.instance) new HttpClient();
 
-    return Http.instance;
+    return HttpClient.instance;
   };
 
   private paramsSerializer = (params) => {
@@ -27,4 +27,4 @@ class Http {
   };
 }
 
-export default Http.getInstance();
+export default HttpClient.getInstance();

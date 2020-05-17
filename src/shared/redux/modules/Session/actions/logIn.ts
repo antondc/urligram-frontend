@@ -1,4 +1,4 @@
-import Http from 'Services/Http';
+import HttpClient from 'Services/HttpClient';
 import { Dispatch } from 'redux';
 import { logInRequest } from './logInRequest';
 import { logInReceive } from './logInReceive';
@@ -10,7 +10,7 @@ import { switchLoginModal } from '../../Ui/actions/switchLoginModal';
 export const logIn = ({ username, password }: any) => async (dispatch: Dispatch): Promise<void> => {
   try {
     await dispatch(logInRequest());
-    const response = await Http.post<SessionApiResponse>('login', {
+    const response = await HttpClient.post<SessionApiResponse>('login', {
       name: username,
       password: password,
     });
