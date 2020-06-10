@@ -1,5 +1,6 @@
 import omit from 'lodash/omit';
 import { loadMockDataOne } from 'Modules/MockDataOne/actions/loadMockDataOne';
+import { loadLinks } from 'Modules/Links/actions/loadLinks';
 
 export interface Route {
   name: string;
@@ -54,7 +55,7 @@ const Routes: RoutesInterface = {
     auth: false,
     hasHeader: true,
     hasFooter: true,
-    loadInitialData: [loadMockDataOne],
+    loadInitialData: [loadLinks],
   },
 
   NotFound: {
