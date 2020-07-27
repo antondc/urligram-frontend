@@ -12,7 +12,7 @@ import LinkCard from 'Components/LinkCard';
 import { lists } from 'Root/src/shared/tools/mockData/mockLists';
 import { tags } from 'Root/src/shared/tools/mockData/mockTags';
 import { users } from 'Root/src/shared/tools/mockData/mockUsers';
-import { links } from 'Root/src/shared/tools/mockData/mockLinks';
+import { links } from 'Root/src/shared/tools/mockData/all-links';
 
 import './Home.less';
 
