@@ -15,7 +15,7 @@ export const logIn = ({ username, password }: any) => async (dispatch: Dispatch)
       password: password,
     });
     await dispatch(switchLoginModal());
-    await dispatch(logInReceive(response.data.user));
+    await dispatch(logInReceive(response.data.attributes));
   } catch (err) {
     await dispatch(logInFailure(err));
   }

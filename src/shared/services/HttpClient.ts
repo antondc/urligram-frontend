@@ -13,6 +13,8 @@ class HttpClient {
     axiosInstance.defaults.paramsSerializer = this.paramsSerializer;
     axiosInstance.defaults.withCredentials = true;
 
+    axiosInstance.interceptors.response.use((response) => response.data);
+
     HttpClient.instance = axiosInstance;
   }
 

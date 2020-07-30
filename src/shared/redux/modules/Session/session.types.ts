@@ -4,7 +4,7 @@ export const LOG_OUT = 'LOG_OUT';
 export const LOG_FAILED = 'LOG_FAILED';
 
 export interface SessionApiResponse {
-  user: SessionState;
+  attributes: SessionState;
 }
 
 export interface Credentials {
