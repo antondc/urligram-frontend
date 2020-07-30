@@ -4,7 +4,7 @@ import { Session } from './modules/Session/session.reducer';
 import { MockDataOne } from './modules/MockDataOne/mockDataOne.reducer';
 import { MockDataTwo } from './modules/MockDataTwo/mockDataTwo.reducer';
 import { Ui } from './modules/Ui/ui.reducer';
-import { Links } from './modules/Links/links.reducer';
+import { Bookmarks } from './modules/Bookmarks/bookmarks.reducer';
 
 export const RootReducers = {
   Languages,
@@ -13,5 +13,5 @@ export const RootReducers = {
   MockDataOne,
   MockDataTwo,
   Ui,
-  Links,
+  Bookmarks,
 };

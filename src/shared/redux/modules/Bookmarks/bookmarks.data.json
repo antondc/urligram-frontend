@@ -1,11 +1,11 @@
 {
   "status": "ok",
   "data": {
-    "Links": {
+    "Bookmarks": {
       "byKey": {
         "1": {
           "id": 1,
-          "title": "My first link",
+          "title": "My first bookmark",
           "url": "http://example.com/path",
           "img": "https://picsum.photos/id/123/300/200",
           "tags": [
@@ -20,7 +20,7 @@
         },
         "2": {
           "id": 2,
-          "title": "A second link",
+          "title": "A second bookmark",
           "url": "http://example.com/path",
           "img": "https://picsum.photos/id/21/300/200",
           "tags": [
@@ -36,7 +36,7 @@
         },
         "3": {
           "id": 3,
-          "title": "A third link",
+          "title": "A third bookmark",
           "url": "http://example.com/path",
           "img": "https://picsum.photos/id/42/300/200",
           "tags": [
@@ -47,7 +47,7 @@
         },
         "4": {
           "id": 4,
-          "title": "My first link",
+          "title": "My first bookmark",
           "url": "http://example.com/path",
           "img": "https://picsum.photos/id/56/300/200",
           "tags": [
@@ -59,7 +59,7 @@
         },
         "5": {
           "id": 5,
-          "title": "A second link",
+          "title": "A second bookmark",
           "url": "http://example.com/path",
           "img": "https://picsum.photos/id/32/300/200",
           "tags": [
@@ -75,7 +75,7 @@
         },
         "6": {
           "id": 6,
-          "title": "A third link",
+          "title": "A third bookmark",
           "url": "http://example.com/path",
           "img": "https://picsum.photos/id/51/300/200",
           "tags": [
@@ -89,7 +89,7 @@
         },
         "7": {
           "id": 7,
-          "title": "My first link",
+          "title": "My first bookmark",
           "url": "http://example.com/path",
           "img": "https://picsum.photos/id/46/300/200",
           "tags": [
@@ -104,7 +104,7 @@
         },
         "8": {
           "id": 8,
-          "title": "A second link",
+          "title": "A second bookmark",
           "url": "http://example.com/path",
           "img": "https://picsum.photos/id/6/300/200",
           "tags": [
@@ -119,7 +119,7 @@
         },
         "9": {
           "id": 9,
-          "title": "A third link",
+          "title": "A third bookmark",
           "url": "http://example.com/path",
           "img": "https://picsum.photos/id/65/300/200",
           "tags": [

@@ -12,7 +12,7 @@ import LinkCard from 'Components/LinkCard';
 import { lists } from 'Root/src/shared/tools/mockData/mockLists';
 import { tags } from 'Root/src/shared/tools/mockData/mockTags';
 import { users } from 'Root/src/shared/tools/mockData/mockUsers';
-import { links } from 'Root/src/shared/tools/mockData/all-links';
+import { bookmarks } from 'Root/src/shared/tools/mockData/all-bookmarks';
 
 import './Home.less';
 
@@ -28,8 +28,8 @@ const Home: React.FC = () => {
           <SidebarListLists title="Popular Lists" items={lists} />
         </Sidebar>
         <Main>
-          <MainHeader title="My links" />
-          {links.map((item, index) => (
+          <MainHeader title="My bookmarks" />
+          {bookmarks.map((item, index) => (
             <React.Fragment key={item.id}>
               {!!index && <Hr type="spacer" />}
               <LinkCard {...item} />

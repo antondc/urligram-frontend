@@ -13,7 +13,7 @@ interface Props {
   items: {
     id: number;
     name: string;
-    links: number;
+    bookmarks: number;
     following: number;
     followers: number;
   }[];

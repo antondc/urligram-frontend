@@ -1,7 +1,7 @@
-export const links = [
+export const bookmarks = [
   {
     id: 1,
-    title: 'My first link',
+    title: 'My first bookmark',
     url: 'http://example.com/path',
     img: 'https://picsum.photos/id/123/300/200',
     tags: [
@@ -17,7 +17,7 @@ export const links = [
   },
   {
     id: 2,
-    title: 'A second link',
+    title: 'A second bookmark',
     url: 'http://example.com/path',
     img: 'https://picsum.photos/id/21/300/200',
     tags: [
@@ -33,7 +33,7 @@ export const links = [
   },
   {
     id: 3,
-    title: 'A third link',
+    title: 'A third bookmark',
     url: 'http://example.com/path',
     img: 'https://picsum.photos/id/42/300/200',
     tags: [
@@ -44,7 +44,7 @@ export const links = [
   },
   {
     id: 4,
-    title: 'My first link',
+    title: 'My first bookmark',
     url: 'http://example.com/path',
     img: 'https://picsum.photos/id/56/300/200',
     tags: [
@@ -56,7 +56,7 @@ export const links = [
   },
   {
     id: 5,
-    title: 'A second link',
+    title: 'A second bookmark',
     url: 'http://example.com/path',
     img: 'https://picsum.photos/id/32/300/200',
     tags: [
@@ -72,7 +72,7 @@ export const links = [
   },
   {
     id: 6,
-    title: 'A third link',
+    title: 'A third bookmark',
     url: 'http://example.com/path',
     img: 'https://picsum.photos/id/51/300/200',
     tags: [
@@ -87,7 +87,7 @@ export const links = [
   },
   {
     id: 7,
-    title: 'My first link',
+    title: 'My first bookmark',
     url: 'http://example.com/path',
     img: 'https://picsum.photos/id/46/300/200',
     tags: [
@@ -102,7 +102,7 @@ export const links = [
   },
   {
     id: 8,
-    title: 'A second link',
+    title: 'A second bookmark',
     url: 'http://example.com/path',
     img: 'https://picsum.photos/id/6/300/200',
     tags: [
@@ -118,7 +118,7 @@ export const links = [
   },
   {
     id: 9,
-    title: 'A third link',
+    title: 'A third bookmark',
     url: 'http://example.com/path',
     img: 'https://picsum.photos/id/65/300/200',
     tags: [
