@@ -31,9 +31,11 @@ const LinkCard: React.FC<Props> = ({ id, title, url, tags = [], img, vote }) => 
         <div className="LinkCard-leftTop">
           <Span bold>{title}</Span>
           <Hr type="spacer" size="zero" />
-          <A href={url} styled targetBlank>
-            {url}
-          </A>
+          <div className="LinkCard-url">
+            <A href={url} styled targetBlank>
+              {url}
+            </A>
+          </div>
         </div>
         <div className="LinkCard-tags">
           {tags &&
