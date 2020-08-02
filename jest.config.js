@@ -4,10 +4,10 @@ module.exports = {
     '^.+\\.(jsx?|tsx?)$': 'ts-jest',
   },
   testRegex: './src/*/.*test.(jsx?|tsx?)$',
-  setupFiles: ['<rootDir>/src/shared/tools/jest/setupTests.ts'],
+  setupFiles: ['<rootDir>/src/shared/tools/tests/setupTests.ts'],
   moduleNameMapper: {
-    '\\.(jpg|jpeg|png|gif|eot|otf|svg|ttf|woff|woff2)$': '<rootDir>/src/shared/tools/jest/fileMock.ts',
-    '\\.(css|less)$': '<rootDir>/src/shared/tools/jest/styleMock.ts',
+    '\\.(jpg|jpeg|png|gif|eot|otf|svg|ttf|woff|woff2)$': '<rootDir>/src/shared/tools/tests/fileMock.ts',
+    '\\.(css|less)$': '<rootDir>/src/shared/tools/tests/styleMock.ts',
     '^Root(.*)$': ['<rootDir>$1'],
     '^Redux(.*)$': ['<rootDir>/src/shared/redux$1'],
     '^Modules(.*)$': ['<rootDir>/src/shared/redux/modules$1'],
