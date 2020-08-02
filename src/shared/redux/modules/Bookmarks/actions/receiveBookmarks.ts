@@ -1,8 +1,4 @@
-import {
-  LOAD_BOOKMARKS_SUCCESS,
-  BookmarksState,
-  BookmarksActionsTypes,
-} from 'Root/src/shared/redux/modules/Bookmarks/bookmarks.types';
+import { LOAD_BOOKMARKS_SUCCESS, BookmarksState, BookmarksActionsTypes } from 'Modules/Bookmarks/bookmarks.types';
 
 export const receiveBookmarks = (data: BookmarksState): BookmarksActionsTypes => {
   return {

@@ -20,7 +20,7 @@ interface Props {
   vote?: boolean;
 }
 
-const LinkCard: React.FC<Props> = ({ id, title, url, tags, img, vote }) => {
+const LinkCard: React.FC<Props> = ({ id, title, url, tags = [], img, vote }) => {
   const onVote = (vote) => {
     console.log(vote, id);
   };
@@ -36,11 +36,12 @@ const LinkCard: React.FC<Props> = ({ id, title, url, tags, img, vote }) => {
           </A>
         </div>
         <div className="LinkCard-tags">
-          {tags.map((item) => (
-            <Tag className="LinkCard-tag" key={item.id}>
-              {item.name}
-            </Tag>
-          ))}
+          {tags &&
+            tags.map((item) => (
+              <Tag className="LinkCard-tag" key={item.id}>
+                {item.name}
+              </Tag>
+            ))}
         </div>
       </div>
       <div className="LinkCard-right">

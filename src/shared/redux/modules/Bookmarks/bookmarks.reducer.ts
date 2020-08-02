@@ -12,7 +12,10 @@ export const Bookmarks = (state = initialState, action) => {
       });
     case LOAD_BOOKMARKS_SUCCESS:
       return Object.assign({}, state, {
-        ...action.data.Bookmarks,
+        byKey: {
+          ...state.byKey,
+          ...action.data.byKey,
+        },
         loading: false,
       });
     default:

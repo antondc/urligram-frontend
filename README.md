@@ -87,7 +87,7 @@ Webpack building is done in parallel: client and server.
 
 ### API calls
 
-An `API` client is created for each case in `src/shared/services/Api`. Currently using axios.
+We use Axios, wrapped within an HttpClient singleton.
 
 ### Globals
 
@@ -114,6 +114,12 @@ and
 ```
 
 This prop was removed, as it seems unnecessary
+
+### Thunks, client and server
+
+The data is retrieved from the API via thunks.
+The thunks returns async functions to use async/await syntax. On client they are used as usual; on server, we first have to call the thunk, and then the function within it.
+See src/server/routes/allRoutes.tsx:27 and src/server/routes/allRoutes.tsx:32
 
 ## License
 

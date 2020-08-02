@@ -5,15 +5,17 @@ import { receiveMockDataOne } from './receiveMockDataOne';
 import mockDataOne from 'Modules/MockDataOne/mockDataOne.data.json';
 
 export const loadMockDataOne = () => {
-  if (isBrowser) {
-    return (dispatch: Dispatch) => {
+  return (dispatch?: Dispatch) => {
+    if (isBrowser) {
       const response: MockDataOneApiResponse = mockDataOne;
       dispatch(requestMockDataOne());
       dispatch(receiveMockDataOne(response.data.MockDataOne));
-    };
-  }
 
-  const response: MockDataOneApiResponse = mockDataOne;
+      return;
+    }
 
-  return response.data;
+    const response: MockDataOneApiResponse = mockDataOne;
+
+    return response.data;
+  };
 };

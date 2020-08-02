@@ -29,10 +29,11 @@ interface ReceiveBookmarksAction {
 }
 
 export interface ReceiveBookmarksResponse {
-  status: string;
   data: {
-    Bookmarks: BookmarksState;
-  };
+    type: 'bookmark';
+    id: number;
+    attributes: BookmarkState;
+  }[];
 }
 
 export type BookmarksActionsTypes = RequestBookmarksAction | ReceiveBookmarksAction;

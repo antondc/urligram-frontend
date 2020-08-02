@@ -17,6 +17,7 @@ module.exports = {
     '^Routes(.*)$': ['<rootDir>/src/shared/routes$1'],
     '^Tools(.*)$': ['<rootDir>/src/shared/tools$1'],
     '^Services(.*)$': ['<rootDir>/src/shared/services$1'],
+    '^Ui(.*)$': ['<rootDir>/src/shared/ui$1'],
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
 };

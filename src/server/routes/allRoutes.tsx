@@ -24,12 +24,12 @@ router.get(routesPathsList, function (req: any, res: any) {
   const activeRouteKey = findActiveRouteKey({ urlPath: req.path, routes: routesList });
 
   // Retrieve initial data from loaders passing req.params.
-  const initialDataLoaders = Routes[activeRouteKey].loadInitialData.map((item: any) => item(req.params));
+  const initialDataLoaders = Routes[activeRouteKey].loadInitialData.map((item: any) => item(req.params)()); // We have to execute the thunk, as well as the async function within it
 
   // Add curent path to history.location
   const location = { ...history.location, pathname: req.path };
 
-  Promise.all([loadLanguages(req.params.lang), ...initialDataLoaders])
+  Promise.all([loadLanguages(req.params.lang)(), ...initialDataLoaders]) // We have to execute the Languages thunk, as well as the async function within it
     .then((response: any) => {
       const data = Object.assign({}, ...response);
 
@@ -61,12 +61,12 @@ router.get(routesPathsList, function (req: any, res: any) {
       const store = storeFactory(data);
       const appComponentAsString = config.ENABLE_ISOMORPHISM
         ? renderToString(
-          <Provider store={store}>
-            <StaticRouter location={location} context={context}>
-              <Route path="/" render={(props): React.ReactNode => <Layout {...props} />} />
-            </StaticRouter>
-          </Provider>
-        )
+            <Provider store={store}>
+              <StaticRouter location={location} context={context}>
+                <Route path="/" render={(props): React.ReactNode => <Layout {...props} />} />
+              </StaticRouter>
+            </Provider>
+          )
         : '';
       const helmet = Helmet.renderStatic();
       const dataForTemplate = serialize(data); // Serializing for security reasons: https://redux.js.org/recipes/server-rendering#security-considerations
