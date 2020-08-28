@@ -4,7 +4,8 @@ import { requestBookmarks } from './requestBookmarks';
 import { receiveBookmarks } from './receiveBookmarks';
 import HttpClient from 'Root/src/shared/services/HttpClient';
 
-const bookmarksSerializer = (data) => data.reduce((acc, curr) => ({ ...acc, ...{ [curr.id]: curr.attributes } }), {});
+const bookmarksSerializerByKey = (data) =>
+  data.reduce((acc, curr) => ({ ...acc, ...{ [curr.id]: curr.attributes } }), {});
 
 export const loadBookmarks = () => {
   return async (dispatch?: Dispatch) => {
@@ -12,7 +13,7 @@ export const loadBookmarks = () => {
       const response = await HttpClient.get<ReceiveBookmarksResponse>('bookmarks');
 
       const bookmarksByKey = {
-        byKey: bookmarksSerializer(response.data),
+        byKey: bookmarksSerializerByKey(response.data),
       };
 
       dispatch(requestBookmarks());
@@ -22,7 +23,7 @@ export const loadBookmarks = () => {
     }
 
     const response = await HttpClient.get('bookmarks');
-    const bookmarksByKey = bookmarksSerializer(response.data);
+    const bookmarksByKey = bookmarksSerializerByKey(response.data);
 
     const result = {
       Bookmarks: {
