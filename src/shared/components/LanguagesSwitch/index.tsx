@@ -9,8 +9,8 @@ import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLo
 import { selectCurrentLanguage } from 'Modules/Languages/selectors/selectCurrentLanguage';
 import { selectCurrentRouteParamLanguage } from 'Modules/Routes/selectors/selectCurrentRouteParamLanguage';
 import { selectCurrentPathname } from 'Modules/Routes/selectors/selectCurrentPathname';
-import LanguageItem from '../LanguageItem';
-import Border from '../../ui/Border';
+import LanguageItem from 'Components/LanguageItem';
+import Border from 'Ui/Border';
 
 import './LanguagesSwitch.less';
 
@@ -37,43 +37,28 @@ const LanguagesSwitch: React.FC<Props> = ({
       ? currentPathname.replace('/' + currentRouteParamLanguage, '/' + item.slug)
       : '/' + item.slug + currentPathname;
 
-    const isCurrent = currentLanguage.slug === item.slug;
-
-    return { ...item, link, isCurrent };
+    return { link, ...item };
   });
+  const languagesWithoutCurrent = languagesWithLink.filter((item) => currentLanguage.slug !== item.slug);
 
   return (
     <Border className="LanguagesSwitch" onClick={switchLanguagesModal}>
-      {languagesWithLink
-        .filter((item) => !item.isCurrent)
-        .map((item) => {
-          return (
-            <LanguageItem
-              key={item.id}
-              lang={item.slug}
-              href={item.link}
-              isCurrent={item.isCurrent}
-              onClick={() => {
-                switchCurrentLanguage(item.slug);
-              }}
-            />
-          );
-        })}
-      {languagesWithLink
-        .filter((item) => item.isCurrent)
-        .map((item) => {
-          return (
-            <LanguageItem
-              key={item.id}
-              lang={item.slug}
-              href={item.link}
-              isCurrent={item.isCurrent}
-              onClick={() => {
-                switchCurrentLanguage(item.slug);
-              }}
-            />
-          );
-        })}
+      {languagesWithoutCurrent.map((item) => (
+        <LanguageItem
+          key={item.id}
+          lang={item.slug}
+          href={item.link}
+          onClick={() => switchCurrentLanguage(item.slug)}
+        />
+      ))}
+
+      <LanguageItem
+        key={currentLanguage.id}
+        lang={currentLanguage.slug}
+        href={currentLanguage.link}
+        isCurrent
+        onClick={() => switchCurrentLanguage(currentLanguage.slug)}
+      />
     </Border>
   );
 };

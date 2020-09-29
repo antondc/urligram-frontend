@@ -22,6 +22,8 @@ export interface LanguageState {
   isDefault: boolean;
   loading?: boolean;
   glossary: GlossaryState;
+  link?: string;
+  isCurrent?: boolean;
 }
 
 export type LanguagesState = {
