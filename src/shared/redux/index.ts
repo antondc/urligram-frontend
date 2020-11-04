@@ -1,6 +1,8 @@
-import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
+import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import thunk from 'redux-thunk';
+
 import { RootReducers } from './rootReducers';
+
 const middleware = [thunk];
 
 declare global {
@@ -12,8 +14,7 @@ declare global {
 // Configuration for Redux devtools
 const reduxDevToolsWrapper = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 
-const storeFactory = (initialState = {}): any => {
-  return reduxDevToolsWrapper(applyMiddleware(...middleware))(createStore)(combineReducers(RootReducers), initialState);
-};
+const storeFactory = (initialState = {}): any =>
+  reduxDevToolsWrapper(applyMiddleware(...middleware))(createStore)(combineReducers(RootReducers), initialState);
 
 export default storeFactory;

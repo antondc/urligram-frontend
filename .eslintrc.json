@@ -24,6 +24,7 @@
     "import" // additional formatting for imports
   ],
   "rules": {
+    "import/newline-after-import": "error", // Add newline after imports section
     "simple-import-sort/sort": [
       "error",
       {
