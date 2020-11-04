@@ -1,6 +1,7 @@
 import { createSelector } from 'reselect';
-import { selectCurrentRouteParamLanguage } from './selectCurrentRouteParamLanguage';
+
 import { selectDefaultLanguageSlug } from 'Modules/Languages/selectors/selectDefaultLanguageSlug';
+import { selectCurrentRouteParamLanguage } from './selectCurrentRouteParamLanguage';
 
 export const selectCurrentRouteParamLanguageOrDefault = createSelector(
   selectCurrentRouteParamLanguage,

@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Triangle } from '../Svg';
 
 import './Vote.less';

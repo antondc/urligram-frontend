@@ -29,12 +29,13 @@
       "error",
       {
         "groups": [
-          ["^[^(A-Z|.]"], // Not starting with uppercase or a dot
+          ["^[react]", "^[^(A-Z|.]"], // Not starting with uppercase or a dot
           ["^[A-Z]", "^@?\\w", "^\\."],  // Starting with uppercase, starring with at, starting with dot
           ["(\\.less|\\.css|\\.sass)$"] // Ending with .less, .css, .sass
         ]
       }
     ],
+    "react/display-name": 0,
     "sort-imports": 0, // disables eslint's default sort imports rule
     "indent": ["warn", 2, { "SwitchCase": 1 }],
     "linebreak-style": ["error", "unix"],

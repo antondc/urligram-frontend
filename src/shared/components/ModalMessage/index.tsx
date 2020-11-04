@@ -1,14 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+
+import Cross from 'Assets/svg/cross.svg';
 import { switchMessageModal } from 'Modules/Ui/actions/switchMessageModal';
 import Border from 'Ui/Border';
 import Button from 'Ui/Button';
-import Cross from 'Assets/svg/cross.svg';
-import BaseModal from '../BaseModal';
 import Flex from '../../ui/Flex';
 import Hr from '../../ui/Hr';
 import Span from '../../ui/Span';
+import BaseModal from '../BaseModal';
 
 import './ModalMessage.less';
 

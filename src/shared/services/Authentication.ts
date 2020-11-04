@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+
 import config from 'Root/config.test.json';
 
 class Authentication {

@@ -1,5 +1,6 @@
-import { LanguageState, LanguagesState } from './../languages.types';
 import { createSelector } from 'reselect';
+
+import { LanguagesState,LanguageState } from './../languages.types';
 import { selectLanguages } from './selectLanguages';
 
 export const selectCurrentLanguage = createSelector(

@@ -1,14 +1,15 @@
 import React from 'react';
-import TriangleSvg from '../../assets/svg/triangle.svg';
-import SquareSvg from '../../assets/svg/square.svg';
-import CircleSvg from '../../assets/svg/circle.svg';
-import CheckSvg from '../../assets/svg/check.svg';
-import CrossSvg from '../../assets/svg/cross.svg';
-import ArrowRightSvg from '../../assets/svg/arrowRight.svg';
+
 import ArrowDownSvg from '../../assets/svg/arrowDown.svg';
-import ArrowUpSvg from '../../assets/svg/arrowUp.svg';
 import ArrowLeftSvg from '../../assets/svg/arrowLeft.svg';
+import ArrowRightSvg from '../../assets/svg/arrowRight.svg';
+import ArrowUpSvg from '../../assets/svg/arrowUp.svg';
+import CheckSvg from '../../assets/svg/check.svg';
+import CircleSvg from '../../assets/svg/circle.svg';
+import CrossSvg from '../../assets/svg/cross.svg';
 import LoupeSvg from '../../assets/svg/loupe.svg';
+import SquareSvg from '../../assets/svg/square.svg';
+import TriangleSvg from '../../assets/svg/triangle.svg';
 import UploadSvg from '../../assets/svg/upload.svg';
 import UserSvg from '../../assets/svg/user.svg';
 import * as Icons from '.';

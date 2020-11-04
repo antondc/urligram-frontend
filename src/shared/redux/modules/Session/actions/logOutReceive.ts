@@ -1,7 +1,5 @@
 import { LOG_OUT, LogActionsTypes } from 'Modules/Session/session.types';
 
-export const logOutReceive = (): LogActionsTypes => {
-  return {
-    type: LOG_OUT,
-  };
-};
+export const logOutReceive = (): LogActionsTypes => ({
+  type: LOG_OUT,
+});

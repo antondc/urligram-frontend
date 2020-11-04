@@ -1,7 +1,8 @@
-import get from 'lodash/get';
 import { createSelector } from 'reselect';
-import { selectMockDataTwo } from './selectMockDataTwo';
+import get from 'lodash/get';
+
 import { MockDataTwoState } from './../mockDataTwo.types';
+import { selectMockDataTwo } from './selectMockDataTwo';
 
 export const selectMockDataTwoLoading = createSelector(selectMockDataTwo, (MockDataTwo: MockDataTwoState): boolean =>
   get(MockDataTwo, 'loading', false)

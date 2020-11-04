@@ -1,5 +1,6 @@
 import React from 'react';
 import { CSSTransition } from 'react-transition-group';
+
 import { speedMap } from './speedMap';
 
 import './Fade.less';

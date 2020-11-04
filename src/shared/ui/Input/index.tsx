@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Loupe } from '../Svg';
 
 import './Input.less';

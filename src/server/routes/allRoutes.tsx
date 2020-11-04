@@ -1,20 +1,21 @@
-import React from 'react';
 import express from 'express';
-import Helmet from 'react-helmet';
-import serialize from 'serialize-javascript';
-import { Provider } from 'react-redux';
-import { StaticRouter, Route } from 'react-router-dom';
+import React from 'react';
 import { renderToString } from 'react-dom/server';
-import findActiveRouteKey from 'Tools/utils/url/findActiveRouteKey';
-import enhanceRouteWithParams from 'Tools/utils/url/enhanceRouteWithParams';
+import Helmet from 'react-helmet';
+import { Provider } from 'react-redux';
+import { Route,StaticRouter } from 'react-router-dom';
+import serialize from 'serialize-javascript';
+
+import Layout from 'Common/Layout';
+import { loadLanguages } from 'Modules/Languages/actions/loadLanguages';
+import { SessionState } from 'Modules/Session/session.types';
+import storeFactory from 'Redux/index';
 import config from 'Root/config.test.json';
-import Routes, { routesWithoutOmmitedValues, routesList, routesPathsList } from 'Routes/index';
+import Routes, { routesList, routesPathsList,routesWithoutOmmitedValues } from 'Routes/index';
 import Authentication from 'Services/Authentication';
 import history from 'Services/History';
-import storeFactory from 'Redux/index';
-import Layout from 'Common/Layout';
-import { SessionState } from 'Modules/Session/session.types';
-import { loadLanguages } from 'Modules/Languages/actions/loadLanguages';
+import enhanceRouteWithParams from 'Tools/utils/url/enhanceRouteWithParams';
+import findActiveRouteKey from 'Tools/utils/url/findActiveRouteKey';
 
 const authentication = new Authentication();
 const router = express.Router();
@@ -61,12 +62,12 @@ router.get(routesPathsList, function (req: any, res: any) {
       const store = storeFactory(data);
       const appComponentAsString = config.ENABLE_ISOMORPHISM
         ? renderToString(
-            <Provider store={store}>
-              <StaticRouter location={location} context={context}>
-                <Route path="/" render={(props): React.ReactNode => <Layout {...props} />} />
-              </StaticRouter>
-            </Provider>
-          )
+          <Provider store={store}>
+            <StaticRouter location={location} context={context}>
+              <Route path="/" render={(props): React.ReactNode => <Layout {...props} />} />
+            </StaticRouter>
+          </Provider>
+        )
         : '';
       const helmet = Helmet.renderStatic();
       const dataForTemplate = serialize(data); // Serializing for security reasons: https://redux.js.org/recipes/server-rendering#security-considerations

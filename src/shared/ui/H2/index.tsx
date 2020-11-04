@@ -1,4 +1,5 @@
 import React from 'react';
+
 import './H2.less';
 
 interface Props {

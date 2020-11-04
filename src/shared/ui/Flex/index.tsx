@@ -1,4 +1,5 @@
 import React from 'react';
+
 import './Flex.less';
 
 export type FlexHorizontal = 'center' | 'right' | 'left' | 'even' | 'around' | 'between';

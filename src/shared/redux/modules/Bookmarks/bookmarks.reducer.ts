@@ -1,4 +1,4 @@
-import { LOAD_BOOKMARKS_STARTED, LOAD_BOOKMARKS_SUCCESS, BookmarksState } from './bookmarks.types';
+import { BookmarksState,LOAD_BOOKMARKS_STARTED, LOAD_BOOKMARKS_SUCCESS } from './bookmarks.types';
 
 const initialState: BookmarksState = {
   byKey: {},

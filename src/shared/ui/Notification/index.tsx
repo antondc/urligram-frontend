@@ -1,4 +1,5 @@
 import React from 'react';
+
 import './Notification.less';
 
 export type NotificationType = 'success' | 'error' | 'alert';

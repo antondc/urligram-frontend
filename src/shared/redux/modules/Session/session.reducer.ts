@@ -1,4 +1,4 @@
-import { SessionState, LOG_IN_STARTED, LOG_IN_SUCCESS, LOG_OUT, LOG_FAILED } from './session.types';
+import { LOG_FAILED,LOG_IN_STARTED, LOG_IN_SUCCESS, LOG_OUT, SessionState } from './session.types';
 
 const initialState: SessionState = {};
 

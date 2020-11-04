@@ -1,9 +1,10 @@
-import { connect } from 'react-redux';
 import React from 'react';
-import { selectBookmarksAll } from '../../redux/modules/Bookmarks/selectors/selectBookmarksAll';
+import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+
 import { loadBookmarks } from 'Modules/Bookmarks/actions/loadBookmarks.ts';
 import { BookmarkState } from '../../redux/modules/Bookmarks/bookmarks.types';
+import { selectBookmarksAll } from '../../redux/modules/Bookmarks/selectors/selectBookmarksAll';
 import { HomeUI } from './HomeUI';
 
 interface Props {
@@ -18,6 +19,7 @@ class Home extends React.Component<Props> {
 
   render = () => {
     const { bookmarks } = this.props;
+    
     return <HomeUI bookmarks={bookmarks} />;
   };
 }

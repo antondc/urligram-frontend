@@ -1,6 +1,7 @@
 import { createSelector } from 'reselect';
-import { selectCurrentPathname } from 'Modules/Routes/selectors/selectCurrentPathname';
+
 import { selectLanguagesSlugList } from 'Modules/Languages/selectors/selectLanguagesSlugList';
+import { selectCurrentPathname } from 'Modules/Routes/selectors/selectCurrentPathname';
 
 export const selectPathWithoutLanguageParam = createSelector(
   selectCurrentPathname,

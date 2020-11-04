@@ -1,14 +1,15 @@
-import HttpClient from 'Services/HttpClient';
-import { Dispatch, Action } from 'redux';
-import { logOutReceive } from './logOutReceive';
-import { logInFailure } from './logInFailure';
+import { Action,Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 
-export const logOut = (): ThunkAction<any, any, any, Action> => {
+import HttpClient from 'Services/HttpClient';
+import { logInFailure } from './logInFailure';
+import { logOutReceive } from './logOutReceive';
+
+export const logOut = (): ThunkAction<any, any, any, Action> => 
   // Remove the cookie on server using the base api
-  return (dispatch: Dispatch): void => {
+  (dispatch: Dispatch): void => {
     HttpClient.delete('login')
       .then(() => dispatch(logOutReceive()))
       .catch((error) => dispatch(logInFailure(error)));
-  };
-};
+  }
+;

@@ -1,6 +1,8 @@
 import React from 'react';
+
 import Span from '../Span';
 import SvgIcon from '../Svg';
+
 import './TextButton.less';
 
 export type TextButtonIcon = 'ArrowRight';

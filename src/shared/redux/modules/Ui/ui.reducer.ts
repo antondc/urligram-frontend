@@ -1,9 +1,9 @@
 import {
-  UiState,
-  SWITCH_USER_MODAL,
-  SWITCH_MESSAGE_MODAL,
-  SWITCH_LOGIN_MODAL,
   SWITCH_LANGUAGES_MODAL,
+  SWITCH_LOGIN_MODAL,
+  SWITCH_MESSAGE_MODAL,
+  SWITCH_USER_MODAL,
+  UiState,
 } from './ui.types';
 
 const initialState: UiState = {

@@ -1,7 +1,8 @@
 import React from 'react';
-import { render, hydrate } from 'react-dom';
+import { hydrate,render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { Router, Route } from 'react-router-dom';
+import { Route,Router } from 'react-router-dom';
+
 import Layout from 'Common/Layout';
 import storeFactory from 'Redux/index';
 import config from 'Root/config.test.json';

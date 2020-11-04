@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+
 import { GlossaryState } from '../../redux/modules/Languages/languages.types';
 import { selectCurrentGlossary } from '../../redux/modules/Languages/selectors/selectCurrentGlossary';
 

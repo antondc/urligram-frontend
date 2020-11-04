@@ -1,4 +1,5 @@
 import React from 'react';
+
 import LayoutContent from 'Common/LayoutContent';
 
 import './BaseModal.less';

@@ -1,6 +1,7 @@
 import React from 'react';
-import Span from '../Span';
+
 import Notification from '../Notification';
+import Span from '../Span';
 
 import './Tag.less';
 

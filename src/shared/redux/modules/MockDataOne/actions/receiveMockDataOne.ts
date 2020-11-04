@@ -1,10 +1,8 @@
-import { LOAD_MOCK_DATA_ONE_SUCCESS, MockDataOneState, MockDataOnesActionsTypes } from 'Modules/MockDataOne/mockDataOne.types';
+import { LOAD_MOCK_DATA_ONE_SUCCESS, MockDataOnesActionsTypes,MockDataOneState } from 'Modules/MockDataOne/mockDataOne.types';
 
-export const receiveMockDataOne = (data: MockDataOneState): MockDataOnesActionsTypes => {
-  return {
-    type: LOAD_MOCK_DATA_ONE_SUCCESS,
-    data: {
-      ...data,
-    },
-  };
-};
+export const receiveMockDataOne = (data: MockDataOneState): MockDataOnesActionsTypes => ({
+  type: LOAD_MOCK_DATA_ONE_SUCCESS,
+  data: {
+    ...data,
+  },
+});

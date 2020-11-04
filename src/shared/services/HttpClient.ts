@@ -24,9 +24,7 @@ class HttpClient {
     return HttpClient.instance;
   };
 
-  private paramsSerializer = (params) => {
-    return stringify(params, { arrayFormat: 'repeat' });
-  };
+  private paramsSerializer = (params) => stringify(params, { arrayFormat: 'repeat' });
 }
 
 export default HttpClient.getInstance();

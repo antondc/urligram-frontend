@@ -1,21 +1,20 @@
 import { Dispatch } from 'redux';
-import { MockDataOneApiResponse } from 'Modules/MockDataOne/mockDataOne.types';
-import { requestMockDataOne } from './requestMockDataOne';
-import { receiveMockDataOne } from './receiveMockDataOne';
+
 import mockDataOne from 'Modules/MockDataOne/mockDataOne.data.json';
+import { MockDataOneApiResponse } from 'Modules/MockDataOne/mockDataOne.types';
+import { receiveMockDataOne } from './receiveMockDataOne';
+import { requestMockDataOne } from './requestMockDataOne';
 
-export const loadMockDataOne = () => {
-  return (dispatch?: Dispatch) => {
-    if (isBrowser) {
-      const response: MockDataOneApiResponse = mockDataOne;
-      dispatch(requestMockDataOne());
-      dispatch(receiveMockDataOne(response.data.MockDataOne));
-
-      return;
-    }
-
+export const loadMockDataOne = () => (dispatch?: Dispatch) => {
+  if (isBrowser) {
     const response: MockDataOneApiResponse = mockDataOne;
+    dispatch(requestMockDataOne());
+    dispatch(receiveMockDataOne(response.data.MockDataOne));
 
-    return response.data;
-  };
+    return;
+  }
+
+  const response: MockDataOneApiResponse = mockDataOne;
+
+  return response.data;
 };

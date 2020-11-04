@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import Span from 'Ui/Span';
+
 import FilterDown from 'Assets/svg/filterDown.svg';
+import Span from 'Ui/Span';
 import H4 from '../../ui/H4';
 import Hr from '../../ui/Hr';
 

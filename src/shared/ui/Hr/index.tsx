@@ -1,4 +1,5 @@
 import React from 'react';
+
 import './Hr.less';
 
 export type HrType = 'spacer' | 'shrink';

@@ -1,9 +1,10 @@
+import cloneDeep from 'lodash/cloneDeep';
 import { match } from 'path-to-regexp';
 import * as queryStringParser from 'query-string';
-import cloneDeep from 'lodash/cloneDeep';
+
 import { RouteState } from 'Modules/Routes/routes.types';
-import { Location } from 'Services/History';
 import { Route } from 'Routes/index';
+import { Location } from 'Services/History';
 /**
  * Receives a route object, a queryParams object and a reaact-router-dom location object; extracts the params and query params to enhance the route with them.
  * @param {*} { route, queryParams, location }

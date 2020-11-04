@@ -1,31 +1,32 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Location } from 'history';
+import { Route } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
-import SpinnerCircle from 'Ui/SpinnerCircle';
-import Fade from 'Ui/Fade';
-import Hr from 'Ui/Hr';
-import findActiveRouteKey from 'Tools/utils/url/findActiveRouteKey';
-import enhanceRouteWithParams from 'Tools/utils/url/enhanceRouteWithParams';
-import { selectLanguageLoading } from 'Modules/Languages/selectors/selectLanguageLoading';
-import { pushNewRoute } from 'Modules/Routes/actions/pushNewRoute';
-import { selectMockDataTwoLoading } from 'Modules/MockDataTwo/selectors/selectMockDataTwoLoading';
-import { selectUiUserModalMounted } from 'Modules/Ui/selectors/selectUiUserModalMounted';
-import { selectUiLoginModalMounted } from 'Modules/Ui/selectors/selectUiLoginModalMounted';
-import { selectUiMessageModalMounted } from 'Modules/Ui/selectors/selectUiMessageModalMounted';
-import { selectUiScreenLocked } from 'Root/src/shared/redux/modules/Ui/selectors/selectUiScreenLocked';
-import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
-import { routesList, routesWithoutOmmitedValues } from 'Routes/index';
-import Header from 'Components/Header';
-import Footer from 'Components/Footer';
-import SubHeader from 'Components/SubHeader';
+import { Location } from 'history';
+
 import Background from 'Assets/svg/background.svg';
 import LayoutHelper from 'Common/LayoutHelper';
-import Router from 'Routes/Router';
-import UserModal from 'Components/UserModal';
-import ModalMessage from 'Components/ModalMessage';
+import Footer from 'Components/Footer';
+import Header from 'Components/Header';
 import LoginModal from 'Components/LoginModal';
+import ModalMessage from 'Components/ModalMessage';
+import SubHeader from 'Components/SubHeader';
+import UserModal from 'Components/UserModal';
+import { selectLanguageLoading } from 'Modules/Languages/selectors/selectLanguageLoading';
+import { selectMockDataTwoLoading } from 'Modules/MockDataTwo/selectors/selectMockDataTwoLoading';
+import { pushNewRoute } from 'Modules/Routes/actions/pushNewRoute';
+import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
+import { selectUiLoginModalMounted } from 'Modules/Ui/selectors/selectUiLoginModalMounted';
+import { selectUiMessageModalMounted } from 'Modules/Ui/selectors/selectUiMessageModalMounted';
+import { selectUiUserModalMounted } from 'Modules/Ui/selectors/selectUiUserModalMounted';
+import { selectUiScreenLocked } from 'Root/src/shared/redux/modules/Ui/selectors/selectUiScreenLocked';
+import { routesList, routesWithoutOmmitedValues } from 'Routes/index';
+import Router from 'Routes/Router';
+import enhanceRouteWithParams from 'Tools/utils/url/enhanceRouteWithParams';
+import findActiveRouteKey from 'Tools/utils/url/findActiveRouteKey';
+import Fade from 'Ui/Fade';
+import Hr from 'Ui/Hr';
+import SpinnerCircle from 'Ui/SpinnerCircle';
 import LayoutContent from '../LayoutContent';
 
 import './Layout.less';
@@ -80,7 +81,6 @@ class Layout extends React.Component<Props> {
       userModalMounted,
       messageModalMounted,
       loginModalMounted,
-      isLogged,
     } = this.props;
 
     const mounted = !languageLoading;

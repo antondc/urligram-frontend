@@ -1,10 +1,8 @@
-import { LOAD_BOOKMARKS_STARTED, BookmarksActionsTypes } from 'Root/src/shared/redux/modules/Bookmarks/bookmarks.types';
+import { BookmarksActionsTypes,LOAD_BOOKMARKS_STARTED } from 'Root/src/shared/redux/modules/Bookmarks/bookmarks.types';
 
-export const requestBookmarks = (): BookmarksActionsTypes => {
-  return {
-    type: LOAD_BOOKMARKS_STARTED,
-    data: {
-      loading: true,
-    },
-  };
-};
+export const requestBookmarks = (): BookmarksActionsTypes => ({
+  type: LOAD_BOOKMARKS_STARTED,
+  data: {
+    loading: true,
+  },
+});

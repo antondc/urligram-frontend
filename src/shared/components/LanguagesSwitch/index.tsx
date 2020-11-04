@@ -1,15 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { selectLanguagesList } from 'Modules/Languages/selectors/selectLanguagesList';
-import { switchCurrentLanguage } from 'Modules/Languages/actions/switchCurrentLanguage';
-import { switchLanguagesModal } from 'Modules/Ui/actions/switchLanguagesModal';
-import { LanguageState } from 'Modules/Languages/languages.types';
-import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
-import { selectCurrentLanguage } from 'Modules/Languages/selectors/selectCurrentLanguage';
-import { selectCurrentRouteParamLanguage } from 'Modules/Routes/selectors/selectCurrentRouteParamLanguage';
-import { selectCurrentPathname } from 'Modules/Routes/selectors/selectCurrentPathname';
+
 import LanguageItem from 'Components/LanguageItem';
+import { switchCurrentLanguage } from 'Modules/Languages/actions/switchCurrentLanguage';
+import { LanguageState } from 'Modules/Languages/languages.types';
+import { selectCurrentLanguage } from 'Modules/Languages/selectors/selectCurrentLanguage';
+import { selectLanguagesList } from 'Modules/Languages/selectors/selectLanguagesList';
+import { selectCurrentPathname } from 'Modules/Routes/selectors/selectCurrentPathname';
+import { selectCurrentRouteParamLanguage } from 'Modules/Routes/selectors/selectCurrentRouteParamLanguage';
+import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
+import { switchLanguagesModal } from 'Modules/Ui/actions/switchLanguagesModal';
 import Border from 'Ui/Border';
 
 import './LanguagesSwitch.less';

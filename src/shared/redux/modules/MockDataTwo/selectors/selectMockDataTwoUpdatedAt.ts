@@ -1,6 +1,7 @@
 import { createSelector } from 'reselect';
-import { selectMockDataTwo } from './selectMockDataTwo';
+
 import { MockDataTwoState } from './../mockDataTwo.types';
+import { selectMockDataTwo } from './selectMockDataTwo';
 
 export const selectMockDataTwoUpdatedAt = createSelector(
   selectMockDataTwo,

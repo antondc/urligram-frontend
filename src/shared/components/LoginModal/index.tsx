@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
+
+import Cross from 'Assets/svg/cross.svg';
 import { logIn } from 'Modules/Session/actions/logIn';
+import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
 import Border from 'Ui/Border';
 import Button from 'Ui/Button';
-import Input from 'Ui/Input';
-import Hr from 'Ui/Hr';
 import H3 from 'Ui/H3';
-import Cross from 'Assets/svg/cross.svg';
-import BaseModal from '../BaseModal';
+import Hr from 'Ui/Hr';
+import Input from 'Ui/Input';
 import Flex from '../../ui/Flex';
+import BaseModal from '../BaseModal';
 
 import './LoginModal.less';
 

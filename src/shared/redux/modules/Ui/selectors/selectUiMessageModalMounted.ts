@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect';
 import get from 'lodash/get';
+
 import { UiMessageModalState } from './../ui.types';
 import { selectUiMessageModal } from './selectUiMessageModal';
 

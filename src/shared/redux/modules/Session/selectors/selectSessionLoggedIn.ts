@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect';
+
 import { SessionState } from '../session.types';
 import { selectSession } from './selectSession';
 

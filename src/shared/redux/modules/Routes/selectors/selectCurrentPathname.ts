@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect';
-import { selectCurrentRoute } from './selectCurrentRoute';
+
 import { RouteState } from './../routes.types';
+import { selectCurrentRoute } from './selectCurrentRoute';
 
 export const selectCurrentPathname = createSelector(selectCurrentRoute, (route: RouteState): string => route.pathname);

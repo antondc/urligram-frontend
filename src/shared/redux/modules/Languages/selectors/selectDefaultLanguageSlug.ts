@@ -1,5 +1,6 @@
-import { LanguageState } from '../languages.types';
 import { createSelector } from 'reselect';
+
+import { LanguageState } from '../languages.types';
 import { selectDefaultLanguage } from './selectDefaultLanguage';
 
 export const selectDefaultLanguageSlug = createSelector(

@@ -1,4 +1,5 @@
 import React from 'react';
+
 import Span from '../Span';
 import SvgIcon, { IconsType } from '../Svg';
 
@@ -28,27 +29,25 @@ const Button: React.FC<Props> = ({
   grow,
   onClick,
   type = 'button',
-}): JSX.Element => {
-  return (
-    <button
-      className={
-        'Button ' +
+}): JSX.Element => (
+  <button
+    className={
+      'Button ' +
         (size ? 'Button--' + size : '') +
         (variant ? ' Button--' + variant : '') +
         (grow ? ' Button--grow' : '') +
         (success ? ' Button--success' : '') +
         (error ? ' Button--error' : '') +
         (disabled ? ' Button--disabled' : '')
-      }
-      onClick={onClick}
-      type={type}
-    >
-      <Span className="Button-content" bold uppercase>
-        {text}
-        {icon && <SvgIcon name={icon} size="small" className="Button-svg" />}
-      </Span>
-    </button>
-  );
-};
+    }
+    onClick={onClick}
+    type={type}
+  >
+    <Span className="Button-content" bold uppercase>
+      {text}
+      {icon && <SvgIcon name={icon} size="small" className="Button-svg" />}
+    </Span>
+  </button>
+);
 
 export default Button;

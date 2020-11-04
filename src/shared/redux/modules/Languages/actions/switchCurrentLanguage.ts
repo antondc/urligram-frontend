@@ -1,6 +1,7 @@
 import { Dispatch } from 'redux';
-import { switchCurrentLanguageRequest } from './switchCurrentLanguageRequest';
+
 import { switchCurrentLanguageReceive } from './switchCurrentLanguageReceive';
+import { switchCurrentLanguageRequest } from './switchCurrentLanguageRequest';
 
 export const switchCurrentLanguage = (slug: string) => (dispatch: Dispatch, getState) => {
   const {

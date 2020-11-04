@@ -1,18 +1,19 @@
-import serveGzip from './tools/serveGzip';
-import bodyParser from 'body-parser';
-import express from 'express';
-import path from 'path';
 import cookieParser from 'cookie-parser';
-import logger from 'morgan';
-import allRoutes from './routes/allRoutes';
 import cors from 'cors';
-import http from 'http';
+import express from 'express';
 import useragent from 'express-useragent';
+import bodyParser from 'body-parser';
+import http from 'http';
+import logger from 'morgan';
+import path from 'path';
 import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
-import webpackConfig from '../../webpack/webpack.client.dev';
+
 import { WEBPACK_ROOT } from '../../webpack/constants';
+import webpackConfig from '../../webpack/webpack.client.dev';
+import allRoutes from './routes/allRoutes';
+import serveGzip from './tools/serveGzip';
 
 const compiler = webpack(webpackConfig);
 const app = express();

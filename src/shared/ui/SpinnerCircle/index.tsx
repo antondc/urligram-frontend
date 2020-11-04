@@ -1,4 +1,5 @@
 import React from 'react';
+
 import './SpinnerCircle.less';
 
 const SpinnerCircle: React.FC = () => (

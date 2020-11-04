@@ -1,5 +1,5 @@
+import { SERVER_PRODUCTION_HOST, SERVER_PRODUCTION_PORT,SERVER_PRODUCTION_PROTOCOL } from 'Root/config.test.json';
 import urlBuild from './urlBuild';
-import { SERVER_PRODUCTION_PROTOCOL, SERVER_PRODUCTION_HOST, SERVER_PRODUCTION_PORT } from 'Root/config.test.json';
 
 describe('urlBuild', () => {
   test('it should return a full url', () => {

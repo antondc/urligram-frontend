@@ -1,9 +1,9 @@
 import {
+  LanguagesState,
   LOAD_LANGUAGES_STARTED,
   LOAD_LANGUAGES_SUCCESS,
-  SWITCH_CURRENT_LANGUAGE_REQUEST,
   SWITCH_CURRENT_LANGUAGE_RECEIVE,
-  LanguagesState,
+  SWITCH_CURRENT_LANGUAGE_REQUEST,
 } from './languages.types';
 
 const initialState: LanguagesState = {

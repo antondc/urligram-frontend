@@ -1,10 +1,8 @@
-import { LOAD_LANGUAGES_STARTED, LanguagesActionsTypes } from 'Modules/Languages/languages.types';
+import { LanguagesActionsTypes,LOAD_LANGUAGES_STARTED } from 'Modules/Languages/languages.types';
 
-export const requestLanguages = (): LanguagesActionsTypes => {
-  return {
-    type: LOAD_LANGUAGES_STARTED,
-    data: {
-      loading: true,
-    },
-  };
-};
+export const requestLanguages = (): LanguagesActionsTypes => ({
+  type: LOAD_LANGUAGES_STARTED,
+  data: {
+    loading: true,
+  },
+});
