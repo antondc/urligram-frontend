@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+
+import LanguageItem from 'Components/LanguageItem';
+import LanguagesSwitch from 'Components/LanguagesSwitch';
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
-import { selectUiLanguagesModalMounted } from 'Modules/Ui/selectors/selectUiLanguagesModalMounted';
-import { switchLanguagesModal } from 'Modules/Ui/actions/switchLanguagesModal';
 import { selectCurrentPathname } from 'Modules/Routes/selectors/selectCurrentPathname.ts';
+import { switchLanguagesModal } from 'Modules/Ui/actions/switchLanguagesModal';
+import { selectUiLanguagesModalMounted } from 'Modules/Ui/selectors/selectUiLanguagesModalMounted';
+import A from 'Ui/A';
 import Border from 'Ui/Border';
+import Fade from 'Ui/Fade';
+import Hr from 'Ui/Hr';
 import Input from 'Ui/Input';
 import Span from 'Ui/Span';
-import A from 'Ui/A';
-import Hr from 'Ui/Hr';
-import LanguagesSwitch from 'Components/LanguagesSwitch';
-import LanguageItem from 'Components/LanguageItem';
-import Fade from 'Ui/Fade';
 
 import './Footer.less';
 

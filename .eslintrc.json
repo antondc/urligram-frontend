@@ -17,8 +17,24 @@
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
-  "plugins": ["react", "@typescript-eslint"],
+  "plugins": [
+    "react",
+    "@typescript-eslint",
+    "simple-import-sort", // sorts our imports
+    "import" // additional formatting for imports
+  ],
   "rules": {
+    "simple-import-sort/sort": [
+      "error",
+      {
+        "groups": [
+          ["^[^A-Z]"], // Not starting with uppercase
+          ["^[A-Z]", "^@?\\w"],  // Starting with uppercase, starring with at
+          ["(.less|.css|.sass)$"] // Ending with .less
+        ]
+      }
+    ],
+    "sort-imports": 0, // disables eslint's default sort imports rule
     "indent": ["warn", 2, { "SwitchCase": 1 }],
     "linebreak-style": ["error", "unix"],
     "quotes": ["warn", "single"],
