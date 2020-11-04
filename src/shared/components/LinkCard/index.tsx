@@ -1,10 +1,11 @@
 import React from 'react';
-import Span from 'Ui/Span';
-import Hr from 'Ui/Hr';
-import Tag from 'Ui/Tag';
+
 import Border from 'Ui/Border';
+import Hr from 'Ui/Hr';
+import Span from 'Ui/Span';
+import Tag from 'Ui/Tag';
 import Vote from 'Ui/Vote';
-import A from 'Ui/A';
+import { A } from '@antoniodcorrea/components';
 
 import './LinkCard.less';
 
@@ -32,18 +33,15 @@ const LinkCard: React.FC<Props> = ({ id, title, url, tags = [], img, vote }) => 
           <Span bold>{title}</Span>
           <Hr type="spacer" size="zero" />
           <div className="LinkCard-url">
-            <A href={url} styled targetBlank>
-              {url}
-            </A>
+            <A href={url}>{url}</A>
           </div>
         </div>
         <div className="LinkCard-tags">
-          {tags &&
-            tags.map((item) => (
-              <Tag className="LinkCard-tag" key={item.id}>
-                {item.name}
-              </Tag>
-            ))}
+          {tags?.map((item) => (
+            <Tag className="LinkCard-tag" key={item.id}>
+              {item.name}
+            </Tag>
+          ))}
         </div>
       </div>
       <div className="LinkCard-right">

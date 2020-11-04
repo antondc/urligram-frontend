@@ -8,12 +8,12 @@ import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCur
 import { selectCurrentPathname } from 'Modules/Routes/selectors/selectCurrentPathname.ts';
 import { switchLanguagesModal } from 'Modules/Ui/actions/switchLanguagesModal';
 import { selectUiLanguagesModalMounted } from 'Modules/Ui/selectors/selectUiLanguagesModalMounted';
-import A from 'Ui/A';
 import Border from 'Ui/Border';
 import Fade from 'Ui/Fade';
 import Hr from 'Ui/Hr';
 import Input from 'Ui/Input';
 import Span from 'Ui/Span';
+import { A } from '@antoniodcorrea/components';
 
 import './Footer.less';
 
@@ -41,13 +41,13 @@ const Footer: React.FC<Props> = ({
       <div className="Footer-section">
         <ul>
           <li>
-            <A href="">
+            <A href="" frontend>
               <Span bold>FAQ</Span>
             </A>
             <Hr type="spacer" size="micro" />
           </li>
           <li>
-            <A href="">
+            <A href="" frontend>
               <Span bold>My Account</Span>
             </A>
             <Hr type="spacer" size="micro" />
@@ -57,13 +57,13 @@ const Footer: React.FC<Props> = ({
       <div className="Footer-section">
         <ul>
           <li>
-            <A href="">
+            <A href="" frontend>
               <Span bold>Create account</Span>
             </A>
             <Hr type="spacer" size="micro" />
           </li>
           <li>
-            <A href="">
+            <A href="" frontend>
               <Span bold>My Lists</Span>
             </A>
             <Hr type="spacer" size="micro" />
@@ -73,13 +73,13 @@ const Footer: React.FC<Props> = ({
       <div className="Footer-section">
         <ul>
           <li>
-            <A href="">
+            <A href="" frontend>
               <Span bold>Disclaimer</Span>
             </A>
             <Hr type="spacer" size="micro" />
           </li>
           <li>
-            <A href="">
+            <A href="" frontend>
               <Span bold>Contact Us</Span>
             </A>
             <Hr type="spacer" size="micro" />

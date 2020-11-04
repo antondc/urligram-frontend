@@ -28,9 +28,9 @@
       "error",
       {
         "groups": [
-          ["^[^A-Z]"], // Not starting with uppercase
-          ["^[A-Z]", "^@?\\w"],  // Starting with uppercase, starring with at
-          ["(.less|.css|.sass)$"] // Ending with .less
+          ["^[^(A-Z|.]"], // Not starting with uppercase or a dot
+          ["^[A-Z]", "^@?\\w", "^\\."],  // Starting with uppercase, starring with at, starting with dot
+          ["(\\.less|\\.css|\\.sass)$"] // Ending with .less, .css, .sass
         ]
       }
     ],

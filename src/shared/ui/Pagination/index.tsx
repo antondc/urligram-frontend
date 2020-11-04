@@ -1,7 +1,9 @@
-import React, { Fragment, Component } from 'react';
-import './Pagination.less';
-import A from 'Ui/A';
+import React, { Component, Fragment } from 'react';
+
 import Border from 'Ui/Border';
+import { A } from '@antoniodcorrea/components';
+
+import './Pagination.less';
 
 interface Props {
   totalItems: number;
@@ -39,7 +41,7 @@ export class Pagination extends Component<Props> {
     return (
       <Fragment key={item}>
         <span className="Pagination-dots Pagination-item">...</span>
-        <A className="Pagination-item" href={href} styled>
+        <A className="Pagination-item" href={href} styled frontend>
           {item}
         </A>
       </Fragment>
@@ -50,7 +52,7 @@ export class Pagination extends Component<Props> {
     this.tempPreviousPage += 1;
 
     return (
-      <A className="Pagination-item" href={href} key={item} styled disabled={item === page}>
+      <A className="Pagination-item" href={href} key={item} styled disabled={item === page} frontend>
         {item}
       </A>
     );
@@ -75,9 +77,7 @@ export class Pagination extends Component<Props> {
     return (
       <div className={'Pagination ' + (grow ? 'Pagination-grow' : '')}>
         <Border className="Pagination-border" padding="small" grow={grow}>
-          {pages.map((item) => {
-            return this.renderItems(item, href, page);
-          })}
+          {pages.map((item) => this.renderItems(item, href, page))}
         </Border>
       </div>
     );
