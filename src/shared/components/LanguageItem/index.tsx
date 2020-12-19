@@ -1,7 +1,6 @@
 import React from 'react';
 
-import { A } from '@antoniodcorrea/components';
-import Span from '../../ui/Span';
+import { A, Span } from '@antoniodcorrea/components';
 
 import './LanguageItem.less';
 

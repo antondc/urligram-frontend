@@ -10,9 +10,7 @@ import SidebarListUsers from 'Components/SidebarListUsers';
 import { lists } from 'Root/src/shared/tools/mockData/mockLists';
 import { tags } from 'Root/src/shared/tools/mockData/mockTags';
 import { users } from 'Root/src/shared/tools/mockData/mockUsers';
-import Button from 'Ui/Button';
-import Flex from 'Ui/Flex';
-import Hr from 'Ui/Hr';
+import { Button, Flex, Hr } from '@antoniodcorrea/components';
 import { BookmarkState } from '../../redux/modules/Bookmarks/bookmarks.types';
 
 import './Home.less';
@@ -26,9 +24,9 @@ export const HomeUI: React.FC<Props> = ({ bookmarks }) => (
     <Flex horizontal="between" vertical="top">
       <Sidebar>
         <SidebarListLists title="Popular Lists" items={lists} />
-        <Hr type="spacer" />
+        <Hr spacer />
         <SidebarListLists title="Popular Lists" items={lists} />
-        <Hr type="spacer" />
+        <Hr spacer />
         <SidebarListLists title="Popular Lists" items={lists} />
       </Sidebar>
       <Main>
@@ -36,22 +34,22 @@ export const HomeUI: React.FC<Props> = ({ bookmarks }) => (
         {bookmarks &&
           bookmarks.map((item, index) => (
             <React.Fragment key={item.id}>
-              {!!index && <Hr type="spacer" />}
+              {!!index && <Hr spacer />}
               <LinkCard {...item} />
             </React.Fragment>
           ))}
-        <Hr type="spacer" size="big" />
+        <Hr spacer size="big" />
         <Flex horizontal="center">
           <Button text="Load more" />
         </Flex>
       </Main>
       <Sidebar>
         <SidebarListTags title="Trending Tags" items={tags} />
-        <Hr type="spacer" />
+        <Hr spacer />
         <SidebarListUsers title="Popular Users" items={users} />
-        <Hr type="spacer" />
+        <Hr spacer />
         <SidebarListUsers title="Following" items={users} />
-        <Hr type="spacer" />
+        <Hr spacer />
         <SidebarListUsers title="Followers" items={users} />
       </Sidebar>
     </Flex>

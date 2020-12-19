@@ -24,9 +24,7 @@ import { routesList, routesWithoutOmmitedValues } from 'Routes/index';
 import Router from 'Routes/Router';
 import enhanceRouteWithParams from 'Tools/utils/url/enhanceRouteWithParams';
 import findActiveRouteKey from 'Tools/utils/url/findActiveRouteKey';
-import Fade from 'Ui/Fade';
-import Hr from 'Ui/Hr';
-import SpinnerCircle from 'Ui/SpinnerCircle';
+import { Fade, Hr, SpinnerCircle } from '@antoniodcorrea/components';
 import LayoutContent from '../LayoutContent';
 
 import './Layout.less';
@@ -93,11 +91,11 @@ class Layout extends React.Component<Props> {
           <LayoutContent>
             <div className="Layout-top">
               <Header />
-              <Hr type="spacer" />
+              <Hr spacer />
               <SubHeader />
-              <Hr type="spacer" />
+              <Hr spacer />
               <Route path="/:lang([a-z]{2})?" component={Router} />
-              <Hr type="spacer" />
+              <Hr spacer />
             </div>
             <LayoutHelper />
             <Footer />

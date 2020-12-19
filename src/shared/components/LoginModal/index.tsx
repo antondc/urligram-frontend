@@ -5,12 +5,7 @@ import { createStructuredSelector } from 'reselect';
 import Cross from 'Assets/svg/cross.svg';
 import { logIn } from 'Modules/Session/actions/logIn';
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
-import Border from 'Ui/Border';
-import Button from 'Ui/Button';
-import H3 from 'Ui/H3';
-import Hr from 'Ui/Hr';
-import Input from 'Ui/Input';
-import Flex from '../../ui/Flex';
+import { Border, Button, Flex, H3, Hr, Input } from '@antoniodcorrea/components';
 import BaseModal from '../BaseModal';
 
 import './LoginModal.less';
@@ -44,12 +39,12 @@ const LoginModal: React.FC<Props> = ({ logIn, switchLoginModal }) => {
         <Flex horizontal="center">
           <H3>Log in</H3>
         </Flex>
-        <Hr type="spacer" size="small" />
+        <Hr spacer size="small" />
         <form className="Login-form">
           <Input name="usrname" label="Session name" value={username} onChange={onUsernameChange} />
-          <Hr type="spacer" size="small" />
+          <Hr spacer size="small" />
           <Input name="password" label="Session password" value={password} onChange={onPasswordChange} />
-          <Hr type="spacer" size="big" />
+          <Hr spacer size="big" />
           <Button text="Enter" type="submit" onClick={onSubmit} />
         </form>
       </Border>

@@ -1,8 +1,9 @@
-import merge from 'webpack-merge';
 import webpack from 'webpack';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
-import webpackClientCommonConfig from './webpack.client.common';
+import merge from 'webpack-merge';
+
 import { API_DEVELOPMENT_ENDPOINT, WEBPACK_ROOT, WEBPACK_SRC_CLIENT } from './constants';
+import webpackClientCommonConfig from './webpack.client.common';
 
 const webpackClientDevConfig = {
   mode: 'development',

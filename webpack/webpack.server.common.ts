@@ -1,11 +1,12 @@
-import path from 'path';
-import { CleanWebpackPlugin } from 'clean-webpack-plugin';
-import FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin';
-import CompressionPlugin from 'compression-webpack-plugin';
 import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
-import nodeExternals from 'webpack-node-externals';
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
+import CompressionPlugin from 'compression-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
-import { WEBPACK_SRC_SERVER, WEBPACK_ROOT, WEBPACK_SRC, WEBPACK_DIST, WEBPACK_ASSETS } from './constants';
+import FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin';
+import path from 'path';
+import nodeExternals from 'webpack-node-externals';
+
+import { WEBPACK_ASSETS, WEBPACK_DIST, WEBPACK_ROOT, WEBPACK_SRC, WEBPACK_SRC_SERVER } from './constants';
 
 const webpackServerCommonConfig = {
   name: 'server',

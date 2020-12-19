@@ -7,10 +7,7 @@ import User from 'Assets/svg/user.svg';
 import { logOut } from 'Modules/Session/actions/logOut';
 import { switchMessageModal } from 'Modules/Ui/actions/switchMessageModal';
 import { switchUserModal } from 'Modules/Ui/actions/switchUserModal';
-import Border from 'Ui/Border';
-import Hr from 'Ui/Hr';
-import Span from 'Ui/Span';
-import { A } from '@antoniodcorrea/components';
+import { A, Border, Hr, Span } from '@antoniodcorrea/components';
 
 import './UserModal.less';
 
@@ -30,37 +27,37 @@ const UserModal: React.FC<Props> = ({ logOut, switchUserModal, switchMessageModa
           <Span bold>My account</Span>
         </A>
       </li>
-      <Hr type="spacer" size="small" />
+      <Hr spacer size="small" />
       <li>
         <A href="" frontend>
           <Span bold>My tags</Span>
         </A>
       </li>
-      <Hr type="spacer" size="small" />
+      <Hr spacer size="small" />
       <li>
         <A href="" frontend>
           <Span bold>Followers</Span>
         </A>
       </li>
-      <Hr type="spacer" size="small" />
+      <Hr spacer size="small" />
       <li>
         <A href="" frontend>
           <Span bold>Following</Span>
         </A>
       </li>
-      <Hr type="spacer" size="small" />
+      <Hr spacer size="small" />
       <li>
         <A href="" frontend>
           <Span bold>Recommended</Span>
         </A>
       </li>
-      <Hr type="spacer" size="small" />
+      <Hr spacer size="small" />
       <li>
         <A href="" frontend>
           <Span bold>My lists</Span>
         </A>
       </li>
-      <Hr type="spacer" size="small" />
+      <Hr spacer size="small" />
       <li className="UserModal-logOut" onClick={logOut}>
         <Span bold>Log out</Span>
       </li>

@@ -1,10 +1,11 @@
-import path from 'path';
-import HtmlWebPackPlugin from 'html-webpack-plugin';
-import { CleanWebpackPlugin } from 'clean-webpack-plugin';
-import FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin';
-import CompressionPlugin from 'compression-webpack-plugin';
 import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
-import { WEBPACK_ROOT, WEBPACK_SRC, WEBPACK_DIST } from './constants';
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
+import CompressionPlugin from 'compression-webpack-plugin';
+import FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin';
+import HtmlWebPackPlugin from 'html-webpack-plugin';
+import path from 'path';
+
+import { WEBPACK_DIST, WEBPACK_ROOT, WEBPACK_SRC } from './constants';
 
 const webpackClientCommonConfig = {
   name: 'client',

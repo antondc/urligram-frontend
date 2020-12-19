@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Fade from 'Ui/Fade';
+import { Fade } from '@antoniodcorrea/components';
 
 import './LayoutHelper.less';
 

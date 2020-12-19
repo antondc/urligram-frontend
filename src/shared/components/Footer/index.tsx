@@ -8,12 +8,7 @@ import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCur
 import { selectCurrentPathname } from 'Modules/Routes/selectors/selectCurrentPathname.ts';
 import { switchLanguagesModal } from 'Modules/Ui/actions/switchLanguagesModal';
 import { selectUiLanguagesModalMounted } from 'Modules/Ui/selectors/selectUiLanguagesModalMounted';
-import Border from 'Ui/Border';
-import Fade from 'Ui/Fade';
-import Hr from 'Ui/Hr';
-import Input from 'Ui/Input';
-import Span from 'Ui/Span';
-import { A } from '@antoniodcorrea/components';
+import { A, Border, Fade, Hr, Input, Span } from '@antoniodcorrea/components';
 
 import './Footer.less';
 
@@ -36,64 +31,37 @@ const Footer: React.FC<Props> = ({
   };
 
   return (
-    <Border className="Footer">
-      <div className="Footer-section" />
+    <Border className="Footer" weight="thick">
       <div className="Footer-section">
-        <ul>
-          <li>
-            <A href="" frontend>
-              <Span bold>FAQ</Span>
-            </A>
-            <Hr type="spacer" size="micro" />
-          </li>
-          <li>
-            <A href="" frontend>
-              <Span bold>My Account</Span>
-            </A>
-            <Hr type="spacer" size="micro" />
-          </li>
-        </ul>
+        <A href="" frontend>
+          <Span bold>About</Span>
+        </A>
       </div>
       <div className="Footer-section">
-        <ul>
-          <li>
-            <A href="" frontend>
-              <Span bold>Create account</Span>
-            </A>
-            <Hr type="spacer" size="micro" />
-          </li>
-          <li>
-            <A href="" frontend>
-              <Span bold>My Lists</Span>
-            </A>
-            <Hr type="spacer" size="micro" />
-          </li>
-        </ul>
+        <A href="" frontend>
+          <Span bold>Disclaimer</Span>
+        </A>
       </div>
       <div className="Footer-section">
-        <ul>
-          <li>
-            <A href="" frontend>
-              <Span bold>Disclaimer</Span>
-            </A>
-            <Hr type="spacer" size="micro" />
-          </li>
-          <li>
-            <A href="" frontend>
-              <Span bold>Contact Us</Span>
-            </A>
-            <Hr type="spacer" size="micro" />
-          </li>
-        </ul>
+        <A href="" frontend>
+          <Span bold>FAQ</Span>
+        </A>
+      </div>
+      <div className="Footer-section">
+        <A href="" frontend>
+          <Span bold>Download</Span>
+        </A>
+      </div>
+      <div className="Footer-section">
+        <A href="" frontend>
+          <Span bold>Contact</Span>
+        </A>
       </div>
       <div className="Footer-section Footer-lastSection">
-        <div className="Footer-languages" onMouseLeave={uiLanguagesModalMounted ? switchLanguagesModal : undefined}>
-          <Fade mounted={uiLanguagesModalMounted}>
-            <LanguagesSwitch />
-          </Fade>
-          <LanguageItem lang={currentLanguageSlug} onClick={switchLanguagesModal} href={currentPathName} />
-        </div>
-        <Input name="mailing" label="Sign up to our mailing list" value={email} onChange={onInputType} />
+        <Fade mounted={uiLanguagesModalMounted}>
+          <LanguagesSwitch />
+        </Fade>
+        <LanguageItem lang={currentLanguageSlug} onClick={switchLanguagesModal} href={currentPathName} />
       </div>
     </Border>
   );

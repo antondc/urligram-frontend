@@ -3,9 +3,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 import FilterDown from 'Assets/svg/filterDown.svg';
-import Span from 'Ui/Span';
-import H4 from '../../ui/H4';
-import Hr from '../../ui/Hr';
+import { H4, Hr, Span } from '@antoniodcorrea/components';
 
 import './MainHeader.less';
 
@@ -33,7 +31,9 @@ const MainHeader: React.FC<Props> = ({ className, activeFilter, title }) => (
             №. votes
           </Span>
           <FilterDown
-            className={'MainHeader-filterIcon' + (activeFilter === 'NumberVotes' ? ' MainHeader-filterIcon--active' : '')}
+            className={
+              'MainHeader-filterIcon' + (activeFilter === 'NumberVotes' ? ' MainHeader-filterIcon--active' : '')
+            }
           />
         </div>
         <div className="MainHeader-filter">
@@ -46,7 +46,7 @@ const MainHeader: React.FC<Props> = ({ className, activeFilter, title }) => (
         </div>
       </div>
     </div>
-    <Hr type="spacer" size="small" />
+    <Hr spacer size="small" />
   </>
 );
 

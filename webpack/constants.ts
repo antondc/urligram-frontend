@@ -1,4 +1,5 @@
 import path from 'path';
+
 import config from '../config.test.json';
 import urlBuild from '../src/shared/tools/utils/url/urlBuild';
 

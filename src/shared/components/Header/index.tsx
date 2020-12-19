@@ -10,10 +10,7 @@ import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCur
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
 import { switchUserModal } from 'Modules/Ui/actions/switchUserModal';
-import Border from 'Ui/Border';
-import H3 from 'Ui/H3';
-import H4 from 'Ui/H4';
-import { A } from '@antoniodcorrea/components';
+import { A, Border, H3, H4 } from '@antoniodcorrea/components';
 
 import './Header.less';
 
@@ -33,7 +30,7 @@ const Header: React.FC<Props> = ({
   switchLoginModal,
 }) => (
   <header>
-    <Border className="Header">
+    <Border className="Header" weight="thick">
       <A className="Header-brand" href={'/' + currentLanguageSlug + '/'} styled={false} frontend>
         <Logo className="Header-logo" />
         <H3 className="Header-title">Linking</H3>
@@ -42,9 +39,11 @@ const Header: React.FC<Props> = ({
         <A className="Header-link" href={'/' + currentLanguageSlug + '/'} frontend>
           <H4>{currentGlossary.Tags}</H4>
         </A>
+        <span className="Header-bar">|</span>
         <A className="Header-link" href={'/' + currentLanguageSlug + '/login'} frontend>
           <H4>{currentGlossary.Trending}</H4>
         </A>
+        <span className="Header-bar">|</span>
         <A className="Header-link" href={'/' + currentLanguageSlug + '/control'} frontend>
           <H4>{currentGlossary.Lists}</H4>
         </A>

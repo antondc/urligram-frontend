@@ -1,9 +1,10 @@
-import merge from 'webpack-merge';
 import webpack from 'webpack';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
-import webpackServerCommonConfig from './webpack.server.common';
-import { API_DEVELOPMENT_ENDPOINT } from './constants';
+import merge from 'webpack-merge';
+
 import { SERVER_DEVELOPMENT_PORT } from '../config.test.json';
+import { API_DEVELOPMENT_ENDPOINT } from './constants';
+import webpackServerCommonConfig from './webpack.server.common';
 
 const webpackServerDevConfig = {
   name: 'server',

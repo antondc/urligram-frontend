@@ -1,8 +1,9 @@
-import merge from 'webpack-merge';
-import webpack from 'webpack';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import webpack from 'webpack';
+import merge from 'webpack-merge';
+
+import { API_PRODUCTION_ENDPOINT, WEBPACK_DIST, WEBPACK_SRC_CLIENT } from './constants';
 import webpackClientCommonConfig from './webpack.client.common';
-import { API_PRODUCTION_ENDPOINT, WEBPACK_SRC_CLIENT, WEBPACK_DIST } from './constants';
 
 const webpackClientProdConfig = {
   entry: [WEBPACK_SRC_CLIENT],

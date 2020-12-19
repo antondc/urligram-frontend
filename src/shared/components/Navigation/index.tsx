@@ -1,8 +1,6 @@
 import React from 'react';
 
-import Border from 'Ui/Border';
-import Span from 'Ui/Span';
-import { A } from '@antoniodcorrea/components';
+import { A, Border, Span } from '@antoniodcorrea/components';
 
 import './Navigation.less';
 

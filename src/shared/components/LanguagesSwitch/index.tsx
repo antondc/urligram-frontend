@@ -11,7 +11,7 @@ import { selectCurrentPathname } from 'Modules/Routes/selectors/selectCurrentPat
 import { selectCurrentRouteParamLanguage } from 'Modules/Routes/selectors/selectCurrentRouteParamLanguage';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import { switchLanguagesModal } from 'Modules/Ui/actions/switchLanguagesModal';
-import Border from 'Ui/Border';
+import { Border } from '@antoniodcorrea/components';
 
 import './LanguagesSwitch.less';
 

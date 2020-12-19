@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
-import { Route,Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
@@ -14,7 +14,7 @@ import Login from 'Routes/Login';
 import NotFound from 'Routes/NotFound';
 import SignIn from 'Routes/SignIn';
 import { Location } from 'Services/History';
-import FadeInOut from 'Ui/FadeInOut';
+import { FadeInOut } from '@antoniodcorrea/components';
 
 interface Props {
   loggedIn: boolean;

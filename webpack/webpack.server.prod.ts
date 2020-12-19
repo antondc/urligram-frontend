@@ -1,8 +1,9 @@
-import merge from 'webpack-merge';
 import webpack from 'webpack';
-import webpackServerCommonConfig from './webpack.server.common';
-import { API_PRODUCTION_ENDPOINT } from './constants';
+import merge from 'webpack-merge';
+
 import { SERVER_PRODUCTION_PORT } from '../config.test.json';
+import { API_PRODUCTION_ENDPOINT } from './constants';
+import webpackServerCommonConfig from './webpack.server.common';
 
 const webpackServerProdConfig = {
   name: 'server',

@@ -1,11 +1,6 @@
 import React from 'react';
 
-import Border from 'Ui/Border';
-import Hr from 'Ui/Hr';
-import Span from 'Ui/Span';
-import Tag from 'Ui/Tag';
-import Vote from 'Ui/Vote';
-import { A } from '@antoniodcorrea/components';
+import { A, Border, Hr, Span, Tag, Vote } from '@antoniodcorrea/components';
 
 import './LinkCard.less';
 
@@ -31,7 +26,7 @@ const LinkCard: React.FC<Props> = ({ id, title, url, tags = [], img, vote }) => 
       <div className="LinkCard-left">
         <div className="LinkCard-leftTop">
           <Span bold>{title}</Span>
-          <Hr type="spacer" size="zero" />
+          <Hr spacer size="zero" />
           <div className="LinkCard-url">
             <A href={url}>{url}</A>
           </div>
