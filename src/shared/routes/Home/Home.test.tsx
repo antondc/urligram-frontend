@@ -34,8 +34,4 @@ describe('HomeUI', () => {
   test('has a ".Main" wrapper', () => {
     expect(wrapper.find('.Home')).toHaveLength(1);
   });
-
-  test('renders appropiate number of items', () => {
-    expect(wrapper.find('LinkCard')).toHaveLength(2);
-  });
 });

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import LinkCard from 'Components/LinkCard';
+import { BookmarkRow } from 'Components/BookmarkRow';
 import Main from 'Components/Main';
 import MainHeader from 'Components/MainHeader';
 import Sidebar from 'Components/Sidebar';
@@ -35,7 +35,7 @@ export const HomeUI: React.FC<Props> = ({ bookmarks }) => (
           bookmarks.map((item, index) => (
             <React.Fragment key={item.id}>
               {!!index && <Hr spacer />}
-              <LinkCard {...item} />
+              <BookmarkRow {...item} />
             </React.Fragment>
           ))}
         <Hr spacer size="big" />

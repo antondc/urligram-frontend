@@ -1,12 +1,22 @@
 @import '../../css/imports.less';
 
-@c: .LinkCard;
+@c: .BookmarkRow;
 
 @{c} {
   display: flex;
   justify-content: space-between;
-  height: 100px;
-  padding: 10px;
+  align-items: flex-start;
+  width: 670px;
+  padding: 10px 20px;
+
+  &-icons {
+    display: flex;
+    margin-bottom: 3px;
+
+    svg {
+      margin-right: 5px;
+    }
+  }
 
   &-left {
     display: flex;
@@ -23,6 +33,7 @@
 
   &-url {
     position: relative;
+    font-size: @fs-micro;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -42,13 +53,12 @@
 
   &-right {
     display: flex;
-    align-items: flex-start;
-    width: 150px;
   }
 
   &-image {
     height: 100%;
-    width: 120px;
+    width: 110px;
+    margin-right: 20px;
     object-fit: cover;
     object-position: center;
     border: 2px solid black;
@@ -57,5 +67,28 @@
   &-vote {
     width: 30px;
     margin-top: 1px;
+  }
+
+  &-rightEnd {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  &-stats {
+    font-family: @ff-din;
+    font-size: @fs-small;
+    line-height: @fh-small;
+  }
+
+  &-stat {
+    display: flex;
+    justify-content: flex-end;
+    align-items: baseline;
+    text-align: end;
+  }
+
+  &-statIcon {
+    margin-right: 3px;
   }
 }

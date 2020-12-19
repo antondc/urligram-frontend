@@ -18,18 +18,9 @@ const webpackClientProdConfig = {
   module: {
     rules: [
       {
-        test: /\.(js|jsx|ts|tsx)$/,
-        loader: 'ts-loader',
-        exclude: /node_modules/,
-      },
-      {
         test: /\.(less|css)$/,
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'less-loader'],
         exclude: /node_modules/,
-      },
-      {
-        test: /\.svg$/,
-        use: ['@svgr/webpack'],
       },
     ],
   },

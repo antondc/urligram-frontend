@@ -26,6 +26,6 @@ const customViewports = {
 addParameters({
   viewport: {
     viewports: customViewports, // newViewports would be an ViewportMap. (see below for examples)
-    defaultViewport: 'Mobile',
+    defaultViewport: 'Desktop',
   },
 });

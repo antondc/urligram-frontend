@@ -59,6 +59,14 @@ const webpackServerCommonConfig = {
         test: /\.svg$/,
         use: ['@svgr/webpack'],
       },
+      {
+        test: /\.(woff|woff2|eot|ttf)$/,
+        loader: 'file-loader',
+        options: {
+          outputPath: 'fonts',
+          name: '[path][name].[ext]',
+        },
+      },
     ],
   },
   plugins: [

@@ -45,8 +45,16 @@ module.exports = {
     config.resolve.extensions.push('.ts', '.tsx', '.svg');
 
     config.resolve.alias = {
-      Components: path.resolve(__dirname, '../src/shared/components/'),
-      Svg: path.resolve(__dirname, '../src/shared/assets/svg/'),
+      Root: path.resolve(process.cwd()),
+      Redux: path.resolve(process.cwd(), 'src/shared/redux/'),
+      Modules: path.resolve(process.cwd(), 'src/shared/redux/modules/'),
+      Common: path.resolve(process.cwd(), 'src/shared/common/'),
+      Components: path.resolve(process.cwd(), 'src/shared/components/'),
+      Assets: path.resolve(process.cwd(), 'src/shared/assets/'),
+      Routes: path.resolve(process.cwd(), 'src/shared/routes/'),
+      Tools: path.resolve(process.cwd(), 'src/shared/tools/'),
+      Services: path.resolve(process.cwd(), 'src/shared/services/'),
+      Ui: path.resolve(process.cwd(), 'src/shared/ui/'),
     };
 
     return config;

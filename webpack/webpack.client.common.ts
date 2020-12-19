@@ -27,6 +27,27 @@ const webpackClientCommonConfig = {
       Ui: path.resolve(WEBPACK_ROOT, 'src/shared/ui/'),
     },
   },
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx|ts|tsx)$/,
+        loader: 'ts-loader',
+        exclude: /node_modules/,
+      },
+      {
+        test: /\.svg$/,
+        use: ['@svgr/webpack'],
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf)$/,
+        loader: 'file-loader',
+        options: {
+          outputPath: 'fonts',
+          name: '[path][name].[ext]',
+        },
+      },
+    ],
+  },
   plugins: [
     new CaseSensitivePathsPlugin(),
     new CleanWebpackPlugin({
