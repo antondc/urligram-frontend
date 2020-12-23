@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
@@ -8,7 +8,7 @@ import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCur
 import { selectCurrentPathname } from 'Modules/Routes/selectors/selectCurrentPathname.ts';
 import { switchLanguagesModal } from 'Modules/Ui/actions/switchLanguagesModal';
 import { selectUiLanguagesModalMounted } from 'Modules/Ui/selectors/selectUiLanguagesModalMounted';
-import { A, Border, Fade, Hr, Input, Span } from '@antoniodcorrea/components';
+import { A, Border, Fade, Span } from '@antoniodcorrea/components';
 
 import './Footer.less';
 
@@ -24,48 +24,41 @@ const Footer: React.FC<Props> = ({
   uiLanguagesModalMounted,
   currentPathName,
   switchLanguagesModal,
-}) => {
-  const [email, setEmail] = useState(undefined);
-  const onInputType = (e) => {
-    setEmail(e.target.value);
-  };
-
-  return (
-    <Border className="Footer" weight="thick">
-      <div className="Footer-section">
-        <A href="" frontend>
-          <Span bold>About</Span>
-        </A>
-      </div>
-      <div className="Footer-section">
-        <A href="" frontend>
-          <Span bold>Disclaimer</Span>
-        </A>
-      </div>
-      <div className="Footer-section">
-        <A href="" frontend>
-          <Span bold>FAQ</Span>
-        </A>
-      </div>
-      <div className="Footer-section">
-        <A href="" frontend>
-          <Span bold>Download</Span>
-        </A>
-      </div>
-      <div className="Footer-section">
-        <A href="" frontend>
-          <Span bold>Contact</Span>
-        </A>
-      </div>
-      <div className="Footer-section Footer-lastSection">
-        <Fade mounted={uiLanguagesModalMounted}>
-          <LanguagesSwitch />
-        </Fade>
-        <LanguageItem lang={currentLanguageSlug} onClick={switchLanguagesModal} href={currentPathName} />
-      </div>
-    </Border>
-  );
-};
+}) => (
+  <Border className="Footer" weight="thick">
+    <div className="Footer-section">
+      <A href="" frontend>
+        <Span bold>About</Span>
+      </A>
+    </div>
+    <div className="Footer-section">
+      <A href="" frontend>
+        <Span bold>Disclaimer</Span>
+      </A>
+    </div>
+    <div className="Footer-section">
+      <A href="" frontend>
+        <Span bold>FAQ</Span>
+      </A>
+    </div>
+    <div className="Footer-section">
+      <A href="" frontend>
+        <Span bold>Download</Span>
+      </A>
+    </div>
+    <div className="Footer-section">
+      <A href="" frontend>
+        <Span bold>Contact</Span>
+      </A>
+    </div>
+    <div className="Footer-section Footer-lastSection">
+      <Fade mounted={uiLanguagesModalMounted}>
+        <LanguagesSwitch />
+      </Fade>
+      <LanguageItem lang={currentLanguageSlug} onClick={switchLanguagesModal} href={currentPathName} />
+    </div>
+  </Border>
+);
 
 const mapStateToProps = createStructuredSelector({
   currentLanguageSlug: selectCurrentLanguageSlug,

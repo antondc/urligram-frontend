@@ -1,14 +1,7 @@
 @import './typography.less';
 @import './constants.less';
 
-.default() {
-  font-family: @ff-sans;
-  font-size: @fs-normal;
-  line-height: @fh-normal;
-}
-
 body {
-  .default();
   .hideScrollbar();
 
   color: @c-base;
@@ -26,15 +19,5 @@ body {
 
   &.scrollLocked {
     overflow: hidden !important;
-  }
-}
-
-a {
-  text-decoration: none;
-  color: @c-base;
-
-  &:hover {
-    text-decoration: none;
-    color: @c-base;
   }
 }

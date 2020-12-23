@@ -9,3 +9,11 @@
     background: transparent;
   }
 }
+
+.hoverTransition(@a) {
+  &:hover {
+    opacity: @a;
+    transition: opacity @td-fast @ease;
+    cursor: pointer;
+  }
+}

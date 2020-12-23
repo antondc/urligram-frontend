@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { A, Border, Hr, Link, Private, Span, Tag, Vote } from '@antoniodcorrea/components';
+import { A, Border, Edit, Hr, Link, Private, Span, Tag, Vote } from '@antoniodcorrea/components';
 
 import './BookmarkRow.less';
 
@@ -25,12 +25,32 @@ export const BookmarkRow: React.FC<Props> = ({ id, title, url, tags = [], img, v
     <Border grow className="BookmarkRow" data-test-id="BookmarkRow">
       <div className="BookmarkRow-left">
         <div className="BookmarkRow-icons">
-          <Link size="micro" />
-          <Private size="micro" />
+          <Link
+            size="micro"
+            className="BookmarkRow-icon"
+            onClick={() => {
+              alert('Link');
+            }}
+          />
+          <Private
+            size="micro"
+            className="BookmarkRow-icon"
+            onClick={() => {
+              alert('Private');
+            }}
+          />
+          <Edit
+            size="micro"
+            className="BookmarkRow-icon"
+            onClick={() => {
+              alert('Edit');
+            }}
+          />
         </div>
         <div className="BookmarkRow-leftTop">
-          <Span bold>{title}</Span>
-          <Hr spacer size="zero" />
+          <Span bold className="BookmarkRow-title">
+            {title}
+          </Span>
           <div className="BookmarkRow-url">
             <A href={url}>
               <Span size="small">{url}</Span>

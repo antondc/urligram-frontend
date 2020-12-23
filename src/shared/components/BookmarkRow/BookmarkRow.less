@@ -6,16 +6,17 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  width: 670px;
   padding: 10px 20px;
 
   &-icons {
     display: flex;
     margin-bottom: 3px;
+  }
 
-    svg {
-      margin-right: 5px;
-    }
+  &-icon {
+    .hoverTransition(0.5);
+
+    margin-right: 7px;
   }
 
   &-left {
@@ -29,6 +30,10 @@
 
   &-leftTop {
     //
+  }
+
+  &-title {
+    .hoverTransition(0.8);
   }
 
   &-url {

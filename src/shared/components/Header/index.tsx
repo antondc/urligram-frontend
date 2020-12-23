@@ -28,13 +28,18 @@ const Header: React.FC<Props> = ({
   switchUserModal,
   currentLanguageSlug,
   switchLoginModal,
+
 }) => (
   <header>
     <Border className="Header" weight="thick">
       <A className="Header-brand" href={'/' + currentLanguageSlug + '/'} styled={false} frontend>
         <Logo className="Header-logo" />
-        <H3 className="Header-title">Linking</H3>
       </A>
+      <H3 className="Header-title">
+        <A className="Header-brand" href={'/' + currentLanguageSlug + '/'} styled={false} frontend>
+          Linking
+        </A>
+      </H3>
       <nav className="Header-navigation">
         <A className="Header-link" href={'/' + currentLanguageSlug + '/'} frontend>
           <H4>{currentGlossary.Tags}</H4>
