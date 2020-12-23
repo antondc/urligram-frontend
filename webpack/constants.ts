@@ -11,12 +11,12 @@ export const WEBPACK_SRC_CLIENT = path.resolve(process.cwd(), 'src', 'client', '
 export const WEBPACK_SRC_SERVER = path.resolve(process.cwd(), 'src', 'server', 'App.ts');
 export const WEBPACK_ASSETS = path.resolve(process.cwd(), 'src', 'shared', 'assets');
 
-export const API_DEVELOPMENT_ENDPOINT = JSON.stringify(
+export const API_LOCAL_ENDPOINT = JSON.stringify(
   urlBuild({
-    protocol: config.API_DEVELOPMENT_PROTOCOL,
-    host: config.API_DEVELOPMENT_HOST,
-    port: config.API_DEVELOPMENT_PORT,
-    path: config.API_DEVELOPMENT_PATH,
+    protocol: config.API_LOCAL_PROTOCOL,
+    host: config.API_LOCAL_HOST,
+    port: config.API_LOCAL_PORT,
+    path: config.API_LOCAL_PATH,
   })
 );
 
