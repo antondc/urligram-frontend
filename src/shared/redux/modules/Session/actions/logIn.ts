@@ -11,7 +11,7 @@ import { logInRequest } from './logInRequest';
 export const logIn = ({ username, password }: any) => async (dispatch: Dispatch): Promise<void> => {
   try {
     await dispatch(logInRequest());
-    const response = await HttpClient.post<SessionApiResponse>('login', {
+    const response = await HttpClient.post<SessionApiResponse>('/login', {
       name: username,
       password: password,
     });
