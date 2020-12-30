@@ -9,7 +9,7 @@
   "SERVER_PRODUCTION_HOST": "antoniodiaz.me",
   "SERVER_PRODUCTION_PORT": 19079,
   "API_LOCAL_PROTOCOL": "https",
-  "API_LOCAL_HOST": "linking-api-staging.antoniodiaz.me",
+  "API_LOCAL_HOST": "linking.me",
   "API_LOCAL_PORT": 3000,
   "API_LOCAL_PATH": "/api/v1/",
   "API_STAGING_PROTOCOL": "https",
