@@ -1,6 +1,6 @@
 {
   "SERVER_DEVELOPMENT_PROTOCOL": "http",
-  "SERVER_DEVELOPMENT_HOST": "0.0.0.0",
+  "SERVER_DEVELOPMENT_HOST": "antoniodiaz.me",
   "SERVER_DEVELOPMENT_PORT": 4000,
   "SERVER_STAGING_PROTOCOL": "http",
   "SERVER_STAGING_HOST": "antoniodiaz.me",
@@ -8,8 +8,8 @@
   "SERVER_PRODUCTION_PROTOCOL": "http",
   "SERVER_PRODUCTION_HOST": "antoniodiaz.me",
   "SERVER_PRODUCTION_PORT": 19079,
-  "API_LOCAL_PROTOCOL": "http",
-  "API_LOCAL_HOST": "0.0.0.0",
+  "API_LOCAL_PROTOCOL": "https",
+  "API_LOCAL_HOST": "linking-api-staging.antoniodiaz.me",
   "API_LOCAL_PORT": 3000,
   "API_LOCAL_PATH": "/api/v1/",
   "API_STAGING_PROTOCOL": "https",

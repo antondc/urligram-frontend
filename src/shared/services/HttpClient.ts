@@ -1,4 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
+import https from 'https';
 import { stringify } from 'qs';
 
 class HttpClient {
@@ -7,6 +8,9 @@ class HttpClient {
   constructor() {
     const axiosInstance = axios.create({
       baseURL: process.env.ENDPOINT_API,
+      httpsAgent: new https.Agent({
+        rejectUnauthorized: false,
+      }),
     });
 
     axiosInstance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
