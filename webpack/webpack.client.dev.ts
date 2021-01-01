@@ -2,7 +2,8 @@ import webpack from 'webpack';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import merge from 'webpack-merge';
 
-import { API_LOCAL_ENDPOINT, WEBPACK_ROOT, WEBPACK_SRC_CLIENT } from './constants';
+import { development } from '../config.test.json';
+import { WEBPACK_ROOT, WEBPACK_SRC_CLIENT } from './constants';
 import webpackClientCommonConfig from './webpack.client.common';
 
 const webpackClientDevConfig = {
@@ -29,7 +30,7 @@ const webpackClientDevConfig = {
     new webpack.DefinePlugin({
       isBrowser: true,
       'process.env': {
-        ENDPOINT_API: API_LOCAL_ENDPOINT,
+        ENDPOINT_API: JSON.stringify(development.API_URL),
       },
     }),
     new BundleAnalyzerPlugin({

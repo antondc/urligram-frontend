@@ -2,7 +2,6 @@ import webpack from 'webpack';
 import merge from 'webpack-merge';
 
 import { production } from '../config.test.json';
-import { API_PRODUCTION_ENDPOINT } from './constants';
 import webpackServerCommonConfig from './webpack.server.common';
 
 const webpackServerProdConfig = {
@@ -18,7 +17,7 @@ const webpackServerProdConfig = {
       'process.env': {
         SERVER_PORT_HTTP: production.PORT_HTTP,
         SERVER_PORT_HTTPS: production.PORT_HTTPS,
-        ENDPOINT_API: API_PRODUCTION_ENDPOINT,
+        ENDPOINT_API: JSON.stringify(production.API_URL),
       },
     }),
   ],

@@ -3,7 +3,6 @@ import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import merge from 'webpack-merge';
 
 import { development } from '../config.test.json';
-import { API_LOCAL_ENDPOINT } from './constants';
 import webpackServerCommonConfig from './webpack.server.common';
 
 const webpackServerDevConfig = {
@@ -19,7 +18,7 @@ const webpackServerDevConfig = {
       'process.env': {
         SERVER_PORT_HTTP: development.PORT_HTTP,
         SERVER_PORT_HTTPS: development.PORT_HTTPS,
-        ENDPOINT_API: API_LOCAL_ENDPOINT,
+        ENDPOINT_API: JSON.stringify(development.API_URL),
       },
     }),
     new BundleAnalyzerPlugin({
