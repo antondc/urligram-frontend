@@ -1,4 +1,4 @@
-import { SERVER_PRODUCTION_HOST, SERVER_PRODUCTION_PORT,SERVER_PRODUCTION_PROTOCOL } from 'Root/config.test.json';
+import { production } from 'Root/config.test.json';
 import urlBuild from './urlBuild';
 
 describe('urlBuild', () => {
@@ -40,9 +40,9 @@ describe('urlBuild', () => {
 describe('urlBuild', () => {
   test('it should return a full url', () => {
     const input = {
-      protocol: SERVER_PRODUCTION_PROTOCOL,
-      host: SERVER_PRODUCTION_HOST,
-      port: SERVER_PRODUCTION_PORT,
+      protocol: production.PROTOCOL,
+      host: production.HOST,
+      port: production.PORT,
     };
     const output = 'http://antoniodiaz.me:19079';
     expect(urlBuild(input)).toEqual(output);

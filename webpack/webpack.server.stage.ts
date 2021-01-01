@@ -1,7 +1,7 @@
 import webpack from 'webpack';
 import merge from 'webpack-merge';
 
-import { SERVER_PRODUCTION_PORT } from '../config.test.json';
+import { staging } from '../config.test.json';
 import { API_STAGING_ENDPOINT } from './constants';
 import webpackServerCommonConfig from './webpack.server.common';
 
@@ -16,7 +16,7 @@ const webpackServerProdConfig = {
     new webpack.DefinePlugin({
       isBrowser: false,
       'process.env': {
-        SERVER_PORT: SERVER_PRODUCTION_PORT,
+        SERVER_PORT: staging.PORT,
         ENDPOINT_API: API_STAGING_ENDPOINT,
       },
     }),

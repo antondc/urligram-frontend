@@ -1,7 +1,7 @@
 import webpack from 'webpack';
 import merge from 'webpack-merge';
 
-import { SERVER_PRODUCTION_PORT } from '../config.test.json';
+import { production } from '../config.test.json';
 import { API_PRODUCTION_ENDPOINT } from './constants';
 import webpackServerCommonConfig from './webpack.server.common';
 
@@ -16,7 +16,7 @@ const webpackServerProdConfig = {
     new webpack.DefinePlugin({
       isBrowser: false,
       'process.env': {
-        SERVER_PORT: SERVER_PRODUCTION_PORT,
+        SERVER_PORT: production.PORT,
         ENDPOINT_API: API_PRODUCTION_ENDPOINT,
       },
     }),

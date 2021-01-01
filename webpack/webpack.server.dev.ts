@@ -2,7 +2,7 @@ import webpack from 'webpack';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import merge from 'webpack-merge';
 
-import { SERVER_DEVELOPMENT_PORT } from '../config.test.json';
+import { development } from '../config.test.json';
 import { API_LOCAL_ENDPOINT } from './constants';
 import webpackServerCommonConfig from './webpack.server.common';
 
@@ -17,7 +17,7 @@ const webpackServerDevConfig = {
     new webpack.DefinePlugin({
       isBrowser: false,
       'process.env': {
-        SERVER_PORT: SERVER_DEVELOPMENT_PORT,
+        SERVER_PORT: development.PORT,
         ENDPOINT_API: API_LOCAL_ENDPOINT,
       },
     }),

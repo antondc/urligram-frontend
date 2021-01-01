@@ -13,25 +13,25 @@ export const WEBPACK_ASSETS = path.resolve(process.cwd(), 'src', 'shared', 'asse
 
 export const API_LOCAL_ENDPOINT = JSON.stringify(
   urlBuild({
-    protocol: config.API_LOCAL_PROTOCOL,
-    host: config.API_LOCAL_HOST,
-    port: config.API_LOCAL_PORT,
-    path: config.API_LOCAL_PATH,
+    protocol: config.development.API_PROTOCOL,
+    host: config.development.API_HOST,
+    port: config.development.API_PORT,
+    path: config.development.API_PATH,
   })
 );
 
 export const API_STAGING_ENDPOINT = JSON.stringify(
   urlBuild({
-    protocol: config.API_STAGING_PROTOCOL,
-    host: config.API_STAGING_HOST,
-    path: config.API_STAGING_PATH,
+    protocol: config.staging.API_PROTOCOL,
+    host: config.staging.API_HOST,
+    path: config.staging.API_PATH,
   })
 );
 
 export const API_PRODUCTION_ENDPOINT = JSON.stringify(
   urlBuild({
-    protocol: config.API_PRODUCTION_PROTOCOL,
-    host: config.API_PRODUCTION_HOST,
-    path: config.API_PRODUCTION_PATH,
+    protocol: config.production.API_PROTOCOL,
+    host: config.production.API_HOST,
+    path: config.production.API_PATH,
   })
 );
