@@ -16,7 +16,8 @@ const webpackServerProdConfig = {
     new webpack.DefinePlugin({
       isBrowser: false,
       'process.env': {
-        SERVER_PORT: production.PORT,
+        SERVER_PORT_HTTP: production.PORT_HTTP,
+        SERVER_PORT_HTTPS: production.PORT_HTTPS,
         ENDPOINT_API: API_PRODUCTION_ENDPOINT,
       },
     }),

@@ -17,3 +17,6 @@ __snapshots__
 tmp
 .htpasswd
 *www-linking_frontend_*.pid
+src/server/ssl/private.crt
+src/server/ssl/private.csr
+src/server/ssl/private.key

@@ -1,25 +1,22 @@
 {
   "development": {
-    "PROTOCOL": "http",
-    "HOST": "antoniodiaz.me",
-    "PORT": 4000,
+    "PORT_HTTP": 80,
+    "PORT_HTTPS": 443,
     "API_PROTOCOL": "https",
     "API_HOST": "linking.me",
     "API_PORT": 3000,
     "API_PATH": "/api/v1/"
   },
   "staging": {
-    "PROTOCOL": "http",
-    "HOST": "antoniodiaz.me",
-    "PORT": 11923,
+    "PORT_HTTP": 11923,
+    "PORT_HTTPS": 0,
     "API_PROTOCOL": "https",
     "API_HOST": "linking-api-staging.antoniodiaz.me",
     "API_PATH": "/api/v1/"
   },
   "production": {
-    "PROTOCOL": "http",
-    "HOST": "antoniodiaz.me",
-    "PORT": 19079,
+    "PORT_HTTP": 19079,
+    "PORT_HTTPS": 0,
     "API_PROTOCOL": "https",
     "API_HOST": "linking-api-production.antoniodiaz.me",
     "API_PATH": "/api/v1/"

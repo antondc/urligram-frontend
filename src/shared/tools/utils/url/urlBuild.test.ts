@@ -1,4 +1,3 @@
-import { production } from 'Root/config.test.json';
 import urlBuild from './urlBuild';
 
 describe('urlBuild', () => {
@@ -40,11 +39,11 @@ describe('urlBuild', () => {
 describe('urlBuild', () => {
   test('it should return a full url', () => {
     const input = {
-      protocol: production.PROTOCOL,
-      host: production.HOST,
-      port: production.PORT,
+      protocol: 'http',
+      host: 'linking.me',
+      port: 19079,
     };
-    const output = 'http://antoniodiaz.me:19079';
+    const output = 'http://linking.me:19079';
     expect(urlBuild(input)).toEqual(output);
   });
 });

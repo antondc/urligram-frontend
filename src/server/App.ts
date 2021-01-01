@@ -3,8 +3,11 @@ import cors from 'cors';
 import express from 'express';
 import useragent from 'express-useragent';
 import bodyParser from 'body-parser';
+import fs from 'fs';
 import http from 'http';
+import https from 'https';
 import logger from 'morgan';
+import { AddressInfo } from 'net';
 import path from 'path';
 import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
@@ -91,6 +94,27 @@ app.use(function (err: any, req: any, res: any, next: any) {
 
 // Launching app
 export default app;
-const server = http.createServer(app);
 
-server.listen(process.env.SERVER_PORT);
+/* - - - - - - - - - - - Server - - - - - - - - - - - - - -*/
+
+try {
+  const certOptions = {
+    key: fs.readFileSync(path.resolve(process.cwd(), 'src/server/ssl/private.key')),
+    cert: fs.readFileSync(path.resolve(process.cwd(), 'src/server/ssl/private.crt')),
+  };
+  const server = https.createServer(certOptions, app);
+
+  server.listen(process.env.SERVER_PORT_HTTPS, () => {
+    const address = server.address() as AddressInfo;
+    console.log('=> App listening to HTTPS on port: ' + address.port);
+  });
+} catch {
+  console.log('=> SSL configuration files not found, skipping HTTPS server');
+} finally {
+  const httpServer = http.createServer(app);
+
+  httpServer.listen(process.env.SERVER_PORT_HTTP, () => {
+    const address = httpServer.address() as AddressInfo;
+    console.log('=> App listening to HTTP on port: ' + address.port);
+  });
+}
