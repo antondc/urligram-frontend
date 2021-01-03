@@ -3,29 +3,8 @@ import React from 'react';
 
 import { HomeUI } from './HomeUI';
 
-const props = {
-  bookmarks: [
-    {
-      id: 1,
-      title: 'My first bookmark',
-      url: 'http://example.com/path',
-      img: 'https://picsum.photos/id/123/300/200',
-      tags: [{ id: 2, name: 'Media' }],
-      vote: undefined,
-    },
-    {
-      id: 2,
-      title: 'A second bookmark',
-      url: 'http://example.com/path',
-      img: 'https://picsum.photos/id/21/300/200',
-      tags: [{ id: 4, name: 'Long text' }],
-      vote: true,
-    },
-  ],
-};
-
 describe('HomeUI', () => {
-  const wrapper = shallow(<HomeUI {...props} />);
+  const wrapper = shallow(<HomeUI />);
 
   test('component renders', () => {
     expect(wrapper.exists()).toBe(true);

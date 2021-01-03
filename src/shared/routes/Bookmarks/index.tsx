@@ -3,11 +3,25 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 import { loadBookmarks } from 'Modules/Bookmarks/actions/loadBookmarks.ts';
+import { BookmarkState } from '../../redux/modules/Bookmarks/bookmarks.types';
 import { selectBookmarksAll } from '../../redux/modules/Bookmarks/selectors/selectBookmarksAll';
-import { HomeUI } from './HomeUI';
+import { BookmarksUi } from './bookmarksUi';
 
-class Home extends React.Component {
-  render = () => <HomeUI />;
+interface Props {
+  bookmarks: BookmarkState[];
+  loadBookmarks: () => void;
+}
+
+class Home extends React.Component<Props> {
+  componentDidMount = () => {
+    this.props.loadBookmarks();
+  };
+
+  render = () => {
+    const { bookmarks } = this.props;
+
+    return <BookmarksUi bookmarks={bookmarks} />;
+  };
 }
 
 const mapStateToProps = createStructuredSelector({

@@ -20,6 +20,16 @@ export interface RoutesInterface {
 }
 
 const Routes: RoutesInterface = {
+  Bookmarks: {
+    name: 'Bookmarks',
+    path: '/:lang([a-z]{2})?/bookmarks',
+    exact: true,
+    auth: false,
+    hasHeader: false,
+    hasFooter: false,
+    loadInitialData: [loadBookmarks],
+  },
+
   Login: {
     name: 'Login',
     path: '/:lang([a-z]{2})?/login',
@@ -57,7 +67,7 @@ const Routes: RoutesInterface = {
     auth: false,
     hasHeader: true,
     hasFooter: true,
-    loadInitialData: [loadBookmarks, loadMockDataOne, loadMockDataTwo],
+    loadInitialData: [loadMockDataOne, loadMockDataTwo],
   },
 
   NotFound: {
