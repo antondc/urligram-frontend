@@ -28,7 +28,6 @@ const Header: React.FC<Props> = ({
   switchUserModal,
   currentLanguageSlug,
   switchLoginModal,
-
 }) => (
   <header>
     <Border className="Header" weight="thick">
@@ -51,6 +50,10 @@ const Header: React.FC<Props> = ({
         <span className="Header-bar">|</span>
         <A className="Header-link" href={'/' + currentLanguageSlug + '/control'} frontend>
           <H4>{currentGlossary.Lists}</H4>
+        </A>
+        <span className="Header-bar">|</span>
+        <A className="Header-link" href={'/' + currentLanguageSlug + '/bookmarks'} frontend>
+          <H4>{currentGlossary.Bookmarks}</H4>
         </A>
       </nav>
       <div className="Header-user">
