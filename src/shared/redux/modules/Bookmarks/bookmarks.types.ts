@@ -6,17 +6,8 @@ export interface BookmarkState {
   title: string;
   url: string;
   img: string;
-  tags: {
-    id: number;
-    name: string;
-  }[];
-  statistics: {
-    absoluteVote: number | null;
-    timesVoted: number;
-    averageVote: number | null;
-    timesBookmarked: number;
-    vote: boolean | null;
-  };
+  tags: { id: number; name: string }[];
+  vote?: boolean;
 }
 
 export interface BookmarksState {

@@ -1,30 +1,47 @@
 import React from 'react';
 
-import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
-import { A, Border, Edit, Link, Private, Span, Tag, Vote } from '@antoniodcorrea/components';
+import { A, Border, Edit, Hr, Link, Private, Span, Tag, Vote } from '@antoniodcorrea/components';
 
 import './BookmarkRow.less';
 
-export const BookmarkRow: React.FC<BookmarkState> = ({ id, title, url, tags = [], img, statistics }) => {
+interface Props {
+  id: number;
+  title: string;
+  url: string;
+  tags: {
+    id: number;
+    name: string;
+  }[];
+  img: string;
+  vote?: boolean;
+}
+
+export const BookmarkRow: React.FC<Props> = ({ id, title, url, tags = [], img, vote }) => {
   const onVote = (vote) => {
-    alert(JSON.stringify({ vote, bookmarkId: id }, null, 4));
+    console.log(vote, id);
   };
 
   return (
     <Border grow className="BookmarkRow" data-test-id="BookmarkRow">
       <div className="BookmarkRow-left">
         <div className="BookmarkRow-icons">
-          <Link size="micro" className="BookmarkRow-icon" />
+          <Link
+            size="micro"
+            className="BookmarkRow-icon"
+            onClick={() => {
+              alert('Link');
+            }}
+          />
           <Private
             size="micro"
-            className="BookmarkRow-icon BookmarkRow-iconHover"
+            className="BookmarkRow-icon"
             onClick={() => {
               alert('Private');
             }}
           />
           <Edit
             size="micro"
-            className="BookmarkRow-icon BookmarkRow-iconHover"
+            className="BookmarkRow-icon"
             onClick={() => {
               alert('Edit');
             }}
@@ -42,18 +59,16 @@ export const BookmarkRow: React.FC<BookmarkState> = ({ id, title, url, tags = []
         </div>
         <div className="BookmarkRow-tags">
           {tags?.map((item) => (
-            <A href={`/tags/${item.name}`} key={item.id} styled={false} frontend>
-              <Tag className="BookmarkRow-tag" size="small">
-                {item.name}
-              </Tag>
-            </A>
+            <Tag className="BookmarkRow-tag" key={item.id} size="small">
+              {item.name}
+            </Tag>
           ))}
         </div>
       </div>
       <div className="BookmarkRow-right">
         <img className="BookmarkRow-image" src={img} />
         <div className="BookmarkRow-rightEnd">
-          <Vote className="BookmarkRow-vote" vote={statistics?.vote} changeVote={onVote} />
+          <Vote className="BookmarkRow-vote" vote={vote} changeVote={onVote} />
           <div className="BookmarkRow-stats">
             <div className="BookmarkRow-stat">
               <Span size="nano" className="BookmarkRow-statIcon">
