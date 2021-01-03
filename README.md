@@ -40,19 +40,9 @@ Hot module reloading with `webpack-hot-middleware` and `webpack-dev-middleware.
 
 ### Cookies
 
-Cookies are accessed from backend only thanks to HttpOnly.
+Cookies are accesssed from backend only thanks to HttpOnly.
 
 Cookie-parser: https://github.com/expressjs/cookie-parser, official `Express` parser to access cookies.
-
-Cookies options are set checking if the APP referer is recognized by the API. If so, «domain» will be set with prepending «.» to allow any subdomain. If is not recognised, «domain» will be null; servers will be allowed.
-
-        const cookieOptions: CookieOptions = {
-          maxAge: 900000,
-          httpOnly: true,
-          path: '/',
-          sameSite: PRODUCTION ? 'strict' : 'none',
-          secure: DEVELOPMENT ? false : true,
-        };
 
 Cookies are set in the following steps:
 
@@ -64,18 +54,18 @@ Cookies are set in the following steps:
   - Request to `GET` `/login` is called, the response has a cookie with user data, along with user data itself
   - Reducer is triggered and user data is saved on store: `src/shared/redux/reducers.js`
   - User navigates
-  - The `HTTPS` request has the cookie included
+  - The `HTTP` request has the cookie included
 
 - Server
 
-  - For all requests, cookies are checked at `src/infrastructure/http/controllers/UserLoginController.ts`, as cookies are an implementation detail.
-  - If cookie can be decrypted, user data is returned
+  - For all requests, cookies are checked at `src/server/routes/allRoutes.tsx`
+  - If cookie can be decrypted, user data is included in `window.__PRELOADED_STATE__`
 
 - Client
 
-  - Token validator is wrapped in `src/shared/services/Authentication.ts` to handle error
+  - Token validator is wrapped in `src/shared/services/Cookies.ts` to handle error
 
-On `<Router/>` we have `<Redirect />` components that are loaded depending on the login status of the user, and allows or disallows to access to specific routes: `src/shared/routes/Router/index.tsx`
+On `<Router/>` we have `<Redirect />` components that are loaded depending on the login status of the user, and allows or disallows to access to specific routes: `src/shared/routes/Router/index.js`
 
 ### CSS
 

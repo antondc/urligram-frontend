@@ -22,7 +22,6 @@ const initialState: LanguagesState = {
       Tags: '',
       Trending: '',
       Lists: '',
-      Bookmarks: '',
     },
   },
 };

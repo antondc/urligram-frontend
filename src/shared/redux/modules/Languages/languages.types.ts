@@ -13,7 +13,6 @@ export interface GlossaryState {
   Tags: string;
   Trending: string;
   Lists: string;
-  Bookmarks: string;
 }
 
 export interface LanguageState {
