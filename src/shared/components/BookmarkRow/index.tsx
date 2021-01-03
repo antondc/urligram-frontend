@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { A, Border, Edit, Hr, Link, Private, Span, Tag, Vote } from '@antoniodcorrea/components';
+import { A, Border, Edit, Link, Private, Span, Tag, Vote } from '@antoniodcorrea/components';
 
 import './BookmarkRow.less';
 
