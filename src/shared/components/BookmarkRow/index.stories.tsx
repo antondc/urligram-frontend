@@ -16,13 +16,6 @@ const props = {
     { id: 1, name: 'Cool' },
     { id: 2, name: 'Interesting' },
   ],
-  statistics: {
-    absoluteVote: 0,
-    timesVoted: 0,
-    averageVote: 0,
-    timesBookmarked: 0,
-    vote: false,
-  },
 };
 
 export const Default: React.ReactNode = () => (

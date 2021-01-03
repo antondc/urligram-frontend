@@ -10,7 +10,7 @@ const bookmarksSerializerByKey = (data) =>
 
 export const loadBookmarks = () => async (dispatch?: Dispatch) => {
   if (isBrowser) {
-    const response = await HttpClient.get<ReceiveBookmarksResponse>('/bookmarks');
+    const response = await HttpClient.get<ReceiveBookmarksResponse>('bookmarks');
 
     const bookmarksByKey = {
       byKey: bookmarksSerializerByKey(response.data),
@@ -22,7 +22,7 @@ export const loadBookmarks = () => async (dispatch?: Dispatch) => {
     return;
   }
 
-  const response = await HttpClient.get('/bookmarks');
+  const response = await HttpClient.get('bookmarks');
   const bookmarksByKey = bookmarksSerializerByKey(response.data);
 
   const result = {
