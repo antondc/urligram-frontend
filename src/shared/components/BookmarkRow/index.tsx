@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
-import { A, Border, Edit, Link, Private, Span, Tag, Vote } from '@antoniodcorrea/components';
+import { A, Border, Edit, Private, Span, Tag, Vote } from '@antoniodcorrea/components';
 
 import './BookmarkRow.less';
 
@@ -14,7 +14,7 @@ export const BookmarkRow: React.FC<BookmarkState> = ({ id, title, url, tags = []
     <Border grow className="BookmarkRow" data-test-id="BookmarkRow">
       <div className="BookmarkRow-left">
         <div className="BookmarkRow-icons">
-          <Link size="micro" className="BookmarkRow-icon" />
+          {/* <Link size="micro" className="BookmarkRow-icon" /> */}
           <Private
             size="micro"
             className="BookmarkRow-icon BookmarkRow-iconHover"
