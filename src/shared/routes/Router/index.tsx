@@ -7,6 +7,7 @@ import { createStructuredSelector } from 'reselect';
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
 import { selectPathWithoutLanguageParam } from 'Modules/Routes/selectors/selectPathWithoutLanguageParam';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
+import Bookmarks from 'Routes/Bookmarks';
 import Control from 'Routes/Control';
 import Home from 'Routes/Home';
 import Routes from 'Routes/index';
@@ -28,6 +29,7 @@ const Router: React.FC<Props> = ({ loggedIn, location, defaultCurrentSlug, pathW
     <Switch location={{ ...location, pathname: pathWithoutLanguageParam }}>
       {loggedIn && <Redirect from="/:lang?/login" to={'/' + defaultCurrentSlug + '/control'} />}
       {!loggedIn && <Redirect from="/:lang?/control" to={'/' + defaultCurrentSlug + '/sign-in'} />}
+      <Route exact={Routes.Bookmarks.exact} path={Routes.Bookmarks.path} component={Bookmarks} />
       <Route exact={Routes.Login.exact} path={Routes.Login.path} component={Login} />
       <Route exact={Routes.SignIn.exact} path={Routes.SignIn.path} component={SignIn} />
       <Route exact={Routes.Home.exact} path={Routes.Home.path} component={Home} />
