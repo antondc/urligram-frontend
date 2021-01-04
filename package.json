@@ -135,7 +135,8 @@
     "react-transition-group": "^4.3.0",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
-    "serialize-javascript": "^3.0.0"
+    "serialize-javascript": "^3.0.0",
+    "storybook-react-router": "^1.0.8"
   },
   "husky": {
     "hooks": {
