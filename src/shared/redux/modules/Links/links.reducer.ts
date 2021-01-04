@@ -1,16 +1,16 @@
-import { BookmarksState, LOAD_BOOKMARKS_STARTED, LOAD_BOOKMARKS_SUCCESS } from './bookmarks.types';
+import { LinksState,LOAD_LINKS_STARTED, LOAD_LINKS_SUCCESS } from './links.types';
 
-const initialState: BookmarksState = {
+const initialState: LinksState = {
   byKey: {},
 };
 
-export const Bookmarks = (state = initialState, action) => {
+export const Links = (state = initialState, action) => {
   switch (action.type) {
-    case LOAD_BOOKMARKS_STARTED:
+    case LOAD_LINKS_STARTED:
       return Object.assign({}, state, {
         loading: true,
       });
-    case LOAD_BOOKMARKS_SUCCESS:
+    case LOAD_LINKS_SUCCESS:
       return Object.assign({}, state, {
         byKey: {
           ...state.byKey,

@@ -1,0 +1,49 @@
+export const LOAD_LINKS_STARTED = 'LOAD_LINKS_STARTED';
+export const LOAD_LINKS_SUCCESS = 'LOAD_LINKS_SUCCESS';
+
+export interface LinkState {
+  id: number;
+  title: string;
+  url: string;
+  img: string;
+  linkId: number;
+  tags: {
+    id: number;
+    name: string;
+  }[];
+  statistics: {
+    absoluteVote: number | null;
+    timesVoted: number;
+    averageVote: number | null;
+    timesBookmarked: number;
+    vote: boolean | null;
+  };
+}
+
+export interface LinksState {
+  byKey: {
+    [key: string]: LinkState;
+  };
+}
+
+interface RequestLinksAction {
+  type: typeof LOAD_LINKS_STARTED;
+  data: {
+    loading: true;
+  };
+}
+
+interface ReceiveLinksAction {
+  type: typeof LOAD_LINKS_SUCCESS;
+  data: LinksState;
+}
+
+export interface ReceiveLinksResponse {
+  data: {
+    type: 'links';
+    id: number;
+    attributes: LinkState;
+  }[];
+}
+
+export type LinksActionsTypes = RequestLinksAction | ReceiveLinksAction;

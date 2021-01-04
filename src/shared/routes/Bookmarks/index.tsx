@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 import { loadBookmarks } from 'Modules/Bookmarks/actions/loadBookmarks.ts';
-import { BookmarkState } from '../../redux/modules/Bookmarks/bookmarks.types';
-import { selectBookmarksAll } from '../../redux/modules/Bookmarks/selectors/selectBookmarksAll';
+import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
+import { selectBookmarksAll } from 'Modules/Bookmarks/selectors/selectBookmarksAll';
 import { BookmarksUi } from './bookmarksUi';
 
 interface Props {

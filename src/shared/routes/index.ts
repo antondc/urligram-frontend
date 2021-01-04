@@ -1,8 +1,9 @@
 import omit from 'lodash/omit';
 
 import { loadBookmarks } from 'Modules/Bookmarks/actions/loadBookmarks';
+import { loadLinks } from 'Modules/Links/actions/loadLinks';
 import { loadMockDataOne } from 'Modules/MockDataOne/actions/loadMockDataOne';
-import { loadMockDataTwo } from '../redux/modules/MockDataTwo/actions/loadMockDataTwo';
+import { loadMockDataTwo } from 'Modules/MockDataTwo/actions/loadMockDataTwo';
 
 export interface Route {
   name: string;
@@ -28,6 +29,16 @@ const Routes: RoutesInterface = {
     hasHeader: false,
     hasFooter: false,
     loadInitialData: [loadBookmarks],
+  },
+
+  Links: {
+    name: 'Links',
+    path: '/:lang([a-z]{2})?/links',
+    exact: true,
+    auth: false,
+    hasHeader: false,
+    hasFooter: false,
+    loadInitialData: [loadLinks],
   },
 
   Login: {

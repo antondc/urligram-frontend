@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 import { loadBookmarks } from 'Modules/Bookmarks/actions/loadBookmarks.ts';
-import { selectBookmarksAll } from '../../redux/modules/Bookmarks/selectors/selectBookmarksAll';
+import { selectBookmarksAll } from 'Modules/Bookmarks/selectors/selectBookmarksAll';
 import { HomeUI } from './HomeUI';
 
 class Home extends React.Component {

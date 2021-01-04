@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
 
-import { ReceiveBookmarksResponse } from 'Root/src/shared/redux/modules/Bookmarks/bookmarks.types';
+import { ReceiveBookmarksResponse } from 'Modules/Bookmarks/bookmarks.types';
 import HttpClient from 'Root/src/shared/services/HttpClient';
 import { receiveBookmarks } from './receiveBookmarks';
 import { requestBookmarks } from './requestBookmarks';

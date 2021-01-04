@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
+import { LinkState } from 'Modules/Links/links.types';
 import { A, Border, Circle, Edit, Private, Span, Tag, Vote } from '@antoniodcorrea/components';
 
 import './LinkRow.less';
 
-export const LinkRow: React.FC<BookmarkState> = ({ id, title, url, tags = [], img, statistics, linkId }) => {
+export const LinkRow: React.FC<LinkState> = ({ id, title, url, tags = [], img, statistics, linkId }) => {
   const onVote = (vote) => {
     alert(JSON.stringify({ vote, linkId }, null, 4));
   };

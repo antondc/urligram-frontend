@@ -1,26 +1,26 @@
 import React from 'react';
 
-import { BookmarkRow } from 'Components/BookmarkRow';
+import { LinkRow } from 'Components/LinkRow';
 import Main from 'Components/Main';
 import MainHeader from 'Components/MainHeader';
 import Sidebar from 'Components/Sidebar';
 import SidebarListLists from 'Components/SidebarListLists';
 import SidebarListTags from 'Components/SidebarListTags';
 import SidebarListUsers from 'Components/SidebarListUsers';
-import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
+import { LinkState } from 'Modules/Links/links.types';
 import { lists } from 'Root/src/shared/tools/mockData/mockLists';
 import { tags } from 'Root/src/shared/tools/mockData/mockTags';
 import { users } from 'Root/src/shared/tools/mockData/mockUsers';
 import { Button, Flex, Hr } from '@antoniodcorrea/components';
 
-import './Bookmarks.less';
+import './Links.less';
 
 interface Props {
-  bookmarks: BookmarkState[];
+  links: LinkState[];
 }
 
-export const BookmarksUi: React.FC<Props> = ({ bookmarks }) => (
-  <div className="Bookmarks">
+export const LinksUi: React.FC<Props> = ({ links }) => (
+  <div className="Links">
     <Flex horizontal="between" vertical="top">
       <Sidebar>
         <SidebarListLists title="Popular Lists" items={lists} />
@@ -30,12 +30,12 @@ export const BookmarksUi: React.FC<Props> = ({ bookmarks }) => (
         <SidebarListLists title="Popular Lists" items={lists} />
       </Sidebar>
       <Main>
-        <MainHeader title="My bookmarks" />
-        {bookmarks &&
-          bookmarks.map((item, index) => (
+        <MainHeader title="My links" />
+        {links &&
+          links.map((item, index) => (
             <React.Fragment key={item.id}>
               {!!index && <Hr spacer />}
-              <BookmarkRow {...item} />
+              <LinkRow {...item} />
             </React.Fragment>
           ))}
         <Hr spacer size="big" />
