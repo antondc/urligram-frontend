@@ -21,6 +21,9 @@ module.exports = {
       use: [
         {
           loader: require.resolve('awesome-typescript-loader'),
+          options: {
+            configFileName: path.resolve(process.cwd(), '.storybook/tsconfig.json'),
+          },
         },
       ],
     });
