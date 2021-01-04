@@ -1,20 +1,20 @@
 import React from 'react';
 
 import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
-import { A, Border, Edit, Private, Span, Tag, Vote } from '@antoniodcorrea/components';
+import { A, Border, Edit, Link, Private, Span, Tag, Vote } from '@antoniodcorrea/components';
 
 import './BookmarkRow.less';
 
-export const BookmarkRow: React.FC<BookmarkState> = ({ id, title, url, tags = [], img, statistics }) => {
+export const BookmarkRow: React.FC<BookmarkState> = ({ id, title, url, tags = [], img, statistics, linkId }) => {
   const onVote = (vote) => {
-    alert(JSON.stringify({ vote, bookmarkId: id }, null, 4));
+    alert(JSON.stringify({ vote, linkId }, null, 4));
   };
 
   return (
-    <Border grow className="BookmarkRow" data-test-id="BookmarkRow">
+    <Border grow className="BookmarkRow" data-test-id="BookmarkRow" key={id}>
       <div className="BookmarkRow-left">
         <div className="BookmarkRow-icons">
-          {/* <Link size="micro" className="BookmarkRow-icon" /> */}
+          <Link size="micro" className="BookmarkRow-icon" />
           <Private
             size="micro"
             className="BookmarkRow-icon BookmarkRow-iconHover"

@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { BookmarkRow } from '.';
+import { LinkRow } from '.';
 
 export default {
-  component: BookmarkRow,
-  title: 'BookmarkRow',
+  component: LinkRow,
+  title: 'LinkRow',
 };
 
 const props = {
@@ -28,6 +28,6 @@ const props = {
 
 export const Default: React.ReactNode = () => (
   <div style={{ padding: '30px' }}>
-    <BookmarkRow {...props} />
+    <LinkRow {...props} />
   </div>
 );

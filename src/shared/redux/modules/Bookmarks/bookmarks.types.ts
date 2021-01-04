@@ -6,6 +6,7 @@ export interface BookmarkState {
   title: string;
   url: string;
   img: string;
+  linkId: number;
   tags: {
     id: number;
     name: string;

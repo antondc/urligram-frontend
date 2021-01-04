@@ -7,6 +7,7 @@ const props = {
   bookmarks: [
     {
       id: 1,
+      linkId: 12,
       title: 'My first bookmark',
       url: 'http://example.com/path',
       img: 'https://picsum.photos/id/123/300/200',
@@ -21,6 +22,7 @@ const props = {
     },
     {
       id: 2,
+      linkId: 15,
       title: 'A second bookmark',
       url: 'http://example.com/path',
       img: 'https://picsum.photos/id/21/300/200',
