@@ -1,6 +1,6 @@
 import { addParameters } from '@storybook/react';
 import { addDecorator } from '@storybook/react';
-import StoryRouter from 'storybook-react-router';
+// import StoryRouter from 'storybook-react-router';
 
 /* Activate to center view */
 // import { addDecorator } from '@storybook/react';
@@ -8,7 +8,7 @@ import StoryRouter from 'storybook-react-router';
 // addDecorator(centered);
 /* END */
 
-addDecorator(StoryRouter());
+// addDecorator(StoryRouter());
 
 const customViewports = {
   Desktop: {
