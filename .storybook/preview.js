@@ -1,6 +1,7 @@
 import { addParameters } from '@storybook/react';
 import { addDecorator } from '@storybook/react';
 import StoryRouter from 'storybook-react-router';
+
 /* Activate to center view */
 // import { addDecorator } from '@storybook/react';
 // import centered from '@storybook/addon-centered/react';
