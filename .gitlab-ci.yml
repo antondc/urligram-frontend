@@ -16,30 +16,30 @@ stages:
   - deploy_staging
   - deploy_production
 
-cache:
-  paths:
-    - node_modules/
+# cache:
+#   paths:
+#     - node_modules/
 
-install:
-  stage: install
-  script:
-    - npm install
-  artifacts:
-    paths:
-      - node_modules/
+# install:
+#   stage: install
+#   script:
+#     - npm install
+#   artifacts:
+#     paths:
+#       - node_modules/
 
-test:
-  stage: test
-  script:
-    - npm test
-  artifacts:
-    paths:
-      - node_modules/
+# test:
+#   stage: test
+#   script:
+#     - npm test
+#   artifacts:
+#     paths:
+#       - node_modules/
 
-build:
-  stage: build
-  script:
-    - npm build
+# build:
+#   stage: build
+#   script:
+#     - npm build
 
 deploy_staging:
   stage: deploy_staging
