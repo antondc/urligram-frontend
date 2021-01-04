@@ -13,7 +13,7 @@ interface Props {
 
 const NotFound: React.FC<Props> = ({ currentGlossary }) => (
   <div className="NotFound">
-    <h1 className="NotFound-h1">{currentGlossary.NotFound}</h1>
+    <h1 className="NotFound-h1">{currentGlossary.notFound}</h1>
   </div>
 );
 

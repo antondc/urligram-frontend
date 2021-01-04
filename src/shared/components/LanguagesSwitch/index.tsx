@@ -33,13 +33,16 @@ const LanguagesSwitch: React.FC<Props> = ({
   currentRouteParamLanguage,
   currentPathname,
 }) => {
-  const languagesWithLink = languagesList.map((item) => {
+  const addLinkToLanguage = (language) => {
     const link = !!currentRouteParamLanguage
-      ? currentPathname.replace('/' + currentRouteParamLanguage, '/' + item.slug)
-      : '/' + item.slug + currentPathname;
+      ? currentPathname.replace('/' + currentRouteParamLanguage, '/' + language.slug)
+      : '/' + language.slug + currentPathname;
 
-    return { link, ...item };
-  });
+    return { ...language, link };
+  };
+
+  const languagesWithLink = languagesList.map((language) => addLinkToLanguage(language));
+  const currentLanguageWithLink = addLinkToLanguage(currentLanguage);
   const languagesWithoutCurrent = languagesWithLink.filter((item) => currentLanguage.slug !== item.slug);
 
   return (
@@ -54,9 +57,9 @@ const LanguagesSwitch: React.FC<Props> = ({
       ))}
 
       <LanguageItem
-        key={currentLanguage.id}
-        lang={currentLanguage.slug}
-        href={currentLanguage.link}
+        key={currentLanguageWithLink.id}
+        lang={currentLanguageWithLink.slug}
+        href={currentLanguageWithLink.link}
         isCurrent
         onClick={() => switchCurrentLanguage(currentLanguage.slug)}
       />

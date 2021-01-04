@@ -6,7 +6,7 @@ import './LanguageItem.less';
 
 interface Props {
   lang: string;
-  href?: string;
+  href: string;
   isCurrent?: boolean;
   onClick: () => void;
 }

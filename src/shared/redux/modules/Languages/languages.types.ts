@@ -5,19 +5,24 @@ export const SWITCH_CURRENT_LANGUAGE_RECEIVE = 'SWITCH_CURRENT_LANGUAGE_RECEIVE'
 export const SWITCH_CURRENT_LANGUAGE_REQUEST = 'SWITCH_CURRENT_LANGUAGE_REQUEST';
 
 export interface GlossaryState {
-  Home: string;
-  Login: string;
-  LogOut: string;
-  Control: string;
-  NotFound: string;
-  Tags: string;
-  Trending: string;
-  Lists: string;
-  Bookmarks: string;
+  home: string;
+  login: string;
+  logout: string;
+  control: string;
+  notFound: string;
+  tags: string;
+  trending: string;
+  lists: string;
+  bookmarks: string;
+  links: string;
+  users: string;
+  following: string;
+  followers: string;
 }
 
 export interface LanguageState {
   id: number;
+  order: number;
   slug: string;
   name: string;
   isDefault: boolean;
@@ -31,7 +36,7 @@ export type LanguagesState = {
   byKey: {
     [key: string]: LanguageState;
   };
-  currentLanguage: LanguageState;
+  currentLanguage?: LanguageState;
 };
 
 interface RequestLanguagesAction {
@@ -68,10 +73,13 @@ interface SwitchCurrentLanguageReceiveAction {
 }
 
 export interface LanguagesApiResponse {
-  status: string;
-  data: {
-    Languages: LanguagesState;
+  links: {
+    self: string;
   };
+  data: {
+    type: 'languages';
+    attributes: LanguageState;
+  }[];
 }
 
 export type LanguagesActionsTypes =

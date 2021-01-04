@@ -13,7 +13,7 @@ interface Props {
 
 const Control: React.FC<Props> = ({ currentGlossary }) => (
   <div className="Control">
-    <h1 className="Control-h1">{currentGlossary.Control}</h1>
+    <h1 className="Control-h1">{currentGlossary.control}</h1>
   </div>
 );
 

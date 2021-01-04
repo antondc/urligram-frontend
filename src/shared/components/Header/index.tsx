@@ -41,19 +41,23 @@ const Header: React.FC<Props> = ({
       </H3>
       <nav className="Header-navigation">
         <A className="Header-link" href={'/' + currentLanguageSlug + '/'} frontend>
-          <H4>{currentGlossary.Tags}</H4>
+          <H4>{currentGlossary.tags}</H4>
         </A>
         <span className="Header-bar">|</span>
         <A className="Header-link" href={'/' + currentLanguageSlug + '/login'} frontend>
-          <H4>{currentGlossary.Trending}</H4>
+          <H4>{currentGlossary.trending}</H4>
         </A>
         <span className="Header-bar">|</span>
         <A className="Header-link" href={'/' + currentLanguageSlug + '/control'} frontend>
-          <H4>{currentGlossary.Lists}</H4>
+          <H4>{currentGlossary.lists}</H4>
         </A>
         <span className="Header-bar">|</span>
         <A className="Header-link" href={'/' + currentLanguageSlug + '/bookmarks'} frontend>
-          <H4>{currentGlossary.Bookmarks}</H4>
+          <H4>{currentGlossary.bookmarks}</H4>
+        </A>
+        <span className="Header-bar">|</span>
+        <A className="Header-link" href={'/' + currentLanguageSlug + '/links'} frontend>
+          <H4>{currentGlossary.links}</H4>
         </A>
       </nav>
       <div className="Header-user">
