@@ -12,7 +12,8 @@ before_script:
 stages:
   - install
   - test
-  - build
+  - build_staging
+  - build_production
   - deploy_staging
   - deploy_production
 
@@ -23,7 +24,7 @@ cache:
 install:
   stage: install
   script:
-    - npm install
+    - npm install --verbose
   artifacts:
     paths:
       - node_modules/
@@ -36,10 +37,19 @@ test:
     paths:
       - node_modules/
 
-build:
-  stage: build
+build_staging:
+  stage: build_staging
+  only:
+    - staging
   script:
-    - npm build
+    - npm run stage
+
+build_prod:
+  stage: build_production
+  only:
+    - master
+  script:
+    - npm run prod
 
 deploy_staging:
   stage: deploy_staging
