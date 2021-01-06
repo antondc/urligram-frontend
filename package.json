@@ -30,7 +30,6 @@
     "storybook": "start-storybook -s -p 6006 watch-css"
   },
   "devDependencies": {
-    "@antoniodcorrea/components": "^0.5.15",
     "@storybook/addon-actions": "^5.3.18",
     "@storybook/addon-centered": "^5.3.18",
     "@storybook/addon-knobs": "^5.3.18",
@@ -115,6 +114,7 @@
     "webpack-node-externals": "^1.7.2"
   },
   "dependencies": {
+    "@antoniodcorrea/components": "^0.5.16",
     "axios": "^0.19.2",
     "babel-loader": "^8.1.0",
     "body-parser": "^1.18.3",
