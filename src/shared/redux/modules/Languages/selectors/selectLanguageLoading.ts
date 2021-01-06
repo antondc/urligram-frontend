@@ -5,5 +5,5 @@ import { selectLanguages } from './selectLanguages';
 
 export const selectLanguageLoading = createSelector(
   selectLanguages,
-  (Languages: LanguagesState): boolean => /* Languages.currentLanguage.loading */ false
+  (Languages: LanguagesState): boolean => Languages.currentLanguage.loading
 );
