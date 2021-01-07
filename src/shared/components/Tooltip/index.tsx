@@ -1,4 +1,4 @@
-import React, { MutableRefObject, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import { Border, Fade, Span } from '@antoniodcorrea/components';
 
@@ -6,43 +6,48 @@ import './Tooltip.less';
 
 interface Props {
   content: string;
-  parentRef: MutableRefObject<HTMLElement>;
+  parentElementId: string;
 }
 
+const TIME_OUT_SLOW = 2000;
 let myTimeOut;
 
-export const Tooltip: React.FC<Props> = ({ content, parentRef }) => {
+export const Tooltip: React.FC<Props> = ({ content, parentElementId }) => {
   const tooltipRef = useRef(null);
   const [mounted, setMounted] = useState<boolean>(false);
 
   const mountTooltip = () => {
     myTimeOut = setTimeout(() => {
       setMounted(true);
-    }, 2000);
+    }, TIME_OUT_SLOW);
+  };
+
+  const unmountTooltip = () => {
+    setMounted(false);
+    clearTimeout(myTimeOut);
   };
 
   useEffect(() => {
-    const parentBoundingClientRect = parentRef.current.getBoundingClientRect();
+    const parentElement = document.getElementById(parentElementId);
+    const parentBoundingClientRect = parentElement.getBoundingClientRect();
     const parentBottom = String(parentBoundingClientRect.bottom - 20) + 'px';
     const parentRight = parentBoundingClientRect.right;
     const parentWidth = parentBoundingClientRect.width;
     const parentFinalWidth = String(parentRight - parentWidth + 13) + 'px';
     tooltipRef.current.style.top = parentBottom;
     tooltipRef.current.style.right = parentFinalWidth;
-  }, [mounted]);
+  }, []);
 
   useEffect(() => {
-    parentRef.current.addEventListener('mouseenter', mountTooltip);
+    const parentElement = document.getElementById(parentElementId);
+    parentElement.addEventListener('mouseenter', mountTooltip);
 
     return window.removeEventListener('mouseenter', mountTooltip);
   }, []);
 
   useEffect(() => {
-    const unmountTooltip = () => {
-      setMounted(false);
-      clearTimeout(myTimeOut);
-    };
-    parentRef.current.addEventListener('mouseleave', unmountTooltip);
+    const parentElement = document.getElementById(parentElementId);
+    parentElement.addEventListener('mouseleave', unmountTooltip);
 
     return window.removeEventListener('mouseenter', unmountTooltip);
   }, []);
