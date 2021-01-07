@@ -7,7 +7,10 @@ import { receiveLanguages } from './receiveLanguages';
 import { requestLanguages } from './requestLanguages';
 
 const languagesSerializerByKey = (data) =>
-  data.reduce((acc, curr) => ({ ...acc, ...{ [curr.attributes.slug]: curr.attributes } }), {});
+  data.reduce((acc, curr) => ({ ...acc, ...{ [curr.attributes.slug]: curr.attributes } }), {
+    byKey: {},
+    currentLanguage: {},
+  });
 
 export const loadLanguages = (lang: string) => async (dispatch?: Dispatch) => {
   if (isBrowser) {

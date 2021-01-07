@@ -68,5 +68,5 @@ deploy_production:
   script:
     - ssh antoniodiaz@antoniodiaz.me "cd ~/www/linking_frontend_production && rm -rf node_modules dist/* tmp"
     - ssh antoniodiaz@antoniodiaz.me "cd ~/www/linking_frontend_production && git pull"
-    - ssh antoniodiaz@antoniodiaz.me "source ~/.bash_profile && export NPM_TOKEN=${NPM_TOKEN} && cd ~/www/linking_frontend_production && nvm use --delete-prefix && git checkout master && npm ci --verbose && npm run prod'
+    - ssh antoniodiaz@antoniodiaz.me "source ~/.bash_profile && export NPM_TOKEN=${NPM_TOKEN} && cd ~/www/linking_frontend_production && nvm use --delete-prefix && git checkout master && npm ci --verbose && npm run prod"
     - ssh antoniodiaz@antoniodiaz.me "cd ~/www/linking_frontend_production && mkdir -p tmp/always_restart.txt"
