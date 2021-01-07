@@ -23,11 +23,11 @@ export const BookmarksUi: React.FC<Props> = ({ bookmarks }) => (
   <div className="Bookmarks">
     <Flex horizontal="between" vertical="top">
       <Sidebar>
-        <SidebarListLists title="Popular Lists" items={lists} />
+        <SidebarListLists title="Popular Lists" items={lists} id="PopularLists" />
         <Hr spacer />
-        <SidebarListLists title="Popular Lists" items={lists} />
+        <SidebarListLists title="Popular Lists" items={lists} id="PopularLists2" />
         <Hr spacer />
-        <SidebarListLists title="Popular Lists" items={lists} />
+        <SidebarListLists title="Popular Lists" items={lists} id="PopularLists3" />
       </Sidebar>
       <Main>
         <MainHeader title="My bookmarks" />

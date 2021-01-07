@@ -1,9 +1,17 @@
 @import '../../css/imports.less';
 
-@c: .Tooltip;
+@c: .WithTooltip;
 
 @{c} {
-  position: absolute;
+  position: relative;
+
+  &-content {
+    position: absolute;
+    max-width: 300px;
+    min-width: 200px;
+    left: 0%;
+    z-index: @z-index-1000;
+  }
 
   &-border:before {
     content: '';
