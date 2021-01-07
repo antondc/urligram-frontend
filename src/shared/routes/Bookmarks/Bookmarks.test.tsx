@@ -45,7 +45,7 @@ describe('BookmarksUi', () => {
     expect(wrapper.exists()).toBe(true);
   });
 
-  test('has a ".Main" wrapper', () => {
+  test('has a ".Bookmarks" wrapper', () => {
     expect(wrapper.find('.Bookmarks')).toHaveLength(1);
   });
 });

@@ -45,7 +45,7 @@ describe('LinksUi', () => {
     expect(wrapper.exists()).toBe(true);
   });
 
-  test('has a ".Main" wrapper', () => {
+  test('has a ".Links" wrapper', () => {
     expect(wrapper.find('.Links')).toHaveLength(1);
   });
 });

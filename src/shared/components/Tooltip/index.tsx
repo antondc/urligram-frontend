@@ -4,22 +4,23 @@ import { Border, Fade, Span } from '@antoniodcorrea/components';
 
 import './Tooltip.less';
 
+const TIME_OUT_SLOW = 2000;
+
 interface Props {
   content: string;
   parentElementId: string;
+  timeOut?: number;
 }
 
-const TIME_OUT_SLOW = 2000;
-let myTimeOut;
-
-export const Tooltip: React.FC<Props> = ({ content, parentElementId }) => {
+export const Tooltip: React.FC<Props> = ({ content, parentElementId, timeOut = TIME_OUT_SLOW }) => {
+  let myTimeOut;
   const tooltipRef = useRef(null);
   const [mounted, setMounted] = useState<boolean>(false);
 
   const mountTooltip = () => {
     myTimeOut = setTimeout(() => {
       setMounted(true);
-    }, TIME_OUT_SLOW);
+    }, timeOut);
   };
 
   const unmountTooltip = () => {

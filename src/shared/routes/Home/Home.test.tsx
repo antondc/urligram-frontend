@@ -10,7 +10,7 @@ describe('HomeUI', () => {
     expect(wrapper.exists()).toBe(true);
   });
 
-  test('has a ".Main" wrapper', () => {
+  test('has a ".Home" wrapper', () => {
     expect(wrapper.find('.Home')).toHaveLength(1);
   });
 });
