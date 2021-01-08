@@ -16,7 +16,7 @@ export const HomeUI: React.FC = () => (
   <div className="Home">
     <Flex horizontal="between" vertical="top">
       <Sidebar>
-      <SidebarListLists title="Popular Lists" items={lists} id="PopularLists" />
+        <SidebarListLists title="Popular Lists" items={lists} id="PopularLists" />
         <Hr spacer />
         <SidebarListLists title="Popular Lists" items={lists} id="PopularLists2" />
         <Hr spacer />

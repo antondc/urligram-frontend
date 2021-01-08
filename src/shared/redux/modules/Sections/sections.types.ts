@@ -9,7 +9,7 @@ export interface UserState {
   userId: string;
   createdAt: string;
   updatedAt: string;
-  numberOfMembers: number;
+  members: number;
   listMembers: [
     {
       id: string;
@@ -31,19 +31,11 @@ export interface PopularListsState {
   userId: string;
   createdAt: string;
   updatedAt: string;
-  numberOfMembers: number;
-  listMembers: [
-    {
-      id: string;
-      name: string;
-      userRole: string;
-    },
-    {
-      id: string;
-      name: string;
-      userRole: string;
-    }
-  ];
+  members: {
+    id: string;
+    name: string;
+    userRole: string;
+  }[];
 }
 
 export interface SectionsState {

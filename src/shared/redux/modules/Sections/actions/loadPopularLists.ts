@@ -20,7 +20,8 @@ export const loadPopularLists = () => async (dispatch?: Dispatch) => {
     return;
   }
 
-  const response = await HttpClient.get<ReceiveMostPopularListsResponse>('/lists');
+  const response = await HttpClient.get<ReceiveMostPopularListsResponse>('/lists?sort=-members&page[size]=5');
+
   const popularListsByKey = {
     byKey: serializerByKey(response.data),
   };

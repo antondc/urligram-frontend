@@ -8,7 +8,7 @@ import SidebarListLists from 'Components/SidebarListLists';
 import SidebarListTags from 'Components/SidebarListTags';
 import SidebarListUsers from 'Components/SidebarListUsers';
 import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
-import { lists } from 'Root/src/shared/tools/mockData/mockLists';
+import { PopularListsState } from 'Modules/Sections/sections.types';
 import { tags } from 'Root/src/shared/tools/mockData/mockTags';
 import { users } from 'Root/src/shared/tools/mockData/mockUsers';
 import { Button, Flex, Hr } from '@antoniodcorrea/components';
@@ -17,17 +17,15 @@ import './Bookmarks.less';
 
 interface Props {
   bookmarks: BookmarkState[];
+  popularLists: PopularListsState[];
 }
 
-export const BookmarksUi: React.FC<Props> = ({ bookmarks }) => (
+export const BookmarksUi: React.FC<Props> = ({ bookmarks, popularLists }) => (
   <div className="Bookmarks">
     <Flex horizontal="between" vertical="top">
       <Sidebar>
-        <SidebarListLists title="Popular Lists" items={lists} id="PopularLists" />
+        <SidebarListLists title="Popular Lists" items={popularLists} id="PopularLists" />
         <Hr spacer />
-        <SidebarListLists title="Popular Lists" items={lists} id="PopularLists2" />
-        <Hr spacer />
-        <SidebarListLists title="Popular Lists" items={lists} id="PopularLists3" />
       </Sidebar>
       <Main>
         <MainHeader title="My bookmarks" />
