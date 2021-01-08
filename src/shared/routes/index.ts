@@ -4,6 +4,7 @@ import { loadBookmarks } from 'Modules/Bookmarks/actions/loadBookmarks';
 import { loadLinks } from 'Modules/Links/actions/loadLinks';
 import { loadMockDataOne } from 'Modules/MockDataOne/actions/loadMockDataOne';
 import { loadMockDataTwo } from 'Modules/MockDataTwo/actions/loadMockDataTwo';
+import { loadPopularLists } from '../redux/modules/Sections/actions/loadPopularLists';
 
 export interface Route {
   name: string;
@@ -28,7 +29,7 @@ const Routes: RoutesInterface = {
     auth: false,
     hasHeader: false,
     hasFooter: false,
-    loadInitialData: [loadBookmarks],
+    loadInitialData: [loadBookmarks, loadPopularLists],
   },
 
   Links: {
