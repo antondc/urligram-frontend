@@ -2,8 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import WithTooltip from 'Components/WithTooltip';
-import { Border, H4, Hr, Span } from '@antoniodcorrea/components';
+import { Border, H4, Hr, Span, Tooltip } from '@antoniodcorrea/components';
 
 import './SidebarListLists.less';
 
@@ -29,11 +28,10 @@ const SidebarListLists: React.FC<Props> = ({ id, title, items }) => (
             <dl className="SidebarListLists-listName">
               <Span bold>+ {item.name}</Span>
             </dl>
-            <WithTooltip parentElementId={id + '-' + index} content="This is something" timeOut={3}>
-              <dd id={id + '-' + index} className="SidebarListLists-listDescription">
-                {item.count} items
-              </dd>
-            </WithTooltip>
+            <dd id={id + '-' + index} className="SidebarListLists-listDescription">
+              {item.count} items
+            </dd>
+            <Tooltip parentElementId={id + '-' + index} content="This is something" />
           </div>
         </React.Fragment>
       ))}
