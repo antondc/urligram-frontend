@@ -7,7 +7,7 @@ import { Border, H4, Hr, Span, Tooltip } from '@antoniodcorrea/components';
 import './SidebarListLists.less';
 
 interface Props {
-  id?: string;
+  id: string;
   title: string;
   items: {
     id: number;
