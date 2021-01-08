@@ -9,7 +9,7 @@ const serializerByKey = (data) => data.reduce((acc, curr) => ({ ...acc, ...{ [cu
 
 export const loadPopularLists = () => async (dispatch?: Dispatch) => {
   if (isBrowser) {
-    const response = await HttpClient.get<ReceiveMostPopularListsResponse>('/lists');
+    const response = await HttpClient.get<ReceiveMostPopularListsResponse>('/lists?sort=-members&page[size]=5');
 
     const popularListsByKey = {
       byKey: serializerByKey(response.data),
