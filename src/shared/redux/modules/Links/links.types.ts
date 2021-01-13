@@ -1,5 +1,7 @@
 export const LOAD_LINKS_STARTED = 'LOAD_LINKS_STARTED';
 export const LOAD_LINKS_SUCCESS = 'LOAD_LINKS_SUCCESS';
+export const LINK_VOTE_STARTED = 'LINK_VOTE_STARTED';
+export const LINK_VOTE_SUCCESS = 'LINK_VOTE_SUCCESS';
 
 export interface LinkState {
   id: number;
@@ -36,6 +38,14 @@ interface RequestLinksAction {
 interface ReceiveLinksAction {
   type: typeof LOAD_LINKS_SUCCESS;
   data: LinksState;
+}
+
+export interface ReceiveLinkResponse {
+  data: {
+    type: 'links';
+    id: number;
+    attributes: LinkState;
+  };
 }
 
 export interface ReceiveLinksResponse {

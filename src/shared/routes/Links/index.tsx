@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import { loadLinks } from 'Modules/Links/actions/loadLinks.ts';
+import { loadLinks } from 'Modules/Links/actions/loadLinks';
 import { LinkState } from 'Modules/Links/links.types';
 import { selectLinksAll } from 'Modules/Links/selectors/selectLinksAll';
 import { LinksUi } from './linksUi';

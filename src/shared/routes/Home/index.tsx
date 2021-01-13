@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import { loadBookmarks } from 'Modules/Bookmarks/actions/loadBookmarks.ts';
+import { loadBookmarks } from 'Modules/Bookmarks/actions/loadBookmarks';
 import { selectBookmarksAll } from 'Modules/Bookmarks/selectors/selectBookmarksAll';
 import { HomeUI } from './HomeUI';
 

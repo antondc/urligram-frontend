@@ -1,10 +1,14 @@
 import React from 'react';
 
-import { BookmarkRow } from '.';
+import { BookmarkRow } from './BookmarkRow';
 
 export default {
   component: BookmarkRow,
   title: 'BookmarkRow',
+};
+
+const noop = () => {
+  //
 };
 
 const props = {
@@ -24,6 +28,7 @@ const props = {
     timesBookmarked: 0,
     vote: false,
   },
+  onVote: noop,
 };
 
 export const Default: React.ReactNode = () => (

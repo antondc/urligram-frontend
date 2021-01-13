@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { BookmarkRow } from 'Components/BookmarkRow';
+import BookmarkRow from 'Components/BookmarkRow';
 import Main from 'Components/Main';
 import MainHeader from 'Components/MainHeader';
 import Sidebar from 'Components/Sidebar';

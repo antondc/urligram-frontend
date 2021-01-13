@@ -1,4 +1,9 @@
-import { BookmarksState, LOAD_BOOKMARKS_STARTED, LOAD_BOOKMARKS_SUCCESS } from './bookmarks.types';
+import {
+  BOOKMARK_UPDATE_VOTE,
+  BookmarksState,
+  LOAD_BOOKMARKS_STARTED,
+  LOAD_BOOKMARKS_SUCCESS,
+} from './bookmarks.types';
 
 const initialState: BookmarksState = {
   byKey: {},
@@ -15,6 +20,20 @@ export const Bookmarks = (state = initialState, action) => {
         byKey: {
           ...state.byKey,
           ...action.data.byKey,
+        },
+        loading: false,
+      });
+    case BOOKMARK_UPDATE_VOTE:
+      return Object.assign({}, state, {
+        byKey: {
+          ...state.byKey,
+          [action.data.linkId]: {
+            ...state.byKey[action.data.linkId],
+            statistics: {
+              ...state.byKey[action.data.linkId].statistics,
+              vote: action.data.vote,
+            },
+          },
         },
         loading: false,
       });

@@ -5,7 +5,7 @@ import { createStructuredSelector } from 'reselect';
 import LanguageItem from 'Components/LanguageItem';
 import LanguagesSwitch from 'Components/LanguagesSwitch';
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
-import { selectCurrentPathname } from 'Modules/Routes/selectors/selectCurrentPathname.ts';
+import { selectCurrentPathname } from 'Modules/Routes/selectors/selectCurrentPathname';
 import { switchLanguagesModal } from 'Modules/Ui/actions/switchLanguagesModal';
 import { selectUiLanguagesModalMounted } from 'Modules/Ui/selectors/selectUiLanguagesModalMounted';
 import { A, Border, Fade, Span } from '@antoniodcorrea/components';

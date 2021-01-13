@@ -1,5 +1,6 @@
 export const LOAD_BOOKMARKS_STARTED = 'LOAD_BOOKMARKS_STARTED';
 export const LOAD_BOOKMARKS_SUCCESS = 'LOAD_BOOKMARKS_SUCCESS';
+export const BOOKMARK_UPDATE_VOTE = 'BOOKMARK_UPDATE_VOTE';
 
 export interface BookmarkState {
   id: number;
