@@ -1,8 +1,9 @@
 import {
-  BOOKMARK_UPDATE_VOTE,
   BookmarksState,
   LOAD_BOOKMARKS_STARTED,
   LOAD_BOOKMARKS_SUCCESS,
+  VOTE_BOOKMARK_START,
+  VOTE_UPDATE_BOOKMARK_SUCCESS,
 } from './bookmarks.types';
 
 const initialState: BookmarksState = {
@@ -10,9 +11,13 @@ const initialState: BookmarksState = {
 };
 
 export const Bookmarks = (state = initialState, action) => {
+  const linkId = action?.data?.linkId;
+  const bookmarkIdsByLinkId = Object.values(state?.byKey).filter((item) => item?.linkId === linkId) || [];
+
   switch (action.type) {
     case LOAD_BOOKMARKS_STARTED:
       return Object.assign({}, state, {
+        ...state,
         loading: true,
       });
     case LOAD_BOOKMARKS_SUCCESS:
@@ -22,20 +27,52 @@ export const Bookmarks = (state = initialState, action) => {
           ...action.data.byKey,
         },
         loading: false,
+        ...state,
       });
-    case BOOKMARK_UPDATE_VOTE:
+    case VOTE_BOOKMARK_START:
       return Object.assign({}, state, {
+        ...state,
         byKey: {
           ...state.byKey,
-          [action.data.linkId]: {
-            ...state.byKey[action.data.linkId],
-            statistics: {
-              ...state.byKey[action.data.linkId].statistics,
-              vote: action.data.vote,
-            },
-          },
+          ...bookmarkIdsByLinkId.reduce(
+            (acc, curr) => ({
+              ...acc,
+              ...{
+                [curr.id]: {
+                  ...curr,
+                  statistics: {
+                    ...curr.statistics,
+                    loading: true,
+                  },
+                },
+              },
+            }),
+            {}
+          ),
         },
-        loading: false,
+      });
+    case VOTE_UPDATE_BOOKMARK_SUCCESS:
+      return Object.assign({}, state, {
+        ...state,
+        byKey: {
+          ...state.byKey,
+          ...bookmarkIdsByLinkId.reduce(
+            (acc, curr) => ({
+              ...acc,
+              ...{
+                [curr.id]: {
+                  ...curr,
+                  statistics: {
+                    ...curr.statistics,
+                    vote: action?.data?.vote,
+                    loading: false,
+                  },
+                },
+              },
+            }),
+            {}
+          ),
+        },
       });
     default:
       return Object.assign({}, state);

@@ -8,9 +8,9 @@ import SidebarListLists from 'Components/SidebarListLists';
 import SidebarListTags from 'Components/SidebarListTags';
 import SidebarListUsers from 'Components/SidebarListUsers';
 import { LinkState } from 'Modules/Links/links.types';
-import { lists } from 'Root/src/shared/tools/mockData/mockLists';
-import { tags } from 'Root/src/shared/tools/mockData/mockTags';
-import { users } from 'Root/src/shared/tools/mockData/mockUsers';
+import { lists } from 'Tools/mockData/mockLists';
+import { tags } from 'Tools/mockData/mockTags';
+import { users } from 'Tools/mockData/mockUsers';
 import { Button, Flex, Hr } from '@antoniodcorrea/components';
 
 import './Links.less';

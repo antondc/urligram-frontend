@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
-import { A, Bookmark, Border, Edit, Private, Span, Tag, Vote } from '@antoniodcorrea/components';
+import { A, Bookmark, Border, Edit, Fade, Private, Span, SpinnerCircle, Tag, Vote } from '@antoniodcorrea/components';
 
 import './BookmarkRow.less';
 
@@ -52,7 +52,7 @@ export const BookmarkRow: React.FC<BookmarkRow> = ({ id, title, url, tags = [], 
     <div className="BookmarkRow-right">
       <img className="BookmarkRow-image" src={img} />
       <div className="BookmarkRow-rightEnd">
-        <Vote className="BookmarkRow-vote" vote={statistics?.vote} changeVote={onVote} />
+        <Vote className="BookmarkRow-vote" vote={statistics?.vote} changeVote={onVote} loading={statistics?.loading} />
         <div className="BookmarkRow-stats">
           <div className="BookmarkRow-stat">
             <Span size="nano" className="BookmarkRow-statIcon">

@@ -1,9 +1,9 @@
 import {
   LINK_VOTE_STARTED,
-  LINK_VOTE_SUCCESS,
   LinksState,
   LOAD_LINKS_STARTED,
   LOAD_LINKS_SUCCESS,
+  VOTE_LINK_SUCCESS,
 } from './links.types';
 
 const initialState: LinksState = {
@@ -26,15 +26,27 @@ export const Links = (state = initialState, action) => {
       });
     case LINK_VOTE_STARTED:
       return Object.assign({}, state, {
-        loading: true,
+        byKey: {
+          ...state.byKey,
+          [action?.data?.linkId]: {
+            statistics: {
+              loading: true,
+            },
+          },
+        },
       });
-    case LINK_VOTE_SUCCESS:
+    case VOTE_LINK_SUCCESS:
       return Object.assign({}, state, {
         byKey: {
           ...state.byKey,
-          ...action.data.byKey,
+          [action?.data?.id]: {
+            ...action.data,
+            statistics: {
+              ...action.data?.statistics,
+              loading: false,
+            },
+          },
         },
-        loading: false,
       });
     default:
       return Object.assign({}, state);

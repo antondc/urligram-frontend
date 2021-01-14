@@ -1,6 +1,7 @@
 export const LOAD_BOOKMARKS_STARTED = 'LOAD_BOOKMARKS_STARTED';
 export const LOAD_BOOKMARKS_SUCCESS = 'LOAD_BOOKMARKS_SUCCESS';
-export const BOOKMARK_UPDATE_VOTE = 'BOOKMARK_UPDATE_VOTE';
+export const VOTE_UPDATE_BOOKMARK_SUCCESS = 'VOTE_UPDATE_BOOKMARK_SUCCESS';
+export const VOTE_BOOKMARK_START = 'VOTE_BOOKMARK_START';
 
 export interface BookmarkState {
   id: number;
@@ -18,6 +19,7 @@ export interface BookmarkState {
     averageVote: number | null;
     timesBookmarked: number;
     vote: boolean | null;
+    loading: boolean | undefined;
   };
 }
 

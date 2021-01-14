@@ -18,6 +18,7 @@ const props = {
         averageVote: 0,
         timesBookmarked: 0,
         vote: false,
+        loading: false,
       },
     },
     {
@@ -33,6 +34,7 @@ const props = {
         averageVote: 0,
         timesBookmarked: 0,
         vote: false,
+        loading: false,
       },
     },
   ],

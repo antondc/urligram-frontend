@@ -27,6 +27,7 @@ const props = {
     averageVote: 0,
     timesBookmarked: 0,
     vote: false,
+    loading: false,
   },
   onVote: noop,
 };

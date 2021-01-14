@@ -1,7 +1,7 @@
 import { Dispatch } from 'redux';
 
 import { ReceiveBookmarksResponse } from 'Modules/Bookmarks/bookmarks.types';
-import HttpClient from 'Root/src/shared/services/HttpClient';
+import HttpClient from 'Services/HttpClient';
 import { receiveBookmarks } from './receiveBookmarks';
 import { requestBookmarks } from './requestBookmarks';
 
@@ -10,20 +10,21 @@ const bookmarksSerializerByKey = (data) =>
 
 export const loadBookmarks = () => async (dispatch?: Dispatch) => {
   if (isBrowser) {
-    const response = await HttpClient.get<ReceiveBookmarksResponse>('/bookmarks');
+    dispatch(requestBookmarks());
+
+    const { data }: ReceiveBookmarksResponse = await HttpClient.get('/bookmarks');
 
     const bookmarksByKey = {
-      byKey: bookmarksSerializerByKey(response.data),
+      byKey: bookmarksSerializerByKey(data),
     };
 
-    dispatch(requestBookmarks());
     dispatch(receiveBookmarks(bookmarksByKey));
 
     return;
   }
 
-  const response = await HttpClient.get('/bookmarks');
-  const bookmarksByKey = bookmarksSerializerByKey(response.data);
+  const { data }: ReceiveBookmarksResponse = await HttpClient.get('/bookmarks');
+  const bookmarksByKey = bookmarksSerializerByKey(data);
 
   const result = {
     Bookmarks: {

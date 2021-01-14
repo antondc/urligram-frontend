@@ -1,7 +1,7 @@
 import { Dispatch } from 'redux';
 
 import { ReceiveMostPopularListsResponse } from 'Modules/Sections/sections.types';
-import HttpClient from 'Root/src/shared/services/HttpClient';
+import HttpClient from 'Services/HttpClient';
 import { receivePopularLists } from './receivePopularLists';
 import { requestPopularLists } from './requestPopularLists';
 
@@ -9,12 +9,12 @@ const serializerByKey = (data) => data.reduce((acc, curr) => ({ ...acc, ...{ [cu
 
 export const loadPopularLists = () => async (dispatch?: Dispatch) => {
   if (isBrowser) {
+    dispatch(requestPopularLists());
     const response = await HttpClient.get<ReceiveMostPopularListsResponse>('/lists?sort=-members&page[size]=5');
 
     const popularListsByKey = {
       byKey: serializerByKey(response.data),
     };
-    dispatch(requestPopularLists());
     dispatch(receivePopularLists({ PopularLists: popularListsByKey }));
 
     return;

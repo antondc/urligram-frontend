@@ -1,7 +1,7 @@
 export const LOAD_LINKS_STARTED = 'LOAD_LINKS_STARTED';
 export const LOAD_LINKS_SUCCESS = 'LOAD_LINKS_SUCCESS';
 export const LINK_VOTE_STARTED = 'LINK_VOTE_STARTED';
-export const LINK_VOTE_SUCCESS = 'LINK_VOTE_SUCCESS';
+export const VOTE_LINK_SUCCESS = 'VOTE_LINK_SUCCESS';
 
 export interface LinkState {
   id: number;
@@ -19,6 +19,7 @@ export interface LinkState {
     averageVote: number | null;
     timesBookmarked: number;
     vote: boolean | null;
+    loading: boolean | undefined;
   };
 }
 
