@@ -5,10 +5,9 @@ import HttpClient from 'Services/HttpClient';
 import { logInFailure } from './logInFailure';
 import { logOutReceive } from './logOutReceive';
 
-export const logOut = (): ThunkAction<any, any, any, Action> =>
+export const logOut = (): ThunkAction<any, any, any, Action> => (dispatch: Dispatch): void => {
   // Remove the cookie on server using the base api
-  (dispatch: Dispatch): void => {
-    HttpClient.delete('/login')
-      .then(() => dispatch(logOutReceive()))
-      .catch((error) => dispatch(logInFailure(error)));
-  };
+  HttpClient.delete('/login')
+    .then(() => dispatch(logOutReceive()))
+    .catch((error) => dispatch(logInFailure(error)));
+};

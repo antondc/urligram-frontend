@@ -1,6 +1,35 @@
-import { BookmarksActionsTypes, BookmarkState, VOTE_UPDATE_BOOKMARK_START } from 'Modules/Bookmarks/bookmarks.types';
+import { Action, Dispatch } from 'redux';
+import { ThunkAction } from 'redux-thunk';
 
-export const voteBookmarkRequest = (payload: BookmarkState): BookmarksActionsTypes => ({
-  type: VOTE_UPDATE_BOOKMARK_START,
-  payload,
-});
+import { BookmarksState, VOTE_UPDATE_BOOKMARK_START } from 'Modules/Bookmarks/bookmarks.types';
+
+export const voteBookmarkRequest = ({ linkId }: { linkId: string | number }): ThunkAction<any, any, any, Action> => (
+  dispatch: Dispatch,
+  getState
+) => {
+  const { Bookmarks }: { Bookmarks: BookmarksState } = getState();
+
+  const payloadFormatted = Object.entries(Bookmarks.byKey).filter(([, value]) => value.linkId === linkId);
+  const payloadFormattedLoader = payloadFormatted.map(([key, value]) => [
+    key,
+    {
+      ...value,
+      statistics: {
+        ...value.statistics,
+        loading: true,
+      },
+    },
+  ]);
+  const bookmarksStateFormatted: BookmarksState = {
+    ...Bookmarks,
+    byKey: {
+      ...Bookmarks.byKey,
+      ...Object.fromEntries(payloadFormattedLoader),
+    },
+  };
+
+  dispatch({
+    type: VOTE_UPDATE_BOOKMARK_START,
+    payload: bookmarksStateFormatted,
+  });
+};

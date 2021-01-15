@@ -1,4 +1,5 @@
 import {
+  BookmarksActionsTypes,
   BookmarksState,
   LOAD_BOOKMARKS_STARTED,
   LOAD_BOOKMARKS_SUCCESS,
@@ -10,7 +11,7 @@ const initialState: BookmarksState = {
   byKey: {},
 };
 
-export const Bookmarks = (state = initialState, action) => {
+export const Bookmarks = (state = initialState, action: BookmarksActionsTypes): BookmarksState => {
   switch (action.type) {
     case LOAD_BOOKMARKS_STARTED:
       return Object.assign({}, state, {
@@ -30,20 +31,16 @@ export const Bookmarks = (state = initialState, action) => {
 
     case VOTE_UPDATE_BOOKMARK_START:
       return Object.assign({}, state, {
-        byKey: {
-          ...state.byKey,
-          [action.payload.id]: action.payload,
-        },
+        ...state,
+        ...action.payload,
       });
 
     case VOTE_UPDATE_BOOKMARK_SUCCESS:
       return Object.assign({}, state, {
-        byKey: {
-          ...state.byKey,
-          [action.payload.id]: action.payload,
-        },
+        ...state,
+        ...action.payload,
       });
-    
+
     default:
       return Object.assign({}, state);
   }

@@ -1,5 +1,6 @@
 import {
   LINK_VOTE_STARTED,
+  LinksActionsTypes,
   LinksState,
   LOAD_LINKS_STARTED,
   LOAD_LINKS_SUCCESS,
@@ -10,7 +11,7 @@ const initialState: LinksState = {
   byKey: {},
 };
 
-export const Links = (state = initialState, action) => {
+export const Links = (state = initialState, action: LinksActionsTypes): LinksState => {
   switch (action.type) {
     case LOAD_LINKS_STARTED:
       return Object.assign({}, state, {

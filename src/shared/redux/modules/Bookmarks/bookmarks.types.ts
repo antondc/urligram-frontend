@@ -3,6 +3,15 @@ export const LOAD_BOOKMARKS_SUCCESS = 'LOAD_BOOKMARKS_SUCCESS';
 export const VOTE_UPDATE_BOOKMARK_SUCCESS = 'VOTE_UPDATE_BOOKMARK_SUCCESS';
 export const VOTE_UPDATE_BOOKMARK_START = 'VOTE_UPDATE_BOOKMARK_START';
 
+export interface LinkStatistics {
+  absoluteVote: number | null;
+  timesVoted: number;
+  averageVote: number | null;
+  timesBookmarked: number;
+  vote: boolean | null;
+  loading: boolean | undefined;
+}
+
 export interface BookmarkState {
   id: number;
   title: string;
@@ -13,14 +22,7 @@ export interface BookmarkState {
     id: number;
     name: string;
   }[];
-  statistics: {
-    absoluteVote: number | null;
-    timesVoted: number;
-    averageVote: number | null;
-    timesBookmarked: number;
-    vote: boolean | null;
-    loading: boolean | undefined;
-  };
+  statistics: LinkStatistics;
 }
 
 export interface BookmarksState {
@@ -51,7 +53,7 @@ export interface ReceiveBookmarksResponse {
 
 export interface VoteBookmarkRequest {
   type: typeof VOTE_UPDATE_BOOKMARK_START;
-  payload: BookmarkState;
+  payload: BookmarksState;
 }
 
 export interface VoteBookmarkReceive {

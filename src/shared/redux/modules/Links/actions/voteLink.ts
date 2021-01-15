@@ -1,36 +1,28 @@
-import { Dispatch } from 'redux';
+import { Action } from 'redux';
+import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 
-import { voteBookmarkReceive } from 'Modules/Bookmarks/actions/voteBookmarkReceive';
 import { voteBookmarkRequest } from 'Modules/Bookmarks/actions/voteBookmarkRequest';
-import { BookmarksState, BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
 import { LinksState, ReceiveLinkResponse } from 'Modules/Links/links.types';
 import HttpClient from 'Services/HttpClient';
+import { voteBookmarkReceive } from '../../Bookmarks/actions/voteBookmarkReceive';
 import { voteLinkReceive } from './voteLinkReceive';
 import { voteLinkRequest } from './voteLinkRequest';
 
-export const voteLink = ({ vote, linkId, userId }) => async (dispatch: Dispatch, getState) => {
+interface Props {
+  vote: number;
+  linkId: number;
+  userId: string;
+}
+
+export const voteLink = ({ vote, linkId, userId }: Props): ThunkAction<any, any, any, Action> => async (
+  dispatch: ThunkDispatch<any, void, Action>,
+  getState
+) => {
   const {
     Links: { byKey },
-    Bookmarks,
-  }: {
-    Links: LinksState;
-    Bookmarks: BookmarksState;
   } = getState();
 
-  const bookmarksWithLinkIdArray: BookmarkState[] =
-    Object.values(Bookmarks?.byKey).filter((item) => item?.linkId === linkId) || [];
-
-  const bookmarksWithLinkIdArrayStarted: BookmarkState[] = bookmarksWithLinkIdArray.map((item) => ({
-    ...item,
-    statistics: {
-      ...item.statistics,
-      loading: true,
-    },
-  }));
-
-  bookmarksWithLinkIdArrayStarted.forEach(async (item) => {
-    await dispatch(voteBookmarkRequest(item));
-  });
+  dispatch(voteBookmarkRequest({ linkId }));
 
   const linksSerializedByKeyRequest: LinksState = {
     byKey: {
@@ -61,19 +53,13 @@ export const voteLink = ({ vote, linkId, userId }) => async (dispatch: Dispatch,
     },
   };
 
-  await dispatch(voteLinkReceive(linksSerializedByKeyResponse));
-
-  const bookmarksWithLinkIdArraySuccess: BookmarkState[] = bookmarksWithLinkIdArray.map((item) => ({
-    ...item,
-    statistics: {
-      ...data?.attributes?.statistics,
-      loading: false,
-    },
-  }));
-
-  bookmarksWithLinkIdArraySuccess.forEach(async (item) => {
-    await dispatch(voteBookmarkReceive(item));
-  });
+  dispatch(voteLinkReceive(linksSerializedByKeyResponse));
+  dispatch(
+    voteBookmarkReceive({
+      linkId,
+      statistics: data?.attributes?.statistics,
+    })
+  );
 
   return;
 };
