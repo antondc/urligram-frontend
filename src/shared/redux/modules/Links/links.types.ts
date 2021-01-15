@@ -57,4 +57,14 @@ export interface ReceiveLinksResponse {
   }[];
 }
 
-export type LinksActionsTypes = RequestLinksAction | ReceiveLinksAction;
+export interface VoteLinkRequest {
+  type: typeof LINK_VOTE_STARTED;
+  payload: LinksState;
+}
+
+export interface VoteLinkReceive {
+  type: typeof VOTE_LINK_SUCCESS;
+  payload: LinksState;
+}
+
+export type LinksActionsTypes = RequestLinksAction | ReceiveLinksAction | VoteLinkRequest | VoteLinkReceive;

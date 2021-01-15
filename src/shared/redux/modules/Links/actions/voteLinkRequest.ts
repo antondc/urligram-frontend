@@ -1,9 +1,6 @@
-import { LINK_VOTE_STARTED } from 'Modules/Links/links.types';
+import { LINK_VOTE_STARTED, LinksActionsTypes, LinksState } from 'Modules/Links/links.types';
 
-export const voteLinkRequest = ({ linkId }) => ({
+export const voteLinkRequest = (payload: LinksState): LinksActionsTypes => ({
   type: LINK_VOTE_STARTED,
-  data: {
-    linkId,
-    loading: true,
-  },
+  payload,
 });

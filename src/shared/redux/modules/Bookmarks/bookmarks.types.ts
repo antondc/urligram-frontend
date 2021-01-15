@@ -49,4 +49,17 @@ export interface ReceiveBookmarksResponse {
   }[];
 }
 
-export type BookmarksActionsTypes = RequestBookmarksAction | ReceiveBookmarksAction;
+export interface VoteBookmarkRequest {
+  type: typeof VOTE_BOOKMARK_START;
+  payload: BookmarksState;
+}
+export interface VoteBookmarkReceive {
+  type: typeof VOTE_UPDATE_BOOKMARK_SUCCESS;
+  payload: BookmarksState;
+}
+
+export type BookmarksActionsTypes =
+  | RequestBookmarksAction
+  | ReceiveBookmarksAction
+  | VoteBookmarkRequest
+  | VoteBookmarkReceive;

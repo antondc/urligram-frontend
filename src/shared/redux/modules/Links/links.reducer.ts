@@ -25,29 +25,9 @@ export const Links = (state = initialState, action) => {
         loading: false,
       });
     case LINK_VOTE_STARTED:
-      return Object.assign({}, state, {
-        byKey: {
-          ...state.byKey,
-          [action?.data?.linkId]: {
-            statistics: {
-              loading: true,
-            },
-          },
-        },
-      });
+      return Object.assign({}, state, action.payload);
     case VOTE_LINK_SUCCESS:
-      return Object.assign({}, state, {
-        byKey: {
-          ...state.byKey,
-          [action?.data?.id]: {
-            ...action.data,
-            statistics: {
-              ...action.data?.statistics,
-              loading: false,
-            },
-          },
-        },
-      });
+      return Object.assign({}, state, action.payload);
     default:
       return Object.assign({}, state);
   }
