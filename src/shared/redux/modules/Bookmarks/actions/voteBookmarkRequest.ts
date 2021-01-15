@@ -1,6 +1,6 @@
-import { BookmarksActionsTypes, BookmarksState, VOTE_BOOKMARK_START } from 'Modules/Bookmarks/bookmarks.types';
+import { BookmarksActionsTypes, BookmarkState, VOTE_UPDATE_BOOKMARK_START } from 'Modules/Bookmarks/bookmarks.types';
 
-export const voteBookmarkRequest = (payload: BookmarksState): BookmarksActionsTypes => ({
-  type: VOTE_BOOKMARK_START,
+export const voteBookmarkRequest = (payload: BookmarkState): BookmarksActionsTypes => ({
+  type: VOTE_UPDATE_BOOKMARK_START,
   payload,
 });

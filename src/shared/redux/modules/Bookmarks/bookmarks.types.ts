@@ -1,7 +1,7 @@
 export const LOAD_BOOKMARKS_STARTED = 'LOAD_BOOKMARKS_STARTED';
 export const LOAD_BOOKMARKS_SUCCESS = 'LOAD_BOOKMARKS_SUCCESS';
 export const VOTE_UPDATE_BOOKMARK_SUCCESS = 'VOTE_UPDATE_BOOKMARK_SUCCESS';
-export const VOTE_BOOKMARK_START = 'VOTE_BOOKMARK_START';
+export const VOTE_UPDATE_BOOKMARK_START = 'VOTE_UPDATE_BOOKMARK_START';
 
 export interface BookmarkState {
   id: number;
@@ -50,12 +50,13 @@ export interface ReceiveBookmarksResponse {
 }
 
 export interface VoteBookmarkRequest {
-  type: typeof VOTE_BOOKMARK_START;
-  payload: BookmarksState;
+  type: typeof VOTE_UPDATE_BOOKMARK_START;
+  payload: BookmarkState;
 }
+
 export interface VoteBookmarkReceive {
   type: typeof VOTE_UPDATE_BOOKMARK_SUCCESS;
-  payload: BookmarksState;
+  payload: BookmarkState;
 }
 
 export type BookmarksActionsTypes =

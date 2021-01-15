@@ -2,7 +2,7 @@ import {
   BookmarksState,
   LOAD_BOOKMARKS_STARTED,
   LOAD_BOOKMARKS_SUCCESS,
-  VOTE_BOOKMARK_START,
+  VOTE_UPDATE_BOOKMARK_START,
   VOTE_UPDATE_BOOKMARK_SUCCESS,
 } from './bookmarks.types';
 
@@ -17,6 +17,7 @@ export const Bookmarks = (state = initialState, action) => {
         ...state,
         loading: true,
       });
+
     case LOAD_BOOKMARKS_SUCCESS:
       return Object.assign({}, state, {
         ...state,
@@ -26,54 +27,23 @@ export const Bookmarks = (state = initialState, action) => {
         },
         loading: false,
       });
-    case VOTE_BOOKMARK_START:
-      return Object.assign({}, state, action.payload);
-    // return Object.assign({}, state, {
-    //   ...state,
-    //   byKey: {
-    //     ...state.byKey,
-    //     ...bookmarkIdsByLinkId.reduce(
-    //       (acc, curr) => ({
-    //         ...acc,
-    //         ...{
-    //           [curr.id]: {
-    //             ...curr,
-    //             statistics: {
-    //               ...curr.statistics,
-    //               loading: true,
-    //             },
-    //           },
-    //         },
-    //       }),
-    //       {}
-    //     ),
-    //   },
-    // });
-    case VOTE_UPDATE_BOOKMARK_SUCCESS:
-      return Object.assign({}, state, action.payload);
 
-    // return Object.assign({}, state, {
-    //   ...state,
-    //   byKey: {
-    //     ...state.byKey,
-    //     ...bookmarkIdsByLinkId.reduce(
-    //       (acc, curr) => ({
-    //         ...acc,
-    //         ...{
-    //           [curr.id]: {
-    //             ...curr,
-    //             statistics: {
-    //               ...curr.statistics,
-    //               ...action.data.statistics,
-    //               loading: false,
-    //             },
-    //           },
-    //         },
-    //       }),
-    //       {}
-    //     ),
-    //   },
-    // });
+    case VOTE_UPDATE_BOOKMARK_START:
+      return Object.assign({}, state, {
+        byKey: {
+          ...state.byKey,
+          [action.payload.id]: action.payload,
+        },
+      });
+
+    case VOTE_UPDATE_BOOKMARK_SUCCESS:
+      return Object.assign({}, state, {
+        byKey: {
+          ...state.byKey,
+          [action.payload.id]: action.payload,
+        },
+      });
+    
     default:
       return Object.assign({}, state);
   }
