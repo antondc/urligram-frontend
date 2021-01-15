@@ -22,12 +22,12 @@ export const Bookmarks = (state = initialState, action) => {
       });
     case LOAD_BOOKMARKS_SUCCESS:
       return Object.assign({}, state, {
+        ...state,
         byKey: {
           ...state.byKey,
           ...action.data.byKey,
         },
         loading: false,
-        ...state,
       });
     case VOTE_BOOKMARK_START:
       return Object.assign({}, state, {
@@ -64,7 +64,7 @@ export const Bookmarks = (state = initialState, action) => {
                   ...curr,
                   statistics: {
                     ...curr.statistics,
-                    vote: action?.data?.vote,
+                    ...action.data.statistics,
                     loading: false,
                   },
                 },

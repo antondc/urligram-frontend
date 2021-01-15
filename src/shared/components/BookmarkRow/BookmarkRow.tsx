@@ -58,13 +58,13 @@ export const BookmarkRow: React.FC<BookmarkRow> = ({ id, title, url, tags = [], 
             <Span size="nano" className="BookmarkRow-statIcon">
               ▲
             </Span>
-            32
+            {statistics?.absoluteVote}
           </div>
           <div className="BookmarkRow-stat">
             <Span size="nano" className="BookmarkRow-statIcon">
               ⚭
             </Span>
-            124
+            {statistics?.timesBookmarked}
           </div>
         </div>
       </div>

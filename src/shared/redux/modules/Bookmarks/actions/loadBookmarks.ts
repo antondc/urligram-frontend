@@ -17,7 +17,6 @@ export const loadBookmarks = () => async (dispatch?: Dispatch) => {
     const bookmarksByKey = {
       byKey: bookmarksSerializerByKey(data),
     };
-
     dispatch(receiveBookmarks(bookmarksByKey));
 
     return;

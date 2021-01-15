@@ -19,7 +19,7 @@ export const voteLink = ({ vote, linkId, userId }) => async (dispatch?: Dispatch
   await dispatch(
     voteBookmarkReceive({
       linkId: data?.attributes?.id,
-      vote: data.attributes?.statistics?.vote,
+      statistics: data.attributes?.statistics,
     })
   );
 
