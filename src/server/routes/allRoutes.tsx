@@ -3,7 +3,7 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import Helmet from 'react-helmet';
 import { Provider } from 'react-redux';
-import { Route,StaticRouter } from 'react-router-dom';
+import { Route, StaticRouter } from 'react-router-dom';
 import serialize from 'serialize-javascript';
 
 import Layout from 'Common/Layout';
@@ -11,11 +11,19 @@ import { loadLanguages } from 'Modules/Languages/actions/loadLanguages';
 import { SessionState } from 'Modules/Session/session.types';
 import storeFactory from 'Redux/index';
 import config from 'Root/config.test.json';
-import Routes, { routesList, routesPathsList,routesWithoutOmmitedValues } from 'Routes/index';
+import { RecursiveObject } from 'Root/src/shared/typescript/recursiveObject';
+import Routes, { routesList, routesPathsList, routesWithoutOmmitedValues } from 'Routes/index';
 import Authentication from 'Services/Authentication';
 import history from 'Services/History';
 import enhanceRouteWithParams from 'Tools/utils/url/enhanceRouteWithParams';
 import findActiveRouteKey from 'Tools/utils/url/findActiveRouteKey';
+
+export type RequestParameters = {
+  hostname?: string;
+  originalUrl?: string;
+  params?: RecursiveObject;
+  query?: RecursiveObject;
+};
 
 const authentication = new Authentication();
 const router = express.Router();
@@ -24,8 +32,14 @@ router.get(routesPathsList, function (req: any, res: any) {
   // Get active route key
   const activeRouteKey = findActiveRouteKey({ urlPath: req.path, routes: routesList });
 
+  const requestParameters: RequestParameters = {
+    hostname: req.hostname,
+    originalUrl: req.originalUrl,
+    params: req.params,
+    query: req.query,
+  };
   // Retrieve initial data from loaders passing req.params.
-  const initialDataLoaders = Routes[activeRouteKey].loadInitialData.map((item: any) => item(req.params)()); // We have to execute the thunk, as well as the async function within it
+  const initialDataLoaders = Routes[activeRouteKey].loadInitialData.map((item: any) => item(requestParameters)()); // We have to execute the thunk, as well as the async function within it
 
   // Add curent path to history.location
   const location = { ...history.location, pathname: req.path };
@@ -62,12 +76,12 @@ router.get(routesPathsList, function (req: any, res: any) {
       const store = storeFactory(data);
       const appComponentAsString = config.ENABLE_ISOMORPHISM
         ? renderToString(
-          <Provider store={store}>
-            <StaticRouter location={location} context={context}>
-              <Route path="/" render={(props): React.ReactNode => <Layout {...props} />} />
-            </StaticRouter>
-          </Provider>
-        )
+            <Provider store={store}>
+              <StaticRouter location={location} context={context}>
+                <Route path="/" render={(props): React.ReactNode => <Layout {...props} />} />
+              </StaticRouter>
+            </Provider>
+          )
         : '';
       const helmet = Helmet.renderStatic();
       const dataForTemplate = serialize(data); // Serializing for security reasons: https://redux.js.org/recipes/server-rendering#security-considerations

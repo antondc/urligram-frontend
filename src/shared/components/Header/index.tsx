@@ -52,7 +52,7 @@ const Header: React.FC<Props> = ({
           <H4>{currentGlossary.lists}</H4>
         </A>
         <span className="Header-bar">|</span>
-        <A className="Header-link" href={'/' + currentLanguageSlug + '/bookmarks'} frontend>
+        <A className="Header-link" href={'/' + currentLanguageSlug + '/bookmarks?sort=-members'} frontend>
           <H4>{currentGlossary.bookmarks}</H4>
         </A>
         <span className="Header-bar">|</span>

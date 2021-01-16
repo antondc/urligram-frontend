@@ -4,7 +4,8 @@ import { loadBookmarks } from 'Modules/Bookmarks/actions/loadBookmarks';
 import { loadLinks } from 'Modules/Links/actions/loadLinks';
 import { loadMockDataOne } from 'Modules/MockDataOne/actions/loadMockDataOne';
 import { loadMockDataTwo } from 'Modules/MockDataTwo/actions/loadMockDataTwo';
-import { loadPopularLists } from '../redux/modules/Sections/actions/loadPopularLists';
+import { loadPopularLists } from 'Modules/Sections/actions/loadPopularLists';
+import { RequestParameters } from 'Root/src/server/routes/allRoutes';
 
 export interface Route {
   name: string;
@@ -14,7 +15,7 @@ export interface Route {
   hasHeader?: boolean;
   hasFooter?: boolean;
   header?: boolean;
-  loadInitialData?: Function[];
+  loadInitialData?: Array<(params: RequestParameters) => void>;
 }
 
 export interface RoutesInterface {
