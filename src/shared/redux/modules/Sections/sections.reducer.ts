@@ -1,5 +1,10 @@
 import { loadPopularLists } from './actions/loadPopularLists';
-import { LOAD_MOST_POPULAR_LISTS_STARTED, LOAD_MOST_POPULAR_LISTS_SUCCESS, SectionsState } from './sections.types';
+import {
+  LOAD_MOST_POPULAR_LISTS_STARTED,
+  LOAD_MOST_POPULAR_LISTS_SUCCESS,
+  SectionsActionsTypes,
+  SectionsState,
+} from './sections.types';
 
 const initialState: SectionsState = {
   PopularLists: {
@@ -8,7 +13,7 @@ const initialState: SectionsState = {
   },
 };
 
-export const Sections = (state = initialState, action) => {
+export const Sections = (state = initialState, action: SectionsActionsTypes): SectionsState => {
   switch (action.type) {
     case LOAD_MOST_POPULAR_LISTS_STARTED:
       return Object.assign({}, state, {

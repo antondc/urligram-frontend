@@ -1,14 +1,14 @@
 import { Dispatch } from 'redux';
 
+import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
 import HttpClient from 'Services/HttpClient';
-import { switchLoginModal } from '../../Ui/actions/switchLoginModal';
 import { SessionApiResponse } from './../session.types';
 import { logInFailure } from './logInFailure';
 import { logInReceive } from './logInReceive';
 import { logInRequest } from './logInRequest';
 
 // Request a cookie from api server using the base api
-export const logIn = ({ username, password }: any) => async (dispatch: Dispatch): Promise<void> => {
+export const logIn = (username: string, password: string) => async (dispatch: Dispatch): Promise<void> => {
   try {
     await dispatch(logInRequest());
     const response = await HttpClient.post<SessionApiResponse>('/login', {

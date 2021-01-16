@@ -3,6 +3,7 @@ import {
   SWITCH_LOGIN_MODAL,
   SWITCH_MESSAGE_MODAL,
   SWITCH_USER_MODAL,
+  UiActionsTypes,
   UiState,
 } from './ui.types';
 
@@ -26,7 +27,7 @@ const initialState: UiState = {
   },
 };
 
-export const Ui = (state = initialState, action): UiState => {
+export const Ui = (state = initialState, action: UiActionsTypes): UiState => {
   switch (action.type) {
     case SWITCH_USER_MODAL:
       return Object.assign({}, state, {

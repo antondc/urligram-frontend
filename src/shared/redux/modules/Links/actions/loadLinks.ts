@@ -1,4 +1,5 @@
-import { Dispatch } from 'redux';
+import { Action, Dispatch } from 'redux';
+import { ThunkAction } from 'redux-thunk';
 
 import { ReceiveLinksResponse } from 'Modules/Links/links.types';
 import HttpClient from 'Services/HttpClient';
@@ -7,7 +8,7 @@ import { requestLinks } from './requestLinks';
 
 const linksSerializerByKey = (data) => data.reduce((acc, curr) => ({ ...acc, ...{ [curr.id]: curr.attributes } }), {});
 
-export const loadLinks = () => async (dispatch?: Dispatch) => {
+export const loadLinks = (): ThunkAction<any, any, any, Action> => async (dispatch?: Dispatch) => {
   if (isBrowser) {
     dispatch(requestLinks());
 

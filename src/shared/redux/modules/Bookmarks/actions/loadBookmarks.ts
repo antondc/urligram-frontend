@@ -1,4 +1,5 @@
-import { Dispatch } from 'redux';
+import { Action, Dispatch } from 'redux';
+import { ThunkAction } from 'redux-thunk';
 
 import { ReceiveBookmarksResponse } from 'Modules/Bookmarks/bookmarks.types';
 import HttpClient from 'Services/HttpClient';
@@ -8,7 +9,7 @@ import { requestBookmarks } from './requestBookmarks';
 const bookmarksSerializerByKey = (data) =>
   data.reduce((acc, curr) => ({ ...acc, ...{ [curr.id]: curr.attributes } }), {});
 
-export const loadBookmarks = () => async (dispatch?: Dispatch) => {
+export const loadBookmarks = (): ThunkAction<any, any, any, Action> => async (dispatch?: Dispatch) => {
   if (isBrowser) {
     dispatch(requestBookmarks());
 

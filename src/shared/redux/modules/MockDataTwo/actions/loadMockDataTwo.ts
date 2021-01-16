@@ -1,11 +1,12 @@
-import { Dispatch } from 'redux';
+import { Action, Dispatch } from 'redux';
+import { ThunkAction } from 'redux-thunk';
 
 import mockDataTwo from 'Modules/MockDataTwo/mockDataTwo.data.json';
 import { MockDataTwoApiResponse } from 'Modules/MockDataTwo/mockDataTwo.types';
 import { receiveMockDataTwo } from './receiveMockDataTwo';
 import { requestMockDataTwo } from './requestMockDataTwo';
 
-export const loadMockDataTwo = () => (dispatch?: Dispatch) => {
+export const loadMockDataTwo = (): ThunkAction<any, any, any, Action> => (dispatch?: Dispatch) => {
   if (isBrowser) {
     const response: MockDataTwoApiResponse = mockDataTwo;
     dispatch(requestMockDataTwo());

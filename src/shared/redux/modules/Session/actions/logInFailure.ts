@@ -1,6 +1,6 @@
-import { LOG_FAILED, LogActionsTypes } from 'Modules/Session/session.types';
+import { LOG_FAILED, SessionActionsTypes } from 'Modules/Session/session.types';
 
-export const logInFailure = (error): LogActionsTypes => ({
+export const logInFailure = (error: string): SessionActionsTypes => ({
   type: LOG_FAILED,
   data: {
     loading: false,

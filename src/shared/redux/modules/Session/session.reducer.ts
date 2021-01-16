@@ -1,8 +1,15 @@
-import { LOG_FAILED,LOG_IN_STARTED, LOG_IN_SUCCESS, LOG_OUT, SessionState } from './session.types';
+import {
+  LOG_FAILED,
+  LOG_IN_STARTED,
+  LOG_IN_SUCCESS,
+  LOG_OUT,
+  SessionActionsTypes,
+  SessionState,
+} from './session.types';
 
 const initialState: SessionState = {};
 
-export const Session = (state = initialState, action): SessionState => {
+export const Session = (state = initialState, action: SessionActionsTypes): SessionState => {
   switch (action.type) {
     case LOG_IN_STARTED:
       return Object.assign({}, state, {

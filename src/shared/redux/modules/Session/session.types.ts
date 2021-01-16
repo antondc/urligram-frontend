@@ -49,4 +49,4 @@ interface LogOutReceiveAction {
   type: typeof LOG_OUT;
 }
 
-export type LogActionsTypes = LogInFailureAction | LogInReceiveAction | LogInRequestAction | LogOutReceiveAction;
+export type SessionActionsTypes = LogInFailureAction | LogInReceiveAction | LogInRequestAction | LogOutReceiveAction;

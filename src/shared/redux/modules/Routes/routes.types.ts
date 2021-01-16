@@ -23,4 +23,4 @@ interface PushNewRouteAction {
   data: RouteState;
 }
 
-export type RoutesTypes = PushNewRouteAction;
+export type RoutesActionTypes = PushNewRouteAction;

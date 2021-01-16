@@ -1,6 +1,6 @@
-import { LOG_IN_STARTED, LogActionsTypes } from 'Modules/Session/session.types';
+import { LOG_IN_STARTED, SessionActionsTypes } from 'Modules/Session/session.types';
 
-export const logInRequest = (): LogActionsTypes => ({
+export const logInRequest = (): SessionActionsTypes => ({
   type: LOG_IN_STARTED,
   data: {
     loading: true,

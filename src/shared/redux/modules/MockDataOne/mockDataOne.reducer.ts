@@ -1,6 +1,18 @@
-import { LOAD_MOCK_DATA_ONE_STARTED, LOAD_MOCK_DATA_ONE_SUCCESS } from './mockDataOne.types';
+import {
+  LOAD_MOCK_DATA_ONE_STARTED,
+  LOAD_MOCK_DATA_ONE_SUCCESS,
+  MockDataOnesActionsTypes,
+  MockDataOneState,
+} from './mockDataOne.types';
 
-export const MockDataOne = (state = {}, action) => {
+const initialState: MockDataOneState = {
+  id: undefined,
+  order: undefined,
+  createdAt: undefined,
+  updatedAt: undefined,
+};
+
+export const MockDataOne = (state = initialState, action: MockDataOnesActionsTypes): MockDataOneState => {
   switch (action.type) {
     case LOAD_MOCK_DATA_ONE_STARTED:
       return Object.assign({}, state, {
