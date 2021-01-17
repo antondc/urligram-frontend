@@ -7,9 +7,7 @@ export default {
   title: 'BookmarkRow',
 };
 
-const noop = () => {
-  //
-};
+const noop = () => {};
 
 const props = {
   id: 1,

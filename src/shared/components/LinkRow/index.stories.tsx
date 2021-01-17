@@ -1,11 +1,13 @@
 import React from 'react';
 
-import { LinkRow } from '.';
+import { LinkRow } from './LinkRow';
 
 export default {
   component: LinkRow,
   title: 'LinkRow',
 };
+
+const noop = () => {};
 
 const props = {
   id: 1,
@@ -25,6 +27,7 @@ const props = {
     vote: false,
     loading: false,
   },
+  onVote: noop,
 };
 
 export const Default: React.ReactNode = () => (

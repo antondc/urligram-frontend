@@ -1,77 +1,62 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
+import { voteLink } from 'Modules/Links/actions/voteLink';
 import { LinkState } from 'Modules/Links/links.types';
-import { A, Border, Circle, Edit, Private, Span, Tag, Vote } from '@antoniodcorrea/components';
+import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
+import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUserId';
+import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
+import { LinkRow as LinkRowUi } from './LinkRow';
 
 import './LinkRow.less';
 
-export const LinkRow: React.FC<LinkState> = ({ id, title, url, tags = [], img, statistics, linkId }) => {
+interface Props extends LinkState {
+  voteLink: ({ vote: boolean, linkId: number, userId: string }) => void;
+  userId: string;
+  isLogged: boolean;
+  switchLoginModal: () => void;
+}
+
+const LinkRow: React.FC<Props> = ({
+  id,
+  linkId,
+  userId,
+  title,
+  url,
+  tags = [],
+  img,
+  statistics,
+  voteLink,
+  isLogged,
+  switchLoginModal,
+}) => {
   const onVote = (vote) => {
-    alert(JSON.stringify({ vote, linkId }, null, 4));
+    if (!isLogged) return switchLoginModal();
+
+    voteLink({ vote, linkId: id, userId });
   };
 
   return (
-    <Border grow className="LinkRow" data-test-id="LinkRow" key={id}>
-      <div className="LinkRow-left">
-        <div className="LinkRow-icons">
-          <Circle size="micro" className="LinkRow-icon" />
-          <Private
-            size="micro"
-            className="LinkRow-icon LinkRow-iconHover"
-            onClick={() => {
-              alert('Private');
-            }}
-          />
-          <Edit
-            size="micro"
-            className="LinkRow-icon LinkRow-iconHover"
-            onClick={() => {
-              alert('Edit');
-            }}
-          />
-        </div>
-        <div className="LinkRow-leftTop">
-          <Span bold className="LinkRow-title">
-            {title}
-          </Span>
-          <div className="LinkRow-url">
-            <A href={url}>
-              <Span size="small">{url}</Span>
-            </A>
-          </div>
-        </div>
-        <div className="LinkRow-tags">
-          {tags?.map((item) => (
-            <A href={`/tags/${item.name}`} key={item.id} styled={false} frontend>
-              <Tag className="LinkRow-tag" size="small">
-                {item.name}
-              </Tag>
-            </A>
-          ))}
-        </div>
-      </div>
-      <div className="LinkRow-right">
-        <img className="LinkRow-image" src={img} />
-        <div className="LinkRow-rightEnd">
-          <Vote className="LinkRow-vote" vote={statistics?.vote} changeVote={onVote} />
-          <div className="LinkRow-stats">
-            <div className="LinkRow-stat">
-              <Span size="nano" className="LinkRow-statIcon">
-                ▲
-              </Span>
-              32
-            </div>
-            <div className="LinkRow-stat">
-              <Span size="nano" className="LinkRow-statIcon">
-                ⚭
-              </Span>
-              124
-            </div>
-          </div>
-        </div>
-      </div>
-    </Border>
+    <LinkRowUi
+      id={id}
+      linkId={linkId}
+      title={title}
+      url={url}
+      tags={tags}
+      img={img}
+      statistics={statistics}
+      onVote={onVote}
+    />
   );
 };
 
-export default LinkRow;
+const mapStateToProps = createStructuredSelector({
+  userId: selectSessionUserId,
+  isLogged: selectSessionLoggedIn,
+});
+
+export default connect(mapStateToProps, {
+  voteLink,
+  switchLoginModal,
+})(LinkRow);

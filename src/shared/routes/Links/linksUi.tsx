@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { LinkRow } from 'Components/LinkRow';
 import Main from 'Components/Main';
 import MainHeader from 'Components/MainHeader';
 import Sidebar from 'Components/Sidebar';
@@ -8,6 +7,7 @@ import SidebarListLists from 'Components/SidebarListLists';
 import SidebarListTags from 'Components/SidebarListTags';
 import SidebarListUsers from 'Components/SidebarListUsers';
 import { LinkState } from 'Modules/Links/links.types';
+import LinkRow from 'Root/src/shared/components/LinkRow';
 import { lists } from 'Tools/mockData/mockLists';
 import { tags } from 'Tools/mockData/mockTags';
 import { users } from 'Tools/mockData/mockUsers';
