@@ -10,19 +10,21 @@ import { RequestParameters } from 'Root/src/server/routes/allRoutes';
 import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
 
-export const initialBookmarksLoader = async ({ query }: RequestParameters = {}): Promise<{ Bookmarks: BookmarksState }> => {
+export const initialBookmarksLoader = async ({ query }: RequestParameters = {}): Promise<{
+  Bookmarks: BookmarksState;
+}> => {
   const APIBaseEndpoint = '/bookmarks';
 
   const { data }: ReceiveBookmarksResponse = await HttpClient.get(APIBaseEndpoint + '?' + stringify(query));
-  const bookmarksByKey = {
-    byKey: serializerFromArrayToByKey<ReceiveBookmarkItem, BookmarkState>({
-      data: data,
-      contentPath: 'attributes',
-    }),
-  };
 
   const result = {
-    Bookmarks: bookmarksByKey,
+    Bookmarks: {
+      byKey: serializerFromArrayToByKey<ReceiveBookmarkItem, BookmarkState>({
+        data: data,
+        contentPath: 'attributes',
+      }),
+      currentIds: data.map((item) => item.id),
+    },
   };
 
   return result;

@@ -52,7 +52,7 @@ export const LinkRow: React.FC<LinkRow> = ({ id, title, url, tags = [], img, sta
     <div className="LinkRow-right">
       <img className="LinkRow-image" src={img} />
       <div className="LinkRow-rightEnd">
-        <Vote className="LinkRow-vote" vote={statistics?.vote} changeVote={onVote} />
+        <Vote className="LinkRow-vote" vote={statistics?.vote} changeVote={onVote} loading={statistics?.loading} />
         <div className="LinkRow-stats">
           <div className="LinkRow-stat">
             <Span size="nano" className="LinkRow-statIcon">

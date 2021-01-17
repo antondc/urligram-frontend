@@ -26,6 +26,7 @@ export const Bookmarks = (state = initialState, action: BookmarksActionsTypes): 
           ...state.byKey,
           ...action.data.byKey,
         },
+        currentIds: action.data.currentIds,
         loading: false,
       });
 

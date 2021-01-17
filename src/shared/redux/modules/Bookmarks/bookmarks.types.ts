@@ -29,6 +29,7 @@ export interface BookmarksState {
   byKey: {
     [key: string]: BookmarkState;
   };
+  currentIds?: number[];
   loading?: boolean;
 }
 

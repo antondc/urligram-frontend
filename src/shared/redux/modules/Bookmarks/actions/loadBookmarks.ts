@@ -19,6 +19,7 @@ export const loadBookmarks = (): ThunkAction<any, any, any, Action> => async (di
       data: data,
       contentPath: 'attributes',
     }),
+    currentIds: data.map((item) => item.id),
   };
   dispatch(receiveBookmarks(bookmarksByKey));
 
