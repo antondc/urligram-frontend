@@ -11,6 +11,8 @@ import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLo
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
 import { switchUserModal } from 'Modules/Ui/actions/switchUserModal';
 import { A, Border, H3, H4 } from '@antoniodcorrea/components';
+import { selectBookmarksLoading } from '../../redux/modules/Bookmarks/selectors/selectBookmarksLoading';
+import { selectLinksLoading } from '../../redux/modules/Links/selectLinksLoading';
 
 import './Header.less';
 
@@ -18,6 +20,8 @@ interface Props {
   isLogged: boolean;
   currentGlossary: GlossaryState;
   currentLanguageSlug: string;
+  bookmarksLoading: boolean;
+  linksLoading: boolean;
   switchUserModal: () => void;
   switchLoginModal: () => void;
 }
@@ -28,53 +32,61 @@ const Header: React.FC<Props> = ({
   switchUserModal,
   currentLanguageSlug,
   switchLoginModal,
-}) => (
-  <header>
-    <Border className="Header" weight="thick">
-      <A className="Header-brand" href={'/' + currentLanguageSlug + '/'} styled={false} frontend>
-        <Logo className="Header-logo" />
-      </A>
-      <H3 className="Header-title">
+  bookmarksLoading,
+  linksLoading,
+}) => {
+  const loading = bookmarksLoading || linksLoading;
+
+  return (
+    <header>
+      <Border className="Header" weight="thick">
         <A className="Header-brand" href={'/' + currentLanguageSlug + '/'} styled={false} frontend>
-          Linking
+          <Logo className={'Header-logo' + (loading ? ' Header-logo--loading' : '')} />
         </A>
-      </H3>
-      <nav className="Header-navigation">
-        <A className="Header-link" href={'/' + currentLanguageSlug + '/'} frontend>
-          <H4>{currentGlossary.tags}</H4>
-        </A>
-        <span className="Header-bar">|</span>
-        <A className="Header-link" href={'/' + currentLanguageSlug + '/login'} frontend>
-          <H4>{currentGlossary.trending}</H4>
-        </A>
-        <span className="Header-bar">|</span>
-        <A className="Header-link" href={'/' + currentLanguageSlug + '/control'} frontend>
-          <H4>{currentGlossary.lists}</H4>
-        </A>
-        <span className="Header-bar">|</span>
-        <A className="Header-link" href={'/' + currentLanguageSlug + '/bookmarks?sort=-members'} frontend>
-          <H4>{currentGlossary.bookmarks}</H4>
-        </A>
-        <span className="Header-bar">|</span>
-        <A className="Header-link" href={'/' + currentLanguageSlug + '/links'} frontend>
-          <H4>{currentGlossary.links}</H4>
-        </A>
-      </nav>
-      <div className="Header-user">
-        <User
-          name="User"
-          className={'Header-userLogo' + (isLogged ? ' Header-userLogo--isActive' : '')}
-          onClick={isLogged ? switchUserModal : switchLoginModal}
-        />
-      </div>
-    </Border>
-  </header>
-);
+        <H3 className="Header-title">
+          <A className="Header-brand" href={'/' + currentLanguageSlug + '/'} styled={false} frontend>
+            Linking
+          </A>
+        </H3>
+        <nav className="Header-navigation">
+          <A className="Header-link" href={'/' + currentLanguageSlug + '/'} frontend>
+            <H4>{currentGlossary.tags}</H4>
+          </A>
+          <span className="Header-bar">|</span>
+          <A className="Header-link" href={'/' + currentLanguageSlug + '/login'} frontend>
+            <H4>{currentGlossary.trending}</H4>
+          </A>
+          <span className="Header-bar">|</span>
+          <A className="Header-link" href={'/' + currentLanguageSlug + '/control'} frontend>
+            <H4>{currentGlossary.lists}</H4>
+          </A>
+          <span className="Header-bar">|</span>
+          <A className="Header-link" href={'/' + currentLanguageSlug + '/bookmarks?sort=-members'} frontend>
+            <H4>{currentGlossary.bookmarks}</H4>
+          </A>
+          <span className="Header-bar">|</span>
+          <A className="Header-link" href={'/' + currentLanguageSlug + '/links'} frontend>
+            <H4>{currentGlossary.links}</H4>
+          </A>
+        </nav>
+        <div className="Header-user">
+          <User
+            name="User"
+            className={'Header-userLogo' + (isLogged ? ' Header-userLogo--isActive' : '')}
+            onClick={isLogged ? switchUserModal : switchLoginModal}
+          />
+        </div>
+      </Border>
+    </header>
+  );
+};
 
 const mapStateToProps = createStructuredSelector({
   isLogged: selectSessionLoggedIn,
   currentGlossary: selectCurrentGlossary,
   currentLanguageSlug: selectCurrentLanguageSlug,
+  bookmarksLoading: selectBookmarksLoading,
+  linksLoading: selectLinksLoading,
 });
 
 export default connect(mapStateToProps, {
