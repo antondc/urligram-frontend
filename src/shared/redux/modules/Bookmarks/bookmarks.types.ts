@@ -29,6 +29,7 @@ export interface BookmarksState {
   byKey: {
     [key: string]: BookmarkState;
   };
+  loading?: boolean;
 }
 
 interface RequestBookmarksAction {

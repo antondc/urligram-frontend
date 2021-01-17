@@ -11,7 +11,7 @@ import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
 import { ListState } from 'Modules/Lists/lists.types';
 import { tags } from 'Tools/mockData/mockTags';
 import { users } from 'Tools/mockData/mockUsers';
-import { Button, Flex, Hr } from '@antoniodcorrea/components';
+import { Button, Fade, Flex, Hr } from '@antoniodcorrea/components';
 
 import './Bookmarks.less';
 
@@ -38,7 +38,9 @@ export const BookmarksUi: React.FC<Props> = ({ bookmarks, popularLists }) => (
           ))}
         <Hr spacer size="big" />
         <Flex horizontal="center">
-          <Button text="Load more" />
+          <Fade mounted={!!bookmarks.length} speed="fastest">
+            <Button text="Load more" />
+          </Fade>
         </Flex>
       </Main>
       <Sidebar>

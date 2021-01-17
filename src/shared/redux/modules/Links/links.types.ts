@@ -27,6 +27,7 @@ export interface LinksState {
   byKey: {
     [key: string]: LinkState;
   };
+  loading?: boolean;
 }
 
 interface RequestLinksAction {
