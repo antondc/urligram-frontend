@@ -11,7 +11,5 @@ export const logOut = (): ThunkAction<any, any, any, Action> => async (dispatch:
     .then(() => dispatch(logOutReceive()))
     .catch((error) => dispatch(logInFailure(error)));
 
-  await window.location.reload();
-
   return;
 };

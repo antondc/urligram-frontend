@@ -20,8 +20,13 @@ export const Session = (state = initialState, action: SessionActionsTypes): Sess
         ...action.data,
         loading: false,
       });
-    case LOG_OUT || LOG_FAILED:
+    case LOG_OUT:
       return {};
+    case LOG_FAILED:
+      return Object.assign({}, state, {
+        ...action.data,
+        loading: false,
+      });
     default:
       return Object.assign({}, state);
   }

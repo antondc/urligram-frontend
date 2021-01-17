@@ -29,7 +29,7 @@ interface LogInFailureAction {
   type: typeof LOG_FAILED;
   data: {
     loading: false;
-    error: string;
+    error: Error;
   };
 }
 

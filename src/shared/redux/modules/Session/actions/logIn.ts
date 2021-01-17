@@ -21,7 +21,6 @@ export const logIn = ({ username, password }: Props) => async (dispatch: Dispatc
     });
     await dispatch(switchLoginModal());
     await dispatch(logInReceive(response.data.attributes));
-    window.location.reload();
   } catch (err) {
     await dispatch(logInFailure(err));
   }
