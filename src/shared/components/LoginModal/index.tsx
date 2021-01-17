@@ -12,7 +12,7 @@ import './LoginModal.less';
 
 interface Props {
   switchLoginModal: () => void;
-  logIn: (credentials: any) => Promise<void>;
+  logIn: ({ username, password }) => Promise<void>;
 }
 
 const LoginModal: React.FC<Props> = ({ logIn, switchLoginModal }) => {

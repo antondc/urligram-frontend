@@ -8,7 +8,7 @@ import { Button } from '@antoniodcorrea/components';
 import './Login.less';
 
 interface Props {
-  logIn: (username: string, password: string) => void;
+  logIn: ({ username, password }) => void;
 }
 interface State {
   username: string;
@@ -33,7 +33,7 @@ class Login extends Component<Props, State> {
   onSubmit = () => {
     const { logIn } = this.props;
     const { username, password } = this.state;
-    logIn(username, password);
+    logIn({ username, password });
   };
 
   render() {

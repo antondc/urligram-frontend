@@ -8,7 +8,7 @@ import { Button } from '@antoniodcorrea/components';
 import './SignIn.less';
 
 interface Props {
-  logIn: (username: string, password: string) => void;
+  logIn: ({ username, password }) => void;
 }
 
 interface State {
@@ -34,7 +34,7 @@ class SignIn extends Component<Props, State> {
   onSubmit = () => {
     const { logIn } = this.props;
     const { username, password } = this.state;
-    logIn(username, password);
+    logIn({ username, password });
   };
 
   render() {
