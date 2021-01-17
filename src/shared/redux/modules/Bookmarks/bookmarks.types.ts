@@ -43,12 +43,14 @@ interface ReceiveBookmarksAction {
   data: BookmarksState;
 }
 
+export interface ReceiveBookmarkItem {
+  type: 'bookmark';
+  id: number;
+  attributes: BookmarkState;
+}
+
 export interface ReceiveBookmarksResponse {
-  data: {
-    type: 'bookmark';
-    id: number;
-    attributes: BookmarkState;
-  }[];
+  data: ReceiveBookmarkItem[];
 }
 
 export interface VoteBookmarkRequest {

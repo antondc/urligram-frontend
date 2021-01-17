@@ -8,7 +8,7 @@ import SidebarListLists from 'Components/SidebarListLists';
 import SidebarListTags from 'Components/SidebarListTags';
 import SidebarListUsers from 'Components/SidebarListUsers';
 import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
-import { PopularListsState } from 'Modules/Sections/sections.types';
+import { ListState } from 'Modules/Lists/lists.types';
 import { tags } from 'Tools/mockData/mockTags';
 import { users } from 'Tools/mockData/mockUsers';
 import { Button, Flex, Hr } from '@antoniodcorrea/components';
@@ -17,7 +17,7 @@ import './Bookmarks.less';
 
 interface Props {
   bookmarks: BookmarkState[];
-  popularLists: PopularListsState[];
+  popularLists: ListState[];
 }
 
 export const BookmarksUi: React.FC<Props> = ({ bookmarks, popularLists }) => (

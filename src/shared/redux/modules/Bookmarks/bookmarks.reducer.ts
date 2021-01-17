@@ -7,7 +7,7 @@ import {
   VOTE_UPDATE_BOOKMARK_SUCCESS,
 } from './bookmarks.types';
 
-const initialState: BookmarksState = {
+export const initialState: BookmarksState = {
   byKey: {},
 };
 

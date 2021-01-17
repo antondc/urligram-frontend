@@ -1,7 +1,23 @@
-type Key = number | string;
+import get from 'lodash/get';
 
-export const serializerFromArrayToByKey = <T extends { id: number | string }>(
-  data: Array<T>
-): {
-  [key in Key]: T;
-} => data.reduce((acc, curr) => ({ ...acc, ...{ [curr.id]: curr } }), {});
+type SerializerByKey = <T, K>(props: {
+  data: Array<T>;
+  keyPath?: string;
+  contentPath?: string;
+}) => {
+  [key: string]: K;
+};
+
+export const serializerFromArrayToByKey: SerializerByKey = ({ data, keyPath, contentPath }) => {
+  if (!data) return {};
+
+  return data.reduce(
+    (acc, curr) => ({
+      ...acc,
+      ...{
+        [get(curr, keyPath, curr['id'])]: get(curr, contentPath, curr),
+      },
+    }),
+    {}
+  );
+};

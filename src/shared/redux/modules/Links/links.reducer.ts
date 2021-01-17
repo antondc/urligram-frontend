@@ -7,7 +7,7 @@ import {
   VOTE_LINK_SUCCESS,
 } from './links.types';
 
-const initialState: LinksState = {
+export const initialState: LinksState = {
   byKey: {},
 };
 

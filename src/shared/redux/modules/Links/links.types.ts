@@ -41,20 +41,18 @@ interface ReceiveLinksAction {
   data: LinksState;
 }
 
+export interface ReceiveLinkItem {
+  type: 'links';
+  id: number;
+  attributes: LinkState;
+}
+
 export interface ReceiveLinkResponse {
-  data: {
-    type: 'links';
-    id: number;
-    attributes: LinkState;
-  };
+  data: ReceiveLinkItem;
 }
 
 export interface ReceiveLinksResponse {
-  data: {
-    type: 'links';
-    id: number;
-    attributes: LinkState;
-  }[];
+  data: ReceiveLinkItem[];
 }
 
 export interface VoteLinkRequest {

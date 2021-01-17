@@ -1,5 +1,5 @@
+import { ListState } from 'Modules/Lists/lists.types';
 import { RootState } from 'Modules/rootType';
-import { PopularListsState } from '../sections.types';
 
-export const selectPopularLists = (state: RootState): PopularListsState[] =>
+export const selectPopularLists = (state: RootState): ListState[] =>
   Object.values(state.Sections?.PopularLists?.byKey || {});

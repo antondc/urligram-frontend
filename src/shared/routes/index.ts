@@ -1,10 +1,8 @@
 import omit from 'lodash/omit';
 
-import { loadBookmarks } from 'Modules/Bookmarks/actions/loadBookmarks';
-import { loadLinks } from 'Modules/Links/actions/loadLinks';
-import { loadMockDataOne } from 'Modules/MockDataOne/actions/loadMockDataOne';
-import { loadMockDataTwo } from 'Modules/MockDataTwo/actions/loadMockDataTwo';
-import { loadPopularLists } from 'Modules/Sections/actions/loadPopularLists';
+import { initialBookmarksLoader } from 'Modules/Bookmarks/bookmarks.loader';
+import { initialLinksLoader } from 'Modules/Links/links.loader';
+import { initialPopularListsLoader } from 'Modules/Sections/sections.loader';
 import { RequestParameters } from 'Root/src/server/routes/allRoutes';
 
 export interface Route {
@@ -30,7 +28,7 @@ const Routes: RoutesInterface = {
     auth: false,
     hasHeader: false,
     hasFooter: false,
-    loadInitialData: [loadBookmarks, loadPopularLists],
+    loadInitialData: [initialBookmarksLoader, initialPopularListsLoader],
   },
 
   Links: {
@@ -40,7 +38,7 @@ const Routes: RoutesInterface = {
     auth: false,
     hasHeader: false,
     hasFooter: false,
-    loadInitialData: [loadLinks],
+    loadInitialData: [initialLinksLoader],
   },
 
   Login: {
@@ -50,7 +48,7 @@ const Routes: RoutesInterface = {
     auth: false,
     hasHeader: false,
     hasFooter: false,
-    loadInitialData: [loadMockDataOne],
+    loadInitialData: [],
   },
 
   SignIn: {
@@ -60,7 +58,7 @@ const Routes: RoutesInterface = {
     auth: false,
     hasHeader: false,
     hasFooter: false,
-    loadInitialData: [loadMockDataOne],
+    loadInitialData: [],
   },
 
   Control: {
@@ -70,7 +68,7 @@ const Routes: RoutesInterface = {
     auth: true,
     hasHeader: true,
     hasFooter: true,
-    loadInitialData: [loadMockDataOne],
+    loadInitialData: [],
   },
 
   Home: {
@@ -80,7 +78,7 @@ const Routes: RoutesInterface = {
     auth: false,
     hasHeader: true,
     hasFooter: true,
-    loadInitialData: [loadMockDataOne, loadMockDataTwo],
+    loadInitialData: [],
   },
 
   NotFound: {

@@ -6,7 +6,7 @@ import {
   SectionsState,
 } from './sections.types';
 
-const initialState: SectionsState = {
+export const initialState: SectionsState = {
   PopularLists: {
     byKey: {},
     loading: false,

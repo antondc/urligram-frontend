@@ -50,6 +50,7 @@ interface ReceiveLanguagesAction {
   type: typeof LOAD_LANGUAGES_SUCCESS;
   data: {
     loading: boolean;
+    Languages: LanguagesState;
   };
 }
 
@@ -72,14 +73,16 @@ interface SwitchCurrentLanguageReceiveAction {
   data: LanguageState;
 }
 
+export interface LanguagesApiResponseItem {
+  type: 'languages';
+  attributes: LanguageState;
+}
+
 export interface LanguagesApiResponse {
   links: {
     self: string;
   };
-  data: {
-    type: 'languages';
-    attributes: LanguageState;
-  }[];
+  data: LanguagesApiResponseItem[];
 }
 
 export type LanguagesActionsTypes =

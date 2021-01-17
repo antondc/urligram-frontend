@@ -5,14 +5,14 @@ import { createStructuredSelector } from 'reselect';
 import { loadBookmarks } from 'Modules/Bookmarks/actions/loadBookmarks';
 import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
 import { selectBookmarksAll } from 'Modules/Bookmarks/selectors/selectBookmarksAll';
+import { ListState } from 'Modules/Lists/lists.types';
 import { loadPopularLists } from 'Modules/Sections/actions/loadPopularLists';
-import { PopularListsState } from 'Modules/Sections/sections.types';
 import { selectPopularLists } from 'Modules/Sections/selectors/selectPopularLists';
 import { BookmarksUi } from './bookmarksUi';
 
 interface Props {
   bookmarks: BookmarkState[];
-  popularLists: PopularListsState[];
+  popularLists: ListState[];
   loadBookmarks: () => void;
   loadPopularLists: () => void;
 }

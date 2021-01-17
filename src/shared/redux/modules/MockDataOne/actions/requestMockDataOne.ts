@@ -1,8 +1,0 @@
-import { LOAD_MOCK_DATA_ONE_STARTED, MockDataOnesActionsTypes } from 'Modules/MockDataOne/mockDataOne.types';
-
-export const requestMockDataOne = (): MockDataOnesActionsTypes => ({
-  type: LOAD_MOCK_DATA_ONE_STARTED,
-  data: {
-    loading: true,
-  },
-});

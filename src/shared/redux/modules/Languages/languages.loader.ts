@@ -1,6 +1,3 @@
-import { Action, Dispatch } from 'redux';
-import { ThunkAction } from 'redux-thunk';
-
 import {
   LanguagesApiResponse,
   LanguagesApiResponseItem,
@@ -9,13 +6,9 @@ import {
 } from 'Modules/Languages/languages.types';
 import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
-import { getCurrentOrDefaultLanguage } from '../utils/getCurrentOrDefaultLanguage';
-import { receiveLanguages } from './receiveLanguages';
-import { requestLanguages } from './requestLanguages';
+import { getCurrentOrDefaultLanguage } from './utils/getCurrentOrDefaultLanguage';
 
-export const loadLanguages = (lang: string): ThunkAction<any, any, any, Action> => async (dispatch?: Dispatch) => {
-  dispatch(requestLanguages());
-
+export const initialLanguagesLoader = async (lang: string): Promise<{ Languages: LanguagesState }> => {
   const { data }: LanguagesApiResponse = await HttpClient.get('/languages');
 
   const languagesByKey: LanguagesState = {
@@ -25,12 +18,15 @@ export const loadLanguages = (lang: string): ThunkAction<any, any, any, Action> 
       keyPath: 'attributes.slug',
     }),
   };
+
   const currentLanguage = getCurrentOrDefaultLanguage(languagesByKey, lang);
 
-  const Languages = {
-    ...languagesByKey,
-    currentLanguage,
+  const result = {
+    Languages: {
+      ...languagesByKey,
+      currentLanguage,
+    },
   };
 
-  dispatch(receiveLanguages(Languages));
+  return result;
 };

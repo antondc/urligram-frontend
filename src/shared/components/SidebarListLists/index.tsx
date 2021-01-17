@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import { PopularListsState } from 'Modules/Sections/sections.types';
+import { ListState } from 'Modules/Lists/lists.types';
 import { Border, H4, Hr, Span, Tooltip } from '@antoniodcorrea/components';
 
 import './SidebarListLists.less';
@@ -10,7 +10,7 @@ import './SidebarListLists.less';
 interface Props {
   id: string;
   title: string;
-  items: PopularListsState[];
+  items: ListState[];
 }
 
 const SidebarListLists: React.FC<Props> = ({ id, title, items }) => (

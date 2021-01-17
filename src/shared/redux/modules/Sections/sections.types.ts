@@ -1,50 +1,10 @@
+import { ListsState, ListState } from '../Lists/lists.types';
+
 export const LOAD_MOST_POPULAR_LISTS_STARTED = 'LOAD_MOST_POPULAR_LISTS_STARTED';
 export const LOAD_MOST_POPULAR_LISTS_SUCCESS = 'LOAD_MOST_POPULAR_LISTS_SUCCESS';
 
-export interface UserState {
-  id: number;
-  name: string;
-  description: string;
-  isPrivate: boolean;
-  userId: string;
-  createdAt: string;
-  updatedAt: string;
-  members: number;
-  listMembers: [
-    {
-      id: string;
-      name: string;
-      userRole: string;
-    },
-    {
-      id: string;
-      name: string;
-      userRole: string;
-    }
-  ];
-}
-export interface PopularListsState {
-  id: number;
-  name: string;
-  description: string;
-  isPrivate: boolean;
-  userId: string;
-  createdAt: string;
-  updatedAt: string;
-  members: {
-    id: string;
-    name: string;
-    userRole: string;
-  }[];
-}
-
 export interface SectionsState {
-  PopularLists: {
-    byKey: {
-      [key: string]: PopularListsState;
-    };
-    loading?: boolean;
-  };
+  PopularLists: ListsState;
 }
 
 interface RequestMostPopularListsAction {
@@ -63,7 +23,15 @@ export interface ReceiveMostPopularListsResponse {
   data: {
     type: 'lists';
     id: number;
-    attributes: PopularListsState;
+    attributes: ListState;
+  }[];
+}
+
+export interface ReceiveMostPopularListsResponse {
+  data: {
+    type: 'lists';
+    id: number;
+    attributes: ListState;
   }[];
 }
 

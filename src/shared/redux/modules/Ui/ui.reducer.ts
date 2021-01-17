@@ -7,7 +7,7 @@ import {
   UiState,
 } from './ui.types';
 
-const initialState: UiState = {
+export const initialState: UiState = {
   screenLocked: false,
   userModal: {
     type: 'modal',

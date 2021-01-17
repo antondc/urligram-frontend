@@ -13,7 +13,6 @@ import ModalMessage from 'Components/ModalMessage';
 import SubHeader from 'Components/SubHeader';
 import UserModal from 'Components/UserModal';
 import { selectLanguageLoading } from 'Modules/Languages/selectors/selectLanguageLoading';
-import { selectMockDataTwoLoading } from 'Modules/MockDataTwo/selectors/selectMockDataTwoLoading';
 import { pushNewRoute } from 'Modules/Routes/actions/pushNewRoute';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import { selectUiLoginModalMounted } from 'Modules/Ui/selectors/selectUiLoginModalMounted';
@@ -30,7 +29,6 @@ import LayoutContent from '../LayoutContent';
 import './Layout.less';
 
 interface Props {
-  mockDataTwoLoading: boolean;
   location: Location;
   languageLoading: boolean;
   userModalMounted: boolean;
@@ -73,16 +71,10 @@ class Layout extends React.Component<Props> {
   };
 
   render = () => {
-    const {
-      languageLoading,
-      mockDataTwoLoading,
-      userModalMounted,
-      messageModalMounted,
-      loginModalMounted,
-    } = this.props;
+    const { languageLoading, userModalMounted, messageModalMounted, loginModalMounted } = this.props;
 
     const mounted = !languageLoading;
-    const showLoader = mockDataTwoLoading;
+    const showLoader = false;
 
     return (
       <div className="Layout">
@@ -120,7 +112,6 @@ class Layout extends React.Component<Props> {
 
 const mapStateToProps = createStructuredSelector({
   languageLoading: selectLanguageLoading,
-  mockDataTwoLoading: selectMockDataTwoLoading,
   userModalMounted: selectUiUserModalMounted,
   messageModalMounted: selectUiMessageModalMounted,
   uiScreenLocked: selectUiScreenLocked,

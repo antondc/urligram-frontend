@@ -1,4 +1,5 @@
 import {
+  LanguagesActionsTypes,
   LanguagesState,
   LOAD_LANGUAGES_STARTED,
   LOAD_LANGUAGES_SUCCESS,
@@ -6,7 +7,7 @@ import {
   SWITCH_CURRENT_LANGUAGE_REQUEST,
 } from './languages.types';
 
-const initialState: LanguagesState = {
+export const initialState: LanguagesState = {
   byKey: {},
   currentLanguage: {
     id: 0,
@@ -32,7 +33,7 @@ const initialState: LanguagesState = {
   },
 };
 
-export const Languages = (state = initialState, action) => {
+export const Languages = (state = initialState, action: LanguagesActionsTypes): LanguagesState => {
   switch (action.type) {
     case LOAD_LANGUAGES_STARTED:
       return Object.assign({}, state, {

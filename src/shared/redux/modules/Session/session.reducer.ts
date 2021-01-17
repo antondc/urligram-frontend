@@ -7,7 +7,7 @@ import {
   SessionState,
 } from './session.types';
 
-const initialState: SessionState = {};
+export const initialState: SessionState = {};
 
 export const Session = (state = initialState, action: SessionActionsTypes): SessionState => {
   switch (action.type) {

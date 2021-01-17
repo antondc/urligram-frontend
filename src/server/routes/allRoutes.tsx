@@ -7,7 +7,7 @@ import { Route, StaticRouter } from 'react-router-dom';
 import serialize from 'serialize-javascript';
 
 import Layout from 'Common/Layout';
-import { loadLanguages } from 'Modules/Languages/actions/loadLanguages';
+import { initialLanguagesLoader } from 'Modules/Languages/languages.loader';
 import { SessionState } from 'Modules/Session/session.types';
 import storeFactory from 'Redux/index';
 import config from 'Root/config.test.json';
@@ -39,12 +39,12 @@ router.get(routesPathsList, function (req: any, res: any) {
     query: req.query,
   };
   // Retrieve initial data from loaders passing req.params.
-  const initialDataLoaders = Routes[activeRouteKey].loadInitialData.map((item: any) => item(requestParameters)()); // We have to execute the thunk, as well as the async function within it
+  const initialDataLoaders = Routes[activeRouteKey].loadInitialData.map((item: any) => item(requestParameters)); // We have to execute the thunk, as well as the async function within it
 
   // Add curent path to history.location
   const location = { ...history.location, pathname: req.path };
 
-  Promise.all([loadLanguages(req.params.lang)(), ...initialDataLoaders]) // We have to execute the Languages thunk, as well as the async function within it
+  Promise.all([initialLanguagesLoader(req.params.lang), ...initialDataLoaders]) // We have to execute the Languages thunk, as well as the async function within it
     .then((response: any) => {
       const data = Object.assign({}, ...response);
 
