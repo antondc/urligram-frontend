@@ -23,6 +23,7 @@ export const Links = (state = initialState, action: LinksActionsTypes): LinksSta
           ...state.byKey,
           ...action.data.byKey,
         },
+        allIds: [...action.data.allIds],
         loading: false,
       });
     case LINK_VOTE_STARTED:

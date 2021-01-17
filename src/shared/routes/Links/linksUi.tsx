@@ -6,7 +6,6 @@ import Sidebar from 'Components/Sidebar';
 import SidebarListLists from 'Components/SidebarListLists';
 import SidebarListTags from 'Components/SidebarListTags';
 import SidebarListUsers from 'Components/SidebarListUsers';
-import { LinkState } from 'Modules/Links/links.types';
 import LinkRow from 'Root/src/shared/components/LinkRow';
 import { lists } from 'Tools/mockData/mockLists';
 import { tags } from 'Tools/mockData/mockTags';
@@ -16,10 +15,10 @@ import { Button, Flex, Hr } from '@antoniodcorrea/components';
 import './Links.less';
 
 interface Props {
-  links: LinkState[];
+  linksIds: number[];
 }
 
-export const LinksUi: React.FC<Props> = ({ links }) => (
+export const LinksUi: React.FC<Props> = ({ linksIds }) => (
   <div className="Links">
     <Flex horizontal="between" vertical="top">
       <Sidebar>
@@ -31,11 +30,11 @@ export const LinksUi: React.FC<Props> = ({ links }) => (
       </Sidebar>
       <Main>
         <MainHeader title="My links" />
-        {links &&
-          links.map((item, index) => (
-            <React.Fragment key={item.id}>
+        {linksIds &&
+          linksIds.map((id, index) => (
+            <React.Fragment key={id}>
               {!!index && <Hr spacer />}
-              <LinkRow {...item} />
+              <LinkRow id={id} />
             </React.Fragment>
           ))}
         <Hr spacer size="big" />

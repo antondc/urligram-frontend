@@ -4,6 +4,7 @@ import { createStructuredSelector } from 'reselect';
 
 import { voteLink } from 'Modules/Links/actions/voteLink';
 import { LinkState } from 'Modules/Links/links.types';
+import { selectLinkById } from 'Modules/Links/selectors/selectLinkById';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUserId';
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
@@ -11,7 +12,9 @@ import { LinkRow as LinkRowUi } from './LinkRow';
 
 import './LinkRow.less';
 
-interface Props extends LinkState {
+interface Props {
+  id: number;
+  link: LinkState;
   voteLink: ({ vote: boolean, linkId: number, userId: string }) => void;
   userId: string;
   isLogged: boolean;
@@ -20,16 +23,11 @@ interface Props extends LinkState {
 
 const LinkRow: React.FC<Props> = ({
   id,
-  linkId,
+  link: { linkId, title, url, tags = [], img, statistics },
   userId,
-  title,
-  url,
-  tags = [],
-  img,
-  statistics,
-  voteLink,
   isLogged,
   switchLoginModal,
+  voteLink,
 }) => {
   const onVote = (vote) => {
     if (!isLogged) return switchLoginModal();
@@ -54,6 +52,7 @@ const LinkRow: React.FC<Props> = ({
 const mapStateToProps = createStructuredSelector({
   userId: selectSessionUserId,
   isLogged: selectSessionLoggedIn,
+  link: selectLinkById,
 });
 
 export default connect(mapStateToProps, {

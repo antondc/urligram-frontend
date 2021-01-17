@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 import { selectBookmarksLoading } from 'Modules/Bookmarks/selectors/selectBookmarksLoading';
+import { selectBookmarksVoteLoading } from 'Modules/Bookmarks/selectors/selectBookmarksVoteLoading';
 import { GlossaryState } from 'Modules/Languages/languages.types';
 import { selectCurrentGlossary } from 'Modules/Languages/selectors/selectCurrentGlossary';
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
@@ -11,7 +12,6 @@ import { selectLinksVoteLoading } from 'Modules/Links/selectors/selectLinksVoteL
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
 import { switchUserModal } from 'Modules/Ui/actions/switchUserModal';
-import { selectBookmarksVoteLoading } from '../../redux/modules/Bookmarks/selectors/selectBookmarksVoteLoading';
 import { Header as HeaderUi } from './Header';
 
 import './Header.less';

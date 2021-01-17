@@ -17,6 +17,7 @@ export const loadLinks = (): ThunkAction<any, any, any, Action> => async (dispat
       data: data,
       contentPath: 'attributes',
     }),
+    allIds: data.map((item) => item.id),
   };
   dispatch(receiveLinks(linksByKey));
 

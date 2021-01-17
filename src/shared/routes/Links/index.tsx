@@ -3,12 +3,11 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 import { loadLinks } from 'Modules/Links/actions/loadLinks';
-import { LinkState } from 'Modules/Links/links.types';
-import { selectLinksAll } from 'Modules/Links/selectors/selectLinksAll';
+import { selectLinksAllIds } from 'Modules/Links/selectors/selectLinksAllIds';
 import { LinksUi } from './linksUi';
 
 interface Props {
-  links: LinkState[];
+  linksIds: number[];
   loadLinks: () => void;
 }
 
@@ -18,14 +17,14 @@ class Home extends React.Component<Props> {
   };
 
   render = () => {
-    const { links } = this.props;
+    const { linksIds } = this.props;
 
-    return <LinksUi links={links} />;
+    return <LinksUi linksIds={linksIds} />;
   };
 }
 
 const mapStateToProps = createStructuredSelector({
-  links: selectLinksAll,
+  linksIds: selectLinksAllIds,
 });
 
 export default connect(mapStateToProps, {

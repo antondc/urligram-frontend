@@ -28,6 +28,7 @@ export interface LinksState {
     [key: string]: LinkState;
   };
   loading?: boolean;
+  allIds?: number[];
 }
 
 interface RequestLinksAction {

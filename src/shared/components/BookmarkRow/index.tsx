@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
+import { selectBookmarksById } from 'Modules/Bookmarks/selectors/selectBookmarkById';
 import { voteLink } from 'Modules/Links/actions/voteLink';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUserId';
@@ -11,7 +12,9 @@ import { BookmarkRow as BookmarkRowUi } from './BookmarkRow';
 
 import './BookmarkRow.less';
 
-interface Props extends BookmarkState {
+interface Props {
+  id: number;
+  bookmark: BookmarkState;
   voteLink: ({ vote: boolean, linkId: number, userId: string }) => void;
   userId: string;
   isLogged: boolean;
@@ -20,15 +23,10 @@ interface Props extends BookmarkState {
 
 const BookmarkRow: React.FC<Props> = ({
   id,
-  linkId,
-  userId,
-  title,
-  url,
-  tags = [],
-  img,
-  statistics,
+  bookmark: { linkId, title, url, tags = [], img, statistics },
   voteLink,
   isLogged,
+  userId,
   switchLoginModal,
 }) => {
   const onVote = (vote) => {
@@ -54,6 +52,7 @@ const BookmarkRow: React.FC<Props> = ({
 const mapStateToProps = createStructuredSelector({
   userId: selectSessionUserId,
   isLogged: selectSessionLoggedIn,
+  bookmark: selectBookmarksById,
 });
 
 export default connect(mapStateToProps, {

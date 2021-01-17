@@ -7,7 +7,6 @@ import Sidebar from 'Components/Sidebar';
 import SidebarListLists from 'Components/SidebarListLists';
 import SidebarListTags from 'Components/SidebarListTags';
 import SidebarListUsers from 'Components/SidebarListUsers';
-import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
 import { ListState } from 'Modules/Lists/lists.types';
 import { tags } from 'Tools/mockData/mockTags';
 import { users } from 'Tools/mockData/mockUsers';
@@ -16,11 +15,11 @@ import { Button, Fade, Flex, Hr } from '@antoniodcorrea/components';
 import './Bookmarks.less';
 
 interface Props {
-  bookmarks: BookmarkState[];
+  bookmarksIds: number[];
   popularLists: ListState[];
 }
 
-export const BookmarksUi: React.FC<Props> = ({ bookmarks, popularLists }) => (
+export const BookmarksUi: React.FC<Props> = ({ bookmarksIds, popularLists }) => (
   <div className="Bookmarks">
     <Flex horizontal="between" vertical="top">
       <Sidebar>
@@ -29,16 +28,16 @@ export const BookmarksUi: React.FC<Props> = ({ bookmarks, popularLists }) => (
       </Sidebar>
       <Main>
         <MainHeader title="My bookmarks" />
-        {bookmarks &&
-          bookmarks.map((item, index) => (
-            <React.Fragment key={item.id}>
+        {bookmarksIds &&
+          bookmarksIds.map((id, index) => (
+            <React.Fragment key={id}>
               {!!index && <Hr spacer />}
-              <BookmarkRow {...item} />
+              <BookmarkRow id={id} />
             </React.Fragment>
           ))}
         <Hr spacer size="big" />
         <Flex horizontal="center">
-          <Fade mounted={!!bookmarks.length} speed="fastest">
+          <Fade mounted={!!bookmarksIds?.length} speed="fastest">
             <Button text="Load more" />
           </Fade>
         </Flex>
