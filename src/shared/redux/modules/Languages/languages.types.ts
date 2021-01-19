@@ -18,6 +18,7 @@ export interface GlossaryState {
   users: string;
   following: string;
   followers: string;
+  since: string;
 }
 
 export interface LanguageState {

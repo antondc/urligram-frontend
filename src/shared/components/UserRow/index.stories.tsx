@@ -22,6 +22,7 @@ const props = {
   ammountBookmarks: 4,
   createdAt: new Date(),
   updatedAt: new Date(),
+  sinceTranslation: 'since',
   tags: [
     {
       id: 1,

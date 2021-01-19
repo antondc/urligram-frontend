@@ -10,6 +10,7 @@ interface UserRow extends UserState {
   connections: number;
   ammountLists: number;
   ammountBookmarks: number;
+  sinceTranslation: string;
 }
 
 export const UserRow: React.FC<UserRow> = ({
@@ -21,6 +22,7 @@ export const UserRow: React.FC<UserRow> = ({
   connections,
   ammountLists,
   ammountBookmarks,
+  sinceTranslation,
 }) => (
   <Border grow className="UserRow" data-test-id="UserRow" key={'UserRow-' + id}>
     <div className="UserRow-left">
@@ -31,13 +33,24 @@ export const UserRow: React.FC<UserRow> = ({
         <Hr spacer size="nano" />
         <div className="UserRow-details">
           <Span size="nano">
-            {ammountLists} lists · {ammountBookmarks} bookmarks · {connections} connections · since {createdAt}
+            <A href={'/lists'} styled frontend>
+              {ammountLists} lists
+            </A>{' '}
+            ·{' '}
+            <A href={'/bookmarks'} styled frontend>
+              {ammountBookmarks} bookmarks
+            </A>{' '}
+            ·{' '}
+            <A href={'/users'} styled frontend>
+              {connections} connections
+            </A>{' '}
+            · {sinceTranslation.toLocaleLowerCase()} {createdAt}
           </Span>
         </div>
       </div>
       <div className="UserRow-tags">
-        {tags?.map((item, index) => (
-          <A href={`/tags/${item.name}`} key={id + '-' + item.id + '-' + index} styled={false} frontend>
+        {tags?.map((item) => (
+          <A href={`/tags/${item.name}`} key={item.id} styled={false} frontend>
             <Tag className="UserRow-tag" size="small">
               {item.name}
             </Tag>

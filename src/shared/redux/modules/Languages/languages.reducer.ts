@@ -29,6 +29,7 @@ export const initialState: LanguagesState = {
       users: '',
       following: '',
       followers: '',
+      since: '',
     },
   },
 };
