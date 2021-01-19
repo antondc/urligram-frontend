@@ -54,6 +54,10 @@ export const Header: React.FC<Props> = ({
         <A className="Header-link" href={'/' + currentLanguageSlug + '/links'} frontend>
           <H4>{currentGlossary.links}</H4>
         </A>
+        <span className="Header-bar">|</span>
+        <A className="Header-link" href={'/' + currentLanguageSlug + '/users'} frontend>
+          <H4>{currentGlossary.users}</H4>
+        </A>
       </nav>
       <div className="Header-user">
         <User

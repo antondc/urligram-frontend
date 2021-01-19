@@ -3,6 +3,7 @@ import omit from 'lodash/omit';
 import { initialBookmarksLoader } from 'Modules/Bookmarks/bookmarks.loader';
 import { initialLinksLoader } from 'Modules/Links/links.loader';
 import { initialPopularListsLoader } from 'Modules/Sections/sections.loader';
+import { initialUsersLoader } from 'Modules/Users/users.loader';
 import { RequestParameters } from 'Root/src/server/routes/allRoutes';
 
 export interface Route {
@@ -29,6 +30,16 @@ const Routes: RoutesInterface = {
     hasHeader: false,
     hasFooter: false,
     loadInitialData: [initialBookmarksLoader, initialPopularListsLoader],
+  },
+
+  Users: {
+    name: 'Users',
+    path: '/:lang([a-z]{2})?/users',
+    exact: true,
+    auth: false,
+    hasHeader: false,
+    hasFooter: false,
+    loadInitialData: [initialUsersLoader, initialPopularListsLoader],
   },
 
   Links: {

@@ -15,6 +15,7 @@ import Links from 'Routes/Links';
 import Login from 'Routes/Login';
 import NotFound from 'Routes/NotFound';
 import SignIn from 'Routes/SignIn';
+import Users from 'Routes/Users';
 import { Location } from 'Services/History';
 import { FadeInOut } from '@antoniodcorrea/components';
 
@@ -30,6 +31,7 @@ const Router: React.FC<Props> = ({ loggedIn, location, defaultCurrentSlug, pathW
     <Switch location={{ ...location, pathname: pathWithoutLanguageParam }}>
       {loggedIn && <Redirect from="/:lang?/login" to={'/' + defaultCurrentSlug + '/control'} />}
       {!loggedIn && <Redirect from="/:lang?/control" to={'/' + defaultCurrentSlug + '/sign-in'} />}
+      <Route exact={Routes.Users.exact} path={Routes.Users.path} component={Users} />
       <Route exact={Routes.Links.exact} path={Routes.Links.path} component={Links} />
       <Route exact={Routes.Bookmarks.exact} path={Routes.Bookmarks.path} component={Bookmarks} />
       <Route exact={Routes.Login.exact} path={Routes.Login.path} component={Login} />
