@@ -1,47 +1,43 @@
 import React from 'react';
 
 import { UserState } from 'Modules/Users/users.types';
-import { A, Border, Edit, Private, Span, Tag, User } from '@antoniodcorrea/components';
+import { A, Border, Hr, Span, Tag } from '@antoniodcorrea/components';
 
 import './UserRow.less';
 
 interface UserRow extends UserState {
   id: string;
+  connections: number;
+  ammountLists: number;
+  ammountBookmarks: number;
 }
 
-export const UserRow: React.FC<UserRow> = ({ id, name, image, tags }) => (
-  <Border grow className="UserRow" data-test-id="UserRow" key={id}>
+export const UserRow: React.FC<UserRow> = ({
+  id,
+  name,
+  image,
+  tags,
+  createdAt,
+  connections,
+  ammountLists,
+  ammountBookmarks,
+}) => (
+  <Border grow className="UserRow" data-test-id="UserRow" key={'UserRow-' + id}>
     <div className="UserRow-left">
-      <div className="UserRow-icons">
-        <User size="micro" className="UserRow-icon" />
-        <Private
-          size="micro"
-          className="UserRow-icon UserRow-iconHover"
-          onClick={() => {
-            alert('Private');
-          }}
-        />
-        <Edit
-          size="micro"
-          className="UserRow-icon UserRow-iconHover"
-          onClick={() => {
-            alert('Edit');
-          }}
-        />
-      </div>
       <div className="UserRow-leftTop">
-        <Span bold className="UserRow-title">
-          {name}
+        <Span bold size="small" className="UserRow-title">
+          @{name}
         </Span>
-        <div className="UserRow-url">
-          <A href={'example.com'}>
-            <Span size="small">{'example.com'}</Span>
-          </A>
+        <Hr spacer size="nano" />
+        <div className="UserRow-details">
+          <Span size="nano">
+            {ammountLists} lists · {ammountBookmarks} bookmarks · {connections} connections · since {createdAt}
+          </Span>
         </div>
       </div>
       <div className="UserRow-tags">
-        {tags?.map((item) => (
-          <A href={`/tags/${item.name}`} key={item.id} styled={false} frontend>
+        {tags?.map((item, index) => (
+          <A href={`/tags/${item.name}`} key={id + '-' + item.id + '-' + index} styled={false} frontend>
             <Tag className="UserRow-tag" size="small">
               {item.name}
             </Tag>
@@ -51,22 +47,6 @@ export const UserRow: React.FC<UserRow> = ({ id, name, image, tags }) => (
     </div>
     <div className="UserRow-right">
       <img className="UserRow-image" src={image} />
-      <div className="UserRow-rightEnd">
-        <div className="UserRow-stats">
-          <div className="UserRow-stat">
-            <Span size="nano" className="UserRow-statIcon">
-              ▲
-            </Span>
-            2
-          </div>
-          <div className="UserRow-stat">
-            <Span size="nano" className="UserRow-statIcon">
-              ⚭
-            </Span>
-            4
-          </div>
-        </div>
-      </div>
     </div>
   </Border>
 );

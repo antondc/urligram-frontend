@@ -1,3 +1,5 @@
+import { ListState } from '../Lists/lists.types';
+
 export const LOAD_USERS_STARTED = 'LOAD_USERS_STARTED';
 export const LOAD_USERS_SUCEEDED = 'LOAD_USERS_SUCEEDED';
 
@@ -11,8 +13,15 @@ export interface UserState {
   statement: string;
   location: string;
   order: number;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: Date | string;
+  updatedAt: Date | string;
+  followers?: string[];
+  following?: string[];
+  lists?: {
+    id: number;
+    userRole: string;
+  }[];
+  bookmarks?: number[];
   tags?: {
     id: number;
     name: string;

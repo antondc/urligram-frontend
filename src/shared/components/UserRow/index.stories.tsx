@@ -10,13 +10,16 @@ export default {
 const props = {
   id: 'string1',
   name: 'User One',
-  image: 'https://picsum.photos/300/200',
+  image: 'https://cdn-images-1.medium.com/max/1200/1*NpUUls7kjn9JhO4ChjGV7w.png',
   level: 'admin',
   email: 'hello@example.com',
   status: 'active',
   statement: 'Some text',
   location: 'Some place',
   order: 1,
+  connections: 2,
+  ammountLists: 4,
+  ammountBookmarks: 4,
   createdAt: new Date(),
   updatedAt: new Date(),
   tags: [
