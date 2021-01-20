@@ -44,7 +44,7 @@ export const UserRow: React.FC<UserRow> = ({
             <A href={`users/${id}`} styled frontend disabled={!connections}>
               {connections} connections
             </A>{' '}
-            · {sinceTranslation.toLocaleLowerCase()} {createdAt}
+            · {sinceTranslation?.toLocaleLowerCase()} {createdAt}
           </Span>
         </div>
       </div>
