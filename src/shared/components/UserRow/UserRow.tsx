@@ -33,15 +33,15 @@ export const UserRow: React.FC<UserRow> = ({
         <Hr spacer size="nano" />
         <div className="UserRow-details">
           <Span size="nano">
-            <A href={'/lists'} styled frontend>
+            <A href={`users/${id}/lists`} styled frontend disabled={!ammountLists}>
               {ammountLists} lists
             </A>{' '}
             ·{' '}
-            <A href={'/bookmarks'} styled frontend>
+            <A href={`users/${id}/bookmarks`} styled frontend disabled={!ammountBookmarks}>
               {ammountBookmarks} bookmarks
             </A>{' '}
             ·{' '}
-            <A href={'/users'} styled frontend>
+            <A href={`users/${id}`} styled frontend disabled={!connections}>
               {connections} connections
             </A>{' '}
             · {sinceTranslation.toLocaleLowerCase()} {createdAt}
@@ -50,7 +50,7 @@ export const UserRow: React.FC<UserRow> = ({
       </div>
       <div className="UserRow-tags">
         {tags?.map((item) => (
-          <A href={`/tags/${item.name}`} key={item.id} styled={false} frontend>
+          <A href={`tags/${item.name}`} key={item.id} styled={false} frontend>
             <Tag className="UserRow-tag" size="small">
               {item.name}
             </Tag>
@@ -59,7 +59,9 @@ export const UserRow: React.FC<UserRow> = ({
       </div>
     </div>
     <div className="UserRow-right">
-      <img className="UserRow-image" src={image} />
+      <A href={`users/${id}`} styled={false} frontend>
+        <img className="UserRow-image" src={image} />
+      </A>
     </div>
   </Border>
 );
