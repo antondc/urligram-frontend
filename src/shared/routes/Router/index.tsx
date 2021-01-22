@@ -12,6 +12,7 @@ import Control from 'Routes/Control';
 import Home from 'Routes/Home';
 import Routes from 'Routes/index';
 import Links from 'Routes/Links';
+import Lists from 'Routes/Lists';
 import Login from 'Routes/Login';
 import NotFound from 'Routes/NotFound';
 import SignIn from 'Routes/SignIn';
@@ -33,6 +34,7 @@ const Router: React.FC<Props> = ({ loggedIn, location, defaultCurrentSlug, pathW
       {!loggedIn && <Redirect from="/:lang?/control" to={'/' + defaultCurrentSlug + '/sign-in'} />}
       <Route exact={Routes.Users.exact} path={Routes.Users.path} component={Users} />
       <Route exact={Routes.Links.exact} path={Routes.Links.path} component={Links} />
+      <Route exact={Routes.Lists.exact} path={Routes.Lists.path} component={Lists} />
       <Route exact={Routes.Bookmarks.exact} path={Routes.Bookmarks.path} component={Bookmarks} />
       <Route exact={Routes.Login.exact} path={Routes.Login.path} component={Login} />
       <Route exact={Routes.SignIn.exact} path={Routes.SignIn.path} component={SignIn} />

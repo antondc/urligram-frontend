@@ -5,22 +5,26 @@ import Sidebar from 'Components/Sidebar';
 import SidebarListLists from 'Components/SidebarListLists';
 import SidebarListTags from 'Components/SidebarListTags';
 import SidebarListUsers from 'Components/SidebarListUsers';
-import { lists } from 'Tools/mockData/mockLists';
+import { ListState } from 'Modules/Lists/lists.types';
 import { tags } from 'Tools/mockData/mockTags';
 import { users } from 'Tools/mockData/mockUsers';
 import { Border, Flex, Hr } from '@antoniodcorrea/components';
 
 import './Home.less';
 
-export const HomeUI: React.FC = () => (
+interface Props {
+  popularLists: ListState[];
+}
+
+export const Home: React.FC<Props> = ({ popularLists }) => (
   <div className="Home">
     <Flex horizontal="between" vertical="top">
       <Sidebar>
-        <SidebarListLists title="Popular Lists" items={lists} id="PopularLists" />
+        <SidebarListLists title="Popular Lists" items={popularLists} id="PopularLists" />
         <Hr spacer />
-        <SidebarListLists title="Popular Lists" items={lists} id="PopularLists2" />
+        <SidebarListLists title="Popular Lists" items={popularLists} id="PopularLists2" />
         <Hr spacer />
-        <SidebarListLists title="Popular Lists" items={lists} id="PopularLists3" />
+        <SidebarListLists title="Popular Lists" items={popularLists} id="PopularLists3" />
       </Sidebar>
       <Main>
         <Border>Home</Border>

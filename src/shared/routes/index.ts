@@ -5,6 +5,7 @@ import { initialLinksLoader } from 'Modules/Links/links.loader';
 import { initialPopularListsLoader } from 'Modules/Sections/sections.loader';
 import { initialUsersLoader } from 'Modules/Users/users.loader';
 import { RequestParameters } from 'Root/src/server/routes/allRoutes';
+import { initialListsLoader } from '../redux/modules/Lists/lists.loader';
 
 export interface Route {
   name: string;
@@ -49,7 +50,17 @@ const Routes: RoutesInterface = {
     auth: false,
     hasHeader: false,
     hasFooter: false,
-    loadInitialData: [initialLinksLoader],
+    loadInitialData: [initialLinksLoader, initialPopularListsLoader],
+  },
+
+  Lists: {
+    name: 'Lists',
+    path: '/:lang([a-z]{2})?/lists',
+    exact: true,
+    auth: false,
+    hasHeader: false,
+    hasFooter: false,
+    loadInitialData: [initialListsLoader, initialPopularListsLoader],
   },
 
   Login: {

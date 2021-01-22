@@ -1,0 +1,98 @@
+@import '../../css/imports.less';
+
+@c: .ListRow;
+
+@{c} {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+  line-height: unset;
+
+  &-icons {
+    display: flex;
+    margin-bottom: 3px;
+  }
+
+  &-icon {
+    margin-right: 7px;
+  }
+
+  &-iconHover {
+    .hoverTransition(0.5);
+  }
+
+  &-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex-basis: calc(100% - 50px);
+    margin-right: 10px;
+    overflow: hidden;
+  }
+
+  &-leftTop {
+    //
+  }
+
+  &-title {
+    .hoverTransition(0.8);
+  }
+
+  &-statistics {
+    //
+  }
+
+  &-tags {
+    display: flex;
+    min-height: 25px;
+    overflow-x: scroll;
+    overflow-y: visible;
+
+    .hideScrollbar;
+  }
+
+  &-tag {
+    margin: 0 8px 0 0;
+  }
+
+  &-right {
+    display: flex;
+  }
+
+  &-image {
+    height: 100%;
+    width: 110px;
+    margin-right: 20px;
+    object-fit: cover;
+    object-position: center;
+    border: 2px solid black;
+  }
+
+  &-vote {
+    width: 30px;
+    margin-top: 1px;
+  }
+
+  &-rightEnd {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  &-stats {
+    font-family: @ff-din;
+    font-size: @fs-small;
+    line-height: @fh-small;
+  }
+
+  &-stat {
+    display: flex;
+    justify-content: flex-end;
+    align-items: baseline;
+    text-align: end;
+  }
+
+  &-statIcon {
+    margin-right: 3px;
+  }
+}

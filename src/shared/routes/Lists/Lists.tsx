@@ -1,40 +1,41 @@
 import React from 'react';
 
+import ListRow from 'Components/ListRow';
 import Main from 'Components/Main';
 import MainHeader from 'Components/MainHeader';
 import Sidebar from 'Components/Sidebar';
 import SidebarListLists from 'Components/SidebarListLists';
 import SidebarListTags from 'Components/SidebarListTags';
 import SidebarListUsers from 'Components/SidebarListUsers';
-import LinkRow from 'Root/src/shared/components/LinkRow';
-import { lists } from 'Tools/mockData/mockLists';
+import { ListState } from 'Modules/Lists/lists.types';
 import { tags } from 'Tools/mockData/mockTags';
 import { users } from 'Tools/mockData/mockUsers';
 import { Button, Flex, Hr } from '@antoniodcorrea/components';
 
-import './Links.less';
+import './Lists.less';
 
 interface Props {
-  linksIds: number[];
+  listsIds: number[];
+  popularLists: ListState[];
 }
 
-export const LinksUi: React.FC<Props> = ({ linksIds }) => (
-  <div className="Links">
+export const Lists: React.FC<Props> = ({ listsIds, popularLists }) => (
+  <div className="Lists">
     <Flex horizontal="between" vertical="top">
       <Sidebar>
-        <SidebarListLists title="Popular Lists" items={lists} id="PopularLists" />
+        <SidebarListLists title="Popular Lists" items={popularLists} id="PopularLists" />
         <Hr spacer />
-        <SidebarListLists title="Popular Lists" items={lists} id="PopularLists2" />
+        <SidebarListLists title="Popular Lists" items={popularLists} id="PopularLists2" />
         <Hr spacer />
-        <SidebarListLists title="Popular Lists" items={lists} id="PopularLists3" />
+        <SidebarListLists title="Popular Lists" items={popularLists} id="PopularLists3" />
       </Sidebar>
       <Main>
-        <MainHeader title="My links" />
-        {linksIds &&
-          linksIds.map((id, index) => (
+        <MainHeader title="My lists" />
+        {listsIds &&
+          listsIds.map((id, index) => (
             <React.Fragment key={id}>
               {!!index && <Hr spacer />}
-              <LinkRow id={id} />
+              <ListRow id={id} />
             </React.Fragment>
           ))}
         <Hr spacer size="big" />

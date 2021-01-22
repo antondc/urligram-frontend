@@ -1,9 +1,10 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import { Home as HomeUI } from './Home';
+import { Lists as ListsUi } from './Lists';
 
 const props = {
+  listsIds: [1, 2],
   popularLists: [
     {
       id: 3,
@@ -27,14 +28,14 @@ const props = {
   ],
 };
 
-describe('HomeUI', () => {
-  const wrapper = shallow(<HomeUI {...props} />);
+describe('ListsUi', () => {
+  const wrapper = shallow(<ListsUi {...props} />);
 
   test('component renders', () => {
     expect(wrapper.exists()).toBe(true);
   });
 
-  test('has a ".Home" wrapper', () => {
-    expect(wrapper.find('.Home')).toHaveLength(1);
+  test('has a ".Lists" wrapper', () => {
+    expect(wrapper.find('.Lists')).toHaveLength(1);
   });
 });
