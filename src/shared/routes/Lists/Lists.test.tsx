@@ -26,6 +26,7 @@ const props = {
       tags: [],
     },
   ],
+  loading: true,
 };
 
 describe('ListsUi', () => {

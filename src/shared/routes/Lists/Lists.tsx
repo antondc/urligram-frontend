@@ -11,15 +11,17 @@ import { ListState } from 'Modules/Lists/lists.types';
 import { tags } from 'Tools/mockData/mockTags';
 import { users } from 'Tools/mockData/mockUsers';
 import { Button, Flex, Hr } from '@antoniodcorrea/components';
+import { ListsSkeleton } from './ListsSkeleton';
 
 import './Lists.less';
 
 interface Props {
   listsIds: number[];
+  loading: boolean;
   popularLists: ListState[];
 }
 
-export const Lists: React.FC<Props> = ({ listsIds, popularLists }) => (
+export const Lists: React.FC<Props> = ({ listsIds, popularLists, loading }) => (
   <div className="Lists">
     <Flex horizontal="between" vertical="top">
       <Sidebar>
@@ -31,13 +33,16 @@ export const Lists: React.FC<Props> = ({ listsIds, popularLists }) => (
       </Sidebar>
       <Main>
         <MainHeader title="My lists" />
-        {listsIds &&
+        {loading ? (
+          <ListsSkeleton />
+        ) : (
           listsIds.map((id, index) => (
             <React.Fragment key={id}>
               {!!index && <Hr spacer />}
               <ListRow id={id} />
             </React.Fragment>
-          ))}
+          ))
+        )}
         <Hr spacer size="big" />
         <Flex horizontal="center">
           <Button text="Load more" />

@@ -1,24 +1,14 @@
 import React from 'react';
 
-import { ListState } from 'Modules/Lists/lists.types';
-import { A, Border, Hr, SkeletonItem, Span, Tag } from '@antoniodcorrea/components';
+import { Border, Hr, SkeletonItem, Span } from '@antoniodcorrea/components';
 
 import './ListRowSkeleton.less';
 
-interface ListRowSkeleton extends Partial<ListState> {
-  sinceTranslation: string;
+interface ListRowSkeleton {
+  id: number;
 }
 
-export const ListRowSkeleton: React.FC<ListRowSkeleton> = ({
-  id,
-  name,
-  image,
-  tags,
-  bookmarksIds,
-  members,
-  createdAt,
-  sinceTranslation,
-}) => (
+export const ListRowSkeleton: React.FC<ListRowSkeleton> = ({ id }) => (
   <Border grow className="ListRowSkeleton" data-test-id="ListRowSkeleton" key={'ListRowSkeleton-' + id}>
     <div className="ListRowSkeleton-left">
       <div className="ListRowSkeleton-leftTop">
