@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import { BookmarksUi } from './bookmarksUi';
+import { Bookmarks as BookmarksUi } from './Bookmarks';
 
 const props = {
   bookmarksIds: [1, 2, 3],

@@ -1,0 +1,107 @@
+@import '../../css/imports.less';
+
+@c: .BookmarkRowSkeleton;
+
+@{c} {
+  display: flex;
+  justify-content: space-between;
+  height: 100px;
+  padding: 10px 20px;
+
+  &-icons {
+    display: flex;
+  }
+
+  &-icon {
+    margin-right: 7px;
+
+    .skeletonItem(10px, 10px);
+  }
+
+  &-iconHover {
+    .hoverTransition(0.5);
+  }
+
+  &-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex-basis: calc(100% - 150px);
+    margin-right: 10px;
+    overflow: hidden;
+  }
+
+  &-leftTop {
+    //
+  }
+
+  &-title {
+    margin: 6px 0 2px;
+
+    .skeletonItem(12px, 100px);
+  }
+
+  &-url {
+    margin: 6px 0 6px;
+
+    .skeletonItem( @fs-micro, 100px);
+  }
+
+  &-tags {
+    display: flex;
+    overflow-x: scroll;
+    overflow-y: visible;
+
+    .hideScrollbar;
+  }
+
+  &-tag {
+    margin: 0 8px 0 0;
+
+    .skeletonItem( 25px, 50px);
+  }
+
+  &-right {
+    display: flex;
+  }
+
+  &-image {
+    margin-right: 25px;
+
+    .skeletonItem(76px, 110px, 4px);
+  }
+
+  &-vote {
+    margin-top: 1px;
+
+    .skeletonItem(16px, 25px);
+  }
+
+  &-rightEnd {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  &-stats {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    font-family: @ff-din;
+    font-size: @fs-small;
+    line-height: @fh-small;
+  }
+
+  &-stat {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 2px;
+    text-align: end;
+
+    .skeletonItem(15px, 15px);
+  }
+
+  &-statIcon {
+    margin-right: 3px;
+  }
+}

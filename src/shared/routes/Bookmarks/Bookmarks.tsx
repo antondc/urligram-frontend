@@ -11,6 +11,7 @@ import { ListState } from 'Modules/Lists/lists.types';
 import { tags } from 'Tools/mockData/mockTags';
 import { users } from 'Tools/mockData/mockUsers';
 import { Button, Fade, Flex, Hr } from '@antoniodcorrea/components';
+import { BookmarksSkeleton } from './BookmarksSkeleton';
 
 import './Bookmarks.less';
 
@@ -19,7 +20,7 @@ interface Props {
   popularLists: ListState[];
 }
 
-export const BookmarksUi: React.FC<Props> = ({ bookmarksIds, popularLists }) => (
+export const Bookmarks: React.FC<Props> = ({ bookmarksIds, popularLists }) => (
   <div className="Bookmarks">
     <Flex horizontal="between" vertical="top">
       <Sidebar>
@@ -28,13 +29,16 @@ export const BookmarksUi: React.FC<Props> = ({ bookmarksIds, popularLists }) => 
       </Sidebar>
       <Main>
         <MainHeader title="My bookmarks" />
-        {bookmarksIds &&
+        {bookmarksIds ? (
           bookmarksIds.map((id, index) => (
             <React.Fragment key={id}>
               {!!index && <Hr spacer />}
               <BookmarkRow id={id} />
             </React.Fragment>
-          ))}
+          ))
+        ) : (
+          <BookmarksSkeleton />
+        )}
         <Hr spacer size="big" />
         <Flex horizontal="center">
           <Fade mounted={!!bookmarksIds?.length} speed="fastest">

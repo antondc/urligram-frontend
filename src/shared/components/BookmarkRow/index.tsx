@@ -8,7 +8,9 @@ import { voteLink } from 'Modules/Links/actions/voteLink';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUserId';
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
+import { selectBookmarksLoading } from '../../redux/modules/Bookmarks/selectors/selectBookmarksLoading';
 import { BookmarkRow as BookmarkRowUi } from './BookmarkRow';
+import { BookmarkRowSkeleton } from './BookmarkRowSkeleton';
 
 import './BookmarkRow.less';
 
@@ -18,6 +20,7 @@ interface Props {
   voteLink: ({ vote: boolean, linkId: number, userId: string }) => void;
   userId: string;
   isLogged: boolean;
+  loading: boolean;
   switchLoginModal: () => void;
 }
 
@@ -28,6 +31,7 @@ const BookmarkRow: React.FC<Props> = ({
   isLogged,
   userId,
   switchLoginModal,
+  loading,
 }) => {
   const onVote = (vote) => {
     if (!isLogged) return switchLoginModal();
@@ -35,7 +39,9 @@ const BookmarkRow: React.FC<Props> = ({
     voteLink({ vote, linkId, userId });
   };
 
-  return (
+  return loading ? (
+    <BookmarkRowSkeleton id={id} />
+  ) : (
     <BookmarkRowUi
       id={id}
       linkId={linkId}
@@ -53,6 +59,7 @@ const mapStateToProps = createStructuredSelector({
   userId: selectSessionUserId,
   isLogged: selectSessionLoggedIn,
   bookmark: selectBookmarksById,
+  loading: selectBookmarksLoading,
 });
 
 export default connect(mapStateToProps, {

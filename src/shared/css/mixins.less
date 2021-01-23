@@ -17,3 +17,25 @@
     cursor: pointer;
   }
 }
+
+.skeletonItem(@height, @width, @borderRadius: 2px) {
+  height: @height;
+  width: @width;
+  background: @c-base;
+  animation: skeletonItemAnimation 1s ease infinite;
+  border-radius: @borderRadius;
+
+  @keyframes skeletonItemAnimation {
+    0% {
+      background-color: @c-base;
+    }
+
+    15% {
+      background-color: @c-accent;
+    }
+
+    100% {
+      background-color: @c-base;
+    }
+  }
+}

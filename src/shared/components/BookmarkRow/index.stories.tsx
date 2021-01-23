@@ -1,10 +1,13 @@
 import React from 'react';
 
+import { boolean, withKnobs } from '@storybook/addon-knobs';
 import { BookmarkRow } from './BookmarkRow';
+import { BookmarkRowSkeleton } from './BookmarkRowSkeleton';
 
 export default {
   component: BookmarkRow,
   title: 'BookmarkRow',
+  decorators: [withKnobs],
 };
 
 const noop = () => {};
@@ -30,8 +33,12 @@ const props = {
   onVote: noop,
 };
 
+const knobs = {
+  skeleton: (): boolean => boolean('Skeleton', false),
+};
+
 export const Default: React.ReactNode = () => (
   <div style={{ padding: '30px' }}>
-    <BookmarkRow {...props} />
+    {!knobs.skeleton() ? <BookmarkRow {...props} /> : <BookmarkRowSkeleton {...props} />}
   </div>
 );

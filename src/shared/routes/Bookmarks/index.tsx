@@ -9,7 +9,7 @@ import { selectBookmarksAllIds } from 'Modules/Bookmarks/selectors/selectBookmar
 import { ListState } from 'Modules/Lists/lists.types';
 import { loadPopularLists } from 'Modules/Sections/actions/loadPopularLists';
 import { selectPopularLists } from 'Modules/Sections/selectors/selectPopularLists';
-import { BookmarksUi } from './bookmarksUi';
+import { Bookmarks as BookmarksUi } from './Bookmarks';
 
 interface Props {
   bookmarks: BookmarkState[];
