@@ -9,9 +9,11 @@ import { selectCurrentGlossary } from 'Modules/Languages/selectors/selectCurrent
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
 import { selectLinksLoading } from 'Modules/Links/selectors/selectLinksLoading';
 import { selectLinksVoteLoading } from 'Modules/Links/selectors/selectLinksVoteLoading';
+import { selectListsLoading } from 'Modules/Lists/selectors/selectListsLoading';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
 import { switchUserModal } from 'Modules/Ui/actions/switchUserModal';
+import { selectUsersLoading } from 'Modules/Users/selectors/selectUsersLoading';
 import { Header as HeaderUi } from './Header';
 
 import './Header.less';
@@ -24,6 +26,8 @@ interface Props {
   linksLoading: boolean;
   linksVoteLoading: boolean;
   bookmarksVoteLoading: boolean;
+  usersLoading: boolean;
+  listsLoading: boolean;
   switchUserModal: () => void;
   switchLoginModal: () => void;
 }
@@ -38,8 +42,11 @@ const Header: React.FC<Props> = ({
   linksLoading,
   linksVoteLoading,
   bookmarksVoteLoading,
+  usersLoading,
+  listsLoading,
 }) => {
-  const loading = bookmarksLoading || linksLoading || linksVoteLoading || bookmarksVoteLoading;
+  const loading =
+    bookmarksLoading || linksLoading || linksVoteLoading || bookmarksVoteLoading || usersLoading || listsLoading;
 
   return (
     <HeaderUi
@@ -61,6 +68,8 @@ const mapStateToProps = createStructuredSelector({
   linksLoading: selectLinksLoading,
   linksVoteLoading: selectLinksVoteLoading,
   bookmarksVoteLoading: selectBookmarksVoteLoading,
+  usersLoading: selectUsersLoading,
+  listsLoading: selectListsLoading,
 });
 
 export default connect(mapStateToProps, {
