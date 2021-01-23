@@ -10,16 +10,18 @@ import { ListState } from 'Modules/Lists/lists.types';
 import LinkRow from 'Root/src/shared/components/LinkRow';
 import { tags } from 'Tools/mockData/mockTags';
 import { users } from 'Tools/mockData/mockUsers';
-import { Button, Flex, Hr } from '@antoniodcorrea/components';
+import { Button, FadeInOut, Flex, Hr } from '@antoniodcorrea/components';
+import { LinksSkeleton } from './LinksSkeleton';
 
 import './Links.less';
 
 interface Props {
   linksIds: number[];
   popularLists: ListState[];
+  loading: boolean;
 }
 
-export const Links: React.FC<Props> = ({ linksIds, popularLists }) => (
+export const Links: React.FC<Props> = ({ linksIds, popularLists, loading }) => (
   <div className="Links">
     <Flex horizontal="between" vertical="top">
       <Sidebar>
@@ -31,13 +33,19 @@ export const Links: React.FC<Props> = ({ linksIds, popularLists }) => (
       </Sidebar>
       <Main>
         <MainHeader title="My links" />
-        {linksIds &&
-          linksIds.map((id, index) => (
-            <React.Fragment key={id}>
-              {!!index && <Hr spacer />}
-              <LinkRow id={id} />
-            </React.Fragment>
-          ))}
+        <FadeInOut valueToUpdate={loading} speed="fastest">
+          {loading ? (
+            <LinksSkeleton />
+          ) : (
+            linksIds?.map((id, index) => (
+              <React.Fragment key={id}>
+                {!!index && <Hr spacer />}
+                <LinkRow id={id} />
+              </React.Fragment>
+            ))
+          )}
+        </FadeInOut>
+
         <Hr spacer size="big" />
         <Flex horizontal="center">
           <Button text="Load more" />

@@ -1,0 +1,106 @@
+@import '../../css/imports.less';
+
+@c: .LinkRowSkeleton;
+
+@{c} {
+  display: flex;
+  justify-content: space-between;
+  height: 100px;
+  padding: 10px 20px;
+
+  &-icons {
+    display: flex;
+  }
+
+  &-icon {
+    height: 10px;
+    width: 10px;
+    margin-right: 7px;
+  }
+
+  &-iconHover {
+    .hoverTransition(0.5);
+  }
+
+  &-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-basis: calc(100% - 150px);
+    margin-right: 10px;
+    overflow: hidden;
+  }
+
+  &-leftTop {
+    //
+  }
+
+  &-title {
+    height: 12px;
+    width: 100px;
+    margin: 6px 0 2px;
+  }
+
+  &-url {
+    height: @fs-micro;
+    width: 100px;
+    margin: 6px 0 6px;
+  }
+
+  &-tags {
+    display: flex;
+    overflow-x: scroll;
+    overflow-y: visible;
+
+    .hideScrollbar;
+  }
+
+  &-tag {
+    height: 25px;
+    width: 50px;
+    margin: 0 8px 0 0;
+  }
+
+  &-right {
+    display: flex;
+  }
+
+  &-image {
+    height: 76px;
+    width: 110px;
+    margin-right: 25px;
+    border-radius: 4px;
+  }
+
+  &-vote {
+    height: @fs-normal;
+    width: 25px;
+    margin-top: 1px;
+  }
+
+  &-rightEnd {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  &-stats {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    font-family: @ff-din;
+    font-size: @fs-small;
+    line-height: @fh-small;
+  }
+
+  &-stat {
+    display: flex;
+    justify-content: flex-end;
+    align-items: baseline;
+    text-align: end;
+  }
+
+  &-statIcon {
+    margin-right: 3px;
+  }
+}
