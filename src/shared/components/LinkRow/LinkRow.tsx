@@ -35,7 +35,7 @@ export const LinkRow: React.FC<LinkRow> = ({ id, title, url, tags = [], img, sta
           {title}
         </Span>
         <Hr spacer size="zero" />
-        <A href={url}>
+        <A href={url} targetBlank>
           <Span size="small">{url}</Span>
         </A>
       </div>

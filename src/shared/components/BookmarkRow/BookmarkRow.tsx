@@ -36,7 +36,7 @@ export const BookmarkRow: React.FC<BookmarkRow> = ({ id, title, url, tags = [], 
         {title}
       </Span>
       <Hr spacer size="zero" />
-      <A href={url}>
+      <A href={url} targetBlank>
         <Span size="small">{url}</Span>
       </A>
       <div className="BookmarkRow-tags">
