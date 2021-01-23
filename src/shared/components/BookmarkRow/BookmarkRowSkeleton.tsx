@@ -12,29 +12,29 @@ export const BookmarkRowSkeleton: React.FC<BookmarkRowSkeleton> = ({ id }) => (
   <Border grow className="BookmarkRowSkeleton" data-test-id="BookmarkRowSkeleton" key={id}>
     <div className="BookmarkRowSkeleton-left">
       <div className="BookmarkRowSkeleton-icons">
-        <SkeletonItem className="BookmarkRowSkeleton-icon" />
-        <SkeletonItem className="BookmarkRowSkeleton-icon" />
-        <SkeletonItem className="BookmarkRowSkeleton-icon" />
+        <SkeletonItem hollow className="BookmarkRowSkeleton-icon" />
+        <SkeletonItem hollow className="BookmarkRowSkeleton-icon" />
+        <SkeletonItem hollow className="BookmarkRowSkeleton-icon" />
       </div>
       <div className="BookmarkRowSkeleton-leftTop">
-        <SkeletonItem className="BookmarkRowSkeleton-title" />
+        <SkeletonItem hollow className="BookmarkRowSkeleton-title" />
         <Hr spacer size="zero" />
-        <SkeletonItem className="BookmarkRowSkeleton-url" />
+        <SkeletonItem hollow className="BookmarkRowSkeleton-url" />
       </div>
       <div className="BookmarkRowSkeleton-tags">
-        <SkeletonItem className="BookmarkRowSkeleton-tag" />
-        <SkeletonItem className="BookmarkRowSkeleton-tag" />
-        <SkeletonItem className="BookmarkRowSkeleton-tag" />
-        <SkeletonItem className="BookmarkRowSkeleton-tag" />
+        <SkeletonItem hollow className="BookmarkRowSkeleton-tag" />
+        <SkeletonItem hollow className="BookmarkRowSkeleton-tag" />
+        <SkeletonItem hollow className="BookmarkRowSkeleton-tag" />
+        <SkeletonItem hollow className="BookmarkRowSkeleton-tag" />
       </div>
     </div>
     <div className="BookmarkRowSkeleton-right">
-      <SkeletonItem className="BookmarkRowSkeleton-image" />
+      <SkeletonItem hollow className="BookmarkRowSkeleton-image" />
       <div className="BookmarkRowSkeleton-rightEnd">
-        <SkeletonItem className="BookmarkRowSkeleton-vote" />
+        <SkeletonItem hollow className="BookmarkRowSkeleton-vote" />
         <div className="BookmarkRowSkeleton-stats">
-          <SkeletonItem className="BookmarkRowSkeleton-stat" />
-          <SkeletonItem className="BookmarkRowSkeleton-stat" />
+          <SkeletonItem hollow className="BookmarkRowSkeleton-stat" />
+          <SkeletonItem hollow className="BookmarkRowSkeleton-stat" />
         </div>
       </div>
     </div>

@@ -13,27 +13,27 @@ export const LinkRowSkeleton: React.FC<LinkRowSkeleton> = ({ id }) => (
     <div className="LinkRowSkeleton-left">
       <div className="LinkRowSkeleton-leftTop">
         <div className="LinkRowSkeleton-icons">
-          <SkeletonItem className="LinkRowSkeleton-icon" />
-          <SkeletonItem className="LinkRowSkeleton-icon" />
-          <SkeletonItem className="LinkRowSkeleton-icon" />
+          <SkeletonItem hollow className="LinkRowSkeleton-icon" />
+          <SkeletonItem hollow className="LinkRowSkeleton-icon" />
+          <SkeletonItem hollow className="LinkRowSkeleton-icon" />
         </div>
-        <SkeletonItem className="LinkRowSkeleton-title" />
+        <SkeletonItem hollow className="LinkRowSkeleton-title" />
         <Hr spacer size="zero" />
-        <SkeletonItem className="LinkRowSkeleton-url" />
+        <SkeletonItem hollow className="LinkRowSkeleton-url" />
       </div>
       <div className="LinkRowSkeleton-leftBottom">
-        <SkeletonItem className="LinkRowSkeleton-tag" />
-        <SkeletonItem className="LinkRowSkeleton-tag" />
-        <SkeletonItem className="LinkRowSkeleton-tag" />
+        <SkeletonItem hollow className="LinkRowSkeleton-tag" />
+        <SkeletonItem hollow className="LinkRowSkeleton-tag" />
+        <SkeletonItem hollow className="LinkRowSkeleton-tag" />
       </div>
     </div>
     <div className="LinkRowSkeleton-right">
-      <SkeletonItem className="LinkRowSkeleton-image" />
+      <SkeletonItem hollow className="LinkRowSkeleton-image" />
       <div className="LinkRowSkeleton-rightEnd">
-        <SkeletonItem className="LinkRowSkeleton-vote" />
+        <SkeletonItem hollow className="LinkRowSkeleton-vote" />
         <div className="LinkRowSkeleton-stats">
-          <SkeletonItem className="LinkRowSkeleton-stat" />
-          <SkeletonItem className="LinkRowSkeleton-stat" />
+          <SkeletonItem hollow className="LinkRowSkeleton-stat" />
+          <SkeletonItem hollow className="LinkRowSkeleton-stat" />
         </div>
       </div>
     </div>
