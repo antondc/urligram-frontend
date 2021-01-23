@@ -35,7 +35,7 @@ const props = {
 };
 
 const knobs = {
-  skeleton: (): boolean => boolean('Skeleton', true),
+  skeleton: (): boolean => boolean('Skeleton', false),
 };
 
 export const Default: React.ReactNode = () => (

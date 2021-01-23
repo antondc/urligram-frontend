@@ -30,25 +30,25 @@ export const UserRow: React.FC<UserRow> = ({
         <Span bold size="small" className="UserRow-title">
           @{name}
         </Span>
-        <Hr spacer size="nano" />
-        <div className="UserRow-details">
-          <Span size="nano">
-            <A href={`users/${id}/lists`} styled frontend disabled={!ammountLists}>
-              {ammountLists} lists
-            </A>{' '}
-            ·{' '}
-            <A href={`users/${id}/bookmarks`} styled frontend disabled={!ammountBookmarks}>
-              {ammountBookmarks} bookmarks
-            </A>{' '}
-            ·{' '}
-            <A href={`users/${id}`} styled frontend disabled={!connections}>
-              {connections} connections
-            </A>{' '}
-            · {sinceTranslation?.toLocaleLowerCase()} {createdAt}
-          </Span>
-        </div>
+        <Hr spacer size="micro" />
+        <Hr spacer size="micro" />
+        <Hr spacer size="zero" />
+        <Span size="nano">
+          <A href={`users/${id}/lists`} styled frontend disabled={!ammountLists}>
+            {ammountLists} lists
+          </A>
+          <span className="UserRow-dot">·</span>
+          <A href={`users/${id}/bookmarks`} styled frontend disabled={!ammountBookmarks}>
+            {ammountBookmarks} bookmarks
+          </A>
+          <span className="UserRow-dot">·</span>
+          <A href={`users/${id}`} styled frontend disabled={!connections}>
+            {connections} connections
+          </A>
+          {/* <span className="UserRow-dot">·</span> {sinceTranslation?.toLocaleLowerCase()} {createdAt} */}
+        </Span>
       </div>
-      <div className="UserRow-tags">
+      <div className="UserRow-leftBottom">
         {tags?.map((item) => (
           <A href={`tags/${item.name}`} key={item.id} styled={false} frontend>
             <Tag className="UserRow-tag" size="small">

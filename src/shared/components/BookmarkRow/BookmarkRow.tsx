@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
-import { A, Bookmark, Border, Edit, Private, Span, Tag, Vote } from '@antoniodcorrea/components';
+import { A, Bookmark, Border, Edit, Hr, Private, Span, Tag, Vote } from '@antoniodcorrea/components';
 
 import './BookmarkRow.less';
 
@@ -12,33 +12,33 @@ interface BookmarkRow extends BookmarkState {
 export const BookmarkRow: React.FC<BookmarkRow> = ({ id, title, url, tags = [], img, statistics, onVote }) => (
   <Border grow className="BookmarkRow" data-test-id="BookmarkRow" key={id}>
     <div className="BookmarkRow-left">
-      <div className="BookmarkRow-icons">
-        <Bookmark size="micro" className="BookmarkRow-icon" />
-        <Private
-          size="micro"
-          className="BookmarkRow-icon BookmarkRow-iconHover"
-          onClick={() => {
-            alert('Private');
-          }}
-        />
-        <Edit
-          size="micro"
-          className="BookmarkRow-icon BookmarkRow-iconHover"
-          onClick={() => {
-            alert('Edit');
-          }}
-        />
-      </div>
       <div className="BookmarkRow-leftTop">
-        <Span bold className="BookmarkRow-title">
-          {title}
-        </Span>
-        <div className="BookmarkRow-url">
-          <A href={url}>
-            <Span size="small">{url}</Span>
-          </A>
+        <div className="BookmarkRow-icons">
+          <Bookmark size="micro" className="BookmarkRow-icon" />
+          <Private
+            size="micro"
+            className="BookmarkRow-icon BookmarkRow-iconHover"
+            onClick={() => {
+              alert('Private');
+            }}
+          />
+          <Edit
+            size="micro"
+            className="BookmarkRow-icon BookmarkRow-iconHover"
+            onClick={() => {
+              alert('Edit');
+            }}
+          />
         </div>
       </div>
+      <Hr spacer size="micro" />
+      <Span bold className="BookmarkRow-title">
+        {title}
+      </Span>
+      <Hr spacer size="zero" />
+      <A href={url}>
+        <Span size="small">{url}</Span>
+      </A>
       <div className="BookmarkRow-tags">
         {tags?.map((item) => (
           <A href={`/tags/${item.name}`} key={item.id} styled={false} frontend>

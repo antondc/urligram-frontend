@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Border, SkeletonItem } from '@antoniodcorrea/components';
+import { Border, Hr, SkeletonItem } from '@antoniodcorrea/components';
 
 import './BookmarkRowSkeleton.less';
 
@@ -18,9 +18,11 @@ export const BookmarkRowSkeleton: React.FC<BookmarkRowSkeleton> = ({ id }) => (
       </div>
       <div className="BookmarkRowSkeleton-leftTop">
         <SkeletonItem className="BookmarkRowSkeleton-title" />
+        <Hr spacer size="zero" />
         <SkeletonItem className="BookmarkRowSkeleton-url" />
       </div>
       <div className="BookmarkRowSkeleton-tags">
+        <SkeletonItem className="BookmarkRowSkeleton-tag" />
         <SkeletonItem className="BookmarkRowSkeleton-tag" />
         <SkeletonItem className="BookmarkRowSkeleton-tag" />
         <SkeletonItem className="BookmarkRowSkeleton-tag" />

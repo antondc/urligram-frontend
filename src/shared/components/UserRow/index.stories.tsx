@@ -1,15 +1,19 @@
 import React from 'react';
 
+import { FadeInOut, Hr } from '@antoniodcorrea/components';
+import { boolean, withKnobs } from '@storybook/addon-knobs';
 import { UserRow } from './UserRow';
+import { UserRowSkeleton } from './UserRowSkeleton';
 
 export default {
   component: UserRow,
   title: 'UserRow',
+  decorators: [withKnobs],
 };
 
 const props = {
   id: 'string1',
-  name: 'User One',
+  name: 'Emile_879',
   image: 'https://cdn-images-1.medium.com/max/1200/1*NpUUls7kjn9JhO4ChjGV7w.png',
   level: 'admin',
   email: 'hello@example.com',
@@ -51,4 +55,46 @@ const props = {
   ],
 };
 
-export const Default: React.ReactNode = () => <div style={{ padding: '30px' }}>{<UserRow {...props} />}</div>;
+const knobs = {
+  skeleton: (): boolean => boolean('Skeleton', false),
+};
+
+export const Default: React.ReactNode = () => (
+  <div style={{ padding: '30px' }}>
+    <FadeInOut valueToUpdate={knobs.skeleton()} speed="fastest">
+      {!knobs.skeleton() ? (
+        <>
+          <UserRow {...props} />
+          <Hr size="small" spacer />
+          <UserRow {...props} />
+          <Hr size="small" spacer />
+          <UserRow {...props} />
+          <Hr size="small" spacer />
+          <UserRow {...props} />
+          <Hr size="small" spacer />
+          <UserRow {...props} />
+          <Hr size="small" spacer />
+          <UserRow {...props} />
+          <Hr size="small" spacer />
+          <UserRow {...props} />
+        </>
+      ) : (
+        <>
+          <UserRowSkeleton {...props} />
+          <Hr size="small" spacer />
+          <UserRowSkeleton {...props} />
+          <Hr size="small" spacer />
+          <UserRowSkeleton {...props} />
+          <Hr size="small" spacer />
+          <UserRowSkeleton {...props} />
+          <Hr size="small" spacer />
+          <UserRowSkeleton {...props} />
+          <Hr size="small" spacer />
+          <UserRowSkeleton {...props} />
+          <Hr size="small" spacer />
+          <UserRowSkeleton {...props} />
+        </>
+      )}
+    </FadeInOut>
+  </div>
+);

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Border, SkeletonItem } from '@antoniodcorrea/components';
+import { Border, Hr, SkeletonItem } from '@antoniodcorrea/components';
 
 import './LinkRowSkeleton.less';
 
@@ -11,28 +11,29 @@ interface LinkRowSkeleton {
 export const LinkRowSkeleton: React.FC<LinkRowSkeleton> = ({ id }) => (
   <Border grow className="LinkRowSkeleton" data-test-id="LinkRowSkeleton" key={id}>
     <div className="LinkRowSkeleton-left">
-      <div className="LinkRowSkeleton-icons">
-        <SkeletonItem className="BookmarkRowSkeleton-icon" />
-        <SkeletonItem className="BookmarkRowSkeleton-icon" />
-        <SkeletonItem className="BookmarkRowSkeleton-icon" />
-      </div>
       <div className="LinkRowSkeleton-leftTop">
-        <SkeletonItem className="BookmarkRowSkeleton-title" />
-        <SkeletonItem className="BookmarkRowSkeleton-url" />
+        <div className="LinkRowSkeleton-icons">
+          <SkeletonItem className="LinkRowSkeleton-icon" />
+          <SkeletonItem className="LinkRowSkeleton-icon" />
+          <SkeletonItem className="LinkRowSkeleton-icon" />
+        </div>
+        <SkeletonItem className="LinkRowSkeleton-title" />
+        <Hr spacer size="zero" />
+        <SkeletonItem className="LinkRowSkeleton-url" />
       </div>
-      <div className="LinkRowSkeleton-tags">
-        <SkeletonItem className="BookmarkRowSkeleton-tag" />
-        <SkeletonItem className="BookmarkRowSkeleton-tag" />
-        <SkeletonItem className="BookmarkRowSkeleton-tag" />
+      <div className="LinkRowSkeleton-leftBottom">
+        <SkeletonItem className="LinkRowSkeleton-tag" />
+        <SkeletonItem className="LinkRowSkeleton-tag" />
+        <SkeletonItem className="LinkRowSkeleton-tag" />
       </div>
     </div>
     <div className="LinkRowSkeleton-right">
-      <SkeletonItem className="BookmarkRowSkeleton-image" />
+      <SkeletonItem className="LinkRowSkeleton-image" />
       <div className="LinkRowSkeleton-rightEnd">
-        <SkeletonItem className="BookmarkRowSkeleton-vote" />
+        <SkeletonItem className="LinkRowSkeleton-vote" />
         <div className="LinkRowSkeleton-stats">
-          <SkeletonItem className="BookmarkRowSkeleton-stat" />
-          <SkeletonItem className="BookmarkRowSkeleton-stat" />
+          <SkeletonItem className="LinkRowSkeleton-stat" />
+          <SkeletonItem className="LinkRowSkeleton-stat" />
         </div>
       </div>
     </div>

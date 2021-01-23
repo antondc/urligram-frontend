@@ -1,6 +1,6 @@
 @import '../../css/imports.less';
 
-@c: .UserRow;
+@c: .ListRowSkeleton;
 
 @{c} {
   display: flex;
@@ -14,6 +14,8 @@
   }
 
   &-icon {
+    height: 10px;
+    width: 10px;
     margin-right: 7px;
   }
 
@@ -36,11 +38,17 @@
     justify-content: flex-start;
   }
 
-  &-dot {
-    margin: 0 10px;
+  &-title {
+    width: 300px;
+    line-height: @fs-normal;
+    .hoverTransition(0.8);
   }
 
-  &-leftBottom {
+  &-statistics {
+    //
+  }
+
+  &-tags {
     display: flex;
     min-height: 25px;
     overflow-x: scroll;
@@ -50,6 +58,8 @@
   }
 
   &-tag {
+    height: 25px;
+    width: 50px;
     margin: 0 8px 0 0;
   }
 
@@ -58,12 +68,17 @@
   }
 
   &-image {
-    height: 30px;
-    width: 30px;
+    height: 100%;
+    width: 110px;
+    margin-right: 20px;
     object-fit: cover;
     object-position: center;
-    border: 1px solid black;
-    border-radius: 50%;
+    border: 2px solid black;
+  }
+
+  &-vote {
+    width: 30px;
+    margin-top: 1px;
   }
 
   &-rightEnd {
@@ -81,7 +96,9 @@
   &-stat {
     display: flex;
     justify-content: flex-end;
-    align-items: baseline;
+    height: @fs-normal;
+    width: @fs-normal;
+    margin-bottom: 2px;
     text-align: end;
   }
 

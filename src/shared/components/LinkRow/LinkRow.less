@@ -30,10 +30,13 @@
   }
 
   &-leftTop {
-    //
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
   }
 
   &-title {
+    line-height: @fs-normal;
     .hoverTransition(0.8);
   }
 
@@ -45,7 +48,7 @@
     text-overflow: ellipsis;
   }
 
-  &-tags {
+  &-leftBottom {
     display: flex;
     overflow-x: scroll;
     overflow-y: visible;
