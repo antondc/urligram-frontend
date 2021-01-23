@@ -35,18 +35,6 @@ export const Header: React.FC<Props> = ({
         </A>
       </H3>
       <nav className="Header-navigation">
-        <A className="Header-link" href={'/' + currentLanguageSlug + '/'} frontend>
-          <H4>{currentGlossary.tags}</H4>
-        </A>
-        <span className="Header-bar">|</span>
-        <A className="Header-link" href={'/' + currentLanguageSlug + '/login'} frontend>
-          <H4>{currentGlossary.trending}</H4>
-        </A>
-        <span className="Header-bar">|</span>
-        <A className="Header-link" href={'/' + currentLanguageSlug + '/control'} frontend>
-          <H4>{currentGlossary.control}</H4>
-        </A>
-        <span className="Header-bar">|</span>
         <A className="Header-link" href={'/' + currentLanguageSlug + '/bookmarks?sort=-members&page[size]=10'} frontend>
           <H4>{currentGlossary.bookmarks}</H4>
         </A>

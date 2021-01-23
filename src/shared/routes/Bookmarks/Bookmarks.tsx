@@ -10,7 +10,7 @@ import SidebarListUsers from 'Components/SidebarListUsers';
 import { ListState } from 'Modules/Lists/lists.types';
 import { tags } from 'Tools/mockData/mockTags';
 import { users } from 'Tools/mockData/mockUsers';
-import { Button, Fade, FadeInOut, Flex, Hr } from '@antoniodcorrea/components';
+import { Button, Fade, Flex, Hr } from '@antoniodcorrea/components';
 import { BookmarksSkeleton } from './BookmarksSkeleton';
 
 import './Bookmarks.less';
@@ -30,18 +30,16 @@ export const Bookmarks: React.FC<Props> = ({ bookmarksIds, popularLists, loading
       </Sidebar>
       <Main>
         <MainHeader title="My bookmarks" />
-        <FadeInOut valueToUpdate={loading} speed="fastest">
-          {loading ? (
-            <BookmarksSkeleton />
-          ) : (
-            bookmarksIds?.map((id, index) => (
-              <React.Fragment key={id}>
-                {!!index && <Hr spacer />}
-                <BookmarkRow id={id} />
-              </React.Fragment>
-            ))
-          )}
-        </FadeInOut>
+        {loading ? (
+          <BookmarksSkeleton />
+        ) : (
+          bookmarksIds?.map((id, index) => (
+            <React.Fragment key={id}>
+              {!!index && <Hr spacer />}
+              <BookmarkRow id={id} />
+            </React.Fragment>
+          ))
+        )}
         <Hr spacer size="big" />
         <Flex horizontal="center">
           <Fade mounted={!!bookmarksIds?.length} speed="fastest">

@@ -10,7 +10,7 @@ import { ListState } from 'Modules/Lists/lists.types';
 import LinkRow from 'Root/src/shared/components/LinkRow';
 import { tags } from 'Tools/mockData/mockTags';
 import { users } from 'Tools/mockData/mockUsers';
-import { Button, FadeInOut, Flex, Hr } from '@antoniodcorrea/components';
+import { Button, Flex, Hr } from '@antoniodcorrea/components';
 import { LinksSkeleton } from './LinksSkeleton';
 
 import './Links.less';
@@ -33,19 +33,16 @@ export const Links: React.FC<Props> = ({ linksIds, popularLists, loading }) => (
       </Sidebar>
       <Main>
         <MainHeader title="My links" />
-        <FadeInOut valueToUpdate={loading} speed="fastest">
-          {loading ? (
-            <LinksSkeleton />
-          ) : (
-            linksIds?.map((id, index) => (
-              <React.Fragment key={id}>
-                {!!index && <Hr spacer />}
-                <LinkRow id={id} />
-              </React.Fragment>
-            ))
-          )}
-        </FadeInOut>
-
+        {loading ? (
+          <LinksSkeleton />
+        ) : (
+          linksIds?.map((id, index) => (
+            <React.Fragment key={id}>
+              {!!index && <Hr spacer />}
+              <LinkRow id={id} />
+            </React.Fragment>
+          ))
+        )}
         <Hr spacer size="big" />
         <Flex horizontal="center">
           <Button text="Load more" />
