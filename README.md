@@ -38,6 +38,17 @@ Hot module reloading with `webpack-hot-middleware` and `webpack-dev-middleware.
 
 ## Docs
 
+### Pre-commit tasks
+
+Add to package.json
+
+        "husky": {
+          "hooks": {
+            "pre-commit": "npm run test:precommit",
+            "pre-push": "npm run test:precommit"
+          }
+        },
+
 ### Cookies
 
 Cookies are accessed from backend only thanks to HttpOnly.

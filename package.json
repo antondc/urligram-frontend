@@ -140,11 +140,5 @@
     "redux-thunk": "^2.3.0",
     "serialize-javascript": "^3.0.0"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run test:precommit",
-      "pre-push": "npm run test:precommit"
-    }
-  },
   "license": "ISC"
 }
