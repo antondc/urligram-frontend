@@ -42,7 +42,6 @@ export const Bookmarks: React.FC<Props> = ({ bookmarksIds, popularLists, loading
             ))
           )}
         </FadeInOut>
-
         <Hr spacer size="big" />
         <Flex horizontal="center">
           <Fade mounted={!!bookmarksIds?.length} speed="fastest">

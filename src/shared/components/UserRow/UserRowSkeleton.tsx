@@ -1,29 +1,14 @@
 import React from 'react';
 
-import { UserState } from 'Modules/Users/users.types';
-import { A, Border, Hr, SkeletonItem, Span, Tag } from '@antoniodcorrea/components';
+import { Border, Hr, SkeletonItem, Span } from '@antoniodcorrea/components';
 
 import './UserRowSkeleton.less';
 
-interface UserRowSkeleton extends UserState {
+interface UserRowSkeleton {
   id: string;
-  connections: number;
-  ammountLists: number;
-  ammountBookmarks: number;
-  sinceTranslation: string;
 }
 
-export const UserRowSkeleton: React.FC<UserRowSkeleton> = ({
-  id,
-  name,
-  image,
-  tags,
-  createdAt,
-  connections,
-  ammountLists,
-  ammountBookmarks,
-  sinceTranslation,
-}) => (
+export const UserRowSkeleton: React.FC<UserRowSkeleton> = ({ id }) => (
   <Border grow className="UserRowSkeleton" data-test-id="UserRowSkeleton" key={'UserRowSkeleton-' + id}>
     <div className="UserRowSkeleton-left">
       <div className="UserRowSkeleton-leftTop">
