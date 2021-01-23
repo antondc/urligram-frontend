@@ -27,9 +27,11 @@ export const UserRow: React.FC<UserRow> = ({
   <Border grow className="UserRow" data-test-id="UserRow" key={'UserRow-' + id}>
     <div className="UserRow-left">
       <div className="UserRow-leftTop">
-        <Span bold size="small" className="UserRow-title">
-          @{name}
-        </Span>
+        <A href={`users/${id}`} styled frontend>
+          <Span bold size="small" className="UserRow-title">
+            @{name}
+          </Span>
+        </A>
         <Hr spacer size="micro" />
         <Hr spacer size="micro" />
         <Hr spacer size="zero" />
@@ -45,7 +47,7 @@ export const UserRow: React.FC<UserRow> = ({
           <A href={`users/${id}`} styled frontend disabled={!connections}>
             {connections} connections
           </A>
-          {/* <span className="UserRow-dot">·</span> {sinceTranslation?.toLocaleLowerCase()} {createdAt} */}
+          <span className="UserRow-dot">·</span> {sinceTranslation?.toLocaleLowerCase()} {createdAt}
         </Span>
       </div>
       <div className="UserRow-leftBottom">
