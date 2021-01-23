@@ -23,7 +23,7 @@ interface Props {
 
 const BookmarkRow: React.FC<Props> = ({
   id,
-  bookmark: { linkId, title, url, tags = [], img, statistics },
+  bookmark: { linkId, title, url, tags = [], img, statistics } = {},
   voteLink,
   isLogged,
   userId,

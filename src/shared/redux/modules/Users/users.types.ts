@@ -1,7 +1,7 @@
-import { ListState } from '../Lists/lists.types';
-
 export const LOAD_USERS_STARTED = 'LOAD_USERS_STARTED';
 export const LOAD_USERS_SUCEEDED = 'LOAD_USERS_SUCEEDED';
+export const USER_LOAD_STARTED = 'USER_LOAD_STARTED';
+export const USER_LOAD_SUCEEDED = 'LOAD_USER_SUCEEDED';
 
 export interface UserState {
   id: string;
@@ -58,4 +58,20 @@ export interface ReceiveUsersResponse {
   data: ReceiveUserItem[];
 }
 
-export type UsersActionsTypes = RequestUsersAction | ReceiveUsersAction;
+export interface ReceiveUserResponse {
+  data: ReceiveUserItem;
+}
+
+interface UserRequestAction {
+  type: typeof USER_LOAD_STARTED;
+  data: {
+    loading: true;
+  };
+}
+
+interface UserReceiveAction {
+  type: typeof USER_LOAD_SUCEEDED;
+  data: UsersState;
+}
+
+export type UsersActionsTypes = RequestUsersAction | ReceiveUsersAction | UserRequestAction | UserReceiveAction;

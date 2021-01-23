@@ -92,6 +92,17 @@ app.use(function (err: any, req: any, res: any, next: any) {
   next(err);
 });
 
+// error handler
+app.use((err: any, req: any, res: any, next: any) => {
+  if (err) {
+    res.status(500);
+
+    return res.render('error', { error: err });
+  }
+
+  return next(err);
+});
+
 // Launching app
 export default app;
 

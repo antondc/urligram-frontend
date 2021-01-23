@@ -7,10 +7,14 @@ import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFr
 import { receiveBookmarks } from './receiveBookmarks';
 import { requestBookmarks } from './requestBookmarks';
 
-export const loadBookmarks = (): ThunkAction<any, any, any, Action> => async (dispatch: Dispatch) => {
+export const loadBookmarksByUserId = (userId: string): ThunkAction<any, any, any, Action> => async (
+  dispatch: Dispatch
+) => {
   dispatch(requestBookmarks());
 
-  const { data }: ReceiveBookmarksResponse = await HttpClient.get('/bookmarks' + window.location.search);
+  const { data }: ReceiveBookmarksResponse = await HttpClient.get(
+    '/users/' + userId + '/bookmarks' + window.location.search
+  );
 
   const bookmarksByKey = {
     byKey: serializerFromArrayToByKey<ReceiveBookmarkItem, BookmarkState>({

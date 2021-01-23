@@ -3,6 +3,7 @@ import omit from 'lodash/omit';
 import { initialBookmarksLoader } from 'Modules/Bookmarks/bookmarks.loader';
 import { initialLinksLoader } from 'Modules/Links/links.loader';
 import { initialPopularListsLoader } from 'Modules/Sections/sections.loader';
+import { initialUserLoader } from 'Modules/Users/user.loader';
 import { initialUsersLoader } from 'Modules/Users/users.loader';
 import { RequestParameters } from 'Root/src/server/routes/allRoutes';
 import { initialListsLoader } from '../redux/modules/Lists/lists.loader';
@@ -31,6 +32,16 @@ const Routes: RoutesInterface = {
     hasHeader: false,
     hasFooter: false,
     loadInitialData: [initialBookmarksLoader, initialPopularListsLoader],
+  },
+
+  User: {
+    name: 'User',
+    path: '/:lang([a-z]{2})?/users/:userId',
+    exact: true,
+    auth: false,
+    hasHeader: false,
+    hasFooter: false,
+    loadInitialData: [initialUserLoader],
   },
 
   Users: {
