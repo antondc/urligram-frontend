@@ -18,7 +18,7 @@ const SidebarListLists: React.FC<Props> = ({ id, title, items }) => (
     <H4>{title}</H4>
     <Hr spacer size="small" />
     <dl className="SidebarListLists-lists">
-      {items.length &&
+      {items?.length &&
         items.map(({ id, name, members }, index) => (
           <React.Fragment key={id}>
             {!!index && <Hr spacer size="micro" />}
@@ -27,7 +27,7 @@ const SidebarListLists: React.FC<Props> = ({ id, title, items }) => (
                 <Span bold>+ {name}</Span>
               </dl>
               <dd id={id + '-' + index} className="SidebarListLists-listDescription">
-                {members?.length && members.length} items
+                {members?.length && members?.length} items
               </dd>
               <Tooltip parentElementId={id + '-' + index} content="This is something" />
             </div>
