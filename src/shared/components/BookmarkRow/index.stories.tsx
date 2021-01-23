@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { FadeInOut, Hr } from '@antoniodcorrea/components';
 import { boolean, withKnobs } from '@storybook/addon-knobs';
 import { BookmarkRow } from './BookmarkRow';
 import { BookmarkRowSkeleton } from './BookmarkRowSkeleton';
@@ -39,6 +40,32 @@ const knobs = {
 
 export const Default: React.ReactNode = () => (
   <div style={{ padding: '30px' }}>
-    {!knobs.skeleton() ? <BookmarkRow {...props} /> : <BookmarkRowSkeleton {...props} />}
+    <FadeInOut valueToUpdate={knobs.skeleton()} speed="fastest">
+      {!knobs.skeleton() ? (
+        <>
+          <BookmarkRow {...props} />
+          <Hr size="small" spacer />
+          <BookmarkRow {...props} />
+          <Hr size="small" spacer />
+          <BookmarkRow {...props} />
+          <Hr size="small" spacer />
+          <BookmarkRow {...props} />
+          <Hr size="small" spacer />
+          <BookmarkRow {...props} />
+        </>
+      ) : (
+        <>
+          <BookmarkRowSkeleton {...props} />
+          <Hr size="small" spacer />
+          <BookmarkRowSkeleton {...props} />
+          <Hr size="small" spacer />
+          <BookmarkRowSkeleton {...props} />
+          <Hr size="small" spacer />
+          <BookmarkRowSkeleton {...props} />
+          <Hr size="small" spacer />
+          <BookmarkRowSkeleton {...props} />
+        </>
+      )}
+    </FadeInOut>
   </div>
 );
