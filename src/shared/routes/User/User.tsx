@@ -5,12 +5,7 @@ import Main from 'Components/Main';
 import MainHeader from 'Components/MainHeader';
 import Sidebar from 'Components/Sidebar';
 import SidebarListLists from 'Components/SidebarListLists';
-import SidebarListTags from 'Components/SidebarListTags';
-import SidebarListUsers from 'Components/SidebarListUsers';
-import UserRow from 'Components/UserRow';
 import { ListState } from 'Modules/Lists/lists.types';
-import { tags } from 'Tools/mockData/mockTags';
-import { users } from 'Tools/mockData/mockUsers';
 import { Button, Fade, Flex, Hr } from '@antoniodcorrea/components';
 import { UserSkeleton } from './UserSkeleton';
 

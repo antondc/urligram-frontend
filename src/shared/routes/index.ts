@@ -41,7 +41,7 @@ const Routes: RoutesInterface = {
     auth: false,
     hasHeader: false,
     hasFooter: false,
-    loadInitialData: [initialUserLoader],
+    loadInitialData: [initialUserLoader, initialPopularListsLoader],
   },
 
   Users: {

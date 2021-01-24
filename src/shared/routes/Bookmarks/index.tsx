@@ -5,7 +5,7 @@ import { createStructuredSelector } from 'reselect';
 import { loadBookmarks } from 'Modules/Bookmarks/actions/loadBookmarks';
 import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
 import { selectBookmarksAll } from 'Modules/Bookmarks/selectors/selectBookmarksAll';
-import { selectBookmarksAllIds } from 'Modules/Bookmarks/selectors/selectBookmarksAllIds';
+import { selectBookmarksCurrentIds } from 'Modules/Bookmarks/selectors/selectBookmarksCurrentIds';
 import { ListState } from 'Modules/Lists/lists.types';
 import { loadPopularLists } from 'Modules/Sections/actions/loadPopularLists';
 import { selectPopularLists } from 'Modules/Sections/selectors/selectPopularLists';
@@ -37,7 +37,7 @@ class Home extends React.Component<Props> {
 const mapStateToProps = createStructuredSelector({
   bookmarks: selectBookmarksAll,
   popularLists: selectPopularLists,
-  bookmarksIds: selectBookmarksAllIds,
+  bookmarksIds: selectBookmarksCurrentIds,
   loading: selectBookmarksLoading,
 });
 
