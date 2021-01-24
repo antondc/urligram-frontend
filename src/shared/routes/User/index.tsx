@@ -1,49 +1,31 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { RouteComponentProps } from 'react-router-dom';
-import { createStructuredSelector } from 'reselect';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { loadBookmarksByUserId } from 'Modules/Bookmarks/actions/loadBookmarksByUserId';
 import { ListState } from 'Modules/Lists/lists.types';
 import { userLoad } from 'Modules/Users/actions/userLoad';
 import { selectCurrentRouteParamUserId } from '../../redux/modules/Routes/selectors/selectCurrentRouteParamUserId';
 import { selectUserBookmarkIds } from '../../redux/modules/Users/selectors/selectUserBookmarkIds';
+import { selectUsersLoading } from '../../redux/modules/Users/selectors/selectUsersLoading';
 import { User as UserUi } from './User';
 
-interface RouteInfo {
-  userId: string;
-}
-
-interface Props extends RouteComponentProps<RouteInfo> {
-  bookmarksIds: number[];
+interface Props {
   popularLists: ListState[];
-  loading: boolean;
   userId: string;
-  userLoad: (userId: string) => void;
-  loadBookmarksByUserId: (userId: string) => void;
 }
 
-class User extends React.Component<Props> {
-  componentDidMount = () => {
-    const { userId } = this.props;
+const User: React.FC<Props> = ({ popularLists }) => {
+  const dispatch = useDispatch();
+  const userId = useSelector(selectCurrentRouteParamUserId);
+  const loading = useSelector(selectUsersLoading);
+  const bookmarksIds = useSelector((state) => selectUserBookmarkIds(state, { userId }));
 
-    this.props.userLoad(userId);
-    this.props.loadBookmarksByUserId(userId);
-  };
+  useEffect(() => {
+    dispatch(userLoad(userId));
+    dispatch(loadBookmarksByUserId(userId));
+  }, [userId]);
 
-  render = () => {
-    const { bookmarksIds, popularLists, loading } = this.props;
+  return <UserUi bookmarksIds={bookmarksIds} popularLists={popularLists} loading={loading} />;
+};
 
-    return <UserUi bookmarksIds={bookmarksIds} popularLists={popularLists} loading={loading} />;
-  };
-}
-
-const mapStateToProps = createStructuredSelector({
-  userId: selectCurrentRouteParamUserId,
-  bookmarksIds: selectUserBookmarkIds,
-});
-
-export default connect(mapStateToProps, {
-  userLoad,
-  loadBookmarksByUserId,
-})(User);
+export default User;
