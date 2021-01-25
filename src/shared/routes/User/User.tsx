@@ -7,6 +7,7 @@ import Sidebar from 'Components/Sidebar';
 import SidebarListLists from 'Components/SidebarListLists';
 import { ListState } from 'Modules/Lists/lists.types';
 import { Button, Fade, Flex, Hr } from '@antoniodcorrea/components';
+import SidebarBlock from '../../components/SidebarBlock';
 import { UserSkeleton } from './UserSkeleton';
 
 import './User.less';
@@ -15,13 +16,16 @@ interface Props {
   bookmarksIds: number[];
   popularLists: ListState[];
   loading: boolean;
+  popularListLoading: boolean;
 }
 
-export const User: React.FC<Props> = ({ bookmarksIds, popularLists, loading }) => (
+export const User: React.FC<Props> = ({ bookmarksIds, popularLists, loading, popularListLoading }) => (
   <div className="User">
     <Flex horizontal="between" vertical="top">
       <Sidebar>
-        <SidebarListLists title="Popular Lists" items={popularLists} id="PopularLists" />
+        <SidebarBlock title="Popular lists" loading={popularListLoading}>
+          <SidebarListLists items={popularLists} />
+        </SidebarBlock>
         <Hr spacer />
       </Sidebar>
       <Main>
@@ -44,7 +48,7 @@ export const User: React.FC<Props> = ({ bookmarksIds, popularLists, loading }) =
         </Flex>
       </Main>
       <Sidebar>
-        <SidebarListLists title="Popular Lists" items={popularLists} id="PopularLists" />
+        {/* <SidebarListLists title="Popular Lists" items={popularLists} id="PopularLists" /> */}
         <Hr spacer />
       </Sidebar>
     </Flex>

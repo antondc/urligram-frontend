@@ -3,6 +3,7 @@ import React from 'react';
 import Main from 'Components/Main';
 import MainHeader from 'Components/MainHeader';
 import Sidebar from 'Components/Sidebar';
+import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListLists from 'Components/SidebarListLists';
 import SidebarListTags from 'Components/SidebarListTags';
 import SidebarListUsers from 'Components/SidebarListUsers';
@@ -18,15 +19,17 @@ import './Users.less';
 interface Props {
   usersIds: string[];
   popularLists: ListState[];
+  popularListLoading: boolean;
   loading: boolean;
 }
 
-export const Users: React.FC<Props> = ({ usersIds, popularLists, loading }) => (
+export const Users: React.FC<Props> = ({ usersIds, popularLists, loading, popularListLoading }) => (
   <div className="Users">
     <Flex horizontal="between" vertical="top">
       <Sidebar>
-        <SidebarListLists title="Popular Lists" items={popularLists} id="PopularLists" />
-        <Hr spacer />
+        <SidebarBlock title="Popular lists" loading={popularListLoading}>
+          <SidebarListLists items={popularLists} />
+        </SidebarBlock>
       </Sidebar>
       <Main>
         <MainHeader title="My users" />

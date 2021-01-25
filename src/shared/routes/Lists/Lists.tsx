@@ -25,11 +25,11 @@ export const Lists: React.FC<Props> = ({ listsIds, popularLists, loading }) => (
   <div className="Lists">
     <Flex horizontal="between" vertical="top">
       <Sidebar>
-        <SidebarListLists title="Popular Lists" items={popularLists} id="PopularLists" />
+        {/* <SidebarListLists title="Popular Lists" items={popularLists} id="PopularLists" />
         <Hr spacer />
         <SidebarListLists title="Popular Lists" items={popularLists} id="PopularLists2" />
         <Hr spacer />
-        <SidebarListLists title="Popular Lists" items={popularLists} id="PopularLists3" />
+        <SidebarListLists title="Popular Lists" items={popularLists} id="PopularLists3" /> */}
       </Sidebar>
       <Main>
         <MainHeader title="My lists" />

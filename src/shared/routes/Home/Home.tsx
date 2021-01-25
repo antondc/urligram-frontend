@@ -20,11 +20,11 @@ export const Home: React.FC<Props> = ({ popularLists }) => (
   <div className="Home">
     <Flex horizontal="between" vertical="top">
       <Sidebar>
-        <SidebarListLists title="Popular Lists" items={popularLists} id="PopularLists" />
+        {/* <SidebarListLists title="Popular Lists" items={popularLists} id="PopularLists" />
         <Hr spacer />
         <SidebarListLists title="Popular Lists" items={popularLists} id="PopularLists2" />
         <Hr spacer />
-        <SidebarListLists title="Popular Lists" items={popularLists} id="PopularLists3" />
+        <SidebarListLists title="Popular Lists" items={popularLists} id="PopularLists3" /> */}
       </Sidebar>
       <Main>
         <Border>Home</Border>

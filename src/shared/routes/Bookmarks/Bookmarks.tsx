@@ -25,7 +25,7 @@ export const Bookmarks: React.FC<Props> = ({ bookmarksIds, popularLists, loading
   <div className="Bookmarks">
     <Flex horizontal="between" vertical="top">
       <Sidebar>
-        <SidebarListLists title="Popular Lists" items={popularLists} id="PopularLists" />
+        {/* <SidebarListLists title="Popular Lists" items={popularLists} id="PopularLists" /> */}
         <Hr spacer />
       </Sidebar>
       <Main>

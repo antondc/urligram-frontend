@@ -78,7 +78,7 @@ class Layout extends React.Component<Props> {
 
     return (
       <div className="Layout">
-        <Fade mounted={mounted} unmountOnExit={false} speed="fast">
+        <Fade mounted={mounted} unmountOnExit={false} speed="fast" appear>
           <Background className="Layout-background" />
           <LayoutContent>
             <div className="Layout-top">
@@ -91,17 +91,17 @@ class Layout extends React.Component<Props> {
             </div>
             <LayoutHelper />
             <Footer />
-            <Fade mounted={userModalMounted} position="absolute">
+            <Fade mounted={userModalMounted} position="absolute" appear>
               <UserModal />
             </Fade>
           </LayoutContent>
-          <Fade mounted={showLoader} speed="fastest" position="fixed">
+          <Fade mounted={showLoader} speed="fastest" position="fixed" appear>
             <SpinnerCircle />
           </Fade>
-          <Fade mounted={messageModalMounted} speed="fastest" position="fixed">
+          <Fade mounted={messageModalMounted} speed="fastest" position="fixed" appear>
             <ModalMessage message="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus gravida augue sed ipsum pulvinar, vel pretium tellus commodo. Aliquam erat volutpat. Morbi placerat justo massa, eget laoreet enim cursus et. Aliquam id scelerisque ipsum, ac rutrum erat. Donec sed blandit metus. Maecenas pellentesque, neque vel " />
           </Fade>
-          <Fade mounted={loginModalMounted} speed="fastest" position="fixed">
+          <Fade mounted={loginModalMounted} speed="fastest" position="fixed" appear>
             <LoginModal />
           </Fade>
         </Fade>

@@ -29,7 +29,7 @@ interface Props {
 }
 
 const Router: React.FC<Props> = ({ loggedIn, location, defaultCurrentSlug, pathWithoutLanguageParam }) => (
-  <FadeInOut valueToUpdate={pathWithoutLanguageParam}>
+  <FadeInOut valueToUpdate={pathWithoutLanguageParam} appear>
     <Switch location={{ ...location, pathname: pathWithoutLanguageParam }}>
       {loggedIn && <Redirect from="/:lang?/login" to={'/' + defaultCurrentSlug + '/control'} />}
       {!loggedIn && <Redirect from="/:lang?/control" to={'/' + defaultCurrentSlug + '/sign-in'} />}

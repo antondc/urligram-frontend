@@ -9,6 +9,7 @@ import { loadPopularLists } from 'Modules/Sections/actions/loadPopularLists';
 import { selectPopularLists } from 'Modules/Sections/selectors/selectPopularLists';
 import { userLoad } from 'Modules/Users/actions/userLoad';
 import { selectUsersLoading } from 'Modules/Users/selectors/selectUsersLoading';
+import { selectPopularListsLoading } from '../../redux/modules/Sections/selectors/selectPopularListsLoading';
 import { User as UserUi } from './User';
 
 interface Props {
@@ -22,6 +23,7 @@ const User: React.FC<Props> = () => {
   const userId = useSelector(selectCurrentRouteParamUserId);
   const loading = useSelector(selectUsersLoading);
   const bookmarksIds = useSelector(selectBookmarksCurrentIds);
+  const popularListLoading = useSelector(selectPopularListsLoading);
 
   useEffect(() => {
     dispatch(userLoad(userId));
@@ -29,7 +31,14 @@ const User: React.FC<Props> = () => {
     dispatch(loadBookmarksByUserId(userId));
   }, [userId]);
 
-  return <UserUi bookmarksIds={bookmarksIds} popularLists={popularLists} loading={loading} />;
+  return (
+    <UserUi
+      bookmarksIds={bookmarksIds}
+      popularLists={popularLists}
+      loading={loading}
+      popularListLoading={popularListLoading}
+    />
+  );
 };
 
 export default User;

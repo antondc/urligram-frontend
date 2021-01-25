@@ -27,6 +27,7 @@ const props = {
     },
   ],
   loading: true,
+  popularListLoading: true,
 };
 
 describe('UsersUi', () => {
