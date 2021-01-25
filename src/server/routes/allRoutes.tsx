@@ -28,7 +28,7 @@ export type RequestParameters = {
 const authentication = new Authentication();
 const router = express.Router();
 
-router.get(routesPathsList, function (req: any, res: any) {
+router.get(routesPathsList, (req: any, res: any, next: any) => {
   // Get active route key
   const activeRouteKey = findActiveRouteKey({ urlPath: req.path, routes: routesList });
 
@@ -99,8 +99,8 @@ router.get(routesPathsList, function (req: any, res: any) {
         isBot: req.useragent.isBot,
       });
     })
-    .catch((error: any) => {
-      res.render('error', { error });
+    .catch((err) => {
+      next(err);
     });
 });
 

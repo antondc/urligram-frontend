@@ -84,23 +84,24 @@ app.get('/', (req: any, res: any) => {
 });
 
 // error handler
-app.use(function (err: any, req: any, res: any, next: any) {
+app.use((err: any, req: any, res: any, next: any) => {
+  console.log('---------');
+  console.error(err);
+  console.log('---------');
+
   if (err.name === 'UnauthorizedError') {
     return res.redirect(303, '/login');
+  } else if (process.env.NODE_ENV === 'development') {
+    return res.status(500).render('error', {
+      message: err.message,
+      stack: err.stack,
+      status: err.status || 500,
+    });
+  } else if (err) {
+    return res.redirect(500, '/500');
+  } else {
+    next();
   }
-
-  next(err);
-});
-
-// error handler
-app.use((err: any, req: any, res: any, next: any) => {
-  if (err) {
-    res.status(500);
-
-    return res.render('error', { error: err });
-  }
-
-  return next(err);
 });
 
 // Launching app
