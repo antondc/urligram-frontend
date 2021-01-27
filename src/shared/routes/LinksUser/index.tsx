@@ -6,7 +6,7 @@ import { loadLinks } from 'Modules/Links/actions/loadLinks';
 import { selectLinksAllIds } from 'Modules/Links/selectors/selectLinksAllIds';
 import { ListState } from 'Modules/Lists/lists.types';
 import { selectLinksLoading } from '../../redux/modules/Links/selectors/selectLinksLoading';
-import { Links as LinksUi } from './Links';
+import { LinksUser as LinksUserUi } from './LinksUser';
 
 interface Props {
   linksIds: number[];
@@ -15,7 +15,7 @@ interface Props {
   loadLinks: () => void;
 }
 
-class Home extends React.Component<Props> {
+class LinksUser extends React.Component<Props> {
   componentDidMount = () => {
     this.props.loadLinks();
   };
@@ -23,7 +23,7 @@ class Home extends React.Component<Props> {
   render = () => {
     const { linksIds, popularLists, loading } = this.props;
 
-    return <LinksUi linksIds={linksIds} popularLists={popularLists} loading={loading} />;
+    return <LinksUserUi linksIds={linksIds} popularLists={popularLists} loading={loading} />;
   };
 }
 
@@ -34,4 +34,4 @@ const mapStateToProps = createStructuredSelector({
 
 export default connect(mapStateToProps, {
   loadLinks,
-})(Home);
+})(LinksUser);

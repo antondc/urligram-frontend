@@ -13,7 +13,8 @@ import Control from 'Routes/Control';
 import HomeUser from 'Routes/HomeUser';
 import HomeVisitor from 'Routes/HomeVisitor';
 import Routes from 'Routes/index';
-import Links from 'Routes/Links';
+import LinksUser from 'Routes/LinksUser';
+import LinksVisitor from 'Routes/LinksVisitor';
 import Lists from 'Routes/Lists';
 import Login from 'Routes/Login';
 import NotFound from 'Routes/NotFound';
@@ -37,7 +38,8 @@ const Router: React.FC<Props> = ({ loggedIn, location, defaultCurrentSlug, pathW
       {!loggedIn && <Redirect from="/:lang?/control" to={'/' + defaultCurrentSlug + '/sign-in'} />}
       <Route exact={Routes.User.exact} path={Routes.User.path} component={User} />
       <Route exact={Routes.Users.exact} path={Routes.Users.path} component={Users} />
-      <Route exact={Routes.Links.exact} path={Routes.Links.path} component={Links} />
+      {loggedIn && <Route exact={Routes.LinksUser.exact} path={Routes.LinksUser.path} component={LinksUser} />}
+      <Route exact={Routes.LinksVisitor.exact} path={Routes.LinksVisitor.path} component={LinksVisitor} />
       <Route exact={Routes.Lists.exact} path={Routes.Lists.path} component={Lists} />
       {loggedIn && (
         <Route exact={Routes.BookmarksUser.exact} path={Routes.BookmarksUser.path} component={BookmarksUser} />

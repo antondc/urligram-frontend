@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import { Links as LinksUi } from './Links';
+import { LinksVisitor as LinksVisitorUi } from './LinksVisitor';
 
 const props = {
   linksIds: [1, 2],
@@ -29,14 +29,14 @@ const props = {
   loading: false,
 };
 
-describe('LinksUi', () => {
-  const wrapper = shallow(<LinksUi {...props} />);
+describe('LinksVisitorUi', () => {
+  const wrapper = shallow(<LinksVisitorUi {...props} />);
 
   test('component renders', () => {
     expect(wrapper.exists()).toBe(true);
   });
 
-  test('has a ".Links" wrapper', () => {
-    expect(wrapper.find('.Links')).toHaveLength(1);
+  test('has a ".LinksVisitor" wrapper', () => {
+    expect(wrapper.find('.LinksVisitor')).toHaveLength(1);
   });
 });

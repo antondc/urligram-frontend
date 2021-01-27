@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { LinkRowSkeletonGroup } from 'Components/LinkRow/LinkRowSkeletonGroup';
 import Main from 'Components/Main';
 import MainHeader from 'Components/MainHeader';
 import Sidebar from 'Components/Sidebar';
@@ -11,9 +12,8 @@ import LinkRow from 'Root/src/shared/components/LinkRow';
 import { tags } from 'Tools/mockData/mockTags';
 import { users } from 'Tools/mockData/mockUsers';
 import { Button, Flex, Hr } from '@antoniodcorrea/components';
-import { LinksSkeleton } from './LinksSkeleton';
 
-import './Links.less';
+import './LinksVisitor.less';
 
 interface Props {
   linksIds: number[];
@@ -21,8 +21,8 @@ interface Props {
   loading: boolean;
 }
 
-export const Links: React.FC<Props> = ({ linksIds, popularLists, loading }) => (
-  <div className="Links">
+export const LinksVisitor: React.FC<Props> = ({ linksIds, popularLists, loading }) => (
+  <div className="LinksVisitor">
     <Flex horizontal="between" vertical="top">
       <Sidebar>
         {/* <SidebarListLists title="Popular Lists" items={popularLists} id="PopularLists" />
@@ -34,7 +34,7 @@ export const Links: React.FC<Props> = ({ linksIds, popularLists, loading }) => (
       <Main>
         <MainHeader title="My links" />
         {loading ? (
-          <LinksSkeleton />
+          <LinkRowSkeletonGroup />
         ) : (
           linksIds?.map((id, index) => (
             <React.Fragment key={id}>
