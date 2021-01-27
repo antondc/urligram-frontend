@@ -6,17 +6,17 @@ import { loadBookmarks } from 'Modules/Bookmarks/actions/loadBookmarks';
 import { selectBookmarksAll } from 'Modules/Bookmarks/selectors/selectBookmarksAll';
 import { ListState } from 'Modules/Lists/lists.types';
 import { selectPopularLists } from 'Modules/Sections/selectors/selectPopularLists';
-import { Home as HomeUI } from './Home';
+import { HomeVisitor as HomeVisitorUI } from './HomeVisitor';
 
 interface Props {
   popularLists: ListState[];
 }
 
-class Home extends React.Component<Props> {
+class HomeVisitor extends React.Component<Props> {
   render = () => {
     const { popularLists } = this.props;
 
-    return <HomeUI popularLists={popularLists} />;
+    return <HomeVisitorUI popularLists={popularLists} />;
   };
 }
 
@@ -27,4 +27,4 @@ const mapStateToProps = createStructuredSelector({
 
 export default connect(mapStateToProps, {
   loadBookmarks,
-})(Home);
+})(HomeVisitor);

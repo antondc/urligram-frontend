@@ -9,7 +9,8 @@ import { selectPathWithoutLanguageParam } from 'Modules/Routes/selectors/selectP
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import Bookmarks from 'Routes/Bookmarks';
 import Control from 'Routes/Control';
-import Home from 'Routes/Home';
+import HomeUser from 'Routes/HomeUser';
+import HomeVisitor from 'Routes/HomeVisitor';
 import Routes from 'Routes/index';
 import Links from 'Routes/Links';
 import Lists from 'Routes/Lists';
@@ -40,7 +41,8 @@ const Router: React.FC<Props> = ({ loggedIn, location, defaultCurrentSlug, pathW
       <Route exact={Routes.Bookmarks.exact} path={Routes.Bookmarks.path} component={Bookmarks} />
       <Route exact={Routes.Login.exact} path={Routes.Login.path} component={Login} />
       <Route exact={Routes.SignIn.exact} path={Routes.SignIn.path} component={SignIn} />
-      <Route exact={Routes.Home.exact} path={Routes.Home.path} component={Home} />
+      {loggedIn && <Route exact={Routes.HomeUser.exact} path={Routes.HomeUser.path} component={HomeUser} />}
+      {!loggedIn && <Route exact={Routes.HomeVisitor.exact} path={Routes.HomeVisitor.path} component={HomeVisitor} />}
       <Route exact={Routes.Control.exact} path={Routes.Control.path} component={Control} />
       <Route exact={Routes.NotFound.exact} path={Routes.NotFound.path} component={NotFound} />
     </Switch>

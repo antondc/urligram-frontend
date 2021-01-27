@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import { Home as HomeUI } from './Home';
+import { HomeVisitor as HomeVisitorUI } from './HomeVisitor';
 
 const props = {
   popularLists: [
@@ -27,14 +27,14 @@ const props = {
   ],
 };
 
-describe('HomeUI', () => {
-  const wrapper = shallow(<HomeUI {...props} />);
+describe('HomeVisitorUI', () => {
+  const wrapper = shallow(<HomeVisitorUI {...props} />);
 
   test('component renders', () => {
     expect(wrapper.exists()).toBe(true);
   });
 
-  test('has a ".Home" wrapper', () => {
-    expect(wrapper.find('.Home')).toHaveLength(1);
+  test('has a ".HomeVisitor" wrapper', () => {
+    expect(wrapper.find('.HomeVisitor')).toHaveLength(1);
   });
 });

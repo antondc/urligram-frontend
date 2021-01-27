@@ -104,8 +104,18 @@ const Routes: RoutesInterface = {
     loadInitialData: [],
   },
 
-  Home: {
-    name: 'Home',
+  HomeVisitor: {
+    name: 'HomeVisitor',
+    path: '/:lang([a-z]{2})?',
+    exact: true,
+    auth: true,
+    hasHeader: true,
+    hasFooter: true,
+    loadInitialData: [],
+  },
+
+  HomeUser: {
+    name: 'HomeUser',
     path: '/:lang([a-z]{2})?',
     exact: true,
     auth: false,

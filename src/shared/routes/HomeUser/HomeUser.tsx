@@ -10,14 +10,14 @@ import { tags } from 'Tools/mockData/mockTags';
 import { users } from 'Tools/mockData/mockUsers';
 import { Border, Flex, Hr } from '@antoniodcorrea/components';
 
-import './Home.less';
+import './HomeUser.less';
 
 interface Props {
   popularLists: ListState[];
 }
 
-export const Home: React.FC<Props> = ({ popularLists }) => (
-  <div className="Home">
+export const HomeUser: React.FC<Props> = ({ popularLists }) => (
+  <div className="HomeUser">
     <Flex horizontal="between" vertical="top">
       <Sidebar>
         {/* <SidebarListLists title="Popular Lists" items={popularLists} id="PopularLists" />
@@ -27,7 +27,7 @@ export const Home: React.FC<Props> = ({ popularLists }) => (
         <SidebarListLists title="Popular Lists" items={popularLists} id="PopularLists3" /> */}
       </Sidebar>
       <Main>
-        <Border>Home</Border>
+        <Border>HomeUser</Border>
       </Main>
       <Sidebar>
         <SidebarListTags title="Trending Tags" items={tags} />
