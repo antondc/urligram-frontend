@@ -8,12 +8,12 @@ import SidebarListLists from 'Components/SidebarListLists';
 import SidebarListTags from 'Components/SidebarListTags';
 import SidebarListUsers from 'Components/SidebarListUsers';
 import { ListState } from 'Modules/Lists/lists.types';
+import { BookmarksRowSkeletonGroup } from 'Root/src/shared/components/BookmarkRow/BookmarksRowSkeletonGroup';
 import { tags } from 'Tools/mockData/mockTags';
 import { users } from 'Tools/mockData/mockUsers';
 import { Button, Fade, Flex, Hr } from '@antoniodcorrea/components';
-import { BookmarksSkeleton } from './BookmarksSkeleton';
 
-import './Bookmarks.less';
+import './BookmarksVisitor.less';
 
 interface Props {
   bookmarksIds: number[];
@@ -21,8 +21,8 @@ interface Props {
   loading: boolean;
 }
 
-export const Bookmarks: React.FC<Props> = ({ bookmarksIds, popularLists, loading }) => (
-  <div className="Bookmarks">
+export const BookmarksVisitor: React.FC<Props> = ({ bookmarksIds, popularLists, loading }) => (
+  <div className="BookmarksVisitor">
     <Flex horizontal="between" vertical="top">
       <Sidebar>
         {/* <SidebarListLists title="Popular Lists" items={popularLists} id="PopularLists" /> */}
@@ -31,7 +31,7 @@ export const Bookmarks: React.FC<Props> = ({ bookmarksIds, popularLists, loading
       <Main>
         <MainHeader title="My bookmarks" />
         {loading ? (
-          <BookmarksSkeleton />
+          <BookmarksRowSkeletonGroup />
         ) : (
           bookmarksIds?.map((id, index) => (
             <React.Fragment key={id}>

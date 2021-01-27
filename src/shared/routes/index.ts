@@ -24,8 +24,18 @@ export interface RoutesInterface {
 }
 
 const Routes: RoutesInterface = {
-  Bookmarks: {
-    name: 'Bookmarks',
+  BookmarksVisitor: {
+    name: 'BookmarksVisitor',
+    path: '/:lang([a-z]{2})?/bookmarks',
+    exact: true,
+    auth: false,
+    hasHeader: false,
+    hasFooter: false,
+    loadInitialData: [initialBookmarksLoader, initialPopularListsLoader],
+  },
+
+  BookmarksUser: {
+    name: 'BookmarksUser',
     path: '/:lang([a-z]{2})?/bookmarks',
     exact: true,
     auth: false,

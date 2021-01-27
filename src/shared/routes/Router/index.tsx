@@ -7,7 +7,8 @@ import { createStructuredSelector } from 'reselect';
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
 import { selectPathWithoutLanguageParam } from 'Modules/Routes/selectors/selectPathWithoutLanguageParam';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
-import Bookmarks from 'Routes/Bookmarks';
+import BookmarksUser from 'Routes/BookmarksUser';
+import BookmarksVisitor from 'Routes/BookmarksVisitor';
 import Control from 'Routes/Control';
 import HomeUser from 'Routes/HomeUser';
 import HomeVisitor from 'Routes/HomeVisitor';
@@ -38,11 +39,14 @@ const Router: React.FC<Props> = ({ loggedIn, location, defaultCurrentSlug, pathW
       <Route exact={Routes.Users.exact} path={Routes.Users.path} component={Users} />
       <Route exact={Routes.Links.exact} path={Routes.Links.path} component={Links} />
       <Route exact={Routes.Lists.exact} path={Routes.Lists.path} component={Lists} />
-      <Route exact={Routes.Bookmarks.exact} path={Routes.Bookmarks.path} component={Bookmarks} />
+      {loggedIn && (
+        <Route exact={Routes.BookmarksUser.exact} path={Routes.BookmarksUser.path} component={BookmarksUser} />
+      )}
+      <Route exact={Routes.BookmarksVisitor.exact} path={Routes.BookmarksVisitor.path} component={BookmarksVisitor} />
       <Route exact={Routes.Login.exact} path={Routes.Login.path} component={Login} />
       <Route exact={Routes.SignIn.exact} path={Routes.SignIn.path} component={SignIn} />
       {loggedIn && <Route exact={Routes.HomeUser.exact} path={Routes.HomeUser.path} component={HomeUser} />}
-      {!loggedIn && <Route exact={Routes.HomeVisitor.exact} path={Routes.HomeVisitor.path} component={HomeVisitor} />}
+      <Route exact={Routes.HomeVisitor.exact} path={Routes.HomeVisitor.path} component={HomeVisitor} />
       <Route exact={Routes.Control.exact} path={Routes.Control.path} component={Control} />
       <Route exact={Routes.NotFound.exact} path={Routes.NotFound.path} component={NotFound} />
     </Switch>

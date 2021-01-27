@@ -10,7 +10,7 @@ import { ListState } from 'Modules/Lists/lists.types';
 import { loadPopularLists } from 'Modules/Sections/actions/loadPopularLists';
 import { selectPopularLists } from 'Modules/Sections/selectors/selectPopularLists';
 import { selectBookmarksLoading } from '../../redux/modules/Bookmarks/selectors/selectBookmarksLoading';
-import { Bookmarks as BookmarksUi } from './Bookmarks';
+import { BookmarksUser as BookmarksUserUi } from './BookmarksUser';
 
 interface Props {
   bookmarks: BookmarkState[];
@@ -30,7 +30,7 @@ class Home extends React.Component<Props> {
   render = () => {
     const { bookmarksIds, popularLists, loading } = this.props;
 
-    return <BookmarksUi bookmarksIds={bookmarksIds} popularLists={popularLists} loading={loading} />;
+    return <BookmarksUserUi bookmarksIds={bookmarksIds} popularLists={popularLists} loading={loading} />;
   };
 }
 

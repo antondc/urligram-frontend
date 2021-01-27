@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import { Bookmarks as BookmarksUi } from './Bookmarks';
+import { BookmarksUser as BookmarksUserUi } from './BookmarksUser';
 
 const props = {
   bookmarksIds: [1, 2, 3],
@@ -30,13 +30,13 @@ const props = {
 };
 
 describe('BookmarksUi', () => {
-  const wrapper = shallow(<BookmarksUi {...props} />);
+  const wrapper = shallow(<BookmarksUserUi {...props} />);
 
   test('component renders', () => {
     expect(wrapper.exists()).toBe(true);
   });
 
-  test('has a ".Bookmarks" wrapper', () => {
-    expect(wrapper.find('.Bookmarks')).toHaveLength(1);
+  test('has a ".BookmarksUser" wrapper', () => {
+    expect(wrapper.find('.BookmarksUser')).toHaveLength(1);
   });
 });
