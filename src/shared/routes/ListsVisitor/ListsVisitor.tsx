@@ -11,9 +11,9 @@ import { ListState } from 'Modules/Lists/lists.types';
 import { tags } from 'Tools/mockData/mockTags';
 import { users } from 'Tools/mockData/mockUsers';
 import { Button, Flex, Hr } from '@antoniodcorrea/components';
-import { ListsSkeleton } from './ListsSkeleton';
+import { ListRowSkeletonGroup } from '../../components/ListRow/ListSkeletonGroup';
 
-import './Lists.less';
+import './ListsVisitor.less';
 
 interface Props {
   listsIds: number[];
@@ -21,20 +21,14 @@ interface Props {
   popularLists: ListState[];
 }
 
-export const Lists: React.FC<Props> = ({ listsIds, popularLists, loading }) => (
-  <div className="Lists">
+export const ListsVisitor: React.FC<Props> = ({ listsIds, popularLists, loading }) => (
+  <div className="ListsVisitor">
     <Flex horizontal="between" vertical="top">
-      <Sidebar>
-        {/* <SidebarListLists title="Popular Lists" items={popularLists} id="PopularLists" />
-        <Hr spacer />
-        <SidebarListLists title="Popular Lists" items={popularLists} id="PopularLists2" />
-        <Hr spacer />
-        <SidebarListLists title="Popular Lists" items={popularLists} id="PopularLists3" /> */}
-      </Sidebar>
+      <Sidebar>{/*  */}</Sidebar>
       <Main>
         <MainHeader title="My lists" />
         {loading ? (
-          <ListsSkeleton />
+          <ListRowSkeletonGroup />
         ) : (
           listsIds.map((id, index) => (
             <React.Fragment key={id}>

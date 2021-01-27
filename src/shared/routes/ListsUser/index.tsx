@@ -7,7 +7,7 @@ import { ListState } from 'Modules/Lists/lists.types';
 import { selectListsAllIds } from 'Modules/Lists/selectors/selectListsAllIds';
 import { selectListsLoading } from 'Modules/Lists/selectors/selectListsLoading';
 import { selectPopularLists } from 'Modules/Sections/selectors/selectPopularLists';
-import { Lists as ListsUi } from './Lists';
+import { ListsUser as ListsUserUi } from './ListsUser';
 
 interface Props {
   listsIds: number[];
@@ -16,7 +16,7 @@ interface Props {
   loadLists: () => void;
 }
 
-class Lists extends React.Component<Props> {
+class ListsUser extends React.Component<Props> {
   componentDidMount = () => {
     this.props.loadLists();
   };
@@ -24,7 +24,7 @@ class Lists extends React.Component<Props> {
   render = () => {
     const { listsIds, popularLists, loading } = this.props;
 
-    return <ListsUi listsIds={listsIds} popularLists={popularLists} loading={loading} />;
+    return <ListsUserUi listsIds={listsIds} popularLists={popularLists} loading={loading} />;
   };
 }
 
@@ -36,4 +36,4 @@ const mapStateToProps = createStructuredSelector({
 
 export default connect(mapStateToProps, {
   loadLists,
-})(Lists);
+})(ListsUser);

@@ -15,7 +15,8 @@ import HomeVisitor from 'Routes/HomeVisitor';
 import Routes from 'Routes/index';
 import LinksUser from 'Routes/LinksUser';
 import LinksVisitor from 'Routes/LinksVisitor';
-import Lists from 'Routes/Lists';
+import ListsUser from 'Routes/ListsUser';
+import ListsVisitor from 'Routes/ListsVisitor';
 import Login from 'Routes/Login';
 import NotFound from 'Routes/NotFound';
 import SignIn from 'Routes/SignIn';
@@ -40,7 +41,8 @@ const Router: React.FC<Props> = ({ loggedIn, location, defaultCurrentSlug, pathW
       <Route exact={Routes.Users.exact} path={Routes.Users.path} component={Users} />
       {loggedIn && <Route exact={Routes.LinksUser.exact} path={Routes.LinksUser.path} component={LinksUser} />}
       <Route exact={Routes.LinksVisitor.exact} path={Routes.LinksVisitor.path} component={LinksVisitor} />
-      <Route exact={Routes.Lists.exact} path={Routes.Lists.path} component={Lists} />
+      {loggedIn && <Route exact={Routes.ListsUser.exact} path={Routes.ListsUser.path} component={ListsUser} />}
+      <Route exact={Routes.ListsVisitor.exact} path={Routes.ListsVisitor.path} component={ListsVisitor} />
       {loggedIn && (
         <Route exact={Routes.BookmarksUser.exact} path={Routes.BookmarksUser.path} component={BookmarksUser} />
       )}

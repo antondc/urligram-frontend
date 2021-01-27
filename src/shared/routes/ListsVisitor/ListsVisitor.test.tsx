@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import { Lists as ListsUi } from './Lists';
+import { ListsVisitor as ListsVisitorUi } from './ListsVisitor';
 
 const props = {
   listsIds: [1, 2],
@@ -29,14 +29,14 @@ const props = {
   loading: true,
 };
 
-describe('ListsUi', () => {
-  const wrapper = shallow(<ListsUi {...props} />);
+describe('ListsVisitorUi', () => {
+  const wrapper = shallow(<ListsVisitorUi {...props} />);
 
   test('component renders', () => {
     expect(wrapper.exists()).toBe(true);
   });
 
-  test('has a ".Lists" wrapper', () => {
+  test('has a ".ListsVisitor" wrapper', () => {
     expect(wrapper.find('.Lists')).toHaveLength(1);
   });
 });

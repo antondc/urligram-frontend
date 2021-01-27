@@ -5,7 +5,7 @@ import { Border, Hr, SkeletonItem, Span } from '@antoniodcorrea/components';
 import './ListRowSkeleton.less';
 
 interface ListRowSkeleton {
-  id: number;
+  id?: number;
 }
 
 export const ListRowSkeleton: React.FC<ListRowSkeleton> = ({ id }) => (

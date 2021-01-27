@@ -84,8 +84,18 @@ const Routes: RoutesInterface = {
     loadInitialData: [initialLinksLoader, initialPopularListsLoader],
   },
 
-  Lists: {
-    name: 'Lists',
+  ListsVisitor: {
+    name: 'ListsVisitor',
+    path: '/:lang([a-z]{2})?/lists',
+    exact: true,
+    auth: false,
+    hasHeader: false,
+    hasFooter: false,
+    loadInitialData: [initialListsLoader, initialPopularListsLoader],
+  },
+
+  ListsUser: {
+    name: 'ListsUser',
     path: '/:lang([a-z]{2})?/lists',
     exact: true,
     auth: false,
