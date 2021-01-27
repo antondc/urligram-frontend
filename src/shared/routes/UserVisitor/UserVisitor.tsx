@@ -1,62 +1,55 @@
 import React from 'react';
 
+import BookmarkRow from 'Components/BookmarkRow';
+import { BookmarkRowSkeletonGroup } from 'Components/BookmarkRow/BookmarkRowSkeletonGroup';
 import Main from 'Components/Main';
 import MainHeader from 'Components/MainHeader';
 import Sidebar from 'Components/Sidebar';
 import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListLists from 'Components/SidebarListLists';
-import SidebarListTags from 'Components/SidebarListTags';
-import SidebarListUsers from 'Components/SidebarListUsers';
-import UserRow from 'Components/UserRow';
 import { ListState } from 'Modules/Lists/lists.types';
-import { tags } from 'Tools/mockData/mockTags';
-import { users } from 'Tools/mockData/mockUsers';
 import { Button, Fade, Flex, Hr } from '@antoniodcorrea/components';
 
-import './Users.less';
+import './UserVisitor.less';
 
 interface Props {
-  usersIds: string[];
+  bookmarksIds: number[];
   popularLists: ListState[];
+  bookmarksLoading: boolean;
   popularListLoading: boolean;
-  loading: boolean;
 }
 
-export const Users: React.FC<Props> = ({ usersIds, popularLists, loading, popularListLoading }) => (
-  <div className="Users">
+export const UserVisitor: React.FC<Props> = ({ bookmarksIds, popularLists, bookmarksLoading, popularListLoading }) => (
+  <div className="UserVisitor">
     <Flex horizontal="between" vertical="top">
       <Sidebar>
         <SidebarBlock title="Popular lists" loading={popularListLoading}>
           <SidebarListLists items={popularLists} />
         </SidebarBlock>
+        <Hr spacer />
       </Sidebar>
       <Main>
-        <MainHeader title="My users" />
-        {loading ? (
-          <div />
+        <MainHeader title="My user" />
+        {!!bookmarksLoading ? (
+          <BookmarkRowSkeletonGroup />
         ) : (
-          usersIds?.map((id, index) => (
+          bookmarksIds?.map((id, index) => (
             <React.Fragment key={id}>
               {!!index && <Hr spacer />}
-              <UserRow id={id} />
+              <BookmarkRow id={id} />
             </React.Fragment>
           ))
         )}
         <Hr spacer size="big" />
         <Flex horizontal="center">
-          <Fade mounted={!!usersIds?.length} speed="fastest">
+          <Fade mounted={!!bookmarksIds?.length} speed="fastest">
             <Button text="Load more" />
           </Fade>
         </Flex>
       </Main>
       <Sidebar>
-        <SidebarListTags title="Trending Tags" items={tags} />
+        {/* <SidebarListLists title="Popular Lists" items={popularLists} id="PopularLists" /> */}
         <Hr spacer />
-        <SidebarListUsers title="Popular Users" items={users} />
-        <Hr spacer />
-        <SidebarListUsers title="Following" items={users} />
-        <Hr spacer />
-        <SidebarListUsers title="Followers" items={users} />
       </Sidebar>
     </Flex>
   </div>

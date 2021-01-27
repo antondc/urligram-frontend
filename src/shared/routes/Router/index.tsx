@@ -20,8 +20,9 @@ import ListsVisitor from 'Routes/ListsVisitor';
 import Login from 'Routes/Login';
 import NotFound from 'Routes/NotFound';
 import SignIn from 'Routes/SignIn';
-import User from 'Routes/User';
 import Users from 'Routes/Users';
+import UserUser from 'Routes/UserUser';
+import UserVisitor from 'Routes/UserVisitor';
 import { Location } from 'Services/History';
 import { FadeInOut } from '@antoniodcorrea/components';
 
@@ -37,7 +38,8 @@ const Router: React.FC<Props> = ({ loggedIn, location, defaultCurrentSlug, pathW
     <Switch location={{ ...location, pathname: pathWithoutLanguageParam }}>
       {loggedIn && <Redirect from="/:lang?/login" to={'/' + defaultCurrentSlug + '/control'} />}
       {!loggedIn && <Redirect from="/:lang?/control" to={'/' + defaultCurrentSlug + '/sign-in'} />}
-      <Route exact={Routes.User.exact} path={Routes.User.path} component={User} />
+      {loggedIn && <Route exact={Routes.UserUser.exact} path={Routes.UserUser.path} component={UserUser} />}
+      <Route exact={Routes.UserVisitor.exact} path={Routes.UserVisitor.path} component={UserVisitor} />
       <Route exact={Routes.Users.exact} path={Routes.Users.path} component={Users} />
       {loggedIn && <Route exact={Routes.LinksUser.exact} path={Routes.LinksUser.path} component={LinksUser} />}
       <Route exact={Routes.LinksVisitor.exact} path={Routes.LinksVisitor.path} component={LinksVisitor} />

@@ -7,10 +7,10 @@ import Sidebar from 'Components/Sidebar';
 import SidebarListLists from 'Components/SidebarListLists';
 import { ListState } from 'Modules/Lists/lists.types';
 import { Button, Fade, Flex, Hr } from '@antoniodcorrea/components';
+import { BookmarkRowSkeletonGroup } from '../../components/BookmarkRow/BookmarkRowSkeletonGroup';
 import SidebarBlock from '../../components/SidebarBlock';
-import { UserSkeleton } from './UserSkeleton';
 
-import './User.less';
+import './UserUser.less';
 
 interface Props {
   bookmarksIds: number[];
@@ -19,8 +19,8 @@ interface Props {
   popularListLoading: boolean;
 }
 
-export const User: React.FC<Props> = ({ bookmarksIds, popularLists, bookmarksLoading, popularListLoading }) => (
-  <div className="User">
+export const UserUser: React.FC<Props> = ({ bookmarksIds, popularLists, bookmarksLoading, popularListLoading }) => (
+  <div className="UserUser">
     <Flex horizontal="between" vertical="top">
       <Sidebar>
         <SidebarBlock title="Popular lists" loading={popularListLoading}>
@@ -31,7 +31,7 @@ export const User: React.FC<Props> = ({ bookmarksIds, popularLists, bookmarksLoa
       <Main>
         <MainHeader title="My user" />
         {!!bookmarksLoading ? (
-          <UserSkeleton />
+          <BookmarkRowSkeletonGroup />
         ) : (
           bookmarksIds?.map((id, index) => (
             <React.Fragment key={id}>

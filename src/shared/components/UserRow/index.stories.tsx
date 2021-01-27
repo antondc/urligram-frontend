@@ -3,7 +3,7 @@ import React from 'react';
 import { FadeInOut, Hr } from '@antoniodcorrea/components';
 import { boolean, withKnobs } from '@storybook/addon-knobs';
 import { UserRow } from './UserRow';
-import { UserRowSkeleton } from './UserRowSkeleton';
+import { UserRowSkeletonGroup } from './UserRowSkeletonGroup';
 
 export default {
   component: UserRow,
@@ -80,19 +80,7 @@ export const Default: React.ReactNode = () => (
         </>
       ) : (
         <>
-          <UserRowSkeleton {...props} />
-          <Hr size="small" spacer />
-          <UserRowSkeleton {...props} />
-          <Hr size="small" spacer />
-          <UserRowSkeleton {...props} />
-          <Hr size="small" spacer />
-          <UserRowSkeleton {...props} />
-          <Hr size="small" spacer />
-          <UserRowSkeleton {...props} />
-          <Hr size="small" spacer />
-          <UserRowSkeleton {...props} />
-          <Hr size="small" spacer />
-          <UserRowSkeleton {...props} />
+          <UserRowSkeletonGroup />
         </>
       )}
     </FadeInOut>
