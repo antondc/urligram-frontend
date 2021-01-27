@@ -8,7 +8,7 @@ import { selectCurrentRouteParamUserId } from 'Modules/Routes/selectors/selectCu
 import { loadPopularLists } from 'Modules/Sections/actions/loadPopularLists';
 import { selectPopularLists } from 'Modules/Sections/selectors/selectPopularLists';
 import { userLoad } from 'Modules/Users/actions/userLoad';
-import { selectUsersLoading } from 'Modules/Users/selectors/selectUsersLoading';
+import { selectBookmarksLoading } from '../../redux/modules/Bookmarks/selectors/selectBookmarksLoading';
 import { selectPopularListsLoading } from '../../redux/modules/Sections/selectors/selectPopularListsLoading';
 import { User as UserUi } from './User';
 
@@ -19,9 +19,9 @@ interface Props {
 
 const User: React.FC<Props> = () => {
   const dispatch = useDispatch();
-  const popularLists = useSelector(selectPopularLists);
   const userId = useSelector(selectCurrentRouteParamUserId);
-  const loading = useSelector(selectUsersLoading);
+  const popularLists = useSelector(selectPopularLists);
+  const bookmarksLoading = useSelector(selectBookmarksLoading);
   const bookmarksIds = useSelector(selectBookmarksCurrentIds);
   const popularListLoading = useSelector(selectPopularListsLoading);
 
@@ -34,8 +34,8 @@ const User: React.FC<Props> = () => {
   return (
     <UserUi
       bookmarksIds={bookmarksIds}
+      bookmarksLoading={bookmarksLoading}
       popularLists={popularLists}
-      loading={loading}
       popularListLoading={popularListLoading}
     />
   );

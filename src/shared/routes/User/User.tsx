@@ -15,11 +15,11 @@ import './User.less';
 interface Props {
   bookmarksIds: number[];
   popularLists: ListState[];
-  loading: boolean;
+  bookmarksLoading: boolean;
   popularListLoading: boolean;
 }
 
-export const User: React.FC<Props> = ({ bookmarksIds, popularLists, loading, popularListLoading }) => (
+export const User: React.FC<Props> = ({ bookmarksIds, popularLists, bookmarksLoading, popularListLoading }) => (
   <div className="User">
     <Flex horizontal="between" vertical="top">
       <Sidebar>
@@ -30,7 +30,7 @@ export const User: React.FC<Props> = ({ bookmarksIds, popularLists, loading, pop
       </Sidebar>
       <Main>
         <MainHeader title="My user" />
-        {loading ? (
+        {!!bookmarksLoading ? (
           <UserSkeleton />
         ) : (
           bookmarksIds?.map((id, index) => (
