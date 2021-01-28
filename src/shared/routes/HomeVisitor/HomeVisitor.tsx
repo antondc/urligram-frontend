@@ -18,6 +18,8 @@ export interface Props {
   newListsLoading: boolean;
   mostFollowedUsers: UserState[];
   mostFollowedUsersLoading: boolean;
+  newUsers: UserState[];
+  newUsersLoading: boolean;
 }
 
 export const HomeVisitor: React.FC<Props> = ({
@@ -27,6 +29,8 @@ export const HomeVisitor: React.FC<Props> = ({
   newListsLoading,
   mostFollowedUsers,
   mostFollowedUsersLoading,
+  newUsers,
+  newUsersLoading,
 }) => (
   <div className="HomeVisitor">
     <Flex horizontal="between" vertical="top">
@@ -39,21 +43,18 @@ export const HomeVisitor: React.FC<Props> = ({
           <SidebarListLists items={newLists} />
         </SidebarBlock>
         <Hr spacer />
-        <SidebarBlock title="Most Followed Users" loading={mostFollowedUsersLoading}>
-          <SidebarListUsers items={mostFollowedUsers} />
-        </SidebarBlock>
       </Sidebar>
       <Main>
         <Border>HomeVisitor</Border>
       </Main>
       <Sidebar>
-        {/* <SidebarListTags title="Trending Tags" items={tags} />
+        <SidebarBlock title="Most Followed Users" loading={mostFollowedUsersLoading}>
+          <SidebarListUsers items={mostFollowedUsers} />
+        </SidebarBlock>
         <Hr spacer />
-        <SidebarListUsers title="Popular Users" items={users} />
-        <Hr spacer />
-        <SidebarListUsers title="Following" items={users} />
-        <Hr spacer />
-        <SidebarListUsers title="Followers" items={users} /> */}
+        <SidebarBlock title="New Users" loading={newUsersLoading}>
+          <SidebarListUsers items={newUsers} />
+        </SidebarBlock>
       </Sidebar>
     </Flex>
   </div>

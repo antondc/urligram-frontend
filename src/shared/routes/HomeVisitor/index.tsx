@@ -8,8 +8,11 @@ import { selectMostFollowedUsers } from 'Modules/Sections/selectors/selectMostFo
 import { selectMostFollowedUsersLoading } from 'Modules/Sections/selectors/selectMostFollowedUsersLoading';
 import { selectNewLists } from 'Modules/Sections/selectors/selectNewLists';
 import { selectNewListsLoading } from 'Modules/Sections/selectors/selectNewListsLoading';
+import { selectNewUsers } from 'Modules/Sections/selectors/selectNewUsers';
+import { selectNewUsersLoading } from 'Modules/Sections/selectors/selectNewUsersLoading';
 import { selectPopularLists } from 'Modules/Sections/selectors/selectPopularLists';
 import { selectPopularListsLoading } from 'Modules/Sections/selectors/selectPopularListsLoading';
+import { sectionsNewUsersLoad } from '../../redux/modules/Sections/actions/sectionsNewUsersLoad';
 import { HomeVisitor as HomeVisitorUI } from './HomeVisitor';
 
 const HomeVisitor: React.FC = () => {
@@ -20,11 +23,14 @@ const HomeVisitor: React.FC = () => {
   const mostFollowedListsLoading = useSelector(selectPopularListsLoading);
   const mostFollowedUsers = useSelector(selectMostFollowedUsers);
   const mostFollowedUsersLoading = useSelector(selectMostFollowedUsersLoading);
+  const newUsers = useSelector(selectNewUsers);
+  const newUsersLoading = useSelector(selectNewUsersLoading);
 
   useEffect(() => {
     dispatch(loadPopularLists());
     dispatch(sectionsNewListsLoad());
     dispatch(sectionsMostFollowedUsersLoad());
+    dispatch(sectionsNewUsersLoad());
   }, []);
 
   return (
@@ -35,6 +41,8 @@ const HomeVisitor: React.FC = () => {
       newListsLoading={newListsLoading}
       mostFollowedUsers={mostFollowedUsers}
       mostFollowedUsersLoading={mostFollowedUsersLoading}
+      newUsers={newUsers}
+      newUsersLoading={newUsersLoading}
     />
   );
 };
