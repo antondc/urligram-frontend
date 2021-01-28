@@ -4,6 +4,7 @@ import { renderToString } from 'react-dom/server';
 import Helmet from 'react-helmet';
 import { Provider } from 'react-redux';
 import { Route, StaticRouter } from 'react-router-dom';
+import { merge } from 'lodash';
 import serialize from 'serialize-javascript';
 
 import Layout from 'Common/Layout';
@@ -46,7 +47,7 @@ router.get(routesPathsList, (req: any, res: any, next: any) => {
 
   Promise.all([initialLanguagesLoader(req.params.lang), ...initialDataLoaders]) // We have to execute the Languages thunk, as well as the async function within it
     .then((response: any) => {
-      const data = Object.assign({}, ...response);
+      const data = merge(...response); // Use Lodash to merge the result objects of the promises; otherwise we will get only the last result
 
       // Validate session data from token
       try {

@@ -2,10 +2,11 @@ import omit from 'lodash/omit';
 
 import { initialBookmarksLoader } from 'Modules/Bookmarks/bookmarks.loader';
 import { initialLinksLoader } from 'Modules/Links/links.loader';
+import { initialListsLoader } from 'Modules/Lists/lists.loader';
+import { sectionsMostFollowedUsersLoad } from 'Modules/Sections/initialLoaders/sectionsMostFollowedUsersLoad';
 import { initialUserLoader } from 'Modules/Users/user.loader';
 import { initialUsersLoader } from 'Modules/Users/users.loader';
 import { RequestParameters } from 'Root/src/server/routes/allRoutes';
-import { initialListsLoader } from '../redux/modules/Lists/lists.loader';
 import { initialHomeVisitorLoader } from './HomeVisitor/HomeVisitor.loader';
 
 export interface Route {
@@ -171,7 +172,7 @@ const Routes: RoutesInterface = {
     auth: true,
     hasHeader: true,
     hasFooter: true,
-    loadInitialData: [initialHomeVisitorLoader],
+    loadInitialData: [sectionsMostFollowedUsersLoad, initialHomeVisitorLoader],
   },
 
   HomeUser: {
