@@ -2,12 +2,12 @@ import React from 'react';
 
 import { boolean, withKnobs } from '@storybook/addon-knobs';
 import SidebarBlock from '../SidebarBlock';
-import SidebarListLists from '.';
-import { Props } from './SidebarListListsSkeletonProps';
+import SidebarListUsers from '.';
+import { MockUsersList } from './SidebarListUsersStoriesProps';
 
 export default {
-  component: SidebarListLists,
-  title: 'SidebarListLists',
+  component: SidebarListUsers,
+  title: 'SidebarListUsers',
   decorators: [withKnobs],
 };
 
@@ -18,7 +18,7 @@ const knobs = {
 export const Default: React.ReactNode = () => (
   <div style={{ padding: '30px', width: '400px' }}>
     <SidebarBlock loading={knobs.skeleton()} title="Some title">
-      <SidebarListLists loading={knobs.skeleton()} {...Props} />
+      <SidebarListUsers items={MockUsersList} loading={knobs.skeleton()} />
     </SidebarBlock>
   </div>
 );

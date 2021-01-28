@@ -48,13 +48,13 @@ export const BookmarksVisitor: React.FC<Props> = ({ bookmarksIds, popularLists, 
         </Flex>
       </Main>
       <Sidebar>
-        <SidebarListTags title="Trending Tags" items={tags} />
+        {/* <SidebarListTags title="Trending Tags" items={tags} />
         <Hr spacer />
         <SidebarListUsers title="Popular Users" items={users} />
         <Hr spacer />
         <SidebarListUsers title="Following" items={users} />
         <Hr spacer />
-        <SidebarListUsers title="Followers" items={users} />
+        <SidebarListUsers title="Followers" items={users} /> */}
       </Sidebar>
     </Flex>
   </div>

@@ -22,7 +22,7 @@ export interface ListState {
 }
 
 export interface ListsState {
-  byKey?: {
+  byKey: {
     [key: string]: ListState;
   };
   loading?: boolean;

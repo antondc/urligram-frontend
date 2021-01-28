@@ -19,7 +19,7 @@ export const Users = (state = initialState, action: UsersActionsTypes): UsersSta
           ...state.byKey,
           ...action.data.byKey,
         },
-        currentIds: action.data.currentIds,
+        currentIds: action.data.currentIds || state.currentIds,
         loading: false,
       });
 

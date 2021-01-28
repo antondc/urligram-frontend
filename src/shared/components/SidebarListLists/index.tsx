@@ -17,11 +17,11 @@ const SidebarListLists: React.FC<Props> = ({ items, loading }) => (
       items.map(({ id, name, members }, index) => (
         <React.Fragment key={id}>
           {!!index && <Hr spacer size="micro" />}
-          <dd className="SidebarListListsUi-list">
-            <div className="SidebarListListsUi-listName">
+          <dd className="SidebarListLists-list">
+            <div className="SidebarListLists-listName">
               <Span bold>+ {name}</Span>
             </div>
-            <div id={id + '-' + index} className="SidebarListListsUi-listDescription">
+            <div id={id + '-' + index} className="SidebarListLists-listDescription">
               <Span size="small"> {members?.length && members?.length} items</Span>
             </div>
             <Tooltip parentElementId={id + '-' + index} content="This is something" />

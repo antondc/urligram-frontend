@@ -1,13 +1,17 @@
-import { ListsState, ListState } from '../Lists/lists.types';
+import { ListsState } from '../Lists/lists.types';
+import { UsersState } from '../Users/users.types';
 
 export const LOAD_MOST_POPULAR_LISTS_STARTED = 'LOAD_MOST_POPULAR_LISTS_STARTED';
 export const LOAD_MOST_POPULAR_LISTS_SUCCESS = 'LOAD_MOST_POPULAR_LISTS_SUCCESS';
 export const SECTIONS_NEW_LISTS_REQUEST = 'SECTIONS_NEW_LISTS_REQUEST';
 export const SECTIONS_NEW_LISTS_RECEIVE = 'SECTIONS_NEW_LISTS_RECEIVE';
+export const SECTIONS_MOST_FOLLOWED_USERS_REQUEST = 'SECTIONS_MOST_FOLLOWED_USERS_REQUEST';
+export const SECTIONS_MOST_FOLLOWED_USERS_RECEIVE = 'SECTIONS_MOST_FOLLOWED_USERS_RECEIVE';
 
 export interface SectionsState {
-  PopularLists?: ListsState;
-  NewLists?: ListsState;
+  PopularLists?: Partial<ListsState>;
+  NewLists?: Partial<ListsState>;
+  MostFollowedUsers?: Partial<UsersState>;
 }
 
 interface RequestMostPopularListsAction {
@@ -22,14 +26,6 @@ interface ReceiveMostPopularListsAction {
   data: SectionsState;
 }
 
-export interface ReceiveListsResponse {
-  data: {
-    type: 'lists';
-    id: number;
-    attributes: ListState;
-  }[];
-}
-
 interface SectionNewListsRequestAction {
   type: typeof SECTIONS_NEW_LISTS_REQUEST;
   data: {
@@ -42,8 +38,22 @@ interface SectionNewListsReceiveAction {
   data: SectionsState;
 }
 
+interface SectionMostFollowedUsersRequestAction {
+  type: typeof SECTIONS_MOST_FOLLOWED_USERS_REQUEST;
+  data: {
+    loading: true;
+  };
+}
+
+interface SectionMostFollowedUsersReceiveAction {
+  type: typeof SECTIONS_MOST_FOLLOWED_USERS_RECEIVE;
+  data: SectionsState;
+}
+
 export type SectionsActionsTypes =
   | RequestMostPopularListsAction
   | ReceiveMostPopularListsAction
   | SectionNewListsRequestAction
-  | SectionNewListsReceiveAction;
+  | SectionNewListsReceiveAction
+  | SectionMostFollowedUsersRequestAction
+  | SectionMostFollowedUsersReceiveAction;

@@ -1,6 +1,8 @@
 import {
   LOAD_MOST_POPULAR_LISTS_STARTED,
   LOAD_MOST_POPULAR_LISTS_SUCCESS,
+  SECTIONS_MOST_FOLLOWED_USERS_RECEIVE,
+  SECTIONS_MOST_FOLLOWED_USERS_REQUEST,
   SECTIONS_NEW_LISTS_RECEIVE,
   SECTIONS_NEW_LISTS_REQUEST,
   SectionsActionsTypes,
@@ -9,7 +11,15 @@ import {
 
 export const initialState: SectionsState = {
   PopularLists: {
-    byKey: {},
+    currentIds: [],
+    loading: false,
+  },
+  NewLists: {
+    currentIds: [],
+    loading: false,
+  },
+  MostFollowedUsers: {
+    currentIds: [],
     loading: false,
   },
 };
@@ -42,6 +52,20 @@ export const Sections = (state = initialState, action: SectionsActionsTypes): Se
         ...state,
         NewLists: {
           currentIds: action.data.NewLists?.currentIds,
+          loading: false,
+        },
+      });
+    case SECTIONS_MOST_FOLLOWED_USERS_REQUEST:
+      return Object.assign({}, state, {
+        MostFollowedUsers: {
+          loading: true,
+        },
+      });
+    case SECTIONS_MOST_FOLLOWED_USERS_RECEIVE:
+      return Object.assign({}, state, {
+        ...state,
+        MostFollowedUsers: {
+          currentIds: action.data.MostFollowedUsers?.currentIds,
           loading: false,
         },
       });

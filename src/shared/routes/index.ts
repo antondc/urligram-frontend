@@ -2,7 +2,6 @@ import omit from 'lodash/omit';
 
 import { initialBookmarksLoader } from 'Modules/Bookmarks/bookmarks.loader';
 import { initialLinksLoader } from 'Modules/Links/links.loader';
-import { initialPopularListsLoader } from 'Modules/Sections/sections.loader';
 import { initialUserLoader } from 'Modules/Users/user.loader';
 import { initialUsersLoader } from 'Modules/Users/users.loader';
 import { RequestParameters } from 'Root/src/server/routes/allRoutes';
@@ -32,7 +31,7 @@ const Routes: RoutesInterface = {
     auth: false,
     hasHeader: false,
     hasFooter: false,
-    loadInitialData: [initialBookmarksLoader, initialPopularListsLoader],
+    loadInitialData: [initialBookmarksLoader],
   },
 
   BookmarksUser: {
@@ -42,7 +41,7 @@ const Routes: RoutesInterface = {
     auth: false,
     hasHeader: false,
     hasFooter: false,
-    loadInitialData: [initialBookmarksLoader, initialPopularListsLoader],
+    loadInitialData: [initialBookmarksLoader],
   },
 
   UserVisitor: {
@@ -52,7 +51,7 @@ const Routes: RoutesInterface = {
     auth: false,
     hasHeader: false,
     hasFooter: false,
-    loadInitialData: [initialUserLoader, initialPopularListsLoader],
+    loadInitialData: [initialUserLoader],
   },
 
   UserUser: {
@@ -62,7 +61,7 @@ const Routes: RoutesInterface = {
     auth: false,
     hasHeader: false,
     hasFooter: false,
-    loadInitialData: [initialUserLoader, initialPopularListsLoader],
+    loadInitialData: [initialUserLoader],
   },
 
   UsersUser: {
@@ -72,7 +71,7 @@ const Routes: RoutesInterface = {
     auth: false,
     hasHeader: false,
     hasFooter: false,
-    loadInitialData: [initialUsersLoader, initialPopularListsLoader],
+    loadInitialData: [initialUsersLoader],
   },
 
   UsersVisitor: {
@@ -82,7 +81,7 @@ const Routes: RoutesInterface = {
     auth: false,
     hasHeader: false,
     hasFooter: false,
-    loadInitialData: [initialUsersLoader, initialPopularListsLoader],
+    loadInitialData: [initialUsersLoader],
   },
 
   Users: {
@@ -92,7 +91,7 @@ const Routes: RoutesInterface = {
     auth: false,
     hasHeader: false,
     hasFooter: false,
-    loadInitialData: [initialUsersLoader, initialPopularListsLoader],
+    loadInitialData: [initialUsersLoader],
   },
 
   LinksVisitor: {
@@ -102,7 +101,7 @@ const Routes: RoutesInterface = {
     auth: false,
     hasHeader: false,
     hasFooter: false,
-    loadInitialData: [initialLinksLoader, initialPopularListsLoader],
+    loadInitialData: [initialLinksLoader],
   },
 
   LinksUser: {
@@ -112,7 +111,7 @@ const Routes: RoutesInterface = {
     auth: false,
     hasHeader: false,
     hasFooter: false,
-    loadInitialData: [initialLinksLoader, initialPopularListsLoader],
+    loadInitialData: [initialLinksLoader],
   },
 
   ListsVisitor: {
@@ -122,7 +121,7 @@ const Routes: RoutesInterface = {
     auth: false,
     hasHeader: false,
     hasFooter: false,
-    loadInitialData: [initialListsLoader, initialPopularListsLoader],
+    loadInitialData: [initialListsLoader],
   },
 
   ListsUser: {
@@ -132,7 +131,7 @@ const Routes: RoutesInterface = {
     auth: false,
     hasHeader: false,
     hasFooter: false,
-    loadInitialData: [initialListsLoader, initialPopularListsLoader],
+    loadInitialData: [initialListsLoader],
   },
 
   Login: {
