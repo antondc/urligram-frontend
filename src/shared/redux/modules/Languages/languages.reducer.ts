@@ -30,6 +30,7 @@ export const initialState: LanguagesState = {
       following: '',
       followers: '',
       since: '',
+      serverError: '',
     },
   },
 };

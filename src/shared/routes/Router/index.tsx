@@ -19,6 +19,7 @@ import ListsUser from 'Routes/ListsUser';
 import ListsVisitor from 'Routes/ListsVisitor';
 import Login from 'Routes/Login';
 import NotFound from 'Routes/NotFound';
+import ServerError from 'Routes/ServerError';
 import SignIn from 'Routes/SignIn';
 import UsersUser from 'Routes/UsersUser';
 import UsersVisitor from 'Routes/UsersVisitor';
@@ -37,8 +38,11 @@ interface Props {
 const Router: React.FC<Props> = ({ loggedIn, location, defaultCurrentSlug, pathWithoutLanguageParam }) => (
   <FadeInOut valueToUpdate={pathWithoutLanguageParam} appear>
     <Switch location={{ ...location, pathname: pathWithoutLanguageParam }}>
+      {/* Redirects */}
       {loggedIn && <Redirect from="/:lang?/login" to={'/' + defaultCurrentSlug + '/control'} />}
       {!loggedIn && <Redirect from="/:lang?/control" to={'/' + defaultCurrentSlug + '/sign-in'} />}
+
+      {/* Pages */}
       {loggedIn && <Route exact={Routes.UserUser.exact} path={Routes.UserUser.path} component={UserUser} />}
       <Route exact={Routes.UserVisitor.exact} path={Routes.UserVisitor.path} component={UserVisitor} />
       {loggedIn && <Route exact={Routes.UsersUser.exact} path={Routes.UsersUser.path} component={UsersUser} />}
@@ -51,11 +55,16 @@ const Router: React.FC<Props> = ({ loggedIn, location, defaultCurrentSlug, pathW
         <Route exact={Routes.BookmarksUser.exact} path={Routes.BookmarksUser.path} component={BookmarksUser} />
       )}
       <Route exact={Routes.BookmarksVisitor.exact} path={Routes.BookmarksVisitor.path} component={BookmarksVisitor} />
-      <Route exact={Routes.Login.exact} path={Routes.Login.path} component={Login} />
-      <Route exact={Routes.SignIn.exact} path={Routes.SignIn.path} component={SignIn} />
       {loggedIn && <Route exact={Routes.HomeUser.exact} path={Routes.HomeUser.path} component={HomeUser} />}
       <Route exact={Routes.HomeVisitor.exact} path={Routes.HomeVisitor.path} component={HomeVisitor} />
+
+      {/* General */}
       <Route exact={Routes.Control.exact} path={Routes.Control.path} component={Control} />
+      <Route exact={Routes.Login.exact} path={Routes.Login.path} component={Login} />
+      <Route exact={Routes.SignIn.exact} path={Routes.SignIn.path} component={SignIn} />
+
+      {/* Guards */}
+      <Route exact={Routes.ServerError.exact} path={Routes.ServerError.path} component={ServerError} />
       <Route exact={Routes.NotFound.exact} path={Routes.NotFound.path} component={NotFound} />
     </Switch>
   </FadeInOut>

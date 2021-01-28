@@ -89,17 +89,25 @@ app.use((err: any, req: any, res: any, next: any) => {
   console.error(err);
   console.log('---------');
 
-  if (err.name === 'UnauthorizedError') {
+  const isServerErrorPage = req.path.includes('/500-server-error'); // Check if its server error to break the redirect loop
+  const isUnauthorizedError = err.name === 'UnauthorizedError';
+  const isDevelopment = process.env.NODE_ENV === 'development';
+
+  if (err && isUnauthorizedError) {
     return res.redirect(303, '/login');
-  } else if (process.env.NODE_ENV === 'development') {
+  } else if (err && isDevelopment) {
     return res.status(500).render('error', {
       message: err.message,
       stack: err.stack,
       status: err.status || 500,
     });
+  } else if (err && !isServerErrorPage) {
+    return res.redirect('/500-server-error');
   } else if (err) {
-    return res.redirect(500, '/500');
+    // If still there is a non handled error, then render server error page
+    res.render('serverError');
   } else {
+    // If we didn't handle the error, continue, as this is not an error
     next();
   }
 });

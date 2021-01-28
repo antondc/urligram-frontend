@@ -184,6 +184,17 @@ const Routes: RoutesInterface = {
     loadInitialData: [],
   },
 
+  ServerError: {
+    name: 'ServerError',
+    path: '/:lang([a-z]{2})?/500-server-error',
+    exact: true,
+    hasHeader: true,
+    hasFooter: true,
+    auth: false,
+    header: false,
+    loadInitialData: [],
+  },
+
   NotFound: {
     name: 'NotFound',
     path: '/:lang([a-z]{2})?/:path*',

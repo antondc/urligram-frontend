@@ -19,6 +19,7 @@ export interface GlossaryState {
   following: string;
   followers: string;
   since: string;
+  serverError: string;
 }
 
 export interface LanguageState {
