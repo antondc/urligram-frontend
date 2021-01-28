@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import { Users as UsersUi } from './Users';
+import { UsersUser as UsersUserUi } from './UsersUser';
 
 const props = {
   usersIds: ['string1', 'string2'],
@@ -26,18 +26,18 @@ const props = {
       tags: [],
     },
   ],
-  loading: true,
+  usersLoading: true,
   popularListLoading: true,
 };
 
-describe('UsersUi', () => {
-  const wrapper = shallow(<UsersUi {...props} />);
+describe('UsersUserUi', () => {
+  const wrapper = shallow(<UsersUserUi {...props} />);
 
   test('component renders', () => {
     expect(wrapper.exists()).toBe(true);
   });
 
   test('has a ".Users" wrapper', () => {
-    expect(wrapper.find('.Users')).toHaveLength(1);
+    expect(wrapper.find('.UsersUser')).toHaveLength(1);
   });
 });

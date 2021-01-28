@@ -20,7 +20,8 @@ import ListsVisitor from 'Routes/ListsVisitor';
 import Login from 'Routes/Login';
 import NotFound from 'Routes/NotFound';
 import SignIn from 'Routes/SignIn';
-import Users from 'Routes/Users';
+import UsersUser from 'Routes/UsersUser';
+import UsersVisitor from 'Routes/UsersVisitor';
 import UserUser from 'Routes/UserUser';
 import UserVisitor from 'Routes/UserVisitor';
 import { Location } from 'Services/History';
@@ -40,7 +41,8 @@ const Router: React.FC<Props> = ({ loggedIn, location, defaultCurrentSlug, pathW
       {!loggedIn && <Redirect from="/:lang?/control" to={'/' + defaultCurrentSlug + '/sign-in'} />}
       {loggedIn && <Route exact={Routes.UserUser.exact} path={Routes.UserUser.path} component={UserUser} />}
       <Route exact={Routes.UserVisitor.exact} path={Routes.UserVisitor.path} component={UserVisitor} />
-      <Route exact={Routes.Users.exact} path={Routes.Users.path} component={Users} />
+      {loggedIn && <Route exact={Routes.UsersUser.exact} path={Routes.UsersUser.path} component={UsersUser} />}
+      <Route exact={Routes.UsersVisitor.exact} path={Routes.UsersVisitor.path} component={UsersVisitor} />
       {loggedIn && <Route exact={Routes.LinksUser.exact} path={Routes.LinksUser.path} component={LinksUser} />}
       <Route exact={Routes.LinksVisitor.exact} path={Routes.LinksVisitor.path} component={LinksVisitor} />
       {loggedIn && <Route exact={Routes.ListsUser.exact} path={Routes.ListsUser.path} component={ListsUser} />}

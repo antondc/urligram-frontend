@@ -64,6 +64,26 @@ const Routes: RoutesInterface = {
     loadInitialData: [initialUserLoader, initialPopularListsLoader],
   },
 
+  UsersUser: {
+    name: 'UsersUser',
+    path: '/:lang([a-z]{2})?/users',
+    exact: true,
+    auth: false,
+    hasHeader: false,
+    hasFooter: false,
+    loadInitialData: [initialUsersLoader, initialPopularListsLoader],
+  },
+
+  UsersVisitor: {
+    name: 'UsersVisitor',
+    path: '/:lang([a-z]{2})?/users',
+    exact: true,
+    auth: false,
+    hasHeader: false,
+    hasFooter: false,
+    loadInitialData: [initialUsersLoader, initialPopularListsLoader],
+  },
+
   Users: {
     name: 'Users',
     path: '/:lang([a-z]{2})?/users',

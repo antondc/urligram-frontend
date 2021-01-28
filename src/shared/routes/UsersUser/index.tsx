@@ -9,31 +9,31 @@ import { loadUsers } from 'Modules/Users/actions/loadUsers';
 import { selectUsersCurrentIds } from 'Modules/Users/selectors/selectUsersCurrentIds';
 import { selectUsersLoading } from 'Modules/Users/selectors/selectUsersLoading';
 import { selectPopularListsLoading } from '../../redux/modules/Sections/selectors/selectPopularListsLoading';
-import { Users as UsersUi } from './Users';
+import { UsersUser as UsersUserUi } from './UsersUser';
 
 interface Props {
   usersIds: string[];
   popularLists: ListState[];
-  loading: boolean;
+  usersLoading: boolean;
   popularListLoading: boolean;
   loadUsers: () => void;
   loadPopularLists: () => void;
 }
 
-class Users extends React.Component<Props> {
+class UsersUser extends React.Component<Props> {
   componentDidMount = () => {
     this.props.loadUsers();
     this.props.loadPopularLists();
   };
 
   render = () => {
-    const { usersIds, popularLists, loading, popularListLoading } = this.props;
+    const { usersIds, popularLists, usersLoading, popularListLoading } = this.props;
 
     return (
-      <UsersUi
+      <UsersUserUi
         usersIds={usersIds}
         popularLists={popularLists}
-        loading={loading}
+        usersLoading={usersLoading}
         popularListLoading={popularListLoading}
       />
     );
@@ -43,11 +43,11 @@ class Users extends React.Component<Props> {
 const mapStateToProps = createStructuredSelector({
   popularLists: selectPopularLists,
   usersIds: selectUsersCurrentIds,
-  loading: selectUsersLoading,
+  usersLoading: selectUsersLoading,
   popularListLoading: selectPopularListsLoading,
 });
 
 export default connect(mapStateToProps, {
   loadUsers,
   loadPopularLists,
-})(Users);
+})(UsersUser);

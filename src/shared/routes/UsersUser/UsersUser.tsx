@@ -12,18 +12,19 @@ import { ListState } from 'Modules/Lists/lists.types';
 import { tags } from 'Tools/mockData/mockTags';
 import { users } from 'Tools/mockData/mockUsers';
 import { Button, Fade, Flex, Hr } from '@antoniodcorrea/components';
+import { UserRowSkeletonGroup } from '../../components/UserRow/UserRowSkeletonGroup';
 
-import './Users.less';
+import './UsersUser.less';
 
 interface Props {
   usersIds: string[];
   popularLists: ListState[];
   popularListLoading: boolean;
-  loading: boolean;
+  usersLoading: boolean;
 }
 
-export const Users: React.FC<Props> = ({ usersIds, popularLists, loading, popularListLoading }) => (
-  <div className="Users">
+export const UsersUser: React.FC<Props> = ({ usersIds, popularLists, usersLoading, popularListLoading }) => (
+  <div className="UsersUser">
     <Flex horizontal="between" vertical="top">
       <Sidebar>
         <SidebarBlock title="Popular lists" loading={popularListLoading}>
@@ -32,8 +33,8 @@ export const Users: React.FC<Props> = ({ usersIds, popularLists, loading, popula
       </Sidebar>
       <Main>
         <MainHeader title="My users" />
-        {loading ? (
-          <div />
+        {usersLoading ? (
+          <UserRowSkeletonGroup />
         ) : (
           usersIds?.map((id, index) => (
             <React.Fragment key={id}>
