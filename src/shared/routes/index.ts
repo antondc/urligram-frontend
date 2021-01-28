@@ -3,11 +3,12 @@ import omit from 'lodash/omit';
 import { initialBookmarksLoader } from 'Modules/Bookmarks/bookmarks.loader';
 import { initialLinksLoader } from 'Modules/Links/links.loader';
 import { initialListsLoader } from 'Modules/Lists/lists.loader';
-import { sectionsMostFollowedUsersLoad } from 'Modules/Sections/initialLoaders/sectionsMostFollowedUsersLoad';
+import { mostFollowedUsersInitialLoader } from 'Modules/Sections/initialLoaders/mostFollowedUsersInitialLoader';
+import { newListsInitialLoader } from 'Modules/Sections/initialLoaders/newListsInitialLoader';
+import { popularListsInitialLoader } from 'Modules/Sections/initialLoaders/popularListsInitialLoader';
 import { initialUserLoader } from 'Modules/Users/user.loader';
 import { initialUsersLoader } from 'Modules/Users/users.loader';
 import { RequestParameters } from 'Root/src/server/routes/allRoutes';
-import { initialHomeVisitorLoader } from './HomeVisitor/HomeVisitor.loader';
 
 export interface Route {
   name: string;
@@ -172,7 +173,7 @@ const Routes: RoutesInterface = {
     auth: true,
     hasHeader: true,
     hasFooter: true,
-    loadInitialData: [sectionsMostFollowedUsersLoad, initialHomeVisitorLoader],
+    loadInitialData: [mostFollowedUsersInitialLoader, popularListsInitialLoader, newListsInitialLoader],
   },
 
   HomeUser: {

@@ -3,18 +3,13 @@ import { SectionsState } from 'Modules/Sections/sections.types';
 import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
 
-export const initialHomeVisitorLoader = async (): Promise<{ Sections: SectionsState }> => {
-  const { data: popularListsData }: ReceiveListsResponse = await HttpClient.get('/lists?sort=-members&page[size]=5');
+export const newListsInitialLoader = async (): Promise<{ Sections: SectionsState }> => {
   const { data: newListsData }: ReceiveListsResponse = await HttpClient.get('/lists?sort=-createdAt&page[size]=5');
 
   const ListsByKey = {
     byKey: {
       ...serializerFromArrayToByKey<ReceiveListItem, ListState>({
         data: newListsData,
-        contentPath: 'attributes',
-      }),
-      ...serializerFromArrayToByKey<ReceiveListItem, ListState>({
-        data: popularListsData,
         contentPath: 'attributes',
       }),
     },
@@ -25,9 +20,6 @@ export const initialHomeVisitorLoader = async (): Promise<{ Sections: SectionsSt
     Sections: {
       NewLists: {
         currentIds: newListsData.map((item) => item.id),
-      },
-      PopularLists: {
-        currentIds: popularListsData.map((item) => item.id),
       },
     },
   };
