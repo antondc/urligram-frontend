@@ -20,7 +20,7 @@ export const Lists = (state = initialState, action: ListsActionsTypes): ListsSta
           ...state.byKey,
           ...action.data.byKey,
         },
-        currentIds: action.data.currentIds,
+        currentIds: action.data?.currentIds || state.currentIds,
         loading: false,
       });
 

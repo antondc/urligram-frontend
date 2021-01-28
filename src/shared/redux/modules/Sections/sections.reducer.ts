@@ -1,7 +1,8 @@
-import { loadPopularLists } from './actions/loadPopularLists';
 import {
   LOAD_MOST_POPULAR_LISTS_STARTED,
   LOAD_MOST_POPULAR_LISTS_SUCCESS,
+  SECTIONS_NEW_LISTS_RECEIVE,
+  SECTIONS_NEW_LISTS_REQUEST,
   SectionsActionsTypes,
   SectionsState,
 } from './sections.types';
@@ -17,18 +18,30 @@ export const Sections = (state = initialState, action: SectionsActionsTypes): Se
   switch (action.type) {
     case LOAD_MOST_POPULAR_LISTS_STARTED:
       return Object.assign({}, state, {
+        ...state,
         PopularLists: {
-          ...loadPopularLists,
           loading: true,
         },
       });
     case LOAD_MOST_POPULAR_LISTS_SUCCESS:
       return Object.assign({}, state, {
+        ...state,
         PopularLists: {
-          byKey: {
-            ...state.PopularLists.byKey,
-            ...action.data.PopularLists.byKey,
-          },
+          currentIds: action.data.PopularLists?.currentIds,
+          loading: false,
+        },
+      });
+    case SECTIONS_NEW_LISTS_REQUEST:
+      return Object.assign({}, state, {
+        NewLists: {
+          loading: true,
+        },
+      });
+    case SECTIONS_NEW_LISTS_RECEIVE:
+      return Object.assign({}, state, {
+        ...state,
+        NewLists: {
+          currentIds: action.data.NewLists?.currentIds,
           loading: false,
         },
       });

@@ -7,6 +7,7 @@ import { initialUserLoader } from 'Modules/Users/user.loader';
 import { initialUsersLoader } from 'Modules/Users/users.loader';
 import { RequestParameters } from 'Root/src/server/routes/allRoutes';
 import { initialListsLoader } from '../redux/modules/Lists/lists.loader';
+import { initialHomeVisitorLoader } from './HomeVisitor/HomeVisitor.loader';
 
 export interface Route {
   name: string;
@@ -171,7 +172,7 @@ const Routes: RoutesInterface = {
     auth: true,
     hasHeader: true,
     hasFooter: true,
-    loadInitialData: [],
+    loadInitialData: [initialHomeVisitorLoader],
   },
 
   HomeUser: {

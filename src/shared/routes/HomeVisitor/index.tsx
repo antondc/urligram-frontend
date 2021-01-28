@@ -1,33 +1,34 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { loadBookmarks } from 'Modules/Bookmarks/actions/loadBookmarks';
-import { selectBookmarksAll } from 'Modules/Bookmarks/selectors/selectBookmarksAll';
-import { ListState } from 'Modules/Lists/lists.types';
+import { loadPopularLists } from 'Modules/Sections/actions/loadPopularLists';
+import { sectionsNewListsLoad } from 'Modules/Sections/actions/sectionsNewListsLoad';
+import { selectNewLists } from 'Modules/Sections/selectors/selectNewLists';
+import { selectNewListsLoading } from 'Modules/Sections/selectors/selectNewListsLoading';
 import { selectPopularLists } from 'Modules/Sections/selectors/selectPopularLists';
-import { selectPopularListsLoading } from '../../redux/modules/Sections/selectors/selectPopularListsLoading';
+import { selectPopularListsLoading } from 'Modules/Sections/selectors/selectPopularListsLoading';
 import { HomeVisitor as HomeVisitorUI } from './HomeVisitor';
 
-interface Props {
-  mostFollowedLists: ListState[];
-  mostFollowedListsLoading: boolean;
-}
+const HomeVisitor: React.FC = () => {
+  const dispatch = useDispatch();
+  const mostFollowedLists = useSelector(selectPopularLists);
+  const newLists = useSelector(selectNewLists);
+  const newListsLoading = useSelector(selectNewListsLoading);
+  const mostFollowedListsLoading = useSelector(selectPopularListsLoading);
 
-class HomeVisitor extends React.Component<Props> {
-  render = () => {
-    const { mostFollowedLists, mostFollowedListsLoading } = this.props;
+  useEffect(() => {
+    dispatch(loadPopularLists());
+    dispatch(sectionsNewListsLoad());
+  }, []);
 
-    return <HomeVisitorUI mostFollowedLists={mostFollowedLists} mostFollowedListsLoading={mostFollowedListsLoading} />;
-  };
-}
+  return (
+    <HomeVisitorUI
+      mostFollowedLists={mostFollowedLists}
+      mostFollowedListsLoading={mostFollowedListsLoading}
+      newLists={newLists}
+      newListsLoading={newListsLoading}
+    />
+  );
+};
 
-const mapStateToProps = createStructuredSelector({
-  bookmarks: selectBookmarksAll,
-  mostFollowedLists: selectPopularLists,
-  mostFollowedListsLoading: selectPopularListsLoading,
-});
-
-export default connect(mapStateToProps, {
-  loadBookmarks,
-})(HomeVisitor);
+export default HomeVisitor;

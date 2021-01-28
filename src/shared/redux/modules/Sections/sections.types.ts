@@ -2,9 +2,12 @@ import { ListsState, ListState } from '../Lists/lists.types';
 
 export const LOAD_MOST_POPULAR_LISTS_STARTED = 'LOAD_MOST_POPULAR_LISTS_STARTED';
 export const LOAD_MOST_POPULAR_LISTS_SUCCESS = 'LOAD_MOST_POPULAR_LISTS_SUCCESS';
+export const SECTIONS_NEW_LISTS_REQUEST = 'SECTIONS_NEW_LISTS_REQUEST';
+export const SECTIONS_NEW_LISTS_RECEIVE = 'SECTIONS_NEW_LISTS_RECEIVE';
 
 export interface SectionsState {
-  PopularLists: ListsState;
+  PopularLists?: ListsState;
+  NewLists?: ListsState;
 }
 
 interface RequestMostPopularListsAction {
@@ -19,7 +22,7 @@ interface ReceiveMostPopularListsAction {
   data: SectionsState;
 }
 
-export interface ReceiveMostPopularListsResponse {
+export interface ReceiveListsResponse {
   data: {
     type: 'lists';
     id: number;
@@ -27,12 +30,20 @@ export interface ReceiveMostPopularListsResponse {
   }[];
 }
 
-export interface ReceiveMostPopularListsResponse {
+interface SectionNewListsRequestAction {
+  type: typeof SECTIONS_NEW_LISTS_REQUEST;
   data: {
-    type: 'lists';
-    id: number;
-    attributes: ListState;
-  }[];
+    loading: true;
+  };
 }
 
-export type SectionsActionsTypes = RequestMostPopularListsAction | ReceiveMostPopularListsAction;
+interface SectionNewListsReceiveAction {
+  type: typeof SECTIONS_NEW_LISTS_RECEIVE;
+  data: SectionsState;
+}
+
+export type SectionsActionsTypes =
+  | RequestMostPopularListsAction
+  | ReceiveMostPopularListsAction
+  | SectionNewListsRequestAction
+  | SectionNewListsReceiveAction;
