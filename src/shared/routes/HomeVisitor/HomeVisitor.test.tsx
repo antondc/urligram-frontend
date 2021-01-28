@@ -4,7 +4,7 @@ import React from 'react';
 import { HomeVisitor as HomeVisitorUI } from './HomeVisitor';
 
 const props = {
-  popularLists: [
+  mostFollowedLists: [
     {
       id: 3,
       name: 'Third list',
@@ -25,6 +25,7 @@ const props = {
       tags: [],
     },
   ],
+  mostFollowedListsLoading: false,
 };
 
 describe('HomeVisitorUI', () => {

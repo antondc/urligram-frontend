@@ -9,22 +9,22 @@ import { ListState } from 'Modules/Lists/lists.types';
 import { tags } from 'Tools/mockData/mockTags';
 import { users } from 'Tools/mockData/mockUsers';
 import { Border, Flex, Hr } from '@antoniodcorrea/components';
+import SidebarBlock from '../../components/SidebarBlock';
 
 import './HomeVisitor.less';
 
 interface Props {
-  popularLists: ListState[];
+  mostFollowedLists: ListState[];
+  mostFollowedListsLoading: boolean;
 }
 
-export const HomeVisitor: React.FC<Props> = ({ popularLists }) => (
+export const HomeVisitor: React.FC<Props> = ({ mostFollowedLists, mostFollowedListsLoading }) => (
   <div className="HomeVisitor">
     <Flex horizontal="between" vertical="top">
       <Sidebar>
-        {/* <SidebarListLists title="Popular Lists" items={popularLists} id="PopularLists" />
-        <Hr spacer />
-        <SidebarListLists title="Popular Lists" items={popularLists} id="PopularLists2" />
-        <Hr spacer />
-        <SidebarListLists title="Popular Lists" items={popularLists} id="PopularLists3" /> */}
+        <SidebarBlock title="Most Followed Lists" loading={mostFollowedListsLoading}>
+          <SidebarListLists items={mostFollowedLists} />
+        </SidebarBlock>
       </Sidebar>
       <Main>
         <Border>HomeVisitor</Border>
