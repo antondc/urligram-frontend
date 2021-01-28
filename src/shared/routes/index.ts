@@ -4,6 +4,7 @@ import { initialBookmarksLoader } from 'Modules/Bookmarks/bookmarks.loader';
 import { initialLinksLoader } from 'Modules/Links/links.loader';
 import { initialListsLoader } from 'Modules/Lists/lists.loader';
 import { mostFollowedUsersInitialLoader } from 'Modules/Sections/initialLoaders/mostFollowedUsersInitialLoader';
+import { myListsInitialLoader } from 'Modules/Sections/initialLoaders/myListsInitialLoader';
 import { newListsInitialLoader } from 'Modules/Sections/initialLoaders/newListsInitialLoader';
 import { newUsersInitialLoader } from 'Modules/Sections/initialLoaders/newUsersInitialLoader';
 import { popularListsInitialLoader } from 'Modules/Sections/initialLoaders/popularListsInitialLoader';
@@ -167,6 +168,16 @@ const Routes: RoutesInterface = {
     loadInitialData: [],
   },
 
+  HomeUser: {
+    name: 'HomeUser',
+    path: '/:lang([a-z]{2})?',
+    exact: true,
+    auth: false,
+    hasHeader: true,
+    hasFooter: true,
+    loadInitialData: [myListsInitialLoader],
+  },
+
   HomeVisitor: {
     name: 'HomeVisitor',
     path: '/:lang([a-z]{2})?',
@@ -180,16 +191,6 @@ const Routes: RoutesInterface = {
       newListsInitialLoader,
       newUsersInitialLoader,
     ],
-  },
-
-  HomeUser: {
-    name: 'HomeUser',
-    path: '/:lang([a-z]{2})?',
-    exact: true,
-    auth: false,
-    hasHeader: true,
-    hasFooter: true,
-    loadInitialData: [],
   },
 
   ServerError: {

@@ -2,29 +2,25 @@ import React from 'react';
 
 import Main from 'Components/Main';
 import Sidebar from 'Components/Sidebar';
+import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListLists from 'Components/SidebarListLists';
-import SidebarListTags from 'Components/SidebarListTags';
-import SidebarListUsers from 'Components/SidebarListUsers';
 import { ListState } from 'Modules/Lists/lists.types';
-import { tags } from 'Tools/mockData/mockTags';
-import { users } from 'Tools/mockData/mockUsers';
 import { Border, Flex, Hr } from '@antoniodcorrea/components';
 
 import './HomeUser.less';
 
 interface Props {
-  popularLists: ListState[];
+  myLists: ListState[];
+  myListsLoading: boolean;
 }
 
-export const HomeUser: React.FC<Props> = ({ popularLists }) => (
+export const HomeUser: React.FC<Props> = ({ myLists, myListsLoading }) => (
   <div className="HomeUser">
     <Flex horizontal="between" vertical="top">
       <Sidebar>
-        {/* <SidebarListLists title="Popular Lists" items={popularLists} id="PopularLists" />
-        <Hr spacer />
-        <SidebarListLists title="Popular Lists" items={popularLists} id="PopularLists2" />
-        <Hr spacer />
-        <SidebarListLists title="Popular Lists" items={popularLists} id="PopularLists3" /> */}
+        <SidebarBlock title="Most Followed Lists" loading={myListsLoading}>
+          <SidebarListLists items={myLists} />
+        </SidebarBlock>
       </Sidebar>
       <Main>
         <Border>HomeUser</Border>

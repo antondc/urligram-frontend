@@ -1,30 +1,23 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { loadBookmarks } from 'Modules/Bookmarks/actions/loadBookmarks';
-import { selectBookmarksAll } from 'Modules/Bookmarks/selectors/selectBookmarksAll';
-import { ListState } from 'Modules/Lists/lists.types';
-import { selectPopularLists } from 'Modules/Sections/selectors/selectPopularLists';
-import { HomeUser as HomeUserUI } from './HomeUser';
+import { sectionsMyListsLoad } from '../../redux/modules/Sections/actions/sectionsMyListsLoad';
+import { selectMyLists } from '../../redux/modules/Sections/selectors/selectMyLists';
+import { selectMyListsLoading } from '../../redux/modules/Sections/selectors/selectMyListsLoading';
+import { selectSessionUserId } from '../../redux/modules/Session/selectors/selectSessionUserId';
+import { HomeUser as HomeUserUi } from './HomeUser';
 
-interface Props {
-  popularLists: ListState[];
-}
+const HomeUser: React.FC = () => {
+  const dispatch = useDispatch();
+  const sessionId = useSelector(selectSessionUserId);
+  const myLists = useSelector(selectMyLists);
+  const myListsLoading = useSelector(selectMyListsLoading);
 
-class HomeUser extends React.Component<Props> {
-  render = () => {
-    const { popularLists } = this.props;
+  useEffect(() => {
+    dispatch(sectionsMyListsLoad(sessionId));
+  }, [sessionId]);
 
-    return <HomeUserUI popularLists={popularLists} />;
-  };
-}
+  return <HomeUserUi myLists={myLists} myListsLoading={myListsLoading} />;
+};
 
-const mapStateToProps = createStructuredSelector({
-  bookmarks: selectBookmarksAll,
-  popularLists: selectPopularLists,
-});
-
-export default connect(mapStateToProps, {
-  loadBookmarks,
-})(HomeUser);
+export default HomeUser;

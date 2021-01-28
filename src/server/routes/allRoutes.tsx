@@ -33,12 +33,24 @@ router.get(routesPathsList, (req: any, res: any, next: any) => {
   // Get active route key
   const activeRouteKey = findActiveRouteKey({ urlPath: req.path, routes: routesList });
 
+  // Validate session data from token
+  let session;
+  try {
+    session = authentication.verifyToken(req.cookies.sessionToken) as SessionState;
+  } catch {
+    session = {};
+  }
+
   const requestParameters: RequestParameters = {
     hostname: req.hostname,
     originalUrl: req.originalUrl,
-    params: req.params,
+    params: {
+      ...req.params,
+      sessionId: session?.id,
+    },
     query: req.query,
   };
+
   // Retrieve initial data from loaders passing req.params.
   const initialDataLoaders = Routes[activeRouteKey].loadInitialData.map((item: any) => item(requestParameters)); // We have to execute the thunk, as well as the async function within it
 
@@ -49,15 +61,9 @@ router.get(routesPathsList, (req: any, res: any, next: any) => {
     .then((response: any) => {
       const data = merge(...response); // Use Lodash to merge the result objects of the promises; otherwise we will get only the last result
 
-      // Validate session data from token
-      try {
-        const session = authentication.verifyToken(req.cookies.sessionToken) as SessionState;
-        data.Session = {
-          ...session,
-        };
-      } catch (err) {
-        data.Session = {};
-      }
+      data.Session = {
+        ...session,
+      };
 
       // Load routes data
       const enhancedRoute = enhanceRouteWithParams({
