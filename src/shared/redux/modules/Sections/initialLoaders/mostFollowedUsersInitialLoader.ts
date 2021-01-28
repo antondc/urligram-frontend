@@ -4,7 +4,7 @@ import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
 
 export const mostFollowedUsersInitialLoader = async (): Promise<{ Sections: SectionsState }> => {
-  const { data: usersData }: ReceiveUsersResponse = await HttpClient.get('/users?sort=-createdAt&page[size]=5');
+  const { data: usersData }: ReceiveUsersResponse = await HttpClient.get('/users?sort=-followers&page[size]=5');
 
   const UsersByKey = {
     byKey: {

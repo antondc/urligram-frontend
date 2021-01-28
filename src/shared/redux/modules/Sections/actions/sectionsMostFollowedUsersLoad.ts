@@ -10,7 +10,7 @@ import { sectionsMostFollowedUsersRequest } from './sectionsMostFollowedUsersReq
 
 export const sectionsMostFollowedUsersLoad = (): ThunkAction<any, any, any, Action> => async (dispatch?: Dispatch) => {
   dispatch(sectionsMostFollowedUsersRequest());
-  const { data }: ReceiveUsersResponse = await HttpClient.get('/users?sort=-createdAt&page[size]=5');
+  const { data }: ReceiveUsersResponse = await HttpClient.get('/users?sort=-followers&page[size]=5');
 
   const mostFollowedUsersByKey = {
     byKey: serializerFromArrayToByKey<ReceiveUserItem, UserState>({
