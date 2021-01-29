@@ -13,7 +13,7 @@ export const sectionsMyListsLoad = (sessionId: string): ThunkAction<any, any, an
 ) => {
   dispatch(sectionsMyListsRequest());
 
-  const { data }: ReceiveListsResponse = await HttpClient.get(`/users/${sessionId}/lists?page[size]=5`);
+  const { data }: ReceiveListsResponse = await HttpClient.get(`/users/${sessionId}/lists?page[size]=5&filter[role]=admin`);
 
   const myListsByKey = {
     byKey: serializerFromArrayToByKey<ReceiveListItem, ListState>({

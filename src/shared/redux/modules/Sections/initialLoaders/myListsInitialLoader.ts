@@ -10,7 +10,7 @@ export const myListsInitialLoader = async ({ params }: RequestParameters = {}): 
   if (!params?.sessionId) return;
 
   const { data: myListsData }: ReceiveListsResponse = await HttpClient.get(
-    `/users/${params?.sessionId}/lists?page[size]=5`
+    `/users/${params?.sessionId}/lists?page[size]=5&filter[role]=admin`
   );
 
   const ListsByKey = {
