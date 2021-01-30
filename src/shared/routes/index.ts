@@ -11,6 +11,8 @@ import { popularListsInitialLoader } from 'Modules/Sections/initialLoaders/popul
 import { initialUserLoader } from 'Modules/Users/user.loader';
 import { initialUsersLoader } from 'Modules/Users/users.loader';
 import { RequestParameters } from 'Root/src/server/routes/allRoutes';
+import { followingListsInitialLoader } from '../redux/modules/Sections/initialLoaders/followingListsInitialLoader';
+import { myTagsInitialLoader } from '../redux/modules/Sections/initialLoaders/myTagsInitialLoader';
 
 export interface Route {
   name: string;
@@ -175,7 +177,7 @@ const Routes: RoutesInterface = {
     auth: false,
     hasHeader: true,
     hasFooter: true,
-    loadInitialData: [myListsInitialLoader],
+    loadInitialData: [myListsInitialLoader, followingListsInitialLoader, myTagsInitialLoader],
   },
 
   HomeVisitor: {

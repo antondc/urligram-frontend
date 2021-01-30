@@ -5,6 +5,7 @@ import { ListsState } from './Lists/lists.types';
 import { RoutesState } from './Routes/routes.types';
 import { SectionsState } from './Sections/sections.types';
 import { SessionState } from './Session/session.types';
+import { TagsState } from './Tags/tags.types';
 import { UiState } from './Ui/ui.types';
 import { UsersState } from './Users/users.types';
 
@@ -18,4 +19,5 @@ export type RootState = {
   Ui: UiState;
   Session: SessionState;
   Lists: ListsState;
+  Tags: TagsState;
 };

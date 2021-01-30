@@ -4,7 +4,9 @@ import Main from 'Components/Main';
 import Sidebar from 'Components/Sidebar';
 import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListLists from 'Components/SidebarListLists';
+import SidebarListTags from 'Components/SidebarListTags';
 import { ListState } from 'Modules/Lists/lists.types';
+import { TagState } from 'Modules/Tags/tags.types';
 import { Border, Flex, Hr } from '@antoniodcorrea/components';
 
 import './HomeUser.less';
@@ -14,9 +16,18 @@ interface Props {
   myListsLoading: boolean;
   followingLists: ListState[];
   followingListsLoading: boolean;
+  myTags: TagState[];
+  myTagsLoading: boolean;
 }
 
-export const HomeUser: React.FC<Props> = ({ myLists, myListsLoading, followingLists, followingListsLoading }) => (
+export const HomeUser: React.FC<Props> = ({
+  myLists,
+  myListsLoading,
+  followingLists,
+  followingListsLoading,
+  myTags,
+  myTagsLoading,
+}) => (
   <div className="HomeUser">
     <Flex horizontal="between" vertical="top">
       <Sidebar>
@@ -32,13 +43,9 @@ export const HomeUser: React.FC<Props> = ({ myLists, myListsLoading, followingLi
         <Border>HomeUser</Border>
       </Main>
       <Sidebar>
-        {/* <SidebarListTags title="Trending Tags" items={tags} />
-        <Hr spacer />
-        <SidebarListUsers title="Popular Users" items={users} />
-        <Hr spacer />
-        <SidebarListUsers title="Following" items={users} />
-        <Hr spacer />
-        <SidebarListUsers title="Followers" items={users} /> */}
+        <SidebarBlock title="My Tags" loading={myTagsLoading}>
+          <SidebarListTags items={myTags} />
+        </SidebarBlock>
       </Sidebar>
     </Flex>
   </div>

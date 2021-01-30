@@ -1,13 +1,16 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { sectionsFollowingListsLoad } from '../../redux/modules/Sections/actions/sectionsFollowingListsLoad';
-import { sectionsMyListsLoad } from '../../redux/modules/Sections/actions/sectionsMyListsLoad';
-import { selectFollowingLists } from '../../redux/modules/Sections/selectors/selectFollowingLists';
-import { selectFollowingListsLoading } from '../../redux/modules/Sections/selectors/selectFollowingListsLoading';
-import { selectMyLists } from '../../redux/modules/Sections/selectors/selectMyLists';
-import { selectMyListsLoading } from '../../redux/modules/Sections/selectors/selectMyListsLoading';
-import { selectSessionUserId } from '../../redux/modules/Session/selectors/selectSessionUserId';
+import { sectionsFollowingListsLoad } from 'Modules/Sections/actions/sectionsFollowingListsLoad';
+import { sectionsMyListsLoad } from 'Modules/Sections/actions/sectionsMyListsLoad';
+import { sectionsMyTagsLoad } from 'Modules/Sections/actions/sectionsMyTagsLoad';
+import { selectFollowingLists } from 'Modules/Sections/selectors/selectFollowingLists';
+import { selectFollowingListsLoading } from 'Modules/Sections/selectors/selectFollowingListsLoading';
+import { selectMyLists } from 'Modules/Sections/selectors/selectMyLists';
+import { selectMyListsLoading } from 'Modules/Sections/selectors/selectMyListsLoading';
+import { selectMyTags } from 'Modules/Sections/selectors/selectMyTags';
+import { selectMyTagsLoading } from 'Modules/Sections/selectors/selectMyTagsLoading';
+import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUserId';
 import { HomeUser as HomeUserUi } from './HomeUser';
 
 const HomeUser: React.FC = () => {
@@ -17,9 +20,13 @@ const HomeUser: React.FC = () => {
   const myListsLoading = useSelector(selectMyListsLoading);
   const followingLists = useSelector(selectFollowingLists);
   const followingListsLoading = useSelector(selectFollowingListsLoading);
+  const myTags = useSelector(selectMyTags);
+  const myTagsLoading = useSelector(selectMyTagsLoading);
+
   useEffect(() => {
     dispatch(sectionsMyListsLoad(sessionId));
     dispatch(sectionsFollowingListsLoad(sessionId));
+    dispatch(sectionsMyTagsLoad(sessionId));
   }, [sessionId]);
 
   return (
@@ -28,6 +35,8 @@ const HomeUser: React.FC = () => {
       myListsLoading={myListsLoading}
       followingLists={followingLists}
       followingListsLoading={followingListsLoading}
+      myTags={myTags}
+      myTagsLoading={myTagsLoading}
     />
   );
 };

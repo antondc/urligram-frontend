@@ -5,6 +5,7 @@ import { Lists } from './modules/Lists/lists.reducer';
 import { Routes } from './modules/Routes/routes.reducer';
 import { Sections } from './modules/Sections/sections.reducer';
 import { Session } from './modules/Session/session.reducer';
+import { Tags } from './modules/Tags/tags.reducer';
 import { Ui } from './modules/Ui/ui.reducer';
 import { Users } from './modules/Users/users.reducer';
 
@@ -18,4 +19,5 @@ export const RootReducers = {
   Links,
   Sections,
   Lists,
+  Tags,
 };

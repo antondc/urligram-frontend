@@ -12,7 +12,7 @@ interface Props {
 }
 
 const SidebarListLists: React.FC<Props> = ({ items, loading }) => (
-  <>
+  <dl className="SidebarListLists-lists">
     {!loading && items?.length ? (
       items.map(({ id, name, members }, index) => (
         <React.Fragment key={id}>
@@ -31,6 +31,6 @@ const SidebarListLists: React.FC<Props> = ({ items, loading }) => (
     ) : (
       <SidebarListListsSkeleton />
     )}
-  </>
+  </dl>
 );
 export default SidebarListLists;

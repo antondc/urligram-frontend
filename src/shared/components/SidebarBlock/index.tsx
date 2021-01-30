@@ -30,7 +30,7 @@ const SidebarBlock: React.FC<Props> = ({ title, loading, children }) => {
       <H4>{title}</H4>
       <Hr spacer size="small" />
       <FadeInOut valueToUpdate={computedLoadingState} appear>
-        <dl className="SidebarListLists-lists">{childrenWithProps}</dl>
+        {childrenWithProps}
       </FadeInOut>
     </Border>
   );
