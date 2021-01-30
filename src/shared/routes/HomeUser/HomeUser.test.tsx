@@ -26,6 +26,8 @@ const list = {
 const props = {
   myLists: [list],
   myListsLoading: false,
+  followingLists: [list],
+  followingListsLoading: false,
 };
 
 describe('HomeUserUI', () => {

@@ -12,14 +12,20 @@ import './HomeUser.less';
 interface Props {
   myLists: ListState[];
   myListsLoading: boolean;
+  followingLists: ListState[];
+  followingListsLoading: boolean;
 }
 
-export const HomeUser: React.FC<Props> = ({ myLists, myListsLoading }) => (
+export const HomeUser: React.FC<Props> = ({ myLists, myListsLoading, followingLists, followingListsLoading }) => (
   <div className="HomeUser">
     <Flex horizontal="between" vertical="top">
       <Sidebar>
-        <SidebarBlock title="Most Followed Lists" loading={myListsLoading}>
+        <SidebarBlock title="My Lists" loading={myListsLoading}>
           <SidebarListLists items={myLists} />
+        </SidebarBlock>
+        <Hr spacer />
+        <SidebarBlock title="Following Lists" loading={followingListsLoading}>
+          <SidebarListLists items={followingLists} />
         </SidebarBlock>
       </Sidebar>
       <Main>
