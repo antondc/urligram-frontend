@@ -10,6 +10,8 @@ const props = {
   followingListsLoading: false,
   myTags: [],
   myTagsLoading: false,
+  followingUsers: [],
+  followingUsersLoading: false,
 };
 
 describe('HomeUserUI', () => {

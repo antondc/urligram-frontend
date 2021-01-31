@@ -3,6 +3,8 @@ import {
   LOAD_MOST_POPULAR_LISTS_SUCCESS,
   SECTIONS_FOLLOWING_LISTS_RECEIVE,
   SECTIONS_FOLLOWING_LISTS_REQUEST,
+  SECTIONS_FOLLOWING_USERS_RECEIVE,
+  SECTIONS_FOLLOWING_USERS_REQUEST,
   SECTIONS_MOST_FOLLOWED_USERS_RECEIVE,
   SECTIONS_MOST_FOLLOWED_USERS_REQUEST,
   SECTIONS_MY_LISTS_RECEIVE,
@@ -114,7 +116,7 @@ export const Sections = (state = initialState, action: SectionsActionsTypes): Se
       });
     case SECTIONS_MY_TAGS_REQUEST:
       return Object.assign({}, state, {
-        FollowingLists: {
+        MyTags: {
           loading: true,
         },
       });
@@ -122,6 +124,19 @@ export const Sections = (state = initialState, action: SectionsActionsTypes): Se
       return Object.assign({}, state, {
         MyTags: {
           currentIds: action.data.MyTags?.currentIds,
+          loading: false,
+        },
+      });
+    case SECTIONS_FOLLOWING_USERS_REQUEST:
+      return Object.assign({}, state, {
+        FollowingUsers: {
+          loading: true,
+        },
+      });
+    case SECTIONS_FOLLOWING_USERS_RECEIVE:
+      return Object.assign({}, state, {
+        FollowingUsers: {
+          currentIds: action.data.FollowingUsers?.currentIds,
           loading: false,
         },
       });

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { UserState } from 'Modules/Users/users.types';
-import { Hr, Span, Tooltip } from '@antoniodcorrea/components';
+import { A, Hr, Span, Tooltip } from '@antoniodcorrea/components';
 import { SidebarListUsersSkeleton } from './SidebarListUsersSkeleton';
 
 import './SidebarListUsers.less';
@@ -19,14 +19,56 @@ const SidebarListUsers: React.FC<Props> = ({ items, loading }) => (
           {!!index && <Hr spacer size="micro" />}
           <dd className="SidebarListUsers-user">
             <div className="SidebarListUsers-userName">
-              <Span bold>+ {name}</Span>
+              <A href={`users/${id}`} frontend styled>
+                <Span bold>+ {name}</Span>
+              </A>
             </div>
-            <div id={id + '-' + index} className="SidebarListUsers-userDescription">
-              <Span size="small"> {followers?.length && followers?.length}</Span> ·
-              <Span size="small"> {following?.length && following?.length}</Span> ·
-              <Span size="small"> {bookmarks?.length && bookmarks?.length}</Span>
+            <div className="SidebarListUsers-userDescription">
+              {followers?.length && (
+                <>
+                  <Tooltip
+                    parentElementId={`SidebarListUsers-followers-${id}`}
+                    content="Followers of this user"
+                    delay={0.5}
+                  />
+                  <A href={`users/${id}/followers`} frontend>
+                    <Span id={`SidebarListUsers-followers-${id}`} className="SidebarListUsers-userData" size="small">
+                      {' '}
+                      {followers?.length} ·{' '}
+                    </Span>
+                  </A>
+                </>
+              )}
+              {following?.length && (
+                <>
+                  <Tooltip
+                    parentElementId={`SidebarListUsers-following-${id}`}
+                    content="People following to this user"
+                    delay={0.5}
+                  />
+                  <A href={`users/${id}/following`} frontend>
+                    <Span id={`SidebarListUsers-following-${id}`} className="SidebarListUsers-userData" size="small">
+                      {following?.length} ·{' '}
+                    </Span>
+                  </A>
+                </>
+              )}
+              {bookmarks?.length && (
+                <>
+                  <Tooltip
+                    parentElementId={`SidebarListUsers-bookmarks-${id}`}
+                    content="Bookmarks of this user"
+                    delay={0.5}
+                  />
+                  <A href={`users/${id}/bookmarks`} frontend>
+                    <Span id={`SidebarListUsers-bookmarks-${id}`} className="SidebarListUsers-userData" size="small">
+                      {' '}
+                      {bookmarks?.length}
+                    </Span>
+                  </A>
+                </>
+              )}
             </div>
-            <Tooltip parentElementId={id + '-' + index} content="This is something" />
           </dd>
         </React.Fragment>
       ))
