@@ -4,6 +4,7 @@ import React from 'react';
 import { HomeUser as HomeUserUI } from './HomeUser';
 
 const props = {
+  sessionId: '',
   myLists: [],
   myListsLoading: false,
   followingLists: [],

@@ -14,6 +14,7 @@ import SidebarListUsers from '../../components/SidebarListUsers';
 import './HomeUser.less';
 
 interface Props {
+  sessionId: string;
   myLists: ListState[];
   myListsLoading: boolean;
   followingLists: ListState[];
@@ -25,6 +26,7 @@ interface Props {
 }
 
 export const HomeUser: React.FC<Props> = ({
+  sessionId,
   myLists,
   myListsLoading,
   followingLists,
@@ -37,11 +39,11 @@ export const HomeUser: React.FC<Props> = ({
   <div className="HomeUser">
     <Flex horizontal="between" vertical="top">
       <Sidebar>
-        <SidebarBlock title="My Lists" loading={myListsLoading}>
+        <SidebarBlock title="My Lists" href={`user/${sessionId}/lists`} loading={myListsLoading}>
           <SidebarListLists items={myLists} />
         </SidebarBlock>
         <Hr spacer />
-        <SidebarBlock title="Following Lists" loading={followingListsLoading}>
+        <SidebarBlock title="Following Lists" href={`user/${sessionId}/lists`} loading={followingListsLoading}>
           <SidebarListLists items={followingLists} />
         </SidebarBlock>
       </Sidebar>
@@ -49,11 +51,11 @@ export const HomeUser: React.FC<Props> = ({
         <Border>HomeUser</Border>
       </Main>
       <Sidebar>
-        <SidebarBlock title="My Tags" loading={myTagsLoading}>
+        <SidebarBlock title="My Tags" href="" loading={myTagsLoading}>
           <SidebarListTags items={myTags} />
         </SidebarBlock>
         <Hr spacer />
-        <SidebarBlock title="Following Users" loading={followingUsersLoading}>
+        <SidebarBlock title="Following Users" href={`user/${sessionId}/following`} loading={followingUsersLoading}>
           <SidebarListUsers items={followingUsers} />
         </SidebarBlock>
       </Sidebar>

@@ -37,6 +37,7 @@ const HomeUser: React.FC = () => {
 
   return (
     <HomeUserUi
+      sessionId={sessionId}
       myLists={myLists}
       myListsLoading={myListsLoading}
       followingLists={followingLists}
