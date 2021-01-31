@@ -6,10 +6,10 @@ import { loadBookmarks } from 'Modules/Bookmarks/actions/loadBookmarks';
 import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
 import { selectBookmarksAll } from 'Modules/Bookmarks/selectors/selectBookmarksAll';
 import { selectBookmarksCurrentIds } from 'Modules/Bookmarks/selectors/selectBookmarksCurrentIds';
+import { selectBookmarksLoading } from 'Modules/Bookmarks/selectors/selectBookmarksLoading';
 import { ListState } from 'Modules/Lists/lists.types';
 import { loadPopularLists } from 'Modules/Sections/actions/loadPopularLists';
 import { selectPopularLists } from 'Modules/Sections/selectors/selectPopularLists';
-import { selectBookmarksLoading } from '../../redux/modules/Bookmarks/selectors/selectBookmarksLoading';
 import { BookmarksUser as BookmarksUserUi } from './BookmarksUser';
 
 interface Props {

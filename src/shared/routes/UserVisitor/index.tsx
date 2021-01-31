@@ -3,13 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { loadBookmarksByUserId } from 'Modules/Bookmarks/actions/loadBookmarksByUserId';
 import { selectBookmarksCurrentIds } from 'Modules/Bookmarks/selectors/selectBookmarksCurrentIds';
+import { selectBookmarksLoading } from 'Modules/Bookmarks/selectors/selectBookmarksLoading';
 import { ListState } from 'Modules/Lists/lists.types';
 import { selectCurrentRouteParamUserId } from 'Modules/Routes/selectors/selectCurrentRouteParamUserId';
 import { loadPopularLists } from 'Modules/Sections/actions/loadPopularLists';
 import { selectPopularLists } from 'Modules/Sections/selectors/selectPopularLists';
+import { selectPopularListsLoading } from 'Modules/Sections/selectors/selectPopularListsLoading';
 import { userLoad } from 'Modules/Users/actions/userLoad';
-import { selectBookmarksLoading } from '../../redux/modules/Bookmarks/selectors/selectBookmarksLoading';
-import { selectPopularListsLoading } from '../../redux/modules/Sections/selectors/selectPopularListsLoading';
 import { UserVisitor as UserVisitorUi } from './UserVisitor';
 
 interface Props {

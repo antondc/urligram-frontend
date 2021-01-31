@@ -3,16 +3,16 @@ import omit from 'lodash/omit';
 import { initialBookmarksLoader } from 'Modules/Bookmarks/bookmarks.loader';
 import { initialLinksLoader } from 'Modules/Links/links.loader';
 import { initialListsLoader } from 'Modules/Lists/lists.loader';
+import { followingListsInitialLoader } from 'Modules/Sections/initialLoaders/followingListsInitialLoader';
 import { mostFollowedUsersInitialLoader } from 'Modules/Sections/initialLoaders/mostFollowedUsersInitialLoader';
 import { myListsInitialLoader } from 'Modules/Sections/initialLoaders/myListsInitialLoader';
+import { myTagsInitialLoader } from 'Modules/Sections/initialLoaders/myTagsInitialLoader';
 import { newListsInitialLoader } from 'Modules/Sections/initialLoaders/newListsInitialLoader';
 import { newUsersInitialLoader } from 'Modules/Sections/initialLoaders/newUsersInitialLoader';
 import { popularListsInitialLoader } from 'Modules/Sections/initialLoaders/popularListsInitialLoader';
 import { initialUserLoader } from 'Modules/Users/user.loader';
 import { initialUsersLoader } from 'Modules/Users/users.loader';
 import { RequestParameters } from 'Root/src/server/routes/allRoutes';
-import { followingListsInitialLoader } from '../redux/modules/Sections/initialLoaders/followingListsInitialLoader';
-import { myTagsInitialLoader } from '../redux/modules/Sections/initialLoaders/myTagsInitialLoader';
 
 export interface Route {
   name: string;

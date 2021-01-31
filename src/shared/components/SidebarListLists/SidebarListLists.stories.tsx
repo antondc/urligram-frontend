@@ -1,7 +1,7 @@
 import React from 'react';
 
+import SidebarBlock from 'Components/SidebarBlock';
 import { boolean, withKnobs } from '@storybook/addon-knobs';
-import SidebarBlock from '../SidebarBlock';
 import SidebarListLists from '.';
 import { Props } from './SidebarListListsSkeletonProps';
 

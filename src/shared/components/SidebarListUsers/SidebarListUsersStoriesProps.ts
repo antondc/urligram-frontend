@@ -1,4 +1,4 @@
-import { UserState } from '../../redux/modules/Users/users.types';
+import { UserState } from 'Modules/Users/users.types';
 
 export const MockUsersList: UserState[] = [
   {

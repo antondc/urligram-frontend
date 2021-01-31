@@ -5,6 +5,7 @@ import { createStructuredSelector } from 'reselect';
 import { Location } from 'history';
 
 import Background from 'Assets/svg/background.svg';
+import LayoutContent from 'Common/LayoutContent';
 import LayoutHelper from 'Common/LayoutHelper';
 import Footer from 'Components/Footer';
 import Header from 'Components/Header';
@@ -24,7 +25,6 @@ import Router from 'Routes/Router';
 import enhanceRouteWithParams from 'Tools/utils/url/enhanceRouteWithParams';
 import findActiveRouteKey from 'Tools/utils/url/findActiveRouteKey';
 import { Fade, Hr, SpinnerCircle } from '@antoniodcorrea/components';
-import LayoutContent from '../LayoutContent';
 
 import './Layout.less';
 

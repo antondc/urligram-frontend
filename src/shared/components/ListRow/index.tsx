@@ -6,9 +6,9 @@ import { GlossaryState } from 'Modules/Languages/languages.types';
 import { selectCurrentGlossary } from 'Modules/Languages/selectors/selectCurrentGlossary';
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
 import { ListState } from 'Modules/Lists/lists.types';
+import { selectListsById } from 'Modules/Lists/selectors/selectListById';
 import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUserId';
 import { LocaleFormattedDate } from 'Tools/utils/Date/localeFormattedDate';
-import { selectListsById } from '../../redux/modules/Lists/selectors/selectListById';
 import { ListRow as ListRowUi } from './ListRow';
 
 import './ListRow.less';

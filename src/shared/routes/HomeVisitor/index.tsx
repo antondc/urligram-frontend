@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loadPopularLists } from 'Modules/Sections/actions/loadPopularLists';
 import { sectionsMostFollowedUsersLoad } from 'Modules/Sections/actions/sectionsMostFollowedUsersLoad';
 import { sectionsNewListsLoad } from 'Modules/Sections/actions/sectionsNewListsLoad';
+import { sectionsNewUsersLoad } from 'Modules/Sections/actions/sectionsNewUsersLoad';
 import { selectMostFollowedUsers } from 'Modules/Sections/selectors/selectMostFollowedUsers';
 import { selectMostFollowedUsersLoading } from 'Modules/Sections/selectors/selectMostFollowedUsersLoading';
 import { selectNewLists } from 'Modules/Sections/selectors/selectNewLists';
@@ -12,7 +13,6 @@ import { selectNewUsers } from 'Modules/Sections/selectors/selectNewUsers';
 import { selectNewUsersLoading } from 'Modules/Sections/selectors/selectNewUsersLoading';
 import { selectPopularLists } from 'Modules/Sections/selectors/selectPopularLists';
 import { selectPopularListsLoading } from 'Modules/Sections/selectors/selectPopularListsLoading';
-import { sectionsNewUsersLoad } from '../../redux/modules/Sections/actions/sectionsNewUsersLoad';
 import { HomeVisitor as HomeVisitorUI } from './HomeVisitor';
 
 const HomeVisitor: React.FC = () => {

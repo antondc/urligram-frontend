@@ -5,14 +5,10 @@ import MainHeader from 'Components/MainHeader';
 import Sidebar from 'Components/Sidebar';
 import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListLists from 'Components/SidebarListLists';
-import SidebarListTags from 'Components/SidebarListTags';
-import SidebarListUsers from 'Components/SidebarListUsers';
 import UserRow from 'Components/UserRow';
+import { UserRowSkeletonGroup } from 'Components/UserRow/UserRowSkeletonGroup';
 import { ListState } from 'Modules/Lists/lists.types';
-import { tags } from 'Tools/mockData/mockTags';
-import { users } from 'Tools/mockData/mockUsers';
 import { Button, Fade, Flex, Hr } from '@antoniodcorrea/components';
-import { UserRowSkeletonGroup } from '../../components/UserRow/UserRowSkeletonGroup';
 
 import './UsersUser.less';
 
@@ -50,15 +46,7 @@ export const UsersUser: React.FC<Props> = ({ usersIds, popularLists, usersLoadin
           </Fade>
         </Flex>
       </Main>
-      <Sidebar>
-        {/* <SidebarListTags title="Trending Tags" items={tags} />
-        <Hr spacer />
-        <SidebarListUsers title="Popular Users" items={users} />
-        <Hr spacer />
-        <SidebarListUsers title="Following" items={users} />
-        <Hr spacer />
-        <SidebarListUsers title="Followers" items={users} /> */}
-      </Sidebar>
+      <Sidebar>{/*  */}</Sidebar>
     </Flex>
   </div>
 );

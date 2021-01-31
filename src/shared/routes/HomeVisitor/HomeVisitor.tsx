@@ -6,8 +6,8 @@ import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListLists from 'Components/SidebarListLists';
 import SidebarListUsers from 'Components/SidebarListUsers';
 import { ListState } from 'Modules/Lists/lists.types';
+import { UserState } from 'Modules/Users/users.types';
 import { Border, Flex, Hr } from '@antoniodcorrea/components';
-import { UserState } from '../../redux/modules/Users/users.types';
 
 import './HomeVisitor.less';
 

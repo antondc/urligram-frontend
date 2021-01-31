@@ -1,7 +1,7 @@
 import React from 'react';
 
+import { UserState } from 'Modules/Users/users.types';
 import { Hr, Span, Tooltip } from '@antoniodcorrea/components';
-import { UserState } from '../../redux/modules/Users/users.types';
 import { SidebarListUsersSkeleton } from './SidebarListUsersSkeleton';
 
 import './SidebarListUsers.less';

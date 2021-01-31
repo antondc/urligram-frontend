@@ -5,10 +5,10 @@ import { createStructuredSelector } from 'reselect';
 import { ListState } from 'Modules/Lists/lists.types';
 import { loadPopularLists } from 'Modules/Sections/actions/loadPopularLists';
 import { selectPopularLists } from 'Modules/Sections/selectors/selectPopularLists';
+import { selectPopularListsLoading } from 'Modules/Sections/selectors/selectPopularListsLoading';
 import { loadUsers } from 'Modules/Users/actions/loadUsers';
 import { selectUsersCurrentIds } from 'Modules/Users/selectors/selectUsersCurrentIds';
 import { selectUsersLoading } from 'Modules/Users/selectors/selectUsersLoading';
-import { selectPopularListsLoading } from '../../redux/modules/Sections/selectors/selectPopularListsLoading';
 import { UsersVisitor as UsersVisitorUi } from './UsersVisitor';
 
 interface Props {

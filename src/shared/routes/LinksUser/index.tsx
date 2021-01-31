@@ -4,8 +4,8 @@ import { createStructuredSelector } from 'reselect';
 
 import { loadLinks } from 'Modules/Links/actions/loadLinks';
 import { selectLinksAllIds } from 'Modules/Links/selectors/selectLinksAllIds';
+import { selectLinksLoading } from 'Modules/Links/selectors/selectLinksLoading';
 import { ListState } from 'Modules/Lists/lists.types';
-import { selectLinksLoading } from '../../redux/modules/Links/selectors/selectLinksLoading';
 import { LinksUser as LinksUserUi } from './LinksUser';
 
 interface Props {

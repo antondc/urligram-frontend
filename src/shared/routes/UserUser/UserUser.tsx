@@ -1,14 +1,14 @@
 import React from 'react';
 
 import BookmarkRow from 'Components/BookmarkRow';
+import { BookmarkRowSkeletonGroup } from 'Components/BookmarkRow/BookmarkRowSkeletonGroup';
 import Main from 'Components/Main';
 import MainHeader from 'Components/MainHeader';
 import Sidebar from 'Components/Sidebar';
+import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListLists from 'Components/SidebarListLists';
 import { ListState } from 'Modules/Lists/lists.types';
 import { Button, Fade, Flex, Hr } from '@antoniodcorrea/components';
-import { BookmarkRowSkeletonGroup } from '../../components/BookmarkRow/BookmarkRowSkeletonGroup';
-import SidebarBlock from '../../components/SidebarBlock';
 
 import './UserUser.less';
 

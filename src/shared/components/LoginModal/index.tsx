@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 import Cross from 'Assets/svg/cross.svg';
+import BaseModal from 'Components/BaseModal';
 import { logIn } from 'Modules/Session/actions/logIn';
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
 import { Border, Button, Flex, H3, Hr, Input } from '@antoniodcorrea/components';
-import BaseModal from '../BaseModal';
 
 import './LoginModal.less';
 
