@@ -14,6 +14,10 @@ const props: Props = {
   mostFollowedUsersLoading: false,
   newUsers: [mockUser],
   newUsersLoading: false,
+  allTags: [],
+  allTagsLoading: true,
+  bookmarksCurrentIds: [],
+  bookmarksLoading: false,
 };
 
 describe('HomeVisitorUI', () => {

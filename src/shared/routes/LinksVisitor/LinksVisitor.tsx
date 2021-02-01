@@ -9,7 +9,7 @@ import SidebarListTags from 'Components/SidebarListTags';
 import SidebarListUsers from 'Components/SidebarListUsers';
 import { ListState } from 'Modules/Lists/lists.types';
 import LinkRow from 'Root/src/shared/components/LinkRow';
-import { Button, Flex, Hr } from '@antoniodcorrea/components';
+import { Border, Button, Flex, Hr } from '@antoniodcorrea/components';
 
 import './LinksVisitor.less';
 
@@ -30,21 +30,23 @@ export const LinksVisitor: React.FC<Props> = ({ linksIds, popularLists, loading 
         <SidebarListLists title="Popular Lists" items={popularLists} id="PopularLists3" /> */}
       </Sidebar>
       <Main>
-        <MainHeader title="My links" />
-        {loading ? (
-          <LinkRowSkeletonGroup />
-        ) : (
-          linksIds?.map((id, index) => (
-            <React.Fragment key={id}>
-              {!!index && <Hr spacer />}
-              <LinkRow id={id} />
-            </React.Fragment>
-          ))
-        )}
-        <Hr spacer size="big" />
-        <Flex horizontal="center">
-          <Button text="Load more" />
-        </Flex>
+        <Border grow>
+          <MainHeader title="My links" />
+          {loading ? (
+            <LinkRowSkeletonGroup />
+          ) : (
+            linksIds?.map((id, index) => (
+              <React.Fragment key={id}>
+                {!!index && <Hr spacer />}
+                <LinkRow id={id} />
+              </React.Fragment>
+            ))
+          )}
+          <Hr spacer size="big" />
+          <Flex horizontal="center">
+            <Button text="Load more" />
+          </Flex>
+        </Border>
       </Main>
       <Sidebar>
         {/* <SidebarListTags title="Trending Tags" items={tags} />

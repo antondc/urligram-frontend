@@ -1,13 +1,16 @@
 import React from 'react';
 
+import BookmarkRow from 'Components/BookmarkRow';
+import { BookmarkRowSkeletonGroup } from 'Components/BookmarkRow/BookmarkRowSkeletonGroup';
 import Main from 'Components/Main';
 import Sidebar from 'Components/Sidebar';
 import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListLists from 'Components/SidebarListLists';
 import SidebarListUsers from 'Components/SidebarListUsers';
 import { ListState } from 'Modules/Lists/lists.types';
+import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
-import { Border, Flex, Hr } from '@antoniodcorrea/components';
+import { A, Border, Flex, H4, Hr, Tag } from '@antoniodcorrea/components';
 
 import './HomeVisitor.less';
 
@@ -20,6 +23,10 @@ export interface Props {
   mostFollowedUsersLoading: boolean;
   newUsers: UserState[];
   newUsersLoading: boolean;
+  allTags: TagState[];
+  allTagsLoading: boolean;
+  bookmarksCurrentIds: number[];
+  bookmarksLoading: boolean;
 }
 
 export const HomeVisitor: React.FC<Props> = ({
@@ -31,6 +38,10 @@ export const HomeVisitor: React.FC<Props> = ({
   mostFollowedUsersLoading,
   newUsers,
   newUsersLoading,
+  allTags,
+  allTagsLoading,
+  bookmarksCurrentIds,
+  bookmarksLoading,
 }) => (
   <div className="HomeVisitor">
     <Flex horizontal="between" vertical="top">
@@ -49,7 +60,40 @@ export const HomeVisitor: React.FC<Props> = ({
         <Hr spacer />
       </Sidebar>
       <Main>
-        <Border>HomeVisitor</Border>
+        <Border className="HomeVisitor-tags" grow>
+          <H4>Trending Tags</H4>
+          <Hr spacer />
+          {allTagsLoading ? (
+            <div>...loading</div>
+          ) : (
+            allTags?.map((item) => (
+              <A
+                className="SidebarListTags-tag"
+                href={`/tags/${item.name}`}
+                key={`SidebarListTags-tags-${item.id}`}
+                styled={false}
+                frontend
+              >
+                <Tag size="big">{item.name}</Tag>
+              </A>
+            ))
+          )}
+        </Border>
+        <Hr spacer />
+        <Border className="HomeVisitor-tags" grow>
+          <H4>Bookmarks</H4>
+          <Hr spacer />
+          {bookmarksLoading ? (
+            <BookmarkRowSkeletonGroup />
+          ) : (
+            bookmarksCurrentIds?.map((id, index) => (
+              <React.Fragment key={id}>
+                {!!index && <Hr spacer />}
+                <BookmarkRow id={id} />
+              </React.Fragment>
+            ))
+          )}
+        </Border>
       </Main>
       <Sidebar>
         <SidebarBlock

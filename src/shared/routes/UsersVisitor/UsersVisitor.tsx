@@ -8,7 +8,7 @@ import SidebarListLists from 'Components/SidebarListLists';
 import UserRow from 'Components/UserRow';
 import { UserRowSkeletonGroup } from 'Components/UserRow/UserRowSkeletonGroup';
 import { ListState } from 'Modules/Lists/lists.types';
-import { Button, Fade, Flex, Hr } from '@antoniodcorrea/components';
+import { Border, Button, Fade, Flex, Hr } from '@antoniodcorrea/components';
 
 import './UsersVisitor.less';
 
@@ -28,23 +28,25 @@ export const UsersVisitor: React.FC<Props> = ({ usersIds, popularLists, usersLoa
         </SidebarBlock>
       </Sidebar>
       <Main>
-        <MainHeader title="My users" />
-        {usersLoading ? (
-          <UserRowSkeletonGroup />
-        ) : (
-          usersIds?.map((id, index) => (
-            <React.Fragment key={id}>
-              {!!index && <Hr spacer />}
-              <UserRow id={id} />
-            </React.Fragment>
-          ))
-        )}
-        <Hr spacer size="big" />
-        <Flex horizontal="center">
-          <Fade mounted={!!usersIds?.length} speed="fastest">
-            <Button text="Load more" />
-          </Fade>
-        </Flex>
+        <Border grow>
+          <MainHeader title="My users" />
+          {usersLoading ? (
+            <UserRowSkeletonGroup />
+          ) : (
+            usersIds?.map((id, index) => (
+              <React.Fragment key={id}>
+                {!!index && <Hr spacer />}
+                <UserRow id={id} />
+              </React.Fragment>
+            ))
+          )}
+          <Hr spacer size="big" />
+          <Flex horizontal="center">
+            <Fade mounted={!!usersIds?.length} speed="fastest">
+              <Button text="Load more" />
+            </Fade>
+          </Flex>
+        </Border>
       </Main>
       <Sidebar>{/*  */}</Sidebar>
     </Flex>

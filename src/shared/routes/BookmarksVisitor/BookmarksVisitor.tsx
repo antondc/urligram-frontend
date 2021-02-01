@@ -9,7 +9,7 @@ import SidebarListTags from 'Components/SidebarListTags';
 import SidebarListUsers from 'Components/SidebarListUsers';
 import { ListState } from 'Modules/Lists/lists.types';
 import { BookmarkRowSkeletonGroup } from 'Root/src/shared/components/BookmarkRow/BookmarkRowSkeletonGroup';
-import { Button, Fade, Flex, Hr } from '@antoniodcorrea/components';
+import { Border, Button, Fade, Flex, Hr } from '@antoniodcorrea/components';
 
 import './BookmarksVisitor.less';
 
@@ -27,23 +27,25 @@ export const BookmarksVisitor: React.FC<Props> = ({ bookmarksIds, popularLists, 
         <Hr spacer />
       </Sidebar>
       <Main>
-        <MainHeader title="My bookmarks" />
-        {loading ? (
-          <BookmarkRowSkeletonGroup />
-        ) : (
-          bookmarksIds?.map((id, index) => (
-            <React.Fragment key={id}>
-              {!!index && <Hr spacer />}
-              <BookmarkRow id={id} />
-            </React.Fragment>
-          ))
-        )}
-        <Hr spacer size="big" />
-        <Flex horizontal="center">
-          <Fade mounted={!!bookmarksIds?.length} speed="fastest">
-            <Button text="Load more" />
-          </Fade>
-        </Flex>
+        <Border grow>
+          <MainHeader title="My bookmarks" />
+          {loading ? (
+            <BookmarkRowSkeletonGroup />
+          ) : (
+            bookmarksIds?.map((id, index) => (
+              <React.Fragment key={id}>
+                {!!index && <Hr spacer />}
+                <BookmarkRow id={id} />
+              </React.Fragment>
+            ))
+          )}
+          <Hr spacer size="big" />
+          <Flex horizontal="center">
+            <Fade mounted={!!bookmarksIds?.length} speed="fastest">
+              <Button text="Load more" />
+            </Fade>
+          </Flex>
+        </Border>
       </Main>
       <Sidebar>
         {/* <SidebarListTags title="Trending Tags" items={tags} />

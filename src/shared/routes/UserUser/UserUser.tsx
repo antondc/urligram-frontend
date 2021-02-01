@@ -8,7 +8,7 @@ import Sidebar from 'Components/Sidebar';
 import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListLists from 'Components/SidebarListLists';
 import { ListState } from 'Modules/Lists/lists.types';
-import { Button, Fade, Flex, Hr } from '@antoniodcorrea/components';
+import { Border, Button, Fade, Flex, Hr } from '@antoniodcorrea/components';
 
 import './UserUser.less';
 
@@ -29,23 +29,25 @@ export const UserUser: React.FC<Props> = ({ bookmarksIds, popularLists, bookmark
         <Hr spacer />
       </Sidebar>
       <Main>
-        <MainHeader title="My user" />
-        {!!bookmarksLoading ? (
-          <BookmarkRowSkeletonGroup />
-        ) : (
-          bookmarksIds?.map((id, index) => (
-            <React.Fragment key={id}>
-              {!!index && <Hr spacer />}
-              <BookmarkRow id={id} />
-            </React.Fragment>
-          ))
-        )}
-        <Hr spacer size="big" />
-        <Flex horizontal="center">
-          <Fade mounted={!!bookmarksIds?.length} speed="fastest">
-            <Button text="Load more" />
-          </Fade>
-        </Flex>
+        <Border grow>
+          <MainHeader title="My user" />
+          {!!bookmarksLoading ? (
+            <BookmarkRowSkeletonGroup />
+          ) : (
+            bookmarksIds?.map((id, index) => (
+              <React.Fragment key={id}>
+                {!!index && <Hr spacer />}
+                <BookmarkRow id={id} />
+              </React.Fragment>
+            ))
+          )}
+          <Hr spacer size="big" />
+          <Flex horizontal="center">
+            <Fade mounted={!!bookmarksIds?.length} speed="fastest">
+              <Button text="Load more" />
+            </Fade>
+          </Flex>
+        </Border>
       </Main>
       <Sidebar>
         {/* <SidebarListLists title="Popular Lists" items={popularLists} id="PopularLists" /> */}

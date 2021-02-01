@@ -22,20 +22,20 @@ const SidebarListUsers: React.FC<Props> = ({ items, loading, title }) => (
           <dd className="SidebarListUsers-user">
             <div className="SidebarListUsers-userName">
               <A href={`users/${id}`} frontend styled>
-                <Span bold>+ {name}</Span>
+                <Span bold>@{name}</Span>
               </A>
             </div>
             <div className="SidebarListUsers-userDescription">
               {followers?.length && (
                 <>
                   <Tooltip
-                    parentElementId={`${stringToDashCase(title)}-followers-${id}`}
+                    parentElementId={`${stringToDashCase(title)}-followers-${index}`}
                     content="Followers of this user"
                     delay={0.5}
                   />
                   <A href={`users/${id}/followers`} frontend>
                     <Span
-                      id={`${stringToDashCase(title)}-followers-${id}`}
+                      id={`${stringToDashCase(title)}-followers-${index}`}
                       className="SidebarListUsers-userData"
                       size="small"
                     >
@@ -48,13 +48,13 @@ const SidebarListUsers: React.FC<Props> = ({ items, loading, title }) => (
               {following?.length && (
                 <>
                   <Tooltip
-                    parentElementId={`${stringToDashCase(title)}-following-${id}`}
+                    parentElementId={`${stringToDashCase(title)}-following-${index}`}
                     content="People following to this user"
                     delay={0.5}
                   />
                   <A href={`users/${id}/following`} frontend>
                     <Span
-                      id={`${stringToDashCase(title)}-following-${id}`}
+                      id={`${stringToDashCase(title)}-following-${index}`}
                       className="SidebarListUsers-userData"
                       size="small"
                     >
@@ -67,13 +67,13 @@ const SidebarListUsers: React.FC<Props> = ({ items, loading, title }) => (
               {bookmarksIds?.length && (
                 <>
                   <Tooltip
-                    parentElementId={`${stringToDashCase(title)}}-Ids-${id}`}
+                    parentElementId={`${stringToDashCase(title)}-bookmarks-${index}`}
                     content="Bookmarks of this user"
                     delay={0.5}
                   />
                   <A href={`users/${id}/bookmarks`} frontend>
                     <Span
-                      id={`${stringToDashCase(title)}}-bookmarks-${id}`}
+                      id={`${stringToDashCase(title)}-bookmarks-${index}`}
                       className="SidebarListUsers-userData"
                       size="small"
                     >

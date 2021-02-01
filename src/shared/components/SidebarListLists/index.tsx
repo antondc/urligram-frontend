@@ -35,16 +35,14 @@ const SidebarListLists: React.FC<Props> = ({ items, loading, title }) => (
                   />
                   <A href={`lists/${id}/users`} frontend>
                     <Span id={`${stringToDashCase(title)}-members-${id}`} size="small">
-                      {' '}
                       {membersIds?.length + 1}
+                      {bookmarksIds?.length && <> · </>}
                     </Span>
                   </A>
                 </>
               )}
               {bookmarksIds?.length && (
                 <>
-                  {' '}
-                  ·{' '}
                   <Tooltip
                     parentElementId={`${stringToDashCase(title)}-bookmarks-${id}`}
                     content="Bookmarks within this list"
@@ -52,9 +50,8 @@ const SidebarListLists: React.FC<Props> = ({ items, loading, title }) => (
                   />
                   <A href={`lists/${id}`} frontend>
                     <Span id={`${stringToDashCase(title)}-bookmarks-${id}`} size="small">
-                      {' '}
                       {bookmarksIds?.length}
-                    </Span>{' '}
+                    </Span>
                   </A>
                 </>
               )}
