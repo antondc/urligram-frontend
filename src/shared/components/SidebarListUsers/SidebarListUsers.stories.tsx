@@ -1,8 +1,8 @@
 import React from 'react';
 
 import SidebarBlock from 'Components/SidebarBlock';
+import { mockUser } from 'Modules/Users/user.data';
 import { boolean, withKnobs } from '@storybook/addon-knobs';
-import { mockUser } from '../../redux/modules/Users/user.data';
 import SidebarListUsers from '.';
 
 export default {

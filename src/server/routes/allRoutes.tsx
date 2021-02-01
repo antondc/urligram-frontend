@@ -51,13 +51,17 @@ router.get(routesPathsList, (req: any, res: any, next: any) => {
     query: req.query,
   };
 
+  const initialDataLoaders = !!session?.id
+    ? Routes[activeRouteKey].initialDataLoadersSession
+    : Routes[activeRouteKey].initialDataLoadersVisitor;
+
   // Retrieve initial data from loaders passing req.params.
-  const initialDataLoaders = Routes[activeRouteKey].loadInitialData.map((item: any) => item(requestParameters)); // We have to execute the thunk, as well as the async function within it
+  const initialDataLoadersPromises = initialDataLoaders.map((item: any) => item(requestParameters)); // We have to execute the thunk, as well as the async function within it
 
   // Add curent path to history.location
   const location = { ...history.location, pathname: req.path };
 
-  Promise.all([initialLanguagesLoader(req.params.lang), ...initialDataLoaders]) // We have to execute the Languages thunk, as well as the async function within it
+  Promise.all([initialLanguagesLoader(req.params.lang), ...initialDataLoadersPromises]) // We have to execute the Languages thunk, as well as the async function within it
     .then((response: any) => {
       const data = merge(...response); // Use Lodash to merge the result objects of the promises; otherwise we will get only the last result
 

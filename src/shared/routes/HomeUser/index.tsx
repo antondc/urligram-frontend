@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { loadBookmarksByUserId } from 'Modules/Bookmarks/actions/loadBookmarksByUserId';
+import { selectBookmarksLoading } from 'Modules/Bookmarks/selectors/selectBookmarksLoading';
 import { RootState } from 'Modules/rootType';
 import { sectionsFollowingListsLoad } from 'Modules/Sections/actions/sectionsFollowingListsLoad';
 import { sectionsFollowingUsersLoad } from 'Modules/Sections/actions/sectionsFollowingUsersLoad';
@@ -18,7 +19,6 @@ import { selectMyTagsLoading } from 'Modules/Sections/selectors/selectMyTagsLoad
 import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUserId';
 import { userLoad } from 'Modules/Users/actions/userLoad';
 import { selectUserById } from 'Modules/Users/selectors/selectUserById';
-import { selectBookmarksLoading } from '../../redux/modules/Bookmarks/selectors/selectBookmarksLoading';
 import { HomeUser as HomeUserUi } from './HomeUser';
 
 const HomeUser: React.FC = () => {

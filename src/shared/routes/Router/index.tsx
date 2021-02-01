@@ -43,20 +43,16 @@ const Router: React.FC<Props> = ({ loggedIn, location, defaultCurrentSlug, pathW
       {!loggedIn && <Redirect from="/:lang?/control" to={'/' + defaultCurrentSlug + '/sign-in'} />}
 
       {/* Pages */}
-      {loggedIn && <Route exact={Routes.UserUser.exact} path={Routes.UserUser.path} component={UserUser} />}
-      <Route exact={Routes.UserVisitor.exact} path={Routes.UserVisitor.path} component={UserVisitor} />
-      {loggedIn && <Route exact={Routes.UsersUser.exact} path={Routes.UsersUser.path} component={UsersUser} />}
-      <Route exact={Routes.UsersVisitor.exact} path={Routes.UsersVisitor.path} component={UsersVisitor} />
-      {loggedIn && <Route exact={Routes.LinksUser.exact} path={Routes.LinksUser.path} component={LinksUser} />}
-      <Route exact={Routes.LinksVisitor.exact} path={Routes.LinksVisitor.path} component={LinksVisitor} />
-      {loggedIn && <Route exact={Routes.ListsUser.exact} path={Routes.ListsUser.path} component={ListsUser} />}
-      <Route exact={Routes.ListsVisitor.exact} path={Routes.ListsVisitor.path} component={ListsVisitor} />
-      {loggedIn && (
-        <Route exact={Routes.BookmarksUser.exact} path={Routes.BookmarksUser.path} component={BookmarksUser} />
-      )}
-      <Route exact={Routes.BookmarksVisitor.exact} path={Routes.BookmarksVisitor.path} component={BookmarksVisitor} />
-      {loggedIn && <Route exact={Routes.HomeUser.exact} path={Routes.HomeUser.path} component={HomeUser} />}
-      <Route exact={Routes.HomeVisitor.exact} path={Routes.HomeVisitor.path} component={HomeVisitor} />
+      <Route exact={Routes.User.exact} path={Routes.User.path} component={loggedIn ? UserUser : UserVisitor} />
+      <Route exact={Routes.Users.exact} path={Routes.Users.path} component={loggedIn ? UsersUser : UsersVisitor} />
+      <Route exact={Routes.Links.exact} path={Routes.Links.path} component={loggedIn ? LinksUser : LinksVisitor} />
+      <Route exact={Routes.Lists.exact} path={Routes.Lists.path} component={loggedIn ? ListsUser : ListsVisitor} />
+      <Route
+        exact={Routes.Bookmarks.exact}
+        path={Routes.Bookmarks.path}
+        component={loggedIn ? BookmarksUser : BookmarksVisitor}
+      />
+      <Route exact={Routes.Home.exact} path={Routes.Home.path} component={loggedIn ? HomeUser : HomeVisitor} />
 
       {/* General */}
       <Route exact={Routes.Control.exact} path={Routes.Control.path} component={Control} />

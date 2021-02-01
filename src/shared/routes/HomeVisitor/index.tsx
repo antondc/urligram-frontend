@@ -13,6 +13,7 @@ import { selectNewUsers } from 'Modules/Sections/selectors/selectNewUsers';
 import { selectNewUsersLoading } from 'Modules/Sections/selectors/selectNewUsersLoading';
 import { selectPopularLists } from 'Modules/Sections/selectors/selectPopularLists';
 import { selectPopularListsLoading } from 'Modules/Sections/selectors/selectPopularListsLoading';
+import { tagsAllLoad } from 'Modules/Tags/actions/tagsAllLoad';
 import { HomeVisitor as HomeVisitorUI } from './HomeVisitor';
 
 const HomeVisitor: React.FC = () => {
@@ -31,6 +32,7 @@ const HomeVisitor: React.FC = () => {
     dispatch(sectionsNewListsLoad());
     dispatch(sectionsMostFollowedUsersLoad());
     dispatch(sectionsNewUsersLoad());
+    dispatch(tagsAllLoad());
   }, []);
 
   return (

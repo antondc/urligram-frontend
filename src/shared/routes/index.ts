@@ -11,6 +11,7 @@ import { myTagsInitialLoader } from 'Modules/Sections/initialLoaders/myTagsIniti
 import { newListsInitialLoader } from 'Modules/Sections/initialLoaders/newListsInitialLoader';
 import { newUsersInitialLoader } from 'Modules/Sections/initialLoaders/newUsersInitialLoader';
 import { popularListsInitialLoader } from 'Modules/Sections/initialLoaders/popularListsInitialLoader';
+import { tagsAllInitialLoader } from 'Modules/Tags/initialLoaders/tagsAllInitialLoader';
 import { initialUserLoader } from 'Modules/Users/user.loader';
 import { initialUsersLoader } from 'Modules/Users/users.loader';
 import { RequestParameters } from 'Root/src/server/routes/allRoutes';
@@ -23,7 +24,8 @@ export interface Route {
   hasHeader?: boolean;
   hasFooter?: boolean;
   header?: boolean;
-  loadInitialData?: Array<(params: RequestParameters) => void>;
+  initialDataLoadersVisitor?: Array<(params: RequestParameters) => void>;
+  initialDataLoadersSession?: Array<(params: RequestParameters) => void>;
 }
 
 export interface RoutesInterface {
@@ -31,64 +33,26 @@ export interface RoutesInterface {
 }
 
 const Routes: RoutesInterface = {
-  BookmarksVisitor: {
-    name: 'BookmarksVisitor',
+  Bookmarks: {
+    name: 'Bookmarks',
     path: '/:lang([a-z]{2})?/bookmarks',
     exact: true,
     auth: false,
     hasHeader: false,
     hasFooter: false,
-    loadInitialData: [initialBookmarksLoader],
+    initialDataLoadersVisitor: [initialBookmarksLoader],
+    initialDataLoadersSession: [initialBookmarksLoader],
   },
 
-  BookmarksUser: {
-    name: 'BookmarksUser',
-    path: '/:lang([a-z]{2})?/bookmarks',
-    exact: true,
-    auth: false,
-    hasHeader: false,
-    hasFooter: false,
-    loadInitialData: [initialBookmarksLoader],
-  },
-
-  UserVisitor: {
-    name: 'UserVisitor',
+  User: {
+    name: 'User',
     path: '/:lang([a-z]{2})?/users/:userId',
     exact: true,
     auth: false,
     hasHeader: false,
     hasFooter: false,
-    loadInitialData: [initialUserLoader],
-  },
-
-  UserUser: {
-    name: 'UserUser',
-    path: '/:lang([a-z]{2})?/users/:userId',
-    exact: true,
-    auth: false,
-    hasHeader: false,
-    hasFooter: false,
-    loadInitialData: [initialUserLoader],
-  },
-
-  UsersUser: {
-    name: 'UsersUser',
-    path: '/:lang([a-z]{2})?/users',
-    exact: true,
-    auth: false,
-    hasHeader: false,
-    hasFooter: false,
-    loadInitialData: [initialUsersLoader],
-  },
-
-  UsersVisitor: {
-    name: 'UsersVisitor',
-    path: '/:lang([a-z]{2})?/users',
-    exact: true,
-    auth: false,
-    hasHeader: false,
-    hasFooter: false,
-    loadInitialData: [initialUsersLoader],
+    initialDataLoadersVisitor: [initialUserLoader],
+    initialDataLoadersSession: [initialUserLoader],
   },
 
   Users: {
@@ -98,47 +62,30 @@ const Routes: RoutesInterface = {
     auth: false,
     hasHeader: false,
     hasFooter: false,
-    loadInitialData: [initialUsersLoader],
+    initialDataLoadersVisitor: [initialUsersLoader],
+    initialDataLoadersSession: [initialUsersLoader],
   },
 
-  LinksVisitor: {
-    name: 'LinksVisitor',
+  Links: {
+    name: 'Links',
     path: '/:lang([a-z]{2})?/links',
     exact: true,
     auth: false,
     hasHeader: false,
     hasFooter: false,
-    loadInitialData: [initialLinksLoader],
+    initialDataLoadersVisitor: [initialLinksLoader],
+    initialDataLoadersSession: [initialLinksLoader],
   },
 
-  LinksUser: {
-    name: 'LinksUser',
-    path: '/:lang([a-z]{2})?/links',
-    exact: true,
-    auth: false,
-    hasHeader: false,
-    hasFooter: false,
-    loadInitialData: [initialLinksLoader],
-  },
-
-  ListsVisitor: {
-    name: 'ListsVisitor',
+  Lists: {
+    name: 'Lists',
     path: '/:lang([a-z]{2})?/lists',
     exact: true,
     auth: false,
     hasHeader: false,
     hasFooter: false,
-    loadInitialData: [initialListsLoader],
-  },
-
-  ListsUser: {
-    name: 'ListsUser',
-    path: '/:lang([a-z]{2})?/lists',
-    exact: true,
-    auth: false,
-    hasHeader: false,
-    hasFooter: false,
-    loadInitialData: [initialListsLoader],
+    initialDataLoadersVisitor: [initialListsLoader],
+    initialDataLoadersSession: [initialListsLoader],
   },
 
   Login: {
@@ -148,7 +95,8 @@ const Routes: RoutesInterface = {
     auth: false,
     hasHeader: false,
     hasFooter: false,
-    loadInitialData: [],
+    initialDataLoadersVisitor: [],
+    initialDataLoadersSession: [],
   },
 
   SignIn: {
@@ -158,7 +106,30 @@ const Routes: RoutesInterface = {
     auth: false,
     hasHeader: false,
     hasFooter: false,
-    loadInitialData: [],
+    initialDataLoadersVisitor: [],
+    initialDataLoadersSession: [],
+  },
+
+  Home: {
+    name: 'Home',
+    path: '/:lang([a-z]{2})?',
+    exact: true,
+    auth: false,
+    hasHeader: true,
+    hasFooter: true,
+    initialDataLoadersVisitor: [
+      tagsAllInitialLoader,
+      mostFollowedUsersInitialLoader,
+      popularListsInitialLoader,
+      newListsInitialLoader,
+      newUsersInitialLoader,
+    ],
+    initialDataLoadersSession: [
+      myListsInitialLoader,
+      followingListsInitialLoader,
+      myTagsInitialLoader,
+      followingUsersInitialLoader,
+    ],
   },
 
   Control: {
@@ -168,37 +139,8 @@ const Routes: RoutesInterface = {
     auth: true,
     hasHeader: true,
     hasFooter: true,
-    loadInitialData: [],
-  },
-
-  HomeUser: {
-    name: 'HomeUser',
-    path: '/:lang([a-z]{2})?',
-    exact: true,
-    auth: false,
-    hasHeader: true,
-    hasFooter: true,
-    loadInitialData: [
-      myListsInitialLoader,
-      followingListsInitialLoader,
-      myTagsInitialLoader,
-      followingUsersInitialLoader,
-    ],
-  },
-
-  HomeVisitor: {
-    name: 'HomeVisitor',
-    path: '/:lang([a-z]{2})?',
-    exact: true,
-    auth: true,
-    hasHeader: true,
-    hasFooter: true,
-    loadInitialData: [
-      mostFollowedUsersInitialLoader,
-      popularListsInitialLoader,
-      newListsInitialLoader,
-      newUsersInitialLoader,
-    ],
+    initialDataLoadersVisitor: [],
+    initialDataLoadersSession: [],
   },
 
   ServerError: {
@@ -209,7 +151,8 @@ const Routes: RoutesInterface = {
     hasFooter: true,
     auth: false,
     header: false,
-    loadInitialData: [],
+    initialDataLoadersVisitor: [],
+    initialDataLoadersSession: [],
   },
 
   NotFound: {
@@ -220,13 +163,14 @@ const Routes: RoutesInterface = {
     hasFooter: true,
     auth: false,
     header: false,
-    loadInitialData: [],
+    initialDataLoadersVisitor: [],
+    initialDataLoadersSession: [],
   },
 };
 
 // Export routes without specific values values
 export const routesWithoutOmmitedValues: RoutesInterface = Object.entries(Routes).reduce((acc, [key, value]) => {
-  const valuesToRemove = ['loadInitialData' /* etc. */];
+  const valuesToRemove = ['initialDataLoadersVisitor', 'initialDataLoadersSession' /* etc. */];
   const routeWithoutOmmitedValues = omit(value, valuesToRemove);
 
   return { ...acc, [key]: routeWithoutOmmitedValues };
