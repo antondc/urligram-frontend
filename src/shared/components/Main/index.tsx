@@ -1,13 +1,14 @@
 import React from 'react';
 
-import { Border } from '@antoniodcorrea/components';
-
 import './Main.less';
 
 interface Props {
+  className?: string;
   children: React.ReactNode | React.ReactNode[];
 }
 
-const Main: React.FC<Props> = ({ children }) => <Border className="Main">{children}</Border>;
+const Main: React.FC<Props> = ({ children, className }) => (
+  <div className={'Main ' + (className ? className : '')}>{children}</div>
+);
 
 export default Main;

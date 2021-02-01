@@ -16,7 +16,7 @@ interface Props {
 const SidebarListUsers: React.FC<Props> = ({ items, loading, title }) => (
   <>
     {!loading && items?.length ? (
-      items.map(({ id, name, followers, following, bookmarks }, index) => (
+      items.map(({ id, name, followers, following, bookmarksIds }, index) => (
         <React.Fragment key={id}>
           {!!index && <Hr spacer size="micro" />}
           <dd className="SidebarListUsers-user">
@@ -39,8 +39,8 @@ const SidebarListUsers: React.FC<Props> = ({ items, loading, title }) => (
                       className="SidebarListUsers-userData"
                       size="small"
                     >
-                      {' '}
-                      {followers?.length} ·{' '}
+                      {followers?.length}
+                      {(following?.length || bookmarksIds?.length) && <> · </>}
                     </Span>
                   </A>
                 </>
@@ -58,15 +58,16 @@ const SidebarListUsers: React.FC<Props> = ({ items, loading, title }) => (
                       className="SidebarListUsers-userData"
                       size="small"
                     >
-                      {following?.length} ·{' '}
+                      {following?.length}
+                      {bookmarksIds?.length && <> · </>}
                     </Span>
                   </A>
                 </>
               )}
-              {bookmarks?.length && (
+              {bookmarksIds?.length && (
                 <>
                   <Tooltip
-                    parentElementId={`${stringToDashCase(title)}}-bookmarks-${id}`}
+                    parentElementId={`${stringToDashCase(title)}}-Ids-${id}`}
                     content="Bookmarks of this user"
                     delay={0.5}
                   />
@@ -76,8 +77,7 @@ const SidebarListUsers: React.FC<Props> = ({ items, loading, title }) => (
                       className="SidebarListUsers-userData"
                       size="small"
                     >
-                      {' '}
-                      {bookmarks?.length}
+                      {bookmarksIds?.length}
                     </Span>
                   </A>
                 </>

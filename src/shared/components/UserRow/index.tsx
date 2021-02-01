@@ -41,7 +41,7 @@ const UserRow: React.FC<Props> = ({
     createdAt,
     updatedAt,
     lists,
-    bookmarks,
+    bookmarksIds,
     followers,
     following,
   },
@@ -52,7 +52,7 @@ const UserRow: React.FC<Props> = ({
   const formattedDate = date.getLocaleFormattedDate();
   const connections = followers?.length || 0 + following?.length || 0;
   const ammountLists = lists?.length || 0;
-  const ammountBookmarks = bookmarks?.length || 0;
+  const ammountBookmarks = bookmarksIds?.length || 0;
 
   return (
     <UserRowUi

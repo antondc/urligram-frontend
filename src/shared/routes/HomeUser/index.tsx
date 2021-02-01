@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { loadBookmarksByUserId } from 'Modules/Bookmarks/actions/loadBookmarksByUserId';
+import { RootState } from 'Modules/rootType';
 import { sectionsFollowingListsLoad } from 'Modules/Sections/actions/sectionsFollowingListsLoad';
 import { sectionsFollowingUsersLoad } from 'Modules/Sections/actions/sectionsFollowingUsersLoad';
 import { sectionsMyListsLoad } from 'Modules/Sections/actions/sectionsMyListsLoad';
@@ -14,6 +16,9 @@ import { selectMyListsLoading } from 'Modules/Sections/selectors/selectMyListsLo
 import { selectMyTags } from 'Modules/Sections/selectors/selectMyTags';
 import { selectMyTagsLoading } from 'Modules/Sections/selectors/selectMyTagsLoading';
 import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUserId';
+import { userLoad } from 'Modules/Users/actions/userLoad';
+import { selectUserById } from 'Modules/Users/selectors/selectUserById';
+import { selectBookmarksLoading } from '../../redux/modules/Bookmarks/selectors/selectBookmarksLoading';
 import { HomeUser as HomeUserUi } from './HomeUser';
 
 const HomeUser: React.FC = () => {
@@ -27,16 +32,22 @@ const HomeUser: React.FC = () => {
   const myTagsLoading = useSelector(selectMyTagsLoading);
   const followingUsers = useSelector(selectFollowingUsers);
   const followingUsersLoading = useSelector(selectFollowingUsersLoading);
+  const user = useSelector((state: RootState) => selectUserById(state, { id: sessionId }));
+  const bookmarksLoading = useSelector(selectBookmarksLoading);
 
   useEffect(() => {
     dispatch(sectionsMyListsLoad(sessionId));
     dispatch(sectionsFollowingListsLoad(sessionId));
     dispatch(sectionsMyTagsLoad(sessionId));
     dispatch(sectionsFollowingUsersLoad(sessionId));
+    dispatch(userLoad(sessionId));
+    dispatch(loadBookmarksByUserId(sessionId));
   }, [sessionId]);
 
   return (
     <HomeUserUi
+      user={user}
+      bookmarksLoading={bookmarksLoading}
       sessionId={sessionId}
       myLists={myLists}
       myListsLoading={myListsLoading}

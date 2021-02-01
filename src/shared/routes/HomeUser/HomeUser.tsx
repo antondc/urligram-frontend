@@ -1,19 +1,24 @@
 import React from 'react';
 
+import BookmarkRow from 'Components/BookmarkRow';
 import Main from 'Components/Main';
 import Sidebar from 'Components/Sidebar';
 import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListLists from 'Components/SidebarListLists';
 import SidebarListTags from 'Components/SidebarListTags';
+import SidebarListUsers from 'Components/SidebarListUsers';
 import { ListState } from 'Modules/Lists/lists.types';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
-import { Border, Flex, Hr } from '@antoniodcorrea/components';
-import SidebarListUsers from '../../components/SidebarListUsers';
+import { Border, Flex, H4, Hr } from '@antoniodcorrea/components';
+import { BookmarkRowSkeletonGroup } from '../../components/BookmarkRow/BookmarkRowSkeletonGroup';
+import MainHeader from '../../components/MainHeader';
 
 import './HomeUser.less';
 
 interface Props {
+  user: UserState;
+  bookmarksLoading: boolean;
   sessionId: string;
   myLists: ListState[];
   myListsLoading: boolean;
@@ -26,6 +31,8 @@ interface Props {
 }
 
 export const HomeUser: React.FC<Props> = ({
+  user,
+  bookmarksLoading,
   sessionId,
   myLists,
   myListsLoading,
@@ -48,7 +55,41 @@ export const HomeUser: React.FC<Props> = ({
         </SidebarBlock>
       </Sidebar>
       <Main>
-        <Border>HomeUser</Border>
+        <Border className="HomeUser-main">
+          <H4>My Bookmarks</H4>
+          <Hr spacer />
+          {bookmarksLoading ? (
+            <BookmarkRowSkeletonGroup length={5} />
+          ) : (
+            user?.bookmarksIds?.map(
+              (id, index) =>
+                index < 5 && (
+                  <React.Fragment key={id}>
+                    {!!index && <Hr spacer />}
+                    <BookmarkRow id={id} />
+                  </React.Fragment>
+                )
+            )
+          )}
+        </Border>
+        <Hr spacer />
+        <Border className="HomeUser-main">
+          <H4>Recommended Bookmarks</H4>
+          <Hr spacer />
+          {bookmarksLoading ? (
+            <BookmarkRowSkeletonGroup length={5} />
+          ) : (
+            user?.bookmarksIds?.map(
+              (id, index) =>
+                index < 5 && (
+                  <React.Fragment key={id}>
+                    {!!index && <Hr spacer />}
+                    <BookmarkRow id={id} />
+                  </React.Fragment>
+                )
+            )
+          )}
+        </Border>
       </Main>
       <Sidebar>
         <SidebarBlock title="My Tags" href={`users/${sessionId}/tags`} loading={myTagsLoading}>

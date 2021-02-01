@@ -9,8 +9,6 @@ import SidebarListTags from 'Components/SidebarListTags';
 import SidebarListUsers from 'Components/SidebarListUsers';
 import { ListState } from 'Modules/Lists/lists.types';
 import { BookmarkRowSkeletonGroup } from 'Root/src/shared/components/BookmarkRow/BookmarkRowSkeletonGroup';
-import { tags } from 'Tools/mockData/mockTags';
-import { users } from 'Tools/mockData/mockUsers';
 import { Button, Fade, Flex, Hr } from '@antoniodcorrea/components';
 
 import './BookmarksVisitor.less';

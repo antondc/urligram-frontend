@@ -1,9 +1,12 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
+import { mockUser } from 'Modules/Users/user.data';
 import { HomeUser as HomeUserUI } from './HomeUser';
 
 const props = {
+  user: mockUser,
+  bookmarksLoading: false,
   sessionId: '',
   myLists: [],
   myListsLoading: false,

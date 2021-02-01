@@ -2,8 +2,8 @@ import React from 'react';
 
 import SidebarBlock from 'Components/SidebarBlock';
 import { boolean, withKnobs } from '@storybook/addon-knobs';
+import { mockUser } from '../../redux/modules/Users/user.data';
 import SidebarListUsers from '.';
-import { MockUsersList } from './SidebarListUsersStoriesProps';
 
 export default {
   component: SidebarListUsers,
@@ -18,7 +18,7 @@ const knobs = {
 export const Default: React.ReactNode = () => (
   <div style={{ padding: '30px', width: '400px' }}>
     <SidebarBlock loading={knobs.skeleton()} title="Some title" href="test-url">
-      <SidebarListUsers items={MockUsersList} loading={knobs.skeleton()} />
+      <SidebarListUsers items={[mockUser, mockUser, mockUser]} loading={knobs.skeleton()} />
     </SidebarBlock>
   </div>
 );

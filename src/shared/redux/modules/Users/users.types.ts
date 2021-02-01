@@ -21,7 +21,7 @@ export interface UserState {
     id: number;
     userRole: string;
   }[];
-  bookmarks?: number[];
+  bookmarksIds?: number[];
   tags?: {
     id: number;
     name: string;
