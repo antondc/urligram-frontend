@@ -9,31 +9,9 @@ export const Props = {
       description: '',
       userId: '',
       image: '',
-      bookmarksIds: [1, 2, 4, 6, 9, 14, 10],
-      members: [
-        {
-          id: '',
-          userRole: '',
-        },
-        {
-          id: '',
-          userRole: '',
-        },
-      ],
-      tags: [
-        {
-          id: 0,
-          name: '',
-        },
-        {
-          id: 0,
-          name: '',
-        },
-        {
-          id: 0,
-          name: '',
-        },
-      ],
+      bookmarksIds: [],
+      membersIds: [],
+      tags: [],
       createdAt: '',
       updatedAt: '',
     },
@@ -44,43 +22,9 @@ export const Props = {
       description: '',
       userId: '',
       image: '',
-      bookmarksIds: [1, 2, 4, 6, 8],
-      members: [
-        {
-          id: '',
-          userRole: '',
-        },
-        {
-          id: '',
-          userRole: '',
-        },
-        {
-          id: '',
-          userRole: '',
-        },
-        {
-          id: '',
-          userRole: '',
-        },
-        {
-          id: '',
-          userRole: '',
-        },
-      ],
-      tags: [
-        {
-          id: 0,
-          name: '',
-        },
-        {
-          id: 0,
-          name: '',
-        },
-        {
-          id: 0,
-          name: '',
-        },
-      ],
+      bookmarksIds: [],
+      membersIds: [],
+      tags: [],
       createdAt: '',
       updatedAt: '',
     },
@@ -91,27 +35,9 @@ export const Props = {
       description: '',
       userId: '',
       image: '',
-      bookmarksIds: [1],
-      members: [
-        {
-          id: '',
-          userRole: '',
-        },
-      ],
-      tags: [
-        {
-          id: 0,
-          name: '',
-        },
-        {
-          id: 0,
-          name: '',
-        },
-        {
-          id: 0,
-          name: '',
-        },
-      ],
+      bookmarksIds: [],
+      membersIds: [],
+      tags: [],
       createdAt: '',
       updatedAt: '',
     },
@@ -122,71 +48,9 @@ export const Props = {
       description: '',
       userId: '',
       image: '',
-      bookmarksIds: [1, 2, 4, 6, 7, 8, 9],
-      members: [
-        {
-          id: '',
-          userRole: '',
-        },
-        {
-          id: '',
-          userRole: '',
-        },
-        {
-          id: '',
-          userRole: '',
-        },
-        {
-          id: '',
-          userRole: '',
-        },
-        {
-          id: '',
-          userRole: '',
-        },
-        {
-          id: '',
-          userRole: '',
-        },
-        {
-          id: '',
-          userRole: '',
-        },
-        {
-          id: '',
-          userRole: '',
-        },
-        {
-          id: '',
-          userRole: '',
-        },
-        {
-          id: '',
-          userRole: '',
-        },
-      ],
-      tags: [
-        {
-          id: 0,
-          name: '',
-        },
-        {
-          id: 0,
-          name: '',
-        },
-        {
-          id: 0,
-          name: '',
-        },
-        {
-          id: 0,
-          name: '',
-        },
-        {
-          id: 0,
-          name: '',
-        },
-      ],
+      bookmarksIds: [],
+      membersIds: [],
+      tags: [],
       createdAt: '',
       updatedAt: '',
     },
@@ -197,27 +61,9 @@ export const Props = {
       description: '',
       userId: '',
       image: '',
-      bookmarksIds: [1, 2],
-      members: [
-        {
-          id: '',
-          userRole: '',
-        },
-      ],
-      tags: [
-        {
-          id: 0,
-          name: '',
-        },
-        {
-          id: 0,
-          name: '',
-        },
-        {
-          id: 0,
-          name: '',
-        },
-      ],
+      bookmarksIds: [],
+      membersIds: [],
+      tags: [],
       createdAt: '',
       updatedAt: '',
     },

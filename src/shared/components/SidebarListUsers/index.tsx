@@ -2,6 +2,7 @@ import React from 'react';
 
 import { UserState } from 'Modules/Users/users.types';
 import { A, Hr, Span, Tooltip } from '@antoniodcorrea/components';
+import { stringToDashCase } from '../../tools/utils/string/stringToDashCase';
 import { SidebarListUsersSkeleton } from './SidebarListUsersSkeleton';
 
 import './SidebarListUsers.less';
@@ -9,9 +10,10 @@ import './SidebarListUsers.less';
 interface Props {
   items: UserState[];
   loading?: boolean;
+  title?: string;
 }
 
-const SidebarListUsers: React.FC<Props> = ({ items, loading }) => (
+const SidebarListUsers: React.FC<Props> = ({ items, loading, title }) => (
   <>
     {!loading && items?.length ? (
       items.map(({ id, name, followers, following, bookmarks }, index) => (
@@ -27,12 +29,16 @@ const SidebarListUsers: React.FC<Props> = ({ items, loading }) => (
               {followers?.length && (
                 <>
                   <Tooltip
-                    parentElementId={`SidebarListUsers-followers-${id}`}
+                    parentElementId={`${stringToDashCase(title)}-followers-${id}`}
                     content="Followers of this user"
                     delay={0.5}
                   />
                   <A href={`users/${id}/followers`} frontend>
-                    <Span id={`SidebarListUsers-followers-${id}`} className="SidebarListUsers-userData" size="small">
+                    <Span
+                      id={`${stringToDashCase(title)}-followers-${id}`}
+                      className="SidebarListUsers-userData"
+                      size="small"
+                    >
                       {' '}
                       {followers?.length} ·{' '}
                     </Span>
@@ -42,12 +48,16 @@ const SidebarListUsers: React.FC<Props> = ({ items, loading }) => (
               {following?.length && (
                 <>
                   <Tooltip
-                    parentElementId={`SidebarListUsers-following-${id}`}
+                    parentElementId={`${stringToDashCase(title)}-following-${id}`}
                     content="People following to this user"
                     delay={0.5}
                   />
                   <A href={`users/${id}/following`} frontend>
-                    <Span id={`SidebarListUsers-following-${id}`} className="SidebarListUsers-userData" size="small">
+                    <Span
+                      id={`${stringToDashCase(title)}-following-${id}`}
+                      className="SidebarListUsers-userData"
+                      size="small"
+                    >
                       {following?.length} ·{' '}
                     </Span>
                   </A>
@@ -56,12 +66,16 @@ const SidebarListUsers: React.FC<Props> = ({ items, loading }) => (
               {bookmarks?.length && (
                 <>
                   <Tooltip
-                    parentElementId={`SidebarListUsers-bookmarks-${id}`}
+                    parentElementId={`${stringToDashCase(title)}}-bookmarks-${id}`}
                     content="Bookmarks of this user"
                     delay={0.5}
                   />
                   <A href={`users/${id}/bookmarks`} frontend>
-                    <Span id={`SidebarListUsers-bookmarks-${id}`} className="SidebarListUsers-userData" size="small">
+                    <Span
+                      id={`${stringToDashCase(title)}}-bookmarks-${id}`}
+                      className="SidebarListUsers-userData"
+                      size="small"
+                    >
                       {' '}
                       {bookmarks?.length}
                     </Span>

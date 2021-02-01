@@ -1,20 +1,20 @@
 import React from 'react';
 
 import { ListState } from 'Modules/Lists/lists.types';
-import { A, Border, Circle, Edit, Hr, Private, Span, Tag, Triangle, Vote } from '@antoniodcorrea/components';
+import { A, Border, Edit, Hr, Private, Span, Tag, Triangle } from '@antoniodcorrea/components';
 
 import './ListRow.less';
 
 interface ListRow extends Partial<ListState> {
   sinceTranslation: string;
 }
+
 export const ListRow: React.FC<ListRow> = ({
   id,
   name,
-  image,
   tags,
   bookmarksIds,
-  members,
+  membersIds,
   createdAt,
   sinceTranslation,
 }) => (
@@ -44,8 +44,8 @@ export const ListRow: React.FC<ListRow> = ({
         </Span>
         <Hr spacer size="micro" />
         <Span size="nano">
-          <A href={'users'} styled frontend disabled={!members.length}>
-            {members?.length} users
+          <A href={'users'} styled frontend disabled={!membersIds.length}>
+            {membersIds?.length} users
           </A>{' '}
           ·{' '}
           <A href={`lists/${id}`} styled frontend disabled={!bookmarksIds?.length}>

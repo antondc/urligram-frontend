@@ -9,10 +9,7 @@ export interface ListState {
   userId: string;
   image: string;
   bookmarksIds: number[];
-  members: {
-    id: string;
-    userRole: string;
-  }[];
+  membersIds: string[];
   tags: {
     id: number;
     name: string;

@@ -15,7 +15,7 @@ const props = {
   id: 1,
   name: 'List name',
   image: 'https://picsum.photos/300/200',
-  members: [],
+  membersIds: [],
   createdAt: '',
   sinceTranslation: 'since',
   listsIds: [1, 3, 5],

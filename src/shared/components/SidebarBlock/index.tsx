@@ -23,6 +23,7 @@ const SidebarBlock: React.FC<Props> = ({ title, href, loading, children }) => {
     if (React.isValidElement(child))
       return React.cloneElement(child, {
         loading: computedLoadingState,
+        title,
       });
   });
 
