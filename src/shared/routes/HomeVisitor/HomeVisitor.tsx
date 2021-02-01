@@ -35,11 +35,15 @@ export const HomeVisitor: React.FC<Props> = ({
   <div className="HomeVisitor">
     <Flex horizontal="between" vertical="top">
       <Sidebar>
-        <SidebarBlock title="Most Followed Lists" loading={mostFollowedListsLoading}>
+        <SidebarBlock
+          title="Most Followed Lists"
+          href="lists?sort=members&page[size]=10"
+          loading={mostFollowedListsLoading}
+        >
           <SidebarListLists items={mostFollowedLists} />
         </SidebarBlock>
         <Hr spacer />
-        <SidebarBlock title="New Lists" loading={newListsLoading}>
+        <SidebarBlock title="New Lists" href="lists?sort=createdat&page[size]=10" loading={newListsLoading}>
           <SidebarListLists items={newLists} />
         </SidebarBlock>
         <Hr spacer />
@@ -48,11 +52,15 @@ export const HomeVisitor: React.FC<Props> = ({
         <Border>HomeVisitor</Border>
       </Main>
       <Sidebar>
-        <SidebarBlock title="Most Followed Users" loading={mostFollowedUsersLoading}>
+        <SidebarBlock
+          title="Most Followed Users"
+          href="users?sort=followers&page[size]=10"
+          loading={mostFollowedUsersLoading}
+        >
           <SidebarListUsers items={mostFollowedUsers} />
         </SidebarBlock>
         <Hr spacer />
-        <SidebarBlock title="New Users" loading={newUsersLoading}>
+        <SidebarBlock title="New Users" href="users?sort=createdat&page[size]=10" loading={newUsersLoading}>
           <SidebarListUsers items={newUsers} />
         </SidebarBlock>
       </Sidebar>

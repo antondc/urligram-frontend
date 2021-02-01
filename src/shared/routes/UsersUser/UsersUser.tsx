@@ -23,7 +23,7 @@ export const UsersUser: React.FC<Props> = ({ usersIds, popularLists, usersLoadin
   <div className="UsersUser">
     <Flex horizontal="between" vertical="top">
       <Sidebar>
-        <SidebarBlock title="Popular lists" loading={popularListLoading}>
+        <SidebarBlock title="Popular lists" href="lists?sort=-members&page[size]=10" loading={popularListLoading}>
           <SidebarListLists items={popularLists} />
         </SidebarBlock>
       </Sidebar>

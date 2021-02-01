@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Tag } from '@antoniodcorrea/components';
+import { A, Tag } from '@antoniodcorrea/components';
 import { SidebarListTagsSkeleton } from './SidebarListTagsSkeleton';
 
 import './SidebarListTags.less';
@@ -17,9 +17,15 @@ const SidebarListTags: React.FC<Props> = ({ items, loading }) => (
   <dl className="SidebarListTags-tags">
     {!loading && items?.length ? (
       items.map((item) => (
-        <Tag size="big" className="SidebarListTags-tag" key={item.id}>
-          {item.name}
-        </Tag>
+        <A
+          className="SidebarListTags-tag"
+          href={`/tags/${item.name}`}
+          key={`SidebarListTags-tags-${item.id}`}
+          styled={false}
+          frontend
+        >
+          <Tag size="big">{item.name}</Tag>
+        </A>
       ))
     ) : (
       <SidebarListTagsSkeleton />

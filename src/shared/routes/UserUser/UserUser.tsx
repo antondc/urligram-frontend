@@ -23,7 +23,7 @@ export const UserUser: React.FC<Props> = ({ bookmarksIds, popularLists, bookmark
   <div className="UserUser">
     <Flex horizontal="between" vertical="top">
       <Sidebar>
-        <SidebarBlock title="Popular lists" loading={popularListLoading}>
+        <SidebarBlock title="Popular lists" href="" loading={popularListLoading}>
           <SidebarListLists items={popularLists} />
         </SidebarBlock>
         <Hr spacer />

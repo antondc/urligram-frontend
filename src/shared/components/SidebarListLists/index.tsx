@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { ListState } from 'Modules/Lists/lists.types';
-import { Hr, Span, Tooltip } from '@antoniodcorrea/components';
+import { A, Hr, Span, Tooltip } from '@antoniodcorrea/components';
 import { SidebarListListsSkeleton } from './SidebarListListsSkeleton';
 
 import './SidebarListLists.less';
@@ -19,12 +19,16 @@ const SidebarListLists: React.FC<Props> = ({ items, loading }) => (
           {!!index && <Hr spacer size="micro" />}
           <dd className="SidebarListLists-list">
             <div className="SidebarListLists-listName">
-              <Span bold>+ {name}</Span>
+              <A href={`lists/${id}`} frontend>
+                <Span bold>+ {name}</Span>
+              </A>
             </div>
             <div id={id + '-' + index} className="SidebarListLists-listDescription">
-              <Span size="small"> {members?.length && members?.length} items</Span>
+              <A href={`lists/${id}`} frontend>
+                <Span size="small"> {members?.length && members?.length} items</Span>{' '}
+              </A>
             </div>
-            <Tooltip parentElementId={id + '-' + index} content="This is something" />
+            <Tooltip parentElementId={`${id}-${index}`} content="Bookmarks in this list" delay={1} />
           </dd>
         </React.Fragment>
       ))

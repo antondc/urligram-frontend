@@ -6,7 +6,7 @@ import './SidebarBlock.less';
 
 interface Props {
   title: string;
-  href?: string;
+  href: string;
   loading: boolean;
 }
 
@@ -28,13 +28,9 @@ const SidebarBlock: React.FC<Props> = ({ title, href, loading, children }) => {
 
   return (
     <Border grow>
-      {!!href ? (
-        <A href={href} styled={!!href}>
-          <H4>{title}</H4>
-        </A>
-      ) : (
+      <A href={href} styled={!!href}>
         <H4>{title}</H4>
-      )}
+      </A>
       <Hr spacer size="small" />
       <FadeInOut valueToUpdate={computedLoadingState} appear>
         {childrenWithProps}

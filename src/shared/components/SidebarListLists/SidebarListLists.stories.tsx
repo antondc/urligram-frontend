@@ -17,7 +17,7 @@ const knobs = {
 
 export const Default: React.ReactNode = () => (
   <div style={{ padding: '30px', width: '400px' }}>
-    <SidebarBlock loading={knobs.skeleton()} title="Some title">
+    <SidebarBlock loading={knobs.skeleton()} title="Some title" href="test-url">
       <SidebarListLists loading={knobs.skeleton()} {...Props} />
     </SidebarBlock>
   </div>

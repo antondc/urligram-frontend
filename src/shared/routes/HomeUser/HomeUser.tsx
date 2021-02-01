@@ -39,11 +39,11 @@ export const HomeUser: React.FC<Props> = ({
   <div className="HomeUser">
     <Flex horizontal="between" vertical="top">
       <Sidebar>
-        <SidebarBlock title="My Lists" href={`user/${sessionId}/lists`} loading={myListsLoading}>
+        <SidebarBlock title="My Lists" href={`users/${sessionId}/lists`} loading={myListsLoading}>
           <SidebarListLists items={myLists} />
         </SidebarBlock>
         <Hr spacer />
-        <SidebarBlock title="Following Lists" href={`user/${sessionId}/lists`} loading={followingListsLoading}>
+        <SidebarBlock title="Following Lists" href={`users/${sessionId}/lists`} loading={followingListsLoading}>
           <SidebarListLists items={followingLists} />
         </SidebarBlock>
       </Sidebar>
@@ -51,11 +51,11 @@ export const HomeUser: React.FC<Props> = ({
         <Border>HomeUser</Border>
       </Main>
       <Sidebar>
-        <SidebarBlock title="My Tags" href="" loading={myTagsLoading}>
+        <SidebarBlock title="My Tags" href={`users/${sessionId}/tags`} loading={myTagsLoading}>
           <SidebarListTags items={myTags} />
         </SidebarBlock>
         <Hr spacer />
-        <SidebarBlock title="Following Users" href={`user/${sessionId}/following`} loading={followingUsersLoading}>
+        <SidebarBlock title="Following Users" href={`users/${sessionId}/following`} loading={followingUsersLoading}>
           <SidebarListUsers items={followingUsers} />
         </SidebarBlock>
       </Sidebar>
