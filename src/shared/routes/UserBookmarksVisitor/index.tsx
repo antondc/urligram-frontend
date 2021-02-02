@@ -17,6 +17,8 @@ import { selectUserLists } from 'Modules/Sections/selectors/selectUserLists';
 import { selectUserListsLoading } from 'Modules/Sections/selectors/selectUserListsLoading';
 import { userLoad } from 'Modules/Users/actions/userLoad';
 import { selectUserById } from 'Modules/Users/selectors/selectUserById';
+import { sectionsFollowersUsersLoad } from '../../redux/modules/Sections/actions/sectionsFollowersUsersLoad';
+import { selectFollowersUsers } from '../../redux/modules/Sections/selectors/selectFollowersUsers';
 import { UserBookmarksVisitor as UserBookmarksVisitorUi } from './UserBookmarksVisitor';
 
 const UserBookmarksVisitor: React.FC = () => {
@@ -31,6 +33,8 @@ const UserBookmarksVisitor: React.FC = () => {
   const followingListsLoading = useSelector(selectFollowingListsLoading);
   const followingUsers = useSelector(selectFollowingUsers);
   const followingUsersLoading = useSelector(selectFollowingUsersLoading);
+  const followersUsers = useSelector(selectFollowersUsers);
+  const followersUsersLoading = useSelector(selectFollowingUsersLoading);
 
   useEffect(() => {
     dispatch(userLoad(userId));
@@ -38,6 +42,7 @@ const UserBookmarksVisitor: React.FC = () => {
     dispatch(sectionsUserListsLoad(userId));
     dispatch(sectionsFollowingListsLoad(userId));
     dispatch(sectionsFollowingUsersLoad(userId));
+    dispatch(sectionsFollowersUsersLoad(userId));
   }, []);
 
   return (
@@ -52,6 +57,8 @@ const UserBookmarksVisitor: React.FC = () => {
       followingListsLoading={followingListsLoading}
       followingUsers={followingUsers}
       followingUsersLoading={followingUsersLoading}
+      followersUsers={followersUsers}
+      followersUsersLoading={followersUsersLoading}
     />
   );
 };

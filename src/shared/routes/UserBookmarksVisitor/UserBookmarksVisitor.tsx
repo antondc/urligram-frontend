@@ -25,6 +25,8 @@ interface Props {
   followingListsLoading: boolean;
   followingUsers: UserState[];
   followingUsersLoading: boolean;
+  followersUsers: UserState[];
+  followersUsersLoading: boolean;
 }
 
 export const UserBookmarksVisitor: React.FC<Props> = ({
@@ -38,6 +40,8 @@ export const UserBookmarksVisitor: React.FC<Props> = ({
   followingListsLoading,
   followingUsers,
   followingUsersLoading,
+  followersUsers,
+  followersUsersLoading,
 }) => (
   <div className="UserBookmarksVisitor">
     <Flex horizontal="between" vertical="top">
@@ -83,8 +87,8 @@ export const UserBookmarksVisitor: React.FC<Props> = ({
           <SidebarListUsers items={followingUsers} />
         </SidebarBlock>
         <Hr spacer />
-        <SidebarBlock title="Followers" href={`users/${userId}/followers`} loading={followingUsersLoading}>
-          <SidebarListUsers items={followingUsers} />
+        <SidebarBlock title="Followers" href={`users/${userId}/followers`} loading={followersUsersLoading}>
+          <SidebarListUsers items={followersUsers} />
         </SidebarBlock>
       </Sidebar>
     </Flex>

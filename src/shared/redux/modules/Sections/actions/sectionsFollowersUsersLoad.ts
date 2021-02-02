@@ -13,7 +13,7 @@ export const sectionsFollowersUsersLoad = (sessionId: string): ThunkAction<any, 
 ) => {
   dispatch(sectionsFollowersUsersRequest());
   const { data }: ReceiveUsersResponse = await HttpClient.get(
-    `/users/${sessionId}/following?sort=-createdAt&page[size]=5`
+    `/users/${sessionId}/followers?sort=-createdAt&page[size]=5`
   );
 
   const newUsersByKey = {
