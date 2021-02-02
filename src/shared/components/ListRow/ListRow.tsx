@@ -40,9 +40,11 @@ export const ListRow: React.FC<ListRow> = ({
           />
         </div>
         <Hr spacer size="micro" />
-        <Span bold className="LinkRow-title">
-          {name}
-        </Span>
+        <A href={`/lists/${id}`} frontend>
+          <Span bold className="LinkRow-title">
+            {name}
+          </Span>
+        </A>
         <Hr spacer size="micro" />
         <Span size="nano">
           <A href={'users'} styled frontend disabled={!membersIds.length}>

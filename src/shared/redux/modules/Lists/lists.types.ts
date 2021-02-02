@@ -1,5 +1,7 @@
 export const LOAD_LISTS_STARTED = 'LOAD_LISTS_STARTED';
 export const LOAD_LISTS_SUCCESS = 'LOAD_LISTS_SUCCESS';
+export const LOAD_LIST_STARTED = 'LOAD_LIST_STARTED';
+export const LOAD_LIST_SUCCESS = 'LOAD_LIST_SUCCESS';
 
 export interface ListState {
   id: number;
@@ -32,6 +34,10 @@ export interface ReceiveListItem {
   attributes: ListState;
 }
 
+export interface ReceiveListResponse {
+  data: ReceiveListItem;
+}
+
 export interface ReceiveListsResponse {
   data: ReceiveListItem[];
 }
@@ -48,4 +54,16 @@ interface ReceiveListsAction {
   data: ListsState;
 }
 
-export type ListsActionsTypes = RequestListsAction | ReceiveListsAction;
+interface RequestListAction {
+  type: typeof LOAD_LIST_STARTED;
+  data: {
+    loading: true;
+  };
+}
+
+interface ReceiveListAction {
+  type: typeof LOAD_LIST_SUCCESS;
+  data: ListsState;
+}
+
+export type ListsActionsTypes = RequestListsAction | ReceiveListsAction | RequestListAction | ReceiveListAction;

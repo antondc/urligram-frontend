@@ -101,6 +101,17 @@ const Routes: RoutesInterface = {
     ],
   },
 
+  List: {
+    name: 'List',
+    path: '/:lang([a-z]{2})?/lists/:listId',
+    exact: true,
+    auth: false,
+    hasHeader: false,
+    hasFooter: false,
+    initialDataLoadersVisitor: [],
+    initialDataLoadersSession: [],
+  },
+
   Lists: {
     name: 'Lists',
     path: '/:lang([a-z]{2})?/lists',
