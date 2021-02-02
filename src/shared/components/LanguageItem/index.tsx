@@ -17,6 +17,7 @@ const LanguageItem: React.FC<Props> = ({ lang, href, isCurrent, onClick }) => (
     href={href}
     styled={false}
     frontend
+    disabled={isCurrent}
     onClick={onClick}
   >
     <Span bold className="LanguageItem-text">

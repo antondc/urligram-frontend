@@ -1,7 +1,8 @@
 import React from 'react';
 
+import A from 'Components/A';
 import { LinkState } from 'Modules/Links/links.types';
-import { A, Border, Circle, Edit, Hr, Private, Span, Tag, Vote } from '@antoniodcorrea/components';
+import { Border, Circle, Edit, Hr, Private, Span, Tag, Vote } from '@antoniodcorrea/components';
 
 import './LinkRow.less';
 

@@ -20,6 +20,10 @@ export const SECTIONS_FOLLOWING_USERS_REQUEST = 'SECTIONS_FOLLOWING_USERS_REQUES
 export const SECTIONS_FOLLOWING_USERS_RECEIVE = 'SECTIONS_FOLLOWING_USERS_RECEIVE';
 export const SECTIONS_MOST_FOLLOWED_TAGS_REQUEST = 'SECTIONS_MOST_FOLLOWED_TAGS_REQUEST';
 export const SECTIONS_MOST_FOLLOWED_TAGS_RECEIVE = 'SECTIONS_MOST_FOLLOWED_TAGS_RECEIVE';
+export const SECTIONS_USER_LISTS_REQUEST = 'SECTIONS_USER_LISTS_REQUEST';
+export const SECTIONS_USER_LISTS_RECEIVE = 'SECTIONS_USER_LISTS_RECEIVE';
+export const SECTIONS_FOLLOWERS_USERS_REQUEST = 'SECTIONS_FOLLOWERS_USERS_REQUEST';
+export const SECTIONS_FOLLOWERS_USERS_RECEIVE = 'SECTIONS_FOLLOWERS_USERS_RECEIVE';
 
 export interface SectionsState {
   PopularLists?: Partial<ListsState>;
@@ -31,6 +35,8 @@ export interface SectionsState {
   FollowingUsers?: Partial<UsersState>;
   MyTags?: Partial<TagsState>;
   MostFollowedTags?: Partial<TagsState>;
+  UserLists?: Partial<ListsState>;
+  FollowersUsers?: Partial<UsersState>;
 }
 
 interface RequestMostPopularListsAction {
@@ -141,6 +147,30 @@ interface SectionMostFollowedTagsReceiveAction {
   data: SectionsState;
 }
 
+interface SectionUserListsRequestAction {
+  type: typeof SECTIONS_USER_LISTS_REQUEST;
+  data: {
+    loading: true;
+  };
+}
+
+interface SectionUserListsReceiveAction {
+  type: typeof SECTIONS_USER_LISTS_RECEIVE;
+  data: SectionsState;
+}
+
+interface SectionFollowersUsersRequestAction {
+  type: typeof SECTIONS_FOLLOWERS_USERS_REQUEST;
+  data: {
+    loading: true;
+  };
+}
+
+interface SectionFollowersUsersReceiveAction {
+  type: typeof SECTIONS_FOLLOWERS_USERS_RECEIVE;
+  data: SectionsState;
+}
+
 export type SectionsActionsTypes =
   | RequestMostPopularListsAction
   | ReceiveMostPopularListsAction
@@ -159,4 +189,8 @@ export type SectionsActionsTypes =
   | SectionFollowingUsersRequestAction
   | SectionFollowingUsersReceiveAction
   | SectionMostFollowedTagsRequestAction
-  | SectionMostFollowedTagsReceiveAction;
+  | SectionMostFollowedTagsReceiveAction
+  | SectionUserListsRequestAction
+  | SectionUserListsReceiveAction
+  | SectionFollowersUsersRequestAction
+  | SectionFollowersUsersReceiveAction;

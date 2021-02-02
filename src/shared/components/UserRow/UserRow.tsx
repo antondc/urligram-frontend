@@ -1,7 +1,8 @@
 import React from 'react';
 
+import A from 'Components/A';
 import { UserState } from 'Modules/Users/users.types';
-import { A, Border, Hr, Span, Tag } from '@antoniodcorrea/components';
+import { Border, Hr, Span, Tag } from '@antoniodcorrea/components';
 
 import './UserRow.less';
 

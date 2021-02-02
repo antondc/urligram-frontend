@@ -17,6 +17,8 @@ import {
   SECTIONS_NEW_LISTS_REQUEST,
   SECTIONS_NEW_USERS_RECEIVE,
   SECTIONS_NEW_USERS_REQUEST,
+  SECTIONS_USER_LISTS_RECEIVE,
+  SECTIONS_USER_LISTS_REQUEST,
   SectionsActionsTypes,
   SectionsState,
 } from './sections.types';
@@ -152,6 +154,19 @@ export const Sections = (state = initialState, action: SectionsActionsTypes): Se
       return Object.assign({}, state, {
         MostFollowedTags: {
           currentIds: action.data.MostFollowedTags?.currentIds,
+          loading: false,
+        },
+      });
+    case SECTIONS_USER_LISTS_REQUEST:
+      return Object.assign({}, state, {
+        UserLists: {
+          loading: true,
+        },
+      });
+    case SECTIONS_USER_LISTS_RECEIVE:
+      return Object.assign({}, state, {
+        UserLists: {
+          currentIds: action.data.UserLists?.currentIds,
           loading: false,
         },
       });

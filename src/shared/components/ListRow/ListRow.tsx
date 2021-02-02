@@ -1,7 +1,8 @@
 import React from 'react';
 
+import A from 'Components/A';
 import { ListState } from 'Modules/Lists/lists.types';
-import { A, Border, Edit, Hr, Private, Span, Tag, Triangle } from '@antoniodcorrea/components';
+import { Border, Edit, Hr, Private, Span, Tag, Triangle } from '@antoniodcorrea/components';
 
 import './ListRow.less';
 

@@ -45,6 +45,17 @@ const Routes: RoutesInterface = {
     initialDataLoadersSession: [initialBookmarksLoader],
   },
 
+  UserBookmarks: {
+    name: 'UserBookmarks',
+    path: '/:lang([a-z]{2})?/users/:userId/bookmarks',
+    exact: true,
+    auth: false,
+    hasHeader: false,
+    hasFooter: false,
+    initialDataLoadersVisitor: [],
+    initialDataLoadersSession: [],
+  },
+
   User: {
     name: 'User',
     path: '/:lang([a-z]{2})?/users/:userId',

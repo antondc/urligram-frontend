@@ -6,7 +6,6 @@ import { selectBookmarksLoading } from 'Modules/Bookmarks/selectors/selectBookma
 import { selectBookmarksVoteLoading } from 'Modules/Bookmarks/selectors/selectBookmarksVoteLoading';
 import { GlossaryState } from 'Modules/Languages/languages.types';
 import { selectCurrentGlossary } from 'Modules/Languages/selectors/selectCurrentGlossary';
-import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
 import { selectLinksLoading } from 'Modules/Links/selectors/selectLinksLoading';
 import { selectLinksVoteLoading } from 'Modules/Links/selectors/selectLinksVoteLoading';
 import { selectListsLoading } from 'Modules/Lists/selectors/selectListsLoading';
@@ -21,7 +20,6 @@ import './Header.less';
 interface Props {
   isLogged: boolean;
   currentGlossary: GlossaryState;
-  currentLanguageSlug: string;
   bookmarksLoading: boolean;
   linksLoading: boolean;
   linksVoteLoading: boolean;
@@ -36,7 +34,6 @@ const Header: React.FC<Props> = ({
   isLogged,
   currentGlossary,
   switchUserModal,
-  currentLanguageSlug,
   switchLoginModal,
   bookmarksLoading,
   linksLoading,
@@ -53,7 +50,6 @@ const Header: React.FC<Props> = ({
       isLogged={isLogged}
       currentGlossary={currentGlossary}
       switchUserModal={switchUserModal}
-      currentLanguageSlug={currentLanguageSlug}
       switchLoginModal={switchLoginModal}
       loading={loading}
     />
@@ -63,7 +59,6 @@ const Header: React.FC<Props> = ({
 const mapStateToProps = createStructuredSelector({
   isLogged: selectSessionLoggedIn,
   currentGlossary: selectCurrentGlossary,
-  currentLanguageSlug: selectCurrentLanguageSlug,
   bookmarksLoading: selectBookmarksLoading,
   linksLoading: selectLinksLoading,
   linksVoteLoading: selectLinksVoteLoading,

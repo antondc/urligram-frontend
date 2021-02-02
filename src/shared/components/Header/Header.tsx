@@ -2,49 +2,38 @@ import React from 'react';
 
 import Logo from 'Assets/svg/logo.svg';
 import User from 'Assets/svg/user.svg';
+import A from 'Components/A';
 import { GlossaryState } from 'Modules/Languages/languages.types';
-import { A, Border, H3, H4 } from '@antoniodcorrea/components';
+import { Border, H3, H4 } from '@antoniodcorrea/components';
 
 import './Header.less';
 
 interface Props {
   isLogged: boolean;
   currentGlossary: GlossaryState;
-  currentLanguageSlug: string;
   loading: boolean;
   switchUserModal: () => void;
   switchLoginModal: () => void;
 }
 
-export const Header: React.FC<Props> = ({
-  isLogged,
-  currentGlossary,
-  switchUserModal,
-  currentLanguageSlug,
-  switchLoginModal,
-  loading,
-}) => (
+export const Header: React.FC<Props> = ({ isLogged, currentGlossary, switchUserModal, switchLoginModal, loading }) => (
   <header>
     <Border className="Header" weight="thick">
-      <A className="Header-brand" href={'/' + currentLanguageSlug + '/'} frontend>
+      <A className="Header-brand" href={'/'} frontend>
         <Logo className={'Header-logo' + (loading ? ' Header-logo--loading' : '')} />
         <H3 className="Header-title">Linking</H3>
       </A>
-
       <nav className="Header-navigation">
-        <A className="Header-link" href={'/' + currentLanguageSlug + '/bookmarks?sort=-members&page[size]=10'} frontend>
-          <H4>{currentGlossary.bookmarks}</H4>
-        </A>
         <span className="Header-bar">|</span>
-        <A className="Header-link" href={'/' + currentLanguageSlug + '/links'} frontend>
+        <A className="Header-link" href={'/links'} frontend>
           <H4>{currentGlossary.links}</H4>
         </A>
         <span className="Header-bar">|</span>
-        <A className="Header-link" href={'/' + currentLanguageSlug + '/users'} frontend>
+        <A className="Header-link" href={'/users'} frontend>
           <H4>{currentGlossary.users}</H4>
         </A>
         <span className="Header-bar">|</span>
-        <A className="Header-link" href={'/' + currentLanguageSlug + '/lists'} frontend>
+        <A className="Header-link" href={'/lists'} frontend>
           <H4>{currentGlossary.lists}</H4>
         </A>
       </nav>

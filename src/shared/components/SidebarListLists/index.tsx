@@ -1,8 +1,9 @@
 import React from 'react';
 
+import A from 'Components/A';
 import { ListState } from 'Modules/Lists/lists.types';
 import { stringToDashCase } from 'Tools/utils/string/stringToDashCase';
-import { A, Hr, Span, Tooltip } from '@antoniodcorrea/components';
+import { Hr, Span, Tooltip } from '@antoniodcorrea/components';
 import { SidebarListListsSkeleton } from './SidebarListListsSkeleton';
 
 import './SidebarListLists.less';

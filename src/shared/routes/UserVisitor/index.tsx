@@ -21,9 +21,9 @@ const UserVisitor: React.FC<Props> = () => {
   const dispatch = useDispatch();
   const userId = useSelector(selectCurrentRouteParamUserId);
   const popularLists = useSelector(selectPopularLists);
+  const popularListLoading = useSelector(selectPopularListsLoading);
   const bookmarksLoading = useSelector(selectBookmarksLoading);
   const bookmarksIds = useSelector(selectBookmarksCurrentIds);
-  const popularListLoading = useSelector(selectPopularListsLoading);
 
   useEffect(() => {
     dispatch(userLoad(userId));

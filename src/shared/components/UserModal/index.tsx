@@ -4,10 +4,11 @@ import { createStructuredSelector } from 'reselect';
 
 import Cross from 'Assets/svg/cross.svg';
 import User from 'Assets/svg/user.svg';
+import A from 'Components/A';
 import { logOut } from 'Modules/Session/actions/logOut';
 import { switchMessageModal } from 'Modules/Ui/actions/switchMessageModal';
 import { switchUserModal } from 'Modules/Ui/actions/switchUserModal';
-import { A, Border, Hr, Span } from '@antoniodcorrea/components';
+import { Border, Hr, Span } from '@antoniodcorrea/components';
 
 import './UserModal.less';
 

@@ -2,13 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
+import A from 'Components/A';
 import LanguageItem from 'Components/LanguageItem';
 import LanguagesSwitch from 'Components/LanguagesSwitch';
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
 import { selectCurrentPathname } from 'Modules/Routes/selectors/selectCurrentPathname';
 import { switchLanguagesModal } from 'Modules/Ui/actions/switchLanguagesModal';
 import { selectUiLanguagesModalMounted } from 'Modules/Ui/selectors/selectUiLanguagesModalMounted';
-import { A, Border, Fade, Span } from '@antoniodcorrea/components';
+import { Border, Fade, Span } from '@antoniodcorrea/components';
 
 import './Footer.less';
 

@@ -1,7 +1,8 @@
 import React from 'react';
 
+import A from 'Components/A';
 import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
-import { A, Bookmark, Border, Edit, Hr, Private, Span, Tag, Vote } from '@antoniodcorrea/components';
+import { Bookmark, Border, Edit, Hr, Private, Span, Tag, Vote } from '@antoniodcorrea/components';
 
 import './BookmarkRow.less';
 

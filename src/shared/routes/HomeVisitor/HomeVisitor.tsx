@@ -1,5 +1,6 @@
 import React from 'react';
 
+import A from 'Components/A';
 import BookmarkRow from 'Components/BookmarkRow';
 import { BookmarkRowSkeletonGroup } from 'Components/BookmarkRow/BookmarkRowSkeletonGroup';
 import Main from 'Components/Main';
@@ -10,7 +11,7 @@ import SidebarListUsers from 'Components/SidebarListUsers';
 import { ListState } from 'Modules/Lists/lists.types';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
-import { A, Border, Flex, H4, Hr, Tag } from '@antoniodcorrea/components';
+import { Border, Flex, H4, Hr, Tag } from '@antoniodcorrea/components';
 
 import './HomeVisitor.less';
 

@@ -1,5 +1,6 @@
 import React from 'react';
 
+import A from 'Components/A';
 import BookmarkRow from 'Components/BookmarkRow';
 import { BookmarkRowSkeletonGroup } from 'Components/BookmarkRow/BookmarkRowSkeletonGroup';
 import Main from 'Components/Main';
@@ -11,7 +12,7 @@ import SidebarListUsers from 'Components/SidebarListUsers';
 import { ListState } from 'Modules/Lists/lists.types';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
-import { A, Border, Flex, H4, Hr } from '@antoniodcorrea/components';
+import { Border, Flex, H4, Hr } from '@antoniodcorrea/components';
 
 import './HomeUser.less';
 
@@ -55,7 +56,7 @@ export const HomeUser: React.FC<Props> = ({
       </Sidebar>
       <Main>
         <Border className="HomeUser-main">
-          <A href={`users/${sessionId}`} frontend>
+          <A href={`users/${sessionId}/bookmarks?sort=-members&page[size]=10`} frontend>
             <H4>My Bookmarks</H4>
           </A>
           <Hr spacer />

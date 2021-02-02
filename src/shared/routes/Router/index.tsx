@@ -20,6 +20,7 @@ import Login from 'Routes/Login';
 import NotFound from 'Routes/NotFound';
 import ServerError from 'Routes/ServerError';
 import SignIn from 'Routes/SignIn';
+import UserBookmarksVisitor from 'Routes/UserBookmarksVisitor';
 import UsersUser from 'Routes/UsersUser';
 import UsersVisitor from 'Routes/UsersVisitor';
 import UserUser from 'Routes/UserUser';
@@ -42,6 +43,11 @@ const Router: React.FC<Props> = ({ loggedIn, location, defaultCurrentSlug, pathW
       {!loggedIn && <Redirect from="/:lang?/control" to={'/' + defaultCurrentSlug + '/sign-in'} />}
 
       {/* Pages */}
+      <Route
+        exact={Routes.UserBookmarks.exact}
+        path={Routes.UserBookmarks.path}
+        component={loggedIn ? UserBookmarksVisitor : UserBookmarksVisitor}
+      />
       <Route exact={Routes.User.exact} path={Routes.User.path} component={loggedIn ? UserUser : UserVisitor} />
       <Route exact={Routes.Users.exact} path={Routes.Users.path} component={loggedIn ? UsersUser : UsersVisitor} />
       <Route exact={Routes.Links.exact} path={Routes.Links.path} component={Links} />

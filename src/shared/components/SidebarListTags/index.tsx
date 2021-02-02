@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { A, Tag } from '@antoniodcorrea/components';
+import A from 'Components/A';
+import { Tag } from '@antoniodcorrea/components';
 import { SidebarListTagsSkeleton } from './SidebarListTagsSkeleton';
 
 import './SidebarListTags.less';
