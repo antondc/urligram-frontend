@@ -1,6 +1,7 @@
 import React from 'react';
 
 import BookmarkRow from 'Components/BookmarkRow';
+import { BookmarkRowSkeletonGroup } from 'Components/BookmarkRow/BookmarkRowSkeletonGroup';
 import Main from 'Components/Main';
 import Sidebar from 'Components/Sidebar';
 import SidebarBlock from 'Components/SidebarBlock';
@@ -10,9 +11,7 @@ import SidebarListUsers from 'Components/SidebarListUsers';
 import { ListState } from 'Modules/Lists/lists.types';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
-import { Border, Flex, H4, Hr } from '@antoniodcorrea/components';
-import { BookmarkRowSkeletonGroup } from '../../components/BookmarkRow/BookmarkRowSkeletonGroup';
-import MainHeader from '../../components/MainHeader';
+import { A, Border, Flex, H4, Hr } from '@antoniodcorrea/components';
 
 import './HomeUser.less';
 
@@ -56,7 +55,9 @@ export const HomeUser: React.FC<Props> = ({
       </Sidebar>
       <Main>
         <Border className="HomeUser-main">
-          <H4>My Bookmarks</H4>
+          <A href={`users/${sessionId}`} frontend>
+            <H4>My Bookmarks</H4>
+          </A>
           <Hr spacer />
           {bookmarksLoading ? (
             <BookmarkRowSkeletonGroup length={5} />
@@ -74,7 +75,9 @@ export const HomeUser: React.FC<Props> = ({
         </Border>
         <Hr spacer />
         <Border className="HomeUser-main">
-          <H4>Recommended Bookmarks</H4>
+          <A href={`users/${sessionId}/recommended`} frontend>
+            <H4>Recommended Bookmarks</H4>
+          </A>
           <Hr spacer />
           {bookmarksLoading ? (
             <BookmarkRowSkeletonGroup length={5} />

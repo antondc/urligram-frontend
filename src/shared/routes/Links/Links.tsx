@@ -9,12 +9,12 @@ import SidebarListLists from 'Components/SidebarListLists';
 import SidebarListTags from 'Components/SidebarListTags';
 import SidebarListUsers from 'Components/SidebarListUsers';
 import { ListState } from 'Modules/Lists/lists.types';
+import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import LinkRow from 'Root/src/shared/components/LinkRow';
 import { Border, Button, Flex, Hr } from '@antoniodcorrea/components';
-import { TagState } from '../../redux/modules/Tags/tags.types';
 
-import './LinksVisitor.less';
+import './Links.less';
 
 interface Props {
   linksIds: number[];
@@ -29,7 +29,7 @@ interface Props {
   mostFollowedTagsLoading: boolean;
 }
 
-export const LinksVisitor: React.FC<Props> = ({
+export const Links: React.FC<Props> = ({
   linksIds,
   mostFollowedLists,
   mostFollowedListsLoading,
@@ -41,18 +41,18 @@ export const LinksVisitor: React.FC<Props> = ({
   mostFollowedTags,
   mostFollowedTagsLoading,
 }) => (
-  <div className="LinksVisitor">
+  <div className="Links">
     <Flex horizontal="between" vertical="top">
       <Sidebar>
         <SidebarBlock
           title="Most Followed Lists"
-          href="lists?sort=members&page[size]=10"
+          href="lists?sort=-members&page[size]=10"
           loading={mostFollowedListsLoading}
         >
           <SidebarListLists items={mostFollowedLists} />
         </SidebarBlock>
         <Hr spacer />
-        <SidebarBlock title="New Lists" href="lists?sort=createdat&page[size]=10" loading={newListsLoading}>
+        <SidebarBlock title="New Lists" href="lists?sort=-createdat&page[size]=10" loading={newListsLoading}>
           <SidebarListLists items={newLists} />
         </SidebarBlock>
         <Hr spacer />
@@ -77,7 +77,7 @@ export const LinksVisitor: React.FC<Props> = ({
         </Border>
       </Main>
       <Sidebar>
-        <SidebarBlock title="My Tags" href={'bookmarks'} loading={mostFollowedTagsLoading}>
+        <SidebarBlock title="Popular Tags" href="tags?sort[most-used]=desc" loading={mostFollowedTagsLoading}>
           <SidebarListTags items={mostFollowedTags} />
         </SidebarBlock>
         <Hr spacer />

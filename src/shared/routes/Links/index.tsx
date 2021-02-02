@@ -16,9 +16,9 @@ import { selectPopularLists } from 'Modules/Sections/selectors/selectPopularList
 import { selectPopularListsLoading } from 'Modules/Sections/selectors/selectPopularListsLoading';
 import { selectMostFollowedTags } from '../../redux/modules/Sections/selectors/selectMostFollowedTags';
 import { selectMostFollowedTagsLoading } from '../../redux/modules/Sections/selectors/selectMostFollowedTagsLoading';
-import { LinksVisitor } from './LinksVisitor';
+import { Links as LinksUi } from './Links';
 
-const HomeVisitor: React.FC = () => {
+const Links: React.FC = () => {
   const dispatch = useDispatch();
   const linksAllIds = useSelector(selectLinksAllIds);
   const linksAllIdsLoading = useSelector(selectLinksLoading);
@@ -40,7 +40,7 @@ const HomeVisitor: React.FC = () => {
   }, []);
 
   return (
-    <LinksVisitor
+    <LinksUi
       linksIds={linksAllIds}
       loading={linksAllIdsLoading}
       mostFollowedLists={mostFollowedLists}
@@ -55,4 +55,4 @@ const HomeVisitor: React.FC = () => {
   );
 };
 
-export default HomeVisitor;
+export default Links;

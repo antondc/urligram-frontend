@@ -5,6 +5,7 @@ import { initialLinksLoader } from 'Modules/Links/links.loader';
 import { initialListsLoader } from 'Modules/Lists/lists.loader';
 import { followingListsInitialLoader } from 'Modules/Sections/initialLoaders/followingListsInitialLoader';
 import { followingUsersInitialLoader } from 'Modules/Sections/initialLoaders/followingUsersInitialLoad';
+import { mostFollowedTagsInitialLoader } from 'Modules/Sections/initialLoaders/mostFollowedTagsInitialLoader';
 import { mostFollowedUsersInitialLoader } from 'Modules/Sections/initialLoaders/mostFollowedUsersInitialLoader';
 import { myListsInitialLoader } from 'Modules/Sections/initialLoaders/myListsInitialLoader';
 import { myTagsInitialLoader } from 'Modules/Sections/initialLoaders/myTagsInitialLoader';
@@ -73,8 +74,20 @@ const Routes: RoutesInterface = {
     auth: false,
     hasHeader: false,
     hasFooter: false,
-    initialDataLoadersVisitor: [initialLinksLoader],
-    initialDataLoadersSession: [initialLinksLoader],
+    initialDataLoadersVisitor: [
+      initialLinksLoader,
+      popularListsInitialLoader,
+      newListsInitialLoader,
+      mostFollowedTagsInitialLoader,
+      newUsersInitialLoader,
+    ],
+    initialDataLoadersSession: [
+      initialLinksLoader,
+      popularListsInitialLoader,
+      newListsInitialLoader,
+      mostFollowedTagsInitialLoader,
+      newUsersInitialLoader,
+    ],
   },
 
   Lists: {

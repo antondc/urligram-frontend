@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { loadBookmarks } from 'Modules/Bookmarks/actions/loadBookmarks';
+import { bookmarksLoadBySize } from 'Modules/Bookmarks/actions/bookmarksLoadBySize';
 import { selectBookmarksCurrentIds } from 'Modules/Bookmarks/selectors/selectBookmarksCurrentIds';
 import { selectBookmarksLoading } from 'Modules/Bookmarks/selectors/selectBookmarksLoading';
 import { loadPopularLists } from 'Modules/Sections/actions/loadPopularLists';
@@ -42,7 +42,7 @@ const HomeVisitor: React.FC = () => {
     dispatch(sectionsMostFollowedUsersLoad());
     dispatch(sectionsNewUsersLoad());
     dispatch(tagsAllLoad());
-    dispatch(loadBookmarks(5));
+    dispatch(bookmarksLoadBySize(5));
   }, []);
 
   return (
