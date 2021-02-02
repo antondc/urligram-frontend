@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { loadBookmarks } from 'Modules/Bookmarks/actions/loadBookmarks';
+import { selectBookmarksCurrentIds } from 'Modules/Bookmarks/selectors/selectBookmarksCurrentIds';
+import { selectBookmarksLoading } from 'Modules/Bookmarks/selectors/selectBookmarksLoading';
 import { loadPopularLists } from 'Modules/Sections/actions/loadPopularLists';
 import { sectionsMostFollowedUsersLoad } from 'Modules/Sections/actions/sectionsMostFollowedUsersLoad';
 import { sectionsNewListsLoad } from 'Modules/Sections/actions/sectionsNewListsLoad';
@@ -14,20 +17,16 @@ import { selectNewUsersLoading } from 'Modules/Sections/selectors/selectNewUsers
 import { selectPopularLists } from 'Modules/Sections/selectors/selectPopularLists';
 import { selectPopularListsLoading } from 'Modules/Sections/selectors/selectPopularListsLoading';
 import { tagsAllLoad } from 'Modules/Tags/actions/tagsAllLoad';
-import { loadBookmarks } from '../../redux/modules/Bookmarks/actions/loadBookmarks';
-import { selectBookmarksAll } from '../../redux/modules/Bookmarks/selectors/selectBookmarksAll';
-import { selectBookmarksCurrentIds } from '../../redux/modules/Bookmarks/selectors/selectBookmarksCurrentIds';
-import { selectBookmarksLoading } from '../../redux/modules/Bookmarks/selectors/selectBookmarksLoading';
-import { selectTagsAll } from '../../redux/modules/Tags/selectors/selectAllTags';
-import { selectTagsLoading } from '../../redux/modules/Tags/selectors/selectAllTagsLoading';
+import { selectTagsAll } from 'Modules/Tags/selectors/selectAllTags';
+import { selectTagsLoading } from 'Modules/Tags/selectors/selectAllTagsLoading';
 import { HomeVisitor as HomeVisitorUI } from './HomeVisitor';
 
 const HomeVisitor: React.FC = () => {
   const dispatch = useDispatch();
   const mostFollowedLists = useSelector(selectPopularLists);
+  const mostFollowedListsLoading = useSelector(selectPopularListsLoading);
   const newLists = useSelector(selectNewLists);
   const newListsLoading = useSelector(selectNewListsLoading);
-  const mostFollowedListsLoading = useSelector(selectPopularListsLoading);
   const mostFollowedUsers = useSelector(selectMostFollowedUsers);
   const mostFollowedUsersLoading = useSelector(selectMostFollowedUsersLoading);
   const newUsers = useSelector(selectNewUsers);

@@ -18,6 +18,8 @@ export const SECTIONS_MY_TAGS_REQUEST = 'SECTIONS_MY_TAGS_REQUEST';
 export const SECTIONS_MY_TAGS_RECEIVE = 'SECTIONS_MY_TAGS_RECEIVE';
 export const SECTIONS_FOLLOWING_USERS_REQUEST = 'SECTIONS_FOLLOWING_USERS_REQUEST';
 export const SECTIONS_FOLLOWING_USERS_RECEIVE = 'SECTIONS_FOLLOWING_USERS_RECEIVE';
+export const SECTIONS_MOST_FOLLOWED_TAGS_REQUEST = 'SECTIONS_MOST_FOLLOWED_TAGS_REQUEST';
+export const SECTIONS_MOST_FOLLOWED_TAGS_RECEIVE = 'SECTIONS_MOST_FOLLOWED_TAGS_RECEIVE';
 
 export interface SectionsState {
   PopularLists?: Partial<ListsState>;
@@ -28,6 +30,7 @@ export interface SectionsState {
   NewUsers?: Partial<UsersState>;
   FollowingUsers?: Partial<UsersState>;
   MyTags?: Partial<TagsState>;
+  MostFollowedTags?: Partial<TagsState>;
 }
 
 interface RequestMostPopularListsAction {
@@ -126,6 +129,18 @@ interface SectionFollowingUsersReceiveAction {
   data: SectionsState;
 }
 
+interface SectionMostFollowedTagsRequestAction {
+  type: typeof SECTIONS_MOST_FOLLOWED_TAGS_REQUEST;
+  data: {
+    loading: true;
+  };
+}
+
+interface SectionMostFollowedTagsReceiveAction {
+  type: typeof SECTIONS_MOST_FOLLOWED_TAGS_RECEIVE;
+  data: SectionsState;
+}
+
 export type SectionsActionsTypes =
   | RequestMostPopularListsAction
   | ReceiveMostPopularListsAction
@@ -142,4 +157,6 @@ export type SectionsActionsTypes =
   | SectionMyTagsRequestAction
   | SectionMyTagsReceiveAction
   | SectionFollowingUsersRequestAction
-  | SectionFollowingUsersReceiveAction;
+  | SectionFollowingUsersReceiveAction
+  | SectionMostFollowedTagsRequestAction
+  | SectionMostFollowedTagsReceiveAction;

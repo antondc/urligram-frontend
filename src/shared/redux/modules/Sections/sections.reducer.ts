@@ -5,6 +5,8 @@ import {
   SECTIONS_FOLLOWING_LISTS_REQUEST,
   SECTIONS_FOLLOWING_USERS_RECEIVE,
   SECTIONS_FOLLOWING_USERS_REQUEST,
+  SECTIONS_MOST_FOLLOWED_TAGS_RECEIVE,
+  SECTIONS_MOST_FOLLOWED_TAGS_REQUEST,
   SECTIONS_MOST_FOLLOWED_USERS_RECEIVE,
   SECTIONS_MOST_FOLLOWED_USERS_REQUEST,
   SECTIONS_MY_LISTS_RECEIVE,
@@ -137,6 +139,19 @@ export const Sections = (state = initialState, action: SectionsActionsTypes): Se
       return Object.assign({}, state, {
         FollowingUsers: {
           currentIds: action.data.FollowingUsers?.currentIds,
+          loading: false,
+        },
+      });
+    case SECTIONS_MOST_FOLLOWED_TAGS_REQUEST:
+      return Object.assign({}, state, {
+        MostFollowedTags: {
+          loading: true,
+        },
+      });
+    case SECTIONS_MOST_FOLLOWED_TAGS_RECEIVE:
+      return Object.assign({}, state, {
+        MostFollowedTags: {
+          currentIds: action.data.MostFollowedTags?.currentIds,
           loading: false,
         },
       });
