@@ -24,6 +24,10 @@ export const SECTIONS_USER_LISTS_REQUEST = 'SECTIONS_USER_LISTS_REQUEST';
 export const SECTIONS_USER_LISTS_RECEIVE = 'SECTIONS_USER_LISTS_RECEIVE';
 export const SECTIONS_FOLLOWERS_USERS_REQUEST = 'SECTIONS_FOLLOWERS_USERS_REQUEST';
 export const SECTIONS_FOLLOWERS_USERS_RECEIVE = 'SECTIONS_FOLLOWERS_USERS_RECEIVE';
+export const SECTIONS_SIMILAR_LISTS_REQUEST = 'SECTIONS_SIMILAR_LISTS_REQUEST';
+export const SECTIONS_SIMILAR_LISTS_RECEIVE = 'SECTIONS_SIMILAR_LISTS_RECEIVE';
+export const SECTIONS_USERS_IN_THIS_LIST_REQUEST = 'SECTIONS_USERS_IN_THIS_LIST_REQUEST';
+export const SECTIONS_USERS_IN_THIS_LIST_RECEIVE = 'SECTIONS_USERS_IN_THIS_LIST_RECEIVE';
 
 export interface SectionsState {
   PopularLists?: Partial<ListsState>;
@@ -37,6 +41,8 @@ export interface SectionsState {
   MostFollowedTags?: Partial<TagsState>;
   UserLists?: Partial<ListsState>;
   FollowersUsers?: Partial<UsersState>;
+  SimilarLists?: Partial<ListsState>;
+  UsersInThisList?: Partial<UsersState>;
 }
 
 interface RequestMostPopularListsAction {
@@ -171,6 +177,30 @@ interface SectionFollowersUsersReceiveAction {
   data: SectionsState;
 }
 
+interface SectionSimilarListsRequestAction {
+  type: typeof SECTIONS_SIMILAR_LISTS_REQUEST;
+  data: {
+    loading: true;
+  };
+}
+
+interface SectionSimilarListsReceiveAction {
+  type: typeof SECTIONS_SIMILAR_LISTS_RECEIVE;
+  data: SectionsState;
+}
+
+interface SectionUsersInThisListRequestAction {
+  type: typeof SECTIONS_USERS_IN_THIS_LIST_REQUEST;
+  data: {
+    loading: true;
+  };
+}
+
+interface SectionUsersInThisListReceiveAction {
+  type: typeof SECTIONS_USERS_IN_THIS_LIST_RECEIVE;
+  data: SectionsState;
+}
+
 export type SectionsActionsTypes =
   | RequestMostPopularListsAction
   | ReceiveMostPopularListsAction
@@ -193,4 +223,8 @@ export type SectionsActionsTypes =
   | SectionUserListsRequestAction
   | SectionUserListsReceiveAction
   | SectionFollowersUsersRequestAction
-  | SectionFollowersUsersReceiveAction;
+  | SectionFollowersUsersReceiveAction
+  | SectionSimilarListsRequestAction
+  | SectionSimilarListsReceiveAction
+  | SectionUsersInThisListRequestAction
+  | SectionUsersInThisListReceiveAction;
