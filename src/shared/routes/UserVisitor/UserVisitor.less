@@ -1,20 +1,28 @@
 @import '../../css/imports.less';
 
 .UserVisitor {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  &-image {
+    height: 50px;
+    width: 50px;
+    object-fit: cover;
+    object-position: center;
+    border: 1px solid black;
+    border-radius: 50%;
+  }
 
-  &-content {
-    .calcgrid(@property: width; @columns: 2; @parentColumns: 12; @addGutter: 2; @hasParentPaddings: 0);
+  &-detail {
+    margin: 0 10px;
 
-    @media @br-mobile {
-      .calcgrid(@property: width; @columns: 2; @parentColumns: 2; @addGutter: 2; @hasParentPaddings: 0);
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &:last-child {
+      margin-right: 0;
     }
   }
 
-  &-form {
-    display: flex;
-    flex-direction: column;
+  &-tag {
+    margin: 0 8px 8px 0;
   }
 }
