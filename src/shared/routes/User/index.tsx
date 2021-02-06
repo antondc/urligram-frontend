@@ -23,14 +23,14 @@ import { selectUserListsLoading } from 'Modules/Sections/selectors/selectUserLis
 import { userLoad } from 'Modules/Users/actions/userLoad';
 import { selectUserById } from 'Modules/Users/selectors/selectUserById';
 import { LocaleFormattedDate } from 'Tools/utils/Date/localeFormattedDate';
-import { UserVisitor as UserVisitorUi } from './UserVisitor';
+import { User as UserUi } from './User';
 
 interface Props {
   popularLists: ListState[];
   userId: string;
 }
 
-const UserVisitor: React.FC<Props> = () => {
+const User: React.FC<Props> = () => {
   const dispatch = useDispatch();
   const userId = useSelector(selectCurrentRouteParamUserId);
   const user = useSelector((state: RootState) => selectUserById(state, { id: userId }));
@@ -58,7 +58,7 @@ const UserVisitor: React.FC<Props> = () => {
   }, [userId]);
 
   return (
-    <UserVisitorUi
+    <UserUi
       userId={userId}
       user={user}
       createdAt={createdAt}
@@ -76,4 +76,4 @@ const UserVisitor: React.FC<Props> = () => {
   );
 };
 
-export default UserVisitor;
+export default User;

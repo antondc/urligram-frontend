@@ -12,7 +12,7 @@ import { ListState } from 'Modules/Lists/lists.types';
 import { UserState } from 'Modules/Users/users.types';
 import { Border, Button, Fade, Flex, H4, Hr, Span, Tag } from '@antoniodcorrea/components';
 
-import './UserUser.less';
+import './User.less';
 
 interface Props {
   userId: string;
@@ -30,7 +30,7 @@ interface Props {
   followersUsersLoading: boolean;
 }
 
-export const UserUser: React.FC<Props> = ({
+export const User: React.FC<Props> = ({
   userId,
   user,
   createdAt,
@@ -45,7 +45,7 @@ export const UserUser: React.FC<Props> = ({
   followersUsers,
   followersUsersLoading,
 }) => (
-  <div className="UserUser">
+  <div className="User">
     <Flex horizontal="between" vertical="top">
       <Sidebar>
         <SidebarBlock title="User lists" href="" loading={userListsLoading}>
@@ -75,36 +75,36 @@ export const UserUser: React.FC<Props> = ({
               <Span bold>Created at:</Span>
               <Span> {createdAt}</Span>
             </div>
-            <img className="UserUser-image" src={user?.image} />
+            <img className="User-image" src={user?.image} />
           </Flex>
           <Hr spacer />
           <Flex>
-            <Span className="UserUser-detail" size="small">
+            <Span className="User-detail" size="small">
               Bookmarks:{' '}
               <A href={`users/${userId}/bookmarks`} frontend>
                 {user?.bookmarksIds?.length}
               </A>
             </Span>
             ·
-            <Span className="UserUser-detail" size="small">
+            <Span className="User-detail" size="small">
               Following:{' '}
               <A href={`users/${userId}/following`} frontend>
                 {user?.following?.length}
               </A>
             </Span>
             ·
-            <Span className="UserUser-detail" size="small">
+            <Span className="User-detail" size="small">
               Followers:{' '}
               <A href={`users/${userId}/followers`} frontend>
                 {user?.followers?.length}
               </A>
             </Span>
             ·
-            <Span className="UserUser-detail" size="small">
+            <Span className="User-detail" size="small">
               Tags: {user?.tags?.length}
             </Span>
             ·
-            <Span className="UserUser-detail" size="small">
+            <Span className="User-detail" size="small">
               Lists:{' '}
               <A href={`users/${userId}/lists`} frontend>
                 {user?.lists?.length}
@@ -118,7 +118,7 @@ export const UserUser: React.FC<Props> = ({
           <Hr spacer size="small" />
           <Flex>
             {user?.tags?.map((item) => (
-              <A className="UserUser-tag" href={`tags/${item.name}`} key={item.id} styled={false} frontend>
+              <A className="User-tag" href={`tags/${item.name}`} key={item.id} styled={false} frontend>
                 <Tag size="small">{item.name}</Tag>
               </A>
             ))}

@@ -22,12 +22,11 @@ import Login from 'Routes/Login';
 import NotFound from 'Routes/NotFound';
 import ServerError from 'Routes/ServerError';
 import SignIn from 'Routes/SignIn';
+import User from 'Routes/User';
 import UserBookmarksUser from 'Routes/UserBookmarksUser';
 import UserBookmarksVisitor from 'Routes/UserBookmarksVisitor';
 import UsersUser from 'Routes/UsersUser';
 import UsersVisitor from 'Routes/UsersVisitor';
-import UserUser from 'Routes/UserUser';
-import UserVisitor from 'Routes/UserVisitor';
 import { Location } from 'Services/History';
 import { FadeInOut } from '@antoniodcorrea/components';
 
@@ -51,7 +50,7 @@ const Router: React.FC<Props> = ({ loggedIn, location, defaultCurrentSlug, pathW
         path={Routes.UserBookmarks.path}
         component={loggedIn ? UserBookmarksUser : UserBookmarksVisitor}
       />
-      <Route exact={Routes.User.exact} path={Routes.User.path} component={loggedIn ? UserUser : UserVisitor} />
+      <Route exact={Routes.User.exact} path={Routes.User.path} component={User} />
       <Route exact={Routes.Users.exact} path={Routes.Users.path} component={loggedIn ? UsersUser : UsersVisitor} />
       <Route exact={Routes.Links.exact} path={Routes.Links.path} component={Links} />
       <Route exact={Routes.List.exact} path={Routes.List.path} component={loggedIn ? ListUser : ListVisitor} />
