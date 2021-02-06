@@ -21,6 +21,8 @@ import {
   SECTIONS_NEW_USERS_REQUEST,
   SECTIONS_SIMILAR_LISTS_RECEIVE,
   SECTIONS_SIMILAR_LISTS_REQUEST,
+  SECTIONS_TAGS_IN_THIS_LIST_RECEIVE,
+  SECTIONS_TAGS_IN_THIS_LIST_REQUEST,
   SECTIONS_USER_LISTS_RECEIVE,
   SECTIONS_USER_LISTS_REQUEST,
   SECTIONS_USERS_IN_THIS_LIST_RECEIVE,
@@ -212,6 +214,19 @@ export const Sections = (state = initialState, action: SectionsActionsTypes): Se
       return Object.assign({}, state, {
         UsersInThisList: {
           currentIds: action.data.UsersInThisList?.currentIds,
+          loading: false,
+        },
+      });
+    case SECTIONS_TAGS_IN_THIS_LIST_REQUEST:
+      return Object.assign({}, state, {
+        TagsInThisList: {
+          loading: true,
+        },
+      });
+    case SECTIONS_TAGS_IN_THIS_LIST_RECEIVE:
+      return Object.assign({}, state, {
+        TagsInThisList: {
+          currentIds: action.data.TagsInThisList?.currentIds,
           loading: false,
         },
       });

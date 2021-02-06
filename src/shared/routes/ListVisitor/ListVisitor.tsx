@@ -6,8 +6,10 @@ import Main from 'Components/Main';
 import Sidebar from 'Components/Sidebar';
 import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListLists from 'Components/SidebarListLists';
+import SidebarListTags from 'Components/SidebarListTags';
 import SidebarListUsers from 'Components/SidebarListUsers';
 import { ListState } from 'Modules/Lists/lists.types';
+import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { Border, Button, Flex, H4, Hr } from '@antoniodcorrea/components';
 
@@ -23,6 +25,8 @@ interface Props {
   similarListsLoading: boolean;
   usersInThisList: UserState[];
   usersInThisListLoading: boolean;
+  tagsInThisList: TagState[];
+  tagsInThisListLoading: boolean;
 }
 
 export const ListVisitor: React.FC<Props> = ({
@@ -35,6 +39,8 @@ export const ListVisitor: React.FC<Props> = ({
   similarListsLoading,
   usersInThisList,
   usersInThisListLoading,
+  tagsInThisList,
+  tagsInThisListLoading,
 }) => (
   <div className="ListVisitor">
     <Flex horizontal="between" vertical="top">
@@ -75,7 +81,10 @@ export const ListVisitor: React.FC<Props> = ({
         <SidebarBlock title="People in this list" loading={usersInThisListLoading}>
           <SidebarListUsers items={usersInThisList} />
         </SidebarBlock>
-        <Hr spacer />
+        <Hr spacer />{' '}
+        <SidebarBlock title="Tags In This List" loading={tagsInThisListLoading}>
+          <SidebarListTags items={tagsInThisList} />
+        </SidebarBlock>
       </Sidebar>
     </Flex>
   </div>

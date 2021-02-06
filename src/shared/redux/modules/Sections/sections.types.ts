@@ -28,6 +28,8 @@ export const SECTIONS_SIMILAR_LISTS_REQUEST = 'SECTIONS_SIMILAR_LISTS_REQUEST';
 export const SECTIONS_SIMILAR_LISTS_RECEIVE = 'SECTIONS_SIMILAR_LISTS_RECEIVE';
 export const SECTIONS_USERS_IN_THIS_LIST_REQUEST = 'SECTIONS_USERS_IN_THIS_LIST_REQUEST';
 export const SECTIONS_USERS_IN_THIS_LIST_RECEIVE = 'SECTIONS_USERS_IN_THIS_LIST_RECEIVE';
+export const SECTIONS_TAGS_IN_THIS_LIST_REQUEST = 'SECTIONS_TAGS_IN_THIS_LIST_REQUEST';
+export const SECTIONS_TAGS_IN_THIS_LIST_RECEIVE = 'SECTIONS_TAGS_IN_THIS_LIST_RECEIVE';
 
 export interface SectionsState {
   PopularLists?: Partial<ListsState>;
@@ -43,6 +45,7 @@ export interface SectionsState {
   FollowersUsers?: Partial<UsersState>;
   SimilarLists?: Partial<ListsState>;
   UsersInThisList?: Partial<UsersState>;
+  TagsInThisList?: Partial<TagsState>;
 }
 
 interface RequestMostPopularListsAction {
@@ -201,6 +204,18 @@ interface SectionUsersInThisListReceiveAction {
   data: SectionsState;
 }
 
+interface SectionTagsInThisListRequestAction {
+  type: typeof SECTIONS_TAGS_IN_THIS_LIST_REQUEST;
+  data: {
+    loading: true;
+  };
+}
+
+interface SectionTagsInThisListReceiveAction {
+  type: typeof SECTIONS_TAGS_IN_THIS_LIST_RECEIVE;
+  data: SectionsState;
+}
+
 export type SectionsActionsTypes =
   | RequestMostPopularListsAction
   | ReceiveMostPopularListsAction
@@ -227,4 +242,6 @@ export type SectionsActionsTypes =
   | SectionSimilarListsRequestAction
   | SectionSimilarListsReceiveAction
   | SectionUsersInThisListRequestAction
-  | SectionUsersInThisListReceiveAction;
+  | SectionUsersInThisListReceiveAction
+  | SectionTagsInThisListRequestAction
+  | SectionTagsInThisListReceiveAction;
