@@ -17,16 +17,28 @@ interface Props {
   popularLists: ListState[];
   bookmarksLoading: boolean;
   popularListLoading: boolean;
+  userLists: ListState[];
+  userListsLoading: boolean;
 }
 
-export const UserUser: React.FC<Props> = ({ bookmarksIds, popularLists, bookmarksLoading, popularListLoading }) => (
+export const UserUser: React.FC<Props> = ({
+  bookmarksIds,
+  popularLists,
+  bookmarksLoading,
+  popularListLoading,
+  userLists,
+  userListsLoading,
+}) => (
   <div className="UserUser">
     <Flex horizontal="between" vertical="top">
       <Sidebar>
+        <SidebarBlock title="User lists" href="" loading={userListsLoading}>
+          <SidebarListLists items={userLists} />
+        </SidebarBlock>
+        <Hr spacer />
         <SidebarBlock title="Popular lists" href="" loading={popularListLoading}>
           <SidebarListLists items={popularLists} />
         </SidebarBlock>
-        <Hr spacer />
       </Sidebar>
       <Main>
         <Border grow>
