@@ -1,3 +1,4 @@
+import { BookmarksState } from '../Bookmarks/bookmarks.types';
 import { ListsState } from '../Lists/lists.types';
 import { TagsState } from '../Tags/tags.types';
 import { UsersState } from '../Users/users.types';
@@ -30,6 +31,8 @@ export const SECTIONS_USERS_IN_THIS_LIST_REQUEST = 'SECTIONS_USERS_IN_THIS_LIST_
 export const SECTIONS_USERS_IN_THIS_LIST_RECEIVE = 'SECTIONS_USERS_IN_THIS_LIST_RECEIVE';
 export const SECTIONS_TAGS_IN_THIS_LIST_REQUEST = 'SECTIONS_TAGS_IN_THIS_LIST_REQUEST';
 export const SECTIONS_TAGS_IN_THIS_LIST_RECEIVE = 'SECTIONS_TAGS_IN_THIS_LIST_RECEIVE';
+export const SECTIONS_MY_RECENT_BOOKMARKS_REQUEST = 'SECTIONS_MY_RECENT_BOOKMARKS_REQUEST';
+export const SECTIONS_MY_RECENT_BOOKMARKS_RECEIVE = 'SECTIONS_MY_RECENT_BOOKMARKS_RECEIVE';
 
 export interface SectionsState {
   PopularLists?: Partial<ListsState>;
@@ -46,6 +49,7 @@ export interface SectionsState {
   SimilarLists?: Partial<ListsState>;
   UsersInThisList?: Partial<UsersState>;
   TagsInThisList?: Partial<TagsState>;
+  MyRecentBookmarks?: Partial<BookmarksState>;
 }
 
 interface RequestMostPopularListsAction {
@@ -216,6 +220,18 @@ interface SectionTagsInThisListReceiveAction {
   data: SectionsState;
 }
 
+interface SectionMyRecentBookmarksRequestAction {
+  type: typeof SECTIONS_MY_RECENT_BOOKMARKS_REQUEST;
+  data: {
+    loading: true;
+  };
+}
+
+interface SectionMyRecentBookmarksReceiveAction {
+  type: typeof SECTIONS_MY_RECENT_BOOKMARKS_RECEIVE;
+  data: SectionsState;
+}
+
 export type SectionsActionsTypes =
   | RequestMostPopularListsAction
   | ReceiveMostPopularListsAction
@@ -244,4 +260,6 @@ export type SectionsActionsTypes =
   | SectionUsersInThisListRequestAction
   | SectionUsersInThisListReceiveAction
   | SectionTagsInThisListRequestAction
-  | SectionTagsInThisListReceiveAction;
+  | SectionTagsInThisListReceiveAction
+  | SectionMyRecentBookmarksRequestAction
+  | SectionMyRecentBookmarksReceiveAction;

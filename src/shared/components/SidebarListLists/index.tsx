@@ -14,7 +14,7 @@ interface Props {
   title?: string;
 }
 
-const SidebarListLists: React.FC<Props> = ({ items, loading, title }) => (
+const SidebarListLists: React.FC<Props> = ({ items, loading, title: blockTitle }) => (
   <dl className="SidebarListLists-lists">
     {!loading && items?.length ? (
       items.map(({ id, name, membersIds, bookmarksIds }, index) => (
@@ -30,12 +30,12 @@ const SidebarListLists: React.FC<Props> = ({ items, loading, title }) => (
               {membersIds?.length && (
                 <>
                   <Tooltip
-                    parentElementId={`${stringToDashCase(title)}-members-${id}`}
+                    parentElementId={`${stringToDashCase(blockTitle)}-members-${id}`}
                     content="Users following this list"
                     delay={0.5}
                   />
                   <A href={`lists/${id}/users`} frontend>
-                    <Span id={`${stringToDashCase(title)}-members-${id}`} size="small">
+                    <Span id={`${stringToDashCase(blockTitle)}-members-${id}`} size="small">
                       {membersIds?.length + 1}
                       {bookmarksIds?.length && <> · </>}
                     </Span>
@@ -45,12 +45,12 @@ const SidebarListLists: React.FC<Props> = ({ items, loading, title }) => (
               {bookmarksIds?.length && (
                 <>
                   <Tooltip
-                    parentElementId={`${stringToDashCase(title)}-bookmarks-${id}`}
+                    parentElementId={`${stringToDashCase(blockTitle)}-bookmarks-${id}`}
                     content="Bookmarks within this list"
                     delay={0.5}
                   />
                   <A href={`lists/${id}`} frontend>
-                    <Span id={`${stringToDashCase(title)}-bookmarks-${id}`} size="small">
+                    <Span id={`${stringToDashCase(blockTitle)}-bookmarks-${id}`} size="small">
                       {bookmarksIds?.length}
                     </Span>
                   </A>

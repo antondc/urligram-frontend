@@ -13,6 +13,8 @@ import {
   SECTIONS_MOST_FOLLOWED_USERS_REQUEST,
   SECTIONS_MY_LISTS_RECEIVE,
   SECTIONS_MY_LISTS_REQUEST,
+  SECTIONS_MY_RECENT_BOOKMARKS_RECEIVE,
+  SECTIONS_MY_RECENT_BOOKMARKS_REQUEST,
   SECTIONS_MY_TAGS_RECEIVE,
   SECTIONS_MY_TAGS_REQUEST,
   SECTIONS_NEW_LISTS_RECEIVE,
@@ -227,6 +229,19 @@ export const Sections = (state = initialState, action: SectionsActionsTypes): Se
       return Object.assign({}, state, {
         TagsInThisList: {
           currentIds: action.data.TagsInThisList?.currentIds,
+          loading: false,
+        },
+      });
+    case SECTIONS_MY_RECENT_BOOKMARKS_REQUEST:
+      return Object.assign({}, state, {
+        MyRecentBookmarks: {
+          loading: true,
+        },
+      });
+    case SECTIONS_MY_RECENT_BOOKMARKS_RECEIVE:
+      return Object.assign({}, state, {
+        MyRecentBookmarks: {
+          currentIds: action.data.MyRecentBookmarks?.currentIds,
           loading: false,
         },
       });

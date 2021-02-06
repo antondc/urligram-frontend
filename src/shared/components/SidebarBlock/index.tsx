@@ -31,7 +31,7 @@ const SidebarBlock: React.FC<Props> = ({ title, href, loading, children }) => {
   return (
     <Border grow>
       {!!href ? (
-        <A href={href} styled={!!href}>
+        <A href={href} styled={!!href} frontend>
           <H4>{title}</H4>
         </A>
       ) : (
