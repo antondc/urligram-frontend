@@ -51,6 +51,8 @@ const ListVisitor: React.FC = () => {
     usersInThisListIds?.length && dispatch(sectionsUsersInThisListLoad(usersInThisListIds));
   }, [usersInThisListIds]);
 
+  const onListJoin = () => alert(`Join list ${list?.id}`);
+
   return (
     <ListVisitorUI
       list={list}
@@ -64,6 +66,7 @@ const ListVisitor: React.FC = () => {
       usersInThisListLoading={usersInThisListLoading}
       tagsInThisList={tagsInThisList}
       tagsInThisListLoading={tagsInThisListLoading}
+      onListJoin={onListJoin}
     />
   );
 };

@@ -11,7 +11,8 @@ import SidebarListUsers from 'Components/SidebarListUsers';
 import { ListState } from 'Modules/Lists/lists.types';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
-import { Border, Button, Flex, H4, Hr } from '@antoniodcorrea/components';
+import { Border, Button, Flex, H4, Hr, PlusCircle, Tooltip } from '@antoniodcorrea/components';
+import { SvgClickEvent } from '@antoniodcorrea/components/Svg/Svg.types';
 
 import './ListVisitor.less';
 
@@ -27,6 +28,7 @@ interface Props {
   usersInThisListLoading: boolean;
   tagsInThisList: TagState[];
   tagsInThisListLoading: boolean;
+  onListJoin: (e: SvgClickEvent) => void;
 }
 
 export const ListVisitor: React.FC<Props> = ({
@@ -41,6 +43,7 @@ export const ListVisitor: React.FC<Props> = ({
   usersInThisListLoading,
   tagsInThisList,
   tagsInThisListLoading,
+  onListJoin,
 }) => (
   <div className="ListVisitor">
     <Flex horizontal="between" vertical="top">
@@ -59,7 +62,13 @@ export const ListVisitor: React.FC<Props> = ({
       </Sidebar>
       <Main>
         <Border grow>
-          <H4>{`Bookmarks in ${list?.name}`}</H4>
+          <Flex horizontal="between">
+            <H4>{`Bookmarks in ${list?.name}`}</H4>
+            <div id="ListVisitor-joinList">
+              <PlusCircle className="ListVisitor-joinList" onClick={onListJoin} />
+            </div>
+            <Tooltip parentElementId={'ListVisitor-joinList'} content="Join this list" />
+          </Flex>
           <Hr spacer />
           {bookmarksLoading ? (
             <BookmarkRowSkeletonGroup />

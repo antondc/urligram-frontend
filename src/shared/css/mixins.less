@@ -10,9 +10,9 @@
   }
 }
 
-.hoverTransition(@a) {
+.hoverTransition(@opacity: 0.7) {
   &:hover {
-    opacity: @a;
+    opacity: @opacity;
     transition: opacity @td-fast @ease;
     cursor: pointer;
   }
