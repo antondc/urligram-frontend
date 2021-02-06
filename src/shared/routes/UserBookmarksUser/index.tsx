@@ -6,9 +6,11 @@ import { selectBookmarksCurrentIds } from 'Modules/Bookmarks/selectors/selectBoo
 import { selectBookmarksLoading } from 'Modules/Bookmarks/selectors/selectBookmarksLoading';
 import { RootState } from 'Modules/rootType';
 import { selectCurrentRouteParamUserId } from 'Modules/Routes/selectors/selectCurrentRouteParamUserId';
+import { sectionsFollowersUsersLoad } from 'Modules/Sections/actions/sectionsFollowersUsersLoad';
 import { sectionsFollowingListsLoad } from 'Modules/Sections/actions/sectionsFollowingListsLoad';
 import { sectionsFollowingUsersLoad } from 'Modules/Sections/actions/sectionsFollowingUsersLoad';
 import { sectionsUserListsLoad } from 'Modules/Sections/actions/sectionsUserListsLoad';
+import { selectFollowersUsers } from 'Modules/Sections/selectors/selectFollowersUsers';
 import { selectFollowingLists } from 'Modules/Sections/selectors/selectFollowingLists';
 import { selectFollowingListsLoading } from 'Modules/Sections/selectors/selectFollowingListsLoading';
 import { selectFollowingUsers } from 'Modules/Sections/selectors/selectFollowingUsers';
@@ -17,15 +19,12 @@ import { selectUserLists } from 'Modules/Sections/selectors/selectUserLists';
 import { selectUserListsLoading } from 'Modules/Sections/selectors/selectUserListsLoading';
 import { userLoad } from 'Modules/Users/actions/userLoad';
 import { selectUserById } from 'Modules/Users/selectors/selectUserById';
-import { sectionsFollowersUsersLoad } from '../../redux/modules/Sections/actions/sectionsFollowersUsersLoad';
-import { selectFollowersUsers } from '../../redux/modules/Sections/selectors/selectFollowersUsers';
 import { UserBookmarksUser as UserBookmarksUserUi } from './UserBookmarksUser';
 
 const UserBookmarksUser: React.FC = () => {
   const dispatch = useDispatch();
   const userId = useSelector(selectCurrentRouteParamUserId);
   const user = useSelector((state: RootState) => selectUserById(state, { id: userId }));
-
   const bookmarksIds = useSelector(selectBookmarksCurrentIds);
   const bookmarksLoading = useSelector(selectBookmarksLoading);
   const userLists = useSelector(selectUserLists);

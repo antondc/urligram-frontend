@@ -7,27 +7,41 @@ import MainHeader from 'Components/MainHeader';
 import Sidebar from 'Components/Sidebar';
 import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListLists from 'Components/SidebarListLists';
+import SidebarListUsers from 'Components/SidebarListUsers';
 import { ListState } from 'Modules/Lists/lists.types';
-import { Border, Button, Fade, Flex, Hr } from '@antoniodcorrea/components';
+import { UserState } from 'Modules/Users/users.types';
+import { Border, Button, Fade, Flex, H4, Hr } from '@antoniodcorrea/components';
 
 import './UserUser.less';
 
 interface Props {
+  userId: string;
+  user: UserState;
   bookmarksIds: number[];
-  popularLists: ListState[];
   bookmarksLoading: boolean;
-  popularListLoading: boolean;
   userLists: ListState[];
   userListsLoading: boolean;
+  followingLists: ListState[];
+  followingListsLoading: boolean;
+  followingUsers: UserState[];
+  followingUsersLoading: boolean;
+  followersUsers: UserState[];
+  followersUsersLoading: boolean;
 }
 
 export const UserUser: React.FC<Props> = ({
+  userId,
+  user,
   bookmarksIds,
-  popularLists,
   bookmarksLoading,
-  popularListLoading,
   userLists,
   userListsLoading,
+  followingLists,
+  followingListsLoading,
+  followingUsers,
+  followingUsersLoading,
+  followersUsers,
+  followersUsersLoading,
 }) => (
   <div className="UserUser">
     <Flex horizontal="between" vertical="top">
@@ -36,13 +50,14 @@ export const UserUser: React.FC<Props> = ({
           <SidebarListLists items={userLists} />
         </SidebarBlock>
         <Hr spacer />
-        <SidebarBlock title="Popular lists" href="" loading={popularListLoading}>
-          <SidebarListLists items={popularLists} />
+        <SidebarBlock title="Lists followed" href="" loading={followingListsLoading}>
+          <SidebarListLists items={followingLists} />
         </SidebarBlock>
       </Sidebar>
       <Main>
         <Border grow>
-          <MainHeader title="My user" />
+          <H4>@{user?.name}</H4>
+          <Hr spacer />
           {!!bookmarksLoading ? (
             <BookmarkRowSkeletonGroup />
           ) : (
@@ -62,8 +77,13 @@ export const UserUser: React.FC<Props> = ({
         </Border>
       </Main>
       <Sidebar>
-        {/* <SidebarListLists title="Popular Lists" items={popularLists} id="PopularLists" /> */}
+        <SidebarBlock title="Following Users" href={`users/${userId}/following`} loading={followingUsersLoading}>
+          <SidebarListUsers items={followingUsers} />
+        </SidebarBlock>
         <Hr spacer />
+        <SidebarBlock title="Followers" href={`users/${userId}/followers`} loading={followersUsersLoading}>
+          <SidebarListUsers items={followersUsers} />
+        </SidebarBlock>
       </Sidebar>
     </Flex>
   </div>

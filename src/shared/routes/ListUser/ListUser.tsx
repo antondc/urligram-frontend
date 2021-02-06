@@ -67,7 +67,7 @@ export const ListUser: React.FC<Props> = ({
       <Main>
         <Border grow>
           <Flex horizontal="between">
-            <H4>{`Bookmarks in ${list?.name}`}</H4>
+            <H4>Bookmarks in {list?.name}</H4>
             <div id="ListUser-joinList">
               <PlusCircle className="ListUser-joinList" onClick={onListJoin} />
             </div>
