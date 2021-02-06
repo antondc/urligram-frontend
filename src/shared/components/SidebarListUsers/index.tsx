@@ -16,7 +16,7 @@ interface Props {
 
 const SidebarListUsers: React.FC<Props> = ({ items, loading, title: blockTitle }) => (
   <>
-    {!loading && items?.length ? (
+    {!loading ? (
       items.map(({ id, name, followers, following, bookmarksIds }, index) => (
         <React.Fragment key={id}>
           {!!index && <Hr spacer size="micro" />}

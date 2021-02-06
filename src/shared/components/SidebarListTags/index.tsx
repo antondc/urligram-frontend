@@ -16,7 +16,7 @@ interface Props {
 
 const SidebarListTags: React.FC<Props> = ({ items, loading }) => (
   <dl className="SidebarListTags-tags">
-    {!loading && items?.length ? (
+    {!loading ? (
       items.map((item) => (
         <A
           className="SidebarListTags-tag"

@@ -61,7 +61,10 @@ export const UserBookmarksUser: React.FC<Props> = ({
       <Main>
         <Border grow>
           <H4>
-            Bookmarks of <A href={`/users/${userId}`}>@{user?.name}</A>
+            Bookmarks of{' '}
+            <A href={`/users/${userId}`} frontend>
+              @{user?.name}
+            </A>
           </H4>
           <Hr spacer />
           {bookmarksLoading ? (

@@ -4,24 +4,25 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loadBookmarksByUserId } from 'Modules/Bookmarks/actions/loadBookmarksByUserId';
 import { selectBookmarksCurrentIds } from 'Modules/Bookmarks/selectors/selectBookmarksCurrentIds';
 import { selectBookmarksLoading } from 'Modules/Bookmarks/selectors/selectBookmarksLoading';
+import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
 import { ListState } from 'Modules/Lists/lists.types';
+import { RootState } from 'Modules/rootType';
 import { selectCurrentRouteParamUserId } from 'Modules/Routes/selectors/selectCurrentRouteParamUserId';
-import { loadPopularLists } from 'Modules/Sections/actions/loadPopularLists';
+import { sectionsFollowersUsersLoad } from 'Modules/Sections/actions/sectionsFollowersUsersLoad';
+import { sectionsFollowingListsLoad } from 'Modules/Sections/actions/sectionsFollowingListsLoad';
+import { sectionsFollowingUsersLoad } from 'Modules/Sections/actions/sectionsFollowingUsersLoad';
+import { sectionsUserListsLoad } from 'Modules/Sections/actions/sectionsUserListsLoad';
+import { selectFollowersUsers } from 'Modules/Sections/selectors/selectFollowersUsers';
+import { selectFollowersUsersLoading } from 'Modules/Sections/selectors/selectFollowersUsersLoading';
 import { selectFollowingLists } from 'Modules/Sections/selectors/selectFollowingLists';
 import { selectFollowingListsLoading } from 'Modules/Sections/selectors/selectFollowingListsLoading';
 import { selectFollowingUsers } from 'Modules/Sections/selectors/selectFollowingUsers';
 import { selectFollowingUsersLoading } from 'Modules/Sections/selectors/selectFollowingUsersLoading';
+import { selectUserLists } from 'Modules/Sections/selectors/selectUserLists';
+import { selectUserListsLoading } from 'Modules/Sections/selectors/selectUserListsLoading';
 import { userLoad } from 'Modules/Users/actions/userLoad';
-import { RootState } from '../../redux/modules/rootType';
-import { sectionsFollowersUsersLoad } from '../../redux/modules/Sections/actions/sectionsFollowersUsersLoad';
-import { sectionsFollowingListsLoad } from '../../redux/modules/Sections/actions/sectionsFollowingListsLoad';
-import { sectionsFollowingUsersLoad } from '../../redux/modules/Sections/actions/sectionsFollowingUsersLoad';
-import { sectionsUserListsLoad } from '../../redux/modules/Sections/actions/sectionsUserListsLoad';
-import { selectFollowersUsers } from '../../redux/modules/Sections/selectors/selectFollowersUsers';
-import { selectFollowersUsersLoading } from '../../redux/modules/Sections/selectors/selectFollowersUsersLoading';
-import { selectUserLists } from '../../redux/modules/Sections/selectors/selectUserLists';
-import { selectUserListsLoading } from '../../redux/modules/Sections/selectors/selectUserListsLoading';
-import { selectUserById } from '../../redux/modules/Users/selectors/selectUserById';
+import { selectUserById } from 'Modules/Users/selectors/selectUserById';
+import { LocaleFormattedDate } from 'Tools/utils/Date/localeFormattedDate';
 import { UserUser as UserUserUi } from './UserUser';
 
 interface Props {
@@ -43,6 +44,9 @@ const UserUser: React.FC<Props> = () => {
   const followingUsersLoading = useSelector(selectFollowingUsersLoading);
   const followersUsers = useSelector(selectFollowersUsers);
   const followersUsersLoading = useSelector(selectFollowersUsersLoading);
+  const currentLanguageSlug = useSelector(selectCurrentLanguageSlug);
+  const date = new LocaleFormattedDate(user?.createdAt, currentLanguageSlug);
+  const createdAt = date.getLocaleFormattedDate();
 
   useEffect(() => {
     dispatch(userLoad(userId));
@@ -57,6 +61,7 @@ const UserUser: React.FC<Props> = () => {
     <UserUserUi
       userId={userId}
       user={user}
+      createdAt={createdAt}
       bookmarksIds={bookmarksIds}
       bookmarksLoading={bookmarksLoading}
       userLists={userLists}

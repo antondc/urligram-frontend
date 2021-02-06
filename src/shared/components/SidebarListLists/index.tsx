@@ -16,7 +16,7 @@ interface Props {
 
 const SidebarListLists: React.FC<Props> = ({ items, loading, title: blockTitle }) => (
   <dl className="SidebarListLists-lists">
-    {!loading && items?.length ? (
+    {!loading ? (
       items.map(({ id, name, membersIds, bookmarksIds }, index) => (
         <React.Fragment key={id}>
           {!!index && <Hr spacer size="micro" />}
