@@ -1,53 +1,60 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { ListState } from 'Modules/Lists/lists.types';
+import { bookmarksLoadBySize } from 'Modules/Bookmarks/actions/bookmarksLoadBySize';
 import { loadPopularLists } from 'Modules/Sections/actions/loadPopularLists';
+import { sectionsMostFollowedUsersLoad } from 'Modules/Sections/actions/sectionsMostFollowedUsersLoad';
+import { sectionsNewListsLoad } from 'Modules/Sections/actions/sectionsNewListsLoad';
+import { sectionsNewUsersLoad } from 'Modules/Sections/actions/sectionsNewUsersLoad';
+import { selectMostFollowedUsers } from 'Modules/Sections/selectors/selectMostFollowedUsers';
+import { selectMostFollowedUsersLoading } from 'Modules/Sections/selectors/selectMostFollowedUsersLoading';
+import { selectNewLists } from 'Modules/Sections/selectors/selectNewLists';
+import { selectNewListsLoading } from 'Modules/Sections/selectors/selectNewListsLoading';
+import { selectNewUsers } from 'Modules/Sections/selectors/selectNewUsers';
+import { selectNewUsersLoading } from 'Modules/Sections/selectors/selectNewUsersLoading';
 import { selectPopularLists } from 'Modules/Sections/selectors/selectPopularLists';
 import { selectPopularListsLoading } from 'Modules/Sections/selectors/selectPopularListsLoading';
 import { loadUsers } from 'Modules/Users/actions/loadUsers';
 import { selectUsersCurrentIds } from 'Modules/Users/selectors/selectUsersCurrentIds';
 import { selectUsersLoading } from 'Modules/Users/selectors/selectUsersLoading';
-import { UsersVisitor as UsersVisitorUi } from './UsersVisitor';
+import { UsersVisitor as UsersVisitorUI } from './UsersVisitor';
 
-interface Props {
-  usersIds: string[];
-  popularLists: ListState[];
-  usersLoading: boolean;
-  popularListLoading: boolean;
-  loadUsers: () => void;
-  loadPopularLists: () => void;
-}
+const UsersVisitor: React.FC = () => {
+  const dispatch = useDispatch();
+  const mostFollowedLists = useSelector(selectPopularLists);
+  const mostFollowedListsLoading = useSelector(selectPopularListsLoading);
+  const newLists = useSelector(selectNewLists);
+  const newListsLoading = useSelector(selectNewListsLoading);
+  const mostFollowedUsers = useSelector(selectMostFollowedUsers);
+  const mostFollowedUsersLoading = useSelector(selectMostFollowedUsersLoading);
+  const newUsers = useSelector(selectNewUsers);
+  const newUsersLoading = useSelector(selectNewUsersLoading);
+  const usersCurrentIds = useSelector(selectUsersCurrentIds);
+  const usersLoading = useSelector(selectUsersLoading);
 
-class UsersVisitor extends React.Component<Props> {
-  componentDidMount = () => {
-    this.props.loadUsers();
-    this.props.loadPopularLists();
-  };
+  useEffect(() => {
+    dispatch(loadUsers());
+    dispatch(loadPopularLists());
+    dispatch(sectionsNewListsLoad());
+    dispatch(sectionsMostFollowedUsersLoad());
+    dispatch(sectionsNewUsersLoad());
+    dispatch(bookmarksLoadBySize(5));
+  }, []);
 
-  render = () => {
-    const { usersIds, popularLists, usersLoading, popularListLoading } = this.props;
+  return (
+    <UsersVisitorUI
+      mostFollowedLists={mostFollowedLists}
+      mostFollowedListsLoading={mostFollowedListsLoading}
+      newLists={newLists}
+      newListsLoading={newListsLoading}
+      mostFollowedUsers={mostFollowedUsers}
+      mostFollowedUsersLoading={mostFollowedUsersLoading}
+      newUsers={newUsers}
+      newUsersLoading={newUsersLoading}
+      usersCurrentIds={usersCurrentIds}
+      usersLoading={usersLoading}
+    />
+  );
+};
 
-    return (
-      <UsersVisitorUi
-        usersIds={usersIds}
-        popularLists={popularLists}
-        usersLoading={usersLoading}
-        popularListLoading={popularListLoading}
-      />
-    );
-  };
-}
-
-const mapStateToProps = createStructuredSelector({
-  popularLists: selectPopularLists,
-  usersIds: selectUsersCurrentIds,
-  loading: selectUsersLoading,
-  popularListLoading: selectPopularListsLoading,
-});
-
-export default connect(mapStateToProps, {
-  loadUsers,
-  loadPopularLists,
-})(UsersVisitor);
+export default UsersVisitor;

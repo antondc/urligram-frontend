@@ -15,7 +15,7 @@
     "API_URL": "https://linking-api-production.antoniodiaz.me/api/v1/"
   },
   "SECRET": "superSecret",
-  "ENABLE_ISOMORPHISM": true,
+  "ENABLE_ISOMORPHISM": false,
   "MEDIA": "media",
   "MEDIA_FOLDER": "media",
   "MEDIA_IMAGES": "media/images",
