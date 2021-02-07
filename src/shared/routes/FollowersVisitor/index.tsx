@@ -14,7 +14,7 @@ import { selectUserLists } from 'Modules/Sections/selectors/selectUserLists';
 import { selectUserListsLoading } from 'Modules/Sections/selectors/selectUserListsLoading';
 import { selectUserMostUsedTags } from 'Modules/Sections/selectors/selectUserMostUsedTags';
 import { selectUserMostUsedTagsLoading } from 'Modules/Sections/selectors/selectUserMostUsedTagsLoading';
-import { loadUsers } from 'Modules/Users/actions/loadUsers';
+import { userFollowersLoad } from 'Modules/Users/actions/userFollowersLoad';
 import { selectUsersCurrentIds } from 'Modules/Users/selectors/selectUsersCurrentIds';
 import { selectUsersLoading } from 'Modules/Users/selectors/selectUsersLoading';
 import { FollowersVisitor as FollowersVisitorUI } from './FollowersVisitor';
@@ -33,8 +33,10 @@ const FollowersVisitor: React.FC = () => {
   const userMostUsedTags = useSelector(selectUserMostUsedTags);
   const userMostUsedTagsLoading = useSelector(selectUserMostUsedTagsLoading);
 
+
+
   useEffect(() => {
-    dispatch(loadUsers());
+    dispatch(userFollowersLoad(userId));
     dispatch(sectionsUserListsLoad(userId));
     dispatch(sectionsFollowingListsLoad(userId));
     dispatch(sectionsMostUsedTagsLoad());

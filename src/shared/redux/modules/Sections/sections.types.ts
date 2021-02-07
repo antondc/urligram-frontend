@@ -40,13 +40,13 @@ export interface SectionsState {
   PopularLists?: Partial<ListsState>;
   NewLists?: Partial<ListsState>;
   MyLists?: Partial<ListsState>;
+  UserLists?: Partial<ListsState>;
   FollowingLists?: Partial<ListsState>;
   MostFollowedUsers?: Partial<UsersState>;
   NewUsers?: Partial<UsersState>;
   FollowingUsers?: Partial<UsersState>;
   MyTags?: Partial<TagsState>;
   MostUsedTags?: Partial<TagsState>;
-  UserLists?: Partial<ListsState>;
   FollowersUsers?: Partial<UsersState>;
   SimilarLists?: Partial<ListsState>;
   UsersInThisList?: Partial<UsersState>;

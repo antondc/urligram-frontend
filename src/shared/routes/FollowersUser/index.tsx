@@ -3,8 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { selectCurrentRouteParamUserId } from 'Modules/Routes/selectors/selectCurrentRouteParamUserId';
 import { sectionsFollowingListsLoad } from 'Modules/Sections/actions/sectionsFollowingListsLoad';
+import { sectionsMostFollowedUsersLoad } from 'Modules/Sections/actions/sectionsMostFollowedUsersLoad';
 import { sectionsMostUsedTagsLoad } from 'Modules/Sections/actions/sectionsMostUsedTagsLoad';
-import { sectionsUserListsLoad } from 'Modules/Sections/actions/sectionsUserListsLoad';
+import { sectionsMyListsLoad } from 'Modules/Sections/actions/sectionsMyListsLoad';
 import { sectionsUserMostUsedTagsLoad } from 'Modules/Sections/actions/sectionsUserMostFollowedTagsLoad';
 import { selectFollowingLists } from 'Modules/Sections/selectors/selectFollowingLists';
 import { selectFollowingListsLoading } from 'Modules/Sections/selectors/selectFollowingListsLoading';
@@ -14,7 +15,7 @@ import { selectMyLists } from 'Modules/Sections/selectors/selectMyLists';
 import { selectMyListsLoading } from 'Modules/Sections/selectors/selectMyListsLoading';
 import { selectUserMostUsedTags } from 'Modules/Sections/selectors/selectUserMostUsedTags';
 import { selectUserMostUsedTagsLoading } from 'Modules/Sections/selectors/selectUserMostUsedTagsLoading';
-import { loadUsers } from 'Modules/Users/actions/loadUsers';
+import { userFollowersLoad } from 'Modules/Users/actions/userFollowersLoad';
 import { selectUsersCurrentIds } from 'Modules/Users/selectors/selectUsersCurrentIds';
 import { selectUsersLoading } from 'Modules/Users/selectors/selectUsersLoading';
 import { FollowersUser as FollowersUserUI } from './FollowersUser';
@@ -34,8 +35,9 @@ const FollowersUser: React.FC = () => {
   const userMostUsedTagsLoading = useSelector(selectUserMostUsedTagsLoading);
 
   useEffect(() => {
-    dispatch(loadUsers());
-    dispatch(sectionsUserListsLoad(userId));
+    dispatch(userFollowersLoad(userId));
+    dispatch(sectionsMyListsLoad(userId));
+    dispatch(sectionsMostFollowedUsersLoad());
     dispatch(sectionsFollowingListsLoad(userId));
     dispatch(sectionsMostUsedTagsLoad());
     dispatch(sectionsUserMostUsedTagsLoad(userId));
