@@ -8,14 +8,14 @@ import HttpClient from 'Services/HttpClient';
 import { sectionsUserListsReceive } from './sectionsUserListsReceive';
 import { sectionsUserListsRequest } from './sectionsUserListsRequest';
 
-export const sectionsUserListsLoad = (sessionId: string): ThunkAction<any, any, any, Action> => async (
+export const sectionsUserListsLoad = (userId: string): ThunkAction<any, any, any, Action> => async (
   dispatch?: Dispatch
 ) => {
+  if (!userId) return;
+  
   dispatch(sectionsUserListsRequest());
 
-  const { data }: ReceiveListsResponse = await HttpClient.get(
-    `/users/${sessionId}/lists?page[size]=5&filter[role]=admin`
-  );
+  const { data }: ReceiveListsResponse = await HttpClient.get(`/users/${userId}/lists?page[size]=5&filter[role]=admin`);
 
   const userListsByKey = {
     byKey: serializerFromArrayToByKey<ReceiveListItem, ListState>({
