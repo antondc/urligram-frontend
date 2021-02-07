@@ -9,12 +9,12 @@ import SidebarListBookmarks from 'Components/SidebarListBookmarks';
 import SidebarListLists from 'Components/SidebarListLists';
 import SidebarListTags from 'Components/SidebarListTags';
 import SidebarListUsers from 'Components/SidebarListUsers';
+import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
 import { ListState } from 'Modules/Lists/lists.types';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { Border, Button, Flex, H4, Hr, PlusCircle, Tooltip } from '@antoniodcorrea/components';
 import { SvgClickEvent } from '@antoniodcorrea/components/Svg/Svg.types';
-import { BookmarkState } from '../../redux/modules/Bookmarks/bookmarks.types';
 
 import './ListUser.less';
 

@@ -20,7 +20,7 @@ export const mostFollowedTagsInitialLoader = async (): Promise<{
   const result = {
     Tags: TagsByKey,
     Sections: {
-      MostFollowedTags: {
+      MostUsedTags: {
         currentIds: mostFollowedTagsData.map((item) => item.id),
       },
     },

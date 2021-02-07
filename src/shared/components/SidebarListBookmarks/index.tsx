@@ -1,9 +1,9 @@
 import React from 'react';
 
 import A from 'Components/A';
+import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
 import { stringToDashCase } from 'Tools/utils/string/stringToDashCase';
 import { Hr, Span, Tooltip } from '@antoniodcorrea/components';
-import { BookmarkState } from '../../redux/modules/Bookmarks/bookmarks.types';
 import { SidebarListBookmarksSkeleton } from './SidebarListBookmarksSkeleton';
 
 import './SidebarListBookmarks.less';

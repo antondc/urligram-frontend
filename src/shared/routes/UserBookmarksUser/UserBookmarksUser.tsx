@@ -4,13 +4,13 @@ import A from 'Components/A';
 import BookmarkRow from 'Components/BookmarkRow';
 import Main from 'Components/Main';
 import Sidebar from 'Components/Sidebar';
+import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListLists from 'Components/SidebarListLists';
 import SidebarListUsers from 'Components/SidebarListUsers';
 import { ListState } from 'Modules/Lists/lists.types';
+import { UserState } from 'Modules/Users/users.types';
 import { BookmarkRowSkeletonGroup } from 'Root/src/shared/components/BookmarkRow/BookmarkRowSkeletonGroup';
 import { Border, Button, Fade, Flex, H4, Hr } from '@antoniodcorrea/components';
-import SidebarBlock from '../../components/SidebarBlock';
-import { UserState } from '../../redux/modules/Users/users.types';
 
 import './UserBookmarksUser.less';
 

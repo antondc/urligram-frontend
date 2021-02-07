@@ -7,10 +7,10 @@ import {
   SECTIONS_FOLLOWING_LISTS_REQUEST,
   SECTIONS_FOLLOWING_USERS_RECEIVE,
   SECTIONS_FOLLOWING_USERS_REQUEST,
-  SECTIONS_MOST_FOLLOWED_TAGS_RECEIVE,
-  SECTIONS_MOST_FOLLOWED_TAGS_REQUEST,
   SECTIONS_MOST_FOLLOWED_USERS_RECEIVE,
   SECTIONS_MOST_FOLLOWED_USERS_REQUEST,
+  SECTIONS_MOST_USED_TAGS_RECEIVE,
+  SECTIONS_MOST_USED_TAGS_REQUEST,
   SECTIONS_MY_LISTS_RECEIVE,
   SECTIONS_MY_LISTS_REQUEST,
   SECTIONS_MY_RECENT_BOOKMARKS_RECEIVE,
@@ -27,6 +27,8 @@ import {
   SECTIONS_TAGS_IN_THIS_LIST_REQUEST,
   SECTIONS_USER_LISTS_RECEIVE,
   SECTIONS_USER_LISTS_REQUEST,
+  SECTIONS_USER_MOST_USED_TAGS_RECEIVE,
+  SECTIONS_USER_MOST_USED_TAGS_REQUEST,
   SECTIONS_USERS_IN_THIS_LIST_RECEIVE,
   SECTIONS_USERS_IN_THIS_LIST_REQUEST,
   SectionsActionsTypes,
@@ -154,16 +156,16 @@ export const Sections = (state = initialState, action: SectionsActionsTypes): Se
           loading: false,
         },
       });
-    case SECTIONS_MOST_FOLLOWED_TAGS_REQUEST:
+    case SECTIONS_MOST_USED_TAGS_REQUEST:
       return Object.assign({}, state, {
         MostFollowedTags: {
           loading: true,
         },
       });
-    case SECTIONS_MOST_FOLLOWED_TAGS_RECEIVE:
+    case SECTIONS_MOST_USED_TAGS_RECEIVE:
       return Object.assign({}, state, {
-        MostFollowedTags: {
-          currentIds: action.data.MostFollowedTags?.currentIds,
+        MostUsedTags: {
+          currentIds: action.data.MostUsedTags?.currentIds,
           loading: false,
         },
       });
@@ -242,6 +244,19 @@ export const Sections = (state = initialState, action: SectionsActionsTypes): Se
       return Object.assign({}, state, {
         MyRecentBookmarks: {
           currentIds: action.data.MyRecentBookmarks?.currentIds,
+          loading: false,
+        },
+      });
+    case SECTIONS_USER_MOST_USED_TAGS_REQUEST:
+      return Object.assign({}, state, {
+        UserMostUsedTags: {
+          loading: true,
+        },
+      });
+    case SECTIONS_USER_MOST_USED_TAGS_RECEIVE:
+      return Object.assign({}, state, {
+        UserMostUsedTags: {
+          currentIds: action.data.UserMostUsedTags?.currentIds,
           loading: false,
         },
       });

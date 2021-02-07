@@ -16,11 +16,11 @@ import { selectPopularLists } from 'Modules/Sections/selectors/selectPopularList
 import { selectPopularListsLoading } from 'Modules/Sections/selectors/selectPopularListsLoading';
 import { selectSimilarLists } from 'Modules/Sections/selectors/selectSimilarLists';
 import { selectSimilarListsLoading } from 'Modules/Sections/selectors/selectSimilarListsLoading';
+import { selectTagsInThisList } from 'Modules/Sections/selectors/selectTagsInThisList';
+import { selectTagsInThisListLoading } from 'Modules/Sections/selectors/selectTagsInThisListLoading';
 import { selectUsersInThisList } from 'Modules/Sections/selectors/selectUsersInThisList';
 import { selectUsersInThisListIds } from 'Modules/Sections/selectors/selectUsersInThisListIds';
 import { selectUsersInThisListLoading } from 'Modules/Sections/selectors/selectUsersInThisListLoading';
-import { selectTagsInThisList } from '../../redux/modules/Sections/selectors/selectTagsInThisList';
-import { selectTagsInThisListLoading } from '../../redux/modules/Sections/selectors/selectTagsInThisListLoading';
 import { ListVisitor as ListVisitorUI } from './ListVisitor';
 
 const ListVisitor: React.FC = () => {

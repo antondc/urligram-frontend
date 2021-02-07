@@ -14,25 +14,31 @@ import { Border, Flex, H4, Hr } from '@antoniodcorrea/components';
 import './FollowersVisitor.less';
 
 export interface Props {
+  userId: string;
   usersCurrentIds: string[];
   usersLoading: boolean;
   userLists: ListState[];
   userListsLoading: boolean;
   followingLists: ListState[];
   followingListsLoading: boolean;
-  mostFollowedTags: TagState[];
-  mostFollowedTagsLoading: boolean;
+  mostUsedTags: TagState[];
+  mostUsedTagsLoading: boolean;
+  userMostUsedTags: TagState[];
+  userMostUsedTagsLoading: boolean;
 }
 
 export const FollowersVisitor: React.FC<Props> = ({
+  userId,
   usersCurrentIds,
   usersLoading,
   userLists,
   userListsLoading,
   followingLists,
   followingListsLoading,
-  mostFollowedTags,
-  mostFollowedTagsLoading,
+  mostUsedTags,
+  mostUsedTagsLoading,
+  userMostUsedTags,
+  userMostUsedTagsLoading,
 }) => (
   <div className="FollowersVisitor">
     <Flex horizontal="between" vertical="top">
@@ -64,13 +70,16 @@ export const FollowersVisitor: React.FC<Props> = ({
       </Main>
       <Sidebar>
         <SidebarBlock
-          title="Most Followed Users"
-          href="users?sort=-followers&page[size]=10"
-          loading={mostFollowedTagsLoading}
+          title="User Most Followed Tags"
+          href={`users/${userId}/bookmarks`}
+          loading={userMostUsedTagsLoading}
         >
-          <SidebarListTags items={mostFollowedTags} />
+          <SidebarListTags items={userMostUsedTags} />
         </SidebarBlock>
         <Hr spacer />
+        <SidebarBlock title="Most Followed Tags" loading={mostUsedTagsLoading}>
+          <SidebarListTags items={mostUsedTags} />
+        </SidebarBlock>
       </Sidebar>
     </Flex>
   </div>

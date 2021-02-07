@@ -19,8 +19,8 @@ export const SECTIONS_MY_TAGS_REQUEST = 'SECTIONS_MY_TAGS_REQUEST';
 export const SECTIONS_MY_TAGS_RECEIVE = 'SECTIONS_MY_TAGS_RECEIVE';
 export const SECTIONS_FOLLOWING_USERS_REQUEST = 'SECTIONS_FOLLOWING_USERS_REQUEST';
 export const SECTIONS_FOLLOWING_USERS_RECEIVE = 'SECTIONS_FOLLOWING_USERS_RECEIVE';
-export const SECTIONS_MOST_FOLLOWED_TAGS_REQUEST = 'SECTIONS_MOST_FOLLOWED_TAGS_REQUEST';
-export const SECTIONS_MOST_FOLLOWED_TAGS_RECEIVE = 'SECTIONS_MOST_FOLLOWED_TAGS_RECEIVE';
+export const SECTIONS_MOST_USED_TAGS_REQUEST = 'SECTIONS_MOST_USED_TAGS_REQUEST';
+export const SECTIONS_MOST_USED_TAGS_RECEIVE = 'SECTIONS_MOST_USED_TAGS_RECEIVE';
 export const SECTIONS_USER_LISTS_REQUEST = 'SECTIONS_USER_LISTS_REQUEST';
 export const SECTIONS_USER_LISTS_RECEIVE = 'SECTIONS_USER_LISTS_RECEIVE';
 export const SECTIONS_FOLLOWERS_USERS_REQUEST = 'SECTIONS_FOLLOWERS_USERS_REQUEST';
@@ -33,6 +33,8 @@ export const SECTIONS_TAGS_IN_THIS_LIST_REQUEST = 'SECTIONS_TAGS_IN_THIS_LIST_RE
 export const SECTIONS_TAGS_IN_THIS_LIST_RECEIVE = 'SECTIONS_TAGS_IN_THIS_LIST_RECEIVE';
 export const SECTIONS_MY_RECENT_BOOKMARKS_REQUEST = 'SECTIONS_MY_RECENT_BOOKMARKS_REQUEST';
 export const SECTIONS_MY_RECENT_BOOKMARKS_RECEIVE = 'SECTIONS_MY_RECENT_BOOKMARKS_RECEIVE';
+export const SECTIONS_USER_MOST_USED_TAGS_REQUEST = 'SECTIONS_USER_MOST_USED_TAGS_REQUEST';
+export const SECTIONS_USER_MOST_USED_TAGS_RECEIVE = 'SECTIONS_USER_MOST_USED_TAGS_RECEIVE';
 
 export interface SectionsState {
   PopularLists?: Partial<ListsState>;
@@ -43,13 +45,14 @@ export interface SectionsState {
   NewUsers?: Partial<UsersState>;
   FollowingUsers?: Partial<UsersState>;
   MyTags?: Partial<TagsState>;
-  MostFollowedTags?: Partial<TagsState>;
+  MostUsedTags?: Partial<TagsState>;
   UserLists?: Partial<ListsState>;
   FollowersUsers?: Partial<UsersState>;
   SimilarLists?: Partial<ListsState>;
   UsersInThisList?: Partial<UsersState>;
   TagsInThisList?: Partial<TagsState>;
   MyRecentBookmarks?: Partial<BookmarksState>;
+  UserMostUsedTags?: Partial<TagsState>;
 }
 
 interface RequestMostPopularListsAction {
@@ -149,14 +152,14 @@ interface SectionFollowingUsersReceiveAction {
 }
 
 interface SectionMostFollowedTagsRequestAction {
-  type: typeof SECTIONS_MOST_FOLLOWED_TAGS_REQUEST;
+  type: typeof SECTIONS_MOST_USED_TAGS_REQUEST;
   data: {
     loading: true;
   };
 }
 
 interface SectionMostFollowedTagsReceiveAction {
-  type: typeof SECTIONS_MOST_FOLLOWED_TAGS_RECEIVE;
+  type: typeof SECTIONS_MOST_USED_TAGS_RECEIVE;
   data: SectionsState;
 }
 
@@ -232,6 +235,18 @@ interface SectionMyRecentBookmarksReceiveAction {
   data: SectionsState;
 }
 
+interface SectionUserMostFollowedTagsRequestAction {
+  type: typeof SECTIONS_USER_MOST_USED_TAGS_REQUEST;
+  data: {
+    loading: true;
+  };
+}
+
+interface SectionUserMostFollowedTagsReceiveAction {
+  type: typeof SECTIONS_USER_MOST_USED_TAGS_RECEIVE;
+  data: SectionsState;
+}
+
 export type SectionsActionsTypes =
   | RequestMostPopularListsAction
   | ReceiveMostPopularListsAction
@@ -262,4 +277,6 @@ export type SectionsActionsTypes =
   | SectionTagsInThisListRequestAction
   | SectionTagsInThisListReceiveAction
   | SectionMyRecentBookmarksRequestAction
-  | SectionMyRecentBookmarksReceiveAction;
+  | SectionMyRecentBookmarksReceiveAction
+  | SectionUserMostFollowedTagsRequestAction
+  | SectionUserMostFollowedTagsReceiveAction;

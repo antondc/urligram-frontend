@@ -4,6 +4,7 @@ export const LOAD_TAGS_SUCCESS = 'LOAD_TAGS_SUCCESS';
 export interface TagState {
   id: number;
   name: string;
+  count?: number;
 }
 
 export interface TagsState {

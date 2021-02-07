@@ -25,8 +25,8 @@ interface Props {
   newListsLoading: boolean;
   newUsers: UserState[];
   newUsersLoading: boolean;
-  mostFollowedTags: TagState[];
-  mostFollowedTagsLoading: boolean;
+  mostUsedTags: TagState[];
+  mostUsedTagsLoading: boolean;
 }
 
 export const Links: React.FC<Props> = ({
@@ -38,8 +38,8 @@ export const Links: React.FC<Props> = ({
   newListsLoading,
   newUsers,
   newUsersLoading,
-  mostFollowedTags,
-  mostFollowedTagsLoading,
+  mostUsedTags,
+  mostUsedTagsLoading,
 }) => (
   <div className="Links">
     <Flex horizontal="between" vertical="top">
@@ -77,8 +77,8 @@ export const Links: React.FC<Props> = ({
         </Border>
       </Main>
       <Sidebar>
-        <SidebarBlock title="Popular Tags" href="tags?sort[most-used]=desc" loading={mostFollowedTagsLoading}>
-          <SidebarListTags items={mostFollowedTags} />
+        <SidebarBlock title="Popular Tags" href="tags?sort[most-used]=desc" loading={mostUsedTagsLoading}>
+          <SidebarListTags items={mostUsedTags} />
         </SidebarBlock>
         <Hr spacer />
         <SidebarBlock title="New Users" href="users?sort=createdat&page[size]=10" loading={newUsersLoading}>
