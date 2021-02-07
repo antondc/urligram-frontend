@@ -12,6 +12,7 @@ import BookmarksVisitor from 'Routes/BookmarksVisitor';
 import Control from 'Routes/Control';
 import FollowersUser from 'Routes/FollowersUser';
 import FollowersVisitor from 'Routes/FollowersVisitor';
+import FollowingUser from 'Routes/FollowingUser';
 import FollowingVisitor from 'Routes/FollowingVisitor';
 import HomeUser from 'Routes/HomeUser';
 import HomeVisitor from 'Routes/HomeVisitor';
@@ -72,7 +73,7 @@ const Router: React.FC<Props> = ({ loggedIn, location, defaultCurrentSlug, pathW
       <Route
         exact={Routes.Following.exact}
         path={Routes.Following.path}
-        component={loggedIn ? FollowingVisitor : FollowingVisitor}
+        component={loggedIn ? FollowingUser : FollowingVisitor}
       />
 
       {/* General */}

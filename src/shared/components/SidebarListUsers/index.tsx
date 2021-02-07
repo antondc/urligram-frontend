@@ -2,8 +2,8 @@ import React from 'react';
 
 import A from 'Components/A';
 import { UserState } from 'Modules/Users/users.types';
+import { stringToDashCase } from 'Tools/utils/string/stringToDashCase';
 import { Hr, Span, Tooltip } from '@antoniodcorrea/components';
-import { stringToDashCase } from '../../tools/utils/string/stringToDashCase';
 import { SidebarListUsersSkeleton } from './SidebarListUsersSkeleton';
 
 import './SidebarListUsers.less';
