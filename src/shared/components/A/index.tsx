@@ -17,13 +17,14 @@ interface Props {
   onClick?: (any) => void;
 }
 
-const A: React.FC<Props> = ({ href, ...props }) => {
+const A: React.FC<Props> = ({ href, targetBlank, ...props }) => {
   const currentLanguageSlug = useSelector(selectCurrentLanguageSlug);
   const hrefWithoutLeadingSlash = href?.replace(/^\//, '');
 
-  const hrefWithCurrentSlug = !!currentLanguageSlug ? `/${currentLanguageSlug}/${hrefWithoutLeadingSlash}` : href;
+  const hrefWithCurrentSlug =
+    !!currentLanguageSlug && !targetBlank ? `/${currentLanguageSlug}/${hrefWithoutLeadingSlash}` : href;
 
-  return <ComponentsA {...props} href={hrefWithCurrentSlug} />;
+  return <ComponentsA {...props} href={hrefWithCurrentSlug} targetBlank={targetBlank} />;
 };
 
 export default A;
