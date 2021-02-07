@@ -29,6 +29,7 @@ import SignIn from 'Routes/SignIn';
 import User from 'Routes/User';
 import UserBookmarksUser from 'Routes/UserBookmarksUser';
 import UserBookmarksVisitor from 'Routes/UserBookmarksVisitor';
+import UserListsUser from 'Routes/UserListsUser';
 import UserListsVisitor from 'Routes/UserListsVisitor';
 import UsersUser from 'Routes/UsersUser';
 import UsersVisitor from 'Routes/UsersVisitor';
@@ -79,7 +80,7 @@ const Router: React.FC<Props> = ({ loggedIn, location, defaultCurrentSlug, pathW
       <Route
         exact={Routes.UserLists.exact}
         path={Routes.UserLists.path}
-        component={loggedIn ? UserListsVisitor : UserListsVisitor}
+        component={loggedIn ? UserListsUser : UserListsVisitor}
       />
 
       {/* General */}
