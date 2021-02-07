@@ -11,9 +11,12 @@ import { sectionsMyListsRequest } from './sectionsMyListsRequest';
 export const sectionsMyListsLoad = (sessionId: string): ThunkAction<any, any, any, Action> => async (
   dispatch?: Dispatch
 ) => {
+  if (!sessionId) return;
   dispatch(sectionsMyListsRequest());
 
-  const { data }: ReceiveListsResponse = await HttpClient.get(`/users/${sessionId}/lists?page[size]=5&filter[role]=admin`);
+  const { data }: ReceiveListsResponse = await HttpClient.get(
+    `/users/${sessionId}/lists?page[size]=5&filter[role]=admin`
+  );
 
   const myListsByKey = {
     byKey: serializerFromArrayToByKey<ReceiveListItem, ListState>({

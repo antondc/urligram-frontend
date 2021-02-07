@@ -11,6 +11,8 @@ import { sectionsFollowersUsersRequest } from './sectionsFollowersUsersRequest';
 export const sectionsFollowersUsersLoad = (sessionId: string): ThunkAction<any, any, any, Action> => async (
   dispatch?: Dispatch
 ) => {
+  if (!sessionId) return;
+
   dispatch(sectionsFollowersUsersRequest());
   const { data }: ReceiveUsersResponse = await HttpClient.get(
     `/users/${sessionId}/followers?sort=-createdAt&page[size]=5`

@@ -11,6 +11,8 @@ import { sectionsUserMostUsedTagsRequest } from './sectionsUserMostUsedTagsReque
 export const sectionsUserMostUsedTagsLoad = (userId: string): ThunkAction<any, any, any, Action> => async (
   dispatch?: Dispatch
 ) => {
+  if (!userId) return;
+
   dispatch(sectionsUserMostUsedTagsRequest());
 
   const { data: myTagsData }: ReceiveTagsResponse = await HttpClient.get(`users/${userId}/tags?page[size]=10`);

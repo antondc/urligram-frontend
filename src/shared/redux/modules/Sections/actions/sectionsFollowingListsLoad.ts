@@ -11,6 +11,8 @@ import { sectionsFollowingListsRequest } from './sectionsFollowingListsRequest';
 export const sectionsFollowingListsLoad = (sessionId: string): ThunkAction<any, any, any, Action> => async (
   dispatch?: Dispatch
 ) => {
+  if (!sessionId) return;
+
   dispatch(sectionsFollowingListsRequest());
 
   const { data }: ReceiveListsResponse = await HttpClient.get(
