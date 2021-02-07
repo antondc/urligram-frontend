@@ -9,19 +9,22 @@ import { requestUsers } from './requestUsers';
 
 export const loadUsers = (): ThunkAction<any, any, any, Action> => async (dispatch: Dispatch) => {
   const APIBaseEndpoint = '/users';
+  try {
+    dispatch(requestUsers());
 
-  dispatch(requestUsers());
+    const { data }: ReceiveUsersResponse = await HttpClient.get(APIBaseEndpoint + window.location.search);
 
-  const { data }: ReceiveUsersResponse = await HttpClient.get(APIBaseEndpoint + window.location.search);
-
-  const usersByKey = {
-    byKey: serializerFromArrayToByKey<ReceiveUserItem, UserState>({
-      data: data,
-      contentPath: 'attributes',
-    }),
-    currentIds: data.map((item) => item.id),
-  };
-  dispatch(receiveUsers(usersByKey));
+    const usersByKey = {
+      byKey: serializerFromArrayToByKey<ReceiveUserItem, UserState>({
+        data: data,
+        contentPath: 'attributes',
+      }),
+      currentIds: data.map((item) => item.id),
+    };
+    dispatch(receiveUsers(usersByKey));
+  } catch (err) {
+    throw new Error(err);
+  }
 
   return;
 };

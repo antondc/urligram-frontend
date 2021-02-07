@@ -10,24 +10,28 @@ import { requestBookmarks } from './requestBookmarks';
 export const bookmarksLoadBySize = (size?: number): ThunkAction<any, any, any, Action> => async (
   dispatch: Dispatch
 ) => {
-  dispatch(requestBookmarks());
+  try {
+    dispatch(requestBookmarks());
 
-  const { data }: ReceiveBookmarksResponse = await HttpClient.get('bookmarks', {
-    params: {
-      page: {
-        size,
+    const { data }: ReceiveBookmarksResponse = await HttpClient.get('bookmarks', {
+      params: {
+        page: {
+          size,
+        },
       },
-    },
-  });
+    });
 
-  const bookmarksByKey = {
-    byKey: serializerFromArrayToByKey<ReceiveBookmarkItem, BookmarkState>({
-      data: data,
-      contentPath: 'attributes',
-    }),
-    currentIds: data.map((item) => item.id),
-  };
-  dispatch(receiveBookmarks(bookmarksByKey));
+    const bookmarksByKey = {
+      byKey: serializerFromArrayToByKey<ReceiveBookmarkItem, BookmarkState>({
+        data: data,
+        contentPath: 'attributes',
+      }),
+      currentIds: data.map((item) => item.id),
+    };
+    dispatch(receiveBookmarks(bookmarksByKey));
+  } catch (err) {
+    throw new Error(err);
+  }
 
   return;
 };

@@ -11,25 +11,29 @@ import { sectionsMyTagsRequest } from './sectionsMyTagsRequest';
 export const sectionsMyTagsLoad = (sessionId: string): ThunkAction<any, any, any, Action> => async (
   dispatch?: Dispatch
 ) => {
-  dispatch(sectionsMyTagsRequest());
+  try {
+    dispatch(sectionsMyTagsRequest());
 
-  const { data: myTagsData }: ReceiveTagsResponse = await HttpClient.get(`/users/${sessionId}/tags?page[size]=10`);
+    const { data: myTagsData }: ReceiveTagsResponse = await HttpClient.get(`/users/${sessionId}/tags?page[size]=10`);
 
-  const myTagsByKey = {
-    byKey: serializerFromArrayToByKey<ReceiveTagItem, TagState>({
-      data: myTagsData,
-      contentPath: 'attributes',
-    }),
-  };
+    const myTagsByKey = {
+      byKey: serializerFromArrayToByKey<ReceiveTagItem, TagState>({
+        data: myTagsData,
+        contentPath: 'attributes',
+      }),
+    };
 
-  dispatch(loadTagsReceive(myTagsByKey));
-  dispatch(
-    sectionsMyTagsReceive({
-      MyTags: {
-        currentIds: myTagsData.map((item) => item.id),
-      },
-    })
-  );
+    dispatch(loadTagsReceive(myTagsByKey));
+    dispatch(
+      sectionsMyTagsReceive({
+        MyTags: {
+          currentIds: myTagsData.map((item) => item.id),
+        },
+      })
+    );
+  } catch (err) {
+    throw new Error(err);
+  }
 
   return;
 };

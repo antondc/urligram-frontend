@@ -8,18 +8,22 @@ import { receiveLinks } from './receiveLinks';
 import { requestLinks } from './requestLinks';
 
 export const loadLinks = (): ThunkAction<any, any, any, Action> => async (dispatch?: Dispatch) => {
-  dispatch(requestLinks());
+  try {
+    dispatch(requestLinks());
 
-  const { data }: ReceiveLinksResponse = await HttpClient.get(`/links${window.location.search}`);
+    const { data }: ReceiveLinksResponse = await HttpClient.get(`/links${window.location.search}`);
 
-  const linksByKey = {
-    byKey: serializerFromArrayToByKey<ReceiveLinkItem, LinkState>({
-      data: data,
-      contentPath: 'attributes',
-    }),
-    allIds: data.map((item) => item.id),
-  };
-  dispatch(receiveLinks(linksByKey));
+    const linksByKey = {
+      byKey: serializerFromArrayToByKey<ReceiveLinkItem, LinkState>({
+        data: data,
+        contentPath: 'attributes',
+      }),
+      allIds: data.map((item) => item.id),
+    };
+    dispatch(receiveLinks(linksByKey));
+  } catch (err) {
+    throw new Error(err);
+  }
 
   return;
 };

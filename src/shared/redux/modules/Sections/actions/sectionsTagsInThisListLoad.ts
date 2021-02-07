@@ -12,25 +12,29 @@ import { sectionsTagsInThisListRequest } from './sectionsTagsInThisListRequest';
 export const sectionsTagsInThisListLoad = (listId: number): ThunkAction<any, any, any, Action> => async (
   dispatch?: Dispatch
 ) => {
-  dispatch(sectionsTagsInThisListRequest());
+  try {
+    dispatch(sectionsTagsInThisListRequest());
 
-  const { data: listData }: ReceiveListResponse = await HttpClient.get(`/lists/${listId}`);
-  const tagsInList = listData?.attributes?.tags?.slice(0, 10);
+    const { data: listData }: ReceiveListResponse = await HttpClient.get(`/lists/${listId}`);
+    const tagsInList = listData?.attributes?.tags?.slice(0, 10);
 
-  const myTagsByKey = {
-    byKey: serializerFromArrayToByKey<TagState, TagState>({
-      data: tagsInList,
-    }),
-  };
+    const myTagsByKey = {
+      byKey: serializerFromArrayToByKey<TagState, TagState>({
+        data: tagsInList,
+      }),
+    };
 
-  dispatch(loadTagsReceive(myTagsByKey));
-  dispatch(
-    sectionsTagsInThisListReceive({
-      TagsInThisList: {
-        currentIds: tagsInList?.map((item) => item.id) || [],
-      },
-    })
-  );
+    dispatch(loadTagsReceive(myTagsByKey));
+    dispatch(
+      sectionsTagsInThisListReceive({
+        TagsInThisList: {
+          currentIds: tagsInList?.map((item) => item.id) || [],
+        },
+      })
+    );
+  } catch (err) {
+    throw new Error(err);
+  }
 
   return;
 };

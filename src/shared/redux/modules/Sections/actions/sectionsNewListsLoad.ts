@@ -9,25 +9,30 @@ import { sectionsNewListsReceive } from './sectionsNewListsReceive';
 import { sectionsNewListsRequest } from './sectionsNewListsRequest';
 
 export const sectionsNewListsLoad = (): ThunkAction<any, any, any, Action> => async (dispatch?: Dispatch) => {
-  dispatch(sectionsNewListsRequest());
-  const { data }: ReceiveListsResponse = await HttpClient.get('/lists?sort=-createdAt&page[size]=5');
+  try {
+    dispatch(sectionsNewListsRequest());
 
-  const popularListsByKey = {
-    byKey: serializerFromArrayToByKey<ReceiveListItem, ListState>({
-      data: data,
-      contentPath: 'attributes',
-    }),
-  };
+    const { data }: ReceiveListsResponse = await HttpClient.get('/lists?sort=-createdAt&page[size]=5');
 
-  dispatch(loadListsReceive(popularListsByKey));
+    const popularListsByKey = {
+      byKey: serializerFromArrayToByKey<ReceiveListItem, ListState>({
+        data: data,
+        contentPath: 'attributes',
+      }),
+    };
 
-  dispatch(
-    sectionsNewListsReceive({
-      NewLists: {
-        currentIds: data.map((item) => item.id),
-      },
-    })
-  );
+    dispatch(loadListsReceive(popularListsByKey));
+
+    dispatch(
+      sectionsNewListsReceive({
+        NewLists: {
+          currentIds: data.map((item) => item.id),
+        },
+      })
+    );
+  } catch (err) {
+    throw new Error(err);
+  }
 
   return;
 };

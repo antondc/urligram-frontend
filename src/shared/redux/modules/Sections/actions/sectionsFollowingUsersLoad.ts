@@ -11,27 +11,32 @@ import { sectionsFollowingUsersRequest } from './sectionsFollowingUsersRequest';
 export const sectionsFollowingUsersLoad = (sessionId: string): ThunkAction<any, any, any, Action> => async (
   dispatch?: Dispatch
 ) => {
-  dispatch(sectionsFollowingUsersRequest());
-  const { data }: ReceiveUsersResponse = await HttpClient.get(
-    `/users/${sessionId}/following?sort=-createdAt&page[size]=5`
-  );
+  try {
+    dispatch(sectionsFollowingUsersRequest());
 
-  const newUsersByKey = {
-    byKey: serializerFromArrayToByKey<ReceiveUserItem, UserState>({
-      data: data,
-      contentPath: 'attributes',
-    }),
-  };
+    const { data }: ReceiveUsersResponse = await HttpClient.get(
+      `/users/${sessionId}/following?sort=-createdAt&page[size]=5`
+    );
 
-  dispatch(receiveUsers(newUsersByKey));
+    const newUsersByKey = {
+      byKey: serializerFromArrayToByKey<ReceiveUserItem, UserState>({
+        data: data,
+        contentPath: 'attributes',
+      }),
+    };
 
-  dispatch(
-    sectionsFollowingUsersReceive({
-      FollowingUsers: {
-        currentIds: data.map((item) => item.id),
-      },
-    })
-  );
+    dispatch(receiveUsers(newUsersByKey));
+
+    dispatch(
+      sectionsFollowingUsersReceive({
+        FollowingUsers: {
+          currentIds: data.map((item) => item.id),
+        },
+      })
+    );
+  } catch (err) {
+    throw new Error(err);
+  }
 
   return;
 };

@@ -8,18 +8,22 @@ import { loadListsReceive } from './loadListsReceive';
 import { loadListsRequest } from './loadListsRequest';
 
 export const loadLists = (): ThunkAction<any, any, any, Action> => async (dispatch: Dispatch) => {
-  dispatch(loadListsRequest());
+  try {
+    dispatch(loadListsRequest());
 
-  const { data }: ReceiveListsResponse = await HttpClient.get('/lists' + window.location.search);
+    const { data }: ReceiveListsResponse = await HttpClient.get('/lists' + window.location.search);
 
-  const listsByKey = {
-    byKey: serializerFromArrayToByKey<ReceiveListItem, ListState>({
-      data: data,
-      contentPath: 'attributes',
-    }),
-    currentIds: data.map((item) => item.id),
-  };
-  dispatch(loadListsReceive(listsByKey));
+    const listsByKey = {
+      byKey: serializerFromArrayToByKey<ReceiveListItem, ListState>({
+        data: data,
+        contentPath: 'attributes',
+      }),
+      currentIds: data.map((item) => item.id),
+    };
+    dispatch(loadListsReceive(listsByKey));
+  } catch (err) {
+    throw new Error(err);
+  }
 
   return;
 };

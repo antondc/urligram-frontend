@@ -11,28 +11,32 @@ import { sectionsMyRecentBookmarksRequest } from './sectionsMyRecentBookmarksReq
 export const sectionsMyRecentBookmarksLoad = (sessionId: string): ThunkAction<any, any, any, Action> => async (
   dispatch?: Dispatch
 ) => {
-  dispatch(sectionsMyRecentBookmarksRequest());
+  try {
+    dispatch(sectionsMyRecentBookmarksRequest());
 
-  const { data }: ReceiveBookmarksResponse = await HttpClient.get(
-    `/users/${sessionId}/bookmarks?page[size]=5&sort=-createdAt`
-  );
+    const { data }: ReceiveBookmarksResponse = await HttpClient.get(
+      `/users/${sessionId}/bookmarks?page[size]=5&sort=-createdAt`
+    );
 
-  const myBookmarksByKey = {
-    byKey: serializerFromArrayToByKey<ReceiveBookmarkItem, BookmarkState>({
-      data: data,
-      contentPath: 'attributes',
-    }),
-  };
+    const myBookmarksByKey = {
+      byKey: serializerFromArrayToByKey<ReceiveBookmarkItem, BookmarkState>({
+        data: data,
+        contentPath: 'attributes',
+      }),
+    };
 
-  dispatch(receiveBookmarks(myBookmarksByKey));
+    dispatch(receiveBookmarks(myBookmarksByKey));
 
-  dispatch(
-    sectionsMyRecentBookmarksReceive({
-      MyRecentBookmarks: {
-        currentIds: data.map((item) => item.id),
-      },
-    })
-  );
+    dispatch(
+      sectionsMyRecentBookmarksReceive({
+        MyRecentBookmarks: {
+          currentIds: data.map((item) => item.id),
+        },
+      })
+    );
+  } catch (err) {
+    throw new Error(err);
+  }
 
   return;
 };

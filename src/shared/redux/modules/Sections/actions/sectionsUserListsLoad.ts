@@ -12,27 +12,33 @@ export const sectionsUserListsLoad = (userId: string): ThunkAction<any, any, any
   dispatch?: Dispatch
 ) => {
   if (!userId) return;
-  
-  dispatch(sectionsUserListsRequest());
 
-  const { data }: ReceiveListsResponse = await HttpClient.get(`/users/${userId}/lists?page[size]=5&filter[role]=admin`);
+  try {
+    dispatch(sectionsUserListsRequest());
 
-  const userListsByKey = {
-    byKey: serializerFromArrayToByKey<ReceiveListItem, ListState>({
-      data: data,
-      contentPath: 'attributes',
-    }),
-  };
+    const { data }: ReceiveListsResponse = await HttpClient.get(
+      `/users/${userId}/lists?page[size]=5&filter[role]=admin`
+    );
 
-  dispatch(loadListsReceive(userListsByKey));
+    const userListsByKey = {
+      byKey: serializerFromArrayToByKey<ReceiveListItem, ListState>({
+        data: data,
+        contentPath: 'attributes',
+      }),
+    };
 
-  dispatch(
-    sectionsUserListsReceive({
-      UserLists: {
-        currentIds: data.map((item) => item.id),
-      },
-    })
-  );
+    dispatch(loadListsReceive(userListsByKey));
+
+    dispatch(
+      sectionsUserListsReceive({
+        UserLists: {
+          currentIds: data.map((item) => item.id),
+        },
+      })
+    );
+  } catch (err) {
+    throw new Error(err);
+  }
 
   return;
 };

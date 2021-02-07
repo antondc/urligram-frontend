@@ -9,22 +9,25 @@ import { loadListsRequest } from './loadListsRequest';
 
 export const listsLoadByUserId = (userId: string): ThunkAction<any, any, any, Action> => async (dispatch: Dispatch) => {
   if (!userId) return;
+  try {
+    dispatch(loadListsRequest());
 
-  dispatch(loadListsRequest());
+    const { data: listsData }: ReceiveListsResponse = await HttpClient.get(
+      `/users/${userId}/lists${window.location.search}`
+    );
 
-  const { data: listsData }: ReceiveListsResponse = await HttpClient.get(
-    `/users/${userId}/lists${window.location.search}`
-  );
+    const listsByKey = {
+      byKey: serializerFromArrayToByKey<ReceiveListItem, ListState>({
+        data: listsData,
+        contentPath: 'attributes',
+      }),
+      currentIds: listsData.map((item) => item.id),
+    };
 
-  const listsByKey = {
-    byKey: serializerFromArrayToByKey<ReceiveListItem, ListState>({
-      data: listsData,
-      contentPath: 'attributes',
-    }),
-    currentIds: listsData.map((item) => item.id),
-  };
-
-  dispatch(loadListsReceive(listsByKey));
+    dispatch(loadListsReceive(listsByKey));
+  } catch (err) {
+    throw new Error(err);
+  }
 
   return;
 };

@@ -23,5 +23,6 @@ export const logIn = ({ username, password }: Props) => async (dispatch: Dispatc
     await dispatch(logInReceive(response.data.attributes));
   } catch (err) {
     await dispatch(logInFailure(err));
+    throw new Error(err);
   }
 };

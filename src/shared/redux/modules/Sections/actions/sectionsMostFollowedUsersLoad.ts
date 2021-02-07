@@ -9,25 +9,30 @@ import { sectionsMostFollowedUsersReceive } from './sectionsMostFollowedUsersRec
 import { sectionsMostFollowedUsersRequest } from './sectionsMostFollowedUsersRequest';
 
 export const sectionsMostFollowedUsersLoad = (): ThunkAction<any, any, any, Action> => async (dispatch?: Dispatch) => {
-  dispatch(sectionsMostFollowedUsersRequest());
-  const { data }: ReceiveUsersResponse = await HttpClient.get('/users?sort=-followers&page[size]=5');
+  try {
+    dispatch(sectionsMostFollowedUsersRequest());
 
-  const mostFollowedUsersByKey = {
-    byKey: serializerFromArrayToByKey<ReceiveUserItem, UserState>({
-      data: data,
-      contentPath: 'attributes',
-    }),
-  };
+    const { data }: ReceiveUsersResponse = await HttpClient.get('/users?sort=-followers&page[size]=5');
 
-  dispatch(receiveUsers(mostFollowedUsersByKey));
+    const mostFollowedUsersByKey = {
+      byKey: serializerFromArrayToByKey<ReceiveUserItem, UserState>({
+        data: data,
+        contentPath: 'attributes',
+      }),
+    };
 
-  dispatch(
-    sectionsMostFollowedUsersReceive({
-      MostFollowedUsers: {
-        currentIds: data.map((item) => item.id),
-      },
-    })
-  );
+    dispatch(receiveUsers(mostFollowedUsersByKey));
+
+    dispatch(
+      sectionsMostFollowedUsersReceive({
+        MostFollowedUsers: {
+          currentIds: data.map((item) => item.id),
+        },
+      })
+    );
+  } catch (err) {
+    throw new Error(err);
+  }
 
   return;
 };

@@ -11,26 +11,30 @@ import { sectionsSimilarListsRequest } from './sectionsSimilarListsRequest';
 export const sectionsSimilarListsLoad = (listId: number): ThunkAction<any, any, any, Action> => async (
   dispatch?: Dispatch
 ) => {
-  dispatch(sectionsSimilarListsRequest());
+  try {
+    dispatch(sectionsSimilarListsRequest());
 
-  const { data }: ReceiveListsResponse = await HttpClient.get(`/lists/${listId}/similar?page[size]=5`);
+    const { data }: ReceiveListsResponse = await HttpClient.get(`/lists/${listId}/similar?page[size]=5`);
 
-  const myListsByKey = {
-    byKey: serializerFromArrayToByKey<ReceiveListItem, ListState>({
-      data: data,
-      contentPath: 'attributes',
-    }),
-  };
+    const myListsByKey = {
+      byKey: serializerFromArrayToByKey<ReceiveListItem, ListState>({
+        data: data,
+        contentPath: 'attributes',
+      }),
+    };
 
-  dispatch(loadListsReceive(myListsByKey));
+    dispatch(loadListsReceive(myListsByKey));
 
-  dispatch(
-    sectionsSimilarListsReceive({
-      SimilarLists: {
-        currentIds: data.map((item) => item.id),
-      },
-    })
-  );
+    dispatch(
+      sectionsSimilarListsReceive({
+        SimilarLists: {
+          currentIds: data.map((item) => item.id),
+        },
+      })
+    );
+  } catch (err) {
+    throw new Error(err);
+  }
 
   return;
 };

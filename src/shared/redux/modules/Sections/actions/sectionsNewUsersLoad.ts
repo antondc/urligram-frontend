@@ -9,25 +9,30 @@ import { sectionsNewUsersReceive } from './sectionsNewUsersReceive';
 import { sectionsNewUsersRequest } from './sectionsNewUsersRequest';
 
 export const sectionsNewUsersLoad = (): ThunkAction<any, any, any, Action> => async (dispatch?: Dispatch) => {
-  dispatch(sectionsNewUsersRequest());
-  const { data }: ReceiveUsersResponse = await HttpClient.get('/users?sort=createdAt&page[size]=5');
+  try {
+    dispatch(sectionsNewUsersRequest());
 
-  const newUsersByKey = {
-    byKey: serializerFromArrayToByKey<ReceiveUserItem, UserState>({
-      data: data,
-      contentPath: 'attributes',
-    }),
-  };
+    const { data }: ReceiveUsersResponse = await HttpClient.get('/users?sort=createdAt&page[size]=5');
 
-  dispatch(receiveUsers(newUsersByKey));
+    const newUsersByKey = {
+      byKey: serializerFromArrayToByKey<ReceiveUserItem, UserState>({
+        data: data,
+        contentPath: 'attributes',
+      }),
+    };
 
-  dispatch(
-    sectionsNewUsersReceive({
-      NewUsers: {
-        currentIds: data.map((item) => item.id),
-      },
-    })
-  );
+    dispatch(receiveUsers(newUsersByKey));
+
+    dispatch(
+      sectionsNewUsersReceive({
+        NewUsers: {
+          currentIds: data.map((item) => item.id),
+        },
+      })
+    );
+  } catch (err) {
+    throw new Error(err);
+  }
 
   return;
 };

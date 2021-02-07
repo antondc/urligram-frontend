@@ -7,21 +7,27 @@ import { BookmarkState, ReceiveBookmarkItem, ReceiveBookmarksResponse } from 'Mo
 import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
 
-export const bookmarksLoadByListId = (listId: number): ThunkAction<any, any, any, Action> => async (dispatch: Dispatch) => {
-  dispatch(requestBookmarks());
+export const bookmarksLoadByListId = (listId: number): ThunkAction<any, any, any, Action> => async (
+  dispatch: Dispatch
+) => {
+  try {
+    dispatch(requestBookmarks());
 
-  const { data: bookmarksData }: ReceiveBookmarksResponse = await HttpClient.get(
-    `/lists/${listId}/bookmarks${window.location.search}`
-  );
+    const { data: bookmarksData }: ReceiveBookmarksResponse = await HttpClient.get(
+      `/lists/${listId}/bookmarks${window.location.search}`
+    );
 
-  const bookmarksByKey = {
-    byKey: serializerFromArrayToByKey<ReceiveBookmarkItem, BookmarkState>({
-      data: bookmarksData,
-      contentPath: 'attributes',
-    }),
-    currentIds: bookmarksData.map((item) => item.id),
-  };
-  dispatch(receiveBookmarks(bookmarksByKey));
+    const bookmarksByKey = {
+      byKey: serializerFromArrayToByKey<ReceiveBookmarkItem, BookmarkState>({
+        data: bookmarksData,
+        contentPath: 'attributes',
+      }),
+      currentIds: bookmarksData.map((item) => item.id),
+    };
+    dispatch(receiveBookmarks(bookmarksByKey));
+  } catch (err) {
+    throw new Error(err);
+  }
 
   return;
 };

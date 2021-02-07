@@ -13,27 +13,32 @@ export const sectionsFollowersUsersLoad = (sessionId: string): ThunkAction<any, 
 ) => {
   if (!sessionId) return;
 
-  dispatch(sectionsFollowersUsersRequest());
-  const { data }: ReceiveUsersResponse = await HttpClient.get(
-    `/users/${sessionId}/followers?sort=-createdAt&page[size]=5`
-  );
+  try {
+    dispatch(sectionsFollowersUsersRequest());
 
-  const newUsersByKey = {
-    byKey: serializerFromArrayToByKey<ReceiveUserItem, UserState>({
-      data: data,
-      contentPath: 'attributes',
-    }),
-  };
+    const { data }: ReceiveUsersResponse = await HttpClient.get(
+      `/users/${sessionId}/followers?sort=-createdAt&page[size]=5`
+    );
 
-  dispatch(receiveUsers(newUsersByKey));
+    const newUsersByKey = {
+      byKey: serializerFromArrayToByKey<ReceiveUserItem, UserState>({
+        data: data,
+        contentPath: 'attributes',
+      }),
+    };
 
-  dispatch(
-    sectionsFollowersUsersReceive({
-      FollowersUsers: {
-        currentIds: data.map((item) => item.id),
-      },
-    })
-  );
+    dispatch(receiveUsers(newUsersByKey));
+
+    dispatch(
+      sectionsFollowersUsersReceive({
+        FollowersUsers: {
+          currentIds: data.map((item) => item.id),
+        },
+      })
+    );
+  } catch (err) {
+    throw new Error(err);
+  }
 
   return;
 };

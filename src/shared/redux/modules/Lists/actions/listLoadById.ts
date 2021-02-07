@@ -7,17 +7,21 @@ import { loadListsReceive } from './loadListsReceive';
 import { loadListsRequest } from './loadListsRequest';
 
 export const loadListById = (listId: number): ThunkAction<any, any, any, Action> => async (dispatch: Dispatch) => {
-  dispatch(loadListsRequest());
+  try {
+    dispatch(loadListsRequest());
 
-  const { data: listData }: ReceiveListResponse = await HttpClient.get(`/lists/${listId}${window.location.search}`);
+    const { data: listData }: ReceiveListResponse = await HttpClient.get(`/lists/${listId}${window.location.search}`);
 
-  const listsByKey = {
-    byKey: {
-      [listData?.id]: listData?.attributes,
-    },
-    currentIds: [listData?.id],
-  };
-  dispatch(loadListsReceive(listsByKey));
+    const listsByKey = {
+      byKey: {
+        [listData?.id]: listData?.attributes,
+      },
+      currentIds: [listData?.id],
+    };
+    dispatch(loadListsReceive(listsByKey));
+  } catch (err) {
+    throw new Error(err);
+  }
 
   return;
 };

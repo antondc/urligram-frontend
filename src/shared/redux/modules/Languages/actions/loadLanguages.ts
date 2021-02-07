@@ -14,23 +14,27 @@ import { receiveLanguages } from './receiveLanguages';
 import { requestLanguages } from './requestLanguages';
 
 export const loadLanguages = (lang: string): ThunkAction<any, any, any, Action> => async (dispatch?: Dispatch) => {
-  dispatch(requestLanguages());
+  try {
+    dispatch(requestLanguages());
 
-  const { data }: LanguagesApiResponse = await HttpClient.get('/languages');
+    const { data }: LanguagesApiResponse = await HttpClient.get('/languages');
 
-  const languagesByKey: LanguagesState = {
-    byKey: serializerFromArrayToByKey<LanguagesApiResponseItem, LanguageState>({
-      data,
-      contentPath: 'attributes',
-      keyPath: 'attributes.slug',
-    }),
-  };
-  const currentLanguage = getCurrentOrDefaultLanguage(languagesByKey, lang);
+    const languagesByKey: LanguagesState = {
+      byKey: serializerFromArrayToByKey<LanguagesApiResponseItem, LanguageState>({
+        data,
+        contentPath: 'attributes',
+        keyPath: 'attributes.slug',
+      }),
+    };
+    const currentLanguage = getCurrentOrDefaultLanguage(languagesByKey, lang);
 
-  const Languages = {
-    ...languagesByKey,
-    currentLanguage,
-  };
+    const Languages = {
+      ...languagesByKey,
+      currentLanguage,
+    };
 
-  dispatch(receiveLanguages(Languages));
+    dispatch(receiveLanguages(Languages));
+  } catch (err) {
+    throw new Error(err);
+  }
 };

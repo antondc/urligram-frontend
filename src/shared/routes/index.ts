@@ -114,24 +114,12 @@ const Routes: RoutesInterface = {
   Links: {
     name: 'Links',
     path: '/:lang([a-z]{2})?/links',
-    exact: true,
+    exact: false,
     auth: false,
     hasHeader: false,
     hasFooter: false,
-    initialDataLoadersVisitor: [
-      initialLinksLoader,
-      popularListsInitialLoader,
-      newListsInitialLoader,
-      mostFollowedTagsInitialLoader,
-      newUsersInitialLoader,
-    ],
-    initialDataLoadersSession: [
-      initialLinksLoader,
-      popularListsInitialLoader,
-      newListsInitialLoader,
-      mostFollowedTagsInitialLoader,
-      newUsersInitialLoader,
-    ],
+    initialDataLoadersVisitor: [],
+    initialDataLoadersSession: [],
   },
 
   List: {

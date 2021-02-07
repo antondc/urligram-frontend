@@ -10,21 +10,25 @@ export const userLoad = (userId: string): ThunkAction<any, any, any, Action> => 
   dispatch: Dispatch,
   getState
 ) => {
-  dispatch(requestUsers());
+  try {
+    dispatch(requestUsers());
 
-  const { data: userData }: ReceiveUserResponse = await HttpClient.get('/users/' + userId + window.location.search);
+    const { data: userData }: ReceiveUserResponse = await HttpClient.get('/users/' + userId + window.location.search);
 
-  const { Users } = getState();
-  const usersByKey = {
-    byKey: {
-      ...Users.byKey,
-      [userData?.attributes?.id]: {
-        ...userData.attributes,
+    const { Users } = getState();
+    const usersByKey = {
+      byKey: {
+        ...Users.byKey,
+        [userData?.attributes?.id]: {
+          ...userData.attributes,
+        },
       },
-    },
-    currentIds: [userData?.attributes?.id],
-  };
-  dispatch(receiveUsers(usersByKey));
+      currentIds: [userData?.attributes?.id],
+    };
+    dispatch(receiveUsers(usersByKey));
+  } catch (err) {
+    throw new Error(err);
+  }
 
   return;
 };

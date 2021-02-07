@@ -13,25 +13,29 @@ export const sectionsUserMostUsedTagsLoad = (userId: string): ThunkAction<any, a
 ) => {
   if (!userId) return;
 
-  dispatch(sectionsUserMostUsedTagsRequest());
+  try {
+    dispatch(sectionsUserMostUsedTagsRequest());
 
-  const { data: myTagsData }: ReceiveTagsResponse = await HttpClient.get(`users/${userId}/tags?page[size]=10`);
+    const { data: myTagsData }: ReceiveTagsResponse = await HttpClient.get(`users/${userId}/tags?page[size]=10`);
 
-  const myTagsByKey = {
-    byKey: serializerFromArrayToByKey<ReceiveTagItem, TagState>({
-      data: myTagsData,
-      contentPath: 'attributes',
-    }),
-  };
+    const myTagsByKey = {
+      byKey: serializerFromArrayToByKey<ReceiveTagItem, TagState>({
+        data: myTagsData,
+        contentPath: 'attributes',
+      }),
+    };
 
-  dispatch(loadTagsReceive(myTagsByKey));
-  dispatch(
-    sectionsUserMostUsedTagsReceive({
-      UserMostUsedTags: {
-        currentIds: myTagsData.map((item) => item.id),
-      },
-    })
-  );
+    dispatch(loadTagsReceive(myTagsByKey));
+    dispatch(
+      sectionsUserMostUsedTagsReceive({
+        UserMostUsedTags: {
+          currentIds: myTagsData.map((item) => item.id),
+        },
+      })
+    );
+  } catch (err) {
+    throw new Error(err);
+  }
 
   return;
 };

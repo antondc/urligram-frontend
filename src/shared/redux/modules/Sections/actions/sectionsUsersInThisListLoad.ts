@@ -11,29 +11,33 @@ import { sectionsUsersInThisListRequest } from './sectionsUsersInThisListRequest
 export const sectionsUsersInThisListLoad = (userIds: string[]): ThunkAction<any, any, any, Action> => async (
   dispatch?: Dispatch
 ) => {
-  dispatch(sectionsUsersInThisListRequest());
+  try {
+    dispatch(sectionsUsersInThisListRequest());
 
-  const { data }: ReceiveUsersResponse = await HttpClient.get('/users/ids', {
-    params: {
-      userIds,
-    },
-  });
-
-  const usersByKey = {
-    byKey: serializerFromArrayToByKey<ReceiveUserItem, UserState>({
-      data: data,
-      contentPath: 'attributes',
-    }),
-  };
-
-  dispatch(receiveUsers(usersByKey));
-  dispatch(
-    sectionsUsersInThisListReceive({
-      UsersInThisList: {
-        currentIds: data.map((item) => item.id),
+    const { data }: ReceiveUsersResponse = await HttpClient.get('/users/ids', {
+      params: {
+        userIds,
       },
-    })
-  );
+    });
+
+    const usersByKey = {
+      byKey: serializerFromArrayToByKey<ReceiveUserItem, UserState>({
+        data: data,
+        contentPath: 'attributes',
+      }),
+    };
+
+    dispatch(receiveUsers(usersByKey));
+    dispatch(
+      sectionsUsersInThisListReceive({
+        UsersInThisList: {
+          currentIds: data.map((item) => item.id),
+        },
+      })
+    );
+  } catch (err) {
+    throw new Error(err);
+  }
 
   return;
 };

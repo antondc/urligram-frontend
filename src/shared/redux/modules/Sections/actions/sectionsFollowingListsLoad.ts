@@ -13,28 +13,32 @@ export const sectionsFollowingListsLoad = (sessionId: string): ThunkAction<any, 
 ) => {
   if (!sessionId) return;
 
-  dispatch(sectionsFollowingListsRequest());
+  try {
+    dispatch(sectionsFollowingListsRequest());
 
-  const { data }: ReceiveListsResponse = await HttpClient.get(
-    `/users/${sessionId}/lists?page[size]=5&filter[role]=reader,editor`
-  );
+    const { data }: ReceiveListsResponse = await HttpClient.get(
+      `/users/${sessionId}/lists?page[size]=5&filter[role]=reader,editor`
+    );
 
-  const myListsByKey = {
-    byKey: serializerFromArrayToByKey<ReceiveListItem, ListState>({
-      data: data,
-      contentPath: 'attributes',
-    }),
-  };
+    const myListsByKey = {
+      byKey: serializerFromArrayToByKey<ReceiveListItem, ListState>({
+        data: data,
+        contentPath: 'attributes',
+      }),
+    };
 
-  dispatch(loadListsReceive(myListsByKey));
+    dispatch(loadListsReceive(myListsByKey));
 
-  dispatch(
-    sectionsFollowingListsReceive({
-      FollowingLists: {
-        currentIds: data.map((item) => item.id),
-      },
-    })
-  );
+    dispatch(
+      sectionsFollowingListsReceive({
+        FollowingLists: {
+          currentIds: data.map((item) => item.id),
+        },
+      })
+    );
+  } catch (err) {
+    throw new Error(err);
+  }
 
   return;
 };

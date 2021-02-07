@@ -10,24 +10,28 @@ import { requestPopularLists } from './requestPopularLists';
 
 export const loadPopularLists = (): ThunkAction<any, any, any, Action> => async (dispatch?: Dispatch) => {
   dispatch(requestPopularLists());
-  const { data }: ReceiveListsResponse = await HttpClient.get('/lists?sort=-members&page[size]=5');
+  try {
+    const { data }: ReceiveListsResponse = await HttpClient.get('/lists?sort=-members&page[size]=5');
 
-  const popularListsByKey = {
-    byKey: serializerFromArrayToByKey<ReceiveListItem, ListState>({
-      data,
-      contentPath: 'attributes',
-    }),
-  };
+    const popularListsByKey = {
+      byKey: serializerFromArrayToByKey<ReceiveListItem, ListState>({
+        data,
+        contentPath: 'attributes',
+      }),
+    };
 
-  dispatch(loadListsReceive(popularListsByKey));
+    dispatch(loadListsReceive(popularListsByKey));
 
-  dispatch(
-    receivePopularLists({
-      PopularLists: {
-        currentIds: data.map((item) => item.id),
-      },
-    })
-  );
+    dispatch(
+      receivePopularLists({
+        PopularLists: {
+          currentIds: data.map((item) => item.id),
+        },
+      })
+    );
+  } catch (err) {
+    throw new Error(err);
+  }
 
   return;
 };

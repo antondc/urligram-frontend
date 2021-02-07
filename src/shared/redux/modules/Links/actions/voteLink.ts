@@ -22,44 +22,48 @@ export const voteLink = ({ vote, linkId, userId }: Props): ThunkAction<any, any,
     Links: { byKey },
   } = getState();
 
-  dispatch(voteBookmarkRequest({ linkId }));
+  try {
+    dispatch(voteBookmarkRequest({ linkId }));
 
-  const linksSerializedByKeyRequest: LinksState = {
-    byKey: {
-      ...byKey,
-      [linkId]: {
-        ...byKey[linkId],
-        statistics: {
-          ...byKey[linkId]?.statistics,
-          loading: true,
+    const linksSerializedByKeyRequest: LinksState = {
+      byKey: {
+        ...byKey,
+        [linkId]: {
+          ...byKey[linkId],
+          statistics: {
+            ...byKey[linkId]?.statistics,
+            loading: true,
+          },
         },
       },
-    },
-  };
+    };
 
-  await dispatch(voteLinkRequest(linksSerializedByKeyRequest));
+    await dispatch(voteLinkRequest(linksSerializedByKeyRequest));
 
-  const { data }: ReceiveLinkResponse = await HttpClient.put(`/links/${linkId}`, {
-    vote,
-    userId,
-  });
+    const { data }: ReceiveLinkResponse = await HttpClient.put(`/links/${linkId}`, {
+      vote,
+      userId,
+    });
 
-  const linksSerializedByKeyResponse: LinksState = {
-    byKey: {
-      ...byKey,
-      [data.attributes.id]: {
-        ...data.attributes,
+    const linksSerializedByKeyResponse: LinksState = {
+      byKey: {
+        ...byKey,
+        [data.attributes.id]: {
+          ...data.attributes,
+        },
       },
-    },
-  };
+    };
 
-  dispatch(voteLinkReceive(linksSerializedByKeyResponse));
-  dispatch(
-    voteBookmarkReceive({
-      linkId,
-      statistics: data?.attributes?.statistics,
-    })
-  );
+    dispatch(voteLinkReceive(linksSerializedByKeyResponse));
+    dispatch(
+      voteBookmarkReceive({
+        linkId,
+        statistics: data?.attributes?.statistics,
+      })
+    );
+  } catch (err) {
+    throw new Error(err);
+  }
 
   return;
 };
