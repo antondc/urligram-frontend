@@ -16,10 +16,10 @@ import { selectUserListsLoading } from 'Modules/Sections/selectors/selectUserLis
 import { selectUserMostUsedTags } from 'Modules/Sections/selectors/selectUserMostUsedTags';
 import { selectUserMostUsedTagsLoading } from 'Modules/Sections/selectors/selectUserMostUsedTagsLoading';
 import { userFollowersLoad } from 'Modules/Users/actions/userFollowersLoad';
+import { userLoad } from 'Modules/Users/actions/userLoad';
 import { selectUserById } from 'Modules/Users/selectors/selectUserById';
 import { selectUsersCurrentIds } from 'Modules/Users/selectors/selectUsersCurrentIds';
 import { selectUsersLoading } from 'Modules/Users/selectors/selectUsersLoading';
-import { userLoad } from '../../redux/modules/Users/actions/userLoad';
 import { FollowersVisitor as FollowersVisitorUI } from './FollowersVisitor';
 
 const FollowersVisitor: React.FC = () => {

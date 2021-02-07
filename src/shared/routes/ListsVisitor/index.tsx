@@ -1,39 +1,58 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { loadLists } from 'Modules/Lists/actions/loadLists';
-import { ListState } from 'Modules/Lists/lists.types';
 import { selectListsAllIds } from 'Modules/Lists/selectors/selectListsAllIds';
 import { selectListsLoading } from 'Modules/Lists/selectors/selectListsLoading';
+import { loadPopularLists } from 'Modules/Sections/actions/loadPopularLists';
+import { sectionsMostUsedTagsLoad } from 'Modules/Sections/actions/sectionsMostUsedTagsLoad';
+import { sectionsNewListsLoad } from 'Modules/Sections/actions/sectionsNewListsLoad';
+import { sectionsNewUsersLoad } from 'Modules/Sections/actions/sectionsNewUsersLoad';
+import { selectMostUsedTags } from 'Modules/Sections/selectors/selectMostUsedTags';
+import { selectMostUsedTagsLoading } from 'Modules/Sections/selectors/selectMostUsedTagsLoading';
+import { selectNewLists } from 'Modules/Sections/selectors/selectNewLists';
+import { selectNewListsLoading } from 'Modules/Sections/selectors/selectNewListsLoading';
+import { selectNewUsers } from 'Modules/Sections/selectors/selectNewUsers';
+import { selectNewUsersLoading } from 'Modules/Sections/selectors/selectNewUsersLoading';
 import { selectPopularLists } from 'Modules/Sections/selectors/selectPopularLists';
-import { ListsVisitor as ListsVisitorUi } from './ListsVisitor';
+import { selectPopularListsLoading } from 'Modules/Sections/selectors/selectPopularListsLoading';
+import { ListsVisitor as ListsVisitorUI } from './ListsVisitor';
 
-interface Props {
-  listsIds: number[];
-  popularLists: ListState[];
-  loading: boolean;
-  loadLists: () => void;
-}
+const ListsVisitor: React.FC = () => {
+  const dispatch = useDispatch();
+  const listsIds = useSelector(selectListsAllIds);
+  const listsIdsLoading = useSelector(selectListsLoading);
+  const popularLists = useSelector(selectPopularLists);
+  const popularListsLoading = useSelector(selectPopularListsLoading);
+  const newLists = useSelector(selectNewLists);
+  const newListsLoading = useSelector(selectNewListsLoading);
+  const mostUsedTags = useSelector(selectMostUsedTags);
+  const mostUsedTagsLoading = useSelector(selectMostUsedTagsLoading);
+  const newUsers = useSelector(selectNewUsers);
+  const newUsersLoading = useSelector(selectNewUsersLoading);
 
-class Lists extends React.Component<Props> {
-  componentDidMount = () => {
-    this.props.loadLists();
-  };
+  useEffect(() => {
+    dispatch(loadLists());
+    dispatch(loadPopularLists());
+    dispatch(sectionsNewListsLoad());
+    dispatch(sectionsMostUsedTagsLoad());
+    dispatch(sectionsNewUsersLoad());
+  }, []);
 
-  render = () => {
-    const { listsIds, popularLists, loading } = this.props;
+  return (
+    <ListsVisitorUI
+      listsIds={listsIds}
+      listsIdsLoading={listsIdsLoading}
+      popularLists={popularLists}
+      popularListsLoading={popularListsLoading}
+      newLists={newLists}
+      newListsLoading={newListsLoading}
+      mostUsedTags={mostUsedTags}
+      mostUsedTagsLoading={mostUsedTagsLoading}
+      newUsers={newUsers}
+      newUsersLoading={newUsersLoading}
+    />
+  );
+};
 
-    return <ListsVisitorUi listsIds={listsIds} popularLists={popularLists} loading={loading} />;
-  };
-}
-
-const mapStateToProps = createStructuredSelector({
-  listsIds: selectListsAllIds,
-  popularLists: selectPopularLists,
-  loading: selectListsLoading,
-});
-
-export default connect(mapStateToProps, {
-  loadLists,
-})(Lists);
+export default ListsVisitor;
