@@ -10,6 +10,7 @@ import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLo
 import BookmarksUser from 'Routes/BookmarksUser';
 import BookmarksVisitor from 'Routes/BookmarksVisitor';
 import Control from 'Routes/Control';
+import FollowersUser from 'Routes/FollowersUser';
 import FollowersVisitor from 'Routes/FollowersVisitor';
 import HomeUser from 'Routes/HomeUser';
 import HomeVisitor from 'Routes/HomeVisitor';
@@ -65,7 +66,7 @@ const Router: React.FC<Props> = ({ loggedIn, location, defaultCurrentSlug, pathW
       <Route
         exact={Routes.Followers.exact}
         path={Routes.Followers.path}
-        component={loggedIn ? FollowersVisitor : FollowersVisitor}
+        component={loggedIn ? FollowersUser : FollowersVisitor}
       />
 
       {/* General */}
