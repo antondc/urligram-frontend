@@ -56,6 +56,17 @@ const Routes: RoutesInterface = {
     initialDataLoadersSession: [],
   },
 
+  UserLists: {
+    name: 'UserLists',
+    path: '/:lang([a-z]{2})?/users/:userId/lists',
+    exact: true,
+    auth: false,
+    hasHeader: false,
+    hasFooter: false,
+    initialDataLoadersVisitor: [],
+    initialDataLoadersSession: [],
+  },
+
   Following: {
     name: 'Following',
     path: '/:lang([a-z]{2})?/users/:userId/following',
