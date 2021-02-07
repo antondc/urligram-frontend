@@ -16,6 +16,7 @@ import { Border, Flex, H4, Hr } from '@antoniodcorrea/components';
 import './FollowersUser.less';
 
 export interface Props {
+  user: UserState;
   userId: string;
   usersCurrentIds: string[];
   usersLoading: boolean;
@@ -30,6 +31,7 @@ export interface Props {
 }
 
 export const FollowersUser: React.FC<Props> = ({
+  user,
   userId,
   usersCurrentIds,
   usersLoading,
@@ -64,7 +66,7 @@ export const FollowersUser: React.FC<Props> = ({
       </Sidebar>
       <Main>
         <Border className="FollowersUser-tags" grow>
-          <H4>Users</H4>
+          <H4>Users following @{user?.name}</H4>
           <Hr spacer />
           {usersLoading ? (
             <UserRowSkeletonGroup />

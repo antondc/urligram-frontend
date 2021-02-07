@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { RootState } from 'Modules/rootType';
 import { selectCurrentRouteParamUserId } from 'Modules/Routes/selectors/selectCurrentRouteParamUserId';
 import { sectionsFollowingListsLoad } from 'Modules/Sections/actions/sectionsFollowingListsLoad';
 import { sectionsMostFollowedUsersLoad } from 'Modules/Sections/actions/sectionsMostFollowedUsersLoad';
@@ -15,6 +16,8 @@ import { selectMyListsLoading } from 'Modules/Sections/selectors/selectMyListsLo
 import { selectUserMostUsedTags } from 'Modules/Sections/selectors/selectUserMostUsedTags';
 import { selectUserMostUsedTagsLoading } from 'Modules/Sections/selectors/selectUserMostUsedTagsLoading';
 import { userFollowingLoad } from 'Modules/Users/actions/userFollowingLoad';
+import { userLoad } from 'Modules/Users/actions/userLoad';
+import { selectUserById } from 'Modules/Users/selectors/selectUserById';
 import { selectUsersCurrentIds } from 'Modules/Users/selectors/selectUsersCurrentIds';
 import { selectUsersLoading } from 'Modules/Users/selectors/selectUsersLoading';
 import { FollowingUser as FollowingUserUI } from './FollowingUser';
@@ -22,6 +25,7 @@ import { FollowingUser as FollowingUserUI } from './FollowingUser';
 const FollowingUser: React.FC = () => {
   const dispatch = useDispatch();
   const userId = useSelector(selectCurrentRouteParamUserId);
+  const user = useSelector((state: RootState) => selectUserById(state, { id: userId }));
   const usersCurrentIds = useSelector(selectUsersCurrentIds);
   const usersLoading = useSelector(selectUsersLoading);
   const myLists = useSelector(selectMyLists);
@@ -34,6 +38,7 @@ const FollowingUser: React.FC = () => {
   const userMostUsedTagsLoading = useSelector(selectUserMostUsedTagsLoading);
 
   useEffect(() => {
+    dispatch(userLoad(userId));
     dispatch(userFollowingLoad(userId));
     dispatch(sectionsMyListsLoad(userId));
     dispatch(sectionsFollowingListsLoad(userId));
@@ -43,6 +48,7 @@ const FollowingUser: React.FC = () => {
 
   return (
     <FollowingUserUI
+      user={user}
       userId={userId}
       usersCurrentIds={usersCurrentIds}
       usersLoading={usersLoading}

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { RootState } from 'Modules/rootType';
 import { selectCurrentRouteParamUserId } from 'Modules/Routes/selectors/selectCurrentRouteParamUserId';
 import { sectionsFollowingListsLoad } from 'Modules/Sections/actions/sectionsFollowingListsLoad';
 import { sectionsMostFollowedUsersLoad } from 'Modules/Sections/actions/sectionsMostFollowedUsersLoad';
@@ -16,13 +17,16 @@ import { selectMyListsLoading } from 'Modules/Sections/selectors/selectMyListsLo
 import { selectUserMostUsedTags } from 'Modules/Sections/selectors/selectUserMostUsedTags';
 import { selectUserMostUsedTagsLoading } from 'Modules/Sections/selectors/selectUserMostUsedTagsLoading';
 import { userFollowersLoad } from 'Modules/Users/actions/userFollowersLoad';
+import { selectUserById } from 'Modules/Users/selectors/selectUserById';
 import { selectUsersCurrentIds } from 'Modules/Users/selectors/selectUsersCurrentIds';
 import { selectUsersLoading } from 'Modules/Users/selectors/selectUsersLoading';
+import { userLoad } from '../../redux/modules/Users/actions/userLoad';
 import { FollowersUser as FollowersUserUI } from './FollowersUser';
 
 const FollowersUser: React.FC = () => {
   const dispatch = useDispatch();
   const userId = useSelector(selectCurrentRouteParamUserId);
+  const user = useSelector((state: RootState) => selectUserById(state, { id: userId }));
   const usersCurrentIds = useSelector(selectUsersCurrentIds);
   const usersLoading = useSelector(selectUsersLoading);
   const myLists = useSelector(selectMyLists);
@@ -35,6 +39,7 @@ const FollowersUser: React.FC = () => {
   const userMostUsedTagsLoading = useSelector(selectUserMostUsedTagsLoading);
 
   useEffect(() => {
+    dispatch(userLoad(userId));
     dispatch(userFollowersLoad(userId));
     dispatch(sectionsMyListsLoad(userId));
     dispatch(sectionsMostFollowedUsersLoad());
@@ -45,6 +50,7 @@ const FollowersUser: React.FC = () => {
 
   return (
     <FollowersUserUI
+      user={user}
       userId={userId}
       usersCurrentIds={usersCurrentIds}
       myLists={myLists}

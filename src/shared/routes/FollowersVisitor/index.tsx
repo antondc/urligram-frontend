@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { RootState } from 'Modules/rootType';
 import { selectCurrentRouteParamUserId } from 'Modules/Routes/selectors/selectCurrentRouteParamUserId';
 import { sectionsFollowingListsLoad } from 'Modules/Sections/actions/sectionsFollowingListsLoad';
 import { sectionsMostUsedTagsLoad } from 'Modules/Sections/actions/sectionsMostUsedTagsLoad';
@@ -15,12 +16,15 @@ import { selectUserListsLoading } from 'Modules/Sections/selectors/selectUserLis
 import { selectUserMostUsedTags } from 'Modules/Sections/selectors/selectUserMostUsedTags';
 import { selectUserMostUsedTagsLoading } from 'Modules/Sections/selectors/selectUserMostUsedTagsLoading';
 import { userFollowersLoad } from 'Modules/Users/actions/userFollowersLoad';
+import { selectUserById } from 'Modules/Users/selectors/selectUserById';
 import { selectUsersCurrentIds } from 'Modules/Users/selectors/selectUsersCurrentIds';
 import { selectUsersLoading } from 'Modules/Users/selectors/selectUsersLoading';
+import { userLoad } from '../../redux/modules/Users/actions/userLoad';
 import { FollowersVisitor as FollowersVisitorUI } from './FollowersVisitor';
 
 const FollowersVisitor: React.FC = () => {
   const dispatch = useDispatch();
+  const user = useSelector((state: RootState) => selectUserById(state, { id: userId }));
   const userId = useSelector(selectCurrentRouteParamUserId);
   const usersCurrentIds = useSelector(selectUsersCurrentIds);
   const usersLoading = useSelector(selectUsersLoading);
@@ -33,9 +37,8 @@ const FollowersVisitor: React.FC = () => {
   const userMostUsedTags = useSelector(selectUserMostUsedTags);
   const userMostUsedTagsLoading = useSelector(selectUserMostUsedTagsLoading);
 
-
-
   useEffect(() => {
+    dispatch(userLoad(userId));
     dispatch(userFollowersLoad(userId));
     dispatch(sectionsUserListsLoad(userId));
     dispatch(sectionsFollowingListsLoad(userId));
@@ -45,6 +48,7 @@ const FollowersVisitor: React.FC = () => {
 
   return (
     <FollowersVisitorUI
+      user={user}
       userId={userId}
       usersCurrentIds={usersCurrentIds}
       usersLoading={usersLoading}

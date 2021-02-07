@@ -10,10 +10,12 @@ import { UserRowSkeletonGroup } from 'Components/UserRow/UserRowSkeletonGroup';
 import { ListState } from 'Modules/Lists/lists.types';
 import { TagState } from 'Modules/Tags/tags.types';
 import { Border, Flex, H4, Hr } from '@antoniodcorrea/components';
+import { UserState } from '../../redux/modules/Users/users.types';
 
 import './FollowingVisitor.less';
 
 export interface Props {
+  user: UserState;
   userId: string;
   usersCurrentIds: string[];
   usersLoading: boolean;
@@ -28,6 +30,7 @@ export interface Props {
 }
 
 export const FollowingVisitor: React.FC<Props> = ({
+  user,
   userId,
   usersCurrentIds,
   usersLoading,
@@ -54,7 +57,7 @@ export const FollowingVisitor: React.FC<Props> = ({
       </Sidebar>
       <Main>
         <Border className="FollowingVisitor-tags" grow>
-          <H4>Users</H4>
+          <H4>Users followed by @{user?.name}</H4>
           <Hr spacer />
           {usersLoading ? (
             <UserRowSkeletonGroup />
