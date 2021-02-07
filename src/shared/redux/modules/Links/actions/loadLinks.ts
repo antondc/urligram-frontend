@@ -10,7 +10,7 @@ import { requestLinks } from './requestLinks';
 export const loadLinks = (): ThunkAction<any, any, any, Action> => async (dispatch?: Dispatch) => {
   dispatch(requestLinks());
 
-  const { data }: ReceiveLinksResponse = await HttpClient.get('/links');
+  const { data }: ReceiveLinksResponse = await HttpClient.get(`/links${window.location.search}`);
 
   const linksByKey = {
     byKey: serializerFromArrayToByKey<ReceiveLinkItem, LinkState>({
