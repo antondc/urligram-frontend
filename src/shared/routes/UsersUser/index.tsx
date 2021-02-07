@@ -1,53 +1,65 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { ListState } from 'Modules/Lists/lists.types';
-import { loadPopularLists } from 'Modules/Sections/actions/loadPopularLists';
-import { selectPopularLists } from 'Modules/Sections/selectors/selectPopularLists';
-import { selectPopularListsLoading } from 'Modules/Sections/selectors/selectPopularListsLoading';
-import { loadUsers } from 'Modules/Users/actions/loadUsers';
-import { selectUsersCurrentIds } from 'Modules/Users/selectors/selectUsersCurrentIds';
-import { selectUsersLoading } from 'Modules/Users/selectors/selectUsersLoading';
+import { loadBookmarksByUserId } from 'Modules/Bookmarks/actions/loadBookmarksByUserId';
+import { sectionsFollowingListsLoad } from 'Modules/Sections/actions/sectionsFollowingListsLoad';
+import { sectionsFollowingUsersLoad } from 'Modules/Sections/actions/sectionsFollowingUsersLoad';
+import { sectionsMyListsLoad } from 'Modules/Sections/actions/sectionsMyListsLoad';
+import { sectionsMyTagsLoad } from 'Modules/Sections/actions/sectionsMyTagsLoad';
+import { selectFollowingLists } from 'Modules/Sections/selectors/selectFollowingLists';
+import { selectFollowingListsLoading } from 'Modules/Sections/selectors/selectFollowingListsLoading';
+import { selectMyLists } from 'Modules/Sections/selectors/selectMyLists';
+import { selectMyListsLoading } from 'Modules/Sections/selectors/selectMyListsLoading';
+import { selectMyTags } from 'Modules/Sections/selectors/selectMyTags';
+import { selectMyTagsLoading } from 'Modules/Sections/selectors/selectMyTagsLoading';
+import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUserId';
+import { sectionsMostFollowedUsersLoad } from '../../redux/modules/Sections/actions/sectionsMostFollowedUsersLoad';
+import { selectMostFollowedUsers } from '../../redux/modules/Sections/selectors/selectMostFollowedUsers';
+import { selectMostFollowedUsersLoading } from '../../redux/modules/Sections/selectors/selectMostFollowedUsersLoading';
+import { loadUsers } from '../../redux/modules/Users/actions/loadUsers';
+import { selectUsersCurrentIds } from '../../redux/modules/Users/selectors/selectUsersCurrentIds';
+import { selectUsersLoading } from '../../redux/modules/Users/selectors/selectUsersLoading';
 import { UsersUser as UsersUserUi } from './UsersUser';
 
-interface Props {
-  usersIds: string[];
-  popularLists: ListState[];
-  usersLoading: boolean;
-  popularListLoading: boolean;
-  loadUsers: () => void;
-  loadPopularLists: () => void;
-}
+const UsersUser: React.FC = () => {
+  const dispatch = useDispatch();
+  const sessionId = useSelector(selectSessionUserId);
+  const myLists = useSelector(selectMyLists);
+  const myListsLoading = useSelector(selectMyListsLoading);
+  const followingLists = useSelector(selectFollowingLists);
+  const followingListsLoading = useSelector(selectFollowingListsLoading);
+  const myTags = useSelector(selectMyTags);
+  const myTagsLoading = useSelector(selectMyTagsLoading);
+  const mostFollowedUsers = useSelector(selectMostFollowedUsers);
+  const mostFollowedUsersLoading = useSelector(selectMostFollowedUsersLoading);
+  const usersCurrentIds = useSelector(selectUsersCurrentIds);
+  const usersLoading = useSelector(selectUsersLoading);
 
-class UsersUser extends React.Component<Props> {
-  componentDidMount = () => {
-    this.props.loadUsers();
-    this.props.loadPopularLists();
-  };
+  useEffect(() => {
+    dispatch(loadUsers());
+    dispatch(sectionsMyListsLoad(sessionId));
+    dispatch(sectionsFollowingListsLoad(sessionId));
+    dispatch(sectionsMyTagsLoad(sessionId));
+    dispatch(sectionsFollowingUsersLoad(sessionId));
+    dispatch(loadBookmarksByUserId(sessionId));
+    dispatch(sectionsMostFollowedUsersLoad());
+  }, [sessionId]);
 
-  render = () => {
-    const { usersIds, popularLists, usersLoading, popularListLoading } = this.props;
+  return (
+    <UsersUserUi
+      usersCurrentIds={usersCurrentIds}
+      usersLoading={usersLoading}
+      sessionId={sessionId}
+      myLists={myLists}
+      myListsLoading={myListsLoading}
+      followingLists={followingLists}
+      followingListsLoading={followingListsLoading}
+      myTags={myTags}
+      myTagsLoading={myTagsLoading}
+      mostFollowedUsers={mostFollowedUsers}
+      mostFollowedUsersLoading={mostFollowedUsersLoading}
+    />
+  );
+};
 
-    return (
-      <UsersUserUi
-        usersIds={usersIds}
-        popularLists={popularLists}
-        usersLoading={usersLoading}
-        popularListLoading={popularListLoading}
-      />
-    );
-  };
-}
-
-const mapStateToProps = createStructuredSelector({
-  popularLists: selectPopularLists,
-  usersIds: selectUsersCurrentIds,
-  usersLoading: selectUsersLoading,
-  popularListLoading: selectPopularListsLoading,
-});
-
-export default connect(mapStateToProps, {
-  loadUsers,
-  loadPopularLists,
-})(UsersUser);
+export default UsersUser;

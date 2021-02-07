@@ -56,7 +56,7 @@ export const UsersVisitor: React.FC<Props> = ({
       </Sidebar>
       <Main>
         <Border className="UsersVisitor-tags" grow>
-          <H4>Bookmarks</H4>
+          <H4>Users</H4>
           <Hr spacer />
           {usersLoading ? (
             <UserRowSkeletonGroup />
