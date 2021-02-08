@@ -1,21 +1,21 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { loadPopularLists } from '../../redux/modules/Sections/actions/loadPopularLists';
-import { sectionsMostFollowedUsersLoad } from '../../redux/modules/Sections/actions/sectionsMostFollowedUsersLoad';
-import { sectionsNewListsLoad } from '../../redux/modules/Sections/actions/sectionsNewListsLoad';
-import { sectionsNewUsersLoad } from '../../redux/modules/Sections/actions/sectionsNewUsersLoad';
-import { selectMostFollowedUsers } from '../../redux/modules/Sections/selectors/selectMostFollowedUsers';
-import { selectMostFollowedUsersLoading } from '../../redux/modules/Sections/selectors/selectMostFollowedUsersLoading';
-import { selectNewLists } from '../../redux/modules/Sections/selectors/selectNewLists';
-import { selectNewListsLoading } from '../../redux/modules/Sections/selectors/selectNewListsLoading';
-import { selectNewUsers } from '../../redux/modules/Sections/selectors/selectNewUsers';
-import { selectNewUsersLoading } from '../../redux/modules/Sections/selectors/selectNewUsersLoading';
-import { selectPopularLists } from '../../redux/modules/Sections/selectors/selectPopularLists';
-import { selectPopularListsLoading } from '../../redux/modules/Sections/selectors/selectPopularListsLoading';
-import { tagsAllLoad } from '../../redux/modules/Tags/actions/tagsAllLoad';
-import { selectTagsLoading } from '../../redux/modules/Tags/selectors/selectAllTagsLoading';
-import { selectTagsCurrent } from '../../redux/modules/Tags/selectors/selectTagsCurrent';
+import { loadPopularLists } from 'Modules/Sections/actions/loadPopularLists';
+import { sectionsMostFollowedUsersLoad } from 'Modules/Sections/actions/sectionsMostFollowedUsersLoad';
+import { sectionsNewListsLoad } from 'Modules/Sections/actions/sectionsNewListsLoad';
+import { sectionsNewUsersLoad } from 'Modules/Sections/actions/sectionsNewUsersLoad';
+import { selectMostFollowedUsers } from 'Modules/Sections/selectors/selectMostFollowedUsers';
+import { selectMostFollowedUsersLoading } from 'Modules/Sections/selectors/selectMostFollowedUsersLoading';
+import { selectNewLists } from 'Modules/Sections/selectors/selectNewLists';
+import { selectNewListsLoading } from 'Modules/Sections/selectors/selectNewListsLoading';
+import { selectNewUsers } from 'Modules/Sections/selectors/selectNewUsers';
+import { selectNewUsersLoading } from 'Modules/Sections/selectors/selectNewUsersLoading';
+import { selectPopularLists } from 'Modules/Sections/selectors/selectPopularLists';
+import { selectPopularListsLoading } from 'Modules/Sections/selectors/selectPopularListsLoading';
+import { tagsAllLoad } from 'Modules/Tags/actions/tagsAllLoad';
+import { selectTagsLoading } from 'Modules/Tags/selectors/selectAllTagsLoading';
+import { selectTagsCurrent } from 'Modules/Tags/selectors/selectTagsCurrent';
 import { TagsVisitor as TagsVisitorUi } from './TagsVisitor';
 
 const TagsVisitor: React.FC = () => {

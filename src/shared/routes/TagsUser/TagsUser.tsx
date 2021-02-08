@@ -5,52 +5,59 @@ import Main from 'Components/Main';
 import Sidebar from 'Components/Sidebar';
 import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListLists from 'Components/SidebarListLists';
+import SidebarListTags from 'Components/SidebarListTags';
 import SidebarListUsers from 'Components/SidebarListUsers';
 import { ListState } from 'Modules/Lists/lists.types';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { Border, Flex, H4, Hr, Tag } from '@antoniodcorrea/components';
 
-import './TagsVisitor.less';
+import './TagsUser.less';
 
 interface Props {
+  sessionId: string;
   tags: TagState[];
   tagsLoading: boolean;
-  popularLists: ListState[];
-  popularListsLoading: boolean;
-  newLists: ListState[];
-  newListsLoading: boolean;
+  myLists: ListState[];
+  myListsLoading: boolean;
+  followingLists: ListState[];
+  followingListsLoading: boolean;
   mostFollowedUsers: UserState[];
   mostFollowedUsersLoading: boolean;
-  newUsers: UserState[];
-  newUsersLoading: boolean;
+  userMostUsedTags: TagState[];
+  userMostUsedTagsLoading: boolean;
 }
 
-export const TagsVisitor: React.FC<Props> = ({
+export const TagsUser: React.FC<Props> = ({
+  sessionId,
   tags,
   tagsLoading,
-  popularLists,
-  popularListsLoading,
-  newLists,
-  newListsLoading,
+  myLists,
+  myListsLoading,
+  followingLists,
+  followingListsLoading,
   mostFollowedUsers,
   mostFollowedUsersLoading,
-  newUsers,
-  newUsersLoading,
+  userMostUsedTags,
+  userMostUsedTagsLoading,
 }) => (
-  <div className="TagsVisitor">
+  <div className="TagsUser">
     <Flex horizontal="between" vertical="top">
       <Sidebar>
         <SidebarBlock
-          title="Popular Lists"
-          href="lists?sort=-members&page[size]=10&filter[role]=admin"
-          loading={popularListsLoading}
+          title="My Lists"
+          href={`/users/${sessionId}/lists?sort=-createdAt&page[size]=10&filter[role]=admin`}
+          loading={myListsLoading}
         >
-          <SidebarListLists items={popularLists} />
+          <SidebarListLists items={myLists} />
         </SidebarBlock>
         <Hr spacer />
-        <SidebarBlock title="New Lists" href="lists?sort=-createdAt&page[size]=10" loading={newListsLoading}>
-          <SidebarListLists items={newLists} />
+        <SidebarBlock
+          title="Following Lists"
+          href={`/user/${sessionId}/lists?sort=-createdAt&page[size]=10&filter[role]=editor,reader`}
+          loading={followingListsLoading}
+        >
+          <SidebarListLists items={followingLists} />
         </SidebarBlock>
       </Sidebar>
       <Main>
@@ -77,16 +84,16 @@ export const TagsVisitor: React.FC<Props> = ({
         </Border>
       </Main>
       <Sidebar>
+        <SidebarBlock title="My Tags" loading={userMostUsedTagsLoading}>
+          <SidebarListTags items={userMostUsedTags} />
+        </SidebarBlock>
+        <Hr spacer />
         <SidebarBlock
-          title="Following Users"
-          href={'/users?sort=-followers&page[size]=10'}
+          title="My Followers"
+          href={`/users/${sessionId}/followers?page[size]=10`}
           loading={mostFollowedUsersLoading}
         >
           <SidebarListUsers items={mostFollowedUsers} />
-        </SidebarBlock>
-        <Hr spacer />
-        <SidebarBlock title="Following Users" href={'/users?sort=-createdAt&page[size]=10'} loading={newUsersLoading}>
-          <SidebarListUsers items={newUsers} />
         </SidebarBlock>
       </Sidebar>
     </Flex>
