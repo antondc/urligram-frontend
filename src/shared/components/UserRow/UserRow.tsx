@@ -53,10 +53,8 @@ export const UserRow: React.FC<UserRow> = ({
       </div>
       <div className="UserRow-leftBottom">
         {tags?.map((item) => (
-          <A href={`tags/${item.name}`} key={item.id} styled={false} frontend>
-            <Tag className="UserRow-tag" size="small">
-              {item.name}
-            </Tag>
+          <A className="UserRow-tag" href={`/links?filter[tags]=${item.name}`} key={item.id} styled={false} frontend>
+            <Tag size="small">{item.name}</Tag>
           </A>
         ))}
       </div>

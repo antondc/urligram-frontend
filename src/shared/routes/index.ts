@@ -1,11 +1,9 @@
 import omit from 'lodash/omit';
 
 import { initialBookmarksLoader } from 'Modules/Bookmarks/bookmarks.loader';
-import { initialLinksLoader } from 'Modules/Links/links.loader';
 import { initialListsLoader } from 'Modules/Lists/lists.loader';
 import { followingListsInitialLoader } from 'Modules/Sections/initialLoaders/followingListsInitialLoader';
 import { followingUsersInitialLoader } from 'Modules/Sections/initialLoaders/followingUsersInitialLoad';
-import { mostFollowedTagsInitialLoader } from 'Modules/Sections/initialLoaders/mostFollowedTagsInitialLoader';
 import { mostFollowedUsersInitialLoader } from 'Modules/Sections/initialLoaders/mostFollowedUsersInitialLoader';
 import { myListsInitialLoader } from 'Modules/Sections/initialLoaders/myListsInitialLoader';
 import { myTagsInitialLoader } from 'Modules/Sections/initialLoaders/myTagsInitialLoader';
@@ -34,6 +32,17 @@ export interface RoutesInterface {
 }
 
 const Routes: RoutesInterface = {
+  Tags: {
+    name: 'Tags',
+    path: '/:lang([a-z]{2})?/tags',
+    exact: true,
+    auth: false,
+    hasHeader: false,
+    hasFooter: false,
+    initialDataLoadersVisitor: [],
+    initialDataLoadersSession: [],
+  },
+
   Bookmarks: {
     name: 'Bookmarks',
     path: '/:lang([a-z]{2})?/bookmarks',

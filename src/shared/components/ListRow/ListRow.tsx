@@ -59,10 +59,8 @@ export const ListRow: React.FC<ListRow> = ({
       </div>
       <div className="ListRow-leftBottom">
         {tags?.map((item) => (
-          <A href={`/tags/${item.name}`} key={item.id} styled={false} frontend>
-            <Tag className="ListRow-tag" size="small">
-              {item.name}
-            </Tag>
+          <A className="ListRow-tag" href={`/links?filter[tags]=${item.name}`} key={item.id} styled={false} frontend>
+            <Tag size="small">{item.name}</Tag>
           </A>
         ))}
       </div>

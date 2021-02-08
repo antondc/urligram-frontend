@@ -26,6 +26,7 @@ import Login from 'Routes/Login';
 import NotFound from 'Routes/NotFound';
 import ServerError from 'Routes/ServerError';
 import SignIn from 'Routes/SignIn';
+import TagsVisitor from 'Routes/TagsVisitor';
 import User from 'Routes/User';
 import UserBookmarksUser from 'Routes/UserBookmarksUser';
 import UserBookmarksVisitor from 'Routes/UserBookmarksVisitor';
@@ -82,6 +83,7 @@ const Router: React.FC<Props> = ({ loggedIn, location, defaultCurrentSlug, pathW
         path={Routes.UserLists.path}
         component={loggedIn ? UserListsUser : UserListsVisitor}
       />
+      <Route exact={Routes.Tags.exact} path={Routes.Tags.path} component={loggedIn ? TagsVisitor : TagsVisitor} />
 
       {/* General */}
       <Route exact={Routes.Control.exact} path={Routes.Control.path} component={Control} />

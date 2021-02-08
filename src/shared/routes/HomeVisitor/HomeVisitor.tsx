@@ -70,7 +70,7 @@ export const HomeVisitor: React.FC<Props> = ({
             allTags?.map((item) => (
               <A
                 className="SidebarListTags-tag"
-                href={`/tags/${item.name}`}
+                href={`/links?filter[tags]=${item.name}`}
                 key={`SidebarListTags-tags-${item.id}`}
                 styled={false}
                 frontend

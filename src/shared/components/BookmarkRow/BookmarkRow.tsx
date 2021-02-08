@@ -42,10 +42,14 @@ export const BookmarkRow: React.FC<BookmarkRow> = ({ id, title, url, tags = [], 
       </A>
       <div className="BookmarkRow-tags">
         {tags?.map((item) => (
-          <A href={`/tags/${item.name}`} key={item.id} styled={false} frontend>
-            <Tag className="BookmarkRow-tag" size="small">
-              {item.name}
-            </Tag>
+          <A
+            className="BookmarkRow-tag"
+            href={`/links?filter[tags]=${item.name}`}
+            key={item.id}
+            styled={false}
+            frontend
+          >
+            <Tag size="small">{item.name}</Tag>
           </A>
         ))}
       </div>
