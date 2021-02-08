@@ -4,6 +4,7 @@ import A from 'Components/A';
 import { UserState } from 'Modules/Users/users.types';
 import { stringToDashCase } from 'Tools/utils/string/stringToDashCase';
 import { Hr, Span, Tooltip } from '@antoniodcorrea/components';
+import { RenderInPortal } from '../Portal';
 import { SidebarListUsersSkeleton } from './SidebarListUsersSkeleton';
 
 import './SidebarListUsers.less';
@@ -29,11 +30,13 @@ const SidebarListUsers: React.FC<Props> = ({ items, loading, title: blockTitle }
             <div className="SidebarListUsers-userDescription">
               {followers?.length && (
                 <>
-                  <Tooltip
-                    parentElementId={`${stringToDashCase(blockTitle)}-followers-${index}`}
-                    content="Followers of this user"
-                    delay={0.5}
-                  />
+                  <RenderInPortal>
+                    <Tooltip
+                      parentElementId={`${stringToDashCase(blockTitle)}-followers-${index}`}
+                      content="Followers of this user"
+                      delay={0.5}
+                    />
+                  </RenderInPortal>
                   <A href={`users/${id}/followers`} frontend>
                     <Span
                       id={`${stringToDashCase(blockTitle)}-followers-${index}`}
@@ -48,11 +51,13 @@ const SidebarListUsers: React.FC<Props> = ({ items, loading, title: blockTitle }
               )}
               {following?.length && (
                 <>
-                  <Tooltip
-                    parentElementId={`${stringToDashCase(blockTitle)}-following-${index}`}
-                    content="People following to this user"
-                    delay={0.5}
-                  />
+                  <RenderInPortal>
+                    <Tooltip
+                      parentElementId={`${stringToDashCase(blockTitle)}-following-${index}`}
+                      content="People following to this user"
+                      delay={0.5}
+                    />
+                  </RenderInPortal>
                   <A href={`users/${id}/following`} frontend>
                     <Span
                       id={`${stringToDashCase(blockTitle)}-following-${index}`}
@@ -67,11 +72,13 @@ const SidebarListUsers: React.FC<Props> = ({ items, loading, title: blockTitle }
               )}
               {bookmarksIds?.length && (
                 <>
-                  <Tooltip
-                    parentElementId={`${stringToDashCase(blockTitle)}-bookmarks-${index}`}
-                    content="Bookmarks of this user"
-                    delay={0.5}
-                  />
+                  <RenderInPortal>
+                    <Tooltip
+                      parentElementId={`${stringToDashCase(blockTitle)}-bookmarks-${index}`}
+                      content="Bookmarks of this user"
+                      delay={0.5}
+                    />
+                  </RenderInPortal>
                   <A href={`users/${id}/bookmarks`} frontend>
                     <Span
                       id={`${stringToDashCase(blockTitle)}-bookmarks-${index}`}

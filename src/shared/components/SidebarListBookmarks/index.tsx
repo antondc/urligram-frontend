@@ -1,6 +1,7 @@
 import React from 'react';
 
 import A from 'Components/A';
+import { RenderInPortal } from 'Components/Portal';
 import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
 import { stringToDashCase } from 'Tools/utils/string/stringToDashCase';
 import { Hr, Span, Tooltip } from '@antoniodcorrea/components';
@@ -25,11 +26,13 @@ const SidebarListBookmarks: React.FC<Props> = ({ items, loading, title: blockTit
               <Span bold>⚭ {title}</Span>
             </A>
             <div>
-              <Tooltip
-                parentElementId={`${stringToDashCase(blockTitle)}-timesVoted-${id}`}
-                content="Times voted"
-                delay={1.5}
-              />
+              <RenderInPortal>
+                <Tooltip
+                  parentElementId={`${stringToDashCase(blockTitle)}-timesVoted-${id}`}
+                  content="Times voted"
+                  delay={1.5}
+                />
+              </RenderInPortal>
               <Span
                 className="SidebarListBookmarks-detail"
                 id={`${stringToDashCase(blockTitle)}-timesVoted-${id}`}
@@ -38,11 +41,13 @@ const SidebarListBookmarks: React.FC<Props> = ({ items, loading, title: blockTit
                 {statistics?.timesVoted}
               </Span>
               <> · </>
-              <Tooltip
-                parentElementId={`${stringToDashCase(blockTitle)}-averageVote-${id}`}
-                content="Average vote"
-                delay={1.5}
-              />
+              <RenderInPortal>
+                <Tooltip
+                  parentElementId={`${stringToDashCase(blockTitle)}-averageVote-${id}`}
+                  content="Average vote"
+                  delay={1.5}
+                />
+              </RenderInPortal>
               <Span
                 className="SidebarListBookmarks-detail"
                 id={`${stringToDashCase(blockTitle)}-averageVote-${id}`}
@@ -51,11 +56,13 @@ const SidebarListBookmarks: React.FC<Props> = ({ items, loading, title: blockTit
                 {statistics?.averageVote}
               </Span>
               <> · </>
-              <Tooltip
-                parentElementId={`${stringToDashCase(blockTitle)}-timesBookmarked-${id}`}
-                content="Times bookmarked"
-                delay={1.5}
-              />
+              <RenderInPortal>
+                <Tooltip
+                  parentElementId={`${stringToDashCase(blockTitle)}-timesBookmarked-${id}`}
+                  content="Times bookmarked"
+                  delay={1.5}
+                />
+              </RenderInPortal>
               <Span
                 className="SidebarListBookmarks-detail"
                 id={`${stringToDashCase(blockTitle)}-timesBookmarked-${id}`}

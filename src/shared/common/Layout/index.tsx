@@ -105,6 +105,7 @@ class Layout extends React.Component<Props> {
             <LoginModal />
           </Fade>
         </Fade>
+        <div id="Tooltips" />
       </div>
     );
   };

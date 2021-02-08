@@ -12,7 +12,7 @@ import { ListState } from 'Modules/Lists/lists.types';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import LinkRow from 'Root/src/shared/components/LinkRow';
-import { Border, Button, Flex, Hr } from '@antoniodcorrea/components';
+import { Border, Button, Flex, H4, Hr } from '@antoniodcorrea/components';
 
 import './Links.less';
 
@@ -59,7 +59,8 @@ export const Links: React.FC<Props> = ({
       </Sidebar>
       <Main>
         <Border grow>
-          <MainHeader title="My links" />
+          <H4>Links</H4>
+          <Hr spacer />
           {loading ? (
             <LinkRowSkeletonGroup />
           ) : (

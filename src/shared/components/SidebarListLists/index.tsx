@@ -1,9 +1,11 @@
 import React from 'react';
+import { createPortal } from 'react-dom';
 
 import A from 'Components/A';
 import { ListState } from 'Modules/Lists/lists.types';
 import { stringToDashCase } from 'Tools/utils/string/stringToDashCase';
 import { Hr, Span, Tooltip } from '@antoniodcorrea/components';
+import { RenderInPortal } from '../Portal';
 import { SidebarListListsSkeleton } from './SidebarListListsSkeleton';
 
 import './SidebarListLists.less';
@@ -29,11 +31,13 @@ const SidebarListLists: React.FC<Props> = ({ items, loading, title: blockTitle }
             <div id={id + '-' + index} className="SidebarListLists-listDescription">
               {membersIds?.length && (
                 <>
-                  <Tooltip
-                    parentElementId={`${stringToDashCase(blockTitle)}-members-${id}`}
-                    content="Users following this list"
-                    delay={0.5}
-                  />
+                  <RenderInPortal>
+                    <Tooltip
+                      parentElementId={`${stringToDashCase(blockTitle)}-members-${id}`}
+                      content="Users following this list"
+                      delay={0.5}
+                    />
+                  </RenderInPortal>
                   <A href={`lists/${id}/users`} frontend>
                     <Span id={`${stringToDashCase(blockTitle)}-members-${id}`} size="small">
                       {membersIds?.length + 1}
@@ -44,11 +48,13 @@ const SidebarListLists: React.FC<Props> = ({ items, loading, title: blockTitle }
               )}
               {bookmarksIds?.length && (
                 <>
-                  <Tooltip
-                    parentElementId={`${stringToDashCase(blockTitle)}-bookmarks-${id}`}
-                    content="Bookmarks within this list"
-                    delay={0.5}
-                  />
+                  <RenderInPortal>
+                    <Tooltip
+                      parentElementId={`${stringToDashCase(blockTitle)}-bookmarks-${id}`}
+                      content="Bookmarks within this list"
+                      delay={0.5}
+                    />
+                  </RenderInPortal>
                   <A href={`lists/${id}`} frontend>
                     <Span id={`${stringToDashCase(blockTitle)}-bookmarks-${id}`} size="small">
                       {bookmarksIds?.length}
