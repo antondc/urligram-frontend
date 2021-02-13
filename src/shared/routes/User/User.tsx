@@ -6,9 +6,7 @@ import { BookmarkRowSkeletonGroup } from 'Components/BookmarkRow/BookmarkRowSkel
 import Main from 'Components/Main';
 import Sidebar from 'Components/Sidebar';
 import SidebarBlock from 'Components/SidebarBlock';
-import SidebarListLists from 'Components/SidebarListLists';
 import SidebarListUsers from 'Components/SidebarListUsers';
-import { ListState } from 'Modules/Lists/lists.types';
 import { UserState } from 'Modules/Users/users.types';
 import { Border, Button, Fade, Flex, H4, Hr, Span, Tag } from '@antoniodcorrea/components';
 
@@ -20,10 +18,6 @@ interface Props {
   createdAt: string;
   bookmarksIds: number[];
   bookmarksLoading: boolean;
-  userLists: ListState[];
-  userListsLoading: boolean;
-  followingLists: ListState[];
-  followingListsLoading: boolean;
   followingUsers: UserState[];
   followingUsersLoading: boolean;
   followersUsers: UserState[];
@@ -36,10 +30,6 @@ export const User: React.FC<Props> = ({
   createdAt,
   bookmarksIds,
   bookmarksLoading,
-  userLists,
-  userListsLoading,
-  followingLists,
-  followingListsLoading,
   followingUsers,
   followingUsersLoading,
   followersUsers,
@@ -47,15 +37,6 @@ export const User: React.FC<Props> = ({
 }) => (
   <div className="User">
     <Flex horizontal="between" vertical="top">
-      <Sidebar>
-        <SidebarBlock title="User lists" href="" loading={userListsLoading}>
-          <SidebarListLists items={userLists} />
-        </SidebarBlock>
-        <Hr spacer />
-        <SidebarBlock title="Lists followed" href="" loading={followingListsLoading}>
-          <SidebarListLists items={followingLists} />
-        </SidebarBlock>
-      </Sidebar>
       <Main>
         <Border grow>
           <Flex horizontal="between">

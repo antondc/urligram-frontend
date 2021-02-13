@@ -1,48 +1,48 @@
 import React from 'react';
 
-import { LinkRowSkeletonGroup } from 'Components/LinkRow/LinkRowSkeletonGroup';
+import ListRow from 'Components/ListRow';
+import { ListRowSkeletonGroup } from 'Components/ListRow/ListSkeletonGroup';
 import Main from 'Components/Main';
+import MainHeader from 'Components/MainHeader';
 import Sidebar from 'Components/Sidebar';
 import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListTags from 'Components/SidebarListTags';
 import SidebarListUsers from 'Components/SidebarListUsers';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
-import LinkRow from 'Root/src/shared/components/LinkRow';
-import { Border, Button, Flex, H4, Hr } from '@antoniodcorrea/components';
+import { Border, Button, Flex, Hr } from '@antoniodcorrea/components';
 
-import './Links.less';
+import './Lists.less';
 
 interface Props {
-  linksIds: number[];
-  loading: boolean;
-  newUsers: UserState[];
-  newUsersLoading: boolean;
+  listsIds: number[];
+  listsIdsLoading: boolean;
   mostUsedTags: TagState[];
   mostUsedTagsLoading: boolean;
+  newUsers: UserState[];
+  newUsersLoading: boolean;
 }
 
-export const Links: React.FC<Props> = ({
-  linksIds,
-  loading,
-  newUsers,
-  newUsersLoading,
+export const Lists: React.FC<Props> = ({
+  listsIds,
+  listsIdsLoading,
   mostUsedTags,
   mostUsedTagsLoading,
+  newUsers,
+  newUsersLoading,
 }) => (
-  <div className="Links">
+  <div className="Lists">
     <Flex horizontal="between" vertical="top">
       <Main>
         <Border grow>
-          <H4>Links</H4>
-          <Hr spacer />
-          {loading ? (
-            <LinkRowSkeletonGroup />
+          <MainHeader title="My lists" />
+          {listsIdsLoading ? (
+            <ListRowSkeletonGroup />
           ) : (
-            linksIds?.map((id, index) => (
+            listsIds?.map((id, index) => (
               <React.Fragment key={id}>
                 {!!index && <Hr spacer />}
-                <LinkRow id={id} />
+                <ListRow id={id} />
               </React.Fragment>
             ))
           )}
@@ -53,7 +53,7 @@ export const Links: React.FC<Props> = ({
         </Border>
       </Main>
       <Sidebar>
-        <SidebarBlock title="Popular Tags" href="tags?sort[most-used]=desc" loading={mostUsedTagsLoading}>
+        <SidebarBlock title="Most Used Tags" loading={mostUsedTagsLoading}>
           <SidebarListTags items={mostUsedTags} />
         </SidebarBlock>
         <Hr spacer />

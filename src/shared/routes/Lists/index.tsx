@@ -1,42 +1,42 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { loadLinks } from 'Modules/Links/actions/loadLinks';
-import { selectLinksAllIds } from 'Modules/Links/selectors/selectLinksAllIds';
-import { selectLinksLoading } from 'Modules/Links/selectors/selectLinksLoading';
+import { loadLists } from 'Modules/Lists/actions/loadLists';
+import { selectListsAllIds } from 'Modules/Lists/selectors/selectListsAllIds';
+import { selectListsLoading } from 'Modules/Lists/selectors/selectListsLoading';
 import { sectionsMostUsedTagsLoad } from 'Modules/Sections/actions/sectionsMostUsedTagsLoad';
 import { sectionsNewUsersLoad } from 'Modules/Sections/actions/sectionsNewUsersLoad';
 import { selectMostUsedTags } from 'Modules/Sections/selectors/selectMostUsedTags';
 import { selectMostUsedTagsLoading } from 'Modules/Sections/selectors/selectMostUsedTagsLoading';
 import { selectNewUsers } from 'Modules/Sections/selectors/selectNewUsers';
 import { selectNewUsersLoading } from 'Modules/Sections/selectors/selectNewUsersLoading';
-import { Links as LinksUi } from './Links';
+import { Lists as ListsUI } from './Lists';
 
-const Links: React.FC = () => {
+const Lists: React.FC = () => {
   const dispatch = useDispatch();
-  const linksAllIds = useSelector(selectLinksAllIds);
-  const linksAllIdsLoading = useSelector(selectLinksLoading);
-  const newUsers = useSelector(selectNewUsers);
-  const newUsersLoading = useSelector(selectNewUsersLoading);
+  const listsIds = useSelector(selectListsAllIds);
+  const listsIdsLoading = useSelector(selectListsLoading);
   const mostUsedTags = useSelector(selectMostUsedTags);
   const mostUsedTagsLoading = useSelector(selectMostUsedTagsLoading);
+  const newUsers = useSelector(selectNewUsers);
+  const newUsersLoading = useSelector(selectNewUsersLoading);
 
   useEffect(() => {
-    dispatch(loadLinks());
-    dispatch(sectionsNewUsersLoad());
+    dispatch(loadLists());
     dispatch(sectionsMostUsedTagsLoad());
+    dispatch(sectionsNewUsersLoad());
   }, []);
 
   return (
-    <LinksUi
-      linksIds={linksAllIds}
-      loading={linksAllIdsLoading}
-      newUsers={newUsers}
-      newUsersLoading={newUsersLoading}
+    <ListsUI
+      listsIds={listsIds}
+      listsIdsLoading={listsIdsLoading}
       mostUsedTags={mostUsedTags}
       mostUsedTagsLoading={mostUsedTagsLoading}
+      newUsers={newUsers}
+      newUsersLoading={newUsersLoading}
     />
   );
 };
 
-export default Links;
+export default Lists;
