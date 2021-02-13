@@ -34,7 +34,7 @@ class LayoutHelper extends React.Component<{}, State> {
     const { mounted } = this.state;
 
     return (
-      <Fade mounted={mounted} speed="fastest">
+      mounted && (
         <div className="LayoutHelper">
           <div className="LayoutHelper-columns">
             <div className="LayoutHelper-externalPadding" />
@@ -218,7 +218,7 @@ class LayoutHelper extends React.Component<{}, State> {
             <div className="LayoutHelper-rowGap" />
           </div>
         </div>
-      </Fade>
+      )
     );
   }
 }

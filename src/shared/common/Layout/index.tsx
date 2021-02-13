@@ -24,7 +24,8 @@ import { routesList, routesWithoutOmmitedValues } from 'Routes/index';
 import Router from 'Routes/Router';
 import enhanceRouteWithParams from 'Tools/utils/url/enhanceRouteWithParams';
 import findActiveRouteKey from 'Tools/utils/url/findActiveRouteKey';
-import { Fade, Hr, SpinnerCircle } from '@antoniodcorrea/components';
+import { Fade, Flex, Hr, SpinnerCircle } from '@antoniodcorrea/components';
+import SidebarLeft from '../../components/SidebarLeft';
 
 import './Layout.less';
 
@@ -77,8 +78,8 @@ class Layout extends React.Component<Props> {
     const showLoader = false;
 
     return (
-      <div className="Layout">
-        <Fade mounted={mounted} unmountOnExit={false} speed="fast" appear>
+      mounted && (
+        <div className="Layout">
           <Background className="Layout-background" />
           <LayoutContent>
             <div className="Layout-top">
@@ -86,7 +87,10 @@ class Layout extends React.Component<Props> {
               <Hr spacer />
               <SubHeader />
               <Hr spacer />
-              <Route path="/:lang([a-z]{2})?" component={Router} />
+              <Flex vertical="top">
+                <SidebarLeft />
+                <Route path="/:lang([a-z]{2})?" component={Router} />
+              </Flex>
               <Hr spacer />
             </div>
             <LayoutHelper />
@@ -104,9 +108,9 @@ class Layout extends React.Component<Props> {
           <Fade mounted={loginModalMounted} speed="fastest" position="fixed" appear>
             <LoginModal />
           </Fade>
-        </Fade>
-        <div id="Tooltips" />
-      </div>
+          <div id="Tooltips" />
+        </div>
+      )
     );
   };
 }

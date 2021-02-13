@@ -1,21 +1,21 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { listsLoadByUserId } from 'Modules/Lists/actions/listsLoadByUserId';
+import { selectListsAllIds } from 'Modules/Lists/selectors/selectListsAllIds';
+import { selectListsLoading } from 'Modules/Lists/selectors/selectListsLoading';
 import { RootState } from 'Modules/rootType';
 import { selectCurrentRouteParamUserId } from 'Modules/Routes/selectors/selectCurrentRouteParamUserId';
+import { selectMostUsedTags } from 'Modules/Sections/selectors/selectMostUsedTags';
+import { selectMostUsedTagsLoading } from 'Modules/Sections/selectors/selectMostUsedTagsLoading';
+import { selectNewLists } from 'Modules/Sections/selectors/selectNewLists';
+import { selectNewListsLoading } from 'Modules/Sections/selectors/selectNewListsLoading';
+import { selectPopularLists } from 'Modules/Sections/selectors/selectPopularLists';
+import { selectPopularListsLoading } from 'Modules/Sections/selectors/selectPopularListsLoading';
+import { selectUserMostUsedTags } from 'Modules/Sections/selectors/selectUserMostUsedTags';
+import { selectUserMostUsedTagsLoading } from 'Modules/Sections/selectors/selectUserMostUsedTagsLoading';
 import { userLoad } from 'Modules/Users/actions/userLoad';
 import { selectUserById } from 'Modules/Users/selectors/selectUserById';
-import { listsLoadByUserId } from '../../redux/modules/Lists/actions/listsLoadByUserId';
-import { selectListsAllIds } from '../../redux/modules/Lists/selectors/selectListsAllIds';
-import { selectListsLoading } from '../../redux/modules/Lists/selectors/selectListsLoading';
-import { selectMostUsedTags } from '../../redux/modules/Sections/selectors/selectMostUsedTags';
-import { selectMostUsedTagsLoading } from '../../redux/modules/Sections/selectors/selectMostUsedTagsLoading';
-import { selectNewLists } from '../../redux/modules/Sections/selectors/selectNewLists';
-import { selectNewListsLoading } from '../../redux/modules/Sections/selectors/selectNewListsLoading';
-import { selectPopularLists } from '../../redux/modules/Sections/selectors/selectPopularLists';
-import { selectPopularListsLoading } from '../../redux/modules/Sections/selectors/selectPopularListsLoading';
-import { selectUserMostUsedTags } from '../../redux/modules/Sections/selectors/selectUserMostUsedTags';
-import { selectUserMostUsedTagsLoading } from '../../redux/modules/Sections/selectors/selectUserMostUsedTagsLoading';
 import { UserListsVisitor as UserListsVisitorUi } from './UserListsVisitor';
 
 const UserListsVisitor: React.FC = () => {

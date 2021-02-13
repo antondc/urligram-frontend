@@ -38,6 +38,8 @@ import UsersVisitor from 'Routes/UsersVisitor';
 import { Location } from 'Services/History';
 import { FadeInOut } from '@antoniodcorrea/components';
 
+import './Router.less';
+
 interface Props {
   loggedIn: boolean;
   location: Location;
@@ -46,56 +48,58 @@ interface Props {
 }
 
 const Router: React.FC<Props> = ({ loggedIn, location, defaultCurrentSlug, pathWithoutLanguageParam }) => (
-  <FadeInOut valueToUpdate={pathWithoutLanguageParam} appear>
-    <Switch location={{ ...location, pathname: pathWithoutLanguageParam }}>
-      {/* Redirects */}
-      {loggedIn && <Redirect from="/:lang?/login" to={'/' + defaultCurrentSlug + '/control'} />}
-      {!loggedIn && <Redirect from="/:lang?/control" to={'/' + defaultCurrentSlug + '/sign-in'} />}
+  <div className="Router">
+    <FadeInOut valueToUpdate={pathWithoutLanguageParam} appear>
+      <Switch location={{ ...location, pathname: pathWithoutLanguageParam }}>
+        {/* Redirects */}
+        {loggedIn && <Redirect from="/:lang?/login" to={'/' + defaultCurrentSlug + '/control'} />}
+        {!loggedIn && <Redirect from="/:lang?/control" to={'/' + defaultCurrentSlug + '/sign-in'} />}
 
-      {/* Pages */}
-      <Route
-        exact={Routes.UserBookmarks.exact}
-        path={Routes.UserBookmarks.path}
-        component={loggedIn ? UserBookmarksUser : UserBookmarksVisitor}
-      />
-      <Route exact={Routes.User.exact} path={Routes.User.path} component={User} />
-      <Route exact={Routes.Users.exact} path={Routes.Users.path} component={loggedIn ? UsersUser : UsersVisitor} />
-      <Route exact={Routes.Links.exact} path={Routes.Links.path} component={Links} />
-      <Route exact={Routes.List.exact} path={Routes.List.path} component={loggedIn ? ListUser : ListVisitor} />
-      <Route exact={Routes.Lists.exact} path={Routes.Lists.path} component={loggedIn ? ListsUser : ListsVisitor} />
-      <Route
-        exact={Routes.Bookmarks.exact}
-        path={Routes.Bookmarks.path}
-        component={loggedIn ? BookmarksUser : BookmarksVisitor}
-      />
-      <Route exact={Routes.Home.exact} path={Routes.Home.path} component={loggedIn ? HomeUser : HomeVisitor} />
-      <Route
-        exact={Routes.Followers.exact}
-        path={Routes.Followers.path}
-        component={loggedIn ? FollowersUser : FollowersVisitor}
-      />
-      <Route
-        exact={Routes.Following.exact}
-        path={Routes.Following.path}
-        component={loggedIn ? FollowingUser : FollowingVisitor}
-      />
-      <Route
-        exact={Routes.UserLists.exact}
-        path={Routes.UserLists.path}
-        component={loggedIn ? UserListsUser : UserListsVisitor}
-      />
-      <Route exact={Routes.Tags.exact} path={Routes.Tags.path} component={loggedIn ? TagsUser : TagsVisitor} />
+        {/* Pages */}
+        <Route
+          exact={Routes.UserBookmarks.exact}
+          path={Routes.UserBookmarks.path}
+          component={loggedIn ? UserBookmarksUser : UserBookmarksVisitor}
+        />
+        <Route exact={Routes.User.exact} path={Routes.User.path} component={User} />
+        <Route exact={Routes.Users.exact} path={Routes.Users.path} component={loggedIn ? UsersUser : UsersVisitor} />
+        <Route exact={Routes.Links.exact} path={Routes.Links.path} component={Links} />
+        <Route exact={Routes.List.exact} path={Routes.List.path} component={loggedIn ? ListUser : ListVisitor} />
+        <Route exact={Routes.Lists.exact} path={Routes.Lists.path} component={loggedIn ? ListsUser : ListsVisitor} />
+        <Route
+          exact={Routes.Bookmarks.exact}
+          path={Routes.Bookmarks.path}
+          component={loggedIn ? BookmarksUser : BookmarksVisitor}
+        />
+        <Route exact={Routes.Home.exact} path={Routes.Home.path} component={loggedIn ? HomeUser : HomeVisitor} />
+        <Route
+          exact={Routes.Followers.exact}
+          path={Routes.Followers.path}
+          component={loggedIn ? FollowersUser : FollowersVisitor}
+        />
+        <Route
+          exact={Routes.Following.exact}
+          path={Routes.Following.path}
+          component={loggedIn ? FollowingUser : FollowingVisitor}
+        />
+        <Route
+          exact={Routes.UserLists.exact}
+          path={Routes.UserLists.path}
+          component={loggedIn ? UserListsUser : UserListsVisitor}
+        />
+        <Route exact={Routes.Tags.exact} path={Routes.Tags.path} component={loggedIn ? TagsUser : TagsVisitor} />
 
-      {/* General */}
-      <Route exact={Routes.Control.exact} path={Routes.Control.path} component={Control} />
-      <Route exact={Routes.Login.exact} path={Routes.Login.path} component={Login} />
-      <Route exact={Routes.SignIn.exact} path={Routes.SignIn.path} component={SignIn} />
+        {/* General */}
+        <Route exact={Routes.Control.exact} path={Routes.Control.path} component={Control} />
+        <Route exact={Routes.Login.exact} path={Routes.Login.path} component={Login} />
+        <Route exact={Routes.SignIn.exact} path={Routes.SignIn.path} component={SignIn} />
 
-      {/* Guards */}
-      <Route exact={Routes.ServerError.exact} path={Routes.ServerError.path} component={ServerError} />
-      <Route exact={Routes.NotFound.exact} path={Routes.NotFound.path} component={NotFound} />
-    </Switch>
-  </FadeInOut>
+        {/* Guards */}
+        <Route exact={Routes.ServerError.exact} path={Routes.ServerError.path} component={ServerError} />
+        <Route exact={Routes.NotFound.exact} path={Routes.NotFound.path} component={NotFound} />
+      </Switch>
+    </FadeInOut>
+  </div>
 );
 
 const mapStateToProps = createStructuredSelector({
