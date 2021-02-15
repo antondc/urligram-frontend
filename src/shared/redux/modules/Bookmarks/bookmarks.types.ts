@@ -31,6 +31,9 @@ export interface BookmarksState {
   };
   currentIds?: number[];
   loading?: boolean;
+  meta?: {
+    totalItems?: number;
+  };
 }
 
 interface RequestBookmarksAction {
@@ -53,6 +56,9 @@ export interface ReceiveBookmarkItem {
 
 export interface ReceiveBookmarksResponse {
   data: ReceiveBookmarkItem[];
+  meta: {
+    totalItems: number;
+  };
 }
 
 export interface VoteBookmarkRequest {

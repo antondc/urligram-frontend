@@ -5,10 +5,12 @@ import Helmet from 'react-helmet';
 import { Provider } from 'react-redux';
 import { Route, StaticRouter } from 'react-router-dom';
 import { merge } from 'lodash';
+import qs from 'qs';
 import serialize from 'serialize-javascript';
 
 import Layout from 'Common/Layout';
 import { initialLanguagesLoader } from 'Modules/Languages/languages.loader';
+import { RouteState } from 'Modules/Routes/routes.types';
 import { SessionState } from 'Modules/Session/session.types';
 import storeFactory from 'Redux/index';
 import config from 'Root/config.test.json';
@@ -59,7 +61,7 @@ router.get(routesPathsList, (req: any, res: any, next: any) => {
   const initialDataLoadersPromises = initialDataLoaders.map((item: any) => item(requestParameters)); // We have to execute the thunk, as well as the async function within it
 
   // Add curent path to history.location
-  const location = { ...history.location, pathname: req.path };
+  const location = { ...history.location, pathname: req.path, search: qs.stringify(req.query) };
 
   Promise.all([initialLanguagesLoader(req.params.lang), ...initialDataLoadersPromises]) // We have to execute the Languages thunk, as well as the async function within it
     .then((response: any) => {
@@ -70,11 +72,15 @@ router.get(routesPathsList, (req: any, res: any, next: any) => {
       };
 
       // Load routes data
-      const enhancedRoute = enhanceRouteWithParams({
-        route: routesWithoutOmmitedValues[activeRouteKey],
-        location: location,
-        queryParams: req.query,
-      });
+      const enhancedRoute: RouteState = {
+        ...enhanceRouteWithParams({
+          route: routesWithoutOmmitedValues[activeRouteKey],
+          location: location,
+        }),
+        domain: req.protocol + '://' + req.get('host'),
+        href: req.protocol + '://' + req.get('host') + req.originalUrl,
+        pathAndQuery: req.originalUrl,
+      };
 
       data.Routes = {
         routes: routesWithoutOmmitedValues,

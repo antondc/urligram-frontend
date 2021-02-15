@@ -1,34 +1,27 @@
 import cloneDeep from 'lodash/cloneDeep';
 import { match } from 'path-to-regexp';
-import * as queryStringParser from 'query-string';
+import qs from 'qs';
 
 import { RouteState } from 'Modules/Routes/routes.types';
 import { Route } from 'Routes/index';
 import { Location } from 'Services/History';
 /**
- * Receives a route object, a queryParams object and a reaact-router-dom location object; extracts the params and query params to enhance the route with them.
+ * Receives a route object and a react-router-dom-ish location object; extracts the params and query params to enhance the route with them.
  * @param {*} { route, queryParams, location }
  * @returns
  */
 
-type EnhanceRouteWithParams = (options: {
-  route: Route;
-  queryParams?: {
-    [key: string]: string;
-  };
-  location: Location;
-}) => RouteState;
+type EnhanceRouteWithParams = (options: { route: Route; location: Location }) => RouteState;
 
-const enhanceRouteWithParams: EnhanceRouteWithParams = ({ route, queryParams, location }) => {
+const enhanceRouteWithParams: EnhanceRouteWithParams = ({ route, location }) => {
   const regexp = match(route.path, { decode: decodeURIComponent }); // Create a regexp with the route's path
-  const parsedPath = regexp(location.pathname); // Parse the url path to extract the params
+  const parsedPath = regexp(location.pathname); // Parse the url and match it
   const finalParams = parsedPath ? parsedPath.params : undefined; // Extract the params
-  const finalQueryParams = queryParams || queryStringParser.parse(location.search) || undefined; // If there are queryParams, use them; otherwise parse the string if present, or undefined
-
+  const queryParams = qs.parse(location.search); // Parse query params
   const enhancedRoute: RouteState = Object.assign(cloneDeep(route), {
     ...location,
     params: finalParams,
-    queryParams: finalQueryParams,
+    queryParams,
   });
 
   return enhancedRoute;

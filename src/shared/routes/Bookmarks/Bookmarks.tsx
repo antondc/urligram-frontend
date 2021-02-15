@@ -3,6 +3,7 @@ import React from 'react';
 import BookmarkRow from 'Components/BookmarkRow';
 import Main from 'Components/Main';
 import MainHeader from 'Components/MainHeader';
+import { Pagination } from 'Components/Pagination';
 import Sidebar from 'Components/Sidebar';
 import { ListState } from 'Modules/Lists/lists.types';
 import { BookmarkRowSkeletonGroup } from 'Root/src/shared/components/BookmarkRow/BookmarkRowSkeletonGroup';
@@ -11,19 +12,26 @@ import { Border, Button, Fade, Flex, Hr } from '@antoniodcorrea/components';
 import './Bookmarks.less';
 
 interface Props {
+  url: string;
   bookmarksIds: number[];
   popularLists: ListState[];
   loading: boolean;
+  sort: string;
+  page: {
+    size: number;
+    offset: number;
+  };
+  totalItems: number;
 }
 
-export const Bookmarks: React.FC<Props> = ({ bookmarksIds, popularLists, loading }) => (
+export const Bookmarks: React.FC<Props> = ({ url, bookmarksIds, popularLists, loading, sort, page, totalItems }) => (
   <div className="Bookmarks">
     <Flex horizontal="between" vertical="top">
       <Main>
         <Border grow>
           <MainHeader title="My bookmarks" />
           {loading ? (
-            <BookmarkRowSkeletonGroup />
+            <BookmarkRowSkeletonGroup length={5} />
           ) : (
             bookmarksIds?.map((id, index) => (
               <React.Fragment key={id}>
@@ -34,9 +42,7 @@ export const Bookmarks: React.FC<Props> = ({ bookmarksIds, popularLists, loading
           )}
           <Hr spacer size="big" />
           <Flex horizontal="center">
-            <Fade mounted={!!bookmarksIds?.length} speed="fastest">
-              <Button text="Load more" />
-            </Fade>
+            <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
           </Flex>
         </Border>
       </Main>

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import { Location } from 'history';
+import qs from 'qs';
 
 import Background from 'Assets/svg/background.svg';
 import LayoutContent from 'Common/LayoutContent';
@@ -26,6 +27,7 @@ import enhanceRouteWithParams from 'Tools/utils/url/enhanceRouteWithParams';
 import findActiveRouteKey from 'Tools/utils/url/findActiveRouteKey';
 import { Fade, Flex, Hr, SpinnerCircle } from '@antoniodcorrea/components';
 import SidebarLeft from '../../components/SidebarLeft';
+import { RouteState } from '../../redux/modules/Routes/routes.types';
 
 import './Layout.less';
 
@@ -56,10 +58,16 @@ class Layout extends React.Component<Props> {
         urlPath: location.pathname,
         routes: routesList,
       });
-      const enhancedRoute = enhanceRouteWithParams({
-        route: routesWithoutOmmitedValues[activeRouteKey],
-        location,
-      });
+
+      const enhancedRoute: RouteState = {
+        ...enhanceRouteWithParams({
+          route: routesWithoutOmmitedValues[activeRouteKey],
+          location,
+        }),
+        domain: `${window.location.protocol}://${window.location.hostname}`,
+        href: window.location.href,
+        pathAndQuery: `${window.location.pathname}${window.location.search}`,
+      };
       this.props.pushNewRoute(enhancedRoute);
     }
 

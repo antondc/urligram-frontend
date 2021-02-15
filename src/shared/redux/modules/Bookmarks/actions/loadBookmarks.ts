@@ -11,7 +11,10 @@ export const loadBookmarks = (): ThunkAction<any, any, any, Action> => async (di
   try {
     dispatch(requestBookmarks());
 
-    const { data }: ReceiveBookmarksResponse = await HttpClient.get(`bookmarks${window.location.search}`);
+    const {
+      meta: { totalItems },
+      data,
+    }: ReceiveBookmarksResponse = await HttpClient.get(`bookmarks${window.location.search}`);
 
     const bookmarksByKey = {
       byKey: serializerFromArrayToByKey<ReceiveBookmarkItem, BookmarkState>({
@@ -19,6 +22,9 @@ export const loadBookmarks = (): ThunkAction<any, any, any, Action> => async (di
         contentPath: 'attributes',
       }),
       currentIds: data.map((item) => item.id),
+      meta: {
+        totalItems,
+      },
     };
     dispatch(receiveBookmarks(bookmarksByKey));
   } catch (err) {

@@ -10,6 +10,9 @@ export interface RoutesState {
 }
 
 export interface RouteState extends Route, Location {
+  domain?: string;
+  href: string;
+  pathAndQuery: string;
   params?: {
     [key: string]: string | number;
   };

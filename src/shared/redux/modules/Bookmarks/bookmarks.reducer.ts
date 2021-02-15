@@ -28,6 +28,7 @@ export const Bookmarks = (state = initialState, action: BookmarksActionsTypes): 
         },
         currentIds: action.data.currentIds || state.currentIds,
         loading: false,
+        meta: action.data.meta,
       });
 
     case VOTE_UPDATE_BOOKMARK_START:

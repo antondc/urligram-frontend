@@ -1,47 +1,46 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { loadBookmarks } from 'Modules/Bookmarks/actions/loadBookmarks';
-import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
-import { selectBookmarksAll } from 'Modules/Bookmarks/selectors/selectBookmarksAll';
 import { selectBookmarksCurrentIds } from 'Modules/Bookmarks/selectors/selectBookmarksCurrentIds';
 import { selectBookmarksLoading } from 'Modules/Bookmarks/selectors/selectBookmarksLoading';
-import { ListState } from 'Modules/Lists/lists.types';
+import { selectBookmarksTotalItems } from 'Modules/Bookmarks/selectors/selectBookmarkTotalItems';
+import { selectCurrentRouteQueryParamPage } from 'Modules/Routes/selectors/selectCurrentRouteQueryParamPage';
+import { selectCurrentRouteQueryParamSort } from 'Modules/Routes/selectors/selectCurrentRouteQueryParamSort';
 import { loadPopularLists } from 'Modules/Sections/actions/loadPopularLists';
 import { selectPopularLists } from 'Modules/Sections/selectors/selectPopularLists';
+import { selectCurrentPathAndQuery } from '../../redux/modules/Routes/selectors/selectCurrentPathAndQuery';
 import { Bookmarks as BookmarksUi } from './Bookmarks';
 
-interface Props {
-  bookmarks: BookmarkState[];
-  bookmarksIds: number[];
-  popularLists: ListState[];
-  loading: true;
-  loadBookmarks: () => void;
-  loadPopularLists: () => void;
-}
+const Home: React.FC = () => {
+  const dispatch = useDispatch();
 
-class Home extends React.Component<Props> {
-  componentDidMount = () => {
-    this.props.loadBookmarks();
-    this.props.loadPopularLists();
-  };
+  const popularLists = useSelector(selectPopularLists);
+  const bookmarksIds = useSelector(selectBookmarksCurrentIds);
+  const loading = useSelector(selectBookmarksLoading);
+  const sort = useSelector(selectCurrentRouteQueryParamSort);
+  const page = useSelector(selectCurrentRouteQueryParamPage);
+  const totalItems = useSelector(selectBookmarksTotalItems);
+  const url = useSelector(selectCurrentPathAndQuery);
 
-  render = () => {
-    const { bookmarksIds, popularLists, loading } = this.props;
+  useEffect(() => {
+    dispatch(loadPopularLists());
+  }, []);
 
-    return <BookmarksUi bookmarksIds={bookmarksIds} popularLists={popularLists} loading={loading} />;
-  };
-}
+  useEffect(() => {
+    dispatch(loadBookmarks());
+  }, [page]);
 
-const mapStateToProps = createStructuredSelector({
-  bookmarks: selectBookmarksAll,
-  popularLists: selectPopularLists,
-  bookmarksIds: selectBookmarksCurrentIds,
-  loading: selectBookmarksLoading,
-});
-
-export default connect(mapStateToProps, {
-  loadBookmarks,
-  loadPopularLists,
-})(Home);
+  return (
+    <BookmarksUi
+      bookmarksIds={bookmarksIds}
+      popularLists={popularLists}
+      loading={loading}
+      sort={sort}
+      page={page}
+      totalItems={totalItems}
+      url={url}
+    />
+  );
+};
+export default Home;
