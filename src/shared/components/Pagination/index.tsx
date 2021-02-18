@@ -3,7 +3,7 @@ import { animateScroll as scroll } from 'react-scroll';
 
 import history from 'Services/History';
 import { URLWrapper } from 'Services/URLWrapper';
-import { A, Border } from '@antoniodcorrea/components';
+import { A, Border, Fade } from '@antoniodcorrea/components';
 import { calculatePages } from './calculatePages';
 
 import './Pagination.less';
@@ -42,29 +42,31 @@ const Pagination: React.FC<Props> = ({
   };
 
   return (
-    <div className={'Pagination ' + (grow ? 'Pagination-grow' : '')}>
-      <Border className="Pagination-border" padding="small" grow={grow}>
-        {pages.map((item, index) =>
-          !!item ? (
-            <A
-              className="Pagination-item"
-              href={item.path}
-              key={index}
-              styled
-              disabled={item.current}
-              frontend
-              onClick={scrollToTop}
-            >
-              {item.page}
-            </A>
-          ) : (
-            <Fragment key={index}>
-              <span className="Pagination-dots Pagination-item">...</span>
-            </Fragment>
-          )
-        )}
-      </Border>
-    </div>
+    <Fade mounted={!!totalItems} speed="slow">
+      <div className={'Pagination ' + (grow ? 'Pagination-grow' : '')}>
+        <Border className="Pagination-border" padding="small" grow={grow}>
+          {pages.map((item, index) =>
+            !!item ? (
+              <A
+                className="Pagination-item"
+                href={item.path}
+                key={index}
+                styled
+                disabled={item.current}
+                frontend
+                onClick={scrollToTop}
+              >
+                {item.page}
+              </A>
+            ) : (
+              <Fragment key={index}>
+                <span className="Pagination-dots Pagination-item">...</span>
+              </Fragment>
+            )
+          )}
+        </Border>
+      </div>
+    </Fade>
   );
 };
 
