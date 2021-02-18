@@ -17,7 +17,7 @@ const enhanceRouteWithParams: EnhanceRouteWithParams = ({ route, location }) => 
   const regexp = match(route.path, { decode: decodeURIComponent }); // Create a regexp with the route's path
   const parsedPath = regexp(location.pathname); // Parse the url and match it
   const finalParams = parsedPath ? parsedPath.params : undefined; // Extract the params
-  const queryParams = qs.parse(location.search); // Parse query params
+  const queryParams = qs.parse(location.search.replace(/^\?/, '')); // Remove starting quote if exists and parse query params
   const enhancedRoute: RouteState = Object.assign(cloneDeep(route), {
     ...location,
     params: finalParams,

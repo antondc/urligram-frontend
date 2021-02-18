@@ -1,6 +1,7 @@
-import React from 'react';
 import { shallow } from 'enzyme';
-import { Pagination } from '.';
+import React from 'react';
+
+import Pagination from '.';
 
 const defaultProps = {
   totalItems: 100,

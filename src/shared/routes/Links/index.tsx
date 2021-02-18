@@ -10,6 +10,9 @@ import { selectMostUsedTags } from 'Modules/Sections/selectors/selectMostUsedTag
 import { selectMostUsedTagsLoading } from 'Modules/Sections/selectors/selectMostUsedTagsLoading';
 import { selectNewUsers } from 'Modules/Sections/selectors/selectNewUsers';
 import { selectNewUsersLoading } from 'Modules/Sections/selectors/selectNewUsersLoading';
+import { selectLinksTotalItems } from '../../redux/modules/Links/selectors/selectLinksTotalItems';
+import { selectCurrentPathAndQuery } from '../../redux/modules/Routes/selectors/selectCurrentPathAndQuery';
+import { selectCurrentRouteQueryParamPage } from '../../redux/modules/Routes/selectors/selectCurrentRouteQueryParamPage';
 import { Links as LinksUi } from './Links';
 
 const Links: React.FC = () => {
@@ -20,12 +23,18 @@ const Links: React.FC = () => {
   const newUsersLoading = useSelector(selectNewUsersLoading);
   const mostUsedTags = useSelector(selectMostUsedTags);
   const mostUsedTagsLoading = useSelector(selectMostUsedTagsLoading);
+  const page = useSelector(selectCurrentRouteQueryParamPage);
+  const totalItems = useSelector(selectLinksTotalItems);
+  const url = useSelector(selectCurrentPathAndQuery);
 
   useEffect(() => {
-    dispatch(loadLinks());
     dispatch(sectionsNewUsersLoad());
     dispatch(sectionsMostUsedTagsLoad());
   }, []);
+
+  useEffect(() => {
+    dispatch(loadLinks());
+  }, [page]);
 
   return (
     <LinksUi
@@ -35,6 +44,9 @@ const Links: React.FC = () => {
       newUsersLoading={newUsersLoading}
       mostUsedTags={mostUsedTags}
       mostUsedTagsLoading={mostUsedTagsLoading}
+      url={url}
+      totalItems={totalItems}
+      page={page}
     />
   );
 };

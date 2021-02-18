@@ -55,4 +55,10 @@ export class URLWrapper {
 
     return this.getSearchString();
   }
+
+  deleteSearchParam(field: string): string {
+    this.searchParams.delete(field);
+
+    return this.getSearchString();
+  }
 }

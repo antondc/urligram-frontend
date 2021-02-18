@@ -6,7 +6,6 @@ import { selectBookmarksCurrentIds } from 'Modules/Bookmarks/selectors/selectBoo
 import { selectBookmarksLoading } from 'Modules/Bookmarks/selectors/selectBookmarksLoading';
 import { selectBookmarksTotalItems } from 'Modules/Bookmarks/selectors/selectBookmarkTotalItems';
 import { selectCurrentRouteQueryParamPage } from 'Modules/Routes/selectors/selectCurrentRouteQueryParamPage';
-import { selectCurrentRouteQueryParamSort } from 'Modules/Routes/selectors/selectCurrentRouteQueryParamSort';
 import { loadPopularLists } from 'Modules/Sections/actions/loadPopularLists';
 import { selectPopularLists } from 'Modules/Sections/selectors/selectPopularLists';
 import { selectCurrentPathAndQuery } from '../../redux/modules/Routes/selectors/selectCurrentPathAndQuery';
@@ -18,7 +17,6 @@ const Home: React.FC = () => {
   const popularLists = useSelector(selectPopularLists);
   const bookmarksIds = useSelector(selectBookmarksCurrentIds);
   const loading = useSelector(selectBookmarksLoading);
-  const sort = useSelector(selectCurrentRouteQueryParamSort);
   const page = useSelector(selectCurrentRouteQueryParamPage);
   const totalItems = useSelector(selectBookmarksTotalItems);
   const url = useSelector(selectCurrentPathAndQuery);
@@ -36,7 +34,6 @@ const Home: React.FC = () => {
       bookmarksIds={bookmarksIds}
       popularLists={popularLists}
       loading={loading}
-      sort={sort}
       page={page}
       totalItems={totalItems}
       url={url}

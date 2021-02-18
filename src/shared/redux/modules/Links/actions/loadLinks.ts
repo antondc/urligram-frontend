@@ -11,7 +11,10 @@ export const loadLinks = (): ThunkAction<any, any, any, Action> => async (dispat
   try {
     dispatch(requestLinks());
 
-    const { data }: ReceiveLinksResponse = await HttpClient.get(`/links${window.location.search}`);
+    const {
+      meta: { totalItems },
+      data,
+    }: ReceiveLinksResponse = await HttpClient.get(`/links${window.location.search}`);
 
     const linksByKey = {
       byKey: serializerFromArrayToByKey<ReceiveLinkItem, LinkState>({
@@ -19,6 +22,9 @@ export const loadLinks = (): ThunkAction<any, any, any, Action> => async (dispat
         contentPath: 'attributes',
       }),
       allIds: data.map((item) => item.id),
+      meta: {
+        totalItems,
+      },
     };
     dispatch(receiveLinks(linksByKey));
   } catch (err) {

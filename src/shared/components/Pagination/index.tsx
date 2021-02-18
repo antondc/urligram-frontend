@@ -14,9 +14,9 @@ interface Props {
   grow?: boolean;
 }
 
-export const Pagination: React.FC<Props> = ({
-  totalItems,
-  itemsPerPage,
+const Pagination: React.FC<Props> = ({
+  totalItems = 0,
+  itemsPerPage = 10,
   offset = 0,
   path,
   pageNeighbours = 1,
@@ -58,3 +58,5 @@ export const Pagination: React.FC<Props> = ({
     </div>
   );
 };
+
+export default Pagination;

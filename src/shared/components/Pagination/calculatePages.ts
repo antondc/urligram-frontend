@@ -38,14 +38,16 @@ export const calculatePages = ({
       const isNotFirstPage = item.page > 1;
       const isNotLastPage = item.page < totalPages;
       const isNotNeighbour = item.page < currentPage - pageNeighbours || item.page > currentPage + pageNeighbours;
-      const offsetExceedesCalculatedPages = Math.ceil(itemsPerPage / offset) >= array.length;
+      const offsetExceedesCalculatedPages = !!offset && Math.ceil(itemsPerPage / offset) >= array.length;
       const isLastPage = index + 1 === array.length;
       const isCurrent = item.page === currentPage || (offsetExceedesCalculatedPages && isLastPage);
 
       if (isNotFirstPage && isNotLastPage && isNotNeighbour) return null;
 
       const myUrl = new URLWrapper(path);
-      myUrl.upsertSearchParam('page[offset]', currentPageOffset);
+      isNotFirstPage
+        ? myUrl.upsertSearchParam('page[offset]', currentPageOffset)
+        : myUrl.deleteSearchParam('page[offset]');
       const pathWithCurrentOffSet = `?${myUrl.getSearchString()}`;
 
       const page = {

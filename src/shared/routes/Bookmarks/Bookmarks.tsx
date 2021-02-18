@@ -3,7 +3,7 @@ import React from 'react';
 import BookmarkRow from 'Components/BookmarkRow';
 import Main from 'Components/Main';
 import MainHeader from 'Components/MainHeader';
-import { Pagination } from 'Components/Pagination';
+import Pagination from 'Components/Pagination';
 import Sidebar from 'Components/Sidebar';
 import { ListState } from 'Modules/Lists/lists.types';
 import { BookmarkRowSkeletonGroup } from 'Root/src/shared/components/BookmarkRow/BookmarkRowSkeletonGroup';
@@ -16,7 +16,6 @@ interface Props {
   bookmarksIds: number[];
   popularLists: ListState[];
   loading: boolean;
-  sort: string;
   page: {
     size: number;
     offset: number;
@@ -24,7 +23,7 @@ interface Props {
   totalItems: number;
 }
 
-export const Bookmarks: React.FC<Props> = ({ url, bookmarksIds, popularLists, loading, sort, page, totalItems }) => (
+export const Bookmarks: React.FC<Props> = ({ url, bookmarksIds, popularLists, loading, page, totalItems }) => (
   <div className="Bookmarks">
     <Flex horizontal="between" vertical="top">
       <Main>

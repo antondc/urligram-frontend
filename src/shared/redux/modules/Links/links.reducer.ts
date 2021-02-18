@@ -25,6 +25,7 @@ export const Links = (state = initialState, action: LinksActionsTypes): LinksSta
         },
         allIds: [...action.data.allIds],
         loading: false,
+        meta: action.data.meta,
       });
     case LINK_VOTE_STARTED:
       return Object.assign({}, state, action.payload);

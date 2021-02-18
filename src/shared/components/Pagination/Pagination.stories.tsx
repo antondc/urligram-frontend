@@ -2,7 +2,7 @@ import React from 'react';
 
 import { H1, Hr } from '@antoniodcorrea/components';
 import { boolean, number, text, withKnobs } from '@storybook/addon-knobs';
-import { Pagination } from './index';
+import Pagination from './index';
 
 export default {
   component: Pagination,

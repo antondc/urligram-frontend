@@ -2,6 +2,7 @@ import React from 'react';
 
 import { LinkRowSkeletonGroup } from 'Components/LinkRow/LinkRowSkeletonGroup';
 import Main from 'Components/Main';
+import Pagination from 'Components/Pagination';
 import Sidebar from 'Components/Sidebar';
 import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListTags from 'Components/SidebarListTags';
@@ -20,6 +21,12 @@ interface Props {
   newUsersLoading: boolean;
   mostUsedTags: TagState[];
   mostUsedTagsLoading: boolean;
+  url: string;
+  page: {
+    size: number;
+    offset: number;
+  };
+  totalItems: number;
 }
 
 export const Links: React.FC<Props> = ({
@@ -29,6 +36,9 @@ export const Links: React.FC<Props> = ({
   newUsersLoading,
   mostUsedTags,
   mostUsedTagsLoading,
+  url,
+  page,
+  totalItems,
 }) => (
   <div className="Links">
     <Flex horizontal="between" vertical="top">
@@ -48,7 +58,7 @@ export const Links: React.FC<Props> = ({
           )}
           <Hr spacer size="big" />
           <Flex horizontal="center">
-            <Button text="Load more" />
+            <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
           </Flex>
         </Border>
       </Main>
