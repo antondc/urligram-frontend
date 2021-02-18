@@ -12,7 +12,6 @@ media/*
 dist/*
 # Dont track the built view
 src/server/views/index.ejs
-__snapshots__
 .htaccess
 tmp
 .htpasswd
