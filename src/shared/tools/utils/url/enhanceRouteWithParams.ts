@@ -5,6 +5,7 @@ import qs from 'qs';
 import { RouteState } from 'Modules/Routes/routes.types';
 import { Route } from 'Routes/index';
 import { Location } from 'Services/History';
+import { numberLikeToNumber } from 'Tools/utils/converters/numberLikeToNumber';
 /**
  * Receives a route object and a react-router-dom-ish location object; extracts the params and query params to enhance the route with them.
  * @param {*} { route, queryParams, location }
@@ -17,7 +18,10 @@ const enhanceRouteWithParams: EnhanceRouteWithParams = ({ route, location }) => 
   const regexp = match(route.path, { decode: decodeURIComponent }); // Create a regexp with the route's path
   const parsedPath = regexp(location.pathname); // Parse the url and match it
   const finalParams = parsedPath ? parsedPath.params : undefined; // Extract the params
-  const queryParams = qs.parse(location.search.replace(/^\?/, '')); // Remove starting quote if exists and parse query params
+
+  // Remove starting quote if exists and parse query params. Using custom decoder https://github.com/ljharb/qs#stringifying
+  const queryParams = qs.parse(location.search.replace(/^\?/, ''), { decoder: numberLikeToNumber });
+
   const enhancedRoute: RouteState = Object.assign(cloneDeep(route), {
     ...location,
     params: finalParams,
