@@ -2,9 +2,9 @@ import cloneDeep from 'lodash/cloneDeep';
 import { match } from 'path-to-regexp';
 
 import { RouteState } from 'Modules/Routes/routes.types';
-import { QueryStringWrapper } from 'Root/src/shared/services/QueryStringWrapper';
 import { Route } from 'Routes/index';
 import { Location } from 'Services/History';
+import { QueryStringWrapper } from 'Services/QueryStringWrapper';
 /**
  * Receives a route object and a react-router-dom-ish location object; extracts the params and query params to enhance the route with them.
  * @param {*} { route, queryParams, location }
