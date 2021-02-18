@@ -1,8 +1,8 @@
 import cloneDeep from 'lodash/cloneDeep';
 import { match } from 'path-to-regexp';
-import qs from 'qs';
 
 import { RouteState } from 'Modules/Routes/routes.types';
+import { QueryStringWrapper } from 'Root/src/shared/services/QueryStringWrapper';
 import { Route } from 'Routes/index';
 import { Location } from 'Services/History';
 /**
@@ -19,7 +19,7 @@ const enhanceRouteWithParams: EnhanceRouteWithParams = ({ route, location }) => 
   const finalParams = parsedPath ? parsedPath.params : undefined; // Extract the params
 
   // Remove starting quote if exists and parse query params.
-  const queryParams = qs.parse(location.search.replace(/^\?/, ''));
+  const queryParams = QueryStringWrapper.parseQueryString(location.search);
 
   const enhancedRoute: RouteState = Object.assign(cloneDeep(route), {
     ...location,
