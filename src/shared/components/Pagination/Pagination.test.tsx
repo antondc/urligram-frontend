@@ -16,10 +16,3 @@ describe('Pagination (Snapshot)', () => {
     expect(component).toMatchSnapshot();
   });
 });
-
-describe('Pagination', () => {
-  it('Pagination is a myComponent type <div>', () => {
-    const component = shallow(<Pagination {...defaultProps} />);
-    expect(component.type()).toEqual('div');
-  });
-});
