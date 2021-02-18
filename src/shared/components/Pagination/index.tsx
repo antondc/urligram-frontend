@@ -42,7 +42,7 @@ const Pagination: React.FC<Props> = ({
   };
 
   return (
-    <div className={'Pagination ' + (grow ? 'Pagination-grow' : '')} onClick={scrollToTop}>
+    <div className={'Pagination ' + (grow ? 'Pagination-grow' : '')}>
       <Border className="Pagination-border" padding="small" grow={grow}>
         {pages.map((item, index) =>
           !!item ? (
