@@ -9,6 +9,6 @@ export const selectCurrentRouteQueryParamPage = createSelector(selectCurrentRout
   size: number;
   offset: number;
 } => ({
-  size: get(currentRoute, 'queryParams.page.size', DEFAULT_PAGE_SIZE),
-  offset: get(currentRoute, 'queryParams.page.offset', 0),
+  size: Number(get(currentRoute, 'queryParams.page.size', DEFAULT_PAGE_SIZE)),
+  offset: Number(get(currentRoute, 'queryParams.page.offset', 0)),
 }));

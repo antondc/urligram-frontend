@@ -26,6 +26,10 @@ export class URLWrapper {
     return this.url?.href;
   }
 
+  getPathName(): string | undefined {
+    return this.url.pathname;
+  }
+
   getPath(): string | undefined {
     return this.path;
   }

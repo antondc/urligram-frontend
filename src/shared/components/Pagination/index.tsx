@@ -1,5 +1,8 @@
 import React, { Fragment } from 'react';
+import { animateScroll as scroll } from 'react-scroll';
 
+import history from 'Services/History';
+import { URLWrapper } from 'Services/URLWrapper';
 import { A, Border } from '@antoniodcorrea/components';
 import { calculatePages } from './calculatePages';
 
@@ -24,16 +27,22 @@ const Pagination: React.FC<Props> = ({
 }) => {
   const pages = calculatePages({ totalItems, itemsPerPage, path, offset, pageNeighbours });
 
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: 'smooth',
+  const scrollToTop = (e) => {
+    e.preventDefault();
+    const { href } = e.target;
+    const url = new URLWrapper(href);
+    const pathAndSearch = url.getPathAndSearch();
+
+    setTimeout(() => history.push(pathAndSearch), 120);
+
+    scroll.scrollToTop({
+      duration: 120,
+      smooth: 'easeOutQuart',
     });
   };
 
   return (
-    <div className={'Pagination ' + (grow ? 'Pagination-grow' : '')}>
+    <div className={'Pagination ' + (grow ? 'Pagination-grow' : '')} onClick={scrollToTop}>
       <Border className="Pagination-border" padding="small" grow={grow}>
         {pages.map((item, index) =>
           !!item ? (

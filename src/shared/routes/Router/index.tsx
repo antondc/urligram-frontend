@@ -5,6 +5,7 @@ import { Route, Switch } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
+import { selectPathAndQueryWithoutLanguageParam } from 'Modules/Routes/selectors/selectPathAndQueryWithoutLanguageParam';
 import { selectPathWithoutLanguageParam } from 'Modules/Routes/selectors/selectPathWithoutLanguageParam';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import Bookmarks from 'Routes/Bookmarks';
@@ -35,11 +36,18 @@ interface Props {
   location: Location;
   defaultCurrentSlug: string;
   pathWithoutLanguageParam: string;
+  pathAndQueryWithoutLanguageParam: string;
 }
 
-const Router: React.FC<Props> = ({ loggedIn, location, defaultCurrentSlug, pathWithoutLanguageParam }) => (
+const Router: React.FC<Props> = ({
+  loggedIn,
+  location,
+  defaultCurrentSlug,
+  pathWithoutLanguageParam,
+  pathAndQueryWithoutLanguageParam,
+}) => (
   <div className="Router">
-    <FadeInOut valueToUpdate={pathWithoutLanguageParam} appear>
+    <FadeInOut valueToUpdate={pathAndQueryWithoutLanguageParam} appear>
       <Switch location={{ ...location, pathname: pathWithoutLanguageParam }}>
         {/* Redirects */}
         {loggedIn && <Redirect from="/:lang?/login" to={'/' + defaultCurrentSlug + '/control'} />}
@@ -76,6 +84,7 @@ const mapStateToProps = createStructuredSelector({
   loggedIn: selectSessionLoggedIn,
   defaultCurrentSlug: selectCurrentLanguageSlug,
   pathWithoutLanguageParam: selectPathWithoutLanguageParam,
+  pathAndQueryWithoutLanguageParam: selectPathAndQueryWithoutLanguageParam,
 });
 
 export default connect(mapStateToProps, {})(Router);
