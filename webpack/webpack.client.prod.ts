@@ -28,7 +28,6 @@ const webpackClientProdConfig = {
   plugins: [
     ...webpackClientCommonConfig.plugins,
     new webpack.DefinePlugin({
-      isBrowser: true,
       'process.env': {
         ENDPOINT_API: JSON.stringify(production.API_URL),
       },

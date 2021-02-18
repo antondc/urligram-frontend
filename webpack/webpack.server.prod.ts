@@ -13,7 +13,6 @@ const webpackServerProdConfig = {
   plugins: [
     // Setting a variable to identify browser from server
     new webpack.DefinePlugin({
-      isBrowser: false,
       'process.env': {
         SERVER_PORT_HTTP: production.PORT_HTTP,
         SERVER_PORT_HTTPS: production.PORT_HTTPS,

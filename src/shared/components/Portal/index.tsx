@@ -10,7 +10,9 @@ interface Props {
 }
 
 export const RenderInPortal: React.FC<Props> = ({ children, elementId, className = '' }) => {
-  if (!isDomAvailable) return <></>;
+  const domAvailable = isDomAvailable();
+
+  if (!domAvailable) return <></>;
 
   const newElement = document.createElement('div');
   !!elementId && newElement.setAttribute('id', elementId);

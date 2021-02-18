@@ -1,7 +1,11 @@
 import { createBrowserHistory, createMemoryHistory, History } from 'history';
 
+import { isDomAvailable } from 'Tools/utils/dom/isDomAvailable';
+
 export { Location } from 'history';
 
-const history: History = isBrowser ? createBrowserHistory() : createMemoryHistory();
+const domAvailable = isDomAvailable();
+
+const history: History = domAvailable ? createBrowserHistory() : createMemoryHistory();
 
 export default history;

@@ -1,1 +1,1 @@
-export const isDomAvailable = !!(typeof window !== 'undefined' && window.document);
+export const isDomAvailable = (): boolean => !!(typeof window !== 'undefined' && window.document);

@@ -1,4 +1,3 @@
-declare const isBrowser: boolean;
 declare module 'path-to-regexp';
 
 // Type declaration for SVGs

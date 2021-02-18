@@ -14,7 +14,6 @@ const webpackServerDevConfig = {
   plugins: [
     // Setting a variable to identify browser from server
     new webpack.DefinePlugin({
-      isBrowser: false,
       'process.env': {
         SERVER_PORT_HTTP: development.PORT_HTTP,
         SERVER_PORT_HTTPS: development.PORT_HTTPS,

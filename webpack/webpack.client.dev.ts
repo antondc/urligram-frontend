@@ -28,7 +28,6 @@ const webpackClientDevConfig = {
     ...webpackClientCommonConfig.plugins,
     new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
-      isBrowser: true,
       'process.env': {
         ENDPOINT_API: JSON.stringify(development.API_URL),
       },
