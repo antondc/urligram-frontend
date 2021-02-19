@@ -12,7 +12,10 @@ export const loadUsers = (): ThunkAction<any, any, any, Action> => async (dispat
   try {
     dispatch(requestUsers());
 
-    const { data }: ReceiveUsersResponse = await HttpClient.get(APIBaseEndpoint + window.location.search);
+    const {
+      meta: { totalItems },
+      data,
+    }: ReceiveUsersResponse = await HttpClient.get(APIBaseEndpoint + window.location.search);
 
     const usersByKey = {
       byKey: serializerFromArrayToByKey<ReceiveUserItem, UserState>({
@@ -20,6 +23,9 @@ export const loadUsers = (): ThunkAction<any, any, any, Action> => async (dispat
         contentPath: 'attributes',
       }),
       currentIds: data.map((item) => item.id),
+      meta: {
+        totalItems,
+      },
     };
     dispatch(receiveUsers(usersByKey));
   } catch (err) {

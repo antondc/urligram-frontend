@@ -8,6 +8,7 @@ import UserRow from 'Components/UserRow';
 import { UserRowSkeletonGroup } from 'Components/UserRow/UserRowSkeletonGroup';
 import { UserState } from 'Modules/Users/users.types';
 import { Border, Flex, H4, Hr } from '@antoniodcorrea/components';
+import Pagination from '../../components/Pagination';
 
 import './Users.less';
 
@@ -18,6 +19,12 @@ export interface Props {
   mostFollowedUsersLoading: boolean;
   newUsers: UserState[];
   newUsersLoading: boolean;
+  url: string;
+  page: {
+    size: number;
+    offset: number;
+  };
+  totalItems: number;
 }
 
 export const Users: React.FC<Props> = ({
@@ -27,6 +34,9 @@ export const Users: React.FC<Props> = ({
   mostFollowedUsersLoading,
   newUsers,
   newUsersLoading,
+  page,
+  totalItems,
+  url,
 }) => (
   <div className="Users">
     <Flex horizontal="between" vertical="top">
@@ -44,6 +54,10 @@ export const Users: React.FC<Props> = ({
               </React.Fragment>
             ))
           )}
+          <Hr spacer size="big" />
+          <Flex horizontal="center">
+            <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
+          </Flex>
         </Border>
       </Main>
       <Sidebar>

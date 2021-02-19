@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { bookmarksLoadBySize } from 'Modules/Bookmarks/actions/bookmarksLoadBySize';
+import { selectCurrentFullUrl } from 'Modules/Routes/selectors/selectCurrentFullUrl';
+import { selectCurrentRouteQueryParamPage } from 'Modules/Routes/selectors/selectCurrentRouteQueryParamPage';
 import { sectionsMostFollowedUsersLoad } from 'Modules/Sections/actions/sectionsMostFollowedUsersLoad';
 import { sectionsNewUsersLoad } from 'Modules/Sections/actions/sectionsNewUsersLoad';
 import { selectMostFollowedUsers } from 'Modules/Sections/selectors/selectMostFollowedUsers';
@@ -11,6 +13,7 @@ import { selectNewUsersLoading } from 'Modules/Sections/selectors/selectNewUsers
 import { loadUsers } from 'Modules/Users/actions/loadUsers';
 import { selectUsersCurrentIds } from 'Modules/Users/selectors/selectUsersCurrentIds';
 import { selectUsersLoading } from 'Modules/Users/selectors/selectUsersLoading';
+import { selectUsersTotalItems } from 'Modules/Users/selectors/selectUsersTotalItems';
 import { Users as UsersUI } from './Users';
 
 const Users: React.FC = () => {
@@ -21,13 +24,19 @@ const Users: React.FC = () => {
   const newUsersLoading = useSelector(selectNewUsersLoading);
   const usersCurrentIds = useSelector(selectUsersCurrentIds);
   const usersLoading = useSelector(selectUsersLoading);
+  const page = useSelector(selectCurrentRouteQueryParamPage);
+  const totalItems = useSelector(selectUsersTotalItems);
+  const url = useSelector(selectCurrentFullUrl);
 
   useEffect(() => {
-    dispatch(loadUsers());
     dispatch(sectionsMostFollowedUsersLoad());
     dispatch(sectionsNewUsersLoad());
     dispatch(bookmarksLoadBySize(5));
   }, []);
+
+  useEffect(() => {
+    dispatch(loadUsers());
+  }, [page]);
 
   return (
     <UsersUI
@@ -37,6 +46,9 @@ const Users: React.FC = () => {
       newUsersLoading={newUsersLoading}
       usersCurrentIds={usersCurrentIds}
       usersLoading={usersLoading}
+      page={page}
+      totalItems={totalItems}
+      url={url}
     />
   );
 };
