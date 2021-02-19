@@ -27,10 +27,6 @@ const Lists: React.FC = () => {
   const totalItems = useSelector(selectListsTotalItems);
   const url = useSelector(selectCurrentFullUrl);
 
-  console.log('listsIds: ', listsIds.length);
-  console.log('page: ', page);
-  console.log('totalItems: ', totalItems);
-
   useEffect(() => {
     dispatch(sectionsMostUsedTagsLoad());
     dispatch(sectionsNewUsersLoad());

@@ -26,7 +26,6 @@ import UserBookmarks from 'Routes/UserBookmarks';
 import UserLists from 'Routes/UserLists';
 import Users from 'Routes/Users';
 import { Location } from 'Services/History';
-import { FadeInOut } from '@antoniodcorrea/components';
 
 import './Router.less';
 
@@ -39,36 +38,36 @@ interface Props {
 
 const Router: React.FC<Props> = ({ loggedIn, location, defaultCurrentSlug, pathWithoutLanguageParam }) => (
   <div className="Router">
-    <FadeInOut valueToUpdate={pathWithoutLanguageParam} appear>
-      <Switch location={{ ...location, pathname: pathWithoutLanguageParam }}>
-        {/* Redirects */}
-        {loggedIn && <Redirect from="/:lang?/login" to={'/' + defaultCurrentSlug + '/control'} />}
-        {!loggedIn && <Redirect from="/:lang?/control" to={'/' + defaultCurrentSlug + '/sign-in'} />}
+    {/* <FadeInOut valueToUpdate={pathWithoutLanguageParam} appear> */}
+    <Switch location={{ ...location, pathname: pathWithoutLanguageParam }}>
+      {/* Redirects */}
+      {loggedIn && <Redirect from="/:lang?/login" to={'/' + defaultCurrentSlug + '/control'} />}
+      {!loggedIn && <Redirect from="/:lang?/control" to={'/' + defaultCurrentSlug + '/sign-in'} />}
 
-        {/* Pages */}
-        <Route exact={Routes.UserBookmarks.exact} path={Routes.UserBookmarks.path} component={UserBookmarks} />
-        <Route exact={Routes.User.exact} path={Routes.User.path} component={User} />
-        <Route exact={Routes.Users.exact} path={Routes.Users.path} component={Users} />
-        <Route exact={Routes.Links.exact} path={Routes.Links.path} component={Links} />
-        <Route exact={Routes.List.exact} path={Routes.List.path} component={List} />
-        <Route exact={Routes.Lists.exact} path={Routes.Lists.path} component={Lists} />
-        <Route exact={Routes.Bookmarks.exact} path={Routes.Bookmarks.path} component={Bookmarks} />
-        <Route exact={Routes.Home.exact} path={Routes.Home.path} component={Home} />
-        <Route exact={Routes.Followers.exact} path={Routes.Followers.path} component={Followers} />
-        <Route exact={Routes.Following.exact} path={Routes.Following.path} component={Following} />
-        <Route exact={Routes.UserLists.exact} path={Routes.UserLists.path} component={UserLists} />
-        <Route exact={Routes.Tags.exact} path={Routes.Tags.path} component={Tags} />
+      {/* Pages */}
+      <Route exact={Routes.UserBookmarks.exact} path={Routes.UserBookmarks.path} component={UserBookmarks} />
+      <Route exact={Routes.User.exact} path={Routes.User.path} component={User} />
+      <Route exact={Routes.Users.exact} path={Routes.Users.path} component={Users} />
+      <Route exact={Routes.Links.exact} path={Routes.Links.path} component={Links} />
+      <Route exact={Routes.List.exact} path={Routes.List.path} component={List} />
+      <Route exact={Routes.Lists.exact} path={Routes.Lists.path} component={Lists} />
+      <Route exact={Routes.Bookmarks.exact} path={Routes.Bookmarks.path} component={Bookmarks} />
+      <Route exact={Routes.Home.exact} path={Routes.Home.path} component={Home} />
+      <Route exact={Routes.Followers.exact} path={Routes.Followers.path} component={Followers} />
+      <Route exact={Routes.Following.exact} path={Routes.Following.path} component={Following} />
+      <Route exact={Routes.UserLists.exact} path={Routes.UserLists.path} component={UserLists} />
+      <Route exact={Routes.Tags.exact} path={Routes.Tags.path} component={Tags} />
 
-        {/* General */}
-        <Route exact={Routes.Control.exact} path={Routes.Control.path} component={Control} />
-        <Route exact={Routes.Login.exact} path={Routes.Login.path} component={Login} />
-        <Route exact={Routes.SignIn.exact} path={Routes.SignIn.path} component={SignIn} />
+      {/* General */}
+      <Route exact={Routes.Control.exact} path={Routes.Control.path} component={Control} />
+      <Route exact={Routes.Login.exact} path={Routes.Login.path} component={Login} />
+      <Route exact={Routes.SignIn.exact} path={Routes.SignIn.path} component={SignIn} />
 
-        {/* Guards */}
-        <Route exact={Routes.ServerError.exact} path={Routes.ServerError.path} component={ServerError} />
-        <Route exact={Routes.NotFound.exact} path={Routes.NotFound.path} component={NotFound} />
-      </Switch>
-    </FadeInOut>
+      {/* Guards */}
+      <Route exact={Routes.ServerError.exact} path={Routes.ServerError.path} component={ServerError} />
+      <Route exact={Routes.NotFound.exact} path={Routes.NotFound.path} component={NotFound} />
+    </Switch>
+    {/* </FadeInOut> */}
   </div>
 );
 
