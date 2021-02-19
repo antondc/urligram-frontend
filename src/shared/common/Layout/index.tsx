@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import { Location } from 'history';
-import qs from 'qs';
 
 import Background from 'Assets/svg/background.svg';
 import LayoutContent from 'Common/LayoutContent';
@@ -12,10 +11,12 @@ import Footer from 'Components/Footer';
 import Header from 'Components/Header';
 import LoginModal from 'Components/LoginModal';
 import ModalMessage from 'Components/ModalMessage';
+import SidebarLeft from 'Components/SidebarLeft';
 import SubHeader from 'Components/SubHeader';
 import UserModal from 'Components/UserModal';
 import { selectLanguageLoading } from 'Modules/Languages/selectors/selectLanguageLoading';
 import { pushNewRoute } from 'Modules/Routes/actions/pushNewRoute';
+import { RouteState } from 'Modules/Routes/routes.types';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import { selectUiLoginModalMounted } from 'Modules/Ui/selectors/selectUiLoginModalMounted';
 import { selectUiMessageModalMounted } from 'Modules/Ui/selectors/selectUiMessageModalMounted';
@@ -26,8 +27,6 @@ import Router from 'Routes/Router';
 import enhanceRouteWithParams from 'Tools/utils/url/enhanceRouteWithParams';
 import findActiveRouteKey from 'Tools/utils/url/findActiveRouteKey';
 import { Fade, Flex, Hr, SpinnerCircle } from '@antoniodcorrea/components';
-import SidebarLeft from '../../components/SidebarLeft';
-import { RouteState } from '../../redux/modules/Routes/routes.types';
 
 import './Layout.less';
 
