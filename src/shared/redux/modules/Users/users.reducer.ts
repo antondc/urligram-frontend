@@ -21,7 +21,10 @@ export const Users = (state = initialState, action: UsersActionsTypes): UsersSta
         },
         currentIds: action.data.currentIds || state.currentIds,
         loading: false,
-        meta: action.data.meta || state.meta,
+        meta: {
+          ...state.meta,
+          ...action.data.meta,
+        },
       });
 
     default:
