@@ -9,7 +9,8 @@ import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListTags from 'Components/SidebarListTags';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
-import { Border, Button, Fade, Flex, H4, Hr } from '@antoniodcorrea/components';
+import { Border, Flex, H4, Hr } from '@antoniodcorrea/components';
+import Pagination from '../../components/Pagination';
 
 import './UserLists.less';
 
@@ -22,6 +23,12 @@ interface Props {
   userMostUsedTagsLoading: boolean;
   mostFollowedTags: TagState[];
   mostFollowedTagsLoading: boolean;
+  url: string;
+  page: {
+    size: number;
+    offset: number;
+  };
+  totalItems: number;
 }
 
 export const UserLists: React.FC<Props> = ({
@@ -33,6 +40,9 @@ export const UserLists: React.FC<Props> = ({
   userMostUsedTagsLoading,
   mostFollowedTags,
   mostFollowedTagsLoading,
+  url,
+  page,
+  totalItems,
 }) => (
   <div className="UserLists">
     <Flex horizontal="between" vertical="top">
@@ -54,9 +64,7 @@ export const UserLists: React.FC<Props> = ({
           )}
           <Hr spacer size="big" />
           <Flex horizontal="center">
-            <Fade mounted={!!listsIds?.length} speed="fastest">
-              <Button text="Load more" />
-            </Fade>
+            <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
           </Flex>
         </Border>
       </Main>
@@ -65,7 +73,7 @@ export const UserLists: React.FC<Props> = ({
           <SidebarListTags items={userMostUsedTags} />
         </SidebarBlock>
         <Hr spacer />
-        <SidebarBlock title="My Tags" href={`users/${userId}/tags`} loading={mostFollowedTagsLoading}>
+        <SidebarBlock title="Most Used Tags" href={`users/${userId}/tags`} loading={mostFollowedTagsLoading}>
           <SidebarListTags items={mostFollowedTags} />
         </SidebarBlock>
       </Sidebar>

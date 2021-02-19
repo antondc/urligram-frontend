@@ -12,9 +12,10 @@ export const listsLoadByUserId = (userId: string): ThunkAction<any, any, any, Ac
   try {
     dispatch(loadListsRequest());
 
-    const { data: listsData }: ReceiveListsResponse = await HttpClient.get(
-      `/users/${userId}/lists${window.location.search}`
-    );
+    const {
+      meta: { totalItems },
+      data: listsData,
+    }: ReceiveListsResponse = await HttpClient.get(`/users/${userId}/lists${window.location.search}`);
 
     const listsByKey = {
       byKey: serializerFromArrayToByKey<ReceiveListItem, ListState>({
@@ -22,6 +23,9 @@ export const listsLoadByUserId = (userId: string): ThunkAction<any, any, any, Ac
         contentPath: 'attributes',
       }),
       currentIds: listsData.map((item) => item.id),
+      meta: {
+        totalItems,
+      },
     };
 
     dispatch(loadListsReceive(listsByKey));

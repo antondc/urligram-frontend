@@ -4,8 +4,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { listsLoadByUserId } from 'Modules/Lists/actions/listsLoadByUserId';
 import { selectListsAllIds } from 'Modules/Lists/selectors/selectListsAllIds';
 import { selectListsLoading } from 'Modules/Lists/selectors/selectListsLoading';
+import { selectListsTotalItems } from 'Modules/Lists/selectors/selectListsTotalItems';
 import { RootState } from 'Modules/rootType';
+import { selectCurrentFullUrl } from 'Modules/Routes/selectors/selectCurrentFullUrl';
 import { selectCurrentRouteParamUserId } from 'Modules/Routes/selectors/selectCurrentRouteParamUserId';
+import { selectCurrentRouteQueryParamPage } from 'Modules/Routes/selectors/selectCurrentRouteQueryParamPage';
+import { sectionsMostUsedTagsLoad } from 'Modules/Sections/actions/sectionsMostUsedTagsLoad';
+import { sectionsUserMostUsedTagsLoad } from 'Modules/Sections/actions/sectionsUserMostFollowedTagsLoad';
 import { selectMostUsedTags } from 'Modules/Sections/selectors/selectMostUsedTags';
 import { selectMostUsedTagsLoading } from 'Modules/Sections/selectors/selectMostUsedTagsLoading';
 import { selectUserMostUsedTags } from 'Modules/Sections/selectors/selectUserMostUsedTags';
@@ -24,11 +29,19 @@ const UserLists: React.FC = () => {
   const userMostUsedTagsLoading = useSelector(selectUserMostUsedTagsLoading);
   const mostFollowedTags = useSelector(selectMostUsedTags);
   const mostFollowedTagsLoading = useSelector(selectMostUsedTagsLoading);
+  const page = useSelector(selectCurrentRouteQueryParamPage);
+  const totalItems = useSelector(selectListsTotalItems);
+  const url = useSelector(selectCurrentFullUrl);
 
   useEffect(() => {
     dispatch(userLoad(userId));
-    dispatch(listsLoadByUserId(userId));
+    dispatch(sectionsUserMostUsedTagsLoad(userId));
+    dispatch(sectionsMostUsedTagsLoad());
   }, []);
+
+  useEffect(() => {
+    dispatch(listsLoadByUserId(userId));
+  }, [page]);
 
   return (
     <UserListsUi
@@ -40,6 +53,9 @@ const UserLists: React.FC = () => {
       userMostUsedTagsLoading={userMostUsedTagsLoading}
       mostFollowedTags={mostFollowedTags}
       mostFollowedTagsLoading={mostFollowedTagsLoading}
+      page={page}
+      totalItems={totalItems}
+      url={url}
     />
   );
 };
