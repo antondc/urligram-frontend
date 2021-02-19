@@ -4,8 +4,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loadBookmarksByUserId } from 'Modules/Bookmarks/actions/loadBookmarksByUserId';
 import { selectBookmarksCurrentIds } from 'Modules/Bookmarks/selectors/selectBookmarksCurrentIds';
 import { selectBookmarksLoading } from 'Modules/Bookmarks/selectors/selectBookmarksLoading';
+import { selectBookmarksTotalItems } from 'Modules/Bookmarks/selectors/selectBookmarkTotalItems';
 import { RootState } from 'Modules/rootType';
+import { selectCurrentFullUrl } from 'Modules/Routes/selectors/selectCurrentFullUrl';
 import { selectCurrentRouteParamUserId } from 'Modules/Routes/selectors/selectCurrentRouteParamUserId';
+import { selectCurrentRouteQueryParamPage } from 'Modules/Routes/selectors/selectCurrentRouteQueryParamPage';
 import { sectionsFollowersUsersLoad } from 'Modules/Sections/actions/sectionsFollowersUsersLoad';
 import { sectionsFollowingUsersLoad } from 'Modules/Sections/actions/sectionsFollowingUsersLoad';
 import { selectFollowersUsers } from 'Modules/Sections/selectors/selectFollowersUsers';
@@ -25,6 +28,9 @@ const UserBookmarks: React.FC = () => {
   const followingUsersLoading = useSelector(selectFollowingUsersLoading);
   const followersUsers = useSelector(selectFollowersUsers);
   const followersUsersLoading = useSelector(selectFollowingUsersLoading);
+  const page = useSelector(selectCurrentRouteQueryParamPage);
+  const totalItems = useSelector(selectBookmarksTotalItems);
+  const url = useSelector(selectCurrentFullUrl);
 
   useEffect(() => {
     dispatch(userLoad(userId));
@@ -32,6 +38,10 @@ const UserBookmarks: React.FC = () => {
     dispatch(sectionsFollowingUsersLoad(userId));
     dispatch(sectionsFollowersUsersLoad(userId));
   }, []);
+
+  useEffect(() => {
+    dispatch(loadBookmarksByUserId(userId));
+  }, [page]);
 
   return (
     <UserBookmarksUi
@@ -43,6 +53,9 @@ const UserBookmarks: React.FC = () => {
       followingUsersLoading={followingUsersLoading}
       followersUsers={followersUsers}
       followersUsersLoading={followersUsersLoading}
+      page={page}
+      totalItems={totalItems}
+      url={url}
     />
   );
 };

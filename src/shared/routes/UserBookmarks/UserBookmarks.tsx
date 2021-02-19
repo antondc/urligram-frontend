@@ -2,13 +2,14 @@ import React from 'react';
 
 import A from 'Components/A';
 import BookmarkRow from 'Components/BookmarkRow';
+import { BookmarkRowSkeletonGroup } from 'Components/BookmarkRow/BookmarkRowSkeletonGroup';
 import Main from 'Components/Main';
+import Pagination from 'Components/Pagination';
 import Sidebar from 'Components/Sidebar';
 import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListUsers from 'Components/SidebarListUsers';
 import { UserState } from 'Modules/Users/users.types';
-import { BookmarkRowSkeletonGroup } from 'Root/src/shared/components/BookmarkRow/BookmarkRowSkeletonGroup';
-import { Border, Button, Fade, Flex, H4, Hr } from '@antoniodcorrea/components';
+import { Border, Flex, H4, Hr } from '@antoniodcorrea/components';
 
 import './UserBookmarks.less';
 
@@ -21,6 +22,12 @@ interface Props {
   followingUsersLoading: boolean;
   followersUsers: UserState[];
   followersUsersLoading: boolean;
+  url: string;
+  page: {
+    size: number;
+    offset: number;
+  };
+  totalItems: number;
 }
 
 export const UserBookmarks: React.FC<Props> = ({
@@ -32,6 +39,9 @@ export const UserBookmarks: React.FC<Props> = ({
   followingUsersLoading,
   followersUsers,
   followersUsersLoading,
+  page,
+  totalItems,
+  url,
 }) => (
   <div className="UserBookmarks">
     <Flex horizontal="between" vertical="top">
@@ -53,9 +63,7 @@ export const UserBookmarks: React.FC<Props> = ({
           )}
           <Hr spacer size="big" />
           <Flex horizontal="center">
-            <Fade mounted={!!bookmarksIds?.length} speed="fastest">
-              <Button text="Load more" />
-            </Fade>
+            <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
           </Flex>
         </Border>
       </Main>

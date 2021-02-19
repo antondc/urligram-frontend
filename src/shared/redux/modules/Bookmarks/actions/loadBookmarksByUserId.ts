@@ -13,9 +13,10 @@ export const loadBookmarksByUserId = (userId: string): ThunkAction<any, any, any
   try {
     dispatch(requestBookmarks());
 
-    const { data }: ReceiveBookmarksResponse = await HttpClient.get(
-      '/users/' + userId + '/bookmarks' + window.location.search
-    );
+    const {
+      meta: { totalItems },
+      data,
+    }: ReceiveBookmarksResponse = await HttpClient.get('/users/' + userId + '/bookmarks' + window.location.search);
 
     const bookmarksByKey = {
       byKey: serializerFromArrayToByKey<ReceiveBookmarkItem, BookmarkState>({
@@ -23,6 +24,9 @@ export const loadBookmarksByUserId = (userId: string): ThunkAction<any, any, any
         contentPath: 'attributes',
       }),
       currentIds: data.map((item) => item.id),
+      meta: {
+        totalItems,
+      },
     };
     dispatch(receiveBookmarks(bookmarksByKey));
   } catch (err) {

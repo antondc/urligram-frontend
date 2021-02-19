@@ -8,7 +8,7 @@ import Sidebar from 'Components/Sidebar';
 import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListUsers from 'Components/SidebarListUsers';
 import { UserState } from 'Modules/Users/users.types';
-import { Border, Button, Fade, Flex, H4, Hr, Span, Tag } from '@antoniodcorrea/components';
+import { AIcon, Border, Button, Fade, Flex, H4, Hr, Span, Tag } from '@antoniodcorrea/components';
 
 import './User.less';
 
@@ -107,7 +107,12 @@ export const User: React.FC<Props> = ({
         </Border>
         <Hr spacer />
         <Border grow>
-          <H4>User bookmarks</H4>
+          <Flex horizontal="between" vertical="bottom">
+            <H4>User bookmarks</H4>
+            <A href={`users/${userId}/bookmarks`} frontend>
+              <AIcon size="small">See more</AIcon>
+            </A>
+          </Flex>
           <Hr spacer />
           {!!bookmarksLoading ? (
             <BookmarkRowSkeletonGroup length={bookmarksIds?.length} />
@@ -119,12 +124,6 @@ export const User: React.FC<Props> = ({
               </React.Fragment>
             ))
           )}
-          <Hr spacer size="big" />
-          <Flex horizontal="center">
-            <Fade mounted={!!bookmarksIds?.length} speed="fastest">
-              <Button text="Load more" />
-            </Fade>
-          </Flex>
         </Border>
       </Main>
       <Sidebar>
