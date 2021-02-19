@@ -26,6 +26,9 @@ export interface ListsState {
   };
   loading?: boolean;
   currentIds?: number[];
+  meta?: {
+    totalItems: number;
+  };
 }
 
 export interface ReceiveListItem {
@@ -40,6 +43,9 @@ export interface ReceiveListResponse {
 
 export interface ReceiveListsResponse {
   data: ReceiveListItem[];
+  meta?: {
+    totalItems: number;
+  };
 }
 
 interface RequestListsAction {

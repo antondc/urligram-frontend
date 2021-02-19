@@ -4,13 +4,14 @@ import ListRow from 'Components/ListRow';
 import { ListRowSkeletonGroup } from 'Components/ListRow/ListSkeletonGroup';
 import Main from 'Components/Main';
 import MainHeader from 'Components/MainHeader';
+import Pagination from 'Components/Pagination';
 import Sidebar from 'Components/Sidebar';
 import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListTags from 'Components/SidebarListTags';
 import SidebarListUsers from 'Components/SidebarListUsers';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
-import { Border, Button, Flex, Hr } from '@antoniodcorrea/components';
+import { Border, Flex, Hr } from '@antoniodcorrea/components';
 
 import './Lists.less';
 
@@ -21,6 +22,12 @@ interface Props {
   mostUsedTagsLoading: boolean;
   newUsers: UserState[];
   newUsersLoading: boolean;
+  url: string;
+  page: {
+    size: number;
+    offset: number;
+  };
+  totalItems: number;
 }
 
 export const Lists: React.FC<Props> = ({
@@ -30,6 +37,9 @@ export const Lists: React.FC<Props> = ({
   mostUsedTagsLoading,
   newUsers,
   newUsersLoading,
+  url,
+  page,
+  totalItems,
 }) => (
   <div className="Lists">
     <Flex horizontal="between" vertical="top">
@@ -48,7 +58,7 @@ export const Lists: React.FC<Props> = ({
           )}
           <Hr spacer size="big" />
           <Flex horizontal="center">
-            <Button text="Load more" />
+            <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
           </Flex>
         </Border>
       </Main>

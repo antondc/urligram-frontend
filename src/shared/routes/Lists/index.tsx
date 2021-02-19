@@ -4,6 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loadLists } from 'Modules/Lists/actions/loadLists';
 import { selectListsAllIds } from 'Modules/Lists/selectors/selectListsAllIds';
 import { selectListsLoading } from 'Modules/Lists/selectors/selectListsLoading';
+import { selectListsTotalItems } from 'Modules/Lists/selectors/selectListsTotalItems';
+import { selectCurrentFullUrl } from 'Modules/Routes/selectors/selectCurrentFullUrl';
+import { selectCurrentRouteQueryParamPage } from 'Modules/Routes/selectors/selectCurrentRouteQueryParamPage';
 import { sectionsMostUsedTagsLoad } from 'Modules/Sections/actions/sectionsMostUsedTagsLoad';
 import { sectionsNewUsersLoad } from 'Modules/Sections/actions/sectionsNewUsersLoad';
 import { selectMostUsedTags } from 'Modules/Sections/selectors/selectMostUsedTags';
@@ -20,12 +23,22 @@ const Lists: React.FC = () => {
   const mostUsedTagsLoading = useSelector(selectMostUsedTagsLoading);
   const newUsers = useSelector(selectNewUsers);
   const newUsersLoading = useSelector(selectNewUsersLoading);
+  const page = useSelector(selectCurrentRouteQueryParamPage);
+  const totalItems = useSelector(selectListsTotalItems);
+  const url = useSelector(selectCurrentFullUrl);
+
+  console.log('listsIds: ', listsIds.length);
+  console.log('page: ', page);
+  console.log('totalItems: ', totalItems);
 
   useEffect(() => {
-    dispatch(loadLists());
     dispatch(sectionsMostUsedTagsLoad());
     dispatch(sectionsNewUsersLoad());
   }, []);
+
+  useEffect(() => {
+    dispatch(loadLists());
+  }, [page]);
 
   return (
     <ListsUI
@@ -35,6 +48,9 @@ const Lists: React.FC = () => {
       mostUsedTagsLoading={mostUsedTagsLoading}
       newUsers={newUsers}
       newUsersLoading={newUsersLoading}
+      page={page}
+      totalItems={totalItems}
+      url={url}
     />
   );
 };

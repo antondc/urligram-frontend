@@ -11,7 +11,10 @@ export const loadLists = (): ThunkAction<any, any, any, Action> => async (dispat
   try {
     dispatch(loadListsRequest());
 
-    const { data }: ReceiveListsResponse = await HttpClient.get('/lists' + window.location.search);
+    const {
+      meta: { totalItems },
+      data,
+    }: ReceiveListsResponse = await HttpClient.get('/lists' + window.location.search);
 
     const listsByKey = {
       byKey: serializerFromArrayToByKey<ReceiveListItem, ListState>({
@@ -19,6 +22,9 @@ export const loadLists = (): ThunkAction<any, any, any, Action> => async (dispat
         contentPath: 'attributes',
       }),
       currentIds: data.map((item) => item.id),
+      meta: {
+        totalItems,
+      },
     };
     dispatch(loadListsReceive(listsByKey));
   } catch (err) {

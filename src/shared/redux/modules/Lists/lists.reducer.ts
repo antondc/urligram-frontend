@@ -22,6 +22,10 @@ export const Lists = (state = initialState, action: ListsActionsTypes): ListsSta
         },
         currentIds: action.data?.currentIds || state.currentIds,
         loading: false,
+        meta: {
+          ...state.meta,
+          ...action.data.meta,
+        },
       });
 
     default:
