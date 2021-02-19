@@ -37,7 +37,7 @@ export const Lists: React.FC<Props> = ({
         <Border grow>
           <MainHeader title="My lists" />
           {listsIdsLoading ? (
-            <ListRowSkeletonGroup />
+            <ListRowSkeletonGroup length={listsIds?.length} />
           ) : (
             listsIds?.map((id, index) => (
               <React.Fragment key={id}>

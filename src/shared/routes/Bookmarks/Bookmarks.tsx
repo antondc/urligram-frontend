@@ -30,7 +30,7 @@ export const Bookmarks: React.FC<Props> = ({ url, bookmarksIds, popularLists, lo
         <Border grow>
           <MainHeader title="My bookmarks" />
           {loading ? (
-            <BookmarkRowSkeletonGroup length={5} />
+            <BookmarkRowSkeletonGroup length={bookmarksIds?.length} />
           ) : (
             bookmarksIds?.map((id, index) => (
               <React.Fragment key={id}>

@@ -45,7 +45,7 @@ export const Users: React.FC<Props> = ({
           <H4>Users</H4>
           <Hr spacer />
           {usersLoading ? (
-            <UserRowSkeletonGroup />
+            <UserRowSkeletonGroup length={usersCurrentIds?.length} />
           ) : (
             usersCurrentIds?.map((id, index) => (
               <React.Fragment key={id}>

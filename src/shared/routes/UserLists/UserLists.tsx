@@ -43,7 +43,7 @@ export const UserLists: React.FC<Props> = ({
           </H4>
           <Hr spacer />
           {listsLoading ? (
-            <BookmarkRowSkeletonGroup />
+            <BookmarkRowSkeletonGroup length={listsIds?.length} />
           ) : (
             listsIds?.map((id, index) => (
               <React.Fragment key={id}>

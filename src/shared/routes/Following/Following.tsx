@@ -40,7 +40,7 @@ export const Following: React.FC<Props> = ({
           <H4>Users followed by @{user?.name}</H4>
           <Hr spacer />
           {usersLoading ? (
-            <UserRowSkeletonGroup />
+            <UserRowSkeletonGroup length={usersCurrentIds?.length} />
           ) : (
             usersCurrentIds?.map((id, index) => (
               <React.Fragment key={id}>

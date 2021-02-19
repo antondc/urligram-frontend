@@ -49,7 +49,7 @@ export const List: React.FC<Props> = ({
           </Flex>
           <Hr spacer />
           {bookmarksLoading ? (
-            <BookmarkRowSkeletonGroup />
+            <BookmarkRowSkeletonGroup length={bookmarksIds?.length} />
           ) : (
             bookmarksIds?.map((id, index) => (
               <React.Fragment key={id}>

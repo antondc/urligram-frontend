@@ -47,7 +47,7 @@ export const Links: React.FC<Props> = ({
           <H4>Links</H4>
           <Hr spacer />
           {loading ? (
-            <LinkRowSkeletonGroup />
+            <LinkRowSkeletonGroup length={linksIds?.length} />
           ) : (
             linksIds?.map((id, index) => (
               <React.Fragment key={id}>
