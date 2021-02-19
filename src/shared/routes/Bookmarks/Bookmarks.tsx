@@ -7,7 +7,7 @@ import Pagination from 'Components/Pagination';
 import Sidebar from 'Components/Sidebar';
 import { ListState } from 'Modules/Lists/lists.types';
 import { BookmarkRowSkeletonGroup } from 'Root/src/shared/components/BookmarkRow/BookmarkRowSkeletonGroup';
-import { Border, Button, Fade, Flex, Hr } from '@antoniodcorrea/components';
+import { Border, Flex, Hr } from '@antoniodcorrea/components';
 
 import './Bookmarks.less';
 
@@ -39,7 +39,6 @@ export const Bookmarks: React.FC<Props> = ({ url, bookmarksIds, popularLists, lo
               </React.Fragment>
             ))
           )}
-          <Hr spacer size="big" />
           <Flex horizontal="center">
             <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
           </Flex>

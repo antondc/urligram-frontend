@@ -3,6 +3,7 @@ import React from 'react';
 import BookmarkRow from 'Components/BookmarkRow';
 import { BookmarkRowSkeletonGroup } from 'Components/BookmarkRow/BookmarkRowSkeletonGroup';
 import Main from 'Components/Main';
+import Pagination from 'Components/Pagination';
 import Sidebar from 'Components/Sidebar';
 import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListTags from 'Components/SidebarListTags';
@@ -10,7 +11,7 @@ import SidebarListUsers from 'Components/SidebarListUsers';
 import { ListState } from 'Modules/Lists/lists.types';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
-import { Border, Button, Flex, H4, Hr, PlusCircle, Tooltip } from '@antoniodcorrea/components';
+import { Border, Flex, H4, Hr, PlusCircle, Tooltip } from '@antoniodcorrea/components';
 import { SvgClickEvent } from '@antoniodcorrea/components/Svg/Svg.types';
 
 import './List.less';
@@ -24,6 +25,12 @@ interface Props {
   tagsInThisList: TagState[];
   tagsInThisListLoading: boolean;
   onListJoin: (e: SvgClickEvent) => void;
+  url: string;
+  page: {
+    size: number;
+    offset: number;
+  };
+  totalItems: number;
 }
 
 export const List: React.FC<Props> = ({
@@ -35,6 +42,9 @@ export const List: React.FC<Props> = ({
   tagsInThisList,
   tagsInThisListLoading,
   onListJoin,
+  page,
+  totalItems,
+  url,
 }) => (
   <div className="List">
     <Flex horizontal="between" vertical="top">
@@ -58,9 +68,8 @@ export const List: React.FC<Props> = ({
               </React.Fragment>
             ))
           )}
-          <Hr spacer size="big" />
           <Flex horizontal="center">
-            <Button text="Load more" />
+            <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
           </Flex>
         </Border>
       </Main>
@@ -68,7 +77,7 @@ export const List: React.FC<Props> = ({
         <SidebarBlock title="People in this list" loading={usersInThisListLoading}>
           <SidebarListUsers items={usersInThisList} />
         </SidebarBlock>
-        <Hr spacer />{' '}
+        <Hr spacer />
         <SidebarBlock title="Tags In This List" loading={tagsInThisListLoading}>
           <SidebarListTags items={tagsInThisList} />
         </SidebarBlock>

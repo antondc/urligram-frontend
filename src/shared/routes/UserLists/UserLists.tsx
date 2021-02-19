@@ -62,7 +62,6 @@ export const UserLists: React.FC<Props> = ({
               </React.Fragment>
             ))
           )}
-          <Hr spacer size="big" />
           <Flex horizontal="center">
             <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
           </Flex>

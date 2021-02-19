@@ -3,7 +3,7 @@ import { animateScroll as scroll } from 'react-scroll';
 
 import history from 'Services/History';
 import { URLWrapper } from 'Services/URLWrapper';
-import { A, Border, Fade } from '@antoniodcorrea/components';
+import { A, Border, Fade, Hr } from '@antoniodcorrea/components';
 import { calculatePages } from './calculatePages';
 
 import './Pagination.less';
@@ -26,6 +26,7 @@ const Pagination: React.FC<Props> = ({
   grow,
 }) => {
   const pages = calculatePages({ totalItems, itemsPerPage, path, offset, pageNeighbours });
+  const mounted = !!totalItems && pages?.length > 1;
 
   const scrollToTop = (e) => {
     e.preventDefault();
@@ -42,7 +43,8 @@ const Pagination: React.FC<Props> = ({
   };
 
   return (
-    <Fade mounted={!!totalItems} speed="slow">
+    <Fade mounted={mounted} speed="slow">
+      <Hr size="big" spacer />
       <div className={'Pagination ' + (grow ? 'Pagination-grow' : '')}>
         <Border className="Pagination-border" padding="small" grow={grow}>
           {pages.map((item, index) =>

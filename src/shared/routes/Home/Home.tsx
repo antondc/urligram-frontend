@@ -9,7 +9,7 @@ import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListUsers from 'Components/SidebarListUsers';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
-import { Border, Flex, H4, Hr, Tag } from '@antoniodcorrea/components';
+import { AIcon, Border, Flex, H4, Hr, Tag } from '@antoniodcorrea/components';
 
 import './Home.less';
 
@@ -58,7 +58,12 @@ export const Home: React.FC<Props> = ({
         </Border>
         <Hr spacer />
         <Border className="Home-tags" grow>
-          <H4>Bookmarks</H4>
+          <Flex horizontal="between" vertical="bottom">
+            <H4>Links</H4>
+            <A href={'links'} frontend>
+              <AIcon size="small">See more</AIcon>
+            </A>
+          </Flex>
           <Hr spacer />
           {bookmarksLoading ? (
             <BookmarkRowSkeletonGroup />

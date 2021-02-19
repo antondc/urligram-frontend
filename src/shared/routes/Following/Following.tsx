@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Main from 'Components/Main';
+import Pagination from 'Components/Pagination';
 import Sidebar from 'Components/Sidebar';
 import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListTags from 'Components/SidebarListTags';
@@ -21,6 +22,12 @@ export interface Props {
   mostUsedTagsLoading: boolean;
   userMostUsedTags: TagState[];
   userMostUsedTagsLoading: boolean;
+  url: string;
+  page: {
+    size: number;
+    offset: number;
+  };
+  totalItems: number;
 }
 
 export const Following: React.FC<Props> = ({
@@ -32,6 +39,9 @@ export const Following: React.FC<Props> = ({
   mostUsedTagsLoading,
   userMostUsedTags,
   userMostUsedTagsLoading,
+  page,
+  totalItems,
+  url,
 }) => (
   <div className="Following">
     <Flex horizontal="between" vertical="top">
@@ -49,6 +59,9 @@ export const Following: React.FC<Props> = ({
               </React.Fragment>
             ))
           )}
+          <Flex horizontal="center">
+            <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
+          </Flex>
         </Border>
       </Main>
       <Sidebar>

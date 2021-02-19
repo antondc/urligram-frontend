@@ -48,7 +48,10 @@ export const UserBookmarks: React.FC<Props> = ({
       <Main>
         <Border grow>
           <H4>
-            Bookmarks of <A href={`/users/${userId}`}>@{user?.name}</A>
+            Bookmarks of{' '}
+            <A frontend href={`/users/${userId}`}>
+              @{user?.name}
+            </A>
           </H4>
           <Hr spacer />
           {bookmarksLoading ? (
@@ -61,7 +64,6 @@ export const UserBookmarks: React.FC<Props> = ({
               </React.Fragment>
             ))
           )}
-          <Hr spacer size="big" />
           <Flex horizontal="center">
             <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
           </Flex>

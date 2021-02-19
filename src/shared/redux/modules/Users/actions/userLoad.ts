@@ -23,7 +23,6 @@ export const userLoad = (userId: string): ThunkAction<any, any, any, Action> => 
           ...userData.attributes,
         },
       },
-      currentIds: [userData?.attributes?.id],
     };
     dispatch(receiveUsers(usersByKey));
   } catch (err) {

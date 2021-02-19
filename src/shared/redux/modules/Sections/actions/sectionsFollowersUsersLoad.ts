@@ -8,16 +8,16 @@ import { receiveUsers } from '../../Users/actions/receiveUsers';
 import { sectionsFollowersUsersReceive } from './sectionsFollowersUsersReceive';
 import { sectionsFollowersUsersRequest } from './sectionsFollowersUsersRequest';
 
-export const sectionsFollowersUsersLoad = (sessionId: string): ThunkAction<any, any, any, Action> => async (
+export const sectionsFollowersUsersLoad = (userId: string): ThunkAction<any, any, any, Action> => async (
   dispatch?: Dispatch
 ) => {
-  if (!sessionId) return;
+  if (!userId) return;
 
   try {
     dispatch(sectionsFollowersUsersRequest());
 
     const { data }: ReceiveUsersResponse = await HttpClient.get(
-      `/users/${sessionId}/followers?sort=-createdAt&page[size]=5`
+      `/users/${userId}/followers?sort=-createdAt&page[size]=5`
     );
 
     const newUsersByKey = {

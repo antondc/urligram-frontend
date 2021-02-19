@@ -5,10 +5,10 @@ import { loadBookmarks } from 'Modules/Bookmarks/actions/loadBookmarks';
 import { selectBookmarksCurrentIds } from 'Modules/Bookmarks/selectors/selectBookmarksCurrentIds';
 import { selectBookmarksLoading } from 'Modules/Bookmarks/selectors/selectBookmarksLoading';
 import { selectBookmarksTotalItems } from 'Modules/Bookmarks/selectors/selectBookmarkTotalItems';
+import { selectCurrentFullUrl } from 'Modules/Routes/selectors/selectCurrentFullUrl';
 import { selectCurrentRouteQueryParamPage } from 'Modules/Routes/selectors/selectCurrentRouteQueryParamPage';
 import { loadPopularLists } from 'Modules/Sections/actions/loadPopularLists';
 import { selectPopularLists } from 'Modules/Sections/selectors/selectPopularLists';
-import { selectCurrentPathAndQuery } from '../../redux/modules/Routes/selectors/selectCurrentPathAndQuery';
 import { Bookmarks as BookmarksUi } from './Bookmarks';
 
 const Home: React.FC = () => {
@@ -19,7 +19,7 @@ const Home: React.FC = () => {
   const loading = useSelector(selectBookmarksLoading);
   const page = useSelector(selectCurrentRouteQueryParamPage);
   const totalItems = useSelector(selectBookmarksTotalItems);
-  const url = useSelector(selectCurrentPathAndQuery);
+  const url = useSelector(selectCurrentFullUrl);
 
   useEffect(() => {
     dispatch(loadPopularLists());

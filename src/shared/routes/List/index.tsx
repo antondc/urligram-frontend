@@ -4,10 +4,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { bookmarksLoadByListId } from 'Modules/Bookmarks/actions/bookmarksLoadByListId';
 import { selectBookmarksCurrentIds } from 'Modules/Bookmarks/selectors/selectBookmarksCurrentIds';
 import { selectBookmarksLoading } from 'Modules/Bookmarks/selectors/selectBookmarksLoading';
+import { selectBookmarksTotalItems } from 'Modules/Bookmarks/selectors/selectBookmarkTotalItems';
 import { loadListById } from 'Modules/Lists/actions/listLoadById';
 import { selectListsById } from 'Modules/Lists/selectors/selectListById';
 import { RootState } from 'Modules/rootType';
+import { selectCurrentFullUrl } from 'Modules/Routes/selectors/selectCurrentFullUrl';
 import { selectCurrentRouteParamListId } from 'Modules/Routes/selectors/selectCurrentRouteParamListId';
+import { selectCurrentRouteQueryParamPage } from 'Modules/Routes/selectors/selectCurrentRouteQueryParamPage';
 import { sectionsTagsInThisListLoad } from 'Modules/Sections/actions/sectionsTagsInThisListLoad';
 import { sectionsUsersInThisListLoad } from 'Modules/Sections/actions/sectionsUsersInThisListLoad';
 import { selectTagsInThisList } from 'Modules/Sections/selectors/selectTagsInThisList';
@@ -28,12 +31,18 @@ const List: React.FC = () => {
   const usersInThisListLoading = useSelector(selectUsersInThisListLoading);
   const tagsInThisList = useSelector(selectTagsInThisList);
   const tagsInThisListLoading = useSelector(selectTagsInThisListLoading);
+  const page = useSelector(selectCurrentRouteQueryParamPage);
+  const totalItems = useSelector(selectBookmarksTotalItems);
+  const url = useSelector(selectCurrentFullUrl);
 
   useEffect(() => {
     dispatch(loadListById(listId));
-    dispatch(bookmarksLoadByListId(listId));
     dispatch(sectionsTagsInThisListLoad(listId));
   }, []);
+
+  useEffect(() => {
+    dispatch(bookmarksLoadByListId(listId));
+  }, [page]);
 
   useEffect(() => {
     usersInThisListIds?.length && dispatch(sectionsUsersInThisListLoad(usersInThisListIds));
@@ -51,6 +60,9 @@ const List: React.FC = () => {
       tagsInThisList={tagsInThisList}
       tagsInThisListLoading={tagsInThisListLoading}
       onListJoin={onListJoin}
+      page={page}
+      totalItems={totalItems}
+      url={url}
     />
   );
 };
