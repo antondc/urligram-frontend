@@ -116,7 +116,6 @@
   },
   "dependencies": {
     "@antoniodcorrea/components": "^0.5.62",
-    "@popperjs/core": "^2.7.2",
     "axios": "^0.19.2",
     "babel-loader": "^8.1.0",
     "body-parser": "^1.18.3",
