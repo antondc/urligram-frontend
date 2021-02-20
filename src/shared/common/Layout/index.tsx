@@ -42,11 +42,17 @@ interface Props {
 }
 
 class Layout extends React.Component<Props> {
+  addBodyClasses() {
+    document.body.classList.remove('preload'); // Preventing animations on load
+    document.body.classList.add('isLoaded'); // Showing page on load
+  }
+
   componentDidMount() {
-    window.addEventListener('load', () => {
-      document.body.classList.remove('preload'); // Preventing animations on load
-      document.body.classList.add('isLoaded'); // Showing page on load
-    });
+    window.addEventListener('load', this.addBodyClasses);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('load', this.addBodyClasses);
   }
 
   componentDidUpdate = (prevProps) => {

@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { Fade } from '@antoniodcorrea/components';
-
 import './LayoutHelper.less';
 
 const KEY_CODE = 192; // Key: º
@@ -10,7 +8,7 @@ interface State {
   mounted: boolean;
 }
 
-class LayoutHelper extends React.Component<{}, State> {
+class LayoutHelper extends React.Component<unknown, State> {
   constructor(props) {
     super(props);
     this.state = {
@@ -20,6 +18,10 @@ class LayoutHelper extends React.Component<{}, State> {
 
   componentDidMount = () => {
     document.addEventListener('keydown', this.testKeyDown);
+  };
+
+  componentWillUnmount = () => {
+    document.removeEventListener('keydown', this.testKeyDown);
   };
 
   testKeyDown = (e) => {

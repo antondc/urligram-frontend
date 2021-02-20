@@ -4,7 +4,7 @@ import { renderToString } from 'react-dom/server';
 import Helmet from 'react-helmet';
 import { Provider } from 'react-redux';
 import { Route, StaticRouter } from 'react-router-dom';
-import { merge } from 'lodash';
+import merge from 'lodash/merge';
 import qs from 'qs';
 import serialize from 'serialize-javascript';
 
