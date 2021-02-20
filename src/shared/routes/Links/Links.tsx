@@ -1,5 +1,6 @@
 import React from 'react';
 
+import LinkRow from 'Components/LinkRow';
 import { LinkRowSkeletonGroup } from 'Components/LinkRow/LinkRowSkeletonGroup';
 import Main from 'Components/Main';
 import Pagination from 'Components/Pagination';
@@ -9,8 +10,7 @@ import SidebarListTags from 'Components/SidebarListTags';
 import SidebarListUsers from 'Components/SidebarListUsers';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
-import LinkRow from 'Root/src/shared/components/LinkRow';
-import { Border, Button, Flex, H4, Hr } from '@antoniodcorrea/components';
+import { Border, Flex, H4, Hr } from '@antoniodcorrea/components';
 
 import './Links.less';
 

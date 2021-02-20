@@ -10,6 +10,7 @@ import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListUsers from 'Components/SidebarListUsers';
 import { UserState } from 'Modules/Users/users.types';
 import { Border, Flex, H4, Hr } from '@antoniodcorrea/components';
+import Empty from '../../components/Empty';
 
 import './UserBookmarks.less';
 
@@ -64,6 +65,7 @@ export const UserBookmarks: React.FC<Props> = ({
               </React.Fragment>
             ))
           )}
+          {!bookmarksLoading && !bookmarksIds?.length && <Empty message="ⵁ This user has no bookmarks yet" />}
           <Flex horizontal="center">
             <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
           </Flex>

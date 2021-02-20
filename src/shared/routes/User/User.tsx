@@ -9,6 +9,7 @@ import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListUsers from 'Components/SidebarListUsers';
 import { UserState } from 'Modules/Users/users.types';
 import { AIcon, Border, Button, Fade, Flex, H4, Hr, Span, Tag } from '@antoniodcorrea/components';
+import Empty from '../../components/Empty';
 
 import './User.less';
 
@@ -124,6 +125,7 @@ export const User: React.FC<Props> = ({
               </React.Fragment>
             ))
           )}
+          {!bookmarksLoading && !bookmarksIds?.length && <Empty message="ⵁ This user has no bookmarks yet" />}
         </Border>
       </Main>
       <Sidebar>
