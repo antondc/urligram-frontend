@@ -36,7 +36,7 @@ const Links: React.FC = () => {
 
   useEffect(() => {
     dispatch(loadLinks());
-  }, [page]);
+  }, [url]);
 
   return (
     <LinksUi

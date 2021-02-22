@@ -115,7 +115,7 @@
     "webpack-node-externals": "^1.7.2"
   },
   "dependencies": {
-    "@antoniodcorrea/components": "^0.5.67",
+    "@antoniodcorrea/components": "^0.5.68",
     "axios": "^0.19.2",
     "babel-loader": "^8.1.0",
     "body-parser": "^1.18.3",

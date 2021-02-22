@@ -53,7 +53,6 @@ export const Links: React.FC<Props> = ({
               { label: 'Order', field: 'order' },
               { label: 'Count', field: 'count' },
             ]}
-            activeSort={sort}
             href={url}
           />
         </Flex>

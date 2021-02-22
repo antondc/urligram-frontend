@@ -16,21 +16,21 @@
     &:last-of-type {
       margin-right: 0;
     }
-
-    &:hover {
-      cursor: pointer;
-    }
   }
 
   &-listItemLink {
     color: @c-traslucid--hardest;
     transition: color @td-normal @ease;
 
+    &:hover {
+      cursor: pointer;
+    }
+
     @{c}-listItemIcon {
-      height: 16px;
-      width: 16px;
+      height: 12px;
+      width: 12px;
       fill: @c-traslucid--hardest;
-      transition: fill @td-normal @ease-outCubic, transform @td-fastest @ease-outCubic;
+      transition: fill @td-normal @ease-outCubic, transform @td-fastest @ease-outCubic !important;
     }
   }
 

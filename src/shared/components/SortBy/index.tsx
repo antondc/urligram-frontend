@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 
+import history from 'Services/History';
 import { URLWrapper } from 'Services/URLWrapper';
 import { A, ArrowUp, Border } from '@antoniodcorrea/components';
 
@@ -12,45 +13,53 @@ interface Props {
     label: string;
     field: string;
   }[];
-  activeSort: string;
 }
 
-export const SortBy: React.FC<Props> = ({ className, href, options, activeSort = 'id' }) => {
+export const SortBy: React.FC<Props> = ({ className, href, options }) => {
   const url = new URLWrapper(href);
+  const activeSort = url.getSearchParam('sort');
   const activeSortIsDesc = activeSort?.startsWith('-');
+  const [activeStateOption, setActiveOption] = useState('id');
+
+  const navigateAndSetOpeion = (e, displayedUrl: string) => {
+    e.preventDefault();
+
+    const url = new URLWrapper(displayedUrl);
+    const sort = url.getSearchParam('sort');
+
+    setActiveOption(sort);
+
+    history.push(displayedUrl);
+  };
 
   return (
     <Border className={'SortBy' + (className ? ' ' + className : '')} padding="small">
       <ul className={'SortBy-list'}>
         {options.map((item, index) => {
-          const isActiveItem = item.field === activeSort || `-${item.field}` === activeSort;
+          const isActiveItem = item.field === activeStateOption || `-${item.field}` === activeStateOption;
           const isActiveItemAndActiveSortIsAsc = !activeSortIsDesc && isActiveItem;
           const iconDesc = activeSortIsDesc && isActiveItem;
           url.upsertSearchParam('sort', item.field);
-          const optionUrlAsc = url.getPathAndSearch();
+          const redirectUrlAsc = url.getPathAndSearch();
           url.upsertSearchParam('sort', `-${item.field}`);
-          const optionUrlDesc = url.getPathAndSearch();
-          const displayedUrl = isActiveItemAndActiveSortIsAsc ? optionUrlDesc : optionUrlAsc;
+          const redirectUrlDesc = url.getPathAndSearch();
+          const displayedUrl = isActiveItemAndActiveSortIsAsc ? redirectUrlDesc : redirectUrlAsc;
 
           return (
-            <li
-              className={'SortBy-listItem' + (isActiveItem ? ' SortBy-listItem--active' : '')}
-              key={index}
-              id={isActiveItem && ' SortBy-listItem--active'}
-            >
-              <A href={displayedUrl} key={index} styled={false} frontend className={'SortBy-listItemLink'}>
+            <li className={'SortBy-listItem' + (isActiveItem ? ' SortBy-listItem--active' : '')} key={index}>
+              <A
+                href={displayedUrl}
+                onClick={(e) => navigateAndSetOpeion(e, displayedUrl)}
+                styled={false}
+                frontend
+                disabled
+                className="SortBy-listItemLink"
+              >
                 {item.label}{' '}
-                {/* <ArrowUp
+                <ArrowUp
                   size="small"
                   className={'SortBy-listItemIcon' + (iconDesc ? ' SortBy-listItemIcon--desc' : '')}
-                /> */}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 28.3 28.3"
-                  className={'SortBy-listItemIcon' + (iconDesc ? ' SortBy-listItemIcon--desc' : '')}
-                >
-                  <path d="M14.2 12.4L3.5 23 0 19.4 10.6 8.8l3.5-3.5 14.2 14.1-3.5 3.5-10.6-10.5z"></path>
-                </svg>
+                />
               </A>
             </li>
           );
