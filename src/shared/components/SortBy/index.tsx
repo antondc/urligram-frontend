@@ -6,6 +6,8 @@ import { A, ArrowUp, Border } from '@antoniodcorrea/components';
 
 import './SortBy.less';
 
+const DEFAULT_ACTIVE_SORT = 'id';
+
 interface Props {
   className?: string;
   href: string;
@@ -17,7 +19,7 @@ interface Props {
 
 export const SortBy: React.FC<Props> = ({ className, href, options }) => {
   const url = new URLWrapper(href);
-  const activeSort = url.getSearchParam('sort');
+  const activeSort = url.getSearchParam('sort') || DEFAULT_ACTIVE_SORT;
   const activeSortIsDesc = activeSort?.startsWith('-');
   const [activeOption, setActiveOption] = useState<string>(activeSort);
 
