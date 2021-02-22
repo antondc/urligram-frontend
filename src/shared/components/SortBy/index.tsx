@@ -19,9 +19,9 @@ export const SortBy: React.FC<Props> = ({ className, href, options }) => {
   const url = new URLWrapper(href);
   const activeSort = url.getSearchParam('sort');
   const activeSortIsDesc = activeSort?.startsWith('-');
-  const [activeStateOption, setActiveOption] = useState('id');
+  const [activeOption, setActiveOption] = useState<string>(activeSort);
 
-  const navigateAndSetOpeion = (e, displayedUrl: string) => {
+  const setActiveSortAndNavigate = (e: React.MouseEvent<HTMLAnchorElement>, displayedUrl: string) => {
     e.preventDefault();
 
     const url = new URLWrapper(displayedUrl);
@@ -36,7 +36,7 @@ export const SortBy: React.FC<Props> = ({ className, href, options }) => {
     <Border className={'SortBy' + (className ? ' ' + className : '')} padding="small">
       <ul className={'SortBy-list'}>
         {options.map((item, index) => {
-          const isActiveItem = item.field === activeStateOption || `-${item.field}` === activeStateOption;
+          const isActiveItem = item.field === activeOption || `-${item.field}` === activeOption;
           const isActiveItemAndActiveSortIsAsc = !activeSortIsDesc && isActiveItem;
           const iconDesc = activeSortIsDesc && isActiveItem;
           url.upsertSearchParam('sort', item.field);
@@ -49,7 +49,7 @@ export const SortBy: React.FC<Props> = ({ className, href, options }) => {
             <li className={'SortBy-listItem' + (isActiveItem ? ' SortBy-listItem--active' : '')} key={index}>
               <A
                 href={displayedUrl}
-                onClick={(e) => navigateAndSetOpeion(e, displayedUrl)}
+                onClick={(e) => setActiveSortAndNavigate(e, displayedUrl)}
                 styled={false}
                 frontend
                 disabled

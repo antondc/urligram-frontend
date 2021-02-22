@@ -20,7 +20,7 @@
 
   &-listItemLink {
     color: @c-traslucid--hardest;
-    transition: color @td-normal @ease;
+    transition: color @td-fast @ease-outCubic;
 
     &:hover {
       cursor: pointer;
@@ -30,7 +30,7 @@
       height: 12px;
       width: 12px;
       fill: @c-traslucid--hardest;
-      transition: fill @td-normal @ease-outCubic, transform @td-fastest @ease-outCubic !important;
+      transition: fill @td-fast @ease-outCubic, transform @td-fast @ease-outCubic !important;
     }
   }
 
