@@ -8,6 +8,7 @@ import Sidebar from 'Components/Sidebar';
 import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListTags from 'Components/SidebarListTags';
 import SidebarListUsers from 'Components/SidebarListUsers';
+import { SortBy } from 'Components/SortBy';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { Border, Flex, H4, Hr } from '@antoniodcorrea/components';
@@ -27,6 +28,7 @@ interface Props {
     offset: number;
   };
   totalItems: number;
+  sort: string;
 }
 
 export const Links: React.FC<Props> = ({
@@ -39,10 +41,23 @@ export const Links: React.FC<Props> = ({
   url,
   page,
   totalItems,
+  sort,
 }) => (
   <div className="Links">
     <Flex horizontal="between" vertical="top">
       <Main>
+        <Flex horizontal="right">
+          <SortBy
+            options={[
+              { label: 'Id', field: 'id' },
+              { label: 'Order', field: 'order' },
+              { label: 'Count', field: 'count' },
+            ]}
+            activeSort={sort}
+            href={url}
+          />
+        </Flex>
+        <Hr spacer size="small" />
         <Border grow>
           <H4>Links</H4>
           <Hr spacer />

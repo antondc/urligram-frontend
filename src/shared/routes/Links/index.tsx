@@ -13,6 +13,7 @@ import { selectMostUsedTags } from 'Modules/Sections/selectors/selectMostUsedTag
 import { selectMostUsedTagsLoading } from 'Modules/Sections/selectors/selectMostUsedTagsLoading';
 import { selectNewUsers } from 'Modules/Sections/selectors/selectNewUsers';
 import { selectNewUsersLoading } from 'Modules/Sections/selectors/selectNewUsersLoading';
+import { selectCurrentRouteQueryParamSort } from '../../redux/modules/Routes/selectors/selectCurrentRouteQueryParamSort';
 import { Links as LinksUi } from './Links';
 
 const Links: React.FC = () => {
@@ -26,6 +27,7 @@ const Links: React.FC = () => {
   const page = useSelector(selectCurrentRouteQueryParamPage);
   const totalItems = useSelector(selectLinksTotalItems);
   const url = useSelector(selectCurrentFullUrl);
+  const sort = useSelector(selectCurrentRouteQueryParamSort);
 
   useEffect(() => {
     dispatch(sectionsNewUsersLoad());
@@ -47,6 +49,7 @@ const Links: React.FC = () => {
       url={url}
       totalItems={totalItems}
       page={page}
+      sort={sort}
     />
   );
 };

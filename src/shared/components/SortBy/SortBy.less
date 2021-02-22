@@ -1,0 +1,50 @@
+@import '../../css/imports.less';
+
+@c: .SortBy;
+
+@{c} {
+  position: relative;
+
+  &-list {
+    display: flex;
+    align-items: center;
+  }
+
+  &-listItem {
+    margin-right: 15px;
+
+    &:last-of-type {
+      margin-right: 0;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &-listItemLink {
+    color: @c-traslucid--hardest;
+    transition: color @td-normal @ease;
+
+    @{c}-listItemIcon {
+      height: 16px;
+      width: 16px;
+      fill: @c-traslucid--hardest;
+      transition: fill @td-normal @ease-outCubic, transform @td-fastest @ease-outCubic;
+    }
+  }
+
+  &-listItem--active {
+    @{c}-listItemLink {
+      color: @c-base;
+    }
+
+    @{c}-listItemIcon {
+      fill: @c-base;
+    }
+
+    @{c}-listItemIcon--desc {
+      transform: scaleY(-1);
+    }
+  }
+}
