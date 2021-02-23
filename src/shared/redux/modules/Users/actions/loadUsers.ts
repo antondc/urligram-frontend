@@ -13,7 +13,7 @@ export const loadUsers = (): ThunkAction<any, any, any, Action> => async (dispat
     dispatch(requestUsers());
 
     const {
-      meta: { totalItems },
+      meta: { totalItems, sort },
       data,
     }: ReceiveUsersResponse = await HttpClient.get(APIBaseEndpoint + window.location.search);
 
@@ -25,6 +25,7 @@ export const loadUsers = (): ThunkAction<any, any, any, Action> => async (dispat
       currentIds: data.map((item) => item.id),
       meta: {
         totalItems,
+        sort,
       },
     };
     dispatch(receiveUsers(usersByKey));

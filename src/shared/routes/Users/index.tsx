@@ -13,6 +13,7 @@ import { selectNewUsersLoading } from 'Modules/Sections/selectors/selectNewUsers
 import { loadUsers } from 'Modules/Users/actions/loadUsers';
 import { selectUsersCurrentIds } from 'Modules/Users/selectors/selectUsersCurrentIds';
 import { selectUsersLoading } from 'Modules/Users/selectors/selectUsersLoading';
+import { selectUsersMetaSort } from 'Modules/Users/selectors/selectUsersMetaSort';
 import { selectUsersTotalItems } from 'Modules/Users/selectors/selectUsersTotalItems';
 import { Users as UsersUI } from './Users';
 
@@ -27,6 +28,7 @@ const Users: React.FC = () => {
   const page = useSelector(selectCurrentRouteQueryParamPage);
   const totalItems = useSelector(selectUsersTotalItems);
   const url = useSelector(selectCurrentFullUrl);
+  const sort = useSelector(selectUsersMetaSort);
 
   useEffect(() => {
     dispatch(sectionsMostFollowedUsersLoad());
@@ -49,6 +51,7 @@ const Users: React.FC = () => {
       page={page}
       totalItems={totalItems}
       url={url}
+      sort={sort}
     />
   );
 };

@@ -5,6 +5,7 @@ import Pagination from 'Components/Pagination';
 import Sidebar from 'Components/Sidebar';
 import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListUsers from 'Components/SidebarListUsers';
+import { SortBy } from 'Components/SortBy';
 import UserRow from 'Components/UserRow';
 import { UserRowSkeletonGroup } from 'Components/UserRow/UserRowSkeletonGroup';
 import { UserState } from 'Modules/Users/users.types';
@@ -25,6 +26,7 @@ export interface Props {
     offset: number;
   };
   totalItems: number;
+  sort: string;
 }
 
 export const Users: React.FC<Props> = ({
@@ -37,10 +39,24 @@ export const Users: React.FC<Props> = ({
   page,
   totalItems,
   url,
+  sort,
 }) => (
   <div className="Users">
     <Flex horizontal="between" vertical="top">
       <Main>
+        <Flex horizontal="right">
+          <SortBy
+            options={[
+              { label: 'Created', field: 'createdat' },
+              { label: 'Name', field: 'name' },
+              { label: 'Followers', field: 'followers' },
+              { label: 'Bookmarks', field: 'bookmarks' },
+            ]}
+            href={url}
+            currentSort={sort}
+          />
+        </Flex>
+        <Hr spacer size="small" />
         <Border className="Users-tags" grow>
           <H4>Users</H4>
           <Hr spacer />

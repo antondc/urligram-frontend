@@ -35,7 +35,8 @@ export interface UsersState {
   currentIds?: string[];
   loading?: boolean;
   meta?: {
-    totalItems: number;
+    totalItems?: number;
+    sort?: string;
   };
 }
 
@@ -60,7 +61,8 @@ export interface ReceiveUserItem {
 export interface ReceiveUsersResponse {
   data: ReceiveUserItem[];
   meta: {
-    totalItems: number;
+    totalItems?: number;
+    sort?: string;
   };
 }
 
