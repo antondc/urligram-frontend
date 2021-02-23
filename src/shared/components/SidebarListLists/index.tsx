@@ -29,7 +29,7 @@ const SidebarListLists: React.FC<Props> = ({ items, loading, title: blockTitle }
               </A>
             </div>
             <div id={id + '-' + index} className="SidebarListLists-listDescription">
-              {membersIds?.length && (
+              {!!membersIds?.length && (
                 <>
                   <RenderInPortal>
                     <Tooltip
@@ -46,7 +46,7 @@ const SidebarListLists: React.FC<Props> = ({ items, loading, title: blockTitle }
                   </A>
                 </>
               )}
-              {bookmarksIds?.length && (
+              {!!bookmarksIds?.length && (
                 <>
                   <RenderInPortal>
                     <Tooltip

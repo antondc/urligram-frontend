@@ -28,7 +28,7 @@ const SidebarListUsers: React.FC<Props> = ({ items, loading, title: blockTitle }
               </A>
             </div>
             <div className="SidebarListUsers-userDescription">
-              {followers?.length && (
+              {!!followers?.length && (
                 <>
                   <RenderInPortal>
                     <Tooltip
@@ -49,7 +49,7 @@ const SidebarListUsers: React.FC<Props> = ({ items, loading, title: blockTitle }
                   </A>
                 </>
               )}
-              {following?.length && (
+              {!!following?.length && (
                 <>
                   <RenderInPortal>
                     <Tooltip
@@ -70,7 +70,7 @@ const SidebarListUsers: React.FC<Props> = ({ items, loading, title: blockTitle }
                   </A>
                 </>
               )}
-              {bookmarksIds?.length && (
+              {!!bookmarksIds?.length && (
                 <>
                   <RenderInPortal>
                     <Tooltip
