@@ -51,7 +51,15 @@ export const UserBookmarks: React.FC<Props> = ({
     <Flex horizontal="between" vertical="top">
       <Main>
         <Flex horizontal="right">
-          <SortBy options={[{ label: 'Last created', field: 'createdat' }]} href={url} currentSort={sort} />
+          <SortBy
+            options={[
+              { label: 'Rating', field: 'vote' },
+              { label: 'Bookmarked', field: 'timesbookmarked' },
+              { label: 'Created', field: 'createdat' },
+            ]}
+            href={url}
+            currentSort={sort}
+          />
         </Flex>
         <Hr spacer size="small" />
         <Border grow>
