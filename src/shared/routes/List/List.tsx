@@ -49,6 +49,10 @@ export const List: React.FC<Props> = ({
   <div className="List">
     <Flex horizontal="between" vertical="top">
       <Main>
+        <Flex horizontal="right">
+          <Border padding="small">Sort pending here</Border>
+        </Flex>
+        <Hr spacer size="small" />
         <Border grow>
           <Flex horizontal="between">
             <H4>Bookmarks in {list?.name}</H4>

@@ -3,7 +3,6 @@ import React from 'react';
 import ListRow from 'Components/ListRow';
 import { ListRowSkeletonGroup } from 'Components/ListRow/ListSkeletonGroup';
 import Main from 'Components/Main';
-import MainHeader from 'Components/MainHeader';
 import Pagination from 'Components/Pagination';
 import Sidebar from 'Components/Sidebar';
 import SidebarBlock from 'Components/SidebarBlock';
@@ -11,7 +10,7 @@ import SidebarListTags from 'Components/SidebarListTags';
 import SidebarListUsers from 'Components/SidebarListUsers';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
-import { Border, Flex, Hr } from '@antoniodcorrea/components';
+import { Border, Flex, H4, Hr } from '@antoniodcorrea/components';
 
 import './Lists.less';
 
@@ -44,8 +43,13 @@ export const Lists: React.FC<Props> = ({
   <div className="Lists">
     <Flex horizontal="between" vertical="top">
       <Main>
+        <Flex horizontal="right">
+          <Border padding="small">Sort pending here</Border>
+        </Flex>
+        <Hr spacer size="small" />
         <Border grow>
-          <MainHeader title="My lists" />
+          <H4>My Lists</H4>
+          <Hr spacer size="small" />
           {listsIdsLoading ? (
             <ListRowSkeletonGroup length={listsIds?.length} />
           ) : (
