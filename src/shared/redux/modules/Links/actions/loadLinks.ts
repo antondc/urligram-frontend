@@ -3,18 +3,23 @@ import { ThunkAction } from 'redux-thunk';
 
 import { LinkState, ReceiveLinkItem, ReceiveLinksResponse } from 'Modules/Links/links.types';
 import HttpClient from 'Services/HttpClient';
+import { URLWrapper } from 'Services/URLWrapper';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
 import { receiveLinks } from './receiveLinks';
 import { requestLinks } from './requestLinks';
 
-export const loadLinks = (): ThunkAction<any, any, any, Action> => async (dispatch?: Dispatch) => {
+export const loadLinks = (size?: number): ThunkAction<any, any, any, Action> => async (dispatch?: Dispatch) => {
   try {
     dispatch(requestLinks());
+
+    const url = new URLWrapper(`/links${window.location.search}`);
+    !!size && url.upsertSearchParam('page[size]', size);
+    const apiEndpoint = url.getPathAndSearch();
 
     const {
       meta: { totalItems, sort },
       data,
-    }: ReceiveLinksResponse = await HttpClient.get(`/links${window.location.search}`);
+    }: ReceiveLinksResponse = await HttpClient.get(apiEndpoint);
 
     const linksByKey = {
       byKey: serializerFromArrayToByKey<ReceiveLinkItem, LinkState>({

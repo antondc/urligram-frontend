@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { loadLinksBySize } from 'Modules/Links/actions/loadLinksBySize';
+import { loadLinks } from 'Modules/Links/actions/loadLinks';
 import { selectLinksAllIds } from 'Modules/Links/selectors/selectLinksAllIds';
 import { selectLinksLoading } from 'Modules/Links/selectors/selectLinksLoading';
 import { sectionsMostFollowedUsersLoad } from 'Modules/Sections/actions/sectionsMostFollowedUsersLoad';
@@ -33,7 +33,7 @@ const Home: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    dispatch(loadLinksBySize(5));
+    dispatch(loadLinks(5));
   }, []);
 
   return (
