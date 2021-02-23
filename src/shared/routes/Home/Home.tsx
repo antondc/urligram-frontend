@@ -1,8 +1,8 @@
 import React from 'react';
 
 import A from 'Components/A';
-import BookmarkRow from 'Components/BookmarkRow';
-import { BookmarkRowSkeletonGroup } from 'Components/BookmarkRow/BookmarkRowSkeletonGroup';
+import LinkRow from 'Components/LinkRow';
+import { LinkRowSkeletonGroup } from 'Components/LinkRow/LinkRowSkeletonGroup';
 import Main from 'Components/Main';
 import Sidebar from 'Components/Sidebar';
 import SidebarBlock from 'Components/SidebarBlock';
@@ -14,25 +14,25 @@ import { AIcon, Border, Flex, H4, Hr, Tag } from '@antoniodcorrea/components';
 import './Home.less';
 
 export interface Props {
+  linksIds: number[];
+  linksIdsLoading: boolean;
   mostFollowedUsers: UserState[];
   mostFollowedUsersLoading: boolean;
   newUsers: UserState[];
   newUsersLoading: boolean;
   allTags: TagState[];
   allTagsLoading: boolean;
-  bookmarksCurrentIds: number[];
-  bookmarksLoading: boolean;
 }
 
 export const Home: React.FC<Props> = ({
+  linksIds,
+  linksIdsLoading,
   mostFollowedUsers,
   mostFollowedUsersLoading,
   newUsers,
   newUsersLoading,
   allTags,
   allTagsLoading,
-  bookmarksCurrentIds,
-  bookmarksLoading,
 }) => (
   <div className="Home">
     <Flex horizontal="between" vertical="top">
@@ -65,13 +65,13 @@ export const Home: React.FC<Props> = ({
             </A>
           </Flex>
           <Hr spacer />
-          {bookmarksLoading ? (
-            <BookmarkRowSkeletonGroup />
+          {linksIdsLoading ? (
+            <LinkRowSkeletonGroup length={linksIds?.length} />
           ) : (
-            bookmarksCurrentIds?.map((id, index) => (
+            linksIds?.map((id, index) => (
               <React.Fragment key={id}>
                 {!!index && <Hr spacer />}
-                <BookmarkRow id={id} />
+                <LinkRow id={id} />
               </React.Fragment>
             ))
           )}

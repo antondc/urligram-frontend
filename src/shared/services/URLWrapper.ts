@@ -2,6 +2,8 @@ import psl from 'psl';
 
 import { addDefaultHttps } from 'Tools/utils/url/AddDefaultHttps';
 
+const DEFAULT_URL = 'example.com';
+
 export class URLWrapper {
   private readonly url: URL;
   private readonly host: string;
@@ -10,9 +12,29 @@ export class URLWrapper {
 
   constructor(rawURL: string) {
     try {
-      const editedURL = addDefaultHttps(rawURL);
+      let formattedURL;
 
-      const url = new URL(editedURL);
+      // Test for cases when url is malformed
+      switch (true) {
+        case rawURL === '':
+          formattedURL = DEFAULT_URL;
+          break;
+        case rawURL === '/':
+          formattedURL = DEFAULT_URL;
+          break;
+        case rawURL.startsWith('/'):
+          formattedURL = `${DEFAULT_URL}${rawURL}`;
+          break;
+
+        default:
+          formattedURL = rawURL;
+          break;
+      }
+
+      const URLWithProtocol = addDefaultHttps(formattedURL);
+
+      const url = new URL(URLWithProtocol);
+
       this.url = url;
       this.host = url.hostname;
       this.path = url.pathname;
