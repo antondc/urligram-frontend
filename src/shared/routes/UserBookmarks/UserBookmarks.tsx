@@ -3,14 +3,15 @@ import React from 'react';
 import A from 'Components/A';
 import BookmarkRow from 'Components/BookmarkRow';
 import { BookmarkRowSkeletonGroup } from 'Components/BookmarkRow/BookmarkRowSkeletonGroup';
+import Empty from 'Components/Empty';
 import Main from 'Components/Main';
 import Pagination from 'Components/Pagination';
 import Sidebar from 'Components/Sidebar';
 import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListUsers from 'Components/SidebarListUsers';
+import { SortBy } from 'Components/SortBy';
 import { UserState } from 'Modules/Users/users.types';
 import { Border, Flex, H4, Hr } from '@antoniodcorrea/components';
-import Empty from '../../components/Empty';
 
 import './UserBookmarks.less';
 
@@ -29,6 +30,7 @@ interface Props {
     offset: number;
   };
   totalItems: number;
+  sort: string;
 }
 
 export const UserBookmarks: React.FC<Props> = ({
@@ -43,10 +45,15 @@ export const UserBookmarks: React.FC<Props> = ({
   page,
   totalItems,
   url,
+  sort,
 }) => (
   <div className="UserBookmarks">
     <Flex horizontal="between" vertical="top">
       <Main>
+        <Flex horizontal="right">
+          <SortBy options={[{ label: 'Last created', field: 'createdat' }]} href={url} currentSort={sort} />
+        </Flex>
+        <Hr spacer size="small" />
         <Border grow>
           <H4>
             Bookmarks of{' '}

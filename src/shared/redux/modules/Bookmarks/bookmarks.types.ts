@@ -33,6 +33,7 @@ export interface BookmarksState {
   loading?: boolean;
   meta?: {
     totalItems?: number;
+    sort?: string;
   };
 }
 
@@ -58,6 +59,7 @@ export interface ReceiveBookmarksResponse {
   data: ReceiveBookmarkItem[];
   meta: {
     totalItems: number;
+    sort: string;
   };
 }
 

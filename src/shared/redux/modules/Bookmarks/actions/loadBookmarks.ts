@@ -12,7 +12,7 @@ export const loadBookmarks = (): ThunkAction<any, any, any, Action> => async (di
     dispatch(requestBookmarks());
 
     const {
-      meta: { totalItems },
+      meta: { totalItems, sort },
       data,
     }: ReceiveBookmarksResponse = await HttpClient.get(`bookmarks${window.location.search}`);
 
@@ -24,6 +24,7 @@ export const loadBookmarks = (): ThunkAction<any, any, any, Action> => async (di
       currentIds: data.map((item) => item.id),
       meta: {
         totalItems,
+        sort,
       },
     };
     dispatch(receiveBookmarks(bookmarksByKey));

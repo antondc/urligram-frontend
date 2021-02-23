@@ -14,7 +14,7 @@ export const loadBookmarksByUserId = (userId: string): ThunkAction<any, any, any
     dispatch(requestBookmarks());
 
     const {
-      meta: { totalItems },
+      meta: { totalItems, sort },
       data,
     }: ReceiveBookmarksResponse = await HttpClient.get('/users/' + userId + '/bookmarks' + window.location.search);
 
@@ -26,6 +26,7 @@ export const loadBookmarksByUserId = (userId: string): ThunkAction<any, any, any
       currentIds: data.map((item) => item.id),
       meta: {
         totalItems,
+        sort,
       },
     };
     dispatch(receiveBookmarks(bookmarksByKey));
