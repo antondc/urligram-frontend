@@ -116,7 +116,7 @@ export const User: React.FC<Props> = ({
           </Flex>
           <Hr spacer />
           {!!bookmarksLoading ? (
-            <BookmarkRowSkeletonGroup length={bookmarksIds?.length} />
+            <BookmarkRowSkeletonGroup length={5} />
           ) : (
             bookmarksIds?.map((id, index) => (
               <React.Fragment key={id}>
