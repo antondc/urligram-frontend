@@ -17,6 +17,7 @@ interface Props {
 
 export const SortBy: React.FC<Props> = ({ className, href, options, currentSort }) => {
   const url = new URLWrapper(href);
+  url.deleteSearchParam('page[offset]'); // Reset offset on click
   const currentSortIsDesc = currentSort?.startsWith('-');
 
   return (

@@ -5,6 +5,7 @@ import Pagination from 'Components/Pagination';
 import Sidebar from 'Components/Sidebar';
 import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListTags from 'Components/SidebarListTags';
+import { SortBy } from 'Components/SortBy';
 import UserRow from 'Components/UserRow';
 import { UserRowSkeletonGroup } from 'Components/UserRow/UserRowSkeletonGroup';
 import { TagState } from 'Modules/Tags/tags.types';
@@ -28,6 +29,7 @@ export interface Props {
     offset: number;
   };
   totalItems: number;
+  sort: string;
 }
 
 export const Following: React.FC<Props> = ({
@@ -42,10 +44,23 @@ export const Following: React.FC<Props> = ({
   page,
   totalItems,
   url,
+  sort,
 }) => (
   <div className="Following">
     <Flex horizontal="between" vertical="top">
       <Main>
+        <Flex horizontal="right">
+          <SortBy
+            options={[
+              { label: 'Name', field: 'name' },
+              { label: 'Login', field: 'login' },
+              { label: 'Bookmarks', field: 'bookmarks' },
+            ]}
+            href={url}
+            currentSort={sort}
+          />
+        </Flex>
+        <Hr spacer size="small" />
         <Border className="Following-tags" grow>
           <H4>Users followed by @{user?.name}</H4>
           <Hr spacer />

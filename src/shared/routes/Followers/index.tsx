@@ -16,6 +16,7 @@ import { userLoad } from 'Modules/Users/actions/userLoad';
 import { selectUserById } from 'Modules/Users/selectors/selectUserById';
 import { selectUsersCurrentIds } from 'Modules/Users/selectors/selectUsersCurrentIds';
 import { selectUsersLoading } from 'Modules/Users/selectors/selectUsersLoading';
+import { selectUsersMetaSort } from 'Modules/Users/selectors/selectUsersMetaSort';
 import { selectUsersTotalItems } from 'Modules/Users/selectors/selectUsersTotalItems';
 import { Followers as FollowersUI } from './Followers';
 
@@ -32,6 +33,7 @@ const Followers: React.FC = () => {
   const page = useSelector(selectCurrentRouteQueryParamPage);
   const totalItems = useSelector(selectUsersTotalItems);
   const url = useSelector(selectCurrentFullUrl);
+  const sort = useSelector(selectUsersMetaSort);
 
   useEffect(() => {
     dispatch(userLoad(userId));
@@ -56,6 +58,7 @@ const Followers: React.FC = () => {
       page={page}
       totalItems={totalItems}
       url={url}
+      sort={sort}
     />
   );
 };

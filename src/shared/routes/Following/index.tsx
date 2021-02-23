@@ -17,6 +17,7 @@ import { selectUserById } from 'Modules/Users/selectors/selectUserById';
 import { selectUsersCurrentIds } from 'Modules/Users/selectors/selectUsersCurrentIds';
 import { selectUsersLoading } from 'Modules/Users/selectors/selectUsersLoading';
 import { selectUsersTotalItems } from 'Modules/Users/selectors/selectUsersTotalItems';
+import { selectUsersMetaSort } from '../../redux/modules/Users/selectors/selectUsersMetaSort';
 import { Following as FollowingUI } from './Following';
 
 const Following: React.FC = () => {
@@ -32,6 +33,7 @@ const Following: React.FC = () => {
   const page = useSelector(selectCurrentRouteQueryParamPage);
   const totalItems = useSelector(selectUsersTotalItems);
   const url = useSelector(selectCurrentFullUrl);
+  const sort = useSelector(selectUsersMetaSort);
 
   useEffect(() => {
     dispatch(userLoad(userId));
@@ -56,6 +58,7 @@ const Following: React.FC = () => {
       page={page}
       totalItems={totalItems}
       url={url}
+      sort={sort}
     />
   );
 };

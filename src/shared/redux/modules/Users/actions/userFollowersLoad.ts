@@ -12,7 +12,7 @@ export const userFollowersLoad = (userId: string): ThunkAction<any, any, any, Ac
     dispatch(requestUsers());
 
     const {
-      meta: { totalItems },
+      meta: { totalItems, sort },
       data,
     }: ReceiveUsersResponse = await HttpClient.get(`/users/${userId}/followers${window.location.search}`);
 
@@ -24,6 +24,7 @@ export const userFollowersLoad = (userId: string): ThunkAction<any, any, any, Ac
       currentIds: data.map((item) => item.id),
       meta: {
         totalItems,
+        sort,
       },
     };
     dispatch(receiveUsers(usersByKey));
