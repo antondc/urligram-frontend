@@ -12,7 +12,7 @@ export const loadLinks = (): ThunkAction<any, any, any, Action> => async (dispat
     dispatch(requestLinks());
 
     const {
-      meta: { totalItems },
+      meta: { totalItems, sort },
       data,
     }: ReceiveLinksResponse = await HttpClient.get(`/links${window.location.search}`);
 
@@ -24,6 +24,7 @@ export const loadLinks = (): ThunkAction<any, any, any, Action> => async (dispat
       allIds: data.map((item) => item.id),
       meta: {
         totalItems,
+        sort,
       },
     };
     dispatch(receiveLinks(linksByKey));

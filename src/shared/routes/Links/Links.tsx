@@ -49,11 +49,12 @@ export const Links: React.FC<Props> = ({
         <Flex horizontal="right">
           <SortBy
             options={[
-              { label: 'Id', field: 'id' },
-              { label: 'Order', field: 'order' },
-              { label: 'Count', field: 'count' },
+              { label: 'Last updated', field: 'last-bookmarked' },
+              { label: 'Rating', field: 'vote' },
+              { label: 'Bookmarks', field: 'most-bookmarked' },
             ]}
             href={url}
+            currentSort={sort}
           />
         </Flex>
         <Hr spacer size="small" />

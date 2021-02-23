@@ -30,7 +30,8 @@ export interface LinksState {
   loading?: boolean;
   allIds?: number[];
   meta?: {
-    totalItems: number;
+    totalItems?: number;
+    sort?: string;
   };
 }
 
@@ -59,7 +60,8 @@ export interface ReceiveLinkResponse {
 export interface ReceiveLinksResponse {
   data: ReceiveLinkItem[];
   meta: {
-    totalItems: number;
+    totalItems?: number;
+    sort?: string;
   };
 }
 

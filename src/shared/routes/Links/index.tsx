@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loadLinks } from 'Modules/Links/actions/loadLinks';
 import { selectLinksAllIds } from 'Modules/Links/selectors/selectLinksAllIds';
 import { selectLinksLoading } from 'Modules/Links/selectors/selectLinksLoading';
+import { selectLinksMetaSort } from 'Modules/Links/selectors/selectLinksMetaSort';
 import { selectLinksTotalItems } from 'Modules/Links/selectors/selectLinksTotalItems';
 import { selectCurrentFullUrl } from 'Modules/Routes/selectors/selectCurrentFullUrl';
 import { selectCurrentRouteQueryParamPage } from 'Modules/Routes/selectors/selectCurrentRouteQueryParamPage';
@@ -13,7 +14,6 @@ import { selectMostUsedTags } from 'Modules/Sections/selectors/selectMostUsedTag
 import { selectMostUsedTagsLoading } from 'Modules/Sections/selectors/selectMostUsedTagsLoading';
 import { selectNewUsers } from 'Modules/Sections/selectors/selectNewUsers';
 import { selectNewUsersLoading } from 'Modules/Sections/selectors/selectNewUsersLoading';
-import { selectCurrentRouteQueryParamSort } from '../../redux/modules/Routes/selectors/selectCurrentRouteQueryParamSort';
 import { Links as LinksUi } from './Links';
 
 const Links: React.FC = () => {
@@ -27,7 +27,7 @@ const Links: React.FC = () => {
   const page = useSelector(selectCurrentRouteQueryParamPage);
   const totalItems = useSelector(selectLinksTotalItems);
   const url = useSelector(selectCurrentFullUrl);
-  const sort = useSelector(selectCurrentRouteQueryParamSort);
+  const sort = useSelector(selectLinksMetaSort);
 
   useEffect(() => {
     dispatch(sectionsNewUsersLoad());
