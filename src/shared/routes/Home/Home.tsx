@@ -66,7 +66,7 @@ export const Home: React.FC<Props> = ({
           </Flex>
           <Hr spacer />
           {linksIdsLoading ? (
-            <LinkRowSkeletonGroup length={linksIds?.length} />
+            <LinkRowSkeletonGroup length={5} />
           ) : (
             linksIds?.map((id, index) => (
               <React.Fragment key={id}>
