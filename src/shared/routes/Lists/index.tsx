@@ -13,6 +13,7 @@ import { selectMostUsedTags } from 'Modules/Sections/selectors/selectMostUsedTag
 import { selectMostUsedTagsLoading } from 'Modules/Sections/selectors/selectMostUsedTagsLoading';
 import { selectNewUsers } from 'Modules/Sections/selectors/selectNewUsers';
 import { selectNewUsersLoading } from 'Modules/Sections/selectors/selectNewUsersLoading';
+import { selectListsMetaSort } from '../../redux/modules/Lists/selectors/selectListMetaSort';
 import { Lists as ListsUI } from './Lists';
 
 const Lists: React.FC = () => {
@@ -26,6 +27,7 @@ const Lists: React.FC = () => {
   const page = useSelector(selectCurrentRouteQueryParamPage);
   const totalItems = useSelector(selectListsTotalItems);
   const url = useSelector(selectCurrentFullUrl);
+  const sort = useSelector(selectListsMetaSort);
 
   useEffect(() => {
     dispatch(sectionsMostUsedTagsLoad());
@@ -47,6 +49,7 @@ const Lists: React.FC = () => {
       page={page}
       totalItems={totalItems}
       url={url}
+      sort={sort}
     />
   );
 };

@@ -12,7 +12,7 @@ export const loadLists = (): ThunkAction<any, any, any, Action> => async (dispat
     dispatch(loadListsRequest());
 
     const {
-      meta: { totalItems },
+      meta: { totalItems, sort },
       data,
     }: ReceiveListsResponse = await HttpClient.get('/lists' + window.location.search);
 
@@ -24,6 +24,7 @@ export const loadLists = (): ThunkAction<any, any, any, Action> => async (dispat
       currentIds: data.map((item) => item.id),
       meta: {
         totalItems,
+        sort,
       },
     };
     dispatch(loadListsReceive(listsByKey));

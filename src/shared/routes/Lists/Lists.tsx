@@ -11,6 +11,7 @@ import SidebarListUsers from 'Components/SidebarListUsers';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { Border, Flex, H4, Hr } from '@antoniodcorrea/components';
+import { SortBy } from '../../components/SortBy';
 
 import './Lists.less';
 
@@ -27,6 +28,7 @@ interface Props {
     offset: number;
   };
   totalItems: number;
+  sort: string;
 }
 
 export const Lists: React.FC<Props> = ({
@@ -39,12 +41,21 @@ export const Lists: React.FC<Props> = ({
   url,
   page,
   totalItems,
+  sort,
 }) => (
   <div className="Lists">
     <Flex horizontal="between" vertical="top">
       <Main>
         <Flex horizontal="right">
-          <Border padding="small">Sort pending here</Border>
+          <SortBy
+            options={[
+              { label: 'Date', field: 'createdat' },
+              { label: 'Updated', field: 'updatedat' },
+              { label: 'Members', field: 'members' },
+            ]}
+            href={url}
+            currentSort={sort}
+          />
         </Flex>
         <Hr spacer size="small" />
         <Border grow>
