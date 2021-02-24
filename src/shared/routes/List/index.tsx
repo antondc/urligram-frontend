@@ -18,6 +18,7 @@ import { selectTagsInThisListLoading } from 'Modules/Sections/selectors/selectTa
 import { selectUsersInThisList } from 'Modules/Sections/selectors/selectUsersInThisList';
 import { selectUsersInThisListIds } from 'Modules/Sections/selectors/selectUsersInThisListIds';
 import { selectUsersInThisListLoading } from 'Modules/Sections/selectors/selectUsersInThisListLoading';
+import { selectBookmarksMetaSort } from '../../redux/modules/Bookmarks/selectors/selectBookmarksMetaSort';
 import { List as ListUI } from './List';
 
 const List: React.FC = () => {
@@ -34,6 +35,7 @@ const List: React.FC = () => {
   const page = useSelector(selectCurrentRouteQueryParamPage);
   const totalItems = useSelector(selectBookmarksTotalItems);
   const url = useSelector(selectCurrentFullUrl);
+  const sort = useSelector(selectBookmarksMetaSort);
 
   useEffect(() => {
     dispatch(loadListById(listId));
@@ -42,7 +44,7 @@ const List: React.FC = () => {
 
   useEffect(() => {
     dispatch(bookmarksLoadByListId(listId));
-  }, [page]);
+  }, [url]);
 
   useEffect(() => {
     usersInThisListIds?.length && dispatch(sectionsUsersInThisListLoad(usersInThisListIds));
@@ -63,6 +65,7 @@ const List: React.FC = () => {
       page={page}
       totalItems={totalItems}
       url={url}
+      sort={sort}
     />
   );
 };

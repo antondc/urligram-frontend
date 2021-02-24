@@ -13,6 +13,7 @@ import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { Border, Flex, H4, Hr, PlusCircle, Tooltip } from '@antoniodcorrea/components';
 import { SvgClickEvent } from '@antoniodcorrea/components/Svg/Svg.types';
+import { SortBy } from '../../components/SortBy';
 
 import './List.less';
 
@@ -31,6 +32,7 @@ interface Props {
     offset: number;
   };
   totalItems: number;
+  sort: string;
 }
 
 export const List: React.FC<Props> = ({
@@ -45,12 +47,21 @@ export const List: React.FC<Props> = ({
   page,
   totalItems,
   url,
+  sort,
 }) => (
   <div className="List">
     <Flex horizontal="between" vertical="top">
       <Main>
         <Flex horizontal="right">
-          <Border padding="small">Sort pending here</Border>
+          <SortBy
+            options={[
+              { label: 'Rating', field: 'vote' },
+              { label: 'Bookmarks', field: 'timesbookmarked' },
+              { label: 'Date', field: 'createdat' },
+            ]}
+            href={url}
+            currentSort={sort}
+          />
         </Flex>
         <Hr spacer size="small" />
         <Border grow>

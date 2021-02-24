@@ -14,7 +14,7 @@ export const bookmarksLoadByListId = (listId: number): ThunkAction<any, any, any
     dispatch(requestBookmarks());
 
     const {
-      meta: { totalItems },
+      meta: { totalItems, sort },
       data: bookmarksData,
     }: ReceiveBookmarksResponse = await HttpClient.get(`/lists/${listId}/bookmarks${window.location.search}`);
 
@@ -26,6 +26,7 @@ export const bookmarksLoadByListId = (listId: number): ThunkAction<any, any, any
       currentIds: bookmarksData.map((item) => item.id),
       meta: {
         totalItems,
+        sort,
       },
     };
     dispatch(receiveBookmarks(bookmarksByKey));
