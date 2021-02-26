@@ -1,13 +1,13 @@
 image: node:latest
 
 before_script:
-  - sudo apt-get update -qq
-  - sudo apt-get install -qq git
-  - sudo 'which ssh-agent || ( apt-get install -qq openssh-client )'
-  - sudo eval $(ssh-agent -s)
-  - sudo ssh-add <(echo "$K8S_SECRET_SSH_PRIVATE_KEY" | base64 -d)
-  - sudo mkdir -p ~/.ssh
-  - sudo '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+  - apt-get update -qq
+  - apt-get install -qq git
+  - 'which ssh-agent || ( apt-get install -qq openssh-client )'
+  - eval $(ssh-agent -s)
+  - ssh-add <(echo "$K8S_SECRET_SSH_PRIVATE_KEY" | base64 -d)
+  - mkdir -p ~/.ssh
+  - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
 
 stages:
   - install
@@ -56,17 +56,17 @@ deploy_staging:
   only:
     - staging
   script:
-    - sudo ssh antoniodiaz@antoniodiaz.me "cd ~/www/linking_frontend_staging && rm -rf node_modules dist/* tmp"
-    - sudo ssh antoniodiaz@antoniodiaz.me "cd ~/www/linking_frontend_staging && git pull"
-    - sudo ssh antoniodiaz@antoniodiaz.me "source ~/.bash_profile && export NPM_TOKEN=${NPM_TOKEN} && cd ~/www/linking_frontend_staging && nvm use --delete-prefix && git checkout staging && npm ci --verbose && npm run stage"
-    - sudo ssh antoniodiaz@antoniodiaz.me "cd ~/www/linking_frontend_staging && mkdir -p tmp/always_restart.txt"
+    - ssh antoniodiaz@antoniodiaz.me "cd ~/www/linking_frontend_staging && rm -rf node_modules dist/* tmp"
+    - ssh antoniodiaz@antoniodiaz.me "cd ~/www/linking_frontend_staging && git pull"
+    - ssh antoniodiaz@antoniodiaz.me "source ~/.bash_profile && export NPM_TOKEN=${NPM_TOKEN} && cd ~/www/linking_frontend_staging && nvm use --delete-prefix && git checkout staging && npm ci --verbose && npm run stage"
+    - ssh antoniodiaz@antoniodiaz.me "cd ~/www/linking_frontend_staging && mkdir -p tmp/always_restart.txt"
 
 deploy_production:
   stage: deploy_production
   only:
     - master
   script:
-    - sudo ssh antoniodiaz@antoniodiaz.me "cd ~/www/linking_frontend_production && rm -rf node_modules dist/* tmp"
-    - sudo ssh antoniodiaz@antoniodiaz.me "cd ~/www/linking_frontend_production && git pull"
-    - sudo ssh antoniodiaz@antoniodiaz.me "source ~/.bash_profile && export NPM_TOKEN=${NPM_TOKEN} && cd ~/www/linking_frontend_production && nvm use --delete-prefix && git checkout master && npm ci --verbose && npm run prod"
-    - sudo ssh antoniodiaz@antoniodiaz.me "cd ~/www/linking_frontend_production && mkdir -p tmp/always_restart.txt"
+    - ssh antoniodiaz@antoniodiaz.me "cd ~/www/linking_frontend_production && rm -rf node_modules dist/* tmp"
+    - ssh antoniodiaz@antoniodiaz.me "cd ~/www/linking_frontend_production && git pull"
+    - ssh antoniodiaz@antoniodiaz.me "source ~/.bash_profile && export NPM_TOKEN=${NPM_TOKEN} && cd ~/www/linking_frontend_production && nvm use --delete-prefix && git checkout master && npm ci --verbose && npm run prod"
+    - ssh antoniodiaz@antoniodiaz.me "cd ~/www/linking_frontend_production && mkdir -p tmp/always_restart.txt"
