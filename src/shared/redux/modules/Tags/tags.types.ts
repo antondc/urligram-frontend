@@ -13,6 +13,7 @@ export interface TagsState {
   };
   loading?: boolean;
   currentIds?: number[];
+  searchIds?: number[];
 }
 
 export interface ReceiveTagItem {

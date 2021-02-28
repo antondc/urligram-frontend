@@ -1,10 +1,10 @@
 import { parse, stringify } from 'qs';
 
 export class QueryStringWrapper {
-  static decoder(str: string, a, b, type): string | number {
-    if (!isNaN(Number(str)) && type === 'value') return Number(str);
+  static decoder(str: string, defaultDecoder, b, type: string): string | number | string[] | number[] {
+    if (type === 'value' && !isNaN(Number(str))) return Number(str);
 
-    return decodeURI(str);
+    return decodeURIComponent(defaultDecoder(str));
   }
 
   static parseQueryString(string: string): { [key: string]: unknown } {
@@ -15,9 +15,11 @@ export class QueryStringWrapper {
     return queryParams;
   }
 
-  static stringifyQueryParams(params: { [key: string]: unknown }): string {
-    const queryParams = stringify(params);
+  static stringifyQueryParams(params: { [key: string]: unknown } | any): string {
+    const queryParams = stringify(params, {
+      arrayFormat: 'brackets',
+    });
 
-    return queryParams;
+    return decodeURIComponent(queryParams);
   }
 }

@@ -12,9 +12,10 @@ export const loadLinks = (size?: number): ThunkAction<any, any, any, Action> => 
   try {
     dispatch(requestLinks());
 
-    const url = new URLWrapper(`/links${window.location.search}`);
-    !!size && url.upsertSearchParam('page[size]', size);
-    const apiEndpoint = url.getPathAndSearch();
+    const path = `/links${window.location.search}`;
+    const urlObject = new URLWrapper(path);
+    !!size && urlObject.upsertSearchParam('page[size]', size);
+    const apiEndpoint = urlObject.getPathAndSearch();
 
     const {
       meta: { totalItems, sort },

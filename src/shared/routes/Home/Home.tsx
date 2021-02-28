@@ -4,6 +4,7 @@ import A from 'Components/A';
 import LinkRow from 'Components/LinkRow';
 import { LinkRowSkeletonGroup } from 'Components/LinkRow/LinkRowSkeletonGroup';
 import Main from 'Components/Main';
+// import { Select } from 'Components/Select';
 import Sidebar from 'Components/Sidebar';
 import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListUsers from 'Components/SidebarListUsers';
@@ -46,7 +47,7 @@ export const Home: React.FC<Props> = ({
             allTags?.map((item) => (
               <A
                 className="SidebarListTags-tag"
-                href={`/links?filter[tags]=${item.name}`}
+                href={`/links?filter[tags][]=${item.name}`}
                 key={`SidebarListTags-tags-${item.id}`}
                 styled={false}
                 frontend

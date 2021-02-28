@@ -4,6 +4,7 @@ import LinkRow from 'Components/LinkRow';
 import { LinkRowSkeletonGroup } from 'Components/LinkRow/LinkRowSkeletonGroup';
 import Main from 'Components/Main';
 import Pagination from 'Components/Pagination';
+import SelectSync, { Value } from 'Components/SelectSync';
 import Sidebar from 'Components/Sidebar';
 import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListTags from 'Components/SidebarListTags';
@@ -29,6 +30,15 @@ interface Props {
   };
   totalItems: number;
   sort: string;
+  tagsSearch: any;
+  tagsSearchFormatted: {
+    label: string;
+    value: string;
+  }[];
+  onInputChange: (string: string) => void;
+  onChange: (string: string) => void;
+  allTags: TagState[];
+  currentQueryParamFilterTags: Value[];
 }
 
 export const Links: React.FC<Props> = ({
@@ -42,10 +52,25 @@ export const Links: React.FC<Props> = ({
   page,
   totalItems,
   sort,
+  tagsSearchFormatted,
+  onInputChange,
+  allTags,
+  currentQueryParamFilterTags,onChange
 }) => (
   <div className="Links">
     <Flex horizontal="between" vertical="top">
       <Main>
+        <SelectSync
+          defaultValue={currentQueryParamFilterTags}
+          defaultOptions={allTags.map((item) => ({ label: item.name, value: item.name }))}
+          options={[...tagsSearchFormatted, ...allTags.map((item) => ({ label: item.name, value: item.name }))].filter(
+            (v, i, a) => a.findIndex((t) => t.value === v.value) === i
+          )}
+          onInputChange={onInputChange}
+          onChange={onChange}
+          grow
+        />
+        <Hr spacer size="big" />
         <Flex horizontal="right">
           <SortBy
             options={[

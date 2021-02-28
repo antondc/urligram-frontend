@@ -100,7 +100,7 @@ export const User: React.FC<Props> = ({
           <Hr spacer size="small" />
           <Flex>
             {user?.tags?.map((item) => (
-              <A className="User-tag" href={`/links?filter[tags]=${item.name}`} key={item.id} styled={false} frontend>
+              <A className="User-tag" href={`/links?filter[tags][]=${item.name}`} key={item.id} styled={false} frontend>
                 <Tag size="small">{item.name}</Tag>
               </A>
             ))}

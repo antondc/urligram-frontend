@@ -20,7 +20,7 @@ const SidebarListTags: React.FC<Props> = ({ items, loading }) => (
       items.map((item) => (
         <A
           className="SidebarListTags-tag"
-          href={`/links?filter[tags]=${item.name}`}
+          href={`/links?filter[tags][]=${item.name}`}
           key={`SidebarListTags-tags-${item.id}`}
           styled={false}
           frontend

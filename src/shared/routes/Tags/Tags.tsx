@@ -39,7 +39,13 @@ export const Tags: React.FC<Props> = ({
               <>...loading</>
             ) : (
               tags?.map((item) => (
-                <A className="Tags-tag" href={`/links?filter[tags]=${item.name}`} key={item.id} styled={false} frontend>
+                <A
+                  className="Tags-tag"
+                  href={`/links?filter[tags][]=${item.name}`}
+                  key={item.id}
+                  styled={false}
+                  frontend
+                >
                   <Tag size="small">{item.name}</Tag>
                 </A>
               ))

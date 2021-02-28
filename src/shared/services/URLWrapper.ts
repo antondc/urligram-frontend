@@ -69,7 +69,7 @@ export class URLWrapper {
   }
 
   getPathAndSearch(): string | undefined {
-    return `${this.getPath()}?${this.getSearchString()}`;
+    return decodeURIComponent(`${this.getPath()}?${this.getSearchString()}`);
   }
 
   getSearchParam(field: string): any {

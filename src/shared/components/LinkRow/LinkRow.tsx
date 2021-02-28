@@ -42,7 +42,7 @@ export const LinkRow: React.FC<LinkRow> = ({ id, title, url, tags = [], img, sta
       </div>
       <div className="LinkRow-leftBottom">
         {tags?.map((item) => (
-          <A className="LinkRow-tag" href={`/links?filter[tags]=${item.name}`} key={item.id} styled={false} frontend>
+          <A className="LinkRow-tag" href={`/links?filter[tags][]=${item.name}`} key={item.id} styled={false} frontend>
             <Tag size="small">{item.name}</Tag>
           </A>
         ))}
