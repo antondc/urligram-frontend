@@ -1,13 +1,13 @@
-import { parse, stringify } from 'qs';
+import { defaultDecoder, parse, ParsedQs, stringify } from 'qs';
 
 export class QueryStringWrapper {
-  static decoder(str: string, defaultDecoder, b, type: string): string | number | string[] | number[] {
+  static decoder(str: string, defaultDecoder: defaultDecoder, b, type: string): string | number | ParsedQs {
     if (type === 'value' && !isNaN(Number(str))) return Number(str);
 
-    return decodeURIComponent(defaultDecoder(str));
+    return defaultDecoder(str);
   }
 
-  static parseQueryString(string: string): { [key: string]: unknown } {
+  static parseQueryString(string: string): Record<string, unknown> {
     const queryParams = parse(string.replace(/^\?/, ''), {
       decoder: QueryStringWrapper.decoder,
     });
@@ -15,7 +15,7 @@ export class QueryStringWrapper {
     return queryParams;
   }
 
-  static stringifyQueryParams(params: { [key: string]: unknown } | any): string {
+  static stringifyQueryParams(params: Record<string, unknown>): string {
     const queryParams = stringify(params, {
       arrayFormat: 'brackets',
     });

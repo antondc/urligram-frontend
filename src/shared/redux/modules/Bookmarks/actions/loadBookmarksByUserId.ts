@@ -15,7 +15,7 @@ export const loadBookmarksByUserId = (userId: string, size?: number): ThunkActio
     dispatch(requestBookmarks());
 
     const url = new URLWrapper(`/users/${userId}/bookmarks${window.location.search}`);
-    !!size && url.upsertSearchParam('page[size]', size);
+    !!size && url.upsertSearchParams({ page: { size } });
     const apiEndpoint = url.getPathAndSearch();
 
     const {

@@ -16,10 +16,7 @@ export const tagsSearchLoad = (searchString?: string): ThunkAction<any, any, any
 
     const path = '/tags';
     const urlObject = new URLWrapper(path);
-    if (!!searchString) {
-      urlObject.deleteSearchParam('filter[tags][]');
-      urlObject.upsertSearchParam('filter[tags][]', searchString);
-    }
+    if (!!searchString) urlObject.upsertSearchParams({ filter: { tags: [searchString] } });
     const apiEndpoint = urlObject.getPathAndSearch();
 
     const { data }: ReceiveTagsResponse = await HttpClient.get(apiEndpoint);

@@ -46,8 +46,9 @@ export const calculatePages = ({
 
       const myUrl = new URLWrapper(path);
       isNotFirstPage
-        ? myUrl.upsertSearchParam('page[offset]', currentPageOffset)
-        : myUrl.deleteSearchParam('page[offset]');
+        ? myUrl.upsertSearchParams({ page: { offset: currentPageOffset } })
+        : myUrl.deleteSearchParam('page.offset');
+
       const pathWithCurrentOffSet = myUrl.getPathAndSearch();
 
       const page = {

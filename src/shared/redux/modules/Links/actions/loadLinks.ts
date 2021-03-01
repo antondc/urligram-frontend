@@ -14,7 +14,7 @@ export const loadLinks = (size?: number): ThunkAction<any, any, any, Action> => 
 
     const path = `/links${window.location.search}`;
     const urlObject = new URLWrapper(path);
-    !!size && urlObject.upsertSearchParam('page[size]', size);
+    !!size && urlObject.upsertSearchParams({ page: { size } });
     const apiEndpoint = urlObject.getPathAndSearch();
 
     const {

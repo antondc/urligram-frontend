@@ -116,6 +116,7 @@
   },
   "dependencies": {
     "@antoniodcorrea/components": "^0.5.68",
+    "@types/qs": "^6.9.5",
     "@types/react-select": "^4.0.13",
     "axios": "^0.19.2",
     "babel-loader": "^8.1.0",

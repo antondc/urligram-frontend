@@ -19,7 +19,6 @@ import { tagsSearchLoad } from 'Modules/Tags/actions/tagsSearchLoad';
 import { selectTagsAll } from 'Modules/Tags/selectors/selectAllTags';
 import { selectTagsSearch } from 'Modules/Tags/selectors/selectTagsSearch';
 import history from 'Services/History';
-import { QueryStringWrapper } from 'Services/QueryStringWrapper';
 import { URLWrapper } from 'Services/URLWrapper';
 import { Links as LinksUi } from './Links';
 
@@ -57,23 +56,15 @@ const Links: React.FC = () => {
   }, [url]);
 
   const onInputChange = (string: string) => {
-    console.log('onInputChange: ', string);
     !!string && dispatch(tagsSearchLoad(string));
   };
 
   const onChange = (values) => {
-    const tags = values?.map((item) => item.value);
+    const tags: string[] = values?.map((item) => item.value);
     const myUrl = new URLWrapper(window.document.location.href);
-    myUrl.deleteSearchParam('filter[tags][]');
-    const string = QueryStringWrapper.stringifyQueryParams({
-      filter: {
-        tags,
-      },
-    });
-    // TODO: Fix malformed url
-    console.clear();
-    console.log('string: ', string);
-    const redirectPath = myUrl.getPathAndSearch() + string;
+
+    myUrl.upsertSearchParams({ filter: { tags } });
+    const redirectPath = myUrl.getPathAndSearch();
 
     history.push(redirectPath);
   };

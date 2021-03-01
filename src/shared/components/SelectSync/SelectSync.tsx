@@ -69,7 +69,7 @@ export const SelectSync: React.FC<Props> = ({ options, value, defaultOptions, on
     <Select
       className={'SelectSync__container'}
       classNamePrefix={'SelectSync'}
-      closeMenuOnSelect={false}
+      closeMenuOnSelect
       value={value}
       isMulti
       placeholder=" "

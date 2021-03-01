@@ -27,9 +27,9 @@ export const SortBy: React.FC<Props> = ({ className, href, options, currentSort 
           const isActiveItem = item.field === currentSort || `-${item.field}` === currentSort;
           const isActiveItemAndActiveSortIsAsc = !currentSortIsDesc && isActiveItem;
           const iconDesc = currentSortIsDesc && isActiveItem;
-          url.upsertSearchParam('sort', item.field);
+          url.upsertSearchParams({ sort: item.field });
           const redirectUrlAsc = url.getPathAndSearch();
-          url.upsertSearchParam('sort', `-${item.field}`);
+          url.upsertSearchParams({ sort: `-${item.field}` });
           const redirectUrlDesc = url.getPathAndSearch();
           const displayedUrl = isActiveItemAndActiveSortIsAsc ? redirectUrlDesc : redirectUrlAsc;
 
