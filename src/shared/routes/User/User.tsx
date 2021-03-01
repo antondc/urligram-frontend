@@ -3,13 +3,13 @@ import React from 'react';
 import A from 'Components/A';
 import BookmarkRow from 'Components/BookmarkRow';
 import { BookmarkRowSkeletonGroup } from 'Components/BookmarkRow/BookmarkRowSkeletonGroup';
+import Empty from 'Components/Empty';
 import Main from 'Components/Main';
 import Sidebar from 'Components/Sidebar';
 import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListUsers from 'Components/SidebarListUsers';
 import { UserState } from 'Modules/Users/users.types';
-import { AIcon, Border, Button, Fade, Flex, H4, Hr, Span, Tag } from '@antoniodcorrea/components';
-import Empty from '../../components/Empty';
+import { AIcon, Border, Flex, H4, Hr, Span, Tag } from '@antoniodcorrea/components';
 
 import './User.less';
 

@@ -8,12 +8,12 @@ import Sidebar from 'Components/Sidebar';
 import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListTags from 'Components/SidebarListTags';
 import SidebarListUsers from 'Components/SidebarListUsers';
+import { SortBy } from 'Components/SortBy';
 import { ListState } from 'Modules/Lists/lists.types';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { Border, Flex, H4, Hr, PlusCircle, Tooltip } from '@antoniodcorrea/components';
 import { SvgClickEvent } from '@antoniodcorrea/components/Svg/Svg.types';
-import { SortBy } from '../../components/SortBy';
 
 import './List.less';
 
