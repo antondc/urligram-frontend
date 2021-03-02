@@ -62,7 +62,8 @@ export const Links: React.FC<Props> = ({
     <Flex horizontal="between" vertical="top">
       <Main>
         <SelectSync
-          defaultValue={currentQueryParamFilterTags}
+          label="Select tags"
+          value={currentQueryParamFilterTags}
           defaultOptions={allTags.map((item) => ({ label: item.name, value: item.name }))}
           options={[...tagsSearchFormatted, ...allTags.map((item) => ({ label: item.name, value: item.name }))].filter(
             (v, i, a) => a.findIndex((t) => t.value === v.value) === i
@@ -71,18 +72,16 @@ export const Links: React.FC<Props> = ({
           onChange={onChange}
           grow
         />
-        <Hr spacer size="big" />
-        <Flex horizontal="right">
-          <SortBy
-            options={[
-              { label: 'Last updated', field: 'last-bookmarked' },
-              { label: 'Rating', field: 'vote' },
-              { label: 'Bookmarks', field: 'most-bookmarked' },
-            ]}
-            href={url}
-            currentSort={sort}
-          />
-        </Flex>
+        <Hr spacer size="small" />
+        <SortBy
+          options={[
+            { label: 'Last updated', field: 'last-bookmarked' },
+            { label: 'Rating', field: 'vote' },
+            { label: 'Bookmarks', field: 'most-bookmarked' },
+          ]}
+          href={url}
+          currentSort={sort}
+        />
         <Hr spacer size="small" />
         <Border grow>
           <H4>Links</H4>

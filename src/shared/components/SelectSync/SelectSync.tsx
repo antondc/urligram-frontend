@@ -13,12 +13,17 @@ import { Value } from '.';
 import './SelectSync.less';
 
 interface Props {
+  placeholder?: string;
+  label?: string;
+  focusOrContent: boolean;
   options: Value[];
-  value: Value | Value[];
+  value: Value[];
   defaultOptions: Value[];
   grow?: boolean;
   onChange: (params: unknown) => void;
   onInputChange: (params: unknown) => void;
+  onFocus: () => void;
+  onBlur: () => void;
 }
 
 const Menu = ({ ...props }: { limit: number } & MenuProps<any, any>): JSX.Element => {
@@ -31,7 +36,7 @@ const Menu = ({ ...props }: { limit: number } & MenuProps<any, any>): JSX.Elemen
       {showOptions ? (
         props.children
       ) : (
-        <div className="Select__option Select__option--is-disabled">Max limit reached</div>
+        <div className="SelectSync__option SelectSync__option--is-disabled">Max limit reached</div>
       )}
     </Components.Menu>
   );
@@ -43,16 +48,9 @@ const MultiValueRemove = (props: MultiValueProps<unknown>): JSX.Element => (
   </Components.MultiValueRemove>
 );
 
-const SelectContainer = ({ children, ...props }: Value & ContainerProps<any, any>): JSX.Element => {
-  const { value, label } = props;
-
-  return (
-    <Components.SelectContainer {...props}>
-      {children}
-      <label className={'Select__label ' + (value ? 'Select__label--active' : '')}>{label}</label>
-    </Components.SelectContainer>
-  );
-};
+const SelectContainer = ({ children, ...props }: ContainerProps<any, any>): JSX.Element => (
+  <Components.SelectContainer {...props}>{children}</Components.SelectContainer>
+);
 
 const DropdownIndicator = (props: IndicatorProps<any, any>): JSX.Element => (
   <Components.DropdownIndicator {...props}>
@@ -64,7 +62,19 @@ const LoadingMessage = (): null => null;
 
 const NoOptionsMessage = (): null => null;
 
-export const SelectSync: React.FC<Props> = ({ options, value, defaultOptions, onInputChange, grow, onChange }) => (
+export const SelectSync: React.FC<Props> = ({
+  options,
+  value,
+  defaultOptions,
+  onInputChange,
+  grow,
+  onChange,
+  placeholder,
+  label,
+  focusOrContent,
+  onFocus,
+  onBlur,
+}) => (
   <div className={'SelectSync ' + (grow ? 'SelectSync--grow' : '')}>
     <Select
       className={'SelectSync__container'}
@@ -72,12 +82,14 @@ export const SelectSync: React.FC<Props> = ({ options, value, defaultOptions, on
       closeMenuOnSelect
       value={value}
       isMulti
-      placeholder=" "
+      placeholder={!label ? placeholder : ' '}
       cacheOptions
       defaultOptions={defaultOptions}
       options={options}
       onInputChange={onInputChange}
       onChange={onChange}
+      onFocus={onFocus}
+      onBlur={onBlur}
       components={{
         Menu: Menu,
         DropdownIndicator: DropdownIndicator,
@@ -87,5 +99,8 @@ export const SelectSync: React.FC<Props> = ({ options, value, defaultOptions, on
         NoOptionsMessage: NoOptionsMessage,
       }}
     />
+    {!placeholder && (
+      <label className={'SelectSync__label ' + (focusOrContent ? 'SelectSync__label--active' : '')}>{label}</label>
+    )}
   </div>
 );

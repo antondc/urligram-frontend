@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import { SelectSync as SelectSyncUi } from './SelectSync';
 
@@ -8,34 +8,46 @@ export type Value = {
 };
 
 interface Props {
+  placeholder?: string;
+  label?: string;
   options: Value[];
-  defaultValue: Value | Value[];
+  value: Value[];
   defaultOptions: Value[];
   grow?: boolean;
   onChange?: (params?: unknown) => void;
   onInputChange?: (params: unknown) => void;
 }
 
-const SelectSync: React.FC<Props> = ({ options, defaultValue, defaultOptions, onInputChange, grow, onChange }) => {
-  const [values, setValues] = useState<Value[] | Value>();
-
-  useEffect(() => {
-    setValues(defaultValue);
-  }, []);
+const SelectSync: React.FC<Props> = ({
+  placeholder,
+  label,
+  options,
+  value,
+  defaultOptions,
+  onInputChange,
+  grow,
+  onChange,
+}) => {
+  const [focus, setFocus] = useState(false);
+  const focusOrContent = !!value?.length || focus;
 
   const onValueChange = (values) => {
-    setValues(values);
     onChange(values);
   };
 
   return (
     <SelectSyncUi
+      placeholder={placeholder}
+      label={label}
+      focusOrContent={focusOrContent}
       options={options}
-      value={values}
+      value={value}
       defaultOptions={defaultOptions}
       onInputChange={onInputChange}
       onChange={onValueChange}
       grow={grow}
+      onFocus={() => setFocus(true)}
+      onBlur={() => setFocus(false)}
     />
   );
 };

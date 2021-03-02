@@ -7,8 +7,6 @@
   position: relative;
   flex-wrap: nowrap;
   align-items: flex-end;
-  height: 50px;
-  // .default();
 
   &__container:not(.noClass) {
     height: 40px;
@@ -37,17 +35,19 @@
     height: @fs-normal;
     top: 13px;
     left: 12px;
+    padding: 0 7px 0 4px;
     color: @c-disabled;
-    background: @c-background;
-    transition: all @td-fast @ease;
+    background: @c-transparent;
+    transform: translate(-4px, 0) scale(1);
+    transition: transform @td-fast @ease;
+    will-change: transform;
     pointer-events: none;
   }
 
   &__control--is-focused:not(.noClass) ~ @{c}__label,
   @{c}__label--active {
-    padding: 0 7px 0 6px;
     background: @c-background;
-    transform: translate(-18px, -22px) scale(0.8);
+    transform: translate(-13px, -23px) scale(0.8);
   }
 
   &__indicator-separator:not(.noClass) {
