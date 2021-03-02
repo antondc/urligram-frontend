@@ -21,7 +21,7 @@ const SelectSync: React.FC<Props> = ({ options, defaultValue, defaultOptions, on
 
   useEffect(() => {
     setValues(defaultValue);
-  }, [defaultValue]);
+  }, []);
 
   const onValueChange = (values) => {
     setValues(values);

@@ -55,7 +55,8 @@ export const Links: React.FC<Props> = ({
   tagsSearchFormatted,
   onInputChange,
   allTags,
-  currentQueryParamFilterTags,onChange
+  currentQueryParamFilterTags,
+  onChange,
 }) => (
   <div className="Links">
     <Flex horizontal="between" vertical="top">
