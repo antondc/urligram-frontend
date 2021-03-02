@@ -14,6 +14,7 @@ interface Props {
   value: Value[];
   defaultOptions: Value[];
   grow?: boolean;
+  maxItems?: number;
   onChange?: (params?: unknown) => void;
   onInputChange?: (params: unknown) => void;
 }
@@ -27,6 +28,7 @@ const SelectSync: React.FC<Props> = ({
   onInputChange,
   grow,
   onChange,
+  maxItems,
 }) => {
   const [focus, setFocus] = useState(false);
   const focusOrContent = !!value?.length || focus;
@@ -48,6 +50,7 @@ const SelectSync: React.FC<Props> = ({
       grow={grow}
       onFocus={() => setFocus(true)}
       onBlur={() => setFocus(false)}
+      maxItems={maxItems}
     />
   );
 };

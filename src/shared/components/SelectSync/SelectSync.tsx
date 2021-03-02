@@ -1,5 +1,5 @@
 import React from 'react';
-import Select, {
+import CreatableSelect, {
   components as Components,
   ContainerProps,
   IndicatorProps,
@@ -20,16 +20,24 @@ interface Props {
   value: Value[];
   defaultOptions: Value[];
   grow?: boolean;
+  maxItems?: number;
   onChange: (params: unknown) => void;
   onInputChange: (params: unknown) => void;
   onFocus: () => void;
   onBlur: () => void;
 }
 
-const Menu = ({ ...props }: { limit: number } & MenuProps<any, any>): JSX.Element => {
-  const { limit } = props;
-  const optionSelectedLength = props.getValue().length || 0;
-  const showOptions = !limit || optionSelectedLength < limit;
+type MenyType = {
+  selectProps: {
+    maxItems: number;
+  };
+};
+
+const Menu = ({ ...props }: MenyType & MenuProps<any, any>): JSX.Element => {
+  const {
+    selectProps: { maxItems },
+  } = props;
+  const showOptions = !maxItems || (props.getValue().length || 0) < maxItems;
 
   return (
     <Components.Menu {...props}>
@@ -74,9 +82,10 @@ export const SelectSync: React.FC<Props> = ({
   focusOrContent,
   onFocus,
   onBlur,
+  maxItems,
 }) => (
   <div className={'SelectSync ' + (grow ? 'SelectSync--grow' : '')}>
-    <Select
+    <CreatableSelect
       className={'SelectSync__container'}
       classNamePrefix={'SelectSync'}
       closeMenuOnSelect
@@ -90,6 +99,7 @@ export const SelectSync: React.FC<Props> = ({
       onChange={onChange}
       onFocus={onFocus}
       onBlur={onBlur}
+      maxItems={maxItems}
       components={{
         Menu: Menu,
         DropdownIndicator: DropdownIndicator,

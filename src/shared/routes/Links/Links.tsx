@@ -71,6 +71,7 @@ export const Links: React.FC<Props> = ({
           onInputChange={onInputChange}
           onChange={onChange}
           grow
+          maxItems={4}
         />
         <Hr spacer size="small" />
         <SortBy
