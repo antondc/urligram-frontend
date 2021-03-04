@@ -19,7 +19,7 @@
   }
 
   &-rows {
-    display: none;
+    // display: none;
   }
 
   &-column {
@@ -68,11 +68,13 @@
   &-row {
     height: 10px;
     width: 100%;
-    background-color: @c-traslucid--lightest;
+    box-sizing: border-box;
+    border-bottom: 1px solid @c-traslucid--hard;
   }
 
   &-rowGap {
     height: 10px;
     width: 100%;
+    box-sizing: border-box;
   }
 }
