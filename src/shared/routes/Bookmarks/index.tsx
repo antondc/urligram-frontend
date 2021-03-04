@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loadBookmarks } from 'Modules/Bookmarks/actions/loadBookmarks';
 import { selectBookmarksCurrentIds } from 'Modules/Bookmarks/selectors/selectBookmarksCurrentIds';
 import { selectBookmarksLoading } from 'Modules/Bookmarks/selectors/selectBookmarksLoading';
+import { selectBookmarksMetaSort } from 'Modules/Bookmarks/selectors/selectBookmarksMetaSort';
 import { selectBookmarksTotalItems } from 'Modules/Bookmarks/selectors/selectBookmarkTotalItems';
 import { selectCurrentFullUrl } from 'Modules/Routes/selectors/selectCurrentFullUrl';
 import { selectCurrentRouteQueryParamPage } from 'Modules/Routes/selectors/selectCurrentRouteQueryParamPage';
@@ -20,6 +21,7 @@ const Home: React.FC = () => {
   const page = useSelector(selectCurrentRouteQueryParamPage);
   const totalItems = useSelector(selectBookmarksTotalItems);
   const url = useSelector(selectCurrentFullUrl);
+  const sort = useSelector(selectBookmarksMetaSort);
 
   useEffect(() => {
     dispatch(loadPopularLists());
@@ -37,6 +39,7 @@ const Home: React.FC = () => {
       page={page}
       totalItems={totalItems}
       url={url}
+      sort={sort}
     />
   );
 };

@@ -2,12 +2,11 @@ import React from 'react';
 
 import BookmarkRow from 'Components/BookmarkRow';
 import Main from 'Components/Main';
-import MainHeader from 'Components/MainHeader';
 import Pagination from 'Components/Pagination';
 import Sidebar from 'Components/Sidebar';
 import { ListState } from 'Modules/Lists/lists.types';
 import { BookmarkRowSkeletonGroup } from 'Root/src/shared/components/BookmarkRow/BookmarkRowSkeletonGroup';
-import { Border, Flex, Hr } from '@antoniodcorrea/components';
+import { Border, Flex, Hr, SortBy } from '@antoniodcorrea/components';
 
 import './Bookmarks.less';
 
@@ -21,14 +20,25 @@ interface Props {
     offset: number;
   };
   totalItems: number;
+  sort: string;
 }
 
-export const Bookmarks: React.FC<Props> = ({ url, bookmarksIds, popularLists, loading, page, totalItems }) => (
+export const Bookmarks: React.FC<Props> = ({ url, bookmarksIds, popularLists, loading, page, totalItems, sort }) => (
   <div className="Bookmarks">
     <Flex horizontal="between" vertical="top">
       <Main>
+        <Flex horizontal="right">
+          <SortBy
+            options={[
+              { label: 'Created at', field: 'createdAt' },
+              { label: 'Rating', field: 'vote' },
+            ]}
+            href={url}
+            currentSort={sort}
+          />
+        </Flex>
+        <Hr spacer size="small" />
         <Border grow>
-          <MainHeader title="My bookmarks" />
           {loading ? (
             <BookmarkRowSkeletonGroup length={bookmarksIds?.length} />
           ) : (
