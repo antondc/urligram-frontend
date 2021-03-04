@@ -10,7 +10,7 @@
     "API_URL": "https://linking-api-staging.antoniodiaz.me/api/v1/"
   },
   "production": {
-    "PORT_HTTP": 19079,
+    "PORT_HTTP": 11917,
     "PORT_HTTPS": 0,
     "API_URL": "https://linking-api-production.antoniodiaz.me/api/v1/"
   },
