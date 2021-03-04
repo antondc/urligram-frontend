@@ -51,7 +51,7 @@ export const Home: React.FC<Props> = ({
                 styled={false}
                 frontend
               >
-                <Tag size="big">{item.name}</Tag>
+                <Tag size="medium">{item.name}</Tag>
               </A>
             ))
           )}
