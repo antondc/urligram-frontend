@@ -4,15 +4,13 @@ import LinkRow from 'Components/LinkRow';
 import { LinkRowSkeletonGroup } from 'Components/LinkRow/LinkRowSkeletonGroup';
 import Main from 'Components/Main';
 import Pagination from 'Components/Pagination';
-import SelectSync, { Value } from 'Components/SelectSync';
 import Sidebar from 'Components/Sidebar';
 import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListTags from 'Components/SidebarListTags';
 import SidebarListUsers from 'Components/SidebarListUsers';
-import { SortBy } from 'Components/SortBy';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
-import { Border, Flex, H4, Hr } from '@antoniodcorrea/components';
+import { Border, Flex, H4, Hr, Select, SelectValue, SortBy } from '@antoniodcorrea/components';
 
 import './Links.less';
 
@@ -36,9 +34,9 @@ interface Props {
     value: string;
   }[];
   onInputChange: (string: string) => void;
-  onChange: (string: string) => void;
+  onChange: (string: SelectValue[]) => void;
   allTags: TagState[];
-  currentQueryParamFilterTags: Value[];
+  currentQueryParamFilterTags: SelectValue[];
 }
 
 export const Links: React.FC<Props> = ({
@@ -61,7 +59,19 @@ export const Links: React.FC<Props> = ({
   <div className="Links">
     <Flex horizontal="between" vertical="top">
       <Main>
-        <SelectSync
+        <Flex horizontal="right">
+          <SortBy
+            options={[
+              { label: 'Last updated', field: 'last-bookmarked' },
+              { label: 'Rating', field: 'vote' },
+              { label: 'Bookmarks', field: 'most-bookmarked' },
+            ]}
+            href={url}
+            currentSort={sort}
+          />
+        </Flex>
+        <Hr spacer size="nano" />
+        <Select
           label="Select tags"
           value={currentQueryParamFilterTags}
           defaultOptions={allTags.map((item) => ({ label: item.name, value: item.name }))}
@@ -70,18 +80,8 @@ export const Links: React.FC<Props> = ({
           )}
           onInputChange={onInputChange}
           onChange={onChange}
-          grow
           maxItems={4}
-        />
-        <Hr spacer size="small" />
-        <SortBy
-          options={[
-            { label: 'Last updated', field: 'last-bookmarked' },
-            { label: 'Rating', field: 'vote' },
-            { label: 'Bookmarks', field: 'most-bookmarked' },
-          ]}
-          href={url}
-          currentSort={sort}
+          grow
         />
         <Hr spacer size="small" />
         <Border grow>

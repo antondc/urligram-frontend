@@ -8,10 +8,9 @@ import Sidebar from 'Components/Sidebar';
 import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListTags from 'Components/SidebarListTags';
 import SidebarListUsers from 'Components/SidebarListUsers';
-import { SortBy } from 'Components/SortBy';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
-import { Border, Flex, H4, Hr } from '@antoniodcorrea/components';
+import { Border, Flex, H4, Hr, SortBy } from '@antoniodcorrea/components';
 
 import './Lists.less';
 

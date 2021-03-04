@@ -5,11 +5,10 @@ import Pagination from 'Components/Pagination';
 import Sidebar from 'Components/Sidebar';
 import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListUsers from 'Components/SidebarListUsers';
-import { SortBy } from 'Components/SortBy';
 import UserRow from 'Components/UserRow';
 import { UserRowSkeletonGroup } from 'Components/UserRow/UserRowSkeletonGroup';
 import { UserState } from 'Modules/Users/users.types';
-import { Border, Flex, H4, Hr } from '@antoniodcorrea/components';
+import { Border, Flex, H4, Hr, SortBy } from '@antoniodcorrea/components';
 
 import './Users.less';
 
@@ -47,10 +46,9 @@ export const Users: React.FC<Props> = ({
         <Flex horizontal="right">
           <SortBy
             options={[
-              { label: 'Created', field: 'createdat' },
-              { label: 'Name', field: 'name' },
-              { label: 'Followers', field: 'followers' },
-              { label: 'Bookmarks', field: 'bookmarks' },
+              { label: 'Last updated', field: 'last-bookmarked' },
+              { label: 'Rating', field: 'vote' },
+              { label: 'Bookmarks', field: 'most-bookmarked' },
             ]}
             href={url}
             currentSort={sort}

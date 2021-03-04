@@ -25,7 +25,7 @@ const SidebarListTags: React.FC<Props> = ({ items, loading }) => (
           styled={false}
           frontend
         >
-          <Tag size="big">{item.name}</Tag>
+          <Tag size="medium">{item.name}</Tag>
         </A>
       ))
     ) : (

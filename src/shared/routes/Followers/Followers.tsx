@@ -5,12 +5,11 @@ import Pagination from 'Components/Pagination';
 import Sidebar from 'Components/Sidebar';
 import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListTags from 'Components/SidebarListTags';
-import { SortBy } from 'Components/SortBy';
 import UserRow from 'Components/UserRow';
 import { UserRowSkeletonGroup } from 'Components/UserRow/UserRowSkeletonGroup';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
-import { Border, Flex, H4, Hr } from '@antoniodcorrea/components';
+import { Border, Flex, H4, Hr, SortBy } from '@antoniodcorrea/components';
 
 import './Followers.less';
 

@@ -9,9 +9,8 @@ import Pagination from 'Components/Pagination';
 import Sidebar from 'Components/Sidebar';
 import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListUsers from 'Components/SidebarListUsers';
-import { SortBy } from 'Components/SortBy';
 import { UserState } from 'Modules/Users/users.types';
-import { Border, Flex, H4, Hr } from '@antoniodcorrea/components';
+import { Border, Flex, H4, Hr, SortBy } from '@antoniodcorrea/components';
 
 import './UserBookmarks.less';
 
