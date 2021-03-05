@@ -15,15 +15,16 @@ const customViewports = {
     name: 'Desktop',
     styles: {
       width: '1200px',
-      height: '963px',
+      height: '900px',
+      padding: '50px',
     },
   },
   Tablet: {
     name: 'Tablet',
     styles: {
-      width: '730px',
-      height: '801px',
-      padding: '0px',
+      width: '700px',
+      height: '800px',
+      padding: '50px',
     },
   },
 };

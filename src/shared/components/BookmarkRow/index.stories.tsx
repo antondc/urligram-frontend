@@ -39,33 +39,31 @@ const knobs = {
 };
 
 export const Default: React.ReactNode = () => (
-  <div style={{ padding: '30px' }}>
-    <FadeInOut valueToUpdate={knobs.skeleton()} speed="fastest">
-      {!knobs.skeleton() ? (
-        <>
-          <BookmarkRow {...props} />
-          <Hr size="small" spacer />
-          <BookmarkRow {...props} />
-          <Hr size="small" spacer />
-          <BookmarkRow {...props} />
-          <Hr size="small" spacer />
-          <BookmarkRow {...props} />
-          <Hr size="small" spacer />
-          <BookmarkRow {...props} />
-        </>
-      ) : (
-        <>
-          <BookmarkRowSkeleton {...props} />
-          <Hr size="small" spacer />
-          <BookmarkRowSkeleton {...props} />
-          <Hr size="small" spacer />
-          <BookmarkRowSkeleton {...props} />
-          <Hr size="small" spacer />
-          <BookmarkRowSkeleton {...props} />
-          <Hr size="small" spacer />
-          <BookmarkRowSkeleton {...props} />
-        </>
-      )}
-    </FadeInOut>
-  </div>
+  <FadeInOut valueToUpdate={knobs.skeleton()} speed="fastest">
+    {!knobs.skeleton() ? (
+      <>
+        <BookmarkRow {...props} />
+        <Hr size="small" spacer />
+        <BookmarkRow {...props} />
+        <Hr size="small" spacer />
+        <BookmarkRow {...props} />
+        <Hr size="small" spacer />
+        <BookmarkRow {...props} />
+        <Hr size="small" spacer />
+        <BookmarkRow {...props} />
+      </>
+    ) : (
+      <>
+        <BookmarkRowSkeleton {...props} />
+        <Hr size="small" spacer />
+        <BookmarkRowSkeleton {...props} />
+        <Hr size="small" spacer />
+        <BookmarkRowSkeleton {...props} />
+        <Hr size="small" spacer />
+        <BookmarkRowSkeleton {...props} />
+        <Hr size="small" spacer />
+        <BookmarkRowSkeleton {...props} />
+      </>
+    )}
+  </FadeInOut>
 );
