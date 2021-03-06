@@ -64,7 +64,7 @@ export const Users: React.FC<Props> = ({
             ) : (
               usersCurrentIds?.map((id, index) => (
                 <React.Fragment key={id}>
-                  {!!index && <Hr spacer />}
+                  {!!index && <Hr spacer size="small" />}
                   <UserRow id={id} />
                 </React.Fragment>
               ))

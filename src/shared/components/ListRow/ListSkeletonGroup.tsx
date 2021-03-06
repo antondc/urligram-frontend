@@ -16,7 +16,7 @@ export const ListRowSkeletonGroup: React.FC<Props> = ({ length }) => {
       {Array.from({ length: lengthNoZero }, (_, index) => (
         <React.Fragment key={index}>
           <ListRowSkeleton id={index} />
-          <Hr spacer />
+          <Hr spacer size="small" />
         </React.Fragment>
       ))}
     </>

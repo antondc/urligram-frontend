@@ -1,8 +1,7 @@
 import React from 'react';
 
-import A from 'Components/A';
 import { UserState } from 'Modules/Users/users.types';
-import { Border, Hr, Span, Tag } from '@antoniodcorrea/components';
+import { A, Border, Hr, Span, Tag } from '@antoniodcorrea/components';
 
 import './UserRow.less';
 
@@ -27,37 +26,34 @@ export const UserRow: React.FC<UserRow> = ({
 }) => (
   <Border grow className="UserRow" data-test-id="UserRow" key={'UserRow-' + id}>
     <div className="UserRow-left">
-      <div className="UserRow-leftTop">
-        <A href={`users/${id}`} styled frontend>
-          <Span bold size="small" className="UserRow-title">
-            @{name}
-          </Span>
-        </A>
-        <Hr spacer size="micro" />
-        <Hr spacer size="micro" />
-        <Hr spacer size="zero" />
-        <Span size="nano">
-          <A href={`users/${id}/lists`} styled frontend disabled={!ammountLists}>
-            {ammountLists} lists
-          </A>
-          <span className="UserRow-dot">·</span>
-          <A href={`users/${id}/bookmarks`} styled frontend disabled={!ammountBookmarks}>
-            {ammountBookmarks} bookmarks
-          </A>
-          <span className="UserRow-dot">·</span>
-          <A href={`users/${id}`} styled frontend disabled={!connections}>
-            {connections} connections
-          </A>
-          <span className="UserRow-dot">·</span> {sinceTranslation?.toLocaleLowerCase()} {createdAt}
+      <A href={`users/${id}`} styled frontend>
+        <Span bold size="small" className="UserRow-title">
+          @{name}
         </Span>
-      </div>
-      <div className="UserRow-leftBottom">
-        {tags?.map((item) => (
-          <A className="UserRow-tag" href={`/links?filter[tags][]=${item.name}`} key={item.id} styled={false} frontend>
-            <Tag size="small">{item.name}</Tag>
-          </A>
-        ))}
-      </div>
+      </A>
+      <Span size="nano">
+        <A href={`users/${id}/lists`} styled frontend disabled={!ammountLists}>
+          {ammountLists} lists
+        </A>
+        <span className="UserRow-dot">·</span>
+        <A href={`users/${id}/bookmarks`} styled frontend disabled={!ammountBookmarks}>
+          {ammountBookmarks} bookmarks
+        </A>
+        <span className="UserRow-dot">·</span>
+        <A href={`users/${id}`} styled frontend disabled={!connections}>
+          {connections} connections
+        </A>
+        <span className="UserRow-dot">·</span> {sinceTranslation?.toLocaleLowerCase()} {createdAt}
+      </Span>
+    </div>
+    <div className="UserRow-center">
+      {tags?.map((item) => (
+        <A className="UserRow-tag" href={`/links?filter[tags][]=${item.name}`} key={item.id} styled={false} frontend>
+          <Tag variant="simple" size="nano">
+            {item.name}
+          </Tag>
+        </A>
+      ))}
     </div>
     <div className="UserRow-right">
       <A href={`users/${id}`} styled={false} frontend>

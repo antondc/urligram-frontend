@@ -3,7 +3,7 @@ import React from 'react';
 import { FadeInOut, Hr } from '@antoniodcorrea/components';
 import { boolean, withKnobs } from '@storybook/addon-knobs';
 import { UserRow } from './UserRow';
-import { UserRowSkeletonGroup } from './UserRowSkeletonGroup';
+import { UserRowSkeleton } from './UserRowSkeleton';
 
 export default {
   component: UserRow,
@@ -24,8 +24,8 @@ const props = {
   connections: 2,
   ammountLists: 4,
   ammountBookmarks: 4,
-  createdAt: new Date(),
-  updatedAt: new Date(),
+  createdAt: '3 de abril de 2008',
+  updatedAt: '3 de abril de 2008',
   sinceTranslation: 'since',
   tags: [
     {
@@ -50,7 +50,55 @@ const props = {
     },
     {
       id: 6,
-      name: 'Six',
+      name: 'Aleluya',
+    },
+    {
+      id: 7,
+      name: 'Meoplasto',
+    },
+    {
+      id: 8,
+      name: 'Sincalope',
+    },
+    {
+      id: 9,
+      name: 'Leinham',
+    },
+    {
+      id: 10,
+      name: 'Rodchanka',
+    },
+    {
+      id: 11,
+      name: 'Engolopasto',
+    },
+    {
+      id: 12,
+      name: 'Trilobites',
+    },
+    {
+      id: 13,
+      name: 'Meoplasto',
+    },
+    {
+      id: 14,
+      name: 'Sincalope',
+    },
+    {
+      id: 15,
+      name: 'Leinham',
+    },
+    {
+      id: 16,
+      name: 'Rodchanka',
+    },
+    {
+      id: 17,
+      name: 'Engolopasto',
+    },
+    {
+      id: 18,
+      name: 'Trilobites',
     },
   ],
 };
@@ -60,29 +108,7 @@ const knobs = {
 };
 
 export const Default: React.ReactNode = () => (
-  <div style={{ padding: '30px' }}>
-    <FadeInOut valueToUpdate={knobs.skeleton()} speed="fastest">
-      {!knobs.skeleton() ? (
-        <>
-          <UserRow {...props} />
-          <Hr size="small" spacer />
-          <UserRow {...props} />
-          <Hr size="small" spacer />
-          <UserRow {...props} />
-          <Hr size="small" spacer />
-          <UserRow {...props} />
-          <Hr size="small" spacer />
-          <UserRow {...props} />
-          <Hr size="small" spacer />
-          <UserRow {...props} />
-          <Hr size="small" spacer />
-          <UserRow {...props} />
-        </>
-      ) : (
-        <>
-          <UserRowSkeletonGroup />
-        </>
-      )}
-    </FadeInOut>
-  </div>
+  <FadeInOut valueToUpdate={knobs.skeleton()} speed="fastest">
+    {!knobs.skeleton() ? <UserRow {...props} /> : <UserRowSkeleton id={1} />}
+  </FadeInOut>
 );

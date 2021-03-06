@@ -4,88 +4,45 @@
 
 @{c} {
   display: flex;
-  justify-content: space-between;
-  height: 100px;
-  padding: 10px 20px;
-  line-height: unset;
-
-  &-icons {
-    display: flex;
-  }
-
-  &-icon {
-    margin-right: 7px;
-  }
-
-  &-iconHover {
-    .hoverTransition(0.5);
-  }
+  flex-wrap: nowrap;
+  padding: 9px 19px;
 
   &-left {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    flex-basis: calc(100% - 50px);
+    flex-shrink: 0;
     margin-right: 10px;
-    overflow: hidden;
+    padding-top: 4px;
   }
 
-  &-leftTop {
+  &-center {
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-  }
-
-  &-dot {
-    margin: 0 10px;
-  }
-
-  &-leftBottom {
-    display: flex;
-    min-height: 25px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-content: space-between;
+    flex: 1;
+    height: 36px;
+    max-height: 36px;
+    margin-right: 6px;
+    padding-top: 2px;
     overflow-x: scroll;
-    overflow-y: visible;
+    overflow-y: hidden;
 
     .hideScrollbar;
   }
 
   &-tag {
-    margin: 0 8px 0 0;
+    margin-bottom: 4px;
+    margin-right: 4px;
   }
 
   &-right {
-    display: flex;
+    flex-shrink: 0;
   }
 
   &-image {
-    height: 30px;
-    width: 30px;
-    object-fit: cover;
-    object-position: center;
-    border: 1px solid @c-base;
+    height: 37px;
+    width: 37px;
     border-radius: 50%;
-  }
-
-  &-rightEnd {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-
-  &-stats {
-    font-family: @ff-din;
-    font-size: @fs-small;
-    line-height: @fh-small;
-  }
-
-  &-stat {
-    display: flex;
-    justify-content: flex-end;
-    align-items: baseline;
-    text-align: end;
-  }
-
-  &-statIcon {
-    margin-right: 3px;
   }
 }

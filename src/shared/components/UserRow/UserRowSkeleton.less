@@ -4,96 +4,67 @@
 
 @{c} {
   display: flex;
-  justify-content: space-between;
-  height: 100px;
-  padding: 10px 20px;
-  line-height: unset;
-
-  &-icons {
-    display: flex;
-  }
-
-  &-icon {
-    margin-right: 7px;
-  }
-
-  &-iconHover {
-    .hoverTransition(0.5);
-  }
+  flex-wrap: nowrap;
+  padding: 9px 19px;
+  border-color: @c-traslucid;
+  box-shadow: 4px 4px 0 0 @c-traslucid;
 
   &-left {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    flex-basis: calc(100% - 50px);
+    flex-shrink: 0;
     margin-right: 10px;
-    overflow: hidden;
+    padding-top: 2px;
   }
 
-  &-leftTop {
+  &-title,
+  &-details {
+    height: 15px;
+    width: 150px;
+  }
+
+  &-center {
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-  }
-
-  &-title {
-    width: 300px;
-  }
-
-  &-detail {
-    height: @fs-micro;
-    width: 70px;
-  }
-
-  &-dot {
-    margin: 0 10px;
-  }
-
-  &-leftBottom {
-    display: flex;
-    min-height: 25px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-content: space-between;
+    flex: 1;
+    height: 36px;
+    max-height: 36px;
+    margin-right: 6px;
+    padding-top: 2px;
     overflow-x: scroll;
-    overflow-y: visible;
+    overflow-y: hidden;
 
     .hideScrollbar;
   }
 
   &-tag {
-    height: 25px;
+    width: 70px;
+    margin-bottom: 4px;
+    margin-right: 4px;
+  }
+
+  &-tag1 {
+    width: 60px;
+  }
+
+  &-tag2 {
+    width: 40px;
+  }
+
+  &-tag3 {
     width: 50px;
-    margin: 0 8px 0 0;
   }
 
   &-right {
-    display: flex;
+    flex-shrink: 0;
   }
 
   &-image {
-    height: 30px;
-    width: 30px;
+    height: 37px;
+    width: 37px;
     border-radius: 50%;
-  }
-
-  &-rightEnd {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-
-  &-stats {
-    font-family: @ff-din;
-    font-size: @fs-small;
-    line-height: @fh-small;
-  }
-
-  &-stat {
-    display: flex;
-    justify-content: flex-end;
-    align-items: baseline;
-    text-align: end;
-  }
-
-  &-statIcon {
-    margin-right: 3px;
   }
 }

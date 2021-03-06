@@ -11,36 +11,24 @@ interface UserRowSkeleton {
 export const UserRowSkeleton: React.FC<UserRowSkeleton> = ({ id }) => (
   <Border grow className="UserRowSkeleton" data-test-id="UserRowSkeleton" key={'UserRowSkeleton-' + id}>
     <div className="UserRowSkeleton-left">
-      <div className="UserRowSkeleton-leftTop">
-        <SkeletonItem hollow className="UserRowSkeleton-title" />
-        <Hr spacer size="micro" />
-        <Hr spacer size="micro" />
-        <Hr spacer size="zero" />
-        <Span size="nano">
-          <SkeletonItem hollow className="UserRowSkeleton-detail" />
-          <Span size="nano" className="UserRowSkeleton-dot">
-            ·
-          </Span>
-          <SkeletonItem hollow className="UserRowSkeleton-detail" />
-          <Span size="nano" className="UserRowSkeleton-dot">
-            ·
-          </Span>
-          <SkeletonItem hollow className="UserRowSkeleton-detail" />
-          <Span size="nano" className="UserRowSkeleton-dot">
-            ·
-          </Span>
-          <SkeletonItem hollow className="UserRowSkeleton-detail" />
-        </Span>
-      </div>
-      <div className="UserRowSkeleton-leftBottom">
-        <SkeletonItem hollow className="UserRowSkeleton-tag" />
-        <SkeletonItem hollow className="UserRowSkeleton-tag" />
-        <SkeletonItem hollow className="UserRowSkeleton-tag" />
-        <SkeletonItem hollow className="UserRowSkeleton-tag" />
-      </div>
+      <SkeletonItem className="UserRowSkeleton-title" />
+      <SkeletonItem className="UserRowSkeleton-details" />
+    </div>
+    <div className="UserRowSkeleton-center">
+      <SkeletonItem className="UserRowSkeleton-tag UserRowSkeleton-tag1" />
+      <SkeletonItem className="UserRowSkeleton-tag UserRowSkeleton-tag2" />
+      <SkeletonItem className="UserRowSkeleton-tag UserRowSkeleton-tag3" />
+      <SkeletonItem className="UserRowSkeleton-tag UserRowSkeleton-tag1" />
+      <SkeletonItem className="UserRowSkeleton-tag UserRowSkeleton-tag1" />
+      <SkeletonItem className="UserRowSkeleton-tag UserRowSkeleton-tag2" />
+      <SkeletonItem className="UserRowSkeleton-tag UserRowSkeleton-tag3" />
+      <SkeletonItem className="UserRowSkeleton-tag UserRowSkeleton-tag1" />
+      <SkeletonItem className="UserRowSkeleton-tag UserRowSkeleton-tag1" />
+      <SkeletonItem className="UserRowSkeleton-tag UserRowSkeleton-tag1" />
+      <SkeletonItem className="UserRowSkeleton-tag UserRowSkeleton-tag2" />
     </div>
     <div className="UserRowSkeleton-right">
-      <SkeletonItem hollow className="UserRowSkeleton-image" />
+      <SkeletonItem className="UserRowSkeleton-image" />
     </div>
   </Border>
 );
