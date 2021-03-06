@@ -6,7 +6,7 @@ import Pagination from 'Components/Pagination';
 import Sidebar from 'Components/Sidebar';
 import { ListState } from 'Modules/Lists/lists.types';
 import { BookmarkRowSkeletonGroup } from 'Root/src/shared/components/BookmarkRow/BookmarkRowSkeletonGroup';
-import { Border, Flex, Hr, SortBy } from '@antoniodcorrea/components';
+import { Border, FadeInOut, Flex, Hr, SortBy } from '@antoniodcorrea/components';
 
 import './Bookmarks.less';
 
@@ -39,16 +39,18 @@ export const Bookmarks: React.FC<Props> = ({ url, bookmarksIds, popularLists, lo
         </Flex>
         <Hr spacer size="small" />
         <Border grow>
-          {loading ? (
-            <BookmarkRowSkeletonGroup length={bookmarksIds?.length} />
-          ) : (
-            bookmarksIds?.map((id, index) => (
-              <React.Fragment key={id}>
-                {!!index && <Hr spacer />}
-                <BookmarkRow id={id} />
-              </React.Fragment>
-            ))
-          )}
+          <FadeInOut valueToUpdate={loading} speed="fastest">
+            {loading ? (
+              <BookmarkRowSkeletonGroup length={bookmarksIds?.length} />
+            ) : (
+              bookmarksIds?.map((id, index) => (
+                <React.Fragment key={id}>
+                  {!!index && <Hr spacer size="small" />}
+                  <BookmarkRow id={id} />
+                </React.Fragment>
+              ))
+            )}
+          </FadeInOut>
           <Flex horizontal="center">
             <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
           </Flex>

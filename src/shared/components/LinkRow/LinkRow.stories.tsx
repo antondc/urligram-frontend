@@ -2,12 +2,12 @@ import React from 'react';
 
 import { FadeInOut, Hr } from '@antoniodcorrea/components';
 import { boolean, withKnobs } from '@storybook/addon-knobs';
-import { BookmarkRow } from './BookmarkRow';
-import { BookmarkRowSkeleton } from './BookmarkRowSkeleton';
+import { LinkRow } from './LinkRow';
+import { LinkRowSkeleton } from './LinkRowSkeleton';
 
 export default {
-  component: BookmarkRow,
-  title: 'BookmarkRow',
+  component: LinkRow,
+  title: 'LinkRow',
   decorators: [withKnobs],
 };
 
@@ -27,9 +27,10 @@ const props = {
     absoluteVote: 0,
     timesVoted: 0,
     averageVote: 0,
-    timesBookmarked: 0,
+    timesLinked: 0,
     vote: false,
     loading: false,
+    timesBookmarked: 10,
   },
   onVote: noop,
 };
@@ -42,27 +43,27 @@ export const Default: React.ReactNode = () => (
   <FadeInOut valueToUpdate={knobs.skeleton()} speed="fastest">
     {!knobs.skeleton() ? (
       <>
-        <BookmarkRow {...props} />
+        <LinkRow {...props} />
         <Hr size="small" spacer />
-        <BookmarkRow {...props} />
+        <LinkRow {...props} />
         <Hr size="small" spacer />
-        <BookmarkRow {...props} />
+        <LinkRow {...props} />
         <Hr size="small" spacer />
-        <BookmarkRow {...props} />
+        <LinkRow {...props} />
         <Hr size="small" spacer />
-        <BookmarkRow {...props} />
+        <LinkRow {...props} />
       </>
     ) : (
       <>
-        <BookmarkRowSkeleton {...props} />
+        <LinkRowSkeleton {...props} />
         <Hr size="small" spacer />
-        <BookmarkRowSkeleton {...props} />
+        <LinkRowSkeleton {...props} />
         <Hr size="small" spacer />
-        <BookmarkRowSkeleton {...props} />
+        <LinkRowSkeleton {...props} />
         <Hr size="small" spacer />
-        <BookmarkRowSkeleton {...props} />
+        <LinkRowSkeleton {...props} />
         <Hr size="small" spacer />
-        <BookmarkRowSkeleton {...props} />
+        <LinkRowSkeleton {...props} />
       </>
     )}
   </FadeInOut>

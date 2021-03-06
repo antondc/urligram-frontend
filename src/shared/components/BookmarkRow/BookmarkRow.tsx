@@ -39,7 +39,6 @@ export const BookmarkRow: React.FC<BookmarkRow> = ({ id, title, url, tags = [], 
         </Span>
       </A>
     </div>
-
     <div className="BookmarkRow-center">
       {tags?.map((item) => (
         <A

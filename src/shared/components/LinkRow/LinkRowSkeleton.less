@@ -5,22 +5,10 @@
 @{c} {
   display: flex;
   justify-content: space-between;
-  height: 100px;
-  padding: 10px 20px;
-
-  &-icons {
-    display: flex;
-  }
-
-  &-icon {
-    height: 10px;
-    width: 10px;
-    margin-right: 7px;
-  }
-
-  &-iconHover {
-    .hoverTransition(0.5);
-  }
+  height: 60px;
+  padding: 9px 18px 9px 14px;
+  border-color: @c-traslucid;
+  box-shadow: 4px 4px 0 0 @c-traslucid;
 
   &-left {
     display: flex;
@@ -31,66 +19,39 @@
     overflow: hidden;
   }
 
-  &-leftTop {
-    //
+  &-icons {
+    display: flex;
+  }
+
+  &-icon {
+    height: 10px;
+    width: 10px;
+    min-width: 10px;
+    margin-right: 7px;
   }
 
   &-title {
     height: 12px;
-    width: 100px;
-    margin: 6px 0 2px;
+    width: 200px;
+    margin: 3px 0 2px;
   }
 
   &-url {
     height: @fs-micro;
-    width: 100px;
-    margin: 0 0 6px;
-  }
-
-  &-tags {
-    display: flex;
-    overflow-x: scroll;
-    overflow-y: visible;
-
-    .hideScrollbar;
-  }
-
-  &-tag {
-    height: 25px;
-    width: 50px;
-    margin: 0 8px 0 0;
+    width: 200px;
+    margin: 2px 0 0;
   }
 
   &-right {
     display: flex;
-  }
-
-  &-image {
-    height: 76px;
-    width: 110px;
-    margin-right: 25px;
-    border-radius: 4px;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
   }
 
   &-vote {
     height: @fs-normal;
     width: 25px;
-    margin-top: 1px;
-  }
-
-  &-rightEnd {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-
-  &-stats {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    font-family: @ff-din;
-    font-size: @fs-small;
-    line-height: @fh-small;
   }
 
   &-stat {
@@ -98,11 +59,7 @@
     justify-content: flex-end;
     height: @fs-normal;
     width: @fs-normal;
-    margin-bottom: 2px;
+    width: 50px;
     text-align: end;
-  }
-
-  &-statIcon {
-    margin-right: 3px;
   }
 }

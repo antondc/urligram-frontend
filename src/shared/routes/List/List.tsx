@@ -11,7 +11,7 @@ import SidebarListUsers from 'Components/SidebarListUsers';
 import { ListState } from 'Modules/Lists/lists.types';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
-import { Border, Flex, H4, Hr, PlusCircle, SortBy, Tooltip } from '@antoniodcorrea/components';
+import { Border, FadeInOut, Flex, H4, Hr, PlusCircle, SortBy, Tooltip } from '@antoniodcorrea/components';
 import { SvgClickEvent } from '@antoniodcorrea/components/Svg/Svg.types';
 
 import './List.less';
@@ -72,16 +72,18 @@ export const List: React.FC<Props> = ({
             <Tooltip parentElementId={'List-joinList'} content="Join this list" />
           </Flex>
           <Hr spacer />
-          {bookmarksLoading ? (
-            <BookmarkRowSkeletonGroup length={bookmarksIds?.length} />
-          ) : (
-            bookmarksIds?.map((id, index) => (
-              <React.Fragment key={id}>
-                {!!index && <Hr spacer />}
-                <BookmarkRow id={id} />
-              </React.Fragment>
-            ))
-          )}
+          <FadeInOut valueToUpdate={bookmarksLoading} speed="fastest">
+            {bookmarksLoading ? (
+              <BookmarkRowSkeletonGroup length={bookmarksIds?.length} />
+            ) : (
+              bookmarksIds?.map((id, index) => (
+                <React.Fragment key={id}>
+                  {!!index && <Hr spacer size="small" />}
+                  <BookmarkRow id={id} />
+                </React.Fragment>
+              ))
+            )}
+          </FadeInOut>
           <Flex horizontal="center">
             <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
           </Flex>

@@ -10,7 +10,7 @@ import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListTags from 'Components/SidebarListTags';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
-import { Border, Flex, H4, Hr } from '@antoniodcorrea/components';
+import { Border, FadeInOut, Flex, H4, Hr } from '@antoniodcorrea/components';
 
 import './UserLists.less';
 
@@ -52,16 +52,18 @@ export const UserLists: React.FC<Props> = ({
             Lists of <A href={`/users/${userId}`}>@{user?.name}</A>
           </H4>
           <Hr spacer />
-          {listsLoading ? (
-            <BookmarkRowSkeletonGroup length={listsIds?.length} />
-          ) : (
-            listsIds?.map((id, index) => (
-              <React.Fragment key={id}>
-                {!!index && <Hr spacer />}
-                <ListRow id={id} />
-              </React.Fragment>
-            ))
-          )}
+          <FadeInOut valueToUpdate={listsLoading} speed="fastest">
+            {listsLoading ? (
+              <BookmarkRowSkeletonGroup length={listsIds?.length} />
+            ) : (
+              listsIds?.map((id, index) => (
+                <React.Fragment key={id}>
+                  {!!index && <Hr spacer size="small" />}
+                  <ListRow id={id} />
+                </React.Fragment>
+              ))
+            )}
+          </FadeInOut>
           <Flex horizontal="center">
             <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
           </Flex>

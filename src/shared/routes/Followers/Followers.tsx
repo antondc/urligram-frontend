@@ -9,7 +9,7 @@ import UserRow from 'Components/UserRow';
 import { UserRowSkeletonGroup } from 'Components/UserRow/UserRowSkeletonGroup';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
-import { Border, Flex, H4, Hr, SortBy } from '@antoniodcorrea/components';
+import { Border, FadeInOut, Flex, H4, Hr, SortBy } from '@antoniodcorrea/components';
 
 import './Followers.less';
 
@@ -63,16 +63,18 @@ export const Followers: React.FC<Props> = ({
         <Border className="Followers-tags" grow>
           <H4>Users following @{user?.name}</H4>
           <Hr spacer />
-          {usersLoading ? (
-            <UserRowSkeletonGroup length={usersCurrentIds?.length} />
-          ) : (
-            usersCurrentIds?.map((id, index) => (
-              <React.Fragment key={id}>
-                {!!index && <Hr spacer />}
-                <UserRow id={id} />
-              </React.Fragment>
-            ))
-          )}
+          <FadeInOut valueToUpdate={usersLoading} speed="fastest">
+            {usersLoading ? (
+              <UserRowSkeletonGroup length={usersCurrentIds?.length} />
+            ) : (
+              usersCurrentIds?.map((id, index) => (
+                <React.Fragment key={id}>
+                  {!!index && <Hr spacer size="small" />}
+                  <UserRow id={id} />
+                </React.Fragment>
+              ))
+            )}
+          </FadeInOut>
           <Flex horizontal="center">
             <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
           </Flex>

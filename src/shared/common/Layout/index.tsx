@@ -93,7 +93,7 @@ class Layout extends React.Component<Props> {
     return (
       mounted && (
         <div className="Layout">
-          <Background className="Layout-background" />
+          <div className="Layout-background" />
           <LayoutContent>
             <div className="Layout-top">
               <Header />

@@ -9,7 +9,7 @@ import Sidebar from 'Components/Sidebar';
 import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListUsers from 'Components/SidebarListUsers';
 import { UserState } from 'Modules/Users/users.types';
-import { AIcon, Border, Flex, H4, Hr, Span, Tag } from '@antoniodcorrea/components';
+import { AIcon, Border, FadeInOut, Flex, H4, Hr, Span, Tag } from '@antoniodcorrea/components';
 
 import './User.less';
 
@@ -115,16 +115,18 @@ export const User: React.FC<Props> = ({
             </A>
           </Flex>
           <Hr spacer />
-          {!!bookmarksLoading ? (
-            <BookmarkRowSkeletonGroup length={5} />
-          ) : (
-            bookmarksIds?.map((id, index) => (
-              <React.Fragment key={id}>
-                {!!index && <Hr spacer />}
-                <BookmarkRow id={id} />
-              </React.Fragment>
-            ))
-          )}
+          <FadeInOut valueToUpdate={bookmarksLoading} speed="fastest">
+            {!!bookmarksLoading ? (
+              <BookmarkRowSkeletonGroup length={5} />
+            ) : (
+              bookmarksIds?.map((id, index) => (
+                <React.Fragment key={id}>
+                  {!!index && <Hr spacer size="small" />}
+                  <BookmarkRow id={id} />
+                </React.Fragment>
+              ))
+            )}
+          </FadeInOut>
           {!bookmarksLoading && !bookmarksIds?.length && <Empty message="ⵁ This user has no bookmarks yet" />}
         </Border>
       </Main>

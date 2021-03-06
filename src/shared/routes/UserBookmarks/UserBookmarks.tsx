@@ -10,7 +10,7 @@ import Sidebar from 'Components/Sidebar';
 import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListUsers from 'Components/SidebarListUsers';
 import { UserState } from 'Modules/Users/users.types';
-import { Border, Flex, H4, Hr, SortBy } from '@antoniodcorrea/components';
+import { Border, FadeInOut, Flex, H4, Hr, SortBy } from '@antoniodcorrea/components';
 
 import './UserBookmarks.less';
 
@@ -69,16 +69,18 @@ export const UserBookmarks: React.FC<Props> = ({
             </A>
           </H4>
           <Hr spacer />
-          {bookmarksLoading ? (
-            <BookmarkRowSkeletonGroup length={bookmarksIds?.length} />
-          ) : (
-            bookmarksIds?.map((id, index) => (
-              <React.Fragment key={id}>
-                {!!index && <Hr spacer />}
-                <BookmarkRow id={id} />
-              </React.Fragment>
-            ))
-          )}
+          <FadeInOut valueToUpdate={bookmarksLoading} speed="fastest">
+            {bookmarksLoading ? (
+              <BookmarkRowSkeletonGroup length={bookmarksIds?.length} />
+            ) : (
+              bookmarksIds?.map((id, index) => (
+                <React.Fragment key={id}>
+                  {!!index && <Hr spacer size="small" />}
+                  <BookmarkRow id={id} />
+                </React.Fragment>
+              ))
+            )}
+          </FadeInOut>
           {!bookmarksLoading && !bookmarksIds?.length && <Empty message="ⵁ This user has no bookmarks yet" />}
           <Flex horizontal="center">
             <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />

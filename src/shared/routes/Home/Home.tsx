@@ -9,7 +9,7 @@ import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListUsers from 'Components/SidebarListUsers';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
-import { AIcon, Border, Flex, H4, Hr, Tag } from '@antoniodcorrea/components';
+import { AIcon, Border, FadeInOut, Flex, H4, Hr, Tag } from '@antoniodcorrea/components';
 
 import './Home.less';
 
@@ -64,17 +64,19 @@ export const Home: React.FC<Props> = ({
               <AIcon size="small">See more</AIcon>
             </A>
           </Flex>
-          <Hr spacer />
-          {linksIdsLoading ? (
-            <LinkRowSkeletonGroup length={5} />
-          ) : (
-            linksIds?.map((id, index) => (
-              <React.Fragment key={id}>
-                {!!index && <Hr spacer />}
-                <LinkRow id={id} />
-              </React.Fragment>
-            ))
-          )}
+          <Hr spacer size="small" />{' '}
+          <FadeInOut valueToUpdate={linksIdsLoading} speed="fastest">
+            {linksIdsLoading ? (
+              <LinkRowSkeletonGroup length={5} />
+            ) : (
+              linksIds?.map((id, index) => (
+                <React.Fragment key={id}>
+                  {!!index && <Hr spacer size="small" />}
+                  <LinkRow id={id} />
+                </React.Fragment>
+              ))
+            )}
+          </FadeInOut>
         </Border>
       </Main>
       <Sidebar>

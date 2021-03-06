@@ -8,7 +8,7 @@ import SidebarListUsers from 'Components/SidebarListUsers';
 import UserRow from 'Components/UserRow';
 import { UserRowSkeletonGroup } from 'Components/UserRow/UserRowSkeletonGroup';
 import { UserState } from 'Modules/Users/users.types';
-import { Border, Flex, H4, Hr, SortBy } from '@antoniodcorrea/components';
+import { Border, FadeInOut, Flex, H4, Hr, SortBy } from '@antoniodcorrea/components';
 
 import './Users.less';
 
@@ -58,16 +58,18 @@ export const Users: React.FC<Props> = ({
         <Border className="Users-tags" grow>
           <H4>Users</H4>
           <Hr spacer />
-          {usersLoading ? (
-            <UserRowSkeletonGroup length={usersCurrentIds?.length} />
-          ) : (
-            usersCurrentIds?.map((id, index) => (
-              <React.Fragment key={id}>
-                {!!index && <Hr spacer />}
-                <UserRow id={id} />
-              </React.Fragment>
-            ))
-          )}
+          <FadeInOut valueToUpdate={usersLoading} speed="fastest">
+            {usersLoading ? (
+              <UserRowSkeletonGroup length={usersCurrentIds?.length} />
+            ) : (
+              usersCurrentIds?.map((id, index) => (
+                <React.Fragment key={id}>
+                  {!!index && <Hr spacer />}
+                  <UserRow id={id} />
+                </React.Fragment>
+              ))
+            )}
+          </FadeInOut>
           <Flex horizontal="center">
             <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
           </Flex>

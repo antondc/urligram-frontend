@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Border, Hr, SkeletonItem } from '@antoniodcorrea/components';
+import { Border, SkeletonItem } from '@antoniodcorrea/components';
 
 import './LinkRowSkeleton.less';
 
@@ -11,31 +11,18 @@ interface LinkRowSkeleton {
 export const LinkRowSkeleton: React.FC<LinkRowSkeleton> = ({ id }) => (
   <Border grow className="LinkRowSkeleton" data-test-id="LinkRowSkeleton" key={id}>
     <div className="LinkRowSkeleton-left">
-      <div className="LinkRowSkeleton-leftTop">
-        <div className="LinkRowSkeleton-icons">
-          <SkeletonItem hollow className="LinkRowSkeleton-icon" />
-          <SkeletonItem hollow className="LinkRowSkeleton-icon" />
-          <SkeletonItem hollow className="LinkRowSkeleton-icon" />
-        </div>
-        <SkeletonItem hollow className="LinkRowSkeleton-title" />
-        <Hr spacer size="zero" />
-        <SkeletonItem hollow className="LinkRowSkeleton-url" />
+      <div className="LinkRowSkeleton-icons">
+        <SkeletonItem className="LinkRowSkeleton-icon" />
+        <SkeletonItem className="LinkRowSkeleton-icon" />
+        <SkeletonItem className="LinkRowSkeleton-icon" />
       </div>
-      <div className="LinkRowSkeleton-leftBottom">
-        <SkeletonItem hollow className="LinkRowSkeleton-tag" />
-        <SkeletonItem hollow className="LinkRowSkeleton-tag" />
-        <SkeletonItem hollow className="LinkRowSkeleton-tag" />
-      </div>
+      <SkeletonItem className="LinkRowSkeleton-title" />
+      <SkeletonItem className="LinkRowSkeleton-url" />
     </div>
+
     <div className="LinkRowSkeleton-right">
-      <SkeletonItem hollow className="LinkRowSkeleton-image" />
-      <div className="LinkRowSkeleton-rightEnd">
-        <SkeletonItem hollow className="LinkRowSkeleton-vote" />
-        <div className="LinkRowSkeleton-stats">
-          <SkeletonItem hollow className="LinkRowSkeleton-stat" />
-          <SkeletonItem hollow className="LinkRowSkeleton-stat" />
-        </div>
-      </div>
+      <SkeletonItem className="LinkRowSkeleton-vote" />
+      <SkeletonItem className="LinkRowSkeleton-stat" />
     </div>
   </Border>
 );

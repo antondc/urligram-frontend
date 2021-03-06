@@ -10,7 +10,7 @@ import SidebarListTags from 'Components/SidebarListTags';
 import SidebarListUsers from 'Components/SidebarListUsers';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
-import { Border, Flex, H4, Hr, Select, SelectValue, SortBy } from '@antoniodcorrea/components';
+import { Border, FadeInOut, Flex, H4, Hr, Select, SelectValue, SortBy } from '@antoniodcorrea/components';
 
 import './Links.less';
 
@@ -59,7 +59,20 @@ export const Links: React.FC<Props> = ({
   <div className="Links">
     <Flex horizontal="between" vertical="top">
       <Main>
-        <Flex horizontal="right">
+        <Flex horizontal="between" noWrap>
+          <Select
+            className="Links-select"
+            label="Select tags"
+            value={currentQueryParamFilterTags}
+            defaultOptions={allTags.map((item) => ({ label: item.name, value: item.name }))}
+            options={[
+              ...tagsSearchFormatted,
+              ...allTags.map((item) => ({ label: item.name, value: item.name })),
+            ].filter((v, i, a) => a.findIndex((t) => t.value === v.value) === i)}
+            onInputChange={onInputChange}
+            onChange={onChange}
+            maxItems={4}
+          />
           <SortBy
             options={[
               { label: 'Last updated', field: 'last-bookmarked' },
@@ -71,32 +84,23 @@ export const Links: React.FC<Props> = ({
           />
         </Flex>
         <Hr spacer size="nano" />
-        <Select
-          label="Select tags"
-          value={currentQueryParamFilterTags}
-          defaultOptions={allTags.map((item) => ({ label: item.name, value: item.name }))}
-          options={[...tagsSearchFormatted, ...allTags.map((item) => ({ label: item.name, value: item.name }))].filter(
-            (v, i, a) => a.findIndex((t) => t.value === v.value) === i
-          )}
-          onInputChange={onInputChange}
-          onChange={onChange}
-          maxItems={4}
-          grow
-        />
+
         <Hr spacer size="small" />
         <Border grow>
           <H4>Links</H4>
           <Hr spacer />
-          {loading ? (
-            <LinkRowSkeletonGroup length={linksIds?.length} />
-          ) : (
-            linksIds?.map((id, index) => (
-              <React.Fragment key={id}>
-                {!!index && <Hr spacer />}
-                <LinkRow id={id} />
-              </React.Fragment>
-            ))
-          )}
+          <FadeInOut valueToUpdate={loading} speed="fastest">
+            {loading ? (
+              <LinkRowSkeletonGroup length={linksIds?.length} />
+            ) : (
+              linksIds?.map((id, index) => (
+                <React.Fragment key={id}>
+                  {!!index && <Hr spacer size="small" />}
+                  <LinkRow id={id} />
+                </React.Fragment>
+              ))
+            )}
+          </FadeInOut>
           <Flex horizontal="center">
             <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
           </Flex>
