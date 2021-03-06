@@ -5,11 +5,18 @@
 @{c} {
   display: flex;
   justify-content: space-between;
-  height: 100px;
-  padding: 10px 20px;
+  padding: 8px 18px 7px 14px;
+
+  &-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-right: 10px;
+  }
 
   &-icons {
     display: flex;
+    margin-bottom: 2px;
   }
 
   &-icon {
@@ -24,75 +31,45 @@
     .hoverTransition(0.5);
   }
 
-  &-left {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    flex-basis: calc(100% - 150px);
-    margin-right: 10px;
-    overflow: hidden;
-  }
-
-  &-leftTop {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-  }
-
   &-title {
-    .hoverTransition(0.8);
-
+    margin-left: -2px;
     line-height: @fs-normal;
+    .hoverTransition(0.8);
   }
 
-  &-url {
-    position: relative;
-    font-size: @fs-micro;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  &-description {
+    margin-top: -3px;
+    line-height: 12px;
   }
 
-  &-leftBottom {
+  &-center {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-content: space-between;
+    flex: 1;
+    height: 41px;
+    margin-right: 6px;
+    padding-top: 5px;
     overflow-x: scroll;
-    overflow-y: visible;
+    overflow-y: hidden;
 
     .hideScrollbar;
   }
 
   &-tag {
-    margin: 0 8px 0 0;
+    margin-bottom: 4px;
+    margin-right: 4px;
   }
 
   &-right {
     display: flex;
-  }
-
-  &-image {
-    height: 100%;
-    width: 110px;
-    margin-right: 20px;
-    object-fit: cover;
-    object-position: center;
-    border: 2px solid @c-base;
-  }
-
-  &-vote {
-    width: 30px;
-    margin-top: 1px;
-  }
-
-  &-rightEnd {
-    display: flex;
     flex-direction: column;
     justify-content: space-between;
-  }
-
-  &-stats {
+    padding: 5px 0;
     font-family: @ff-din;
     font-size: @fs-small;
-    line-height: @fh-small;
+    line-height: @fh-micro;
   }
 
   &-stat {
@@ -103,6 +80,6 @@
   }
 
   &-statIcon {
-    margin-right: 3px;
+    //
   }
 }

@@ -1,8 +1,7 @@
 import React from 'react';
 
-import A from 'Components/A';
 import { ListState } from 'Modules/Lists/lists.types';
-import { Border, Edit, Hr, Private, Span, Tag, Triangle } from '@antoniodcorrea/components';
+import { A, Border, Edit, Hr, Private, Span, Tag, Triangle } from '@antoniodcorrea/components';
 
 import './ListRow.less';
 
@@ -18,71 +17,59 @@ export const ListRow: React.FC<ListRow> = ({
   membersIds,
   createdAt,
   sinceTranslation,
+  description,
 }) => (
   <Border grow className="ListRow" data-test-id="ListRow" key={id}>
     <div className="ListRow-left">
-      <div className="ListRow-leftTop">
-        <div className="ListRow-icons">
-          <Triangle filled size="micro" className="ListRow-icon ListRow-iconTriangle" />
-          <Private
-            size="micro"
-            className="ListRow-icon ListRow-iconHover"
-            onClick={() => {
-              alert('Private');
-            }}
-          />
-          <Edit
-            size="micro"
-            className="ListRow-icon ListRow-iconHover"
-            onClick={() => {
-              alert('Edit');
-            }}
-          />
-        </div>
-        <Hr spacer size="micro" />
-        <A href={`/lists/${id}`} frontend>
-          <Span bold className="LinkRow-title">
-            {name}
-          </Span>
-        </A>
-        <Hr spacer size="micro" />
-        <Span size="nano">
-          <A href={'users'} styled frontend disabled={!membersIds.length}>
-            {membersIds?.length} users
-          </A>{' '}
-          ·{' '}
-          <A href={`lists/${id}`} styled frontend disabled={!bookmarksIds?.length}>
-            {bookmarksIds?.length} bookmarks
-          </A>{' '}
-          · {sinceTranslation?.toLocaleLowerCase()} {createdAt}
+      <div className="ListRow-icons">
+        <Triangle filled size="nano" className="ListRow-icon ListRow-iconTriangle" />
+        <Private
+          size="micro"
+          className="ListRow-icon ListRow-iconHover"
+          onClick={() => {
+            alert('Private');
+          }}
+        />
+        <Edit
+          size="micro"
+          className="ListRow-icon ListRow-iconHover"
+          onClick={() => {
+            alert('Edit');
+          }}
+        />
+      </div>
+      <A href={`/lists/${id}`} frontend>
+        <Span size="normal" bold className="ListRow-title">
+          {name}
         </Span>
-      </div>
-      <div className="ListRow-leftBottom">
-        {tags?.map((item) => (
-          <A className="ListRow-tag" href={`/links?filter[tags][]=${item.name}`} key={item.id} styled={false} frontend>
-            <Tag size="small">{item.name}</Tag>
-          </A>
-        ))}
-      </div>
+      </A>
+      <Span className="ListRow-description" size="small">
+        {description}
+      </Span>
+    </div>
+    <div className="ListRow-center">
+      {tags?.map((item) => (
+        <A className="ListRow-tag" href={`/links?filter[tags][]=${item.name}`} key={item.id} styled={false} frontend>
+          <Tag size="nano" variant="simple">
+            {item.name}
+          </Tag>
+        </A>
+      ))}
     </div>
     <div className="ListRow-right">
-      <img className="ListRow-image" src={'img'} />
-      <div className="ListRow-rightEnd">
-        <div className="ListRow-stats">
-          <div className="ListRow-stat">
-            <Span size="nano" className="ListRow-statIcon">
-              ▲
-            </Span>
-            32
-          </div>
-          <div className="ListRow-stat">
-            <Span size="nano" className="ListRow-statIcon">
-              ⚭
-            </Span>
-            124
-          </div>
-        </div>
+      <div className="ListRow-stat">
+        <Span size="nano" className="ListRow-statIcon">
+          ▲ 32
+        </Span>
       </div>
+      <div className="ListRow-stat">
+        <Span size="nano" className="ListRow-statIcon">
+          ⚭ 124
+        </Span>
+      </div>
+      <Span size="nano" className="ListRow-stat">
+        14 07 2021
+      </Span>
     </div>
   </Border>
 );

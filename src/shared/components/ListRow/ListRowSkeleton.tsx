@@ -11,43 +11,27 @@ interface ListRowSkeleton {
 export const ListRowSkeleton: React.FC<ListRowSkeleton> = ({ id }) => (
   <Border grow className="ListRowSkeleton" data-test-id="ListRowSkeleton" key={'ListRowSkeleton-' + id}>
     <div className="ListRowSkeleton-left">
-      <div className="ListRowSkeleton-leftTop">
-        <div className="ListRowSkeleton-icons">
-          <SkeletonItem hollow className="ListRowSkeleton-icon" />
-          <SkeletonItem hollow className="ListRowSkeleton-icon" />
-          <SkeletonItem hollow className="ListRowSkeleton-icon" />
-        </div>
-        <Hr spacer size="micro" />
-        <SkeletonItem hollow className="ListRowSkeleton-title" />
-
-        <Hr spacer size="micro" />
-        <Span size="nano">
-          <SkeletonItem hollow className="UserRowSkeleton-detail" />
-          <Span size="nano" className="UserRowSkeleton-dot">
-            ·
-          </Span>
-          <SkeletonItem hollow className="UserRowSkeleton-detail" />
-          <Span size="nano" className="UserRowSkeleton-dot">
-            ·
-          </Span>
-          <SkeletonItem hollow className="UserRowSkeleton-detail" />
-        </Span>
-      </div>
-      <div className="ListRowSkeleton-leftBottom">
-        <SkeletonItem hollow className="ListRowSkeleton-tag" />
-        <SkeletonItem hollow className="ListRowSkeleton-tag" />
-        <SkeletonItem hollow className="ListRowSkeleton-tag" />
-      </div>
+      <SkeletonItem className="ListRowSkeleton-icons" />
+      <SkeletonItem className="ListRowSkeleton-title" />
+      <SkeletonItem className="ListRowSkeleton-description" />
+    </div>
+    <div className="UserRowSkeleton-center">
+      <SkeletonItem className="UserRowSkeleton-tag UserRowSkeleton-tag1" />
+      <SkeletonItem className="UserRowSkeleton-tag UserRowSkeleton-tag2" />
+      <SkeletonItem className="UserRowSkeleton-tag UserRowSkeleton-tag3" />
+      <SkeletonItem className="UserRowSkeleton-tag UserRowSkeleton-tag1" />
+      <SkeletonItem className="UserRowSkeleton-tag UserRowSkeleton-tag1" />
+      <SkeletonItem className="UserRowSkeleton-tag UserRowSkeleton-tag2" />
+      <SkeletonItem className="UserRowSkeleton-tag UserRowSkeleton-tag3" />
+      <SkeletonItem className="UserRowSkeleton-tag UserRowSkeleton-tag1" />
+      <SkeletonItem className="UserRowSkeleton-tag UserRowSkeleton-tag1" />
+      <SkeletonItem className="UserRowSkeleton-tag UserRowSkeleton-tag1" />
+      <SkeletonItem className="UserRowSkeleton-tag UserRowSkeleton-tag2" />
     </div>
     <div className="ListRowSkeleton-right">
-      <SkeletonItem hollow className="ListRowSkeleton-image" />
-
-      <div className="ListRow-rightEnd">
-        <div className="ListRow-stats">
-          <SkeletonItem hollow className="ListRowSkeleton-stat" />
-          <SkeletonItem hollow className="ListRowSkeleton-stat" />
-        </div>
-      </div>
+      <SkeletonItem className="ListRowSkeleton-stat" />
+      <SkeletonItem className="ListRowSkeleton-stat" />
+      <SkeletonItem className="ListRowSkeleton-stat" />
     </div>
   </Border>
 );

@@ -23,7 +23,7 @@ interface Props {
 
 const ListRow: React.FC<Props> = ({
   id,
-  list: { name, image, tags, createdAt, updatedAt, bookmarksIds } = {},
+  list: { name, image, tags, createdAt, updatedAt, bookmarksIds, description } = {},
   slug,
   currentGlossary: { since },
 }) => {
@@ -34,6 +34,7 @@ const ListRow: React.FC<Props> = ({
     <ListRowUi
       id={id}
       name={name}
+      description={description}
       createdAt={formattedDate}
       updatedAt={updatedAt}
       sinceTranslation={since}
