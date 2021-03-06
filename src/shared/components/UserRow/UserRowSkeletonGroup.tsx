@@ -11,7 +11,7 @@ export const UserRowSkeletonGroup: React.FC<Props> = ({ length = 10 }) => (
   <>
     {Array.from({ length }, (_, index) => (
       <React.Fragment key={index}>
-        <UserRowSkeleton id={index} />
+        <UserRowSkeleton id={index.toString()} />
         <Hr spacer size="small" />
       </React.Fragment>
     ))}

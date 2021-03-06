@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { ListState } from 'Modules/Lists/lists.types';
-import { A, Border, Edit, Hr, Private, Span, Tag, Triangle } from '@antoniodcorrea/components';
+import { A, Border, Edit, Private, Span, Tag, Triangle } from '@antoniodcorrea/components';
 
 import './ListRow.less';
 
@@ -13,10 +13,10 @@ export const ListRow: React.FC<ListRow> = ({
   id,
   name,
   tags,
-  bookmarksIds,
-  membersIds,
-  createdAt,
-  sinceTranslation,
+  // bookmarksIds,
+  // membersIds,
+  // createdAt,
+  // sinceTranslation,
   description,
 }) => (
   <Border grow className="ListRow" data-test-id="ListRow" key={id}>

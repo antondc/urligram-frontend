@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { Border, Hr, SkeletonItem, Span } from '@antoniodcorrea/components';
+import { Border, SkeletonItem } from '@antoniodcorrea/components';
 
 import './UserRowSkeleton.less';
 
 interface UserRowSkeleton {
-  id: number;
+  id: string;
 }
 
 export const UserRowSkeleton: React.FC<UserRowSkeleton> = ({ id }) => (

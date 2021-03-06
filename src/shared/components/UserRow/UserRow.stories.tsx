@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { FadeInOut, Hr } from '@antoniodcorrea/components';
+import { FadeInOut } from '@antoniodcorrea/components';
 import { boolean, withKnobs } from '@storybook/addon-knobs';
 import { UserRow } from './UserRow';
 import { UserRowSkeleton } from './UserRowSkeleton';
@@ -109,6 +109,6 @@ const knobs = {
 
 export const Default: React.ReactNode = () => (
   <FadeInOut valueToUpdate={knobs.skeleton()} speed="fastest">
-    {!knobs.skeleton() ? <UserRow {...props} /> : <UserRowSkeleton id={1} />}
+    {!knobs.skeleton() ? <UserRow {...props} /> : <UserRowSkeleton id="1" />}
   </FadeInOut>
 );
