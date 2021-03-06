@@ -16,7 +16,8 @@ const customViewports = {
     styles: {
       width: '1200px',
       height: '900px',
-      padding: '50px',
+      padding: '0',
+      border: 'none',
     },
   },
   Tablet: {
@@ -24,7 +25,17 @@ const customViewports = {
     styles: {
       width: '700px',
       height: '800px',
-      padding: '50px',
+      padding: '0',
+      border: 'none',
+    },
+  },
+  Mobile: {
+    name: 'Mobile',
+    styles: {
+      width: '375px',
+      height: '750px',
+      padding: '0',
+      border: 'none',
     },
   },
 };

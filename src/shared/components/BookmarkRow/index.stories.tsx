@@ -22,6 +22,20 @@ const props = {
   tags: [
     { id: 1, name: 'Cool' },
     { id: 2, name: 'Interesting' },
+    { id: 3, name: 'Lorem' },
+    { id: 4, name: 'Ipsum' },
+    { id: 5, name: 'Ador' },
+    { id: 6, name: 'Cenit' },
+    { id: 7, name: 'Culmen' },
+    { id: 8, name: 'Zanot' },
+    { id: 9, name: 'Articles' },
+    { id: 10, name: 'Noticias' },
+    { id: 11, name: 'Aeronautica' },
+    { id: 12, name: 'Neplomasto' },
+    { id: 13, name: 'Clamolito' },
+    { id: 14, name: 'Posadka' },
+    { id: 14, name: 'Amelokasto' },
+    { id: 14, name: 'Klimolerato' },
   ],
   statistics: {
     absoluteVote: 0,
@@ -34,36 +48,13 @@ const props = {
   onVote: noop,
 };
 
-const knobs = {
-  skeleton: (): boolean => boolean('Skeleton', false),
-};
+// const knobs = {
+//   skeleton: (): boolean => boolean('Skeleton', false),
+// };
 
 export const Default: React.ReactNode = () => (
-  <FadeInOut valueToUpdate={knobs.skeleton()} speed="fastest">
-    {!knobs.skeleton() ? (
-      <>
-        <BookmarkRow {...props} />
-        <Hr size="small" spacer />
-        <BookmarkRow {...props} />
-        <Hr size="small" spacer />
-        <BookmarkRow {...props} />
-        <Hr size="small" spacer />
-        <BookmarkRow {...props} />
-        <Hr size="small" spacer />
-        <BookmarkRow {...props} />
-      </>
-    ) : (
-      <>
-        <BookmarkRowSkeleton {...props} />
-        <Hr size="small" spacer />
-        <BookmarkRowSkeleton {...props} />
-        <Hr size="small" spacer />
-        <BookmarkRowSkeleton {...props} />
-        <Hr size="small" spacer />
-        <BookmarkRowSkeleton {...props} />
-        <Hr size="small" spacer />
-        <BookmarkRowSkeleton {...props} />
-      </>
-    )}
-  </FadeInOut>
+  <BookmarkRow {...props} />
+  // <FadeInOut valueToUpdate={knobs.skeleton()} speed="fastest">
+  //   {!knobs.skeleton() ? <BookmarkRow {...props} /> : <BookmarkRowSkeleton {...props} />}
+  // </FadeInOut>
 );

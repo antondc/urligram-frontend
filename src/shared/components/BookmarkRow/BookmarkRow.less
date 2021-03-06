@@ -4,65 +4,75 @@
 
 @{c} {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
-  height: 100px;
-  padding: 10px 20px;
+  padding: 8px 13px 3px;
+
+  &-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-right: 12px;
+    overflow: visible;
+  }
 
   &-icons {
     display: flex;
+    padding-left: 2px;
   }
 
   &-icon {
-    margin-right: 7px;
+    margin-right: 5px;
   }
 
   &-iconHover {
     .hoverTransition(0.5);
   }
 
-  &-left {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    flex-basis: calc(100% - 150px);
-    margin-right: 10px;
-    overflow: hidden;
-  }
-
-  &-leftTop {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-  }
-
   &-title {
-    line-height: @fs-normal;
+    line-height: 19px;
 
     .hoverTransition(0.8);
   }
 
   &-url {
     position: relative;
-    font-size: @fs-micro;
+    font-size: @fs-small;
+    line-height: 12px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
 
-  &-tags {
+  &-center {
     display: flex;
+    align-items: flex-end;
+    flex: 1;
+    margin-right: 10px;
+    padding-bottom: 4px;
     overflow-x: scroll;
     overflow-y: visible;
 
     .hideScrollbar;
+
+    @media @br-mobile {
+      min-width: 100%;
+      margin: 0;
+      order: 1;
+      padding: 1px 0 2px;
+    }
   }
 
   &-tag {
-    margin: 0 8px 0 0;
+    margin-right: 5px;
   }
 
   &-right {
     display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 1px 5px 2px;
   }
 
   &-image {
@@ -75,17 +85,11 @@
   }
 
   &-vote {
-    width: 30px;
-    margin-top: 1px;
-  }
-
-  &-rightEnd {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    //
   }
 
   &-stats {
+    display: flex;
     font-family: @ff-din;
     font-size: @fs-small;
     line-height: @fh-small;
@@ -95,10 +99,11 @@
     display: flex;
     justify-content: flex-end;
     align-items: baseline;
+    margin-left: 5px;
     text-align: end;
   }
 
   &-statIcon {
-    margin-right: 3px;
+    margin-right: 1px;
   }
 }
