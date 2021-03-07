@@ -1,18 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import { Location } from 'history';
 
-import Background from 'Assets/svg/background.svg';
 import LayoutContent from 'Common/LayoutContent';
 import LayoutHelper from 'Common/LayoutHelper';
 import Footer from 'Components/Footer';
 import Header from 'Components/Header';
 import LoginModal from 'Components/LoginModal';
 import ModalMessage from 'Components/ModalMessage';
-import SidebarLeft from 'Components/SidebarLeft';
-import SubHeader from 'Components/SubHeader';
 import UserModal from 'Components/UserModal';
 import { selectLanguageLoading } from 'Modules/Languages/selectors/selectLanguageLoading';
 import { pushNewRoute } from 'Modules/Routes/actions/pushNewRoute';
@@ -22,11 +19,13 @@ import { selectUiLoginModalMounted } from 'Modules/Ui/selectors/selectUiLoginMod
 import { selectUiMessageModalMounted } from 'Modules/Ui/selectors/selectUiMessageModalMounted';
 import { selectUiScreenLocked } from 'Modules/Ui/selectors/selectUiScreenLocked';
 import { selectUiUserModalMounted } from 'Modules/Ui/selectors/selectUiUserModalMounted';
-import { routesList, routesWithoutOmmitedValues } from 'Routes/index';
-import Router from 'Routes/Router';
+import { pathsByLayout, routesList, routesWithoutOmmitedValues } from 'Routes/index';
+import RouterContent from 'Routes/RouterContent';
 import enhanceRouteWithParams from 'Tools/utils/url/enhanceRouteWithParams';
 import findActiveRouteKey from 'Tools/utils/url/findActiveRouteKey';
-import { Fade, Flex, Hr, SpinnerCircle } from '@antoniodcorrea/components';
+import { Fade, SpinnerCircle } from '@antoniodcorrea/components';
+import { selectPathWithoutLanguageParam } from '../../redux/modules/Routes/selectors/selectPathWithoutLanguageParam';
+import RouterAccesory from '../../routes/RouterAccesory';
 
 import './Layout.less';
 
@@ -38,6 +37,7 @@ interface Props {
   loginModalMounted: boolean;
   uiScreenLocked: boolean;
   isLogged: boolean;
+  pathWithoutLanguageParam: string;
   pushNewRoute: (route) => void;
 }
 
@@ -85,28 +85,30 @@ class Layout extends React.Component<Props> {
   };
 
   render = () => {
-    const { languageLoading, userModalMounted, messageModalMounted, loginModalMounted } = this.props;
+    const {
+      languageLoading,
+      userModalMounted,
+      messageModalMounted,
+      loginModalMounted,
+      pathWithoutLanguageParam,
+    } = this.props;
 
     const mounted = !languageLoading;
     const showLoader = false;
+    const pathsByLayoutWithLeftSidebar = pathsByLayout('withLeftSidebar');
+    const pathsByLayoutFullPage = pathsByLayout('fullPage');
 
     return (
       mounted && (
         <div className="Layout">
+          <LayoutHelper />
           <div className="Layout-background" />
           <LayoutContent>
-            <div className="Layout-top">
-              <Header />
-              <Hr spacer />
-              <SubHeader />
-              <Hr spacer />
-              <Flex vertical="top">
-                <SidebarLeft />
-                <Route path="/:lang([a-z]{2})?" component={Router} />
-              </Flex>
-              <Hr spacer />
-            </div>
-            <LayoutHelper />
+            <Header />
+            <Switch>
+              <Route path={pathsByLayoutWithLeftSidebar} component={RouterContent} exact />
+              <Route path={pathsByLayoutFullPage} component={RouterAccesory} />
+            </Switch>
             <Footer />
             <Fade mounted={userModalMounted} position="absolute" appear>
               <UserModal />
@@ -135,6 +137,7 @@ const mapStateToProps = createStructuredSelector({
   uiScreenLocked: selectUiScreenLocked,
   loginModalMounted: selectUiLoginModalMounted,
   isLogged: selectSessionLoggedIn,
+  pathWithoutLanguageParam: selectPathWithoutLanguageParam,
 });
 
 export default connect(mapStateToProps, {

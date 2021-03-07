@@ -1,0 +1,16 @@
+@import '../../css/imports.less';
+
+@c: .RouterContent;
+
+@{c} {
+  flex: 1;
+
+  &-content {
+    .calcgrid(@property: width; @columns: 9; @parentColumns: 12; @addGutter: 0; @hasParentPaddings: 0);
+    .calcgrid(@property: margin-left; @columns: 0; @parentColumns: 12; @addGutter: 1; @hasParentPaddings: 0);
+  }
+
+  &-sidebarLeft {
+    flex: 1;
+  }
+}

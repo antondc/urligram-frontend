@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 import { logIn } from 'Modules/Session/actions/logIn';
-import { Button } from '@antoniodcorrea/components';
+import { Button, H3, Hr } from '@antoniodcorrea/components';
 
 import './Login.less';
 
@@ -38,17 +38,21 @@ class Login extends Component<Props, State> {
 
   render() {
     return (
-      <div className="Login">
-        <div className="Login-content">
-          <h1 className="Login-h1">LOGIN PAGE</h1>
-          <form className="Login-form">
-            Log in
-            <input name="username" type="text" placeholder="Session name" autoFocus onChange={this.onChange} />
-            <input name="password" type="text" placeholder="Password" autoFocus onChange={this.onChange} />
-            <Button text="Enter" onClick={this.onSubmit} />
-          </form>
+      <>
+        <Hr spacer size="big" />
+        <Hr spacer size="big" />
+        <Hr spacer size="big" />
+        <div className="Login">
+          <div className="Login-content">
+            <H3 className="Login-h1">LOGIN PAGE</H3>
+            <form className="Login-form">
+              <input name="username" type="text" placeholder="Session name" autoFocus onChange={this.onChange} />
+              <input name="password" type="text" placeholder="Password" autoFocus onChange={this.onChange} />
+              <Button text="Enter" onClick={this.onSubmit} />
+            </form>
+          </div>
         </div>
-      </div>
+      </>
     );
   }
 }

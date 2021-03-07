@@ -15,6 +15,8 @@ import { initialUserLoader } from 'Modules/Users/user.loader';
 import { initialUsersLoader } from 'Modules/Users/users.loader';
 import { RequestParameters } from 'Root/src/server/routes/allRoutes';
 
+type Layout = 'withLeftSidebar' | 'fullPage';
+
 export interface Route {
   name: string;
   path: string;
@@ -25,6 +27,7 @@ export interface Route {
   header?: boolean;
   initialDataLoadersVisitor?: Array<(params: RequestParameters) => void>;
   initialDataLoadersSession?: Array<(params: RequestParameters) => void>;
+  layout?: Layout;
 }
 
 export interface RoutesInterface {
@@ -41,6 +44,7 @@ const Routes: RoutesInterface = {
     hasFooter: false,
     initialDataLoadersVisitor: [],
     initialDataLoadersSession: [],
+    layout: 'withLeftSidebar',
   },
 
   Bookmarks: {
@@ -52,6 +56,7 @@ const Routes: RoutesInterface = {
     hasFooter: false,
     initialDataLoadersVisitor: [initialBookmarksLoader],
     initialDataLoadersSession: [initialBookmarksLoader],
+    layout: 'withLeftSidebar',
   },
 
   UserBookmarks: {
@@ -63,6 +68,7 @@ const Routes: RoutesInterface = {
     hasFooter: false,
     initialDataLoadersVisitor: [],
     initialDataLoadersSession: [],
+    layout: 'withLeftSidebar',
   },
 
   UserLists: {
@@ -74,6 +80,7 @@ const Routes: RoutesInterface = {
     hasFooter: false,
     initialDataLoadersVisitor: [],
     initialDataLoadersSession: [],
+    layout: 'withLeftSidebar',
   },
 
   Following: {
@@ -85,6 +92,7 @@ const Routes: RoutesInterface = {
     hasFooter: false,
     initialDataLoadersVisitor: [initialUserLoader],
     initialDataLoadersSession: [initialUserLoader],
+    layout: 'withLeftSidebar',
   },
 
   Followers: {
@@ -96,6 +104,7 @@ const Routes: RoutesInterface = {
     hasFooter: false,
     initialDataLoadersVisitor: [initialUserLoader],
     initialDataLoadersSession: [initialUserLoader],
+    layout: 'withLeftSidebar',
   },
 
   User: {
@@ -107,6 +116,7 @@ const Routes: RoutesInterface = {
     hasFooter: false,
     initialDataLoadersVisitor: [initialUserLoader],
     initialDataLoadersSession: [initialUserLoader],
+    layout: 'withLeftSidebar',
   },
 
   Users: {
@@ -118,6 +128,7 @@ const Routes: RoutesInterface = {
     hasFooter: false,
     initialDataLoadersVisitor: [initialUsersLoader],
     initialDataLoadersSession: [initialUsersLoader],
+    layout: 'withLeftSidebar',
   },
 
   Links: {
@@ -129,6 +140,7 @@ const Routes: RoutesInterface = {
     hasFooter: false,
     initialDataLoadersVisitor: [],
     initialDataLoadersSession: [],
+    layout: 'withLeftSidebar',
   },
 
   List: {
@@ -140,6 +152,7 @@ const Routes: RoutesInterface = {
     hasFooter: false,
     initialDataLoadersVisitor: [],
     initialDataLoadersSession: [],
+    layout: 'withLeftSidebar',
   },
 
   Lists: {
@@ -151,6 +164,7 @@ const Routes: RoutesInterface = {
     hasFooter: false,
     initialDataLoadersVisitor: [initialListsLoader],
     initialDataLoadersSession: [initialListsLoader],
+    layout: 'withLeftSidebar',
   },
 
   Login: {
@@ -162,6 +176,7 @@ const Routes: RoutesInterface = {
     hasFooter: false,
     initialDataLoadersVisitor: [],
     initialDataLoadersSession: [],
+    layout: 'fullPage',
   },
 
   SignIn: {
@@ -173,6 +188,7 @@ const Routes: RoutesInterface = {
     hasFooter: false,
     initialDataLoadersVisitor: [],
     initialDataLoadersSession: [],
+    layout: 'fullPage',
   },
 
   Home: {
@@ -195,6 +211,19 @@ const Routes: RoutesInterface = {
       // myTagsInitialLoader,
       // followingUsersInitialLoader,
     ],
+    layout: 'withLeftSidebar',
+  },
+
+  About: {
+    name: 'About',
+    path: '/:lang([a-z]{2})?/about',
+    exact: true,
+    auth: true,
+    hasHeader: true,
+    hasFooter: true,
+    initialDataLoadersVisitor: [],
+    initialDataLoadersSession: [],
+    layout: 'fullPage',
   },
 
   Control: {
@@ -206,6 +235,7 @@ const Routes: RoutesInterface = {
     hasFooter: true,
     initialDataLoadersVisitor: [],
     initialDataLoadersSession: [],
+    layout: 'fullPage',
   },
 
   ServerError: {
@@ -218,6 +248,7 @@ const Routes: RoutesInterface = {
     header: false,
     initialDataLoadersVisitor: [],
     initialDataLoadersSession: [],
+    layout: 'fullPage',
   },
 
   NotFound: {
@@ -230,6 +261,7 @@ const Routes: RoutesInterface = {
     header: false,
     initialDataLoadersVisitor: [],
     initialDataLoadersSession: [],
+    layout: 'fullPage',
   },
 };
 
@@ -240,6 +272,11 @@ export const routesWithoutOmmitedValues: RoutesInterface = Object.entries(Routes
 
   return { ...acc, [key]: routeWithoutOmmitedValues };
 }, {});
+
+export const pathsByLayout = (layout: Layout): string[] =>
+  Object.values(Routes)
+    .filter((value) => value.layout === layout)
+    .map((item) => item.path);
 
 export const routesPathsList: string[] = Object.values(Routes).map((item) => item.path);
 
