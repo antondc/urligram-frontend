@@ -24,6 +24,7 @@ export const initialBookmarksLoader = async ({ query }: RequestParameters = {}):
         contentPath: 'attributes',
       }),
       currentIds: data.map((item) => item.id),
+      loading: true,
     },
   };
 

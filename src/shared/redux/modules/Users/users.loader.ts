@@ -11,6 +11,7 @@ export const initialUsersLoader = async (): Promise<{ Users: UsersState }> => {
     Users: {
       byKey: usersByKey,
       allIds: data.map((item) => item.id),
+      loading: true,
     },
   };
 

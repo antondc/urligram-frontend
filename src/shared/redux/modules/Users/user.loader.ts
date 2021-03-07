@@ -29,10 +29,12 @@ export const initialUserLoader = async ({ query, params }: RequestParameters = {
         },
       },
       currentIds: [userData?.attributes?.id],
+      loading: true,
     },
     Bookmarks: {
       byKey: serializedBookmarks,
       currentIds: bookmarksData.map((item) => item.id),
+      loading: true,
     },
   };
 

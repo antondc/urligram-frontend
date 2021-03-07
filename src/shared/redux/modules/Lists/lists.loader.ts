@@ -17,6 +17,7 @@ export const initialListsLoader = async ({ query }: RequestParameters = {}): Pro
         contentPath: 'attributes',
       }),
       currentIds: data.map((item) => item.id),
+      loading: true
     },
   };
 

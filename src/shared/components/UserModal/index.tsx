@@ -1,75 +1,38 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
+import { useDispatch, useSelector } from 'react-redux';
 
-import Cross from 'Assets/svg/cross.svg';
-import User from 'Assets/svg/user.svg';
-import A from 'Components/A';
 import { logOut } from 'Modules/Session/actions/logOut';
 import { switchMessageModal } from 'Modules/Ui/actions/switchMessageModal';
 import { switchUserModal } from 'Modules/Ui/actions/switchUserModal';
-import { Border, Hr, Span } from '@antoniodcorrea/components';
+import { selectSessionUserId } from '../../redux/modules/Session/selectors/selectSessionUserId';
+import { UserModal as UserModalUi } from './UserModal';
 
 import './UserModal.less';
 
-interface Props {
-  logOut: () => void;
-  switchMessageModal: () => void;
-  switchUserModal: () => void;
-}
+const UserModal: React.FC = () => {
+  const dispatch = useDispatch();
+  const sessionId = useSelector(selectSessionUserId);
 
-const UserModal: React.FC<Props> = ({ logOut, switchUserModal, switchMessageModal }) => (
-  <Border className="UserModal" onClick={switchUserModal} onMouseLeave={switchUserModal}>
-    <Cross className="UserModal-cross" />
-    <User className="UserModal-userLogo" onClick={switchMessageModal} />
-    <ul>
-      <li>
-        <A href="" frontend>
-          <Span bold>My account</Span>
-        </A>
-      </li>
-      <Hr spacer size="small" />
-      <li>
-        <A href="" frontend>
-          <Span bold>My tags</Span>
-        </A>
-      </li>
-      <Hr spacer size="small" />
-      <li>
-        <A href="" frontend>
-          <Span bold>Followers</Span>
-        </A>
-      </li>
-      <Hr spacer size="small" />
-      <li>
-        <A href="" frontend>
-          <Span bold>Following</Span>
-        </A>
-      </li>
-      <Hr spacer size="small" />
-      <li>
-        <A href="" frontend>
-          <Span bold>Recommended</Span>
-        </A>
-      </li>
-      <Hr spacer size="small" />
-      <li>
-        <A href="" frontend>
-          <Span bold>My lists</Span>
-        </A>
-      </li>
-      <Hr spacer size="small" />
-      <li className="UserModal-logOut" onClick={logOut}>
-        <Span bold>Log out</Span>
-      </li>
-    </ul>
-  </Border>
-);
+  const logOutDispatched = () => {
+    dispatch(logOut());
+  };
 
-const mapStateToProps = createStructuredSelector({});
+  const switchUserModalDispatched = () => {
+    dispatch(switchUserModal());
+  };
 
-export default connect(mapStateToProps, {
-  switchUserModal,
-  switchMessageModal,
-  logOut,
-})(UserModal);
+  const switchMessageModalDispatched = () => {
+    dispatch(switchMessageModal());
+  };
+
+  return (
+    <UserModalUi
+      sessionId={sessionId}
+      logOut={logOutDispatched}
+      switchUserModal={switchUserModalDispatched}
+      switchMessageModal={switchMessageModalDispatched}
+    />
+  );
+};
+
+export default UserModal;

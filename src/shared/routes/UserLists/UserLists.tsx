@@ -10,6 +10,7 @@ import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListTags from 'Components/SidebarListTags';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
+import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
 import { Border, FadeInOut, Flex, H4, Hr } from '@antoniodcorrea/components';
 
 import './UserLists.less';
@@ -52,9 +53,9 @@ export const UserLists: React.FC<Props> = ({
             Lists of <A href={`/users/${userId}`}>@{user?.name}</A>
           </H4>
           <Hr spacer />
-          <FadeInOut valueToUpdate={listsLoading} speed="fastest">
+          <FadeInOut valueToUpdate={listsLoading} speed="fastest" appear>
             {listsLoading ? (
-              <BookmarkRowSkeletonGroup length={listsIds?.length} />
+              <BookmarkRowSkeletonGroup length={listsIds?.length || DEFAULT_PAGE_SIZE} />
             ) : (
               listsIds?.map((id, index) => (
                 <React.Fragment key={id}>

@@ -9,6 +9,7 @@ import UserRow from 'Components/UserRow';
 import { UserRowSkeletonGroup } from 'Components/UserRow/UserRowSkeletonGroup';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
+import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
 import { Border, FadeInOut, Flex, H4, Hr, SortBy } from '@antoniodcorrea/components';
 
 import './Followers.less';
@@ -63,9 +64,9 @@ export const Followers: React.FC<Props> = ({
         <Border className="Followers-tags" grow>
           <H4>Users following @{user?.name}</H4>
           <Hr spacer />
-          <FadeInOut valueToUpdate={usersLoading} speed="fastest">
+          <FadeInOut valueToUpdate={usersLoading} speed="fastest" appear>
             {usersLoading ? (
-              <UserRowSkeletonGroup length={usersCurrentIds?.length} />
+              <UserRowSkeletonGroup length={usersCurrentIds?.length || DEFAULT_PAGE_SIZE} />
             ) : (
               usersCurrentIds?.map((id, index) => (
                 <React.Fragment key={id}>

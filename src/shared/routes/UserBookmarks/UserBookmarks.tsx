@@ -10,6 +10,7 @@ import Sidebar from 'Components/Sidebar';
 import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListUsers from 'Components/SidebarListUsers';
 import { UserState } from 'Modules/Users/users.types';
+import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
 import { Border, FadeInOut, Flex, H4, Hr, SortBy } from '@antoniodcorrea/components';
 
 import './UserBookmarks.less';
@@ -69,9 +70,9 @@ export const UserBookmarks: React.FC<Props> = ({
             </A>
           </H4>
           <Hr spacer />
-          <FadeInOut valueToUpdate={bookmarksLoading} speed="fastest">
+          <FadeInOut valueToUpdate={bookmarksLoading} speed="fastest" appear>
             {bookmarksLoading ? (
-              <BookmarkRowSkeletonGroup length={bookmarksIds?.length} />
+              <BookmarkRowSkeletonGroup length={bookmarksIds?.length || DEFAULT_PAGE_SIZE} />
             ) : (
               bookmarksIds?.map((id, index) => (
                 <React.Fragment key={id}>

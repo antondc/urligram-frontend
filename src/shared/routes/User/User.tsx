@@ -115,7 +115,7 @@ export const User: React.FC<Props> = ({
             </A>
           </Flex>
           <Hr spacer />
-          <FadeInOut valueToUpdate={bookmarksLoading} speed="fastest">
+          <FadeInOut valueToUpdate={bookmarksLoading} speed="fastest" appear>
             {!!bookmarksLoading ? (
               <BookmarkRowSkeletonGroup length={5} />
             ) : (

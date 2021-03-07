@@ -8,6 +8,7 @@ import SidebarListUsers from 'Components/SidebarListUsers';
 import UserRow from 'Components/UserRow';
 import { UserRowSkeletonGroup } from 'Components/UserRow/UserRowSkeletonGroup';
 import { UserState } from 'Modules/Users/users.types';
+import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
 import { Border, FadeInOut, Flex, H4, Hr, SortBy } from '@antoniodcorrea/components';
 
 import './Users.less';
@@ -44,23 +45,15 @@ export const Users: React.FC<Props> = ({
     <Flex horizontal="between" vertical="top">
       <Main>
         <Flex horizontal="right">
-          <SortBy
-            options={[
-              { label: 'Last updated', field: 'last-bookmarked' },
-              { label: 'Rating', field: 'vote' },
-              { label: 'Bookmarks', field: 'most-bookmarked' },
-            ]}
-            href={url}
-            currentSort={sort}
-          />
+          <SortBy options={[{ label: 'Created', field: 'createdat' }]} href={url} currentSort={sort} />
         </Flex>
         <Hr spacer size="small" />
-        <Border className="Users-tags" grow>
+        <Border className="Users-users" grow>
           <H4>Users</H4>
           <Hr spacer />
-          <FadeInOut valueToUpdate={usersLoading} speed="fastest">
+          <FadeInOut valueToUpdate={usersLoading} speed="fastest" appear>
             {usersLoading ? (
-              <UserRowSkeletonGroup length={usersCurrentIds?.length} />
+              <UserRowSkeletonGroup length={usersCurrentIds?.length || DEFAULT_PAGE_SIZE} />
             ) : (
               usersCurrentIds?.map((id, index) => (
                 <React.Fragment key={id}>

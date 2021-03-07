@@ -10,6 +10,7 @@ import SidebarListTags from 'Components/SidebarListTags';
 import SidebarListUsers from 'Components/SidebarListUsers';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
+import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
 import { Border, FadeInOut, Flex, H4, Hr, Select, SelectValue, SortBy } from '@antoniodcorrea/components';
 
 import './Links.less';
@@ -89,9 +90,9 @@ export const Links: React.FC<Props> = ({
         <Border grow>
           <H4>Links</H4>
           <Hr spacer />
-          <FadeInOut valueToUpdate={loading} speed="fastest">
+          <FadeInOut valueToUpdate={loading} speed="fastest" appear>
             {loading ? (
-              <LinkRowSkeletonGroup length={linksIds?.length} />
+              <LinkRowSkeletonGroup length={linksIds?.length || DEFAULT_PAGE_SIZE} />
             ) : (
               linksIds?.map((id, index) => (
                 <React.Fragment key={id}>

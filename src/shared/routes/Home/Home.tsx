@@ -9,6 +9,7 @@ import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListUsers from 'Components/SidebarListUsers';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
+import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
 import { AIcon, Border, FadeInOut, Flex, H4, Hr, Tag } from '@antoniodcorrea/components';
 
 import './Home.less';
@@ -57,15 +58,15 @@ export const Home: React.FC<Props> = ({
           )}
         </Border>
         <Hr spacer />
-        <Border className="Home-tags" grow>
+        <Border className="Home-links" grow>
           <Flex horizontal="between" vertical="bottom">
             <H4>Links</H4>
             <A href={'links'} frontend>
               <AIcon size="small">See more</AIcon>
             </A>
           </Flex>
-          <Hr spacer size="small" />{' '}
-          <FadeInOut valueToUpdate={linksIdsLoading} speed="fastest">
+          <Hr spacer size="small" />
+          <FadeInOut valueToUpdate={linksIdsLoading} speed="fastest" appear>
             {linksIdsLoading ? (
               <LinkRowSkeletonGroup length={5} />
             ) : (
