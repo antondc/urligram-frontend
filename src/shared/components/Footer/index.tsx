@@ -33,7 +33,7 @@ const Footer: React.FC<Props> = ({
       </A>
     </div>
     <div className="Footer-section">
-      <A href="sign-in" frontend>
+      <A href="sign-up" frontend>
         <Span bold>Sign up</Span>
       </A>
     </div>

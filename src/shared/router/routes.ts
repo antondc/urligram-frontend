@@ -170,9 +170,9 @@ export const Routes: RoutesInterface = {
     layout: 'fullPage',
   },
 
-  SignIn: {
-    name: 'SignIn',
-    path: '/:lang([a-z]{2})?/sign-in',
+  SignUp: {
+    name: 'SignUp',
+    path: '/:lang([a-z]{2})?/sign-up',
     exact: true,
     auth: false,
     hasHeader: false,

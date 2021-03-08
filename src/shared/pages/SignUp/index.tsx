@@ -7,13 +7,13 @@ import { selectSessionError } from 'Modules/Session/selectors/selectSessionError
 import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUserId';
 import { Button, Flex, H1, Hr, Input, Span } from '@antoniodcorrea/components';
 
-import './SignIn.less';
+import './SignUp.less';
 
 interface State {
   username: string | undefined;
   password: string | undefined;
 }
-const SignIn: React.FC = () => {
+const SignUp: React.FC = () => {
   const [formState, setFormState] = useState<State>({
     username: undefined,
     password: undefined,
@@ -45,10 +45,10 @@ const SignIn: React.FC = () => {
       <Hr spacer size="big" />
       <Hr spacer size="big" />
       <Hr spacer size="big" />
-      <div className="SignIn">
-        <div className="SignIn-content">
-          <H1 className="SignIn-h1">Sign up</H1>
-          <form className="SignIn-form">
+      <div className="SignUp">
+        <div className="SignUp-content">
+          <H1 className="SignUp-h1">Sign up</H1>
+          <form className="SignUp-form">
             <Hr size="normal" spacer />
             <Input
               name="username"
@@ -76,7 +76,7 @@ const SignIn: React.FC = () => {
           <Flex horizontal="center">
             <Span bold>Forgot password?</Span>
             <Hr size="micro" spacer />
-            <div className="SignIn-section">
+            <div className="SignUp-section">
               <Span bold>Already have an account?: </Span>
               <A href="login" styled underlined frontend>
                 <Span bold>login</Span>
@@ -89,4 +89,4 @@ const SignIn: React.FC = () => {
   );
 };
 
-export default SignIn;
+export default SignUp;

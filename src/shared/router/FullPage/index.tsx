@@ -12,7 +12,7 @@ import Control from 'Pages/Control';
 import Login from 'Pages/Login';
 import NotFound from 'Pages/NotFound';
 import ServerError from 'Pages/ServerError';
-import SignIn from 'Pages/SignIn';
+import SignUp from 'Pages/SignUp';
 import { Routes } from 'Router/routes';
 import { Location } from 'Services/History';
 import { FadeInOut } from '@antoniodcorrea/components';
@@ -31,15 +31,15 @@ const FullPage: React.FC<Props> = ({ loggedIn, location, defaultCurrentSlug, pat
     <FadeInOut classname="FullPage-content" valueToUpdate={pathWithoutLanguageParam} speed="fastest" appear>
       <Switch location={{ ...location, pathname: pathWithoutLanguageParam }}>
         {/* Redirects */}
-        {loggedIn && <Redirect from="/:lang?/sign-in" to={'/' + defaultCurrentSlug + '/'} />}
+        {loggedIn && <Redirect from="/:lang?/sign-up" to={'/' + defaultCurrentSlug + '/'} />}
         {loggedIn && <Redirect from="/:lang?/login" to={'/' + defaultCurrentSlug + '/'} />}
-        {!loggedIn && <Redirect from="/:lang?/control" to={'/' + defaultCurrentSlug + '/sign-in'} />}
+        {!loggedIn && <Redirect from="/:lang?/control" to={'/' + defaultCurrentSlug + '/sign-up'} />}
 
         {/* General */}
         <Route exact={Routes.About.exact} path={Routes.About.path} component={About} />
         <Route exact={Routes.Control.exact} path={Routes.Control.path} component={Control} />
         <Route exact={Routes.Login.exact} path={Routes.Login.path} component={Login} />
-        <Route exact={Routes.SignIn.exact} path={Routes.SignIn.path} component={SignIn} />
+        <Route exact={Routes.SignUp.exact} path={Routes.SignUp.path} component={SignUp} />
 
         {/* Guards */}
         <Route exact={Routes.ServerError.exact} path={Routes.ServerError.path} component={ServerError} />

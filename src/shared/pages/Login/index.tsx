@@ -78,7 +78,7 @@ const Login: React.FC = () => {
             <Hr size="micro" spacer />
             <div className="Login-section">
               <Span bold>Dont have an account?: </Span>
-              <A href="sign-in" styled underlined frontend>
+              <A href="sign-up" styled underlined frontend>
                 <Span bold>sign up</Span>
               </A>
             </div>
