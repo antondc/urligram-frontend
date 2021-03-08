@@ -1,0 +1,18 @@
+@import '../../css/imports.less';
+
+@c: .ConfirmSignUp;
+
+@{c} {
+  &-content {
+    .calcgrid(@property: width; @columns: 2; @parentColumns: 12; @addGutter: 2; @hasParentPaddings: 0);
+
+    @media @br-mobile {
+      .calcgrid(@property: width; @columns: 2; @parentColumns: 2; @addGutter: 2; @hasParentPaddings: 0);
+    }
+  }
+
+  &-form {
+    display: flex;
+    flex-direction: column;
+  }
+}

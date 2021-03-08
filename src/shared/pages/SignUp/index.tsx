@@ -2,25 +2,33 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import A from 'Components/A';
-import { logIn } from 'Modules/Session/actions/logIn';
+import { signUp } from 'Modules/Session/actions/signUp';
 import { selectSessionError } from 'Modules/Session/selectors/selectSessionError';
+import { selectSessionStatus } from 'Modules/Session/selectors/selectSessionStatus';
 import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUserId';
+import history from 'Services/History';
 import { Button, Flex, H1, Hr, Input, Span } from '@antoniodcorrea/components';
 
 import './SignUp.less';
 
 interface State {
   username: string | undefined;
+  email: string | undefined;
   password: string | undefined;
+  repeatPassword: string | undefined;
 }
+
 const SignUp: React.FC = () => {
   const [formState, setFormState] = useState<State>({
     username: undefined,
+    email: undefined,
     password: undefined,
+    repeatPassword: undefined,
   });
   const dispatch = useDispatch();
   const sessionError = useSelector(selectSessionError);
   const sessionId = useSelector(selectSessionUserId);
+  const sessionStatus = useSelector(selectSessionStatus);
 
   const onChange = (e: React.FormEvent<HTMLInputElement>) => {
     setFormState({
@@ -34,10 +42,14 @@ const SignUp: React.FC = () => {
 
     const data = {
       username: formState.username,
+      email: formState.email,
       password: formState.password,
+      repeatPassword: formState.repeatPassword,
     };
 
-    dispatch(logIn(data));
+    if (sessionStatus === 'inactive') history.push('/');
+
+    dispatch(signUp(data));
   };
 
   return (
@@ -59,13 +71,33 @@ const SignUp: React.FC = () => {
               error={!!sessionError}
               success={!!sessionId}
             />
-            <Hr size="small" spacer />
+            <Hr size="nano" spacer />
+            <Input
+              name="email"
+              type="email"
+              label="Email"
+              onChange={onChange}
+              value={formState.email}
+              error={!!sessionError}
+              success={!!sessionId}
+            />
+            <Hr size="nano" spacer />
             <Input
               name="password"
               type="password"
               label="Password"
               onChange={onChange}
               value={formState.password}
+              error={!!sessionError}
+              success={!!sessionId}
+            />
+            <Hr size="nano" spacer />
+            <Input
+              name="repeatPassword"
+              type="password"
+              label="Repeat password"
+              onChange={onChange}
+              value={formState.repeatPassword}
               error={!!sessionError}
               success={!!sessionId}
             />

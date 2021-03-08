@@ -8,6 +8,7 @@ import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCur
 import { selectPathWithoutLanguageParam } from 'Modules/Routes/selectors/selectPathWithoutLanguageParam';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import About from 'Pages/About';
+import ConfirmSignUp from 'Pages/ConfirmSignUp';
 import Control from 'Pages/Control';
 import Login from 'Pages/Login';
 import NotFound from 'Pages/NotFound';
@@ -31,15 +32,17 @@ const FullPage: React.FC<Props> = ({ loggedIn, location, defaultCurrentSlug, pat
     <FadeInOut classname="FullPage-content" valueToUpdate={pathWithoutLanguageParam} speed="fastest" appear>
       <Switch location={{ ...location, pathname: pathWithoutLanguageParam }}>
         {/* Redirects */}
-        {loggedIn && <Redirect from="/:lang?/sign-up" to={'/' + defaultCurrentSlug + '/'} />}
-        {loggedIn && <Redirect from="/:lang?/login" to={'/' + defaultCurrentSlug + '/'} />}
-        {!loggedIn && <Redirect from="/:lang?/control" to={'/' + defaultCurrentSlug + '/sign-up'} />}
+        {loggedIn && <Redirect from={Routes.ConfirmSignUp.path} to={'/' + defaultCurrentSlug + '/'} />}
+        {loggedIn && <Redirect from={Routes.SignUp.path} to={'/' + defaultCurrentSlug + '/'} />}
+        {loggedIn && <Redirect from={Routes.Login.path} to={'/' + defaultCurrentSlug + '/'} />}
+        {!loggedIn && <Redirect from={Routes.Control.path} to={'/' + defaultCurrentSlug + '/login'} />}
 
         {/* General */}
         <Route exact={Routes.About.exact} path={Routes.About.path} component={About} />
         <Route exact={Routes.Control.exact} path={Routes.Control.path} component={Control} />
         <Route exact={Routes.Login.exact} path={Routes.Login.path} component={Login} />
         <Route exact={Routes.SignUp.exact} path={Routes.SignUp.path} component={SignUp} />
+        <Route exact={Routes.ConfirmSignUp.exact} path={Routes.ConfirmSignUp.path} component={ConfirmSignUp} />
 
         {/* Guards */}
         <Route exact={Routes.ServerError.exact} path={Routes.ServerError.path} component={ServerError} />
