@@ -9,7 +9,6 @@ import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListUsers from 'Components/SidebarListUsers';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
-import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
 import { AIcon, Border, FadeInOut, Flex, H4, Hr, Tag } from '@antoniodcorrea/components';
 
 import './Home.less';

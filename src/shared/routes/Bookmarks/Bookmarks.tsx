@@ -24,7 +24,7 @@ interface Props {
   sort: string;
 }
 
-export const Bookmarks: React.FC<Props> = ({ url, bookmarksIds, popularLists, loading, page, totalItems, sort }) => (
+export const Bookmarks: React.FC<Props> = ({ url, bookmarksIds, loading, page, totalItems, sort }) => (
   <div className="Bookmarks">
     <Flex horizontal="between" vertical="top">
       <Main>

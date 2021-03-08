@@ -1,7 +1,7 @@
 import { defaultDecoder, parse, ParsedQs, stringify } from 'qs';
 
 export class QueryStringWrapper {
-  static decoder(str: string, defaultDecoder: defaultDecoder, b, type: string): string | number | ParsedQs {
+  static decoder(str: string, defaultDecoder: defaultDecoder, b: unknown, type: string): string | number | ParsedQs {
     if (type === 'value' && !isNaN(Number(str))) return Number(str);
 
     return defaultDecoder(str);

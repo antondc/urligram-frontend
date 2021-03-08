@@ -1,5 +1,3 @@
-import { url } from 'inspector';
-
 import { URLWrapper } from './URLWrapper';
 
 describe('URLWrapper', () => {

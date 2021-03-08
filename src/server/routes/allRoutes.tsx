@@ -91,6 +91,7 @@ router.get(routesPathsList, (req: any, res: any, next: any) => {
       // Send the Router with Route component; App component sent within render method; backend data passed via context
       const context: any = { data }; // TODO: Check this type
       const store = storeFactory(data);
+      /* eslint-disable indent */
       const appComponentAsString = config.ENABLE_ISOMORPHISM
         ? renderToString(
             <Provider store={store}>
@@ -100,6 +101,7 @@ router.get(routesPathsList, (req: any, res: any, next: any) => {
             </Provider>
           )
         : '';
+      /* eslint-enable indent */
       const helmet = Helmet.renderStatic();
       const dataForTemplate = serialize(data); // Serializing for security reasons: https://redux.js.org/recipes/server-rendering#security-considerations
 

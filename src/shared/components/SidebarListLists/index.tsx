@@ -1,5 +1,4 @@
 import React from 'react';
-import { createPortal } from 'react-dom';
 
 import A from 'Components/A';
 import { ListState } from 'Modules/Lists/lists.types';

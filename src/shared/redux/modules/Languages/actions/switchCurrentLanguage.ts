@@ -1,9 +1,10 @@
 import { Dispatch } from 'redux';
 
+import { RootState } from '../../rootType';
 import { switchCurrentLanguageReceive } from './switchCurrentLanguageReceive';
 import { switchCurrentLanguageRequest } from './switchCurrentLanguageRequest';
 
-export const switchCurrentLanguage = (slug: string) => (dispatch: Dispatch, getState) => {
+export const switchCurrentLanguage = (slug: string) => (dispatch: Dispatch, getState: () => RootState): void => {
   const {
     Languages: { byKey, currentLanguage },
   } = getState();

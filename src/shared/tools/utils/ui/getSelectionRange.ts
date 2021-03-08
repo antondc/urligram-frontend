@@ -1,4 +1,4 @@
-const getSelectionRange = () => {
+const getSelectionRange = (): Range => {
   const selection = window.getSelection();
   if (selection.rangeCount === 0) return null;
 

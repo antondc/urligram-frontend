@@ -85,13 +85,7 @@ class Layout extends React.Component<Props> {
   };
 
   render = () => {
-    const {
-      languageLoading,
-      userModalMounted,
-      messageModalMounted,
-      loginModalMounted,
-      pathWithoutLanguageParam,
-    } = this.props;
+    const { languageLoading, userModalMounted, messageModalMounted, loginModalMounted } = this.props;
 
     const mounted = !languageLoading;
     const showLoader = false;

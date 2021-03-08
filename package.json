@@ -24,6 +24,7 @@
     "build:server:stage": "webpack --config ./webpack/webpack.server.stage.ts",
     "build:client:stage": "webpack --config ./webpack/webpack.client.stage.ts",
     "run:server": "node --inspect=9228 ./dist/server.js",
+    "lint": "eslint src --ext .ts,.tsx,.js,.jsx",
     "test": "jest --no-cache",
     "test:watch": "jest --watch --no-cache",
     "test:precommit": "jest --no-cache",

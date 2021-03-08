@@ -1,4 +1,10 @@
-const getSelectionCoords = (selectionRange, id) => {
+const getSelectionCoords = (
+  selectionRange: HTMLElement,
+  id: string
+): {
+  offsetLeft: number;
+  offsetTop: number;
+} => {
   const editorBounds = document.getElementById(id).getBoundingClientRect();
   const rangeBounds = selectionRange.getBoundingClientRect();
   const rangeWidth = rangeBounds.right - rangeBounds.left;

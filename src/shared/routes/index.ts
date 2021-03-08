@@ -2,15 +2,6 @@ import omit from 'lodash/omit';
 
 import { initialBookmarksLoader } from 'Modules/Bookmarks/bookmarks.loader';
 import { initialListsLoader } from 'Modules/Lists/lists.loader';
-import { followingListsInitialLoader } from 'Modules/Sections/initialLoaders/followingListsInitialLoader';
-import { followingUsersInitialLoader } from 'Modules/Sections/initialLoaders/followingUsersInitialLoad';
-import { mostFollowedUsersInitialLoader } from 'Modules/Sections/initialLoaders/mostFollowedUsersInitialLoader';
-import { myListsInitialLoader } from 'Modules/Sections/initialLoaders/myListsInitialLoader';
-import { myTagsInitialLoader } from 'Modules/Sections/initialLoaders/myTagsInitialLoader';
-import { newListsInitialLoader } from 'Modules/Sections/initialLoaders/newListsInitialLoader';
-import { newUsersInitialLoader } from 'Modules/Sections/initialLoaders/newUsersInitialLoader';
-import { popularListsInitialLoader } from 'Modules/Sections/initialLoaders/popularListsInitialLoader';
-import { tagsAllInitialLoader } from 'Modules/Tags/initialLoaders/tagsAllInitialLoader';
 import { initialUserLoader } from 'Modules/Users/user.loader';
 import { initialUsersLoader } from 'Modules/Users/users.loader';
 import { RequestParameters } from 'Root/src/server/routes/allRoutes';

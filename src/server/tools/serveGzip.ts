@@ -1,9 +1,10 @@
 // Middleware to serve gzipped files
 // Has to be called before static middleware
+import { NextFunction, Request, Response } from 'express';
 
 import getExtension from 'Tools/utils/file/getExtension';
 
-const serveGzip = function (req: any, res: any, next: any) {
+const serveGzip = function (req: Request, res: Response, next: NextFunction): void {
   // TODO: express types
   switch (getExtension(req.url)) {
     case 'js':

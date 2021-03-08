@@ -1,14 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router';
 import { Route, Switch } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 
-import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
 import { selectPathWithoutLanguageParam } from 'Modules/Routes/selectors/selectPathWithoutLanguageParam';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import Bookmarks from 'Routes/Bookmarks';
-import Control from 'Routes/Control';
 import Followers from 'Routes/Followers';
 import Following from 'Routes/Following';
 import Home from 'Routes/Home';
@@ -16,10 +13,6 @@ import Routes from 'Routes/index';
 import Links from 'Routes/Links';
 import List from 'Routes/List';
 import Lists from 'Routes/Lists';
-import Login from 'Routes/Login';
-import NotFound from 'Routes/NotFound';
-import ServerError from 'Routes/ServerError';
-import SignIn from 'Routes/SignIn';
 import Tags from 'Routes/Tags';
 import User from 'Routes/User';
 import UserBookmarks from 'Routes/UserBookmarks';

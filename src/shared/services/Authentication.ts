@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 import config from 'Root/config.test.json';
 
 class Authentication {
-  verifyToken = (token: string): {} | null => {
+  verifyToken = (token: string): unknown => {
     if (!token) return null;
     try {
       const tokenContent = jwt.verify(token, config.SECRET);

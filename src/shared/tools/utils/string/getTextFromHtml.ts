@@ -5,7 +5,7 @@
 // HTML Entity Decode https://stackoverflow.com/questions/5796718/html-entity-decode
 // &amp;amp; malformed in XML https://stackoverflow.com/questions/18019716/is-ampamp-valid/25273781
 // Remove spaces from string to check differences
-export const getTextFromHtml = (html) => {
+export const getTextFromHtml = (html: string): string => {
   html = html.replace('&amp;amp;', '&');
 
   const element = document.createElement('div');

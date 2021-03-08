@@ -9,22 +9,22 @@ interface State {
 }
 
 class LayoutHelper extends React.Component<unknown, State> {
-  constructor(props) {
+  constructor(props: unknown) {
     super(props);
     this.state = {
       mounted: false,
     };
   }
 
-  componentDidMount = () => {
+  componentDidMount = (): void => {
     document.addEventListener('keydown', this.testKeyDown);
   };
 
-  componentWillUnmount = () => {
+  componentWillUnmount = (): void => {
     document.removeEventListener('keydown', this.testKeyDown);
   };
 
-  testKeyDown = (e) => {
+  testKeyDown = (e: KeyboardEvent): void => {
     if (e.which === KEY_CODE) {
       this.setState({
         mounted: !this.state.mounted,
@@ -32,7 +32,7 @@ class LayoutHelper extends React.Component<unknown, State> {
     }
   };
 
-  render() {
+  render(): JSX.Element {
     const { mounted } = this.state;
 
     return (

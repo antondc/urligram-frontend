@@ -14,7 +14,7 @@ export class URLWrapper {
   private path: string;
   private search: string;
   private searchParams: URLSearchParams;
-  private searchParamsObject: Record<string, unknown>;
+  private searchParamsObject: Record<string, any>;
 
   constructor(rawURL: string) {
     this.instantiateURL(rawURL);
@@ -87,7 +87,7 @@ export class URLWrapper {
   upsertSearchParams(params: Record<string, unknown>): string {
     const alreadyParams = QueryStringWrapper.parseQueryString(this.url.search);
 
-    const paramsEnhanced = mergeDeep(alreadyParams, params);
+    const paramsEnhanced = mergeDeep<Record<string, unknown>>(alreadyParams, params);
     this.searchParamsObject = paramsEnhanced;
     const stringifiedParams = QueryStringWrapper.stringifyQueryParams(paramsEnhanced);
     const updatedURL = `${this.getDomain()}${this.getPath()}?${stringifiedParams}`;
