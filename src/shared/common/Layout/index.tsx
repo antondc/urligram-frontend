@@ -91,9 +91,9 @@ class Layout extends React.Component<Props> {
     return (
       mounted && (
         <div className="Layout">
-          <LayoutHelper />
           <div className="Layout-background" />
           <LayoutContent>
+            <LayoutHelper />
             <Header />
             <Router />
             <Footer />

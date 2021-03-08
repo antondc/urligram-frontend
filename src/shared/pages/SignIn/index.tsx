@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import A from 'Components/A';
 import { logIn } from 'Modules/Session/actions/logIn';
 import { selectSessionError } from 'Modules/Session/selectors/selectSessionError';
 import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUserId';
-import { Button, H3, Hr, Input } from '@antoniodcorrea/components';
+import { Button, Flex, H1, Hr, Input, Span } from '@antoniodcorrea/components';
 
 import './SignIn.less';
 
@@ -44,11 +45,11 @@ const SignIn: React.FC = () => {
       <Hr spacer size="big" />
       <Hr spacer size="big" />
       <Hr spacer size="big" />
-      <div className="Login">
-        <div className="Login-content">
-          <H3 className="Login-h1">LOGIN PAGE</H3>
-          <form className="Login-form">
-            <Hr size="small" spacer />
+      <div className="SignIn">
+        <div className="SignIn-content">
+          <H1 className="SignIn-h1">Sign in</H1>
+          <form className="SignIn-form">
+            <Hr size="normal" spacer />
             <Input
               name="username"
               type="text"
@@ -68,9 +69,20 @@ const SignIn: React.FC = () => {
               error={!!sessionError}
               success={!!sessionId}
             />
-            <Hr size="big" spacer />
+            <Hr size="normal" spacer />
             <Button text="Enter" type="submit" onClick={onSubmit} error={!!sessionError} success={!!sessionId} />
           </form>
+          <Hr size="big" spacer />
+          <Flex horizontal="center">
+            <Span bold>Forgot password?</Span>
+            <Hr size="micro" spacer />
+            <div className="SignIn-section">
+              <Span bold>Already have an account?: </Span>
+              <A href="login" styled underlined frontend>
+                <Span bold>login</Span>
+              </A>
+            </div>
+          </Flex>
         </div>
       </div>
     </>

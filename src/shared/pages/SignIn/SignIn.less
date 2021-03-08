@@ -8,15 +8,22 @@
   align-items: center;
 
   &-content {
-    .calcgrid(@property: width; @columns: 2; @parentColumns: 12; @addGutter: 2; @hasParentPaddings: 0);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 1;
 
-    @media @br-mobile {
-      .calcgrid(@property: width; @columns: 2; @parentColumns: 2; @addGutter: 2; @hasParentPaddings: 0);
-    }
+    .calcgrid(@property: width; @columns: 4; @parentColumns: 12; @addGutter: 0; @hasParentPaddings: 0);
   }
 
   &-form {
     display: flex;
     flex-direction: column;
+
+    .calcgrid(@property: width; @columns: 2; @parentColumns: 4; @addGutter: 2; @hasParentPaddings: 0);
+
+    @media @br-mobile {
+      .calcgrid(@property: width; @columns: 2; @parentColumns: 4; @addGutter: 2; @hasParentPaddings: 0);
+    }
   }
 }
