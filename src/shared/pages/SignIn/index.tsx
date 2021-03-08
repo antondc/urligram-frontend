@@ -51,8 +51,8 @@ const SignIn: React.FC = () => {
             <Hr size="small" spacer />
             <Input
               name="username"
-              type="input"
-              label="Session name"
+              type="text"
+              label="Name"
               onChange={onChange}
               value={formState.username}
               error={!!sessionError}

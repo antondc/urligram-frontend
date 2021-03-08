@@ -116,7 +116,7 @@
     "webpack-node-externals": "^1.7.2"
   },
   "dependencies": {
-    "@antoniodcorrea/components": "^0.5.92",
+    "@antoniodcorrea/components": "^0.5.93",
     "@types/qs": "^6.9.5",
     "@types/react-select": "^4.0.13",
     "axios": "^0.19.2",
