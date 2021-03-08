@@ -6,16 +6,16 @@ export const SIGN_UP_REQUEST = 'SIGN_UP_REQUEST';
 export const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS';
 export const SIGN_UP_FAILURE = 'SIGN_UP_FAILURE';
 
-export const SESSION_ACTIVE = 'active';
-export const SESSION_INACTIVE = 'inactive';
-export const SESSION_DISABLED = 'disabled';
-export const SESSION_REMOVED = 'removed';
+export const SESSION_STATUS_ACTIVE = 'active';
+export const SESSION_STATUS_INACTIVE = 'inactive';
+export const SESSION_STATUS_DISABLED = 'disabled';
+export const SESSION_STATUS_REMOVED = 'removed';
 
 export type SessionStatus =
-  | typeof SESSION_ACTIVE
-  | typeof SESSION_INACTIVE
-  | typeof SESSION_DISABLED
-  | typeof SESSION_REMOVED;
+  | typeof SESSION_STATUS_ACTIVE
+  | typeof SESSION_STATUS_INACTIVE
+  | typeof SESSION_STATUS_DISABLED
+  | typeof SESSION_STATUS_REMOVED;
 
 export type SessionLevel = 'admin' | 'user';
 
@@ -45,10 +45,10 @@ export interface LogInResponse {
 }
 
 export interface SignUpRequest {
-  username: string;
+  name: string;
   email: string;
   password: string;
-  repeatPassword: string;
+  password_repeated: string;
 }
 
 export interface SignUpResponse {

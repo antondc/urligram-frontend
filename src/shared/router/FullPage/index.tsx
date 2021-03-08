@@ -27,30 +27,34 @@ interface Props {
   pathWithoutLanguageParam: string;
 }
 
-const FullPage: React.FC<Props> = ({ loggedIn, location, defaultCurrentSlug, pathWithoutLanguageParam }) => (
-  <div className="FullPage">
-    <FadeInOut classname="FullPage-content" valueToUpdate={pathWithoutLanguageParam} speed="fastest" appear>
-      <Switch location={{ ...location, pathname: pathWithoutLanguageParam }}>
-        {/* Redirects */}
-        {loggedIn && <Redirect from={Routes.ConfirmSignUp.path} to={'/' + defaultCurrentSlug + '/'} />}
-        {loggedIn && <Redirect from={Routes.SignUp.path} to={'/' + defaultCurrentSlug + '/'} />}
-        {loggedIn && <Redirect from={Routes.Login.path} to={'/' + defaultCurrentSlug + '/'} />}
-        {!loggedIn && <Redirect from={Routes.Control.path} to={'/' + defaultCurrentSlug + '/login'} />}
+const FullPage: React.FC<Props> = ({ loggedIn, location, defaultCurrentSlug, pathWithoutLanguageParam }) => {
+  console.log('loggedIn: ', loggedIn);
 
-        {/* General */}
-        <Route exact={Routes.About.exact} path={Routes.About.path} component={About} />
-        <Route exact={Routes.Control.exact} path={Routes.Control.path} component={Control} />
-        <Route exact={Routes.Login.exact} path={Routes.Login.path} component={Login} />
-        <Route exact={Routes.SignUp.exact} path={Routes.SignUp.path} component={SignUp} />
-        <Route exact={Routes.ConfirmSignUp.exact} path={Routes.ConfirmSignUp.path} component={ConfirmSignUp} />
+  return (
+    <div className="FullPage">
+      <FadeInOut classname="FullPage-content" valueToUpdate={pathWithoutLanguageParam} speed="fastest" appear>
+        <Switch location={{ ...location, pathname: pathWithoutLanguageParam }}>
+          {/* Redirects */}
+          {loggedIn && <Redirect from={Routes.ConfirmSignUp.path} to={'/' + defaultCurrentSlug + '/'} />}
+          {loggedIn && <Redirect from={Routes.SignUp.path} to={'/' + defaultCurrentSlug + '/'} />}
+          {loggedIn && <Redirect from={Routes.Login.path} to={'/' + defaultCurrentSlug + '/'} />}
+          {!loggedIn && <Redirect from={Routes.Control.path} to={'/' + defaultCurrentSlug + '/login'} />}
 
-        {/* Guards */}
-        <Route exact={Routes.ServerError.exact} path={Routes.ServerError.path} component={ServerError} />
-        <Route exact={Routes.NotFound.exact} path={Routes.NotFound.path} component={NotFound} />
-      </Switch>
-    </FadeInOut>
-  </div>
-);
+          {/* General */}
+          <Route exact={Routes.About.exact} path={Routes.About.path} component={About} />
+          <Route exact={Routes.Control.exact} path={Routes.Control.path} component={Control} />
+          <Route exact={Routes.Login.exact} path={Routes.Login.path} component={Login} />
+          <Route exact={Routes.SignUp.exact} path={Routes.SignUp.path} component={SignUp} />
+          <Route exact={Routes.ConfirmSignUp.exact} path={Routes.ConfirmSignUp.path} component={ConfirmSignUp} />
+
+          {/* Guards */}
+          <Route exact={Routes.ServerError.exact} path={Routes.ServerError.path} component={ServerError} />
+          <Route exact={Routes.NotFound.exact} path={Routes.NotFound.path} component={NotFound} />
+        </Switch>
+      </FadeInOut>
+    </div>
+  );
+};
 
 const mapStateToProps = createStructuredSelector({
   loggedIn: selectSessionLoggedIn,
