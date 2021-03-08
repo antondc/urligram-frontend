@@ -12,7 +12,7 @@ export const LinkRowSkeletonGroup: React.FC<Props> = ({ length = 10 }) => (
     {Array.from({ length }, (_, index) => (
       <React.Fragment key={index}>
         <LinkRowSkeleton id={index} />
-        <Hr spacer size="small" />
+        {index !== length - 1 && <Hr spacer size="small" />}
       </React.Fragment>
     ))}
   </>
