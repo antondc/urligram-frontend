@@ -79,7 +79,7 @@ const Login: React.FC = () => {
             <div className="Login-section">
               <Span bold>Dont have an account?: </Span>
               <A href="sign-in" styled underlined frontend>
-                <Span bold>sign in</Span>
+                <Span bold>sign up</Span>
               </A>
             </div>
           </Flex>

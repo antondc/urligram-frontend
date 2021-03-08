@@ -47,7 +47,7 @@ const SignIn: React.FC = () => {
       <Hr spacer size="big" />
       <div className="SignIn">
         <div className="SignIn-content">
-          <H1 className="SignIn-h1">Sign in</H1>
+          <H1 className="SignIn-h1">Sign up</H1>
           <form className="SignIn-form">
             <Hr size="normal" spacer />
             <Input
