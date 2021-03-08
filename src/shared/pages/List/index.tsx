@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { bookmarksLoadByListId } from 'Modules/Bookmarks/actions/bookmarksLoadByListId';
 import { selectBookmarksCurrentIds } from 'Modules/Bookmarks/selectors/selectBookmarksCurrentIds';
 import { selectBookmarksLoading } from 'Modules/Bookmarks/selectors/selectBookmarksLoading';
+import { selectBookmarksMetaSort } from 'Modules/Bookmarks/selectors/selectBookmarksMetaSort';
 import { selectBookmarksTotalItems } from 'Modules/Bookmarks/selectors/selectBookmarkTotalItems';
 import { loadListById } from 'Modules/Lists/actions/listLoadById';
 import { selectListsById } from 'Modules/Lists/selectors/selectListById';
@@ -18,7 +19,6 @@ import { selectTagsInThisListLoading } from 'Modules/Sections/selectors/selectTa
 import { selectUsersInThisList } from 'Modules/Sections/selectors/selectUsersInThisList';
 import { selectUsersInThisListIds } from 'Modules/Sections/selectors/selectUsersInThisListIds';
 import { selectUsersInThisListLoading } from 'Modules/Sections/selectors/selectUsersInThisListLoading';
-import { selectBookmarksMetaSort } from '../../redux/modules/Bookmarks/selectors/selectBookmarksMetaSort';
 import { List as ListUI } from './List';
 
 const List: React.FC = () => {

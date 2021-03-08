@@ -3,26 +3,26 @@ import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 
+import SidebarLeft from 'Components/SidebarLeft';
 import { selectPathWithoutLanguageParam } from 'Modules/Routes/selectors/selectPathWithoutLanguageParam';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
-import Bookmarks from 'Routes/Bookmarks';
-import Followers from 'Routes/Followers';
-import Following from 'Routes/Following';
-import Home from 'Routes/Home';
-import Routes from 'Routes/index';
-import Links from 'Routes/Links';
-import List from 'Routes/List';
-import Lists from 'Routes/Lists';
-import Tags from 'Routes/Tags';
-import User from 'Routes/User';
-import UserBookmarks from 'Routes/UserBookmarks';
-import UserLists from 'Routes/UserLists';
-import Users from 'Routes/Users';
+import Bookmarks from 'Pages/Bookmarks';
+import Followers from 'Pages/Followers';
+import Following from 'Pages/Following';
+import Home from 'Pages/Home';
+import Links from 'Pages/Links';
+import List from 'Pages/List';
+import Lists from 'Pages/Lists';
+import Tags from 'Pages/Tags';
+import User from 'Pages/User';
+import UserBookmarks from 'Pages/UserBookmarks';
+import UserLists from 'Pages/UserLists';
+import Users from 'Pages/Users';
+import { Routes } from 'Router/routes';
 import { Location } from 'Services/History';
 import { Fade, FadeInOut, Flex, Hr } from '@antoniodcorrea/components';
-import SidebarLeft from '../../components/SidebarLeft';
 
-import './RouterContent.less';
+import './Content.less';
 
 interface Props {
   loggedIn: boolean;
@@ -30,15 +30,15 @@ interface Props {
   pathWithoutLanguageParam: string;
 }
 
-const RouterContent: React.FC<Props> = ({ location, pathWithoutLanguageParam }) => (
+const Content: React.FC<Props> = ({ location, pathWithoutLanguageParam }) => (
   <>
     <Hr spacer size="big" />
-    <div className="RouterContent">
+    <div className="Content">
       <Flex vertical="top">
-        <Fade classname="RouterContent-sidebarLeft" mounted speed="fastest" delayIn={250} appear>
+        <Fade classname="Content-sidebarLeft" mounted speed="fastest" delayIn={250} appear>
           <SidebarLeft />
         </Fade>
-        <div className="RouterContent-content">
+        <div className="Content-content">
           <FadeInOut valueToUpdate={pathWithoutLanguageParam} speed="fastest" appear>
             <Switch location={{ ...location, pathname: pathWithoutLanguageParam }}>
               <Route exact={Routes.UserBookmarks.exact} path={Routes.UserBookmarks.path} component={UserBookmarks} />
@@ -66,4 +66,4 @@ const mapStateToProps = createStructuredSelector({
   pathWithoutLanguageParam: selectPathWithoutLanguageParam,
 });
 
-export default connect(mapStateToProps, {})(RouterContent);
+export default connect(mapStateToProps, {})(Content);

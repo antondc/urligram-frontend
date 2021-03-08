@@ -25,7 +25,7 @@ export interface RoutesInterface {
   [key: string]: Route;
 }
 
-const Routes: RoutesInterface = {
+export const Routes: RoutesInterface = {
   Tags: {
     name: 'Tags',
     path: '/:lang([a-z]{2})?/tags',
@@ -272,5 +272,3 @@ export const pathsByLayout = (layout: Layout): string[] =>
 export const routesPathsList: string[] = Object.values(Routes).map((item) => item.path);
 
 export const routesList: Route[] = Object.values(Routes);
-
-export default Routes;

@@ -15,7 +15,7 @@ import { SessionState } from 'Modules/Session/session.types';
 import storeFactory from 'Redux/index';
 import config from 'Root/config.test.json';
 import { RecursiveObject } from 'Root/src/shared/typescript/recursiveObject';
-import Routes, { routesList, routesPathsList, routesWithoutOmmitedValues } from 'Routes/index';
+import { Routes, routesList, routesPathsList, routesWithoutOmmitedValues } from 'Router/routes';
 import Authentication from 'Services/Authentication';
 import history from 'Services/History';
 import enhanceRouteWithParams from 'Tools/utils/url/enhanceRouteWithParams';

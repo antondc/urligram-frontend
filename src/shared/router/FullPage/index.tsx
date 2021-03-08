@@ -7,17 +7,17 @@ import { createStructuredSelector } from 'reselect';
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
 import { selectPathWithoutLanguageParam } from 'Modules/Routes/selectors/selectPathWithoutLanguageParam';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
-import Routes from 'Routes/index';
-import Login from 'Routes/Login';
+import About from 'Pages/About';
+import Control from 'Pages/Control';
+import Login from 'Pages/Login';
+import NotFound from 'Pages/NotFound';
+import ServerError from 'Pages/ServerError';
+import SignIn from 'Pages/SignIn';
+import { Routes } from 'Router/routes';
 import { Location } from 'Services/History';
 import { FadeInOut } from '@antoniodcorrea/components';
-import About from '../About';
-import Control from '../Control';
-import NotFound from '../NotFound';
-import ServerError from '../ServerError';
-import SignIn from '../SignIn';
 
-import './RouterAccesory.less';
+import './FullPage.less';
 
 interface Props {
   loggedIn: boolean;
@@ -26,9 +26,9 @@ interface Props {
   pathWithoutLanguageParam: string;
 }
 
-const RouterAccesory: React.FC<Props> = ({ loggedIn, location, defaultCurrentSlug, pathWithoutLanguageParam }) => (
-  <div className="RouterAccesory">
-    <FadeInOut classname="RouterAccesory-content" valueToUpdate={pathWithoutLanguageParam} speed="fastest" appear>
+const FullPage: React.FC<Props> = ({ loggedIn, location, defaultCurrentSlug, pathWithoutLanguageParam }) => (
+  <div className="FullPage">
+    <FadeInOut classname="FullPage-content" valueToUpdate={pathWithoutLanguageParam} speed="fastest" appear>
       <Switch location={{ ...location, pathname: pathWithoutLanguageParam }}>
         {/* Redirects */}
         {loggedIn && <Redirect from="/:lang?/login" to={'/' + defaultCurrentSlug + '/'} />}
@@ -54,4 +54,4 @@ const mapStateToProps = createStructuredSelector({
   pathWithoutLanguageParam: selectPathWithoutLanguageParam,
 });
 
-export default connect(mapStateToProps, {})(RouterAccesory);
+export default connect(mapStateToProps, {})(FullPage);

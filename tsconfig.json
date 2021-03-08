@@ -21,10 +21,11 @@
       "Common/*": ["./src/shared/common/*"],
       "Components/*": ["./src/shared/components/*"],
       "Assets/*": ["./src/shared/assets/*"],
-      "Routes/*": ["./src/shared/routes/*"],
+      "Router/*": ["./src/shared/router/*"],
       "Tools/*": ["./src/shared/tools/*"],
       "Services/*": ["./src/shared/services/*"],
-      "Ui/*": ["./src/shared/ui/*"]
+      "Ui/*": ["./src/shared/ui/*"],
+      "Pages/*": ["./src/shared/pages/*"]
     }
   },
   "include": ["./src/**/*", "./*"]

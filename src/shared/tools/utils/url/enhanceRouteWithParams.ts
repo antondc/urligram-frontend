@@ -2,7 +2,7 @@ import cloneDeep from 'lodash/cloneDeep';
 import { match } from 'path-to-regexp';
 
 import { RouteState } from 'Modules/Routes/routes.types';
-import { Route } from 'Routes/index';
+import { Route } from 'Router/routes';
 import { Location } from 'Services/History';
 import { QueryStringWrapper } from 'Services/QueryStringWrapper';
 /**

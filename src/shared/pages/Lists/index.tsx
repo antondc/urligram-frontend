@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { loadLists } from 'Modules/Lists/actions/loadLists';
+import { selectListsMetaSort } from 'Modules/Lists/selectors/selectListMetaSort';
 import { selectListsAllIds } from 'Modules/Lists/selectors/selectListsAllIds';
 import { selectListsLoading } from 'Modules/Lists/selectors/selectListsLoading';
 import { selectListsTotalItems } from 'Modules/Lists/selectors/selectListsTotalItems';
@@ -13,7 +14,6 @@ import { selectMostUsedTags } from 'Modules/Sections/selectors/selectMostUsedTag
 import { selectMostUsedTagsLoading } from 'Modules/Sections/selectors/selectMostUsedTagsLoading';
 import { selectNewUsers } from 'Modules/Sections/selectors/selectNewUsers';
 import { selectNewUsersLoading } from 'Modules/Sections/selectors/selectNewUsersLoading';
-import { selectListsMetaSort } from '../../redux/modules/Lists/selectors/selectListMetaSort';
 import { Lists as ListsUI } from './Lists';
 
 const Lists: React.FC = () => {

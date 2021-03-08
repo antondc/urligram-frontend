@@ -1,4 +1,4 @@
-import { Route } from 'Routes/index';
+import { Route } from 'Router/routes';
 import { Location } from 'Services/History';
 
 export const PUSH_NEW_ROUTE = 'PUSH_NEW_ROUTE';

@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Route, Switch } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import { Location } from 'history';
 
@@ -14,18 +13,17 @@ import UserModal from 'Components/UserModal';
 import { selectLanguageLoading } from 'Modules/Languages/selectors/selectLanguageLoading';
 import { pushNewRoute } from 'Modules/Routes/actions/pushNewRoute';
 import { RouteState } from 'Modules/Routes/routes.types';
+import { selectPathWithoutLanguageParam } from 'Modules/Routes/selectors/selectPathWithoutLanguageParam';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import { selectUiLoginModalMounted } from 'Modules/Ui/selectors/selectUiLoginModalMounted';
 import { selectUiMessageModalMounted } from 'Modules/Ui/selectors/selectUiMessageModalMounted';
 import { selectUiScreenLocked } from 'Modules/Ui/selectors/selectUiScreenLocked';
 import { selectUiUserModalMounted } from 'Modules/Ui/selectors/selectUiUserModalMounted';
-import { pathsByLayout, routesList, routesWithoutOmmitedValues } from 'Routes/index';
-import RouterContent from 'Routes/RouterContent';
+import Router from 'Router/index';
+import { routesList, routesWithoutOmmitedValues } from 'Router/routes';
 import enhanceRouteWithParams from 'Tools/utils/url/enhanceRouteWithParams';
 import findActiveRouteKey from 'Tools/utils/url/findActiveRouteKey';
 import { Fade, SpinnerCircle } from '@antoniodcorrea/components';
-import { selectPathWithoutLanguageParam } from '../../redux/modules/Routes/selectors/selectPathWithoutLanguageParam';
-import RouterAccesory from '../../routes/RouterAccesory';
 
 import './Layout.less';
 
@@ -89,8 +87,6 @@ class Layout extends React.Component<Props> {
 
     const mounted = !languageLoading;
     const showLoader = false;
-    const pathsByLayoutWithLeftSidebar = pathsByLayout('withLeftSidebar');
-    const pathsByLayoutFullPage = pathsByLayout('fullPage');
 
     return (
       mounted && (
@@ -99,10 +95,7 @@ class Layout extends React.Component<Props> {
           <div className="Layout-background" />
           <LayoutContent>
             <Header />
-            <Switch>
-              <Route path={pathsByLayoutWithLeftSidebar} component={RouterContent} exact />
-              <Route path={pathsByLayoutFullPage} component={RouterAccesory} />
-            </Switch>
+            <Router />
             <Footer />
             <Fade mounted={userModalMounted} position="absolute" appear>
               <UserModal />

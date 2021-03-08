@@ -1,10 +1,10 @@
 import React from 'react';
 
 import A from 'Components/A';
+import { RenderInPortal } from 'Components/Portal';
 import { UserState } from 'Modules/Users/users.types';
 import { stringToDashCase } from 'Tools/utils/string/stringToDashCase';
 import { Hr, Span, Tooltip } from '@antoniodcorrea/components';
-import { RenderInPortal } from '../Portal';
 import { SidebarListUsersSkeleton } from './SidebarListUsersSkeleton';
 
 import './SidebarListUsers.less';

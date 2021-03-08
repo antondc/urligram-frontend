@@ -2,9 +2,9 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { logOut } from 'Modules/Session/actions/logOut';
+import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUserId';
 import { switchMessageModal } from 'Modules/Ui/actions/switchMessageModal';
 import { switchUserModal } from 'Modules/Ui/actions/switchUserModal';
-import { selectSessionUserId } from '../../redux/modules/Session/selectors/selectSessionUserId';
 import { UserModal as UserModalUi } from './UserModal';
 
 import './UserModal.less';

@@ -21,10 +21,11 @@ const webpackClientCommonConfig = {
       Common: path.resolve(WEBPACK_ROOT, 'src/shared/common/'),
       Components: path.resolve(WEBPACK_ROOT, 'src/shared/components/'),
       Assets: path.resolve(WEBPACK_ROOT, 'src/shared/assets/'),
-      Routes: path.resolve(WEBPACK_ROOT, 'src/shared/routes/'),
+      Router: path.resolve(WEBPACK_ROOT, 'src/shared/router/'),
       Tools: path.resolve(WEBPACK_ROOT, 'src/shared/tools/'),
       Services: path.resolve(WEBPACK_ROOT, 'src/shared/services/'),
       Ui: path.resolve(WEBPACK_ROOT, 'src/shared/ui/'),
+      Pages: path.resolve(WEBPACK_ROOT, 'src/shared/pages/'),
     },
   },
   module: {

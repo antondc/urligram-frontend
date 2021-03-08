@@ -54,10 +54,11 @@ module.exports = {
       Common: path.resolve(process.cwd(), 'src/shared/common/'),
       Components: path.resolve(process.cwd(), 'src/shared/components/'),
       Assets: path.resolve(process.cwd(), 'src/shared/assets/'),
-      Routes: path.resolve(process.cwd(), 'src/shared/routes/'),
+      Router: path.resolve(process.cwd(), 'src/shared/router/'),
       Tools: path.resolve(process.cwd(), 'src/shared/tools/'),
       Services: path.resolve(process.cwd(), 'src/shared/services/'),
       Ui: path.resolve(process.cwd(), 'src/shared/ui/'),
+      Pages: path.resolve(process.cwd(), 'src/shared/pages/'),
     };
 
     return config;

@@ -16,8 +16,8 @@ import { userLoad } from 'Modules/Users/actions/userLoad';
 import { selectUserById } from 'Modules/Users/selectors/selectUserById';
 import { selectUsersCurrentIds } from 'Modules/Users/selectors/selectUsersCurrentIds';
 import { selectUsersLoading } from 'Modules/Users/selectors/selectUsersLoading';
+import { selectUsersMetaSort } from 'Modules/Users/selectors/selectUsersMetaSort';
 import { selectUsersTotalItems } from 'Modules/Users/selectors/selectUsersTotalItems';
-import { selectUsersMetaSort } from '../../redux/modules/Users/selectors/selectUsersMetaSort';
 import { Following as FollowingUI } from './Following';
 
 const Following: React.FC = () => {
