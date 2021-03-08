@@ -8,7 +8,6 @@ import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCur
 import { voteLink } from 'Modules/Links/actions/voteLink';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUserId';
-import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
 import { selectUserById } from 'Modules/Users/selectors/selectUserById';
 import { UserState } from 'Modules/Users/users.types';
 import { LocaleFormattedDate } from 'Tools/utils/Date/localeFormattedDate';
@@ -21,7 +20,6 @@ interface Props {
   user: UserState;
   sessionId: string;
   isLogged: boolean;
-  switchLoginModal: () => void;
   slug: string;
   currentGlossary: GlossaryState;
 }
@@ -86,5 +84,4 @@ const mapStateToProps = createStructuredSelector({
 
 export default connect(mapStateToProps, {
   voteLink,
-  switchLoginModal,
 })(UserRow);

@@ -15,12 +15,13 @@ interface Props {
 export const logIn = ({ username, password }: Props) => async (dispatch: Dispatch): Promise<void> => {
   try {
     await dispatch(logInRequest());
-    const response = await HttpClient.post<SessionApiResponse>('/login', {
+    const { data }: SessionApiResponse = await HttpClient.post('/login', {
       name: username,
       password: password,
     });
-    await dispatch(switchLoginModal());
-    await dispatch(logInReceive(response.data.attributes));
+
+    await dispatch(switchLoginModal(false));
+    await dispatch(logInReceive(data.attributes));
   } catch (err) {
     await dispatch(logInFailure(err));
     throw new Error(err);

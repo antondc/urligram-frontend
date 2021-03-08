@@ -31,6 +31,7 @@ const FullPage: React.FC<Props> = ({ loggedIn, location, defaultCurrentSlug, pat
     <FadeInOut classname="FullPage-content" valueToUpdate={pathWithoutLanguageParam} speed="fastest" appear>
       <Switch location={{ ...location, pathname: pathWithoutLanguageParam }}>
         {/* Redirects */}
+        {loggedIn && <Redirect from="/:lang?/sign-in" to={'/' + defaultCurrentSlug + '/'} />}
         {loggedIn && <Redirect from="/:lang?/login" to={'/' + defaultCurrentSlug + '/'} />}
         {!loggedIn && <Redirect from="/:lang?/control" to={'/' + defaultCurrentSlug + '/sign-in'} />}
 

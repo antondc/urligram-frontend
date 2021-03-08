@@ -11,7 +11,7 @@ import { Border, Button, Flex, H3, Hr, Input } from '@antoniodcorrea/components'
 import './LoginModal.less';
 
 interface Props {
-  switchLoginModal: () => void;
+  switchLoginModal: (mount: boolean) => void;
   logIn: ({ username, password }) => Promise<void>;
 }
 
@@ -33,9 +33,9 @@ const LoginModal: React.FC<Props> = ({ logIn, switchLoginModal }) => {
   };
 
   return (
-    <BaseModal onClick={switchLoginModal}>
+    <BaseModal onClick={() => switchLoginModal(false)}>
       <Border className="LoginModal" grow>
-        <Cross className="LoginModal-cross" onClick={switchLoginModal} />
+        <Cross className="LoginModal-cross" onClick={() => switchLoginModal(false)} />
         <Flex horizontal="center">
           <H3>Log in</H3>
         </Flex>

@@ -57,7 +57,7 @@ export const Ui = (state = initialState, action: UiActionsTypes): UiState => {
         screenLocked: !state.screenLocked,
         loginModal: {
           ...state.loginModal,
-          mounted: !state.loginModal.mounted,
+          mounted: action.data.mounted,
         },
       });
 

@@ -44,6 +44,9 @@ interface SwitchMessageModal {
 }
 
 interface SwitchLoginModal {
+  data: {
+    mounted: boolean;
+  };
   type: typeof SWITCH_LOGIN_MODAL;
 }
 

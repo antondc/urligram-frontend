@@ -1,65 +1,80 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { logIn } from 'Modules/Session/actions/logIn';
-import { Button, H3, Hr } from '@antoniodcorrea/components';
+import { selectSessionError } from 'Modules/Session/selectors/selectSessionError';
+import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUserId';
+import { Button, H3, Hr, Input } from '@antoniodcorrea/components';
 
 import './SignIn.less';
 
-interface Props {
-  logIn: ({ username, password }) => void;
-}
-
 interface State {
-  username: string;
-  password: undefined;
+  username: string | undefined;
+  password: string | undefined;
 }
+const SignIn: React.FC = () => {
+  const [formState, setFormState] = useState<State>({
+    username: undefined,
+    password: undefined,
+  });
+  const dispatch = useDispatch();
+  const sessionError = useSelector(selectSessionError);
+  const sessionId = useSelector(selectSessionUserId);
 
-class SignIn extends Component<Props, State> {
-  constructor(props) {
-    super(props);
-    this.state = {
-      username: undefined,
-      password: undefined,
-    };
-  }
-
-  onChange = (e) => {
-    this.setState({
-      [e.target.name]: e.target.value,
+  const onChange = (e: React.FormEvent<HTMLInputElement>) => {
+    setFormState({
+      ...formState,
+      [e.currentTarget.name]: e.currentTarget.value,
     } as Pick<State, keyof State>);
   };
 
-  onSubmit = () => {
-    const { logIn } = this.props;
-    const { username, password } = this.state;
-    logIn({ username, password });
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    const data = {
+      username: formState.username,
+      password: formState.password,
+    };
+
+    dispatch(logIn(data));
   };
 
-  render() {
-    return (
-      <>
-        <Hr spacer size="big" />
-        <Hr spacer size="big" />
-        <Hr spacer size="big" />
-        <div className="SignIn">
-          <div className="SignIn-content">
-            <H3 className="SignIn-h3">SIGN IN PAGE</H3>
-            <form className="SignIn-form">
-              <input name="username" type="text" placeholder="Session name" autoFocus onChange={this.onChange} />
-              <input name="password" type="text" placeholder="Password" autoFocus onChange={this.onChange} />
-              <Button text="Enter" onClick={this.onSubmit} />
-            </form>
-          </div>
-        </div>{' '}
-      </>
-    );
-  }
-}
+  return (
+    <>
+      <Hr spacer size="big" />
+      <Hr spacer size="big" />
+      <Hr spacer size="big" />
+      <div className="Login">
+        <div className="Login-content">
+          <H3 className="Login-h1">LOGIN PAGE</H3>
+          <form className="Login-form">
+            <Hr size="small" spacer />
+            <Input
+              name="username"
+              type="input"
+              label="Session name"
+              onChange={onChange}
+              value={formState.username}
+              error={!!sessionError}
+              success={!!sessionId}
+            />
+            <Hr size="small" spacer />
+            <Input
+              name="password"
+              type="password"
+              label="Password"
+              onChange={onChange}
+              value={formState.password}
+              error={!!sessionError}
+              success={!!sessionId}
+            />
+            <Hr size="big" spacer />
+            <Button text="Enter" type="submit" onClick={onSubmit} error={!!sessionError} success={!!sessionId} />
+          </form>
+        </div>
+      </div>
+    </>
+  );
+};
 
-const mapStateToProps = createStructuredSelector({});
-
-export default connect(mapStateToProps, {
-  logIn,
-})(SignIn);
+export default SignIn;

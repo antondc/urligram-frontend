@@ -4,7 +4,9 @@ export const LOG_OUT = 'LOG_OUT';
 export const LOG_FAILED = 'LOG_FAILED';
 
 export interface SessionApiResponse {
-  attributes: SessionState;
+  data: {
+    attributes: SessionState;
+  };
 }
 
 export interface Credentials {
@@ -23,6 +25,7 @@ export interface SessionState {
   logged?: boolean;
   token?: string;
   iat?: number;
+  error?: Error;
 }
 
 interface LogInFailureAction {

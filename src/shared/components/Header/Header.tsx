@@ -13,7 +13,7 @@ interface Props {
   currentGlossary: GlossaryState;
   loading: boolean;
   switchUserModal: () => void;
-  switchLoginModal: () => void;
+  switchLoginModal: (mount: true) => void;
 }
 
 export const Header: React.FC<Props> = ({ isLogged, currentGlossary, switchUserModal, switchLoginModal, loading }) => (
@@ -41,7 +41,7 @@ export const Header: React.FC<Props> = ({ isLogged, currentGlossary, switchUserM
         <User
           name="User"
           className={'Header-userLogo' + (isLogged ? ' Header-userLogo--isActive' : '')}
-          onClick={isLogged ? switchUserModal : switchLoginModal}
+          onClick={isLogged ? switchUserModal : () => switchLoginModal(true)}
         />
       </div>
     </Border>

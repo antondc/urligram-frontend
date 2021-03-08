@@ -27,7 +27,7 @@ interface Props {
   usersLoading: boolean;
   listsLoading: boolean;
   switchUserModal: () => void;
-  switchLoginModal: () => void;
+  switchLoginModal: (mount: true) => void;
 }
 
 const Header: React.FC<Props> = ({

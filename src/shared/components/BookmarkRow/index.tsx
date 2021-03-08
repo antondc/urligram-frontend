@@ -18,7 +18,7 @@ interface Props {
   voteLink: ({ vote: boolean, linkId: number, userId: string }) => void;
   userId: string;
   isLogged: boolean;
-  switchLoginModal: () => void;
+  switchLoginModal: (mount: false) => void;
 }
 
 const BookmarkRow: React.FC<Props> = ({
@@ -30,7 +30,7 @@ const BookmarkRow: React.FC<Props> = ({
   switchLoginModal,
 }) => {
   const onVote = (vote) => {
-    if (!isLogged) return switchLoginModal();
+    if (!isLogged) return switchLoginModal(false);
 
     voteLink({ vote, linkId, userId });
   };
