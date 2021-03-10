@@ -81,7 +81,7 @@ const SignUp: React.FC = () => {
     const isValidPassword = validatePassword(value);
 
     if (!isValidPassword) {
-      setPasswordError('Password not valid');
+      setPasswordError('6-10 chars., one digit and uppercase');
 
       return;
     }
@@ -109,7 +109,7 @@ const SignUp: React.FC = () => {
 
     const isSamePassword = passwordRepeatedValue === passwordValue;
     if (!isSamePassword) {
-      setPasswordRepeatedError('Passwords not identical');
+      setPasswordRepeatedError('Passwords are not equal');
 
       return;
     }
