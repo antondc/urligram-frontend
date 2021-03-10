@@ -1,7 +1,7 @@
 import React from 'react';
 
 import A from 'Components/A';
-import { Button, FadeInOut, Flex, H1, Hr, Input, Span } from '@antoniodcorrea/components';
+import { Button, FadeInOut, Flex, H1, Hr, Input, Span, Tooltip } from '@antoniodcorrea/components';
 
 import './SignUp.less';
 
@@ -97,6 +97,11 @@ export const SignUp: React.FC<Props> = ({
               {passwordError}
             </Span>
           </FadeInOut>
+          <Tooltip
+            parentElementId="Input-password"
+            content="Min 6 characters, one number and one uppercase"
+            delay={3}
+          />
           <Hr size="nano" spacer />
           <Input
             name="password_repeated"
@@ -113,6 +118,11 @@ export const SignUp: React.FC<Props> = ({
               {passwordRepeatedError}
             </Span>
           </FadeInOut>
+          <Tooltip
+            parentElementId="Input-password_repeated"
+            content="Min 6 characters, one number and one uppercase"
+            delay={3}
+          />
           <Hr size="normal" spacer />
           <Button
             text="Enter"
