@@ -2,6 +2,12 @@ import axios, { AxiosInstance } from 'axios';
 import https from 'https';
 import { stringify } from 'qs';
 
+export const DEFAULT_ASYNC_ERROR = {
+  message: 'An error ocurred',
+  statusCode: 500,
+  category: 'Error',
+};
+
 class HttpClient {
   private static instance: AxiosInstance;
 
@@ -17,7 +23,10 @@ class HttpClient {
     axiosInstance.defaults.paramsSerializer = this.paramsSerializer;
     axiosInstance.defaults.withCredentials = true;
 
-    axiosInstance.interceptors.response.use((response) => response.data);
+    axiosInstance.interceptors.response.use(
+      (response) => response.data,
+      (err) => Promise.reject(err?.response?.data?.error || DEFAULT_ASYNC_ERROR)
+    );
 
     HttpClient.instance = axiosInstance;
   }

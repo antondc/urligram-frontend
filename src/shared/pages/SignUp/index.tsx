@@ -4,21 +4,23 @@ import { useDispatch, useSelector } from 'react-redux';
 import A from 'Components/A';
 import { signUp } from 'Modules/Session/actions/signUp';
 import { selectSessionError } from 'Modules/Session/selectors/selectSessionError';
-import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUserId';
+import { selectSessionStatus } from 'Modules/Session/selectors/selectSessionStatus';
 import { SESSION_STATUS_INACTIVE } from 'Modules/Session/session.types';
 import { DELAY_SLOW_MS } from 'Root/src/shared/constants';
 import { Routes } from 'Router/routes';
 import history from 'Services/History';
+import { validateEmailAddress } from 'Tools/utils/string/validateEmailAddress';
+import { validatePassword } from 'Tools/utils/string/validatePassword';
 import { Button, Flex, H1, Hr, Input, Span } from '@antoniodcorrea/components';
-import { selectSessionStatus } from '../../redux/modules/Session/selectors/selectSessionStatus';
-import { ReceiveUsersResponse } from '../../redux/modules/Users/users.types';
-import HttpClient from '../../services/HttpClient';
-import { validateEmailAddress } from '../../tools/utils/string/validateEmailAddress';
-import { validatePassword } from '../../tools/utils/string/validatePassword';
 
 import './SignUp.less';
 
 const SignUp: React.FC = () => {
+  const dispatch = useDispatch();
+  const sessionError = useSelector(selectSessionError);
+  const sessionStatus = useSelector(selectSessionStatus);
+  const sessionStatusInactive = sessionStatus === SESSION_STATUS_INACTIVE;
+
   const [emailValue, setEmailValue] = useState<string>(undefined);
   const [emailError, setEmailError] = useState<string>(undefined);
   const [nameValue, setNameValue] = useState<string>(undefined);
@@ -27,13 +29,18 @@ const SignUp: React.FC = () => {
   const [passwordError, setPasswordError] = useState<string>(undefined);
   const [passwordRepeatedValue, setPasswordRepeatedValue] = useState<string>(undefined);
   const [passwordRepeatedError, setPasswordRepeatedError] = useState<string>(undefined);
+  const [submitSucces, setSubmitSucces] = useState<boolean>(false);
   const [submitError, setSubmitError] = useState<string>(undefined);
 
-  const dispatch = useDispatch();
-  const sessionError = useSelector(selectSessionError);
-  const sessionId = useSelector(selectSessionUserId);
-  const sessionStatus = useSelector(selectSessionStatus);
-  const sessionStatusInactive = sessionStatus === SESSION_STATUS_INACTIVE;
+  const submitDisabled =
+    !emailValue ||
+    !!emailError ||
+    !nameValue ||
+    !!nameError ||
+    !passwordValue ||
+    !!passwordError ||
+    !passwordRepeatedValue ||
+    !!passwordRepeatedError;
 
   const onChangeName = async (e: React.FormEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
@@ -108,21 +115,6 @@ const SignUp: React.FC = () => {
       return;
     }
 
-    const usersByName: ReceiveUsersResponse = await HttpClient.get(`/users?filter[name]=${nameValue}`);
-
-    const isNameAvailable = !usersByName?.data?.length;
-    if (!isNameAvailable) {
-      setSubmitError('Name not available');
-      setNameError('Name not available');
-
-      return;
-    }
-    if (sessionError?.message) {
-      setSubmitError(sessionError?.message);
-
-      return;
-    }
-
     const data = {
       name: nameValue,
       email: emailValue,
@@ -135,9 +127,14 @@ const SignUp: React.FC = () => {
 
   useEffect(() => {
     if (!!sessionStatusInactive) {
+      setSubmitSucces(true);
       setTimeout(() => history.push(Routes.ConfirmSignUp.route), DELAY_SLOW_MS);
     }
   }, [sessionStatusInactive]);
+
+  useEffect(() => {
+    if (sessionError?.message) setSubmitError(sessionError?.message);
+  }, [sessionError]);
 
   return (
     <>
@@ -182,7 +179,14 @@ const SignUp: React.FC = () => {
             />
             <div>{passwordRepeatedError}</div>
             <Hr size="normal" spacer />
-            <Button text="Enter" type="submit" onClick={onSubmit} error={!!submitError} success={!!sessionId} />
+            <Button
+              text="Enter"
+              type="submit"
+              onClick={onSubmit}
+              error={!!submitError}
+              success={submitSucces}
+              disabled={submitDisabled}
+            />
             <div>{submitError}</div>
           </form>
           <Hr size="big" spacer />
