@@ -11,7 +11,7 @@ import { Routes } from 'Router/routes';
 import history from 'Services/History';
 import { validateEmailAddress } from 'Tools/utils/string/validateEmailAddress';
 import { validatePassword } from 'Tools/utils/string/validatePassword';
-import { Button, Flex, H1, Hr, Input, Span } from '@antoniodcorrea/components';
+import { Button, FadeInOut, Flex, H1, Hr, Input, Span } from '@antoniodcorrea/components';
 
 import './SignUp.less';
 
@@ -95,9 +95,9 @@ const SignUp: React.FC = () => {
     setPasswordRepeatedValue(value);
     setSubmitError(undefined);
 
-    const isValidPassword = validatePassword(value);
-    if (!isValidPassword) {
-      setPasswordRepeatedError('Password not valid');
+    const isSamePassword = value === passwordValue;
+    if (!isSamePassword) {
+      setPasswordRepeatedError('Passwords are not equal');
 
       return;
     }
@@ -146,38 +146,68 @@ const SignUp: React.FC = () => {
           <H1 className="SignUp-h1">Sign up</H1>
           <form className="SignUp-form">
             <Hr size="normal" spacer />
-            <Input name="name" type="text" label="Name" onChange={onChangeName} value={nameValue} error={nameError} />
-            <div>{nameError}</div>
+            <Input
+              name="name"
+              type="text"
+              label="Name"
+              onChange={onChangeName}
+              onBlur={onChangeName}
+              value={nameValue}
+              error={nameError}
+            />
+            <FadeInOut valueToUpdate={!!nameError} speed="fast">
+              <Span className="SignUp-error" size="small">
+                {nameError}
+              </Span>
+            </FadeInOut>
             <Hr size="nano" spacer />
             <Input
               name="email"
               type="email"
               label="Email"
               onChange={onChangeEmail}
+              onBlur={onChangeEmail}
               value={emailValue}
               error={emailError}
             />
-            <div>{emailError}</div>
+            <Hr size="nano" spacer />
+            <FadeInOut valueToUpdate={!!emailError} speed="fast">
+              <Span className="SignUp-error" size="small">
+                {emailError}
+              </Span>
+            </FadeInOut>
             <Hr size="nano" spacer />
             <Input
               name="password"
               type="password"
               label="Password"
               onChange={onChangePassword}
+              onBlur={onChangePassword}
               value={passwordValue}
               error={passwordError}
             />
-            <div>{passwordError}</div>
+            <Hr size="nano" spacer />
+            <FadeInOut valueToUpdate={!!passwordError} speed="fast">
+              <Span className="SignUp-error" size="small">
+                {passwordError}
+              </Span>
+            </FadeInOut>
             <Hr size="nano" spacer />
             <Input
               name="password_repeated"
               type="password"
               label="Repeat password"
               onChange={onChangePasswordRepeated}
+              onBlur={onChangePasswordRepeated}
               value={passwordRepeatedValue}
               error={passwordRepeatedError}
             />
-            <div>{passwordRepeatedError}</div>
+            <Hr size="nano" spacer />
+            <FadeInOut valueToUpdate={!!passwordRepeatedError} speed="fast">
+              <Span className="SignUp-error" size="small">
+                {passwordRepeatedError}
+              </Span>
+            </FadeInOut>
             <Hr size="normal" spacer />
             <Button
               text="Enter"
@@ -187,7 +217,12 @@ const SignUp: React.FC = () => {
               success={submitSucces}
               disabled={submitDisabled}
             />
-            <div>{submitError}</div>
+            <Hr size="nano" spacer />
+            <FadeInOut valueToUpdate={!!submitError} speed="fast">
+              <Span className="SignUp-error" size="small">
+                {submitError}
+              </Span>
+            </FadeInOut>
           </form>
           <Hr size="big" spacer />
           <Flex horizontal="center">
