@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import A from 'Components/A';
 import { signUp } from 'Modules/Session/actions/signUp';
 import { selectSessionError } from 'Modules/Session/selectors/selectSessionError';
 import { selectSessionStatus } from 'Modules/Session/selectors/selectSessionStatus';
@@ -11,7 +10,7 @@ import { Routes } from 'Router/routes';
 import history from 'Services/History';
 import { validateEmailAddress } from 'Tools/utils/string/validateEmailAddress';
 import { validatePassword } from 'Tools/utils/string/validatePassword';
-import { Button, FadeInOut, Flex, H1, Hr, Input, Span } from '@antoniodcorrea/components';
+import { SignUp as SignUpUi } from './SignUp';
 
 import './SignUp.less';
 
@@ -29,7 +28,7 @@ const SignUp: React.FC = () => {
   const [passwordError, setPasswordError] = useState<string>(undefined);
   const [passwordRepeatedValue, setPasswordRepeatedValue] = useState<string>(undefined);
   const [passwordRepeatedError, setPasswordRepeatedError] = useState<string>(undefined);
-  const [submitSucces, setSubmitSucces] = useState<boolean>(false);
+  const [submitSuccess, setSubmitSuccess] = useState<boolean>(false);
   const [submitError, setSubmitError] = useState<string>(undefined);
 
   const submitDisabled =
@@ -105,7 +104,7 @@ const SignUp: React.FC = () => {
     setPasswordRepeatedError(undefined);
   };
 
-  const onSubmit = async (e) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const isSamePassword = passwordRepeatedValue === passwordValue;
@@ -127,7 +126,7 @@ const SignUp: React.FC = () => {
 
   useEffect(() => {
     if (!!sessionStatusInactive) {
-      setSubmitSucces(true);
+      setSubmitSuccess(true);
       setTimeout(() => history.push(Routes.ConfirmSignUp.route), DELAY_SLOW_MS);
     }
   }, [sessionStatusInactive]);
@@ -137,107 +136,24 @@ const SignUp: React.FC = () => {
   }, [sessionError]);
 
   return (
-    <>
-      <Hr spacer size="big" />
-      <Hr spacer size="big" />
-      <Hr spacer size="big" />
-      <div className="SignUp">
-        <div className="SignUp-content">
-          <H1 className="SignUp-h1">Sign up</H1>
-          <form className="SignUp-form">
-            <Hr size="normal" spacer />
-            <Input
-              name="name"
-              type="text"
-              label="Name"
-              onChange={onChangeName}
-              onBlur={onChangeName}
-              value={nameValue}
-              error={nameError}
-            />
-            <FadeInOut valueToUpdate={!!nameError} speed="fast">
-              <Span className="SignUp-error" size="small">
-                {nameError}
-              </Span>
-            </FadeInOut>
-            <Hr size="nano" spacer />
-            <Input
-              name="email"
-              type="email"
-              label="Email"
-              onChange={onChangeEmail}
-              onBlur={onChangeEmail}
-              value={emailValue}
-              error={emailError}
-            />
-            <Hr size="nano" spacer />
-            <FadeInOut valueToUpdate={!!emailError} speed="fast">
-              <Span className="SignUp-error" size="small">
-                {emailError}
-              </Span>
-            </FadeInOut>
-            <Hr size="nano" spacer />
-            <Input
-              name="password"
-              type="password"
-              label="Password"
-              onChange={onChangePassword}
-              onBlur={onChangePassword}
-              value={passwordValue}
-              error={passwordError}
-            />
-            <Hr size="nano" spacer />
-            <FadeInOut valueToUpdate={!!passwordError} speed="fast">
-              <Span className="SignUp-error" size="small">
-                {passwordError}
-              </Span>
-            </FadeInOut>
-            <Hr size="nano" spacer />
-            <Input
-              name="password_repeated"
-              type="password"
-              label="Repeat password"
-              onChange={onChangePasswordRepeated}
-              onBlur={onChangePasswordRepeated}
-              value={passwordRepeatedValue}
-              error={passwordRepeatedError}
-            />
-            <Hr size="nano" spacer />
-            <FadeInOut valueToUpdate={!!passwordRepeatedError} speed="fast">
-              <Span className="SignUp-error" size="small">
-                {passwordRepeatedError}
-              </Span>
-            </FadeInOut>
-            <Hr size="normal" spacer />
-            <Button
-              text="Enter"
-              type="submit"
-              onClick={onSubmit}
-              error={!!submitError}
-              success={submitSucces}
-              disabled={submitDisabled}
-            />
-            <Hr size="nano" spacer />
-            <FadeInOut valueToUpdate={!!submitError} speed="fast">
-              <Span className="SignUp-error" size="small">
-                {submitError}
-              </Span>
-            </FadeInOut>
-          </form>
-          <Hr size="big" spacer />
-          <Flex horizontal="center">
-            <Span bold>Forgot password?</Span>
-            <Hr size="micro" spacer />
-            <div className="SignUp-section">
-              <Span bold>Already have an account?: </Span>
-              <A href="login" styled underlined frontend>
-                <Span bold>login</Span>
-              </A>
-            </div>
-          </Flex>
-        </div>
-      </div>
-    </>
+    <SignUpUi
+      nameValue={nameValue}
+      nameError={nameError}
+      onChangeName={onChangeName}
+      emailValue={emailValue}
+      emailError={emailError}
+      onChangeEmail={onChangeEmail}
+      passwordValue={passwordValue}
+      passwordError={passwordError}
+      onChangePassword={onChangePassword}
+      passwordRepeatedValue={passwordRepeatedValue}
+      passwordRepeatedError={passwordRepeatedError}
+      onChangePasswordRepeated={onChangePasswordRepeated}
+      onSubmit={onSubmit}
+      submitDisabled={submitDisabled}
+      submitSuccess={submitSuccess}
+      submitError={submitError}
+    />
   );
 };
 
