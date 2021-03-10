@@ -1,45 +1,143 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import A from 'Components/A';
 import { signUp } from 'Modules/Session/actions/signUp';
 import { selectSessionError } from 'Modules/Session/selectors/selectSessionError';
 import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUserId';
-import { SignUpRequest } from 'Modules/Session/session.types';
+import { SESSION_STATUS_INACTIVE } from 'Modules/Session/session.types';
+import { DELAY_SLOW_MS } from 'Root/src/shared/constants';
+import { Routes } from 'Router/routes';
+import history from 'Services/History';
 import { Button, Flex, H1, Hr, Input, Span } from '@antoniodcorrea/components';
+import { selectSessionStatus } from '../../redux/modules/Session/selectors/selectSessionStatus';
+import { ReceiveUsersResponse } from '../../redux/modules/Users/users.types';
+import HttpClient from '../../services/HttpClient';
+import { validateEmailAddress } from '../../tools/utils/string/validateEmailAddress';
+import { validatePassword } from '../../tools/utils/string/validatePassword';
 
 import './SignUp.less';
 
 const SignUp: React.FC = () => {
-  const [formState, setFormState] = useState<Partial<SignUpRequest>>({
-    name: undefined,
-    email: undefined,
-    password: undefined,
-    password_repeated: undefined,
-  });
+  const [emailValue, setEmailValue] = useState<string>(undefined);
+  const [emailError, setEmailError] = useState<string>(undefined);
+  const [nameValue, setNameValue] = useState<string>(undefined);
+  const [nameError, setNameError] = useState<string>(undefined);
+  const [passwordValue, setPasswordValue] = useState<string>(undefined);
+  const [passwordError, setPasswordError] = useState<string>(undefined);
+  const [passwordRepeatedValue, setPasswordRepeatedValue] = useState<string>(undefined);
+  const [passwordRepeatedError, setPasswordRepeatedError] = useState<string>(undefined);
+  const [submitError, setSubmitError] = useState<string>(undefined);
+
   const dispatch = useDispatch();
   const sessionError = useSelector(selectSessionError);
   const sessionId = useSelector(selectSessionUserId);
+  const sessionStatus = useSelector(selectSessionStatus);
+  const sessionStatusInactive = sessionStatus === SESSION_STATUS_INACTIVE;
 
-  const onChange = (e: React.FormEvent<HTMLInputElement>) => {
-    setFormState({
-      ...formState,
-      [e.currentTarget.name]: e.currentTarget.value,
-    });
+  const onChangeName = async (e: React.FormEvent<HTMLInputElement>) => {
+    const { value } = e.currentTarget;
+    setNameValue(value);
+    setSubmitError(undefined);
+
+    const isNameLengthValid = value.length > 5;
+
+    if (!isNameLengthValid) {
+      setNameError('Name too short');
+
+      return;
+    }
+
+    setNameError(undefined);
   };
 
-  const onSubmit = (e) => {
+  const onChangeEmail = (e: React.FormEvent<HTMLInputElement>) => {
+    const { value } = e.currentTarget;
+    setEmailValue(value);
+    setSubmitError(undefined);
+
+    const isValidEmail = validateEmailAddress(value);
+
+    if (!isValidEmail) {
+      setEmailError('Email not valid');
+
+      return;
+    }
+
+    setEmailError(undefined);
+  };
+
+  const onChangePassword = (e: React.FormEvent<HTMLInputElement>) => {
+    const { value } = e.currentTarget;
+    setPasswordValue(value);
+    setSubmitError(undefined);
+
+    const isValidPassword = validatePassword(value);
+
+    if (!isValidPassword) {
+      setPasswordError('Password not valid');
+
+      return;
+    }
+
+    setPasswordError(undefined);
+  };
+
+  const onChangePasswordRepeated = (e: React.FormEvent<HTMLInputElement>) => {
+    const { value } = e.currentTarget;
+    setPasswordRepeatedValue(value);
+    setSubmitError(undefined);
+
+    const isValidPassword = validatePassword(value);
+    if (!isValidPassword) {
+      setPasswordRepeatedError('Password not valid');
+
+      return;
+    }
+
+    setPasswordRepeatedError(undefined);
+  };
+
+  const onSubmit = async (e) => {
     e.preventDefault();
 
+    const isSamePassword = passwordRepeatedValue === passwordValue;
+    if (!isSamePassword) {
+      setPasswordRepeatedError('Passwords not identical');
+
+      return;
+    }
+
+    const usersByName: ReceiveUsersResponse = await HttpClient.get(`/users?filter[name]=${nameValue}`);
+
+    const isNameAvailable = !usersByName?.data?.length;
+    if (!isNameAvailable) {
+      setSubmitError('Name not available');
+      setNameError('Name not available');
+
+      return;
+    }
+    if (sessionError?.message) {
+      setSubmitError(sessionError?.message);
+
+      return;
+    }
+
     const data = {
-      name: formState.name,
-      email: formState.email,
-      password: formState.password,
-      password_repeated: formState.password_repeated,
+      name: nameValue,
+      email: emailValue,
+      password: passwordValue,
+      password_repeated: passwordRepeatedValue,
     };
 
     dispatch(signUp(data));
   };
+
+  useEffect(() => {
+    if (!!sessionStatusInactive) {
+      setTimeout(() => history.push(Routes.ConfirmSignUp.route), DELAY_SLOW_MS);
+    }
+  }, [sessionStatusInactive]);
 
   return (
     <>
@@ -51,47 +149,41 @@ const SignUp: React.FC = () => {
           <H1 className="SignUp-h1">Sign up</H1>
           <form className="SignUp-form">
             <Hr size="normal" spacer />
-            <Input
-              name="name"
-              type="text"
-              label="Name"
-              onChange={onChange}
-              value={formState.name}
-              error={!!sessionError}
-              success={!!sessionId}
-            />
+            <Input name="name" type="text" label="Name" onChange={onChangeName} value={nameValue} error={nameError} />
+            <div>{nameError}</div>
             <Hr size="nano" spacer />
             <Input
               name="email"
               type="email"
               label="Email"
-              onChange={onChange}
-              value={formState.email}
-              error={!!sessionError}
-              success={!!sessionId}
+              onChange={onChangeEmail}
+              value={emailValue}
+              error={emailError}
             />
+            <div>{emailError}</div>
             <Hr size="nano" spacer />
             <Input
               name="password"
               type="password"
               label="Password"
-              onChange={onChange}
-              value={formState.password}
-              error={!!sessionError}
-              success={!!sessionId}
+              onChange={onChangePassword}
+              value={passwordValue}
+              error={passwordError}
             />
+            <div>{passwordError}</div>
             <Hr size="nano" spacer />
             <Input
               name="password_repeated"
               type="password"
               label="Repeat password"
-              onChange={onChange}
-              value={formState.password_repeated}
-              error={!!sessionError}
-              success={!!sessionId}
+              onChange={onChangePasswordRepeated}
+              value={passwordRepeatedValue}
+              error={passwordRepeatedError}
             />
+            <div>{passwordRepeatedError}</div>
             <Hr size="normal" spacer />
-            <Button text="Enter" type="submit" onClick={onSubmit} error={!!sessionError} success={!!sessionId} />
+            <Button text="Enter" type="submit" onClick={onSubmit} error={!!submitError} success={!!sessionId} />
+            <div>{submitError}</div>
           </form>
           <Hr size="big" spacer />
           <Flex horizontal="center">
