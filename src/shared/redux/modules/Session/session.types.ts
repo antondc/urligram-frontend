@@ -19,6 +19,10 @@ export type SessionStatus =
 
 export type SessionLevel = 'admin' | 'user';
 
+export interface SessionError extends Error {
+  field: string;
+}
+
 export interface SessionState {
   loading?: boolean;
   id?: string;
@@ -30,11 +34,11 @@ export interface SessionState {
   logged?: boolean;
   token?: string;
   iat?: number;
-  error?: Error;
+  error?: SessionError;
 }
 
 export interface LogInRequest {
-  username: string;
+  nameOrEmail: string;
   password: string;
 }
 
@@ -54,7 +58,7 @@ export interface SignUpRequest {
 export interface SignUpResponse {
   data: {
     success: boolean;
-    error?: Error;
+    error?: SessionError;
     attributes?: SessionState;
   };
 }
@@ -63,7 +67,7 @@ interface LogInFailureAction {
   type: typeof LOG_FAILED;
   data: {
     loading: false;
-    error: Error;
+    error: SessionError;
   };
 }
 
@@ -95,7 +99,7 @@ interface SignUpFailureAction {
   type: typeof SIGN_UP_FAILURE;
   data: {
     loading: false;
-    error: Error;
+    error: SessionError;
   };
 }
 

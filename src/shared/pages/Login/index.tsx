@@ -1,91 +1,117 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import A from 'Components/A';
 import { logIn } from 'Modules/Session/actions/logIn';
 import { selectSessionError } from 'Modules/Session/selectors/selectSessionError';
-import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUserId';
-import { Button, Flex, H1, Hr, Input, Span } from '@antoniodcorrea/components';
+import { selectSessionStatus } from 'Modules/Session/selectors/selectSessionStatus';
+import { SESSION_STATUS_INACTIVE } from 'Modules/Session/session.types';
+import { DELAY_SLOW_MS } from 'Root/src/shared/constants';
+import { Routes } from 'Router/routes';
+import history from 'Services/History';
+import { validateEmailAddress } from 'Tools/utils/string/validateEmailAddress';
+import { Login as LoginUi } from './Login';
 
 import './Login.less';
 
-interface State {
-  username: string | undefined;
-  password: string | undefined;
-}
 const Login: React.FC = () => {
-  const [formState, setFormState] = useState<State>({
-    username: undefined,
-    password: undefined,
-  });
   const dispatch = useDispatch();
   const sessionError = useSelector(selectSessionError);
-  const sessionId = useSelector(selectSessionUserId);
+  const sessionStatus = useSelector(selectSessionStatus);
+  const sessionStatusInactive = sessionStatus === SESSION_STATUS_INACTIVE;
 
-  const onChange = (e: React.FormEvent<HTMLInputElement>) => {
-    setFormState({
-      ...formState,
-      [e.currentTarget.name]: e.currentTarget.value,
-    } as Pick<State, keyof State>);
+  const [nameOrEmailValue, setNameValue] = useState<string>(undefined);
+  const [nameOrEmailError, setNameOrEmailError] = useState<string>(undefined);
+  const [passwordValue, setPasswordValue] = useState<string>(undefined);
+  const [passwordError, setPasswordError] = useState<string>(undefined);
+  const [submitSuccess, setSubmitSuccess] = useState<boolean>(false);
+  const [submitError, setSubmitError] = useState<string>(undefined);
+
+  const submitDisabled = !nameOrEmailValue || !!nameOrEmailError || !passwordValue || !!passwordError;
+
+  const onChangeNameOrEmail = async (e: React.FormEvent<HTMLInputElement>) => {
+    const { value } = e.currentTarget;
+    setNameValue(value);
+    setSubmitError(undefined);
+
+    const isNameOrEmailLengthValid = value.length > 5;
+
+    if (!isNameOrEmailLengthValid) {
+      setNameOrEmailError('Name or Email too short');
+
+      return;
+    }
+
+    const isEmail = value.includes('@');
+    const isValidEmail = validateEmailAddress(value);
+
+    if (isEmail && !isValidEmail) {
+      setNameOrEmailError('Email not valid');
+
+      return;
+    }
+
+    setNameOrEmailError(undefined);
   };
 
-  const onSubmit = (e) => {
+  const onChangePassword = (e: React.FormEvent<HTMLInputElement>) => {
+    const { value } = e.currentTarget;
+    setPasswordValue(value);
+
+    setPasswordError(undefined);
+    setSubmitError(undefined);
+  };
+
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const data = {
-      username: formState.username,
-      password: formState.password,
+      nameOrEmail: nameOrEmailValue,
+      password: passwordValue,
     };
 
     dispatch(logIn(data));
   };
 
+  useEffect(() => {
+    setSubmitError(undefined);
+  }, []);
+
+  useEffect(() => {
+    if (!!sessionStatusInactive) {
+      setSubmitSuccess(true);
+      setTimeout(() => history.push(Routes.ConfirmLogin.route), DELAY_SLOW_MS);
+    }
+  }, [sessionStatusInactive]);
+
+  useEffect(() => {
+    if (sessionError?.field === 'password') {
+      setPasswordError(sessionError?.message);
+
+      return;
+    }
+
+    if (sessionError?.field === 'nameOrEmail') {
+      setNameOrEmailError(sessionError?.message);
+
+      return;
+    }
+
+    if (sessionError?.message) setSubmitError(sessionError?.message);
+  }, [sessionError]);
+
   return (
-    <>
-      <Hr spacer size="big" />
-      <Hr spacer size="big" />
-      <Hr spacer size="big" />
-      <div className="Login">
-        <div className="Login-content">
-          <H1 className="Login-h1">Login</H1>
-          <form className="Login-form">
-            <Hr size="normal" spacer />
-            <Input
-              name="username"
-              type="text"
-              label="Name"
-              onChange={onChange}
-              value={formState.username}
-              error={!!sessionError}
-              success={!!sessionId}
-            />
-            <Hr size="small" spacer />
-            <Input
-              name="password"
-              type="password"
-              label="Password"
-              onChange={onChange}
-              value={formState.password}
-              error={!!sessionError}
-              success={!!sessionId}
-            />
-            <Hr size="normal" spacer />
-            <Button text="Enter" type="submit" onClick={onSubmit} error={!!sessionError} success={!!sessionId} />
-          </form>
-          <Hr size="big" spacer />
-          <Flex horizontal="center">
-            <Span bold>Forgot password?</Span>
-            <Hr size="micro" spacer />
-            <div className="Login-section">
-              <Span bold>Dont have an account?: </Span>
-              <A href="sign-up" styled underlined frontend>
-                <Span bold>sign up</Span>
-              </A>
-            </div>
-          </Flex>
-        </div>
-      </div>
-    </>
+    <LoginUi
+      nameOrEmailValue={nameOrEmailValue}
+      nameOrEmailError={nameOrEmailError}
+      onChangeNameOrEmail={onChangeNameOrEmail}
+      passwordValue={passwordValue}
+      passwordError={passwordError}
+      onChangePassword={onChangePassword}
+      onSubmit={onSubmit}
+      submitDisabled={submitDisabled}
+      submitSuccess={submitSuccess}
+      submitError={submitError}
+    />
   );
 };
 

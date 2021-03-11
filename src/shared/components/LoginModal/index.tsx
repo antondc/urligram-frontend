@@ -12,15 +12,15 @@ import './LoginModal.less';
 
 interface Props {
   switchLoginModal: (mount: boolean) => void;
-  logIn: ({ username, password }) => Promise<void>;
+  logIn: ({ nameOrEmail, password }) => Promise<void>;
 }
 
 const LoginModal: React.FC<Props> = ({ logIn, switchLoginModal }) => {
   const [password, setPassword] = useState(undefined);
-  const [username, setUsername] = useState(undefined);
+  const [nameOrEmail, setUsernameOrEmail] = useState(undefined);
 
   const onUsernameChange = (e) => {
-    setUsername(e.target.value);
+    setUsernameOrEmail(e.target.value);
   };
 
   const onPasswordChange = (e) => {
@@ -29,7 +29,7 @@ const LoginModal: React.FC<Props> = ({ logIn, switchLoginModal }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    logIn({ username, password });
+    logIn({ nameOrEmail, password });
   };
 
   return (
@@ -41,7 +41,7 @@ const LoginModal: React.FC<Props> = ({ logIn, switchLoginModal }) => {
         </Flex>
         <Hr spacer size="small" />
         <form className="Login-form">
-          <Input name="usrname" label="Session name" value={username} onChange={onUsernameChange} />
+          <Input name="usrname" label="Session name" value={nameOrEmail} onChange={onUsernameChange} />
           <Hr spacer size="small" />
           <Input name="password" label="Session password" value={password} onChange={onPasswordChange} />
           <Hr spacer size="big" />

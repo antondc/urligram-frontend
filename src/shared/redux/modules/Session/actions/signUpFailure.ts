@@ -1,6 +1,6 @@
-import { SessionActionsTypes, SIGN_UP_FAILURE } from 'Modules/Session/session.types';
+import { SessionActionsTypes, SessionError, SIGN_UP_FAILURE } from 'Modules/Session/session.types';
 
-export const signUpFailure = (error: Error): SessionActionsTypes => ({
+export const signUpFailure = (error: SessionError): SessionActionsTypes => ({
   type: SIGN_UP_FAILURE,
   data: {
     loading: false,

@@ -125,6 +125,10 @@ const SignUp: React.FC = () => {
   };
 
   useEffect(() => {
+    setSubmitError(undefined);
+  }, []);
+
+  useEffect(() => {
     if (!!sessionStatusInactive) {
       setSubmitSuccess(true);
       setTimeout(() => history.push(Routes.ConfirmSignUp.route), DELAY_SLOW_MS);
@@ -132,6 +136,18 @@ const SignUp: React.FC = () => {
   }, [sessionStatusInactive]);
 
   useEffect(() => {
+    if (sessionError?.field === 'name') {
+      setNameError(sessionError?.message);
+      setEmailError(sessionError?.message);
+
+      return;
+    }
+    if (sessionError?.field === 'password') {
+      setPasswordError(sessionError?.message);
+      setPasswordRepeatedError(sessionError?.message);
+
+      return;
+    }
     if (sessionError?.message) setSubmitError(sessionError?.message);
   }, [sessionError]);
 

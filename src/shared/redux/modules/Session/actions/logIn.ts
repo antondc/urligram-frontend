@@ -8,13 +8,13 @@ import { logInReceive } from './logInReceive';
 import { logInRequest } from './logInRequest';
 
 // Request a cookie from api server using the base api
-export const logIn = ({ username, password }: LogInRequest) => async (dispatch: Dispatch): Promise<void> => {
+export const logIn = ({ nameOrEmail, password }: LogInRequest) => async (dispatch: Dispatch): Promise<void> => {
   try {
     await dispatch(logInRequest());
 
     const { data }: LogInResponse = await HttpClient.post('/login', {
-      name: username,
-      password: password,
+      nameOrEmail,
+      password,
     });
 
     await dispatch(switchLoginModal(false));
