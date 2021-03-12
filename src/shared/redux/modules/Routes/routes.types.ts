@@ -9,16 +9,16 @@ export interface RoutesState {
   currentRoute?: RouteState;
 }
 
+export interface ParamsState {
+  [key: string]: string | number;
+}
+
 export interface RouteState extends Route, Location {
   domain?: string;
   href: string;
   pathAndQuery: string;
-  params?: {
-    [key: string]: string | number;
-  };
-  queryParams?: {
-    [key: string]: string | number;
-  };
+  params?: ParamsState;
+  queryParams?: ParamsState;
 }
 
 interface PushNewRouteAction {

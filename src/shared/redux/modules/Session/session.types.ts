@@ -63,6 +63,11 @@ export interface SignUpResponse {
   };
 }
 
+export interface SignUpConfirmationRequest {
+  name: string;
+  token: string;
+}
+
 interface LogInFailureAction {
   type: typeof LOG_FAILED;
   data: {

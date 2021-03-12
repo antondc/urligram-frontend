@@ -28,15 +28,20 @@ export const Session = (state = initialState, action: SessionActionsTypes): Sess
         loading: false,
       });
     case LOG_OUT:
-      return Object.assign({}, initialState, {
-        errors: [...state.errors],
-      });
+      return Object.assign(
+        {},
+        {
+          errors: [...state.errors],
+        }
+      );
     case LOG_FAILED:
-      return Object.assign({}, state, {
-        ...state,
-        errors: [...state.errors, action?.data?.error],
-        loading: false,
-      });
+      return Object.assign(
+        {},
+        {
+          errors: [...state.errors, action?.data?.error],
+          loading: false,
+        }
+      );
     case SIGN_UP_REQUEST:
       return Object.assign({}, state, {
         ...state,

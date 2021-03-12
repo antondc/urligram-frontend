@@ -195,10 +195,10 @@ export const Routes: RoutesInterface = {
     layout: 'fullPage',
   },
 
-  SignUpConfirm: {
-    name: 'SignUpConfirm',
-    path: '/:lang([a-z]{2})?/confirm-sign-up',
-    route: 'confirm-sign-up',
+  SignUpConfirmation: {
+    name: 'SignUpConfirmation',
+    path: '/:lang([a-z]{2})?/sign-up-confirmation',
+    route: 'sign-up-confirmation',
     exact: true,
     auth: false,
     header: false,

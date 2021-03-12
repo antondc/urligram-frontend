@@ -2,10 +2,10 @@ import React from 'react';
 
 import { Flex, Hr, Span } from '@antoniodcorrea/components';
 
-import './SignUpConfirm.less';
+import './SignUpConfirmation.less';
 
-export const SignUpConfirm: React.FC = () => (
-  <div className="SignUpConfirm">
+export const SignUpConfirmation: React.FC = () => (
+  <div className="SignUpConfirmation">
     <Hr spacer size="big" />
     <Hr spacer size="big" />
     <Hr spacer size="big" />
