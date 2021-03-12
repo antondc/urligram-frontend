@@ -195,8 +195,8 @@ export const Routes: RoutesInterface = {
     layout: 'fullPage',
   },
 
-  ConfirmSignUp: {
-    name: 'ConfirmSignUp',
+  SignUpConfirm: {
+    name: 'SignUpConfirm',
     path: '/:lang([a-z]{2})?/confirm-sign-up',
     route: 'confirm-sign-up',
     exact: true,

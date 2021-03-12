@@ -10,41 +10,51 @@ import {
   SIGN_UP_SUCCESS,
 } from './session.types';
 
-export const initialState: SessionState = {};
+export const initialState: SessionState = {
+  errors: [],
+};
 
 export const Session = (state = initialState, action: SessionActionsTypes): SessionState => {
   switch (action.type) {
     case LOG_IN_STARTED:
       return Object.assign({}, state, {
+        ...state,
         loading: true,
       });
     case LOG_IN_SUCCESS:
       return Object.assign({}, state, {
+        ...state,
         ...action.data,
         loading: false,
       });
     case LOG_OUT:
-      return {};
+      return Object.assign({}, initialState, {
+        errors: [...state.errors],
+      });
     case LOG_FAILED:
       return Object.assign({}, state, {
-        ...action.data,
+        ...state,
+        errors: [...state.errors, action?.data?.error],
         loading: false,
       });
     case SIGN_UP_REQUEST:
       return Object.assign({}, state, {
+        ...state,
         loading: true,
       });
     case SIGN_UP_SUCCESS:
       return Object.assign({}, state, {
+        ...state,
         ...action.data,
         loading: false,
       });
     case SIGN_UP_FAILURE:
       return Object.assign({}, state, {
+        ...state,
         loading: true,
-        error: action?.data?.error,
+        errors: [...state.errors, action?.data?.error],
       });
     default:
-      return Object.assign({}, state);
+      return Object.assign({}, initialState, state);
   }
 };

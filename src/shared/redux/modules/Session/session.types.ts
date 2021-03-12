@@ -34,7 +34,7 @@ export interface SessionState {
   logged?: boolean;
   token?: string;
   iat?: number;
-  error?: SessionError;
+  errors?: SessionError[];
 }
 
 export interface LogInRequest {

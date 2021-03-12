@@ -2,21 +2,20 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { signUp } from 'Modules/Session/actions/signUp';
-import { selectSessionError } from 'Modules/Session/selectors/selectSessionError';
+import { selectSessionErrorLast } from 'Modules/Session/selectors/selectSessionErrorLast';
 import { selectSessionStatus } from 'Modules/Session/selectors/selectSessionStatus';
 import { SESSION_STATUS_INACTIVE } from 'Modules/Session/session.types';
-import { DELAY_SLOW_MS } from 'Root/src/shared/constants';
-import { Routes } from 'Router/routes';
-import history from 'Services/History';
 import { validateEmailAddress } from 'Tools/utils/string/validateEmailAddress';
 import { validatePassword } from 'Tools/utils/string/validatePassword';
+import { FadeInOut } from '@antoniodcorrea/components';
 import { SignUp as SignUpUi } from './SignUp';
+import { SignUpConfirmation } from './SignUpConfirmation';
 
 import './SignUp.less';
 
 const SignUp: React.FC = () => {
   const dispatch = useDispatch();
-  const sessionError = useSelector(selectSessionError);
+  const sessionError = useSelector(selectSessionErrorLast);
   const sessionStatus = useSelector(selectSessionStatus);
   const sessionStatusInactive = sessionStatus === SESSION_STATUS_INACTIVE;
 
@@ -129,10 +128,7 @@ const SignUp: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    if (!!sessionStatusInactive) {
-      setSubmitSuccess(true);
-      setTimeout(() => history.push(Routes.ConfirmSignUp.route), DELAY_SLOW_MS);
-    }
+    if (!!sessionStatusInactive) setSubmitSuccess(true);
   }, [sessionStatusInactive]);
 
   useEffect(() => {
@@ -152,24 +148,30 @@ const SignUp: React.FC = () => {
   }, [sessionError]);
 
   return (
-    <SignUpUi
-      nameValue={nameValue}
-      nameError={nameError}
-      onChangeName={onChangeName}
-      emailValue={emailValue}
-      emailError={emailError}
-      onChangeEmail={onChangeEmail}
-      passwordValue={passwordValue}
-      passwordError={passwordError}
-      onChangePassword={onChangePassword}
-      passwordRepeatedValue={passwordRepeatedValue}
-      passwordRepeatedError={passwordRepeatedError}
-      onChangePasswordRepeated={onChangePasswordRepeated}
-      onSubmit={onSubmit}
-      submitDisabled={submitDisabled}
-      submitSuccess={submitSuccess}
-      submitError={submitError}
-    />
+    <FadeInOut valueToUpdate={sessionStatusInactive} appear>
+      {!!sessionStatusInactive ? (
+        <SignUpConfirmation />
+      ) : (
+        <SignUpUi
+          nameValue={nameValue}
+          nameError={nameError}
+          onChangeName={onChangeName}
+          emailValue={emailValue}
+          emailError={emailError}
+          onChangeEmail={onChangeEmail}
+          passwordValue={passwordValue}
+          passwordError={passwordError}
+          onChangePassword={onChangePassword}
+          passwordRepeatedValue={passwordRepeatedValue}
+          passwordRepeatedError={passwordRepeatedError}
+          onChangePasswordRepeated={onChangePasswordRepeated}
+          onSubmit={onSubmit}
+          submitDisabled={submitDisabled}
+          submitSuccess={submitSuccess}
+          submitError={submitError}
+        />
+      )}
+    </FadeInOut>
   );
 };
 

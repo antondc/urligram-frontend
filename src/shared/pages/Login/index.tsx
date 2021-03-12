@@ -2,28 +2,21 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { logIn } from 'Modules/Session/actions/logIn';
-import { selectSessionError } from 'Modules/Session/selectors/selectSessionError';
-import { selectSessionStatus } from 'Modules/Session/selectors/selectSessionStatus';
-import { SESSION_STATUS_INACTIVE } from 'Modules/Session/session.types';
-import { DELAY_SLOW_MS } from 'Root/src/shared/constants';
-import { Routes } from 'Router/routes';
-import history from 'Services/History';
+import { selectSessionErrorLast } from 'Modules/Session/selectors/selectSessionErrorLast';
 import { validateEmailAddress } from 'Tools/utils/string/validateEmailAddress';
+import { selectSessionLoggedIn } from '../../redux/modules/Session/selectors/selectSessionLoggedIn';
 import { Login as LoginUi } from './Login';
 
 import './Login.less';
 
 const Login: React.FC = () => {
   const dispatch = useDispatch();
-  const sessionError = useSelector(selectSessionError);
-  const sessionStatus = useSelector(selectSessionStatus);
-  const sessionStatusInactive = sessionStatus === SESSION_STATUS_INACTIVE;
-
+  const sessionError = useSelector(selectSessionErrorLast);
+  const isLoggedIn = useSelector(selectSessionLoggedIn);
   const [nameOrEmailValue, setNameValue] = useState<string>(undefined);
   const [nameOrEmailError, setNameOrEmailError] = useState<string>(undefined);
   const [passwordValue, setPasswordValue] = useState<string>(undefined);
   const [passwordError, setPasswordError] = useState<string>(undefined);
-  const [submitSuccess, setSubmitSuccess] = useState<boolean>(false);
   const [submitError, setSubmitError] = useState<string>(undefined);
 
   const submitDisabled = !nameOrEmailValue || !!nameOrEmailError || !passwordValue || !!passwordError;
@@ -77,13 +70,6 @@ const Login: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    if (!!sessionStatusInactive) {
-      setSubmitSuccess(true);
-      setTimeout(() => history.push(Routes.ConfirmLogin.route), DELAY_SLOW_MS);
-    }
-  }, [sessionStatusInactive]);
-
-  useEffect(() => {
     if (sessionError?.field === 'password') {
       setPasswordError(sessionError?.message);
 
@@ -109,7 +95,7 @@ const Login: React.FC = () => {
       onChangePassword={onChangePassword}
       onSubmit={onSubmit}
       submitDisabled={submitDisabled}
-      submitSuccess={submitSuccess}
+      submitSuccess={isLoggedIn}
       submitError={submitError}
     />
   );

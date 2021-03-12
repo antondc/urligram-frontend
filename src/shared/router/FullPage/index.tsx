@@ -8,12 +8,12 @@ import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCur
 import { selectPathWithoutLanguageParam } from 'Modules/Routes/selectors/selectPathWithoutLanguageParam';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import About from 'Pages/About';
-import ConfirmSignUp from 'Pages/ConfirmSignUp';
 import Control from 'Pages/Control';
 import Login from 'Pages/Login';
 import NotFound from 'Pages/NotFound';
 import ServerError from 'Pages/ServerError';
 import SignUp from 'Pages/SignUp';
+import SignUpConfirm from 'Pages/SignUpConfirm';
 import { Routes } from 'Router/routes';
 import { Location } from 'Services/History';
 import { FadeInOut } from '@antoniodcorrea/components';
@@ -35,7 +35,7 @@ const FullPage: React.FC<Props> = ({ loggedIn, location, defaultCurrentSlug, pat
       <FadeInOut classname="FullPage-content" valueToUpdate={pathWithoutLanguageParam} speed="fastest" appear>
         <Switch location={{ ...location, pathname: pathWithoutLanguageParam }}>
           {/* Redirects */}
-          {loggedIn && <Redirect from={Routes.ConfirmSignUp.path} to={'/' + defaultCurrentSlug + '/'} />}
+          {loggedIn && <Redirect from={Routes.SignUpConfirm.path} to={'/' + defaultCurrentSlug + '/'} />}
           {loggedIn && <Redirect from={Routes.SignUp.path} to={'/' + defaultCurrentSlug + '/'} />}
           {loggedIn && <Redirect from={Routes.Login.path} to={'/' + defaultCurrentSlug + '/'} />}
           {!loggedIn && <Redirect from={Routes.Control.path} to={'/' + defaultCurrentSlug + '/login'} />}
@@ -45,7 +45,7 @@ const FullPage: React.FC<Props> = ({ loggedIn, location, defaultCurrentSlug, pat
           <Route exact={Routes.Control.exact} path={Routes.Control.path} component={Control} />
           <Route exact={Routes.Login.exact} path={Routes.Login.path} component={Login} />
           <Route exact={Routes.SignUp.exact} path={Routes.SignUp.path} component={SignUp} />
-          <Route exact={Routes.ConfirmSignUp.exact} path={Routes.ConfirmSignUp.path} component={ConfirmSignUp} />
+          <Route exact={Routes.SignUpConfirm.exact} path={Routes.SignUpConfirm.path} component={SignUpConfirm} />
 
           {/* Guards */}
           <Route exact={Routes.ServerError.exact} path={Routes.ServerError.path} component={ServerError} />

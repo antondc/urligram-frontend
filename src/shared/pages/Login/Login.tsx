@@ -36,7 +36,7 @@ export const Login: React.FC<Props> = ({
     <Hr spacer size="big" />
     <div className="Login">
       <div className="Login-content">
-        <H1 className="Login-h1">Sign up</H1>
+        <H1 className="Login-h1">Login</H1>
         <form className="Login-form">
           <Hr size="normal" spacer />
           <Input
