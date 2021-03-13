@@ -66,6 +66,7 @@ const ForgotPassword: React.FC = () => {
   };
 
   useEffect(() => {
+    setNameOrEmailError(undefined);
     setSubmitError(undefined);
   }, []);
 
