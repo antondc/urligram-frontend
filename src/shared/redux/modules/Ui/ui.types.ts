@@ -5,6 +5,7 @@ export const SWITCH_LANGUAGES_MODAL = 'SWITCH_LANGUAGES_MODAL';
 export const SWITCH_WELCOME_MODAL = 'SWITCH_WELCOME_MODAL';
 export const SWITCH_SIGN_UP_MODAL = 'SWITCH_SIGN_UP_MODAL';
 export const SWITCH_FORGOT_PASSWORD_MODAL = 'SWITCH_FORGOT_PASSWORD_MODAL';
+export const SWITCH_RESET_PASSWORD_MODAL = 'SWITCH_RESET_PASSWORD_MODAL';
 
 export interface UiState {
   screenLocked: boolean;
@@ -15,6 +16,7 @@ export interface UiState {
   welcomeModal: UiWelcomeModalState;
   signUpModal: UiSignUpModalState;
   forgotPasswordModal: UiForgotPasswordModalState;
+  resetPasswordModal: UiResetPasswordModalState;
 }
 
 export interface UiUserModalState {
@@ -48,6 +50,11 @@ export interface UiSignUpModalState {
 }
 
 export interface UiForgotPasswordModalState {
+  type: 'popup';
+  mounted: boolean;
+}
+
+export interface UiResetPasswordModalState {
   type: 'popup';
   mounted: boolean;
 }
@@ -92,6 +99,13 @@ interface SwitchForgotPasswordModal {
   };
 }
 
+interface SwitchResetPasswordModal {
+  type: typeof SWITCH_RESET_PASSWORD_MODAL;
+  data: {
+    mounted: boolean;
+  };
+}
+
 export type UiActionsTypes =
   | SwitchUserModal
   | SwitchLanguagesModal
@@ -99,4 +113,5 @@ export type UiActionsTypes =
   | SwitchLoginModal
   | SwitchWelcomeModal
   | SwitchSignUpModal
-  | SwitchForgotPasswordModal;
+  | SwitchForgotPasswordModal
+  | SwitchResetPasswordModal;

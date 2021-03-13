@@ -207,6 +207,18 @@ export const Routes: RoutesInterface = {
     layout: 'fullPage',
   },
 
+  ResetPassword: {
+    name: 'ResetPassword',
+    path: '/:lang([a-z]{2})?/reset-password',
+    route: '/reset-password',
+    exact: true,
+    auth: false,
+    header: false,
+    initialDataLoadersVisitor: [],
+    initialDataLoadersSession: [],
+    layout: 'fullPage',
+  },
+
   SignUpConfirmation: {
     name: 'SignUpConfirmation',
     path: '/:lang([a-z]{2})?/sign-up-confirmation',

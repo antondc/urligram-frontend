@@ -6,6 +6,9 @@ import {
   LOG_IN_STARTED,
   LOG_IN_SUCCESS,
   LOG_OUT,
+  RESET_PASSWORD_FAILURE,
+  RESET_PASSWORD_REQUEST,
+  RESET_PASSWORD_SUCCESS,
   SessionActionsTypes,
   SessionState,
   SIGN_UP_FAILURE,
@@ -74,6 +77,23 @@ export const Session = (state = initialState, action: SessionActionsTypes): Sess
         passwordRequested: true,
       });
     case FORGOT_PASSWORD_FAILURE:
+      return Object.assign({}, state, {
+        ...state,
+        loading: false,
+        errors: [...state.errors, action?.data?.error],
+      });
+    case RESET_PASSWORD_REQUEST:
+      return Object.assign({}, state, {
+        ...state,
+        loading: true,
+      });
+    case RESET_PASSWORD_SUCCESS:
+      return Object.assign({}, state, {
+        ...state,
+        loading: false,
+        passwordReset: true,
+      });
+    case RESET_PASSWORD_FAILURE:
       return Object.assign({}, state, {
         ...state,
         loading: false,

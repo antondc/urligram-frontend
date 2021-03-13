@@ -3,6 +3,7 @@ import {
   SWITCH_LANGUAGES_MODAL,
   SWITCH_LOGIN_MODAL,
   SWITCH_MESSAGE_MODAL,
+  SWITCH_RESET_PASSWORD_MODAL,
   SWITCH_SIGN_UP_MODAL,
   SWITCH_USER_MODAL,
   SWITCH_WELCOME_MODAL,
@@ -37,6 +38,10 @@ export const initialState: UiState = {
     mounted: false,
   },
   forgotPasswordModal: {
+    type: 'popup',
+    mounted: false,
+  },
+  resetPasswordModal: {
     type: 'popup',
     mounted: false,
   },
@@ -96,6 +101,14 @@ export const Ui = (state = initialState, action: UiActionsTypes): UiState => {
         screenLocked: !state.screenLocked,
         forgotPasswordModal: {
           ...state.forgotPasswordModal,
+          mounted: action.data.mounted,
+        },
+      });
+    case SWITCH_RESET_PASSWORD_MODAL:
+      return Object.assign({}, state, {
+        screenLocked: !state.screenLocked,
+        resetPasswordModal: {
+          ...state.resetPasswordModal,
           mounted: action.data.mounted,
         },
       });

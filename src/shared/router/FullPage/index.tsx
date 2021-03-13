@@ -12,6 +12,7 @@ import Control from 'Pages/Control';
 import ForgotPassword from 'Pages/ForgotPassword';
 import Login from 'Pages/Login';
 import NotFound from 'Pages/NotFound';
+import ResetPassword from 'Pages/ResetPassword';
 import ServerError from 'Pages/ServerError';
 import SignUp from 'Pages/SignUp';
 import SignUpConfirmation from 'Pages/SignUpConfirmation';
@@ -49,6 +50,7 @@ const FullPage: React.FC<Props> = ({ loggedIn, location, defaultCurrentSlug, pat
           component={SignUpConfirmation}
         />
         <Route exact={Routes.ForgotPassword.exact} path={Routes.ForgotPassword.path} component={ForgotPassword} />
+        <Route exact={Routes.ResetPassword.exact} path={Routes.ResetPassword.path} component={ResetPassword} />
 
         {/* Guards */}
         <Route exact={Routes.ServerError.exact} path={Routes.ServerError.path} component={ServerError} />

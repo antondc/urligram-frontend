@@ -8,6 +8,9 @@ export const SIGN_UP_FAILURE = 'SIGN_UP_FAILURE';
 export const FORGOT_PASSWORD_REQUEST = 'FORGOT_PASSWORD_REQUEST';
 export const FORGOT_PASSWORD_SUCCESS = 'FORGOT_PASSWORD_SUCCESS';
 export const FORGOT_PASSWORD_FAILURE = 'FORGOT_PASSWORD_FAILURE';
+export const RESET_PASSWORD_REQUEST = 'RESET_PASSWORD_REQUEST';
+export const RESET_PASSWORD_SUCCESS = 'RESET_PASSWORD_SUCCESS';
+export const RESET_PASSWORD_FAILURE = 'RESET_PASSWORD_FAILURE';
 
 export const SESSION_STATUS_ACTIVE = 'active';
 export const SESSION_STATUS_INACTIVE = 'inactive';
@@ -39,6 +42,7 @@ export interface SessionState {
   iat?: number;
   errors?: SessionError[];
   passwordRequested?: boolean;
+  passwordReset?: boolean;
 }
 
 export interface LogInRequest {
@@ -83,23 +87,38 @@ export interface ForgotPasswordResponse {
   };
 }
 
-interface LogInFailureAction {
-  type: typeof LOG_FAILED;
-  data: {
-    loading: false;
-    error: SessionError;
-  };
+export interface ResetPasswordRequest {
+  password: string;
+  passwordRepeated: string;
+  name: string;
+  token: string;
 }
 
-interface LogInReceiveAction {
-  type: typeof LOG_IN_SUCCESS;
-  data: SessionState;
+export interface ResetPasswordResponse {
+  data: {
+    success: boolean;
+    error?: SessionError;
+    attributes: SessionState;
+  };
 }
 
 interface LogInRequestAction {
   type: typeof LOG_IN_STARTED;
   data: {
     loading: true;
+  };
+}
+
+interface LogInSuccessAction {
+  type: typeof LOG_IN_SUCCESS;
+  data: SessionState;
+}
+
+interface LogInFailureAction {
+  type: typeof LOG_FAILED;
+  data: {
+    loading: false;
+    error: SessionError;
   };
 }
 
@@ -117,6 +136,28 @@ interface SignUpSucessAction {
 
 interface SignUpFailureAction {
   type: typeof SIGN_UP_FAILURE;
+  data: {
+    loading: false;
+    error: SessionError;
+  };
+}
+
+interface ResetPasswordRequestAction {
+  type: typeof RESET_PASSWORD_REQUEST;
+  data: {
+    loading: true;
+  };
+}
+
+interface ResetPasswordSucessAction {
+  type: typeof RESET_PASSWORD_SUCCESS;
+  data: {
+    loading: false;
+  };
+}
+
+interface ResetPasswordFailureAction {
+  type: typeof RESET_PASSWORD_FAILURE;
   data: {
     loading: false;
     error: SessionError;
@@ -144,7 +185,7 @@ interface ForgotPasswordFailureAction {
 
 export type SessionActionsTypes =
   | LogInFailureAction
-  | LogInReceiveAction
+  | LogInSuccessAction
   | LogInRequestAction
   | LogOutReceiveAction
   | SignUpRequestAction
@@ -152,4 +193,7 @@ export type SessionActionsTypes =
   | SignUpFailureAction
   | ForgotPasswordRequestAction
   | ForgotPasswordSuccessAction
-  | ForgotPasswordFailureAction;
+  | ForgotPasswordFailureAction
+  | ResetPasswordRequestAction
+  | ResetPasswordSucessAction
+  | ResetPasswordFailureAction;
