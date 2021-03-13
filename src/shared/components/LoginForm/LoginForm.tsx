@@ -64,7 +64,7 @@ export const LoginForm: React.FC<Props> = ({
         {passwordError}
       </Span>
     </FadeInOut>
-    <Hr size="normal" spacer />
+    <Hr size="big" spacer />
     <Button
       text="Enter"
       type="submit"
