@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
 
-import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
+import { switchWelcomeModal } from 'Modules/Ui/actions/switchWelcomeModal';
 import HttpClient from 'Services/HttpClient';
 import { LogInResponse, SignUpConfirmationRequest } from '../session.types';
 import { logInFailure } from './logInFailure';
@@ -19,7 +19,7 @@ export const signUpConfirmation = ({ name, token }: SignUpConfirmationRequest) =
       token,
     });
 
-    await dispatch(switchLoginModal(false));
+    await dispatch(switchWelcomeModal(true));
     await dispatch(logInReceive(data.attributes));
   } catch (err) {
     await dispatch(logInFailure(err));

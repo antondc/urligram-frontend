@@ -2,7 +2,9 @@ import {
   SWITCH_LANGUAGES_MODAL,
   SWITCH_LOGIN_MODAL,
   SWITCH_MESSAGE_MODAL,
+  SWITCH_SIGN_UP_MODAL,
   SWITCH_USER_MODAL,
+  SWITCH_WELCOME_MODAL,
   UiActionsTypes,
   UiState,
 } from './ui.types';
@@ -22,6 +24,14 @@ export const initialState: UiState = {
     mounted: false,
   },
   loginModal: {
+    type: 'popup',
+    mounted: false,
+  },
+  welcomeModal: {
+    type: 'popup',
+    mounted: false,
+  },
+  signUpModal: {
     type: 'popup',
     mounted: false,
   },
@@ -57,6 +67,22 @@ export const Ui = (state = initialState, action: UiActionsTypes): UiState => {
         screenLocked: !state.screenLocked,
         loginModal: {
           ...state.loginModal,
+          mounted: action.data.mounted,
+        },
+      });
+    case SWITCH_WELCOME_MODAL:
+      return Object.assign({}, state, {
+        screenLocked: !state.screenLocked,
+        welcomeModal: {
+          ...state.welcomeModal,
+          mounted: action.data.mounted,
+        },
+      });
+    case SWITCH_SIGN_UP_MODAL:
+      return Object.assign({}, state, {
+        screenLocked: !state.screenLocked,
+        signUpModal: {
+          ...state.signUpModal,
           mounted: action.data.mounted,
         },
       });

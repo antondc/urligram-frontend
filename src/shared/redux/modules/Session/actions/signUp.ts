@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
 
-import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
+import { switchSignUpModal } from 'Modules/Ui/actions/switchSignUpModal';
 import HttpClient from 'Services/HttpClient';
 import { SignUpRequest, SignUpResponse } from './../session.types';
 import { signUpFailure } from './signUpFailure';
@@ -13,7 +13,7 @@ export const signUp = (userData: SignUpRequest) => async (dispatch: Dispatch): P
 
     const { data }: SignUpResponse = await HttpClient.post('/users', userData);
 
-    await dispatch(switchLoginModal(false));
+    await dispatch(switchSignUpModal(true));
     await dispatch(signUpSuccess(data.attributes));
   } catch (err) {
     await dispatch(signUpFailure(err));

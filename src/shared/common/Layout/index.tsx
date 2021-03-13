@@ -9,16 +9,21 @@ import Footer from 'Components/Footer';
 import Header from 'Components/Header';
 import LoginModal from 'Components/LoginModal';
 import ModalMessage from 'Components/ModalMessage';
+import SignUpModal from 'Components/SignUpModal';
 import UserModal from 'Components/UserModal';
+import WelcomeModal from 'Components/WelcomeModal';
 import { selectLanguageLoading } from 'Modules/Languages/selectors/selectLanguageLoading';
 import { pushNewRoute } from 'Modules/Routes/actions/pushNewRoute';
 import { RouteState } from 'Modules/Routes/routes.types';
 import { selectPathWithoutLanguageParam } from 'Modules/Routes/selectors/selectPathWithoutLanguageParam';
+import { selectSessionLoading } from 'Modules/Session/selectors/selectSessionLoading';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import { selectUiLoginModalMounted } from 'Modules/Ui/selectors/selectUiLoginModalMounted';
 import { selectUiMessageModalMounted } from 'Modules/Ui/selectors/selectUiMessageModalMounted';
 import { selectUiScreenLocked } from 'Modules/Ui/selectors/selectUiScreenLocked';
+import { selectUiSignUpModalMounted } from 'Modules/Ui/selectors/selectUiSignUpModalMounted';
 import { selectUiUserModalMounted } from 'Modules/Ui/selectors/selectUiUserModalMounted';
+import { selectUiWelcomeModalMounted } from 'Modules/Ui/selectors/selectUiWelcomeModalMounted';
 import Router from 'Router/index';
 import { routesList, routesWithoutOmmitedValues } from 'Router/routes';
 import enhanceRouteWithParams from 'Tools/utils/url/enhanceRouteWithParams';
@@ -33,9 +38,12 @@ interface Props {
   userModalMounted: boolean;
   messageModalMounted: boolean;
   loginModalMounted: boolean;
+  welcomeModalMounted: boolean;
+  signUpModalMounted: boolean;
   uiScreenLocked: boolean;
   isLogged: boolean;
   pathWithoutLanguageParam: string;
+  sessionLoading: boolean;
   pushNewRoute: (route) => void;
 }
 
@@ -83,10 +91,18 @@ class Layout extends React.Component<Props> {
   };
 
   render = () => {
-    const { languageLoading, userModalMounted, messageModalMounted, loginModalMounted } = this.props;
+    const {
+      languageLoading,
+      userModalMounted,
+      messageModalMounted,
+      loginModalMounted,
+      welcomeModalMounted,
+      signUpModalMounted,
+      sessionLoading,
+    } = this.props;
 
     const mounted = !languageLoading;
-    const showLoader = false;
+    const showLoader = sessionLoading;
 
     return (
       mounted && (
@@ -110,6 +126,12 @@ class Layout extends React.Component<Props> {
           <Fade mounted={loginModalMounted} speed="fastest" position="fixed" appear>
             <LoginModal />
           </Fade>
+          <Fade mounted={signUpModalMounted} speed="fastest" position="fixed" appear>
+            <SignUpModal />
+          </Fade>
+          <Fade mounted={welcomeModalMounted} speed="fastest" position="fixed" appear>
+            <WelcomeModal />
+          </Fade>
           <div id="Tooltips" />
         </div>
       )
@@ -125,6 +147,9 @@ const mapStateToProps = createStructuredSelector({
   loginModalMounted: selectUiLoginModalMounted,
   isLogged: selectSessionLoggedIn,
   pathWithoutLanguageParam: selectPathWithoutLanguageParam,
+  sessionLoading: selectSessionLoading,
+  welcomeModalMounted: selectUiWelcomeModalMounted,
+  signUpModalMounted: selectUiSignUpModalMounted,
 });
 
 export default connect(mapStateToProps, {

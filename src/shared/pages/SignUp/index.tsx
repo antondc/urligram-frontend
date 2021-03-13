@@ -7,9 +7,7 @@ import { selectSessionStatus } from 'Modules/Session/selectors/selectSessionStat
 import { SESSION_STATUS_INACTIVE } from 'Modules/Session/session.types';
 import { validateEmailAddress } from 'Tools/utils/string/validateEmailAddress';
 import { validatePassword } from 'Tools/utils/string/validatePassword';
-import { FadeInOut } from '@antoniodcorrea/components';
 import { SignUp as SignUpUi } from './SignUp';
-import { SignUpConfirmation } from './SignUpConfirmation';
 
 import './SignUp.less';
 
@@ -148,30 +146,24 @@ const SignUp: React.FC = () => {
   }, [sessionError]);
 
   return (
-    <FadeInOut valueToUpdate={sessionStatusInactive} appear>
-      {!!sessionStatusInactive ? (
-        <SignUpConfirmation />
-      ) : (
-        <SignUpUi
-          nameValue={nameValue}
-          nameError={nameError}
-          onChangeName={onChangeName}
-          emailValue={emailValue}
-          emailError={emailError}
-          onChangeEmail={onChangeEmail}
-          passwordValue={passwordValue}
-          passwordError={passwordError}
-          onChangePassword={onChangePassword}
-          passwordRepeatedValue={passwordRepeatedValue}
-          passwordRepeatedError={passwordRepeatedError}
-          onChangePasswordRepeated={onChangePasswordRepeated}
-          onSubmit={onSubmit}
-          submitDisabled={submitDisabled}
-          submitSuccess={submitSuccess}
-          submitError={submitError}
-        />
-      )}
-    </FadeInOut>
+    <SignUpUi
+      nameValue={nameValue}
+      nameError={nameError}
+      onChangeName={onChangeName}
+      emailValue={emailValue}
+      emailError={emailError}
+      onChangeEmail={onChangeEmail}
+      passwordValue={passwordValue}
+      passwordError={passwordError}
+      onChangePassword={onChangePassword}
+      passwordRepeatedValue={passwordRepeatedValue}
+      passwordRepeatedError={passwordRepeatedError}
+      onChangePasswordRepeated={onChangePasswordRepeated}
+      onSubmit={onSubmit}
+      submitDisabled={submitDisabled}
+      submitSuccess={submitSuccess}
+      submitError={submitError}
+    />
   );
 };
 

@@ -56,7 +56,7 @@ export const Session = (state = initialState, action: SessionActionsTypes): Sess
     case SIGN_UP_FAILURE:
       return Object.assign({}, state, {
         ...state,
-        loading: true,
+        loading: false,
         errors: [...state.errors, action?.data?.error],
       });
     default:
