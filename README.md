@@ -16,6 +16,12 @@ Install packages
 
 Local server will run in port `4000`, production conf in `config.test.json`.
 
+## Debug
+
+Add the local api of the machine running the app to config.test.json
+
+    "API_URL": "https://192.168.88.193:3000/api/v1/"
+
 ## Development
 
     nvm use
