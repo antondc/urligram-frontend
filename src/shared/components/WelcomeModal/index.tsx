@@ -5,7 +5,7 @@ import Cross from 'Assets/svg/cross.svg';
 import BaseModal from 'Components/BaseModal';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { switchWelcomeModal } from 'Modules/Ui/actions/switchWelcomeModal';
-import { Border, Flex, H3, Hr, P, Span } from '@antoniodcorrea/components';
+import { Border, Flex, H4, Hr, P, Span } from '@antoniodcorrea/components';
 
 import './WelcomeModal.less';
 
@@ -22,11 +22,17 @@ const WelcomeModal: React.FC = () => {
       <Border className="WelcomeModal" grow>
         <Cross className="WelcomeModal-cross" onClick={closeWelcomeModal} />
         <Flex horizontal="center">
-          <H3>Welcome @{name}!</H3>
-          <Hr size="big" spacer />
+          <H4>Welcome @{name}!</H4>
+          <Hr size="normal" spacer />
           <P>
             <Span size="normal" bold>
-              Your account is active now :)
+              Your account is active now
+            </Span>
+          </P>
+          <Hr size="zero" spacer />
+          <P>
+            <Span size="normal" bold>
+              🎉&nbsp;&nbsp;&nbsp;🥳
             </Span>
           </P>
         </Flex>

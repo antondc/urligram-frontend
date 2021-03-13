@@ -129,7 +129,7 @@ class Layout extends React.Component<Props> {
           <Fade mounted={signUpModalMounted} speed="fastest" position="fixed" appear>
             <SignUpModal />
           </Fade>
-          <Fade mounted={welcomeModalMounted} speed="fastest" position="fixed" appear>
+          <Fade mounted={true} speed="fastest" position="fixed" appear>
             <WelcomeModal />
           </Fade>
           <div id="Tooltips" />

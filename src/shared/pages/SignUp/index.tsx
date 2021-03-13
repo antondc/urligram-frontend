@@ -7,6 +7,7 @@ import { selectSessionStatus } from 'Modules/Session/selectors/selectSessionStat
 import { SESSION_STATUS_INACTIVE } from 'Modules/Session/session.types';
 import { validateEmailAddress } from 'Tools/utils/string/validateEmailAddress';
 import { validatePassword } from 'Tools/utils/string/validatePassword';
+import { testStringHasWhiteSpaces } from '../../tools/utils/string/testStringHasWhiteSpaces';
 import { SignUp as SignUpUi } from './SignUp';
 
 import './SignUp.less';
@@ -42,6 +43,14 @@ const SignUp: React.FC = () => {
     const { value } = e.currentTarget;
     setNameValue(value);
     setSubmitError(undefined);
+
+    const stringHasWhiteSpaces = testStringHasWhiteSpaces(value);
+
+    if (stringHasWhiteSpaces) {
+      setNameError('Name can not contain spaces');
+
+      return;
+    }
 
     const isNameLengthValid = value.length > 5;
 
