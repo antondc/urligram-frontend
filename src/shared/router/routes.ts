@@ -195,6 +195,18 @@ export const Routes: RoutesInterface = {
     layout: 'fullPage',
   },
 
+  ForgotPassword: {
+    name: 'ForgotPassword',
+    path: '/:lang([a-z]{2})?/forgot-password',
+    route: '/forgot-password',
+    exact: true,
+    auth: false,
+    header: false,
+    initialDataLoadersVisitor: [],
+    initialDataLoadersSession: [],
+    layout: 'fullPage',
+  },
+
   SignUpConfirmation: {
     name: 'SignUpConfirmation',
     path: '/:lang([a-z]{2})?/sign-up-confirmation',

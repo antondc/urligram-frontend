@@ -1,4 +1,7 @@
 import {
+  FORGOT_PASSWORD_FAILURE,
+  FORGOT_PASSWORD_REQUEST,
+  FORGOT_PASSWORD_SUCCESS,
   LOG_FAILED,
   LOG_IN_STARTED,
   LOG_IN_SUCCESS,
@@ -54,6 +57,23 @@ export const Session = (state = initialState, action: SessionActionsTypes): Sess
         loading: false,
       });
     case SIGN_UP_FAILURE:
+      return Object.assign({}, state, {
+        ...state,
+        loading: false,
+        errors: [...state.errors, action?.data?.error],
+      });
+    case FORGOT_PASSWORD_REQUEST:
+      return Object.assign({}, state, {
+        ...state,
+        loading: true,
+      });
+    case FORGOT_PASSWORD_SUCCESS:
+      return Object.assign({}, state, {
+        ...state,
+        loading: false,
+        passwordRequested: true,
+      });
+    case FORGOT_PASSWORD_FAILURE:
       return Object.assign({}, state, {
         ...state,
         loading: false,

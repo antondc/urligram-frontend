@@ -1,4 +1,5 @@
 import {
+  SWITCH_FORGOT_PASSWORD_MODAL,
   SWITCH_LANGUAGES_MODAL,
   SWITCH_LOGIN_MODAL,
   SWITCH_MESSAGE_MODAL,
@@ -32,6 +33,10 @@ export const initialState: UiState = {
     mounted: false,
   },
   signUpModal: {
+    type: 'popup',
+    mounted: false,
+  },
+  forgotPasswordModal: {
     type: 'popup',
     mounted: false,
   },
@@ -83,6 +88,14 @@ export const Ui = (state = initialState, action: UiActionsTypes): UiState => {
         screenLocked: !state.screenLocked,
         signUpModal: {
           ...state.signUpModal,
+          mounted: action.data.mounted,
+        },
+      });
+    case SWITCH_FORGOT_PASSWORD_MODAL:
+      return Object.assign({}, state, {
+        screenLocked: !state.screenLocked,
+        forgotPasswordModal: {
+          ...state.forgotPasswordModal,
           mounted: action.data.mounted,
         },
       });

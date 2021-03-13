@@ -5,6 +5,9 @@ export const LOG_FAILED = 'LOG_FAILED';
 export const SIGN_UP_REQUEST = 'SIGN_UP_REQUEST';
 export const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS';
 export const SIGN_UP_FAILURE = 'SIGN_UP_FAILURE';
+export const FORGOT_PASSWORD_REQUEST = 'FORGOT_PASSWORD_REQUEST';
+export const FORGOT_PASSWORD_SUCCESS = 'FORGOT_PASSWORD_SUCCESS';
+export const FORGOT_PASSWORD_FAILURE = 'FORGOT_PASSWORD_FAILURE';
 
 export const SESSION_STATUS_ACTIVE = 'active';
 export const SESSION_STATUS_INACTIVE = 'inactive';
@@ -35,6 +38,7 @@ export interface SessionState {
   token?: string;
   iat?: number;
   errors?: SessionError[];
+  passwordRequested?: boolean;
 }
 
 export interface LogInRequest {
@@ -66,6 +70,17 @@ export interface SignUpResponse {
 export interface SignUpConfirmationRequest {
   name: string;
   token: string;
+}
+
+export interface ForgotPasswordRequest {
+  nameOrEmail: string;
+}
+
+export interface ForgotPasswordResponse {
+  data: {
+    success: boolean;
+    error?: SessionError;
+  };
 }
 
 interface LogInFailureAction {
@@ -112,6 +127,21 @@ interface LogOutReceiveAction {
   type: typeof LOG_OUT;
 }
 
+interface ForgotPasswordRequestAction {
+  type: typeof FORGOT_PASSWORD_REQUEST;
+}
+
+interface ForgotPasswordSuccessAction {
+  type: typeof FORGOT_PASSWORD_SUCCESS;
+}
+
+interface ForgotPasswordFailureAction {
+  type: typeof FORGOT_PASSWORD_FAILURE;
+  data: {
+    error: SessionError;
+  };
+}
+
 export type SessionActionsTypes =
   | LogInFailureAction
   | LogInReceiveAction
@@ -119,4 +149,7 @@ export type SessionActionsTypes =
   | LogOutReceiveAction
   | SignUpRequestAction
   | SignUpSucessAction
-  | SignUpFailureAction;
+  | SignUpFailureAction
+  | ForgotPasswordRequestAction
+  | ForgotPasswordSuccessAction
+  | ForgotPasswordFailureAction;

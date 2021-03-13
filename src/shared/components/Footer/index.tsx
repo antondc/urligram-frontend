@@ -28,6 +28,11 @@ const Footer: React.FC<Props> = ({
 }) => (
   <Border className="Footer" weight="thick">
     <div className="Footer-section">
+      <A href="forgot-password" frontend>
+        <Span bold>Forgot password</Span>
+      </A>
+    </div>
+    <div className="Footer-section">
       <A href="login" frontend>
         <Span bold>Log in</Span>
       </A>

@@ -6,6 +6,7 @@ import { Location } from 'history';
 import LayoutContent from 'Common/LayoutContent';
 import LayoutHelper from 'Common/LayoutHelper';
 import Footer from 'Components/Footer';
+import ForgotPasswordModal from 'Components/ForgotPasswordModal';
 import Header from 'Components/Header';
 import LoginModal from 'Components/LoginModal';
 import ModalMessage from 'Components/ModalMessage';
@@ -18,6 +19,7 @@ import { RouteState } from 'Modules/Routes/routes.types';
 import { selectPathWithoutLanguageParam } from 'Modules/Routes/selectors/selectPathWithoutLanguageParam';
 import { selectSessionLoading } from 'Modules/Session/selectors/selectSessionLoading';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
+import { selectUiForgotPasswordModalMounted } from 'Modules/Ui/selectors/selectUiForgotPasswordModalMounted';
 import { selectUiLoginModalMounted } from 'Modules/Ui/selectors/selectUiLoginModalMounted';
 import { selectUiMessageModalMounted } from 'Modules/Ui/selectors/selectUiMessageModalMounted';
 import { selectUiScreenLocked } from 'Modules/Ui/selectors/selectUiScreenLocked';
@@ -40,6 +42,7 @@ interface Props {
   loginModalMounted: boolean;
   welcomeModalMounted: boolean;
   signUpModalMounted: boolean;
+  forgotPasswordModalMounted: boolean;
   uiScreenLocked: boolean;
   isLogged: boolean;
   pathWithoutLanguageParam: string;
@@ -98,6 +101,7 @@ class Layout extends React.Component<Props> {
       loginModalMounted,
       welcomeModalMounted,
       signUpModalMounted,
+      forgotPasswordModalMounted,
       sessionLoading,
     } = this.props;
 
@@ -132,6 +136,9 @@ class Layout extends React.Component<Props> {
           <Fade mounted={welcomeModalMounted} speed="fastest" position="fixed" appear>
             <WelcomeModal />
           </Fade>
+          <Fade mounted={forgotPasswordModalMounted} speed="fastest" position="fixed" appear>
+            <ForgotPasswordModal />
+          </Fade>
           <div id="Tooltips" />
         </div>
       )
@@ -150,6 +157,7 @@ const mapStateToProps = createStructuredSelector({
   sessionLoading: selectSessionLoading,
   welcomeModalMounted: selectUiWelcomeModalMounted,
   signUpModalMounted: selectUiSignUpModalMounted,
+  forgotPasswordModalMounted: selectUiForgotPasswordModalMounted,
 });
 
 export default connect(mapStateToProps, {

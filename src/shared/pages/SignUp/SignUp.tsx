@@ -131,7 +131,12 @@ export const SignUp: React.FC<Props> = ({
         </form>
         <Hr size="big" spacer />
         <Flex horizontal="center">
-          <Span bold>Forgot password?</Span>
+          <div className="SignUp-section">
+            <Span bold>Forgot password?: </Span>
+            <A href="forgot-password" styled underlined frontend>
+              <Span bold>reset it</Span>
+            </A>
+          </div>
           <Hr size="micro" spacer />
           <div className="SignUp-section">
             <Span bold>Already have an account?: </Span>

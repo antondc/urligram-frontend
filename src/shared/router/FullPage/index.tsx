@@ -9,6 +9,7 @@ import { selectPathWithoutLanguageParam } from 'Modules/Routes/selectors/selectP
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import About from 'Pages/About';
 import Control from 'Pages/Control';
+import ForgotPassword from 'Pages/ForgotPassword';
 import Login from 'Pages/Login';
 import NotFound from 'Pages/NotFound';
 import ServerError from 'Pages/ServerError';
@@ -47,6 +48,7 @@ const FullPage: React.FC<Props> = ({ loggedIn, location, defaultCurrentSlug, pat
           path={Routes.SignUpConfirmation.path}
           component={SignUpConfirmation}
         />
+        <Route exact={Routes.ForgotPassword.exact} path={Routes.ForgotPassword.path} component={ForgotPassword} />
 
         {/* Guards */}
         <Route exact={Routes.ServerError.exact} path={Routes.ServerError.path} component={ServerError} />
