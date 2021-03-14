@@ -1,22 +1,29 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import A from 'Components/A';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUserId';
 import { Border, Span } from '@antoniodcorrea/components';
+import { switchBookmarkModal } from '../../redux/modules/Ui/actions/switchBookmarkModal';
 
 import './SidebarLeft.less';
 
 export const SidebarLeft: React.FC = () => {
+  const dispatch = useDispatch();
   const isLoggedIn = useSelector(selectSessionLoggedIn);
   const sessionId = useSelector(selectSessionUserId);
+
+  const switchUiBookmarkModal = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    dispatch(switchBookmarkModal(true));
+  };
 
   return (
     <Border className="SidebarLeft" data-test-id="SidebarLeft">
       {isLoggedIn && (
         <ul>
-          <li>
+          <li className="SidebarLeft-item">
             <span className="SidebarLeft-bullet">•</span>
             <Span bold>
               <A href={`users/${sessionId}`} frontend>
@@ -24,7 +31,7 @@ export const SidebarLeft: React.FC = () => {
               </A>
             </Span>
           </li>
-          <li>
+          <li className="SidebarLeft-item">
             <span className="SidebarLeft-bullet">•</span>
             <Span bold>
               <A href={`users/${sessionId}/bookmarks`} frontend>
@@ -35,12 +42,20 @@ export const SidebarLeft: React.FC = () => {
           <li>
             <span className="SidebarLeft-bullet">•</span>
             <Span bold>
+              <A href="" frontend onClick={switchUiBookmarkModal}>
+                Add bookmark
+              </A>
+            </Span>
+          </li>
+          <li className="SidebarLeft-item">
+            <span className="SidebarLeft-bullet">•</span>
+            <Span bold>
               <A href={`users/${sessionId}/lists?sort=-createdat`} frontend>
                 My Lists
               </A>
             </Span>
           </li>
-          <li>
+          <li className="SidebarLeft-item">
             <span className="SidebarLeft-bullet">•</span>
             <Span bold>
               <A href={`users/${sessionId}/followers`} frontend>
@@ -48,7 +63,7 @@ export const SidebarLeft: React.FC = () => {
               </A>
             </Span>
           </li>
-          <li>
+          <li className="SidebarLeft-item">
             <span className="SidebarLeft-bullet">•</span>
             <Span bold>
               <A href={`users/${sessionId}/following`} frontend>
@@ -60,7 +75,7 @@ export const SidebarLeft: React.FC = () => {
       )}
       {!isLoggedIn && (
         <ul>
-          <li>
+          <li className="SidebarLeft-item">
             <span className="SidebarLeft-bullet">•</span>
             <Span bold>
               <A href="/links" frontend>
@@ -68,7 +83,7 @@ export const SidebarLeft: React.FC = () => {
               </A>
             </Span>
           </li>
-          <li>
+          <li className="SidebarLeft-item">
             <span className="SidebarLeft-bullet">•</span>
             <Span bold>
               <A href="/lists" frontend>
@@ -76,7 +91,7 @@ export const SidebarLeft: React.FC = () => {
               </A>
             </Span>
           </li>
-          <li>
+          <li className="SidebarLeft-item">
             <span className="SidebarLeft-bullet">•</span>
             <Span bold>
               <A href="/bookmarks?sort=-createdAt" frontend>
@@ -84,7 +99,7 @@ export const SidebarLeft: React.FC = () => {
               </A>
             </Span>
           </li>
-          <li>
+          <li className="SidebarLeft-item">
             <span className="SidebarLeft-bullet">•</span>
             <Span bold>
               <A href="/tags" frontend>

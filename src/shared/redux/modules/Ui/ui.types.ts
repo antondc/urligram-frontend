@@ -6,57 +6,23 @@ export const SWITCH_WELCOME_MODAL = 'SWITCH_WELCOME_MODAL';
 export const SWITCH_SIGN_UP_MODAL = 'SWITCH_SIGN_UP_MODAL';
 export const SWITCH_FORGOT_PASSWORD_MODAL = 'SWITCH_FORGOT_PASSWORD_MODAL';
 export const SWITCH_RESET_PASSWORD_MODAL = 'SWITCH_RESET_PASSWORD_MODAL';
+export const SWITCH_BOOKMARK_MODAL = 'SWITCH_BOOKMARK_MODAL';
 
+export type UiBaseModal = {
+  type: 'modal'|'popup';
+  mounted: boolean;
+}
 export interface UiState {
   screenLocked: boolean;
-  userModal: UiUserModalState;
-  languagesModal: UiLanguagesModalState;
-  messageModal: UiMessageModalState;
-  loginModal: UiLoginModalState;
-  welcomeModal: UiWelcomeModalState;
-  signUpModal: UiSignUpModalState;
-  forgotPasswordModal: UiForgotPasswordModalState;
-  resetPasswordModal: UiResetPasswordModalState;
-}
-
-export interface UiUserModalState {
-  type: 'modal';
-  mounted: boolean;
-}
-
-export interface UiLanguagesModalState {
-  type: 'modal';
-  mounted: boolean;
-}
-
-export interface UiMessageModalState {
-  type: 'popup';
-  mounted: boolean;
-}
-
-export interface UiLoginModalState {
-  type: 'popup';
-  mounted: boolean;
-}
-
-export interface UiWelcomeModalState {
-  type: 'popup';
-  mounted: boolean;
-}
-
-export interface UiSignUpModalState {
-  type: 'popup';
-  mounted: boolean;
-}
-
-export interface UiForgotPasswordModalState {
-  type: 'popup';
-  mounted: boolean;
-}
-
-export interface UiResetPasswordModalState {
-  type: 'popup';
-  mounted: boolean;
+  userModal:UiBaseModal
+  languagesModal:UiBaseModal
+  messageModal:UiBaseModal
+  loginModal:UiBaseModal
+  welcomeModal:UiBaseModal
+  signUpModal:UiBaseModal
+  forgotPasswordModal:UiBaseModal
+  resetPasswordModal:UiBaseModal
+  bookmarkModal:UiBaseModal
 }
 
 interface SwitchUserModal {
@@ -106,6 +72,13 @@ interface SwitchResetPasswordModal {
   };
 }
 
+interface SwitchBookmarkModal {
+  type: typeof SWITCH_BOOKMARK_MODAL;
+  data: {
+    mounted: boolean;
+  };
+}
+
 export type UiActionsTypes =
   | SwitchUserModal
   | SwitchLanguagesModal
@@ -114,4 +87,4 @@ export type UiActionsTypes =
   | SwitchWelcomeModal
   | SwitchSignUpModal
   | SwitchForgotPasswordModal
-  | SwitchResetPasswordModal;
+  | SwitchResetPasswordModal|SwitchBookmarkModal;

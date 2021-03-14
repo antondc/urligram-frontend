@@ -1,4 +1,5 @@
 import {
+  SWITCH_BOOKMARK_MODAL,
   SWITCH_FORGOT_PASSWORD_MODAL,
   SWITCH_LANGUAGES_MODAL,
   SWITCH_LOGIN_MODAL,
@@ -42,6 +43,10 @@ export const initialState: UiState = {
     mounted: false,
   },
   resetPasswordModal: {
+    type: 'popup',
+    mounted: false,
+  },
+  bookmarkModal: {
     type: 'popup',
     mounted: false,
   },
@@ -109,6 +114,14 @@ export const Ui = (state = initialState, action: UiActionsTypes): UiState => {
         screenLocked: !state.screenLocked,
         resetPasswordModal: {
           ...state.resetPasswordModal,
+          mounted: action.data.mounted,
+        },
+      });
+    case SWITCH_BOOKMARK_MODAL:
+      return Object.assign({}, state, {
+        screenLocked: !state.screenLocked,
+        bookmarkModal: {
+          ...state.bookmarkModal,
           mounted: action.data.mounted,
         },
       });

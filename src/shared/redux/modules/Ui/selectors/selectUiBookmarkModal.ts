@@ -4,7 +4,7 @@ import get from 'lodash/get';
 import { UiBaseModal, UiState } from '../ui.types';
 import { selectUi } from './selectUi';
 
-export const selectUiForgotPasswordModal = createSelector(
+export const selectUiBookmarkModal = createSelector(
   selectUi,
-  (ui: UiState): UiBaseModal => get(ui, 'forgotPasswordModal', {})
+  (ui: UiState): UiBaseModal => get(ui, 'bookmarkModal', {})
 );
