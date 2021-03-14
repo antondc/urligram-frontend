@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import Cross from 'Assets/svg/cross.svg';
 import BaseModal from 'Components/BaseModal';
-import LoginForm from 'Components/LoginForm';
+import BookmarkForm from 'Components/BookmarkForm';
 import { switchBookmarkModal } from 'Modules/Ui/actions/switchBookmarkModal';
 import { Border, Flex, H3, Hr } from '@antoniodcorrea/components';
 
@@ -24,7 +24,7 @@ const BookmarkModal: React.FC = () => {
           <H3>Add bookmark</H3>
         </Flex>
         <Hr spacer size="small" />
-        <LoginForm />
+        <BookmarkForm />
         <Hr spacer size="big" />
       </Border>
     </BaseModal>
