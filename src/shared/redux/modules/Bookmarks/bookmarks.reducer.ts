@@ -1,4 +1,8 @@
 import {
+  BOOKMARK_CREATE_FAILURE,
+  BOOKMARK_CREATE_REQUEST,
+  BOOKMARK_CREATE_RESET,
+  BOOKMARK_CREATE_SUCCESS,
   BookmarksActionsTypes,
   BookmarksState,
   LOAD_BOOKMARKS_STARTED,
@@ -9,6 +13,7 @@ import {
 
 export const initialState: BookmarksState = {
   byKey: {},
+  errors: [],
 };
 
 export const Bookmarks = (state = initialState, action: BookmarksActionsTypes): BookmarksState => {
@@ -44,6 +49,34 @@ export const Bookmarks = (state = initialState, action: BookmarksActionsTypes): 
       return Object.assign({}, state, {
         ...state,
         ...action.payload,
+      });
+
+    case BOOKMARK_CREATE_REQUEST:
+      return Object.assign({}, state, {
+        ...state,
+        ...action.data,
+      });
+    case BOOKMARK_CREATE_SUCCESS:
+      return Object.assign({}, state, {
+        ...state,
+        byKey: {
+          ...state.byKey,
+          [action.data?.bookmark?.id]: action?.data?.bookmark,
+        },
+        bookmarkCreationSuccess: true,
+        loading: action?.data?.loading,
+      });
+    case BOOKMARK_CREATE_FAILURE:
+      return Object.assign({}, state, {
+        ...state,
+        ...action.data,
+        bookmarkCreationSuccess: false,
+        errors: [...state.errors, action?.data?.error],
+      });
+    case BOOKMARK_CREATE_RESET:
+      return Object.assign({}, state, {
+        ...state,
+        bookmarkCreationSuccess: undefined,
       });
 
     default:

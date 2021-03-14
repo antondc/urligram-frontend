@@ -1,62 +1,149 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { selectSessionErrorLast } from 'Modules/Session/selectors/selectSessionErrorLast';
-import { selectSessionLoggedIn } from '../../redux/modules/Session/selectors/selectSessionLoggedIn';
+import { bookmarkCreate } from 'Modules/Bookmarks/actions/bookmarkCreate';
+import { bookmarkCreateReset } from 'Modules/Bookmarks/actions/bookmarkCreateReset';
+import { selectBookmarkCreationSuccess } from 'Modules/Bookmarks/selectors/selectBookmarkCreationSuccess';
+import { selectBookmarksErrorLast } from 'Modules/Bookmarks/selectors/selectBookmarksErrorLast';
+import { tagsSearchLoad } from 'Modules/Tags/actions/tagsSearchLoad';
+import { selectTagsAll } from 'Modules/Tags/selectors/selectAllTags';
+import { selectTagsSearch } from 'Modules/Tags/selectors/selectTagsSearch';
+import { testStringIsValidUrl } from 'Tools/utils/url/testStringIsValidUrl';
 import { BookmarkForm as BookmarkFormUi } from './BookmarkForm';
 
 import './BookmarkForm.less';
 
+export type TagValue = {
+  label: string;
+  value: string;
+};
+
 const BookmarkForm: React.FC = () => {
-  // const dispatch = useDispatch();
-  const sessionError = useSelector(selectSessionErrorLast);
-  const isLoggedIn = useSelector(selectSessionLoggedIn);
-  const [passwordValue, setPasswordValue] = useState<string>(undefined);
-  const [passwordError, setPasswordError] = useState<string>(undefined);
+  const dispatch = useDispatch();
+  const bookmarkCreationSuccess = useSelector(selectBookmarkCreationSuccess);
+  const bookmarkError = useSelector(selectBookmarksErrorLast);
+  const allTags = useSelector(selectTagsAll);
+  const tagsSearch = useSelector(selectTagsSearch);
+  const tagsSearchFormatted = tagsSearch?.map((item) => ({ label: item.name, value: item.name })) || [];
+
+  const [titleValue, setTitleValue] = useState<string>(undefined);
+  const [titleError, setTitleError] = useState<string>(undefined);
+  const [isPrivateValue, setIsPrivateValue] = useState<boolean>(true);
+  const [isPrivateError, setIsPrivateError] = useState<string>(undefined);
+  const [urlValue, setUrlValue] = useState<string>(undefined);
+  const [urlError, setUrlError] = useState<string>(undefined);
+  const [tagsValue, setTagsValue] = useState<TagValue[]>([]);
+  const [submitSuccess, setSubmitSuccess] = useState<boolean>(undefined);
   const [submitError, setSubmitError] = useState<string>(undefined);
 
-  const submitDisabled = !passwordValue || !!passwordError;
+  const submitDisabled = !titleValue || !!titleError;
 
-  const onChangePassword = (e: React.FormEvent<HTMLInputElement>) => {
+  const onChangeTitle = (e: React.FormEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
-    setPasswordValue(value);
-
-    setPasswordError(undefined);
+    setTitleValue(value);
+    setSubmitSuccess(undefined);
+    setTitleError(undefined);
     setSubmitError(undefined);
   };
 
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const onChangeIsPrivate = (e: React.FormEvent<HTMLInputElement>) => {
+    const { checked } = e.currentTarget;
 
-    const data = {
-      password: passwordValue,
-    };
-
-    // dispatch(logIn(data));
+    setIsPrivateValue(checked);
+    setSubmitSuccess(undefined);
+    setIsPrivateError(undefined);
+    setSubmitError(undefined);
   };
 
-  useEffect(() => {
-    setSubmitError(undefined);
-  }, []);
+  const onChangeUrl = (e: React.FormEvent<HTMLInputElement>) => {
+    const { value } = e.currentTarget;
 
-  useEffect(() => {
-    if (sessionError?.field === 'password') {
-      setPasswordError(sessionError?.message);
+    setSubmitSuccess(undefined);
+    setUrlValue(value);
+
+    const isValidUrl = testStringIsValidUrl(value);
+    if (!isValidUrl) {
+      setUrlError('Url is not valid');
 
       return;
     }
 
-    if (sessionError?.message) setSubmitError(sessionError?.message);
-  }, [sessionError]);
+    setUrlError(undefined);
+    setSubmitError(undefined);
+  };
+
+  const onChangeTagsInput = (string: string) => {
+    setSubmitSuccess(undefined);
+
+    !!string && dispatch(tagsSearchLoad(string));
+  };
+
+  const onChangeTags = (values) => {
+    const tags: TagValue[] = values;
+    setTagsValue(tags || []);
+  };
+
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const transformedTags = tagsValue.map((item) => ({ tag: item.value }));
+
+    const data = {
+      title: titleValue,
+      isPrivate: isPrivateValue,
+      url: urlValue,
+      tags: transformedTags,
+    };
+
+    dispatch(bookmarkCreate(data));
+  };
+
+  useEffect(() => {
+    if (!!bookmarkCreationSuccess) setSubmitSuccess(true);
+  }, [bookmarkCreationSuccess]);
+
+  useEffect(() => {
+    setSubmitError(undefined);
+
+    return () => {
+      dispatch(bookmarkCreateReset());
+    };
+  }, []);
+
+  useEffect(() => {
+    if (bookmarkError?.field === 'title') {
+      setTitleError(bookmarkError?.message);
+
+      return;
+    }
+
+    if (bookmarkError?.field === 'url') {
+      setUrlError(bookmarkError?.message);
+
+      return;
+    }
+
+    if (bookmarkError?.message) setSubmitError(bookmarkError?.message);
+  }, [bookmarkError]);
 
   return (
     <BookmarkFormUi
-      passwordValue={passwordValue}
-      passwordError={passwordError}
-      onChangePassword={onChangePassword}
+      titleValue={titleValue}
+      titleError={titleError}
+      onChangeTitle={onChangeTitle}
+      isPrivateValue={isPrivateValue}
+      isPrivateError={isPrivateError}
+      onChangeIsPrivate={onChangeIsPrivate}
+      urlValue={urlValue}
+      urlError={urlError}
+      onChangeUrl={onChangeUrl}
+      allTags={allTags}
+      tagsSearchFormatted={tagsSearchFormatted}
+      tagsValue={tagsValue}
+      onChangeTags={onChangeTags}
+      onChangeTagsInput={onChangeTagsInput}
       onSubmit={onSubmit}
       submitDisabled={submitDisabled}
-      submitSuccess={isLoggedIn}
+      submitSuccess={submitSuccess}
       submitError={submitError}
     />
   );
