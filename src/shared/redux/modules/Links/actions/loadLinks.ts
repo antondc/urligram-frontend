@@ -2,8 +2,8 @@ import { Action, Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 
 import { LinkState, ReceiveLinkItem, ReceiveLinksResponse } from 'Modules/Links/links.types';
+import { QueryStringWrapper } from 'Root/src/shared/services/QueryStringWrapper';
 import HttpClient from 'Services/HttpClient';
-import { URLWrapper } from 'Services/URLWrapper';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
 import { receiveLinks } from './receiveLinks';
 import { requestLinks } from './requestLinks';
@@ -12,15 +12,14 @@ export const loadLinks = (size?: number): ThunkAction<any, any, any, Action> => 
   try {
     dispatch(requestLinks());
 
-    const path = `/links${window.location.search}`;
-    const urlObject = new URLWrapper(path);
-    !!size && urlObject.upsertSearchParams({ page: { size } });
-    const apiEndpoint = urlObject.getPathAndSearch();
-
+    const queryStringUpdated = !!size
+      ? QueryStringWrapper.upsertSearchParams(window.location.search, { page: { size } })
+      : QueryStringWrapper.extractQueryString(window.location.search);
+    
     const {
       meta: { totalItems, sort },
       data,
-    }: ReceiveLinksResponse = await HttpClient.get(apiEndpoint);
+    }: ReceiveLinksResponse = await HttpClient.get(`/links?${queryStringUpdated}`);
 
     const linksByKey = {
       byKey: serializerFromArrayToByKey<ReceiveLinkItem, LinkState>({

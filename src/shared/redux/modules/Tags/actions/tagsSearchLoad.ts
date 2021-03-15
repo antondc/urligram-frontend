@@ -2,8 +2,8 @@ import { Action, Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 
 import { ReceiveTagItem, ReceiveTagsResponse, TagState } from 'Modules/Tags/tags.types';
+import { QueryStringWrapper } from 'Root/src/shared/services/QueryStringWrapper';
 import HttpClient from 'Services/HttpClient';
-import { URLWrapper } from 'Services/URLWrapper';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
 import { loadTagsReceive } from './loadTagsReceive';
 import { tagsAllRequest } from './tagsAllRequest';
@@ -14,12 +14,11 @@ export const tagsSearchLoad = (searchString?: string): ThunkAction<any, any, any
   try {
     dispatch(tagsAllRequest());
 
-    const path = '/tags';
-    const urlObject = new URLWrapper(path);
-    if (!!searchString) urlObject.upsertSearchParams({ filter: { tags: [searchString] } });
-    const apiEndpoint = urlObject.getPathAndSearch();
-
-    const { data }: ReceiveTagsResponse = await HttpClient.get(apiEndpoint);
+    const queryString = !!searchString
+      ? QueryStringWrapper.stringifyQueryParams({ filter: { tags: [searchString] } })
+      : '';
+    
+    const { data }: ReceiveTagsResponse = await HttpClient.get(`tags?${queryString}`);
 
     const tagsByKey = {
       byKey: serializerFromArrayToByKey<ReceiveTagItem, TagState>({

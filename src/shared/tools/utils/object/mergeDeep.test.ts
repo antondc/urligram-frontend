@@ -2,7 +2,7 @@
 
 import { mergeDeep } from './mergeDeep';
 
-describe('URLWrapper', () => {
+describe('mergeDeep', () => {
   test('it should deepmerge object properties and values', () => {
     const object1 = {
       a: 1,
@@ -49,7 +49,7 @@ describe('URLWrapper', () => {
         c: [4],
       },
     };
-    
+
     const mergedObject = {
       a: 1,
       b: {

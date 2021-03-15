@@ -2,7 +2,7 @@
 
 import { omit } from './omit';
 
-describe('URLWrapper', () => {
+describe('omit', () => {
   test('it should return object with simple key removed', () => {
     const originalObject = {
       field1: 'value1',

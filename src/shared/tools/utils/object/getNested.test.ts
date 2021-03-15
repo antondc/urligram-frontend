@@ -17,7 +17,7 @@ const object = {
   },
 };
 
-describe('URLWrapper', () => {
+describe('getNested', () => {
   test('it should return correct length of a array', () => {
     expect(getNested<[]>(object, 'batters.batter').length).toEqual(3);
   });
