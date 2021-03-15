@@ -12,7 +12,9 @@ const valid = [
   'http://example.com',
   'http://example.com/path1/path2?hello=1&hello=2',
   'http://a',
+  'https://a',
   'http://abc',
+  'http://',
 ];
 
 const invalid = [

@@ -8,6 +8,7 @@ import { selectBookmarksErrorLast } from 'Modules/Bookmarks/selectors/selectBook
 import { tagsSearchLoad } from 'Modules/Tags/actions/tagsSearchLoad';
 import { selectTagsAll } from 'Modules/Tags/selectors/selectAllTags';
 import { selectTagsSearch } from 'Modules/Tags/selectors/selectTagsSearch';
+import { DEFAULT_PROTOCOL } from 'Root/src/shared/constants';
 import { testStringIsValidUrl } from 'Tools/utils/url/testStringIsValidUrl';
 import { testUrlHasProtocol } from 'Tools/utils/url/testUrlHasProtocol';
 import { urlRemoveLeadingCharacters } from 'Tools/utils/url/urlRemoveLeadingCharacters';
@@ -79,7 +80,7 @@ const BookmarkForm: React.FC = () => {
     setSubmitSuccess(undefined);
     const urlHasProtocol = testUrlHasProtocol(value);
 
-    const valueWithProtocol = urlHasProtocol ? value : 'https://' + value;
+    const valueWithProtocol = urlHasProtocol ? value : DEFAULT_PROTOCOL + value;
 
     const isValidUrl = testStringIsValidUrl(valueWithProtocol);
 

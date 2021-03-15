@@ -350,7 +350,7 @@ export const testUrlHasProtocol = (string: string): boolean => {
   if (urlHasSpaces) return false;
 
   const joinedurlSchemes = urlSchemes.join('|');
-  const regex = new RegExp(`^(${joinedurlSchemes})(://)((?=[^/])(?=.+))`, 'i');
+  const regex = new RegExp(`(^(${joinedurlSchemes})(://)$|^(${joinedurlSchemes})(://)((?=[^/])(?=.+)))`, 'i');
   const urlHasProtocol = regex.test(string);
 
   return urlHasProtocol;
