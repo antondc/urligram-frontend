@@ -98,6 +98,8 @@ export const BookmarkForm: React.FC<Props> = ({
       isCreatable
     />
     <Hr spacer />
+    <Span className="BookmarkForm-private">Private</Span>
+    <Hr size="micro" spacer />
     <Switch name="isPrivate" checked={isPrivateValue} onChange={onChangeIsPrivate} />
     <Hr size="nano" spacer />
     <FadeInOut valueToUpdate={!!isPrivateError} speed="fast">
