@@ -16,6 +16,7 @@ interface Props {
   urlValue: string;
   urlError: string;
   onChangeUrl: (e: React.FormEvent<HTMLInputElement>) => void;
+  onBlurUrl: (e: React.FormEvent<HTMLInputElement>) => void;
   allTags: TagState[];
   tagsSearchFormatted: TagValue[];
   tagsValue: TagValue[];
@@ -36,6 +37,7 @@ export const BookmarkForm: React.FC<Props> = ({
   onChangeIsPrivate,
   urlValue,
   urlError,
+  onBlurUrl,
   onChangeUrl,
   allTags,
   tagsSearchFormatted,
@@ -70,7 +72,7 @@ export const BookmarkForm: React.FC<Props> = ({
       type="text"
       label="Url"
       onChange={onChangeUrl}
-      onBlur={onChangeUrl}
+      onBlur={onBlurUrl}
       value={urlValue}
       error={urlError}
       grow

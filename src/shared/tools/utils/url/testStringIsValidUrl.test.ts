@@ -26,46 +26,47 @@ const valid = [
   'http://foo.com/unicode_(✪)_in_parens',
   'http://foo.com/(something)?after=parens',
   'http://☺.damowmow.com/',
-  'http://code.example.com/events/#&product=browser',
+  'http://code.example.com/events/#&product=browser1',
   'http://j.mp',
   'ftp://foo.bar/baz',
   'torrent://foo.bar/baz',
   'image://foo.bar:993',
   'irc://foo.bar:6667',
-];
-
-const invalid = [
+  'http://hello',
   'rdar://1234',
-  'http://',
+  'http://a.b-.co',
   'http://.',
   'http://..',
   'http://../',
+  'http:///a',
+  'http://-a.b.co',
+];
+
+const invalid = [
+  'http://',
   'http://?',
   'http://??',
   'http://??/',
   'http://#',
   'http://##',
   'http://##/',
-  'http://foo.bar?q=Spaces should be encoded',
+  'http://foo.bar?q=Spaces space space space',
   '//',
   '//a',
   '///a',
   '///',
-  'http:///a',
   'foo.com',
-  'http://-a.b.co',
-  'http://a.b-.co',
 ];
 
 describe('testStringIsValidUrl', () => {
   valid.forEach((item) => {
-    test(`it should test ${item}`, () => {
+    test(`it should pass ${item}`, () => {
       expect(testStringIsValidUrl(item)).toEqual(true);
     });
   });
 
   invalid.forEach((item) => {
-    test(`it should test ${item}`, () => {
+    test(`it should fail ${item}`, () => {
       expect(testStringIsValidUrl(item)).toEqual(false);
     });
   });

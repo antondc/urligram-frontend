@@ -1,9 +1,14 @@
 // https://gist.github.com/rodneyrehm/8013067
 
 export const testStringIsValidUrl = (string: string): boolean => {
-  const regex = /^(https?|ftp|torrent|image|irc):\/\/(-\.)?([^\s\/?\.#-]+\.?)+(\/[^\s]*)?$/i;
+  const urlHasSpaces = string.includes(' ');
+  if (urlHasSpaces) return false;
 
-  const stringIsValidUrl = regex.test(string);
+  try {
+    new URL(string);
 
-  return stringIsValidUrl;
+    return true;
+  } catch {
+    return false;
+  }
 };

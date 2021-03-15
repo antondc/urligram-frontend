@@ -9,6 +9,8 @@ import { tagsSearchLoad } from 'Modules/Tags/actions/tagsSearchLoad';
 import { selectTagsAll } from 'Modules/Tags/selectors/selectAllTags';
 import { selectTagsSearch } from 'Modules/Tags/selectors/selectTagsSearch';
 import { testStringIsValidUrl } from 'Tools/utils/url/testStringIsValidUrl';
+import { testUrlHasProtocol } from 'Tools/utils/url/testUrlHasProtocol';
+import { urlRemoveLeadingCharacters } from 'Tools/utils/url/urlRemoveLeadingCharacters';
 import { BookmarkForm as BookmarkFormUi } from './BookmarkForm';
 
 import './BookmarkForm.less';
@@ -57,17 +59,37 @@ const BookmarkForm: React.FC = () => {
 
   const onChangeUrl = (e: React.FormEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
+    const result = urlRemoveLeadingCharacters(value);
+
+    setUrlValue(result);
+    setSubmitSuccess(undefined);
+    setUrlError(undefined);
+    setSubmitError(undefined);
+  };
+
+  const onBlurUrl = (e: React.FormEvent<HTMLInputElement>) => {
+    const { value } = e.currentTarget;
+
+    if (!value.length) {
+      setUrlError('Url is mandatory');
+
+      return;
+    }
 
     setSubmitSuccess(undefined);
-    setUrlValue(value);
+    const urlHasProtocol = testUrlHasProtocol(value);
 
-    const isValidUrl = testStringIsValidUrl(value);
+    const valueWithProtocol = urlHasProtocol ? value : 'https://' + value;
+
+    const isValidUrl = testStringIsValidUrl(valueWithProtocol);
+
     if (!isValidUrl) {
       setUrlError('Url is not valid');
 
       return;
     }
 
+    setUrlValue(valueWithProtocol);
     setUrlError(undefined);
     setSubmitError(undefined);
   };
@@ -136,6 +158,7 @@ const BookmarkForm: React.FC = () => {
       urlValue={urlValue}
       urlError={urlError}
       onChangeUrl={onChangeUrl}
+      onBlurUrl={onBlurUrl}
       allTags={allTags}
       tagsSearchFormatted={tagsSearchFormatted}
       tagsValue={tagsValue}
