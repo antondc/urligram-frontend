@@ -25,6 +25,7 @@ export interface BookmarkState {
   title: string;
   url: string;
   img: string;
+  favicon: string;
   linkId: number;
   tags: {
     id: number;

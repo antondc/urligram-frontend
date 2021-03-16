@@ -5,6 +5,7 @@ export const mockBookmark: BookmarkState = {
   title: 'string',
   url: 'string',
   img: 'string',
+  favicon: 'string',
   linkId: 0,
   tags: [
     {

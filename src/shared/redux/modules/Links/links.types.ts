@@ -8,6 +8,9 @@ export interface LinkState {
   title: string;
   url: string;
   img: string;
+  favicon: string;
+  description: string;
+  language: string;
   linkId: number;
   tags: {
     id: number;

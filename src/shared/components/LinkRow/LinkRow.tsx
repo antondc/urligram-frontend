@@ -10,10 +10,11 @@ interface LinkRow extends LinkState {
   onVote: (vote: boolean | null) => void;
 }
 
-export const LinkRow: React.FC<LinkRow> = ({ id, title, url, tags = [], statistics, onVote }) => (
+export const LinkRow: React.FC<Partial<LinkRow>> = ({ id, title, url, tags = [], statistics, onVote, favicon }) => (
   <Border grow className="LinkRow" data-test-id="LinkRow" key={id}>
     <div className="LinkRow-left">
       <div className="LinkRow-icons">
+        <img className="LinkRow-favicon" src={favicon} />
         <Circle size="micro" className="LinkRow-icon" />
         <Private
           size="micro"

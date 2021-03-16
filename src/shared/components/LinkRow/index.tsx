@@ -23,7 +23,7 @@ interface Props {
 
 const LinkRow: React.FC<Props> = ({
   id,
-  link: { linkId, title, url, tags = [], img, statistics },
+  link: { linkId, title, url, tags = [], favicon, statistics },
   userId,
   isLogged,
   switchLoginModal,
@@ -42,7 +42,7 @@ const LinkRow: React.FC<Props> = ({
       title={title}
       url={url}
       tags={tags}
-      img={img}
+      favicon={favicon}
       statistics={statistics}
       onVote={onVote}
     />

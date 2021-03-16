@@ -10,7 +10,7 @@ interface BookmarkRow extends BookmarkState {
   onVote: (vote: boolean | null) => void;
 }
 
-export const BookmarkRow: React.FC<BookmarkRow> = ({ id, title, url, tags = [], statistics, onVote }) => (
+export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({ id, title, url, tags = [], statistics, onVote }) => (
   <Border grow className="BookmarkRow" data-test-id="BookmarkRow" key={id}>
     <div className="BookmarkRow-left">
       <div className="BookmarkRow-icons">
