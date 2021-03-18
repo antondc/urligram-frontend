@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import A from 'Components/A';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUserId';
+import { switchBookmarkModal } from 'Modules/Ui/actions/switchBookmarkModal';
 import { Border, Span } from '@antoniodcorrea/components';
-import { switchBookmarkModal } from '../../redux/modules/Ui/actions/switchBookmarkModal';
 
 import './SidebarLeft.less';
 

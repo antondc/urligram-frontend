@@ -16,6 +16,10 @@ export const Links = (state = initialState, action: LinksActionsTypes): LinksSta
     case LOAD_LINKS_STARTED:
       return Object.assign({}, state, {
         loading: true,
+        meta: {
+          ...state.meta,
+          sort: undefined,
+        },
       });
     case LOAD_LINKS_SUCCESS:
       return Object.assign({}, state, {

@@ -10,6 +10,10 @@ export const Users = (state = initialState, action: UsersActionsTypes): UsersSta
       return Object.assign({}, state, {
         ...state,
         loading: true,
+        meta: {
+          ...state.meta,
+          sort: undefined
+        },
       });
 
     case LOAD_USERS_SUCEEDED:

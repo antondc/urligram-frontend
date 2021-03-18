@@ -5,18 +5,26 @@ import { BookmarkState, ReceiveBookmarkItem, ReceiveBookmarksResponse } from 'Mo
 import { QueryStringWrapper } from 'Root/src/shared/services/QueryStringWrapper';
 import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
+import { RootState } from '../../rootType';
 import { receiveBookmarks } from './receiveBookmarks';
 import { requestBookmarks } from './requestBookmarks';
 
 export const loadBookmarksByUserId = (userId: string, size?: number): ThunkAction<any, any, any, Action> => async (
-  dispatch: Dispatch
+  dispatch: Dispatch,
+  getState: () => RootState
 ) => {
   try {
+    const { Bookmarks: bookmarksState } = getState();
+    const activeSort = bookmarksState?.meta?.sort;
     dispatch(requestBookmarks());
 
-    const queryStringUpdated = !!size
-      ? QueryStringWrapper.upsertSearchParams(window.location.search, { page: { size } })
-      : QueryStringWrapper.extractQueryString(window.location.search);
+    const queryStringParsed = QueryStringWrapper.parseQueryString(window.location.search);
+    const queryParams = {
+      page: { size },
+      sort: activeSort,
+      ...queryStringParsed,
+    };
+    const queryStringUpdated = QueryStringWrapper.stringifyQueryParams(queryParams);
 
     const apiEndpoint = `/users/${userId}/bookmarks?${queryStringUpdated}`;
 

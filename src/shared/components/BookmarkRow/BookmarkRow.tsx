@@ -7,10 +7,12 @@ import { Bookmark, Border, Edit, Private, Span, Tag, Vote } from '@antoniodcorre
 import './BookmarkRow.less';
 
 interface BookmarkRow extends BookmarkState {
+  userId: string;
   onVote: (vote: boolean | null) => void;
 }
 
 export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
+  userId,
   id,
   title,
   url,
@@ -18,6 +20,7 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
   statistics,
   onVote,
   favicon,
+  createdAt,
 }) => (
   <Border grow className="BookmarkRow" data-test-id="BookmarkRow" key={id}>
     <div className="BookmarkRow-left">
@@ -52,7 +55,7 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
       {tags?.map((item) => (
         <A
           className="BookmarkRow-tag"
-          href={`/links?filter[tags][]=${item.name}`}
+          href={`users/${userId}/bookmarks?filter[tags][]=${item.name}`}
           key={item.id}
           styled={false}
           frontend
@@ -79,6 +82,9 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
           {statistics?.timesBookmarked}
         </div>
       </div>
+      <Span size="micro" className="BookmarkRow-stat">
+        {createdAt}
+      </Span>
     </div>
   </Border>
 );

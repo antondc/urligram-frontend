@@ -27,6 +27,8 @@ export interface BookmarkState {
   img: string;
   favicon: string;
   linkId: number;
+  createdAt: string;
+  updatedAt: string;
   tags: {
     id: number;
     name: string;
@@ -45,6 +47,7 @@ export interface BookmarksState {
     sort?: string;
   };
   errors?: BookmarksError[];
+  bookmarkCreationLoading?: boolean;
   bookmarkCreationSuccess?: boolean;
 }
 
@@ -102,14 +105,15 @@ export interface VoteBookmarkReceive {
 export interface BookmarkCreateRequestAction {
   type: typeof BOOKMARK_CREATE_REQUEST;
   data: {
-    loading: true;
+    bookmarkCreationLoading: true;
   };
 }
 
 export interface BookmarkCreateSuccessAction {
   type: typeof BOOKMARK_CREATE_SUCCESS;
   data: {
-    loading: false;
+    bookmarkCreationLoading: false;
+    bookmarkCreationSuccess: true;
     bookmark: BookmarkState;
   };
 }
@@ -117,7 +121,8 @@ export interface BookmarkCreateSuccessAction {
 export interface BookmarkCreateFailureAction {
   type: typeof BOOKMARK_CREATE_FAILURE;
   data: {
-    loading: false;
+    bookmarkCreationLoading: false;
+    bookmarkCreationSuccess: false;
     error: BookmarksError;
   };
 }

@@ -3,6 +3,6 @@ import { BOOKMARK_CREATE_REQUEST, BookmarksActionsTypes } from 'Modules/Bookmark
 export const bookmarkCreateRequest = (): BookmarksActionsTypes => ({
   type: BOOKMARK_CREATE_REQUEST,
   data: {
-    loading: true,
+    bookmarkCreationLoading: true,
   },
 });

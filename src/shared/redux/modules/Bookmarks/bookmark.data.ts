@@ -13,6 +13,8 @@ export const mockBookmark: BookmarkState = {
       name: 'string',
     },
   ],
+  createdAt: 'string',
+  updatedAt: 'string',
   statistics: {
     absoluteVote: 0,
     timesVoted: 0,

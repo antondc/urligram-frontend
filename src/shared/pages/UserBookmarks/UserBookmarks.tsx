@@ -9,9 +9,10 @@ import Pagination from 'Components/Pagination';
 import Sidebar from 'Components/Sidebar';
 import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListUsers from 'Components/SidebarListUsers';
+import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
-import { Border, FadeInOut, Flex, H4, Hr, SortBy } from '@antoniodcorrea/components';
+import { Border, FadeInOut, Flex, H4, Hr, Select, SelectValue, SortBy } from '@antoniodcorrea/components';
 
 import './UserBookmarks.less';
 
@@ -31,6 +32,14 @@ interface Props {
   };
   totalItems: number;
   sort: string;
+  tagsSearchFormatted: {
+    label: string;
+    value: string;
+  }[];
+  onInputChange: (string: string) => void;
+  onChange: (string: SelectValue[]) => void;
+  allTags: TagState[];
+  currentQueryParamFilterTags: SelectValue[];
 }
 
 export const UserBookmarks: React.FC<Props> = ({
@@ -46,11 +55,29 @@ export const UserBookmarks: React.FC<Props> = ({
   totalItems,
   url,
   sort,
+  tagsSearchFormatted,
+  onInputChange,
+  onChange,
+  allTags,
+  currentQueryParamFilterTags,
 }) => (
   <div className="UserBookmarks">
     <Flex horizontal="between" vertical="top">
       <Main>
-        <Flex horizontal="right">
+        <Flex horizontal="between" noWrap>
+          <Select
+            className="Links-select"
+            label="Select tags"
+            value={currentQueryParamFilterTags}
+            defaultOptions={allTags.map((item) => ({ label: item.name, value: item.name }))}
+            options={[
+              ...tagsSearchFormatted,
+              ...allTags.map((item) => ({ label: item.name, value: item.name })),
+            ].filter((v, i, a) => a.findIndex((t) => t.value === v.value) === i)}
+            onInputChange={onInputChange}
+            onChange={onChange}
+            maxItems={4}
+          />
           <SortBy
             options={[
               { label: 'Rating', field: 'vote' },

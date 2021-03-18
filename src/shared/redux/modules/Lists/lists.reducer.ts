@@ -11,6 +11,10 @@ export const Lists = (state = initialState, action: ListsActionsTypes): ListsSta
       return Object.assign({}, state, {
         ...state,
         loading: true,
+        meta: {
+          ...state.meta,
+          sort: undefined,
+        },
       });
 
     case LOAD_LISTS_SUCCESS:

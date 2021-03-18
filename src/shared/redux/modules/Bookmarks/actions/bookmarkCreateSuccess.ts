@@ -3,7 +3,8 @@ import { BOOKMARK_CREATE_SUCCESS, BookmarksActionsTypes, BookmarkState } from 'M
 export const bookmarkCreateSuccess = (bookmark: BookmarkState): BookmarksActionsTypes => ({
   type: BOOKMARK_CREATE_SUCCESS,
   data: {
-    loading: false,
+    bookmarkCreationLoading: false,
+    bookmarkCreationSuccess: true,
     bookmark,
   },
 });

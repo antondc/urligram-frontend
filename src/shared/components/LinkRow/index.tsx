@@ -1,13 +1,15 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
+import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
 import { voteLink } from 'Modules/Links/actions/voteLink';
 import { LinkState } from 'Modules/Links/links.types';
 import { selectLinkById } from 'Modules/Links/selectors/selectLinkById';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUserId';
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
+import { LocaleFormattedDate } from 'Tools/utils/Date/localeFormattedDate';
 import { LinkRow as LinkRowUi } from './LinkRow';
 
 import './LinkRow.less';
@@ -23,12 +25,16 @@ interface Props {
 
 const LinkRow: React.FC<Props> = ({
   id,
-  link: { linkId, title, url, tags = [], favicon, statistics },
+  link: { linkId, title, url, tags = [], favicon, statistics, createdAt },
   userId,
   isLogged,
   switchLoginModal,
   voteLink,
 }) => {
+  const currentLanguageSlug = useSelector(selectCurrentLanguageSlug);
+  const date = new LocaleFormattedDate(createdAt, currentLanguageSlug);
+  const formattedDate = date.getLocaleFormattedDate();
+
   const onVote = (vote) => {
     if (!isLogged) return switchLoginModal(true);
 
@@ -45,6 +51,7 @@ const LinkRow: React.FC<Props> = ({
       favicon={favicon}
       statistics={statistics}
       onVote={onVote}
+      createdAt={formattedDate}
     />
   );
 };

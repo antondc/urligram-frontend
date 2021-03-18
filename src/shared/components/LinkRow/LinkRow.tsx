@@ -2,7 +2,7 @@ import React from 'react';
 
 import A from 'Components/A';
 import { LinkState } from 'Modules/Links/links.types';
-import { Border, Circle, Edit, Private, Span, Tag, Vote } from '@antoniodcorrea/components';
+import { Border, Circle, Edit, Hr, Private, Span, Tag, Vote } from '@antoniodcorrea/components';
 
 import './LinkRow.less';
 
@@ -10,7 +10,16 @@ interface LinkRow extends LinkState {
   onVote: (vote: boolean | null) => void;
 }
 
-export const LinkRow: React.FC<Partial<LinkRow>> = ({ id, title, url, tags = [], statistics, onVote, favicon }) => (
+export const LinkRow: React.FC<Partial<LinkRow>> = ({
+  id,
+  title,
+  url,
+  tags = [],
+  statistics,
+  onVote,
+  favicon,
+  createdAt,
+}) => (
   <Border grow className="LinkRow" data-test-id="LinkRow" key={id}>
     <div className="LinkRow-left">
       <div className="LinkRow-icons">
@@ -64,7 +73,11 @@ export const LinkRow: React.FC<Partial<LinkRow>> = ({ id, title, url, tags = [],
           </Span>
           124
         </Span>
+        <br />
       </div>
+      <Span size="micro" className="LinkRow-stat">
+        {createdAt}
+      </Span>
     </div>
   </Border>
 );

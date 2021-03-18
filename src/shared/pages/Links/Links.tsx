@@ -29,7 +29,6 @@ interface Props {
   };
   totalItems: number;
   sort: string;
-  tagsSearch: any;
   tagsSearchFormatted: {
     label: string;
     value: string;

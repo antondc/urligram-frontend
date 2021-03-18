@@ -5,17 +5,28 @@ import { LinkState, ReceiveLinkItem, ReceiveLinksResponse } from 'Modules/Links/
 import { QueryStringWrapper } from 'Root/src/shared/services/QueryStringWrapper';
 import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
+import { RootState } from '../../rootType';
 import { receiveLinks } from './receiveLinks';
 import { requestLinks } from './requestLinks';
 
-export const loadLinks = (size?: number): ThunkAction<any, any, any, Action> => async (dispatch?: Dispatch) => {
+export const loadLinks = (size?: number): ThunkAction<any, any, any, Action> => async (
+  dispatch: Dispatch,
+  getState: () => RootState
+) => {
   try {
+    const { Links: linksState } = getState();
+    const linksActiveSort = linksState?.meta?.sort;
+
     dispatch(requestLinks());
 
-    const queryStringUpdated = !!size
-      ? QueryStringWrapper.upsertSearchParams(window.location.search, { page: { size } })
-      : QueryStringWrapper.extractQueryString(window.location.search);
-    
+    const queryStringParsed = QueryStringWrapper.parseQueryString(window.location.search);
+    const queryParams = {
+      page: { size },
+      sort: linksActiveSort,
+      ...queryStringParsed,
+    };
+    const queryStringUpdated = QueryStringWrapper.stringifyQueryParams(queryParams);
+
     const {
       meta: { totalItems, sort },
       data,

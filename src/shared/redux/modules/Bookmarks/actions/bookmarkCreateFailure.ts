@@ -3,7 +3,8 @@ import { BOOKMARK_CREATE_FAILURE, BookmarksActionsTypes, BookmarksError } from '
 export const bookmarkCreateFailure = (error: BookmarksError): BookmarksActionsTypes => ({
   type: BOOKMARK_CREATE_FAILURE,
   data: {
-    loading: false,
+    bookmarkCreationLoading: false,
+    bookmarkCreationSuccess: false,
     error,
   },
 });

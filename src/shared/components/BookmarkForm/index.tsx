@@ -1,14 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import A from 'Components/A';
 import { bookmarkCreate } from 'Modules/Bookmarks/actions/bookmarkCreate';
 import { bookmarkCreateReset } from 'Modules/Bookmarks/actions/bookmarkCreateReset';
+import { loadBookmarks } from 'Modules/Bookmarks/actions/loadBookmarks';
+import { loadBookmarksByUserId } from 'Modules/Bookmarks/actions/loadBookmarksByUserId';
 import { selectBookmarkCreationSuccess } from 'Modules/Bookmarks/selectors/selectBookmarkCreationSuccess';
 import { selectBookmarksErrorLast } from 'Modules/Bookmarks/selectors/selectBookmarksErrorLast';
+import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
+import { loadLinks } from 'Modules/Links/actions/loadLinks';
+import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUserId';
 import { tagsSearchLoad } from 'Modules/Tags/actions/tagsSearchLoad';
 import { selectTagsAll } from 'Modules/Tags/selectors/selectAllTags';
 import { selectTagsSearch } from 'Modules/Tags/selectors/selectTagsSearch';
-import { DEFAULT_PROTOCOL } from 'Root/src/shared/constants';
+import { DEFAULT_PROTOCOL, DELAY_SLOW_MS } from 'Root/src/shared/constants';
+import history from 'Services/History';
 import { testStringIsValidUrl } from 'Tools/utils/url/testStringIsValidUrl';
 import { testUrlHasProtocol } from 'Tools/utils/url/testUrlHasProtocol';
 import { urlRemoveLeadingCharacters } from 'Tools/utils/url/urlRemoveLeadingCharacters';
@@ -21,14 +28,19 @@ export type TagValue = {
   value: string;
 };
 
-const BookmarkForm: React.FC = () => {
+interface Props {
+  onSubmitted: () => void;
+}
+
+const BookmarkForm: React.FC<Props> = ({ onSubmitted }) => {
   const dispatch = useDispatch();
   const bookmarkCreationSuccess = useSelector(selectBookmarkCreationSuccess);
   const bookmarkError = useSelector(selectBookmarksErrorLast);
   const allTags = useSelector(selectTagsAll);
   const tagsSearch = useSelector(selectTagsSearch);
   const tagsSearchFormatted = tagsSearch?.map((item) => ({ label: item.name, value: item.name })) || [];
-
+  const currentLanguageSlug = useSelector(selectCurrentLanguageSlug);
+  const sessionId = useSelector(selectSessionUserId);
   const [titleValue, setTitleValue] = useState<string>(undefined);
   const [titleError, setTitleError] = useState<string>(undefined);
   const [isPrivateValue, setIsPrivateValue] = useState<boolean>(true);
@@ -36,6 +48,7 @@ const BookmarkForm: React.FC = () => {
   const [urlValue, setUrlValue] = useState<string>(undefined);
   const [urlError, setUrlError] = useState<string>(undefined);
   const [tagsValue, setTagsValue] = useState<TagValue[]>([]);
+  const [submitInProcess, setSubmitInProcess] = useState<boolean>(undefined);
   const [submitSuccess, setSubmitSuccess] = useState<boolean>(undefined);
   const [submitError, setSubmitError] = useState<string>(undefined);
 
@@ -107,6 +120,7 @@ const BookmarkForm: React.FC = () => {
   };
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    setSubmitInProcess(true);
     e.preventDefault();
     const transformedTags = tagsValue.map((item) => ({ tag: item.value }));
 
@@ -121,7 +135,21 @@ const BookmarkForm: React.FC = () => {
   };
 
   useEffect(() => {
-    if (!!bookmarkCreationSuccess) setSubmitSuccess(true);
+    if (!!bookmarkCreationSuccess) {
+      setSubmitInProcess(false);
+      setSubmitSuccess(true);
+      dispatch(loadBookmarks());
+      dispatch(loadBookmarksByUserId(sessionId));
+      dispatch(loadLinks());
+
+      setTimeout(() => {
+        history.push(`/${currentLanguageSlug}/users/${sessionId}/bookmarks`);
+        onSubmitted();
+      }, DELAY_SLOW_MS);
+
+      return;
+    }
+    setSubmitInProcess(false);
   }, [bookmarkCreationSuccess]);
 
   useEffect(() => {
@@ -167,6 +195,7 @@ const BookmarkForm: React.FC = () => {
       onChangeTagsInput={onChangeTagsInput}
       onSubmit={onSubmit}
       submitDisabled={submitDisabled}
+      submitInProcess={submitInProcess}
       submitSuccess={submitSuccess}
       submitError={submitError}
     />

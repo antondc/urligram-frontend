@@ -9,14 +9,20 @@ import { selectBookmarksTotalItems } from 'Modules/Bookmarks/selectors/selectBoo
 import { RootState } from 'Modules/rootType';
 import { selectCurrentFullUrl } from 'Modules/Routes/selectors/selectCurrentFullUrl';
 import { selectCurrentRouteParamUserId } from 'Modules/Routes/selectors/selectCurrentRouteParamUserId';
+import { selectCurrentRouteQueryParamFilter } from 'Modules/Routes/selectors/selectCurrentRouteQueryParamFilter';
 import { selectCurrentRouteQueryParamPage } from 'Modules/Routes/selectors/selectCurrentRouteQueryParamPage';
 import { sectionsFollowersUsersLoad } from 'Modules/Sections/actions/sectionsFollowersUsersLoad';
 import { sectionsFollowingUsersLoad } from 'Modules/Sections/actions/sectionsFollowingUsersLoad';
 import { selectFollowersUsers } from 'Modules/Sections/selectors/selectFollowersUsers';
 import { selectFollowingUsers } from 'Modules/Sections/selectors/selectFollowingUsers';
 import { selectFollowingUsersLoading } from 'Modules/Sections/selectors/selectFollowingUsersLoading';
+import { tagsSearchLoad } from 'Modules/Tags/actions/tagsSearchLoad';
+import { selectTagsAll } from 'Modules/Tags/selectors/selectAllTags';
+import { selectTagsSearch } from 'Modules/Tags/selectors/selectTagsSearch';
 import { userLoad } from 'Modules/Users/actions/userLoad';
 import { selectUserById } from 'Modules/Users/selectors/selectUserById';
+import history from 'Services/History';
+import { URLWrapper } from 'Services/URLWrapper';
 import { UserBookmarks as UserBookmarksUi } from './UserBookmarks';
 
 const UserBookmarks: React.FC = () => {
@@ -33,6 +39,15 @@ const UserBookmarks: React.FC = () => {
   const totalItems = useSelector(selectBookmarksTotalItems);
   const url = useSelector(selectCurrentFullUrl);
   const sort = useSelector(selectBookmarksMetaSort);
+  const tagsSearch = useSelector(selectTagsSearch);
+  const tagsSearchFormatted = tagsSearch?.map((item) => ({ label: item.name, value: item.name })) || [];
+  const allTags = useSelector(selectTagsAll);
+  const currentQueryParamFilter = useSelector(selectCurrentRouteQueryParamFilter);
+  const currentQueryParamFilterTags =
+    currentQueryParamFilter?.tags?.map((item) => ({
+      label: item.toString(),
+      value: item,
+    })) || [];
 
   useEffect(() => {
     dispatch(userLoad(userId));
@@ -44,6 +59,26 @@ const UserBookmarks: React.FC = () => {
   useEffect(() => {
     dispatch(loadBookmarksByUserId(userId));
   }, [page]);
+
+  useEffect(() => {
+    dispatch(loadBookmarksByUserId(userId));
+
+    dispatch(tagsSearchLoad());
+  }, [url]);
+
+  const onInputChange = (string: string) => {
+    !!string && dispatch(tagsSearchLoad(string));
+  };
+
+  const onChange = (values) => {
+    const tags: string[] = values?.map((item) => item.value);
+    const myUrl = new URLWrapper(window.document.location.href);
+
+    myUrl.upsertSearchParams({ filter: { tags } });
+    const redirectPath = myUrl.getPathAndSearch();
+
+    history.push(redirectPath);
+  };
 
   return (
     <UserBookmarksUi
@@ -59,6 +94,11 @@ const UserBookmarks: React.FC = () => {
       totalItems={totalItems}
       url={url}
       sort={sort}
+      tagsSearchFormatted={tagsSearchFormatted}
+      allTags={allTags}
+      onInputChange={onInputChange}
+      currentQueryParamFilterTags={currentQueryParamFilterTags}
+      onChange={onChange}
     />
   );
 };

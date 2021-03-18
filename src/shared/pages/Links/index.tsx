@@ -82,7 +82,6 @@ const Links: React.FC = () => {
       page={page}
       sort={sort}
       tagsSearchFormatted={tagsSearchFormatted}
-      tagsSearch={tagsSearch}
       allTags={allTags}
       onInputChange={onInputChange}
       currentQueryParamFilterTags={currentQueryParamFilterTags}

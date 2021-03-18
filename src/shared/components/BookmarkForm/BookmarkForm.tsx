@@ -23,6 +23,7 @@ interface Props {
   onChangeTagsInput: (string: string) => void;
   onChangeTags: (string: SelectValue[]) => void;
   submitDisabled: boolean;
+  submitInProcess: boolean;
   submitSuccess: boolean;
   submitError: string;
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
@@ -45,6 +46,7 @@ export const BookmarkForm: React.FC<Props> = ({
   onChangeTagsInput,
   onChangeTags,
   submitDisabled,
+  submitInProcess,
   submitSuccess,
   submitError,
   onSubmit,
@@ -116,6 +118,7 @@ export const BookmarkForm: React.FC<Props> = ({
       error={!!submitError}
       success={submitSuccess}
       disabled={submitDisabled}
+      loading={submitInProcess}
       grow
     />
     <Hr size="nano" spacer />

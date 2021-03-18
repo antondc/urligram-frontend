@@ -1,13 +1,15 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
 import { selectBookmarksById } from 'Modules/Bookmarks/selectors/selectBookmarkById';
+import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
 import { voteLink } from 'Modules/Links/actions/voteLink';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUserId';
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
+import { LocaleFormattedDate } from 'Tools/utils/Date/localeFormattedDate';
 import { BookmarkRow as BookmarkRowUi } from './BookmarkRow';
 
 import './BookmarkRow.less';
@@ -23,12 +25,16 @@ interface Props {
 
 const BookmarkRow: React.FC<Props> = ({
   id,
-  bookmark: { linkId, title, url, tags = [], img, statistics } = {},
+  bookmark: { linkId, title, url, tags = [], img, statistics, favicon, createdAt } = {},
   voteLink,
   isLogged,
   userId,
   switchLoginModal,
 }) => {
+  const currentLanguageSlug = useSelector(selectCurrentLanguageSlug);
+  const date = new LocaleFormattedDate(createdAt, currentLanguageSlug);
+  const formattedDate = date.getLocaleFormattedDate();
+
   const onVote = (vote) => {
     if (!isLogged) return switchLoginModal(false);
 
@@ -38,10 +44,13 @@ const BookmarkRow: React.FC<Props> = ({
   return (
     <BookmarkRowUi
       id={id}
+      userId={userId}
       linkId={linkId}
       title={title}
       url={url}
+      createdAt={formattedDate}
       tags={tags}
+      favicon={favicon}
       img={img}
       statistics={statistics}
       onVote={onVote}

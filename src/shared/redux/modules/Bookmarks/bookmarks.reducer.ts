@@ -22,6 +22,10 @@ export const Bookmarks = (state = initialState, action: BookmarksActionsTypes): 
       return Object.assign({}, state, {
         ...state,
         loading: true,
+        meta: {
+          ...state.meta,
+          sort: undefined,
+        },
       });
 
     case LOAD_BOOKMARKS_SUCCESS:
@@ -59,23 +63,18 @@ export const Bookmarks = (state = initialState, action: BookmarksActionsTypes): 
     case BOOKMARK_CREATE_SUCCESS:
       return Object.assign({}, state, {
         ...state,
-        byKey: {
-          ...state.byKey,
-          [action.data?.bookmark?.id]: action?.data?.bookmark,
-        },
-        bookmarkCreationSuccess: true,
-        loading: action?.data?.loading,
+        ...action.data,
       });
     case BOOKMARK_CREATE_FAILURE:
       return Object.assign({}, state, {
         ...state,
         ...action.data,
-        bookmarkCreationSuccess: false,
         errors: [...state.errors, action?.data?.error],
       });
     case BOOKMARK_CREATE_RESET:
       return Object.assign({}, state, {
         ...state,
+        bookmarkCreationLoading: undefined,
         bookmarkCreationSuccess: undefined,
       });
 

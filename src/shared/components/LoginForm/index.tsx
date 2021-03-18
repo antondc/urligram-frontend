@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { logIn } from 'Modules/Session/actions/logIn';
 import { selectSessionErrorLast } from 'Modules/Session/selectors/selectSessionErrorLast';
+import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import { validateEmailAddress } from 'Tools/utils/string/validateEmailAddress';
-import { selectSessionLoggedIn } from '../../redux/modules/Session/selectors/selectSessionLoggedIn';
 import { LoginForm as LoginFormUi } from './LoginForm';
 
 import './LoginForm.less';

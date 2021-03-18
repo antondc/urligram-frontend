@@ -24,7 +24,7 @@ const BookmarkModal: React.FC = () => {
           <H3>Add bookmark</H3>
         </Flex>
         <Hr spacer size="small" />
-        <BookmarkForm />
+        <BookmarkForm onSubmitted={closeModal} />
         <Hr spacer size="big" />
       </Border>
     </BaseModal>
