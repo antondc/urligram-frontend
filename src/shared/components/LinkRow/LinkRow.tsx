@@ -34,13 +34,12 @@ export const LinkRow: React.FC<Partial<LinkRow>> = ({ id, title, url, tags = [],
       <Span bold className="LinkRow-title">
         {title}
       </Span>
-      <A href={url} targetBlank>
-        <Span className="LinkRow-url" size="small">
+      <Span className="LinkRow-url" size="small">
+        <A href={url} targetBlank>
           {url}
-        </Span>
-      </A>
+        </A>
+      </Span>
     </div>
-
     <div className="LinkRow-center">
       {tags?.map((item) => (
         <A className="LinkRow-tag" href={`/links?filter[tags][]=${item.name}`} key={item.id} styled={false} frontend>
@@ -53,18 +52,18 @@ export const LinkRow: React.FC<Partial<LinkRow>> = ({ id, title, url, tags = [],
     <div className="LinkRow-right">
       <Vote className="LinkRow-vote" vote={statistics?.vote} changeVote={onVote} loading={statistics?.loading} />
       <div className="LinkRow-stats">
-        <div className="LinkRow-stat">
+        <Span size="micro" className="LinkRow-stat">
           <Span size="small" className="LinkRow-statIcon">
             ▲
           </Span>
           32
-        </div>
-        <div className="LinkRow-stat">
+        </Span>
+        <Span size="micro" className="LinkRow-stat">
           <Span size="small" className="LinkRow-statIcon">
             ⚭
           </Span>
           124
-        </div>
+        </Span>
       </div>
     </div>
   </Border>

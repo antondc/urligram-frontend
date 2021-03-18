@@ -3,28 +3,38 @@
 @c: .ListRow;
 
 @{c} {
-  display: flex;
+  display: grid;
+  flex-wrap: wrap;
   justify-content: space-between;
-  padding: 8px 18px 7px 14px;
+  grid-template-columns: 1fr 1fr 0fr;
+  column-gap: 10px;
+  padding: 8px 13px 7px;
+
+  @media @br-mobile {
+    grid-template-columns: 1fr 0fr;
+    padding: 8px 13px 3px;
+  }
 
   &-left {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    margin-right: 10px;
+    overflow: hidden;
   }
 
   &-icons {
     display: flex;
-    margin-bottom: 2px;
+    padding-left: 2px;
   }
 
   &-icon {
-    margin-right: 7px;
+    margin-right: 5px;
   }
 
-  &-iconTriangle {
-    transform: rotate(90deg);
+  &-favicon {
+    height: 10px;
+    width: 10px;
+    margin-right: 5px;
   }
 
   &-iconHover {
@@ -32,54 +42,98 @@
   }
 
   &-title {
-    margin-left: -2px;
-    line-height: @fs-normal;
+    line-height: 19px;
+    white-space: nowrap;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    text-overflow: ellipsis;
+
+    .hideScrollbar;
     .hoverTransition(0.8);
   }
 
   &-description {
-    margin-top: -3px;
+    position: relative;
+    font-size: @fs-small;
     line-height: 12px;
-  }
-
-  &-center {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    align-content: space-between;
-    flex: 1;
-    height: 41px;
-    margin-right: 6px;
-    padding-top: 5px;
+    white-space: nowrap;
+    overflow: hidden;
     overflow-x: scroll;
     overflow-y: hidden;
+    text-overflow: ellipsis;
 
     .hideScrollbar;
   }
 
+  &-center {
+    display: flex;
+    align-items: flex-end;
+    overflow-x: scroll;
+    overflow-y: visible;
+
+    .hideScrollbar;
+
+    @media @br-mobile {
+      grid-column: auto / span 2;
+      margin: 0;
+      padding: 5px 0 2px;
+      order: 1;
+    }
+  }
+
   &-tag {
-    margin-bottom: 4px;
-    margin-right: 4px;
+    margin-right: 5px;
   }
 
   &-right {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 5px 0;
+    align-items: flex-end;
+    padding: 1px 5px 0;
+
+    @media @br-mobile {
+      justify-content: flex-end;
+      padding: 0;
+    }
+  }
+
+  &-image {
+    height: 100%;
+    width: 110px;
+    margin-right: 20px;
+    object-fit: cover;
+    object-position: center;
+    border: 2px solid @c-base;
+  }
+
+  &-vote {
+    //
+  }
+
+  &-stats {
+    display: flex;
     font-family: @ff-din;
     font-size: @fs-small;
-    line-height: @fh-micro;
+    line-height: @fh-small;
   }
 
   &-stat {
     display: flex;
     justify-content: flex-end;
     align-items: baseline;
+    margin-left: 5px;
+    line-height: 7px;
     text-align: end;
+    white-space: nowrap;
+
+    @media @br-mobile {
+      line-height: 12px;
+    }
   }
 
   &-statIcon {
-    //
+    margin-right: 1px;
+    line-height: 0;
   }
 }

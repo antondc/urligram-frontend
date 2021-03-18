@@ -1,7 +1,8 @@
 import React from 'react';
 
+import A from 'Components/A';
 import { ListState } from 'Modules/Lists/lists.types';
-import { A, Border, Edit, Private, Span, Tag, Triangle } from '@antoniodcorrea/components';
+import { Border, Edit, Private, Span, Tag, Triangle } from '@antoniodcorrea/components';
 
 import './ListRow.less';
 
@@ -38,11 +39,11 @@ export const ListRow: React.FC<ListRow> = ({
           }}
         />
       </div>
-      <A href={`/lists/${id}`} frontend>
-        <Span size="normal" bold className="ListRow-title">
+      <Span size="normal" bold className="ListRow-title">
+        <A href={`/lists/${id}`} frontend styled={false}>
           {name}
-        </Span>
-      </A>
+        </A>
+      </Span>
       <Span className="ListRow-description" size="small">
         {description}
       </Span>
@@ -57,17 +58,19 @@ export const ListRow: React.FC<ListRow> = ({
       ))}
     </div>
     <div className="ListRow-right">
-      <div className="ListRow-stat">
+      <Span size="micro" className="ListRow-stat">
         <Span size="nano" className="ListRow-statIcon">
-          ▲ 32
-        </Span>
-      </div>
-      <div className="ListRow-stat">
+          ▲
+        </Span>{' '}
+        234
+      </Span>
+      <Span size="micro" className="ListRow-stat">
         <Span size="nano" className="ListRow-statIcon">
-          ⚭ 124
-        </Span>
-      </div>
-      <Span size="nano" className="ListRow-stat">
+          ⚭
+        </Span>{' '}
+        92
+      </Span>
+      <Span size="micro" className="ListRow-stat">
         14 07 2021
       </Span>
     </div>

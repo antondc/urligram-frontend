@@ -101,13 +101,9 @@ const knobs = {
 };
 
 export const Default: React.ReactNode = () => (
-  <FadeInOut valueToUpdate={knobs.skeleton()} speed="fastest">
+  <FadeInOut valueToUpdate={knobs.skeleton()} speed="fastest" appear>
     {!knobs.skeleton() ? (
       <>
-        <ListRow {...props} />
-        <Hr size="small" spacer />
-        <ListRow {...props} />
-        <Hr size="small" spacer />
         <ListRow {...props} />
         <Hr size="small" spacer />
         <ListRow {...props} />
@@ -120,10 +116,6 @@ export const Default: React.ReactNode = () => (
       </>
     ) : (
       <>
-        <ListRowSkeleton {...props} />
-        <Hr size="small" spacer />
-        <ListRowSkeleton {...props} />
-        <Hr size="small" spacer />
         <ListRowSkeleton {...props} />
         <Hr size="small" spacer />
         <ListRowSkeleton {...props} />

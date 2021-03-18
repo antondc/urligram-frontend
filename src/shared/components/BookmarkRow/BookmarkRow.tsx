@@ -10,10 +10,19 @@ interface BookmarkRow extends BookmarkState {
   onVote: (vote: boolean | null) => void;
 }
 
-export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({ id, title, url, tags = [], statistics, onVote }) => (
+export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
+  id,
+  title,
+  url,
+  tags = [],
+  statistics,
+  onVote,
+  favicon,
+}) => (
   <Border grow className="BookmarkRow" data-test-id="BookmarkRow" key={id}>
     <div className="BookmarkRow-left">
       <div className="BookmarkRow-icons">
+        <img className="BookmarkRow-favicon" src={favicon} />
         <Bookmark size="micro" className="BookmarkRow-icon" />
         <Private
           size="micro"
@@ -33,11 +42,11 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({ id, title, url, ta
       <Span bold className="BookmarkRow-title">
         {title}
       </Span>
-      <A href={url} targetBlank>
-        <Span className="BookmarkRow-url" size="small">
+      <Span className="BookmarkRow-url" size="small">
+        <A href={url} targetBlank>
           {url}
-        </Span>
-      </A>
+        </A>
+      </Span>
     </div>
     <div className="BookmarkRow-center">
       {tags?.map((item) => (
