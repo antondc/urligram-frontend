@@ -8,16 +8,16 @@ import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFr
 import { loadTagsReceive } from './loadTagsReceive';
 import { tagsAllRequest } from './tagsAllRequest';
 
-export const tagsSearchLoad = (searchString?: string): ThunkAction<any, any, any, Action> => async (
+export const tagsSearchLoad = (tagStringFragment?: string): ThunkAction<any, any, any, Action> => async (
   dispatch: Dispatch
 ) => {
   try {
     dispatch(tagsAllRequest());
 
-    const queryString = !!searchString
-      ? QueryStringWrapper.stringifyQueryParams({ filter: { tags: [searchString] } })
+    const queryString = !!tagStringFragment
+      ? QueryStringWrapper.stringifyQueryParams({ filter: { tags: [tagStringFragment] } })
       : '';
-    
+
     const { data }: ReceiveTagsResponse = await HttpClient.get(`tags?${queryString}`);
 
     const tagsByKey = {

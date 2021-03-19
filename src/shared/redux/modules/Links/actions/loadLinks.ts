@@ -19,13 +19,10 @@ export const loadLinks = (size?: number): ThunkAction<any, any, any, Action> => 
 
     dispatch(requestLinks());
 
-    const queryStringParsed = QueryStringWrapper.parseQueryString(window.location.search);
-    const queryParams = {
+    const queryStringUpdated = QueryStringWrapper.addSearchParamsNoReplace(window.location.search, {
       page: { size },
       sort: linksActiveSort,
-      ...queryStringParsed,
-    };
-    const queryStringUpdated = QueryStringWrapper.stringifyQueryParams(queryParams);
+    });
 
     const {
       meta: { totalItems, sort },

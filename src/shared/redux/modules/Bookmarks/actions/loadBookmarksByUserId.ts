@@ -18,13 +18,10 @@ export const loadBookmarksByUserId = (userId: string, size?: number): ThunkActio
     const activeSort = bookmarksState?.meta?.sort;
     dispatch(requestBookmarks());
 
-    const queryStringParsed = QueryStringWrapper.parseQueryString(window.location.search);
-    const queryParams = {
+    const queryStringUpdated = QueryStringWrapper.addSearchParamsNoReplace(window.location.search, {
       page: { size },
       sort: activeSort,
-      ...queryStringParsed,
-    };
-    const queryStringUpdated = QueryStringWrapper.stringifyQueryParams(queryParams);
+    });
 
     const apiEndpoint = `/users/${userId}/bookmarks?${queryStringUpdated}`;
 

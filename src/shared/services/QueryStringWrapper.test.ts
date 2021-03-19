@@ -94,7 +94,7 @@ describe('QueryStringWrapper', () => {
 
   test('it should extract a query string', () => {
     const url = '/example.com/one';
-    const result = undefined;
+    const result = '';
 
     const queryString = QueryStringWrapper.extractQueryString(url);
 
@@ -184,5 +184,23 @@ describe('QueryStringWrapper', () => {
     const queryStringUpdated = QueryStringWrapper.upsertSearchParams(queryString, { b: { c: [312] } });
 
     expect(queryStringUpdated).toEqual('a[]=1&a[]=2&b[c][]=312&b[d]=1');
+  });
+
+  test('it should add params without overwriting them', () => {
+    const urlString =
+      'https://dev.linking.me/en/links?field1=value1&field2[field21][]=value211&field2[field21][]=value212';
+    const queryString = QueryStringWrapper.extractQueryString(urlString);
+    const newParams = {
+      field1: 'new-value',
+      field4: {
+        field41: ['value41', 'value42'],
+      },
+    };
+
+    const queryStringUpdated = QueryStringWrapper.addSearchParamsNoReplace(queryString, newParams);
+
+    expect(queryStringUpdated).toEqual(
+      'field1=value1&field4[field41][]=value41&field4[field41][]=value42&field2[field21][]=value211&field2[field21][]=value212'
+    );
   });
 });
