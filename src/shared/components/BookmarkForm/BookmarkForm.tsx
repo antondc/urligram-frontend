@@ -1,7 +1,18 @@
 import React from 'react';
 
 import { TagState } from 'Modules/Tags/tags.types';
-import { Button, FadeInOut, Hr, Input, Select, SelectValue, Span, Switch } from '@antoniodcorrea/components';
+import {
+  Button,
+  Fade,
+  FadeInOut,
+  Hr,
+  Input,
+  Select,
+  SelectValue,
+  Span,
+  SpinnerCircle,
+  Switch,
+} from '@antoniodcorrea/components';
 import { TagValue } from '.';
 
 import './BookmarkForm.less';
@@ -13,6 +24,8 @@ interface Props {
   isPrivateValue: boolean;
   isPrivateError: string;
   onChangeIsPrivate: (e: React.FormEvent<HTMLInputElement>) => void;
+  urlSubmitted: boolean;
+  urlLoading: boolean;
   urlValue: string;
   urlError: string;
   onChangeUrl: (e: React.FormEvent<HTMLInputElement>) => void;
@@ -36,6 +49,8 @@ export const BookmarkForm: React.FC<Props> = ({
   isPrivateValue,
   isPrivateError,
   onChangeIsPrivate,
+  urlSubmitted,
+  urlLoading,
   urlValue,
   urlError,
   onBlurUrl,
@@ -53,23 +68,6 @@ export const BookmarkForm: React.FC<Props> = ({
 }) => (
   <form className="BookmarkForm">
     <Input
-      name="title"
-      type="text"
-      label="Title"
-      onChange={onChangeTitle}
-      onBlur={onChangeTitle}
-      value={titleValue}
-      error={titleError}
-      grow
-    />
-    <Hr size="nano" spacer />
-    <FadeInOut valueToUpdate={!!titleError} speed="fast">
-      <Span className="BookmarkForm-error" size="small">
-        {titleError}
-      </Span>
-    </FadeInOut>
-    <Hr spacer />
-    <Input
       name="url"
       type="text"
       label="Url"
@@ -86,46 +84,74 @@ export const BookmarkForm: React.FC<Props> = ({
       </Span>
     </FadeInOut>
     <Hr spacer />
-    <Select
-      className="BookmarkForm-tags"
-      label="Select tags"
-      value={tagsValue}
-      defaultOptions={[]}
-      options={[...tagsSearchFormatted, ...allTags.map((item) => ({ label: item.name, value: item.name }))].filter(
-        (v, i, a) => a.findIndex((t) => t.value === v.value) === i
+    <FadeInOut valueToUpdate={urlSubmitted}>
+      {urlSubmitted && (
+        <>
+          <Input
+            name="title"
+            type="text"
+            label="Title"
+            onChange={onChangeTitle}
+            onBlur={onChangeTitle}
+            value={titleValue}
+            error={titleError}
+            grow
+          />
+          <Hr size="nano" spacer />
+          <FadeInOut valueToUpdate={!!titleError} speed="fast">
+            <Span className="BookmarkForm-error" size="small">
+              {titleError}
+            </Span>
+          </FadeInOut>
+          <Hr spacer />
+          <Select
+            className="BookmarkForm-tags"
+            label="Select tags"
+            value={tagsValue}
+            defaultOptions={[]}
+            options={[
+              ...tagsSearchFormatted,
+              ...allTags.map((item) => ({ label: item.name, value: item.name })),
+            ].filter((v, i, a) => a.findIndex((t) => t.value === v.value) === i)}
+            onInputChange={onChangeTagsInput}
+            onChange={onChangeTags}
+            maxItems={4}
+            grow
+          />
+          <Hr spacer />
+          <Span size="small" className="BookmarkForm-private">
+            Is Private
+          </Span>
+          <Hr size="micro" spacer />
+          <Switch name="isPrivate" checked={isPrivateValue} onChange={onChangeIsPrivate} />
+          <Hr size="nano" spacer />
+          <FadeInOut valueToUpdate={!!isPrivateError} speed="fast">
+            <Span className="BookmarkForm-error" size="small">
+              {isPrivateError}
+            </Span>
+          </FadeInOut>
+          <Hr spacer />
+          <Hr size="big" spacer />
+          <Button
+            text="Enter"
+            type="submit"
+            onClick={onSubmit}
+            error={!!submitError}
+            success={submitSuccess}
+            disabled={submitDisabled}
+            grow
+          />
+          <Hr size="nano" spacer />
+          <FadeInOut valueToUpdate={!!submitError} speed="fast">
+            <Span className="BookmarkForm-error" size="small">
+              {submitError}
+            </Span>
+          </FadeInOut>
+        </>
       )}
-      onInputChange={onChangeTagsInput}
-      onChange={onChangeTags}
-      maxItems={4}
-      isCreatable
-    />
-    <Hr spacer />
-    <Span className="BookmarkForm-private">Private</Span>
-    <Hr size="micro" spacer />
-    <Switch name="isPrivate" checked={isPrivateValue} onChange={onChangeIsPrivate} />
-    <Hr size="nano" spacer />
-    <FadeInOut valueToUpdate={!!isPrivateError} speed="fast">
-      <Span className="BookmarkForm-error" size="small">
-        {isPrivateError}
-      </Span>
     </FadeInOut>
-    <Hr spacer />
-    <Hr size="big" spacer />
-    <Button
-      text="Enter"
-      type="submit"
-      onClick={onSubmit}
-      error={!!submitError}
-      success={submitSuccess}
-      disabled={submitDisabled}
-      loading={submitInProcess}
-      grow
-    />
-    <Hr size="nano" spacer />
-    <FadeInOut valueToUpdate={!!submitError} speed="fast">
-      <Span className="BookmarkForm-error" size="small">
-        {submitError}
-      </Span>
-    </FadeInOut>
+    <Fade mounted={urlLoading || submitInProcess} position="absolute">
+      <SpinnerCircle background />
+    </Fade>
   </form>
 );

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import A from 'Components/A';
 import { bookmarkCreate } from 'Modules/Bookmarks/actions/bookmarkCreate';
 import { bookmarkCreateReset } from 'Modules/Bookmarks/actions/bookmarkCreateReset';
 import { loadBookmarks } from 'Modules/Bookmarks/actions/loadBookmarks';
@@ -19,6 +18,7 @@ import history from 'Services/History';
 import { testStringIsValidUrl } from 'Tools/utils/url/testStringIsValidUrl';
 import { testUrlHasProtocol } from 'Tools/utils/url/testUrlHasProtocol';
 import { urlRemoveLeadingCharacters } from 'Tools/utils/url/urlRemoveLeadingCharacters';
+import HttpClient from '../../services/HttpClient';
 import { BookmarkForm as BookmarkFormUi } from './BookmarkForm';
 
 import './BookmarkForm.less';
@@ -41,12 +41,14 @@ const BookmarkForm: React.FC<Props> = ({ onSubmitted }) => {
   const tagsSearchFormatted = tagsSearch?.map((item) => ({ label: item.name, value: item.name })) || [];
   const currentLanguageSlug = useSelector(selectCurrentLanguageSlug);
   const sessionId = useSelector(selectSessionUserId);
-  const [titleValue, setTitleValue] = useState<string>(undefined);
-  const [titleError, setTitleError] = useState<string>(undefined);
-  const [isPrivateValue, setIsPrivateValue] = useState<boolean>(true);
-  const [isPrivateError, setIsPrivateError] = useState<string>(undefined);
+  const [urlSubmitted, setUrlSubmitted] = useState<boolean>(false);
+  const [urlLoading, setUrlLoading] = useState<boolean>(false);
   const [urlValue, setUrlValue] = useState<string>(undefined);
   const [urlError, setUrlError] = useState<string>(undefined);
+  const [titleValue, setTitleValue] = useState<string>(undefined);
+  const [titleError, setTitleError] = useState<string>(undefined);
+  const [isPrivateValue, setIsPrivateValue] = useState<boolean>(false);
+  const [isPrivateError, setIsPrivateError] = useState<string>(undefined);
   const [tagsValue, setTagsValue] = useState<TagValue[]>([]);
   const [submitInProcess, setSubmitInProcess] = useState<boolean>(undefined);
   const [submitSuccess, setSubmitSuccess] = useState<boolean>(undefined);
@@ -54,34 +56,22 @@ const BookmarkForm: React.FC<Props> = ({ onSubmitted }) => {
 
   const submitDisabled = !titleValue || !!titleError;
 
-  const onChangeTitle = (e: React.FormEvent<HTMLInputElement>) => {
-    const { value } = e.currentTarget;
-    setTitleValue(value);
-    setSubmitSuccess(undefined);
-    setTitleError(undefined);
-    setSubmitError(undefined);
-  };
-
-  const onChangeIsPrivate = (e: React.FormEvent<HTMLInputElement>) => {
-    const { checked } = e.currentTarget;
-
-    setIsPrivateValue(checked);
-    setSubmitSuccess(undefined);
-    setIsPrivateError(undefined);
-    setSubmitError(undefined);
-  };
-
   const onChangeUrl = (e: React.FormEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
     const result = urlRemoveLeadingCharacters(value);
 
     setUrlValue(result);
-    setSubmitSuccess(undefined);
     setUrlError(undefined);
+    setUrlSubmitted(false);
+    setTitleValue(undefined);
+    setTitleError(undefined);
+    setTagsValue([]);
+    setIsPrivateValue(false);
+    setSubmitSuccess(undefined);
     setSubmitError(undefined);
   };
 
-  const onBlurUrl = (e: React.FormEvent<HTMLInputElement>) => {
+  const onBlurUrl = async (e: React.FormEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
 
     if (!value.length) {
@@ -103,8 +93,41 @@ const BookmarkForm: React.FC<Props> = ({ onSubmitted }) => {
       return;
     }
 
-    setUrlValue(valueWithProtocol);
-    setUrlError(undefined);
+    try {
+      setUrlLoading(true);
+      const encodedUrl = encodeURIComponent(valueWithProtocol);
+
+      const {
+        data: { attributes: urlInfo },
+      } = await HttpClient.get(`links/url?url=${encodedUrl}`);
+
+      if (urlInfo?.title) setTitleValue(urlInfo?.title);
+
+      setUrlLoading(false);
+      setUrlSubmitted(true);
+      setUrlValue(valueWithProtocol);
+      setUrlError(undefined);
+      setSubmitError(undefined);
+    } catch (err) {
+      setUrlLoading(false);
+      setUrlError(err?.message);
+    }
+  };
+
+  const onChangeTitle = (e: React.FormEvent<HTMLInputElement>) => {
+    const { value } = e.currentTarget;
+    setTitleValue(value);
+    setSubmitSuccess(undefined);
+    setTitleError(undefined);
+    setSubmitError(undefined);
+  };
+
+  const onChangeIsPrivate = (e: React.FormEvent<HTMLInputElement>) => {
+    const { checked } = e.currentTarget;
+
+    setIsPrivateValue(checked);
+    setSubmitSuccess(undefined);
+    setIsPrivateError(undefined);
     setSubmitError(undefined);
   };
 
@@ -178,12 +201,14 @@ const BookmarkForm: React.FC<Props> = ({ onSubmitted }) => {
 
   return (
     <BookmarkFormUi
+      urlSubmitted={urlSubmitted}
       titleValue={titleValue}
       titleError={titleError}
       onChangeTitle={onChangeTitle}
       isPrivateValue={isPrivateValue}
       isPrivateError={isPrivateError}
       onChangeIsPrivate={onChangeIsPrivate}
+      urlLoading={urlLoading}
       urlValue={urlValue}
       urlError={urlError}
       onChangeUrl={onChangeUrl}
