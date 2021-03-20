@@ -1,10 +1,11 @@
 import { Action } from 'redux';
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 
+import { voteBookmarkReceive } from 'Modules/Bookmarks/actions/voteBookmarkReceive';
 import { voteBookmarkRequest } from 'Modules/Bookmarks/actions/voteBookmarkRequest';
 import { LinksState, ReceiveLinkResponse } from 'Modules/Links/links.types';
+import { RootState } from 'Modules/rootType';
 import HttpClient from 'Services/HttpClient';
-import { voteBookmarkReceive } from '../../Bookmarks/actions/voteBookmarkReceive';
 import { voteLinkReceive } from './voteLinkReceive';
 import { voteLinkRequest } from './voteLinkRequest';
 
@@ -16,7 +17,7 @@ interface Props {
 
 export const voteLink = ({ vote, linkId, userId }: Props): ThunkAction<any, any, any, Action> => async (
   dispatch: ThunkDispatch<any, void, Action>,
-  getState
+  getState: () => RootState
 ) => {
   const {
     Links: { byKey },

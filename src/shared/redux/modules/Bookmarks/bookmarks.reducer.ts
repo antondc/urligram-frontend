@@ -69,7 +69,7 @@ export const Bookmarks = (state = initialState, action: BookmarksActionsTypes): 
       return Object.assign({}, state, {
         ...state,
         ...action.data,
-        errors: [...state.errors, action?.data?.error],
+        errors: [...state?.errors, action?.data?.error],
       });
     case BOOKMARK_CREATE_RESET:
       return Object.assign({}, state, {

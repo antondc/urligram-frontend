@@ -2,12 +2,13 @@ import React from 'react';
 
 import A from 'Components/A';
 import { LinkState } from 'Modules/Links/links.types';
-import { Bookmark, Border, Circle, Edit, Flex, Hr, Private, Span, Tag, Vote } from '@antoniodcorrea/components';
+import { Bookmark, Border, Circle, Ellipsis, FadeInOut, Flex, Span, Tag, Vote } from '@antoniodcorrea/components';
 
 import './LinkRow.less';
 
 interface LinkRow extends LinkState {
   onVote: (vote: boolean | null) => void;
+  onBookmark: () => void;
   userBookmarked: boolean;
 }
 
@@ -19,9 +20,11 @@ export const LinkRow: React.FC<Partial<LinkRow>> = ({
   statistics,
   users,
   onVote,
+  onBookmark,
   favicon,
   createdAt,
   userBookmarked,
+  loading,
 }) => (
   <Border grow className="LinkRow" data-test-id="LinkRow" key={id}>
     <div className="LinkRow-left">
@@ -51,10 +54,19 @@ export const LinkRow: React.FC<Partial<LinkRow>> = ({
     </div>
     <div className="LinkRow-right">
       <Flex horizontal="right" growVertical={false} vertical="center">
-        <Bookmark
-          className={'LinkRow-bookmarkSign ' + (userBookmarked ? 'LinkRow-bookmarkSign--bookmarked' : '')}
-          size="small"
-        />
+        <FadeInOut valueToUpdate={loading} speed="fastest" appear>
+          <Flex horizontal="right" growVertical={false} vertical="center">
+            {loading ? (
+              <Ellipsis size="nano" />
+            ) : (
+              <Bookmark
+                className={'LinkRow-bookmarkSign ' + (!userBookmarked ? 'LinkRow-bookmarkSign--disabled' : '')}
+                size="small"
+                onClick={onBookmark}
+              />
+            )}
+          </Flex>
+        </FadeInOut>
         <Vote className="LinkRow-vote" vote={statistics?.vote} changeVote={onVote} loading={statistics?.loading} />
       </Flex>
       <div className="LinkRow-stats">
@@ -73,7 +85,7 @@ export const LinkRow: React.FC<Partial<LinkRow>> = ({
         <br />
       </div>
       <Span size="micro" className="LinkRow-stat">
-        {createdAt}
+        {createdAt || ''}
       </Span>
     </div>
   </Border>

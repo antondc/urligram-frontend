@@ -37,14 +37,14 @@ export const Session = (state = initialState, action: SessionActionsTypes): Sess
       return Object.assign(
         {},
         {
-          errors: [...state.errors],
+          errors: [...state?.errors],
         }
       );
     case LOG_FAILED:
       return Object.assign(
         {},
         {
-          errors: [...state.errors, action?.data?.error],
+          errors: [...state?.errors, action?.data?.error],
           loading: false,
         }
       );
@@ -63,7 +63,7 @@ export const Session = (state = initialState, action: SessionActionsTypes): Sess
       return Object.assign({}, state, {
         ...state,
         loading: false,
-        errors: [...state.errors, action?.data?.error],
+        errors: [...state?.errors, action?.data?.error],
       });
     case FORGOT_PASSWORD_REQUEST:
       return Object.assign({}, state, {
@@ -80,7 +80,7 @@ export const Session = (state = initialState, action: SessionActionsTypes): Sess
       return Object.assign({}, state, {
         ...state,
         loading: false,
-        errors: [...state.errors, action?.data?.error],
+        errors: [...state?.errors, action?.data?.error],
       });
     case RESET_PASSWORD_REQUEST:
       return Object.assign({}, state, {
@@ -97,7 +97,7 @@ export const Session = (state = initialState, action: SessionActionsTypes): Sess
       return Object.assign({}, state, {
         ...state,
         loading: false,
-        errors: [...state.errors, action?.data?.error],
+        errors: [...state?.errors, action?.data?.error],
       });
     default:
       return Object.assign({}, initialState, state);

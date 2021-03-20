@@ -2,10 +2,10 @@ import { Action, Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 
 import { BookmarkState, ReceiveBookmarkItem, ReceiveBookmarksResponse } from 'Modules/Bookmarks/bookmarks.types';
+import { RootState } from 'Modules/rootType';
 import { QueryStringWrapper } from 'Root/src/shared/services/QueryStringWrapper';
 import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
-import { RootState } from '../../rootType';
 import { receiveBookmarks } from './receiveBookmarks';
 import { requestBookmarks } from './requestBookmarks';
 
@@ -25,10 +25,7 @@ export const loadBookmarksByUserId = (userId: string, size?: number): ThunkActio
 
     const apiEndpoint = `/users/${userId}/bookmarks?${queryStringUpdated}`;
 
-    const {
-      meta: { totalItems, sort },
-      data,
-    }: ReceiveBookmarksResponse = await HttpClient.get(apiEndpoint);
+    const { meta, data = [] }: ReceiveBookmarksResponse = await HttpClient.get(apiEndpoint);
 
     const bookmarksByKey = {
       byKey: serializerFromArrayToByKey<ReceiveBookmarkItem, BookmarkState>({
@@ -37,8 +34,8 @@ export const loadBookmarksByUserId = (userId: string, size?: number): ThunkActio
       }),
       currentIds: data.map((item) => item.id),
       meta: {
-        totalItems,
-        sort,
+        totalItems: meta?.totalItems,
+        sort: meta?.sort,
       },
     };
     dispatch(receiveBookmarks(bookmarksByKey));

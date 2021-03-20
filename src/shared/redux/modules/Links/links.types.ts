@@ -2,6 +2,11 @@ export const LOAD_LINKS_STARTED = 'LOAD_LINKS_STARTED';
 export const LOAD_LINKS_SUCCESS = 'LOAD_LINKS_SUCCESS';
 export const LINK_VOTE_STARTED = 'LINK_VOTE_STARTED';
 export const VOTE_LINK_SUCCESS = 'VOTE_LINK_SUCCESS';
+export const LINK_LOAD_BY_ID_REQUEST = 'LINK_LOAD_BY_ID_REQUEST';
+export const LINK_LOAD_BY_ID_FAILURE = 'LINK_LOAD_BY_ID_FAILURE';
+export const LINK_LOAD_BY_ID_SUCCESS = 'LINK_LOAD_BY_ID_SUCCESS';
+
+export type LinkError = Error;
 
 export interface LinkState {
   id: number;
@@ -27,6 +32,7 @@ export interface LinkState {
     vote: boolean | null;
     loading: boolean | undefined;
   };
+  loading?: boolean;
 }
 
 export interface LinksState {
@@ -39,6 +45,7 @@ export interface LinksState {
     totalItems?: number;
     sort?: string;
   };
+  errors?: LinkError[];
 }
 
 interface RequestLinksAction {
@@ -81,4 +88,31 @@ export interface VoteLinkReceive {
   payload: LinksState;
 }
 
-export type LinksActionsTypes = RequestLinksAction | ReceiveLinksAction | VoteLinkRequest | VoteLinkReceive;
+export interface LinkLoadByIdRequest {
+  type: typeof LINK_LOAD_BY_ID_REQUEST;
+  data: {
+    linkId: number;
+  };
+}
+
+export interface LinkLoadByIdSuccess {
+  type: typeof LINK_LOAD_BY_ID_SUCCESS;
+  data: LinkState;
+}
+
+export interface LinkLoadByIdFailure {
+  type: typeof LINK_LOAD_BY_ID_FAILURE;
+  data: {
+    linkId: number;
+    error: LinkError;
+  };
+}
+
+export type LinksActionsTypes =
+  | RequestLinksAction
+  | ReceiveLinksAction
+  | VoteLinkRequest
+  | VoteLinkReceive
+  | LinkLoadByIdRequest
+  | LinkLoadByIdSuccess
+  | LinkLoadByIdFailure;

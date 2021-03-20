@@ -1,4 +1,7 @@
 import {
+  LINK_LOAD_BY_ID_FAILURE,
+  LINK_LOAD_BY_ID_REQUEST,
+  LINK_LOAD_BY_ID_SUCCESS,
   LINK_VOTE_STARTED,
   LinksActionsTypes,
   LinksState,
@@ -35,6 +38,35 @@ export const Links = (state = initialState, action: LinksActionsTypes): LinksSta
       return Object.assign({}, state, action.payload);
     case VOTE_LINK_SUCCESS:
       return Object.assign({}, state, action.payload);
+    case LINK_LOAD_BY_ID_REQUEST:
+      return Object.assign({}, state, {
+        byKey: {
+          ...state.byKey,
+          [action.data.linkId]: {
+            ...state.byKey[action.data.linkId],
+            loading: true,
+          },
+        },
+      });
+    case LINK_LOAD_BY_ID_SUCCESS:
+      return Object.assign({}, state, {
+        byKey: {
+          ...state.byKey,
+          [action.data.id]: action.data,
+        },
+      });
+    case LINK_LOAD_BY_ID_FAILURE:
+      return Object.assign({}, state, {
+        byKey: {
+          ...state.byKey,
+          [action.data.linkId]: {
+            ...state.byKey[action.data.linkId],
+            loading: undefined,
+          },
+        },
+        errors: [...state?.errors, action?.data?.error],
+      });
+
     default:
       return Object.assign({}, state);
   }

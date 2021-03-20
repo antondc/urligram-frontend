@@ -136,10 +136,20 @@
   }
 
   &-bookmarkSign {
-    fill: @c-disabled;
+    fill: @c-success;
+    transition: fill @td-fast @ease;
 
-    &--bookmarked {
-      fill: @c-success;
+    &:hover {
+      cursor: default;
+    }
+
+    &--disabled {
+      fill: @c-disabled;
+
+      &:hover {
+        fill: @c-success;
+        cursor: pointer;
+      }
     }
   }
 }

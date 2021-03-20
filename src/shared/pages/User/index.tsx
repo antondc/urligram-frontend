@@ -43,7 +43,7 @@ const User: React.FC<Props> = () => {
     dispatch(loadBookmarksByUserId(userId, 5));
     dispatch(sectionsFollowingUsersLoad(userId));
     dispatch(sectionsFollowersUsersLoad(userId));
-  }, [userId]);
+  }, []);
 
   return (
     <UserUi

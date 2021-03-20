@@ -66,9 +66,10 @@ export interface ReceiveBookmarksResponse {
 }
 
 export interface BookmarkCreateRequest {
-  title: string;
-  url: string;
-  isPrivate: boolean;
+  linkId?: number;
+  title?: string;
+  url?: string;
+  isPrivate?: boolean;
   tags?: {
     tag: string;
   }[];
