@@ -11,7 +11,7 @@ import SidebarListTags from 'Components/SidebarListTags';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
-import { Border, FadeInOut, Flex, H4, Hr } from '@antoniodcorrea/components';
+import { Border, FadeInOut, Flex, H4, Hr, SortBy } from '@antoniodcorrea/components';
 
 import './UserLists.less';
 
@@ -30,6 +30,7 @@ interface Props {
     offset: number;
   };
   totalItems: number;
+  sort: string;
 }
 
 export const UserLists: React.FC<Props> = ({
@@ -44,10 +45,23 @@ export const UserLists: React.FC<Props> = ({
   url,
   page,
   totalItems,
+  sort,
 }) => (
   <div className="UserLists">
     <Flex horizontal="between" vertical="top">
       <Main>
+        <Flex horizontal="right">
+          <SortBy
+            options={[
+              { label: 'Date', field: 'createdat' },
+              { label: 'Members', field: 'members' },
+              { label: 'Bookmarks', field: 'bookmarks' },
+            ]}
+            href={url}
+            currentSort={sort}
+          />
+        </Flex>
+        <Hr spacer size="small" />
         <Border grow>
           <H4>
             Lists of <A href={`/users/${userId}`}>@{user?.name}</A>

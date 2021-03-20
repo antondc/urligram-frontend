@@ -6,18 +6,13 @@ import { Border, Edit, Private, Span, Tag, Triangle } from '@antoniodcorrea/comp
 
 import './ListRow.less';
 
-interface ListRow extends Partial<ListState> {
-  sinceTranslation: string;
-}
-
-export const ListRow: React.FC<ListRow> = ({
+export const ListRow: React.FC<Partial<ListState>> = ({
   id,
   name,
   tags,
-  // bookmarksIds,
-  // membersIds,
-  // createdAt,
-  // sinceTranslation,
+  bookmarksIds,
+  membersIds,
+  createdAt,
   description,
 }) => (
   <Border grow className="ListRow" data-test-id="ListRow" key={id}>
@@ -68,10 +63,16 @@ export const ListRow: React.FC<ListRow> = ({
         <Span size="nano" className="ListRow-statIcon">
           ⚭
         </Span>{' '}
-        92
+        {bookmarksIds?.length || 0}
       </Span>
       <Span size="micro" className="ListRow-stat">
-        14 07 2021
+        <Span size="nano" className="ListRow-statIcon">
+          @
+        </Span>{' '}
+        {membersIds?.length || 0}
+      </Span>
+      <Span size="micro" className="ListRow-stat">
+        {createdAt}
       </Span>
     </div>
   </Border>

@@ -13,7 +13,7 @@ export const listsLoadByUserId = (userId: string): ThunkAction<any, any, any, Ac
     dispatch(loadListsRequest());
 
     const {
-      meta: { totalItems },
+      meta: { totalItems, sort },
       data: listsData,
     }: ReceiveListsResponse = await HttpClient.get(`/users/${userId}/lists${window.location.search}`);
 
@@ -25,6 +25,7 @@ export const listsLoadByUserId = (userId: string): ThunkAction<any, any, any, Ac
       currentIds: listsData.map((item) => item.id),
       meta: {
         totalItems,
+        sort,
       },
     };
 

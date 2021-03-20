@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { listsLoadByUserId } from 'Modules/Lists/actions/listsLoadByUserId';
+import { selectListsMetaSort } from 'Modules/Lists/selectors/selectListMetaSort';
 import { selectListsAllIds } from 'Modules/Lists/selectors/selectListsAllIds';
 import { selectListsLoading } from 'Modules/Lists/selectors/selectListsLoading';
 import { selectListsTotalItems } from 'Modules/Lists/selectors/selectListsTotalItems';
@@ -32,6 +33,7 @@ const UserLists: React.FC = () => {
   const page = useSelector(selectCurrentRouteQueryParamPage);
   const totalItems = useSelector(selectListsTotalItems);
   const url = useSelector(selectCurrentFullUrl);
+  const sort = useSelector(selectListsMetaSort);
 
   useEffect(() => {
     dispatch(userLoad(userId));
@@ -56,6 +58,7 @@ const UserLists: React.FC = () => {
       page={page}
       totalItems={totalItems}
       url={url}
+      sort={sort}
     />
   );
 };

@@ -2,8 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import { GlossaryState } from 'Modules/Languages/languages.types';
-import { selectCurrentGlossary } from 'Modules/Languages/selectors/selectCurrentGlossary';
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
 import { ListState } from 'Modules/Lists/lists.types';
 import { selectListsById } from 'Modules/Lists/selectors/selectListById';
@@ -18,14 +16,12 @@ interface Props {
   list: ListState;
   sessionId: string;
   slug?: string;
-  currentGlossary?: GlossaryState;
 }
 
 const ListRow: React.FC<Props> = ({
   id,
-  list: { name, image, tags, createdAt, updatedAt, bookmarksIds, description } = {},
+  list: { name, image, tags, createdAt, updatedAt, bookmarksIds, description, membersIds } = {},
   slug,
-  currentGlossary: { since },
 }) => {
   const date = new LocaleFormattedDate(createdAt, slug);
   const formattedDate = date.getLocaleFormattedDate();
@@ -37,8 +33,7 @@ const ListRow: React.FC<Props> = ({
       description={description}
       createdAt={formattedDate}
       updatedAt={updatedAt}
-      sinceTranslation={since}
-      membersIds={[]}
+      membersIds={membersIds}
       image={image}
       tags={tags}
       bookmarksIds={bookmarksIds}
@@ -48,7 +43,6 @@ const ListRow: React.FC<Props> = ({
 
 const mapStateToProps = createStructuredSelector({
   sessionId: selectSessionUserId,
-  currentGlossary: selectCurrentGlossary,
   slug: selectCurrentLanguageSlug,
   list: selectListsById,
 });
