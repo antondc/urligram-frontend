@@ -16,6 +16,7 @@ export interface LinkState {
     id: number;
     name: string;
   }[];
+  users: string[];
   createdAt: string;
   updatedAt: string;
   statistics: {

@@ -2,12 +2,13 @@ import React from 'react';
 
 import A from 'Components/A';
 import { LinkState } from 'Modules/Links/links.types';
-import { Border, Circle, Edit, Hr, Private, Span, Tag, Vote } from '@antoniodcorrea/components';
+import { Bookmark, Border, Circle, Edit, Flex, Hr, Private, Span, Tag, Vote } from '@antoniodcorrea/components';
 
 import './LinkRow.less';
 
 interface LinkRow extends LinkState {
   onVote: (vote: boolean | null) => void;
+  userBookmarked: boolean;
 }
 
 export const LinkRow: React.FC<Partial<LinkRow>> = ({
@@ -19,26 +20,13 @@ export const LinkRow: React.FC<Partial<LinkRow>> = ({
   onVote,
   favicon,
   createdAt,
+  userBookmarked,
 }) => (
   <Border grow className="LinkRow" data-test-id="LinkRow" key={id}>
     <div className="LinkRow-left">
       <div className="LinkRow-icons">
         <img className="LinkRow-favicon" src={favicon} />
         <Circle size="micro" className="LinkRow-icon" />
-        <Private
-          size="micro"
-          className="LinkRow-icon LinkRow-iconHover"
-          onClick={() => {
-            alert('Private');
-          }}
-        />
-        <Edit
-          size="micro"
-          className="LinkRow-icon LinkRow-iconHover"
-          onClick={() => {
-            alert('Edit');
-          }}
-        />
       </div>
       <Span bold className="LinkRow-title">
         <A href={url} targetBlank styled={false}>
@@ -61,7 +49,13 @@ export const LinkRow: React.FC<Partial<LinkRow>> = ({
       ))}
     </div>
     <div className="LinkRow-right">
-      <Vote className="LinkRow-vote" vote={statistics?.vote} changeVote={onVote} loading={statistics?.loading} />
+      <Flex horizontal="right" growVertical={false} vertical="center">
+        <Bookmark
+          className={'LinkRow-bookmarkSign ' + (userBookmarked ? 'LinkRow-bookmarkSign--bookmarked' : '')}
+          size="small"
+        />
+        <Vote className="LinkRow-vote" vote={statistics?.vote} changeVote={onVote} loading={statistics?.loading} />
+      </Flex>
       <div className="LinkRow-stats">
         <Span size="micro" className="LinkRow-stat">
           <Span size="small" className="LinkRow-statIcon">

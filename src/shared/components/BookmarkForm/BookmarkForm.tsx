@@ -2,9 +2,11 @@ import React from 'react';
 
 import { TagState } from 'Modules/Tags/tags.types';
 import {
+  ArrowRight,
   Button,
   Fade,
   FadeInOut,
+  Flex,
   Hr,
   Input,
   Select,
@@ -67,16 +69,21 @@ export const BookmarkForm: React.FC<Props> = ({
   onSubmit,
 }) => (
   <form className="BookmarkForm" onSubmit={onSubmit}>
-    <Input
-      name="url"
-      type="text"
-      label="Url"
-      onChange={onChangeUrl}
-      onBlur={onBlurUrl}
-      value={urlValue}
-      error={urlError}
-      grow
-    />
+    <Flex growVertical={false} horizontal="left" vertical="bottom" noWrap>
+      <Input
+        name="url"
+        type="text"
+        label="Url"
+        onChange={onChangeUrl}
+        onBlur={onBlurUrl}
+        value={urlValue}
+        error={urlError}
+        grow
+      />
+      <Fade mounted={urlValue && !urlError && !urlSubmitted}>
+        <ArrowRight className="BookmarkForm-urlArrow" size="small" />
+      </Fade>
+    </Flex>
     <Hr size="nano" spacer />
     <FadeInOut valueToUpdate={!!urlError} speed="fast">
       <Span className="BookmarkForm-error" size="small">

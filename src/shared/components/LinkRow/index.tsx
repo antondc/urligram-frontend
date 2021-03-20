@@ -25,7 +25,7 @@ interface Props {
 
 const LinkRow: React.FC<Props> = ({
   id,
-  link: { linkId, title, url, tags = [], favicon, statistics, createdAt },
+  link: { linkId, title, url, tags = [], favicon, statistics, createdAt, users },
   userId,
   isLogged,
   switchLoginModal,
@@ -34,6 +34,8 @@ const LinkRow: React.FC<Props> = ({
   const currentLanguageSlug = useSelector(selectCurrentLanguageSlug);
   const date = new LocaleFormattedDate(createdAt, currentLanguageSlug);
   const formattedDate = date.getLocaleFormattedDate();
+  const sessionId = useSelector(selectSessionUserId);
+  const userBookmarked = users.includes(sessionId);
 
   const onVote = (vote) => {
     if (!isLogged) return switchLoginModal(true);
@@ -52,6 +54,7 @@ const LinkRow: React.FC<Props> = ({
       statistics={statistics}
       onVote={onVote}
       createdAt={formattedDate}
+      userBookmarked={userBookmarked}
     />
   );
 };

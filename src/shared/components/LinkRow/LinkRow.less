@@ -4,11 +4,12 @@
 
 @{c} {
   display: grid;
+  position: relative;
   flex-wrap: wrap;
   justify-content: space-between;
   grid-template-columns: 3fr 1fr 0fr;
-  column-gap: 10px;
   padding: 8px 13px 7px;
+  column-gap: 10px;
 
   @media @br-mobile {
     grid-template-columns: 1fr 0fr;
@@ -131,5 +132,14 @@
   &-statIcon {
     margin-right: 1px;
     line-height: 0;
+    color: @c-traslucid--hardest;
+  }
+
+  &-bookmarkSign {
+    fill: @c-disabled;
+
+    &--bookmarked {
+      fill: @c-success;
+    }
   }
 }
