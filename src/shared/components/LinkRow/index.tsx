@@ -52,6 +52,7 @@ const LinkRow: React.FC<Props> = ({
       tags={tags}
       favicon={favicon}
       statistics={statistics}
+      users={users}
       onVote={onVote}
       createdAt={formattedDate}
       userBookmarked={userBookmarked}

@@ -71,19 +71,17 @@ const BookmarkForm: React.FC<Props> = ({ onSubmitted }) => {
     setSubmitError(undefined);
   };
 
-  const onBlurUrl = async (e: React.FormEvent<HTMLInputElement>) => {
-    const { value } = e.currentTarget;
-
-    if (!value.length) {
+  const onBlurUrl = async () => {
+    if (!urlValue) {
       setUrlError('Url is mandatory');
 
       return;
     }
 
     setSubmitSuccess(undefined);
-    const urlHasProtocol = testUrlHasProtocol(value);
+    const urlHasProtocol = testUrlHasProtocol(urlValue);
 
-    const valueWithProtocol = urlHasProtocol ? value : DEFAULT_PROTOCOL + value;
+    const valueWithProtocol = urlHasProtocol ? urlValue : DEFAULT_PROTOCOL + urlValue;
 
     const isValidUrl = testStringIsValidUrl(valueWithProtocol);
 
@@ -145,8 +143,12 @@ const BookmarkForm: React.FC<Props> = ({ onSubmitted }) => {
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!urlSubmitted) return;
-    
+    if (!urlSubmitted) {
+      onBlurUrl();
+
+      return;
+    }
+
     setSubmitInProcess(true);
 
     const transformedTags = tagsValue.map((item) => ({ tag: item.value }));

@@ -17,6 +17,7 @@ export const LinkRow: React.FC<Partial<LinkRow>> = ({
   url,
   tags = [],
   statistics,
+  users,
   onVote,
   favicon,
   createdAt,
@@ -61,13 +62,13 @@ export const LinkRow: React.FC<Partial<LinkRow>> = ({
           <Span size="small" className="LinkRow-statIcon">
             ▲
           </Span>
-          32
+          {statistics?.absoluteVote || 0}
         </Span>
         <Span size="micro" className="LinkRow-stat">
           <Span size="small" className="LinkRow-statIcon">
             ⚭
           </Span>
-          124
+          {users.length || 0}
         </Span>
         <br />
       </div>
