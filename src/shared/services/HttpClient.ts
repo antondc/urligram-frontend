@@ -1,6 +1,11 @@
 import axios, { AxiosInstance } from 'axios';
 import https from 'https';
-import { stringify } from 'qs';
+
+import { QueryStringWrapper } from './QueryStringWrapper';
+
+interface Options {
+  timeout: number;
+}
 
 export const DEFAULT_ASYNC_ERROR = {
   message: 'An error ocurred',
@@ -8,10 +13,11 @@ export const DEFAULT_ASYNC_ERROR = {
   category: 'Error',
 };
 
-class HttpClient {
-  private static instance: AxiosInstance;
+export class HttpClient {
+  private static staticInstance: AxiosInstance;
+  public publicInstance: AxiosInstance;
 
-  constructor() {
+  constructor(options?: Options) {
     const axiosInstance = axios.create({
       baseURL: process.env.ENDPOINT_API,
       httpsAgent: new https.Agent({
@@ -19,6 +25,7 @@ class HttpClient {
       }),
     });
 
+    axiosInstance.defaults.timeout = options?.timeout;
     axiosInstance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
     axiosInstance.defaults.paramsSerializer = this.paramsSerializer;
     axiosInstance.defaults.withCredentials = true;
@@ -28,16 +35,17 @@ class HttpClient {
       (err) => Promise.reject(err?.response?.data?.error || DEFAULT_ASYNC_ERROR)
     );
 
-    HttpClient.instance = axiosInstance;
+    HttpClient.staticInstance = axiosInstance;
+    this.publicInstance = axiosInstance;
   }
 
-  public static getInstance = () => {
-    if (!HttpClient.instance) new HttpClient();
+  public static getInstance = (): AxiosInstance => {
+    if (!HttpClient.staticInstance) new HttpClient();
 
-    return HttpClient.instance;
+    return HttpClient.staticInstance;
   };
 
-  private paramsSerializer = (params) => stringify(params, { arrayFormat: 'comma' });
+  private paramsSerializer = (params) => QueryStringWrapper.stringifyQueryParams(params);
 }
 
 export default HttpClient.getInstance();
