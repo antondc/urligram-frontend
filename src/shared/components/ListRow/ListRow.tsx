@@ -2,7 +2,7 @@ import React from 'react';
 
 import A from 'Components/A';
 import { ListState } from 'Modules/Lists/lists.types';
-import { Border, Edit, Private, Span, Tag, Triangle } from '@antoniodcorrea/components';
+import { Border, Edit, Flex, Private, Span, Tag, Triangle } from '@antoniodcorrea/components';
 
 import './ListRow.less';
 
@@ -18,21 +18,25 @@ export const ListRow: React.FC<Partial<ListState>> = ({
   <Border grow className="ListRow" data-test-id="ListRow" key={id}>
     <div className="ListRow-left">
       <div className="ListRow-icons">
-        <Triangle filled size="nano" className="ListRow-icon ListRow-iconTriangle" />
-        <Private
-          size="micro"
-          className="ListRow-icon ListRow-iconHover"
-          onClick={() => {
-            alert('Private');
-          }}
-        />
-        <Edit
-          size="micro"
-          className="ListRow-icon ListRow-iconHover"
-          onClick={() => {
-            alert('Edit');
-          }}
-        />
+        <Flex vertical="center" horizontal="left">
+          <Span className="ListRow-icon" size="small" bold>
+            ≡
+          </Span>
+          <Private
+            size="micro"
+            className="ListRow-icon ListRow-iconHover"
+            onClick={() => {
+              alert('Private');
+            }}
+          />
+          <Edit
+            size="micro"
+            className="ListRow-icon ListRow-iconHover"
+            onClick={() => {
+              alert('Edit');
+            }}
+          />
+        </Flex>
       </div>
       <Span size="normal" bold className="ListRow-title">
         <A href={`/lists/${id}`} frontend styled={false}>
@@ -53,12 +57,6 @@ export const ListRow: React.FC<Partial<ListState>> = ({
       ))}
     </div>
     <div className="ListRow-right">
-      <Span size="micro" className="ListRow-stat">
-        <Span size="nano" className="ListRow-statIcon">
-          ▲
-        </Span>{' '}
-        234
-      </Span>
       <Span size="micro" className="ListRow-stat">
         <Span size="nano" className="ListRow-statIcon">
           ⚭
