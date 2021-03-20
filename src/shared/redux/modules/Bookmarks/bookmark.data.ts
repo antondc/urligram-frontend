@@ -2,6 +2,7 @@ import { BookmarkState } from './bookmarks.types';
 
 export const mockBookmark: BookmarkState = {
   id: 0,
+  userId: 'string',
   title: 'string',
   url: 'string',
   img: 'string',
@@ -13,6 +14,8 @@ export const mockBookmark: BookmarkState = {
       name: 'string',
     },
   ],
+  users: ['string'],
+  bookmarkingLoading: false,
   createdAt: 'string',
   updatedAt: 'string',
   statistics: {

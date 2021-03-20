@@ -22,6 +22,7 @@ export interface LinkStatistics {
 
 export interface BookmarkState {
   id: number;
+  userId: string;
   title: string;
   url: string;
   img: string;
@@ -29,11 +30,13 @@ export interface BookmarkState {
   linkId: number;
   createdAt: string;
   updatedAt: string;
+  users: string[];
   tags: {
     id: number;
     name: string;
   }[];
   statistics: LinkStatistics;
+  bookmarkingLoading: boolean;
 }
 
 export interface BookmarksState {
@@ -66,6 +69,7 @@ export interface ReceiveBookmarksResponse {
 }
 
 export interface BookmarkCreateRequest {
+  bookmarkId?: number;
   linkId?: number;
   title?: string;
   url?: string;
@@ -106,15 +110,14 @@ export interface VoteBookmarkReceive {
 export interface BookmarkCreateRequestAction {
   type: typeof BOOKMARK_CREATE_REQUEST;
   data: {
-    bookmarkCreationLoading: true;
+    bookmarkId?: number;
   };
 }
 
 export interface BookmarkCreateSuccessAction {
   type: typeof BOOKMARK_CREATE_SUCCESS;
   data: {
-    bookmarkCreationLoading: false;
-    bookmarkCreationSuccess: true;
+    originalBookmarkId: number;
     bookmark: BookmarkState;
   };
 }
@@ -124,6 +127,7 @@ export interface BookmarkCreateFailureAction {
   data: {
     bookmarkCreationLoading: false;
     bookmarkCreationSuccess: false;
+    bookmarkId: number;
     error: BookmarksError;
   };
 }

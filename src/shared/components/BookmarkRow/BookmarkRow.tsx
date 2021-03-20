@@ -2,13 +2,26 @@ import React from 'react';
 
 import A from 'Components/A';
 import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
-import { Bookmark, Border, Edit, Private, Span, Tag, Vote } from '@antoniodcorrea/components';
+import {
+  Bookmark,
+  Border,
+  Edit,
+  Ellipsis,
+  FadeInOut,
+  Flex,
+  Private,
+  Span,
+  Tag,
+  Vote,
+} from '@antoniodcorrea/components';
 
 import './BookmarkRow.less';
 
 interface BookmarkRow extends BookmarkState {
   userId: string;
+  userBookmarked: boolean;
   onVote: (vote: boolean | null) => void;
+  onBookmark: () => void;
 }
 
 export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
@@ -18,7 +31,10 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
   url,
   tags = [],
   statistics,
+  bookmarkingLoading,
+  userBookmarked,
   onVote,
+  onBookmark,
   favicon,
   createdAt,
 }) => (
@@ -69,19 +85,34 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
       ))}
     </div>
     <div className="BookmarkRow-right">
-      <Vote className="BookmarkRow-vote" vote={statistics?.vote} changeVote={onVote} loading={statistics?.loading} />
+      <Flex horizontal="right" growVertical={false} vertical="center">
+        <FadeInOut valueToUpdate={bookmarkingLoading} speed="fastest" appear>
+          <Flex horizontal="right" growVertical={false} vertical="center">
+            {bookmarkingLoading ? (
+              <Ellipsis size="nano" />
+            ) : (
+              <Bookmark
+                className={'LinkRow-bookmarkSign ' + (!userBookmarked ? 'LinkRow-bookmarkSign--disabled' : '')}
+                size="small"
+                onClick={onBookmark}
+              />
+            )}
+          </Flex>
+        </FadeInOut>
+        <Vote className="LinkRow-vote" vote={statistics?.vote} changeVote={onVote} loading={statistics?.loading} />
+      </Flex>
       <div className="BookmarkRow-stats">
         <div className="BookmarkRow-stat">
           <Span size="small" className="BookmarkRow-statIcon">
             ▲
           </Span>
-          {statistics?.absoluteVote}
+          {statistics?.absoluteVote || 0}
         </div>
         <div className="BookmarkRow-stat">
           <Span size="small" className="BookmarkRow-statIcon">
             ⚭
           </Span>
-          {statistics?.timesBookmarked}
+          {statistics?.timesBookmarked || 0}
         </div>
       </div>
       <Span size="micro" className="BookmarkRow-stat">

@@ -1,11 +1,11 @@
 import React from 'react';
-import { connect, useSelector } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
+import { bookmarkCreate } from 'Modules/Bookmarks/actions/bookmarkCreate';
 import { selectBookmarksById } from 'Modules/Bookmarks/selectors/selectBookmarkById';
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
 import { voteLink } from 'Modules/Links/actions/voteLink';
+import { RootState } from 'Modules/rootType';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUserId';
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
@@ -16,35 +16,38 @@ import './BookmarkRow.less';
 
 interface Props {
   id: number;
-  bookmark: BookmarkState;
-  voteLink: ({ vote: boolean, linkId: number, userId: string }) => void;
-  userId: string;
-  isLogged: boolean;
-  switchLoginModal: (mount: false) => void;
 }
 
-const BookmarkRow: React.FC<Props> = ({
-  id,
-  bookmark: { linkId, title, url, tags = [], img, statistics, favicon, createdAt } = {},
-  voteLink,
-  isLogged,
-  userId,
-  switchLoginModal,
-}) => {
+const BookmarkRow: React.FC<Props> = ({ id }) => {
+  const dispatch = useDispatch();
   const currentLanguageSlug = useSelector(selectCurrentLanguageSlug);
+  const isLogged = useSelector(selectSessionLoggedIn);
+  const sessionId = useSelector(selectSessionUserId);
+  const bookmark = useSelector((state: RootState) => selectBookmarksById(state, { id }));
+  const { linkId, title, url, tags = [], img, statistics, favicon, createdAt, bookmarkingLoading, users } = bookmark;
   const date = new LocaleFormattedDate(createdAt, currentLanguageSlug);
   const formattedDate = date.getLocaleFormattedDate();
+  const userBookmarked = users.includes(sessionId);
+  const tagsByName = tags.map((item) => ({ tag: item.name }));
 
   const onVote = (vote) => {
-    if (!isLogged) return switchLoginModal(false);
+    if (!isLogged) return dispatch(switchLoginModal(false));
 
-    voteLink({ vote, linkId, userId });
+    dispatch(voteLink({ vote, linkId, userId: sessionId }));
+  };
+
+  const onBookmark = () => {
+    if (!userBookmarked) {
+      dispatch(bookmarkCreate({ title, url, isPrivate: false, tags: tagsByName, bookmarkId: id }));
+    } else {
+      //
+    }
   };
 
   return (
     <BookmarkRowUi
       id={id}
-      userId={userId}
+      userId={sessionId}
       linkId={linkId}
       title={title}
       url={url}
@@ -53,18 +56,12 @@ const BookmarkRow: React.FC<Props> = ({
       favicon={favicon}
       img={img}
       statistics={statistics}
+      bookmarkingLoading={bookmarkingLoading}
+      userBookmarked={userBookmarked}
       onVote={onVote}
+      onBookmark={onBookmark}
     />
   );
 };
 
-const mapStateToProps = createStructuredSelector({
-  userId: selectSessionUserId,
-  isLogged: selectSessionLoggedIn,
-  bookmark: selectBookmarksById,
-});
-
-export default connect(mapStateToProps, {
-  voteLink,
-  switchLoginModal,
-})(BookmarkRow);
+export default BookmarkRow;

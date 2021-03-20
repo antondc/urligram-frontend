@@ -1,13 +1,11 @@
 import React from 'react';
-import { connect, useDispatch, useSelector } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { bookmarkCreate } from 'Modules/Bookmarks/actions/bookmarkCreate';
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
-import { linkLoadByIdRequest } from 'Modules/Links/actions/linkLoadByIdRequest';
 import { voteLink } from 'Modules/Links/actions/voteLink';
-import { LinkState } from 'Modules/Links/links.types';
 import { selectLinkById } from 'Modules/Links/selectors/selectLinkById';
+import { RootState } from 'Modules/rootType';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUserId';
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
@@ -18,33 +16,24 @@ import './LinkRow.less';
 
 interface Props {
   id: number;
-  link: LinkState;
-  voteLink: ({ vote: boolean, linkId: number, userId: string }) => void;
-  userId: string;
-  isLogged: boolean;
-  switchLoginModal: (mount: boolean) => void;
 }
 
-const LinkRow: React.FC<Props> = ({
-  id,
-  link: { linkId, title, url, tags = [], favicon, statistics, createdAt, users, loading },
-  userId,
-  isLogged,
-  switchLoginModal,
-  voteLink,
-}) => {
+const LinkRow: React.FC<Props> = ({ id }) => {
   const dispatch = useDispatch();
   const currentLanguageSlug = useSelector(selectCurrentLanguageSlug);
+  const link = useSelector((state: RootState) => selectLinkById(state, { id }));
+  const { linkId, title, url, tags = [], favicon, statistics, createdAt, users, loading } = link;
   const date = new LocaleFormattedDate(createdAt, currentLanguageSlug);
   const formattedDate = date.getLocaleFormattedDate();
+  const isLogged = useSelector(selectSessionLoggedIn);
   const sessionId = useSelector(selectSessionUserId);
   const userBookmarked = users.includes(sessionId);
   const tagsByName = tags.map((item) => ({ tag: item.name }));
 
   const onVote = (vote) => {
-    if (!isLogged) return switchLoginModal(true);
+    if (!isLogged) return dispatch(switchLoginModal(true));
 
-    voteLink({ vote, linkId: id, userId });
+    dispatch(voteLink({ vote, linkId: id, userId: sessionId }));
   };
 
   const onBookmark = () => {
@@ -74,13 +63,4 @@ const LinkRow: React.FC<Props> = ({
   );
 };
 
-const mapStateToProps = createStructuredSelector({
-  userId: selectSessionUserId,
-  isLogged: selectSessionLoggedIn,
-  link: selectLinkById,
-});
-
-export default connect(mapStateToProps, {
-  voteLink,
-  switchLoginModal,
-})(LinkRow);
+export default LinkRow;

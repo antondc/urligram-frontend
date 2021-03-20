@@ -58,18 +58,41 @@ export const Bookmarks = (state = initialState, action: BookmarksActionsTypes): 
     case BOOKMARK_CREATE_REQUEST:
       return Object.assign({}, state, {
         ...state,
-        ...action.data,
+        byKey: {
+          ...state.byKey,
+          [action.data.bookmarkId]: {
+            ...state.byKey[action.data.bookmarkId],
+            bookmarkingLoading: true,
+          },
+        },
+        bookmarkCreationLoading: true,
       });
     case BOOKMARK_CREATE_SUCCESS:
       return Object.assign({}, state, {
         ...state,
-        ...action.data,
+        byKey: {
+          ...state.byKey,
+          [action.data.originalBookmarkId]: {
+            ...state.byKey[action.data.originalBookmarkId],
+            users: action.data.bookmark.users,
+            bookmarkingLoading: undefined,
+          },
+        },
+        bookmarkCreationLoading: false,
+        bookmarkCreationSuccess: true,
       });
     case BOOKMARK_CREATE_FAILURE:
       return Object.assign({}, state, {
         ...state,
         ...action.data,
-        errors: [...state?.errors, action?.data?.error],
+        byKey: {
+          ...state.byKey,
+          [action.data.bookmarkId]: {
+            ...state.byKey[action.data.bookmarkId],
+            bookmarkingLoading: undefined,
+          },
+        },
+        errors: [...state.errors, action?.data?.error],
       });
     case BOOKMARK_CREATE_RESET:
       return Object.assign({}, state, {

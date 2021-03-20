@@ -10,6 +10,7 @@ import HttpClient from 'Services/HttpClient';
 import { bookmarkCreateRequest } from './bookmarkCreateRequest';
 
 export const bookmarkCreate = ({
+  bookmarkId,
   linkId,
   title,
   url,
@@ -18,21 +19,20 @@ export const bookmarkCreate = ({
 }: BookmarkCreateRequest): ThunkAction<any, any, any, Action> => async (dispatch: Dispatch<any>) => {
   try {
     if (linkId) dispatch(linkLoadByIdRequest(linkId));
+    dispatch(bookmarkCreateRequest(bookmarkId));
 
-    dispatch(bookmarkCreateRequest());
     const { data: bookmarkData }: BookmarkCreateResponse = await HttpClient.post('/users/me/bookmarks', {
       title,
       url,
       isPrivate,
       tags,
     });
-
-    await dispatch(bookmarkCreateSuccess(bookmarkData.attributes));
+    await dispatch(bookmarkCreateSuccess({ originalBookmarkId: bookmarkId, bookmark: bookmarkData.attributes }));
     await dispatch(linkLoadById(bookmarkData?.attributes?.linkId));
-  } catch (err) {
-    await dispatch(bookmarkCreateFailure(err));
+  } catch (error) {
+    await dispatch(bookmarkCreateFailure({ error, bookmarkId }));
 
-    throw new Error(err);
+    throw new Error(error);
   }
 
   return;
