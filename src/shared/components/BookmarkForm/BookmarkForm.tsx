@@ -66,7 +66,7 @@ export const BookmarkForm: React.FC<Props> = ({
   submitError,
   onSubmit,
 }) => (
-  <form className="BookmarkForm">
+  <form className="BookmarkForm" onSubmit={onSubmit}>
     <Input
       name="url"
       type="text"

@@ -143,8 +143,12 @@ const BookmarkForm: React.FC<Props> = ({ onSubmitted }) => {
   };
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    setSubmitInProcess(true);
     e.preventDefault();
+
+    if (!urlSubmitted) return;
+    
+    setSubmitInProcess(true);
+
     const transformedTags = tagsValue.map((item) => ({ tag: item.value }));
 
     const data = {

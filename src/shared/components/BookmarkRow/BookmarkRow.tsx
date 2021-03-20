@@ -43,7 +43,9 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
         />
       </div>
       <Span bold className="BookmarkRow-title">
-        {title}
+        <A href={url} targetBlank styled={false}>
+          {title}
+        </A>
       </Span>
       <Span className="BookmarkRow-url" size="small">
         <A href={url} targetBlank>

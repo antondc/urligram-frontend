@@ -41,7 +41,9 @@ export const LinkRow: React.FC<Partial<LinkRow>> = ({
         />
       </div>
       <Span bold className="LinkRow-title">
-        {title}
+        <A href={url} targetBlank styled={false}>
+          {title}
+        </A>
       </Span>
       <Span className="LinkRow-url" size="small">
         <A href={url} targetBlank>
