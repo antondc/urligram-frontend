@@ -54,7 +54,7 @@ const Pagination: React.FC<Props> = ({
                 href={item.path}
                 key={index}
                 styled
-                disabled={item.current}
+                disabled={item?.current}
                 frontend
                 onClick={scrollToTop}
               >

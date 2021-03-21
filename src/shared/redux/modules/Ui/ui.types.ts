@@ -7,6 +7,7 @@ export const SWITCH_SIGN_UP_MODAL = 'SWITCH_SIGN_UP_MODAL';
 export const SWITCH_FORGOT_PASSWORD_MODAL = 'SWITCH_FORGOT_PASSWORD_MODAL';
 export const SWITCH_RESET_PASSWORD_MODAL = 'SWITCH_RESET_PASSWORD_MODAL';
 export const SWITCH_BOOKMARK_MODAL = 'SWITCH_BOOKMARK_MODAL';
+export const SWITCH_LIST_MODAL = 'SWITCH_LIST_MODAL';
 
 export type UiBaseModal = {
   type: 'modal' | 'popup';
@@ -23,6 +24,7 @@ export interface UiState {
   forgotPasswordModal: UiBaseModal;
   resetPasswordModal: UiBaseModal;
   bookmarkModal: UiBaseModal;
+  listModal: UiBaseModal;
 }
 
 interface SwitchUserModal {
@@ -79,6 +81,13 @@ interface SwitchBookmarkModal {
   };
 }
 
+interface SwitchListModal {
+  type: typeof SWITCH_LIST_MODAL;
+  data: {
+    mounted: boolean;
+  };
+}
+
 export type UiActionsTypes =
   | SwitchUserModal
   | SwitchLanguagesModal
@@ -88,4 +97,5 @@ export type UiActionsTypes =
   | SwitchSignUpModal
   | SwitchForgotPasswordModal
   | SwitchResetPasswordModal
-  | SwitchBookmarkModal;
+  | SwitchBookmarkModal
+  | SwitchListModal;

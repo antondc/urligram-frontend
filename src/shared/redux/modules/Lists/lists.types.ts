@@ -2,6 +2,14 @@ export const LOAD_LISTS_STARTED = 'LOAD_LISTS_STARTED';
 export const LOAD_LISTS_SUCCESS = 'LOAD_LISTS_SUCCESS';
 export const LOAD_LIST_STARTED = 'LOAD_LIST_STARTED';
 export const LOAD_LIST_SUCCESS = 'LOAD_LIST_SUCCESS';
+export const LIST_CREATE_REQUEST = 'LIST_CREATE_REQUEST';
+export const LIST_CREATE_SUCCESS = 'LIST_CREATE_SUCCESS';
+export const LIST_CREATE_FAILURE = 'LIST_CREATE_FAILURE';
+export const LIST_CREATE_RESET = 'LIST_CREATE_RESET';
+
+export interface ListsError extends Error {
+  field: string;
+}
 
 export interface ListState {
   id: number;
@@ -25,11 +33,13 @@ export interface ListsState {
     [key: string]: ListState;
   };
   loading?: boolean;
+  listCreationSuccess?: boolean;
   currentIds?: number[];
   meta?: {
     totalItems?: number;
     sort?: string;
   };
+  errors?: ListsError[];
 }
 
 export interface ReceiveListItem {
@@ -48,6 +58,16 @@ export interface ReceiveListsResponse {
     totalItems?: number;
     sort?: string;
   };
+}
+
+export interface CreateListRequest {
+  listName: string;
+  listDescription: string;
+  listIsPrivate: boolean;
+}
+
+export interface CreateListResponse {
+  data: ReceiveListItem;
 }
 
 interface RequestListsAction {
@@ -74,4 +94,34 @@ interface ReceiveListAction {
   data: ListsState;
 }
 
-export type ListsActionsTypes = RequestListsAction | ReceiveListsAction | RequestListAction | ReceiveListAction;
+interface ListCreateRequestAction {
+  type: typeof LIST_CREATE_REQUEST;
+}
+
+interface ListCreateSuccessAction {
+  type: typeof LIST_CREATE_SUCCESS;
+  data: {
+    list: ListState;
+  };
+}
+
+interface ListCreateFailure {
+  type: typeof LIST_CREATE_FAILURE;
+  data: {
+    error: ListsError;
+  };
+}
+
+interface ListCreateReset {
+  type: typeof LIST_CREATE_RESET;
+}
+
+export type ListsActionsTypes =
+  | RequestListsAction
+  | ReceiveListsAction
+  | RequestListAction
+  | ReceiveListAction
+  | ListCreateRequestAction
+  | ListCreateSuccessAction
+  | ListCreateFailure
+  | ListCreateReset;

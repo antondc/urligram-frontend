@@ -29,10 +29,10 @@ export type TagValue = {
 };
 
 interface Props {
-  onSubmitted: () => void;
+  closeModal: () => void;
 }
 
-const BookmarkForm: React.FC<Props> = ({ onSubmitted }) => {
+const BookmarkForm: React.FC<Props> = ({ closeModal }) => {
   const dispatch = useDispatch();
   const bookmarkCreationSuccess = useSelector(selectBookmarkCreationSuccess);
   const bookmarkError = useSelector(selectBookmarksErrorLast);
@@ -72,6 +72,7 @@ const BookmarkForm: React.FC<Props> = ({ onSubmitted }) => {
   };
 
   const onBlurUrl = async () => {
+    if (urlSubmitted) return;
     if (!urlValue) {
       setUrlError('Url is mandatory');
 
@@ -173,7 +174,7 @@ const BookmarkForm: React.FC<Props> = ({ onSubmitted }) => {
 
       setTimeout(() => {
         history.push(`/${currentLanguageSlug}/users/${sessionId}/bookmarks`);
-        onSubmitted();
+        closeModal();
       }, DELAY_SLOW_MS);
 
       return;

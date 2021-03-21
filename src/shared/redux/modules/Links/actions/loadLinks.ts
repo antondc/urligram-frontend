@@ -2,10 +2,10 @@ import { Action, Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 
 import { LinkState, ReceiveLinkItem, ReceiveLinksResponse } from 'Modules/Links/links.types';
-import { QueryStringWrapper } from 'Root/src/shared/services/QueryStringWrapper';
+import { RootState } from 'Modules/rootType';
 import HttpClient from 'Services/HttpClient';
+import { QueryStringWrapper } from 'Services/QueryStringWrapper';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
-import { RootState } from '../../rootType';
 import { receiveLinks } from './receiveLinks';
 import { requestLinks } from './requestLinks';
 

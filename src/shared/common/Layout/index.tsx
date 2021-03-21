@@ -9,6 +9,7 @@ import BookmarkModal from 'Components/BookmarkModal';
 import Footer from 'Components/Footer';
 import ForgotPasswordModal from 'Components/ForgotPasswordModal';
 import Header from 'Components/Header';
+import ListModal from 'Components/ListModal';
 import LoginModal from 'Components/LoginModal';
 import ModalMessage from 'Components/ModalMessage';
 import ResetPasswordModal from 'Components/ResetPasswordModal';
@@ -23,6 +24,7 @@ import { selectSessionLoading } from 'Modules/Session/selectors/selectSessionLoa
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import { selectUiBookmarkModalMounted } from 'Modules/Ui/selectors/selectUiBookmarkModalMounted';
 import { selectUiForgotPasswordModalMounted } from 'Modules/Ui/selectors/selectUiForgotPasswordModalMounted';
+import { selectUiListModalMounted } from 'Modules/Ui/selectors/selectUiListModalMounted';
 import { selectUiLoginModalMounted } from 'Modules/Ui/selectors/selectUiLoginModalMounted';
 import { selectUiMessageModalMounted } from 'Modules/Ui/selectors/selectUiMessageModalMounted';
 import { selectUiResetPasswordModalMounted } from 'Modules/Ui/selectors/selectUiResetPasswordModalMounted';
@@ -49,6 +51,7 @@ interface Props {
   forgotPasswordModalMounted: boolean;
   resetPasswordModalMounted: boolean;
   bookmarkModalMounted: boolean;
+  listModalMounted: boolean;
   uiScreenLocked: boolean;
   isLogged: boolean;
   pathWithoutLanguageParam: string;
@@ -110,6 +113,7 @@ class Layout extends React.Component<Props> {
       forgotPasswordModalMounted,
       resetPasswordModalMounted,
       bookmarkModalMounted,
+      listModalMounted,
       sessionLoading,
     } = this.props;
 
@@ -153,6 +157,9 @@ class Layout extends React.Component<Props> {
           <Fade mounted={bookmarkModalMounted} speed="fastest" position="fixed" appear>
             <BookmarkModal />
           </Fade>
+          <Fade mounted={listModalMounted} speed="fastest" position="fixed" appear>
+            <ListModal />
+          </Fade>
           <div id="Tooltips" />
         </div>
       )
@@ -174,6 +181,7 @@ const mapStateToProps = createStructuredSelector({
   forgotPasswordModalMounted: selectUiForgotPasswordModalMounted,
   resetPasswordModalMounted: selectUiResetPasswordModalMounted,
   bookmarkModalMounted: selectUiBookmarkModalMounted,
+  listModalMounted: selectUiListModalMounted,
 });
 
 export default connect(mapStateToProps, {

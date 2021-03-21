@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
 
-import { RootState } from '../../rootType';
+import { RootState } from 'Modules/rootType';
 import { switchCurrentLanguageReceive } from './switchCurrentLanguageReceive';
 import { switchCurrentLanguageRequest } from './switchCurrentLanguageRequest';
 

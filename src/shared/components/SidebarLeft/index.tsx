@@ -5,6 +5,7 @@ import A from 'Components/A';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUserId';
 import { switchBookmarkModal } from 'Modules/Ui/actions/switchBookmarkModal';
+import { switchListModal } from 'Modules/Ui/actions/switchListModal';
 import { Border, Span } from '@antoniodcorrea/components';
 
 import './SidebarLeft.less';
@@ -17,6 +18,11 @@ export const SidebarLeft: React.FC = () => {
   const switchUiBookmarkModal = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     dispatch(switchBookmarkModal(true));
+  };
+
+  const switchUiListModal = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    dispatch(switchListModal(true));
   };
 
   return (
@@ -44,6 +50,14 @@ export const SidebarLeft: React.FC = () => {
             <Span bold>
               <A href="" frontend onClick={switchUiBookmarkModal}>
                 Add bookmark
+              </A>
+            </Span>
+          </li>
+          <li>
+            <span className="SidebarLeft-bullet">•</span>
+            <Span bold>
+              <A href="" frontend onClick={switchUiListModal}>
+                Create list
               </A>
             </Span>
           </li>

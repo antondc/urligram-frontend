@@ -1,4 +1,4 @@
-import { RootState } from '../../rootType';
+import { RootState } from 'Modules/rootType';
 import { SessionError } from '../session.types';
 
 export const selectSessionErrorLast = (state: RootState): SessionError =>

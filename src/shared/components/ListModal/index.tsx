@@ -3,32 +3,32 @@ import { useDispatch } from 'react-redux';
 
 import Cross from 'Assets/svg/cross.svg';
 import BaseModal from 'Components/BaseModal';
-import BookmarkForm from 'Components/BookmarkForm';
-import { switchBookmarkModal } from 'Modules/Ui/actions/switchBookmarkModal';
+import ListForm from 'Components/ListForm';
+import { switchListModal } from 'Modules/Ui/actions/switchListModal';
 import { Border, Flex, H3, Hr } from '@antoniodcorrea/components';
 
-import './BookmarkModal.less';
+import './ListModal.less';
 
-const BookmarkModal: React.FC = () => {
+const ListModal: React.FC = () => {
   const dispatch = useDispatch();
 
   const closeModal = () => {
-    dispatch(switchBookmarkModal(false));
+    dispatch(switchListModal(false));
   };
 
   return (
     <BaseModal onClick={closeModal}>
-      <Border className="BookmarkModal" grow>
-        <Cross className="BookmarkModal-cross" onClick={closeModal} />
+      <Border className="ListModal" grow>
+        <Cross className="ListModal-cross" onClick={closeModal} />
         <Flex horizontal="center">
-          <H3>Add bookmark</H3>
+          <H3>Create List</H3>
         </Flex>
         <Hr spacer size="small" />
-        <BookmarkForm closeModal={closeModal} />
+        <ListForm closeModal={closeModal} />
         <Hr spacer size="big" />
       </Border>
     </BaseModal>
   );
 };
 
-export default BookmarkModal;
+export default ListModal;

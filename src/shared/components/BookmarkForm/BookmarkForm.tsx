@@ -79,6 +79,7 @@ export const BookmarkForm: React.FC<Props> = ({
         value={urlValue}
         error={urlError}
         grow
+        autoFocus
       />
       <Fade mounted={urlValue && !urlError && !urlSubmitted}>
         <ArrowRight className="BookmarkForm-urlArrow" size="small" />
