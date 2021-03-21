@@ -2,7 +2,7 @@ import React from 'react';
 
 import A from 'Components/A';
 import { ListState } from 'Modules/Lists/lists.types';
-import { Border, Edit, Flex, Private, Span, Tag, Triangle } from '@antoniodcorrea/components';
+import { Border, Cross, Edit, Flex, List, Private, Span, Tag } from '@antoniodcorrea/components';
 
 import './ListRow.less';
 
@@ -19,23 +19,7 @@ export const ListRow: React.FC<Partial<ListState>> = ({
     <div className="ListRow-left">
       <div className="ListRow-icons">
         <Flex vertical="center" horizontal="left">
-          <Span className="ListRow-icon" size="small" bold>
-            ≡
-          </Span>
-          <Private
-            size="micro"
-            className="ListRow-icon ListRow-iconHover"
-            onClick={() => {
-              alert('Private');
-            }}
-          />
-          <Edit
-            size="micro"
-            className="ListRow-icon ListRow-iconHover"
-            onClick={() => {
-              alert('Edit');
-            }}
-          />
+          <List size="micro" className="ListRow-icon" />
         </Flex>
       </div>
       <Span size="normal" bold className="ListRow-title">
@@ -57,18 +41,43 @@ export const ListRow: React.FC<Partial<ListState>> = ({
       ))}
     </div>
     <div className="ListRow-right">
-      <Span size="micro" className="ListRow-stat">
-        <Span size="nano" className="ListRow-statIcon">
-          ⚭
-        </Span>{' '}
-        {bookmarksIds?.length || 0}
-      </Span>
-      <Span size="micro" className="ListRow-stat">
-        <Span size="nano" className="ListRow-statIcon">
-          @
-        </Span>{' '}
-        {membersIds?.length || 0}
-      </Span>
+      <Flex vertical="center" horizontal="right" growVertical={false}>
+        <Private
+          size="micro"
+          className="ListRow-action"
+          onClick={() => {
+            alert('Private');
+          }}
+        />
+        <Edit
+          size="micro"
+          className="ListRow-action"
+          onClick={() => {
+            alert('Edit');
+          }}
+        />
+        <Cross
+          size="micro"
+          className="ListRow-action"
+          onClick={() => {
+            alert('Delete');
+          }}
+        />
+      </Flex>
+      <Flex horizontal="right" growVertical={false}>
+        <Span size="micro" className="ListRow-stat">
+          <Span size="nano" className="ListRow-statIcon">
+            ⚭
+          </Span>{' '}
+          {bookmarksIds?.length || 0}
+        </Span>
+        <Span size="micro" className="ListRow-stat">
+          <Span size="nano" className="ListRow-statIcon">
+            @
+          </Span>{' '}
+          {membersIds?.length || 0}
+        </Span>
+      </Flex>
       <Span size="micro" className="ListRow-stat">
         {createdAt}
       </Span>

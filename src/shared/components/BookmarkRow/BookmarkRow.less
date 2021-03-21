@@ -37,10 +37,6 @@
     margin-right: 5px;
   }
 
-  &-iconHover {
-    .hoverTransition(0.5);
-  }
-
   &-title {
     line-height: 19px;
     white-space: nowrap;
@@ -108,6 +104,29 @@
 
   &-vote {
     //
+  }
+
+  &-action {
+    margin-left: 5px;
+    .hoverTransition(0.5);
+  }
+
+  &-bookmarkSign {
+    fill: @c-success;
+    transition: fill @td-fast @ease;
+
+    &:hover {
+      cursor: default;
+    }
+
+    &--disabled {
+      fill: @c-disabled;
+
+      &:hover {
+        fill: @c-success;
+        cursor: pointer;
+      }
+    }
   }
 
   &-stats {

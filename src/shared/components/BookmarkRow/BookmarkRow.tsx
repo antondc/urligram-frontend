@@ -42,21 +42,6 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
     <div className="BookmarkRow-left">
       <div className="BookmarkRow-icons">
         <img className="BookmarkRow-favicon" src={favicon} />
-        <Bookmark size="micro" className="BookmarkRow-icon" />
-        <Private
-          size="micro"
-          className="BookmarkRow-icon BookmarkRow-iconHover"
-          onClick={() => {
-            alert('Private');
-          }}
-        />
-        <Edit
-          size="micro"
-          className="BookmarkRow-icon BookmarkRow-iconHover"
-          onClick={() => {
-            alert('Edit');
-          }}
-        />
       </div>
       <Span bold className="BookmarkRow-title">
         <A href={url} targetBlank styled={false}>
@@ -86,20 +71,37 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
     </div>
     <div className="BookmarkRow-right">
       <Flex horizontal="right" growVertical={false} vertical="center">
+        <Private
+          size="micro"
+          className="BookmarkRow-action"
+          onClick={() => {
+            alert('Private');
+          }}
+        />
+        <Edit
+          size="micro"
+          className="BookmarkRow-action"
+          onClick={() => {
+            alert('Edit');
+          }}
+        />
         <FadeInOut valueToUpdate={bookmarkingLoading} speed="fastest" appear>
           <Flex horizontal="right" growVertical={false} vertical="center">
             {bookmarkingLoading ? (
               <Ellipsis size="nano" />
             ) : (
               <Bookmark
-                className={'LinkRow-bookmarkSign ' + (!userBookmarked ? 'LinkRow-bookmarkSign--disabled' : '')}
+                className={
+                  'BookmarkRow-action BookmarkRow-bookmarkSign ' +
+                  (!userBookmarked ? 'BookmarkRow-bookmarkSign--disabled' : '')
+                }
                 size="small"
                 onClick={onBookmark}
               />
             )}
           </Flex>
         </FadeInOut>
-        <Vote className="LinkRow-vote" vote={statistics?.vote} changeVote={onVote} loading={statistics?.loading} />
+        <Vote className="BookmarkRow-vote" vote={statistics?.vote} changeVote={onVote} loading={statistics?.loading} />
       </Flex>
       <div className="BookmarkRow-stats">
         <div className="BookmarkRow-stat">

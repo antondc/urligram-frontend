@@ -2,7 +2,7 @@ import React from 'react';
 
 import A from 'Components/A';
 import { LinkState } from 'Modules/Links/links.types';
-import { Bookmark, Border, Circle, Ellipsis, FadeInOut, Flex, Span, Tag, Vote } from '@antoniodcorrea/components';
+import { Bookmark, Border, Ellipsis, FadeInOut, Flex, Span, Tag, Vote } from '@antoniodcorrea/components';
 
 import './LinkRow.less';
 
@@ -30,7 +30,6 @@ export const LinkRow: React.FC<Partial<LinkRow>> = ({
     <div className="LinkRow-left">
       <div className="LinkRow-icons">
         <img className="LinkRow-favicon" src={favicon} />
-        <Circle size="micro" className="LinkRow-icon" />
       </div>
       <Span bold className="LinkRow-title">
         <A href={url} targetBlank styled={false}>
