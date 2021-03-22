@@ -2,10 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { bookmarkCreate } from 'Modules/Bookmarks/actions/bookmarkCreate';
-import { bookmarkCreateReset } from 'Modules/Bookmarks/actions/bookmarkCreateReset';
 import { loadBookmarks } from 'Modules/Bookmarks/actions/loadBookmarks';
 import { loadBookmarksByUserId } from 'Modules/Bookmarks/actions/loadBookmarksByUserId';
-import { selectBookmarkCreationSuccess } from 'Modules/Bookmarks/selectors/selectBookmarkCreationSuccess';
 import { selectBookmarksErrorLast } from 'Modules/Bookmarks/selectors/selectBookmarksErrorLast';
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
 import { loadLinks } from 'Modules/Links/actions/loadLinks';
@@ -34,7 +32,6 @@ interface Props {
 
 const BookmarkCreateForm: React.FC<Props> = ({ closeModal }) => {
   const dispatch = useDispatch();
-  const bookmarkCreationSuccess = useSelector(selectBookmarkCreationSuccess);
   const bookmarkError = useSelector(selectBookmarksErrorLast);
   const allTags = useSelector(selectTagsAll);
   const tagsSearch = useSelector(selectTagsSearch);
@@ -161,11 +158,10 @@ const BookmarkCreateForm: React.FC<Props> = ({ closeModal }) => {
       tags: transformedTags,
     };
 
-    dispatch(bookmarkCreate(data));
-  };
+    const response = await dispatch(bookmarkCreate(data));
+    setSubmitInProcess(false);
 
-  useEffect(() => {
-    if (!!bookmarkCreationSuccess) {
+    if (response?.title) {
       setSubmitInProcess(false);
       setSubmitSuccess(true);
       dispatch(loadBookmarks());
@@ -179,15 +175,10 @@ const BookmarkCreateForm: React.FC<Props> = ({ closeModal }) => {
 
       return;
     }
-    setSubmitInProcess(false);
-  }, [bookmarkCreationSuccess]);
+  };
 
   useEffect(() => {
     setSubmitError(undefined);
-
-    return () => {
-      dispatch(bookmarkCreateReset());
-    };
   }, []);
 
   useEffect(() => {

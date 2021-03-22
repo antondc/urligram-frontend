@@ -1,8 +1,8 @@
-import { BOOKMARK_UPDATE_RESET, BookmarksActionsTypes } from 'Modules/Bookmarks/bookmarks.types';
+import { BookmarksActions, types } from 'Modules/Bookmarks/bookmarks.types';
 
-export const bookmarkUpdateReset = (): BookmarksActionsTypes => ({
-  type: BOOKMARK_UPDATE_RESET,
-  data: {
+export const bookmarkUpdateReset = (): BookmarksActions => ({
+  type: types.BOOKMARK_UPDATE_RESET,
+  payload: {
     bookmarkUpdateSuccess: undefined,
   },
 });
