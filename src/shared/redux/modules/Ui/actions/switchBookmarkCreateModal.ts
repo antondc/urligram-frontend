@@ -1,8 +1,10 @@
-import { SWITCH_BOOKMARK_CREATE_MODAL, UiActionsTypes } from '../ui.types';
+import { types, UiActions } from '../ui.types';
 
-export const switchBookmarkCreateModal = (mount: boolean): UiActionsTypes => ({
-  data: {
-    mounted: mount,
+export const switchBookmarkCreateModal = (mount: boolean): UiActions => ({
+  type: types.SWITCH_BOOKMARK_CREATE_MODAL,
+  payload: {
+    bookmarkCreateModal: {
+      mounted: mount,
+    },
   },
-  type: SWITCH_BOOKMARK_CREATE_MODAL,
 });
