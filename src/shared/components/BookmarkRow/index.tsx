@@ -8,6 +8,7 @@ import { voteLink } from 'Modules/Links/actions/voteLink';
 import { RootState } from 'Modules/rootType';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUserId';
+import { switchBookmarkUpdateModal } from 'Modules/Ui/actions/switchBookmarkUpdateModal';
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
 import { LocaleFormattedDate } from 'Tools/utils/Date/localeFormattedDate';
 import { BookmarkRow as BookmarkRowUi } from './BookmarkRow';
@@ -44,6 +45,14 @@ const BookmarkRow: React.FC<Props> = ({ id }) => {
     }
   };
 
+  const onEdit = () => {
+    if (userBookmarked) {
+      dispatch(switchBookmarkUpdateModal({ mount: true, bookmarkId: id }));
+    } else {
+      //
+    }
+  };
+
   return (
     <BookmarkRowUi
       id={id}
@@ -58,6 +67,7 @@ const BookmarkRow: React.FC<Props> = ({ id }) => {
       statistics={statistics}
       bookmarkingLoading={bookmarkingLoading}
       userBookmarked={userBookmarked}
+      onEdit={onEdit}
       onVote={onVote}
       onBookmark={onBookmark}
     />

@@ -1,5 +1,6 @@
 import {
-  SWITCH_BOOKMARK_MODAL,
+  SWITCH_BOOKMARK_CREATE_MODAL,
+  SWITCH_BOOKMARK_UPDATE_MODAL,
   SWITCH_FORGOT_PASSWORD_MODAL,
   SWITCH_LANGUAGES_MODAL,
   SWITCH_LIST_MODAL,
@@ -47,9 +48,14 @@ export const initialState: UiState = {
     type: 'popup',
     mounted: false,
   },
-  bookmarkModal: {
+  bookmarkCreateModal: {
     type: 'popup',
     mounted: false,
+  },
+  bookmarkUpdateModal: {
+    type: 'popup',
+    mounted: false,
+    bookmarkId: undefined,
   },
   listModal: {
     type: 'popup',
@@ -122,12 +128,21 @@ export const Ui = (state = initialState, action: UiActionsTypes): UiState => {
           mounted: action.data.mounted,
         },
       });
-    case SWITCH_BOOKMARK_MODAL:
+    case SWITCH_BOOKMARK_CREATE_MODAL:
       return Object.assign({}, state, {
         screenLocked: !state.screenLocked,
-        bookmarkModal: {
-          ...state.bookmarkModal,
+        bookmarkCreateModal: {
+          ...state.bookmarkCreateModal,
           mounted: action.data.mounted,
+        },
+      });
+    case SWITCH_BOOKMARK_UPDATE_MODAL:
+      return Object.assign({}, state, {
+        screenLocked: !state.screenLocked,
+        bookmarkUpdateModal: {
+          ...state.bookmarkUpdateModal,
+          mounted: action.data.mounted,
+          bookmarkId: action.data.bookmarkId,
         },
       });
     case SWITCH_LIST_MODAL:

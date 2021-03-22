@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import A from 'Components/A';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUserId';
-import { switchBookmarkModal } from 'Modules/Ui/actions/switchBookmarkModal';
+import { switchBookmarkCreateModal } from 'Modules/Ui/actions/switchBookmarkCreateModal';
 import { switchListModal } from 'Modules/Ui/actions/switchListModal';
 import { Border, Span } from '@antoniodcorrea/components';
 
@@ -17,7 +17,7 @@ export const SidebarLeft: React.FC = () => {
 
   const switchUiBookmarkModal = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    dispatch(switchBookmarkModal(true));
+    dispatch(switchBookmarkCreateModal(true));
   };
 
   const switchUiListModal = (e: React.MouseEvent<HTMLAnchorElement>) => {

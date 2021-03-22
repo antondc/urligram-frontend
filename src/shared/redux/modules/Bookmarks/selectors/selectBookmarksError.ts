@@ -1,4 +1,4 @@
 import { RootState } from 'Modules/rootType';
-import { BookmarksError } from '../bookmarks.types';
+import { BookmarkError } from '../bookmarks.types';
 
-export const selectBookmarksError = (state: RootState): BookmarksError[] => state.Bookmarks.errors;
+export const selectBookmarksError = (state: RootState): BookmarkError[] => state.Bookmarks.errors;

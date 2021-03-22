@@ -6,14 +6,16 @@ export const SWITCH_WELCOME_MODAL = 'SWITCH_WELCOME_MODAL';
 export const SWITCH_SIGN_UP_MODAL = 'SWITCH_SIGN_UP_MODAL';
 export const SWITCH_FORGOT_PASSWORD_MODAL = 'SWITCH_FORGOT_PASSWORD_MODAL';
 export const SWITCH_RESET_PASSWORD_MODAL = 'SWITCH_RESET_PASSWORD_MODAL';
-export const SWITCH_BOOKMARK_MODAL = 'SWITCH_BOOKMARK_MODAL';
+export const SWITCH_BOOKMARK_CREATE_MODAL = 'SWITCH_BOOKMARK_CREATE_MODAL';
+export const SWITCH_BOOKMARK_UPDATE_MODAL = 'SWITCH_BOOKMARK_UPDATE_MODAL';
 export const SWITCH_LIST_MODAL = 'SWITCH_LIST_MODAL';
 
 export type UiBaseModal = {
   type: 'modal' | 'popup';
   mounted: boolean;
 };
-export interface UiState {
+
+export type UiState = {
   screenLocked: boolean;
   userModal: UiBaseModal;
   languagesModal: UiBaseModal;
@@ -23,9 +25,10 @@ export interface UiState {
   signUpModal: UiBaseModal;
   forgotPasswordModal: UiBaseModal;
   resetPasswordModal: UiBaseModal;
-  bookmarkModal: UiBaseModal;
+  bookmarkCreateModal: UiBaseModal;
+  bookmarkUpdateModal: UiBaseModal & { bookmarkId: number };
   listModal: UiBaseModal;
-}
+};
 
 interface SwitchUserModal {
   type: typeof SWITCH_USER_MODAL;
@@ -74,10 +77,18 @@ interface SwitchResetPasswordModal {
   };
 }
 
-interface SwitchBookmarkModal {
-  type: typeof SWITCH_BOOKMARK_MODAL;
+interface SwitchBookmarkCreateModal {
+  type: typeof SWITCH_BOOKMARK_CREATE_MODAL;
   data: {
     mounted: boolean;
+  };
+}
+
+interface SwitchBookmarkUpdateModal {
+  type: typeof SWITCH_BOOKMARK_UPDATE_MODAL;
+  data: {
+    mounted: boolean;
+    bookmarkId: number;
   };
 }
 
@@ -97,5 +108,6 @@ export type UiActionsTypes =
   | SwitchSignUpModal
   | SwitchForgotPasswordModal
   | SwitchResetPasswordModal
-  | SwitchBookmarkModal
+  | SwitchBookmarkCreateModal
+  | SwitchBookmarkUpdateModal
   | SwitchListModal;

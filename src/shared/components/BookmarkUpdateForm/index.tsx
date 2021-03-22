@@ -1,0 +1,154 @@
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { bookmarkUpdate } from 'Modules/Bookmarks/actions/bookmarkUpdate';
+import { bookmarkUpdateReset } from 'Modules/Bookmarks/actions/bookmarkUpdateReset';
+import { loadBookmarks } from 'Modules/Bookmarks/actions/loadBookmarks';
+import { loadBookmarksByUserId } from 'Modules/Bookmarks/actions/loadBookmarksByUserId';
+import { selectBookmarksById } from 'Modules/Bookmarks/selectors/selectBookmarkById';
+import { selectBookmarksErrorLast } from 'Modules/Bookmarks/selectors/selectBookmarksErrorLast';
+import { selectBookmarkUpdateSuccess } from 'Modules/Bookmarks/selectors/selectBookmarkUpdateSuccess';
+import { RootState } from 'Modules/rootType';
+import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUserId';
+import { tagsSearchLoad } from 'Modules/Tags/actions/tagsSearchLoad';
+import { selectTagsAll } from 'Modules/Tags/selectors/selectAllTags';
+import { selectTagsSearch } from 'Modules/Tags/selectors/selectTagsSearch';
+import { selectUiBookmarkUpdateModal } from 'Modules/Ui/selectors/selectUiBookmarkUpdateModal';
+import { DELAY_SLOW_MS } from 'Root/src/shared/constants';
+import { BookmarkUpdateForm as BookmarkFormUi } from './BookmarkUpdateForm';
+
+import './BookmarkUpdateForm.less';
+
+export type TagValue = {
+  label: string;
+  value: string;
+};
+
+interface Props {
+  closeModal: () => void;
+}
+
+const BookmarkUpdateForm: React.FC<Props> = ({ closeModal }) => {
+  const dispatch = useDispatch();
+  const bookmarkUpdateSuccess = useSelector(selectBookmarkUpdateSuccess);
+  const bookmarkError = useSelector(selectBookmarksErrorLast);
+  const allTags = useSelector(selectTagsAll);
+  const tagsSearch = useSelector(selectTagsSearch);
+  const tagsSearchFormatted = tagsSearch?.map((item) => ({ label: item.name, value: item.name })) || [];
+  const sessionId = useSelector(selectSessionUserId);
+  const { bookmarkId } = useSelector(selectUiBookmarkUpdateModal);
+  const bookmark = useSelector((state: RootState) => selectBookmarksById(state, { id: bookmarkId }));
+  const [titleValue, setTitleValue] = useState<string>(undefined);
+  const [titleError, setTitleError] = useState<string>(undefined);
+  const [isPrivateValue, setIsPrivateValue] = useState<boolean>(false);
+  const [tagsValue, setTagsValue] = useState<TagValue[]>([]);
+  const [submitInProcess, setSubmitInProcess] = useState<boolean>(undefined);
+  const [submitSuccess, setSubmitSuccess] = useState<boolean>(undefined);
+  const [submitError, setSubmitError] = useState<string>(undefined);
+
+  const submitDisabled = !titleValue || !!titleError;
+
+  const onChangeTitle = (e: React.FormEvent<HTMLInputElement>) => {
+    const { value } = e.currentTarget;
+    setTitleValue(value);
+    setSubmitSuccess(undefined);
+    setTitleError(undefined);
+    setSubmitError(undefined);
+  };
+
+  const onChangeIsPrivate = (e: React.FormEvent<HTMLInputElement>) => {
+    const { checked } = e.currentTarget;
+
+    setIsPrivateValue(checked);
+    setSubmitSuccess(undefined);
+    setSubmitError(undefined);
+  };
+
+  const onChangeTagsInput = (string: string) => {
+    setSubmitSuccess(undefined);
+
+    !!string && dispatch(tagsSearchLoad(string));
+  };
+
+  const onChangeTags = (values) => {
+    const tags: TagValue[] = values;
+    setTagsValue(tags || []);
+  };
+
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    setSubmitInProcess(true);
+
+    const transformedTags = tagsValue.map((item) => ({ tag: item.value }));
+
+    const data = {
+      bookmarkId: bookmarkId,
+      title: titleValue,
+      isPrivate: isPrivateValue,
+      order: 1,
+      tags: transformedTags,
+    };
+
+    dispatch(bookmarkUpdate(data));
+  };
+
+  useEffect(() => {
+    if (!!bookmarkUpdateSuccess) {
+      setSubmitInProcess(false);
+      setSubmitSuccess(true);
+      dispatch(loadBookmarks());
+      dispatch(loadBookmarksByUserId(sessionId));
+
+      setTimeout(() => {
+        closeModal();
+      }, DELAY_SLOW_MS);
+
+      return;
+    }
+    setSubmitInProcess(false);
+  }, [bookmarkUpdateSuccess]);
+
+  useEffect(() => {
+    setSubmitError(undefined);
+    setTitleValue(bookmark?.title);
+    setIsPrivateValue(bookmark?.isPrivate);
+    setTagsValue(bookmark?.tags.map((item) => ({ label: item.name, value: item.name })));
+
+    return () => {
+      dispatch(bookmarkUpdateReset());
+    };
+  }, []);
+
+  useEffect(() => {
+    if (bookmarkError?.field === 'title') {
+      setTitleError(bookmarkError?.message);
+
+      return;
+    }
+
+    if (bookmarkError?.message) setSubmitError(bookmarkError?.message);
+  }, [bookmarkError]);
+
+  return (
+    <BookmarkFormUi
+      titleValue={titleValue}
+      titleError={titleError}
+      onChangeTitle={onChangeTitle}
+      isPrivateValue={isPrivateValue}
+      onChangeIsPrivate={onChangeIsPrivate}
+      allTags={allTags}
+      tagsSearchFormatted={tagsSearchFormatted}
+      tagsValue={tagsValue}
+      onChangeTags={onChangeTags}
+      onChangeTagsInput={onChangeTagsInput}
+      onSubmit={onSubmit}
+      submitDisabled={submitDisabled}
+      submitInProcess={submitInProcess}
+      submitSuccess={submitSuccess}
+      submitError={submitError}
+    />
+  );
+};
+
+export default BookmarkUpdateForm;

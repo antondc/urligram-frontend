@@ -1,0 +1,34 @@
+import React from 'react';
+import { useDispatch } from 'react-redux';
+
+import Cross from 'Assets/svg/cross.svg';
+import BaseModal from 'Components/BaseModal';
+import BookmarkUpdateForm from 'Components/BookmarkUpdateForm';
+import { switchBookmarkUpdateModal } from 'Modules/Ui/actions/switchBookmarkUpdateModal';
+import { Border, Flex, H3, Hr } from '@antoniodcorrea/components';
+
+import './BookmarkUpdateModal.less';
+
+const BookmarkUpdateModal: React.FC = () => {
+  const dispatch = useDispatch();
+
+  const closeModal = () => {
+    dispatch(switchBookmarkUpdateModal({ mount: false }));
+  };
+
+  return (
+    <BaseModal onClick={closeModal}>
+      <Border className="BookmarkUpdateModal" grow>
+        <Cross className="BookmarkUpdateModal-cross" onClick={closeModal} />
+        <Flex horizontal="center">
+          <H3>Edit bookmark</H3>
+        </Flex>
+        <Hr spacer size="small" />
+        <BookmarkUpdateForm closeModal={closeModal} />
+        <Hr spacer size="big" />
+      </Border>
+    </BaseModal>
+  );
+};
+
+export default BookmarkUpdateModal;

@@ -15,13 +15,13 @@ import { selectTagsAll } from 'Modules/Tags/selectors/selectAllTags';
 import { selectTagsSearch } from 'Modules/Tags/selectors/selectTagsSearch';
 import { DEFAULT_PROTOCOL, DELAY_SLOW_MS } from 'Root/src/shared/constants';
 import history from 'Services/History';
+import HttpClient from 'Services/HttpClient';
 import { testStringIsValidUrl } from 'Tools/utils/url/testStringIsValidUrl';
 import { testUrlHasProtocol } from 'Tools/utils/url/testUrlHasProtocol';
 import { urlRemoveLeadingCharacters } from 'Tools/utils/url/urlRemoveLeadingCharacters';
-import HttpClient from '../../services/HttpClient';
-import { BookmarkForm as BookmarkFormUi } from './BookmarkForm';
+import { BookmarkCreateForm as BookmarkFormUi } from './BookmarkCreateForm';
 
-import './BookmarkForm.less';
+import './BookmarkCreateForm.less';
 
 export type TagValue = {
   label: string;
@@ -32,7 +32,7 @@ interface Props {
   closeModal: () => void;
 }
 
-const BookmarkForm: React.FC<Props> = ({ closeModal }) => {
+const BookmarkCreateForm: React.FC<Props> = ({ closeModal }) => {
   const dispatch = useDispatch();
   const bookmarkCreationSuccess = useSelector(selectBookmarkCreationSuccess);
   const bookmarkError = useSelector(selectBookmarksErrorLast);
@@ -234,4 +234,4 @@ const BookmarkForm: React.FC<Props> = ({ closeModal }) => {
   );
 };
 
-export default BookmarkForm;
+export default BookmarkCreateForm;

@@ -17,7 +17,7 @@ import {
 } from '@antoniodcorrea/components';
 import { TagValue } from '.';
 
-import './BookmarkForm.less';
+import './BookmarkCreateForm.less';
 
 interface Props {
   titleValue: string;
@@ -44,7 +44,7 @@ interface Props {
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
-export const BookmarkForm: React.FC<Props> = ({
+export const BookmarkCreateForm: React.FC<Props> = ({
   titleValue,
   titleError,
   onChangeTitle,
@@ -68,7 +68,7 @@ export const BookmarkForm: React.FC<Props> = ({
   submitError,
   onSubmit,
 }) => (
-  <form className="BookmarkForm" onSubmit={onSubmit}>
+  <form className="BookmarkCreateForm" onSubmit={onSubmit}>
     <Flex growVertical={false} horizontal="left" vertical="bottom" noWrap>
       <Input
         name="url"
@@ -82,12 +82,12 @@ export const BookmarkForm: React.FC<Props> = ({
         autoFocus
       />
       <Fade mounted={urlValue && !urlError && !urlSubmitted}>
-        <ArrowRight className="BookmarkForm-urlArrow" size="small" />
+        <ArrowRight className="BookmarkCreateForm-urlArrow" size="small" />
       </Fade>
     </Flex>
     <Hr size="nano" spacer />
     <FadeInOut valueToUpdate={!!urlError} speed="fast">
-      <Span className="BookmarkForm-error" size="small">
+      <Span className="BookmarkCreateForm-error" size="small">
         {urlError}
       </Span>
     </FadeInOut>
@@ -107,13 +107,13 @@ export const BookmarkForm: React.FC<Props> = ({
           />
           <Hr size="nano" spacer />
           <FadeInOut valueToUpdate={!!titleError} speed="fast">
-            <Span className="BookmarkForm-error" size="small">
+            <Span className="BookmarkCreateForm-error" size="small">
               {titleError}
             </Span>
           </FadeInOut>
           <Hr spacer />
           <Select
-            className="BookmarkForm-tags"
+            className="BookmarkCreateForm-tags"
             label="Select tags"
             value={tagsValue}
             defaultOptions={[]}
@@ -127,14 +127,14 @@ export const BookmarkForm: React.FC<Props> = ({
             grow
           />
           <Hr spacer />
-          <Span size="small" className="BookmarkForm-private">
+          <Span size="small" className="BookmarkCreateForm-private">
             Is Private
           </Span>
           <Hr size="micro" spacer />
           <Switch name="isPrivate" checked={isPrivateValue} onChange={onChangeIsPrivate} />
           <Hr size="nano" spacer />
           <FadeInOut valueToUpdate={!!isPrivateError} speed="fast">
-            <Span className="BookmarkForm-error" size="small">
+            <Span className="BookmarkCreateForm-error" size="small">
               {isPrivateError}
             </Span>
           </FadeInOut>
@@ -151,7 +151,7 @@ export const BookmarkForm: React.FC<Props> = ({
           />
           <Hr size="nano" spacer />
           <FadeInOut valueToUpdate={!!submitError} speed="fast">
-            <Span className="BookmarkForm-error" size="small">
+            <Span className="BookmarkCreateForm-error" size="small">
               {submitError}
             </Span>
           </FadeInOut>

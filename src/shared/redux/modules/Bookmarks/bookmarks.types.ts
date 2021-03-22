@@ -6,8 +6,12 @@ export const BOOKMARK_CREATE_REQUEST = 'BOOKMARK_CREATE_REQUEST';
 export const BOOKMARK_CREATE_SUCCESS = 'BOOKMARK_CREATE_SUCCESS';
 export const BOOKMARK_CREATE_FAILURE = 'BOOKMARK_CREATE_FAILURE';
 export const BOOKMARK_CREATE_RESET = 'BOOKMARK_CREATE_RESET';
+export const BOOKMARK_UPDATE_REQUEST = 'BOOKMARK_UPDATE_REQUEST';
+export const BOOKMARK_UPDATE_SUCCESS = 'BOOKMARK_UPDATE_SUCCESS';
+export const BOOKMARK_UPDATE_FAILURE = 'BOOKMARK_UPDATE_FAILURE';
+export const BOOKMARK_UPDATE_RESET = 'BOOKMARK_UPDATE_RESET';
 
-export interface BookmarksError extends Error {
+export interface BookmarkError extends Error {
   field: string;
 }
 
@@ -31,6 +35,7 @@ export interface BookmarkState {
   createdAt: string;
   updatedAt: string;
   users: string[];
+  isPrivate: boolean;
   tags: {
     id: number;
     name: string;
@@ -49,9 +54,10 @@ export interface BookmarksState {
     totalItems?: number;
     sort?: string;
   };
-  errors?: BookmarksError[];
+  errors?: BookmarkError[];
   bookmarkCreationLoading?: boolean;
   bookmarkCreationSuccess?: boolean;
+  bookmarkUpdateSuccess?: boolean;
 }
 
 export interface ReceiveBookmarkItem {
@@ -128,12 +134,55 @@ export interface BookmarkCreateFailureAction {
     bookmarkCreationLoading: false;
     bookmarkCreationSuccess: false;
     bookmarkId: number;
-    error: BookmarksError;
+    error: BookmarkError;
   };
 }
 
 export interface BookmarkCreateResetAction {
   type: typeof BOOKMARK_CREATE_RESET;
+}
+
+export interface BookmarkUpdateRequest {
+  bookmarkId: number;
+  order: number;
+  title: string;
+  isPrivate: boolean;
+  tags: {
+    tag: string;
+  }[];
+}
+
+export interface BookmarkUpdateResponse {
+  data: {
+    attributes: BookmarkState;
+  };
+}
+
+export interface BookmarkUpdateRequestAction {
+  type: typeof BOOKMARK_UPDATE_REQUEST;
+}
+
+export interface BookmarkUpdateSuccessAction {
+  type: typeof BOOKMARK_UPDATE_SUCCESS;
+  data: {
+    bookmark: BookmarkState;
+    bookmarkUpdateSuccess: true;
+  };
+}
+
+export interface BookmarkUpdateFailureAction {
+  type: typeof BOOKMARK_UPDATE_FAILURE;
+  data: {
+    error: BookmarkError;
+    bookmarkUpdateSuccess: false;
+  };
+}
+
+export interface BookmarkUpdateResetAction {
+  type: typeof BOOKMARK_UPDATE_RESET;
+  data: {
+    bookmarkUpdateSuccess: undefined;
+  };
 }
 
 export type BookmarksActionsTypes =
@@ -144,4 +193,8 @@ export type BookmarksActionsTypes =
   | BookmarkCreateRequestAction
   | BookmarkCreateSuccessAction
   | BookmarkCreateFailureAction
-  | BookmarkCreateResetAction;
+  | BookmarkCreateResetAction
+  | BookmarkUpdateRequestAction
+  | BookmarkUpdateSuccessAction
+  | BookmarkUpdateFailureAction
+  | BookmarkUpdateResetAction;

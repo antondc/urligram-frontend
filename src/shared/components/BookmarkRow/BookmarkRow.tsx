@@ -21,6 +21,7 @@ interface BookmarkRow extends BookmarkState {
   userId: string;
   userBookmarked: boolean;
   onVote: (vote: boolean | null) => void;
+  onEdit: () => void;
   onBookmark: () => void;
 }
 
@@ -34,6 +35,7 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
   bookmarkingLoading,
   userBookmarked,
   onVote,
+  onEdit,
   onBookmark,
   favicon,
   createdAt,
@@ -78,13 +80,7 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
             alert('Private');
           }}
         />
-        <Edit
-          size="micro"
-          className="BookmarkRow-action"
-          onClick={() => {
-            alert('Edit');
-          }}
-        />
+        {userBookmarked && <Edit size="micro" className="BookmarkRow-action" onClick={onEdit} />}
         <FadeInOut valueToUpdate={bookmarkingLoading} speed="fastest" appear>
           <Flex horizontal="right" growVertical={false} vertical="center">
             {bookmarkingLoading ? (

@@ -5,7 +5,8 @@ import { Location } from 'history';
 
 import LayoutContent from 'Common/LayoutContent';
 import LayoutHelper from 'Common/LayoutHelper';
-import BookmarkModal from 'Components/BookmarkModal';
+import BookmarkCreateModal from 'Components/BookmarkCreateModal';
+import BookmarkUpdateModal from 'Components/BookmarkUpdateModal';
 import Footer from 'Components/Footer';
 import ForgotPasswordModal from 'Components/ForgotPasswordModal';
 import Header from 'Components/Header';
@@ -22,7 +23,8 @@ import { RouteState } from 'Modules/Routes/routes.types';
 import { selectPathWithoutLanguageParam } from 'Modules/Routes/selectors/selectPathWithoutLanguageParam';
 import { selectSessionLoading } from 'Modules/Session/selectors/selectSessionLoading';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
-import { selectUiBookmarkModalMounted } from 'Modules/Ui/selectors/selectUiBookmarkModalMounted';
+import { selectUiBookmarkCreateModalMounted } from 'Modules/Ui/selectors/selectUiBookmarkCreateModalMounted';
+import { selectUiBookmarkUpdateModalMounted } from 'Modules/Ui/selectors/selectUiBookmarkUpdateModalMounted';
 import { selectUiForgotPasswordModalMounted } from 'Modules/Ui/selectors/selectUiForgotPasswordModalMounted';
 import { selectUiListModalMounted } from 'Modules/Ui/selectors/selectUiListModalMounted';
 import { selectUiLoginModalMounted } from 'Modules/Ui/selectors/selectUiLoginModalMounted';
@@ -50,7 +52,8 @@ interface Props {
   signUpModalMounted: boolean;
   forgotPasswordModalMounted: boolean;
   resetPasswordModalMounted: boolean;
-  bookmarkModalMounted: boolean;
+  bookmarkCreateModalMounted: boolean;
+  bookmarkUpdateModalMounted: boolean;
   listModalMounted: boolean;
   uiScreenLocked: boolean;
   isLogged: boolean;
@@ -112,7 +115,8 @@ class Layout extends React.Component<Props> {
       signUpModalMounted,
       forgotPasswordModalMounted,
       resetPasswordModalMounted,
-      bookmarkModalMounted,
+      bookmarkCreateModalMounted,
+      bookmarkUpdateModalMounted,
       listModalMounted,
       sessionLoading,
     } = this.props;
@@ -154,8 +158,11 @@ class Layout extends React.Component<Props> {
           <Fade mounted={resetPasswordModalMounted} speed="fastest" position="fixed" appear>
             <ResetPasswordModal />
           </Fade>
-          <Fade mounted={bookmarkModalMounted} speed="fastest" position="fixed" appear>
-            <BookmarkModal />
+          <Fade mounted={bookmarkCreateModalMounted} speed="fastest" position="fixed" appear>
+            <BookmarkCreateModal />
+          </Fade>
+          <Fade mounted={bookmarkUpdateModalMounted} speed="fastest" position="fixed" appear>
+            <BookmarkUpdateModal />
           </Fade>
           <Fade mounted={listModalMounted} speed="fastest" position="fixed" appear>
             <ListModal />
@@ -180,7 +187,8 @@ const mapStateToProps = createStructuredSelector({
   signUpModalMounted: selectUiSignUpModalMounted,
   forgotPasswordModalMounted: selectUiForgotPasswordModalMounted,
   resetPasswordModalMounted: selectUiResetPasswordModalMounted,
-  bookmarkModalMounted: selectUiBookmarkModalMounted,
+  bookmarkCreateModalMounted: selectUiBookmarkCreateModalMounted,
+  bookmarkUpdateModalMounted: selectUiBookmarkUpdateModalMounted,
   listModalMounted: selectUiListModalMounted,
 });
 

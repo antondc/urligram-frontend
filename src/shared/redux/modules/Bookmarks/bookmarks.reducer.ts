@@ -3,6 +3,10 @@ import {
   BOOKMARK_CREATE_REQUEST,
   BOOKMARK_CREATE_RESET,
   BOOKMARK_CREATE_SUCCESS,
+  BOOKMARK_UPDATE_FAILURE,
+  BOOKMARK_UPDATE_REQUEST,
+  BOOKMARK_UPDATE_RESET,
+  BOOKMARK_UPDATE_SUCCESS,
   BookmarksActionsTypes,
   BookmarksState,
   LOAD_BOOKMARKS_STARTED,
@@ -92,13 +96,39 @@ export const Bookmarks = (state = initialState, action: BookmarksActionsTypes): 
             bookmarkingLoading: undefined,
           },
         },
-        errors: [...state.errors, action?.data?.error],
+        errors: [...state?.errors, action?.data?.error],
       });
     case BOOKMARK_CREATE_RESET:
       return Object.assign({}, state, {
         ...state,
         bookmarkCreationLoading: undefined,
         bookmarkCreationSuccess: undefined,
+      });
+
+    case BOOKMARK_UPDATE_REQUEST:
+      return Object.assign({}, state, {
+        ...state,
+      });
+    case BOOKMARK_UPDATE_SUCCESS:
+      return Object.assign({}, state, {
+        ...state,
+        byKey: {
+          ...state.byKey,
+          [action.data.bookmark?.id]: action.data.bookmark,
+        },
+        bookmarkUpdateSuccess: action.data.bookmarkUpdateSuccess,
+      });
+    case BOOKMARK_UPDATE_FAILURE:
+      return Object.assign({}, state, {
+        ...state,
+        ...action.data,
+        errors: [...state?.errors, action?.data?.error],
+        bookmarkUpdateSuccess: action.data.bookmarkUpdateSuccess,
+      });
+    case BOOKMARK_UPDATE_RESET:
+      return Object.assign({}, state, {
+        ...state,
+        bookmarkUpdateSuccess: action.data.bookmarkUpdateSuccess,
       });
 
     default:
