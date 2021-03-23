@@ -1,8 +1,11 @@
-import { BookmarksActions, BOOKMARKS_LOAD_REQUEST } from 'Modules/Bookmarks/bookmarks.types';
+import { BOOKMARKS_LOAD_REQUEST, BookmarksActions } from 'Modules/Bookmarks/bookmarks.types';
 
 export const requestBookmarks = (): BookmarksActions => ({
   type: BOOKMARKS_LOAD_REQUEST,
-  data: {
+  payload: {
     loading: true,
+    meta: {
+      sort: undefined,
+    },
   },
 });

@@ -1,9 +1,8 @@
 import { BOOKMARK_UPDATE_FAILURE, BookmarkError, BookmarksActions } from 'Modules/Bookmarks/bookmarks.types';
 
-export const bookmarkUpdateFailure = ({ error }: { error: BookmarkError }): BookmarksActions => ({
+export const bookmarkUpdateFailure = (errors: BookmarkError[]): BookmarksActions => ({
   type: BOOKMARK_UPDATE_FAILURE,
-  data: {
-    error,
-    bookmarkUpdateSuccess: false,
+  payload: {
+    errors,
   },
 });

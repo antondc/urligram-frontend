@@ -1,5 +1,3 @@
-import merge from 'lodash/merge';
-
 import { types, UiActions, UiState } from './ui.types';
 
 export const initialState: UiState = {
@@ -52,4 +50,4 @@ export const initialState: UiState = {
 };
 
 export const Ui = (state = initialState, action: UiActions): typeof initialState =>
-  Object.hasOwnProperty.call(types, action.type) ? merge({}, state, action.payload) : state;
+  Object.hasOwnProperty.call(types, action.type) ? Object.assign({}, state, action.payload) : state;

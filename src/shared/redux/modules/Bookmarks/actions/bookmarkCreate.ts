@@ -6,7 +6,8 @@ import { BookmarkCreateRequest, BookmarkCreateResponse, BookmarkState } from 'Mo
 import { linkLoadById } from 'Modules/Links/actions/linkLoadById';
 import { linkLoadByIdRequest } from 'Modules/Links/actions/linkLoadByIdRequest';
 import HttpClient from 'Services/HttpClient';
-import { AppThunk } from '../../..';
+import { AppThunk } from '../../../index';
+import { RootState } from '../../rootType';
 import { bookmarkCreateRequest } from './bookmarkCreateRequest';
 
 export const bookmarkCreate = ({
@@ -16,7 +17,11 @@ export const bookmarkCreate = ({
   url,
   isPrivate,
   tags,
-}: BookmarkCreateRequest): AppThunk<Promise<BookmarkState>> => async (dispatch: Dispatch<any>) => {
+}: BookmarkCreateRequest): AppThunk<Promise<BookmarkState>> => async (
+  dispatch: Dispatch<any>,
+  getState: () => RootState
+) => {
+  const { Bookmarks } = getState();
   try {
     if (linkId) dispatch(linkLoadByIdRequest(linkId));
     dispatch(bookmarkCreateRequest(bookmarkId));
@@ -32,6 +37,6 @@ export const bookmarkCreate = ({
 
     return bookmarkData?.attributes;
   } catch (error) {
-    await dispatch(bookmarkCreateFailure({ error, bookmarkId }));
+    await dispatch(bookmarkCreateFailure([...Bookmarks.errors, error]));
   }
 };

@@ -76,7 +76,7 @@ describe('mergeDeep', () => {
       },
     };
 
-    expect(mergeDeep(target, [source], { replaceEmptyObjects: true })).toEqual(expectedResult);
+    expect(mergeDeep(target, [source], { replaceObjects: true })).toEqual(expectedResult);
   });
 
   test('it should deepmerge object replacing arrays', () => {
@@ -108,7 +108,7 @@ describe('mergeDeep', () => {
       },
     };
 
-    expect(mergeDeep(target, [source], { replaceEmptyArrays: true })).toEqual(expectedResult);
+    expect(mergeDeep(target, [source], { replaceArrays: true })).toEqual(expectedResult);
   });
 
   test('it should deepmerge object replacing objects and arrays', () => {
@@ -130,8 +130,6 @@ describe('mergeDeep', () => {
       },
     };
 
-    expect(mergeDeep(target, [source], { replaceEmptyArrays: true, replaceEmptyObjects: true })).toEqual(
-      expectedResult
-    );
+    expect(mergeDeep(target, [source], { replaceArrays: true, replaceObjects: true })).toEqual(expectedResult);
   });
 });

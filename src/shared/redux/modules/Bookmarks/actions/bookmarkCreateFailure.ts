@@ -1,17 +1,8 @@
 import { BOOKMARK_CREATE_FAILURE, BookmarkError, BookmarksActions } from 'Modules/Bookmarks/bookmarks.types';
 
-export const bookmarkCreateFailure = ({
-  error,
-  bookmarkId,
-}: {
-  error: BookmarkError;
-  bookmarkId: number;
-}): BookmarksActions => ({
+export const bookmarkCreateFailure = (errors: BookmarkError[]): BookmarksActions => ({
   type: BOOKMARK_CREATE_FAILURE,
-  data: {
-    bookmarkCreationLoading: false,
-    bookmarkCreationSuccess: false,
-    error,
-    bookmarkId,
+  payload: {
+    errors,
   },
 });

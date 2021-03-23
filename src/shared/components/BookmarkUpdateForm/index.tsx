@@ -2,12 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { bookmarkUpdate } from 'Modules/Bookmarks/actions/bookmarkUpdate';
-import { bookmarkUpdateReset } from 'Modules/Bookmarks/actions/bookmarkUpdateReset';
 import { loadBookmarks } from 'Modules/Bookmarks/actions/loadBookmarks';
 import { loadBookmarksByUserId } from 'Modules/Bookmarks/actions/loadBookmarksByUserId';
 import { selectBookmarksById } from 'Modules/Bookmarks/selectors/selectBookmarkById';
 import { selectBookmarksErrorLast } from 'Modules/Bookmarks/selectors/selectBookmarksErrorLast';
-import { selectBookmarkUpdateSuccess } from 'Modules/Bookmarks/selectors/selectBookmarkUpdateSuccess';
 import { RootState } from 'Modules/rootType';
 import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUserId';
 import { tagsSearchLoad } from 'Modules/Tags/actions/tagsSearchLoad';
@@ -30,7 +28,6 @@ interface Props {
 
 const BookmarkUpdateForm: React.FC<Props> = ({ closeModal }) => {
   const dispatch = useDispatch();
-  const bookmarkUpdateSuccess = useSelector(selectBookmarkUpdateSuccess);
   const bookmarkError = useSelector(selectBookmarksErrorLast);
   const allTags = useSelector(selectTagsAll);
   const tagsSearch = useSelector(selectTagsSearch);
@@ -90,11 +87,9 @@ const BookmarkUpdateForm: React.FC<Props> = ({ closeModal }) => {
       tags: transformedTags,
     };
 
-    dispatch(bookmarkUpdate(data));
-  };
+    const bookmark = await dispatch(bookmarkUpdate(data));
 
-  useEffect(() => {
-    if (!!bookmarkUpdateSuccess) {
+    if (!!bookmark?.id) {
       setSubmitInProcess(false);
       setSubmitSuccess(true);
       dispatch(loadBookmarks());
@@ -107,17 +102,13 @@ const BookmarkUpdateForm: React.FC<Props> = ({ closeModal }) => {
       return;
     }
     setSubmitInProcess(false);
-  }, [bookmarkUpdateSuccess]);
+  };
 
   useEffect(() => {
     setSubmitError(undefined);
     setTitleValue(bookmark?.title);
     setIsPrivateValue(bookmark?.isPrivate);
     setTagsValue(bookmark?.tags.map((item) => ({ label: item.name, value: item.name })));
-
-    return () => {
-      dispatch(bookmarkUpdateReset());
-    };
   }, []);
 
   useEffect(() => {

@@ -1,7 +1,7 @@
 import { Action, Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 
-import { BookmarksState, LinkStatistics, BOOKMARK_UPDATE_VOTE_SUCCESS } from 'Modules/Bookmarks/bookmarks.types';
+import { BOOKMARK_UPDATE_VOTE_SUCCESS, BookmarksState, LinkStatistics } from 'Modules/Bookmarks/bookmarks.types';
 
 interface Props {
   linkId: string | number;
@@ -19,7 +19,10 @@ export const voteBookmarkReceive = ({ linkId, statistics }: Props): ThunkAction<
     key,
     {
       ...value,
-      statistics,
+      statistics: {
+        ...statistics,
+        loading: undefined,
+      },
     },
   ]);
   const bookmarksStateFormatted: BookmarksState = {

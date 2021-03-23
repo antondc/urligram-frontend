@@ -2,4 +2,5 @@ import { BOOKMARK_UPDATE_REQUEST, BookmarksActions } from 'Modules/Bookmarks/boo
 
 export const bookmarkUpdateRequest = (): BookmarksActions => ({
   type: BOOKMARK_UPDATE_REQUEST,
+  payload: undefined,
 });

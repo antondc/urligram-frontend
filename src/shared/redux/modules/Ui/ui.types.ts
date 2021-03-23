@@ -13,7 +13,7 @@ export const types = {
 };
 
 export type UiBaseModal = {
-  type: 'modal' | 'popup';
+  type?: 'modal' | 'popup';
   mounted: boolean;
 };
 
@@ -34,76 +34,57 @@ export type UiState = {
 
 interface SwitchUserModal {
   type: typeof types.SWITCH_USER_MODAL;
-  payload: undefined;
+  payload: Partial<UiState>;
 }
 
 interface SwitchLanguagesModal {
   type: typeof types.SWITCH_LANGUAGES_MODAL;
-  payload: undefined;
+  payload: Partial<UiState>;
 }
 
 interface SwitchMessageModal {
   type: typeof types.SWITCH_MESSAGE_MODAL;
-  payload: undefined;
+  payload: Partial<UiState>;
 }
 
 interface SwitchLoginModal {
   type: typeof types.SWITCH_LOGIN_MODAL;
-  payload: {
-    mounted: boolean;
-  };
+  payload: Partial<UiState>;
 }
 
 interface SwitchWelcomeModal {
   type: typeof types.SWITCH_WELCOME_MODAL;
-  payload: {
-    mounted: boolean;
-  };
+  payload: Partial<UiState>;
 }
 
 interface SwitchSignUpModal {
   type: typeof types.SWITCH_SIGN_UP_MODAL;
-  payload: {
-    mounted: boolean;
-  };
+  payload: Partial<UiState>;
 }
 
 interface SwitchForgotPasswordModal {
   type: typeof types.SWITCH_FORGOT_PASSWORD_MODAL;
-  payload: {
-    mounted: boolean;
-  };
+  payload: Partial<UiState>;
 }
 
 interface SwitchResetPasswordModal {
   type: typeof types.SWITCH_RESET_PASSWORD_MODAL;
-  payload: {
-    mounted: boolean;
-  };
+  payload: Partial<UiState>;
 }
 
 interface SwitchBookmarkCreateModal {
   type: typeof types.SWITCH_BOOKMARK_CREATE_MODAL;
-  payload: {
-    bookmarkCreateModal: {
-      mounted: boolean;
-    };
-  };
+  payload: Partial<UiState>;
 }
 
 interface SwitchBookmarkUpdateModal {
   type: typeof types.SWITCH_BOOKMARK_UPDATE_MODAL;
-  payload: {
-    mounted: boolean;
-    bookmarkId: number;
-  };
+  payload: Partial<UiState>;
 }
 
 interface SwitchListModal {
   type: typeof types.SWITCH_LIST_MODAL;
-  payload: {
-    mounted: boolean;
-  };
+  payload: Partial<UiState>;
 }
 
 export type UiActions =

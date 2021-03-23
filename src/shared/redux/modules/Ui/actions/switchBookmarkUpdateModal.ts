@@ -7,9 +7,11 @@ export const switchBookmarkUpdateModal = ({
   mount: boolean;
   bookmarkId?: number;
 }): UiActions => ({
-  payload: {
-    mounted: mount,
-    bookmarkId,
-  },
   type: types.SWITCH_BOOKMARK_UPDATE_MODAL,
+  payload: {
+    bookmarkUpdateModal: {
+      mounted: mount,
+      bookmarkId,
+    },
+  },
 });

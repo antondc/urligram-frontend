@@ -8,7 +8,7 @@ export const bookmarkCreateSuccess = ({
   bookmark: BookmarkState;
 }): BookmarksActions => ({
   type: BOOKMARK_CREATE_SUCCESS,
-  data: {
+  payload: {
     originalBookmarkId,
     bookmark,
   },

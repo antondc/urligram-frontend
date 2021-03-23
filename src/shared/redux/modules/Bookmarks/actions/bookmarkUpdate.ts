@@ -1,10 +1,11 @@
-import { Action, Dispatch } from 'redux';
-import { ThunkAction } from 'redux-thunk';
+import { Dispatch } from 'redux';
 
 import { bookmarkUpdateFailure } from 'Modules/Bookmarks/actions/bookmarkUpdateFailure';
 import { bookmarkUpdateSuccess } from 'Modules/Bookmarks/actions/bookmarkUpdateSuccess';
-import { BookmarkUpdateRequest, BookmarkUpdateResponse } from 'Modules/Bookmarks/bookmarks.types';
+import { BookmarkState, BookmarkUpdateRequest, BookmarkUpdateResponse } from 'Modules/Bookmarks/bookmarks.types';
 import HttpClient from 'Services/HttpClient';
+import { AppThunk } from '../../..';
+import { RootState } from '../../rootType';
 import { bookmarkUpdateRequest } from './bookmarkUpdateRequest';
 
 export const bookmarkUpdate = ({
@@ -13,22 +14,29 @@ export const bookmarkUpdate = ({
   title,
   isPrivate,
   tags,
-}: BookmarkUpdateRequest): ThunkAction<any, any, any, Action> => async (dispatch: Dispatch<any>) => {
+}: BookmarkUpdateRequest): AppThunk<Promise<BookmarkState>> => async (
+  dispatch: Dispatch<any>,
+  getState: () => RootState
+): Promise<BookmarkState> => {
+  const { Bookmarks } = getState();
   try {
     dispatch(bookmarkUpdateRequest());
 
-    const { data: bookmarkData }: BookmarkUpdateResponse = await HttpClient.put(`/users/me/bookmarks/${bookmarkId}`, {
-      order,
-      title,
-      isPrivate,
-      tags,
-    });
+    const { data: bookmarkData } = await HttpClient.put<any, BookmarkUpdateResponse>(
+      `/users/me/bookmarks/${bookmarkId}`,
+      {
+        order,
+        title,
+        isPrivate,
+        tags,
+      }
+    );
     await dispatch(bookmarkUpdateSuccess({ bookmark: bookmarkData.attributes }));
+
+    return bookmarkData?.attributes;
   } catch (error) {
-    await dispatch(bookmarkUpdateFailure({ error }));
+    await dispatch(bookmarkUpdateFailure([...Bookmarks.errors, error]));
 
     throw new Error(error);
   }
-
-  return;
 };

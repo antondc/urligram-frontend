@@ -40,7 +40,7 @@ export class QueryStringWrapper {
     const alreadyParams = QueryStringWrapper.parseQueryString(queryString);
 
     const paramsEnhanced = mergeDeep<Record<string, unknown>>(alreadyParams, [newParams], {
-      replaceEmptyArrays: true,
+      replaceArrays: true,
     });
     const stringifiedParams = QueryStringWrapper.stringifyQueryParams(paramsEnhanced);
 
@@ -52,7 +52,7 @@ export class QueryStringWrapper {
     const alreadyParams = QueryStringWrapper.parseQueryString(queryString);
 
     const paramsEnhanced = mergeDeep<Record<string, unknown>>(newParams, [alreadyParams], {
-      replaceEmptyArrays: true,
+      replaceArrays: true,
     });
     const stringifiedParams = QueryStringWrapper.stringifyQueryParams(paramsEnhanced);
 

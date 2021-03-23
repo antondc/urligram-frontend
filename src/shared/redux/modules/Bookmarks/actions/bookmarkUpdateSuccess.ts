@@ -2,8 +2,7 @@ import { BOOKMARK_UPDATE_SUCCESS, BookmarksActions, BookmarkState } from 'Module
 
 export const bookmarkUpdateSuccess = ({ bookmark }: { bookmark: BookmarkState }): BookmarksActions => ({
   type: BOOKMARK_UPDATE_SUCCESS,
-  data: {
+  payload: {
     bookmark,
-    bookmarkUpdateSuccess: true,
   },
 });

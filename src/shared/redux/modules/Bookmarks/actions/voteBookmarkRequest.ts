@@ -1,7 +1,7 @@
 import { Action, Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 
-import { BookmarksState, BOOKMARK_UPDATE_VOTE_START } from 'Modules/Bookmarks/bookmarks.types';
+import { BOOKMARK_UPDATE_VOTE_START, BookmarksState } from 'Modules/Bookmarks/bookmarks.types';
 
 export const voteBookmarkRequest = ({ linkId }: { linkId: string | number }): ThunkAction<any, any, any, Action> => (
   dispatch: Dispatch,

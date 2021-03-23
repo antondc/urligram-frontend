@@ -1,18 +1,18 @@
-import { Action, Dispatch } from 'redux';
-import { ThunkAction } from 'redux-thunk';
+import { Dispatch } from 'redux';
 
-import { BookmarkGetItemResponse, BookmarksGetResponse, BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
+import { BookmarksGetResponse, BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
 import { RootState } from 'Modules/rootType';
 import { QueryStringWrapper } from 'Root/src/shared/services/QueryStringWrapper';
 import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
+import { AppThunk } from '../../..';
 import { receiveBookmarks } from './receiveBookmarks';
 import { requestBookmarks } from './requestBookmarks';
 
-export const loadBookmarksByUserId = (userId: string, size?: number): ThunkAction<any, any, any, Action> => async (
+export const loadBookmarksByUserId = (userId: string, size?: number): AppThunk<Promise<BookmarkState[]>> => async (
   dispatch: Dispatch,
   getState: () => RootState
-) => {
+): Promise<BookmarkState[]> => {
   try {
     const { Bookmarks: bookmarksState } = getState();
     const activeSort = bookmarksState?.meta?.sort;
@@ -25,13 +25,12 @@ export const loadBookmarksByUserId = (userId: string, size?: number): ThunkActio
 
     const apiEndpoint = `/users/${userId}/bookmarks?${queryStringUpdated}`;
 
-    const { meta, data = [] }: BookmarksGetResponse = await HttpClient.get(apiEndpoint);
+    const { meta, data = [] } = await HttpClient.get<void, BookmarksGetResponse>(apiEndpoint);
+
+    const bookmarksArray = data.map((item) => item.attributes);
 
     const bookmarksByKey = {
-      byKey: serializerFromArrayToByKey<BookmarkGetItemResponse, BookmarkState>({
-        data: data,
-        contentPath: 'attributes',
-      }),
+      byKey: serializerFromArrayToByKey<BookmarkState, BookmarkState>({ data: bookmarksArray }),
       currentIds: data.map((item) => item.id),
       meta: {
         totalItems: meta?.totalItems,
@@ -39,6 +38,8 @@ export const loadBookmarksByUserId = (userId: string, size?: number): ThunkActio
       },
     };
     dispatch(receiveBookmarks(bookmarksByKey));
+
+    return bookmarksArray;
   } catch (err) {
     throw new Error(err);
   }

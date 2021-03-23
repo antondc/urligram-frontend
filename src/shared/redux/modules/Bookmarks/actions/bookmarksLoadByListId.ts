@@ -1,15 +1,15 @@
-import { Action, Dispatch } from 'redux';
-import { ThunkAction } from 'redux-thunk';
+import { Dispatch } from 'redux';
 
 import { receiveBookmarks } from 'Modules/Bookmarks/actions/receiveBookmarks';
 import { requestBookmarks } from 'Modules/Bookmarks/actions/requestBookmarks';
-import { BookmarkGetItemResponse, BookmarksGetResponse, BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
+import { BookmarksGetResponse, BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
 import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
+import { AppThunk } from '../../..';
 
-export const bookmarksLoadByListId = (listId: number): ThunkAction<any, any, any, Action> => async (
+export const bookmarksLoadByListId = (listId: number): AppThunk<Promise<BookmarkState[]>> => async (
   dispatch: Dispatch
-) => {
+): Promise<BookmarkState[]> => {
   try {
     dispatch(requestBookmarks());
 
@@ -17,12 +17,10 @@ export const bookmarksLoadByListId = (listId: number): ThunkAction<any, any, any
       meta: { totalItems, sort },
       data: bookmarksData,
     }: BookmarksGetResponse = await HttpClient.get(`/lists/${listId}/bookmarks${window.location.search}`);
+    const bookmarksArray = bookmarksData.map((item) => item.attributes);
 
     const bookmarksByKey = {
-      byKey: serializerFromArrayToByKey<BookmarkGetItemResponse, BookmarkState>({
-        data: bookmarksData,
-        contentPath: 'attributes',
-      }),
+      byKey: serializerFromArrayToByKey<BookmarkState, BookmarkState>({ data: bookmarksArray }),
       currentIds: bookmarksData.map((item) => item.id),
       meta: {
         totalItems,
@@ -30,9 +28,9 @@ export const bookmarksLoadByListId = (listId: number): ThunkAction<any, any, any
       },
     };
     dispatch(receiveBookmarks(bookmarksByKey));
+
+    return bookmarksArray;
   } catch (err) {
     throw new Error(err);
   }
-
-  return;
 };

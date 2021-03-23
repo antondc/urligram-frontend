@@ -2,7 +2,7 @@ import { BOOKMARK_CREATE_REQUEST, BookmarksActions } from 'Modules/Bookmarks/boo
 
 export const bookmarkCreateRequest = (bookmarkId?: number): BookmarksActions => ({
   type: BOOKMARK_CREATE_REQUEST,
-  data: {
+  payload: {
     bookmarkId,
   },
 });
