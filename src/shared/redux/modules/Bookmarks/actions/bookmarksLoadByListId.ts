@@ -16,7 +16,7 @@ export const bookmarksLoadByListId = (listId: number): AppThunk<Promise<Bookmark
     const {
       meta: { totalItems, sort },
       data: bookmarksData,
-    }: BookmarksGetResponse = await HttpClient.get(`/lists/${listId}/bookmarks${window.location.search}`);
+    } = await HttpClient.get<any, BookmarksGetResponse>(`/lists/${listId}/bookmarks${window.location.search}`);
     const bookmarksArray = bookmarksData.map((item) => item.attributes);
 
     const bookmarksByKey = {

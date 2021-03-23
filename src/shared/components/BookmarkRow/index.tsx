@@ -39,7 +39,7 @@ const BookmarkRow: React.FC<Props> = ({ id }) => {
 
   const onBookmark = () => {
     if (!userBookmarked) {
-      dispatch(bookmarkCreate({ title, url, isPrivate: false, tags: tagsByName, bookmarkId: id }));
+      dispatch(bookmarkCreate({ title, url, isPrivate: false, tags: tagsByName }));
     } else {
       //
     }

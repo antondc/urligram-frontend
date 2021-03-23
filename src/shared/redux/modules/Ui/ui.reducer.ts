@@ -93,7 +93,7 @@ export const Ui = (state = initialState, action: UiActionsTypes): UiState => {
         screenLocked: !state.screenLocked,
         loginModal: {
           ...state.loginModal,
-          mounted: action.data.mounted,
+          mounted: action.payload.mounted,
         },
       });
     case SWITCH_WELCOME_MODAL:
@@ -101,7 +101,7 @@ export const Ui = (state = initialState, action: UiActionsTypes): UiState => {
         screenLocked: !state.screenLocked,
         welcomeModal: {
           ...state.welcomeModal,
-          mounted: action.data.mounted,
+          mounted: action.payload.mounted,
         },
       });
     case SWITCH_SIGN_UP_MODAL:
@@ -109,7 +109,7 @@ export const Ui = (state = initialState, action: UiActionsTypes): UiState => {
         screenLocked: !state.screenLocked,
         signUpModal: {
           ...state.signUpModal,
-          mounted: action.data.mounted,
+          mounted: action.payload.mounted,
         },
       });
     case SWITCH_FORGOT_PASSWORD_MODAL:
@@ -117,7 +117,7 @@ export const Ui = (state = initialState, action: UiActionsTypes): UiState => {
         screenLocked: !state.screenLocked,
         forgotPasswordModal: {
           ...state.forgotPasswordModal,
-          mounted: action.data.mounted,
+          mounted: action.payload.mounted,
         },
       });
     case SWITCH_RESET_PASSWORD_MODAL:
@@ -125,7 +125,7 @@ export const Ui = (state = initialState, action: UiActionsTypes): UiState => {
         screenLocked: !state.screenLocked,
         resetPasswordModal: {
           ...state.resetPasswordModal,
-          mounted: action.data.mounted,
+          mounted: action.payload.mounted,
         },
       });
     case SWITCH_BOOKMARK_CREATE_MODAL:
@@ -133,7 +133,7 @@ export const Ui = (state = initialState, action: UiActionsTypes): UiState => {
         screenLocked: !state.screenLocked,
         bookmarkCreateModal: {
           ...state.bookmarkCreateModal,
-          mounted: action.data.mounted,
+          mounted: action.payload.mounted,
         },
       });
     case SWITCH_BOOKMARK_UPDATE_MODAL:
@@ -141,8 +141,8 @@ export const Ui = (state = initialState, action: UiActionsTypes): UiState => {
         screenLocked: !state.screenLocked,
         bookmarkUpdateModal: {
           ...state.bookmarkUpdateModal,
-          mounted: action.data.mounted,
-          bookmarkId: action.data.bookmarkId,
+          mounted: action.payload.mounted,
+          bookmarkId: action.payload.bookmarkId,
         },
       });
     case SWITCH_LIST_MODAL:
@@ -150,7 +150,7 @@ export const Ui = (state = initialState, action: UiActionsTypes): UiState => {
         screenLocked: !state.screenLocked,
         listModal: {
           ...state.listModal,
-          mounted: action.data.mounted,
+          mounted: action.payload.mounted,
         },
       });
 

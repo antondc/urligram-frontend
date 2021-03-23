@@ -13,7 +13,7 @@ export const bookmarksLoadBySize = (size?: number): AppThunk<Promise<BookmarkSta
   try {
     dispatch(requestBookmarks());
 
-    const { data }: BookmarksGetResponse = await HttpClient.get<void, BookmarksGetResponse>('bookmarks', {
+    const { data } = await HttpClient.get<void, BookmarksGetResponse>('bookmarks', {
       params: {
         page: {
           size,

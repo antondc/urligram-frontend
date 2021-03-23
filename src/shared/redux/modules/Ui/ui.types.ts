@@ -44,49 +44,49 @@ interface SwitchMessageModal {
 
 interface SwitchLoginModal {
   type: typeof SWITCH_LOGIN_MODAL;
-  data: {
+  payload: {
     mounted: boolean;
   };
 }
 
 interface SwitchWelcomeModal {
   type: typeof SWITCH_WELCOME_MODAL;
-  data: {
+  payload: {
     mounted: boolean;
   };
 }
 
 interface SwitchSignUpModal {
   type: typeof SWITCH_SIGN_UP_MODAL;
-  data: {
+  payload: {
     mounted: boolean;
   };
 }
 
 interface SwitchForgotPasswordModal {
   type: typeof SWITCH_FORGOT_PASSWORD_MODAL;
-  data: {
+  payload: {
     mounted: boolean;
   };
 }
 
 interface SwitchResetPasswordModal {
   type: typeof SWITCH_RESET_PASSWORD_MODAL;
-  data: {
+  payload: {
     mounted: boolean;
   };
 }
 
 interface SwitchBookmarkCreateModal {
   type: typeof SWITCH_BOOKMARK_CREATE_MODAL;
-  data: {
+  payload: {
     mounted: boolean;
   };
 }
 
 interface SwitchBookmarkUpdateModal {
   type: typeof SWITCH_BOOKMARK_UPDATE_MODAL;
-  data: {
+  payload: {
     mounted: boolean;
     bookmarkId: number;
   };
@@ -94,7 +94,7 @@ interface SwitchBookmarkUpdateModal {
 
 interface SwitchListModal {
   type: typeof SWITCH_LIST_MODAL;
-  data: {
+  payload: {
     mounted: boolean;
   };
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { bookmarkCreate } from 'Modules/Bookmarks/actions/bookmarkCreate';
@@ -22,7 +22,8 @@ const LinkRow: React.FC<Props> = ({ id }) => {
   const dispatch = useDispatch();
   const currentLanguageSlug = useSelector(selectCurrentLanguageSlug);
   const link = useSelector((state: RootState) => selectLinkById(state, { id }));
-  const { linkId, title, url, tags = [], favicon, statistics, createdAt, users, loading } = link;
+  const [bookmarkingLoading, setBookmarkingLoading] = useState(false);
+  const { linkId, title, url, tags = [], favicon, statistics, createdAt, users } = link;
   const date = new LocaleFormattedDate(createdAt, currentLanguageSlug);
   const formattedDate = date.getLocaleFormattedDate();
   const isLogged = useSelector(selectSessionLoggedIn);
@@ -36,9 +37,11 @@ const LinkRow: React.FC<Props> = ({ id }) => {
     dispatch(voteLink({ vote, linkId: id, userId: sessionId }));
   };
 
-  const onBookmark = () => {
+  const onBookmark = async () => {
     if (!userBookmarked) {
-      dispatch(bookmarkCreate({ title, url, isPrivate: false, tags: tagsByName, linkId: id }));
+      setBookmarkingLoading(true);
+      await dispatch(bookmarkCreate({ title, url, isPrivate: false, tags: tagsByName, linkId: id }));
+      setBookmarkingLoading(false);
     } else {
       //
     }
@@ -58,7 +61,7 @@ const LinkRow: React.FC<Props> = ({ id }) => {
       onBookmark={onBookmark}
       createdAt={formattedDate}
       userBookmarked={userBookmarked}
-      loading={loading}
+      loading={bookmarkingLoading}
     />
   );
 };

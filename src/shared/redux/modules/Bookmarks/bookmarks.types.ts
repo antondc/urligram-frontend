@@ -126,17 +126,12 @@ export interface BookmarkVoteSuccessAction {
 
 export interface BookmarkCreateRequestAction {
   type: typeof BOOKMARK_CREATE_REQUEST;
-  payload: {
-    bookmarkId?: number;
-  };
+  payload: BookmarksState;
 }
 
 export interface BookmarkCreateSuccessAction {
   type: typeof BOOKMARK_CREATE_SUCCESS;
-  payload: {
-    originalBookmarkId: number;
-    bookmark: BookmarkState;
-  };
+  payload: BookmarksState;
 }
 
 export interface BookmarkCreateFailureAction {

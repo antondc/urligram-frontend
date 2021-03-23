@@ -1,8 +1,8 @@
 import { SWITCH_RESET_PASSWORD_MODAL, UiActionsTypes } from '../ui.types';
 
 export const switchResetPasswordModal = (mount: boolean): UiActionsTypes => ({
-  data: {
+  type: SWITCH_RESET_PASSWORD_MODAL,
+  payload: {
     mounted: mount,
   },
-  type: SWITCH_RESET_PASSWORD_MODAL,
 });

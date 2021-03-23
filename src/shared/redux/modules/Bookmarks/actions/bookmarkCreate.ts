@@ -11,7 +11,6 @@ import { RootState } from '../../rootType';
 import { bookmarkCreateRequest } from './bookmarkCreateRequest';
 
 export const bookmarkCreate = ({
-  bookmarkId,
   linkId,
   title,
   url,
@@ -24,15 +23,22 @@ export const bookmarkCreate = ({
   const { Bookmarks } = getState();
   try {
     if (linkId) dispatch(linkLoadByIdRequest(linkId));
-    dispatch(bookmarkCreateRequest(bookmarkId));
+    dispatch(bookmarkCreateRequest());
 
-    const { data: bookmarkData }: BookmarkCreateResponse = await HttpClient.post('/users/me/bookmarks', {
+    const { data: bookmarkData } = await HttpClient.post<void, BookmarkCreateResponse>('/users/me/bookmarks', {
       title,
       url,
       isPrivate,
       tags,
     });
-    await dispatch(bookmarkCreateSuccess({ originalBookmarkId: bookmarkId, bookmark: bookmarkData.attributes }));
+
+    await dispatch(
+      bookmarkCreateSuccess({
+        byKey: {
+          [bookmarkData.attributes?.id]: bookmarkData.attributes,
+        },
+      })
+    );
     await dispatch(linkLoadById(bookmarkData?.attributes?.linkId));
 
     return bookmarkData?.attributes;
