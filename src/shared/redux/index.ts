@@ -1,22 +1,9 @@
-import { AnyAction, applyMiddleware, combineReducers, compose, createStore } from 'redux';
-import thunk, { ThunkAction } from 'redux-thunk';
+import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
+import thunk from 'redux-thunk';
 
-import { RootState } from './modules/rootType';
 import { RootReducers } from './rootReducers';
 
 const middleware = [thunk];
-
-// Type for thunks
-export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, AnyAction>;
-
-// Declaring Dispatch type to enable return types, as redux Dispatch only consider void return types for actions
-declare module 'redux' {
-  export interface Dispatch<A extends Action = AnyAction> {
-    <TReturnType = any, TState = any, TExtraThunkArg = any>(
-      thunkAction: ThunkAction<TReturnType, TState, TExtraThunkArg, A>
-    ): TReturnType;
-  }
-}
 
 declare global {
   interface Window {

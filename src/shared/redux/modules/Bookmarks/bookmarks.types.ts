@@ -1,17 +1,15 @@
-export const types = {
-  LOAD_BOOKMARKS_STARTED: 'LOAD_BOOKMARKS_STARTED',
-  LOAD_BOOKMARKS_SUCCESS: 'LOAD_BOOKMARKS_SUCCESS',
-  VOTE_UPDATE_BOOKMARK_SUCCESS: 'VOTE_UPDATE_BOOKMARK_SUCCESS',
-  VOTE_UPDATE_BOOKMARK_START: 'VOTE_UPDATE_BOOKMARK_START',
-  BOOKMARK_CREATE_REQUEST: 'BOOKMARK_CREATE_REQUEST',
-  BOOKMARK_CREATE_SUCCESS: 'BOOKMARK_CREATE_SUCCESS',
-  BOOKMARK_CREATE_FAILURE: 'BOOKMARK_CREATE_FAILURE',
-  BOOKMARK_CREATE_RESET: 'BOOKMARK_CREATE_RESET',
-  BOOKMARK_UPDATE_REQUEST: 'BOOKMARK_UPDATE_REQUEST',
-  BOOKMARK_UPDATE_SUCCESS: 'BOOKMARK_UPDATE_SUCCESS',
-  BOOKMARK_UPDATE_FAILURE: 'BOOKMARK_UPDATE_FAILURE',
-  BOOKMARK_UPDATE_RESET: 'BOOKMARK_UPDATE_RESET',
-};
+export const LOAD_BOOKMARKS_STARTED = 'LOAD_BOOKMARKS_STARTED';
+export const LOAD_BOOKMARKS_SUCCESS = 'LOAD_BOOKMARKS_SUCCESS';
+export const VOTE_UPDATE_BOOKMARK_SUCCESS = 'VOTE_UPDATE_BOOKMARK_SUCCESS';
+export const VOTE_UPDATE_BOOKMARK_START = 'VOTE_UPDATE_BOOKMARK_START';
+export const BOOKMARK_CREATE_REQUEST = 'BOOKMARK_CREATE_REQUEST';
+export const BOOKMARK_CREATE_SUCCESS = 'BOOKMARK_CREATE_SUCCESS';
+export const BOOKMARK_CREATE_FAILURE = 'BOOKMARK_CREATE_FAILURE';
+export const BOOKMARK_CREATE_RESET = 'BOOKMARK_CREATE_RESET';
+export const BOOKMARK_UPDATE_REQUEST = 'BOOKMARK_UPDATE_REQUEST';
+export const BOOKMARK_UPDATE_SUCCESS = 'BOOKMARK_UPDATE_SUCCESS';
+export const BOOKMARK_UPDATE_FAILURE = 'BOOKMARK_UPDATE_FAILURE';
+export const BOOKMARK_UPDATE_RESET = 'BOOKMARK_UPDATE_RESET';
 
 export interface BookmarkError extends Error {
   field: string;
@@ -57,6 +55,8 @@ export interface BookmarksState {
     sort?: string;
   };
   errors?: BookmarkError[];
+  bookmarkCreationLoading?: boolean;
+  bookmarkCreationSuccess?: boolean;
   bookmarkUpdateSuccess?: boolean;
 }
 
@@ -91,60 +91,55 @@ export interface BookmarkCreateResponse {
   };
 }
 
-interface LoadBookmarksRequestAction {
-  type: typeof types.LOAD_BOOKMARKS_STARTED;
-  payload: {
+interface RequestBookmarksAction {
+  type: typeof LOAD_BOOKMARKS_STARTED;
+  data: {
     loading: true;
-    meta: {
-      sort: undefined;
-    };
   };
 }
 
-interface LoadBookmarksSuccesAction {
-  type: typeof types.LOAD_BOOKMARKS_SUCCESS;
-  payload: BookmarksState;
+interface ReceiveBookmarksAction {
+  type: typeof LOAD_BOOKMARKS_SUCCESS;
+  data: BookmarksState;
 }
 
 export interface VoteBookmarkRequest {
-  type: typeof types.VOTE_UPDATE_BOOKMARK_START;
+  type: typeof VOTE_UPDATE_BOOKMARK_START;
   payload: BookmarksState;
 }
 
 export interface VoteBookmarkReceive {
-  type: typeof types.VOTE_UPDATE_BOOKMARK_SUCCESS;
+  type: typeof VOTE_UPDATE_BOOKMARK_SUCCESS;
   payload: BookmarkState;
 }
 
 export interface BookmarkCreateRequestAction {
-  type: typeof types.BOOKMARK_CREATE_REQUEST;
-  payload: {
-    byKey: {
-      [key: number]: {
-        bookmarkingLoading: true;
-      };
-    };
+  type: typeof BOOKMARK_CREATE_REQUEST;
+  data: {
+    bookmarkId?: number;
   };
 }
 
 export interface BookmarkCreateSuccessAction {
-  type: typeof types.BOOKMARK_CREATE_SUCCESS;
-  payload: {
-    byKey: {
-      [key: number]: {
-        users: string[];
-        bookmarkingLoading: undefined;
-      };
-    };
+  type: typeof BOOKMARK_CREATE_SUCCESS;
+  data: {
+    originalBookmarkId: number;
+    bookmark: BookmarkState;
   };
 }
 
 export interface BookmarkCreateFailureAction {
-  type: typeof types.BOOKMARK_CREATE_FAILURE;
-  payload: {
+  type: typeof BOOKMARK_CREATE_FAILURE;
+  data: {
+    bookmarkCreationLoading: false;
+    bookmarkCreationSuccess: false;
     bookmarkId: number;
     error: BookmarkError;
   };
+}
+
+export interface BookmarkCreateResetAction {
+  type: typeof BOOKMARK_CREATE_RESET;
 }
 
 export interface BookmarkUpdateRequest {
@@ -164,43 +159,41 @@ export interface BookmarkUpdateResponse {
 }
 
 export interface BookmarkUpdateRequestAction {
-  type: typeof types.BOOKMARK_UPDATE_REQUEST;
-  payload: undefined;
+  type: typeof BOOKMARK_UPDATE_REQUEST;
 }
 
 export interface BookmarkUpdateSuccessAction {
-  type: typeof types.BOOKMARK_UPDATE_SUCCESS;
-  payload: {
-    byKey: {
-      [key: number]: BookmarkState;
-    };
+  type: typeof BOOKMARK_UPDATE_SUCCESS;
+  data: {
+    bookmark: BookmarkState;
     bookmarkUpdateSuccess: true;
   };
 }
 
 export interface BookmarkUpdateFailureAction {
-  type: typeof types.BOOKMARK_UPDATE_FAILURE;
-  payload: {
-    errors: BookmarkError[];
+  type: typeof BOOKMARK_UPDATE_FAILURE;
+  data: {
+    error: BookmarkError;
     bookmarkUpdateSuccess: false;
   };
 }
 
 export interface BookmarkUpdateResetAction {
-  type: typeof types.BOOKMARK_UPDATE_RESET;
-  payload: {
+  type: typeof BOOKMARK_UPDATE_RESET;
+  data: {
     bookmarkUpdateSuccess: undefined;
   };
 }
 
-export type BookmarksActions =
-  | LoadBookmarksRequestAction
-  | LoadBookmarksSuccesAction
+export type BookmarksActionsTypes =
+  | RequestBookmarksAction
+  | ReceiveBookmarksAction
   | VoteBookmarkRequest
   | VoteBookmarkReceive
   | BookmarkCreateRequestAction
   | BookmarkCreateSuccessAction
   | BookmarkCreateFailureAction
+  | BookmarkCreateResetAction
   | BookmarkUpdateRequestAction
   | BookmarkUpdateSuccessAction
   | BookmarkUpdateFailureAction

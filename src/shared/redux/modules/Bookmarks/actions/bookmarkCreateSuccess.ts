@@ -1,4 +1,4 @@
-import { BookmarksActions, BookmarkState, types } from 'Modules/Bookmarks/bookmarks.types';
+import { BOOKMARK_CREATE_SUCCESS, BookmarksActionsTypes, BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
 
 export const bookmarkCreateSuccess = ({
   originalBookmarkId,
@@ -6,14 +6,10 @@ export const bookmarkCreateSuccess = ({
 }: {
   originalBookmarkId: number;
   bookmark: BookmarkState;
-}): BookmarksActions => ({
-  type: types.BOOKMARK_CREATE_SUCCESS,
-  payload: {
-    byKey: {
-      [originalBookmarkId]: {
-        users: bookmark.users,
-        bookmarkingLoading: undefined,
-      },
-    },
+}): BookmarksActionsTypes => ({
+  type: BOOKMARK_CREATE_SUCCESS,
+  data: {
+    originalBookmarkId,
+    bookmark,
   },
 });

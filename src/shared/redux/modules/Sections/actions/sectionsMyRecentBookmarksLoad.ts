@@ -1,7 +1,7 @@
 import { Action, Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 
-import { loadBookmarksSuccess } from 'Modules/Bookmarks/actions/loadBookmarksSuccess';
+import { receiveBookmarks } from 'Modules/Bookmarks/actions/receiveBookmarks';
 import { BookmarkState, ReceiveBookmarkItem, ReceiveBookmarksResponse } from 'Modules/Bookmarks/bookmarks.types';
 import { serializerFromArrayToByKey } from 'Root/src/shared/tools/utils/serializers/serializerFromArrayToByKey';
 import HttpClient from 'Services/HttpClient';
@@ -25,7 +25,7 @@ export const sectionsMyRecentBookmarksLoad = (sessionId: string): ThunkAction<an
       }),
     };
 
-    dispatch(loadBookmarksSuccess(myBookmarksByKey));
+    dispatch(receiveBookmarks(myBookmarksByKey));
 
     dispatch(
       sectionsMyRecentBookmarksReceive({

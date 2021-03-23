@@ -1,6 +1,5 @@
-import { BookmarksActions, types } from 'Modules/Bookmarks/bookmarks.types';
+import { BOOKMARK_UPDATE_REQUEST, BookmarksActionsTypes } from 'Modules/Bookmarks/bookmarks.types';
 
-export const bookmarkUpdateRequest = (): BookmarksActions => ({
-  type: types.BOOKMARK_UPDATE_REQUEST,
-  payload: undefined,
+export const bookmarkUpdateRequest = (): BookmarksActionsTypes => ({
+  type: BOOKMARK_UPDATE_REQUEST,
 });

@@ -6,7 +6,7 @@ import { RootState } from 'Modules/rootType';
 import { QueryStringWrapper } from 'Root/src/shared/services/QueryStringWrapper';
 import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
-import { loadBookmarksSuccess } from './loadBookmarksSuccess';
+import { receiveBookmarks } from './receiveBookmarks';
 import { requestBookmarks } from './requestBookmarks';
 
 export const loadBookmarksByUserId = (userId: string, size?: number): ThunkAction<any, any, any, Action> => async (
@@ -37,9 +37,8 @@ export const loadBookmarksByUserId = (userId: string, size?: number): ThunkActio
         totalItems: meta?.totalItems,
         sort: meta?.sort,
       },
-      loading: false,
     };
-    dispatch(loadBookmarksSuccess(bookmarksByKey));
+    dispatch(receiveBookmarks(bookmarksByKey));
   } catch (err) {
     throw new Error(err);
   }

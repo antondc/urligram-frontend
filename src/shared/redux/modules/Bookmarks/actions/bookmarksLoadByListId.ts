@@ -1,7 +1,7 @@
 import { Action, Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 
-import { loadBookmarksSuccess } from 'Modules/Bookmarks/actions/loadBookmarksSuccess';
+import { receiveBookmarks } from 'Modules/Bookmarks/actions/receiveBookmarks';
 import { requestBookmarks } from 'Modules/Bookmarks/actions/requestBookmarks';
 import { BookmarkState, ReceiveBookmarkItem, ReceiveBookmarksResponse } from 'Modules/Bookmarks/bookmarks.types';
 import HttpClient from 'Services/HttpClient';
@@ -29,7 +29,7 @@ export const bookmarksLoadByListId = (listId: number): ThunkAction<any, any, any
         sort,
       },
     };
-    dispatch(loadBookmarksSuccess(bookmarksByKey));
+    dispatch(receiveBookmarks(bookmarksByKey));
   } catch (err) {
     throw new Error(err);
   }

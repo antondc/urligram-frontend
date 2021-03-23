@@ -4,7 +4,7 @@ import { ThunkAction } from 'redux-thunk';
 import { BookmarkState, ReceiveBookmarkItem, ReceiveBookmarksResponse } from 'Modules/Bookmarks/bookmarks.types';
 import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
-import { loadBookmarksSuccess } from './loadBookmarksSuccess';
+import { receiveBookmarks } from './receiveBookmarks';
 import { requestBookmarks } from './requestBookmarks';
 
 export const bookmarksLoadBySize = (size?: number): ThunkAction<any, any, any, Action> => async (
@@ -28,7 +28,7 @@ export const bookmarksLoadBySize = (size?: number): ThunkAction<any, any, any, A
       }),
       currentIds: data.map((item) => item.id),
     };
-    dispatch(loadBookmarksSuccess(bookmarksByKey));
+    dispatch(receiveBookmarks(bookmarksByKey));
   } catch (err) {
     throw new Error(err);
   }
