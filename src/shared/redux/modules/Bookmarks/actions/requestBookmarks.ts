@@ -1,7 +1,7 @@
-import { BookmarksActionsTypes, LOAD_BOOKMARKS_STARTED } from 'Modules/Bookmarks/bookmarks.types';
+import { BookmarksActions, BOOKMARKS_LOAD_REQUEST } from 'Modules/Bookmarks/bookmarks.types';
 
-export const requestBookmarks = (): BookmarksActionsTypes => ({
-  type: LOAD_BOOKMARKS_STARTED,
+export const requestBookmarks = (): BookmarksActions => ({
+  type: BOOKMARKS_LOAD_REQUEST,
   data: {
     loading: true,
   },

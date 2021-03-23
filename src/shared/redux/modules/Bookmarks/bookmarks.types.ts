@@ -1,7 +1,7 @@
-export const LOAD_BOOKMARKS_STARTED = 'LOAD_BOOKMARKS_STARTED';
-export const LOAD_BOOKMARKS_SUCCESS = 'LOAD_BOOKMARKS_SUCCESS';
-export const VOTE_UPDATE_BOOKMARK_SUCCESS = 'VOTE_UPDATE_BOOKMARK_SUCCESS';
-export const VOTE_UPDATE_BOOKMARK_START = 'VOTE_UPDATE_BOOKMARK_START';
+export const BOOKMARKS_LOAD_REQUEST = 'BOOKMARKS_LOAD_REQUEST';
+export const BOOKMARKS_LOAD_SUCCESS = 'BOOKMARKS_LOAD_SUCCESS';
+export const BOOKMARK_UPDATE_VOTE_SUCCESS = 'BOOKMARK_UPDATE_VOTE_SUCCESS';
+export const BOOKMARK_UPDATE_VOTE_START = 'BOOKMARK_UPDATE_VOTE_START';
 export const BOOKMARK_CREATE_REQUEST = 'BOOKMARK_CREATE_REQUEST';
 export const BOOKMARK_CREATE_SUCCESS = 'BOOKMARK_CREATE_SUCCESS';
 export const BOOKMARK_CREATE_FAILURE = 'BOOKMARK_CREATE_FAILURE';
@@ -60,14 +60,14 @@ export interface BookmarksState {
   bookmarkUpdateSuccess?: boolean;
 }
 
-export interface ReceiveBookmarkItem {
+export interface BookmarkGetItemResponse {
   type: 'bookmark';
   id: number;
   attributes: BookmarkState;
 }
 
-export interface ReceiveBookmarksResponse {
-  data: ReceiveBookmarkItem[];
+export interface BookmarksGetResponse {
+  data: BookmarkGetItemResponse[];
   meta: {
     totalItems: number;
     sort: string;
@@ -91,25 +91,35 @@ export interface BookmarkCreateResponse {
   };
 }
 
-interface RequestBookmarksAction {
-  type: typeof LOAD_BOOKMARKS_STARTED;
+export interface BookmarkUpdateRequest {
+  bookmarkId: number;
+  order: number;
+  title: string;
+  isPrivate: boolean;
+  tags: {
+    tag: string;
+  }[];
+}
+
+interface BookmarksLoadRequestAction {
+  type: typeof BOOKMARKS_LOAD_REQUEST;
   data: {
     loading: true;
   };
 }
 
-interface ReceiveBookmarksAction {
-  type: typeof LOAD_BOOKMARKS_SUCCESS;
+interface BookmarksLoadSuccessAction {
+  type: typeof BOOKMARKS_LOAD_SUCCESS;
   data: BookmarksState;
 }
 
-export interface VoteBookmarkRequest {
-  type: typeof VOTE_UPDATE_BOOKMARK_START;
+export interface BookmarkVoteRequestAction {
+  type: typeof BOOKMARK_UPDATE_VOTE_START;
   payload: BookmarksState;
 }
 
-export interface VoteBookmarkReceive {
-  type: typeof VOTE_UPDATE_BOOKMARK_SUCCESS;
+export interface BookmarkVoteSuccessAction {
+  type: typeof BOOKMARK_UPDATE_VOTE_SUCCESS;
   payload: BookmarkState;
 }
 
@@ -140,16 +150,6 @@ export interface BookmarkCreateFailureAction {
 
 export interface BookmarkCreateResetAction {
   type: typeof BOOKMARK_CREATE_RESET;
-}
-
-export interface BookmarkUpdateRequest {
-  bookmarkId: number;
-  order: number;
-  title: string;
-  isPrivate: boolean;
-  tags: {
-    tag: string;
-  }[];
 }
 
 export interface BookmarkUpdateResponse {
@@ -185,11 +185,11 @@ export interface BookmarkUpdateResetAction {
   };
 }
 
-export type BookmarksActionsTypes =
-  | RequestBookmarksAction
-  | ReceiveBookmarksAction
-  | VoteBookmarkRequest
-  | VoteBookmarkReceive
+export type BookmarksActions =
+  | BookmarksLoadRequestAction
+  | BookmarksLoadSuccessAction
+  | BookmarkVoteRequestAction
+  | BookmarkVoteSuccessAction
   | BookmarkCreateRequestAction
   | BookmarkCreateSuccessAction
   | BookmarkCreateFailureAction

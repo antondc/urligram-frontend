@@ -7,12 +7,12 @@ import {
   BOOKMARK_UPDATE_REQUEST,
   BOOKMARK_UPDATE_RESET,
   BOOKMARK_UPDATE_SUCCESS,
-  BookmarksActionsTypes,
+  BOOKMARK_UPDATE_VOTE_START,
+  BOOKMARK_UPDATE_VOTE_SUCCESS,
+  BOOKMARKS_LOAD_REQUEST,
+  BOOKMARKS_LOAD_SUCCESS,
+  BookmarksActions,
   BookmarksState,
-  LOAD_BOOKMARKS_STARTED,
-  LOAD_BOOKMARKS_SUCCESS,
-  VOTE_UPDATE_BOOKMARK_START,
-  VOTE_UPDATE_BOOKMARK_SUCCESS,
 } from './bookmarks.types';
 
 export const initialState: BookmarksState = {
@@ -20,9 +20,9 @@ export const initialState: BookmarksState = {
   errors: [],
 };
 
-export const Bookmarks = (state = initialState, action: BookmarksActionsTypes): BookmarksState => {
+export const Bookmarks = (state = initialState, action: BookmarksActions): BookmarksState => {
   switch (action.type) {
-    case LOAD_BOOKMARKS_STARTED:
+    case BOOKMARKS_LOAD_REQUEST:
       return Object.assign({}, state, {
         ...state,
         loading: true,
@@ -32,7 +32,7 @@ export const Bookmarks = (state = initialState, action: BookmarksActionsTypes): 
         },
       });
 
-    case LOAD_BOOKMARKS_SUCCESS:
+    case BOOKMARKS_LOAD_SUCCESS:
       return Object.assign({}, state, {
         ...state,
         byKey: {
@@ -47,13 +47,13 @@ export const Bookmarks = (state = initialState, action: BookmarksActionsTypes): 
         },
       });
 
-    case VOTE_UPDATE_BOOKMARK_START:
+    case BOOKMARK_UPDATE_VOTE_START:
       return Object.assign({}, state, {
         ...state,
         ...action.payload,
       });
 
-    case VOTE_UPDATE_BOOKMARK_SUCCESS:
+    case BOOKMARK_UPDATE_VOTE_SUCCESS:
       return Object.assign({}, state, {
         ...state,
         ...action.payload,

@@ -1,7 +1,7 @@
 import { Action, Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 
-import { BookmarkState, ReceiveBookmarkItem, ReceiveBookmarksResponse } from 'Modules/Bookmarks/bookmarks.types';
+import { BookmarkGetItemResponse, BookmarksGetResponse, BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
 import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
 import { receiveBookmarks } from './receiveBookmarks';
@@ -13,7 +13,7 @@ export const bookmarksLoadBySize = (size?: number): ThunkAction<any, any, any, A
   try {
     dispatch(requestBookmarks());
 
-    const { data }: ReceiveBookmarksResponse = await HttpClient.get('bookmarks', {
+    const { data }: BookmarksGetResponse = await HttpClient.get('bookmarks', {
       params: {
         page: {
           size,
@@ -22,7 +22,7 @@ export const bookmarksLoadBySize = (size?: number): ThunkAction<any, any, any, A
     });
 
     const bookmarksByKey = {
-      byKey: serializerFromArrayToByKey<ReceiveBookmarkItem, BookmarkState>({
+      byKey: serializerFromArrayToByKey<BookmarkGetItemResponse, BookmarkState>({
         data: data,
         contentPath: 'attributes',
       }),

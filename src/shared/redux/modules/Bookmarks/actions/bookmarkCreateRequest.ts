@@ -1,6 +1,6 @@
-import { BOOKMARK_CREATE_REQUEST, BookmarksActionsTypes } from 'Modules/Bookmarks/bookmarks.types';
+import { BOOKMARK_CREATE_REQUEST, BookmarksActions } from 'Modules/Bookmarks/bookmarks.types';
 
-export const bookmarkCreateRequest = (bookmarkId?: number): BookmarksActionsTypes => ({
+export const bookmarkCreateRequest = (bookmarkId?: number): BookmarksActions => ({
   type: BOOKMARK_CREATE_REQUEST,
   data: {
     bookmarkId,

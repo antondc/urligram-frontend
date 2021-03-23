@@ -1,6 +1,6 @@
-import { BOOKMARK_UPDATE_SUCCESS, BookmarksActionsTypes, BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
+import { BOOKMARK_UPDATE_SUCCESS, BookmarksActions, BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
 
-export const bookmarkUpdateSuccess = ({ bookmark }: { bookmark: BookmarkState }): BookmarksActionsTypes => ({
+export const bookmarkUpdateSuccess = ({ bookmark }: { bookmark: BookmarkState }): BookmarksActions => ({
   type: BOOKMARK_UPDATE_SUCCESS,
   data: {
     bookmark,

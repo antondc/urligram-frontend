@@ -1,10 +1,10 @@
 import { stringify } from 'qs';
 
 import {
+  BookmarkGetItemResponse,
+  BookmarksGetResponse,
   BookmarksState,
   BookmarkState,
-  ReceiveBookmarkItem,
-  ReceiveBookmarksResponse,
 } from 'Modules/Bookmarks/bookmarks.types';
 import { RequestParameters } from 'Root/src/server/routes/allRoutes';
 import HttpClient from 'Services/HttpClient';
@@ -15,11 +15,11 @@ export const initialBookmarksLoader = async ({ query }: RequestParameters = {}):
 }> => {
   const APIBaseEndpoint = '/bookmarks';
 
-  const { data }: ReceiveBookmarksResponse = await HttpClient.get(APIBaseEndpoint + '?' + stringify(query));
+  const { data }: BookmarksGetResponse = await HttpClient.get(APIBaseEndpoint + '?' + stringify(query));
 
   const result = {
     Bookmarks: {
-      byKey: serializerFromArrayToByKey<ReceiveBookmarkItem, BookmarkState>({
+      byKey: serializerFromArrayToByKey<BookmarkGetItemResponse, BookmarkState>({
         data: data,
         contentPath: 'attributes',
       }),
