@@ -1,6 +1,5 @@
-import { types, UiActions } from '../ui.types';
+import { SWITCH_MESSAGE_MODAL, UiActionsTypes } from '../ui.types';
 
-export const switchMessageModal = (): UiActions => ({
-  type: types.SWITCH_MESSAGE_MODAL,
-  payload: undefined,
+export const switchMessageModal = (): UiActionsTypes => ({
+  type: SWITCH_MESSAGE_MODAL,
 });

@@ -1,10 +1,8 @@
-import { types, UiActions } from '../ui.types';
+import { SWITCH_RESET_PASSWORD_MODAL, UiActionsTypes } from '../ui.types';
 
-export const switchResetPasswordModal = (mount: boolean): UiActions => ({
-  type: types.SWITCH_RESET_PASSWORD_MODAL,
-  payload: {
-    resetPasswordModal: {
-      mounted: mount,
-    },
+export const switchResetPasswordModal = (mount: boolean): UiActionsTypes => ({
+  data: {
+    mounted: mount,
   },
+  type: SWITCH_RESET_PASSWORD_MODAL,
 });

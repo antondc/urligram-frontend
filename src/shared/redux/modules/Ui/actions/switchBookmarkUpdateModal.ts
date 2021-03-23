@@ -1,4 +1,4 @@
-import { types, UiActions } from '../ui.types';
+import { SWITCH_BOOKMARK_UPDATE_MODAL, UiActionsTypes } from '../ui.types';
 
 export const switchBookmarkUpdateModal = ({
   mount,
@@ -6,12 +6,10 @@ export const switchBookmarkUpdateModal = ({
 }: {
   mount: boolean;
   bookmarkId?: number;
-}): UiActions => ({
-  type: types.SWITCH_BOOKMARK_UPDATE_MODAL,
-  payload: {
-    bookmarkUpdateModal: {
-      mounted: mount,
-      bookmarkId,
-    },
+}): UiActionsTypes => ({
+  data: {
+    mounted: mount,
+    bookmarkId,
   },
+  type: SWITCH_BOOKMARK_UPDATE_MODAL,
 });

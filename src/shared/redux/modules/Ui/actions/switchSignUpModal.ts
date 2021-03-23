@@ -1,10 +1,8 @@
-import { types, UiActions } from '../ui.types';
+import { SWITCH_SIGN_UP_MODAL, UiActionsTypes } from '../ui.types';
 
-export const switchSignUpModal = (mount: boolean): UiActions => ({
-  type: types.SWITCH_SIGN_UP_MODAL,
-  payload: {
-    signUpModal: {
-      mounted: mount,
-    },
+export const switchSignUpModal = (mount: boolean): UiActionsTypes => ({
+  data: {
+    mounted: mount,
   },
+  type: SWITCH_SIGN_UP_MODAL,
 });
