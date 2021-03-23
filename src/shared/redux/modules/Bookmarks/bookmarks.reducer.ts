@@ -1,5 +1,3 @@
-import merge from 'lodash/merge';
-
 import { BookmarksState, types } from './bookmarks.types';
 
 export const initialState: BookmarksState = {
@@ -8,4 +6,4 @@ export const initialState: BookmarksState = {
 };
 
 export const Bookmarks = (state = initialState, action: Record<string, any>): typeof initialState =>
-  Object.hasOwnProperty.call(types, action.type) ? merge({}, state, action.payload) : state;
+  Object.hasOwnProperty.call(types, action.type) ? Object.assign({}, state, action.payload) : state;

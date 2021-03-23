@@ -2,62 +2,136 @@
 
 import { mergeDeep } from './mergeDeep';
 
+const target = {
+  a: 1,
+  b: {
+    c: 1,
+    d: [1, 2, 3],
+    e: {
+      f: {
+        g: 1,
+        h: 2,
+      },
+    },
+  },
+};
+
 describe('mergeDeep', () => {
-  test('it should deepmerge object properties and values', () => {
-    const object1 = {
+  test('it should deepmerge without replacing objects nor arrays', () => {
+    const source = {
       a: 1,
       b: {
         c: 1,
-      },
-    };
-    const object2 = {
-      b: {
-        d: {
-          e: {
-            f: 1,
-          },
-        },
-      },
-    };
-    const mergedObject = {
-      a: 1,
-      b: {
-        c: 1,
-        d: {
-          e: {
-            f: 1,
+        d: [1000],
+        e: {
+          f: {
+            i: 3,
           },
         },
       },
     };
 
-    expect(mergeDeep(object1, object2)).toEqual(mergedObject);
+    const expectedResult = {
+      a: 1,
+      b: {
+        c: 1,
+        d: [1, 2, 3, 1000],
+        e: {
+          f: {
+            g: 1,
+            h: 2,
+            i: 3,
+          },
+        },
+      },
+    };
+
+    expect(mergeDeep(target, [source])).toEqual(expectedResult);
   });
 
-  test('it should replace arrays', () => {
-    const object1 = {
+  test('it should deepmerge object replacing objects', () => {
+    const source = {
       a: 1,
       b: {
-        c: [1, 2, 3],
-        d: 1,
+        c: 1,
+        d: {
+          e: {
+            f: [1, 2, 3],
+            g: {},
+          },
+        },
       },
     };
 
-    const object2 = {
+    const expectedResult = {
       a: 1,
       b: {
-        c: [4],
+        c: 1,
+        d: {
+          e: {
+            f: [1, 2, 3],
+            g: {},
+          },
+        },
       },
     };
 
-    const mergedObject = {
+    expect(mergeDeep(target, [source], { replaceEmptyObjects: true })).toEqual(expectedResult);
+  });
+
+  test('it should deepmerge object replacing arrays', () => {
+    const source = {
       a: 1,
       b: {
-        c: [4],
-        d: 1,
+        c: 1,
+        d: [1000],
+        e: {
+          f: {
+            g: 1,
+            h: 2,
+          },
+        },
       },
     };
 
-    expect(mergeDeep(object1, object2)).toEqual(mergedObject);
+    const expectedResult = {
+      a: 1,
+      b: {
+        c: 1,
+        d: [1000],
+        e: {
+          f: {
+            g: 1,
+            h: 2,
+          },
+        },
+      },
+    };
+
+    expect(mergeDeep(target, [source], { replaceEmptyArrays: true })).toEqual(expectedResult);
+  });
+
+  test('it should deepmerge object replacing objects and arrays', () => {
+    const source = {
+      a: 1,
+      b: {
+        c: 1,
+        d: [1000],
+        e: {},
+      },
+    };
+
+    const expectedResult = {
+      a: 1,
+      b: {
+        c: 1,
+        d: [1000],
+        e: {},
+      },
+    };
+
+    expect(mergeDeep(target, [source], { replaceEmptyArrays: true, replaceEmptyObjects: true })).toEqual(
+      expectedResult
+    );
   });
 });

@@ -39,7 +39,9 @@ export class QueryStringWrapper {
     const queryString = QueryStringWrapper.extractQueryString(string);
     const alreadyParams = QueryStringWrapper.parseQueryString(queryString);
 
-    const paramsEnhanced = mergeDeep<Record<string, unknown>>(alreadyParams, newParams);
+    const paramsEnhanced = mergeDeep<Record<string, unknown>>(alreadyParams, [newParams], {
+      replaceEmptyArrays: true,
+    });
     const stringifiedParams = QueryStringWrapper.stringifyQueryParams(paramsEnhanced);
 
     return stringifiedParams;
@@ -49,7 +51,9 @@ export class QueryStringWrapper {
     const queryString = QueryStringWrapper.extractQueryString(string);
     const alreadyParams = QueryStringWrapper.parseQueryString(queryString);
 
-    const paramsEnhanced = mergeDeep<Record<string, unknown>>(newParams, alreadyParams);
+    const paramsEnhanced = mergeDeep<Record<string, unknown>>(newParams, [alreadyParams], {
+      replaceEmptyArrays: true,
+    });
     const stringifiedParams = QueryStringWrapper.stringifyQueryParams(paramsEnhanced);
 
     return stringifiedParams;
