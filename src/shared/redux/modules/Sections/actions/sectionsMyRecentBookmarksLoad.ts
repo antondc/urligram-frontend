@@ -3,8 +3,8 @@ import { ThunkAction } from 'redux-thunk';
 
 import { receiveBookmarks } from 'Modules/Bookmarks/actions/receiveBookmarks';
 import { BookmarkGetItemResponse, BookmarksGetResponse, BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
-import { serializerFromArrayToByKey } from 'Root/src/shared/tools/utils/serializers/serializerFromArrayToByKey';
 import HttpClient from 'Services/HttpClient';
+import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
 import { sectionsMyRecentBookmarksReceive } from './sectionsMyRecentBookmarksReceive';
 import { sectionsMyRecentBookmarksRequest } from './sectionsMyRecentBookmarksRequest';
 
@@ -15,7 +15,7 @@ export const sectionsMyRecentBookmarksLoad = (sessionId: string): ThunkAction<an
     dispatch(sectionsMyRecentBookmarksRequest());
 
     const { data }: BookmarksGetResponse = await HttpClient.get(
-      `/users/${sessionId}/bookmarks?page[size]=5&sort=-createdAt`
+      `/users/${sessionId}/bookmarks?page[size]=5&sort=-createdat`
     );
 
     const myBookmarksByKey = {

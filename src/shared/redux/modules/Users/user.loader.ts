@@ -2,8 +2,8 @@ import { stringify } from 'qs';
 
 import { ReceiveUserResponse, UsersState } from 'Modules/Users/users.types';
 import { RequestParameters } from 'Root/src/server/routes/allRoutes';
-import { serializerFromArrayToByKey } from 'Root/src/shared/tools/utils/serializers/serializerFromArrayToByKey';
 import HttpClient from 'Services/HttpClient';
+import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
 import { BookmarkGetItemResponse, BookmarksGetResponse, BookmarkState } from '../Bookmarks/bookmarks.types';
 
 export const initialUserLoader = async ({ query, params }: RequestParameters = {}): Promise<{

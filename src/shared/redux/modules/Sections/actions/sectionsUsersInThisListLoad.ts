@@ -3,8 +3,8 @@ import { ThunkAction } from 'redux-thunk';
 
 import { receiveUsers } from 'Modules/Users/actions/receiveUsers';
 import { ReceiveUserItem, ReceiveUsersResponse, UserState } from 'Modules/Users/users.types';
-import { serializerFromArrayToByKey } from 'Root/src/shared/tools/utils/serializers/serializerFromArrayToByKey';
 import HttpClient from 'Services/HttpClient';
+import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
 import { sectionsUsersInThisListReceive } from './sectionsUsersInThisListReceive';
 import { sectionsUsersInThisListRequest } from './sectionsUsersInThisListRequest';
 

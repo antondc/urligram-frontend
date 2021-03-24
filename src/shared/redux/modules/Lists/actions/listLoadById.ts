@@ -1,27 +1,46 @@
-import { Action, Dispatch } from 'redux';
-import { ThunkAction } from 'redux-thunk';
+import { Dispatch } from 'redux';
 
-import { ReceiveListResponse } from 'Modules/Lists/lists.types';
+import { ListLoadApiResponse, ListsActions, ListState } from 'Modules/Lists/lists.types';
+import { RootState } from 'Modules/rootType';
 import HttpClient from 'Services/HttpClient';
-import { loadListsReceive } from './loadListsReceive';
-import { loadListsRequest } from './loadListsRequest';
+import { AppThunk } from '../../..';
+import { listsLoadReceive } from './listsLoadReceive';
+import { listsLoadRequest } from './listsLoadRequest';
 
-export const loadListById = (listId: number): ThunkAction<any, any, any, Action> => async (dispatch: Dispatch) => {
+export const listsLoadByUserId = (listId: number): AppThunk<Promise<ListState>> => async (
+  dispatch: Dispatch<ListsActions>,
+  getState: () => RootState
+): Promise<ListState> => {
+  const { Lists } = getState();
   try {
-    dispatch(loadListsRequest());
+    dispatch(
+      listsLoadRequest({
+        ...Lists,
+        loading: true,
+        meta: {
+          ...Lists.meta,
+          sort: undefined,
+        },
+      })
+    );
 
-    const { data: listData }: ReceiveListResponse = await HttpClient.get(`/lists/${listId}${window.location.search}`);
+    const { data: listData } = await HttpClient.get<void, ListLoadApiResponse>(
+      `/lists/${listId}${window.location.search}`
+    );
 
-    const listsByKey = {
-      byKey: {
-        [listData?.id]: listData?.attributes,
-      },
-      currentIds: [listData?.id],
-    };
-    dispatch(loadListsReceive(listsByKey));
+    dispatch(
+      listsLoadReceive({
+        ...Lists,
+        byKey: {
+          ...Lists.byKey,
+          [listData?.id]: listData?.attributes,
+        },
+        currentIds: [listData?.id],
+      })
+    );
+
+    return listData?.attributes;
   } catch (err) {
     throw new Error(err);
   }
-
-  return;
 };

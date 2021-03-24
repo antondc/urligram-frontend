@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
 import { listCreate } from 'Modules/Lists/actions/listCreate';
 import { listCreateReset } from 'Modules/Lists/actions/listCreateReset';
-import { selectListCreationSuccess } from 'Modules/Lists/selectors/selectListCreationSuccess';
 import { selectListsErrorLast } from 'Modules/Lists/selectors/selectListsErrorLast';
 import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUserId';
 import { DELAY_MEDIUM_MS } from 'Root/src/shared/constants';
@@ -28,7 +27,6 @@ const ListForm: React.FC<Props> = ({ closeModal }) => {
   const listError = useSelector(selectListsErrorLast);
   const currentLanguageSlug = useSelector(selectCurrentLanguageSlug);
   const sessionId = useSelector(selectSessionUserId);
-  const listCreationSuccess = useSelector(selectListCreationSuccess);
   const [nameValue, setNameValue] = useState<string>(undefined);
   const [nameError, setNameError] = useState<string>(undefined);
   const [descriptionValue, setDescriptionValue] = useState<string>(undefined);
@@ -78,7 +76,20 @@ const ListForm: React.FC<Props> = ({ closeModal }) => {
       listIsPrivate: isPrivateValue,
     };
 
-    dispatch(listCreate(data));
+    const list = await dispatch(listCreate(data));
+
+    if (!!list.id) {
+      setSubmitInProcess(false);
+      setSubmitSuccess(true);
+      closeModal();
+
+      setTimeout(() => {
+        history.push(`/${currentLanguageSlug}/users/${sessionId}/lists`);
+      }, DELAY_MEDIUM_MS);
+
+      return;
+    }
+    setSubmitInProcess(false);
   };
 
   useEffect(() => {
@@ -96,21 +107,6 @@ const ListForm: React.FC<Props> = ({ closeModal }) => {
 
     if (listError?.message) setSubmitError(listError?.message);
   }, [listError]);
-
-  useEffect(() => {
-    if (!!listCreationSuccess) {
-      setSubmitInProcess(false);
-      setSubmitSuccess(true);
-      closeModal();
-
-      setTimeout(() => {
-        history.push(`/${currentLanguageSlug}/users/${sessionId}/lists`);
-      }, DELAY_MEDIUM_MS);
-
-      return;
-    }
-    setSubmitInProcess(false);
-  }, [listCreationSuccess]);
 
   useEffect(() => {
     setSubmitError(undefined);

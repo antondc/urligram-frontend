@@ -6,7 +6,7 @@ import { selectBookmarksCurrentIds } from 'Modules/Bookmarks/selectors/selectBoo
 import { selectBookmarksLoading } from 'Modules/Bookmarks/selectors/selectBookmarksLoading';
 import { selectBookmarksMetaSort } from 'Modules/Bookmarks/selectors/selectBookmarksMetaSort';
 import { selectBookmarksTotalItems } from 'Modules/Bookmarks/selectors/selectBookmarkTotalItems';
-import { loadListById } from 'Modules/Lists/actions/listLoadById';
+import { listsLoadByUserId } from 'Modules/Lists/actions/listLoadById';
 import { selectListsById } from 'Modules/Lists/selectors/selectListById';
 import { RootState } from 'Modules/rootType';
 import { selectCurrentFullUrl } from 'Modules/Routes/selectors/selectCurrentFullUrl';
@@ -38,7 +38,7 @@ const List: React.FC = () => {
   const sort = useSelector(selectBookmarksMetaSort);
 
   useEffect(() => {
-    dispatch(loadListById(listId));
+    dispatch(listsLoadByUserId(listId));
     dispatch(sectionsTagsInThisListLoad(listId));
   }, []);
 

@@ -1,6 +1,6 @@
 import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
-import { LinksState, LinkState, LinkApiResponseItem, LinksApiResponse } from './links.types';
+import { LinkApiResponseItem, LinksApiResponse, LinksState, LinkState } from './links.types';
 
 export const initialLinksLoader = async (): Promise<{ Links: LinksState }> => {
   const { data }: LinksApiResponse = await HttpClient.get('/links');

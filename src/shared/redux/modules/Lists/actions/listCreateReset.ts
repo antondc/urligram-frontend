@@ -1,5 +1,19 @@
-import { LIST_CREATE_RESET, ListsActionsTypes } from 'Modules/Lists/lists.types';
+import { Dispatch } from 'redux';
 
-export const listCreateReset = (): ListsActionsTypes => ({
-  type: LIST_CREATE_RESET,
-});
+import { LIST_CREATE_RESET, ListsActions } from 'Modules/Lists/lists.types';
+import { RootState } from 'Modules/rootType';
+import { AppThunk } from '../../..';
+
+export const listCreateReset = (): AppThunk<void> => (
+  dispatch: Dispatch<ListsActions>,
+  getState: () => RootState
+): void => {
+  const { Lists } = getState();
+  dispatch({
+    type: LIST_CREATE_RESET,
+    payload: {
+      ...Lists,
+      errors: [],
+    },
+  });
+};

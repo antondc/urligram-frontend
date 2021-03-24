@@ -1,8 +1,6 @@
-import { LIST_CREATE_SUCCESS, ListsActionsTypes, ListState } from 'Modules/Lists/lists.types';
+import { LIST_CREATE_SUCCESS, ListsActions, ListsState } from 'Modules/Lists/lists.types';
 
-export const listCreateSuccess = ({ list }: { list: ListState }): ListsActionsTypes => ({
+export const listCreateSuccess = (payload: ListsState): ListsActions => ({
   type: LIST_CREATE_SUCCESS,
-  data: {
-    list,
-  },
+  payload,
 });

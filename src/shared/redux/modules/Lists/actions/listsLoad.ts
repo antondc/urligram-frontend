@@ -8,13 +8,11 @@ import { AppThunk } from '../../..';
 import { listsLoadReceive } from './listsLoadReceive';
 import { listsLoadRequest } from './listsLoadRequest';
 
-export const listsLoadByUserId = (userId: string): AppThunk<Promise<ListState>> => async (
+export const listsLoad = (): AppThunk<Promise<ListState[]>> => async (
   dispatch: Dispatch<ListsActions>,
   getState: () => RootState
-): Promise<ListState> => {
+): Promise<ListState[]> => {
   const { Lists } = getState();
-
-  if (!userId) return;
   try {
     dispatch(
       listsLoadRequest({
@@ -30,7 +28,8 @@ export const listsLoadByUserId = (userId: string): AppThunk<Promise<ListState>> 
     const {
       meta: { totalItems, sort },
       data,
-    } = await HttpClient.get<void, ListsLoadApiResponse>(`/users/${userId}/lists${window.location.search}`);
+    } = await HttpClient.get<void, ListsLoadApiResponse>('/lists' + window.location.search);
+
     const listsArray = data.map((item) => item.attributes);
 
     dispatch(
@@ -46,9 +45,9 @@ export const listsLoadByUserId = (userId: string): AppThunk<Promise<ListState>> 
         loading: false,
       })
     );
+
+    return listsArray;
   } catch (err) {
     throw new Error(err);
   }
-
-  return;
 };

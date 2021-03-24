@@ -11,10 +11,9 @@ export const userFollowingLoad = (userId: string): ThunkAction<any, any, any, Ac
   try {
     dispatch(requestUsers());
 
-    const {
-      meta: { totalItems, sort },
-      data,
-    }: ReceiveUsersResponse = await HttpClient.get(`/users/${userId}/following${window.location.search}`);
+    const { meta, data }: ReceiveUsersResponse = await HttpClient.get(
+      `/users/${userId}/following${window.location.search}`
+    );
 
     const usersByKey = {
       byKey: serializerFromArrayToByKey<ReceiveUserItem, UserState>({
@@ -22,10 +21,7 @@ export const userFollowingLoad = (userId: string): ThunkAction<any, any, any, Ac
         contentPath: 'attributes',
       }),
       currentIds: data.map((item) => item.id),
-      meta: {
-        totalItems,
-        sort,
-      },
+      meta,
     };
     dispatch(receiveUsers(usersByKey));
   } catch (err) {

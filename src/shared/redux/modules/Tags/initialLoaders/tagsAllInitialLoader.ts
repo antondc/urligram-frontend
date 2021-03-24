@@ -1,6 +1,6 @@
 import { ReceiveTagItem, ReceiveTagsResponse, TagsState, TagState } from 'Modules/Tags/tags.types';
-import { serializerFromArrayToByKey } from 'Root/src/shared/tools/utils/serializers/serializerFromArrayToByKey';
 import HttpClient from 'Services/HttpClient';
+import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
 
 export const tagsAllInitialLoader = async (): Promise<{ Tags: TagsState }> => {
   const { data: tagsAllData }: ReceiveTagsResponse = await HttpClient.get('tags');

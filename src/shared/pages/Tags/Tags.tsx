@@ -62,7 +62,7 @@ export const Tags: React.FC<Props> = ({
           <SidebarListUsers items={mostFollowedUsers} />
         </SidebarBlock>
         <Hr spacer />
-        <SidebarBlock title="Following Users" href={'/users?sort=-createdAt&page[size]=10'} loading={newUsersLoading}>
+        <SidebarBlock title="Following Users" href={'/users?sort=-createdat&page[size]=10'} loading={newUsersLoading}>
           <SidebarListUsers items={newUsers} />
         </SidebarBlock>
       </Sidebar>

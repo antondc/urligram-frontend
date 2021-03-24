@@ -1,4 +1,4 @@
-import { ListState, ReceiveListItem, ReceiveListsResponse } from 'Modules/Lists/lists.types';
+import { ListApiResponseItem, ListsLoadApiResponse, ListState } from 'Modules/Lists/lists.types';
 import { SectionsState } from 'Modules/Sections/sections.types';
 import { RequestParameters } from 'Root/src/server/routes/allRoutes';
 import HttpClient from 'Services/HttpClient';
@@ -9,13 +9,13 @@ export const followingListsInitialLoader = async ({ params }: RequestParameters 
 }> => {
   if (!params?.sessionId) return;
 
-  const { data: followingListsData }: ReceiveListsResponse = await HttpClient.get(
+  const { data: followingListsData }: ListsLoadApiResponse = await HttpClient.get(
     `/users/${params?.sessionId}/lists?page[size]=5&filter[role]=reader,editor`
   );
 
   const ListsByKey = {
     byKey: {
-      ...serializerFromArrayToByKey<ReceiveListItem, ListState>({
+      ...serializerFromArrayToByKey<ListApiResponseItem, ListState>({
         data: followingListsData,
         contentPath: 'attributes',
       }),

@@ -1,5 +1,4 @@
-import { Action, Dispatch } from 'redux';
-import { ThunkAction } from 'redux-thunk';
+import { Dispatch } from 'redux';
 
 import { BookmarksGetResponse, BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
 import HttpClient from 'Services/HttpClient';

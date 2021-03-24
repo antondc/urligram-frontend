@@ -2,8 +2,8 @@ import { Action, Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 
 import { ReceiveTagItem, ReceiveTagsResponse, TagState } from 'Modules/Tags/tags.types';
-import { serializerFromArrayToByKey } from 'Root/src/shared/tools/utils/serializers/serializerFromArrayToByKey';
 import HttpClient from 'Services/HttpClient';
+import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
 import { loadTagsReceive } from '../../Tags/actions/loadTagsReceive';
 import { sectionsMyTagsReceive } from './sectionsMyTagsReceive';
 import { sectionsMyTagsRequest } from './sectionsMyTagsRequest';

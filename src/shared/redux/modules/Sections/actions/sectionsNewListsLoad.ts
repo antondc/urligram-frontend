@@ -1,10 +1,10 @@
 import { Action, Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 
-import { loadListsReceive } from 'Modules/Lists/actions/loadListsReceive';
-import { ListState, ReceiveListItem, ReceiveListsResponse } from 'Modules/Lists/lists.types';
-import { serializerFromArrayToByKey } from 'Root/src/shared/tools/utils/serializers/serializerFromArrayToByKey';
+import { ListApiResponseItem, ListsLoadApiResponse, ListState } from 'Modules/Lists/lists.types';
+import { listsLoadReceive } from 'Root/src/shared/redux/modules/Lists/actions/listsLoadReceive';
 import HttpClient from 'Services/HttpClient';
+import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
 import { sectionsNewListsReceive } from './sectionsNewListsReceive';
 import { sectionsNewListsRequest } from './sectionsNewListsRequest';
 
@@ -12,16 +12,16 @@ export const sectionsNewListsLoad = (): ThunkAction<any, any, any, Action> => as
   try {
     dispatch(sectionsNewListsRequest());
 
-    const { data }: ReceiveListsResponse = await HttpClient.get('/lists?sort=-createdAt&page[size]=5');
+    const { data }: ListsLoadApiResponse = await HttpClient.get('/lists?sort=-createdat&page[size]=5');
 
     const popularListsByKey = {
-      byKey: serializerFromArrayToByKey<ReceiveListItem, ListState>({
+      byKey: serializerFromArrayToByKey<ListApiResponseItem, ListState>({
         data: data,
         contentPath: 'attributes',
       }),
     };
 
-    dispatch(loadListsReceive(popularListsByKey));
+    dispatch(listsLoadReceive(popularListsByKey));
 
     dispatch(
       sectionsNewListsReceive({

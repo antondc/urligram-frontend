@@ -1,10 +1,10 @@
 import { Action, Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 
+import { receiveUsers } from 'Modules/Users/actions/receiveUsers';
 import { ReceiveUserItem, ReceiveUsersResponse, UserState } from 'Modules/Users/users.types';
-import { serializerFromArrayToByKey } from 'Root/src/shared/tools/utils/serializers/serializerFromArrayToByKey';
 import HttpClient from 'Services/HttpClient';
-import { receiveUsers } from '../../Users/actions/receiveUsers';
+import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
 import { sectionsMostFollowedUsersReceive } from './sectionsMostFollowedUsersReceive';
 import { sectionsMostFollowedUsersRequest } from './sectionsMostFollowedUsersRequest';
 

@@ -1,7 +1,7 @@
 import { SectionsState } from 'Modules/Sections/sections.types';
 import { ReceiveTagItem, ReceiveTagsResponse, TagState } from 'Modules/Tags/tags.types';
-import { serializerFromArrayToByKey } from 'Root/src/shared/tools/utils/serializers/serializerFromArrayToByKey';
 import HttpClient from 'Services/HttpClient';
+import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
 
 export const mostFollowedTagsInitialLoader = async (): Promise<{
   Sections: SectionsState;

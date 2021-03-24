@@ -1,6 +1,6 @@
 import { stringify } from 'qs';
 
-import { ListsState, ListState, ReceiveListItem, ReceiveListsResponse } from 'Modules/Lists/lists.types';
+import { ListApiResponseItem, ListsLoadApiResponse, ListsState, ListState } from 'Modules/Lists/lists.types';
 import { RequestParameters } from 'Root/src/server/routes/allRoutes';
 import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
@@ -8,16 +8,16 @@ import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFr
 export const initialListsLoader = async ({ query }: RequestParameters = {}): Promise<{
   Lists: ListsState;
 }> => {
-  const { data }: ReceiveListsResponse = await HttpClient.get('/lists?' + stringify(query));
+  const { data }: ListsLoadApiResponse = await HttpClient.get('/lists?' + stringify(query));
 
   const result = {
     Lists: {
-      byKey: serializerFromArrayToByKey<ReceiveListItem, ListState>({
+      byKey: serializerFromArrayToByKey<ListApiResponseItem, ListState>({
         data: data,
         contentPath: 'attributes',
       }),
       currentIds: data.map((item) => item.id),
-      loading: true
+      loading: true,
     },
   };
 

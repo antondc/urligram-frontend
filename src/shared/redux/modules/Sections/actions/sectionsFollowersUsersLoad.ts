@@ -1,10 +1,10 @@
 import { Action, Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 
+import { receiveUsers } from 'Modules/Users/actions/receiveUsers';
 import { ReceiveUserItem, ReceiveUsersResponse, UserState } from 'Modules/Users/users.types';
-import { serializerFromArrayToByKey } from 'Root/src/shared/tools/utils/serializers/serializerFromArrayToByKey';
 import HttpClient from 'Services/HttpClient';
-import { receiveUsers } from '../../Users/actions/receiveUsers';
+import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
 import { sectionsFollowersUsersReceive } from './sectionsFollowersUsersReceive';
 import { sectionsFollowersUsersRequest } from './sectionsFollowersUsersRequest';
 
@@ -17,7 +17,7 @@ export const sectionsFollowersUsersLoad = (userId: string): ThunkAction<any, any
     dispatch(sectionsFollowersUsersRequest());
 
     const { data }: ReceiveUsersResponse = await HttpClient.get(
-      `/users/${userId}/followers?sort=-createdAt&page[size]=5`
+      `/users/${userId}/followers?sort=-createdat&page[size]=5`
     );
 
     const newUsersByKey = {

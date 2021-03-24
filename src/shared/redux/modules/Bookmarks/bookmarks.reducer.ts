@@ -1,4 +1,4 @@
-import { mergeDeep } from 'Root/src/shared/tools/utils/object/mergeDeep';
+import { mergeDeep } from 'Tools/utils/object/mergeDeep';
 import {
   BOOKMARK_CREATE_FAILURE,
   BOOKMARK_CREATE_REQUEST,

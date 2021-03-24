@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { loadLists } from 'Modules/Lists/actions/loadLists';
+import { listsLoad } from 'Modules/Lists/actions/listsLoad';
 import { selectListsMetaSort } from 'Modules/Lists/selectors/selectListMetaSort';
 import { selectListsAllIds } from 'Modules/Lists/selectors/selectListsAllIds';
 import { selectListsLoading } from 'Modules/Lists/selectors/selectListsLoading';
@@ -35,7 +35,7 @@ const Lists: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    dispatch(loadLists());
+    dispatch(listsLoad());
   }, [page]);
 
   return (
