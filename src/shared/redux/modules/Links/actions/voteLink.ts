@@ -1,13 +1,14 @@
-import { Action } from 'redux';
-import { ThunkAction, ThunkDispatch } from 'redux-thunk';
+import { Dispatch } from 'redux';
 
 import { voteBookmarkReceive } from 'Modules/Bookmarks/actions/voteBookmarkReceive';
 import { voteBookmarkRequest } from 'Modules/Bookmarks/actions/voteBookmarkRequest';
-import { LinksState, ReceiveLinkResponse } from 'Modules/Links/links.types';
+import { LinkApiResponse, LinksActionsTypes, LinksState, LinkState } from 'Modules/Links/links.types';
 import { RootState } from 'Modules/rootType';
 import HttpClient from 'Services/HttpClient';
-import { voteLinkReceive } from './voteLinkReceive';
+import { AppThunk } from '../../..';
+import { BookmarksActions } from '../../Bookmarks/bookmarks.types';
 import { voteLinkRequest } from './voteLinkRequest';
+import { voteLinkSuccess } from './voteLinkSuccess';
 
 interface Props {
   vote: number;
@@ -15,10 +16,10 @@ interface Props {
   userId: string;
 }
 
-export const voteLink = ({ vote, linkId, userId }: Props): ThunkAction<any, any, any, Action> => async (
-  dispatch: ThunkDispatch<any, void, Action>,
+export const voteLink = ({ vote, linkId, userId }: Props): AppThunk<Promise<LinkState>> => async (
+  dispatch: Dispatch<LinksActionsTypes | BookmarksActions>,
   getState: () => RootState
-) => {
+): Promise<LinkState> => {
   const {
     Links: { byKey },
   } = getState();
@@ -38,10 +39,9 @@ export const voteLink = ({ vote, linkId, userId }: Props): ThunkAction<any, any,
         },
       },
     };
-
     await dispatch(voteLinkRequest(linksSerializedByKeyRequest));
 
-    const { data }: ReceiveLinkResponse = await HttpClient.put(`/links/${linkId}`, {
+    const { data } = await HttpClient.put<void, LinkApiResponse>(`/links/${linkId}`, {
       vote,
       userId,
     });
@@ -54,17 +54,17 @@ export const voteLink = ({ vote, linkId, userId }: Props): ThunkAction<any, any,
         },
       },
     };
+    dispatch(voteLinkSuccess(linksSerializedByKeyResponse));
 
-    dispatch(voteLinkReceive(linksSerializedByKeyResponse));
     dispatch(
       voteBookmarkReceive({
         linkId,
         statistics: data?.attributes?.statistics,
       })
     );
+
+    return data.attributes;
   } catch (err) {
     throw new Error(err);
   }
-
-  return;
 };

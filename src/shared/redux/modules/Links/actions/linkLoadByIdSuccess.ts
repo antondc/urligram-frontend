@@ -1,6 +1,6 @@
-import { LINK_LOAD_BY_ID_SUCCESS, LinksActionsTypes, LinkState } from 'Modules/Links/links.types';
+import { LINK_LOAD_BY_ID_SUCCESS, LinksActionsTypes, LinksState } from 'Modules/Links/links.types';
 
-export const linkLoadByIdSuccess = (link: LinkState): LinksActionsTypes => ({
+export const linkLoadByIdSuccess = (payload: LinksState): LinksActionsTypes => ({
   type: LINK_LOAD_BY_ID_SUCCESS,
-  data: link,
+  payload,
 });

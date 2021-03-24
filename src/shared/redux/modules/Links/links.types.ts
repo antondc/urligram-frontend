@@ -1,7 +1,7 @@
-export const LOAD_LINKS_STARTED = 'LOAD_LINKS_STARTED';
-export const LOAD_LINKS_SUCCESS = 'LOAD_LINKS_SUCCESS';
-export const LINK_VOTE_STARTED = 'LINK_VOTE_STARTED';
-export const VOTE_LINK_SUCCESS = 'VOTE_LINK_SUCCESS';
+export const LINKS_LOAD_REQUEST = 'LINKS_LOAD_REQUEST';
+export const LINKS_LOAD_SUCCESS = 'LINKS_LOAD_SUCCESS';
+export const LINK_VOTE_REQUEST = 'LINK_VOTE_REQUEST';
+export const LINK_VOTE_SUCCESS = 'LINK_VOTE_SUCCESS';
 export const LINK_LOAD_BY_ID_REQUEST = 'LINK_LOAD_BY_ID_REQUEST';
 export const LINK_LOAD_BY_ID_FAILURE = 'LINK_LOAD_BY_ID_FAILURE';
 export const LINK_LOAD_BY_ID_SUCCESS = 'LINK_LOAD_BY_ID_SUCCESS';
@@ -48,71 +48,64 @@ export interface LinksState {
   errors?: LinkError[];
 }
 
-interface RequestLinksAction {
-  type: typeof LOAD_LINKS_STARTED;
-  data: {
-    loading: true;
-  };
-}
-
-interface ReceiveLinksAction {
-  type: typeof LOAD_LINKS_SUCCESS;
-  data: LinksState;
-}
-
-export interface ReceiveLinkItem {
+export interface LinkApiResponseItem {
   type: 'links';
   id: number;
   attributes: LinkState;
 }
 
-export interface ReceiveLinkResponse {
-  data: ReceiveLinkItem;
+export interface LinkApiResponse {
+  data: LinkApiResponseItem;
 }
 
-export interface ReceiveLinksResponse {
-  data: ReceiveLinkItem[];
+export interface LinksApiResponse {
+  data: LinkApiResponseItem[];
   meta: {
     totalItems?: number;
     sort?: string;
   };
 }
 
-export interface VoteLinkRequest {
-  type: typeof LINK_VOTE_STARTED;
-  payload: LinksState;
+interface LinksLoadRequestAction {
+  type: typeof LINKS_LOAD_REQUEST;
+  payload: Partial<LinksState>;
 }
 
-export interface VoteLinkReceive {
-  type: typeof VOTE_LINK_SUCCESS;
-  payload: LinksState;
+interface LinksLoadSuccessAction {
+  type: typeof LINKS_LOAD_SUCCESS;
+  payload: Partial<LinksState>;
 }
 
-export interface LinkLoadByIdRequest {
+export interface LinkVoteRequestAction {
+  type: typeof LINK_VOTE_REQUEST;
+  payload: Partial<LinksState>;
+}
+
+export interface LinkVoteSuccessAction {
+  type: typeof LINK_VOTE_SUCCESS;
+  payload: Partial<LinksState>;
+}
+
+export interface LinkLoadByIdRequestAction {
   type: typeof LINK_LOAD_BY_ID_REQUEST;
-  data: {
-    linkId: number;
-  };
+  payload: Partial<LinksState>;
 }
 
-export interface LinkLoadByIdSuccess {
+export interface LinkLoadByIdSuccessAction {
   type: typeof LINK_LOAD_BY_ID_SUCCESS;
-  data: LinkState;
+  payload: Partial<LinksState>;
 }
 
-export interface LinkLoadByIdFailure {
+export interface LinkLoadByIdFailureAction {
   type: typeof LINK_LOAD_BY_ID_FAILURE;
-  data: {
-    linkId: number;
-    error: LinkError;
-  };
+  payload: Partial<LinksState>;
 }
 
 export type LinksActionsTypes =
-  | RequestLinksAction
-  | ReceiveLinksAction
-  | VoteLinkRequest
-  | VoteLinkReceive
-  | LinkLoadByIdRequest
-  | LinkLoadByIdSuccess
-  | LinkLoadByIdFailure;
+  | LinksLoadRequestAction
+  | LinksLoadSuccessAction
+  | LinkVoteRequestAction
+  | LinkVoteSuccessAction
+  | LinkLoadByIdRequestAction
+  | LinkLoadByIdSuccessAction
+  | LinkLoadByIdFailureAction;

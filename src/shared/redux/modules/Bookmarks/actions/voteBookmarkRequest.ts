@@ -1,12 +1,12 @@
-import { Action, Dispatch } from 'redux';
-import { ThunkAction } from 'redux-thunk';
+import { Dispatch } from 'redux';
 
 import { BOOKMARK_UPDATE_VOTE_START, BookmarksState } from 'Modules/Bookmarks/bookmarks.types';
+import { AppThunk } from '../../..';
 
-export const voteBookmarkRequest = ({ linkId }: { linkId: string | number }): ThunkAction<any, any, any, Action> => (
+export const voteBookmarkRequest = ({ linkId }: { linkId: string | number }): AppThunk<void> => (
   dispatch: Dispatch,
   getState
-) => {
+): void => {
   const { Bookmarks }: { Bookmarks: BookmarksState } = getState();
 
   const payloadFormatted = Object.entries(Bookmarks.byKey).filter(([, value]) => value.linkId === linkId);

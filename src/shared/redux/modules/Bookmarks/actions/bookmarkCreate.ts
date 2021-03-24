@@ -20,9 +20,23 @@ export const bookmarkCreate = ({
   dispatch: Dispatch<any>,
   getState: () => RootState
 ) => {
-  const { Bookmarks } = getState();
+  const { Bookmarks, Links } = getState();
   try {
-    if (linkId) dispatch(linkLoadByIdRequest(linkId));
+    if (linkId) {
+      dispatch(
+        linkLoadByIdRequest({
+          ...Links,
+          byKey: {
+            ...Links.byKey,
+            [linkId]: {
+              ...Links.byKey[linkId],
+              loading: true,
+            },
+          },
+        })
+      );
+    }
+
     dispatch(bookmarkCreateRequest());
 
     const { data: bookmarkData } = await HttpClient.post<void, BookmarkCreateResponse>('/users/me/bookmarks', {

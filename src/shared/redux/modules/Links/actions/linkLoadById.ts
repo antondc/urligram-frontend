@@ -1,23 +1,53 @@
-import { Action, Dispatch } from 'redux';
-import { ThunkAction } from 'redux-thunk';
+import { Dispatch } from 'redux';
 
-import { ReceiveLinkResponse } from 'Modules/Links/links.types';
+import { LinkApiResponse, LinksActionsTypes, LinkState } from 'Modules/Links/links.types';
+import { RootState } from 'Modules/rootType';
 import HttpClient from 'Services/HttpClient';
+import { AppThunk } from '../../..';
 import { linkLoadByIdFailure } from './linkLoadByIdFailure';
 import { linkLoadByIdRequest } from './linkLoadByIdRequest';
 import { linkLoadByIdSuccess } from './linkLoadByIdSuccess';
 
-export const linkLoadById = (linkId: number): ThunkAction<any, any, any, Action> => async (dispatch: Dispatch) => {
+export const linkLoadById = (linkId: number): AppThunk<Promise<LinkState>> => async (
+  dispatch: Dispatch<LinksActionsTypes>,
+  getState: () => RootState
+): Promise<LinkState> => {
+  const { Links } = getState();
   try {
-    dispatch(linkLoadByIdRequest(linkId));
+    dispatch(
+      linkLoadByIdRequest({
+        ...Links,
+        byKey: {
+          ...Links.byKey,
+          [linkId]: {
+            ...Links.byKey[linkId],
+            loading: true,
+          },
+        },
+      })
+    );
 
-    const { data }: ReceiveLinkResponse = await HttpClient.get(`/links/${linkId}`);
-    dispatch(linkLoadByIdSuccess(data?.attributes));
+    const { data } = await HttpClient.get<void, LinkApiResponse>(`/links/${linkId}`);
+
+    dispatch(
+      linkLoadByIdSuccess({
+        ...Links,
+        byKey: {
+          ...Links.byKey,
+          [linkId]: data.attributes,
+        },
+      })
+    );
+
+    return data?.attributes;
   } catch (error) {
-    await dispatch(linkLoadByIdFailure({ linkId, error }));
+    await dispatch(
+      linkLoadByIdFailure({
+        ...Links,
+        errors: [...Links.errors, error],
+      })
+    );
 
     throw new Error(error);
   }
-
-  return;
 };

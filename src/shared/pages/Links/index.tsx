@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { loadLinks } from 'Modules/Links/actions/loadLinks';
+import { linksLoad } from 'Modules/Links/actions/linksLoad';
 import { selectLinksAllIds } from 'Modules/Links/selectors/selectLinksAllIds';
 import { selectLinksLoading } from 'Modules/Links/selectors/selectLinksLoading';
 import { selectLinksMetaSort } from 'Modules/Links/selectors/selectLinksMetaSort';
@@ -50,7 +50,7 @@ const Links: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    dispatch(loadLinks());
+    dispatch(linksLoad());
 
     dispatch(tagsSearchLoad());
   }, [url]);

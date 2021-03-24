@@ -6,7 +6,7 @@ import { loadBookmarks } from 'Modules/Bookmarks/actions/loadBookmarks';
 import { loadBookmarksByUserId } from 'Modules/Bookmarks/actions/loadBookmarksByUserId';
 import { selectBookmarksErrorLast } from 'Modules/Bookmarks/selectors/selectBookmarksErrorLast';
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
-import { loadLinks } from 'Modules/Links/actions/loadLinks';
+import { linksLoad } from 'Modules/Links/actions/linksLoad';
 import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUserId';
 import { tagsSearchLoad } from 'Modules/Tags/actions/tagsSearchLoad';
 import { selectTagsAll } from 'Modules/Tags/selectors/selectAllTags';
@@ -166,7 +166,7 @@ const BookmarkCreateForm: React.FC<Props> = ({ closeModal }) => {
       setSubmitSuccess(true);
       dispatch(loadBookmarks());
       dispatch(loadBookmarksByUserId(sessionId));
-      dispatch(loadLinks());
+      dispatch(linksLoad());
 
       setTimeout(() => {
         history.push(`/${currentLanguageSlug}/users/${sessionId}/bookmarks`);

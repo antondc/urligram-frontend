@@ -1,8 +1,6 @@
-import { LINK_LOAD_BY_ID_REQUEST, LinksActionsTypes } from 'Modules/Links/links.types';
+import { LINK_LOAD_BY_ID_REQUEST, LinksActionsTypes, LinksState } from 'Modules/Links/links.types';
 
-export const linkLoadByIdRequest = (linkId: number): LinksActionsTypes => ({
+export const linkLoadByIdRequest = (payload: LinksState): LinksActionsTypes => ({
   type: LINK_LOAD_BY_ID_REQUEST,
-  data: {
-    linkId,
-  },
+  payload,
 });
