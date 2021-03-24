@@ -1,8 +1,8 @@
-export const LOAD_LANGUAGES_STARTED = 'LOAD_LANGUAGES_STARTED';
-export const LOAD_LANGUAGES_SUCCESS = 'LOAD_LANGUAGES_SUCCESS';
-export const SWITCH_CURRENT_LANGUAGE = 'SWITCH_CURRENT_LANGUAGE';
-export const SWITCH_CURRENT_LANGUAGE_RECEIVE = 'SWITCH_CURRENT_LANGUAGE_RECEIVE';
-export const SWITCH_CURRENT_LANGUAGE_REQUEST = 'SWITCH_CURRENT_LANGUAGE_REQUEST';
+export const LANGUAGES_LOAD_REQUEST = 'LANGUAGES_LOAD_REQUEST';
+export const LANGUAGES_LOAD_SUCCESS = 'LANGUAGES_LOAD_SUCCESS';
+export const LANGUAGES_SWITCH_CURRENT = 'LANGUAGES_SWITCH_CURRENT';
+export const LANGUAGES_SWITCH_CURRENT_SUCCESS = 'LANGUAGES_SWITCH_CURRENT_SUCCESS';
+export const LANGUAGES_SWITCH_CURRENT_REQUEST = 'LANGUAGES_SWITCH_CURRENT_REQUEST';
 
 export interface GlossaryState {
   home: string;
@@ -41,40 +41,6 @@ export type LanguagesState = {
   currentLanguage?: LanguageState;
 };
 
-interface RequestLanguagesAction {
-  type: typeof LOAD_LANGUAGES_STARTED;
-  data: {
-    loading: boolean;
-  };
-}
-
-interface ReceiveLanguagesAction {
-  type: typeof LOAD_LANGUAGES_SUCCESS;
-  data: {
-    loading: boolean;
-    Languages: LanguagesState;
-  };
-}
-
-interface SwitchCurrentLanguageAction {
-  type: typeof SWITCH_CURRENT_LANGUAGE;
-  data: {
-    loading: boolean;
-  };
-}
-
-interface SwitchCurrentLanguageRequestAction {
-  type: typeof SWITCH_CURRENT_LANGUAGE_REQUEST;
-  data: {
-    loading: boolean;
-  };
-}
-
-interface SwitchCurrentLanguageReceiveAction {
-  type: typeof SWITCH_CURRENT_LANGUAGE_RECEIVE;
-  data: LanguageState;
-}
-
 export interface LanguagesApiResponseItem {
   type: 'languages';
   attributes: LanguageState;
@@ -87,9 +53,34 @@ export interface LanguagesApiResponse {
   data: LanguagesApiResponseItem[];
 }
 
-export type LanguagesActionsTypes =
-  | RequestLanguagesAction
-  | ReceiveLanguagesAction
-  | SwitchCurrentLanguageAction
-  | SwitchCurrentLanguageRequestAction
-  | SwitchCurrentLanguageReceiveAction;
+interface LanguagesLoadRequestAction {
+  type: typeof LANGUAGES_LOAD_REQUEST;
+  payload: Partial<LanguagesState>;
+}
+
+interface LanguagesLoadSuccessAction {
+  type: typeof LANGUAGES_LOAD_SUCCESS;
+  payload: Partial<LanguagesState>;
+}
+
+interface LanguagesSwitchCurrentAction {
+  type: typeof LANGUAGES_SWITCH_CURRENT;
+  payload: Partial<LanguagesState>;
+}
+
+interface LanguagesSwitchCurrentRequestAction {
+  type: typeof LANGUAGES_SWITCH_CURRENT_REQUEST;
+  payload: Partial<LanguagesState>;
+}
+
+interface LanguagesSwitchCurrentSuccessAction {
+  type: typeof LANGUAGES_SWITCH_CURRENT_SUCCESS;
+  payload: Partial<LanguagesState>;
+}
+
+export type LanguagesActions =
+  | LanguagesLoadRequestAction
+  | LanguagesLoadSuccessAction
+  | LanguagesSwitchCurrentAction
+  | LanguagesSwitchCurrentRequestAction
+  | LanguagesSwitchCurrentSuccessAction;

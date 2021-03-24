@@ -1,10 +1,10 @@
 import {
-  LanguagesActionsTypes,
+  LANGUAGES_LOAD_REQUEST,
+  LANGUAGES_LOAD_SUCCESS,
+  LANGUAGES_SWITCH_CURRENT_REQUEST,
+  LANGUAGES_SWITCH_CURRENT_SUCCESS,
+  LanguagesActions,
   LanguagesState,
-  LOAD_LANGUAGES_STARTED,
-  LOAD_LANGUAGES_SUCCESS,
-  SWITCH_CURRENT_LANGUAGE_RECEIVE,
-  SWITCH_CURRENT_LANGUAGE_REQUEST,
 } from './languages.types';
 
 export const initialState: LanguagesState = {
@@ -35,30 +35,14 @@ export const initialState: LanguagesState = {
   },
 };
 
-export const Languages = (state = initialState, action: LanguagesActionsTypes): LanguagesState => {
+export const Languages = (state = initialState, action: LanguagesActions): LanguagesState => {
   switch (action.type) {
-    case LOAD_LANGUAGES_STARTED:
-      return Object.assign({}, state, {
-        loading: true,
-      });
-    case LOAD_LANGUAGES_SUCCESS:
-      return Object.assign({}, state, {
-        loading: false,
-        ...action.data.Languages,
-      });
-    case SWITCH_CURRENT_LANGUAGE_REQUEST:
-      return Object.assign({}, state, {
-        ...state,
-        currentLanguage: {
-          ...state.currentLanguage,
-          ...action.data,
-        },
-      });
-    case SWITCH_CURRENT_LANGUAGE_RECEIVE:
-      return Object.assign({}, state, {
-        ...state,
-        currentLanguage: action.data,
-      });
+    case LANGUAGES_LOAD_REQUEST:
+    case LANGUAGES_LOAD_SUCCESS:
+    case LANGUAGES_SWITCH_CURRENT_REQUEST:
+    case LANGUAGES_SWITCH_CURRENT_SUCCESS:
+      return Object.assign({}, state, action.payload);
+
     default:
       return Object.assign({}, state);
   }

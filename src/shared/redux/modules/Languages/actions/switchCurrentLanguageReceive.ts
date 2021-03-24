@@ -1,10 +1,6 @@
-import {
-  LanguagesActionsTypes,
-  LanguageState,
-  SWITCH_CURRENT_LANGUAGE_RECEIVE,
-} from 'Modules/Languages/languages.types';
+import { LANGUAGES_SWITCH_CURRENT_SUCCESS, LanguagesActions, LanguagesState } from 'Modules/Languages/languages.types';
 
-export const switchCurrentLanguageReceive = (data: LanguageState): LanguagesActionsTypes => ({
-  type: SWITCH_CURRENT_LANGUAGE_RECEIVE,
-  data,
+export const switchCurrentLanguageReceive = (payload: LanguagesState): LanguagesActions => ({
+  type: LANGUAGES_SWITCH_CURRENT_SUCCESS,
+  payload,
 });

@@ -1,39 +1,55 @@
-import { Action, Dispatch } from 'redux';
-import { ThunkAction } from 'redux-thunk';
+import { Dispatch } from 'redux';
 
 import {
+  LanguagesActions,
   LanguagesApiResponse,
-  LanguagesApiResponseItem,
   LanguagesState,
   LanguageState,
 } from 'Modules/Languages/languages.types';
+import { RootState } from 'Modules/rootType';
 import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
+import { AppThunk } from '../../..';
 import { getCurrentOrDefaultLanguage } from '../utils/getCurrentOrDefaultLanguage';
 import { receiveLanguages } from './receiveLanguages';
 import { requestLanguages } from './requestLanguages';
 
-export const loadLanguages = (lang: string): ThunkAction<any, any, any, Action> => async (dispatch?: Dispatch) => {
+export const loadLanguages = (lang: string): AppThunk<Promise<LanguageState[]>> => async (
+  dispatch: Dispatch<LanguagesActions>,
+  getsState: () => RootState
+): Promise<LanguageState[]> => {
+  const { Languages } = getsState();
   try {
-    dispatch(requestLanguages());
+    dispatch(
+      requestLanguages({
+        ...Languages,
+        currentLanguage: {
+          ...Languages.currentLanguage,
+          loading: true,
+        },
+      })
+    );
 
-    const { data }: LanguagesApiResponse = await HttpClient.get('/languages');
+    const { data } = await HttpClient.get<void, LanguagesApiResponse>('/languages');
+
+    const languagesArray = data.map((item) => item?.attributes);
 
     const languagesByKey: LanguagesState = {
-      byKey: serializerFromArrayToByKey<LanguagesApiResponseItem, LanguageState>({
-        data,
-        contentPath: 'attributes',
+      byKey: serializerFromArrayToByKey<LanguageState, LanguageState>({
+        data: languagesArray,
         keyPath: 'attributes.slug',
       }),
     };
     const currentLanguage = getCurrentOrDefaultLanguage(languagesByKey, lang);
 
-    const Languages = {
-      ...languagesByKey,
-      currentLanguage,
-    };
+    dispatch(
+      receiveLanguages({
+        ...languagesByKey,
+        currentLanguage,
+      })
+    );
 
-    dispatch(receiveLanguages(Languages));
+    return languagesArray;
   } catch (err) {
     throw new Error(err);
   }

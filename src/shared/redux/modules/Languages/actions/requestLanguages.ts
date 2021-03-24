@@ -1,8 +1,6 @@
-import { LanguagesActionsTypes,LOAD_LANGUAGES_STARTED } from 'Modules/Languages/languages.types';
+import { LANGUAGES_LOAD_REQUEST, LanguagesActions, LanguagesState } from 'Modules/Languages/languages.types';
 
-export const requestLanguages = (): LanguagesActionsTypes => ({
-  type: LOAD_LANGUAGES_STARTED,
-  data: {
-    loading: true,
-  },
+export const requestLanguages = (payload: LanguagesState): LanguagesActions => ({
+  type: LANGUAGES_LOAD_REQUEST,
+  payload,
 });
