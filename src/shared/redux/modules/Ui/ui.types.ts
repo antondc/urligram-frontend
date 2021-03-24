@@ -32,71 +32,57 @@ export type UiState = {
 
 interface SwitchUserModal {
   type: typeof SWITCH_USER_MODAL;
+  payload: Partial<UiState>;
 }
 
 interface SwitchLanguagesModal {
   type: typeof SWITCH_LANGUAGES_MODAL;
+  payload: Partial<UiState>;
 }
 
 interface SwitchMessageModal {
   type: typeof SWITCH_MESSAGE_MODAL;
+  payload: Partial<UiState>;
 }
 
 interface SwitchLoginModal {
   type: typeof SWITCH_LOGIN_MODAL;
-  payload: {
-    mounted: boolean;
-  };
+  payload: Partial<UiState>;
 }
 
 interface SwitchWelcomeModal {
   type: typeof SWITCH_WELCOME_MODAL;
-  payload: {
-    mounted: boolean;
-  };
+  payload: Partial<UiState>;
 }
 
 interface SwitchSignUpModal {
   type: typeof SWITCH_SIGN_UP_MODAL;
-  payload: {
-    mounted: boolean;
-  };
+  payload: Partial<UiState>;
 }
 
 interface SwitchForgotPasswordModal {
   type: typeof SWITCH_FORGOT_PASSWORD_MODAL;
-  payload: {
-    mounted: boolean;
-  };
+  payload: Partial<UiState>;
 }
 
 interface SwitchResetPasswordModal {
   type: typeof SWITCH_RESET_PASSWORD_MODAL;
-  payload: {
-    mounted: boolean;
-  };
+  payload: Partial<UiState>;
 }
 
 interface SwitchBookmarkCreateModal {
   type: typeof SWITCH_BOOKMARK_CREATE_MODAL;
-  payload: {
-    mounted: boolean;
-  };
+  payload: Partial<UiState>;
 }
 
 interface SwitchBookmarkUpdateModal {
   type: typeof SWITCH_BOOKMARK_UPDATE_MODAL;
-  payload: {
-    mounted: boolean;
-    bookmarkId: number;
-  };
+  payload: Partial<UiState>;
 }
 
 interface SwitchListModal {
   type: typeof SWITCH_LIST_MODAL;
-  payload: {
-    mounted: boolean;
-  };
+  payload: Partial<UiState>;
 }
 
 export type UiActionsTypes =

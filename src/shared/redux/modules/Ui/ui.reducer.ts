@@ -66,93 +66,17 @@ export const initialState: UiState = {
 export const Ui = (state = initialState, action: UiActionsTypes): UiState => {
   switch (action.type) {
     case SWITCH_USER_MODAL:
-      return Object.assign({}, state, {
-        screenLocked: !state.screenLocked,
-        userModal: {
-          ...state.userModal,
-          mounted: !state.userModal.mounted,
-        },
-      });
     case SWITCH_LANGUAGES_MODAL:
-      return Object.assign({}, state, {
-        languagesModal: {
-          ...state.languagesModal,
-          mounted: !state.languagesModal.mounted,
-        },
-      });
     case SWITCH_MESSAGE_MODAL:
-      return Object.assign({}, state, {
-        screenLocked: !state.screenLocked,
-        messageModal: {
-          ...state.messageModal,
-          mounted: !state.messageModal.mounted,
-        },
-      });
     case SWITCH_LOGIN_MODAL:
-      return Object.assign({}, state, {
-        screenLocked: !state.screenLocked,
-        loginModal: {
-          ...state.loginModal,
-          mounted: action.payload.mounted,
-        },
-      });
     case SWITCH_WELCOME_MODAL:
-      return Object.assign({}, state, {
-        screenLocked: !state.screenLocked,
-        welcomeModal: {
-          ...state.welcomeModal,
-          mounted: action.payload.mounted,
-        },
-      });
     case SWITCH_SIGN_UP_MODAL:
-      return Object.assign({}, state, {
-        screenLocked: !state.screenLocked,
-        signUpModal: {
-          ...state.signUpModal,
-          mounted: action.payload.mounted,
-        },
-      });
     case SWITCH_FORGOT_PASSWORD_MODAL:
-      return Object.assign({}, state, {
-        screenLocked: !state.screenLocked,
-        forgotPasswordModal: {
-          ...state.forgotPasswordModal,
-          mounted: action.payload.mounted,
-        },
-      });
     case SWITCH_RESET_PASSWORD_MODAL:
-      return Object.assign({}, state, {
-        screenLocked: !state.screenLocked,
-        resetPasswordModal: {
-          ...state.resetPasswordModal,
-          mounted: action.payload.mounted,
-        },
-      });
     case SWITCH_BOOKMARK_CREATE_MODAL:
-      return Object.assign({}, state, {
-        screenLocked: !state.screenLocked,
-        bookmarkCreateModal: {
-          ...state.bookmarkCreateModal,
-          mounted: action.payload.mounted,
-        },
-      });
     case SWITCH_BOOKMARK_UPDATE_MODAL:
-      return Object.assign({}, state, {
-        screenLocked: !state.screenLocked,
-        bookmarkUpdateModal: {
-          ...state.bookmarkUpdateModal,
-          mounted: action.payload.mounted,
-          bookmarkId: action.payload.bookmarkId,
-        },
-      });
     case SWITCH_LIST_MODAL:
-      return Object.assign({}, state, {
-        screenLocked: !state.screenLocked,
-        listModal: {
-          ...state.listModal,
-          mounted: action.payload.mounted,
-        },
-      });
+      return Object.assign({}, state, action.payload);
 
     default:
       return Object.assign({}, state);

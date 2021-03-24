@@ -47,7 +47,7 @@ const BookmarkRow: React.FC<Props> = ({ id }) => {
 
   const onEdit = () => {
     if (userBookmarked) {
-      dispatch(switchBookmarkUpdateModal({ mount: true, bookmarkId: id }));
+      dispatch(switchBookmarkUpdateModal({ mounted: true, bookmarkId: id }));
     } else {
       //
     }

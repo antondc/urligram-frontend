@@ -13,7 +13,7 @@ const BookmarkUpdateModal: React.FC = () => {
   const dispatch = useDispatch();
 
   const closeModal = () => {
-    dispatch(switchBookmarkUpdateModal({ mount: false }));
+    dispatch(switchBookmarkUpdateModal({ mounted: false }));
   };
 
   return (

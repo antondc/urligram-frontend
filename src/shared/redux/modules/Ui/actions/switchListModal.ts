@@ -1,8 +1,23 @@
-import { SWITCH_LIST_MODAL, UiActionsTypes } from '../ui.types';
+import { Dispatch } from 'redux';
 
-export const switchListModal = (mount: boolean): UiActionsTypes => ({
-  type: SWITCH_LIST_MODAL,
-  payload: {
-    mounted: mount,
-  },
-});
+import { RootState } from 'Modules/rootType';
+import { AppThunk } from '../../../index';
+import { SWITCH_LOGIN_MODAL, UiActionsTypes } from '../ui.types';
+
+export const switchListModal = (mounted: boolean): AppThunk<void> => async (
+  dispatch: Dispatch<UiActionsTypes>,
+  getState: () => RootState
+): Promise<void> => {
+  const { Ui } = getState();
+
+  dispatch({
+    type: SWITCH_LOGIN_MODAL,
+    payload: {
+      screenLocked: !Ui.screenLocked,
+      listModal: {
+        ...Ui.listModal,
+        mounted,
+      },
+    },
+  });
+};
