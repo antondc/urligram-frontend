@@ -3,9 +3,9 @@ import { Dispatch } from 'redux';
 import { bookmarkUpdateFailure } from 'Modules/Bookmarks/actions/bookmarkUpdateFailure';
 import { bookmarkUpdateSuccess } from 'Modules/Bookmarks/actions/bookmarkUpdateSuccess';
 import { BookmarkState, BookmarkUpdateRequest, BookmarkUpdateResponse } from 'Modules/Bookmarks/bookmarks.types';
+import { RootState } from 'Modules/rootType';
 import HttpClient from 'Services/HttpClient';
 import { AppThunk } from '../../..';
-import { RootState } from '../../rootType';
 import { bookmarkUpdateRequest } from './bookmarkUpdateRequest';
 
 export const bookmarkUpdate = ({

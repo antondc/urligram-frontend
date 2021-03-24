@@ -1,33 +1,43 @@
-import { Action, Dispatch } from 'redux';
-import { ThunkAction } from 'redux-thunk';
+import { Dispatch } from 'redux';
 
-import { receiveUsers } from 'Modules/Users/actions/receiveUsers';
-import { ReceiveUserItem, ReceiveUsersResponse, UserState } from 'Modules/Users/users.types';
+import { RootState } from 'Modules/rootType';
+import { usersReceive } from 'Modules/Users/actions/usersReceive';
+import { UsersActions, UsersLoadApiResponse, UserState } from 'Modules/Users/users.types';
 import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
+import { AppThunk } from '../../..';
+import { SectionsActions } from '../sections.types';
 import { sectionsUsersInThisListReceive } from './sectionsUsersInThisListReceive';
 import { sectionsUsersInThisListRequest } from './sectionsUsersInThisListRequest';
 
-export const sectionsUsersInThisListLoad = (userIds: string[]): ThunkAction<any, any, any, Action> => async (
-  dispatch?: Dispatch
-) => {
+export const sectionsUsersInThisListLoad = (userIds: string[]): AppThunk<Promise<UserState[]>> => async (
+  dispatch: Dispatch<UsersActions | SectionsActions>,
+  getState: () => RootState
+): Promise<UserState[]> => {
   try {
     dispatch(sectionsUsersInThisListRequest());
 
-    const { data }: ReceiveUsersResponse = await HttpClient.get('/users/ids', {
+    const { data } = await HttpClient.get<void, UsersLoadApiResponse>('/users/ids', {
       params: {
         userIds,
       },
     });
 
-    const usersByKey = {
-      byKey: serializerFromArrayToByKey<ReceiveUserItem, UserState>({
-        data: data,
-        contentPath: 'attributes',
-      }),
-    };
+    const usersArray = data.map((item) => item.attributes);
 
-    dispatch(receiveUsers(usersByKey));
+    const { Users } = getState();
+    dispatch(
+      usersReceive({
+        ...Users,
+        byKey: {
+          ...Users.byKey,
+          ...serializerFromArrayToByKey<UserState, UserState>({
+            data: usersArray,
+          }),
+        },
+        loading: false,
+      })
+    );
     dispatch(
       sectionsUsersInThisListReceive({
         UsersInThisList: {
@@ -35,9 +45,9 @@ export const sectionsUsersInThisListLoad = (userIds: string[]): ThunkAction<any,
         },
       })
     );
+
+    return usersArray;
   } catch (err) {
     throw new Error(err);
   }
-
-  return;
 };

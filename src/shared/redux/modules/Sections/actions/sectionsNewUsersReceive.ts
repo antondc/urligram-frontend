@@ -1,6 +1,6 @@
-import { SECTIONS_NEW_USERS_RECEIVE, SectionsActionsTypes, SectionsState } from 'Modules/Sections/sections.types';
+import { SECTIONS_NEW_USERS_RECEIVE, SectionsActions, SectionsState } from 'Modules/Sections/sections.types';
 
-export const sectionsNewUsersReceive = (data: SectionsState): SectionsActionsTypes => ({
+export const sectionsNewUsersReceive = (data: SectionsState): SectionsActions => ({
   type: SECTIONS_NEW_USERS_RECEIVE,
   data: {
     ...data,

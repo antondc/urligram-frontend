@@ -1,33 +1,42 @@
-import { Action, Dispatch } from 'redux';
-import { ThunkAction } from 'redux-thunk';
+import { Dispatch } from 'redux';
 
-import { ReceiveUserResponse } from 'Modules/Users/users.types';
+import { RootState } from 'Modules/rootType';
+import { UserLoadApiResponse, UserState } from 'Modules/Users/users.types';
 import HttpClient from 'Services/HttpClient';
-import { receiveUsers } from './receiveUsers';
-import { requestUsers } from './requestUsers';
+import { AppThunk } from '../../..';
+import { usersReceive } from './usersReceive';
+import { usersRequest } from './usersRequest';
 
-export const userLoad = (userId: string): ThunkAction<any, any, any, Action> => async (
+export const userLoad = (userId: string): AppThunk<Promise<UserState>> => async (
   dispatch: Dispatch,
-  getState
-) => {
+  getState: () => RootState
+): Promise<UserState> => {
+  const { Users } = getState();
+
   try {
-    dispatch(requestUsers());
+    dispatch(
+      usersRequest({
+        ...Users,
+        loading: true,
+      })
+    );
 
-    const { data: userData }: ReceiveUserResponse = await HttpClient.get('/users/' + userId + window.location.search);
+    const { data } = await HttpClient.get<void, UserLoadApiResponse>('/users/' + userId + window.location.search);
 
-    const { Users } = getState();
-    const usersByKey = {
-      byKey: {
-        ...Users.byKey,
-        [userData?.attributes?.id]: {
-          ...userData.attributes,
+    const { Users: UsersAfterApiCall } = getState();
+    dispatch(
+      usersReceive({
+        ...UsersAfterApiCall,
+        byKey: {
+          ...UsersAfterApiCall.byKey,
+          [data?.attributes?.id]: data.attributes,
         },
-      },
-    };
-    dispatch(receiveUsers(usersByKey));
+        loading: false,
+      })
+    );
+
+    return data.attributes;
   } catch (err) {
     throw new Error(err);
   }
-
-  return;
 };

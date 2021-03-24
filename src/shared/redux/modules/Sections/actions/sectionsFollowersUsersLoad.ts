@@ -1,33 +1,42 @@
-import { Action, Dispatch } from 'redux';
-import { ThunkAction } from 'redux-thunk';
+import { Dispatch } from 'redux';
 
-import { receiveUsers } from 'Modules/Users/actions/receiveUsers';
-import { ReceiveUserItem, ReceiveUsersResponse, UserState } from 'Modules/Users/users.types';
+import { RootState } from 'Modules/rootType';
+import { usersReceive } from 'Modules/Users/actions/usersReceive';
+import { UsersActions, UsersLoadApiResponse, UserState } from 'Modules/Users/users.types';
 import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
+import { AppThunk } from '../../..';
+import { SectionsActions } from '../sections.types';
 import { sectionsFollowersUsersReceive } from './sectionsFollowersUsersReceive';
 import { sectionsFollowersUsersRequest } from './sectionsFollowersUsersRequest';
 
-export const sectionsFollowersUsersLoad = (userId: string): ThunkAction<any, any, any, Action> => async (
-  dispatch?: Dispatch
-) => {
+export const sectionsFollowersUsersLoad = (userId: string): AppThunk<Promise<UserState[]>> => async (
+  dispatch: Dispatch<UsersActions | SectionsActions>,
+  getState: () => RootState
+): Promise<UserState[]> => {
   if (!userId) return;
-
   try {
     dispatch(sectionsFollowersUsersRequest());
 
-    const { data }: ReceiveUsersResponse = await HttpClient.get(
+    const { data }: UsersLoadApiResponse = await HttpClient.get(
       `/users/${userId}/followers?sort=-createdat&page[size]=5`
     );
+    const usersArray = data.map((item) => item.attributes);
 
-    const newUsersByKey = {
-      byKey: serializerFromArrayToByKey<ReceiveUserItem, UserState>({
-        data: data,
-        contentPath: 'attributes',
-      }),
-    };
+    const { Users } = getState();
 
-    dispatch(receiveUsers(newUsersByKey));
+    dispatch(
+      usersReceive({
+        ...Users,
+        byKey: {
+          ...Users.byKey,
+          ...serializerFromArrayToByKey<UserState, UserState>({
+            data: usersArray,
+          }),
+        },
+        loading: false,
+      })
+    );
 
     dispatch(
       sectionsFollowersUsersReceive({
@@ -36,9 +45,9 @@ export const sectionsFollowersUsersLoad = (userId: string): ThunkAction<any, any
         },
       })
     );
+
+    return usersArray;
   } catch (err) {
     throw new Error(err);
   }
-
-  return;
 };

@@ -1,6 +1,6 @@
-import { SECTIONS_MY_TAGS_RECEIVE, SectionsActionsTypes, SectionsState } from 'Modules/Sections/sections.types';
+import { SECTIONS_MY_TAGS_RECEIVE, SectionsActions, SectionsState } from 'Modules/Sections/sections.types';
 
-export const sectionsMyTagsReceive = (data: SectionsState): SectionsActionsTypes => ({
+export const sectionsMyTagsReceive = (data: SectionsState): SectionsActions => ({
   type: SECTIONS_MY_TAGS_RECEIVE,
   data,
 });

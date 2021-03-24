@@ -10,7 +10,7 @@ import { selectMostFollowedUsers } from 'Modules/Sections/selectors/selectMostFo
 import { selectMostFollowedUsersLoading } from 'Modules/Sections/selectors/selectMostFollowedUsersLoading';
 import { selectNewUsers } from 'Modules/Sections/selectors/selectNewUsers';
 import { selectNewUsersLoading } from 'Modules/Sections/selectors/selectNewUsersLoading';
-import { loadUsers } from 'Modules/Users/actions/loadUsers';
+import { usersLoad } from 'Modules/Users/actions/usersLoad';
 import { selectUsersCurrentIds } from 'Modules/Users/selectors/selectUsersCurrentIds';
 import { selectUsersLoading } from 'Modules/Users/selectors/selectUsersLoading';
 import { selectUsersMetaSort } from 'Modules/Users/selectors/selectUsersMetaSort';
@@ -37,7 +37,7 @@ const Users: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    dispatch(loadUsers());
+    dispatch(usersLoad());
   }, [page]);
 
   return (

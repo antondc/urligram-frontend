@@ -1,27 +1,39 @@
-import { Action, Dispatch } from 'redux';
-import { ThunkAction } from 'redux-thunk';
+import { Dispatch } from 'redux';
 
-import { receiveUsers } from 'Modules/Users/actions/receiveUsers';
-import { ReceiveUserItem, ReceiveUsersResponse, UserState } from 'Modules/Users/users.types';
+import { RootState } from 'Modules/rootType';
+import { usersReceive } from 'Modules/Users/actions/usersReceive';
+import { UsersActions, UsersLoadApiResponse, UserState } from 'Modules/Users/users.types';
 import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
+import { AppThunk } from '../../..';
+import { SectionsActions } from '../sections.types';
 import { sectionsMostFollowedUsersReceive } from './sectionsMostFollowedUsersReceive';
 import { sectionsMostFollowedUsersRequest } from './sectionsMostFollowedUsersRequest';
 
-export const sectionsMostFollowedUsersLoad = (): ThunkAction<any, any, any, Action> => async (dispatch?: Dispatch) => {
+export const sectionsMostFollowedUsersLoad = (): AppThunk<Promise<UserState[]>> => async (
+  dispatch: Dispatch<UsersActions | SectionsActions>,
+  getState: () => RootState
+): Promise<UserState[]> => {
   try {
     dispatch(sectionsMostFollowedUsersRequest());
 
-    const { data }: ReceiveUsersResponse = await HttpClient.get('/users?sort=-followers&page[size]=5');
+    const { data } = await HttpClient.get<void, UsersLoadApiResponse>('/users?sort=-followers&page[size]=5');
 
-    const mostFollowedUsersByKey = {
-      byKey: serializerFromArrayToByKey<ReceiveUserItem, UserState>({
-        data: data,
-        contentPath: 'attributes',
-      }),
-    };
+    const usersArray = data.map((item) => item.attributes);
 
-    dispatch(receiveUsers(mostFollowedUsersByKey));
+    const { Users } = getState();
+    dispatch(
+      usersReceive({
+        ...Users,
+        byKey: {
+          ...Users.byKey,
+          ...serializerFromArrayToByKey<UserState, UserState>({
+            data: usersArray,
+          }),
+        },
+        loading: false,
+      })
+    );
 
     dispatch(
       sectionsMostFollowedUsersReceive({
@@ -30,9 +42,9 @@ export const sectionsMostFollowedUsersLoad = (): ThunkAction<any, any, any, Acti
         },
       })
     );
+
+    return usersArray;
   } catch (err) {
     throw new Error(err);
   }
-
-  return;
 };

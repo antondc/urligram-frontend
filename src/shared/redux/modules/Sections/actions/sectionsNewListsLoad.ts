@@ -1,8 +1,8 @@
 import { Action, Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 
+import { listsLoadReceive } from 'Modules/Lists/actions/listsLoadReceive';
 import { ListApiResponseItem, ListsLoadApiResponse, ListState } from 'Modules/Lists/lists.types';
-import { listsLoadReceive } from 'Root/src/shared/redux/modules/Lists/actions/listsLoadReceive';
 import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
 import { sectionsNewListsReceive } from './sectionsNewListsReceive';

@@ -1,36 +1,53 @@
-import { Action, Dispatch } from 'redux';
-import { ThunkAction } from 'redux-thunk';
+import { Dispatch } from 'redux';
 
-import { ReceiveUserItem, ReceiveUsersResponse, UserState } from 'Modules/Users/users.types';
+import { RootState } from 'Modules/rootType';
+import { UsersActions, UsersLoadApiResponse, UserState } from 'Modules/Users/users.types';
 import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
-import { receiveUsers } from './receiveUsers';
-import { requestUsers } from './requestUsers';
+import { AppThunk } from '../../..';
+import { usersReceive } from './usersReceive';
+import { usersRequest } from './usersRequest';
 
-export const userFollowersLoad = (userId: string): ThunkAction<any, any, any, Action> => async (dispatch: Dispatch) => {
+export const userFollowersLoad = (userId: string): AppThunk<Promise<UserState[]>> => async (
+  dispatch: Dispatch<UsersActions>,
+  getState: () => RootState
+): Promise<UserState[]> => {
+  const { Users } = getState();
   try {
-    dispatch(requestUsers());
+    dispatch(
+      usersRequest({
+        ...Users,
+        meta: {
+          ...Users.meta,
+          sort: undefined,
+        },
+        loading: true,
+      })
+    );
 
-    const {
-      meta: { totalItems, sort },
-      data,
-    }: ReceiveUsersResponse = await HttpClient.get(`/users/${userId}/followers${window.location.search}`);
+    const { meta, data } = await HttpClient.get<void, UsersLoadApiResponse>(
+      `/users/${userId}/followers${window.location.search}`
+    );
+    const usersArray = data.map((item) => item.attributes);
 
-    const usersByKey = {
-      byKey: serializerFromArrayToByKey<ReceiveUserItem, UserState>({
-        data: data,
-        contentPath: 'attributes',
-      }),
-      currentIds: data.map((item) => item.id),
-      meta: {
-        totalItems,
-        sort,
-      },
-    };
-    dispatch(receiveUsers(usersByKey));
+    const { Users: UsersAfterApiCall } = getState();
+    dispatch(
+      usersReceive({
+        ...UsersAfterApiCall,
+        byKey: {
+          ...UsersAfterApiCall.byKey,
+          ...serializerFromArrayToByKey<UserState, UserState>({
+            data: usersArray,
+          }),
+        },
+        currentIds: data.map((item) => item.id),
+        meta,
+        loading: false,
+      })
+    );
+
+    return usersArray;
   } catch (err) {
     throw new Error(err);
   }
-
-  return;
 };

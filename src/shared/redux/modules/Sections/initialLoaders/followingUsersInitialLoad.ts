@@ -1,5 +1,5 @@
 import { SectionsState } from 'Modules/Sections/sections.types';
-import { ReceiveUserItem, ReceiveUsersResponse, UserState } from 'Modules/Users/users.types';
+import { UsersLoadApiItemResponse, UsersLoadApiResponse, UserState } from 'Modules/Users/users.types';
 import { RequestParameters } from 'Root/src/server/routes/allRoutes';
 import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
@@ -7,13 +7,13 @@ import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFr
 export const followingUsersInitialLoader = async ({ params }: RequestParameters = {}): Promise<{
   Sections: SectionsState;
 }> => {
-  const { data: usersData }: ReceiveUsersResponse = await HttpClient.get(
+  const { data: usersData }: UsersLoadApiResponse = await HttpClient.get(
     `/users/${params?.userId}/following?sort=-createdat&page[size]=5`
   );
 
   const UsersByKey = {
     byKey: {
-      ...serializerFromArrayToByKey<ReceiveUserItem, UserState>({
+      ...serializerFromArrayToByKey<UsersLoadApiItemResponse, UserState>({
         data: usersData,
         contentPath: 'attributes',
       }),

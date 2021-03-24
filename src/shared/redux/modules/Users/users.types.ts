@@ -1,7 +1,7 @@
-export const LOAD_USERS_STARTED = 'LOAD_USERS_STARTED';
-export const LOAD_USERS_SUCEEDED = 'LOAD_USERS_SUCEEDED';
-export const USER_LOAD_STARTED = 'USER_LOAD_STARTED';
-export const USER_LOAD_SUCEEDED = 'LOAD_USER_SUCEEDED';
+export const USERS_LOAD_REQUEST = 'USERS_LOAD_REQUEST';
+export const USERS_LOAD_SUCCEED = 'USERS_LOAD_SUCCEED';
+export const USER_LOAD_REQUEST = 'USER_LOAD_REQUEST';
+export const USER_LOAD_SUCCEED = 'USER_LOAD_SUCCEED';
 
 export interface UserState {
   id: string;
@@ -40,46 +40,46 @@ export interface UsersState {
   };
 }
 
-interface RequestUsersAction {
-  type: typeof LOAD_USERS_STARTED;
-  data: {
-    loading: true;
-  };
-}
-
-interface ReceiveUsersAction {
-  type: typeof LOAD_USERS_SUCEEDED;
-  data: UsersState;
-}
-
-export interface ReceiveUserItem {
+export interface UsersLoadApiItemResponse {
   type: 'user';
   id: string;
   attributes: UserState;
 }
 
-export interface ReceiveUsersResponse {
-  data: ReceiveUserItem[];
+export interface UserLoadApiResponse {
+  data: UsersLoadApiItemResponse;
+}
+
+export interface UsersLoadApiResponse {
+  data: UsersLoadApiItemResponse[];
   meta: {
     totalItems?: number;
     sort?: string;
   };
 }
 
-export interface ReceiveUserResponse {
-  data: ReceiveUserItem;
+interface UsersLoadRequestAction {
+  type: typeof USERS_LOAD_REQUEST;
+  payload: Partial<UsersState>;
 }
 
-interface UserRequestAction {
-  type: typeof USER_LOAD_STARTED;
-  data: {
-    loading: true;
-  };
+interface UsersLoadSuccessAction {
+  type: typeof USERS_LOAD_SUCCEED;
+  payload: Partial<UsersState>;
 }
 
-interface UserReceiveAction {
-  type: typeof USER_LOAD_SUCEEDED;
-  data: UsersState;
+interface UserLoadRequestAction {
+  type: typeof USER_LOAD_REQUEST;
+  payload: Partial<UsersState>;
 }
 
-export type UsersActionsTypes = RequestUsersAction | ReceiveUsersAction | UserRequestAction | UserReceiveAction;
+interface UserLoadSuccessAction {
+  type: typeof USER_LOAD_SUCCEED;
+  payload: Partial<UsersState>;
+}
+
+export type UsersActions =
+  | UsersLoadRequestAction
+  | UsersLoadSuccessAction
+  | UserLoadRequestAction
+  | UserLoadSuccessAction;

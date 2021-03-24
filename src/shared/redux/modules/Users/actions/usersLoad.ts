@@ -8,26 +8,26 @@ import { AppThunk } from '../../..';
 import { usersReceive } from './usersReceive';
 import { usersRequest } from './usersRequest';
 
-export const userFollowingLoad = (userId: string): AppThunk<Promise<UserState[]>> => async (
+export const usersLoad = (): AppThunk<Promise<UserState[]>> => async (
   dispatch: Dispatch<UsersActions>,
   getState: () => RootState
 ): Promise<UserState[]> => {
-  const { Users } = getState();
+  const APIBaseEndpoint = '/users';
+
   try {
     dispatch(
       usersRequest({
-        ...Users,
+        ...getState().Users,
+        loading: true,
         meta: {
-          ...Users.meta,
+          ...getState().Users.meta,
           sort: undefined,
         },
-        loading: true,
       })
     );
 
-    const { meta, data } = await HttpClient.get<void, UsersLoadApiResponse>(
-      `/users/${userId}/following${window.location.search}`
-    );
+    const { meta, data } = await HttpClient.get<void, UsersLoadApiResponse>(APIBaseEndpoint + window.location.search);
+
     const usersArray = data.map((item) => item.attributes);
 
     const { Users: UsersAfterApiCall } = getState();

@@ -31,7 +31,7 @@ import {
   SECTIONS_USER_MOST_USED_TAGS_REQUEST,
   SECTIONS_USERS_IN_THIS_LIST_RECEIVE,
   SECTIONS_USERS_IN_THIS_LIST_REQUEST,
-  SectionsActionsTypes,
+  SectionsActions,
   SectionsState,
 } from './sections.types';
 
@@ -50,7 +50,7 @@ export const initialState: SectionsState = {
   },
 };
 
-export const Sections = (state = initialState, action: SectionsActionsTypes): SectionsState => {
+export const Sections = (state = initialState, action: SectionsActions): SectionsState => {
   switch (action.type) {
     case LOAD_MOST_POPULAR_LISTS_STARTED:
       return Object.assign({}, state, {

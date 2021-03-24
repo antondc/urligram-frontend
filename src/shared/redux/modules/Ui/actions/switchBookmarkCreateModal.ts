@@ -1,7 +1,7 @@
 import { Dispatch } from 'redux';
 
 import { AppThunk } from '../../../index';
-import { RootState } from '../../rootType';
+import { RootState } from 'Modules/rootType';
 import { SWITCH_BOOKMARK_CREATE_MODAL, UiActionsTypes } from '../ui.types';
 
 export const switchBookmarkCreateModal = (mounted: boolean): AppThunk<void> => async (

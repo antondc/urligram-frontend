@@ -5,9 +5,9 @@ import { bookmarkCreateSuccess } from 'Modules/Bookmarks/actions/bookmarkCreateS
 import { BookmarkCreateRequest, BookmarkCreateResponse, BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
 import { linkLoadById } from 'Modules/Links/actions/linkLoadById';
 import { linkLoadByIdRequest } from 'Modules/Links/actions/linkLoadByIdRequest';
+import { RootState } from 'Modules/rootType';
 import HttpClient from 'Services/HttpClient';
 import { AppThunk } from '../../../index';
-import { RootState } from '../../rootType';
 import { bookmarkCreateRequest } from './bookmarkCreateRequest';
 
 export const bookmarkCreate = ({

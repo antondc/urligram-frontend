@@ -1,8 +1,6 @@
-import { USER_LOAD_SUCEEDED, UsersActionsTypes, UsersState } from 'Modules/Users/users.types';
+import { USER_LOAD_SUCCEED, UsersActions, UsersState } from 'Modules/Users/users.types';
 
-export const userReceive = (data: UsersState): UsersActionsTypes => ({
-  type: USER_LOAD_SUCEEDED,
-  data: {
-    ...data,
-  },
+export const userReceive = (payload: UsersState): UsersActions => ({
+  type: USER_LOAD_SUCCEED,
+  payload,
 });

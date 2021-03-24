@@ -247,7 +247,7 @@ interface SectionUserMostFollowedTagsReceiveAction {
   data: SectionsState;
 }
 
-export type SectionsActionsTypes =
+export type SectionsActions =
   | RequestMostPopularListsAction
   | ReceiveMostPopularListsAction
   | SectionNewListsRequestAction

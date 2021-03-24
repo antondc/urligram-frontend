@@ -1,11 +1,14 @@
 import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
-import { ReceiveUserItem, ReceiveUsersResponse, UsersState, UserState } from './users.types';
+import { UsersLoadApiItemResponse, UsersLoadApiResponse, UsersState, UserState } from './users.types';
 
 export const initialUsersLoader = async (): Promise<{ Users: UsersState }> => {
-  const { data }: ReceiveUsersResponse = await HttpClient.get('/users');
+  const { data }: UsersLoadApiResponse = await HttpClient.get('/users');
 
-  const usersByKey = serializerFromArrayToByKey<ReceiveUserItem, UserState>({ data });
+  const usersByKey = serializerFromArrayToByKey<UsersLoadApiItemResponse, UserState>({
+    data,
+    contentPath: 'attributes',
+  });
 
   const result = {
     Users: {

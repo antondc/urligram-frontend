@@ -1,35 +1,23 @@
-import { LOAD_USERS_STARTED, LOAD_USERS_SUCEEDED, UsersActionsTypes, UsersState } from './users.types';
+import {
+  USER_LOAD_REQUEST,
+  USER_LOAD_SUCCEED,
+  USERS_LOAD_REQUEST,
+  USERS_LOAD_SUCCEED,
+  UsersActions,
+  UsersState,
+} from './users.types';
 
 export const initialState: UsersState = {
   byKey: {},
 };
 
-export const Users = (state = initialState, action: UsersActionsTypes): UsersState => {
+export const Users = (state = initialState, action: UsersActions): UsersState => {
   switch (action.type) {
-    case LOAD_USERS_STARTED:
-      return Object.assign({}, state, {
-        ...state,
-        loading: true,
-        meta: {
-          ...state.meta,
-          sort: undefined
-        },
-      });
-
-    case LOAD_USERS_SUCEEDED:
-      return Object.assign({}, state, {
-        ...state,
-        byKey: {
-          ...state.byKey,
-          ...action.data.byKey,
-        },
-        currentIds: action.data.currentIds || state.currentIds,
-        loading: false,
-        meta: {
-          ...state.meta,
-          ...action.data.meta,
-        },
-      });
+    case USER_LOAD_REQUEST:
+    case USER_LOAD_SUCCEED:
+    case USERS_LOAD_REQUEST:
+    case USERS_LOAD_SUCCEED:
+      return Object.assign({}, state, action.payload);
 
     default:
       return Object.assign({}, state);
