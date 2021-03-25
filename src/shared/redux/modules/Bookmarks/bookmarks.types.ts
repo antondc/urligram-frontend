@@ -39,7 +39,6 @@ export interface BookmarkState {
     name: string;
   }[];
   statistics: LinkStatistics;
-  bookmarkingLoading: boolean;
 }
 
 export interface BookmarksState {
@@ -58,13 +57,15 @@ export interface BookmarksState {
   bookmarkUpdateSuccess?: boolean;
 }
 
+// Requests -------
+
 export interface BookmarkGetItemResponse {
   type: 'bookmark';
   id: number;
   attributes: BookmarkState;
 }
 
-export interface BookmarksGetResponse {
+export interface BookmarksGetApiResponse {
   data: BookmarkGetItemResponse[];
   meta: {
     totalItems: number;
@@ -72,9 +73,8 @@ export interface BookmarksGetResponse {
   };
 }
 
-export interface BookmarkCreateRequest {
+export interface BookmarkCreateApiRequest {
   bookmarkId?: number;
-  linkId?: number;
   title?: string;
   url?: string;
   isPrivate?: boolean;
@@ -83,13 +83,13 @@ export interface BookmarkCreateRequest {
   }[];
 }
 
-export interface BookmarkCreateResponse {
+export interface BookmarkCreateApiResponse {
   data: {
     attributes: BookmarkState;
   };
 }
 
-export interface BookmarkUpdateRequest {
+export interface BookmarkUpdateApiRequest {
   bookmarkId: number;
   order: number;
   title: string;
@@ -99,14 +99,17 @@ export interface BookmarkUpdateRequest {
   }[];
 }
 
+export interface BookmarkUpdateApiResponse {
+  data: {
+    attributes: BookmarkState;
+  };
+}
+
+// Actions -----
+
 interface BookmarksLoadRequestAction {
   type: typeof BOOKMARKS_LOAD_REQUEST;
-  payload: {
-    loading: true;
-    meta: {
-      sort: undefined;
-    };
-  };
+  payload: BookmarksState;
 }
 
 interface BookmarksLoadSuccessAction {
@@ -121,10 +124,10 @@ export interface BookmarkVoteRequestAction {
 
 export interface BookmarkVoteSuccessAction {
   type: typeof BOOKMARK_UPDATE_VOTE_SUCCESS;
-  payload: BookmarkState;
+  payload: BookmarksState;
 }
 
-export interface BookmarkCreateRequestAction {
+export interface BookmarkCreateApiRequestAction {
   type: typeof BOOKMARK_CREATE_REQUEST;
   payload: BookmarksState;
 }
@@ -136,34 +139,22 @@ export interface BookmarkCreateSuccessAction {
 
 export interface BookmarkCreateFailureAction {
   type: typeof BOOKMARK_CREATE_FAILURE;
-  payload: {
-    errors: BookmarkError[];
-  };
-}
-
-export interface BookmarkUpdateResponse {
-  data: {
-    attributes: BookmarkState;
-  };
+  payload: BookmarksState;
 }
 
 export interface BookmarkUpdateRequestAction {
   type: typeof BOOKMARK_UPDATE_REQUEST;
-  payload: undefined;
+  payload: BookmarksState;
 }
 
 export interface BookmarkUpdateSuccessAction {
   type: typeof BOOKMARK_UPDATE_SUCCESS;
-  payload: {
-    bookmark: BookmarkState;
-  };
+  payload: BookmarksState;
 }
 
 export interface BookmarkUpdateFailureAction {
   type: typeof BOOKMARK_UPDATE_FAILURE;
-  payload: {
-    errors: BookmarkError[];
-  };
+  payload: BookmarksState;
 }
 
 export type BookmarksActions =
@@ -171,7 +162,7 @@ export type BookmarksActions =
   | BookmarksLoadSuccessAction
   | BookmarkVoteRequestAction
   | BookmarkVoteSuccessAction
-  | BookmarkCreateRequestAction
+  | BookmarkCreateApiRequestAction
   | BookmarkCreateSuccessAction
   | BookmarkCreateFailureAction
   | BookmarkUpdateRequestAction

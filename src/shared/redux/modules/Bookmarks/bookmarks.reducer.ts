@@ -31,7 +31,7 @@ export const Bookmarks = (state = initialState, action: BookmarksActions): Bookm
     case BOOKMARK_UPDATE_REQUEST:
     case BOOKMARK_UPDATE_SUCCESS:
     case BOOKMARK_UPDATE_FAILURE:
-      return Object.assign({}, mergeDeep(state, [action.payload], { replaceArrays: true }));
+      return Object.assign({}, state, action.payload);
     default:
       return Object.assign({}, state);
   }

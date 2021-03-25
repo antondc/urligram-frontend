@@ -26,7 +26,7 @@ export const sectionsSimilarListsLoad = (
     );
 
     const { data }: ListsLoadApiResponse = await HttpClient.get(`/lists/${listId}/similar?page[size]=5`);
-    const listsArray = data.map((item) => item.attributes);
+    const listsArray = data?.map((item) => item.attributes);
     const { Sections: sectionsAfterResponse, Lists: listsAfterResponse } = getState();
 
     dispatch(
@@ -44,7 +44,7 @@ export const sectionsSimilarListsLoad = (
         ...sectionsAfterResponse,
         SimilarLists: {
           ...sectionsAfterResponse.SimilarLists,
-          currentIds: data.map((item) => item.id),
+          currentIds: data?.map((item) => item.id),
           loading: false,
         },
       })

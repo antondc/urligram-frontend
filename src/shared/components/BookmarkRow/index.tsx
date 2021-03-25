@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { bookmarkCreate } from 'Modules/Bookmarks/actions/bookmarkCreate';
@@ -21,15 +21,16 @@ interface Props {
 
 const BookmarkRow: React.FC<Props> = ({ id }) => {
   const dispatch = useDispatch();
+  const [bookmarkingLoading, setBookmarkingLoading] = useState<boolean>(false);
   const currentLanguageSlug = useSelector(selectCurrentLanguageSlug);
   const isLogged = useSelector(selectSessionLoggedIn);
   const sessionId = useSelector(selectSessionUserId);
   const bookmark = useSelector((state: RootState) => selectBookmarksById(state, { id }));
-  const { linkId, title, url, tags = [], img, statistics, favicon, createdAt, bookmarkingLoading, users } = bookmark;
+  const { linkId, title, url, tags = [], img, statistics, favicon, createdAt, users } = bookmark;
   const date = new LocaleFormattedDate(createdAt, currentLanguageSlug);
   const formattedDate = date.getLocaleFormattedDate();
   const userBookmarked = users.includes(sessionId);
-  const tagsByName = tags.map((item) => ({ tag: item.name }));
+  const tagsByName = tags?.map((item) => ({ tag: item.name }));
 
   const onVote = (vote) => {
     if (!isLogged) return dispatch(switchLoginModal(false));
@@ -37,9 +38,11 @@ const BookmarkRow: React.FC<Props> = ({ id }) => {
     dispatch(voteLink({ vote, linkId, userId: sessionId }));
   };
 
-  const onBookmark = () => {
+  const onBookmark = async () => {
     if (!userBookmarked) {
-      dispatch(bookmarkCreate({ title, url, isPrivate: false, tags: tagsByName }));
+      setBookmarkingLoading(true);
+      const result = await dispatch(bookmarkCreate({ title, url, isPrivate: false, tags: tagsByName }));
+      if (result.id) setBookmarkingLoading(false);
     } else {
       //
     }

@@ -29,7 +29,7 @@ export const loadLanguages = (lang: string): AppThunk<Promise<LanguageState[]>, 
 
     const { data } = await HttpClient.get<void, LanguagesApiResponse>('/languages');
 
-    const languagesArray = data.map((item) => item?.attributes);
+    const languagesArray = data?.map((item) => item?.attributes);
 
     const languagesByKey: LanguagesState = {
       byKey: serializerFromArrayToByKey<LanguageState, LanguageState>({

@@ -4,7 +4,7 @@ import { UserLoadApiResponse, UsersState } from 'Modules/Users/users.types';
 import { RequestParameters } from 'Root/src/server/routes/allRoutes';
 import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
-import { BookmarkGetItemResponse, BookmarksGetResponse, BookmarkState } from '../Bookmarks/bookmarks.types';
+import { BookmarkGetItemResponse, BookmarksGetApiResponse, BookmarkState } from '../Bookmarks/bookmarks.types';
 
 export const initialUserLoader = async ({ query, params }: RequestParameters = {}): Promise<{
   Users: UsersState;
@@ -12,7 +12,7 @@ export const initialUserLoader = async ({ query, params }: RequestParameters = {
   const { data: userData }: UserLoadApiResponse = await HttpClient.get(
     '/users/' + params?.userId + '?' + stringify(query)
   );
-  const { data: bookmarksData }: BookmarksGetResponse = await HttpClient.get(
+  const { data: bookmarksData }: BookmarksGetApiResponse = await HttpClient.get(
     '/users/' + params?.userId + '/bookmarks' + '?' + stringify(query)
   );
 

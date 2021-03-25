@@ -11,7 +11,10 @@ interface Props {
   statistics: LinkStatistics;
 }
 
-export const voteBookmarkReceive = ({ linkId, statistics }: Props): AppThunk<void> => (dispatch, getState): void => {
+export const bookmarkVoteSuccess = ({ linkId, statistics }: Props): AppThunk<void, BookmarksActions> => (
+  dispatch,
+  getState
+): void => {
   const { Bookmarks }: { Bookmarks: BookmarksState } = getState();
 
   const payloadFormatted = Object.entries(Bookmarks.byKey).filter(([, value]) => value.linkId === linkId);

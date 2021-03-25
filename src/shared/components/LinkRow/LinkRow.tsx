@@ -9,6 +9,7 @@ import './LinkRow.less';
 interface LinkRow extends LinkState {
   onVote: (vote: boolean | null) => void;
   onBookmark: () => void;
+  bookmarkingLoading: boolean;
   userBookmarked: boolean;
 }
 
@@ -24,7 +25,7 @@ export const LinkRow: React.FC<Partial<LinkRow>> = ({
   favicon,
   createdAt,
   userBookmarked,
-  loading,
+  bookmarkingLoading,
 }) => (
   <Border grow className="LinkRow" data-test-id="LinkRow" key={id}>
     <div className="LinkRow-left">
@@ -53,10 +54,10 @@ export const LinkRow: React.FC<Partial<LinkRow>> = ({
     </div>
     <div className="LinkRow-right">
       <Flex horizontal="right" growVertical={false} vertical="center">
-        <FadeInOut valueToUpdate={loading} speed="fastest" appear>
+        <FadeInOut valueToUpdate={bookmarkingLoading} speed="fastest" appear>
           <Flex horizontal="right" growVertical={false} vertical="center">
-            {loading ? (
-              <Ellipsis size="nano" />
+            {bookmarkingLoading ? (
+              <Ellipsis className="LinkRow-ellipsis" size="nano" />
             ) : (
               <Bookmark
                 className={'LinkRow-bookmarkSign ' + (!userBookmarked ? 'LinkRow-bookmarkSign--disabled' : '')}

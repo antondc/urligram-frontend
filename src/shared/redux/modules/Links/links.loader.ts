@@ -10,7 +10,7 @@ export const initialLinksLoader = async (): Promise<{ Links: LinksState }> => {
   const result = {
     Links: {
       byKey: linksByKey,
-      allIds: data.map((item) => item.id),
+      allIds: data?.map((item) => item.id),
       loading: true,
     },
   };

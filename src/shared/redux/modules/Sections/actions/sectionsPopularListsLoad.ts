@@ -24,7 +24,7 @@ export const sectionsPopularListsLoad = (): AppThunk<Promise<ListState[]>, Secti
       })
     );
     const { data } = await HttpClient.get<void, ListsLoadApiResponse>('/lists?sort=-members&page[size]=5');
-    const listsArray = data.map((item) => item.attributes);
+    const listsArray = data?.map((item) => item.attributes);
     const { Sections: sectionsAfterApi, Lists: listsAfterResponse } = getState();
 
     dispatch(
@@ -42,7 +42,7 @@ export const sectionsPopularListsLoad = (): AppThunk<Promise<ListState[]>, Secti
         ...sectionsAfterApi,
         PopularLists: {
           ...sectionsAfterApi.PopularLists,
-          currentIds: data.map((item) => item.id),
+          currentIds: data?.map((item) => item.id),
           loading: false,
         },
       })

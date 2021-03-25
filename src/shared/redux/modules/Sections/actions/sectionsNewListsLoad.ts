@@ -24,7 +24,7 @@ export const sectionsNewListsLoad = (): AppThunk<Promise<ListState[]>, ListsActi
     );
 
     const { data }: ListsLoadApiResponse = await HttpClient.get('/lists?sort=-createdat&page[size]=5');
-    const listsArray = data.map((item) => item.attributes);
+    const listsArray = data?.map((item) => item.attributes);
     const { Sections: sectionsAfterApi, Lists: listsAfterApi } = getState();
 
     dispatch(
@@ -42,7 +42,7 @@ export const sectionsNewListsLoad = (): AppThunk<Promise<ListState[]>, ListsActi
         ...sectionsAfterApi,
         NewLists: {
           ...sectionsAfterApi.NewLists,
-          currentIds: data.map((item) => item.id),
+          currentIds: data?.map((item) => item.id),
           loading: false,
         },
       })

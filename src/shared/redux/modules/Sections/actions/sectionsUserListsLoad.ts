@@ -30,7 +30,7 @@ export const sectionsUserListsLoad = (
       `/users/${userId}/lists?page[size]=5&filter[role]=admin`
     );
     const { Sections: sectionsAfterResponse, Lists: listsAfterResponse } = getState();
-    const listsArray = data.map((item) => item.attributes);
+    const listsArray = data?.map((item) => item.attributes);
 
     dispatch(
       listsLoadReceive({
@@ -47,7 +47,7 @@ export const sectionsUserListsLoad = (
         ...sectionsAfterResponse,
         UserLists: {
           ...sectionsAfterResponse.UserLists,
-          currentIds: data.map((item) => item.id),
+          currentIds: data?.map((item) => item.id),
           loading: false,
         },
       })

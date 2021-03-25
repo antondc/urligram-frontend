@@ -28,7 +28,7 @@ export const sectionsFollowingUsersLoad = (
     const { data }: UsersLoadApiResponse = await HttpClient.get(
       `/users/${sessionId}/following?sort=-createdat&page[size]=5`
     );
-    const usersArray = data.map((item) => item.attributes);
+    const usersArray = data?.map((item) => item.attributes);
 
     const { Users, Sections: sectionsAfterApi } = getState();
     dispatch(
@@ -50,7 +50,7 @@ export const sectionsFollowingUsersLoad = (
         ...sectionsAfterApi,
         FollowingUsers: {
           ...sectionsAfterApi.FollowingUsers,
-          currentIds: data.map((item) => item.id),
+          currentIds: data?.map((item) => item.id),
           loading: false,
         },
       })

@@ -1,33 +1,36 @@
 import { BookmarksActions, BookmarksGetApiResponse, BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
+import { QueryStringWrapper } from 'Root/src/shared/services/QueryStringWrapper';
 import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
 import { AppThunk } from '../../..';
 import { bookmarksLoadRequest } from './bookmarksLoadRequest';
 import { bookmarksLoadSuccess } from './bookmarksLoadSuccess';
 
-export const bookmarksLoadBySize = (size?: number): AppThunk<Promise<BookmarkState[]>, BookmarksActions> => async (
-  dispatch,
-  getState
-): Promise<BookmarkState[]> => {
+export const bookmarksLoadByUserId = (
+  userId: string,
+  size?: number
+): AppThunk<Promise<BookmarkState[]>, BookmarksActions> => async (dispatch, getState): Promise<BookmarkState[]> => {
   try {
     const { Bookmarks: bookmarksBeforeRequest } = getState();
+    const activeSort = bookmarksBeforeRequest?.meta?.sort;
 
     dispatch(
       bookmarksLoadRequest({
         ...bookmarksBeforeRequest,
-        loading: true,
+        loading: false,
       })
     );
 
-    const { data } = await HttpClient.get<void, BookmarksGetApiResponse>('bookmarks', {
-      params: {
-        page: {
-          size,
-        },
-      },
+    const queryStringUpdated = QueryStringWrapper.addSearchParamsNoReplace(window.location.search, {
+      page: { size },
+      sort: activeSort,
     });
-    const bookmarksArray = data?.map((item) => item.attributes);
+
+    const { meta, data = [] } = await HttpClient.get<void, BookmarksGetApiResponse>(
+      `/users/${userId}/bookmarks?${queryStringUpdated}`
+    );
     const { Bookmarks: bookmarksAfterResponse } = getState();
+    const bookmarksArray = data?.map((item) => item.attributes);
 
     dispatch(
       bookmarksLoadSuccess({
@@ -38,6 +41,10 @@ export const bookmarksLoadBySize = (size?: number): AppThunk<Promise<BookmarkSta
         },
         currentIds: data?.map((item) => item.id),
         loading: false,
+        meta: {
+          totalItems: meta?.totalItems,
+          sort: meta?.sort,
+        },
       })
     );
 

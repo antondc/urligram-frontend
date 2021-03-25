@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { bookmarksLoad } from 'Modules/Bookmarks/actions/bookmarksLoad';
+import { bookmarksLoadByUserId } from 'Modules/Bookmarks/actions/bookmarksLoadByUserId';
 import { bookmarkUpdate } from 'Modules/Bookmarks/actions/bookmarkUpdate';
-import { loadBookmarks } from 'Modules/Bookmarks/actions/loadBookmarks';
-import { loadBookmarksByUserId } from 'Modules/Bookmarks/actions/loadBookmarksByUserId';
 import { selectBookmarksById } from 'Modules/Bookmarks/selectors/selectBookmarkById';
 import { selectBookmarksErrorLast } from 'Modules/Bookmarks/selectors/selectBookmarksErrorLast';
 import { RootState } from 'Modules/rootType';
@@ -92,8 +92,8 @@ const BookmarkUpdateForm: React.FC<Props> = ({ closeModal }) => {
     if (!!bookmark?.id) {
       setSubmitInProcess(false);
       setSubmitSuccess(true);
-      dispatch(loadBookmarks());
-      dispatch(loadBookmarksByUserId(sessionId));
+      dispatch(bookmarksLoad());
+      dispatch(bookmarksLoadByUserId(sessionId));
 
       setTimeout(() => {
         closeModal();
@@ -108,7 +108,7 @@ const BookmarkUpdateForm: React.FC<Props> = ({ closeModal }) => {
     setSubmitError(undefined);
     setTitleValue(bookmark?.title);
     setIsPrivateValue(bookmark?.isPrivate);
-    setTagsValue(bookmark?.tags.map((item) => ({ label: item.name, value: item.name })));
+    setTagsValue(bookmark?.tags?.map((item) => ({ label: item.name, value: item.name })));
   }, []);
 
   useEffect(() => {

@@ -1,5 +1,5 @@
-import { receiveBookmarks } from 'Modules/Bookmarks/actions/receiveBookmarks';
-import { BookmarksActions, BookmarksGetResponse, BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
+import { bookmarksLoadSuccess } from 'Modules/Bookmarks/actions/bookmarksLoadSuccess';
+import { BookmarksActions, BookmarksGetApiResponse, BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
 import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
 import { AppThunk } from '../../..';
@@ -25,14 +25,14 @@ export const sectionsMyRecentBookmarksLoad = (
       })
     );
 
-    const { data } = await HttpClient.get<void, BookmarksGetResponse>(
+    const { data } = await HttpClient.get<void, BookmarksGetApiResponse>(
       `/users/${sessionId}/bookmarks?page[size]=5&sort=-createdat`
     );
     const { Sections: sectionsAfterApi, Bookmarks: bookmarksAfterApi } = getState();
-    const bookmarksArray = data.map((item) => item.attributes);
+    const bookmarksArray = data?.map((item) => item.attributes);
 
     dispatch(
-      receiveBookmarks({
+      bookmarksLoadSuccess({
         ...bookmarksAfterApi,
         byKey: {
           ...bookmarksAfterApi.byKey,
@@ -46,7 +46,7 @@ export const sectionsMyRecentBookmarksLoad = (
         ...sectionsAfterApi,
         MyRecentBookmarks: {
           ...sectionsAfterApi.MyRecentBookmarks,
-          currentIds: data.map((item) => item.id),
+          currentIds: data?.map((item) => item.id),
           loading: false,
         },
       })

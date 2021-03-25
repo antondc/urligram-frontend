@@ -35,7 +35,7 @@ export const linksLoad = (size?: number): AppThunk<Promise<LinkState[]>, LinksAc
       data,
     } = await HttpClient.get<void, LinksApiResponse>(`/links?${queryStringUpdated}`);
 
-    const linksArray = data.map((item) => item.attributes);
+    const linksArray = data?.map((item) => item.attributes);
 
     const payload = {
       byKey: {
@@ -44,7 +44,7 @@ export const linksLoad = (size?: number): AppThunk<Promise<LinkState[]>, LinksAc
           data: linksArray,
         }),
       },
-      allIds: data.map((item) => item.id),
+      allIds: data?.map((item) => item.id),
       meta: {
         ...linksState.meta,
         totalItems,

@@ -20,7 +20,7 @@ export const tagsLoad = (): AppThunk<Promise<TagState[]>, TagsActions> => async 
 
     const { data } = await HttpClient.get<void, TagsLoadApiResponse>(`/tags${window.location.search}`);
     const { Tags: tagsAfterApi } = getState();
-    const tagsArray = data.map((item) => item.attributes);
+    const tagsArray = data?.map((item) => item.attributes);
 
     dispatch(
       tagsLoadSuccess({
@@ -29,7 +29,7 @@ export const tagsLoad = (): AppThunk<Promise<TagState[]>, TagsActions> => async 
           ...tagsAfterApi.byKey,
           ...serializerFromArrayToByKey<TagState, TagState>({ data: tagsArray }),
         },
-        currentIds: data.map((item) => item.id),
+        currentIds: data?.map((item) => item.id),
         loading: false,
       })
     );

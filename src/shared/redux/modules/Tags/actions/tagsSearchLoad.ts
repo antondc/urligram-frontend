@@ -24,7 +24,7 @@ export const tagsSearchLoad = (tagStringFragment?: string): AppThunk<Promise<Tag
       : '';
 
     const { data } = await HttpClient.get<void, TagsLoadApiResponse>(`tags?${queryString}`);
-    const tagsArray = data.map((item) => item.attributes);
+    const tagsArray = data?.map((item) => item.attributes);
 
     const { Tags: tagsAfterApi } = getState();
     dispatch(
@@ -34,7 +34,7 @@ export const tagsSearchLoad = (tagStringFragment?: string): AppThunk<Promise<Tag
           ...tagsAfterApi.byKey,
           ...serializerFromArrayToByKey<TagState, TagState>({ data: tagsArray }),
         },
-        searchIds: data.map((item) => item.id),
+        searchIds: data?.map((item) => item.id),
         loading: false,
       })
     );

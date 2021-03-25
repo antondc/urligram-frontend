@@ -1,7 +1,7 @@
-import { BOOKMARK_UPDATE_VOTE_START, BookmarksState } from 'Modules/Bookmarks/bookmarks.types';
+import { BOOKMARK_UPDATE_VOTE_START, BookmarksActions, BookmarksState } from 'Modules/Bookmarks/bookmarks.types';
 import { AppThunk } from '../../..';
 
-export const voteBookmarkRequest = ({ linkId }: { linkId: string | number }): AppThunk<void> => (
+export const bookmarkVoteRequest = ({ linkId }: { linkId: string | number }): AppThunk<void, BookmarksActions> => (
   dispatch,
   getState
 ): void => {

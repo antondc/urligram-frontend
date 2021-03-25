@@ -25,7 +25,7 @@ export const usersLoad = (): AppThunk<Promise<UserState[]>, UsersActions> => asy
 
     const { meta, data } = await HttpClient.get<void, UsersLoadApiResponse>(APIBaseEndpoint + window.location.search);
 
-    const usersArray = data.map((item) => item.attributes);
+    const usersArray = data?.map((item) => item.attributes);
 
     const { Users: UsersAfterApiCall } = getState();
     dispatch(
@@ -37,7 +37,7 @@ export const usersLoad = (): AppThunk<Promise<UserState[]>, UsersActions> => asy
             data: usersArray,
           }),
         },
-        currentIds: data.map((item) => item.id),
+        currentIds: data?.map((item) => item.id),
         meta,
         loading: false,
       })

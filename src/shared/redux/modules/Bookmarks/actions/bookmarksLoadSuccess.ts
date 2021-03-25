@@ -1,9 +1,6 @@
 import { BOOKMARKS_LOAD_SUCCESS, BookmarksActions, BookmarksState } from 'Modules/Bookmarks/bookmarks.types';
 
-export const receiveBookmarks = (bookmarks: BookmarksState): BookmarksActions => ({
+export const bookmarksLoadSuccess = (payload: BookmarksState): BookmarksActions => ({
   type: BOOKMARKS_LOAD_SUCCESS,
-  payload: {
-    ...bookmarks,
-    loading: false,
-  },
+  payload,
 });

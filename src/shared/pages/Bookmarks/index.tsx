@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { loadBookmarks } from 'Modules/Bookmarks/actions/loadBookmarks';
+import { bookmarksLoad } from 'Modules/Bookmarks/actions/bookmarksLoad';
 import { selectBookmarksCurrentIds } from 'Modules/Bookmarks/selectors/selectBookmarksCurrentIds';
 import { selectBookmarksLoading } from 'Modules/Bookmarks/selectors/selectBookmarksLoading';
 import { selectBookmarksMetaSort } from 'Modules/Bookmarks/selectors/selectBookmarksMetaSort';
@@ -28,7 +28,7 @@ const Home: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    dispatch(loadBookmarks());
+    dispatch(bookmarksLoad());
   }, [page]);
 
   return (

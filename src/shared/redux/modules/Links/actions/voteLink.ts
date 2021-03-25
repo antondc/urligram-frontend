@@ -1,5 +1,5 @@
-import { voteBookmarkReceive } from 'Modules/Bookmarks/actions/voteBookmarkReceive';
-import { voteBookmarkRequest } from 'Modules/Bookmarks/actions/voteBookmarkRequest';
+import { bookmarkVoteRequest } from 'Modules/Bookmarks/actions/bookmarkVoteRequest';
+import { bookmarkVoteSuccess } from 'Modules/Bookmarks/actions/bookmarkVoteSuccess';
 import { LinkApiResponse, LinksActions, LinksState, LinkState } from 'Modules/Links/links.types';
 import HttpClient from 'Services/HttpClient';
 import { AppThunk } from '../../..';
@@ -26,7 +26,7 @@ export const voteLink = ({
   } = getState();
 
   try {
-    dispatch(voteBookmarkRequest({ linkId }));
+    dispatch(bookmarkVoteRequest({ linkId }));
 
     const linksSerializedByKeyRequest: LinksState = {
       byKey: {
@@ -58,7 +58,7 @@ export const voteLink = ({
     dispatch(voteLinkSuccess(linksSerializedByKeyResponse));
 
     dispatch(
-      voteBookmarkReceive({
+      bookmarkVoteSuccess({
         linkId,
         statistics: data?.attributes?.statistics,
       })

@@ -1,16 +1,17 @@
-import { bookmarksLoadRequest } from 'Modules/Bookmarks/actions/bookmarksLoadRequest';
-import { bookmarksLoadSuccess } from 'Modules/Bookmarks/actions/bookmarksLoadSuccess';
 import { BookmarksActions, BookmarksGetApiResponse, BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
 import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
 import { AppThunk } from '../../..';
+import { bookmarksLoadRequest } from './bookmarksLoadRequest';
+import { bookmarksLoadSuccess } from './bookmarksLoadSuccess';
 
-export const bookmarksLoadByListId = (listId: number): AppThunk<Promise<BookmarkState[]>, BookmarksActions> => async (
+export const bookmarksLoad = (): AppThunk<Promise<BookmarkState[]>, BookmarksActions> => async (
   dispatch,
   getState
 ): Promise<BookmarkState[]> => {
-  const { Bookmarks: bookmarksBeforeRequest } = getState();
   try {
+    const { Bookmarks: bookmarksBeforeRequest } = getState();
+
     dispatch(
       bookmarksLoadRequest({
         ...bookmarksBeforeRequest,
@@ -20,16 +21,19 @@ export const bookmarksLoadByListId = (listId: number): AppThunk<Promise<Bookmark
 
     const {
       meta: { totalItems, sort },
-      data: bookmarksData,
-    } = await HttpClient.get<any, BookmarksGetApiResponse>(`/lists/${listId}/bookmarks${window.location.search}`);
-    const bookmarksArray = bookmarksData.map((item) => item.attributes);
+      data,
+    } = await HttpClient.get<void, BookmarksGetApiResponse>(`bookmarks${window.location.search}`);
     const { Bookmarks: bookmarksAfterResponse } = getState();
 
-    dispatch(
+    const bookmarksArray = data?.map((item) => item.attributes);
+    await dispatch(
       bookmarksLoadSuccess({
         ...bookmarksAfterResponse,
-        byKey: serializerFromArrayToByKey<BookmarkState, BookmarkState>({ data: bookmarksArray }),
-        currentIds: bookmarksData.map((item) => item.id),
+        byKey: {
+          ...bookmarksAfterResponse.byKey,
+          ...serializerFromArrayToByKey<BookmarkState, BookmarkState>({ data: bookmarksArray }),
+        },
+        currentIds: data?.map((item) => item.id),
         loading: false,
         meta: {
           totalItems,

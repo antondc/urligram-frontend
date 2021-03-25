@@ -22,14 +22,14 @@ const LinkRow: React.FC<Props> = ({ id }) => {
   const dispatch = useDispatch();
   const currentLanguageSlug = useSelector(selectCurrentLanguageSlug);
   const link = useSelector((state: RootState) => selectLinkById(state, { id }));
-  const [bookmarkingLoading, setBookmarkingLoading] = useState(false);
+  const [bookmarkingLoading, setBookmarkingLoading] = useState<boolean>(false);
   const { linkId, title, url, tags = [], favicon, statistics, createdAt, users } = link;
   const date = new LocaleFormattedDate(createdAt, currentLanguageSlug);
   const formattedDate = date.getLocaleFormattedDate();
   const isLogged = useSelector(selectSessionLoggedIn);
   const sessionId = useSelector(selectSessionUserId);
   const userBookmarked = users.includes(sessionId);
-  const tagsByName = tags.map((item) => ({ tag: item.name }));
+  const tagsByName = tags?.map((item) => ({ tag: item.name }));
 
   const onVote = (vote) => {
     if (!isLogged) return dispatch(switchLoginModal(true));
@@ -38,10 +38,12 @@ const LinkRow: React.FC<Props> = ({ id }) => {
   };
 
   const onBookmark = async () => {
+    if (!isLogged) return dispatch(switchLoginModal(true));
+
     if (!userBookmarked) {
       setBookmarkingLoading(true);
-      await dispatch(bookmarkCreate({ title, url, isPrivate: false, tags: tagsByName, linkId: id }));
-      setBookmarkingLoading(false);
+      const result = await dispatch(bookmarkCreate({ title, url, isPrivate: false, tags: tagsByName }));
+      if (result.id) return setBookmarkingLoading(false);
     } else {
       //
     }
@@ -61,7 +63,7 @@ const LinkRow: React.FC<Props> = ({ id }) => {
       onBookmark={onBookmark}
       createdAt={formattedDate}
       userBookmarked={userBookmarked}
-      loading={bookmarkingLoading}
+      bookmarkingLoading={bookmarkingLoading}
     />
   );
 };

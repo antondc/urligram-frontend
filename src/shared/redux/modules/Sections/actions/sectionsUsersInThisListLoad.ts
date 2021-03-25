@@ -31,7 +31,7 @@ export const sectionsUsersInThisListLoad = (
       },
     });
     const { Users: usersAfterResponse, Sections: sectionsAfterResponse } = getState();
-    const usersArray = data.map((item) => item.attributes);
+    const usersArray = data?.map((item) => item.attributes);
 
     dispatch(
       usersReceive({
@@ -46,7 +46,7 @@ export const sectionsUsersInThisListLoad = (
       sectionsUsersInThisListReceive({
         UsersInThisList: {
           ...sectionsAfterResponse.UsersInThisList,
-          currentIds: data.map((item) => item.id),
+          currentIds: data?.map((item) => item.id),
           loading: false,
         },
       })

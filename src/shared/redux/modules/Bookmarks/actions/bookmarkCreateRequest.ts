@@ -1,6 +1,6 @@
-import { BOOKMARK_CREATE_REQUEST, BookmarksActions } from 'Modules/Bookmarks/bookmarks.types';
+import { BOOKMARK_CREATE_REQUEST, BookmarksActions, BookmarksState } from 'Modules/Bookmarks/bookmarks.types';
 
-export const bookmarkCreateRequest = (): BookmarksActions => ({
+export const bookmarkCreateRequest = (payload: BookmarksState): BookmarksActions => ({
   type: BOOKMARK_CREATE_REQUEST,
-  payload: undefined,
+  payload,
 });

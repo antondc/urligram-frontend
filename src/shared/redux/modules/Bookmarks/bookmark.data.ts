@@ -16,7 +16,6 @@ export const mockBookmark: BookmarkState = {
   ],
   isPrivate: true,
   users: ['string'],
-  bookmarkingLoading: false,
   createdAt: 'string',
   updatedAt: 'string',
   statistics: {

@@ -1,8 +1,6 @@
-import { BOOKMARK_UPDATE_SUCCESS, BookmarksActions, BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
+import { BOOKMARK_UPDATE_SUCCESS, BookmarksActions, BookmarksState } from 'Modules/Bookmarks/bookmarks.types';
 
-export const bookmarkUpdateSuccess = ({ bookmark }: { bookmark: BookmarkState }): BookmarksActions => ({
+export const bookmarkUpdateSuccess = (payload: BookmarksState): BookmarksActions => ({
   type: BOOKMARK_UPDATE_SUCCESS,
-  payload: {
-    bookmark,
-  },
+  payload,
 });

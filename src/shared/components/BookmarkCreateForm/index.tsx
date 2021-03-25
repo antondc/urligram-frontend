@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { bookmarkCreate } from 'Modules/Bookmarks/actions/bookmarkCreate';
-import { loadBookmarks } from 'Modules/Bookmarks/actions/loadBookmarks';
-import { loadBookmarksByUserId } from 'Modules/Bookmarks/actions/loadBookmarksByUserId';
+import { bookmarksLoad } from 'Modules/Bookmarks/actions/bookmarksLoad';
+import { bookmarksLoadByUserId } from 'Modules/Bookmarks/actions/bookmarksLoadByUserId';
 import { selectBookmarksErrorLast } from 'Modules/Bookmarks/selectors/selectBookmarksErrorLast';
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
 import { linksLoad } from 'Modules/Links/actions/linksLoad';
@@ -164,8 +164,8 @@ const BookmarkCreateForm: React.FC<Props> = ({ closeModal }) => {
     if (response?.title) {
       setSubmitInProcess(false);
       setSubmitSuccess(true);
-      dispatch(loadBookmarks());
-      dispatch(loadBookmarksByUserId(sessionId));
+      dispatch(bookmarksLoad());
+      dispatch(bookmarksLoadByUserId(sessionId));
       dispatch(linksLoad());
 
       setTimeout(() => {

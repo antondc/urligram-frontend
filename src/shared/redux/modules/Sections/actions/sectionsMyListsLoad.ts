@@ -32,7 +32,7 @@ export const sectionsMyListsLoad = (
     );
     const { Sections: sectionsAfterApi, Lists: listsAfterApi } = getState();
 
-    const listsArray = data.map((item) => item.attributes);
+    const listsArray = data?.map((item) => item.attributes);
 
     dispatch(
       listsLoadReceive({
@@ -49,7 +49,7 @@ export const sectionsMyListsLoad = (
         ...sectionsAfterApi,
         MyLists: {
           ...sectionsAfterApi.MyLists,
-          currentIds: data.map((item) => item.id),
+          currentIds: data?.map((item) => item.id),
           loading: false,
         },
       })

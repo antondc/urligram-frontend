@@ -30,7 +30,7 @@ export const sectionsFollowingListsLoad = (
     const { data }: ListsLoadApiResponse = await HttpClient.get(
       `/users/${sessionId}/lists?page[size]=5&filter[role]=reader,editor`
     );
-    const listsArray = data.map((item) => item.attributes);
+    const listsArray = data?.map((item) => item.attributes);
     const { Sections: sectionsAfterApi, Lists: listsAfterApi } = getState();
 
     dispatch(
@@ -48,7 +48,7 @@ export const sectionsFollowingListsLoad = (
         ...sectionsAfterApi,
         FollowingLists: {
           ...sectionsAfterApi.FollowingLists,
-          currentIds: data.map((item) => item.id),
+          currentIds: data?.map((item) => item.id),
           loading: false,
         },
       })

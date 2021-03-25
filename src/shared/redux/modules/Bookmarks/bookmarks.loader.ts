@@ -2,7 +2,7 @@ import { stringify } from 'qs';
 
 import {
   BookmarkGetItemResponse,
-  BookmarksGetResponse,
+  BookmarksGetApiResponse,
   BookmarksState,
   BookmarkState,
 } from 'Modules/Bookmarks/bookmarks.types';
@@ -15,7 +15,7 @@ export const initialBookmarksLoader = async ({ query }: RequestParameters = {}):
 }> => {
   const APIBaseEndpoint = '/bookmarks';
 
-  const { data }: BookmarksGetResponse = await HttpClient.get(APIBaseEndpoint + '?' + stringify(query));
+  const { data }: BookmarksGetApiResponse = await HttpClient.get(APIBaseEndpoint + '?' + stringify(query));
 
   const result = {
     Bookmarks: {
@@ -23,7 +23,7 @@ export const initialBookmarksLoader = async ({ query }: RequestParameters = {}):
         data: data,
         contentPath: 'attributes',
       }),
-      currentIds: data.map((item) => item.id),
+      currentIds: data?.map((item) => item.id),
       loading: true,
     },
   };

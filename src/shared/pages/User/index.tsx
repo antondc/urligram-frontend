@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { loadBookmarksByUserId } from 'Modules/Bookmarks/actions/loadBookmarksByUserId';
+import { bookmarksLoadByUserId } from 'Modules/Bookmarks/actions/bookmarksLoadByUserId';
 import { selectBookmarksCurrentIds } from 'Modules/Bookmarks/selectors/selectBookmarksCurrentIds';
 import { selectBookmarksLoading } from 'Modules/Bookmarks/selectors/selectBookmarksLoading';
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
@@ -40,7 +40,7 @@ const User: React.FC<Props> = () => {
 
   useEffect(() => {
     dispatch(userLoad(userId));
-    dispatch(loadBookmarksByUserId(userId, 5));
+    dispatch(bookmarksLoadByUserId(userId, 5));
     dispatch(sectionsFollowingUsersLoad(userId));
     dispatch(sectionsFollowersUsersLoad(userId));
   }, []);

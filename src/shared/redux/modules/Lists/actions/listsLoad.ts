@@ -27,14 +27,14 @@ export const listsLoad = (): AppThunk<Promise<ListState[]>, ListsActions> => asy
       data,
     } = await HttpClient.get<void, ListsLoadApiResponse>('/lists' + window.location.search);
 
-    const listsArray = data.map((item) => item.attributes);
+    const listsArray = data?.map((item) => item.attributes);
 
     dispatch(
       listsLoadReceive({
         byKey: serializerFromArrayToByKey<ListState, ListState>({
           data: listsArray,
         }),
-        currentIds: data.map((item) => item.id),
+        currentIds: data?.map((item) => item.id),
         meta: {
           totalItems,
           sort,

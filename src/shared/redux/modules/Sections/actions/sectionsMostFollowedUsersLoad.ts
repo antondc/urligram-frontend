@@ -24,7 +24,7 @@ export const sectionsMostFollowedUsersLoad = (): AppThunk<
     );
 
     const { data } = await HttpClient.get<void, UsersLoadApiResponse>('/users?sort=-followers&page[size]=5');
-    const usersArray = data.map((item) => item.attributes);
+    const usersArray = data?.map((item) => item.attributes);
     const { Sections: sectionsAfterApi, Users: usersAfterApi } = getState();
 
     dispatch(
@@ -43,7 +43,7 @@ export const sectionsMostFollowedUsersLoad = (): AppThunk<
         ...sectionsAfterApi,
         MostFollowedUsers: {
           ...sectionsAfterApi.MostFollowedUsers,
-          currentIds: data.map((item) => item.id),
+          currentIds: data?.map((item) => item.id),
           loading: false,
         },
       })

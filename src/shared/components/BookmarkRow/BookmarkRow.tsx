@@ -20,6 +20,7 @@ import './BookmarkRow.less';
 interface BookmarkRow extends BookmarkState {
   userId: string;
   userBookmarked: boolean;
+  bookmarkingLoading: boolean;
   onVote: (vote: boolean | null) => void;
   onEdit: () => void;
   onBookmark: () => void;
@@ -84,7 +85,7 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
         <FadeInOut valueToUpdate={bookmarkingLoading} speed="fastest" appear>
           <Flex horizontal="right" growVertical={false} vertical="center">
             {bookmarkingLoading ? (
-              <Ellipsis size="nano" />
+              <Ellipsis className="BookmarkRow-ellipsis BookmarkRow-action" size="nano" />
             ) : (
               <Bookmark
                 className={

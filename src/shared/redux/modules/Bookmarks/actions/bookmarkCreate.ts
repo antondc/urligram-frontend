@@ -1,58 +1,51 @@
 import { bookmarkCreateFailure } from 'Modules/Bookmarks/actions/bookmarkCreateFailure';
 import { bookmarkCreateSuccess } from 'Modules/Bookmarks/actions/bookmarkCreateSuccess';
 import {
-  BookmarkCreateRequest,
-  BookmarkCreateResponse,
+  BookmarkCreateApiRequest,
+  BookmarkCreateApiResponse,
   BookmarksActions,
   BookmarkState,
 } from 'Modules/Bookmarks/bookmarks.types';
 import { linkLoadById } from 'Modules/Links/actions/linkLoadById';
-import { linkLoadByIdRequest } from 'Modules/Links/actions/linkLoadByIdRequest';
+import { serializerFromArrayToByKey } from 'Root/src/shared/tools/utils/serializers/serializerFromArrayToByKey';
 import HttpClient from 'Services/HttpClient';
 import { AppThunk } from '../../../index';
 import { LinksActions } from '../../Links/links.types';
-import { bookmarkCreateRequest } from './bookmarkCreateRequest';
 
 export const bookmarkCreate = ({
-  linkId,
   title,
   url,
   isPrivate,
   tags,
-}: BookmarkCreateRequest): AppThunk<Promise<BookmarkState>, BookmarksActions | LinksActions> => async (
+}: BookmarkCreateApiRequest): AppThunk<Promise<BookmarkState>, BookmarksActions | LinksActions> => async (
   dispatch,
   getState
 ) => {
-  const { Bookmarks, Links } = getState();
   try {
-    if (linkId) {
-      dispatch(
-        linkLoadByIdRequest({
-          ...Links,
-          byKey: {
-            ...Links.byKey,
-            [linkId]: {
-              ...Links.byKey[linkId],
-              loading: true,
-            },
-          },
-        })
-      );
-    }
-
-    dispatch(bookmarkCreateRequest());
-
-    const { data: bookmarkData } = await HttpClient.post<void, BookmarkCreateResponse>('/users/me/bookmarks', {
+    const { data: bookmarkData } = await HttpClient.post<void, BookmarkCreateApiResponse>('/users/me/bookmarks', {
       title,
       url,
       isPrivate,
       tags,
     });
+    const { Bookmarks: bookmarksAfterResponse } = getState();
+    const bookmarksToUpdate = Object.values(bookmarksAfterResponse.byKey).filter(
+      (item) => item.linkId === bookmarkData?.attributes?.linkId
+    );
+    const bookmarksWithNewUser = bookmarksToUpdate.map((item) => ({
+      ...item,
+      users: [...item.users, bookmarkData.attributes.userId],
+    }));
 
     await dispatch(
       bookmarkCreateSuccess({
+        ...bookmarksAfterResponse,
         byKey: {
-          [bookmarkData.attributes?.id]: bookmarkData.attributes,
+          ...bookmarksAfterResponse.byKey,
+          ...serializerFromArrayToByKey<BookmarkState, BookmarkState>({ data: bookmarksWithNewUser }),
+          [bookmarkData.attributes?.id]: {
+            ...bookmarkData.attributes,
+          },
         },
       })
     );
@@ -60,6 +53,12 @@ export const bookmarkCreate = ({
 
     return bookmarkData?.attributes;
   } catch (error) {
-    await dispatch(bookmarkCreateFailure([...Bookmarks.errors, error]));
+    const { Bookmarks: bookmarksOnError } = getState();
+    await dispatch(
+      bookmarkCreateFailure({
+        ...bookmarksOnError,
+        errors: [...bookmarksOnError.errors, error],
+      })
+    );
   }
 };

@@ -25,7 +25,7 @@ export const sectionsNewUsersLoad = (): AppThunk<Promise<UserState[]>, UsersActi
 
     const { data } = await HttpClient.get<void, UsersLoadApiResponse>('/users?sort=createdat&page[size]=5');
 
-    const usersArray = data.map((item) => item.attributes);
+    const usersArray = data?.map((item) => item.attributes);
     const { Users: usersAfterResponse, Sections: sectionsAfterResponse } = getState();
 
     dispatch(
@@ -45,7 +45,7 @@ export const sectionsNewUsersLoad = (): AppThunk<Promise<UserState[]>, UsersActi
         ...sectionsAfterResponse,
         NewUsers: {
           ...sectionsAfterResponse.NewUsers,
-          currentIds: data.map((item) => item.id),
+          currentIds: data?.map((item) => item.id),
           loading: false,
         },
       })

@@ -13,7 +13,7 @@ export const initialUsersLoader = async (): Promise<{ Users: UsersState }> => {
   const result = {
     Users: {
       byKey: usersByKey,
-      allIds: data.map((item) => item.id),
+      allIds: data?.map((item) => item.id),
       loading: true,
     },
   };

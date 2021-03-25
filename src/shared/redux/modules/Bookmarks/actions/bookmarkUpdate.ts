@@ -3,8 +3,8 @@ import { bookmarkUpdateSuccess } from 'Modules/Bookmarks/actions/bookmarkUpdateS
 import {
   BookmarksActions,
   BookmarkState,
-  BookmarkUpdateRequest,
-  BookmarkUpdateResponse,
+  BookmarkUpdateApiRequest,
+  BookmarkUpdateApiResponse,
 } from 'Modules/Bookmarks/bookmarks.types';
 import HttpClient from 'Services/HttpClient';
 import { AppThunk } from '../../..';
@@ -16,15 +16,20 @@ export const bookmarkUpdate = ({
   title,
   isPrivate,
   tags,
-}: BookmarkUpdateRequest): AppThunk<Promise<BookmarkState>, BookmarksActions> => async (
+}: BookmarkUpdateApiRequest): AppThunk<Promise<BookmarkState>, BookmarksActions> => async (
   dispatch,
   getState
 ): Promise<BookmarkState> => {
-  const { Bookmarks } = getState();
+  const { Bookmarks: bookmarksBeforeRequest } = getState();
   try {
-    dispatch(bookmarkUpdateRequest());
+    dispatch(
+      bookmarkUpdateRequest({
+        ...bookmarksBeforeRequest,
+        loading: true,
+      })
+    );
 
-    const { data: bookmarkData } = await HttpClient.put<any, BookmarkUpdateResponse>(
+    const { data: bookmarkData } = await HttpClient.put<any, BookmarkUpdateApiResponse>(
       `/users/me/bookmarks/${bookmarkId}`,
       {
         order,
@@ -33,11 +38,30 @@ export const bookmarkUpdate = ({
         tags,
       }
     );
-    await dispatch(bookmarkUpdateSuccess({ bookmark: bookmarkData.attributes }));
+    const { Bookmarks: bookmarksAfterResponse } = getState();
+
+    await dispatch(
+      bookmarkUpdateSuccess({
+        ...bookmarksAfterResponse,
+        byKey: {
+          ...bookmarksAfterResponse.byKey,
+          [bookmarkData.attributes.id]: bookmarkData.attributes,
+        },
+        loading: false,
+      })
+    );
 
     return bookmarkData?.attributes;
   } catch (error) {
-    await dispatch(bookmarkUpdateFailure([...Bookmarks.errors, error]));
+    const { Bookmarks: bookmarksOnError } = getState();
+
+    await dispatch(
+      bookmarkUpdateFailure({
+        ...bookmarksOnError,
+        errors: [...bookmarksOnError.errors, error],
+        loading: false,
+      })
+    );
 
     throw new Error(error);
   }

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { loadBookmarksByUserId } from 'Modules/Bookmarks/actions/loadBookmarksByUserId';
+import { bookmarksLoadByUserId } from 'Modules/Bookmarks/actions/bookmarksLoadByUserId';
 import { selectBookmarksCurrentIds } from 'Modules/Bookmarks/selectors/selectBookmarksCurrentIds';
 import { selectBookmarksLoading } from 'Modules/Bookmarks/selectors/selectBookmarksLoading';
 import { selectBookmarksMetaSort } from 'Modules/Bookmarks/selectors/selectBookmarksMetaSort';
@@ -51,17 +51,17 @@ const UserBookmarks: React.FC = () => {
 
   useEffect(() => {
     dispatch(userLoad(userId));
-    dispatch(loadBookmarksByUserId(userId));
+    dispatch(bookmarksLoadByUserId(userId));
     dispatch(sectionsFollowingUsersLoad(userId));
     dispatch(sectionsFollowersUsersLoad(userId));
   }, []);
 
   useEffect(() => {
-    dispatch(loadBookmarksByUserId(userId));
+    dispatch(bookmarksLoadByUserId(userId));
   }, [page]);
 
   useEffect(() => {
-    dispatch(loadBookmarksByUserId(userId));
+    dispatch(bookmarksLoadByUserId(userId));
 
     dispatch(tagsSearchLoad());
   }, [url]);

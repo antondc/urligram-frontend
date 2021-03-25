@@ -30,7 +30,7 @@ export const sectionsFollowersUsersLoad = (
       `/users/${userId}/followers?sort=-createdat&page[size]=5`
     );
     const { Users: usersAfterApi, Sections: sectionsAfterApi } = getState();
-    const usersArray = data.map((item) => item.attributes);
+    const usersArray = data?.map((item) => item.attributes);
 
     dispatch(
       usersReceive({
@@ -50,7 +50,7 @@ export const sectionsFollowersUsersLoad = (
         ...sectionsAfterApi,
         FollowersUsers: {
           ...sectionsAfterApi.FollowersUsers,
-          currentIds: data.map((item) => item.id),
+          currentIds: data?.map((item) => item.id),
           loading: false,
         },
       })
