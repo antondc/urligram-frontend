@@ -1,7 +1,7 @@
 import { Route } from 'Router/routes';
 import { Location } from 'Services/History';
 
-export const PUSH_NEW_ROUTE = 'PUSH_NEW_ROUTE';
+export const ROUTES_NEW_ROUTE_PUSH = 'ROUTES_NEW_ROUTE_PUSH';
 
 export interface RoutesState {
   routes: RouteState[];
@@ -22,8 +22,8 @@ export interface RouteState extends Route, Location {
 }
 
 interface PushNewRouteAction {
-  type: typeof PUSH_NEW_ROUTE;
-  data: RouteState;
+  type: typeof ROUTES_NEW_ROUTE_PUSH;
+  payload: RoutesState;
 }
 
-export type RoutesActionTypes = PushNewRouteAction;
+export type RoutesActions = PushNewRouteAction;

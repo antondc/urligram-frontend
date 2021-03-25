@@ -1,4 +1,4 @@
-import { PUSH_NEW_ROUTE, RoutesActionTypes, RoutesState } from './routes.types';
+import { ROUTES_NEW_ROUTE_PUSH, RoutesActions, RoutesState } from './routes.types';
 
 export const initialState: RoutesState = {
   routes: [],
@@ -6,13 +6,10 @@ export const initialState: RoutesState = {
   currentRoute: undefined,
 };
 
-export const Routes = (state = initialState, action: RoutesActionTypes): RoutesState => {
+export const Routes = (state = initialState, action: RoutesActions): RoutesState => {
   switch (action.type) {
-    case PUSH_NEW_ROUTE:
-      return Object.assign({}, state, {
-        currentRoute: action.data,
-        history: [...state.history, action.data],
-      });
+    case ROUTES_NEW_ROUTE_PUSH:
+      return Object.assign({}, state, action.payload);
 
     default:
       return Object.assign({}, state);
