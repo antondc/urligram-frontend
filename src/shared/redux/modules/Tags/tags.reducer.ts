@@ -1,4 +1,4 @@
-import { LOAD_TAGS_STARTED, LOAD_TAGS_SUCCESS, TagsActionsTypes, TagsState } from './tags.types';
+import { TAGS_LOAD_REQUEST, TAGS_LOAD_SUCCESS, TagsActions, TagsState } from './tags.types';
 
 export const initialState: TagsState = {
   byKey: {},
@@ -6,24 +6,11 @@ export const initialState: TagsState = {
   searchIds: [],
 };
 
-export const Tags = (state = initialState, action: TagsActionsTypes): TagsState => {
+export const Tags = (state = initialState, action: TagsActions): TagsState => {
   switch (action.type) {
-    case LOAD_TAGS_STARTED:
-      return Object.assign({}, state, {
-        ...state,
-        loading: true,
-      });
-    case LOAD_TAGS_SUCCESS:
-      return Object.assign({}, state, {
-        ...state,
-        byKey: {
-          ...state.byKey,
-          ...action.data.byKey,
-        },
-        currentIds: action.data?.currentIds || state.currentIds,
-        searchIds: action.data?.searchIds || state.searchIds,
-        loading: false,
-      });
+    case TAGS_LOAD_REQUEST:
+    case TAGS_LOAD_SUCCESS:
+      return Object.assign({}, state, action.payload);
 
     default:
       return Object.assign({}, state);

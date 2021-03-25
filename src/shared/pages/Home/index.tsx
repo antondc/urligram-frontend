@@ -10,7 +10,7 @@ import { selectMostFollowedUsers } from 'Modules/Sections/selectors/selectMostFo
 import { selectMostFollowedUsersLoading } from 'Modules/Sections/selectors/selectMostFollowedUsersLoading';
 import { selectNewUsers } from 'Modules/Sections/selectors/selectNewUsers';
 import { selectNewUsersLoading } from 'Modules/Sections/selectors/selectNewUsersLoading';
-import { tagsAllLoad } from 'Modules/Tags/actions/tagsAllLoad';
+import { tagsLoad } from 'Modules/Tags/actions/tagsLoad';
 import { selectTagsAll } from 'Modules/Tags/selectors/selectAllTags';
 import { selectTagsLoading } from 'Modules/Tags/selectors/selectAllTagsLoading';
 import { Home as HomeUI } from './Home';
@@ -29,7 +29,7 @@ const Home: React.FC = () => {
   useEffect(() => {
     dispatch(sectionsMostFollowedUsersLoad());
     dispatch(sectionsNewUsersLoad());
-    dispatch(tagsAllLoad());
+    dispatch(tagsLoad());
   }, []);
 
   useEffect(() => {

@@ -1,16 +1,16 @@
 import { SectionsState } from 'Modules/Sections/sections.types';
-import { ReceiveTagItem, ReceiveTagsResponse, TagState } from 'Modules/Tags/tags.types';
+import { TagsLoadApiResponse, TagsLoadApiResponseItem, TagState } from 'Modules/Tags/tags.types';
 import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
 
 export const mostFollowedTagsInitialLoader = async (): Promise<{
   Sections: SectionsState;
 }> => {
-  const { data: mostFollowedTagsData }: ReceiveTagsResponse = await HttpClient.get('tags');
+  const { data: mostFollowedTagsData }: TagsLoadApiResponse = await HttpClient.get('tags');
 
   const TagsByKey = {
     byKey: {
-      ...serializerFromArrayToByKey<ReceiveTagItem, TagState>({
+      ...serializerFromArrayToByKey<TagsLoadApiResponseItem, TagState>({
         data: mostFollowedTagsData,
         contentPath: 'attributes',
       }),

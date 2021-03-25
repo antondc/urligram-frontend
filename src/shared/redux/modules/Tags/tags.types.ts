@@ -1,5 +1,5 @@
-export const LOAD_TAGS_STARTED = 'LOAD_TAGS_STARTED';
-export const LOAD_TAGS_SUCCESS = 'LOAD_TAGS_SUCCESS';
+export const TAGS_LOAD_REQUEST = 'TAGS_LOAD_REQUEST';
+export const TAGS_LOAD_SUCCESS = 'TAGS_LOAD_SUCCESS';
 
 export interface TagState {
   id: number;
@@ -16,26 +16,24 @@ export interface TagsState {
   searchIds?: number[];
 }
 
-export interface ReceiveTagItem {
+export interface TagsLoadApiResponseItem {
   type: 'tag';
   id: number;
   attributes: TagState;
 }
 
-export interface ReceiveTagsResponse {
-  data: ReceiveTagItem[];
+export interface TagsLoadApiResponse {
+  data: TagsLoadApiResponseItem[];
 }
 
-interface RequestTagsAction {
-  type: typeof LOAD_TAGS_STARTED;
-  data: {
-    loading: true;
-  };
+interface TagsLoadRequestAction {
+  type: typeof TAGS_LOAD_REQUEST;
+  payload: Partial<TagsState>;
 }
 
 interface ReceiveTagsAction {
-  type: typeof LOAD_TAGS_SUCCESS;
-  data: TagsState;
+  type: typeof TAGS_LOAD_SUCCESS;
+  payload: Partial<TagsState>;
 }
 
-export type TagsActionsTypes = RequestTagsAction | ReceiveTagsAction;
+export type TagsActions = TagsLoadRequestAction | ReceiveTagsAction;

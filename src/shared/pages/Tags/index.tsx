@@ -7,7 +7,7 @@ import { selectMostFollowedUsers } from 'Modules/Sections/selectors/selectMostFo
 import { selectMostFollowedUsersLoading } from 'Modules/Sections/selectors/selectMostFollowedUsersLoading';
 import { selectNewUsers } from 'Modules/Sections/selectors/selectNewUsers';
 import { selectNewUsersLoading } from 'Modules/Sections/selectors/selectNewUsersLoading';
-import { tagsAllLoad } from 'Modules/Tags/actions/tagsAllLoad';
+import { tagsLoad } from 'Modules/Tags/actions/tagsLoad';
 import { selectTagsLoading } from 'Modules/Tags/selectors/selectAllTagsLoading';
 import { selectTagsCurrent } from 'Modules/Tags/selectors/selectTagsCurrent';
 import { Tags as TagsUi } from './Tags';
@@ -22,7 +22,7 @@ const Tags: React.FC = () => {
   const newUsersLoading = useSelector(selectNewUsersLoading);
 
   useEffect(() => {
-    dispatch(tagsAllLoad());
+    dispatch(tagsLoad());
     dispatch(sectionsMostFollowedUsersLoad());
     dispatch(sectionsNewUsersLoad());
   }, []);

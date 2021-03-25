@@ -1,31 +1,36 @@
-import { Action, Dispatch } from 'redux';
-import { ThunkAction } from 'redux-thunk';
+import { Dispatch } from 'redux';
 
-import { ReceiveTagItem, ReceiveTagsResponse, TagState } from 'Modules/Tags/tags.types';
+import { RootState } from 'Modules/rootType';
+import { TagsActions, TagsLoadApiResponse, TagState } from 'Modules/Tags/tags.types';
+import { tagsLoadSuccess } from 'Root/src/shared/redux/modules/Tags/actions/tagsLoadSuccess';
 import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
-import { loadTagsReceive } from '../../Tags/actions/loadTagsReceive';
+import { AppThunk } from '../../..';
+import { SectionsActions } from '../sections.types';
 import { sectionsUserMostUsedTagsReceive } from './sectionsUserMostUsedTagsReceive';
 import { sectionsUserMostUsedTagsRequest } from './sectionsUserMostUsedTagsRequest';
 
-export const sectionsUserMostUsedTagsLoad = (userId: string): ThunkAction<any, any, any, Action> => async (
-  dispatch?: Dispatch
-) => {
-  if (!userId) return;
-
+export const sectionsUserMostUsedTagsLoad = (userId: string): AppThunk<Promise<TagState[]>> => async (
+  dispatch: Dispatch<TagsActions | SectionsActions>,
+  getState: () => RootState
+): Promise<TagState[]> => {
   try {
     dispatch(sectionsUserMostUsedTagsRequest());
 
-    const { data: myTagsData }: ReceiveTagsResponse = await HttpClient.get(`users/${userId}/tags?page[size]=10`);
+    const { data: myTagsData } = await HttpClient.get<void, TagsLoadApiResponse>(`users/${userId}/tags?page[size]=10`);
 
-    const myTagsByKey = {
-      byKey: serializerFromArrayToByKey<ReceiveTagItem, TagState>({
-        data: myTagsData,
-        contentPath: 'attributes',
-      }),
-    };
+    const tagsArray = myTagsData.map((item) => item.attributes);
 
-    dispatch(loadTagsReceive(myTagsByKey));
+    const { Tags: tagsAfterApi } = getState();
+    dispatch(
+      tagsLoadSuccess({
+        ...tagsAfterApi,
+        byKey: {
+          ...tagsAfterApi.byKey,
+          ...serializerFromArrayToByKey<TagState, TagState>({ data: tagsArray }),
+        },
+      })
+    );
     dispatch(
       sectionsUserMostUsedTagsReceive({
         UserMostUsedTags: {
@@ -33,9 +38,9 @@ export const sectionsUserMostUsedTagsLoad = (userId: string): ThunkAction<any, a
         },
       })
     );
+
+    return tagsArray;
   } catch (err) {
     throw new Error(err);
   }
-
-  return;
 };

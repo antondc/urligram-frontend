@@ -2,34 +2,29 @@ import { Dispatch } from 'redux';
 
 import { RootState } from 'Modules/rootType';
 import { TagsActions, TagsLoadApiResponse, TagState } from 'Modules/Tags/tags.types';
-import { QueryStringWrapper } from 'Root/src/shared/services/QueryStringWrapper';
 import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
 import { AppThunk } from '../../..';
 import { tagsLoadRequest } from './tagsLoadRequest';
 import { tagsLoadSuccess } from './tagsLoadSuccess';
 
-export const tagsSearchLoad = (tagStringFragment?: string): AppThunk<Promise<TagState[]>> => async (
+export const tagsLoad = (): AppThunk<Promise<TagState[]>> => async (
   dispatch: Dispatch<TagsActions>,
   getState: () => RootState
 ): Promise<TagState[]> => {
+  const { Tags: tagsBeforeApi } = getState();
   try {
-    const { Tags } = getState();
     dispatch(
       tagsLoadRequest({
-        ...Tags,
+        ...tagsBeforeApi,
         loading: true,
       })
     );
 
-    const queryString = !!tagStringFragment
-      ? QueryStringWrapper.stringifyQueryParams({ filter: { tags: [tagStringFragment] } })
-      : '';
-
-    const { data } = await HttpClient.get<void, TagsLoadApiResponse>(`tags?${queryString}`);
+    const { data } = await HttpClient.get<void, TagsLoadApiResponse>(`/tags${window.location.search}`);
+    const { Tags: tagsAfterApi } = getState();
     const tagsArray = data.map((item) => item.attributes);
 
-    const { Tags: tagsAfterApi } = getState();
     dispatch(
       tagsLoadSuccess({
         ...tagsAfterApi,
@@ -37,12 +32,12 @@ export const tagsSearchLoad = (tagStringFragment?: string): AppThunk<Promise<Tag
           ...tagsAfterApi.byKey,
           ...serializerFromArrayToByKey<TagState, TagState>({ data: tagsArray }),
         },
-        searchIds: data.map((item) => item.id),
+        currentIds: data.map((item) => item.id),
       })
     );
-  } catch (err) {
-    throw new Error(err);
-  }
+
+    return tagsArray;
+  } catch (err) {}
 
   return;
 };

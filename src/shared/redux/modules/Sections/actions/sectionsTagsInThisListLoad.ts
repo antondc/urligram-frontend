@@ -1,40 +1,46 @@
-import { Action, Dispatch } from 'redux';
-import { ThunkAction } from 'redux-thunk';
+import { Dispatch } from 'redux';
 
-import { ListLoadApiResponse } from 'Modules/Lists/lists.types';
-import { loadTagsReceive } from 'Modules/Tags/actions/loadTagsReceive';
-import { TagState } from 'Modules/Tags/tags.types';
+import { RootState } from 'Modules/rootType';
+import { TagsActions, TagsLoadApiResponse, TagState } from 'Modules/Tags/tags.types';
+import { tagsLoadSuccess } from 'Root/src/shared/redux/modules/Tags/actions/tagsLoadSuccess';
 import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
+import { AppThunk } from '../../..';
+import { SectionsActions } from '../sections.types';
 import { sectionsTagsInThisListReceive } from './sectionsTagsInThisListReceive';
 import { sectionsTagsInThisListRequest } from './sectionsTagsInThisListRequest';
 
-export const sectionsTagsInThisListLoad = (listId: number): ThunkAction<any, any, any, Action> => async (
-  dispatch?: Dispatch
-) => {
+export const sectionsTagsInThisListLoad = (listId: number): AppThunk<Promise<TagState[]>> => async (
+  dispatch: Dispatch<TagsActions | SectionsActions>,
+  getState: () => RootState
+): Promise<TagState[]> => {
   try {
     dispatch(sectionsTagsInThisListRequest());
 
-    const { data: listData }: ListLoadApiResponse = await HttpClient.get(`/lists/${listId}`);
-    const tagsInList = listData?.attributes?.tags?.slice(0, 10);
+    const { data: myTagsData } = await HttpClient.get<void, TagsLoadApiResponse>(`/lists/${listId}`);
 
-    const myTagsByKey = {
-      byKey: serializerFromArrayToByKey<TagState, TagState>({
-        data: tagsInList,
-      }),
-    };
+    const tagsArray = myTagsData.map((item) => item.attributes);
 
-    dispatch(loadTagsReceive(myTagsByKey));
+    const { Tags: tagsAfterApi } = getState();
     dispatch(
-      sectionsTagsInThisListReceive({
-        TagsInThisList: {
-          currentIds: tagsInList?.map((item) => item.id) || [],
+      tagsLoadSuccess({
+        ...tagsAfterApi,
+        byKey: {
+          ...tagsAfterApi.byKey,
+          ...serializerFromArrayToByKey<TagState, TagState>({ data: tagsArray }),
         },
       })
     );
+    dispatch(
+      sectionsTagsInThisListReceive({
+        TagsInThisList: {
+          currentIds: tagsArray?.map((item) => item.id) || [],
+        },
+      })
+    );
+
+    return tagsArray;
   } catch (err) {
     throw new Error(err);
   }
-
-  return;
 };
