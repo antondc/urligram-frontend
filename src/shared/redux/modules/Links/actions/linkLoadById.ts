@@ -1,11 +1,11 @@
-import { LinkApiResponse, LinksActionsTypes, LinkState } from 'Modules/Links/links.types';
+import { LinkApiResponse, LinksActions, LinkState } from 'Modules/Links/links.types';
 import HttpClient from 'Services/HttpClient';
 import { AppThunk } from '../../..';
 import { linkLoadByIdFailure } from './linkLoadByIdFailure';
 import { linkLoadByIdRequest } from './linkLoadByIdRequest';
 import { linkLoadByIdSuccess } from './linkLoadByIdSuccess';
 
-export const linkLoadById = (linkId: number): AppThunk<Promise<LinkState>, LinksActionsTypes> => async (
+export const linkLoadById = (linkId: number): AppThunk<Promise<LinkState>, LinksActions> => async (
   dispatch,
   getState
 ): Promise<LinkState> => {

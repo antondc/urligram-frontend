@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { forgotPassword } from 'Modules/Session/actions/forgotPassword';
+import { sessionForgotPassword } from 'Modules/Session/actions/sessionForgotPassword';
 import { selectSessionErrorLast } from 'Modules/Session/selectors/selectSessionErrorLast';
 import { selectSessionPasswordRequested } from 'Modules/Session/selectors/selectSessionPasswordRequested';
 import { testStringHasWhiteSpaces } from 'Tools/utils/string/testStringHasWhiteSpaces';
@@ -62,7 +62,7 @@ const ForgotPassword: React.FC = () => {
       nameOrEmail: nameOrEmailValue,
     };
 
-    dispatch(forgotPassword(data));
+    dispatch(sessionForgotPassword(data));
   };
 
   useEffect(() => {

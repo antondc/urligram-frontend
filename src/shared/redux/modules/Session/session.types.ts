@@ -1,16 +1,16 @@
-export const LOG_IN_STARTED = 'LOG_IN_STARTED';
-export const LOG_IN_SUCCESS = 'LOG_IN_SUCCESS';
-export const LOG_OUT = 'LOG_OUT';
-export const LOG_FAILED = 'LOG_FAILED';
-export const SIGN_UP_REQUEST = 'SIGN_UP_REQUEST';
-export const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS';
-export const SIGN_UP_FAILURE = 'SIGN_UP_FAILURE';
-export const FORGOT_PASSWORD_REQUEST = 'FORGOT_PASSWORD_REQUEST';
-export const FORGOT_PASSWORD_SUCCESS = 'FORGOT_PASSWORD_SUCCESS';
-export const FORGOT_PASSWORD_FAILURE = 'FORGOT_PASSWORD_FAILURE';
-export const RESET_PASSWORD_REQUEST = 'RESET_PASSWORD_REQUEST';
-export const RESET_PASSWORD_SUCCESS = 'RESET_PASSWORD_SUCCESS';
-export const RESET_PASSWORD_FAILURE = 'RESET_PASSWORD_FAILURE';
+export const SESSION_LOG_IN_REQUEST = 'SESSION_LOG_IN_REQUEST';
+export const SESSION_LOG_IN_SUCCESS = 'SESSION_LOG_IN_SUCCESS';
+export const SESSION_LOG_OUT_REQUEST = 'SESSION_LOG_OUT_REQUEST';
+export const SESSION_LOG_IN_FAILURE = 'SESSION_LOG_IN_FAILURE';
+export const SESSION_SIGN_UP_REQUEST = 'SESSION_SIGN_UP_REQUEST';
+export const SESSION_SIGN_UP_SUCCESS = 'SESSION_SIGN_UP_SUCCESS';
+export const SESSION_SIGN_UP_FAILURE = 'SESSION_SIGN_UP_FAILURE';
+export const SESSION_FORGOT_PASSWORD_REQUEST = 'SESSION_FORGOT_PASSWORD_REQUEST';
+export const SESSION_FORGOT_PASSWORD_SUCCESS = 'SESSION_FORGOT_PASSWORD_SUCCESS';
+export const SESSION_FORGOT_PASSWORD_FAILURE = 'SESSION_FORGOT_PASSWORD_FAILURE';
+export const SESSION_RESET_PASSWORD_REQUEST = 'SESSION_RESET_PASSWORD_REQUEST';
+export const SESSION_RESET_PASSWORD_SUCCESS = 'SESSION_RESET_PASSWORD_SUCCESS';
+export const SESSION_RESET_PASSWORD_FAILURE = 'SESSION_RESET_PASSWORD_FAILURE';
 
 export const SESSION_STATUS_ACTIVE = 'active';
 export const SESSION_STATUS_INACTIVE = 'inactive';
@@ -45,25 +45,26 @@ export interface SessionState {
   passwordReset?: boolean;
 }
 
-export interface LogInRequest {
+// Api -----
+export interface SessionLogInApiRequest {
   nameOrEmail: string;
   password: string;
 }
 
-export interface LogInResponse {
+export interface SessionLogInApiResponse {
   data: {
     attributes: SessionState;
   };
 }
 
-export interface SignUpRequest {
+export interface SessionSignUpApiRequest {
   name: string;
   email: string;
   password: string;
   password_repeated: string;
 }
 
-export interface SignUpResponse {
+export interface SessionSignUpApiResponse {
   data: {
     success: boolean;
     error?: SessionError;
@@ -71,30 +72,30 @@ export interface SignUpResponse {
   };
 }
 
-export interface SignUpConfirmationRequest {
+export interface SessionSignUpConfirmationApiRequest {
   name: string;
   token: string;
 }
 
-export interface ForgotPasswordRequest {
+export interface SessionForgotPasswordApiRequest {
   nameOrEmail: string;
 }
 
-export interface ForgotPasswordResponse {
+export interface SessionForgotPasswordApiResponse {
   data: {
     success: boolean;
     error?: SessionError;
   };
 }
 
-export interface ResetPasswordRequest {
+export interface SessionResetPasswordApiRequest {
   password: string;
   passwordRepeated: string;
   name: string;
   token: string;
 }
 
-export interface ResetPasswordResponse {
+export interface SessionResetPasswordApiResponse {
   data: {
     success: boolean;
     error?: SessionError;
@@ -102,88 +103,74 @@ export interface ResetPasswordResponse {
   };
 }
 
+// Actions -----
+
 interface LogInRequestAction {
-  type: typeof LOG_IN_STARTED;
-  data: {
-    loading: true;
-  };
+  type: typeof SESSION_LOG_IN_REQUEST;
+  payload: SessionState;
 }
 
 interface LogInSuccessAction {
-  type: typeof LOG_IN_SUCCESS;
-  data: SessionState;
+  type: typeof SESSION_LOG_IN_SUCCESS;
+  payload: SessionState;
 }
 
 interface LogInFailureAction {
-  type: typeof LOG_FAILED;
-  data: {
-    loading: false;
-    error: SessionError;
-  };
+  type: typeof SESSION_LOG_IN_FAILURE;
+  payload: SessionState;
 }
 
 interface SignUpRequestAction {
-  type: typeof SIGN_UP_REQUEST;
-  data: {
-    loading: true;
-  };
+  type: typeof SESSION_SIGN_UP_REQUEST;
+  payload: SessionState;
 }
 
 interface SignUpSucessAction {
-  type: typeof SIGN_UP_SUCCESS;
-  data: SessionState;
+  type: typeof SESSION_SIGN_UP_SUCCESS;
+  payload: SessionState;
 }
 
 interface SignUpFailureAction {
-  type: typeof SIGN_UP_FAILURE;
-  data: {
-    loading: false;
-    error: SessionError;
-  };
+  type: typeof SESSION_SIGN_UP_FAILURE;
+  payload: SessionState;
 }
 
 interface ResetPasswordRequestAction {
-  type: typeof RESET_PASSWORD_REQUEST;
-  data: {
-    loading: true;
-  };
+  type: typeof SESSION_RESET_PASSWORD_REQUEST;
+  payload: SessionState;
 }
 
 interface ResetPasswordSucessAction {
-  type: typeof RESET_PASSWORD_SUCCESS;
-  data: {
-    loading: false;
-  };
+  type: typeof SESSION_RESET_PASSWORD_SUCCESS;
+  payload: SessionState;
 }
 
 interface ResetPasswordFailureAction {
-  type: typeof RESET_PASSWORD_FAILURE;
-  data: {
-    loading: false;
-    error: SessionError;
-  };
+  type: typeof SESSION_RESET_PASSWORD_FAILURE;
+  payload: SessionState;
 }
 
 interface LogOutReceiveAction {
-  type: typeof LOG_OUT;
+  type: typeof SESSION_LOG_OUT_REQUEST;
+  payload: SessionState;
 }
 
 interface ForgotPasswordRequestAction {
-  type: typeof FORGOT_PASSWORD_REQUEST;
+  type: typeof SESSION_FORGOT_PASSWORD_REQUEST;
+  payload: SessionState;
 }
 
 interface ForgotPasswordSuccessAction {
-  type: typeof FORGOT_PASSWORD_SUCCESS;
+  type: typeof SESSION_FORGOT_PASSWORD_SUCCESS;
+  payload: SessionState;
 }
 
 interface ForgotPasswordFailureAction {
-  type: typeof FORGOT_PASSWORD_FAILURE;
-  data: {
-    error: SessionError;
-  };
+  type: typeof SESSION_FORGOT_PASSWORD_FAILURE;
+  payload: SessionState;
 }
 
-export type SessionActionsTypes =
+export type SessionActions =
   | LogInFailureAction
   | LogInSuccessAction
   | LogInRequestAction

@@ -9,12 +9,12 @@ import './UserModal.less';
 
 interface Props {
   sessionId: string;
-  logOut: () => void;
+  sessionLogOut: () => void;
   switchMessageModal: () => void;
   switchUserModal: () => void;
 }
 
-export const UserModal: React.FC<Props> = ({ sessionId, logOut, switchUserModal, switchMessageModal }) => (
+export const UserModal: React.FC<Props> = ({ sessionId, sessionLogOut, switchUserModal, switchMessageModal }) => (
   <Border className="UserModal" onClick={switchUserModal} onMouseLeave={switchUserModal}>
     <Cross className="UserModal-cross" />
     <User className="UserModal-userLogo" onClick={switchMessageModal} />
@@ -49,7 +49,7 @@ export const UserModal: React.FC<Props> = ({ sessionId, logOut, switchUserModal,
         </A>
       </li>
       <Hr spacer size="small" />
-      <li className="UserModal-logOut" onClick={logOut}>
+      <li className="UserModal-sessionLogOut" onClick={sessionLogOut}>
         <Span bold>Log out</Span>
       </li>
     </ul>

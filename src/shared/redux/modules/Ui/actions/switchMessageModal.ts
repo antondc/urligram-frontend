@@ -1,7 +1,7 @@
 import { AppThunk } from '../../../index';
-import { SWITCH_MESSAGE_MODAL, UiActionsTypes } from '../ui.types';
+import { SWITCH_MESSAGE_MODAL, UiActions } from '../ui.types';
 
-export const switchMessageModal = (): AppThunk<void, UiActionsTypes> => async (dispatch, getState): Promise<void> => {
+export const switchMessageModal = (): AppThunk<void, UiActions> => async (dispatch, getState): Promise<void> => {
   const { Ui } = getState();
 
   dispatch({

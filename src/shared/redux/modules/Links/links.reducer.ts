@@ -6,7 +6,7 @@ import {
   LINK_VOTE_SUCCESS,
   LINKS_LOAD_REQUEST,
   LINKS_LOAD_SUCCESS,
-  LinksActionsTypes,
+  LinksActions,
   LinksState,
 } from './links.types';
 
@@ -14,7 +14,7 @@ export const initialState: LinksState = {
   byKey: {},
 };
 
-export const Links = (state = initialState, action: LinksActionsTypes): LinksState => {
+export const Links = (state = initialState, action: LinksActions): LinksState => {
   switch (action.type) {
     case LINKS_LOAD_REQUEST:
     case LINKS_LOAD_SUCCESS:

@@ -1,7 +1,7 @@
 import { AppThunk } from '../../../index';
-import { SWITCH_LOGIN_MODAL, UiActionsTypes } from '../ui.types';
+import { SWITCH_LOGIN_MODAL, UiActions } from '../ui.types';
 
-export const switchLoginModal = (mounted: boolean): AppThunk<void, UiActionsTypes> => async (
+export const switchLoginModal = (mounted: boolean): AppThunk<void, UiActions> => async (
   dispatch,
   getState
 ): Promise<void> => {

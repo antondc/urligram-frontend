@@ -85,7 +85,7 @@ interface SwitchListModal {
   payload: Partial<UiState>;
 }
 
-export type UiActionsTypes =
+export type UiActions =
   | SwitchUserModal
   | SwitchLanguagesModal
   | SwitchMessageModal

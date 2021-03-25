@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { logOut } from 'Modules/Session/actions/logOut';
+import { sessionLogOut } from 'Modules/Session/actions/sessionLogOut';
 import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUserId';
 import { switchMessageModal } from 'Modules/Ui/actions/switchMessageModal';
 import { switchUserModal } from 'Modules/Ui/actions/switchUserModal';
@@ -14,7 +14,7 @@ const UserModal: React.FC = () => {
   const sessionId = useSelector(selectSessionUserId);
 
   const logOutDispatched = () => {
-    dispatch(logOut());
+    dispatch(sessionLogOut());
   };
 
   const switchUserModalDispatched = () => {
@@ -28,7 +28,7 @@ const UserModal: React.FC = () => {
   return (
     <UserModalUi
       sessionId={sessionId}
-      logOut={logOutDispatched}
+      sessionLogOut={logOutDispatched}
       switchUserModal={switchUserModalDispatched}
       switchMessageModal={switchMessageModalDispatched}
     />

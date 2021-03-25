@@ -10,7 +10,7 @@ import { linkLoadById } from 'Modules/Links/actions/linkLoadById';
 import { linkLoadByIdRequest } from 'Modules/Links/actions/linkLoadByIdRequest';
 import HttpClient from 'Services/HttpClient';
 import { AppThunk } from '../../../index';
-import { LinksActionsTypes } from '../../Links/links.types';
+import { LinksActions } from '../../Links/links.types';
 import { bookmarkCreateRequest } from './bookmarkCreateRequest';
 
 export const bookmarkCreate = ({
@@ -19,7 +19,7 @@ export const bookmarkCreate = ({
   url,
   isPrivate,
   tags,
-}: BookmarkCreateRequest): AppThunk<Promise<BookmarkState>, BookmarksActions | LinksActionsTypes> => async (
+}: BookmarkCreateRequest): AppThunk<Promise<BookmarkState>, BookmarksActions | LinksActions> => async (
   dispatch,
   getState
 ) => {

@@ -1,4 +1,4 @@
-import { LinksActionsTypes, LinksApiResponse, LinkState } from 'Modules/Links/links.types';
+import { LinksActions, LinksApiResponse, LinkState } from 'Modules/Links/links.types';
 import HttpClient from 'Services/HttpClient';
 import { QueryStringWrapper } from 'Services/QueryStringWrapper';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
@@ -6,7 +6,7 @@ import { AppThunk } from '../../..';
 import { linksLoadRequest } from './linksLoadRequest';
 import { linksLoadSuccess } from './linksLoadSuccess';
 
-export const linksLoad = (size?: number): AppThunk<Promise<LinkState[]>, LinksActionsTypes> => async (
+export const linksLoad = (size?: number): AppThunk<Promise<LinkState[]>, LinksActions> => async (
   dispatch,
   getState
 ): Promise<LinkState[]> => {

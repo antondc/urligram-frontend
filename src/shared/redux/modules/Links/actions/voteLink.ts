@@ -1,6 +1,6 @@
 import { voteBookmarkReceive } from 'Modules/Bookmarks/actions/voteBookmarkReceive';
 import { voteBookmarkRequest } from 'Modules/Bookmarks/actions/voteBookmarkRequest';
-import { LinkApiResponse, LinksActionsTypes, LinksState, LinkState } from 'Modules/Links/links.types';
+import { LinkApiResponse, LinksActions, LinksState, LinkState } from 'Modules/Links/links.types';
 import HttpClient from 'Services/HttpClient';
 import { AppThunk } from '../../..';
 import { BookmarksActions } from '../../Bookmarks/bookmarks.types';
@@ -17,7 +17,7 @@ export const voteLink = ({
   vote,
   linkId,
   userId,
-}: Props): AppThunk<Promise<LinkState>, LinksActionsTypes | BookmarksActions> => async (
+}: Props): AppThunk<Promise<LinkState>, LinksActions | BookmarksActions> => async (
   dispatch,
   getState
 ): Promise<LinkState> => {

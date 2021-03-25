@@ -1,14 +1,9 @@
-import { Dispatch } from 'redux';
-
-import { RootState } from 'Modules/rootType';
 import { AppThunk } from '../../..';
+import { LanguagesActions } from '../languages.types';
 import { switchCurrentLanguageReceive } from './switchCurrentLanguageReceive';
 import { switchCurrentLanguageRequest } from './switchCurrentLanguageRequest';
 
-export const switchCurrentLanguage = (slug: string): AppThunk<void> => (
-  dispatch: Dispatch,
-  getState: () => RootState
-): void => {
+export const switchCurrentLanguage = (slug: string): AppThunk<void, LanguagesActions> => (dispatch, getState): void => {
   const { Languages } = getState();
 
   if (Languages.currentLanguage.slug !== slug) {

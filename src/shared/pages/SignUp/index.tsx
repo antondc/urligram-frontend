@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { signUp } from 'Modules/Session/actions/signUp';
+import { sessionSignUp } from 'Modules/Session/actions/sessionSignUp';
 import { selectSessionErrorLast } from 'Modules/Session/selectors/selectSessionErrorLast';
 import { selectSessionStatus } from 'Modules/Session/selectors/selectSessionStatus';
 import { SESSION_STATUS_INACTIVE } from 'Modules/Session/session.types';
@@ -127,7 +127,7 @@ const SignUp: React.FC = () => {
       password_repeated: passwordRepeatedValue,
     };
 
-    dispatch(signUp(data));
+    dispatch(sessionSignUp(data));
   };
 
   useEffect(() => {

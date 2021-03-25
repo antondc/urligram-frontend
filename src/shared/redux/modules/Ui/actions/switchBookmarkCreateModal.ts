@@ -1,7 +1,7 @@
 import { AppThunk } from '../../../index';
-import { SWITCH_BOOKMARK_CREATE_MODAL, UiActionsTypes } from '../ui.types';
+import { SWITCH_BOOKMARK_CREATE_MODAL, UiActions } from '../ui.types';
 
-export const switchBookmarkCreateModal = (mounted: boolean): AppThunk<void, UiActionsTypes> => async (
+export const switchBookmarkCreateModal = (mounted: boolean): AppThunk<void, UiActions> => async (
   dispatch,
   getState
 ): Promise<void> => {

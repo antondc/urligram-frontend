@@ -1,5 +1,5 @@
 import { AppThunk } from '../../../index';
-import { SWITCH_BOOKMARK_UPDATE_MODAL, UiActionsTypes } from '../ui.types';
+import { SWITCH_BOOKMARK_UPDATE_MODAL, UiActions } from '../ui.types';
 
 export const switchBookmarkUpdateModal = ({
   mounted,
@@ -7,7 +7,7 @@ export const switchBookmarkUpdateModal = ({
 }: {
   mounted: boolean;
   bookmarkId?: number;
-}): AppThunk<void, UiActionsTypes> => async (dispatch, getState): Promise<void> => {
+}): AppThunk<void, UiActions> => async (dispatch, getState): Promise<void> => {
   const { Ui } = getState();
 
   dispatch({

@@ -77,7 +77,7 @@ Cookies are set in the following steps:
 
   - User navigates to `/login`
   - User populates form and submit: src/shared/routes/Login/index.js
-  - Action `logIn` is called: `src/shared/redux/actions.js`
+  - Action `sessionLogIn` is called: `src/shared/redux/actions.js`
   - Request to `GET` `/login` is called, the response has a cookie with user data, along with user data itself
   - Reducer is triggered and user data is saved on store: `src/shared/redux/reducers.js`
   - User navigates

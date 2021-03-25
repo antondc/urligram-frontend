@@ -101,7 +101,7 @@ export interface LinkLoadByIdFailureAction {
   payload: Partial<LinksState>;
 }
 
-export type LinksActionsTypes =
+export type LinksActions =
   | LinksLoadRequestAction
   | LinksLoadSuccessAction
   | LinkVoteRequestAction

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { logIn } from 'Modules/Session/actions/logIn';
+import { sessionLogIn } from 'Modules/Session/actions/sessionLogIn';
 import { selectSessionErrorLast } from 'Modules/Session/selectors/selectSessionErrorLast';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import { validateEmailAddress } from 'Tools/utils/string/validateEmailAddress';
@@ -62,7 +62,7 @@ const LoginForm: React.FC = () => {
       password: passwordValue,
     };
 
-    dispatch(logIn(data));
+    dispatch(sessionLogIn(data));
   };
 
   useEffect(() => {

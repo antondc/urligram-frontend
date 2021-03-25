@@ -1,6 +1,6 @@
-import { LINK_VOTE_SUCCESS, LinksActionsTypes, LinksState } from 'Modules/Links/links.types';
+import { LINK_VOTE_SUCCESS, LinksActions, LinksState } from 'Modules/Links/links.types';
 
-export const voteLinkSuccess = (payload: LinksState): LinksActionsTypes => ({
+export const voteLinkSuccess = (payload: LinksState): LinksActions => ({
   type: LINK_VOTE_SUCCESS,
   payload,
 });

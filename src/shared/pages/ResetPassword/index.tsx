@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { selectCurrentRouteQueryParams } from 'Modules/Routes/selectors/selectCurrentRouteQueryParams';
-import { resetPassword } from 'Modules/Session/actions/resetPassword';
+import { sessionResetPassword } from 'Modules/Session/actions/sessionResetPassword';
 import { selectSessionErrorLast } from 'Modules/Session/selectors/selectSessionErrorLast';
 import { selectSessionPasswordRequested } from 'Modules/Session/selectors/selectSessionPasswordRequested';
 import { validatePassword } from 'Tools/utils/string/validatePassword';
@@ -75,7 +75,7 @@ const ResetPassword: React.FC = () => {
       passwordRepeated: passwordRepeatedValue,
     };
 
-    dispatch(resetPassword(data));
+    dispatch(sessionResetPassword(data));
   };
 
   useEffect(() => {

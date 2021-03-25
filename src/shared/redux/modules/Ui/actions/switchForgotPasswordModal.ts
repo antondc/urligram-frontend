@@ -1,7 +1,7 @@
 import { AppThunk } from '../../../index';
-import { SWITCH_FORGOT_PASSWORD_MODAL, UiActionsTypes } from '../ui.types';
+import { SWITCH_FORGOT_PASSWORD_MODAL, UiActions } from '../ui.types';
 
-export const switchForgotPasswordModal = (mounted: boolean): AppThunk<void, UiActionsTypes> => async (
+export const switchForgotPasswordModal = (mounted: boolean): AppThunk<void, UiActions> => async (
   dispatch,
   getState
 ): Promise<void> => {
