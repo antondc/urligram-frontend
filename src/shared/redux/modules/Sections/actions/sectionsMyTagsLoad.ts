@@ -1,29 +1,34 @@
-import { Dispatch } from 'redux';
-
-import { RootState } from 'Modules/rootType';
 import { TagsActions, TagsLoadApiResponse, TagState } from 'Modules/Tags/tags.types';
 import { tagsLoadSuccess } from 'Root/src/shared/redux/modules/Tags/actions/tagsLoadSuccess';
 import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
 import { AppThunk } from '../../..';
 import { SectionsActions } from '../sections.types';
-import { sectionsMyTagsReceive } from './sectionsMyTagsReceive';
 import { sectionsMyTagsRequest } from './sectionsMyTagsRequest';
+import { sectionsMyTagsSuccess } from './sectionsMyTagsSuccess';
 
-export const sectionsMyTagsLoad = (sessionId: string): AppThunk<Promise<TagState[]>> => async (
-  dispatch: Dispatch<TagsActions | SectionsActions>,
-  getState: () => RootState
-): Promise<TagState[]> => {
+export const sectionsMyTagsLoad = (
+  sessionId: string
+): AppThunk<Promise<TagState[]>, TagsActions | SectionsActions> => async (dispatch, getState): Promise<TagState[]> => {
+  const { Sections: sectionsBeforeApi } = getState();
   try {
-    dispatch(sectionsMyTagsRequest());
+    dispatch(
+      sectionsMyTagsRequest({
+        ...sectionsBeforeApi,
+        MyTags: {
+          ...sectionsBeforeApi.MyTags,
+          loading: true,
+        },
+      })
+    );
 
     const { data: myTagsData } = await HttpClient.get<void, TagsLoadApiResponse>(
       `/users/${sessionId}/tags?page[size]=10`
     );
+    const { Sections: sectionsAfterApi, Tags: tagsAfterApi } = getState();
 
     const tagsArray = myTagsData.map((item) => item.attributes);
 
-    const { Tags: tagsAfterApi } = getState();
     dispatch(
       tagsLoadSuccess({
         ...tagsAfterApi,
@@ -31,12 +36,16 @@ export const sectionsMyTagsLoad = (sessionId: string): AppThunk<Promise<TagState
           ...tagsAfterApi.byKey,
           ...serializerFromArrayToByKey<TagState, TagState>({ data: tagsArray }),
         },
+        loading: false,
       })
     );
     dispatch(
-      sectionsMyTagsReceive({
+      sectionsMyTagsSuccess({
+        ...sectionsAfterApi,
         MyTags: {
+          ...sectionsAfterApi.MyTags,
           currentIds: myTagsData.map((item) => item.id),
+          loading: false,
         },
       })
     );

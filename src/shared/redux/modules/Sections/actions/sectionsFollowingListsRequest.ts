@@ -1,8 +1,6 @@
-import { SECTIONS_FOLLOWING_LISTS_REQUEST, SectionsActions } from 'Modules/Sections/sections.types';
+import { SECTIONS_FOLLOWING_LISTS_REQUEST, SectionsActions, SectionsState } from 'Modules/Sections/sections.types';
 
-export const sectionsFollowingListsRequest = (): SectionsActions => ({
+export const sectionsFollowingListsRequest = (payload: SectionsState): SectionsActions => ({
   type: SECTIONS_FOLLOWING_LISTS_REQUEST,
-  data: {
-    loading: true,
-  },
+  payload,
 });

@@ -1,6 +1,3 @@
-import { Dispatch } from 'redux';
-
-import { RootState } from 'Modules/rootType';
 import { AppThunk } from '../../../index';
 import { SWITCH_BOOKMARK_UPDATE_MODAL, UiActionsTypes } from '../ui.types';
 
@@ -10,7 +7,7 @@ export const switchBookmarkUpdateModal = ({
 }: {
   mounted: boolean;
   bookmarkId?: number;
-}): AppThunk<void> => async (dispatch: Dispatch<UiActionsTypes>, getState: () => RootState): Promise<void> => {
+}): AppThunk<void, UiActionsTypes> => async (dispatch, getState): Promise<void> => {
   const { Ui } = getState();
 
   dispatch({

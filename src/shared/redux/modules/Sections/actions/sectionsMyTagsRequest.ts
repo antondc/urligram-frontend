@@ -1,8 +1,6 @@
-import { SECTIONS_MY_TAGS_REQUEST, SectionsActions } from 'Modules/Sections/sections.types';
+import { SECTIONS_MY_TAGS_REQUEST, SectionsActions, SectionsState } from 'Modules/Sections/sections.types';
 
-export const sectionsMyTagsRequest = (): SectionsActions => ({
+export const sectionsMyTagsRequest = (payload: SectionsState): SectionsActions => ({
   type: SECTIONS_MY_TAGS_REQUEST,
-  data: {
-    loading: true,
-  },
+  payload,
 });

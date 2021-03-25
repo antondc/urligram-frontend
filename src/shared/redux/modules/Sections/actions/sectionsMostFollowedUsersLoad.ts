@@ -1,44 +1,50 @@
-import { Dispatch } from 'redux';
-
-import { RootState } from 'Modules/rootType';
 import { usersReceive } from 'Modules/Users/actions/usersReceive';
 import { UsersActions, UsersLoadApiResponse, UserState } from 'Modules/Users/users.types';
 import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
 import { AppThunk } from '../../..';
 import { SectionsActions } from '../sections.types';
-import { sectionsMostFollowedUsersReceive } from './sectionsMostFollowedUsersReceive';
 import { sectionsMostFollowedUsersRequest } from './sectionsMostFollowedUsersRequest';
+import { sectionsMostFollowedUsersSuccess } from './sectionsMostFollowedUsersSuccess';
 
-export const sectionsMostFollowedUsersLoad = (): AppThunk<Promise<UserState[]>> => async (
-  dispatch: Dispatch<UsersActions | SectionsActions>,
-  getState: () => RootState
-): Promise<UserState[]> => {
+export const sectionsMostFollowedUsersLoad = (): AppThunk<
+  Promise<UserState[]>,
+  UsersActions | SectionsActions
+> => async (dispatch, getState): Promise<UserState[]> => {
+  const { Sections: sectionsBeforeApi } = getState();
   try {
-    dispatch(sectionsMostFollowedUsersRequest());
+    dispatch(
+      sectionsMostFollowedUsersRequest({
+        ...sectionsBeforeApi,
+        MostFollowedUsers: {
+          ...sectionsBeforeApi.MostFollowedUsers,
+          loading: true,
+        },
+      })
+    );
 
     const { data } = await HttpClient.get<void, UsersLoadApiResponse>('/users?sort=-followers&page[size]=5');
-
     const usersArray = data.map((item) => item.attributes);
+    const { Sections: sectionsAfterApi, Users: usersAfterApi } = getState();
 
-    const { Users } = getState();
     dispatch(
       usersReceive({
-        ...Users,
+        ...usersAfterApi,
         byKey: {
-          ...Users.byKey,
-          ...serializerFromArrayToByKey<UserState, UserState>({
-            data: usersArray,
-          }),
+          ...usersAfterApi.byKey,
+          ...serializerFromArrayToByKey<UserState, UserState>({ data: usersArray }),
         },
         loading: false,
       })
     );
 
     dispatch(
-      sectionsMostFollowedUsersReceive({
+      sectionsMostFollowedUsersSuccess({
+        ...sectionsAfterApi,
         MostFollowedUsers: {
+          ...sectionsAfterApi.MostFollowedUsers,
           currentIds: data.map((item) => item.id),
+          loading: false,
         },
       })
     );

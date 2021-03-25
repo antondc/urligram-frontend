@@ -1,8 +1,6 @@
-import { SECTIONS_USERS_IN_THIS_LIST_REQUEST, SectionsActions } from 'Modules/Sections/sections.types';
+import { SECTIONS_USERS_IN_THIS_LIST_REQUEST, SectionsActions, SectionsState } from 'Modules/Sections/sections.types';
 
-export const sectionsUsersInThisListRequest = (): SectionsActions => ({
+export const sectionsUsersInThisListRequest = (payload: SectionsState): SectionsActions => ({
   type: SECTIONS_USERS_IN_THIS_LIST_REQUEST,
-  data: {
-    loading: true,
-  },
+  payload,
 });

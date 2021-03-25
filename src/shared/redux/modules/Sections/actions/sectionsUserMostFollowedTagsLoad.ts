@@ -1,6 +1,3 @@
-import { Dispatch } from 'redux';
-
-import { RootState } from 'Modules/rootType';
 import { TagsActions, TagsLoadApiResponse, TagState } from 'Modules/Tags/tags.types';
 import { tagsLoadSuccess } from 'Root/src/shared/redux/modules/Tags/actions/tagsLoadSuccess';
 import HttpClient from 'Services/HttpClient';
@@ -10,18 +7,27 @@ import { SectionsActions } from '../sections.types';
 import { sectionsUserMostUsedTagsReceive } from './sectionsUserMostUsedTagsReceive';
 import { sectionsUserMostUsedTagsRequest } from './sectionsUserMostUsedTagsRequest';
 
-export const sectionsUserMostUsedTagsLoad = (userId: string): AppThunk<Promise<TagState[]>> => async (
-  dispatch: Dispatch<TagsActions | SectionsActions>,
-  getState: () => RootState
-): Promise<TagState[]> => {
+export const sectionsUserMostUsedTagsLoad = (
+  userId: string
+): AppThunk<Promise<TagState[]>, TagsActions | SectionsActions> => async (dispatch, getState): Promise<TagState[]> => {
   try {
-    dispatch(sectionsUserMostUsedTagsRequest());
+    const { Sections: sectionsBeforeRequest } = getState();
+
+    dispatch(
+      sectionsUserMostUsedTagsRequest({
+        ...sectionsBeforeRequest,
+        UserMostUsedTags: {
+          ...sectionsBeforeRequest.UserMostUsedTags,
+          loading: true,
+        },
+      })
+    );
 
     const { data: myTagsData } = await HttpClient.get<void, TagsLoadApiResponse>(`users/${userId}/tags?page[size]=10`);
+    const { Tags: tagsAfterApi, Sections: sectionsAfterResponse } = getState();
 
     const tagsArray = myTagsData.map((item) => item.attributes);
 
-    const { Tags: tagsAfterApi } = getState();
     dispatch(
       tagsLoadSuccess({
         ...tagsAfterApi,
@@ -29,12 +35,16 @@ export const sectionsUserMostUsedTagsLoad = (userId: string): AppThunk<Promise<T
           ...tagsAfterApi.byKey,
           ...serializerFromArrayToByKey<TagState, TagState>({ data: tagsArray }),
         },
+        loading: false,
       })
     );
     dispatch(
       sectionsUserMostUsedTagsReceive({
+        ...sectionsAfterResponse,
         UserMostUsedTags: {
+          ...sectionsAfterResponse.UserMostUsedTags,
           currentIds: myTagsData.map((item) => item.id),
+          loading: false,
         },
       })
     );

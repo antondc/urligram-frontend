@@ -1,12 +1,9 @@
-import { Dispatch } from 'redux';
-
 import {
   LanguagesActions,
   LanguagesApiResponse,
   LanguagesState,
   LanguageState,
 } from 'Modules/Languages/languages.types';
-import { RootState } from 'Modules/rootType';
 import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
 import { AppThunk } from '../../..';
@@ -14,9 +11,9 @@ import { getCurrentOrDefaultLanguage } from '../utils/getCurrentOrDefaultLanguag
 import { receiveLanguages } from './receiveLanguages';
 import { requestLanguages } from './requestLanguages';
 
-export const loadLanguages = (lang: string): AppThunk<Promise<LanguageState[]>> => async (
-  dispatch: Dispatch<LanguagesActions>,
-  getsState: () => RootState
+export const loadLanguages = (lang: string): AppThunk<Promise<LanguageState[]>, LanguagesActions> => async (
+  dispatch,
+  getsState
 ): Promise<LanguageState[]> => {
   const { Languages } = getsState();
   try {

@@ -1,8 +1,6 @@
-import { SECTIONS_FOLLOWERS_USERS_REQUEST, SectionsActions } from 'Modules/Sections/sections.types';
+import { SECTIONS_FOLLOWERS_USERS_REQUEST, SectionsActions, SectionsState } from 'Modules/Sections/sections.types';
 
-export const sectionsFollowersUsersRequest = (): SectionsActions => ({
+export const sectionsFollowersUsersRequest = (payload: SectionsState): SectionsActions => ({
   type: SECTIONS_FOLLOWERS_USERS_REQUEST,
-  data: {
-    loading: true,
-  },
+  payload,
 });

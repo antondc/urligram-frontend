@@ -1,13 +1,7 @@
-import { Dispatch } from 'redux';
-
-import { RootState } from 'Modules/rootType';
 import { AppThunk } from '../../../index';
 import { SWITCH_USER_MODAL, UiActionsTypes } from '../ui.types';
 
-export const switchUserModal = (): AppThunk<void> => async (
-  dispatch: Dispatch<UiActionsTypes>,
-  getState: () => RootState
-): Promise<void> => {
+export const switchUserModal = (): AppThunk<void, UiActionsTypes> => async (dispatch, getState): Promise<void> => {
   const { Ui } = getState();
 
   dispatch({

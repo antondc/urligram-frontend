@@ -1,8 +1,6 @@
-import { SECTIONS_MY_RECENT_BOOKMARKS_REQUEST, SectionsActions } from 'Modules/Sections/sections.types';
+import { SECTIONS_MY_RECENT_BOOKMARKS_REQUEST, SectionsActions, SectionsState } from 'Modules/Sections/sections.types';
 
-export const sectionsMyRecentBookmarksRequest = (): SectionsActions => ({
+export const sectionsMyRecentBookmarksRequest = (payload: SectionsState): SectionsActions => ({
   type: SECTIONS_MY_RECENT_BOOKMARKS_REQUEST,
-  data: {
-    loading: true,
-  },
+  payload,
 });

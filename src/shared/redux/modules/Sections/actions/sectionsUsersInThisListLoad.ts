@@ -1,6 +1,3 @@
-import { Dispatch } from 'redux';
-
-import { RootState } from 'Modules/rootType';
 import { usersReceive } from 'Modules/Users/actions/usersReceive';
 import { UsersActions, UsersLoadApiResponse, UserState } from 'Modules/Users/users.types';
 import HttpClient from 'Services/HttpClient';
@@ -10,38 +7,47 @@ import { SectionsActions } from '../sections.types';
 import { sectionsUsersInThisListReceive } from './sectionsUsersInThisListReceive';
 import { sectionsUsersInThisListRequest } from './sectionsUsersInThisListRequest';
 
-export const sectionsUsersInThisListLoad = (userIds: string[]): AppThunk<Promise<UserState[]>> => async (
-  dispatch: Dispatch<UsersActions | SectionsActions>,
-  getState: () => RootState
+export const sectionsUsersInThisListLoad = (
+  userIds: string[]
+): AppThunk<Promise<UserState[]>, UsersActions | SectionsActions> => async (
+  dispatch,
+  getState
 ): Promise<UserState[]> => {
   try {
-    dispatch(sectionsUsersInThisListRequest());
+    const { Sections: sectionsBeforeRequest } = getState();
+    dispatch(
+      sectionsUsersInThisListRequest({
+        ...sectionsBeforeRequest,
+        UsersInThisList: {
+          ...sectionsBeforeRequest.UsersInThisList,
+          loading: true,
+        },
+      })
+    );
 
     const { data } = await HttpClient.get<void, UsersLoadApiResponse>('/users/ids', {
       params: {
         userIds,
       },
     });
-
+    const { Users: usersAfterResponse, Sections: sectionsAfterResponse } = getState();
     const usersArray = data.map((item) => item.attributes);
 
-    const { Users } = getState();
     dispatch(
       usersReceive({
-        ...Users,
+        ...usersAfterResponse,
         byKey: {
-          ...Users.byKey,
-          ...serializerFromArrayToByKey<UserState, UserState>({
-            data: usersArray,
-          }),
+          ...usersAfterResponse.byKey,
+          ...serializerFromArrayToByKey<UserState, UserState>({ data: usersArray }),
         },
-        loading: false,
       })
     );
     dispatch(
       sectionsUsersInThisListReceive({
         UsersInThisList: {
+          ...sectionsAfterResponse.UsersInThisList,
           currentIds: data.map((item) => item.id),
+          loading: false,
         },
       })
     );

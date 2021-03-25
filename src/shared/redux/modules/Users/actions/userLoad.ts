@@ -1,15 +1,12 @@
-import { Dispatch } from 'redux';
-
-import { RootState } from 'Modules/rootType';
-import { UserLoadApiResponse, UserState } from 'Modules/Users/users.types';
+import { UserLoadApiResponse, UsersActions, UserState } from 'Modules/Users/users.types';
 import HttpClient from 'Services/HttpClient';
 import { AppThunk } from '../../..';
 import { usersReceive } from './usersReceive';
 import { usersRequest } from './usersRequest';
 
-export const userLoad = (userId: string): AppThunk<Promise<UserState>> => async (
-  dispatch: Dispatch,
-  getState: () => RootState
+export const userLoad = (userId: string): AppThunk<Promise<UserState>, UsersActions> => async (
+  dispatch,
+  getState
 ): Promise<UserState> => {
   const { Users } = getState();
 

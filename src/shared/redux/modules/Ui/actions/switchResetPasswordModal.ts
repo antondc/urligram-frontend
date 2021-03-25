@@ -1,12 +1,9 @@
-import { Dispatch } from 'redux';
-
-import { RootState } from 'Modules/rootType';
 import { AppThunk } from '../../../index';
 import { SWITCH_RESET_PASSWORD_MODAL, UiActionsTypes } from '../ui.types';
 
-export const switchResetPasswordModal = (mounted: boolean): AppThunk<void> => async (
-  dispatch: Dispatch<UiActionsTypes>,
-  getState: () => RootState
+export const switchResetPasswordModal = (mounted: boolean): AppThunk<void, UiActionsTypes> => async (
+  dispatch,
+  getState
 ): Promise<void> => {
   const { Ui } = getState();
 

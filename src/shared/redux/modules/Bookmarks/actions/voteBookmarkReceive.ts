@@ -1,6 +1,9 @@
-import { Dispatch } from 'redux';
-
-import { BOOKMARK_UPDATE_VOTE_SUCCESS, BookmarksState, LinkStatistics } from 'Modules/Bookmarks/bookmarks.types';
+import {
+  BOOKMARK_UPDATE_VOTE_SUCCESS,
+  BookmarksActions,
+  BookmarksState,
+  LinkStatistics,
+} from 'Modules/Bookmarks/bookmarks.types';
 import { AppThunk } from '../../..';
 
 interface Props {
@@ -8,10 +11,7 @@ interface Props {
   statistics: LinkStatistics;
 }
 
-export const voteBookmarkReceive = ({ linkId, statistics }: Props): AppThunk<void> => (
-  dispatch: Dispatch,
-  getState
-): void => {
+export const voteBookmarkReceive = ({ linkId, statistics }: Props): AppThunk<void> => (dispatch, getState): void => {
   const { Bookmarks }: { Bookmarks: BookmarksState } = getState();
 
   const payloadFormatted = Object.entries(Bookmarks.byKey).filter(([, value]) => value.linkId === linkId);

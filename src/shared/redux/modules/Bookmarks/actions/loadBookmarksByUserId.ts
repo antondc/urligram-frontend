@@ -1,7 +1,4 @@
-import { Dispatch } from 'redux';
-
-import { BookmarksGetResponse, BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
-import { RootState } from 'Modules/rootType';
+import { BookmarksActions, BookmarksGetResponse, BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
 import { QueryStringWrapper } from 'Root/src/shared/services/QueryStringWrapper';
 import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
@@ -9,10 +6,10 @@ import { AppThunk } from '../../..';
 import { receiveBookmarks } from './receiveBookmarks';
 import { requestBookmarks } from './requestBookmarks';
 
-export const loadBookmarksByUserId = (userId: string, size?: number): AppThunk<Promise<BookmarkState[]>> => async (
-  dispatch: Dispatch,
-  getState: () => RootState
-): Promise<BookmarkState[]> => {
+export const loadBookmarksByUserId = (
+  userId: string,
+  size?: number
+): AppThunk<Promise<BookmarkState[]>, BookmarksActions> => async (dispatch, getState): Promise<BookmarkState[]> => {
   try {
     const { Bookmarks: bookmarksState } = getState();
     const activeSort = bookmarksState?.meta?.sort;

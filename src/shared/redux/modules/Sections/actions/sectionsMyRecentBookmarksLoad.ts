@@ -1,42 +1,59 @@
-import { Action, Dispatch } from 'redux';
-import { ThunkAction } from 'redux-thunk';
-
 import { receiveBookmarks } from 'Modules/Bookmarks/actions/receiveBookmarks';
-import { BookmarkGetItemResponse, BookmarksGetResponse, BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
+import { BookmarksActions, BookmarksGetResponse, BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
 import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
-import { sectionsMyRecentBookmarksReceive } from './sectionsMyRecentBookmarksReceive';
+import { AppThunk } from '../../..';
+import { SectionsActions } from '../sections.types';
 import { sectionsMyRecentBookmarksRequest } from './sectionsMyRecentBookmarksRequest';
+import { sectionsMyRecentBookmarksSuccess } from './sectionsMyRecentBookmarksSuccess';
 
-export const sectionsMyRecentBookmarksLoad = (sessionId: string): ThunkAction<any, any, any, Action> => async (
-  dispatch?: Dispatch
-) => {
+export const sectionsMyRecentBookmarksLoad = (
+  sessionId: string
+): AppThunk<Promise<BookmarkState[]>, BookmarksActions | SectionsActions> => async (
+  dispatch,
+  getState
+): Promise<BookmarkState[]> => {
+  const { Sections: sectionsBeforeApi } = getState();
   try {
-    dispatch(sectionsMyRecentBookmarksRequest());
-
-    const { data }: BookmarksGetResponse = await HttpClient.get(
-      `/users/${sessionId}/bookmarks?page[size]=5&sort=-createdat`
-    );
-
-    const myBookmarksByKey = {
-      byKey: serializerFromArrayToByKey<BookmarkGetItemResponse, BookmarkState>({
-        data: data,
-        contentPath: 'attributes',
-      }),
-    };
-
-    dispatch(receiveBookmarks(myBookmarksByKey));
-
     dispatch(
-      sectionsMyRecentBookmarksReceive({
+      sectionsMyRecentBookmarksRequest({
+        ...sectionsBeforeApi,
         MyRecentBookmarks: {
-          currentIds: data.map((item) => item.id),
+          ...sectionsBeforeApi.MyRecentBookmarks,
+          loading: true,
         },
       })
     );
+
+    const { data } = await HttpClient.get<void, BookmarksGetResponse>(
+      `/users/${sessionId}/bookmarks?page[size]=5&sort=-createdat`
+    );
+    const { Sections: sectionsAfterApi, Bookmarks: bookmarksAfterApi } = getState();
+    const bookmarksArray = data.map((item) => item.attributes);
+
+    dispatch(
+      receiveBookmarks({
+        ...bookmarksAfterApi,
+        byKey: {
+          ...bookmarksAfterApi.byKey,
+          ...serializerFromArrayToByKey<BookmarkState, BookmarkState>({ data: bookmarksArray }),
+        },
+      })
+    );
+
+    dispatch(
+      sectionsMyRecentBookmarksSuccess({
+        ...sectionsAfterApi,
+        MyRecentBookmarks: {
+          ...sectionsAfterApi.MyRecentBookmarks,
+          currentIds: data.map((item) => item.id),
+          loading: false,
+        },
+      })
+    );
+
+    return bookmarksArray;
   } catch (err) {
     throw new Error(err);
   }
-
-  return;
 };

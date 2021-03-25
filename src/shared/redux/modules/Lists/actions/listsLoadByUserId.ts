@@ -1,16 +1,13 @@
-import { Dispatch } from 'redux';
-
 import { ListsActions, ListsLoadApiResponse, ListState } from 'Modules/Lists/lists.types';
-import { RootState } from 'Modules/rootType';
 import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
 import { AppThunk } from '../../..';
 import { listsLoadReceive } from './listsLoadReceive';
 import { listsLoadRequest } from './listsLoadRequest';
 
-export const listsLoadByUserId = (userId: string): AppThunk<Promise<ListState>> => async (
-  dispatch: Dispatch<ListsActions>,
-  getState: () => RootState
+export const listsLoadByUserId = (userId: string): AppThunk<Promise<ListState>, ListsActions> => async (
+  dispatch,
+  getState
 ): Promise<ListState> => {
   const { Lists } = getState();
 

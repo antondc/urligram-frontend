@@ -7,7 +7,12 @@ import { RootReducers } from './rootReducers';
 const middleware = [thunk];
 
 // Type for thunks
-export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, AnyAction>;
+export type AppThunk<ReturnType, Action extends AnyAction = AnyAction> = ThunkAction<
+  ReturnType,
+  RootState,
+  unknown,
+  Action
+>;
 
 // Declaring Dispatch type to enable return types, as redux Dispatch only consider void return types for actions
 declare module 'redux' {

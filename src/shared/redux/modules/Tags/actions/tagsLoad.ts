@@ -1,6 +1,3 @@
-import { Dispatch } from 'redux';
-
-import { RootState } from 'Modules/rootType';
 import { TagsActions, TagsLoadApiResponse, TagState } from 'Modules/Tags/tags.types';
 import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
@@ -8,9 +5,9 @@ import { AppThunk } from '../../..';
 import { tagsLoadRequest } from './tagsLoadRequest';
 import { tagsLoadSuccess } from './tagsLoadSuccess';
 
-export const tagsLoad = (): AppThunk<Promise<TagState[]>> => async (
-  dispatch: Dispatch<TagsActions>,
-  getState: () => RootState
+export const tagsLoad = (): AppThunk<Promise<TagState[]>, TagsActions> => async (
+  dispatch,
+  getState
 ): Promise<TagState[]> => {
   const { Tags: tagsBeforeApi } = getState();
   try {
@@ -33,6 +30,7 @@ export const tagsLoad = (): AppThunk<Promise<TagState[]>> => async (
           ...serializerFromArrayToByKey<TagState, TagState>({ data: tagsArray }),
         },
         currentIds: data.map((item) => item.id),
+        loading: false,
       })
     );
 

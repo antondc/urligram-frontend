@@ -1,6 +1,3 @@
-import { Dispatch } from 'redux';
-
-import { RootState } from 'Modules/rootType';
 import { TagsActions, TagsLoadApiResponse, TagState } from 'Modules/Tags/tags.types';
 import { tagsLoadSuccess } from 'Root/src/shared/redux/modules/Tags/actions/tagsLoadSuccess';
 import HttpClient from 'Services/HttpClient';
@@ -10,18 +7,25 @@ import { SectionsActions } from '../sections.types';
 import { sectionsTagsInThisListReceive } from './sectionsTagsInThisListReceive';
 import { sectionsTagsInThisListRequest } from './sectionsTagsInThisListRequest';
 
-export const sectionsTagsInThisListLoad = (listId: number): AppThunk<Promise<TagState[]>> => async (
-  dispatch: Dispatch<TagsActions | SectionsActions>,
-  getState: () => RootState
-): Promise<TagState[]> => {
+export const sectionsTagsInThisListLoad = (
+  listId: number
+): AppThunk<Promise<TagState[]>, TagsActions | SectionsActions> => async (dispatch, getState): Promise<TagState[]> => {
   try {
-    dispatch(sectionsTagsInThisListRequest());
+    const { Sections: sectionsBeforeRequest } = getState();
+    dispatch(
+      sectionsTagsInThisListRequest({
+        ...sectionsBeforeRequest,
+        TagsInThisList: {
+          ...sectionsBeforeRequest.TagsInThisList,
+          loading: true,
+        },
+      })
+    );
 
     const { data: myTagsData } = await HttpClient.get<void, TagsLoadApiResponse>(`/lists/${listId}`);
-
     const tagsArray = myTagsData.map((item) => item.attributes);
 
-    const { Tags: tagsAfterApi } = getState();
+    const { Tags: tagsAfterApi, Sections: sectionsAfterResponse } = getState();
     dispatch(
       tagsLoadSuccess({
         ...tagsAfterApi,
@@ -29,12 +33,16 @@ export const sectionsTagsInThisListLoad = (listId: number): AppThunk<Promise<Tag
           ...tagsAfterApi.byKey,
           ...serializerFromArrayToByKey<TagState, TagState>({ data: tagsArray }),
         },
+        loading: false,
       })
     );
     dispatch(
       sectionsTagsInThisListReceive({
+        ...sectionsAfterResponse,
         TagsInThisList: {
+          ...sectionsAfterResponse.TagsInThisList,
           currentIds: tagsArray?.map((item) => item.id) || [],
+          loading: false,
         },
       })
     );

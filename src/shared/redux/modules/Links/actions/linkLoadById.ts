@@ -1,16 +1,13 @@
-import { Dispatch } from 'redux';
-
 import { LinkApiResponse, LinksActionsTypes, LinkState } from 'Modules/Links/links.types';
-import { RootState } from 'Modules/rootType';
 import HttpClient from 'Services/HttpClient';
 import { AppThunk } from '../../..';
 import { linkLoadByIdFailure } from './linkLoadByIdFailure';
 import { linkLoadByIdRequest } from './linkLoadByIdRequest';
 import { linkLoadByIdSuccess } from './linkLoadByIdSuccess';
 
-export const linkLoadById = (linkId: number): AppThunk<Promise<LinkState>> => async (
-  dispatch: Dispatch<LinksActionsTypes>,
-  getState: () => RootState
+export const linkLoadById = (linkId: number): AppThunk<Promise<LinkState>, LinksActionsTypes> => async (
+  dispatch,
+  getState
 ): Promise<LinkState> => {
   const { Links } = getState();
   try {

@@ -8,7 +8,7 @@ import { selectBookmarksMetaSort } from 'Modules/Bookmarks/selectors/selectBookm
 import { selectBookmarksTotalItems } from 'Modules/Bookmarks/selectors/selectBookmarkTotalItems';
 import { selectCurrentFullUrl } from 'Modules/Routes/selectors/selectCurrentFullUrl';
 import { selectCurrentRouteQueryParamPage } from 'Modules/Routes/selectors/selectCurrentRouteQueryParamPage';
-import { loadPopularLists } from 'Modules/Sections/actions/loadPopularLists';
+import { sectionsPopularListsLoad } from 'Modules/Sections/actions/sectionsPopularListsLoad';
 import { selectPopularLists } from 'Modules/Sections/selectors/selectPopularLists';
 import { Bookmarks as BookmarksUi } from './Bookmarks';
 
@@ -24,7 +24,7 @@ const Home: React.FC = () => {
   const sort = useSelector(selectBookmarksMetaSort);
 
   useEffect(() => {
-    dispatch(loadPopularLists());
+    dispatch(sectionsPopularListsLoad());
   }, []);
 
   useEffect(() => {

@@ -1,10 +1,8 @@
-import { Dispatch } from 'redux';
-
 import { BOOKMARK_UPDATE_VOTE_START, BookmarksState } from 'Modules/Bookmarks/bookmarks.types';
 import { AppThunk } from '../../..';
 
 export const voteBookmarkRequest = ({ linkId }: { linkId: string | number }): AppThunk<void> => (
-  dispatch: Dispatch,
+  dispatch,
   getState
 ): void => {
   const { Bookmarks }: { Bookmarks: BookmarksState } = getState();

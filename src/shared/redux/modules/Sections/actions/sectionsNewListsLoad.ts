@@ -1,32 +1,49 @@
-import { Action, Dispatch } from 'redux';
-import { ThunkAction } from 'redux-thunk';
-
 import { listsLoadReceive } from 'Modules/Lists/actions/listsLoadReceive';
-import { ListApiResponseItem, ListsLoadApiResponse, ListState } from 'Modules/Lists/lists.types';
+import { ListsActions, ListsLoadApiResponse, ListState } from 'Modules/Lists/lists.types';
 import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
-import { sectionsNewListsReceive } from './sectionsNewListsReceive';
+import { AppThunk } from '../../..';
+import { SectionsActions } from '../sections.types';
 import { sectionsNewListsRequest } from './sectionsNewListsRequest';
+import { sectionsNewListsSuccess } from './sectionsNewListsSuccess';
 
-export const sectionsNewListsLoad = (): ThunkAction<any, any, any, Action> => async (dispatch?: Dispatch) => {
+export const sectionsNewListsLoad = (): AppThunk<Promise<ListState[]>, ListsActions | SectionsActions> => async (
+  dispatch,
+  getState
+): Promise<ListState[]> => {
   try {
-    dispatch(sectionsNewListsRequest());
+    const { Sections: sectionsBeforeApi } = getState();
+    dispatch(
+      sectionsNewListsRequest({
+        ...sectionsBeforeApi,
+        NewLists: {
+          ...sectionsBeforeApi.NewLists,
+          loading: true,
+        },
+      })
+    );
 
     const { data }: ListsLoadApiResponse = await HttpClient.get('/lists?sort=-createdat&page[size]=5');
-
-    const popularListsByKey = {
-      byKey: serializerFromArrayToByKey<ListApiResponseItem, ListState>({
-        data: data,
-        contentPath: 'attributes',
-      }),
-    };
-
-    dispatch(listsLoadReceive(popularListsByKey));
+    const listsArray = data.map((item) => item.attributes);
+    const { Sections: sectionsAfterApi, Lists: listsAfterApi } = getState();
 
     dispatch(
-      sectionsNewListsReceive({
+      listsLoadReceive({
+        ...listsAfterApi,
+        byKey: {
+          ...listsAfterApi.byKey,
+          ...serializerFromArrayToByKey<ListState, ListState>({ data: listsArray }),
+        },
+      })
+    );
+
+    dispatch(
+      sectionsNewListsSuccess({
+        ...sectionsAfterApi,
         NewLists: {
+          ...sectionsAfterApi.NewLists,
           currentIds: data.map((item) => item.id),
+          loading: false,
         },
       })
     );

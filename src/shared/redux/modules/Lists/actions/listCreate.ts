@@ -1,7 +1,4 @@
-import { Dispatch } from 'redux';
-
 import { ListCreateApiRequest, ListCreateApiResponse, ListsActions, ListState } from 'Modules/Lists/lists.types';
-import { RootState } from 'Modules/rootType';
 import HttpClient from 'Services/HttpClient';
 import { AppThunk } from '../../..';
 import { listCreateFailure } from './listCreateFailure';
@@ -12,9 +9,9 @@ export const listCreate = ({
   listName,
   listDescription,
   listIsPrivate,
-}: ListCreateApiRequest): AppThunk<Promise<ListState>> => async (
-  dispatch: Dispatch<ListsActions>,
-  getState: () => RootState
+}: ListCreateApiRequest): AppThunk<Promise<ListState>, ListsActions> => async (
+  dispatch,
+  getState
 ): Promise<ListState> => {
   const { Lists } = getState();
   try {

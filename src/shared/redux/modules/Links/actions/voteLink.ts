@@ -1,9 +1,6 @@
-import { Dispatch } from 'redux';
-
 import { voteBookmarkReceive } from 'Modules/Bookmarks/actions/voteBookmarkReceive';
 import { voteBookmarkRequest } from 'Modules/Bookmarks/actions/voteBookmarkRequest';
 import { LinkApiResponse, LinksActionsTypes, LinksState, LinkState } from 'Modules/Links/links.types';
-import { RootState } from 'Modules/rootType';
 import HttpClient from 'Services/HttpClient';
 import { AppThunk } from '../../..';
 import { BookmarksActions } from '../../Bookmarks/bookmarks.types';
@@ -16,9 +13,13 @@ interface Props {
   userId: string;
 }
 
-export const voteLink = ({ vote, linkId, userId }: Props): AppThunk<Promise<LinkState>> => async (
-  dispatch: Dispatch<LinksActionsTypes | BookmarksActions>,
-  getState: () => RootState
+export const voteLink = ({
+  vote,
+  linkId,
+  userId,
+}: Props): AppThunk<Promise<LinkState>, LinksActionsTypes | BookmarksActions> => async (
+  dispatch,
+  getState
 ): Promise<LinkState> => {
   const {
     Links: { byKey },

@@ -1,8 +1,6 @@
-import { SECTIONS_NEW_LISTS_REQUEST, SectionsActions } from 'Modules/Sections/sections.types';
+import { SECTIONS_NEW_LISTS_REQUEST, SectionsActions, SectionsState } from 'Modules/Sections/sections.types';
 
-export const sectionsNewListsRequest = (): SectionsActions => ({
+export const sectionsNewListsRequest = (payload: SectionsState): SectionsActions => ({
   type: SECTIONS_NEW_LISTS_REQUEST,
-  data: {
-    loading: true,
-  },
+  payload,
 });

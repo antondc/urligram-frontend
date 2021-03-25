@@ -1,6 +1,3 @@
-import { Dispatch } from 'redux';
-
-import { RootState } from 'Modules/rootType';
 import { UsersActions, UsersLoadApiResponse, UserState } from 'Modules/Users/users.types';
 import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
@@ -8,9 +5,9 @@ import { AppThunk } from '../../..';
 import { usersReceive } from './usersReceive';
 import { usersRequest } from './usersRequest';
 
-export const userFollowingLoad = (userId: string): AppThunk<Promise<UserState[]>> => async (
-  dispatch: Dispatch<UsersActions>,
-  getState: () => RootState
+export const userFollowingLoad = (userId: string): AppThunk<Promise<UserState[]>, UsersActions> => async (
+  dispatch,
+  getState
 ): Promise<UserState[]> => {
   const { Users } = getState();
   try {

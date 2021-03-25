@@ -1,8 +1,6 @@
-import { SECTIONS_NEW_USERS_REQUEST, SectionsActions } from 'Modules/Sections/sections.types';
+import { SECTIONS_NEW_USERS_REQUEST, SectionsActions, SectionsState } from 'Modules/Sections/sections.types';
 
-export const sectionsNewUsersRequest = (): SectionsActions => ({
+export const sectionsNewUsersRequest = (payload: SectionsState): SectionsActions => ({
   type: SECTIONS_NEW_USERS_REQUEST,
-  data: {
-    loading: true,
-  },
+  payload,
 });

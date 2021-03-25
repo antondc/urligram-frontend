@@ -1,7 +1,4 @@
-import { Dispatch } from 'redux';
-
-import { LinksApiResponse, LinkState } from 'Modules/Links/links.types';
-import { RootState } from 'Modules/rootType';
+import { LinksActionsTypes, LinksApiResponse, LinkState } from 'Modules/Links/links.types';
 import HttpClient from 'Services/HttpClient';
 import { QueryStringWrapper } from 'Services/QueryStringWrapper';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
@@ -9,9 +6,9 @@ import { AppThunk } from '../../..';
 import { linksLoadRequest } from './linksLoadRequest';
 import { linksLoadSuccess } from './linksLoadSuccess';
 
-export const linksLoad = (size?: number): AppThunk<Promise<LinkState[]>> => async (
-  dispatch: Dispatch,
-  getState: () => RootState
+export const linksLoad = (size?: number): AppThunk<Promise<LinkState[]>, LinksActionsTypes> => async (
+  dispatch,
+  getState
 ): Promise<LinkState[]> => {
   try {
     const { Links: linksState } = getState();

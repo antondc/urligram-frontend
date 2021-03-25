@@ -1,13 +1,16 @@
-import { Dispatch } from 'redux';
-
 import { bookmarkCreateFailure } from 'Modules/Bookmarks/actions/bookmarkCreateFailure';
 import { bookmarkCreateSuccess } from 'Modules/Bookmarks/actions/bookmarkCreateSuccess';
-import { BookmarkCreateRequest, BookmarkCreateResponse, BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
+import {
+  BookmarkCreateRequest,
+  BookmarkCreateResponse,
+  BookmarksActions,
+  BookmarkState,
+} from 'Modules/Bookmarks/bookmarks.types';
 import { linkLoadById } from 'Modules/Links/actions/linkLoadById';
 import { linkLoadByIdRequest } from 'Modules/Links/actions/linkLoadByIdRequest';
-import { RootState } from 'Modules/rootType';
 import HttpClient from 'Services/HttpClient';
 import { AppThunk } from '../../../index';
+import { LinksActionsTypes } from '../../Links/links.types';
 import { bookmarkCreateRequest } from './bookmarkCreateRequest';
 
 export const bookmarkCreate = ({
@@ -16,9 +19,9 @@ export const bookmarkCreate = ({
   url,
   isPrivate,
   tags,
-}: BookmarkCreateRequest): AppThunk<Promise<BookmarkState>> => async (
-  dispatch: Dispatch<any>,
-  getState: () => RootState
+}: BookmarkCreateRequest): AppThunk<Promise<BookmarkState>, BookmarksActions | LinksActionsTypes> => async (
+  dispatch,
+  getState
 ) => {
   const { Bookmarks, Links } = getState();
   try {
