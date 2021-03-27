@@ -9,10 +9,26 @@ export const SWITCH_RESET_PASSWORD_MODAL = 'SWITCH_RESET_PASSWORD_MODAL';
 export const SWITCH_BOOKMARK_CREATE_MODAL = 'SWITCH_BOOKMARK_CREATE_MODAL';
 export const SWITCH_BOOKMARK_UPDATE_MODAL = 'SWITCH_BOOKMARK_UPDATE_MODAL';
 export const SWITCH_LIST_MODAL = 'SWITCH_LIST_MODAL';
+export const UI_NOTIFICATION_VIEWED = 'UI_NOTIFICATION_VIEWED';
+export const UI_NOTIFICATION_PUSH = 'UI_NOTIFICATION_PUSH';
 
 export type UiBaseModal = {
   type?: 'modal' | 'popup';
   mounted: boolean;
+};
+
+export type NotificationTypeState = 'bookmark-creation' | 'bookmark-grabbed' | 'general-error';
+
+export type NotificationState = {
+  number?: number;
+  id?: string;
+  userId?: string;
+  listId?: number;
+  bookmarkId?: number;
+  linkId?: number;
+  type: NotificationTypeState;
+  style: 'alert' | 'error' | 'success';
+  status: 'viewed' | 'pending';
 };
 
 export type UiState = {
@@ -28,6 +44,7 @@ export type UiState = {
   bookmarkCreateModal: UiBaseModal;
   bookmarkUpdateModal: UiBaseModal & { bookmarkId: number };
   listModal: UiBaseModal;
+  notifications?: NotificationState[];
 };
 
 interface SwitchUserModal {
@@ -85,6 +102,16 @@ interface SwitchListModal {
   payload: Partial<UiState>;
 }
 
+interface UiNotificationViewedAction {
+  type: typeof UI_NOTIFICATION_VIEWED;
+  payload: UiState;
+}
+
+interface UiNotificationPushAction {
+  type: typeof UI_NOTIFICATION_PUSH;
+  payload: UiState;
+}
+
 export type UiActions =
   | SwitchUserModal
   | SwitchLanguagesModal
@@ -96,4 +123,6 @@ export type UiActions =
   | SwitchResetPasswordModal
   | SwitchBookmarkCreateModal
   | SwitchBookmarkUpdateModal
-  | SwitchListModal;
+  | SwitchListModal
+  | UiNotificationViewedAction
+  | UiNotificationPushAction;

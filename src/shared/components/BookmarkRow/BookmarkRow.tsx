@@ -21,9 +21,11 @@ interface BookmarkRow extends BookmarkState {
   userId: string;
   userBookmarked: boolean;
   bookmarkingLoading: boolean;
+  recentlyCreated: boolean;
   onVote: (vote: boolean | null) => void;
   onEdit: () => void;
   onBookmark: () => void;
+  onMouseLeave: () => void;
 }
 
 export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
@@ -40,8 +42,16 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
   onBookmark,
   favicon,
   createdAt,
+  recentlyCreated,
+  onMouseLeave
 }) => (
-  <Border grow className="BookmarkRow" data-test-id="BookmarkRow" key={id}>
+  <Border
+    grow
+    className={'BookmarkRow' + (recentlyCreated ? ' BookmarkRow-recentlyCreated' : '')}
+    data-test-id="BookmarkRow"
+    key={id}
+onMouseLeave={onMouseLeave}
+  >
     <div className="BookmarkRow-left">
       <div className="BookmarkRow-icons">
         <img className="BookmarkRow-favicon" src={favicon} />

@@ -7,10 +7,11 @@ import {
   BookmarkState,
 } from 'Modules/Bookmarks/bookmarks.types';
 import { linkLoadById } from 'Modules/Links/actions/linkLoadById';
+import { LinksActions } from 'Modules/Links/links.types';
+import { uiNotificationPush } from 'Modules/Ui/actions/uiNotificationPush';
 import { serializerFromArrayToByKey } from 'Root/src/shared/tools/utils/serializers/serializerFromArrayToByKey';
 import HttpClient from 'Services/HttpClient';
 import { AppThunk } from '../../../index';
-import { LinksActions } from '../../Links/links.types';
 
 export const bookmarkCreate = ({
   title,
@@ -50,6 +51,14 @@ export const bookmarkCreate = ({
       })
     );
     await dispatch(linkLoadById(bookmarkData?.attributes?.linkId));
+    await dispatch(
+      uiNotificationPush({
+        bookmarkId: bookmarkData.attributes.id,
+        type: 'bookmark-grabbed',
+        style: 'success',
+        status: 'pending',
+      })
+    );
 
     return bookmarkData?.attributes;
   } catch (error) {

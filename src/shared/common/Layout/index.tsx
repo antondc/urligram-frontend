@@ -39,6 +39,7 @@ import { routesList, routesWithoutOmmitedValues } from 'Router/routes';
 import enhanceRouteWithParams from 'Tools/utils/url/enhanceRouteWithParams';
 import findActiveRouteKey from 'Tools/utils/url/findActiveRouteKey';
 import { Fade, SpinnerCircle } from '@antoniodcorrea/components';
+import Notifications from '../../components/Notifications';
 
 import './Layout.less';
 
@@ -167,6 +168,7 @@ class Layout extends React.Component<Props> {
           <Fade mounted={listModalMounted} speed="fastest" position="fixed" appear>
             <ListModal />
           </Fade>
+          <Notifications />
           <div id="Tooltips" />
         </div>
       )

@@ -10,6 +10,8 @@ import {
   SWITCH_SIGN_UP_MODAL,
   SWITCH_USER_MODAL,
   SWITCH_WELCOME_MODAL,
+  UI_NOTIFICATION_PUSH,
+  UI_NOTIFICATION_VIEWED,
   UiActions,
   UiState,
 } from './ui.types';
@@ -61,6 +63,7 @@ export const initialState: UiState = {
     type: 'popup',
     mounted: false,
   },
+  notifications: [],
 };
 
 export const Ui = (state = initialState, action: UiActions): UiState => {
@@ -76,6 +79,8 @@ export const Ui = (state = initialState, action: UiActions): UiState => {
     case SWITCH_BOOKMARK_CREATE_MODAL:
     case SWITCH_BOOKMARK_UPDATE_MODAL:
     case SWITCH_LIST_MODAL:
+    case UI_NOTIFICATION_VIEWED:
+    case UI_NOTIFICATION_PUSH:
       return Object.assign({}, state, action.payload);
 
     default:

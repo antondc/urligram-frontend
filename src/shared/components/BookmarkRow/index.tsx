@@ -10,7 +10,9 @@ import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLo
 import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUserId';
 import { switchBookmarkUpdateModal } from 'Modules/Ui/actions/switchBookmarkUpdateModal';
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
+import { getDiffLocalTimeUTCSeconds } from 'Tools/utils/Date/getDiffLocalTimeUTCSeconds';
 import { LocaleFormattedDate } from 'Tools/utils/Date/localeFormattedDate';
+import { TIME_RECENTLY_CREATED_BOOKMARK } from '../../constants';
 import { BookmarkRow as BookmarkRowUi } from './BookmarkRow';
 
 import './BookmarkRow.less';
@@ -21,12 +23,15 @@ interface Props {
 
 const BookmarkRow: React.FC<Props> = ({ id }) => {
   const dispatch = useDispatch();
+  const bookmark = useSelector((state: RootState) => selectBookmarksById(state, { id }));
+  const { linkId, title, url, tags = [], img, statistics, favicon, createdAt, users } = bookmark;
   const [bookmarkingLoading, setBookmarkingLoading] = useState<boolean>(false);
+  const timePassed = getDiffLocalTimeUTCSeconds(createdAt);
+  const recentlyCreatedA = timePassed < TIME_RECENTLY_CREATED_BOOKMARK;
+  const [recentlyCreated, setRecentlyCreated] = useState(recentlyCreatedA);
   const currentLanguageSlug = useSelector(selectCurrentLanguageSlug);
   const isLogged = useSelector(selectSessionLoggedIn);
   const sessionId = useSelector(selectSessionUserId);
-  const bookmark = useSelector((state: RootState) => selectBookmarksById(state, { id }));
-  const { linkId, title, url, tags = [], img, statistics, favicon, createdAt, users } = bookmark;
   const date = new LocaleFormattedDate(createdAt, currentLanguageSlug);
   const formattedDate = date.getLocaleFormattedDate();
   const userBookmarked = users.includes(sessionId);
@@ -42,7 +47,10 @@ const BookmarkRow: React.FC<Props> = ({ id }) => {
     if (!userBookmarked) {
       setBookmarkingLoading(true);
       const result = await dispatch(bookmarkCreate({ title, url, isPrivate: false, tags: tagsByName }));
-      if (result.id) setBookmarkingLoading(false);
+      if (result.id) {
+        setBookmarkingLoading(false);
+        setRecentlyCreated(true);
+      }
     } else {
       //
     }
@@ -54,6 +62,10 @@ const BookmarkRow: React.FC<Props> = ({ id }) => {
     } else {
       //
     }
+  };
+
+  const onMouseLeave = () => {
+    setRecentlyCreated(false);
   };
 
   return (
@@ -73,6 +85,8 @@ const BookmarkRow: React.FC<Props> = ({ id }) => {
       onEdit={onEdit}
       onVote={onVote}
       onBookmark={onBookmark}
+      onMouseLeave={onMouseLeave}
+      recentlyCreated={recentlyCreated}
     />
   );
 };
