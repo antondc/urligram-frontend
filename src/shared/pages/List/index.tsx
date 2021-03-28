@@ -37,13 +37,17 @@ const List: React.FC = () => {
   const url = useSelector(selectCurrentFullUrl);
   const sort = useSelector(selectBookmarksMetaSort);
 
+  const loadMainContent = () => {
+    dispatch(bookmarksLoadByListId(listId));
+  };
+
   useEffect(() => {
     dispatch(listsLoadByUserId(listId));
     dispatch(sectionsTagsInThisListLoad(listId));
   }, []);
 
   useEffect(() => {
-    dispatch(bookmarksLoadByListId(listId));
+    loadMainContent();
   }, [url]);
 
   useEffect(() => {
@@ -66,6 +70,7 @@ const List: React.FC = () => {
       totalItems={totalItems}
       url={url}
       sort={sort}
+      loadMainContent={loadMainContent}
     />
   );
 };

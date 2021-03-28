@@ -111,6 +111,26 @@
     //
   }
 
+  &-action {
+    margin-left: 5px;
+    fill: @c-traslucid--hardest;
+    transition: fill @td-fast @ease, transform @td-fast @ease;
+
+    .hoverTransition(0.5);
+
+    &--accent {
+      fill: @c-success;
+    }
+
+    &--failure {
+      fill: @c-error;
+    }
+
+    &--pending {
+      animation: hearthBeat 1.5s ease infinite;
+    }
+  }
+
   &-stats {
     display: flex;
     align-items: center;
@@ -133,27 +153,5 @@
     margin-right: 1px;
     line-height: 0;
     color: @c-traslucid--hardest;
-  }
-
-  &-ellipsis {
-    width: 12px;
-  }
-
-  &-bookmarkSign {
-    fill: @c-success;
-    transition: fill @td-fast @ease;
-
-    &:hover {
-      cursor: default;
-    }
-
-    &--disabled {
-      fill: @c-disabled;
-
-      &:hover {
-        fill: @c-success;
-        cursor: pointer;
-      }
-    }
   }
 }

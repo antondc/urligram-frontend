@@ -32,7 +32,6 @@ const BookmarkUpdateForm: React.FC<Props> = ({ closeModal }) => {
   const allTags = useSelector(selectTagsAll);
   const tagsSearch = useSelector(selectTagsSearch);
   const tagsSearchFormatted = tagsSearch?.map((item) => ({ label: item.name, value: item.name })) || [];
-  const sessionId = useSelector(selectSessionUserId);
   const { bookmarkId } = useSelector(selectUiBookmarkUpdateModal);
   const bookmark = useSelector((state: RootState) => selectBookmarksById(state, { id: bookmarkId }));
   const [titleValue, setTitleValue] = useState<string>(undefined);
@@ -55,7 +54,7 @@ const BookmarkUpdateForm: React.FC<Props> = ({ closeModal }) => {
 
   const onChangeIsPrivate = (e: React.FormEvent<HTMLInputElement>) => {
     const { checked } = e.currentTarget;
-
+    console.log('onChangeIsPrivate: ', checked);
     setIsPrivateValue(checked);
     setSubmitSuccess(undefined);
     setSubmitError(undefined);
@@ -92,8 +91,6 @@ const BookmarkUpdateForm: React.FC<Props> = ({ closeModal }) => {
     if (!!bookmark?.id) {
       setSubmitInProcess(false);
       setSubmitSuccess(true);
-      dispatch(bookmarksLoad());
-      dispatch(bookmarksLoadByUserId(sessionId));
 
       setTimeout(() => {
         closeModal();

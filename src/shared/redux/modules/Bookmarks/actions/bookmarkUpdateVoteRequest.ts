@@ -1,10 +1,11 @@
-import { BOOKMARK_UPDATE_VOTE_START, BookmarksActions, BookmarksState } from 'Modules/Bookmarks/bookmarks.types';
+import { BOOKMARK_UPDATE_VOTE_REQUEST, BookmarksActions, BookmarksState } from 'Modules/Bookmarks/bookmarks.types';
 import { AppThunk } from '../../..';
 
-export const bookmarkVoteRequest = ({ linkId }: { linkId: string | number }): AppThunk<void, BookmarksActions> => (
-  dispatch,
-  getState
-): void => {
+export const bookmarkUpdateVoteRequest = ({
+  linkId,
+}: {
+  linkId: string | number;
+}): AppThunk<void, BookmarksActions> => (dispatch, getState): void => {
   const { Bookmarks }: { Bookmarks: BookmarksState } = getState();
 
   const payloadFormatted = Object.entries(Bookmarks.byKey).filter(([, value]) => value.linkId === linkId);
@@ -27,7 +28,7 @@ export const bookmarkVoteRequest = ({ linkId }: { linkId: string | number }): Ap
   };
 
   dispatch({
-    type: BOOKMARK_UPDATE_VOTE_START,
+    type: BOOKMARK_UPDATE_VOTE_REQUEST,
     payload: bookmarksStateFormatted,
   });
 };

@@ -108,35 +108,94 @@
     border: 2px solid @c-base;
   }
 
-  &-vote {
-    //
-  }
-
-  &-action {
-    margin-left: 5px;
+  &-private {
     .hoverTransition(0.5);
-  }
 
-  &-ellipsis {
     margin-left: 5px;
+    fill: @c-traslucid--hardest;
+    transition: fill @td-fast @ease, transform @td-fast @ease;
+
+    &--isPrivate {
+      fill: @c-success;
+    }
   }
 
-  &-bookmarkSign {
-    fill: @c-success;
-    transition: fill @td-fast @ease;
+  &-edit {
+    .hoverTransition(0.5);
+
+    margin-left: 5px;
+    fill: @c-traslucid--hardest;
+    transition: fill @td-fast @ease, transform @td-fast @ease;
+  }
+
+  &-bookmark {
+    margin-left: 5px;
+    fill: @c-traslucid--hardest;
+    transition: fill @td-fast @ease, transform @td-fast @ease;
+    .hoverTransition(0.5);
+
+    &--bookmarked {
+      &:hover {
+        opacity: 1;
+        cursor: default;
+      }
+
+      fill: @c-success;
+    }
+  }
+
+  &-myBookmark {
+    position: relative;
+    height: 12px;
+    width: 12px;
+    margin-left: 5px;
+    line-height: 0;
 
     &:hover {
-      cursor: default;
-    }
-
-    &--disabled {
-      fill: @c-disabled;
-
-      &:hover {
-        fill: @c-success;
-        cursor: pointer;
+      @{c}-myBookmarkBookmark {
+        opacity: 0;
+      }
+      @{c}-myBookmarkCross {
+        opacity: 1;
       }
     }
+  }
+
+  &-myBookmarkCross,
+  &-myBookmarkBookmark {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  &-myBookmarkCross {
+    height: 10px;
+    width: 12px;
+    margin-top: 1px;
+    opacity: 0;
+    fill: @c-error;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &-myBookmarkBookmark {
+    height: 12px;
+    width: 12px;
+    opacity: 1;
+    fill: @c-success;
+  }
+
+  &--pending {
+    fill: @c-accent;
+    animation: hearthBeat 1.5s ease infinite;
+  }
+
+  &--failed {
+    fill: @c-error;
   }
 
   &-stats {

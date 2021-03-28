@@ -23,6 +23,7 @@ interface Props {
   followingUsersLoading: boolean;
   followersUsers: UserState[];
   followersUsersLoading: boolean;
+  loadMainContent: () => void;
 }
 
 export const User: React.FC<Props> = ({
@@ -35,6 +36,7 @@ export const User: React.FC<Props> = ({
   followingUsersLoading,
   followersUsers,
   followersUsersLoading,
+  loadMainContent,
 }) => (
   <div className="User">
     <Flex horizontal="between" vertical="top">
@@ -122,7 +124,7 @@ export const User: React.FC<Props> = ({
               bookmarksIds?.map((id, index) => (
                 <React.Fragment key={id}>
                   {!!index && <Hr spacer size="small" />}
-                  <BookmarkRow id={id} />
+                  <BookmarkRow id={id} loadMainContent={loadMainContent} />
                 </React.Fragment>
               ))
             )}

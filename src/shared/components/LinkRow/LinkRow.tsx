@@ -54,19 +54,15 @@ export const LinkRow: React.FC<Partial<LinkRow>> = ({
     </div>
     <div className="LinkRow-right">
       <Flex horizontal="right" growVertical={false} vertical="center">
-        <FadeInOut valueToUpdate={bookmarkingLoading} speed="fastest" appear>
-          <Flex horizontal="right" growVertical={false} vertical="center">
-            {bookmarkingLoading ? (
-              <Ellipsis className="LinkRow-ellipsis" size="nano" />
-            ) : (
-              <Bookmark
-                className={'LinkRow-bookmarkSign ' + (!userBookmarked ? 'LinkRow-bookmarkSign--disabled' : '')}
-                size="small"
-                onClick={onBookmark}
-              />
-            )}
-          </Flex>
-        </FadeInOut>
+        <Bookmark
+          className={
+            'LinkRow-action' +
+            (userBookmarked ? ' LinkRow-action--accent' : '') +
+            (bookmarkingLoading ? ' LinkRow-action--pending' : '')
+          }
+          size="small"
+          onClick={onBookmark}
+        />
         <Vote className="LinkRow-vote" vote={statistics?.vote} changeVote={onVote} loading={statistics?.loading} />
       </Flex>
       <div className="LinkRow-stats">

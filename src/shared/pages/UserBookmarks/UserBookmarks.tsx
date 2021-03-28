@@ -38,6 +38,7 @@ interface Props {
   }[];
   onInputChange: (string: string) => void;
   onChange: (string: SelectValue[]) => void;
+  loadMainContent: () => void;
   allTags: TagState[];
   currentQueryParamFilterTags: SelectValue[];
 }
@@ -58,6 +59,7 @@ export const UserBookmarks: React.FC<Props> = ({
   tagsSearchFormatted,
   onInputChange,
   onChange,
+  loadMainContent,
   allTags,
   currentQueryParamFilterTags,
 }) => (
@@ -104,7 +106,7 @@ export const UserBookmarks: React.FC<Props> = ({
               bookmarksIds?.map((id, index) => (
                 <React.Fragment key={id}>
                   {!!index && <Hr spacer size="small" />}
-                  <BookmarkRow id={id} />
+                  <BookmarkRow id={id} loadMainContent={loadMainContent} />
                 </React.Fragment>
               ))
             )}

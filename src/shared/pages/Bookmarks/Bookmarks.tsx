@@ -22,9 +22,10 @@ interface Props {
   };
   totalItems: number;
   sort: string;
+  loadMainContent: () => void;
 }
 
-export const Bookmarks: React.FC<Props> = ({ url, bookmarksIds, loading, page, totalItems, sort }) => (
+export const Bookmarks: React.FC<Props> = ({ url, bookmarksIds, loading, page, totalItems, sort, loadMainContent }) => (
   <div className="Bookmarks">
     <Flex horizontal="between" vertical="top">
       <Main>
@@ -47,7 +48,7 @@ export const Bookmarks: React.FC<Props> = ({ url, bookmarksIds, loading, page, t
               bookmarksIds?.map((id, index) => (
                 <React.Fragment key={id}>
                   {!!index && <Hr spacer size="small" />}
-                  <BookmarkRow id={id} />
+                  <BookmarkRow id={id} loadMainContent={loadMainContent} />
                 </React.Fragment>
               ))
             )}

@@ -51,14 +51,9 @@ const UserBookmarks: React.FC = () => {
 
   useEffect(() => {
     dispatch(userLoad(userId));
-    dispatch(bookmarksLoadByUserId(userId));
-    dispatch(sectionsFollowingUsersLoad(userId));
     dispatch(sectionsFollowersUsersLoad(userId));
+    dispatch(sectionsFollowingUsersLoad(userId));
   }, []);
-
-  useEffect(() => {
-    dispatch(bookmarksLoadByUserId(userId));
-  }, [page]);
 
   useEffect(() => {
     dispatch(bookmarksLoadByUserId(userId));
@@ -80,6 +75,10 @@ const UserBookmarks: React.FC = () => {
     history.push(redirectPath);
   };
 
+  const loadMainContent = () => {
+    dispatch(bookmarksLoadByUserId(userId));
+  };
+
   return (
     <UserBookmarksUi
       userId={userId}
@@ -99,6 +98,7 @@ const UserBookmarks: React.FC = () => {
       onInputChange={onInputChange}
       currentQueryParamFilterTags={currentQueryParamFilterTags}
       onChange={onChange}
+      loadMainContent={loadMainContent}
     />
   );
 };

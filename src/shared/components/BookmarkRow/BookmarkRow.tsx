@@ -2,29 +2,24 @@ import React from 'react';
 
 import A from 'Components/A';
 import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
-import {
-  Bookmark,
-  Border,
-  Edit,
-  Ellipsis,
-  FadeInOut,
-  Flex,
-  Private,
-  Span,
-  Tag,
-  Vote,
-} from '@antoniodcorrea/components';
+import { Bookmark, Border, Cross, Edit, FadeInOut, Flex, Private, Span, Tag, Vote } from '@antoniodcorrea/components';
 
 import './BookmarkRow.less';
 
 interface BookmarkRow extends BookmarkState {
   userId: string;
-  userBookmarked: boolean;
+  isOwnBookmark: boolean;
+  userBookmarkedLink: boolean;
   bookmarkingLoading: boolean;
   recentlyCreated: boolean;
+  isPrivateRequestFailed: boolean;
+  isPrivateRequestPending: boolean;
+  isBookmarkDeletePending: boolean;
   onVote: (vote: boolean | null) => void;
   onEdit: () => void;
-  onBookmark: () => void;
+  onPrivateSwitch: () => void;
+  onBookmarkGrab: () => void;
+  onBookmarkDelete: () => void;
   onMouseLeave: () => void;
 }
 
@@ -36,21 +31,28 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
   tags = [],
   statistics,
   bookmarkingLoading,
-  userBookmarked,
+  isOwnBookmark,
+  userBookmarkedLink,
+  isPrivate,
+  isPrivateRequestFailed,
+  isPrivateRequestPending,
   onVote,
   onEdit,
-  onBookmark,
+  onPrivateSwitch,
+  isBookmarkDeletePending,
+  onBookmarkGrab,
+  onBookmarkDelete,
   favicon,
   createdAt,
   recentlyCreated,
-  onMouseLeave
+  onMouseLeave,
 }) => (
   <Border
     grow
     className={'BookmarkRow' + (recentlyCreated ? ' BookmarkRow-recentlyCreated' : '')}
     data-test-id="BookmarkRow"
     key={id}
-onMouseLeave={onMouseLeave}
+    onMouseLeave={onMouseLeave}
   >
     <div className="BookmarkRow-left">
       <div className="BookmarkRow-icons">
@@ -84,31 +86,37 @@ onMouseLeave={onMouseLeave}
     </div>
     <div className="BookmarkRow-right">
       <Flex horizontal="right" growVertical={false} vertical="center">
-        <Private
-          size="micro"
-          className="BookmarkRow-action"
-          onClick={() => {
-            alert('Private');
-          }}
-        />
-        {userBookmarked && <Edit size="micro" className="BookmarkRow-action" onClick={onEdit} />}
-        <FadeInOut valueToUpdate={bookmarkingLoading} speed="fastest" appear>
-          <Flex horizontal="right" growVertical={false} vertical="center">
-            {bookmarkingLoading ? (
-              <Ellipsis className="BookmarkRow-ellipsis BookmarkRow-action" size="nano" />
-            ) : (
-              <Bookmark
-                className={
-                  'BookmarkRow-action BookmarkRow-bookmarkSign ' +
-                  (!userBookmarked ? 'BookmarkRow-bookmarkSign--disabled' : '')
-                }
-                size="small"
-                onClick={onBookmark}
-              />
-            )}
-          </Flex>
-        </FadeInOut>
-        <Vote className="BookmarkRow-vote" vote={statistics?.vote} changeVote={onVote} loading={statistics?.loading} />
+        {isOwnBookmark && (
+          <>
+            <Private
+              size="micro"
+              className={
+                'BookmarkRow-private' +
+                (isPrivateRequestPending ? ' BookmarkRow--pending' : '') +
+                (isPrivateRequestFailed ? ' BookmarkRow--failed' : '') +
+                (isPrivate ? ' BookmarkRow-private--isPrivate' : '')
+              }
+              onClick={onPrivateSwitch}
+            />
+            <Edit size="micro" className="BookmarkRow-edit" onClick={onEdit} />
+            <span className={'BookmarkRow-myBookmark' + (isBookmarkDeletePending ? ' BookmarkRow--pending' : '')}>
+              <Bookmark className="BookmarkRow-myBookmarkBookmark" size="small" />
+              <Cross className="BookmarkRow-myBookmarkCross" size="small" onClick={onBookmarkDelete} />
+            </span>
+          </>
+        )}
+        {!isOwnBookmark && (
+          <Bookmark
+            className={
+              'BookmarkRow-bookmark' +
+              (userBookmarkedLink ? ' BookmarkRow-bookmark--bookmarked' : '') +
+              (bookmarkingLoading ? ' BookmarkRow--pending' : '')
+            }
+            size="small"
+            onClick={onBookmarkGrab}
+          />
+        )}
+        <Vote vote={statistics?.vote} changeVote={onVote} loading={statistics?.loading} />
       </Flex>
       <div className="BookmarkRow-stats">
         <div className="BookmarkRow-stat">

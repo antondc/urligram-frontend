@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { bookmarkCreate } from 'Modules/Bookmarks/actions/bookmarkCreate';
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
-import { voteLink } from 'Modules/Links/actions/voteLink';
+import { linkUpdateVote } from 'Modules/Links/actions/linkUpdateVote';
 import { selectLinkById } from 'Modules/Links/selectors/selectLinkById';
 import { RootState } from 'Modules/rootType';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
@@ -34,7 +34,7 @@ const LinkRow: React.FC<Props> = ({ id }) => {
   const onVote = (vote) => {
     if (!isLogged) return dispatch(switchLoginModal(true));
 
-    dispatch(voteLink({ vote, linkId: id, userId: sessionId }));
+    dispatch(linkUpdateVote({ vote, linkId: id, userId: sessionId }));
   };
 
   const onBookmark = async () => {

@@ -22,12 +22,7 @@ export const bookmarkUpdate = ({
 ): Promise<BookmarkState> => {
   const { Bookmarks: bookmarksBeforeRequest } = getState();
   try {
-    dispatch(
-      bookmarkUpdateRequest({
-        ...bookmarksBeforeRequest,
-        loading: true,
-      })
-    );
+    dispatch(bookmarkUpdateRequest(bookmarksBeforeRequest));
 
     const { data: bookmarkData } = await HttpClient.put<any, BookmarkUpdateApiResponse>(
       `/users/me/bookmarks/${bookmarkId}`,
@@ -40,16 +35,14 @@ export const bookmarkUpdate = ({
     );
     const { Bookmarks: bookmarksAfterResponse } = getState();
 
-    await dispatch(
-      bookmarkUpdateSuccess({
-        ...bookmarksAfterResponse,
-        byKey: {
-          ...bookmarksAfterResponse.byKey,
-          [bookmarkData.attributes.id]: bookmarkData.attributes,
-        },
-        loading: false,
-      })
-    );
+    const aaa = {
+      ...bookmarksAfterResponse,
+      byKey: {
+        ...bookmarksAfterResponse.byKey,
+        [bookmarkData.attributes.id]: bookmarkData.attributes,
+      },
+    };
+    await dispatch(bookmarkUpdateSuccess(aaa));
 
     return bookmarkData?.attributes;
   } catch (error) {
@@ -59,7 +52,6 @@ export const bookmarkUpdate = ({
       bookmarkUpdateFailure({
         ...bookmarksOnError,
         errors: [...bookmarksOnError.errors, error],
-        loading: false,
       })
     );
 

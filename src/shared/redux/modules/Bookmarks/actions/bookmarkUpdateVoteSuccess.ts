@@ -11,7 +11,7 @@ interface Props {
   statistics: LinkStatistics;
 }
 
-export const bookmarkVoteSuccess = ({ linkId, statistics }: Props): AppThunk<void, BookmarksActions> => (
+export const bookmarkUpdateVoteSuccess = ({ linkId, statistics }: Props): AppThunk<void, BookmarksActions> => (
   dispatch,
   getState
 ): void => {

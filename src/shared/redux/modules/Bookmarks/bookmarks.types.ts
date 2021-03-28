@@ -1,13 +1,15 @@
 export const BOOKMARKS_LOAD_REQUEST = 'BOOKMARKS_LOAD_REQUEST';
 export const BOOKMARKS_LOAD_SUCCESS = 'BOOKMARKS_LOAD_SUCCESS';
 export const BOOKMARK_UPDATE_VOTE_SUCCESS = 'BOOKMARK_UPDATE_VOTE_SUCCESS';
-export const BOOKMARK_UPDATE_VOTE_START = 'BOOKMARK_UPDATE_VOTE_START';
+export const BOOKMARK_UPDATE_VOTE_REQUEST = 'BOOKMARK_UPDATE_VOTE_REQUEST';
 export const BOOKMARK_CREATE_REQUEST = 'BOOKMARK_CREATE_REQUEST';
 export const BOOKMARK_CREATE_SUCCESS = 'BOOKMARK_CREATE_SUCCESS';
 export const BOOKMARK_CREATE_FAILURE = 'BOOKMARK_CREATE_FAILURE';
 export const BOOKMARK_UPDATE_REQUEST = 'BOOKMARK_UPDATE_REQUEST';
 export const BOOKMARK_UPDATE_SUCCESS = 'BOOKMARK_UPDATE_SUCCESS';
 export const BOOKMARK_UPDATE_FAILURE = 'BOOKMARK_UPDATE_FAILURE';
+export const BOOKMARK_DELETE_SUCCESS = 'BOOKMARK_DELETE_SUCCESS';
+export const BOOKMARK_DELETE_FAILURE = 'BOOKMARK_DELETE_FAILURE';
 
 export interface BookmarkError extends Error {
   field: string;
@@ -24,6 +26,7 @@ export interface LinkStatistics {
 
 export interface BookmarkState {
   id: number;
+  order?: number;
   userId: string;
   title: string;
   url: string;
@@ -89,6 +92,12 @@ export interface BookmarkCreateApiResponse {
   };
 }
 
+export interface BookmarkDeleteApiResponse {
+  data: {
+    attributes: BookmarkState;
+  };
+}
+
 export interface BookmarkUpdateApiRequest {
   bookmarkId: number;
   order: number;
@@ -118,7 +127,7 @@ interface BookmarksLoadSuccessAction {
 }
 
 export interface BookmarkVoteRequestAction {
-  type: typeof BOOKMARK_UPDATE_VOTE_START;
+  type: typeof BOOKMARK_UPDATE_VOTE_REQUEST;
   payload: BookmarksState;
 }
 
@@ -157,6 +166,16 @@ export interface BookmarkUpdateFailureAction {
   payload: BookmarksState;
 }
 
+export interface BookmarkDeleteSuccessAction {
+  type: typeof BOOKMARK_DELETE_SUCCESS;
+  payload: BookmarksState;
+}
+
+export interface BookmarkDeleteFailureAction {
+  type: typeof BOOKMARK_DELETE_FAILURE;
+  payload: BookmarksState;
+}
+
 export type BookmarksActions =
   | BookmarksLoadRequestAction
   | BookmarksLoadSuccessAction
@@ -167,4 +186,6 @@ export type BookmarksActions =
   | BookmarkCreateFailureAction
   | BookmarkUpdateRequestAction
   | BookmarkUpdateSuccessAction
-  | BookmarkUpdateFailureAction;
+  | BookmarkUpdateFailureAction
+  | BookmarkDeleteSuccessAction
+  | BookmarkDeleteFailureAction;

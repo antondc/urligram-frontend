@@ -17,7 +17,7 @@ export const bookmarksLoadByUserId = (
     dispatch(
       bookmarksLoadRequest({
         ...bookmarksBeforeRequest,
-        loading: false,
+        loading: true,
       })
     );
 

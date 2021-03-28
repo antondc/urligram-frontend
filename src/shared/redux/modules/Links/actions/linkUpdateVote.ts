@@ -1,11 +1,11 @@
-import { bookmarkVoteRequest } from 'Modules/Bookmarks/actions/bookmarkVoteRequest';
-import { bookmarkVoteSuccess } from 'Modules/Bookmarks/actions/bookmarkVoteSuccess';
+import { bookmarkUpdateVoteRequest } from 'Modules/Bookmarks/actions/bookmarkUpdateVoteRequest';
+import { bookmarkUpdateVoteSuccess } from 'Modules/Bookmarks/actions/bookmarkUpdateVoteSuccess';
 import { LinkApiResponse, LinksActions, LinksState, LinkState } from 'Modules/Links/links.types';
 import HttpClient from 'Services/HttpClient';
 import { AppThunk } from '../../..';
 import { BookmarksActions } from '../../Bookmarks/bookmarks.types';
-import { voteLinkRequest } from './voteLinkRequest';
-import { voteLinkSuccess } from './voteLinkSuccess';
+import { linkUpdateVoteRequest } from './linkUpdateVoteRequest';
+import { linkUpdateVoteSuccess } from './voteLinkSuccess';
 
 interface Props {
   vote: number;
@@ -13,7 +13,7 @@ interface Props {
   userId: string;
 }
 
-export const voteLink = ({
+export const linkUpdateVote = ({
   vote,
   linkId,
   userId,
@@ -26,7 +26,7 @@ export const voteLink = ({
   } = getState();
 
   try {
-    dispatch(bookmarkVoteRequest({ linkId }));
+    dispatch(bookmarkUpdateVoteRequest({ linkId }));
 
     const linksSerializedByKeyRequest: LinksState = {
       byKey: {
@@ -40,7 +40,7 @@ export const voteLink = ({
         },
       },
     };
-    await dispatch(voteLinkRequest(linksSerializedByKeyRequest));
+    await dispatch(linkUpdateVoteRequest(linksSerializedByKeyRequest));
 
     const { data } = await HttpClient.put<void, LinkApiResponse>(`/links/${linkId}`, {
       vote,
@@ -55,10 +55,10 @@ export const voteLink = ({
         },
       },
     };
-    dispatch(voteLinkSuccess(linksSerializedByKeyResponse));
+    dispatch(linkUpdateVoteSuccess(linksSerializedByKeyResponse));
 
     dispatch(
-      bookmarkVoteSuccess({
+      bookmarkUpdateVoteSuccess({
         linkId,
         statistics: data?.attributes?.statistics,
       })
