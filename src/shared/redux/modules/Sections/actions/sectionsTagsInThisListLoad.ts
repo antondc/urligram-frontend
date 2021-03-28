@@ -1,5 +1,6 @@
-import { TagsActions, TagsLoadApiResponse, TagState } from 'Modules/Tags/tags.types';
-import { tagsLoadSuccess } from 'Root/src/shared/redux/modules/Tags/actions/tagsLoadSuccess';
+import { ListLoadApiResponse } from 'Modules/Lists/lists.types';
+import { tagsLoadSuccess } from 'Modules/Tags/actions/tagsLoadSuccess';
+import { TagsActions, TagState } from 'Modules/Tags/tags.types';
 import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
 import { AppThunk } from '../../..';
@@ -22,8 +23,8 @@ export const sectionsTagsInThisListLoad = (
       })
     );
 
-    const { data: myTagsData } = await HttpClient.get<void, TagsLoadApiResponse>(`/lists/${listId}`);
-    const tagsArray = myTagsData.map((item) => item.attributes);
+    const { data: listData } = await HttpClient.get<void, ListLoadApiResponse>(`/lists/${listId}`);
+    const { tags: tagsArray } = listData?.attributes;
 
     const { Tags: tagsAfterApi, Sections: sectionsAfterResponse } = getState();
     dispatch(

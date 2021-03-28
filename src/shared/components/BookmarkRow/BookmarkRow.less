@@ -4,11 +4,12 @@
 
 @{c} {
   display: grid;
+  position: relative;
   flex-wrap: wrap;
   justify-content: space-between;
   grid-template-columns: 3fr 1fr 0fr;
-  column-gap: 10px;
   padding: 8px 13px 7px;
+  column-gap: 10px;
 
   @media @br-mobile {
     grid-template-columns: 1fr 0fr;
@@ -17,8 +18,8 @@
 
   &-recentlyCreated {
     border: 2px solid @gradientColors[green-1];
-    box-shadow: 4px 4px 0 0 @gradientColors[green-1];
     transition: border @td-fast @ease box-shadow @td-fast @ease;
+    box-shadow: 4px 4px 0 0 @gradientColors[green-1];
   }
 
   &-left {
@@ -128,28 +129,66 @@
     transition: fill @td-fast @ease, transform @td-fast @ease;
   }
 
+  &-bookmarkFilled {
+    position: absolute;
+    top: -4px;
+    right: 2px;
+  }
+
   &-bookmark {
-    margin-left: 5px;
-    fill: @c-traslucid--hardest;
+    position: absolute;
+    height: 12px;
+    width: 12px;
+    top: -4px;
+    right: 2px;
+    line-height: 0;
+    fill: @gradientColors[black-3];
+    // fill: @c-accent;
     transition: fill @td-fast @ease, transform @td-fast @ease;
-    .hoverTransition(0.5);
+
+    path[data-id='background'] {
+      opacity: 1;
+      fill: @c-background;
+    }
+
+    path[data-id='foreground'] {
+      outline: 10px solid @c-background;
+    }
+
+    &:hover {
+      fill: @c-error;
+      cursor: pointer;
+    }
 
     &--bookmarked {
-      &:hover {
-        opacity: 1;
-        cursor: default;
+      fill: @c-error;
+
+      path[data-id='background'] {
+        fill: @c-error;
       }
 
-      fill: @c-success;
+      &:hover {
+        cursor: default;
+      }
+    }
+
+    &--pending {
+      path[data-id='foreground'] {
+        fill: @c-error;
+      }
+
+      animation: hearthBeat 1.5s ease infinite;
     }
   }
 
   &-myBookmark {
-    position: relative;
+    position: absolute;
     height: 12px;
     width: 12px;
-    margin-left: 5px;
+    top: -4px;
+    right: 2px;
     line-height: 0;
+    fill: @c-error;
 
     &:hover {
       @{c}-myBookmarkBookmark {
@@ -165,17 +204,19 @@
   &-myBookmarkBookmark {
     position: absolute;
     top: 0;
-    bottom: 0;
-    left: 0;
     right: 0;
   }
 
   &-myBookmarkCross {
-    height: 10px;
-    width: 12px;
-    margin-top: 1px;
+    path[data-id='background'] {
+      opacity: 1;
+      fill: @c-background;
+    }
+
+    top: -2px;
     opacity: 0;
-    fill: @c-error;
+    fill: @c-accent;
+    transform: rotate(45deg);
 
     &:hover {
       cursor: pointer;
@@ -183,10 +224,8 @@
   }
 
   &-myBookmarkBookmark {
-    height: 12px;
-    width: 12px;
     opacity: 1;
-    fill: @c-success;
+    fill: @c-error;
   }
 
   &--pending {

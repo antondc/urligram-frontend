@@ -7,6 +7,7 @@ import { Hr, Notification } from '@antoniodcorrea/components';
 import { DELAY_SIX_SEC } from '../../constants';
 import BookmarkDeleted from './BookmarkDeleted';
 import BookmarkGrabbed from './BookmarkGrabbed';
+import LinkVoted from './LinkVoted';
 
 import './BaseNotification.less';
 
@@ -29,13 +30,14 @@ const BaseNotification: React.FC<Props> = ({ notification }) => {
 
   return (
     <div>
+      <Hr spacer size="small" />
       <div className="BaseNotification" id={'BaseNotification--' + notification.id}>
         <Notification onCloseClick={onCloseClick} type={notification.style}>
           {notification?.type === 'bookmark-grabbed' && <BookmarkGrabbed notification={notification} />}
           {notification?.type === 'bookmark-deleted' && <BookmarkDeleted notification={notification} />}
+          {notification?.type === 'link-voted' && <LinkVoted notification={notification} />}
         </Notification>
       </div>
-      <Hr spacer size="small" />
     </div>
   );
 };

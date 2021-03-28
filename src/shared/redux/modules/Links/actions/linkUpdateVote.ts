@@ -1,9 +1,9 @@
 import { bookmarkUpdateVoteRequest } from 'Modules/Bookmarks/actions/bookmarkUpdateVoteRequest';
 import { bookmarkUpdateVoteSuccess } from 'Modules/Bookmarks/actions/bookmarkUpdateVoteSuccess';
+import { BookmarksActions } from 'Modules/Bookmarks/bookmarks.types';
 import { LinkApiResponse, LinksActions, LinksState, LinkState } from 'Modules/Links/links.types';
 import HttpClient from 'Services/HttpClient';
 import { AppThunk } from '../../..';
-import { BookmarksActions } from '../../Bookmarks/bookmarks.types';
 import { linkUpdateVoteRequest } from './linkUpdateVoteRequest';
 import { linkUpdateVoteSuccess } from './voteLinkSuccess';
 

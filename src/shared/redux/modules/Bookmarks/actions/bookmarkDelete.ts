@@ -12,6 +12,19 @@ export const bookmarkDelete = (
 ): AppThunk<Promise<Partial<BookmarkState>>, BookmarksActions | LinksActions> => async (dispatch, getState) => {
   const { Bookmarks: bookmarkBeforeRequest } = getState();
   try {
+    await dispatch(
+      bookmarkDeleteSuccess({
+        ...bookmarkBeforeRequest,
+        byKey: {
+          ...bookmarkBeforeRequest.byKey,
+          [bookmarkId]: {
+            ...bookmarkBeforeRequest.byKey[bookmarkId],
+            deleting: true,
+          },
+        },
+      })
+    );
+
     const bookmarkLinkId = bookmarkBeforeRequest?.byKey[bookmarkId]?.linkId;
     const { data: bookmarkData } = await HttpClient.delete<void, BookmarkDeleteApiResponse>(
       `/users/me/bookmarks/${bookmarkId}`

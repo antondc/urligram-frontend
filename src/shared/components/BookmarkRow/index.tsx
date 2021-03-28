@@ -65,31 +65,35 @@ const BookmarkRow: React.FC<Props> = ({ id, loadMainContent }) => {
   const tagsByName = tags?.map((item) => ({ tag: item.name }));
 
   const onVote = (vote) => {
-    if (!isLogged) return dispatch(switchLoginModal(false));
+    if (!isLogged) return dispatch(switchLoginModal(true));
 
     dispatch(linkUpdateVote({ vote, linkId, userId: sessionId }));
   };
 
   const onBookmarkGrab = async () => {
+    if (!isLogged) return dispatch(switchLoginModal(true));
     if (userBookmarkedLink) return;
 
     setBookmarkingLoading(true);
     const result = await dispatch(bookmarkCreate({ title, url, isPrivate: false, tags: tagsByName }));
     setBookmarkingLoading(false);
-    if (result.id) setRecentlyCreatedState(true);
+    if (result?.id) setRecentlyCreatedState(true);
   };
 
   const onBookmarkDelete = async () => {
+    if (!isLogged) return dispatch(switchLoginModal(true));
     if (!userBookmarkedLink) return;
+
     setIsBookmarkDeletePending(true);
     await dispatch(bookmarkDelete(id));
     setIsBookmarkDeletePending(false);
   };
 
   const onPrivateSwitch = async () => {
-    setPrivateRequestStatus(REQUEST_STARTED);
-
+    if (!isLogged) return dispatch(switchLoginModal(true));
     if (!userBookmarkedLink) return;
+
+    setPrivateRequestStatus(REQUEST_STARTED);
 
     const data = {
       bookmarkId: id,
@@ -111,6 +115,7 @@ const BookmarkRow: React.FC<Props> = ({ id, loadMainContent }) => {
   };
 
   const onEdit = async () => {
+    if (!isLogged) return dispatch(switchLoginModal(true));
     if (!userBookmarkedLink) return;
 
     await dispatch(switchBookmarkUpdateModal({ mounted: true, bookmarkId: id }));

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { bookmarksLoadByUserId } from 'Modules/Bookmarks/actions/bookmarksLoadByUserId';
+import { selectBookmarksByKey } from 'Modules/Bookmarks/selectors/selectBookmarksByKey';
 import { selectBookmarksCurrentIds } from 'Modules/Bookmarks/selectors/selectBookmarksCurrentIds';
 import { selectBookmarksLoading } from 'Modules/Bookmarks/selectors/selectBookmarksLoading';
 import { selectBookmarksMetaSort } from 'Modules/Bookmarks/selectors/selectBookmarksMetaSort';
@@ -30,6 +31,7 @@ const UserBookmarks: React.FC = () => {
   const userId = useSelector(selectCurrentRouteParamUserId);
   const user = useSelector((state: RootState) => selectUserById(state, { id: userId }));
   const bookmarksIds = useSelector(selectBookmarksCurrentIds);
+  const bookmarksByKey = useSelector(selectBookmarksByKey);
   const bookmarksLoading = useSelector(selectBookmarksLoading);
   const followingUsers = useSelector(selectFollowingUsers);
   const followingUsersLoading = useSelector(selectFollowingUsersLoading);
@@ -83,6 +85,7 @@ const UserBookmarks: React.FC = () => {
     <UserBookmarksUi
       userId={userId}
       user={user}
+      bookmarksByKey={bookmarksByKey}
       bookmarksIds={bookmarksIds}
       bookmarksLoading={bookmarksLoading}
       followingUsers={followingUsers}

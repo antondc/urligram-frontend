@@ -17,7 +17,12 @@ export type UiBaseModal = {
   mounted: boolean;
 };
 
-export type NotificationTypeState = 'bookmark-creation' | 'bookmark-grabbed' | 'bookmark-deleted' | 'general-error';
+export type NotificationTypeState =
+  | 'bookmark-creation'
+  | 'bookmark-grabbed'
+  | 'bookmark-deleted'
+  | 'general-error'
+  | 'link-voted';
 
 export type NotificationState = {
   number?: number;

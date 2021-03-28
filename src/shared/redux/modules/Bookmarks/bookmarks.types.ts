@@ -8,6 +8,7 @@ export const BOOKMARK_CREATE_FAILURE = 'BOOKMARK_CREATE_FAILURE';
 export const BOOKMARK_UPDATE_REQUEST = 'BOOKMARK_UPDATE_REQUEST';
 export const BOOKMARK_UPDATE_SUCCESS = 'BOOKMARK_UPDATE_SUCCESS';
 export const BOOKMARK_UPDATE_FAILURE = 'BOOKMARK_UPDATE_FAILURE';
+export const BOOKMARK_DELETE_REQUEST = 'BOOKMARK_DELETE_REQUEST';
 export const BOOKMARK_DELETE_SUCCESS = 'BOOKMARK_DELETE_SUCCESS';
 export const BOOKMARK_DELETE_FAILURE = 'BOOKMARK_DELETE_FAILURE';
 
@@ -42,12 +43,15 @@ export interface BookmarkState {
     name: string;
   }[];
   statistics: LinkStatistics;
+  deleting?: boolean;
 }
 
+export type BookmarksByKey = {
+  [key: string]: BookmarkState;
+};
+
 export interface BookmarksState {
-  byKey: {
-    [key: string]: BookmarkState;
-  };
+  byKey: BookmarksByKey;
   currentIds?: number[];
   loading?: boolean;
   meta?: {
@@ -166,6 +170,11 @@ export interface BookmarkUpdateFailureAction {
   payload: BookmarksState;
 }
 
+export interface BookmarkDeleteRequestAction {
+  type: typeof BOOKMARK_DELETE_REQUEST;
+  payload: BookmarksState;
+}
+
 export interface BookmarkDeleteSuccessAction {
   type: typeof BOOKMARK_DELETE_SUCCESS;
   payload: BookmarksState;
@@ -187,5 +196,6 @@ export type BookmarksActions =
   | BookmarkUpdateRequestAction
   | BookmarkUpdateSuccessAction
   | BookmarkUpdateFailureAction
+  | BookmarkDeleteRequestAction
   | BookmarkDeleteSuccessAction
   | BookmarkDeleteFailureAction;

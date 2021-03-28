@@ -9,6 +9,7 @@ import Pagination from 'Components/Pagination';
 import Sidebar from 'Components/Sidebar';
 import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListUsers from 'Components/SidebarListUsers';
+import { BookmarksByKey } from 'Modules/Bookmarks/bookmarks.types';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
@@ -19,6 +20,7 @@ import './UserBookmarks.less';
 interface Props {
   userId: string;
   user: UserState;
+  bookmarksByKey: BookmarksByKey;
   bookmarksIds: number[];
   bookmarksLoading: boolean;
   followingUsers: UserState[];
@@ -46,6 +48,7 @@ interface Props {
 export const UserBookmarks: React.FC<Props> = ({
   userId,
   user,
+  bookmarksByKey,
   bookmarksIds,
   bookmarksLoading,
   followingUsers,
@@ -99,18 +102,20 @@ export const UserBookmarks: React.FC<Props> = ({
             </A>
           </H4>
           <Hr spacer />
-          <FadeInOut valueToUpdate={bookmarksLoading} speed="fastest" appear>
-            {bookmarksLoading ? (
-              <BookmarkRowSkeletonGroup length={bookmarksIds?.length || DEFAULT_PAGE_SIZE} />
-            ) : (
-              bookmarksIds?.map((id, index) => (
-                <React.Fragment key={id}>
-                  {!!index && <Hr spacer size="small" />}
-                  <BookmarkRow id={id} loadMainContent={loadMainContent} />
-                </React.Fragment>
-              ))
-            )}
-          </FadeInOut>
+          {bookmarksLoading ? (
+            <BookmarkRowSkeletonGroup length={bookmarksIds?.length || DEFAULT_PAGE_SIZE} />
+          ) : (
+            bookmarksIds?.map((id, index) => (
+              <FadeInOut valueToUpdate={bookmarksByKey[id]?.deleting} appear key={id}>
+                {!bookmarksByKey[id]?.deleting && (
+                  <>
+                    {!!index && <Hr spacer size="small" />}
+                    <BookmarkRow id={id} loadMainContent={loadMainContent} />
+                  </>
+                )}
+              </FadeInOut>
+            ))
+          )}
           {!bookmarksLoading && !bookmarksIds?.length && <Empty message="ⵁ This user has no bookmarks yet" />}
           <Flex horizontal="center">
             <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />

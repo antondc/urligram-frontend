@@ -1,5 +1,5 @@
+import { tagsLoadSuccess } from 'Modules/Tags/actions/tagsLoadSuccess';
 import { TagsActions, TagsLoadApiResponse, TagState } from 'Modules/Tags/tags.types';
-import { tagsLoadSuccess } from 'Root/src/shared/redux/modules/Tags/actions/tagsLoadSuccess';
 import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
 import { AppThunk } from '../../..';

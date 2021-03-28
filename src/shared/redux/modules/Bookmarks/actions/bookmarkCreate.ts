@@ -31,11 +31,11 @@ export const bookmarkCreate = ({
     });
     const { Bookmarks: bookmarksAfterResponse } = getState();
     const bookmarksToUpdate = Object.values(bookmarksAfterResponse.byKey).filter(
-      (item) => item.linkId === bookmarkData?.attributes?.linkId
+      (item) => item?.linkId === bookmarkData?.attributes?.linkId
     );
     const bookmarksWithNewUser = bookmarksToUpdate.map((item) => ({
       ...item,
-      users: [...item.users, bookmarkData.attributes.userId],
+      users: [...item?.users, bookmarkData.attributes.userId],
     }));
 
     await dispatch(

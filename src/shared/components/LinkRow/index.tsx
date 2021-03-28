@@ -43,7 +43,7 @@ const LinkRow: React.FC<Props> = ({ id }) => {
     if (!userBookmarked) {
       setBookmarkingLoading(true);
       const result = await dispatch(bookmarkCreate({ title, url, isPrivate: false, tags: tagsByName }));
-      if (result.id) return setBookmarkingLoading(false);
+      if (result?.id) return setBookmarkingLoading(false);
     } else {
       //
     }

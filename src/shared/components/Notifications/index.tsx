@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 import BaseNotification from 'Components/BaseNotification';
 import { selectUiNotifications } from 'Modules/Ui/selectors/selectUiNotifications';
-import { FadeInOut } from '@antoniodcorrea/components';
+import { FadeInOut, Hr } from '@antoniodcorrea/components';
 
 import './Notifications.less';
 
@@ -12,6 +12,7 @@ const Notifications: React.FC = () => {
 
   return (
     <div className="Notifications">
+      <Hr spacer size="small" />
       {notifications.map((item) => (
         <FadeInOut valueToUpdate={item.status} key={item.id} appear>
           {item.status !== 'viewed' && <BaseNotification notification={item} key={item.id} />}
