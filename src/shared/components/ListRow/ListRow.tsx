@@ -6,15 +6,11 @@ import { Border, Cross, Edit, Flex, List, Private, Span, Tag } from '@antoniodco
 
 import './ListRow.less';
 
-export const ListRow: React.FC<Partial<ListState>> = ({
-  id,
-  name,
-  tags,
-  bookmarksIds,
-  membersIds,
-  createdAt,
-  description,
-}) => (
+interface Props extends Partial<ListState> {
+  createdAtFormatted: string;
+}
+
+export const ListRow: React.FC<Props> = ({ id, name, tags, bookmarksIds, membersIds, createdAt, description }) => (
   <Border grow className="ListRow" data-test-id="ListRow" key={id}>
     <div className="ListRow-left">
       <div className="ListRow-icons">

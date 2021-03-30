@@ -18,6 +18,7 @@ const props = {
   image: 'https://picsum.photos/300/200',
   membersIds: [],
   createdAt: 2453453,
+  createdAtFormatted: '',
   sinceTranslation: 'since',
   listsIds: [1, 3, 5],
   tags: [

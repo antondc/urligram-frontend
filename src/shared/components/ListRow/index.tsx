@@ -24,14 +24,14 @@ const ListRow: React.FC<Props> = ({
   slug,
 }) => {
   const date = new LocaleFormattedDate({ unixTime: createdAt, locale: slug });
-  const formattedDate = date.getLocaleFormattedDate();
+  const createdAtFormatted = date.getLocaleFormattedDate();
 
   return (
     <ListRowUi
       id={id}
       name={name}
       description={description}
-      createdAtFormatted={formattedDate}
+      createdAtFormatted={createdAtFormatted}
       updatedAt={updatedAt}
       membersIds={membersIds}
       image={image}
