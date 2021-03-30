@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { bookmarkCreate } from 'Modules/Bookmarks/actions/bookmarkCreate';
@@ -11,7 +11,7 @@ import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLo
 import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUserId';
 import { switchBookmarkUpdateModal } from 'Modules/Ui/actions/switchBookmarkUpdateModal';
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
-import { getDiffLocalTimeUTCSeconds } from 'Tools/utils/Date/getDiffLocalTimeUTCSeconds';
+import { diffClientTimeAgainstUTC } from 'Tools/utils/Date/diffClientTimeAgainstUTC';
 import { LocaleFormattedDate } from 'Tools/utils/Date/localeFormattedDate';
 import {
   REQUEST_FAILED,
@@ -52,7 +52,7 @@ const BookmarkRow: React.FC<Props> = ({ id, loadMainContent }) => {
 
   const [bookmarkingLoading, setBookmarkingLoading] = useState<boolean>(false);
   const [isBookmarkDeletePending, setIsBookmarkDeletePending] = useState<boolean>(false);
-  const timePassed = getDiffLocalTimeUTCSeconds(createdAt);
+  const timePassed = diffClientTimeAgainstUTC(createdAt);
   const recentlyCreated = timePassed < TIME_RECENTLY_CREATED_BOOKMARK;
   const [recentlyCreatedState, setRecentlyCreatedState] = useState(recentlyCreated);
   const [isPrivateRequestStatus, setPrivateRequestStatus] = useState<ResponseStatus>(undefined);

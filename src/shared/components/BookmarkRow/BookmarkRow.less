@@ -186,7 +186,7 @@
     height: 12px;
     width: 12px;
     top: -4px;
-    right: 2px;
+    right: 3px;
     line-height: 0;
     fill: @c-error;
 
@@ -208,15 +208,23 @@
   }
 
   &-myBookmarkCross {
+    path[data-id='foreground'] {
+      opacity: 1;
+      fill: @c-base;
+    }
+
     path[data-id='background'] {
       opacity: 1;
       fill: @c-background;
     }
 
     top: -2px;
+    right: 0;
     opacity: 0;
+    outline: 1px solid @c-background;
     fill: @c-accent;
     transform: rotate(45deg);
+    border-radius: 50%;
 
     &:hover {
       cursor: pointer;
