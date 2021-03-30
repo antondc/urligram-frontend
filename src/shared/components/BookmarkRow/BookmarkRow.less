@@ -129,6 +129,38 @@
     transition: fill @td-fast @ease, transform @td-fast @ease;
   }
 
+  &--pending {
+    fill: @c-accent;
+    animation: hearthBeat 1.5s ease infinite;
+  }
+
+  &--failed {
+    fill: @c-error;
+  }
+
+  &-stats {
+    display: flex;
+    align-items: center;
+    font-family: @ff-din;
+    font-size: @fs-small;
+    line-height: @fh-small;
+  }
+
+  &-stat {
+    display: flex;
+    justify-content: flex-end;
+    align-items: baseline;
+    margin-left: 5px;
+    line-height: 7px;
+    text-align: end;
+    white-space: nowrap;
+  }
+
+  &-statIcon {
+    margin-right: 1px;
+    line-height: 0;
+  }
+
   &-bookmarkFilled {
     position: absolute;
     top: -4px;
@@ -234,37 +266,5 @@
   &-myBookmarkBookmark {
     opacity: 1;
     fill: @c-error;
-  }
-
-  &--pending {
-    fill: @c-accent;
-    animation: hearthBeat 1.5s ease infinite;
-  }
-
-  &--failed {
-    fill: @c-error;
-  }
-
-  &-stats {
-    display: flex;
-    align-items: center;
-    font-family: @ff-din;
-    font-size: @fs-small;
-    line-height: @fh-small;
-  }
-
-  &-stat {
-    display: flex;
-    justify-content: flex-end;
-    align-items: baseline;
-    margin-left: 5px;
-    line-height: 7px;
-    text-align: end;
-    white-space: nowrap;
-  }
-
-  &-statIcon {
-    margin-right: 1px;
-    line-height: 0;
   }
 }

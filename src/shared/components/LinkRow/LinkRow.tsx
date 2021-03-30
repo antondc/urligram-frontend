@@ -2,13 +2,25 @@ import React from 'react';
 
 import A from 'Components/A';
 import { LinkState } from 'Modules/Links/links.types';
-import { Bookmark, Border, Ellipsis, FadeInOut, Flex, Span, Tag, Vote } from '@antoniodcorrea/components';
+import {
+  Bookmark,
+  BookmarkFilled,
+  BookmarkWithBackground,
+  Border,
+  Flex,
+  PlusCircleWithBackground,
+  Span,
+  Tag,
+  Vote,
+} from '@antoniodcorrea/components';
 
 import './LinkRow.less';
 
 interface LinkRow extends LinkState {
   onVote: (vote: boolean | null) => void;
-  onBookmark: () => void;
+  onBookmarkGrab: () => void;
+  onBookmarkDelete: () => void;
+  isBookmarkDeletePending: boolean;
   bookmarkingLoading: boolean;
   userBookmarked: boolean;
 }
@@ -21,7 +33,9 @@ export const LinkRow: React.FC<Partial<LinkRow>> = ({
   statistics,
   users,
   onVote,
-  onBookmark,
+  onBookmarkGrab,
+  onBookmarkDelete,
+  isBookmarkDeletePending,
   favicon,
   createdAt,
   userBookmarked,
@@ -54,15 +68,6 @@ export const LinkRow: React.FC<Partial<LinkRow>> = ({
     </div>
     <div className="LinkRow-right">
       <Flex horizontal="right" growVertical={false} vertical="center">
-        <Bookmark
-          className={
-            'LinkRow-action' +
-            (userBookmarked ? ' LinkRow-action--accent' : '') +
-            (bookmarkingLoading ? ' LinkRow-action--pending' : '')
-          }
-          size="small"
-          onClick={onBookmark}
-        />
         <Vote className="LinkRow-vote" vote={statistics?.vote} changeVote={onVote} loading={statistics?.loading} />
       </Flex>
       <div className="LinkRow-stats">
@@ -84,6 +89,19 @@ export const LinkRow: React.FC<Partial<LinkRow>> = ({
         {createdAt || ''}
       </Span>
     </div>
+    {userBookmarked && (
+      <span className={'BookmarkRow-myBookmark' + (isBookmarkDeletePending ? ' BookmarkRow--pending' : '')}>
+        <BookmarkFilled className="BookmarkRow-myBookmarkBookmark" size="small" />
+        <PlusCircleWithBackground className="BookmarkRow-myBookmarkCross" size="medium" onClick={onBookmarkDelete} />
+      </span>
+    )}
+    {!userBookmarked && (
+      <BookmarkWithBackground
+        className={'BookmarkRow-bookmark' + (bookmarkingLoading ? ' BookmarkRow-bookmark--pending' : '')}
+        size="small"
+        onClick={onBookmarkGrab}
+      />
+    )}
   </Border>
 );
 

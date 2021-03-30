@@ -68,27 +68,6 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
     <div className="BookmarkRow-left">
       <div className="BookmarkRow-icons">
         <img className="BookmarkRow-favicon" src={favicon} />
-        {isOwnBookmark && (
-          <span className={'BookmarkRow-myBookmark' + (isBookmarkDeletePending ? ' BookmarkRow--pending' : '')}>
-            <BookmarkFilled className="BookmarkRow-myBookmarkBookmark" size="small" />
-            <PlusCircleWithBackground
-              className="BookmarkRow-myBookmarkCross"
-              size="medium"
-              onClick={onBookmarkDelete}
-            />
-          </span>
-        )}
-        {!isOwnBookmark && (
-          <BookmarkWithBackground
-            className={
-              'BookmarkRow-bookmark' +
-              (userBookmarkedLink ? ' BookmarkRow-bookmark--bookmarked' : '') +
-              (bookmarkingLoading ? ' BookmarkRow-bookmark--pending' : '')
-            }
-            size="small"
-            onClick={onBookmarkGrab}
-          />
-        )}
       </div>
       <Span bold className="BookmarkRow-title">
         <A href={url} targetBlank styled={false}>
@@ -154,6 +133,23 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
         {createdAt}
       </Span>
     </div>
+    {isOwnBookmark && (
+      <span className={'BookmarkRow-myBookmark' + (isBookmarkDeletePending ? ' BookmarkRow--pending' : '')}>
+        <BookmarkFilled className="BookmarkRow-myBookmarkBookmark" size="small" />
+        <PlusCircleWithBackground className="BookmarkRow-myBookmarkCross" size="medium" onClick={onBookmarkDelete} />
+      </span>
+    )}
+    {!isOwnBookmark && (
+      <BookmarkWithBackground
+        className={
+          'BookmarkRow-bookmark' +
+          (userBookmarkedLink ? ' BookmarkRow-bookmark--bookmarked' : '') +
+          (bookmarkingLoading ? ' BookmarkRow-bookmark--pending' : '')
+        }
+        size="small"
+        onClick={onBookmarkGrab}
+      />
+    )}
   </Border>
 );
 

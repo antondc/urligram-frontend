@@ -22,10 +22,7 @@ export const bookmarkUpdateVoteSuccess = ({ linkId, statistics }: Props): AppThu
     key,
     {
       ...value,
-      statistics: {
-        ...statistics,
-        loading: undefined,
-      },
+      statistics,
     },
   ]);
   const bookmarksStateFormatted: BookmarksState = {

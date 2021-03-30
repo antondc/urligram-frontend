@@ -60,7 +60,10 @@ export const linkUpdateVote = ({
     dispatch(
       bookmarkUpdateVoteSuccess({
         linkId,
-        statistics: data?.attributes?.statistics,
+        statistics: {
+          ...data?.attributes?.statistics,
+          loading: false,
+        },
       })
     );
 

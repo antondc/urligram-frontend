@@ -10,6 +10,8 @@ import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLo
 import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUserId';
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
 import { LocaleFormattedDate } from 'Tools/utils/Date/localeFormattedDate';
+import { bookmarkDelete } from '../../redux/modules/Bookmarks/actions/bookmarkDelete';
+import { selectBookmarkByLinkIdAndUserId } from '../../redux/modules/Bookmarks/selectors/selectBookmarkByLinkIdAndUserId';
 import { LinkRow as LinkRowUi } from './LinkRow';
 
 import './LinkRow.less';
@@ -20,14 +22,18 @@ interface Props {
 
 const LinkRow: React.FC<Props> = ({ id }) => {
   const dispatch = useDispatch();
+  const sessionId = useSelector(selectSessionUserId);
   const currentLanguageSlug = useSelector(selectCurrentLanguageSlug);
   const link = useSelector((state: RootState) => selectLinkById(state, { id }));
+  const { id: bookmarkId } = useSelector((state: RootState) =>
+    selectBookmarkByLinkIdAndUserId(state, { linkId: link?.id, userId: sessionId })
+  );
   const [bookmarkingLoading, setBookmarkingLoading] = useState<boolean>(false);
+  const [isBookmarkDeletePending, setIsBookmarkDeletePending] = useState<boolean>(false);
   const { linkId, title, url, tags = [], favicon, statistics, createdAt, users } = link;
   const date = new LocaleFormattedDate(createdAt, currentLanguageSlug);
   const formattedDate = date.getLocaleFormattedDate();
   const isLogged = useSelector(selectSessionLoggedIn);
-  const sessionId = useSelector(selectSessionUserId);
   const userBookmarked = users.includes(sessionId);
   const tagsByName = tags?.map((item) => ({ tag: item.name }));
 
@@ -37,7 +43,7 @@ const LinkRow: React.FC<Props> = ({ id }) => {
     dispatch(linkUpdateVote({ vote, linkId: id, userId: sessionId }));
   };
 
-  const onBookmark = async () => {
+  const onBookmarkGrab = async () => {
     if (!isLogged) return dispatch(switchLoginModal(true));
 
     if (!userBookmarked) {
@@ -47,6 +53,15 @@ const LinkRow: React.FC<Props> = ({ id }) => {
     } else {
       //
     }
+  };
+
+  const onBookmarkDelete = async () => {
+    if (!isLogged) return dispatch(switchLoginModal(true));
+    if (!userBookmarked) return;
+
+    setIsBookmarkDeletePending(true);
+    await dispatch(bookmarkDelete(bookmarkId));
+    setIsBookmarkDeletePending(false);
   };
 
   return (
@@ -60,7 +75,9 @@ const LinkRow: React.FC<Props> = ({ id }) => {
       statistics={statistics}
       users={users}
       onVote={onVote}
-      onBookmark={onBookmark}
+      onBookmarkGrab={onBookmarkGrab}
+      onBookmarkDelete={onBookmarkDelete}
+      isBookmarkDeletePending={isBookmarkDeletePending}
       createdAt={formattedDate}
       userBookmarked={userBookmarked}
       bookmarkingLoading={bookmarkingLoading}
