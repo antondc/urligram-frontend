@@ -53,7 +53,7 @@ export const UserLists: React.FC<Props> = ({
         <Flex horizontal="right">
           <SortBy
             options={[
-              { label: 'Created at', field: 'createdat' },
+              { label: 'Created at', field: 'createdAt' },
               { label: 'Members', field: 'members' },
               { label: 'Bookmarks', field: 'bookmarks' },
             ]}

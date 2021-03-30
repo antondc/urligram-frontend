@@ -109,7 +109,7 @@ export const Links: React.FC<Props> = ({
           <SidebarListTags items={mostUsedTags} />
         </SidebarBlock>
         <Hr spacer />
-        <SidebarBlock title="New Users" href="users?sort=createdat&page[size]=10" loading={newUsersLoading}>
+        <SidebarBlock title="New Users" href="users?sort=createdAt&page[size]=10" loading={newUsersLoading}>
           <SidebarListUsers items={newUsers} />
         </SidebarBlock>
       </Sidebar>

@@ -27,7 +27,7 @@ export const sectionsFollowersUsersLoad = (
     );
 
     const { data }: UsersLoadApiResponse = await HttpClient.get(
-      `/users/${userId}/followers?sort=-createdat&page[size]=5`
+      `/users/${userId}/followers?sort=-createdAt&page[size]=5`
     );
     const { Users: usersAfterApi, Sections: sectionsAfterApi } = getState();
     const usersArray = data?.map((item) => item.attributes);

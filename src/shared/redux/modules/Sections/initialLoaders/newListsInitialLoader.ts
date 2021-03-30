@@ -4,7 +4,7 @@ import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
 
 export const newListsInitialLoader = async (): Promise<{ Sections: SectionsState }> => {
-  const { data: newListsData }: ListsLoadApiResponse = await HttpClient.get('/lists?sort=-createdat&page[size]=5');
+  const { data: newListsData }: ListsLoadApiResponse = await HttpClient.get('/lists?sort=-createdAt&page[size]=5');
 
   const ListsByKey = {
     byKey: {

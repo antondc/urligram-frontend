@@ -64,7 +64,7 @@ export const SidebarLeft: React.FC = () => {
           <li className="SidebarLeft-item">
             <span className="SidebarLeft-bullet">•</span>
             <Span bold>
-              <A href={`users/${sessionId}/lists?sort=-createdat`} frontend>
+              <A href={`users/${sessionId}/lists?sort=-createdAt`} frontend>
                 My Lists
               </A>
             </Span>
@@ -108,7 +108,7 @@ export const SidebarLeft: React.FC = () => {
           <li className="SidebarLeft-item">
             <span className="SidebarLeft-bullet">•</span>
             <Span bold>
-              <A href="/bookmarks?sort=-createdat" frontend>
+              <A href="/bookmarks?sort=-createdAt" frontend>
                 Recent bookmarks
               </A>
             </Span>

@@ -32,7 +32,7 @@ export const Bookmarks: React.FC<Props> = ({ url, bookmarksIds, loading, page, t
         <Flex horizontal="right">
           <SortBy
             options={[
-              { label: 'Created at', field: 'createdat' },
+              { label: 'Created at', field: 'createdAt' },
               { label: 'Rating', field: 'vote' },
             ]}
             href={url}

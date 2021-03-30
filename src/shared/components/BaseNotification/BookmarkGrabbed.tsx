@@ -22,7 +22,7 @@ const BookmarkGrabbed: React.FC<Props> = ({ notification }) => {
       </div>
       <Span size="small">
         Your bookmark was created, click{' '}
-        <A href={`users/${sessionId}/bookmarks?sort=-updatedat`} frontend underlined>
+        <A href={`users/${sessionId}/bookmarks?sort=-updatedAt`} frontend underlined>
           here
         </A>{' '}
         to see it{' '}

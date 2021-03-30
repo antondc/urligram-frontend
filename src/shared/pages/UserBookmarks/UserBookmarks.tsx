@@ -87,7 +87,7 @@ export const UserBookmarks: React.FC<Props> = ({
             options={[
               { label: 'Rating', field: 'vote' },
               { label: 'Bookmarked', field: 'timesbookmarked' },
-              { label: 'Created', field: 'createdat' },
+              { label: 'Created', field: 'createdAt' },
             ]}
             href={url}
             currentSort={sort}

@@ -23,7 +23,7 @@ export const sectionsNewUsersLoad = (): AppThunk<Promise<UserState[]>, UsersActi
       })
     );
 
-    const { data } = await HttpClient.get<void, UsersLoadApiResponse>('/users?sort=createdat&page[size]=5');
+    const { data } = await HttpClient.get<void, UsersLoadApiResponse>('/users?sort=createdAt&page[size]=5');
 
     const usersArray = data?.map((item) => item.attributes);
     const { Users: usersAfterResponse, Sections: sectionsAfterResponse } = getState();

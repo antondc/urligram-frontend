@@ -59,7 +59,7 @@ export const List: React.FC<Props> = ({
             options={[
               { label: 'Rating', field: 'vote' },
               { label: 'Bookmarks', field: 'timesbookmarked' },
-              { label: 'Date', field: 'createdat' },
+              { label: 'Date', field: 'createdAt' },
             ]}
             href={url}
             currentSort={sort}

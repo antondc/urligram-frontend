@@ -45,7 +45,7 @@ export const Users: React.FC<Props> = ({
     <Flex horizontal="between" vertical="top">
       <Main>
         <Flex horizontal="right">
-          <SortBy options={[{ label: 'Created', field: 'createdat' }]} href={url} currentSort={sort} />
+          <SortBy options={[{ label: 'Created', field: 'createdAt' }]} href={url} currentSort={sort} />
         </Flex>
         <Hr spacer size="small" />
         <Border className="Users-users" grow>
@@ -77,7 +77,7 @@ export const Users: React.FC<Props> = ({
           <SidebarListUsers items={mostFollowedUsers} />
         </SidebarBlock>
         <Hr spacer />
-        <SidebarBlock title="New Users" href="users?sort=createdat&page[size]=10" loading={newUsersLoading}>
+        <SidebarBlock title="New Users" href="users?sort=createdAt&page[size]=10" loading={newUsersLoading}>
           <SidebarListUsers items={newUsers} />
         </SidebarBlock>
       </Sidebar>

@@ -8,7 +8,7 @@ export const followingUsersInitialLoader = async ({ params }: RequestParameters 
   Sections: SectionsState;
 }> => {
   const { data: usersData }: UsersLoadApiResponse = await HttpClient.get(
-    `/users/${params?.userId}/following?sort=-createdat&page[size]=5`
+    `/users/${params?.userId}/following?sort=-createdAt&page[size]=5`
   );
 
   const UsersByKey = {

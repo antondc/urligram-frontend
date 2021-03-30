@@ -23,7 +23,7 @@ export const sectionsNewListsLoad = (): AppThunk<Promise<ListState[]>, ListsActi
       })
     );
 
-    const { data }: ListsLoadApiResponse = await HttpClient.get('/lists?sort=-createdat&page[size]=5');
+    const { data }: ListsLoadApiResponse = await HttpClient.get('/lists?sort=-createdAt&page[size]=5');
     const listsArray = data?.map((item) => item.attributes);
     const { Sections: sectionsAfterApi, Lists: listsAfterApi } = getState();
 

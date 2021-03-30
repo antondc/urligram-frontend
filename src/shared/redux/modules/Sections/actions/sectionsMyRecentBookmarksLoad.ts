@@ -26,7 +26,7 @@ export const sectionsMyRecentBookmarksLoad = (
     );
 
     const { data } = await HttpClient.get<void, BookmarksGetApiResponse>(
-      `/users/${sessionId}/bookmarks?page[size]=5&sort=-createdat`
+      `/users/${sessionId}/bookmarks?page[size]=5&sort=-createdAt`
     );
     const { Sections: sectionsAfterApi, Bookmarks: bookmarksAfterApi } = getState();
     const bookmarksArray = data?.map((item) => item.attributes);

@@ -49,8 +49,8 @@ export const Lists: React.FC<Props> = ({
         <Flex horizontal="right">
           <SortBy
             options={[
-              { label: 'Date', field: 'createdat' },
-              { label: 'Updated', field: 'updatedat' },
+              { label: 'Date', field: 'createdAt' },
+              { label: 'Updated', field: 'updatedAt' },
               { label: 'Members', field: 'members' },
             ]}
             href={url}
@@ -83,7 +83,7 @@ export const Lists: React.FC<Props> = ({
           <SidebarListTags items={mostUsedTags} />
         </SidebarBlock>
         <Hr spacer />
-        <SidebarBlock title="New Users" href="users?sort=createdat&page[size]=10" loading={newUsersLoading}>
+        <SidebarBlock title="New Users" href="users?sort=createdAt&page[size]=10" loading={newUsersLoading}>
           <SidebarListUsers items={newUsers} />
         </SidebarBlock>
       </Sidebar>
