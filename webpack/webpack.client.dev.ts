@@ -8,7 +8,7 @@ import webpackClientCommonConfig from './webpack.client.common';
 
 const webpackClientDevConfig = {
   mode: 'development',
-  entry: ['webpack-hot-middleware/client?reload=true', WEBPACK_SRC_CLIENT],
+  entry: ['webpack-hot-middleware/client', WEBPACK_SRC_CLIENT],
   output: {
     filename: 'client-[hash:4].js',
     publicPath: WEBPACK_ROOT,
