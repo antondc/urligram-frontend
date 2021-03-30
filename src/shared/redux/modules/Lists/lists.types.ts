@@ -24,8 +24,8 @@ export interface ListState {
     id: number;
     name: string;
   }[];
-  createdAt: string;
-  updatedAt: string;
+  createdAt: number;
+  updatedAt: number;
 }
 
 export interface ListsState {

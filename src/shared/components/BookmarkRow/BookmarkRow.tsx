@@ -26,6 +26,7 @@ interface BookmarkRow extends BookmarkState {
   isPrivateRequestFailed: boolean;
   isPrivateRequestPending: boolean;
   isBookmarkDeletePending: boolean;
+  createdAtFormatted: string;
   onVote: (vote: boolean | null) => void;
   onEdit: () => void;
   onPrivateSwitch: () => void;
@@ -54,7 +55,7 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
   onBookmarkGrab,
   onBookmarkDelete,
   favicon,
-  createdAt,
+  createdAtFormatted,
   recentlyCreated,
   onMouseLeave,
 }) => (
@@ -130,7 +131,7 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
         </div>
       </div>
       <Span size="micro" className="BookmarkRow-stat">
-        {createdAt}
+        {createdAtFormatted}
       </Span>
     </div>
     {isOwnBookmark && (

@@ -13,8 +13,8 @@ export interface UserState {
   statement: string;
   location: string;
   order: number;
-  createdAt: Date | string;
-  updatedAt: Date | string;
+  createdAt: number;
+  updatedAt: number;
   followers?: string[];
   following?: string[];
   lists?: {

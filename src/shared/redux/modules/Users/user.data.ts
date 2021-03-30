@@ -8,8 +8,8 @@ export const mockUser = {
   statement: 'The quick brown fox jumps over the lazy dog',
   location: 'Moon',
   order: 3,
-  createdAt: '2015-03-19T16:47:48.000Z',
-  updatedAt: '2021-01-10T16:47:48.000Z',
+  createdAt: 276387642,
+  updatedAt: 276387642,
   bookmarksIds: [21, 23, 24, 25, 26, 27, 28, 29, 30],
   lists: [
     {

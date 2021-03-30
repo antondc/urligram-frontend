@@ -3,7 +3,6 @@ import React from 'react';
 import A from 'Components/A';
 import { LinkState } from 'Modules/Links/links.types';
 import {
-  Bookmark,
   BookmarkFilled,
   BookmarkWithBackground,
   Border,
@@ -20,6 +19,7 @@ interface LinkRow extends LinkState {
   onVote: (vote: boolean | null) => void;
   onBookmarkGrab: () => void;
   onBookmarkDelete: () => void;
+  createdAtFormatted: string;
   isBookmarkDeletePending: boolean;
   bookmarkingLoading: boolean;
   userBookmarked: boolean;
@@ -37,7 +37,7 @@ export const LinkRow: React.FC<Partial<LinkRow>> = ({
   onBookmarkDelete,
   isBookmarkDeletePending,
   favicon,
-  createdAt,
+  createdAtFormatted,
   userBookmarked,
   bookmarkingLoading,
 }) => (
@@ -86,7 +86,7 @@ export const LinkRow: React.FC<Partial<LinkRow>> = ({
         <br />
       </div>
       <Span size="micro" className="LinkRow-stat">
-        {createdAt || ''}
+        {createdAtFormatted || ''}
       </Span>
     </div>
     {userBookmarked && (

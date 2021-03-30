@@ -6,12 +6,13 @@ import { Border, Span, Tag } from '@antoniodcorrea/components';
 
 import './UserRow.less';
 
-interface UserRow extends UserState {
+interface UserRow extends Partial<UserState> {
   id: string;
   connections: number;
   ammountLists: number;
   ammountBookmarks: number;
   sinceTranslation: string;
+  createdAtFormatted: string;
 }
 
 export const UserRow: React.FC<UserRow> = ({
@@ -19,7 +20,7 @@ export const UserRow: React.FC<UserRow> = ({
   name,
   image,
   tags,
-  createdAt,
+  createdAtFormatted,
   connections,
   ammountLists,
   ammountBookmarks,
@@ -44,7 +45,7 @@ export const UserRow: React.FC<UserRow> = ({
         <A href={`users/${id}`} styled frontend disabled={!connections}>
           {connections} connections
         </A>
-        <span className="UserRow-dot">·</span> {sinceTranslation?.toLocaleLowerCase()} {createdAt}
+        <span className="UserRow-dot">·</span> {sinceTranslation?.toLocaleLowerCase()} {createdAtFormatted}
       </Span>
     </div>
     <div className="UserRow-center">

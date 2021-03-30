@@ -35,8 +35,8 @@ const User: React.FC<Props> = () => {
   const followersUsers = useSelector(selectFollowersUsers);
   const followersUsersLoading = useSelector(selectFollowersUsersLoading);
   const currentLanguageSlug = useSelector(selectCurrentLanguageSlug);
-  const date = new LocaleFormattedDate(user?.createdAt, currentLanguageSlug);
-  const createdAt = date.getLocaleFormattedDate();
+  const date = new LocaleFormattedDate({ unixTime: user?.createdAt, locale: currentLanguageSlug });
+  const createdAtFormatted = date.getLocaleFormattedDate();
 
   const loadMainContent = () => {
     dispatch(bookmarksLoadByUserId(userId, 5));
@@ -54,7 +54,7 @@ const User: React.FC<Props> = () => {
     <UserUi
       userId={userId}
       user={user}
-      createdAt={createdAt}
+      createdAtFormatted={createdAtFormatted}
       bookmarksIds={bookmarksIds}
       bookmarksLoading={bookmarksLoading}
       followingUsers={followingUsers}

@@ -16,7 +16,7 @@ import './User.less';
 interface Props {
   userId: string;
   user: UserState;
-  createdAt: string;
+  createdAtFormatted: string;
   bookmarksIds: number[];
   bookmarksLoading: boolean;
   followingUsers: UserState[];
@@ -29,7 +29,7 @@ interface Props {
 export const User: React.FC<Props> = ({
   userId,
   user,
-  createdAt,
+  createdAtFormatted,
   bookmarksIds,
   bookmarksLoading,
   followingUsers,
@@ -57,7 +57,7 @@ export const User: React.FC<Props> = ({
               <Hr spacer size="zero" />
               <Hr spacer size="micro" />
               <Span bold>Created at:</Span>
-              <Span> {createdAt}</Span>
+              <Span> {createdAtFormatted}</Span>
             </div>
             <img className="User-image" src={user?.image} />
           </Flex>

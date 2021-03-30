@@ -23,7 +23,7 @@ const ListRow: React.FC<Props> = ({
   list: { name, image, tags, createdAt, updatedAt, bookmarksIds, description, membersIds } = {},
   slug,
 }) => {
-  const date = new LocaleFormattedDate(createdAt, slug);
+  const date = new LocaleFormattedDate({ unixTime: createdAt, locale: slug });
   const formattedDate = date.getLocaleFormattedDate();
 
   return (
@@ -31,7 +31,7 @@ const ListRow: React.FC<Props> = ({
       id={id}
       name={name}
       description={description}
-      createdAt={formattedDate}
+      createdAtFormatted={formattedDate}
       updatedAt={updatedAt}
       membersIds={membersIds}
       image={image}

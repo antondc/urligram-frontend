@@ -34,8 +34,8 @@ export interface BookmarkState {
   img: string;
   favicon: string;
   linkId: number;
-  createdAt: string;
-  updatedAt: string;
+  createdAt: number;
+  updatedAt: number;
   users: string[];
   isPrivate: boolean;
   tags: {

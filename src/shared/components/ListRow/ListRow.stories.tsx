@@ -17,7 +17,7 @@ const props = {
   description: 'List description, this is a cool list',
   image: 'https://picsum.photos/300/200',
   membersIds: [],
-  createdAt: '',
+  createdAt: 2453453,
   sinceTranslation: 'since',
   listsIds: [1, 3, 5],
   tags: [

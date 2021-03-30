@@ -31,8 +31,8 @@ const LinkRow: React.FC<Props> = ({ id }) => {
   const [bookmarkingLoading, setBookmarkingLoading] = useState<boolean>(false);
   const [isBookmarkDeletePending, setIsBookmarkDeletePending] = useState<boolean>(false);
   const { linkId, title, url, tags = [], favicon, statistics, createdAt, users } = link;
-  const date = new LocaleFormattedDate(createdAt, currentLanguageSlug);
-  const formattedDate = date.getLocaleFormattedDate();
+  const date = new LocaleFormattedDate({ unixTime: createdAt, locale: currentLanguageSlug });
+  const createdAtFormatted = date.getLocaleFormattedDate();
   const isLogged = useSelector(selectSessionLoggedIn);
   const userBookmarked = users.includes(sessionId);
   const tagsByName = tags?.map((item) => ({ tag: item.name }));
@@ -78,7 +78,7 @@ const LinkRow: React.FC<Props> = ({ id }) => {
       onBookmarkGrab={onBookmarkGrab}
       onBookmarkDelete={onBookmarkDelete}
       isBookmarkDeletePending={isBookmarkDeletePending}
-      createdAt={formattedDate}
+      createdAtFormatted={createdAtFormatted}
       userBookmarked={userBookmarked}
       bookmarkingLoading={bookmarkingLoading}
     />

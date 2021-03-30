@@ -22,8 +22,8 @@ export interface LinkState {
     name: string;
   }[];
   users: string[];
-  createdAt: string;
-  updatedAt: string;
+  createdAt: number;
+  updatedAt: number;
   statistics: {
     absoluteVote: number | null;
     timesVoted: number;

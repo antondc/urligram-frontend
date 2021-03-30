@@ -24,8 +24,8 @@ const props = {
   connections: 2,
   ammountLists: 4,
   ammountBookmarks: 4,
-  createdAt: '3 de abril de 2008',
-  updatedAt: '3 de abril de 2008',
+  createdAt: 29794,
+  updatedAt: 29794,
   sinceTranslation: 'since',
   tags: [
     {

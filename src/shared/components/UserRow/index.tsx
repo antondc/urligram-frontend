@@ -46,8 +46,8 @@ const UserRow: React.FC<Props> = ({
   slug,
   currentGlossary: { since },
 }) => {
-  const date = new LocaleFormattedDate(createdAt, slug);
-  const formattedDate = date.getLocaleFormattedDate();
+  const date = new LocaleFormattedDate({ unixTime: createdAt, locale: slug });
+  const createdAtFormatted = date.getLocaleFormattedDate();
   const connections = followers?.length || 0 + following?.length || 0;
   const ammountLists = lists?.length || 0;
   const ammountBookmarks = bookmarksIds?.length || 0;
@@ -67,7 +67,7 @@ const UserRow: React.FC<Props> = ({
       connections={connections}
       ammountLists={ammountLists}
       ammountBookmarks={ammountBookmarks}
-      createdAt={formattedDate}
+      createdAtFormatted={createdAtFormatted}
       updatedAt={updatedAt}
       sinceTranslation={since}
     />

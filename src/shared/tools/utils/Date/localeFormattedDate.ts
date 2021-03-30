@@ -1,9 +1,17 @@
+type Options = {
+  unixTime: number;
+  locale: string;
+};
+
 export class LocaleFormattedDate {
   private date: Date;
   private locale: string;
 
-  constructor(date: Date | string, locale: string) {
-    this.date = new Date(date);
+  constructor({ unixTime, locale }: Options) {
+    const unixTimeMil = unixTime * 1000; // Unix time is in sec; new Date() needs miliseconds
+
+    this.date = new Date(unixTimeMil);
+
     this.locale = locale;
   }
 

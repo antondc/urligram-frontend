@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { bookmarkCreate } from 'Modules/Bookmarks/actions/bookmarkCreate';
@@ -11,8 +11,8 @@ import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLo
 import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUserId';
 import { switchBookmarkUpdateModal } from 'Modules/Ui/actions/switchBookmarkUpdateModal';
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
-import { diffClientTimeAgainstUTC } from 'Tools/utils/Date/diffClientTimeAgainstUTC';
 import { LocaleFormattedDate } from 'Tools/utils/Date/localeFormattedDate';
+import { unixTimeElapsed } from 'Tools/utils/Date/unixTimeElapsed';
 import {
   REQUEST_FAILED,
   REQUEST_STARTED,
@@ -52,15 +52,15 @@ const BookmarkRow: React.FC<Props> = ({ id, loadMainContent }) => {
 
   const [bookmarkingLoading, setBookmarkingLoading] = useState<boolean>(false);
   const [isBookmarkDeletePending, setIsBookmarkDeletePending] = useState<boolean>(false);
-  const timePassed = diffClientTimeAgainstUTC(createdAt);
+  const timePassed = unixTimeElapsed(createdAt);
   const recentlyCreated = timePassed < TIME_RECENTLY_CREATED_BOOKMARK;
   const [recentlyCreatedState, setRecentlyCreatedState] = useState(recentlyCreated);
   const [isPrivateRequestStatus, setPrivateRequestStatus] = useState<ResponseStatus>(undefined);
   const isPrivateRequestFailed = isPrivateRequestStatus === REQUEST_FAILED;
   const isPrivateRequestPending = isPrivateRequestStatus === REQUEST_STARTED;
   const currentLanguageSlug = useSelector(selectCurrentLanguageSlug);
-  const date = new LocaleFormattedDate(createdAt, currentLanguageSlug);
-  const formattedDate = date.getLocaleFormattedDate();
+  const date = new LocaleFormattedDate({ unixTime: createdAt, locale: currentLanguageSlug });
+  const createdAtFormatted = date.getLocaleFormattedDate();
   const userBookmarkedLink = users?.includes(sessionId);
   const tagsByName = tags?.map((item) => ({ tag: item.name }));
 
@@ -136,7 +136,7 @@ const BookmarkRow: React.FC<Props> = ({ id, loadMainContent }) => {
       linkId={linkId}
       title={title}
       url={url}
-      createdAt={formattedDate}
+      createdAtFormatted={createdAtFormatted}
       tags={tags}
       favicon={favicon}
       img={img}
