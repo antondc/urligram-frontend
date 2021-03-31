@@ -3,6 +3,9 @@ import {
   LIST_CREATE_REQUEST,
   LIST_CREATE_RESET,
   LIST_CREATE_SUCCESS,
+  LIST_UPDATE_FAILURE,
+  LIST_UPDATE_REQUEST,
+  LIST_UPDATE_SUCCESS,
   LISTS_LOAD_REQUEST,
   LISTS_LOAD_SUCCESS,
   ListsActions,
@@ -21,6 +24,9 @@ export const Lists = (state = initialState, action: ListsActions): ListsState =>
     case LIST_CREATE_REQUEST:
     case LIST_CREATE_SUCCESS:
     case LIST_CREATE_FAILURE:
+    case LIST_UPDATE_REQUEST:
+    case LIST_UPDATE_SUCCESS:
+    case LIST_UPDATE_FAILURE:
     case LIST_CREATE_RESET:
       return Object.assign({}, state, action.payload);
 

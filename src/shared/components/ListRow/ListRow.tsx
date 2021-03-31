@@ -2,11 +2,34 @@ import React from 'react';
 
 import A from 'Components/A';
 import { ListState } from 'Modules/Lists/lists.types';
-import { Bookmark, Border, Edit, Flex, List, Private, Span, Tag, User } from '@antoniodcorrea/components';
+import { Bookmark, Border, Edit, Fade, Flex, List, Private, Span, Tag, User } from '@antoniodcorrea/components';
 
 import './ListRow.less';
 
-export const ListRow: React.FC<Partial<ListState>> = ({ id, name, tags, bookmarksIds, membersIds, description }) => (
+interface Props extends Partial<ListState> {
+  isPrivateRequestFailed: boolean;
+  isPrivateRequestPending: boolean;
+  sessionUserFollowsList: boolean;
+  sessionUserOwnsList: boolean;
+  onEdit: () => void;
+  onPrivateSwitch: () => void;
+}
+
+export const ListRow: React.FC<Props> = ({
+  id,
+  name,
+  tags,
+  bookmarksIds,
+  membersIds,
+  description,
+  onEdit,
+  onPrivateSwitch,
+  isPrivate,
+  isPrivateRequestFailed,
+  isPrivateRequestPending,
+  sessionUserOwnsList,
+  sessionUserFollowsList,
+}) => (
   <Border grow className="ListRow" data-test-id="ListRow" key={id}>
     <div className="ListRow-left">
       <Span size="normal" bold className="ListRow-title">
@@ -29,20 +52,18 @@ export const ListRow: React.FC<Partial<ListState>> = ({ id, name, tags, bookmark
     </div>
     <div className="ListRow-right">
       <Flex vertical="center" horizontal="right" growVertical={false}>
-        <Private
-          size="micro"
-          className="ListRow-action"
-          onClick={() => {
-            alert('Private');
-          }}
-        />
-        <Edit
-          size="micro"
-          className="ListRow-action"
-          onClick={() => {
-            alert('Edit');
-          }}
-        />
+        <Fade classname="ListRow-icon" mounted={sessionUserOwnsList && isPrivate} speed="fast">
+          <Private
+            size="micro"
+            className={
+              'ListRow-action ListRow-private' +
+              (isPrivateRequestPending ? ' ListRow--pending' : '') +
+              (isPrivateRequestFailed ? ' ListRow--failed' : '')
+            }
+            onClick={onPrivateSwitch}
+          />
+        </Fade>
+        {sessionUserOwnsList && <Edit size="micro" className="ListRow-action" onClick={onEdit} />}
       </Flex>
       <Flex horizontal="right" growVertical={false} noWrap>
         <Span size="micro" className="ListRow-stat">
@@ -53,7 +74,14 @@ export const ListRow: React.FC<Partial<ListState>> = ({ id, name, tags, bookmark
         </Span>
       </Flex>
     </div>
-    <List className="ListRow-list" size="small" />
+    <List
+      className={
+        'ListRow-list ' +
+        (sessionUserFollowsList ? ' ListRow-list--followed' : '') +
+        (sessionUserOwnsList ? ' ListRow-list--owned' : '')
+      }
+      size="small"
+    />
   </Border>
 );
 

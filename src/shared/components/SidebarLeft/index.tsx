@@ -22,7 +22,7 @@ export const SidebarLeft: React.FC = () => {
 
   const switchUiListModal = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    dispatch(switchListModal(true));
+    dispatch(switchListModal({ mounted: true }));
   };
 
   return (

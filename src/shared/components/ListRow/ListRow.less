@@ -23,15 +23,6 @@
     overflow: hidden;
   }
 
-  &-icons {
-    display: flex;
-    justify-content: flex-start;
-  }
-
-  &-icon {
-    margin-right: 5px;
-  }
-
   &-favicon {
     height: 10px;
     width: 10px;
@@ -105,18 +96,21 @@
     border: 2px solid @c-base;
   }
 
-  &-vote {
-    //
-  }
-
-  &-actions {
-    //
+  &-icon {
+    line-height: 0;
   }
 
   &-action {
     margin-left: 5px;
 
     .hoverTransition(0.5);
+  }
+
+  &-private {
+    .hoverTransition(0.5);
+
+    margin-left: 5px;
+    fill: @c-error;
   }
 
   &-stats {
@@ -150,11 +144,21 @@
     position: absolute;
     height: 12px;
     width: 12px;
-    top: -7px;
+    top: -6px;
     right: 5px;
     line-height: 0;
     background: @c-background;
     box-shadow: -2px 0 0 0 @c-background, 2px 0 0 0 @c-background;
     fill: @c-base;
+
+    &--owned {
+      fill: @c-error;
+      //;
+    }
+
+    &--followed {
+      // fill: @c-success;
+      //
+    }
   }
 }

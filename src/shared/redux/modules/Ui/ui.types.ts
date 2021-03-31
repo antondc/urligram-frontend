@@ -47,8 +47,12 @@ export type UiState = {
   forgotPasswordModal: UiBaseModal;
   resetPasswordModal: UiBaseModal;
   bookmarkCreateModal: UiBaseModal;
-  bookmarkUpdateModal: UiBaseModal & { bookmarkId: number };
-  listModal: UiBaseModal;
+  bookmarkUpdateModal: {
+    bookmarkId: number;
+  } & UiBaseModal;
+  listModal: {
+    listId?: number;
+  } & UiBaseModal;
   notifications?: NotificationState[];
 };
 

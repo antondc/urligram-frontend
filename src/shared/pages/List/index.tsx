@@ -7,7 +7,7 @@ import { selectBookmarksLoading } from 'Modules/Bookmarks/selectors/selectBookma
 import { selectBookmarksMetaSort } from 'Modules/Bookmarks/selectors/selectBookmarksMetaSort';
 import { selectBookmarksTotalItems } from 'Modules/Bookmarks/selectors/selectBookmarkTotalItems';
 import { listsLoadByUserId } from 'Modules/Lists/actions/listLoadById';
-import { selectListsById } from 'Modules/Lists/selectors/selectListById';
+import { selectListById } from 'Modules/Lists/selectors/selectListById';
 import { RootState } from 'Modules/rootType';
 import { selectCurrentFullUrl } from 'Modules/Routes/selectors/selectCurrentFullUrl';
 import { selectCurrentRouteParamListId } from 'Modules/Routes/selectors/selectCurrentRouteParamListId';
@@ -24,7 +24,7 @@ import { List as ListUI } from './List';
 const List: React.FC = () => {
   const dispatch = useDispatch();
   const listId = useSelector(selectCurrentRouteParamListId);
-  const list = useSelector((state: RootState) => selectListsById(state, { id: listId }));
+  const list = useSelector((state: RootState) => selectListById(state, { id: listId }));
   const bookmarksIds = useSelector(selectBookmarksCurrentIds);
   const bookmarksLoading = useSelector(selectBookmarksLoading);
   const usersInThisListIds = useSelector((state: RootState) => selectUsersInThisListIds(state, { listId }));

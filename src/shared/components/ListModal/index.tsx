@@ -1,19 +1,22 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Cross from 'Assets/svg/cross.svg';
 import BaseModal from 'Components/BaseModal';
 import ListForm from 'Components/ListForm';
 import { switchListModal } from 'Modules/Ui/actions/switchListModal';
 import { Border, Flex, H3, Hr } from '@antoniodcorrea/components';
+import { selectUiListModal } from '../../redux/modules/Ui/selectors/selectUiListModal';
 
 import './ListModal.less';
 
 const ListModal: React.FC = () => {
   const dispatch = useDispatch();
+  const { listId } = useSelector(selectUiListModal);
+  const isUpdate = !!listId;
 
   const closeModal = () => {
-    dispatch(switchListModal(false));
+    dispatch(switchListModal({ mounted: false }));
   };
 
   return (
@@ -21,7 +24,7 @@ const ListModal: React.FC = () => {
       <Border className="ListModal" grow>
         <Cross className="ListModal-cross" onClick={closeModal} />
         <Flex horizontal="center">
-          <H3>Create List</H3>
+          <H3>{!!isUpdate ? 'Update List' : 'Create List'}</H3>
         </Flex>
         <Hr spacer size="small" />
         <ListForm closeModal={closeModal} />

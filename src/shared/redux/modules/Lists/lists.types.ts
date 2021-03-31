@@ -5,6 +5,9 @@ export const LIST_LOAD_SUCCESS = 'LIST_LOAD_SUCCESS';
 export const LIST_CREATE_REQUEST = 'LIST_CREATE_REQUEST';
 export const LIST_CREATE_SUCCESS = 'LIST_CREATE_SUCCESS';
 export const LIST_CREATE_FAILURE = 'LIST_CREATE_FAILURE';
+export const LIST_UPDATE_REQUEST = 'LIST_UPDATE_REQUEST';
+export const LIST_UPDATE_SUCCESS = 'LIST_UPDATE_SUCCESS';
+export const LIST_UPDATE_FAILURE = 'LIST_UPDATE_FAILURE';
 export const LIST_CREATE_RESET = 'LIST_CREATE_RESET';
 
 export interface ListsError extends Error {
@@ -69,6 +72,17 @@ export interface ListCreateApiResponse {
   data: ListApiResponseItem;
 }
 
+export interface ListUpdateApiRequest {
+  listId: number;
+  listName: string;
+  listDescription: string;
+  listIsPrivate: boolean;
+}
+
+export interface ListUpdateApiResponse {
+  data: ListApiResponseItem;
+}
+
 interface ListsLoadRequestAction {
   type: typeof LISTS_LOAD_REQUEST;
   payload: Partial<ListsState>;
@@ -109,6 +123,21 @@ interface ListCreateResetAction {
   payload: Partial<ListsState>;
 }
 
+interface ListUpdateRequestAction {
+  type: typeof LIST_UPDATE_REQUEST;
+  payload: Partial<ListsState>;
+}
+
+interface ListUpdateSuccessAction {
+  type: typeof LIST_UPDATE_SUCCESS;
+  payload: Partial<ListsState>;
+}
+
+interface ListUpdateFailureAction {
+  type: typeof LIST_UPDATE_FAILURE;
+  payload: Partial<ListsState>;
+}
+
 export type ListsActions =
   | ListsLoadRequestAction
   | ListsLoadSuccessAction
@@ -117,4 +146,7 @@ export type ListsActions =
   | ListCreateRequestAction
   | ListCreateSuccessAction
   | ListCreateFailureAction
+  | ListUpdateRequestAction
+  | ListUpdateSuccessAction
+  | ListUpdateFailureAction
   | ListCreateResetAction;

@@ -21,6 +21,12 @@ const props = {
   createdAtFormatted: '',
   sinceTranslation: 'since',
   listsIds: [1, 3, 5],
+  isPrivateRequestFailed: false,
+  isPrivateRequestPending: false,
+  sessionUserFollowsList: false,
+  sessionUserOwnsList: false,
+  onEdit: () => {},
+  onPrivateSwitch: () => {},
   tags: [
     {
       id: 1,
