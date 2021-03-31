@@ -6,12 +6,12 @@ import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCur
 import { listUpdate } from 'Modules/Lists/actions/listUpdate';
 import { ListState } from 'Modules/Lists/lists.types';
 import { selectListById } from 'Modules/Lists/selectors/selectListById';
+import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUserId';
 import { switchListModal } from 'Modules/Ui/actions/switchListModal';
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
 import { REQUEST_FAILED, REQUEST_STARTED, REQUEST_SUCCEEDED, ResponseStatus } from '../../constants';
-import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { ListRow as ListRowUi } from './ListRow';
 
 import './ListRow.less';
@@ -35,7 +35,6 @@ const ListRow: React.FC<Props> = ({
   const isPrivateRequestFailed = isPrivateRequestStatus === REQUEST_FAILED;
   const isPrivateRequestPending = isPrivateRequestStatus === REQUEST_STARTED;
   const sessionUserFollowsList = members?.some((item) => item.id === sessionId);
-  const sessionUserRole = members?.find((item) => item.id === sessionId)?.userRole || 'owner';
   const sessionUserOwnsList = userId === sessionId;
 
   const onEdit = async () => {
@@ -85,7 +84,6 @@ const ListRow: React.FC<Props> = ({
       isPrivateRequestPending={isPrivateRequestPending}
       sessionUserFollowsList={sessionUserFollowsList}
       sessionUserOwnsList={sessionUserOwnsList}
-      sessionUserRole={sessionUserRole}
     />
   );
 };

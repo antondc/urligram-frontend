@@ -23,7 +23,6 @@ interface Props extends Partial<ListState> {
   isPrivateRequestPending: boolean;
   sessionUserFollowsList: boolean;
   sessionUserOwnsList: boolean;
-  sessionUserRole?: string;
   session?: SessionState;
   onEdit: () => void;
   onPrivateSwitch: () => void;
@@ -44,7 +43,6 @@ export const ListRow: React.FC<Props> = ({
   isPrivateRequestPending,
   sessionUserOwnsList,
   sessionUserFollowsList,
-  sessionUserRole,
 }) => (
   <Border grow className="ListRow" data-test-id="ListRow" key={id}>
     <div className="ListRow-left">
@@ -68,7 +66,6 @@ export const ListRow: React.FC<Props> = ({
     </div>
     <div className="ListRow-right">
       <Flex vertical="center" horizontal="right" growVertical={false}>
-        {sessionUserRole && <Span size="nano">{sessionUserRole}</Span>}
         <Fade classname="ListRow-icon" mounted={sessionUserOwnsList && isPrivate} speed="fast">
           <Private
             size="micro"
