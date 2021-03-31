@@ -16,7 +16,7 @@ const props = {
   name: 'List name',
   description: 'List description, this is a cool list',
   image: 'https://picsum.photos/300/200',
-  membersIds: [],
+  members: [],
   createdAt: 2453453,
   createdAtFormatted: '',
   sinceTranslation: 'since',
@@ -25,6 +25,7 @@ const props = {
   isPrivateRequestPending: false,
   sessionUserFollowsList: false,
   sessionUserOwnsList: false,
+  sessionUserRole: 'editor',
   onEdit: () => {},
   onPrivateSwitch: () => {},
   tags: [

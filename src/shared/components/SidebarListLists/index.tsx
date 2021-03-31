@@ -18,7 +18,7 @@ interface Props {
 const SidebarListLists: React.FC<Props> = ({ items, loading, title: blockTitle }) => (
   <dl className="SidebarListLists-lists">
     {!loading ? (
-      items.map(({ id, name, membersIds, bookmarksIds }, index) => (
+      items.map(({ id, name, members, bookmarksIds }, index) => (
         <React.Fragment key={id}>
           {!!index && <Hr spacer size="micro" />}
           <dd className="SidebarListLists-list">
@@ -28,7 +28,7 @@ const SidebarListLists: React.FC<Props> = ({ items, loading, title: blockTitle }
               </A>
             </div>
             <div id={id + '-' + index} className="SidebarListLists-listDescription">
-              {!!membersIds?.length && (
+              {!!members?.length && (
                 <>
                   <RenderInPortal>
                     <Tooltip
@@ -39,7 +39,7 @@ const SidebarListLists: React.FC<Props> = ({ items, loading, title: blockTitle }
                   </RenderInPortal>
                   <A href={`lists/${id}/users`} frontend>
                     <Span id={`${stringToDashCase(blockTitle)}-members-${id}`} size="small">
-                      {membersIds?.length + 1}
+                      {members?.length + 1}
                       {bookmarksIds?.length && <> · </>}
                     </Span>
                   </A>

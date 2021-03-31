@@ -4,19 +4,28 @@ import Logo from 'Assets/svg/logo.svg';
 import User from 'Assets/svg/user.svg';
 import A from 'Components/A';
 import { GlossaryState } from 'Modules/Languages/languages.types';
+import { SessionState } from 'Modules/Session/session.types';
 import { Border, H3, H4 } from '@antoniodcorrea/components';
 
 import './Header.less';
 
 interface Props {
   isLogged: boolean;
+  session: SessionState;
   currentGlossary: GlossaryState;
   loading: boolean;
   switchUserModal: () => void;
   switchLoginModal: (mount: true) => void;
 }
 
-export const Header: React.FC<Props> = ({ isLogged, currentGlossary, switchUserModal, switchLoginModal, loading }) => (
+export const Header: React.FC<Props> = ({
+  isLogged,
+  currentGlossary,
+  switchUserModal,
+  switchLoginModal,
+  loading,
+  session,
+}) => (
   <header>
     <Border className="Header" weight="thick">
       <A className="Header-brand" href={'/'} frontend>
@@ -38,11 +47,19 @@ export const Header: React.FC<Props> = ({ isLogged, currentGlossary, switchUserM
         </A>
       </nav>
       <div className="Header-user">
-        <User
-          name="User"
-          className={'Header-userLogo' + (isLogged ? ' Header-userLogo--isActive' : '')}
-          onClick={isLogged ? switchUserModal : () => switchLoginModal(true)}
-        />
+        {isLogged ? (
+          <img
+            className="Header-userLogo"
+            src={session?.image}
+            onClick={isLogged ? switchUserModal : () => switchLoginModal(true)}
+          />
+        ) : (
+          <User
+            name="User"
+            className={'Header-userLogo' + (isLogged ? ' Header-userLogo--isActive' : '')}
+            onClick={isLogged ? switchUserModal : () => switchLoginModal(true)}
+          />
+        )}
       </div>
     </Border>
   </header>

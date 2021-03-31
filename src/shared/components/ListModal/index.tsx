@@ -6,7 +6,7 @@ import BaseModal from 'Components/BaseModal';
 import ListForm from 'Components/ListForm';
 import { switchListModal } from 'Modules/Ui/actions/switchListModal';
 import { Border, Flex, H3, Hr } from '@antoniodcorrea/components';
-import { selectUiListModal } from '../../redux/modules/Ui/selectors/selectUiListModal';
+import { selectUiListModal } from 'Modules/Ui/selectors/selectUiListModal';
 
 import './ListModal.less';
 

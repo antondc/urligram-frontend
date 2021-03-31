@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { bookmarkCreate } from 'Modules/Bookmarks/actions/bookmarkCreate';
+import { bookmarkDelete } from 'Modules/Bookmarks/actions/bookmarkDelete';
+import { selectBookmarkByLinkIdAndUserId } from 'Modules/Bookmarks/selectors/selectBookmarkByLinkIdAndUserId';
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
 import { linkUpdateVote } from 'Modules/Links/actions/linkUpdateVote';
 import { selectLinkById } from 'Modules/Links/selectors/selectLinkById';
@@ -10,8 +12,6 @@ import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLo
 import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUserId';
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
 import { LocaleFormattedDate } from 'Tools/utils/Date/localeFormattedDate';
-import { bookmarkDelete } from '../../redux/modules/Bookmarks/actions/bookmarkDelete';
-import { selectBookmarkByLinkIdAndUserId } from '../../redux/modules/Bookmarks/selectors/selectBookmarkByLinkIdAndUserId';
 import { LinkRow as LinkRowUi } from './LinkRow';
 
 import './LinkRow.less';

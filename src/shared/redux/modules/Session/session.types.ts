@@ -38,6 +38,7 @@ export interface SessionState {
   status?: SessionStatus;
   level?: SessionLevel;
   logged?: boolean;
+  image?: string;
   token?: string;
   iat?: number;
   errors?: SessionError[];

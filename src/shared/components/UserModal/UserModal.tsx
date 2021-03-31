@@ -3,20 +3,28 @@ import React from 'react';
 import Cross from 'Assets/svg/cross.svg';
 import User from 'Assets/svg/user.svg';
 import A from 'Components/A';
+import { SessionState } from 'Modules/Session/session.types';
 import { Border, Hr, Span } from '@antoniodcorrea/components';
 
 import './UserModal.less';
 
 interface Props {
   sessionId: string;
+  session: SessionState;
   sessionLogOut: () => void;
   switchMessageModal: () => void;
   switchUserModal: () => void;
 }
 
-export const UserModal: React.FC<Props> = ({ sessionId, sessionLogOut, switchUserModal, switchMessageModal }) => (
+export const UserModal: React.FC<Props> = ({
+  sessionId,
+  session,
+  sessionLogOut,
+  switchUserModal,
+  switchMessageModal,
+}) => (
   <Border className="UserModal" onClick={switchUserModal} onMouseLeave={switchUserModal}>
-    <Cross className="UserModal-cross" />
+    {sessionId ? <img className="UserModal-userLogo" src={session?.image} /> : <Cross className="UserModal-cross" />}
     <User className="UserModal-userLogo" onClick={switchMessageModal} />
     <ul>
       <li>

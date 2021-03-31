@@ -59,7 +59,7 @@ export const Lists: React.FC<Props> = ({
         </Flex>
         <Hr spacer size="small" />
         <Border grow>
-          <H4>My Lists</H4>
+          <H4>All Lists</H4>
           <Hr spacer size="small" />
           <FadeInOut valueToUpdate={listsIdsLoading} speed="fastest" appear>
             {listsIdsLoading ? (

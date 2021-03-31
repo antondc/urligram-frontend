@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 import { selectBookmarksLoading } from 'Modules/Bookmarks/selectors/selectBookmarksLoading';
@@ -9,6 +9,7 @@ import { selectCurrentGlossary } from 'Modules/Languages/selectors/selectCurrent
 import { selectLinksLoading } from 'Modules/Links/selectors/selectLinksLoading';
 import { selectLinksVoteLoading } from 'Modules/Links/selectors/selectLinksVoteLoading';
 import { selectListsLoading } from 'Modules/Lists/selectors/selectListsLoading';
+import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
 import { switchUserModal } from 'Modules/Ui/actions/switchUserModal';
@@ -44,10 +45,12 @@ const Header: React.FC<Props> = ({
 }) => {
   const loading =
     bookmarksLoading || linksLoading || linksVoteLoading || bookmarksVoteLoading || usersLoading || listsLoading;
+  const session = useSelector(selectSession);
 
   return (
     <HeaderUi
       isLogged={isLogged}
+      session={session}
       currentGlossary={currentGlossary}
       switchUserModal={switchUserModal}
       switchLoginModal={switchLoginModal}

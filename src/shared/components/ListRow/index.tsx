@@ -11,6 +11,7 @@ import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUser
 import { switchListModal } from 'Modules/Ui/actions/switchListModal';
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
 import { REQUEST_FAILED, REQUEST_STARTED, REQUEST_SUCCEEDED, ResponseStatus } from '../../constants';
+import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { ListRow as ListRowUi } from './ListRow';
 
 import './ListRow.less';
@@ -24,15 +25,17 @@ interface Props {
 
 const ListRow: React.FC<Props> = ({
   id,
-  list: { userId, name, image, tags, bookmarksIds, description, membersIds, isPrivate } = {},
+  list: { userId, name, image, tags, bookmarksIds, description, members, isPrivate } = {},
 }) => {
   const dispatch = useDispatch();
   const isLogged = useSelector(selectSessionLoggedIn);
   const sessionId = useSelector(selectSessionUserId);
+  const session = useSelector(selectSession);
   const [isPrivateRequestStatus, setIsPrivateRequestStatus] = useState<ResponseStatus>(undefined);
   const isPrivateRequestFailed = isPrivateRequestStatus === REQUEST_FAILED;
   const isPrivateRequestPending = isPrivateRequestStatus === REQUEST_STARTED;
-  const sessionUserFollowsList = membersIds.includes(sessionId);
+  const sessionUserFollowsList = members?.some((item) => item.id === sessionId);
+  const sessionUserRole = members?.find((item) => item.id === sessionId)?.userRole || 'owner';
   const sessionUserOwnsList = userId === sessionId;
 
   const onEdit = async () => {
@@ -68,10 +71,11 @@ const ListRow: React.FC<Props> = ({
   return (
     <ListRowUi
       id={id}
+      session={session}
       name={name}
       description={description}
       isPrivate={isPrivate}
-      membersIds={membersIds}
+      members={members}
       image={image}
       tags={tags}
       bookmarksIds={bookmarksIds}
@@ -81,6 +85,7 @@ const ListRow: React.FC<Props> = ({
       isPrivateRequestPending={isPrivateRequestPending}
       sessionUserFollowsList={sessionUserFollowsList}
       sessionUserOwnsList={sessionUserOwnsList}
+      sessionUserRole={sessionUserRole}
     />
   );
 };

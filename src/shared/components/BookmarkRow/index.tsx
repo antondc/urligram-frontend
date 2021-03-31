@@ -20,7 +20,7 @@ import {
   ResponseStatus,
   TIME_RECENTLY_CREATED_BOOKMARK,
 } from '../../constants';
-import { bookmarkDelete } from '../../redux/modules/Bookmarks/actions/bookmarkDelete';
+import { bookmarkDelete } from 'Modules/Bookmarks/actions/bookmarkDelete';
 import { BookmarkRow as BookmarkRowUi } from './BookmarkRow';
 
 import './BookmarkRow.less';

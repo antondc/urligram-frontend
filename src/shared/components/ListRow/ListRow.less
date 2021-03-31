@@ -140,25 +140,45 @@
     line-height: 0;
   }
 
-  &-list {
+  &-sideIcon {
     position: absolute;
     height: 12px;
     width: 12px;
     top: -6px;
     right: 5px;
-    line-height: 0;
-    background: @c-background;
-    box-shadow: -2px 0 0 0 @c-background, 2px 0 0 0 @c-background;
-    fill: @c-base;
+    overflow: hidden;
+    outline: 2px solid @c-background;
+    border-radius: 50%;
+  }
 
-    &--owned {
-      fill: @c-error;
-      //;
+  &-userLogo,
+  &-listFollowed,
+  &-listNotFollowed {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    transition: transform @td-fastest @ease, fill @td-fastest @ease;
+
+    path[data-id='background'] {
+      opacity: 1;
+      fill: @c-background;
     }
+  }
 
-    &--followed {
-      // fill: @c-success;
-      //
+  &-listNotFollowed {
+    fill: @c-accentLight;
+
+    &:hover {
+      fill: @c-success;
+    }
+  }
+
+  &-listFollowed {
+    fill: @c-success;
+
+    &:hover {
+      fill: @c-error;
+      transform: rotate(-45deg);
     }
   }
 }

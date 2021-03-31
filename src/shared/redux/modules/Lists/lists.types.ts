@@ -22,7 +22,10 @@ export interface ListState {
   userId: string;
   image: string;
   bookmarksIds: number[];
-  membersIds: string[];
+  members: {
+    id: string;
+    userRole: 'editor' | 'reader';
+  }[];
   tags: {
     id: number;
     name: string;
