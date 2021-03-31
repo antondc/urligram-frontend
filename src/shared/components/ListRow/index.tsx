@@ -20,26 +20,19 @@ interface Props {
 
 const ListRow: React.FC<Props> = ({
   id,
-  list: { name, image, tags, createdAt, updatedAt, bookmarksIds, description, membersIds } = {},
-  slug,
-}) => {
-  const date = new LocaleFormattedDate({ unixTime: createdAt, locale: slug });
-  const createdAtFormatted = date.getLocaleFormattedDate();
-
-  return (
-    <ListRowUi
-      id={id}
-      name={name}
-      description={description}
-      createdAtFormatted={createdAtFormatted}
-      updatedAt={updatedAt}
-      membersIds={membersIds}
-      image={image}
-      tags={tags}
-      bookmarksIds={bookmarksIds}
-    />
-  );
-};
+  list: { name, image, tags, updatedAt, bookmarksIds, description, membersIds } = {},
+}) => (
+  <ListRowUi
+    id={id}
+    name={name}
+    description={description}
+    updatedAt={updatedAt}
+    membersIds={membersIds}
+    image={image}
+    tags={tags}
+    bookmarksIds={bookmarksIds}
+  />
+);
 
 const mapStateToProps = createStructuredSelector({
   sessionId: selectSessionUserId,
