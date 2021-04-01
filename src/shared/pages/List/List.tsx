@@ -12,8 +12,8 @@ import { ListState } from 'Modules/Lists/lists.types';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
-import { Border, FadeInOut, Flex, H4, Hr, PlusCircle, SortBy, Tooltip } from '@antoniodcorrea/components';
-import { SvgClickEvent } from '@antoniodcorrea/components/Svg/Svg.types';
+import { Border, FadeInOut, Flex, H4, Hr, Private, SortBy, Span } from '@antoniodcorrea/components';
+import ListFollowButton from '../../components/ListFollowButton';
 
 import './List.less';
 
@@ -25,7 +25,6 @@ interface Props {
   usersInThisListLoading: boolean;
   tagsInThisList: TagState[];
   tagsInThisListLoading: boolean;
-  onListJoin: (e: SvgClickEvent) => void;
   loadMainContent: () => void;
   url: string;
   page: {
@@ -44,7 +43,6 @@ export const List: React.FC<Props> = ({
   usersInThisListLoading,
   tagsInThisList,
   tagsInThisListLoading,
-  onListJoin,
   page,
   totalItems,
   loadMainContent,
@@ -54,7 +52,7 @@ export const List: React.FC<Props> = ({
   <div className="List">
     <Flex horizontal="between" vertical="top">
       <Main>
-        <Flex horizontal="right">
+        <Flex horizontal="between">
           <SortBy
             options={[
               { label: 'Rating', field: 'vote' },
@@ -67,13 +65,14 @@ export const List: React.FC<Props> = ({
         </Flex>
         <Hr spacer size="small" />
         <Border grow>
-          <Flex horizontal="between">
+          <Flex horizontal="between" noWrap>
             <H4>Bookmarks in {list?.name}</H4>
-            <div id="List-joinList">
-              <PlusCircle className="List-joinList" onClick={onListJoin} />
-            </div>
-            <Tooltip parentElementId={'List-joinList'} content="Join this list" />
+            <Flex growHorizontal={false} vertical="top">
+              <Private className="List-icon List-iconIsPrivate" />
+              <ListFollowButton className="List-joinList" listId={list?.id} />
+            </Flex>
           </Flex>
+          <Span>{list?.description}</Span>
           <Hr spacer />
           <FadeInOut valueToUpdate={bookmarksLoading} speed="fastest" appear>
             {bookmarksLoading ? (

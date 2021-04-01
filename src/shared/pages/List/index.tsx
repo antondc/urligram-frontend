@@ -38,7 +38,7 @@ const List: React.FC = () => {
   const sort = useSelector(selectBookmarksMetaSort);
 
   const loadMainContent = () => {
-    dispatch(bookmarksLoadByListId(listId));
+    !!listId && dispatch(bookmarksLoadByListId(listId));
   };
 
   useEffect(() => {
@@ -52,9 +52,7 @@ const List: React.FC = () => {
 
   useEffect(() => {
     usersInThisListIds?.length && dispatch(sectionsUsersInThisListLoad(usersInThisListIds));
-  }, [usersInThisListIds]);
-
-  const onListJoin = () => alert(`Join list ${list?.id}`);
+  }, [JSON.stringify(usersInThisListIds)]);
 
   return (
     <ListUI
@@ -65,7 +63,6 @@ const List: React.FC = () => {
       usersInThisListLoading={usersInThisListLoading}
       tagsInThisList={tagsInThisList}
       tagsInThisListLoading={tagsInThisListLoading}
-      onListJoin={onListJoin}
       page={page}
       totalItems={totalItems}
       url={url}

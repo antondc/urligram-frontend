@@ -140,7 +140,7 @@
     line-height: 0;
   }
 
-  &-sideIcon {
+  &-followButton {
     position: absolute;
     height: 12px;
     width: 12px;
@@ -148,48 +148,5 @@
     right: 5px;
     outline: 2px solid @c-background;
     border-radius: 50%;
-  }
-
-  &-userLogo,
-  &-listFollowed,
-  &-listNotFollowed,
-  &-loader {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    transition: transform @td-fastest @ease, fill @td-fastest @ease;
-
-    path[data-id='background'] {
-      opacity: 1;
-      fill: @c-background;
-    }
-  }
-
-  &-userLogo,
-  &-loader {
-    border-radius: 50%;
-  }
-
-  &-loader {
-    background: @c-background;
-    fill: @c-background;
-    stroke: @c-success;
-  }
-
-  &-listNotFollowed {
-    fill: @c-accentLight;
-
-    &:hover {
-      fill: @c-success;
-    }
-  }
-
-  &-listFollowed {
-    fill: @c-success;
-
-    &:hover {
-      fill: @c-error;
-      transform: rotate(-45deg);
-    }
   }
 }

@@ -21,7 +21,16 @@ export const listUnfollow = ({
     const { Lists: listsBeforeRequest } = getState();
     dispatch({
       type: LIST_UNFOLLOW_REQUEST,
-      payload: listsBeforeRequest,
+      payload: {
+        ...listsBeforeRequest,
+        byKey: {
+          ...listsBeforeRequest.byKey,
+          [listId]: {
+            ...listsBeforeRequest.byKey[listId],
+            loading: true,
+          },
+        },
+      },
     });
 
     const { data } = await HttpClient.delete<void, ListFollowApiResponse>(`/lists/${listId}/users/${userId}`);
@@ -37,6 +46,7 @@ export const listUnfollow = ({
         [listId]: {
           ...listsAfterResponse.byKey[listId],
           members: listMembersWithoutUser,
+          loading: false,
         },
       },
     };
@@ -54,6 +64,16 @@ export const listUnfollow = ({
       type: LIST_UNFOLLOW_FAILURE,
       payload: {
         ...listsOnError,
+        payload: {
+          ...listsOnError,
+          byKey: {
+            ...listsOnError.byKey,
+            [listId]: {
+              ...listsOnError.byKey[listId],
+              loading: false,
+            },
+          },
+        },
         errors: [...listsOnError?.errors, error],
       },
     });

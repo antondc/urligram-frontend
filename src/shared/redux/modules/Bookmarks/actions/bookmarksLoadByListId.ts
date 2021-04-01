@@ -9,6 +9,8 @@ export const bookmarksLoadByListId = (listId: number): AppThunk<Promise<Bookmark
   dispatch,
   getState
 ): Promise<BookmarkState[]> => {
+  if (!listId) return;
+  
   const { Bookmarks: bookmarksBeforeRequest } = getState();
   try {
     dispatch(

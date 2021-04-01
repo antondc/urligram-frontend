@@ -16,7 +16,18 @@ export const listUpdate = ({
 ): Promise<ListState> => {
   try {
     const { Lists: listsBeforeRequest } = getState();
-    dispatch(listUpdateRequest({ ...listsBeforeRequest }));
+    dispatch(
+      listUpdateRequest({
+        ...listsBeforeRequest,
+        byKey: {
+          ...listsBeforeRequest.byKey,
+          [listId]: {
+            ...listsBeforeRequest.byKey[listId],
+            loading: true,
+          },
+        },
+      })
+    );
 
     const { data } = await HttpClient.put<void, ListUpdateApiResponse>(`/lists/${listId}`, {
       name: listName,
@@ -30,7 +41,10 @@ export const listUpdate = ({
         ...listsAfterResponse,
         byKey: {
           ...listsAfterResponse.byKey,
-          [data.attributes.id]: data.attributes,
+          [listId]: {
+            ...data.attributes,
+            loading: false,
+          },
         },
       })
     );
@@ -42,6 +56,13 @@ export const listUpdate = ({
     await dispatch(
       listUpdateFailure({
         ...listsOnError,
+        byKey: {
+          ...listsOnError.byKey,
+          [listId]: {
+            ...listsOnError.byKey[listId],
+            loading: false,
+          },
+        },
         errors: [...listsOnError?.errors, error],
       })
     );

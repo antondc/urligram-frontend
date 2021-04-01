@@ -3,7 +3,22 @@
 @c: .List;
 
 @{c} {
-  &-joinList {
+  &-icon {
     .hoverTransition();
+  }
+
+  &-iconIsPrivate {
+    fill: @c-success;
+
+    &:hover {
+      opacity: 1;
+      cursor: default;
+    }
+  }
+
+  &-joinList {
+    height: 20px;
+    width: 20px;
+    margin-left: 8px;
   }
 }

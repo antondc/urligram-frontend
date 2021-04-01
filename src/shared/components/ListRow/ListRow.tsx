@@ -3,53 +3,32 @@ import React from 'react';
 import A from 'Components/A';
 import { ListState } from 'Modules/Lists/lists.types';
 import { SessionState } from 'Modules/Session/session.types';
-import {
-  Bookmark,
-  Border,
-  Edit,
-  Fade,
-  Flex,
-  PlusCircleWithBackground,
-  Private,
-  Span,
-  SpinnerLoader,
-  Tag,
-  User,
-} from '@antoniodcorrea/components';
+import { Bookmark, Border, Fade, Flex, Private, Span, Tag, User } from '@antoniodcorrea/components';
+import ListFollowButton from '../ListFollowButton';
 
 import './ListRow.less';
 
 interface Props extends Partial<ListState> {
   isPrivateRequestFailed: boolean;
   isPrivateRequestPending: boolean;
-  sessionUserFollowsList: boolean;
   sessionUserOwnsList: boolean;
   session?: SessionState;
-  iconActionPending: boolean;
   onEdit: () => void;
   onPrivateSwitch: () => void;
-  onFollowList: () => void;
-  onUnfollowList: () => void;
 }
 
 export const ListRow: React.FC<Props> = ({
   id,
-  session,
   name,
   tags,
   bookmarksIds,
   members,
   description,
-  iconActionPending,
-  onEdit,
   onPrivateSwitch,
   isPrivate,
   isPrivateRequestFailed,
   isPrivateRequestPending,
   sessionUserOwnsList,
-  sessionUserFollowsList,
-  onFollowList,
-  onUnfollowList,
 }) => (
   <Border grow className="ListRow" data-test-id="ListRow" key={id}>
     <div className="ListRow-left">
@@ -84,7 +63,6 @@ export const ListRow: React.FC<Props> = ({
             onClick={onPrivateSwitch}
           />
         </Fade>
-        {sessionUserOwnsList && <Edit size="micro" className="ListRow-action" onClick={onEdit} />}
       </Flex>
       <Flex horizontal="right" growVertical={false} noWrap>
         <Span size="micro" className="ListRow-stat">
@@ -95,16 +73,7 @@ export const ListRow: React.FC<Props> = ({
         </Span>
       </Flex>
     </div>
-    <div className={'ListRow-sideIcon' + (false ? ' ListRow--pending' : '')}>
-      {sessionUserOwnsList && <img className="ListRow-userLogo" src={session?.image} />}
-      {!sessionUserOwnsList && sessionUserFollowsList && (
-        <PlusCircleWithBackground className="ListRow-listFollowed" size="medium" onClick={onUnfollowList} />
-      )}
-      {!sessionUserOwnsList && !sessionUserFollowsList && (
-        <PlusCircleWithBackground className="ListRow-listNotFollowed" size="medium" onClick={onFollowList} />
-      )}
-      {iconActionPending && <SpinnerLoader className="ListRow-loader" size="nano" />}
-    </div>
+    <ListFollowButton listId={id} className="ListRow-followButton" />
   </Border>
 );
 

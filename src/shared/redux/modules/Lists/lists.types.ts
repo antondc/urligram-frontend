@@ -34,6 +34,7 @@ export interface ListState {
   userId: string;
   image: string;
   bookmarksIds: number[];
+  loading?: boolean;
   members: {
     id: string;
     userRole: 'editor' | 'reader';

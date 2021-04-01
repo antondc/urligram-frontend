@@ -21,7 +21,16 @@ export const listFollow = ({
     const { Lists: listsBeforeRequest } = getState();
     dispatch({
       type: LIST_FOLLOW_REQUEST,
-      payload: listsBeforeRequest,
+      payload: {
+        ...listsBeforeRequest,
+        byKey: {
+          ...listsBeforeRequest.byKey,
+          [listId]: {
+            ...listsBeforeRequest.byKey[listId],
+            loading: true,
+          },
+        },
+      },
     });
 
     const { data } = await HttpClient.post<void, ListFollowApiResponse>(`/lists/${listId}/users/${userId}`);
@@ -33,6 +42,7 @@ export const listFollow = ({
         ...listsAfterResponse.byKey,
         [listId]: {
           ...listsAfterResponse.byKey[listId],
+          loading: false,
           members: [
             ...(listsAfterResponse.byKey[listId]?.members || []), // TODO: Firefox will fail on undefined
             {
@@ -57,6 +67,16 @@ export const listFollow = ({
       type: LIST_FOLLOW_FAILURE,
       payload: {
         ...listsOnError,
+        payload: {
+          ...listsOnError,
+          byKey: {
+            ...listsOnError.byKey,
+            [listId]: {
+              ...listsOnError.byKey[listId],
+              loading: false,
+            },
+          },
+        },
         errors: [...listsOnError?.errors, error],
       },
     });
