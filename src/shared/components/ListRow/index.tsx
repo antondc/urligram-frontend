@@ -38,6 +38,7 @@ const ListRow: React.FC<Props> = ({
   const isPrivateRequestPending = isPrivateRequestStatus === REQUEST_STARTED;
   const sessionUserFollowsList = members?.some((item) => item.id === sessionId);
   const sessionUserOwnsList = userId === sessionId;
+  const [iconActionPending, setIconActionPending] = useState<boolean>(false);
 
   const onEdit = async () => {
     if (!isLogged) return dispatch(switchLoginModal(true));
@@ -50,15 +51,17 @@ const ListRow: React.FC<Props> = ({
   const onFollowList = async () => {
     if (!isLogged) return dispatch(switchLoginModal(true));
     if (sessionUserFollowsList) return;
-
+    setIconActionPending(true);
     await dispatch(listFollow({ listId: id, userId: sessionId }));
+    setTimeout(() => setIconActionPending(false), 150);
   };
 
   const onUnfollowList = async () => {
     if (!isLogged) return dispatch(switchLoginModal(true));
     if (!sessionUserFollowsList) return;
-
+    setIconActionPending(true);
     await dispatch(listUnfollow({ listId: id, userId: sessionId }));
+    setTimeout(() => setIconActionPending(false), 150);
   };
 
   const onPrivateSwitch = async () => {
@@ -102,6 +105,7 @@ const ListRow: React.FC<Props> = ({
       sessionUserOwnsList={sessionUserOwnsList}
       onFollowList={onFollowList}
       onUnfollowList={onUnfollowList}
+      iconActionPending={iconActionPending}
     />
   );
 };

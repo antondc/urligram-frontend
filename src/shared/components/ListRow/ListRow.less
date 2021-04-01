@@ -146,14 +146,14 @@
     width: 12px;
     top: -6px;
     right: 5px;
-    overflow: hidden;
     outline: 2px solid @c-background;
     border-radius: 50%;
   }
 
   &-userLogo,
   &-listFollowed,
-  &-listNotFollowed {
+  &-listNotFollowed,
+  &-loader {
     position: absolute;
     height: 100%;
     width: 100%;
@@ -163,6 +163,17 @@
       opacity: 1;
       fill: @c-background;
     }
+  }
+
+  &-userLogo,
+  &-loader {
+    border-radius: 50%;
+  }
+
+  &-loader {
+    background: @c-background;
+    fill: @c-background;
+    stroke: @c-success;
   }
 
   &-listNotFollowed {

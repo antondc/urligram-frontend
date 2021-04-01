@@ -104,6 +104,7 @@ const props = {
       name: 'Trilobites',
     },
   ],
+  iconActionPending: true,
 };
 
 const knobs = {

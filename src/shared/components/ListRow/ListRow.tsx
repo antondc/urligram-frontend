@@ -12,6 +12,7 @@ import {
   PlusCircleWithBackground,
   Private,
   Span,
+  SpinnerLoader,
   Tag,
   User,
 } from '@antoniodcorrea/components';
@@ -24,6 +25,7 @@ interface Props extends Partial<ListState> {
   sessionUserFollowsList: boolean;
   sessionUserOwnsList: boolean;
   session?: SessionState;
+  iconActionPending: boolean;
   onEdit: () => void;
   onPrivateSwitch: () => void;
   onFollowList: () => void;
@@ -38,6 +40,7 @@ export const ListRow: React.FC<Props> = ({
   bookmarksIds,
   members,
   description,
+  iconActionPending,
   onEdit,
   onPrivateSwitch,
   isPrivate,
@@ -100,6 +103,7 @@ export const ListRow: React.FC<Props> = ({
       {!sessionUserOwnsList && !sessionUserFollowsList && (
         <PlusCircleWithBackground className="ListRow-listNotFollowed" size="medium" onClick={onFollowList} />
       )}
+      {iconActionPending && <SpinnerLoader className="ListRow-loader" size="nano" />}
     </div>
   </Border>
 );
