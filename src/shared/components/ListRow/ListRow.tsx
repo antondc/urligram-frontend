@@ -11,7 +11,6 @@ import './ListRow.less';
 interface Props extends Partial<ListState> {
   isPrivateRequestFailed: boolean;
   isPrivateRequestPending: boolean;
-  sessionUserOwnsList: boolean;
   session?: SessionState;
   onEdit: () => void;
   onPrivateSwitch: () => void;
@@ -24,11 +23,9 @@ export const ListRow: React.FC<Props> = ({
   bookmarksIds,
   members,
   description,
-  onPrivateSwitch,
   isPrivate,
   isPrivateRequestFailed,
   isPrivateRequestPending,
-  sessionUserOwnsList,
 }) => (
   <Border grow className="ListRow" data-test-id="ListRow" key={id}>
     <div className="ListRow-left">
@@ -51,25 +48,15 @@ export const ListRow: React.FC<Props> = ({
       ))}
     </div>
     <div className="ListRow-right">
-      <Flex vertical="center" horizontal="right" growVertical={false}>
-        <Fade classname="ListRow-icon" mounted={sessionUserOwnsList && isPrivate} speed="fast">
-          <Private
-            size="micro"
-            className={
-              'ListRow-action ListRow-private' +
-              (isPrivateRequestPending ? ' ListRow--pending' : '') +
-              (isPrivateRequestFailed ? ' ListRow--failed' : '')
-            }
-            onClick={onPrivateSwitch}
-          />
-        </Fade>
-      </Flex>
-      <Flex horizontal="right" growVertical={false} noWrap>
-        <Span size="micro" className="ListRow-stat">
-          <Bookmark size="nano" className="ListRow-statIcon" /> {bookmarksIds?.length || 0}
+      <Flex horizontal="right" noWrap vertical="bottom">
+        {isPrivate && <Private size="nano" className="ListRow-stat ListRow-private" />}
+        <Bookmark size="nano" className="ListRow-icon" />
+        <Span size="micro" className="ListRow-iconText">
+          {bookmarksIds?.length || 0}
         </Span>
-        <Span size="micro" className="ListRow-stat">
-          <User size="nano" className="ListRow-statIcon" /> {members?.length || 0}
+        <User size="nano" className="ListRow-icon" />
+        <Span size="micro" className="ListRow-iconText">
+          {members?.length || 0}
         </Span>
       </Flex>
     </div>

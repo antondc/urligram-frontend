@@ -35,7 +35,7 @@ export const bookmarkCreate = ({
     );
     const bookmarksWithNewUser = bookmarksToUpdate.map((item) => ({
       ...item,
-      users: [...item?.users, bookmarkData.attributes.userId],
+      users: [...(item?.users || []), bookmarkData.attributes.userId],
     }));
 
     await dispatch(

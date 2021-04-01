@@ -81,7 +81,6 @@ const ListRow: React.FC<Props> = ({
       onPrivateSwitch={onPrivateSwitch}
       isPrivateRequestFailed={isPrivateRequestFailed}
       isPrivateRequestPending={isPrivateRequestPending}
-      sessionUserOwnsList={sessionUserOwnsList}
     />
   );
 };

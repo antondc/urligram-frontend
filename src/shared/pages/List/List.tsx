@@ -68,7 +68,7 @@ export const List: React.FC<Props> = ({
           <Flex horizontal="between" noWrap>
             <H4>Bookmarks in {list?.name}</H4>
             <Flex growHorizontal={false} vertical="top">
-              <Private className="List-icon List-iconIsPrivate" />
+              {list?.isPrivate && <Private className="List-icon List-iconIsPrivate" />}
               <ListFollowButton className="List-joinList" listId={list?.id} />
             </Flex>
           </Flex>
