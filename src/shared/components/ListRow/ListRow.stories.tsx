@@ -28,6 +28,8 @@ const props = {
   sessionUserRole: 'editor',
   onEdit: () => {},
   onPrivateSwitch: () => {},
+  onFollowList: () => {},
+  onUnfollowList: () => {},
   tags: [
     {
       id: 1,

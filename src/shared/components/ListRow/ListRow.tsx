@@ -26,6 +26,8 @@ interface Props extends Partial<ListState> {
   session?: SessionState;
   onEdit: () => void;
   onPrivateSwitch: () => void;
+  onFollowList: () => void;
+  onUnfollowList: () => void;
 }
 
 export const ListRow: React.FC<Props> = ({
@@ -43,6 +45,8 @@ export const ListRow: React.FC<Props> = ({
   isPrivateRequestPending,
   sessionUserOwnsList,
   sessionUserFollowsList,
+  onFollowList,
+  onUnfollowList,
 }) => (
   <Border grow className="ListRow" data-test-id="ListRow" key={id}>
     <div className="ListRow-left">
@@ -91,10 +95,10 @@ export const ListRow: React.FC<Props> = ({
     <div className={'ListRow-sideIcon' + (false ? ' ListRow--pending' : '')}>
       {sessionUserOwnsList && <img className="ListRow-userLogo" src={session?.image} />}
       {!sessionUserOwnsList && sessionUserFollowsList && (
-        <PlusCircleWithBackground className="ListRow-listFollowed" size="medium" onClick={() => {}} />
+        <PlusCircleWithBackground className="ListRow-listFollowed" size="medium" onClick={onUnfollowList} />
       )}
       {!sessionUserOwnsList && !sessionUserFollowsList && (
-        <PlusCircleWithBackground className="ListRow-listNotFollowed" size="medium" onClick={() => {}} />
+        <PlusCircleWithBackground className="ListRow-listNotFollowed" size="medium" onClick={onFollowList} />
       )}
     </div>
   </Border>

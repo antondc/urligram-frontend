@@ -1,3 +1,5 @@
+import { UserState } from '../Users/users.types';
+
 export const LISTS_LOAD_REQUEST = 'LISTS_LOAD_REQUEST';
 export const LISTS_LOAD_SUCCESS = 'LISTS_LOAD_SUCCESS';
 export const LIST_LOAD_REQUEST = 'LIST_LOAD_REQUEST';
@@ -9,9 +11,19 @@ export const LIST_UPDATE_REQUEST = 'LIST_UPDATE_REQUEST';
 export const LIST_UPDATE_SUCCESS = 'LIST_UPDATE_SUCCESS';
 export const LIST_UPDATE_FAILURE = 'LIST_UPDATE_FAILURE';
 export const LIST_CREATE_RESET = 'LIST_CREATE_RESET';
+export const LIST_FOLLOW_REQUEST = 'LIST_FOLLOW_REQUEST';
+export const LIST_FOLLOW_SUCCESS = 'LIST_FOLLOW_SUCCESS';
+export const LIST_FOLLOW_FAILURE = 'LIST_FOLLOW_FAILURE';
+export const LIST_UNFOLLOW_REQUEST = 'LIST_UNFOLLOW_REQUEST';
+export const LIST_UNFOLLOW_SUCCESS = 'LIST_UNFOLLOW_SUCCESS';
+export const LIST_UNFOLLOW_FAILURE = 'LIST_UNFOLLOW_FAILURE';
 
 export interface ListsError extends Error {
   field: string;
+}
+
+export interface ListUser extends UserState {
+  userRole: string;
 }
 
 export interface ListState {
@@ -53,6 +65,12 @@ export interface ListApiResponseItem {
   attributes: ListState;
 }
 
+export interface ListApiUserResponseItem {
+  type: 'list';
+  id: number;
+  attributes: ListUser;
+}
+
 export interface ListLoadApiResponse {
   data: ListApiResponseItem;
 }
@@ -80,6 +98,15 @@ export interface ListUpdateApiRequest {
   listName: string;
   listDescription: string;
   listIsPrivate: boolean;
+}
+
+export interface ListFollowApiRequest {
+  userId: string;
+  listId: number;
+}
+
+export interface ListFollowApiResponse {
+  data: ListApiUserResponseItem;
 }
 
 export interface ListUpdateApiResponse {
@@ -141,6 +168,32 @@ interface ListUpdateFailureAction {
   payload: Partial<ListsState>;
 }
 
+interface ListFollowRequestAction {
+  type: typeof LIST_FOLLOW_REQUEST;
+  payload: Partial<ListsState>;
+}
+interface ListFollowSuccessAction {
+  type: typeof LIST_FOLLOW_SUCCESS;
+  payload: Partial<ListsState>;
+}
+interface ListFollowFailureAction {
+  type: typeof LIST_FOLLOW_FAILURE;
+  payload: Partial<ListsState>;
+}
+
+interface ListUnfollowRequestAction {
+  type: typeof LIST_UNFOLLOW_REQUEST;
+  payload: Partial<ListsState>;
+}
+interface ListUnfollowSuccessAction {
+  type: typeof LIST_UNFOLLOW_SUCCESS;
+  payload: Partial<ListsState>;
+}
+interface ListUnfollowFailureAction {
+  type: typeof LIST_UNFOLLOW_FAILURE;
+  payload: Partial<ListsState>;
+}
+
 export type ListsActions =
   | ListsLoadRequestAction
   | ListsLoadSuccessAction
@@ -152,4 +205,10 @@ export type ListsActions =
   | ListUpdateRequestAction
   | ListUpdateSuccessAction
   | ListUpdateFailureAction
-  | ListCreateResetAction;
+  | ListCreateResetAction
+  | ListFollowRequestAction
+  | ListFollowSuccessAction
+  | ListFollowFailureAction
+  | ListUnfollowRequestAction
+  | ListUnfollowSuccessAction
+  | ListUnfollowFailureAction;

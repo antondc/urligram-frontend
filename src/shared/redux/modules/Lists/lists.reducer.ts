@@ -3,6 +3,12 @@ import {
   LIST_CREATE_REQUEST,
   LIST_CREATE_RESET,
   LIST_CREATE_SUCCESS,
+  LIST_FOLLOW_FAILURE,
+  LIST_FOLLOW_REQUEST,
+  LIST_FOLLOW_SUCCESS,
+  LIST_UNFOLLOW_FAILURE,
+  LIST_UNFOLLOW_REQUEST,
+  LIST_UNFOLLOW_SUCCESS,
   LIST_UPDATE_FAILURE,
   LIST_UPDATE_REQUEST,
   LIST_UPDATE_SUCCESS,
@@ -28,6 +34,12 @@ export const Lists = (state = initialState, action: ListsActions): ListsState =>
     case LIST_UPDATE_SUCCESS:
     case LIST_UPDATE_FAILURE:
     case LIST_CREATE_RESET:
+    case LIST_FOLLOW_REQUEST:
+    case LIST_FOLLOW_SUCCESS:
+    case LIST_FOLLOW_FAILURE:
+    case LIST_UNFOLLOW_REQUEST:
+    case LIST_UNFOLLOW_SUCCESS:
+    case LIST_UNFOLLOW_FAILURE:
       return Object.assign({}, state, action.payload);
 
     default:

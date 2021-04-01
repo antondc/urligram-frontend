@@ -3,6 +3,7 @@ import { connect, useDispatch, useSelector } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
+import { listFollow } from 'Modules/Lists/actions/listFollow';
 import { listUpdate } from 'Modules/Lists/actions/listUpdate';
 import { ListState } from 'Modules/Lists/lists.types';
 import { selectListById } from 'Modules/Lists/selectors/selectListById';
@@ -12,6 +13,7 @@ import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUser
 import { switchListModal } from 'Modules/Ui/actions/switchListModal';
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
 import { REQUEST_FAILED, REQUEST_STARTED, REQUEST_SUCCEEDED, ResponseStatus } from '../../constants';
+import { listUnfollow } from '../../redux/modules/Lists/actions/listUnfollow';
 import { ListRow as ListRowUi } from './ListRow';
 
 import './ListRow.less';
@@ -43,6 +45,20 @@ const ListRow: React.FC<Props> = ({
 
     await dispatch(switchListModal({ mounted: true, listId: id }));
     // loadMainContent();
+  };
+
+  const onFollowList = async () => {
+    if (!isLogged) return dispatch(switchLoginModal(true));
+    if (sessionUserFollowsList) return;
+
+    await dispatch(listFollow({ listId: id, userId: sessionId }));
+  };
+
+  const onUnfollowList = async () => {
+    if (!isLogged) return dispatch(switchLoginModal(true));
+    if (!sessionUserFollowsList) return;
+
+    await dispatch(listUnfollow({ listId: id, userId: sessionId }));
   };
 
   const onPrivateSwitch = async () => {
@@ -84,6 +100,8 @@ const ListRow: React.FC<Props> = ({
       isPrivateRequestPending={isPrivateRequestPending}
       sessionUserFollowsList={sessionUserFollowsList}
       sessionUserOwnsList={sessionUserOwnsList}
+      onFollowList={onFollowList}
+      onUnfollowList={onUnfollowList}
     />
   );
 };
