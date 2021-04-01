@@ -19,7 +19,6 @@ interface LinkRow extends LinkState {
   onVote: (vote: boolean | null) => void;
   onBookmarkGrab: () => void;
   onBookmarkDelete: () => void;
-  createdAtFormatted: string;
   isBookmarkDeletePending: boolean;
   bookmarkingLoading: boolean;
   userBookmarked: boolean;
@@ -37,20 +36,19 @@ export const LinkRow: React.FC<Partial<LinkRow>> = ({
   onBookmarkDelete,
   isBookmarkDeletePending,
   favicon,
-  createdAtFormatted,
   userBookmarked,
   bookmarkingLoading,
 }) => (
   <Border grow className="LinkRow" data-test-id="LinkRow" key={id}>
     <div className="LinkRow-left">
-      <div className="LinkRow-icons">
+      <Flex vertical="center" growVertical={false} horizontal="left" noWrap>
         <img className="LinkRow-favicon" src={favicon} />
-      </div>
-      <Span bold className="LinkRow-title">
-        <A href={url} targetBlank styled={false}>
-          {title}
-        </A>
-      </Span>
+        <Span bold className="LinkRow-title">
+          <A href={url} targetBlank styled={false}>
+            {title}
+          </A>
+        </Span>
+      </Flex>
       <Span className="LinkRow-url" size="small">
         <A href={url} targetBlank>
           {url}
@@ -67,7 +65,7 @@ export const LinkRow: React.FC<Partial<LinkRow>> = ({
       ))}
     </div>
     <div className="LinkRow-right">
-      <Flex horizontal="right" growVertical={false} vertical="center">
+      <Flex horizontal="right" growVertical={false} vertical="bottom">
         <Vote className="LinkRow-vote" vote={statistics?.vote} changeVote={onVote} loading={statistics?.loading} />
       </Flex>
       <div className="LinkRow-stats">
@@ -85,9 +83,6 @@ export const LinkRow: React.FC<Partial<LinkRow>> = ({
         </Span>
         <br />
       </div>
-      <Span size="micro" className="LinkRow-stat">
-        {createdAtFormatted || ''}
-      </Span>
     </div>
     {userBookmarked && (
       <span className={'BookmarkRow-myBookmark' + (isBookmarkDeletePending ? ' BookmarkRow--pending' : '')}>

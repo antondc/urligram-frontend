@@ -4,14 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { bookmarkCreate } from 'Modules/Bookmarks/actions/bookmarkCreate';
 import { bookmarkDelete } from 'Modules/Bookmarks/actions/bookmarkDelete';
 import { selectBookmarkByLinkIdAndUserId } from 'Modules/Bookmarks/selectors/selectBookmarkByLinkIdAndUserId';
-import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
 import { linkUpdateVote } from 'Modules/Links/actions/linkUpdateVote';
 import { selectLinkById } from 'Modules/Links/selectors/selectLinkById';
 import { RootState } from 'Modules/rootType';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUserId';
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
-import { LocaleFormattedDate } from 'Tools/utils/Date/localeFormattedDate';
 import { LinkRow as LinkRowUi } from './LinkRow';
 
 import './LinkRow.less';
@@ -23,16 +21,13 @@ interface Props {
 const LinkRow: React.FC<Props> = ({ id }) => {
   const dispatch = useDispatch();
   const sessionId = useSelector(selectSessionUserId);
-  const currentLanguageSlug = useSelector(selectCurrentLanguageSlug);
   const link = useSelector((state: RootState) => selectLinkById(state, { id }));
   const { id: bookmarkId } = useSelector((state: RootState) =>
     selectBookmarkByLinkIdAndUserId(state, { linkId: link?.id, userId: sessionId })
   );
   const [bookmarkingLoading, setBookmarkingLoading] = useState<boolean>(false);
   const [isBookmarkDeletePending, setIsBookmarkDeletePending] = useState<boolean>(false);
-  const { linkId, title, url, tags = [], favicon, statistics, createdAt, users } = link;
-  const date = new LocaleFormattedDate({ unixTime: createdAt, locale: currentLanguageSlug });
-  const createdAtFormatted = date.getLocaleFormattedDate();
+  const { linkId, title, url, tags = [], favicon, statistics, users } = link;
   const isLogged = useSelector(selectSessionLoggedIn);
   const userBookmarked = users.includes(sessionId);
   const tagsByName = tags?.map((item) => ({ tag: item.name }));
@@ -78,7 +73,6 @@ const LinkRow: React.FC<Props> = ({ id }) => {
       onBookmarkGrab={onBookmarkGrab}
       onBookmarkDelete={onBookmarkDelete}
       isBookmarkDeletePending={isBookmarkDeletePending}
-      createdAtFormatted={createdAtFormatted}
       userBookmarked={userBookmarked}
       bookmarkingLoading={bookmarkingLoading}
     />

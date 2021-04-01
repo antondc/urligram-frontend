@@ -33,10 +33,6 @@
     display: flex;
   }
 
-  &-icon {
-    margin-right: 5px;
-  }
-
   &-favicon {
     height: 10px;
     width: 10px;
@@ -109,15 +105,11 @@
   }
 
   &-private {
-    .hoverTransition(0.5);
+    fill: @c-success;
+  }
 
-    margin-left: 5px;
-    fill: @c-traslucid--hardest;
-    transition: fill @td-fast @ease, transform @td-fast @ease;
-
-    &--isPrivate {
-      fill: @c-success;
-    }
+  &-icon {
+    flex-shrink: 0;
   }
 
   &-edit {

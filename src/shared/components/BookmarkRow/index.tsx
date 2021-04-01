@@ -2,25 +2,16 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { bookmarkCreate } from 'Modules/Bookmarks/actions/bookmarkCreate';
-import { bookmarkUpdate } from 'Modules/Bookmarks/actions/bookmarkUpdate';
+import { bookmarkDelete } from 'Modules/Bookmarks/actions/bookmarkDelete';
 import { selectBookmarksById } from 'Modules/Bookmarks/selectors/selectBookmarkById';
-import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
 import { linkUpdateVote } from 'Modules/Links/actions/linkUpdateVote';
 import { RootState } from 'Modules/rootType';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUserId';
 import { switchBookmarkUpdateModal } from 'Modules/Ui/actions/switchBookmarkUpdateModal';
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
-import { LocaleFormattedDate } from 'Tools/utils/Date/localeFormattedDate';
 import { unixTimeElapsed } from 'Tools/utils/Date/unixTimeElapsed';
-import {
-  REQUEST_FAILED,
-  REQUEST_STARTED,
-  REQUEST_SUCCEEDED,
-  ResponseStatus,
-  TIME_RECENTLY_CREATED_BOOKMARK,
-} from '../../constants';
-import { bookmarkDelete } from 'Modules/Bookmarks/actions/bookmarkDelete';
+import { TIME_RECENTLY_CREATED_BOOKMARK } from '../../constants';
 import { BookmarkRow as BookmarkRowUi } from './BookmarkRow';
 
 import './BookmarkRow.less';
@@ -36,7 +27,6 @@ const BookmarkRow: React.FC<Props> = ({ id, loadMainContent }) => {
   const sessionId = useSelector(selectSessionUserId);
   const {
     linkId,
-    order,
     userId,
     title,
     url,
@@ -49,18 +39,11 @@ const BookmarkRow: React.FC<Props> = ({ id, loadMainContent }) => {
     isPrivate,
   } = useSelector((state: RootState) => selectBookmarksById(state, { id }));
   const isOwnBookmark = sessionId === userId;
-
   const [bookmarkingLoading, setBookmarkingLoading] = useState<boolean>(false);
   const [isBookmarkDeletePending, setIsBookmarkDeletePending] = useState<boolean>(false);
   const timePassed = unixTimeElapsed(createdAt);
   const recentlyCreated = timePassed < TIME_RECENTLY_CREATED_BOOKMARK;
   const [recentlyCreatedState, setRecentlyCreatedState] = useState(recentlyCreated);
-  const [isPrivateRequestStatus, setPrivateRequestStatus] = useState<ResponseStatus>(undefined);
-  const isPrivateRequestFailed = isPrivateRequestStatus === REQUEST_FAILED;
-  const isPrivateRequestPending = isPrivateRequestStatus === REQUEST_STARTED;
-  const currentLanguageSlug = useSelector(selectCurrentLanguageSlug);
-  const date = new LocaleFormattedDate({ unixTime: createdAt, locale: currentLanguageSlug });
-  const createdAtFormatted = date.getLocaleFormattedDate();
   const userBookmarkedLink = users?.includes(sessionId);
   const tagsByName = tags?.map((item) => ({ tag: item.name }));
 
@@ -89,31 +72,6 @@ const BookmarkRow: React.FC<Props> = ({ id, loadMainContent }) => {
     setIsBookmarkDeletePending(false);
   };
 
-  const onPrivateSwitch = async () => {
-    if (!isLogged) return dispatch(switchLoginModal(true));
-    if (!userBookmarkedLink) return;
-
-    setPrivateRequestStatus(REQUEST_STARTED);
-
-    const data = {
-      bookmarkId: id,
-      title: title,
-      isPrivate: !isPrivate,
-      order: order,
-      tags: tagsByName,
-    };
-
-    const response = await dispatch(bookmarkUpdate(data));
-
-    if (!response.id) {
-      setPrivateRequestStatus(REQUEST_FAILED);
-
-      return;
-    }
-
-    setPrivateRequestStatus(REQUEST_SUCCEEDED);
-  };
-
   const onEdit = async () => {
     if (!isLogged) return dispatch(switchLoginModal(true));
     if (!userBookmarkedLink) return;
@@ -136,13 +94,10 @@ const BookmarkRow: React.FC<Props> = ({ id, loadMainContent }) => {
       linkId={linkId}
       title={title}
       url={url}
-      createdAtFormatted={createdAtFormatted}
       tags={tags}
       favicon={favicon}
       img={img}
       isPrivate={isPrivate}
-      isPrivateRequestFailed={isPrivateRequestFailed}
-      isPrivateRequestPending={isPrivateRequestPending}
       statistics={statistics}
       isBookmarkDeletePending={isBookmarkDeletePending}
       bookmarkingLoading={bookmarkingLoading}
@@ -151,7 +106,6 @@ const BookmarkRow: React.FC<Props> = ({ id, loadMainContent }) => {
       onVote={onVote}
       onBookmarkGrab={onBookmarkGrab}
       onBookmarkDelete={onBookmarkDelete}
-      onPrivateSwitch={onPrivateSwitch}
       onMouseLeave={onMouseLeave}
       recentlyCreated={recentlyCreatedState}
     />

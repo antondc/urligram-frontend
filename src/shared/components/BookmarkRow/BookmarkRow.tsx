@@ -23,13 +23,9 @@ interface BookmarkRow extends BookmarkState {
   userBookmarkedLink: boolean;
   bookmarkingLoading: boolean;
   recentlyCreated: boolean;
-  isPrivateRequestFailed: boolean;
-  isPrivateRequestPending: boolean;
   isBookmarkDeletePending: boolean;
-  createdAtFormatted: string;
   onVote: (vote: boolean | null) => void;
   onEdit: () => void;
-  onPrivateSwitch: () => void;
   onBookmarkGrab: () => void;
   onBookmarkDelete: () => void;
   onMouseLeave: () => void;
@@ -46,16 +42,12 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
   isOwnBookmark,
   userBookmarkedLink,
   isPrivate,
-  isPrivateRequestFailed,
-  isPrivateRequestPending,
   onVote,
   onEdit,
-  onPrivateSwitch,
   isBookmarkDeletePending,
   onBookmarkGrab,
   onBookmarkDelete,
   favicon,
-  createdAtFormatted,
   recentlyCreated,
   onMouseLeave,
 }) => (
@@ -67,14 +59,14 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
     onMouseLeave={onMouseLeave}
   >
     <div className="BookmarkRow-left">
-      <div className="BookmarkRow-icons">
-        <img className="BookmarkRow-favicon" src={favicon} />
-      </div>
-      <Span bold className="BookmarkRow-title">
-        <A href={url} targetBlank styled={false}>
-          {title}
-        </A>
-      </Span>
+      <Flex vertical="center" growVertical={false} horizontal="left" noWrap>
+        <img className="LinkRow-favicon" src={favicon} />
+        <Span bold className="LinkRow-title">
+          <A href={url} targetBlank styled={false}>
+            {title}
+          </A>
+        </Span>
+      </Flex>
       <Span className="BookmarkRow-url" size="small">
         <A href={url} targetBlank>
           {url}
@@ -97,42 +89,25 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
       ))}
     </div>
     <div className="BookmarkRow-right">
-      <Flex horizontal="right" growVertical={false} vertical="center">
-        {isOwnBookmark && (
-          <>
-            <Private
-              size="micro"
-              className={
-                'BookmarkRow-private' +
-                (isPrivateRequestPending ? ' BookmarkRow--pending' : '') +
-                (isPrivateRequestFailed ? ' BookmarkRow--failed' : '') +
-                (isPrivate ? ' BookmarkRow-private--isPrivate' : '')
-              }
-              onClick={onPrivateSwitch}
-            />
-            <Edit size="micro" className="BookmarkRow-edit" onClick={onEdit} />
-          </>
-        )}
-
-        <Vote vote={statistics?.vote} changeVote={onVote} loading={statistics?.loading} />
+      <Flex horizontal="right" growVertical={false} vertical="bottom" noWrap>
+        {isOwnBookmark && isPrivate && <Private size="micro" className="BookmarkRow-icon BookmarkRow-private" />}
+        {isOwnBookmark && <Edit size="micro" className="BookmarkRow-icon BookmarkRow-edit" onClick={onEdit} />}
+        <Vote className="BookmarkRow-icon " vote={statistics?.vote} changeVote={onVote} loading={statistics?.loading} />
       </Flex>
       <div className="BookmarkRow-stats">
         <div className="BookmarkRow-stat">
-          <Span size="small" className="BookmarkRow-statIcon">
+          <Span size="small" className="BookmarkRow-icon BookmarkRow-statIcon">
             ▲
           </Span>
           {statistics?.absoluteVote || 0}
         </div>
         <div className="BookmarkRow-stat">
-          <Span size="small" className="BookmarkRow-statIcon">
+          <Span size="small" className="BookmarkRow-icon BookmarkRow-statIcon">
             ⚭
           </Span>
           {statistics?.timesBookmarked || 0}
         </div>
       </div>
-      <Span size="micro" className="BookmarkRow-stat">
-        {createdAtFormatted}
-      </Span>
     </div>
     {isOwnBookmark && (
       <span className={'BookmarkRow-myBookmark' + (isBookmarkDeletePending ? ' BookmarkRow--pending' : '')}>
