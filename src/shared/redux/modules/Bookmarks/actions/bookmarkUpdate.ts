@@ -51,7 +51,7 @@ export const bookmarkUpdate = ({
     await dispatch(
       bookmarkUpdateFailure({
         ...bookmarksOnError,
-        errors: [...bookmarksOnError.errors, error],
+        errors: [...(bookmarksOnError.errors || []), error],
       })
     );
 

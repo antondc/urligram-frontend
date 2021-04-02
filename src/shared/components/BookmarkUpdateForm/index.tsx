@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { bookmarksLoad } from 'Modules/Bookmarks/actions/bookmarksLoad';
-import { bookmarksLoadByUserId } from 'Modules/Bookmarks/actions/bookmarksLoadByUserId';
+import { bookmarkDelete } from 'Modules/Bookmarks/actions/bookmarkDelete';
 import { bookmarkUpdate } from 'Modules/Bookmarks/actions/bookmarkUpdate';
 import { selectBookmarksById } from 'Modules/Bookmarks/selectors/selectBookmarkById';
 import { selectBookmarksErrorLast } from 'Modules/Bookmarks/selectors/selectBookmarksErrorLast';
 import { RootState } from 'Modules/rootType';
-import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUserId';
 import { tagsSearchLoad } from 'Modules/Tags/actions/tagsSearchLoad';
 import { selectTagsAll } from 'Modules/Tags/selectors/selectAllTags';
 import { selectTagsSearch } from 'Modules/Tags/selectors/selectTagsSearch';
@@ -33,7 +31,7 @@ const BookmarkUpdateForm: React.FC<Props> = ({ closeModal }) => {
   const tagsSearch = useSelector(selectTagsSearch);
   const tagsSearchFormatted = tagsSearch?.map((item) => ({ label: item.name, value: item.name })) || [];
   const { bookmarkId } = useSelector(selectUiBookmarkUpdateModal);
-  const bookmark = useSelector((state: RootState) => selectBookmarksById(state, { id: bookmarkId }));
+  const bookmark = useSelector((state: RootState) => selectBookmarksById(state, { bookmarkId }));
   const [titleValue, setTitleValue] = useState<string>(undefined);
   const [titleError, setTitleError] = useState<string>(undefined);
   const [isPrivateValue, setIsPrivateValue] = useState<boolean>(false);
@@ -101,6 +99,18 @@ const BookmarkUpdateForm: React.FC<Props> = ({ closeModal }) => {
     setSubmitInProcess(false);
   };
 
+  const onRemove = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setSubmitInProcess(true);
+
+    await dispatch(bookmarkDelete({ bookmarkId: bookmark?.id, linkId: bookmark?.linkId }));
+    setSubmitInProcess(true);
+
+    setTimeout(() => {
+      closeModal();
+    }, DELAY_SLOW_MS);
+  };
+
   useEffect(() => {
     setSubmitError(undefined);
     setTitleValue(bookmark?.title);
@@ -135,6 +145,7 @@ const BookmarkUpdateForm: React.FC<Props> = ({ closeModal }) => {
       submitInProcess={submitInProcess}
       submitSuccess={submitSuccess}
       submitError={submitError}
+      onRemove={onRemove}
     />
   );
 };

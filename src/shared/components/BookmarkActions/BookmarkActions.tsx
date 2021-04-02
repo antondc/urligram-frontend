@@ -8,7 +8,7 @@ import {
   SpinnerLoader,
 } from '@antoniodcorrea/components';
 
-import './BookmarkButton.less';
+import './BookmarkActions.less';
 
 interface Props {
   className?: string;
@@ -20,7 +20,7 @@ interface Props {
   onEdit: () => void;
 }
 
-export const BookmarkButton: React.FC<Props> = ({
+export const BookmarkActions: React.FC<Props> = ({
   className,
   isOwnBookmark,
   userBookmarkedLink,
@@ -29,27 +29,27 @@ export const BookmarkButton: React.FC<Props> = ({
   onBookmarkDelete,
   onEdit,
 }) => (
-  <div className={'BookmarkButton' + (className ? ' ' + className : '')}>
+  <div className={'BookmarkActions' + (className ? ' ' + className : '')}>
     {!loading && isOwnBookmark && (
       <>
-        <BookmarkFilled className="BookmarkButton-bookmark BookmarkButton-bookmarkFilled" />
-        <EditCircle className="BookmarkButton-edit" size="medium" onClick={onEdit} />
+        <BookmarkFilled className="BookmarkActions-bookmark BookmarkActions-bookmarkFilled" />
+        <EditCircle className="BookmarkActions-edit" size="medium" onClick={onEdit} />
       </>
     )}
     {!loading && !isOwnBookmark && !userBookmarkedLink && (
       <BookmarkWithBackground
-        className={'BookmarkButton-bookmark BookmarkButton-bookmarkEmpty'}
+        className={'BookmarkActions-bookmark BookmarkActions-bookmarkEmpty'}
         onClick={onBookmarkGrab}
       />
     )}
     {!loading && !isOwnBookmark && userBookmarkedLink && (
       <>
-        <BookmarkWithBackground className="BookmarkButton-bookmarked" />
-        <PlusCircleWithBackground className="BookmarkButton-bookmarkRemove" onClick={onBookmarkDelete} />
+        <BookmarkWithBackground className="BookmarkActions-bookmarked" />
+        <PlusCircleWithBackground className="BookmarkActions-bookmarkRemove" onClick={onBookmarkDelete} />
       </>
     )}
-    {loading && <SpinnerLoader className="BookmarkButton-loader" size="nano" />}
+    {loading && <SpinnerLoader className="BookmarkActions-loader" size="nano" />}
   </div>
 );
 
-export default BookmarkButton;
+export default BookmarkActions;

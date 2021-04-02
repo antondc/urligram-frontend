@@ -3,6 +3,7 @@ import { QueryStringWrapper } from 'Root/src/shared/services/QueryStringWrapper'
 import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
 import { AppThunk } from '../../..';
+import { bookmarksLoadFailure } from './bookmarksLoadFailure';
 import { bookmarksLoadRequest } from './bookmarksLoadRequest';
 import { bookmarksLoadSuccess } from './bookmarksLoadSuccess';
 
@@ -49,7 +50,14 @@ export const bookmarksLoadByUserId = (
     );
 
     return bookmarksArray;
-  } catch (err) {
-    throw new Error(err);
+  } catch (error) {
+    const { Bookmarks: bookmarksOnError } = getState();
+    dispatch(
+      bookmarksLoadFailure({
+        ...bookmarksOnError,
+        errors: [...(bookmarksOnError?.errors || []), error],
+      })
+    );
+    throw new Error(error);
   }
 };

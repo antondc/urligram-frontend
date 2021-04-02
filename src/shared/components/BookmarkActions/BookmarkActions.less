@@ -1,13 +1,11 @@
 @import '../../css/imports.less';
 
-@c: .BookmarkButton;
+@c: .BookmarkActions;
 
 @{c} {
   position: relative;
   height: 50px;
   width: 50px;
-  // border-radius: 50%;
-  // background: @c-background;
 
   &-bookmark,
   &-bookmarkEmpty,
@@ -43,12 +41,13 @@
     border-radius: 50%;
   }
 
-  &-bookmarkFilled,
-  &-bookmarkEmpty {
+  &-bookmarkFilled {
     fill: @c-error;
   }
 
   &-bookmarkEmpty {
+    fill: @c-accentLight;
+
     path[data-id='background'] {
       opacity: 1;
       fill: @c-background;
@@ -106,27 +105,4 @@
       transform: rotate(-45deg);
     }
   }
-
-  // &-loader {
-  //   background: @c-background;
-  //   fill: @c-background;
-  //   stroke: @c-success;
-  // }
-
-  // &-listNotFollowed {
-  //   fill: @c-accentLight;
-
-  //   &:hover {
-  //     fill: @c-success;
-  //   }
-  // }
-
-  // &-listFollowed {
-  //   fill: @c-success;
-
-  //   &:hover {
-  //     fill: @c-error;
-  //     transform: rotate(-45deg);
-  //   }
-  // }
 }

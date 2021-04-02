@@ -9,8 +9,8 @@ import {
 import { linkLoadById } from 'Modules/Links/actions/linkLoadById';
 import { LinksActions } from 'Modules/Links/links.types';
 import { uiNotificationPush } from 'Modules/Ui/actions/uiNotificationPush';
-import { serializerFromArrayToByKey } from 'Root/src/shared/tools/utils/serializers/serializerFromArrayToByKey';
 import HttpClient from 'Services/HttpClient';
+import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
 import { AppThunk } from '../../../index';
 import { bookmarkCreateRequest } from './bookmarkCreateRequest';
 
@@ -19,26 +19,14 @@ export const bookmarkCreate = ({
   url,
   isPrivate,
   tags,
-  bookmarkId,
 }: BookmarkCreateApiRequest): AppThunk<Promise<BookmarkState>, BookmarksActions | LinksActions> => async (
   dispatch,
   getState
 ) => {
-  try {
-    const { Bookmarks: bookmarksBeforeRequest } = getState();
+  const { Bookmarks: bookmarksBeforeRequest } = getState();
 
-    dispatch(
-      bookmarkCreateRequest({
-        ...bookmarksBeforeRequest,
-        byKey: {
-          ...bookmarksBeforeRequest.byKey,
-          [bookmarkId]: {
-            ...bookmarksBeforeRequest.byKey[bookmarkId],
-            loading: true,
-          },
-        },
-      })
-    );
+  try {
+    dispatch(bookmarkCreateRequest(bookmarksBeforeRequest));
 
     const { data: bookmarkData } = await HttpClient.post<void, BookmarkCreateApiResponse>('/users/me/bookmarks', {
       title,
@@ -56,23 +44,30 @@ export const bookmarkCreate = ({
       users: [...(item?.users || []), bookmarkData.attributes.userId],
     }));
 
-    await dispatch(
+    dispatch(
       bookmarkCreateSuccess({
         ...bookmarksAfterResponse,
         byKey: {
           ...bookmarksAfterResponse.byKey,
           ...serializerFromArrayToByKey<BookmarkState, BookmarkState>({ data: bookmarksWithNewUser }),
-          [bookmarkId]: {
-            ...bookmarksAfterResponse.byKey[bookmarkId],
-            users: [...(bookmarksAfterResponse.byKey[bookmarkId]?.users || []), bookmarkData?.attributes?.userId],
-            loading: false,
+          [bookmarkData?.attributes?.id]: {
+            ...bookmarksAfterResponse.byKey[bookmarkData?.attributes?.id],
+            ...bookmarkData?.attributes,
+            bookmarksRelated: [
+              ...(bookmarksAfterResponse.byKey[bookmarkData?.attributes?.id]?.bookmarksRelated || []),
+              {
+                id: bookmarkData?.attributes?.id,
+                userId: bookmarkData?.attributes?.userId,
+                title: bookmarkData?.attributes?.title,
+              },
+            ],
           },
-          [bookmarkData?.attributes?.id]: bookmarkData?.attributes,
         },
       })
     );
     await dispatch(linkLoadById(bookmarkData?.attributes?.linkId));
-    await dispatch(
+
+    dispatch(
       uiNotificationPush({
         bookmarkId: bookmarkData.attributes.id,
         type: 'bookmark-grabbed',
@@ -84,16 +79,13 @@ export const bookmarkCreate = ({
     return bookmarkData?.attributes;
   } catch (error) {
     const { Bookmarks: bookmarksOnError } = getState();
-
-    await dispatch(
+    dispatch(
       bookmarkCreateFailure({
         ...bookmarksOnError,
-        [bookmarkId]: {
-          ...bookmarksOnError?.byKey[bookmarkId],
-          loading: false,
-        },
-        errors: [...bookmarksOnError.errors, error],
+        errors: [...(bookmarksOnError.errors || []), error],
       })
     );
+
+    throw new Error(error);
   }
 };

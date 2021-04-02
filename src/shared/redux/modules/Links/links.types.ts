@@ -1,3 +1,5 @@
+import { BookmarkRelated } from '../Bookmarks/bookmarks.types';
+
 export const LINKS_LOAD_REQUEST = 'LINKS_LOAD_REQUEST';
 export const LINKS_LOAD_SUCCESS = 'LINKS_LOAD_SUCCESS';
 export const LINK_VOTE_REQUEST = 'LINK_VOTE_REQUEST';
@@ -5,14 +7,11 @@ export const LINK_VOTE_SUCCESS = 'LINK_VOTE_SUCCESS';
 export const LINK_LOAD_BY_ID_REQUEST = 'LINK_LOAD_BY_ID_REQUEST';
 export const LINK_LOAD_BY_ID_FAILURE = 'LINK_LOAD_BY_ID_FAILURE';
 export const LINK_LOAD_BY_ID_SUCCESS = 'LINK_LOAD_BY_ID_SUCCESS';
+export const LINK_BOOKMARK_CREATE_REQUEST = 'LINK_BOOKMARK_CREATE_REQUEST';
+export const LINK_BOOKMARK_CREATE_SUCCESS = 'LINK_BOOKMARK_CREATE_SUCCESS';
+export const LINK_BOOKMARK_CREATE_FAILURE = 'LINK_BOOKMARK_CREATE_FAILURE';
 
 export type LinkError = Error;
-export type LinkBookmark = {
-  id: number;
-  title: string;
-  userId: string;
-  isPrivate: boolean;
-};
 
 export interface LinkState {
   id: number;
@@ -27,7 +26,8 @@ export interface LinkState {
     id: number;
     name: string;
   }[];
-  users: string[];
+  // users: string[];
+  bookmarksRelated: BookmarkRelated[];
   createdAt: number;
   updatedAt: number;
   statistics: {
@@ -38,7 +38,6 @@ export interface LinkState {
     vote: boolean | null;
     loading: boolean | undefined;
   };
-  bookmarks: LinkBookmark[];
   loading?: boolean;
 }
 
@@ -108,6 +107,21 @@ export interface LinkLoadByIdFailureAction {
   payload: Partial<LinksState>;
 }
 
+export interface LinkBookmarkCreateRequestAction {
+  type: typeof LINK_BOOKMARK_CREATE_REQUEST;
+  payload: Partial<LinksState>;
+}
+
+export interface LinkBookmarkCreateSuccessAction {
+  type: typeof LINK_BOOKMARK_CREATE_SUCCESS;
+  payload: Partial<LinksState>;
+}
+
+export interface LinkBookmarkCreateFailulreAction {
+  type: typeof LINK_BOOKMARK_CREATE_FAILURE;
+  payload: Partial<LinksState>;
+}
+
 export type LinksActions =
   | LinksLoadRequestAction
   | LinksLoadSuccessAction
@@ -115,4 +129,7 @@ export type LinksActions =
   | LinkVoteSuccessAction
   | LinkLoadByIdRequestAction
   | LinkLoadByIdSuccessAction
-  | LinkLoadByIdFailureAction;
+  | LinkLoadByIdFailureAction
+  | LinkBookmarkCreateRequestAction
+  | LinkBookmarkCreateSuccessAction
+  | LinkBookmarkCreateFailulreAction;

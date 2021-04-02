@@ -23,16 +23,12 @@ const Home: React.FC = () => {
   const url = useSelector(selectCurrentFullUrl);
   const sort = useSelector(selectBookmarksMetaSort);
 
-  const loadMainContent = () => {
-    dispatch(bookmarksLoad());
-  };
-
   useEffect(() => {
     dispatch(sectionsPopularListsLoad());
   }, []);
 
   useEffect(() => {
-    loadMainContent();
+    dispatch(bookmarksLoad());
   }, [page]);
 
   return (
@@ -44,7 +40,6 @@ const Home: React.FC = () => {
       totalItems={totalItems}
       url={url}
       sort={sort}
-      loadMainContent={loadMainContent}
     />
   );
 };

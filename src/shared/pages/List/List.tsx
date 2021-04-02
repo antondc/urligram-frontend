@@ -25,7 +25,6 @@ interface Props {
   usersInThisListLoading: boolean;
   tagsInThisList: TagState[];
   tagsInThisListLoading: boolean;
-  loadMainContent: () => void;
   url: string;
   page: {
     size: number;
@@ -45,7 +44,6 @@ export const List: React.FC<Props> = ({
   tagsInThisListLoading,
   page,
   totalItems,
-  loadMainContent,
   url,
   sort,
 }) => (
@@ -81,7 +79,7 @@ export const List: React.FC<Props> = ({
               bookmarksIds?.map((id, index) => (
                 <React.Fragment key={id}>
                   {!!index && <Hr spacer size="small" />}
-                  <BookmarkRow id={id} loadMainContent={loadMainContent} />
+                  <BookmarkRow id={id} />
                 </React.Fragment>
               ))
             )}

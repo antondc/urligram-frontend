@@ -1,4 +1,6 @@
 import {
+  LINK_BOOKMARK_CREATE_FAILURE,
+  LINK_BOOKMARK_CREATE_REQUEST,
   LINK_LOAD_BY_ID_FAILURE,
   LINK_LOAD_BY_ID_REQUEST,
   LINK_LOAD_BY_ID_SUCCESS,
@@ -23,6 +25,8 @@ export const Links = (state = initialState, action: LinksActions): LinksState =>
     case LINK_LOAD_BY_ID_REQUEST:
     case LINK_LOAD_BY_ID_SUCCESS:
     case LINK_LOAD_BY_ID_FAILURE:
+    case LINK_BOOKMARK_CREATE_REQUEST:
+    case LINK_BOOKMARK_CREATE_FAILURE:
       return Object.assign({}, state, action.payload);
 
     default:

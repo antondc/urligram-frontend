@@ -38,12 +38,8 @@ const User: React.FC<Props> = () => {
   const date = new LocaleFormattedDate({ unixTime: user?.createdAt, locale: currentLanguageSlug });
   const createdAtFormatted = date.getLocaleFormattedDate();
 
-  const loadMainContent = () => {
-    dispatch(bookmarksLoadByUserId(userId, 5));
-  };
-
   useEffect(() => {
-    loadMainContent();
+    dispatch(bookmarksLoadByUserId(userId, 5));
     dispatch(userLoad(userId));
 
     dispatch(sectionsFollowingUsersLoad(userId));
@@ -61,7 +57,6 @@ const User: React.FC<Props> = () => {
       followingUsersLoading={followingUsersLoading}
       followersUsers={followersUsers}
       followersUsersLoading={followersUsersLoading}
-      loadMainContent={loadMainContent}
     />
   );
 };

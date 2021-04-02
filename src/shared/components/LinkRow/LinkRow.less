@@ -154,110 +154,12 @@
     color: @c-traslucid--hardest;
   }
 
-  &-bookmarkFilled {
+  &-actionButton {
     position: absolute;
-    top: -4px;
-    right: 2px;
-  }
-
-  &-bookmark {
-    position: absolute;
-    height: 12px;
-    width: 12px;
-    top: -4px;
-    right: 2px;
-    line-height: 0;
-    fill: @gradientColors[black-3];
-    // fill: @c-accent;
-    transition: fill @td-fast @ease, transform @td-fast @ease;
-
-    path[data-id='background'] {
-      opacity: 1;
-      fill: @c-background;
-    }
-
-    path[data-id='foreground'] {
-      outline: 10px solid @c-background;
-    }
-
-    &:hover {
-      fill: @c-error;
-      cursor: pointer;
-    }
-
-    &--bookmarked {
-      fill: @c-error;
-
-      path[data-id='background'] {
-        fill: @c-error;
-      }
-
-      &:hover {
-        cursor: default;
-      }
-    }
-
-    &--pending {
-      path[data-id='foreground'] {
-        fill: @c-error;
-      }
-
-      animation: hearthBeat 1.5s ease infinite;
-    }
-  }
-
-  &-myBookmark {
-    position: absolute;
-    height: 12px;
-    width: 12px;
-    top: -4px;
-    right: 3px;
-    line-height: 0;
-    fill: @c-error;
-
-    &:hover {
-      @{c}-myBookmarkBookmark {
-        opacity: 0;
-      }
-      @{c}-myBookmarkCross {
-        opacity: 1;
-      }
-    }
-  }
-
-  &-myBookmarkCross,
-  &-myBookmarkBookmark {
-    position: absolute;
-    top: 0;
-    right: 0;
-  }
-
-  &-myBookmarkCross {
-    path[data-id='foreground'] {
-      opacity: 1;
-      fill: @c-base;
-    }
-
-    path[data-id='background'] {
-      opacity: 1;
-      fill: @c-background;
-    }
-
-    top: -2px;
-    right: 0;
-    opacity: 0;
-    outline: 1px solid @c-background;
-    fill: @c-accent;
-    transform: rotate(45deg);
+    height: 18px;
+    width: 18px;
+    top: -5px;
+    right: 9px;
     border-radius: 50%;
-
-    &:hover {
-      cursor: pointer;
-    }
-  }
-
-  &-myBookmarkBookmark {
-    opacity: 1;
-    fill: @c-error;
   }
 }

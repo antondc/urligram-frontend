@@ -1,19 +1,16 @@
 import React from 'react';
 
 import A from 'Components/A';
-import BookmarkButton from 'Components/BookmarkButton';
+import BookmarkActions from 'Components/BookmarkActions';
 import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
-import { Border, Edit, Flex, Private, Span, Tag, Vote } from '@antoniodcorrea/components';
+import { Border, Flex, Private, Span, Tag, Vote } from '@antoniodcorrea/components';
 
 import './BookmarkRow.less';
 
 interface BookmarkRow extends BookmarkState {
   userId: string;
-  isOwnBookmark: boolean;
   recentlyCreated: boolean;
   onVote: (vote: boolean | null) => void;
-  onEdit: () => void;
-  onMouseLeave: () => void;
 }
 
 export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
@@ -24,20 +21,16 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
   url,
   tags = [],
   statistics,
-  isOwnBookmark,
   isPrivate,
   onVote,
-  onEdit,
   favicon,
   recentlyCreated,
-  onMouseLeave,
 }) => (
   <Border
     grow
     className={'BookmarkRow' + (recentlyCreated ? ' BookmarkRow-recentlyCreated' : '')}
     data-test-id="BookmarkRow"
     key={id}
-    onMouseLeave={onMouseLeave}
   >
     <div className="BookmarkRow-left">
       <Flex vertical="center" growVertical={false} horizontal="left" noWrap>
@@ -71,26 +64,25 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
     </div>
     <div className="BookmarkRow-right">
       <Flex horizontal="right" growVertical={false} vertical="bottom" noWrap>
-        {isOwnBookmark && isPrivate && <Private size="micro" className="BookmarkRow-icon BookmarkRow-private" />}
-        {isOwnBookmark && <Edit size="micro" className="BookmarkRow-icon BookmarkRow-edit" onClick={onEdit} />}
+        {isPrivate && <Private size="micro" className="BookmarkRow-icon BookmarkRow-private" />}
         <Vote className="BookmarkRow-icon " vote={statistics?.vote} changeVote={onVote} loading={statistics?.loading} />
       </Flex>
       <div className="BookmarkRow-stats">
-        <div className="BookmarkRow-stat">
-          <Span size="small" className="BookmarkRow-icon BookmarkRow-statIcon">
+        <Span size="micro" className="LinkRow-stat">
+          <Span size="small" className="LinkRow-statIcon">
             ▲
           </Span>
           {statistics?.absoluteVote || 0}
-        </div>
-        <div className="BookmarkRow-stat">
-          <Span size="small" className="BookmarkRow-icon BookmarkRow-statIcon">
+        </Span>
+        <Span size="micro" className="LinkRow-stat">
+          <Span size="small" className="LinkRow-statIcon">
             ⚭
           </Span>
           {statistics?.timesBookmarked || 0}
-        </div>
+        </Span>
       </div>
     </div>
-    <BookmarkButton className="BookmarkRow-actionButton" linkId={linkId} bookmarkId={id} />
+    <BookmarkActions className="BookmarkRow-actionButton" linkId={linkId} bookmarkId={id} />
   </Border>
 );
 

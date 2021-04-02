@@ -1,5 +1,6 @@
 export const BOOKMARKS_LOAD_REQUEST = 'BOOKMARKS_LOAD_REQUEST';
 export const BOOKMARKS_LOAD_SUCCESS = 'BOOKMARKS_LOAD_SUCCESS';
+export const BOOKMARKS_LOAD_FAILURE = 'BOOKMARKS_LOAD_FAILURE';
 export const BOOKMARK_UPDATE_VOTE_SUCCESS = 'BOOKMARK_UPDATE_VOTE_SUCCESS';
 export const BOOKMARK_UPDATE_VOTE_REQUEST = 'BOOKMARK_UPDATE_VOTE_REQUEST';
 export const BOOKMARK_CREATE_REQUEST = 'BOOKMARK_CREATE_REQUEST';
@@ -15,6 +16,12 @@ export const BOOKMARK_DELETE_FAILURE = 'BOOKMARK_DELETE_FAILURE';
 export interface BookmarkError extends Error {
   field: string;
 }
+
+export type BookmarkRelated = {
+  id: number;
+  title: string;
+  userId: string;
+};
 
 export interface LinkStatistics {
   absoluteVote: number | null;
@@ -37,6 +44,7 @@ export interface BookmarkState {
   createdAt: number;
   updatedAt: number;
   users: string[];
+  bookmarksRelated?: BookmarkRelated[];
   isPrivate: boolean;
   tags: {
     id: number;
@@ -133,6 +141,11 @@ interface BookmarksLoadSuccessAction {
   payload: BookmarksState;
 }
 
+interface BookmarksLoadFailureAction {
+  type: typeof BOOKMARKS_LOAD_FAILURE;
+  payload: BookmarksState;
+}
+
 export interface BookmarkVoteRequestAction {
   type: typeof BOOKMARK_UPDATE_VOTE_REQUEST;
   payload: BookmarksState;
@@ -191,6 +204,7 @@ export interface BookmarkDeleteFailureAction {
 export type BookmarksActions =
   | BookmarksLoadRequestAction
   | BookmarksLoadSuccessAction
+  | BookmarksLoadFailureAction
   | BookmarkVoteRequestAction
   | BookmarkVoteSuccessAction
   | BookmarkCreateApiRequestAction

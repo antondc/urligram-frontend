@@ -47,7 +47,7 @@ export const linkLoadById = (linkId: number): AppThunk<Promise<LinkState>, Links
     await dispatch(
       linkLoadByIdFailure({
         ...linksOnError,
-        errors: [...linksOnError.errors, error],
+        errors: [...(linksOnError.errors || []), error],
       })
     );
 

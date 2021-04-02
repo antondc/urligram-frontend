@@ -1,11 +1,11 @@
 import React from 'react';
 
 import BookmarkRow from 'Components/BookmarkRow';
+import { BookmarkRowSkeletonGroup } from 'Components/BookmarkRow/BookmarkRowSkeletonGroup';
 import Main from 'Components/Main';
 import Pagination from 'Components/Pagination';
 import Sidebar from 'Components/Sidebar';
 import { ListState } from 'Modules/Lists/lists.types';
-import { BookmarkRowSkeletonGroup } from 'Root/src/shared/components/BookmarkRow/BookmarkRowSkeletonGroup';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
 import { Border, FadeInOut, Flex, Hr, SortBy } from '@antoniodcorrea/components';
 
@@ -22,10 +22,9 @@ interface Props {
   };
   totalItems: number;
   sort: string;
-  loadMainContent: () => void;
 }
 
-export const Bookmarks: React.FC<Props> = ({ url, bookmarksIds, loading, page, totalItems, sort, loadMainContent }) => (
+export const Bookmarks: React.FC<Props> = ({ url, bookmarksIds, loading, page, totalItems, sort }) => (
   <div className="Bookmarks">
     <Flex horizontal="between" vertical="top">
       <Main>
@@ -48,7 +47,7 @@ export const Bookmarks: React.FC<Props> = ({ url, bookmarksIds, loading, page, t
               bookmarksIds?.map((id, index) => (
                 <React.Fragment key={id}>
                   {!!index && <Hr spacer size="small" />}
-                  <BookmarkRow id={id} loadMainContent={loadMainContent} />
+                  <BookmarkRow id={id} />
                 </React.Fragment>
               ))
             )}

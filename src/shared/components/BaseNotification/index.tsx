@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { uiNotificationViewed } from 'Modules/Ui/actions/uiNotificationViewed';
 import { NotificationState } from 'Modules/Ui/ui.types';
 import { Hr, Notification } from '@antoniodcorrea/components';
-import { DELAY_SIX_SEC } from '../../constants';
+import { DELAY_THREE_SEC } from '../../constants';
 import BookmarkDeleted from './BookmarkDeleted';
 import BookmarkGrabbed from './BookmarkGrabbed';
 import LinkVoted from './LinkVoted';
@@ -21,7 +21,7 @@ const BaseNotification: React.FC<Props> = ({ notification }) => {
   useEffect(() => {
     setTimeout(() => {
       dispatch(uiNotificationViewed(notification));
-    }, DELAY_SIX_SEC);
+    }, DELAY_THREE_SEC);
   }, []);
 
   const onCloseClick = () => {

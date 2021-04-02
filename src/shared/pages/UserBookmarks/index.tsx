@@ -77,10 +77,6 @@ const UserBookmarks: React.FC = () => {
     history.push(redirectPath);
   };
 
-  const loadMainContent = () => {
-    dispatch(bookmarksLoadByUserId(userId));
-  };
-
   return (
     <UserBookmarksUi
       userId={userId}
@@ -101,7 +97,6 @@ const UserBookmarks: React.FC = () => {
       onInputChange={onInputChange}
       currentQueryParamFilterTags={currentQueryParamFilterTags}
       onChange={onChange}
-      loadMainContent={loadMainContent}
     />
   );
 };

@@ -1,26 +1,14 @@
 import React from 'react';
 
 import A from 'Components/A';
+import BookmarkActions from 'Components/BookmarkActions';
 import { LinkState } from 'Modules/Links/links.types';
-import {
-  BookmarkFilled,
-  BookmarkWithBackground,
-  Border,
-  Flex,
-  PlusCircleWithBackground,
-  Span,
-  Tag,
-  Vote,
-} from '@antoniodcorrea/components';
+import { Border, Flex, Span, Tag, Vote } from '@antoniodcorrea/components';
 
 import './LinkRow.less';
 
 interface LinkRow extends LinkState {
   onVote: (vote: boolean | null) => void;
-  onBookmarkGrab: () => void;
-  onBookmarkDelete: () => void;
-  isBookmarkDeletePending: boolean;
-  bookmarkingLoading: boolean;
   userBookmarked: boolean;
 }
 
@@ -30,14 +18,9 @@ export const LinkRow: React.FC<Partial<LinkRow>> = ({
   url,
   tags = [],
   statistics,
-  users,
+  bookmarksRelated,
   onVote,
-  onBookmarkGrab,
-  onBookmarkDelete,
-  isBookmarkDeletePending,
   favicon,
-  userBookmarked,
-  bookmarkingLoading,
 }) => (
   <Border grow className="LinkRow" data-test-id="LinkRow" key={id}>
     <div className="LinkRow-left">
@@ -79,24 +62,11 @@ export const LinkRow: React.FC<Partial<LinkRow>> = ({
           <Span size="small" className="LinkRow-statIcon">
             ⚭
           </Span>
-          {users.length || 0}
+          {bookmarksRelated?.length || 0}
         </Span>
-        <br />
       </div>
     </div>
-    {userBookmarked && (
-      <span className={'BookmarkRow-myBookmark' + (isBookmarkDeletePending ? ' BookmarkRow--pending' : '')}>
-        <BookmarkFilled className="BookmarkRow-myBookmarkBookmark" size="small" />
-        <PlusCircleWithBackground className="BookmarkRow-myBookmarkCross" size="medium" onClick={onBookmarkDelete} />
-      </span>
-    )}
-    {!userBookmarked && (
-      <BookmarkWithBackground
-        className={'BookmarkRow-bookmark' + (bookmarkingLoading ? ' BookmarkRow-bookmark--pending' : '')}
-        size="small"
-        onClick={onBookmarkGrab}
-      />
-    )}
+    <BookmarkActions className="LinkRow-actionButton" linkId={id} />
   </Border>
 );
 

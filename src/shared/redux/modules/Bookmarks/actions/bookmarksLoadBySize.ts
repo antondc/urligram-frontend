@@ -2,6 +2,7 @@ import { BookmarksActions, BookmarksGetApiResponse, BookmarkState } from 'Module
 import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
 import { AppThunk } from '../../..';
+import { bookmarksLoadFailure } from './bookmarksLoadFailure';
 import { bookmarksLoadRequest } from './bookmarksLoadRequest';
 import { bookmarksLoadSuccess } from './bookmarksLoadSuccess';
 
@@ -42,7 +43,15 @@ export const bookmarksLoadBySize = (size?: number): AppThunk<Promise<BookmarkSta
     );
 
     return bookmarksArray;
-  } catch (err) {
-    throw new Error(err);
+  } catch (error) {
+    const { Bookmarks: bookmarksOnError } = getState();
+
+    dispatch(
+      bookmarksLoadFailure({
+        ...bookmarksOnError,
+        errors: [...(bookmarksOnError?.errors || []), error],
+      })
+    );
+    throw new Error(error);
   }
 };

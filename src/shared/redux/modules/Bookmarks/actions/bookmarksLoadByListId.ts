@@ -4,13 +4,14 @@ import { BookmarksActions, BookmarksGetApiResponse, BookmarkState } from 'Module
 import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
 import { AppThunk } from '../../..';
+import { bookmarksLoadFailure } from './bookmarksLoadFailure';
 
 export const bookmarksLoadByListId = (listId: number): AppThunk<Promise<BookmarkState[]>, BookmarksActions> => async (
   dispatch,
   getState
 ): Promise<BookmarkState[]> => {
   if (!listId) return;
-  
+
   const { Bookmarks: bookmarksBeforeRequest } = getState();
   try {
     dispatch(
@@ -41,7 +42,15 @@ export const bookmarksLoadByListId = (listId: number): AppThunk<Promise<Bookmark
     );
 
     return bookmarksArray;
-  } catch (err) {
-    throw new Error(err);
+  } catch (error) {
+    const { Bookmarks: bookmarksOnError } = getState();
+
+    dispatch(
+      bookmarksLoadFailure({
+        ...bookmarksOnError,
+        errors: [...(bookmarksOnError?.errors || []), error],
+      })
+    );
+    throw new Error(error);
   }
 };
