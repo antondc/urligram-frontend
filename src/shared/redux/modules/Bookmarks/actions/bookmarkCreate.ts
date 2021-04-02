@@ -12,17 +12,34 @@ import { uiNotificationPush } from 'Modules/Ui/actions/uiNotificationPush';
 import { serializerFromArrayToByKey } from 'Root/src/shared/tools/utils/serializers/serializerFromArrayToByKey';
 import HttpClient from 'Services/HttpClient';
 import { AppThunk } from '../../../index';
+import { bookmarkCreateRequest } from './bookmarkCreateRequest';
 
 export const bookmarkCreate = ({
   title,
   url,
   isPrivate,
   tags,
+  bookmarkId,
 }: BookmarkCreateApiRequest): AppThunk<Promise<BookmarkState>, BookmarksActions | LinksActions> => async (
   dispatch,
   getState
 ) => {
   try {
+    const { Bookmarks: bookmarksBeforeRequest } = getState();
+
+    dispatch(
+      bookmarkCreateRequest({
+        ...bookmarksBeforeRequest,
+        byKey: {
+          ...bookmarksBeforeRequest.byKey,
+          [bookmarkId]: {
+            ...bookmarksBeforeRequest.byKey[bookmarkId],
+            loading: true,
+          },
+        },
+      })
+    );
+
     const { data: bookmarkData } = await HttpClient.post<void, BookmarkCreateApiResponse>('/users/me/bookmarks', {
       title,
       url,
@@ -30,6 +47,7 @@ export const bookmarkCreate = ({
       tags,
     });
     const { Bookmarks: bookmarksAfterResponse } = getState();
+
     const bookmarksToUpdate = Object.values(bookmarksAfterResponse.byKey).filter(
       (item) => item?.linkId === bookmarkData?.attributes?.linkId
     );
@@ -44,9 +62,12 @@ export const bookmarkCreate = ({
         byKey: {
           ...bookmarksAfterResponse.byKey,
           ...serializerFromArrayToByKey<BookmarkState, BookmarkState>({ data: bookmarksWithNewUser }),
-          [bookmarkData.attributes?.id]: {
-            ...bookmarkData.attributes,
+          [bookmarkId]: {
+            ...bookmarksAfterResponse.byKey[bookmarkId],
+            users: [...(bookmarksAfterResponse.byKey[bookmarkId]?.users || []), bookmarkData?.attributes?.userId],
+            loading: false,
           },
+          [bookmarkData?.attributes?.id]: bookmarkData?.attributes,
         },
       })
     );
@@ -63,9 +84,14 @@ export const bookmarkCreate = ({
     return bookmarkData?.attributes;
   } catch (error) {
     const { Bookmarks: bookmarksOnError } = getState();
+
     await dispatch(
       bookmarkCreateFailure({
         ...bookmarksOnError,
+        [bookmarkId]: {
+          ...bookmarksOnError?.byKey[bookmarkId],
+          loading: false,
+        },
         errors: [...bookmarksOnError.errors, error],
       })
     );

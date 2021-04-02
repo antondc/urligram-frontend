@@ -1,33 +1,18 @@
 import React from 'react';
 
 import A from 'Components/A';
+import BookmarkButton from 'Components/BookmarkButton';
 import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
-import {
-  BookmarkFilled,
-  BookmarkWithBackground,
-  Border,
-  Edit,
-  Flex,
-  PlusCircleWithBackground,
-  Private,
-  Span,
-  Tag,
-  Vote,
-} from '@antoniodcorrea/components';
+import { Border, Edit, Flex, Private, Span, Tag, Vote } from '@antoniodcorrea/components';
 
 import './BookmarkRow.less';
 
 interface BookmarkRow extends BookmarkState {
   userId: string;
   isOwnBookmark: boolean;
-  userBookmarkedLink: boolean;
-  bookmarkingLoading: boolean;
   recentlyCreated: boolean;
-  isBookmarkDeletePending: boolean;
   onVote: (vote: boolean | null) => void;
   onEdit: () => void;
-  onBookmarkGrab: () => void;
-  onBookmarkDelete: () => void;
   onMouseLeave: () => void;
 }
 
@@ -35,18 +20,14 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
   userId,
   id,
   title,
+  linkId,
   url,
   tags = [],
   statistics,
-  bookmarkingLoading,
   isOwnBookmark,
-  userBookmarkedLink,
   isPrivate,
   onVote,
   onEdit,
-  isBookmarkDeletePending,
-  onBookmarkGrab,
-  onBookmarkDelete,
   favicon,
   recentlyCreated,
   onMouseLeave,
@@ -109,23 +90,7 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
         </div>
       </div>
     </div>
-    {isOwnBookmark && (
-      <span className={'BookmarkRow-myBookmark' + (isBookmarkDeletePending ? ' BookmarkRow--pending' : '')}>
-        <BookmarkFilled className="BookmarkRow-myBookmarkBookmark" size="small" />
-        <PlusCircleWithBackground className="BookmarkRow-myBookmarkCross" size="medium" onClick={onBookmarkDelete} />
-      </span>
-    )}
-    {!isOwnBookmark && (
-      <BookmarkWithBackground
-        className={
-          'BookmarkRow-bookmark' +
-          (userBookmarkedLink ? ' BookmarkRow-bookmark--bookmarked' : '') +
-          (bookmarkingLoading ? ' BookmarkRow-bookmark--pending' : '')
-        }
-        size="small"
-        onClick={onBookmarkGrab}
-      />
-    )}
+    <BookmarkButton className="BookmarkRow-actionButton" linkId={linkId} bookmarkId={id} />
   </Border>
 );
 

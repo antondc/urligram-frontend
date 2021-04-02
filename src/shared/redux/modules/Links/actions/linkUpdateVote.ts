@@ -1,7 +1,7 @@
 import { bookmarkUpdateVoteRequest } from 'Modules/Bookmarks/actions/bookmarkUpdateVoteRequest';
 import { bookmarkUpdateVoteSuccess } from 'Modules/Bookmarks/actions/bookmarkUpdateVoteSuccess';
 import { BookmarksActions } from 'Modules/Bookmarks/bookmarks.types';
-import { LinkApiResponse, LinksActions, LinksState, LinkState } from 'Modules/Links/links.types';
+import { LinkApiResponse, LinksActions, LinkState } from 'Modules/Links/links.types';
 import HttpClient from 'Services/HttpClient';
 import { AppThunk } from '../../..';
 import { linkUpdateVoteRequest } from './linkUpdateVoteRequest';
@@ -21,41 +21,43 @@ export const linkUpdateVote = ({
   dispatch,
   getState
 ): Promise<LinkState> => {
-  const {
-    Links: { byKey },
-  } = getState();
+  const { Links: linksBeforeRequest } = getState();
 
   try {
     dispatch(bookmarkUpdateVoteRequest({ linkId }));
 
-    const linksSerializedByKeyRequest: LinksState = {
-      byKey: {
-        ...byKey,
-        [linkId]: {
-          ...byKey[linkId],
-          statistics: {
-            ...byKey[linkId]?.statistics,
-            loading: true,
+    await dispatch(
+      linkUpdateVoteRequest({
+        byKey: {
+          ...linksBeforeRequest?.byKey,
+          [linkId]: {
+            ...linksBeforeRequest?.byKey[linkId],
+            statistics: {
+              ...linksBeforeRequest?.byKey[linkId]?.statistics,
+              loading: true,
+            },
           },
         },
-      },
-    };
-    await dispatch(linkUpdateVoteRequest(linksSerializedByKeyRequest));
+      })
+    );
 
     const { data } = await HttpClient.put<void, LinkApiResponse>(`/links/${linkId}`, {
       vote,
       userId,
     });
+    const { Links: linksAfterResponse } = getState();
 
-    const linksSerializedByKeyResponse: LinksState = {
-      byKey: {
-        ...byKey,
-        [data.attributes.id]: {
-          ...data.attributes,
+    dispatch(
+      linkUpdateVoteSuccess({
+        ...linksAfterResponse,
+        byKey: {
+          ...linksAfterResponse.byKey,
+          [data.attributes.id]: {
+            ...data.attributes,
+          },
         },
-      },
-    };
-    dispatch(linkUpdateVoteSuccess(linksSerializedByKeyResponse));
+      })
+    );
 
     dispatch(
       bookmarkUpdateVoteSuccess({

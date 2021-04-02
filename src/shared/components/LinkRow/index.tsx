@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { bookmarkCreate } from 'Modules/Bookmarks/actions/bookmarkCreate';
 import { bookmarkDelete } from 'Modules/Bookmarks/actions/bookmarkDelete';
-import { selectBookmarkByLinkIdAndUserId } from 'Modules/Bookmarks/selectors/selectBookmarkByLinkIdAndUserId';
 import { linkUpdateVote } from 'Modules/Links/actions/linkUpdateVote';
+import { selectLinkBookmarkIdByUserId } from 'Modules/Links/selectors/selectLinkBookmarkIdByUserId';
 import { selectLinkById } from 'Modules/Links/selectors/selectLinkById';
 import { RootState } from 'Modules/rootType';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
@@ -23,7 +23,7 @@ const LinkRow: React.FC<Props> = ({ id }) => {
   const sessionId = useSelector(selectSessionUserId);
   const link = useSelector((state: RootState) => selectLinkById(state, { id }));
   const { id: bookmarkId } = useSelector((state: RootState) =>
-    selectBookmarkByLinkIdAndUserId(state, { linkId: link?.id, userId: sessionId })
+    selectLinkBookmarkIdByUserId(state, { linkId: link?.id, userId: sessionId })
   );
   const [bookmarkingLoading, setBookmarkingLoading] = useState<boolean>(false);
   const [isBookmarkDeletePending, setIsBookmarkDeletePending] = useState<boolean>(false);
@@ -55,7 +55,7 @@ const LinkRow: React.FC<Props> = ({ id }) => {
     if (!userBookmarked) return;
 
     setIsBookmarkDeletePending(true);
-    await dispatch(bookmarkDelete(bookmarkId));
+    await dispatch(bookmarkDelete({ bookmarkId, linkId: link?.id, userId: sessionId }));
     setIsBookmarkDeletePending(false);
   };
 

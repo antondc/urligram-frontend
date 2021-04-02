@@ -44,6 +44,7 @@ export interface BookmarkState {
   }[];
   statistics: LinkStatistics;
   deleting?: boolean;
+  loading?: boolean;
 }
 
 export type BookmarksByKey = {
@@ -98,7 +99,9 @@ export interface BookmarkCreateApiResponse {
 
 export interface BookmarkDeleteApiResponse {
   data: {
-    attributes: BookmarkState;
+    attributes: {
+      id: number;
+    };
   };
 }
 

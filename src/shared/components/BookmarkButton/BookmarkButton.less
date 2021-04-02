@@ -1,0 +1,132 @@
+@import '../../css/imports.less';
+
+@c: .BookmarkButton;
+
+@{c} {
+  position: relative;
+  height: 50px;
+  width: 50px;
+  // border-radius: 50%;
+  // background: @c-background;
+
+  &-bookmark,
+  &-bookmarkEmpty,
+  &-bookmarked,
+  &-bookmarkRemove,
+  &-edit,
+  &-loader {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    transition: transform @td-fastest @ease, fill @td-fast @ease, opacity @td-fast @ease;
+  }
+
+  &-bookmark {
+    background: @c-background;
+  }
+
+  &-bookmarked {
+    background: @c-background;
+    fill: @c-error;
+
+    path[data-id='background'] {
+      opacity: 1;
+      fill: @c-error;
+    }
+  }
+
+  &-bookmarkRemove {
+    opacity: 0;
+    background: @c-background;
+    outline: 2px solid @c-background;
+    fill: @c-errorAccent;
+    border-radius: 50%;
+  }
+
+  &-bookmarkFilled,
+  &-bookmarkEmpty {
+    fill: @c-error;
+  }
+
+  &-bookmarkEmpty {
+    path[data-id='background'] {
+      opacity: 1;
+      fill: @c-background;
+      transition: fill @td-fast @ease;
+    }
+  }
+
+  &-loader {
+    background: @c-background;
+    outline: 2px solid @c-background;
+    stroke: @c-success;
+  }
+
+  &-edit,
+  &-loader {
+    border-radius: 50%;
+  }
+
+  &-edit {
+    opacity: 0;
+    background: @c-background;
+    outline: 2px solid @c-background;
+  }
+
+  &:hover {
+    @{c}-edit,
+    @{c}-bookmarkFilled,
+    @{c}-bookmarkEmpty {
+      cursor: pointer;
+    }
+
+    @{c}-edit {
+      opacity: 1;
+    }
+
+    @{c}-bookmarkFilled {
+      opacity: 0;
+    }
+
+    @{c}-bookmarkEmpty {
+      fill: @c-errorAccent;
+      cursor: pointer;
+
+      path[data-id='background'] {
+        fill: @c-errorAccent;
+      }
+    }
+
+    @{c}-bookmarked {
+      opacity: 0;
+    }
+
+    @{c}-bookmarkRemove {
+      opacity: 1;
+      transform: rotate(-45deg);
+    }
+  }
+
+  // &-loader {
+  //   background: @c-background;
+  //   fill: @c-background;
+  //   stroke: @c-success;
+  // }
+
+  // &-listNotFollowed {
+  //   fill: @c-accentLight;
+
+  //   &:hover {
+  //     fill: @c-success;
+  //   }
+  // }
+
+  // &-listFollowed {
+  //   fill: @c-success;
+
+  //   &:hover {
+  //     fill: @c-error;
+  //     transform: rotate(-45deg);
+  //   }
+  // }
+}

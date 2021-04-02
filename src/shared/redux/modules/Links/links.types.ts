@@ -7,6 +7,12 @@ export const LINK_LOAD_BY_ID_FAILURE = 'LINK_LOAD_BY_ID_FAILURE';
 export const LINK_LOAD_BY_ID_SUCCESS = 'LINK_LOAD_BY_ID_SUCCESS';
 
 export type LinkError = Error;
+export type LinkBookmark = {
+  id: number;
+  title: string;
+  userId: string;
+  isPrivate: boolean;
+};
 
 export interface LinkState {
   id: number;
@@ -32,6 +38,7 @@ export interface LinkState {
     vote: boolean | null;
     loading: boolean | undefined;
   };
+  bookmarks: LinkBookmark[];
   loading?: boolean;
 }
 

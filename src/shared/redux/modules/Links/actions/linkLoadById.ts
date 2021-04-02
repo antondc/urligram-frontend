@@ -9,15 +9,15 @@ export const linkLoadById = (linkId: number): AppThunk<Promise<LinkState>, Links
   dispatch,
   getState
 ): Promise<LinkState> => {
-  const { Links } = getState();
+  const { Links: linksBeforeRequest } = getState();
   try {
     dispatch(
       linkLoadByIdRequest({
-        ...Links,
+        ...linksBeforeRequest,
         byKey: {
-          ...Links.byKey,
+          ...linksBeforeRequest.byKey,
           [linkId]: {
-            ...Links.byKey[linkId],
+            ...linksBeforeRequest.byKey[linkId],
             loading: true,
           },
         },
@@ -25,23 +25,29 @@ export const linkLoadById = (linkId: number): AppThunk<Promise<LinkState>, Links
     );
 
     const { data } = await HttpClient.get<void, LinkApiResponse>(`/links/${linkId}`);
+    const { Links: linksAfterResponse } = getState();
 
     dispatch(
       linkLoadByIdSuccess({
-        ...Links,
+        ...linksAfterResponse,
         byKey: {
-          ...Links.byKey,
-          [linkId]: data.attributes,
+          ...linksAfterResponse.byKey,
+          [linkId]: {
+            ...data.attributes,
+            loading: false,
+          },
         },
       })
     );
 
     return data?.attributes;
   } catch (error) {
+    const { Links: linksOnError } = getState();
+
     await dispatch(
       linkLoadByIdFailure({
-        ...Links,
-        errors: [...Links.errors, error],
+        ...linksOnError,
+        errors: [...linksOnError.errors, error],
       })
     );
 
