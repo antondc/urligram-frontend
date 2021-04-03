@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { selectBookmarksById } from 'Modules/Bookmarks/selectors/selectBookmarkById';
@@ -11,8 +11,6 @@ import { unixTimeElapsed } from 'Tools/utils/Date/unixTimeElapsed';
 import { TIME_RECENTLY_CREATED_BOOKMARK } from '../../constants';
 import { BookmarkRow as BookmarkRowUi } from './BookmarkRow';
 
-import './BookmarkRow.less';
-
 interface Props {
   id: number;
 }
@@ -21,7 +19,6 @@ const BookmarkRow: React.FC<Props> = ({ id }) => {
   const dispatch = useDispatch();
   const isLogged = useSelector(selectSessionLoggedIn);
   const session = useSelector(selectSession);
-  const [listsShown, setListsShown] = useState<boolean>(false);
   const {
     linkId,
     title,
@@ -37,6 +34,7 @@ const BookmarkRow: React.FC<Props> = ({ id }) => {
   const timePassed = unixTimeElapsed(createdAt);
   const recentlyCreated = timePassed < TIME_RECENTLY_CREATED_BOOKMARK;
   const isOwnBookmark = userId === session?.id;
+
   const onVote = (vote) => {
     if (!isLogged) return dispatch(switchLoginModal(true));
 
@@ -44,14 +42,6 @@ const BookmarkRow: React.FC<Props> = ({ id }) => {
   };
 
   if (!id) return null;
-
-  const onListsClick = () => {
-    setListsShown(!listsShown);
-  };
-
-  const onListLeave = () => {
-    setListsShown(false);
-  };
 
   return (
     <BookmarkRowUi
@@ -67,10 +57,7 @@ const BookmarkRow: React.FC<Props> = ({ id }) => {
       statistics={statistics}
       onVote={onVote}
       recentlyCreated={recentlyCreated}
-      onListsClick={onListsClick}
       isOwnBookmark={isOwnBookmark}
-      listsShown={listsShown}
-      onListLeave={onListLeave}
     />
   );
 };

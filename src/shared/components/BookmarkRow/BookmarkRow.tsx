@@ -2,9 +2,9 @@ import React from 'react';
 
 import A from 'Components/A';
 import BookmarkActions from 'Components/BookmarkActions';
+import BookmarkLists from 'Components/BookmarkLists';
 import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
-import { Border, Fade, Flex, List, PopOver, Private, Span, Tag, Vote } from '@antoniodcorrea/components';
-import { RenderInPortal } from '../Portal';
+import { Border, Flex, Private, Span, Tag, Vote } from '@antoniodcorrea/components';
 
 import './BookmarkRow.less';
 
@@ -12,10 +12,7 @@ interface BookmarkRow extends BookmarkState {
   userId: string;
   recentlyCreated: boolean;
   isOwnBookmark: boolean;
-  listsShown: boolean;
   onVote: (vote: boolean | null) => void;
-  onListsClick: () => void;
-  onListLeave: () => void;
 }
 
 export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
@@ -31,9 +28,6 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
   favicon,
   recentlyCreated,
   isOwnBookmark,
-  onListsClick,
-  listsShown,
-  onListLeave,
 }) => (
   <Border
     grow
@@ -73,39 +67,7 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
     </div>
     <div className="BookmarkRow-right">
       <Flex horizontal="right" growVertical={false} vertical="bottom" noWrap>
-        {isOwnBookmark && (
-          <>
-            <span id={`BookmarkRow-${id}`} className="BookmarkRow-listIconWrapper">
-              <List size="small" className="BookmarkRow-icon BookmarkRow-listIcon" onClick={onListsClick} />
-            </span>
-            <RenderInPortal elementId={`BookmarkRow-portal--${id}`} className={`BookmarkRow-${id}`}>
-              <Fade mounted={listsShown}>
-                <PopOver parentElementId={`BookmarkRow-${id}`} placement="right-start">
-                  <Border onMouseLeave={onListLeave}>
-                    <ul className="BookmarkRow-lists">
-                      <li>One</li>
-                      <li>Two</li>
-                      <li>Three</li>
-                      <li>Four</li>
-                      <li>Five</li>
-                      <li>Six</li>
-                      <li>Seven</li>
-                      <li>Eight</li>
-                      <li>Nine</li>
-                      <li>Ten</li>
-                      <li>One</li>
-                      <li>Two</li>
-                      <li>Three</li>
-                      <li>Four</li>
-                      <li>Five</li>
-                    </ul>
-                  </Border>
-                </PopOver>
-              </Fade>
-            </RenderInPortal>
-          </>
-        )}
-
+        {isOwnBookmark && <BookmarkLists bookmarkId={id} />}
         {isPrivate && <Private size="micro" className="BookmarkRow-icon BookmarkRow-private" />}
         <Vote className="BookmarkRow-icon " vote={statistics?.vote} changeVote={onVote} loading={statistics?.loading} />
       </Flex>

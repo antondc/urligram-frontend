@@ -4,7 +4,7 @@ import { AppThunk } from '../../..';
 import { listsLoadReceive } from './listsLoadReceive';
 import { listsLoadRequest } from './listsLoadRequest';
 
-export const listsLoadByUserId = (listId: number): AppThunk<Promise<ListState>, ListsActions> => async (
+export const listLoadById = (listId: number): AppThunk<Promise<ListState>, ListsActions> => async (
   dispatch,
   getState
 ): Promise<ListState> => {

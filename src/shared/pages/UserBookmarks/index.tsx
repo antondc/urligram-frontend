@@ -7,6 +7,7 @@ import { selectBookmarksCurrentIds } from 'Modules/Bookmarks/selectors/selectBoo
 import { selectBookmarksLoading } from 'Modules/Bookmarks/selectors/selectBookmarksLoading';
 import { selectBookmarksMetaSort } from 'Modules/Bookmarks/selectors/selectBookmarksMetaSort';
 import { selectBookmarksTotalItems } from 'Modules/Bookmarks/selectors/selectBookmarkTotalItems';
+import { listsLoadByUserId } from 'Modules/Lists/actions/listsLoadByUserId';
 import { RootState } from 'Modules/rootType';
 import { selectCurrentFullUrl } from 'Modules/Routes/selectors/selectCurrentFullUrl';
 import { selectCurrentRouteParamUserId } from 'Modules/Routes/selectors/selectCurrentRouteParamUserId';
@@ -59,7 +60,7 @@ const UserBookmarks: React.FC = () => {
 
   useEffect(() => {
     dispatch(bookmarksLoadByUserId(userId));
-
+    dispatch(listsLoadByUserId(userId));
     dispatch(tagsSearchLoad());
   }, [url]);
 

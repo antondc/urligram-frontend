@@ -1,3 +1,4 @@
+import { BookmarkGetItemResponse, BookmarkState } from '../Bookmarks/bookmarks.types';
 import { UserState } from '../Users/users.types';
 
 export const LISTS_LOAD_REQUEST = 'LISTS_LOAD_REQUEST';
@@ -17,6 +18,9 @@ export const LIST_FOLLOW_FAILURE = 'LIST_FOLLOW_FAILURE';
 export const LIST_UNFOLLOW_REQUEST = 'LIST_UNFOLLOW_REQUEST';
 export const LIST_UNFOLLOW_SUCCESS = 'LIST_UNFOLLOW_SUCCESS';
 export const LIST_UNFOLLOW_FAILURE = 'LIST_UNFOLLOW_FAILURE';
+export const LIST_BOOKMARK_CREATE_REQUEST = 'LIST_BOOKMARK_CREATE_REQUEST';
+export const LIST_BOOKMARK_CREATE_SUCCESS = 'LIST_BOOKMARK_CREATE_SUCCESS';
+export const LIST_BOOKMARK_CREATE_FAILURE = 'LIST_BOOKMARK_CREATE_FAILURE';
 
 export interface ListsError extends Error {
   field: string;
@@ -92,6 +96,15 @@ export interface ListCreateApiRequest {
 
 export interface ListCreateApiResponse {
   data: ListApiResponseItem;
+}
+
+export interface ListBookmarkCreateApiRequest {
+  listId: number;
+  bookmarkId: number;
+}
+
+export interface ListBookmarkCreateApiResponse {
+  data: BookmarkGetItemResponse;
 }
 
 export interface ListUpdateApiRequest {
@@ -186,13 +199,30 @@ interface ListUnfollowRequestAction {
   type: typeof LIST_UNFOLLOW_REQUEST;
   payload: Partial<ListsState>;
 }
+
 interface ListUnfollowSuccessAction {
   type: typeof LIST_UNFOLLOW_SUCCESS;
   payload: Partial<ListsState>;
 }
+
 interface ListUnfollowFailureAction {
   type: typeof LIST_UNFOLLOW_FAILURE;
   payload: Partial<ListsState>;
+}
+
+interface ListBookmarkCreateRequestAction {
+  type: typeof LIST_BOOKMARK_CREATE_REQUEST;
+  payload: Partial<BookmarkState>;
+}
+
+interface ListBookmarkCreateSuccessAction {
+  type: typeof LIST_BOOKMARK_CREATE_SUCCESS;
+  payload: Partial<BookmarkState>;
+}
+
+interface ListBookmarkCreateFailureAction {
+  type: typeof LIST_BOOKMARK_CREATE_FAILURE;
+  payload: Partial<BookmarkState>;
 }
 
 export type ListsActions =
@@ -212,4 +242,7 @@ export type ListsActions =
   | ListFollowFailureAction
   | ListUnfollowRequestAction
   | ListUnfollowSuccessAction
-  | ListUnfollowFailureAction;
+  | ListUnfollowFailureAction
+  | ListBookmarkCreateRequestAction
+  | ListBookmarkCreateSuccessAction
+  | ListBookmarkCreateFailureAction;

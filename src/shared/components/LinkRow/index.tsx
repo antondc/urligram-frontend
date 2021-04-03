@@ -9,8 +9,6 @@ import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUser
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
 import { LinkRow as LinkRowUi } from './LinkRow';
 
-import './LinkRow.less';
-
 interface Props {
   id: number;
 }

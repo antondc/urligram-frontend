@@ -1,0 +1,54 @@
+@import '../../css/imports.less';
+
+@c: .BookmarkLists;
+
+@{c} {
+  position: relative;
+
+  &-listIcon {
+    fill: @c-base;
+
+    .hoverTransition;
+  }
+
+  &-lists {
+    max-height: 400px;
+    overflow-y: scroll;
+
+    .hideScrollbar;
+  }
+
+  &-listsItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1px;
+
+    .hoverTransition;
+
+    &:hover {
+      @{c}-listsItemIcon {
+        opacity: 1;
+      }
+    }
+  }
+
+  &-listsItemText {
+    // margin-right: 30px;
+  }
+
+  &-listsItemIcon {
+    margin-left: 30px;
+    opacity: 1;
+    transition: opacity @td-fast @ease, fill @td-fast @ease;
+
+    &:hover {
+      fill: @c-success;
+    }
+  }
+
+  &-listsItemIconLoader {
+    margin-left: 30px;
+    stroke: @c-success;
+  }
+}

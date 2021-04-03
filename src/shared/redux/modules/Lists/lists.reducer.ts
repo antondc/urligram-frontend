@@ -1,4 +1,7 @@
 import {
+  LIST_BOOKMARK_CREATE_FAILURE,
+  LIST_BOOKMARK_CREATE_REQUEST,
+  LIST_BOOKMARK_CREATE_SUCCESS,
   LIST_CREATE_FAILURE,
   LIST_CREATE_REQUEST,
   LIST_CREATE_RESET,
@@ -40,6 +43,9 @@ export const Lists = (state = initialState, action: ListsActions): ListsState =>
     case LIST_UNFOLLOW_REQUEST:
     case LIST_UNFOLLOW_SUCCESS:
     case LIST_UNFOLLOW_FAILURE:
+    case LIST_BOOKMARK_CREATE_REQUEST:
+    case LIST_BOOKMARK_CREATE_SUCCESS:
+    case LIST_BOOKMARK_CREATE_FAILURE:
       return Object.assign({}, state, action.payload);
 
     default:
