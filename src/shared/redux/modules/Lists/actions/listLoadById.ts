@@ -8,14 +8,14 @@ export const listLoadById = (listId: number): AppThunk<Promise<ListState>, Lists
   dispatch,
   getState
 ): Promise<ListState> => {
-  const { Lists } = getState();
+  const { Lists: listsBeforeRequest } = getState();
   try {
     dispatch(
       listsLoadRequest({
-        ...Lists,
+        ...listsBeforeRequest,
         loading: true,
         meta: {
-          ...Lists.meta,
+          ...listsBeforeRequest.meta,
           sort: undefined,
         },
       })
@@ -24,12 +24,13 @@ export const listLoadById = (listId: number): AppThunk<Promise<ListState>, Lists
     const { data: listData } = await HttpClient.get<void, ListLoadApiResponse>(
       `/lists/${listId}${window.location.search}`
     );
+    const { Lists: listsAfterResponse } = getState();
 
     dispatch(
       listsLoadReceive({
-        ...Lists,
+        ...listsAfterResponse,
         byKey: {
-          ...Lists.byKey,
+          ...listsAfterResponse.byKey,
           [listData?.id]: listData?.attributes,
         },
         currentIds: [listData?.id],

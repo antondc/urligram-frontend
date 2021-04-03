@@ -138,7 +138,7 @@ const BookmarkCreateForm: React.FC<Props> = ({ closeModal }) => {
     setTagsValue(tags || []);
   };
 
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLElement>) => {
     e.preventDefault();
 
     if (!urlSubmitted) {

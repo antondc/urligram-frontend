@@ -21,7 +21,7 @@ interface Props {
   submitDisabled: boolean;
   submitSuccess: boolean;
   submitError: string;
-  onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  onSubmit: (e: React.FormEvent<HTMLButtonElement>) => void;
 }
 
 export const SignUp: React.FC<Props> = ({

@@ -54,7 +54,7 @@ const LoginForm: React.FC = () => {
     setSubmitError(undefined);
   };
 
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     const data = {

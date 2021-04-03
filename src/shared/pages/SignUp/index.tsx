@@ -110,7 +110,7 @@ const SignUp: React.FC = () => {
     setPasswordRepeatedError(undefined);
   };
 
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     const isSamePassword = passwordRepeatedValue === passwordValue;

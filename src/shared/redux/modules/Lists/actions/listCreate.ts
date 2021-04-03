@@ -13,21 +13,22 @@ export const listCreate = ({
   dispatch,
   getState
 ): Promise<ListState> => {
-  const { Lists } = getState();
+  const { Lists: listsBeforeRequest } = getState();
   try {
-    dispatch(listCreateRequest({ ...Lists }));
+    dispatch(listCreateRequest({ ...listsBeforeRequest }));
 
     const { data } = await HttpClient.post<void, ListCreateApiResponse>('/lists', {
       listName,
       listDescription,
       listIsPrivate,
     });
+    const { Lists: listsAfterResponse } = getState();
 
     await dispatch(
       listCreateSuccess({
-        ...Lists,
+        ...listsAfterResponse,
         byKey: {
-          ...Lists.byKey,
+          ...listsAfterResponse.byKey,
           [data.attributes.id]: data.attributes,
         },
       })
@@ -35,10 +36,12 @@ export const listCreate = ({
 
     return data?.attributes;
   } catch (error) {
+    const { Lists: listsOnError } = getState();
+
     await dispatch(
       listCreateFailure({
-        ...Lists,
-        errors: [...Lists?.errors, error],
+        ...listsOnError,
+        errors: [...(listsOnError?.errors || []), error],
       })
     );
 

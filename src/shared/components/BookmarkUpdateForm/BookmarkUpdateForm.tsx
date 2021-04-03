@@ -32,8 +32,8 @@ interface Props {
   submitInProcess: boolean;
   submitSuccess: boolean;
   submitError: string;
-  onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
-  onRemove: (e: React.FormEvent<HTMLFormElement>) => void;
+  onSubmit: (e: React.FormEvent<HTMLElement>) => void;
+  onRemove: (e: React.FormEvent<HTMLButtonElement>) => void;
 }
 
 export const BookmarkUpdateForm: React.FC<Props> = ({

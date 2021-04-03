@@ -5,8 +5,8 @@ import Cross from 'Assets/svg/cross.svg';
 import BaseModal from 'Components/BaseModal';
 import ListForm from 'Components/ListForm';
 import { switchListModal } from 'Modules/Ui/actions/switchListModal';
-import { Border, Flex, H3, Hr } from '@antoniodcorrea/components';
 import { selectUiListModal } from 'Modules/Ui/selectors/selectUiListModal';
+import { Border, Flex, H3, Hr } from '@antoniodcorrea/components';
 
 import './ListModal.less';
 

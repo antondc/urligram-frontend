@@ -71,7 +71,7 @@ const ListForm: React.FC<Props> = ({ closeModal }) => {
     setSubmitError(undefined);
   };
 
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLElement>) => {
     e.preventDefault();
 
     setSubmitInProcess(true);

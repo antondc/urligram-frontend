@@ -1,7 +1,7 @@
 import React from 'react';
 
 import A from 'Components/A';
-import { Button, FadeInOut, Flex, H1, Hr, Input, Span } from '@antoniodcorrea/components';
+import { Button, FadeInOut, Hr, Input, Span } from '@antoniodcorrea/components';
 
 import './LoginForm.less';
 
@@ -15,7 +15,7 @@ interface Props {
   submitDisabled: boolean;
   submitSuccess: boolean;
   submitError: string;
-  onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  onSubmit: (e: React.FormEvent<HTMLButtonElement>) => void;
 }
 
 export const LoginForm: React.FC<Props> = ({

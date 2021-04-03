@@ -9,6 +9,7 @@ import {
 } from 'Modules/Lists/lists.types';
 import HttpClient from 'Services/HttpClient';
 import { AppThunk } from '../../..';
+import { listLoadById } from './listLoadById';
 
 export const listBookmarkCreate = ({
   bookmarkId,
@@ -33,6 +34,7 @@ export const listBookmarkCreate = ({
       type: LIST_BOOKMARK_CREATE_SUCCESS,
       payload: listsAfterResponse,
     });
+    await dispatch(listLoadById(listId));
 
     return data?.attributes;
   } catch (error) {

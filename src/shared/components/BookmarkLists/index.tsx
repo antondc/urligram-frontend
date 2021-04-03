@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { listBookmarkCreate } from 'Modules/Lists/actions/listBookmarkCreate';
+import { listCreate } from 'Modules/Lists/actions/listCreate';
 import { selectListsByUserId } from 'Modules/Lists/selectors/selectListsByUserId';
+import { selectListsErrorLast } from 'Modules/Lists/selectors/selectListsErrorLast';
 import { RootState } from 'Modules/rootType';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { DELAY_THREE_SEC } from 'Root/src/shared/constants';
@@ -14,10 +16,16 @@ interface Props {
 
 export const BookmarkLists: React.FC<Props> = ({ bookmarkId }) => {
   const dispatch = useDispatch();
+
   const session = useSelector(selectSession);
-  const [mounted, setMounted] = useState<boolean>(false);
+  const [itemsLoading, setItemsLoading] = useState<number[]>([]);
+  const [mounted, setMounted] = useState<boolean>(undefined);
+  const [showCreateList, setShowCreateList] = useState<boolean>(false);
+  const [listInputName, setListInputName] = useState<string>(undefined);
+  const listError = useSelector(selectListsErrorLast);
+  const [submitError, setSubmitError] = useState<string>(undefined);
+
   const [inList, setInList] = useState<boolean>(false);
-  const [listsLoading, setListsLoading] = useState<number[]>([]);
   const lists = useSelector((state: RootState) => selectListsByUserId(state, { userId: session?.id }));
 
   const onListEnter = () => {
@@ -25,6 +33,9 @@ export const BookmarkLists: React.FC<Props> = ({ bookmarkId }) => {
   };
 
   const onListLeave = () => {
+    setSubmitError(undefined);
+    setListInputName(undefined);
+
     setMounted(false);
     setInList(false);
   };
@@ -33,11 +44,36 @@ export const BookmarkLists: React.FC<Props> = ({ bookmarkId }) => {
     setMounted(!mounted);
   };
 
-  const onListAdd = async ({ listId }) => {
-    setListsLoading([...listsLoading, listId]);
+  const onListAddBookmark = async (listId: number) => {
+    setItemsLoading([...itemsLoading, listId]);
     await dispatch(listBookmarkCreate({ listId, bookmarkId }));
-    const filteredListLoaders = listsLoading?.filter((item) => item !== listId);
-    setListsLoading(filteredListLoaders);
+    setItemsLoading(itemsLoading.filter((item) => item !== listId));
+  };
+
+  const onListTitleInputChange = async (e: React.FormEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    const { value } = e.currentTarget;
+    setSubmitError(undefined);
+
+    setListInputName(value);
+  };
+
+  const onCreateListSubmit = async (e: React.FormEvent<HTMLElement>) => {
+    e.preventDefault();
+    const data = {
+      listName: listInputName,
+      listDescription: '',
+      listIsPrivate: false,
+    };
+
+    await dispatch(listCreate(data));
+    setShowCreateList(false);
+    setListInputName(undefined);
+  };
+
+  const onShowCreateList = async () => {
+    setShowCreateList(!showCreateList);
+    setShowCreateList(true);
   };
 
   useEffect(() => {
@@ -50,16 +86,26 @@ export const BookmarkLists: React.FC<Props> = ({ bookmarkId }) => {
     };
   }, [mounted, inList]);
 
+  useEffect(() => {
+    setSubmitError(listError?.message);
+  }, [listError]);
+
   return (
     <BookmarkListsUi
       bookmarkId={bookmarkId}
       mounted={mounted}
-      listsLoading={listsLoading}
       onListLeave={onListLeave}
       onListEnter={onListEnter}
       onListsClick={onListsClick}
-      onListAdd={onListAdd}
+      onListAddBookmark={onListAddBookmark}
+      onCreateListSubmit={onCreateListSubmit}
+      listInputName={listInputName}
+      submitError={submitError}
       lists={lists}
+      itemsLoading={itemsLoading}
+      onListTitleInputChange={onListTitleInputChange}
+      showCreateList={showCreateList}
+      onShowCreateList={onShowCreateList}
     />
   );
 };

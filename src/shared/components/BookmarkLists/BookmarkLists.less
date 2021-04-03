@@ -23,32 +23,65 @@
     justify-content: space-between;
     align-items: center;
     padding: 1px;
+    transition: fill @td-fast @ease;
 
     .hoverTransition;
 
     &:hover {
       @{c}-listsItemIcon {
         opacity: 1;
+        fill: @c-success;
+      }
+    }
+
+    &--included {
+      color: @c-success;
+      fill: @c-success;
+
+      @{c}-listsItemText {
+        transition: color @td-fast @ease;
+      }
+      @{c}-listsItemIcon {
+        transition: transform @td-fast @ease, fill @td-fast @ease;
+      }
+
+      &:hover {
+        color: @c-error;
+        cursor: pointer;
+
+        @{c}-listsItemIcon {
+          fill: @c-error;
+          transform: rotate(45deg);
+        }
       }
     }
   }
 
   &-listsItemText {
-    // margin-right: 30px;
+    //
   }
 
   &-listsItemIcon {
     margin-left: 30px;
     opacity: 1;
     transition: opacity @td-fast @ease, fill @td-fast @ease;
+  }
 
-    &:hover {
-      fill: @c-success;
+  &-listsItemLoader {
+    margin-left: 30px;
+    stroke: @c-success;
+  }
+
+  &-listNameInput {
+    .Input-input {
+      padding: 0;
     }
   }
 
-  &-listsItemIconLoader {
-    margin-left: 30px;
-    stroke: @c-success;
+  &-button {
+    .Button-content {
+      padding: 0;
+    }
+    //
   }
 }

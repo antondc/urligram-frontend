@@ -69,7 +69,7 @@ const BookmarkUpdateForm: React.FC<Props> = ({ closeModal }) => {
     setTagsValue(tags || []);
   };
 
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLElement>) => {
     e.preventDefault();
 
     setSubmitInProcess(true);
@@ -99,7 +99,7 @@ const BookmarkUpdateForm: React.FC<Props> = ({ closeModal }) => {
     setSubmitInProcess(false);
   };
 
-  const onRemove = async (e: React.FormEvent<HTMLFormElement>) => {
+  const onRemove = async (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setSubmitInProcess(true);
 
