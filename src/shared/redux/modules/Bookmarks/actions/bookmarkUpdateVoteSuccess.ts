@@ -2,8 +2,10 @@ import {
   BOOKMARK_UPDATE_VOTE_SUCCESS,
   BookmarksActions,
   BookmarksState,
+  BookmarkState,
   LinkStatistics,
 } from 'Modules/Bookmarks/bookmarks.types';
+import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
 import { AppThunk } from '../../..';
 
 interface Props {
@@ -15,21 +17,17 @@ export const bookmarkUpdateVoteSuccess = ({ linkId, statistics }: Props): AppThu
   dispatch,
   getState
 ): void => {
-  const { Bookmarks }: { Bookmarks: BookmarksState } = getState();
+  const { Bookmarks } = getState();
 
-  const payloadFormatted = Object.entries(Bookmarks.byKey).filter(([, value]) => value.linkId === linkId);
-  const payloadFormattedLoader = payloadFormatted.map(([key, value]) => [
-    key,
-    {
-      ...value,
-      statistics,
-    },
-  ]);
+  const bookmarksWithUpdatedStatistics = Object.values(Bookmarks.byKey)
+    .filter((item) => item?.linkId === linkId)
+    .map((item) => ({ ...item, statistics }));
+
   const bookmarksStateFormatted: BookmarksState = {
     ...Bookmarks,
     byKey: {
       ...Bookmarks.byKey,
-      ...Object.fromEntries(payloadFormattedLoader),
+      ...serializerFromArrayToByKey<BookmarkState, BookmarkState>({ data: bookmarksWithUpdatedStatistics }),
     },
   };
 

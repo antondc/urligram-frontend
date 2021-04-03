@@ -14,6 +14,11 @@ export const RenderInPortal: React.FC<Props> = ({ children, elementId, className
 
   if (!domAvailable) return <></>;
 
+  const existingElement = document.getElementById(elementId);
+  if (!!existingElement) {
+    return createPortal(children, existingElement);
+  }
+
   const newElement = document.createElement('div');
   !!elementId && newElement.setAttribute('id', elementId);
   newElement.setAttribute('class', 'Portal' + (!!className ? ` ${className}` : ''));

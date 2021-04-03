@@ -104,12 +104,29 @@
     border: 2px solid @c-base;
   }
 
+  &-icon {
+    flex-shrink: 0;
+  }
+
   &-private {
     fill: @c-success;
   }
 
-  &-icon {
-    flex-shrink: 0;
+  &-listIconWrapper {
+    position: relative;
+  }
+
+  &-listIcon {
+    fill: @c-base;
+
+    .hoverTransition;
+  }
+
+  &-lists {
+    max-height: 100px;
+    overflow-y: scroll;
+
+    .hideScrollbar;
   }
 
   &-edit {
