@@ -1,10 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 
 import A from 'Components/A';
 import { selectCurrentGlossary } from 'Modules/Languages/selectors/selectCurrentGlossary';
-import { selectCurrentLanguageSlug } from 'Redux/modules/Languages/selectors/selectCurrentLanguageSlug';
 import { Routes } from 'Router/routes';
 import { H1, Hr, P, Span } from '@antoniodcorrea/components';
 
@@ -12,11 +10,9 @@ import './NotFound.less';
 
 const NotFound: React.FC = () => {
   const currentGlossary = useSelector(selectCurrentGlossary);
-  const slug = useSelector(selectCurrentLanguageSlug);
 
   return (
     <>
-      <Redirect from="not-found" to={`/${slug}/not-found`} />
       <div className="NotFound">
         <H1 className="NotFound-h1">{currentGlossary?.notFound} 😵</H1>
         <Hr spacer />

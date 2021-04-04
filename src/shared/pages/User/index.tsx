@@ -48,7 +48,7 @@ const User: React.FC<Props> = () => {
     dispatch(sectionsFollowersUsersLoad(userId));
   }, []);
 
-  if (!user?.id) return <Redirect to={Routes.NotFound.route} />;
+  // if (!user?.id) return <Redirect from={Routes.User.path} to={Routes.NotFound.route} />;
 
   return (
     <UserUi
