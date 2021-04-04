@@ -55,14 +55,17 @@ export const Home: React.FC<Props> = ({
               </A>
             ))
           )}
+          {!allTagsLoading && !allTags?.length && <Span bold>ⵁ We didnt find any tag.</Span>}
         </Border>
         <Hr spacer />
         <Border className="Home-links" grow>
           <Flex horizontal="between" vertical="bottom">
             <H4>Links</H4>
-            <A href={'links'} frontend>
-              <AIcon size="small">See more</AIcon>
-            </A>
+            {!!linksIds?.length && (
+              <A href={'links'} frontend>
+                <AIcon size="small">See more</AIcon>
+              </A>
+            )}
           </Flex>
           <Hr spacer size="small" />
           <FadeInOut valueToUpdate={linksIdsLoading} speed="fastest" appear>
