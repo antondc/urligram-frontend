@@ -2,11 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { listBookmarkCreate } from 'Modules/Lists/actions/listBookmarkCreate';
+import { listBookmarkDelete } from 'Modules/Lists/actions/listBookmarkDelete';
 import { listCreate } from 'Modules/Lists/actions/listCreate';
 import { selectListsByUserId } from 'Modules/Lists/selectors/selectListsByUserId';
 import { selectListsErrorLast } from 'Modules/Lists/selectors/selectListsErrorLast';
 import { RootState } from 'Modules/rootType';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
+import { bookmarkListsModalMount } from 'Modules/Ui/actions/bookmarkListsModalMount';
+import { bookmarkListsModalUnmount } from 'Modules/Ui/actions/bookmarkListsModalUnmount';
+import { selecBookmarkListsModal } from 'Modules/Ui/selectors/selecBookmarkListsModal';
 import { DELAY_THREE_SEC } from 'Root/src/shared/constants';
 import { BookmarkLists as BookmarkListsUi } from './BookmarkLists';
 
@@ -19,7 +23,9 @@ export const BookmarkLists: React.FC<Props> = ({ bookmarkId }) => {
 
   const session = useSelector(selectSession);
   const [itemsLoading, setItemsLoading] = useState<number[]>([]);
-  const [mounted, setMounted] = useState<boolean>(undefined);
+  const [createListSubmitting, setCreateListSubmitting] = useState<boolean>(false);
+  const bookmarkListsModal = useSelector((state: RootState) => selecBookmarkListsModal(state, { bookmarkId }));
+  const modalMounted = !!bookmarkListsModal?.bookmarkId;
   const [showCreateList, setShowCreateList] = useState<boolean>(false);
   const [listInputName, setListInputName] = useState<string>(undefined);
   const listError = useSelector(selectListsErrorLast);
@@ -36,17 +42,23 @@ export const BookmarkLists: React.FC<Props> = ({ bookmarkId }) => {
     setSubmitError(undefined);
     setListInputName(undefined);
 
-    setMounted(false);
+    dispatch(bookmarkListsModalUnmount({ bookmarkId }));
     setInList(false);
   };
 
   const onListsClick = () => {
-    setMounted(!mounted);
+    dispatch(bookmarkListsModalMount({ bookmarkId }));
   };
 
   const onListAddBookmark = async (listId: number) => {
     setItemsLoading([...itemsLoading, listId]);
     await dispatch(listBookmarkCreate({ listId, bookmarkId }));
+    setItemsLoading(itemsLoading.filter((item) => item !== listId));
+  };
+
+  const onListDeleteBookmark = async (listId: number) => {
+    setItemsLoading([...itemsLoading, listId]);
+    await dispatch(listBookmarkDelete({ listId, bookmarkId }));
     setItemsLoading(itemsLoading.filter((item) => item !== listId));
   };
 
@@ -60,6 +72,7 @@ export const BookmarkLists: React.FC<Props> = ({ bookmarkId }) => {
 
   const onCreateListSubmit = async (e: React.FormEvent<HTMLElement>) => {
     e.preventDefault();
+    setCreateListSubmitting(true);
     const data = {
       listName: listInputName,
       listDescription: '',
@@ -68,6 +81,7 @@ export const BookmarkLists: React.FC<Props> = ({ bookmarkId }) => {
 
     await dispatch(listCreate(data));
     setShowCreateList(false);
+    setCreateListSubmitting(false);
     setListInputName(undefined);
   };
 
@@ -78,13 +92,13 @@ export const BookmarkLists: React.FC<Props> = ({ bookmarkId }) => {
 
   useEffect(() => {
     const unMountTimeout = setTimeout(() => {
-      !inList && setMounted(false);
+      !inList && !!modalMounted && dispatch(bookmarkListsModalUnmount({ bookmarkId }));
     }, DELAY_THREE_SEC);
 
     return () => {
       clearTimeout(unMountTimeout);
     };
-  }, [mounted, inList]);
+  }, [modalMounted, inList]);
 
   useEffect(() => {
     setSubmitError(listError?.message);
@@ -92,12 +106,14 @@ export const BookmarkLists: React.FC<Props> = ({ bookmarkId }) => {
 
   return (
     <BookmarkListsUi
+      sessionId={session?.id}
       bookmarkId={bookmarkId}
-      mounted={mounted}
+      mounted={modalMounted}
       onListLeave={onListLeave}
       onListEnter={onListEnter}
       onListsClick={onListsClick}
       onListAddBookmark={onListAddBookmark}
+      onListDeleteBookmark={onListDeleteBookmark}
       onCreateListSubmit={onCreateListSubmit}
       listInputName={listInputName}
       submitError={submitError}
@@ -105,6 +121,7 @@ export const BookmarkLists: React.FC<Props> = ({ bookmarkId }) => {
       itemsLoading={itemsLoading}
       onListTitleInputChange={onListTitleInputChange}
       showCreateList={showCreateList}
+      createListSubmitting={createListSubmitting}
       onShowCreateList={onShowCreateList}
     />
   );

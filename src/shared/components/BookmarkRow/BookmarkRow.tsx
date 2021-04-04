@@ -13,6 +13,7 @@ interface BookmarkRow extends BookmarkState {
   recentlyCreated: boolean;
   isOwnBookmark: boolean;
   onVote: (vote: boolean | null) => void;
+  onBookmarkRowMouseLeave: () => void;
 }
 
 export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
@@ -28,12 +29,14 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
   favicon,
   recentlyCreated,
   isOwnBookmark,
+  onBookmarkRowMouseLeave,
 }) => (
   <Border
     grow
     className={'BookmarkRow' + (recentlyCreated ? ' BookmarkRow-recentlyCreated' : '')}
     data-test-id="BookmarkRow"
     key={id}
+    onMouseLeave={onBookmarkRowMouseLeave}
   >
     <div className="BookmarkRow-left">
       <Flex vertical="center" growVertical={false} horizontal="left" noWrap>

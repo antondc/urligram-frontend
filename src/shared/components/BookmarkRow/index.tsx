@@ -6,7 +6,9 @@ import { linkUpdateVote } from 'Modules/Links/actions/linkUpdateVote';
 import { RootState } from 'Modules/rootType';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
+import { bookmarkListsModalUnmount } from 'Modules/Ui/actions/bookmarkListsModalUnmount';
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
+import { selecBookmarkListsModal } from 'Modules/Ui/selectors/selecBookmarkListsModal';
 import { unixTimeElapsed } from 'Tools/utils/Date/unixTimeElapsed';
 import { TIME_RECENTLY_CREATED_BOOKMARK } from '../../constants';
 import { BookmarkRow as BookmarkRowUi } from './BookmarkRow';
@@ -34,7 +36,8 @@ const BookmarkRow: React.FC<Props> = ({ id }) => {
   const timePassed = unixTimeElapsed(createdAt);
   const recentlyCreated = timePassed < TIME_RECENTLY_CREATED_BOOKMARK;
   const isOwnBookmark = userId === session?.id;
-
+  const bookmarkListsModal = useSelector((state: RootState) => selecBookmarkListsModal(state, { bookmarkId: id }));
+  const modalMounted = !!bookmarkListsModal?.bookmarkId;
   const onVote = (vote) => {
     if (!isLogged) return dispatch(switchLoginModal(true));
 
@@ -42,6 +45,10 @@ const BookmarkRow: React.FC<Props> = ({ id }) => {
   };
 
   if (!id) return null;
+
+  const onBookmarkRowMouseLeave = () => {
+    !!modalMounted && dispatch(bookmarkListsModalUnmount({ bookmarkId: id }));
+  };
 
   return (
     <BookmarkRowUi
@@ -58,6 +65,7 @@ const BookmarkRow: React.FC<Props> = ({ id }) => {
       onVote={onVote}
       recentlyCreated={recentlyCreated}
       isOwnBookmark={isOwnBookmark}
+      onBookmarkRowMouseLeave={onBookmarkRowMouseLeave}
     />
   );
 };

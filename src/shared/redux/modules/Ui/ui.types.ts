@@ -8,6 +8,8 @@ export const SWITCH_FORGOT_PASSWORD_MODAL = 'SWITCH_FORGOT_PASSWORD_MODAL';
 export const SWITCH_RESET_PASSWORD_MODAL = 'SWITCH_RESET_PASSWORD_MODAL';
 export const SWITCH_BOOKMARK_CREATE_MODAL = 'SWITCH_BOOKMARK_CREATE_MODAL';
 export const SWITCH_BOOKMARK_UPDATE_MODAL = 'SWITCH_BOOKMARK_UPDATE_MODAL';
+export const UI_BOOKMARK_LISTS_MODALS_MOUNT = 'UI_BOOKMARK_LISTS_MODALS_MOUNT';
+export const UI_BOOKMARK_LISTS_MODALS_UNMOUNT = 'UI_BOOKMARK_LISTS_MODALS_UNMOUNT';
 export const SWITCH_LIST_MODAL = 'SWITCH_LIST_MODAL';
 export const UI_NOTIFICATION_VIEWED = 'UI_NOTIFICATION_VIEWED';
 export const UI_NOTIFICATION_PUSH = 'UI_NOTIFICATION_PUSH';
@@ -36,6 +38,12 @@ export type NotificationState = {
   status: 'viewed' | 'pending';
 };
 
+export type BookmarkListsModal = {
+  bookmarkId?: number;
+} & UiBaseModal;
+
+export type BookmarkListsModals = Array<BookmarkListsModal>;
+
 export type UiState = {
   screenLocked: boolean;
   userModal: UiBaseModal;
@@ -53,6 +61,7 @@ export type UiState = {
   listModal: {
     listId?: number;
   } & UiBaseModal;
+  bookmarkListsModals: BookmarkListsModals;
   notifications?: NotificationState[];
 };
 
@@ -111,6 +120,16 @@ interface SwitchListModal {
   payload: Partial<UiState>;
 }
 
+interface BookmarkListModalsMount {
+  type: typeof UI_BOOKMARK_LISTS_MODALS_MOUNT;
+  payload: Partial<UiState>;
+}
+
+interface BookmarkListModalsUnmount {
+  type: typeof UI_BOOKMARK_LISTS_MODALS_UNMOUNT;
+  payload: Partial<UiState>;
+}
+
 interface UiNotificationViewedAction {
   type: typeof UI_NOTIFICATION_VIEWED;
   payload: UiState;
@@ -133,5 +152,7 @@ export type UiActions =
   | SwitchBookmarkCreateModal
   | SwitchBookmarkUpdateModal
   | SwitchListModal
+  | BookmarkListModalsMount
+  | BookmarkListModalsUnmount
   | UiNotificationViewedAction
   | UiNotificationPushAction;

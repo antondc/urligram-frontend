@@ -7,6 +7,7 @@ import { selectBookmarksLoading } from 'Modules/Bookmarks/selectors/selectBookma
 import { selectBookmarksMetaSort } from 'Modules/Bookmarks/selectors/selectBookmarksMetaSort';
 import { selectBookmarksTotalItems } from 'Modules/Bookmarks/selectors/selectBookmarkTotalItems';
 import { listLoadById } from 'Modules/Lists/actions/listLoadById';
+import { listsLoadByUserId } from 'Modules/Lists/actions/listsLoadByUserId';
 import { selectListById } from 'Modules/Lists/selectors/selectListById';
 import { RootState } from 'Modules/rootType';
 import { selectCurrentFullUrl } from 'Modules/Routes/selectors/selectCurrentFullUrl';
@@ -19,10 +20,12 @@ import { selectTagsInThisListLoading } from 'Modules/Sections/selectors/selectTa
 import { selectUsersInThisList } from 'Modules/Sections/selectors/selectUsersInThisList';
 import { selectUsersInThisListIds } from 'Modules/Sections/selectors/selectUsersInThisListIds';
 import { selectUsersInThisListLoading } from 'Modules/Sections/selectors/selectUsersInThisListLoading';
+import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { List as ListUI } from './List';
 
 const List: React.FC = () => {
   const dispatch = useDispatch();
+  const session = useSelector(selectSession);
   const listId = useSelector(selectCurrentRouteParamListId);
   const list = useSelector((state: RootState) => selectListById(state, { id: listId }));
   const bookmarksIds = useSelector(selectBookmarksCurrentIds);
@@ -40,6 +43,7 @@ const List: React.FC = () => {
   useEffect(() => {
     dispatch(listLoadById(listId));
     dispatch(sectionsTagsInThisListLoad(listId));
+    dispatch(listsLoadByUserId(session?.id));
   }, []);
 
   useEffect(() => {

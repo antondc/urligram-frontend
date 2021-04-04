@@ -10,6 +10,8 @@ import {
   SWITCH_SIGN_UP_MODAL,
   SWITCH_USER_MODAL,
   SWITCH_WELCOME_MODAL,
+  UI_BOOKMARK_LISTS_MODALS_MOUNT,
+  UI_BOOKMARK_LISTS_MODALS_UNMOUNT,
   UI_NOTIFICATION_PUSH,
   UI_NOTIFICATION_VIEWED,
   UiActions,
@@ -63,6 +65,7 @@ export const initialState: UiState = {
     type: 'popup',
     mounted: false,
   },
+  bookmarkListsModals: [],
   notifications: [],
 };
 
@@ -78,6 +81,8 @@ export const Ui = (state = initialState, action: UiActions): UiState => {
     case SWITCH_RESET_PASSWORD_MODAL:
     case SWITCH_BOOKMARK_CREATE_MODAL:
     case SWITCH_BOOKMARK_UPDATE_MODAL:
+    case UI_BOOKMARK_LISTS_MODALS_MOUNT:
+    case UI_BOOKMARK_LISTS_MODALS_UNMOUNT:
     case SWITCH_LIST_MODAL:
     case UI_NOTIFICATION_VIEWED:
     case UI_NOTIFICATION_PUSH:

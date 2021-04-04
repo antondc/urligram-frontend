@@ -1,5 +1,6 @@
 import React from 'react';
 
+import A from 'Components/A';
 import { RenderInPortal } from 'Components/Portal';
 import { ListState } from 'Modules/Lists/lists.types';
 import {
@@ -19,6 +20,7 @@ import {
 import './BookmarkLists.less';
 
 interface Props {
+  sessionId: string;
   bookmarkId: number;
   mounted: boolean;
   listInputName: string;
@@ -29,9 +31,11 @@ interface Props {
   onListLeave: () => void;
   onListsClick: () => void;
   onListAddBookmark: (listId?: number) => void;
+  onListDeleteBookmark: (listId?: number) => void;
   onCreateListSubmit: (e: React.FormEvent<HTMLElement>) => void;
   onListTitleInputChange: (e: React.FormEvent<HTMLInputElement>) => void;
   showCreateList: boolean;
+  createListSubmitting: boolean;
   onShowCreateList: (e: React.MouseEvent<HTMLElement>) => void;
 }
 
@@ -43,11 +47,13 @@ export const BookmarkLists: React.FC<Props> = ({
   onListEnter,
   onListsClick,
   onListAddBookmark,
+  onListDeleteBookmark,
   itemsLoading,
   listInputName,
   submitError,
   showCreateList,
   onCreateListSubmit,
+  createListSubmitting,
   onShowCreateList,
   onListTitleInputChange,
 }) => (
@@ -59,24 +65,28 @@ export const BookmarkLists: React.FC<Props> = ({
           <Border onMouseLeave={onListLeave} onMouseEnter={onListEnter}>
             <ul className="BookmarkLists-lists">
               {lists?.map((item) => {
-                const isBookmrkInList = !!item?.bookmarksIds?.includes(bookmarkId);
+                const isBookmarkInList = !!item?.bookmarksIds?.includes(bookmarkId);
 
                 return (
                   <li
                     className={
-                      'BookmarkLists-listsItem' + (isBookmrkInList ? ' BookmarkLists-listsItem--included' : '')
+                      'BookmarkLists-listsItem' + (isBookmarkInList ? ' BookmarkLists-listsItem--included' : '')
                     }
                     key={item.id}
                   >
                     <Span className="BookmarkList-listsItemText" bold>
-                      {item.name}
+                      <A href={`lists/${item?.id}`} frontend styled={false} onClick={onListLeave}>
+                        {item.name}
+                      </A>
                     </Span>
                     {itemsLoading?.includes(item.id) ? (
                       <SpinnerLoader className="BookmarkLists-listsItemLoader" />
                     ) : (
                       <PlusCircleWithBackground
                         className="BookmarkLists-listsItemIcon"
-                        onClick={() => onListAddBookmark(item?.id)}
+                        onClick={() =>
+                          !!isBookmarkInList ? onListDeleteBookmark(item?.id) : onListAddBookmark(item?.id)
+                        }
                       />
                     )}
                   </li>
@@ -116,9 +126,10 @@ export const BookmarkLists: React.FC<Props> = ({
               ) : (
                 <Button
                   className="BookmarkLists-button"
-                  text="Create list"
+                  text="New list"
                   type="button"
                   size="small"
+                  loading={createListSubmitting}
                   grow
                   onClick={onShowCreateList}
                 />

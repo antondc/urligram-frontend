@@ -69,7 +69,7 @@ export const BookmarkActions: React.FC<Props> = ({ className, linkId, bookmarkId
 
   const onEdit = async () => {
     if (!session?.id) return dispatch(switchLoginModal(true));
-    if (!userBookmarkedLink) return;
+    if (!isOwnBookmark) return;
     await dispatch(switchBookmarkUpdateModal({ mounted: true, bookmarkId: bookmarksSessionBookmark?.id }));
   };
 
