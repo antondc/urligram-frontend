@@ -104,7 +104,7 @@ const BookmarkUpdateForm: React.FC<Props> = ({ closeModal }) => {
     setSubmitInProcess(true);
 
     await dispatch(bookmarkDelete({ bookmarkId: bookmark?.id, linkId: bookmark?.linkId }));
-    setSubmitInProcess(true);
+    setSubmitInProcess(false);
 
     setTimeout(() => {
       closeModal();
@@ -113,6 +113,7 @@ const BookmarkUpdateForm: React.FC<Props> = ({ closeModal }) => {
 
   useEffect(() => {
     setSubmitError(undefined);
+    setTitleError(undefined);
     setTitleValue(bookmark?.title);
     setIsPrivateValue(bookmark?.isPrivate);
     setTagsValue(bookmark?.tags?.map((item) => ({ label: item.name, value: item.name })));

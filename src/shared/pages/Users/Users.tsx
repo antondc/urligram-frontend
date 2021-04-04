@@ -9,7 +9,7 @@ import UserRow from 'Components/UserRow';
 import { UserRowSkeletonGroup } from 'Components/UserRow/UserRowSkeletonGroup';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
-import { Border, FadeInOut, Flex, H4, Hr, SortBy } from '@antoniodcorrea/components';
+import { Border, FadeInOut, Flex, H4, Hr, SortBy, Span } from '@antoniodcorrea/components';
 
 import './Users.less';
 
@@ -62,6 +62,7 @@ export const Users: React.FC<Props> = ({
                 </React.Fragment>
               ))
             )}
+            {!usersLoading && !usersCurrentIds?.length && <Span bold>ⵁ We didn find any user.</Span>}
           </FadeInOut>
           <Flex horizontal="center">
             <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />

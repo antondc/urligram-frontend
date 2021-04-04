@@ -13,7 +13,7 @@ interface Props {
 
 const ServerError: React.FC<Props> = ({ currentGlossary }) => (
   <div className="ServerError">
-    <h1 className="ServerError-h1">{currentGlossary.serverError}</h1>
+    <h1 className="ServerError-h1">{currentGlossary?.serverError}</h1>
   </div>
 );
 

@@ -11,7 +11,7 @@ import SidebarListTags from 'Components/SidebarListTags';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
-import { Border, FadeInOut, Flex, H4, Hr, SortBy } from '@antoniodcorrea/components';
+import { Border, FadeInOut, Flex, H4, Hr, SortBy, Span } from '@antoniodcorrea/components';
 
 import './UserLists.less';
 
@@ -78,6 +78,7 @@ export const UserLists: React.FC<Props> = ({
                 </React.Fragment>
               ))
             )}
+            {!listsLoading && !listsIds?.length && <Span bold>ⵁ We didn find any list.</Span>}
           </FadeInOut>
           <Flex horizontal="center">
             <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />

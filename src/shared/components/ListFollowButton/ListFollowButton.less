@@ -60,6 +60,12 @@
     &:hover {
       fill: @c-success;
     }
+
+    &--recentlyChanged {
+      &:hover {
+        fill: @c-accentLight;
+      }
+    }
   }
 
   &-listFollowed {
@@ -68,6 +74,13 @@
     &:hover {
       fill: @c-error;
       transform: rotate(-45deg);
+    }
+
+    &--recentlyChanged {
+      &:hover {
+        fill: @c-success;
+        transform: rotate(-0);
+      }
     }
   }
 }

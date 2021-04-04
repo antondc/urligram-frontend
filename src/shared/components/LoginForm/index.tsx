@@ -18,7 +18,6 @@ const LoginForm: React.FC = () => {
   const [passwordValue, setPasswordValue] = useState<string>(undefined);
   const [passwordError, setPasswordError] = useState<string>(undefined);
   const [submitError, setSubmitError] = useState<string>(undefined);
-
   const submitDisabled = !nameOrEmailValue || !!nameOrEmailError || !passwordValue || !!passwordError;
 
   const onChangeNameOrEmail = async (e: React.FormEvent<HTMLInputElement>) => {
@@ -67,6 +66,12 @@ const LoginForm: React.FC = () => {
 
   useEffect(() => {
     setSubmitError(undefined);
+
+    return () => {
+      setSubmitError(undefined);
+      setPasswordError(undefined);
+      setNameOrEmailError(undefined);
+    };
   }, []);
 
   useEffect(() => {

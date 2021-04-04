@@ -11,7 +11,9 @@ interface Props {
   sessionUserFollowsList: boolean;
   loading: boolean;
   image: string;
+  recentlyChanged: boolean;
   onEdit: () => void;
+  onMouseOut: () => void;
   onUnfollowList: () => void;
   onFollowList: () => void;
 }
@@ -21,13 +23,15 @@ export const ListFollowButton: React.FC<Props> = ({
   id,
   image,
   loading,
+  recentlyChanged,
   sessionUserOwnsList,
   sessionUserFollowsList,
   onEdit,
+  onMouseOut,
   onUnfollowList,
   onFollowList,
 }) => (
-  <div id={id} className={'ListFollowButton' + (className ? ' ' + className : '')}>
+  <div id={id} className={'ListFollowButton' + (className ? ' ' + className : '')} onMouseOut={onMouseOut}>
     {sessionUserOwnsList && (
       <>
         <img className="ListFollowButton-userLogo" src={image} />
@@ -35,10 +39,23 @@ export const ListFollowButton: React.FC<Props> = ({
       </>
     )}
     {!sessionUserOwnsList && sessionUserFollowsList && (
-      <PlusCircleWithBackground className="ListFollowButton-listFollowed" size="medium" onClick={onUnfollowList} />
+      <PlusCircleWithBackground
+        className={
+          'ListFollowButton-listFollowed ' + (recentlyChanged ? ' ListFollowButton-listFollowed--recentlyChanged' : '')
+        }
+        size="medium"
+        onClick={onUnfollowList}
+      />
     )}
     {!sessionUserOwnsList && !sessionUserFollowsList && (
-      <PlusCircleWithBackground className="ListFollowButton-listNotFollowed" size="medium" onClick={onFollowList} />
+      <PlusCircleWithBackground
+        className={
+          'ListFollowButton-listNotFollowed' +
+          (recentlyChanged ? ' ListFollowButton-listNotFollowed--recentlyChanged' : '')
+        }
+        size="medium"
+        onClick={onFollowList}
+      />
     )}
     {loading && <SpinnerLoader className="ListFollowButton-loader" size="nano" />}
   </div>

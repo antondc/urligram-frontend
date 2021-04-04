@@ -28,7 +28,7 @@ export const Routes: RoutesInterface = {
   Tags: {
     name: 'Tags',
     path: '/:lang([a-z]{2})?/tags',
-    route: 'tags',
+    route: '/tags',
     exact: true,
     auth: false,
     initialDataLoadersVisitor: [],
@@ -39,7 +39,7 @@ export const Routes: RoutesInterface = {
   Bookmarks: {
     name: 'Bookmarks',
     path: '/:lang([a-z]{2})?/bookmarks',
-    route: 'bookmarks',
+    route: '/bookmarks',
     exact: true,
     auth: false,
     initialDataLoadersVisitor: [initialBookmarksLoader],
@@ -100,7 +100,7 @@ export const Routes: RoutesInterface = {
   Users: {
     name: 'Users',
     path: '/:lang([a-z]{2})?/users',
-    route: 'users',
+    route: '/users',
     exact: true,
     auth: false,
     initialDataLoadersVisitor: [initialUsersLoader],
@@ -111,7 +111,7 @@ export const Routes: RoutesInterface = {
   Links: {
     name: 'Links',
     path: '/:lang([a-z]{2})?/links',
-    route: 'links',
+    route: '/links',
     exact: false,
     auth: false,
     initialDataLoadersVisitor: [],
@@ -132,7 +132,7 @@ export const Routes: RoutesInterface = {
   Lists: {
     name: 'Lists',
     path: '/:lang([a-z]{2})?/lists',
-    route: 'lists',
+    route: '/lists',
     exact: true,
     auth: false,
     initialDataLoadersVisitor: [initialListsLoader],
@@ -143,7 +143,7 @@ export const Routes: RoutesInterface = {
   Login: {
     name: 'Login',
     path: '/:lang([a-z]{2})?/login',
-    route: 'login',
+    route: '/login',
     exact: true,
     auth: false,
     initialDataLoadersVisitor: [],
@@ -154,7 +154,7 @@ export const Routes: RoutesInterface = {
   SignUp: {
     name: 'SignUp',
     path: '/:lang([a-z]{2})?/sign-up',
-    route: 'sign-up',
+    route: '/sign-up',
     exact: true,
     auth: false,
     initialDataLoadersVisitor: [],
@@ -165,7 +165,7 @@ export const Routes: RoutesInterface = {
   Home: {
     name: 'Home',
     path: '/:lang([a-z]{2})?',
-    route: '',
+    route: '/',
     exact: true,
     auth: false,
     initialDataLoadersVisitor: [
@@ -187,7 +187,7 @@ export const Routes: RoutesInterface = {
   About: {
     name: 'About',
     path: '/:lang([a-z]{2})?/about',
-    route: 'about',
+    route: '/about',
     exact: true,
     auth: true,
     initialDataLoadersVisitor: [],
@@ -222,7 +222,7 @@ export const Routes: RoutesInterface = {
   SignUpConfirmation: {
     name: 'SignUpConfirmation',
     path: '/:lang([a-z]{2})?/sign-up-confirmation',
-    route: 'sign-up-confirmation',
+    route: '/sign-up-confirmation',
     exact: true,
     auth: false,
     header: false,
@@ -234,7 +234,7 @@ export const Routes: RoutesInterface = {
   Control: {
     name: 'Control',
     path: '/:lang([a-z]{2})?/control',
-    route: 'control',
+    route: '/control',
     exact: true,
     auth: true,
     initialDataLoadersVisitor: [],
@@ -245,7 +245,7 @@ export const Routes: RoutesInterface = {
   ServerError: {
     name: 'ServerError',
     path: '/:lang([a-z]{2})?/500-server-error',
-    route: '500-server-error',
+    route: '/500-server-error',
     exact: true,
     auth: false,
     header: false,
@@ -257,7 +257,7 @@ export const Routes: RoutesInterface = {
   NotFound: {
     name: 'NotFound',
     path: '/:lang([a-z]{2})?/:path*',
-    route: 'not-found',
+    route: '/not-found',
     exact: false,
     auth: false,
     header: false,

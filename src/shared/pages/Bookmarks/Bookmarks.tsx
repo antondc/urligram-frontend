@@ -7,7 +7,7 @@ import Pagination from 'Components/Pagination';
 import Sidebar from 'Components/Sidebar';
 import { ListState } from 'Modules/Lists/lists.types';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
-import { Border, FadeInOut, Flex, Hr, SortBy } from '@antoniodcorrea/components';
+import { Border, FadeInOut, Flex, Hr, SortBy, Span } from '@antoniodcorrea/components';
 
 import './Bookmarks.less';
 
@@ -51,6 +51,7 @@ export const Bookmarks: React.FC<Props> = ({ url, bookmarksIds, loading, page, t
                 </React.Fragment>
               ))
             )}
+            {!loading && !bookmarksIds?.length && <Span bold>ⵁ We didnt find any user.</Span>}
           </FadeInOut>
           <Flex horizontal="center">
             <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />

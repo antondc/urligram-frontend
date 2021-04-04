@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import { bookmarksLoadByUserId } from 'Modules/Bookmarks/actions/bookmarksLoadByUserId';
 import { selectBookmarksCurrentIds } from 'Modules/Bookmarks/selectors/selectBookmarksCurrentIds';
@@ -16,6 +17,7 @@ import { selectFollowingUsers } from 'Modules/Sections/selectors/selectFollowing
 import { selectFollowingUsersLoading } from 'Modules/Sections/selectors/selectFollowingUsersLoading';
 import { userLoad } from 'Modules/Users/actions/userLoad';
 import { selectUserById } from 'Modules/Users/selectors/selectUserById';
+import { Routes } from 'Router/routes';
 import { LocaleFormattedDate } from 'Tools/utils/Date/localeFormattedDate';
 import { User as UserUi } from './User';
 
@@ -45,6 +47,8 @@ const User: React.FC<Props> = () => {
     dispatch(sectionsFollowingUsersLoad(userId));
     dispatch(sectionsFollowersUsersLoad(userId));
   }, []);
+
+  if (!user?.id) return <Redirect to={Routes.NotFound.route} />;
 
   return (
     <UserUi

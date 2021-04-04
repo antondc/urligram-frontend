@@ -11,7 +11,7 @@ import SidebarListUsers from 'Components/SidebarListUsers';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
-import { Border, Flex, H4, Hr, Select, SelectValue, SortBy } from '@antoniodcorrea/components';
+import { Border, Flex, H4, Hr, Select, SelectValue, SortBy, Span } from '@antoniodcorrea/components';
 
 import './Links.less';
 
@@ -99,6 +99,7 @@ export const Links: React.FC<Props> = ({
               </React.Fragment>
             ))
           )}
+          {!loading && !linksIds?.length && <Span bold>ⵁ We didnt find any link.</Span>}
           <Flex horizontal="center">
             <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
           </Flex>

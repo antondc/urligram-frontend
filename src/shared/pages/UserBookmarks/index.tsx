@@ -52,18 +52,6 @@ const UserBookmarks: React.FC = () => {
       value: item,
     })) || [];
 
-  useEffect(() => {
-    dispatch(userLoad(userId));
-    dispatch(sectionsFollowersUsersLoad(userId));
-    dispatch(sectionsFollowingUsersLoad(userId));
-  }, []);
-
-  useEffect(() => {
-    dispatch(bookmarksLoadByUserId(userId));
-    dispatch(listsLoadByUserId(userId));
-    dispatch(tagsSearchLoad());
-  }, [url]);
-
   const onInputChange = (string: string) => {
     !!string && dispatch(tagsSearchLoad(string));
   };
@@ -77,6 +65,18 @@ const UserBookmarks: React.FC = () => {
 
     history.push(redirectPath);
   };
+
+  useEffect(() => {
+    dispatch(userLoad(userId));
+    dispatch(sectionsFollowersUsersLoad(userId));
+    dispatch(sectionsFollowingUsersLoad(userId));
+  }, []);
+
+  useEffect(() => {
+    dispatch(bookmarksLoadByUserId(userId));
+    dispatch(listsLoadByUserId(userId));
+    dispatch(tagsSearchLoad());
+  }, [url]);
 
   return (
     <UserBookmarksUi

@@ -1,24 +1,48 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
+import { useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
-import { GlossaryState } from 'Modules/Languages/languages.types';
+import A from 'Components/A';
 import { selectCurrentGlossary } from 'Modules/Languages/selectors/selectCurrentGlossary';
+import { selectCurrentLanguageSlug } from 'Redux/modules/Languages/selectors/selectCurrentLanguageSlug';
+import { Routes } from 'Router/routes';
+import { H1, Hr, P, Span } from '@antoniodcorrea/components';
 
 import './NotFound.less';
 
-interface Props {
-  currentGlossary: GlossaryState;
-}
+const NotFound: React.FC = () => {
+  const currentGlossary = useSelector(selectCurrentGlossary);
+  const slug = useSelector(selectCurrentLanguageSlug);
 
-const NotFound: React.FC<Props> = ({ currentGlossary }) => (
-  <div className="NotFound">
-    <h1 className="NotFound-h1">{currentGlossary.notFound}</h1>
-  </div>
-);
+  return (
+    <>
+      <Redirect from="not-found" to={`/${slug}/not-found`} />
+      <div className="NotFound">
+        <H1 className="NotFound-h1">{currentGlossary?.notFound} 😵</H1>
+        <Hr spacer />
+        <P>
+          <Span bold>We couldnt find what you were looking for.</Span>
+        </P>
+        <P>
+          <Span bold>
+            But you can continue searching for{' '}
+            <A href={Routes.Links.route} frontend underlined>
+              links
+            </A>
+            ,{' '}
+            <A href={Routes.Lists.route} frontend underlined>
+              lists
+            </A>{' '}
+            or{' '}
+            <A href={Routes.Users.route} frontend underlined>
+              users
+            </A>{' '}
+            .
+          </Span>
+        </P>
+      </div>
+    </>
+  );
+};
 
-const mapStateToProps = createStructuredSelector({
-  currentGlossary: selectCurrentGlossary,
-});
-
-export default connect(mapStateToProps, {})(NotFound);
+export default NotFound;

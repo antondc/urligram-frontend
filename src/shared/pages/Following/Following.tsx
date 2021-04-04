@@ -10,7 +10,7 @@ import { UserRowSkeletonGroup } from 'Components/UserRow/UserRowSkeletonGroup';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
-import { Border, FadeInOut, Flex, H4, Hr, SortBy } from '@antoniodcorrea/components';
+import { Border, FadeInOut, Flex, H4, Hr, SortBy, Span } from '@antoniodcorrea/components';
 
 import './Following.less';
 
@@ -75,6 +75,7 @@ export const Following: React.FC<Props> = ({
                 </React.Fragment>
               ))
             )}
+            {!usersLoading && !usersCurrentIds?.length && <Span bold>ⵁ We didnt find any user.</Span>}
           </FadeInOut>
           <Flex horizontal="center">
             <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />

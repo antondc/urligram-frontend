@@ -1,3 +1,5 @@
+import { bookmarksLoadByUserId } from 'Modules/Bookmarks/actions/bookmarksLoadByUserId';
+import { listsLoadByUserId } from 'Modules/Lists/actions/listsLoadByUserId';
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
 import HttpClient from 'Services/HttpClient';
 import { AppThunk } from '../../..';
@@ -22,6 +24,8 @@ export const sessionLogIn = ({
 
     const { data }: SessionLogInApiResponse = await HttpClient.post('/login', { nameOrEmail, password });
 
+    await dispatch(bookmarksLoadByUserId(data?.attributes?.id));
+    await dispatch(listsLoadByUserId(data?.attributes?.id));
     await dispatch(switchLoginModal(false));
     await dispatch(
       sessionLogInSuccess({

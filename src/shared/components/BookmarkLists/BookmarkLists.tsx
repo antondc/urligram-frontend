@@ -37,6 +37,8 @@ interface Props {
   showCreateList: boolean;
   createListSubmitting: boolean;
   onShowCreateList: (e: React.MouseEvent<HTMLElement>) => void;
+  recentlyUpdated: number[];
+  onIconLeave: (listId: number) => void;
 }
 
 export const BookmarkLists: React.FC<Props> = ({
@@ -56,6 +58,8 @@ export const BookmarkLists: React.FC<Props> = ({
   createListSubmitting,
   onShowCreateList,
   onListTitleInputChange,
+  recentlyUpdated,
+  onIconLeave,
 }) => (
   <span className="BookmarkLists" id={`BookmarkLists-${bookmarkId}`}>
     <List className="BookmarkLists-listIcon" size="small" onClick={onListsClick} />
@@ -66,16 +70,19 @@ export const BookmarkLists: React.FC<Props> = ({
             <ul className="BookmarkLists-lists">
               {lists?.map((item) => {
                 const isBookmarkInList = !!item?.bookmarksIds?.includes(bookmarkId);
+                const wasRecentlyUpdated = recentlyUpdated?.includes(item?.id);
 
                 return (
                   <li
                     className={
-                      'BookmarkLists-listsItem' + (isBookmarkInList ? ' BookmarkLists-listsItem--included' : '')
+                      'BookmarkLists-listsItem' +
+                      (isBookmarkInList ? ' BookmarkLists-listsItem--included' : '') +
+                      (wasRecentlyUpdated ? ' BookmarkLists-listsItem--recentlyUpdated' : '')
                     }
                     key={item.id}
                   >
                     <Span className="BookmarkList-listsItemText" bold>
-                      <A href={`lists/${item?.id}`} frontend styled={false} onClick={onListLeave}>
+                      <A href={`lists/${item?.id}?sort=-updatedAt`} frontend styled={false} onClick={onListLeave}>
                         {item.name}
                       </A>
                     </Span>
@@ -83,10 +90,11 @@ export const BookmarkLists: React.FC<Props> = ({
                       <SpinnerLoader className="BookmarkLists-listsItemLoader" />
                     ) : (
                       <PlusCircleWithBackground
-                        className="BookmarkLists-listsItemIcon"
+                        className={'BookmarkLists-listsItemIcon'}
                         onClick={() =>
                           !!isBookmarkInList ? onListDeleteBookmark(item?.id) : onListAddBookmark(item?.id)
                         }
+                        onMouseLeave={() => onIconLeave(item?.id)}
                       />
                     )}
                   </li>

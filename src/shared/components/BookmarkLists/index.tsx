@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { listBookmarkCreate } from 'Modules/Lists/actions/listBookmarkCreate';
 import { listBookmarkDelete } from 'Modules/Lists/actions/listBookmarkDelete';
 import { listCreate } from 'Modules/Lists/actions/listCreate';
+import { listsLoadByUserId } from 'Modules/Lists/actions/listsLoadByUserId';
 import { selectListsByUserId } from 'Modules/Lists/selectors/selectListsByUserId';
 import { selectListsErrorLast } from 'Modules/Lists/selectors/selectListsErrorLast';
 import { RootState } from 'Modules/rootType';
@@ -30,7 +31,7 @@ export const BookmarkLists: React.FC<Props> = ({ bookmarkId }) => {
   const [listInputName, setListInputName] = useState<string>(undefined);
   const listError = useSelector(selectListsErrorLast);
   const [submitError, setSubmitError] = useState<string>(undefined);
-
+  const [recentlyUpdated, setRecentlyUpdated] = useState<number[]>([]);
   const [inList, setInList] = useState<boolean>(false);
   const lists = useSelector((state: RootState) => selectListsByUserId(state, { userId: session?.id }));
 
@@ -47,19 +48,22 @@ export const BookmarkLists: React.FC<Props> = ({ bookmarkId }) => {
   };
 
   const onListsClick = () => {
-    dispatch(bookmarkListsModalMount({ bookmarkId }));
+    !!modalMounted && dispatch(bookmarkListsModalUnmount({ bookmarkId }));
+    !modalMounted && dispatch(bookmarkListsModalMount({ bookmarkId }));
   };
 
   const onListAddBookmark = async (listId: number) => {
     setItemsLoading([...itemsLoading, listId]);
     await dispatch(listBookmarkCreate({ listId, bookmarkId }));
     setItemsLoading(itemsLoading.filter((item) => item !== listId));
+    setRecentlyUpdated([...recentlyUpdated, listId]);
   };
 
   const onListDeleteBookmark = async (listId: number) => {
     setItemsLoading([...itemsLoading, listId]);
     await dispatch(listBookmarkDelete({ listId, bookmarkId }));
     setItemsLoading(itemsLoading.filter((item) => item !== listId));
+    setRecentlyUpdated([...recentlyUpdated, listId]);
   };
 
   const onListTitleInputChange = async (e: React.FormEvent<HTMLInputElement>) => {
@@ -90,6 +94,10 @@ export const BookmarkLists: React.FC<Props> = ({ bookmarkId }) => {
     setShowCreateList(true);
   };
 
+  const onIconLeave = async (listId) => {
+    setRecentlyUpdated(recentlyUpdated?.filter((item) => item !== listId));
+  };
+
   useEffect(() => {
     const unMountTimeout = setTimeout(() => {
       !inList && !!modalMounted && dispatch(bookmarkListsModalUnmount({ bookmarkId }));
@@ -103,6 +111,10 @@ export const BookmarkLists: React.FC<Props> = ({ bookmarkId }) => {
   useEffect(() => {
     setSubmitError(listError?.message);
   }, [listError]);
+
+  useEffect(() => {
+    dispatch(listsLoadByUserId(session?.id));
+  }, []);
 
   return (
     <BookmarkListsUi
@@ -123,6 +135,8 @@ export const BookmarkLists: React.FC<Props> = ({ bookmarkId }) => {
       showCreateList={showCreateList}
       createListSubmitting={createListSubmitting}
       onShowCreateList={onShowCreateList}
+      recentlyUpdated={recentlyUpdated}
+      onIconLeave={onIconLeave}
     />
   );
 };

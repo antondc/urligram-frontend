@@ -125,6 +125,7 @@ export const BookmarkCreateForm: React.FC<Props> = ({
             onChange={onChangeTags}
             maxItems={4}
             grow
+            isCreatable
           />
           <Hr spacer />
           <Span size="small" className="BookmarkCreateForm-private">

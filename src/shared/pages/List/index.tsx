@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import { bookmarksLoadByListId } from 'Modules/Bookmarks/actions/bookmarksLoadByListId';
 import { selectBookmarksCurrentIds } from 'Modules/Bookmarks/selectors/selectBookmarksCurrentIds';
@@ -21,6 +22,7 @@ import { selectUsersInThisList } from 'Modules/Sections/selectors/selectUsersInT
 import { selectUsersInThisListIds } from 'Modules/Sections/selectors/selectUsersInThisListIds';
 import { selectUsersInThisListLoading } from 'Modules/Sections/selectors/selectUsersInThisListLoading';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
+import { Routes } from 'Router/routes';
 import { List as ListUI } from './List';
 
 const List: React.FC = () => {
@@ -53,6 +55,8 @@ const List: React.FC = () => {
   useEffect(() => {
     usersInThisListIds?.length && dispatch(sectionsUsersInThisListLoad(usersInThisListIds));
   }, [JSON.stringify(usersInThisListIds)]);
+
+  if (!list?.id) return <Redirect to={Routes.NotFound.route} />;
 
   return (
     <ListUI

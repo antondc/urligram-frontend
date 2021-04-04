@@ -31,13 +31,14 @@ const BookmarkRow: React.FC<Props> = ({ id }) => {
     favicon,
     createdAt,
     isPrivate,
-    userId,
+    bookmarksRelated,
   } = useSelector((state: RootState) => selectBookmarksById(state, { bookmarkId: id }));
   const timePassed = unixTimeElapsed(createdAt);
   const recentlyCreated = timePassed < TIME_RECENTLY_CREATED_BOOKMARK;
-  const isOwnBookmark = userId === session?.id;
   const bookmarkListsModal = useSelector((state: RootState) => selecBookmarkListsModal(state, { bookmarkId: id }));
   const modalMounted = !!bookmarkListsModal?.bookmarkId;
+  const sessionUserBookmarkedLink = bookmarksRelated?.some((item) => item?.userId === session?.id);
+
   const onVote = (vote) => {
     if (!isLogged) return dispatch(switchLoginModal(true));
 
@@ -64,7 +65,7 @@ const BookmarkRow: React.FC<Props> = ({ id }) => {
       statistics={statistics}
       onVote={onVote}
       recentlyCreated={recentlyCreated}
-      isOwnBookmark={isOwnBookmark}
+      sessionUserBookmarkedLink={sessionUserBookmarkedLink}
       onBookmarkRowMouseLeave={onBookmarkRowMouseLeave}
     />
   );

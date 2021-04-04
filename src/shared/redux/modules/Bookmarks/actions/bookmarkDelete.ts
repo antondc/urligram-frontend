@@ -31,7 +31,6 @@ export const bookmarkDelete = ({
     const { data: bookmarkData } = await HttpClient.delete<void, BookmarkDeleteApiResponse>(
       `/users/me/bookmarks/${bookmarkId}`
     );
-    await dispatch(linkLoadById(linkId));
 
     const { Bookmarks: bookmarksAfterResponse } = getState();
 

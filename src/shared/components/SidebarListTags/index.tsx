@@ -1,7 +1,7 @@
 import React from 'react';
 
 import A from 'Components/A';
-import { Tag } from '@antoniodcorrea/components';
+import { Span, Tag } from '@antoniodcorrea/components';
 import { SidebarListTagsSkeleton } from './SidebarListTagsSkeleton';
 
 import './SidebarListTags.less';
@@ -14,10 +14,13 @@ interface Props {
   }[];
 }
 
-const SidebarListTags: React.FC<Props> = ({ items, loading }) => (
-  <dl className="SidebarListTags-tags">
-    {!loading ? (
-      items.map((item) => (
+const SidebarListTags: React.FC<Props> = ({ items, loading }) => {
+  if (loading) return <SidebarListTagsSkeleton />;
+  if (!items?.length) return <Span bold>ⵁ Nothing here yet.</Span>;
+
+  return (
+    <dl className="SidebarListTags-tags">
+      {items.map((item) => (
         <A
           className="SidebarListTags-tag"
           href={`/links?filter[tags][]=${item.name}`}
@@ -27,10 +30,8 @@ const SidebarListTags: React.FC<Props> = ({ items, loading }) => (
         >
           <Tag size="medium">{item.name}</Tag>
         </A>
-      ))
-    ) : (
-      <SidebarListTagsSkeleton />
-    )}
-  </dl>
-);
+      ))}
+    </dl>
+  );
+};
 export default SidebarListTags;

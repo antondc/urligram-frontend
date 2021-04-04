@@ -15,10 +15,13 @@ interface Props {
   title?: string;
 }
 
-const SidebarListLists: React.FC<Props> = ({ items, loading, title: blockTitle }) => (
-  <dl className="SidebarListLists-lists">
-    {!loading ? (
-      items.map(({ id, name, members, bookmarksIds }, index) => (
+const SidebarListLists: React.FC<Props> = ({ items, loading, title: blockTitle }) => {
+  if (loading) return <SidebarListListsSkeleton />;
+  if (!items?.length) return <Span bold>ⵁ Nothing here yet.</Span>;
+
+  return (
+    <dl className="SidebarListLists-lists">
+      {items.map(({ id, name, members, bookmarksIds }, index) => (
         <React.Fragment key={id}>
           {!!index && <Hr spacer size="micro" />}
           <dd className="SidebarListLists-list">
@@ -64,10 +67,8 @@ const SidebarListLists: React.FC<Props> = ({ items, loading, title: blockTitle }
             </div>
           </dd>
         </React.Fragment>
-      ))
-    ) : (
-      <SidebarListListsSkeleton />
-    )}
-  </dl>
-);
+      ))}
+    </dl>
+  );
+};
 export default SidebarListLists;

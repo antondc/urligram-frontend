@@ -9,7 +9,7 @@ import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListUsers from 'Components/SidebarListUsers';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
-import { AIcon, Border, FadeInOut, Flex, H4, Hr, Tag } from '@antoniodcorrea/components';
+import { AIcon, Border, FadeInOut, Flex, H4, Hr, Span, Tag } from '@antoniodcorrea/components';
 
 import './Home.less';
 
@@ -76,6 +76,7 @@ export const Home: React.FC<Props> = ({
                 </React.Fragment>
               ))
             )}
+            {!linksIdsLoading && !linksIds?.length && <Span bold>ⵁ We didnt find any link.</Span>}
           </FadeInOut>
         </Border>
       </Main>

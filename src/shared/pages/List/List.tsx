@@ -83,6 +83,7 @@ export const List: React.FC<Props> = ({
                 </React.Fragment>
               ))
             )}
+            {!bookmarksLoading && !bookmarksIds?.length && <Span bold>ⵁ We didn find any bookmark.</Span>}
           </FadeInOut>
           <Flex horizontal="center">
             <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
