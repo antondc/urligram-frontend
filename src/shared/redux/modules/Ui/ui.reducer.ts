@@ -12,6 +12,7 @@ import {
   SWITCH_WELCOME_MODAL,
   UI_BOOKMARK_LISTS_MODALS_MOUNT,
   UI_BOOKMARK_LISTS_MODALS_UNMOUNT,
+  UI_CLOSE_ALL_MODALS,
   UI_NOTIFICATION_PUSH,
   UI_NOTIFICATION_VIEWED,
   UiActions,
@@ -86,6 +87,7 @@ export const Ui = (state = initialState, action: UiActions): UiState => {
     case SWITCH_LIST_MODAL:
     case UI_NOTIFICATION_VIEWED:
     case UI_NOTIFICATION_PUSH:
+    case UI_CLOSE_ALL_MODALS:
       return Object.assign({}, state, action.payload);
 
     default:

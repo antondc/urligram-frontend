@@ -23,6 +23,7 @@ import { RouteState } from 'Modules/Routes/routes.types';
 import { selectPathWithoutLanguageParam } from 'Modules/Routes/selectors/selectPathWithoutLanguageParam';
 import { selectSessionLoading } from 'Modules/Session/selectors/selectSessionLoading';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
+import { uiResetState } from 'Modules/Ui/actions/uiResetState';
 import { selectUiBookmarkCreateModalMounted } from 'Modules/Ui/selectors/selectUiBookmarkCreateModalMounted';
 import { selectUiBookmarkUpdateModalMounted } from 'Modules/Ui/selectors/selectUiBookmarkUpdateModalMounted';
 import { selectUiForgotPasswordModalMounted } from 'Modules/Ui/selectors/selectUiForgotPasswordModalMounted';
@@ -43,6 +44,8 @@ import Notifications from '../../components/Notifications';
 
 import './Layout.less';
 
+const KEY_CODE = 'Escape';
+
 interface Props {
   location: Location;
   languageLoading: boolean;
@@ -61,6 +64,7 @@ interface Props {
   pathWithoutLanguageParam: string;
   sessionLoading: boolean;
   pushNewRoute: (route) => void;
+  uiResetState: () => void;
 }
 
 class Layout extends React.Component<Props> {
@@ -71,11 +75,19 @@ class Layout extends React.Component<Props> {
 
   componentDidMount() {
     window.addEventListener('load', this.addBodyClasses);
+    document.addEventListener('keydown', this.testKeyDown);
   }
 
   componentWillUnmount() {
     window.removeEventListener('load', this.addBodyClasses);
+    document.removeEventListener('keydown', this.testKeyDown);
   }
+
+  testKeyDown = (e: KeyboardEvent): void => {
+    const { uiResetState } = this.props;
+
+    if (e.key === KEY_CODE) uiResetState();
+  };
 
   componentDidUpdate = (prevProps) => {
     const { uiScreenLocked, location } = this.props;
@@ -196,4 +208,5 @@ const mapStateToProps = createStructuredSelector({
 
 export default connect(mapStateToProps, {
   pushNewRoute,
+  uiResetState,
 })(Layout);

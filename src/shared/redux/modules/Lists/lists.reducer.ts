@@ -9,6 +9,9 @@ import {
   LIST_CREATE_REQUEST,
   LIST_CREATE_RESET,
   LIST_CREATE_SUCCESS,
+  LIST_DELETE_FAILURE,
+  LIST_DELETE_REQUEST,
+  LIST_DELETE_SUCCESS,
   LIST_FOLLOW_FAILURE,
   LIST_FOLLOW_REQUEST,
   LIST_FOLLOW_SUCCESS,
@@ -52,6 +55,9 @@ export const Lists = (state = initialState, action: ListsActions): ListsState =>
     case LIST_BOOKMARK_DELETE_REQUEST:
     case LIST_BOOKMARK_DELETE_SUCCESS:
     case LIST_BOOKMARK_DELETE_FAILURE:
+    case LIST_DELETE_REQUEST:
+    case LIST_DELETE_SUCCESS:
+    case LIST_DELETE_FAILURE:
       return Object.assign({}, state, action.payload);
 
     default:

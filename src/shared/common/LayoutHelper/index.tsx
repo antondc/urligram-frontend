@@ -2,7 +2,7 @@ import React from 'react';
 
 import './LayoutHelper.less';
 
-const KEY_CODE = 192; // Key: º
+const KEY_CODE = 'º';
 
 interface State {
   mounted: boolean;
@@ -25,7 +25,7 @@ class LayoutHelper extends React.Component<unknown, State> {
   };
 
   testKeyDown = (e: KeyboardEvent): void => {
-    if (e.which === KEY_CODE) {
+    if (e.key === KEY_CODE) {
       this.setState({
         mounted: !this.state.mounted,
       });

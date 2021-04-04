@@ -24,6 +24,9 @@ export const LIST_BOOKMARK_CREATE_FAILURE = 'LIST_BOOKMARK_CREATE_FAILURE';
 export const LIST_BOOKMARK_DELETE_REQUEST = 'LIST_BOOKMARK_DELETE_REQUEST';
 export const LIST_BOOKMARK_DELETE_SUCCESS = 'LIST_BOOKMARK_DELETE_SUCCESS';
 export const LIST_BOOKMARK_DELETE_FAILURE = 'LIST_BOOKMARK_DELETE_FAILURE';
+export const LIST_DELETE_REQUEST = 'LIST_DELETE_REQUEST';
+export const LIST_DELETE_SUCCESS = 'LIST_DELETE_SUCCESS';
+export const LIST_DELETE_FAILURE = 'LIST_DELETE_FAILURE';
 
 export interface ListsError extends Error {
   field: string;
@@ -121,6 +124,16 @@ export interface ListBookmarkDeleteApiResponse {
       listId: number;
       bookmarkId: number;
     };
+  };
+}
+
+export interface ListDeleteApiRequest {
+  listId: number;
+}
+
+export interface ListDeleteApiResponse {
+  data: {
+    attributes: ListState;
   };
 }
 
@@ -257,6 +270,21 @@ interface ListBookmarkDeleteFailureAction {
   payload: Partial<BookmarkState>;
 }
 
+interface ListDeleteRequestAction {
+  type: typeof LIST_DELETE_REQUEST;
+  payload: Partial<BookmarkState>;
+}
+
+interface ListDeleteSuccessAction {
+  type: typeof LIST_DELETE_SUCCESS;
+  payload: Partial<BookmarkState>;
+}
+
+interface ListDeleteFailureAction {
+  type: typeof LIST_DELETE_FAILURE;
+  payload: Partial<BookmarkState>;
+}
+
 export type ListsActions =
   | ListsLoadRequestAction
   | ListsLoadSuccessAction
@@ -280,4 +308,7 @@ export type ListsActions =
   | ListBookmarkCreateFailureAction
   | ListBookmarkDeleteRequestAction
   | ListBookmarkDeleteSuccessAction
-  | ListBookmarkDeleteFailureAction;
+  | ListBookmarkDeleteFailureAction
+  | ListDeleteRequestAction
+  | ListDeleteSuccessAction
+  | ListDeleteFailureAction;

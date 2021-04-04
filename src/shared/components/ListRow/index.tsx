@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
@@ -11,7 +11,6 @@ import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLo
 import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUserId';
 import { switchListModal } from 'Modules/Ui/actions/switchListModal';
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
-import { REQUEST_FAILED, REQUEST_STARTED, REQUEST_SUCCEEDED, ResponseStatus } from '../../constants';
 import { ListRow as ListRowUi } from './ListRow';
 
 import './ListRow.less';
@@ -31,9 +30,7 @@ const ListRow: React.FC<Props> = ({
   const isLogged = useSelector(selectSessionLoggedIn);
   const sessionId = useSelector(selectSessionUserId);
   const session = useSelector(selectSession);
-  const [isPrivateRequestStatus, setIsPrivateRequestStatus] = useState<ResponseStatus>(undefined);
-  const isPrivateRequestFailed = isPrivateRequestStatus === REQUEST_FAILED;
-  const isPrivateRequestPending = isPrivateRequestStatus === REQUEST_STARTED;
+
   const sessionUserOwnsList = userId === sessionId;
 
   const onEdit = async () => {
@@ -47,7 +44,6 @@ const ListRow: React.FC<Props> = ({
   const onPrivateSwitch = async () => {
     if (!isLogged) return dispatch(switchLoginModal(true));
     if (!sessionUserOwnsList) return;
-    setIsPrivateRequestStatus(REQUEST_STARTED);
 
     const listData = {
       listId: id,
@@ -58,12 +54,8 @@ const ListRow: React.FC<Props> = ({
     const response = await dispatch(listUpdate(listData));
 
     if (!response.id) {
-      setIsPrivateRequestStatus(REQUEST_FAILED);
-
       return;
     }
-
-    setIsPrivateRequestStatus(REQUEST_SUCCEEDED);
   };
 
   return (
@@ -79,8 +71,6 @@ const ListRow: React.FC<Props> = ({
       bookmarksIds={bookmarksIds}
       onEdit={onEdit}
       onPrivateSwitch={onPrivateSwitch}
-      isPrivateRequestFailed={isPrivateRequestFailed}
-      isPrivateRequestPending={isPrivateRequestPending}
     />
   );
 };

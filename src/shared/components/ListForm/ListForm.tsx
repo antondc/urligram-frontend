@@ -19,6 +19,9 @@ interface Props {
   submitSuccess: boolean;
   submitError: string;
   onSubmit: (e: React.FormEvent<HTMLElement>) => void;
+  onRemove: (e: React.FormEvent<HTMLElement>) => void;
+  onBlurTitle: (e: React.FormEvent<HTMLInputElement>) => void;
+  onBlurDescription: (e: React.FormEvent<HTMLInputElement>) => void;
 }
 
 export const ListForm: React.FC<Props> = ({
@@ -36,6 +39,9 @@ export const ListForm: React.FC<Props> = ({
   submitSuccess,
   submitError,
   onSubmit,
+  onBlurTitle,
+  onBlurDescription,
+  onRemove,
 }) => (
   <form className="ListForm" onSubmit={onSubmit}>
     <Flex growVertical={false} horizontal="left" vertical="bottom" noWrap>
@@ -46,6 +52,7 @@ export const ListForm: React.FC<Props> = ({
         onChange={onChangeName}
         value={nameValue}
         error={nameError}
+        onBlur={onBlurTitle}
         grow
         autoFocus
       />
@@ -58,12 +65,13 @@ export const ListForm: React.FC<Props> = ({
     </FadeInOut>
     <Hr spacer />
     <Input
-      name="title"
+      name="description"
       type="text"
       label="List description"
       onChange={onChangeDescription}
       value={descriptionValue}
       error={descriptionError}
+      onBlur={onBlurDescription}
       grow
     />
     <Hr size="nano" spacer />
@@ -100,6 +108,17 @@ export const ListForm: React.FC<Props> = ({
         {submitError}
       </Span>
     </FadeInOut>
+    <Hr spacer />
+    <Button
+      text="Remove list"
+      type="submit"
+      variant="delete"
+      onClick={onRemove}
+      error={!!submitError}
+      success={submitSuccess}
+      grow
+    />
+    <Hr size="nano" spacer />
     <Fade mounted={submitInProcess} position="absolute">
       <SpinnerCircle background />
     </Fade>

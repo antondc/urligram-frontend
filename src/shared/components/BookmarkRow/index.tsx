@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectBookmarksById } from 'Modules/Bookmarks/selectors/selectBookmarkById';
 import { linkUpdateVote } from 'Modules/Links/actions/linkUpdateVote';
 import { RootState } from 'Modules/rootType';
+import { selectCurrentRouteParamUserId } from 'Modules/Routes/selectors/selectCurrentRouteParamUserId';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import { bookmarkListsModalUnmount } from 'Modules/Ui/actions/bookmarkListsModalUnmount';
@@ -32,7 +33,10 @@ const BookmarkRow: React.FC<Props> = ({ id }) => {
     createdAt,
     isPrivate,
     bookmarksRelated,
+    userId,
   } = useSelector((state: RootState) => selectBookmarksById(state, { bookmarkId: id }));
+  const paramUserId = useSelector(selectCurrentRouteParamUserId);
+  const routeUserId = paramUserId || session?.id || userId;
   const timePassed = unixTimeElapsed(createdAt);
   const recentlyCreated = timePassed < TIME_RECENTLY_CREATED_BOOKMARK;
   const bookmarkListsModal = useSelector((state: RootState) => selecBookmarkListsModal(state, { bookmarkId: id }));
@@ -54,7 +58,7 @@ const BookmarkRow: React.FC<Props> = ({ id }) => {
   return (
     <BookmarkRowUi
       id={id}
-      userId={session?.id}
+      userId={routeUserId}
       linkId={linkId}
       title={title}
       url={url}

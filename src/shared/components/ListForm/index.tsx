@@ -4,13 +4,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
 import { listCreate } from 'Modules/Lists/actions/listCreate';
 import { listCreateReset } from 'Modules/Lists/actions/listCreateReset';
+import { listDelete } from 'Modules/Lists/actions/listDelete';
 import { listUpdate } from 'Modules/Lists/actions/listUpdate';
 import { selectListById } from 'Modules/Lists/selectors/selectListById';
 import { selectListsErrorLast } from 'Modules/Lists/selectors/selectListsErrorLast';
 import { RootState } from 'Modules/rootType';
 import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUserId';
 import { selectUiListModal } from 'Modules/Ui/selectors/selectUiListModal';
-import { DELAY_MEDIUM_MS } from 'Root/src/shared/constants';
+import { DELAY_MEDIUM_MS, DELAY_SLOW_MS } from 'Root/src/shared/constants';
 import history from 'Services/History';
 import { urlRemoveLeadingCharacters } from 'Tools/utils/url/urlRemoveLeadingCharacters';
 import { ListForm as ListFormUi } from './ListForm';
@@ -71,6 +72,24 @@ const ListForm: React.FC<Props> = ({ closeModal }) => {
     setSubmitError(undefined);
   };
 
+  const onBlurTitle = (e: React.FormEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    if (!nameValue) {
+      setNameError('List name is required');
+
+      return;
+    }
+  };
+
+  const onBlurDescription = (e: React.FormEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    if (!descriptionValue) {
+      setDescriptionError('List description is required');
+
+      return;
+    }
+  };
+
   const onSubmit = async (e: React.FormEvent<HTMLElement>) => {
     e.preventDefault();
 
@@ -98,6 +117,18 @@ const ListForm: React.FC<Props> = ({ closeModal }) => {
       return;
     }
     setSubmitInProcess(false);
+  };
+
+  const onRemove = async (e: React.FormEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setSubmitInProcess(true);
+
+    await dispatch(listDelete({ listId: list?.id }));
+    setSubmitInProcess(false);
+
+    setTimeout(() => {
+      closeModal();
+    }, DELAY_SLOW_MS);
   };
 
   useEffect(() => {
@@ -140,6 +171,9 @@ const ListForm: React.FC<Props> = ({ closeModal }) => {
       submitInProcess={submitInProcess}
       submitSuccess={submitSuccess}
       submitError={submitError}
+      onBlurTitle={onBlurTitle}
+      onBlurDescription={onBlurDescription}
+      onRemove={onRemove}
     />
   );
 };

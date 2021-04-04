@@ -15,22 +15,23 @@ interface Props {
 }
 
 const SidebarListTags: React.FC<Props> = ({ items, loading }) => {
-  if (loading) return <SidebarListTagsSkeleton />;
   if (!items?.length) return <Span bold>ⵁ Nothing here yet.</Span>;
 
   return (
     <dl className="SidebarListTags-tags">
-      {items.map((item) => (
-        <A
-          className="SidebarListTags-tag"
-          href={`/links?filter[tags][]=${item.name}`}
-          key={`SidebarListTags-tags-${item.id}`}
-          styled={false}
-          frontend
-        >
-          <Tag size="medium">{item.name}</Tag>
-        </A>
-      ))}
+      {!loading &&
+        items.map((item) => (
+          <A
+            className="SidebarListTags-tag"
+            href={`/links?filter[tags][]=${item.name}`}
+            key={`SidebarListTags-tags-${item.id}`}
+            styled={false}
+            frontend
+          >
+            <Tag size="medium">{item.name}</Tag>
+          </A>
+        ))}
+      {!!loading && <SidebarListTagsSkeleton />}
     </dl>
   );
 };

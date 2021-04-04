@@ -17,7 +17,7 @@ const LinkRow: React.FC<Props> = ({ id }) => {
   const dispatch = useDispatch();
   const sessionId = useSelector(selectSessionUserId);
   const link = useSelector((state: RootState) => selectLinkById(state, { id }));
-  const { linkId, title, url, tags = [], favicon, statistics, bookmarksRelated } = link;
+  const { linkId, title, url, tags = [], favicon, statistics, bookmarksRelated } = link || {};
   const isLogged = useSelector(selectSessionLoggedIn);
   const userBookmarked = bookmarksRelated?.some((item) => item?.userId === sessionId);
 

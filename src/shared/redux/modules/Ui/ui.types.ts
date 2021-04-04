@@ -13,6 +13,7 @@ export const UI_BOOKMARK_LISTS_MODALS_UNMOUNT = 'UI_BOOKMARK_LISTS_MODALS_UNMOUN
 export const SWITCH_LIST_MODAL = 'SWITCH_LIST_MODAL';
 export const UI_NOTIFICATION_VIEWED = 'UI_NOTIFICATION_VIEWED';
 export const UI_NOTIFICATION_PUSH = 'UI_NOTIFICATION_PUSH';
+export const UI_CLOSE_ALL_MODALS = 'UI_CLOSE_ALL_MODALS';
 
 export type UiBaseModal = {
   type?: 'modal' | 'popup';
@@ -140,6 +141,11 @@ interface UiNotificationPushAction {
   payload: UiState;
 }
 
+interface UiCloseAllModals {
+  type: typeof UI_CLOSE_ALL_MODALS;
+  payload: UiState;
+}
+
 export type UiActions =
   | SwitchUserModal
   | SwitchLanguagesModal
@@ -155,4 +161,5 @@ export type UiActions =
   | BookmarkListModalsMount
   | BookmarkListModalsUnmount
   | UiNotificationViewedAction
-  | UiNotificationPushAction;
+  | UiNotificationPushAction
+  | UiCloseAllModals;

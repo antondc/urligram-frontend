@@ -3,30 +3,18 @@ import React from 'react';
 import A from 'Components/A';
 import { ListState } from 'Modules/Lists/lists.types';
 import { SessionState } from 'Modules/Session/session.types';
-import { Bookmark, Border, Fade, Flex, Private, Span, Tag, User } from '@antoniodcorrea/components';
+import { Bookmark, Border, Flex, Private, Span, Tag, User } from '@antoniodcorrea/components';
 import ListFollowButton from '../ListFollowButton';
 
 import './ListRow.less';
 
 interface Props extends Partial<ListState> {
-  isPrivateRequestFailed: boolean;
-  isPrivateRequestPending: boolean;
   session?: SessionState;
   onEdit: () => void;
   onPrivateSwitch: () => void;
 }
 
-export const ListRow: React.FC<Props> = ({
-  id,
-  name,
-  tags,
-  bookmarksIds,
-  members,
-  description,
-  isPrivate,
-  isPrivateRequestFailed,
-  isPrivateRequestPending,
-}) => (
+export const ListRow: React.FC<Props> = ({ id, name, tags, bookmarksIds, members, description, isPrivate }) => (
   <Border grow className="ListRow" data-test-id="ListRow" key={id}>
     <div className="ListRow-left">
       <Span size="normal" bold className="ListRow-title">
@@ -35,7 +23,7 @@ export const ListRow: React.FC<Props> = ({
         </A>
       </Span>
       <Span className="ListRow-description" size="small">
-        {description}
+        {description}&nbsp;
       </Span>
     </div>
     <div className="ListRow-center">
