@@ -1,6 +1,7 @@
 import React from 'react';
 
 import A from 'Components/A';
+import UserFollowButton from 'Components/UserFollowButton';
 import { UserState } from 'Modules/Users/users.types';
 import { Border, Span, Tag } from '@antoniodcorrea/components';
 
@@ -62,6 +63,7 @@ export const UserRow: React.FC<UserRow> = ({
         <img className="UserRow-image" src={image} />
       </A>
     </div>
+    <UserFollowButton className="UserRow-followButton" userId={id} />
   </Border>
 );
 
