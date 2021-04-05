@@ -3,7 +3,7 @@ import React from 'react';
 import A from 'Components/A';
 import { ListState } from 'Modules/Lists/lists.types';
 import { SessionState } from 'Modules/Session/session.types';
-import { Bookmark, Border, Flex, Private, Span, Tag, User } from '@antoniodcorrea/components';
+import { Bookmark, Border, Flex, Private, Space, Span, Tag, User } from '@antoniodcorrea/components';
 import ListFollowButton from '../ListFollowButton';
 
 import './ListRow.less';
@@ -23,7 +23,8 @@ export const ListRow: React.FC<Props> = ({ id, name, tags, bookmarksIds, members
         </A>
       </Span>
       <Span className="ListRow-description" size="small">
-        {description}&nbsp;
+        {description}
+        <Space />
       </Span>
     </div>
     <div className="ListRow-center">

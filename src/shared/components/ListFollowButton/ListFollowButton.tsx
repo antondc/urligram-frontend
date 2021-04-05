@@ -6,7 +6,6 @@ import './ListFollowButton.less';
 
 interface Props {
   className?: string;
-  id?: string;
   sessionUserOwnsList: boolean;
   sessionUserFollowsList: boolean;
   loading: boolean;
@@ -20,7 +19,6 @@ interface Props {
 
 export const ListFollowButton: React.FC<Props> = ({
   className,
-  id,
   image,
   loading,
   recentlyChanged,
@@ -31,7 +29,7 @@ export const ListFollowButton: React.FC<Props> = ({
   onUnfollowList,
   onFollowList,
 }) => (
-  <div id={id} className={'ListFollowButton' + (className ? ' ' + className : '')} onMouseOut={onMouseOut}>
+  <div className={'ListFollowButton' + (className ? ' ' + className : '')} onMouseOut={onMouseOut}>
     {sessionUserOwnsList && (
       <>
         <img className="ListFollowButton-userLogo" src={image} />

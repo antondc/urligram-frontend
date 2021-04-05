@@ -17,10 +17,9 @@ import './ListFollowButton.less';
 interface Props {
   listId: number;
   className?: string;
-  id?: string;
 }
 
-export const ListFollowButton: React.FC<Props> = ({ listId, className, id }) => {
+export const ListFollowButton: React.FC<Props> = ({ listId, className }) => {
   const dispatch = useDispatch();
   const list = useSelector((state: RootState) => selectListById(state, { id: listId }));
   const session = useSelector(selectSession);
@@ -65,7 +64,6 @@ export const ListFollowButton: React.FC<Props> = ({ listId, className, id }) => 
 
   return (
     <ListFollowButtonUi
-      id={id}
       image={session?.image}
       loading={listLoading}
       onEdit={onEdit}

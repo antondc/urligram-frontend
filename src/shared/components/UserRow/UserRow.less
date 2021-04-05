@@ -4,6 +4,7 @@
 
 @{c} {
   display: flex;
+  position: relative;
   flex-wrap: nowrap;
   padding: 9px 19px;
 
@@ -43,6 +44,16 @@
   &-image {
     height: 37px;
     width: 37px;
+    border-radius: 50%;
+  }
+
+  &-followButton {
+    position: absolute;
+    height: 18px;
+    width: 18px;
+    top: -5px;
+    right: 9px;
+    outline: 2px solid @c-background;
     border-radius: 50%;
   }
 }
