@@ -2,6 +2,12 @@ export const USERS_LOAD_REQUEST = 'USERS_LOAD_REQUEST';
 export const USERS_LOAD_SUCCEED = 'USERS_LOAD_SUCCEED';
 export const USER_LOAD_REQUEST = 'USER_LOAD_REQUEST';
 export const USER_LOAD_SUCCEED = 'USER_LOAD_SUCCEED';
+export const USER_FOLLOW_CREATE_REQUEST = 'USER_FOLLOW_CREATE_REQUEST';
+export const USER_FOLLOW_CREATE_SUCCEED = 'USER_FOLLOW_CREATE_SUCCEED';
+export const USER_FOLLOW_CREATE_FAILURE = 'USER_FOLLOW_CREATE_FAILURE';
+export const USER_FOLLOW_DELETE_REQUEST = 'USER_FOLLOW_DELETE_REQUEST';
+export const USER_FOLLOW_DELETE_SUCCEED = 'USER_FOLLOW_DELETE_SUCCEED';
+export const USER_FOLLOW_DELETE_FAILURE = 'USER_FOLLOW_DELETE_FAILURE';
 
 export interface UserState {
   id: string;
@@ -38,6 +44,7 @@ export interface UsersState {
     totalItems?: number;
     sort?: string;
   };
+  errors?: Error[];
 }
 
 export interface UsersLoadApiItemResponse {
@@ -55,6 +62,16 @@ export interface UsersLoadApiResponse {
   meta: {
     totalItems?: number;
     sort?: string;
+  };
+}
+
+export interface UserFollowCreateApiResponse {
+  data: UsersLoadApiItemResponse;
+}
+
+export interface UserFollowDeleteApiResponse {
+  data: {
+    success: boolean;
   };
 }
 
@@ -78,8 +95,44 @@ interface UserLoadSuccessAction {
   payload: Partial<UsersState>;
 }
 
+interface UserFollowCreateRequestAction {
+  type: typeof USER_FOLLOW_CREATE_REQUEST;
+  payload: Partial<UsersState>;
+}
+
+interface UserFollowCreateSuccessAction {
+  type: typeof USER_FOLLOW_CREATE_SUCCEED;
+  payload: Partial<UsersState>;
+}
+
+interface UserFollowCreateFailureAction {
+  type: typeof USER_FOLLOW_CREATE_FAILURE;
+  payload: Partial<UsersState>;
+}
+
+interface UserFollowDeleteRequestAction {
+  type: typeof USER_FOLLOW_DELETE_REQUEST;
+  payload: Partial<UsersState>;
+}
+
+interface UserFollowDeleteSuccessAction {
+  type: typeof USER_FOLLOW_DELETE_SUCCEED;
+  payload: Partial<UsersState>;
+}
+
+interface UserFollowDeleteFailureAction {
+  type: typeof USER_FOLLOW_DELETE_FAILURE;
+  payload: Partial<UsersState>;
+}
+
 export type UsersActions =
   | UsersLoadRequestAction
   | UsersLoadSuccessAction
   | UserLoadRequestAction
-  | UserLoadSuccessAction;
+  | UserLoadSuccessAction
+  | UserFollowCreateRequestAction
+  | UserFollowCreateSuccessAction
+  | UserFollowCreateFailureAction
+  | UserFollowDeleteRequestAction
+  | UserFollowDeleteSuccessAction
+  | UserFollowDeleteFailureAction;

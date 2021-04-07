@@ -22,7 +22,7 @@ const SidebarListUsers: React.FC<Props> = ({ items, loading, title: blockTitle }
   return (
     <>
       {items?.map(({ id, name, followers, following, bookmarksIds }, index) => (
-        <React.Fragment key={id}>
+        <React.Fragment key={`${id}-${index}`}>
           {!!index && <Hr spacer size="micro" />}
           <dd className="SidebarListUsers-user">
             <div className="SidebarListUsers-userName">
@@ -47,7 +47,7 @@ const SidebarListUsers: React.FC<Props> = ({ items, loading, title: blockTitle }
                       size="small"
                     >
                       {followers?.length}
-                      {(following?.length || bookmarksIds?.length) && <> · </>}
+                      {(!!following?.length || !!bookmarksIds?.length) && <> · </>}
                     </Span>
                   </A>
                 </>
@@ -68,7 +68,7 @@ const SidebarListUsers: React.FC<Props> = ({ items, loading, title: blockTitle }
                       size="small"
                     >
                       {following?.length}
-                      {bookmarksIds?.length && <> · </>}
+                      {!!bookmarksIds?.length && <> · </>}
                     </Span>
                   </A>
                 </>
