@@ -41,7 +41,7 @@ export const Tags: React.FC<Props> = ({
               tags?.map((item) => (
                 <A
                   className="Tags-tag"
-                  href={`/links?filter[tags][]=${item.name}`}
+                  href={`/bookmarks?filter[tags][]=${item.name}`}
                   key={item.id}
                   styled={false}
                   frontend

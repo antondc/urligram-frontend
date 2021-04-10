@@ -40,7 +40,13 @@ export const LinkRow: React.FC<Partial<LinkRow>> = ({
     </div>
     <div className="LinkRow-center">
       {tags?.map((item) => (
-        <A className="LinkRow-tag" href={`/links?filter[tags][]=${item.name}`} key={item.id} styled={false} frontend>
+        <A
+          className="LinkRow-tag"
+          href={`/bookmarks?filter[tags][]=${item.name}`}
+          key={item.id}
+          styled={false}
+          frontend
+        >
           <Tag size="nano" variant="simple">
             {item.name}
           </Tag>

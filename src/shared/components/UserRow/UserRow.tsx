@@ -51,7 +51,13 @@ export const UserRow: React.FC<UserRow> = ({
     </div>
     <div className="UserRow-center">
       {tags?.map((item) => (
-        <A className="UserRow-tag" href={`/links?filter[tags][]=${item.name}`} key={item.id} styled={false} frontend>
+        <A
+          className="UserRow-tag"
+          href={`/bookmarks?filter[tags][]=${item.name}`}
+          key={item.id}
+          styled={false}
+          frontend
+        >
           <Tag variant="simple" size="nano">
             {item.name}
           </Tag>

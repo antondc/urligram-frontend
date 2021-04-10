@@ -29,7 +29,13 @@ export const ListRow: React.FC<Props> = ({ id, name, tags, bookmarksIds, members
     </div>
     <div className="ListRow-center">
       {tags?.map((item) => (
-        <A className="ListRow-tag" href={`/links?filter[tags][]=${item.name}`} key={item.id} styled={false} frontend>
+        <A
+          className="ListRow-tag"
+          href={`/bookmarks?filter[tags][]=${item.name}`}
+          key={item.id}
+          styled={false}
+          frontend
+        >
           <Tag size="nano" variant="simple">
             {item.name}
           </Tag>

@@ -3,17 +3,17 @@ import { URLWrapper } from './URLWrapper';
 describe('URLWrapper', () => {
   test('it should return a full href', () => {
     const urlString =
-      'https://dev.linking.me/en/links?field1=value1&field2[field211][]=value21&field2[field212][]=value22';
+      'https://dev.linking.me/en/bookmarks?field1=value1&field2[field211][]=value21&field2[field212][]=value22';
     const urlObject = new URLWrapper(urlString);
     const output =
-      'https://dev.linking.me/en/links?field1=value1&field2[field211][]=value21&field2[field212][]=value22';
+      'https://dev.linking.me/en/bookmarks?field1=value1&field2[field211][]=value21&field2[field212][]=value22';
 
     expect(urlObject.getHref()).toEqual(output);
   });
 
   test('it should return all params', () => {
     const urlString =
-      'https://dev.linking.me/en/links?field1=value1&field2[field21][]=value211&field2[field21][]=value212';
+      'https://dev.linking.me/en/bookmarks?field1=value1&field2[field21][]=value211&field2[field21][]=value212';
     const urlObject = new URLWrapper(urlString);
     const output = {
       field1: 'value1',
@@ -27,7 +27,7 @@ describe('URLWrapper', () => {
 
   test('it should upsert params', () => {
     const urlString =
-      'https://dev.linking.me/en/links?field1=value1&field2[field21][]=value211&field2[field21][]=value212';
+      'https://dev.linking.me/en/bookmarks?field1=value1&field2[field21][]=value211&field2[field21][]=value212';
     const urlObject = new URLWrapper(urlString);
     const newParams = {
       field3: 'value3',
@@ -41,7 +41,7 @@ describe('URLWrapper', () => {
 
   test('it should delete all occurence of one param at a field', () => {
     const urlString =
-      'https://dev.linking.me/en/links?field1=value1&field2[field21][]=value211&field2[field21][]=value212&field2[field22][]=value221&field2[field22][]=value222';
+      'https://dev.linking.me/en/bookmarks?field1=value1&field2[field21][]=value211&field2[field21][]=value212&field2[field22][]=value221&field2[field22][]=value222';
     const urlObject = new URLWrapper(urlString);
 
     const originalParams = urlObject.getSearchParamAll();
@@ -67,7 +67,7 @@ describe('URLWrapper', () => {
 
   test('it should delete all occurence of one param at a field', () => {
     const urlString =
-      'https://dev.linking.me/en/links?field1=value1&field2[field21][]=value211&field2[field21][]=value212&field2[field22][]=value221&field2[field22][]=value222';
+      'https://dev.linking.me/en/bookmarks?field1=value1&field2[field21][]=value211&field2[field21][]=value212&field2[field22][]=value221&field2[field22][]=value222';
     const urlObject = new URLWrapper(urlString);
 
     const param = urlObject.getSearchParamOne('field2.field21');
@@ -75,7 +75,7 @@ describe('URLWrapper', () => {
   });
 
   test('it should overwrite existing params', () => {
-    const urlString = 'https://dev.linking.me/en/links?field1[field12]=value121';
+    const urlString = 'https://dev.linking.me/en/bookmarks?field1[field12]=value121';
     const urlObject = new URLWrapper(urlString);
 
     const queryString = urlObject.upsertSearchParams({ field1: { field12: 'value_modified' } });
@@ -83,7 +83,7 @@ describe('URLWrapper', () => {
   });
 
   test('it should overwrite existing params', () => {
-    const urlString = 'https://dev.linking.me/en/links?a[]=1&a[]=2&b[c][]=1&b[c][]=2&b[d]=1';
+    const urlString = 'https://dev.linking.me/en/bookmarks?a[]=1&a[]=2&b[c][]=1&b[c][]=2&b[d]=1';
     const urlObject = new URLWrapper(urlString);
 
     const queryString = urlObject.upsertSearchParams({ b: { c: [312] } });

@@ -1,9 +1,5 @@
 import omit from 'lodash/omit';
 
-import { initialBookmarksLoader } from 'Modules/Bookmarks/bookmarks.loader';
-import { initialListsLoader } from 'Modules/Lists/lists.loader';
-import { initialUserLoader } from 'Modules/Users/user.loader';
-import { initialUsersLoader } from 'Modules/Users/users.loader';
 import { RequestParameters } from 'Root/src/server/routes/allRoutes';
 
 type Layout = 'withLeftSidebar' | 'fullPage';
@@ -42,8 +38,8 @@ export const Routes: RoutesInterface = {
     route: '/bookmarks',
     exact: true,
     auth: false,
-    initialDataLoadersVisitor: [initialBookmarksLoader],
-    initialDataLoadersSession: [initialBookmarksLoader],
+    initialDataLoadersVisitor: [],
+    initialDataLoadersSession: [],
     layout: 'withLeftSidebar',
   },
 
@@ -72,8 +68,8 @@ export const Routes: RoutesInterface = {
     path: '/:lang([a-z]{2})?/users/:userId/following',
     exact: true,
     auth: false,
-    initialDataLoadersVisitor: [initialUserLoader],
-    initialDataLoadersSession: [initialUserLoader],
+    initialDataLoadersVisitor: [],
+    initialDataLoadersSession: [],
     layout: 'withLeftSidebar',
   },
 
@@ -82,8 +78,8 @@ export const Routes: RoutesInterface = {
     path: '/:lang([a-z]{2})?/users/:userId/followers',
     exact: true,
     auth: false,
-    initialDataLoadersVisitor: [initialUserLoader],
-    initialDataLoadersSession: [initialUserLoader],
+    initialDataLoadersVisitor: [],
+    initialDataLoadersSession: [],
     layout: 'withLeftSidebar',
   },
 
@@ -92,8 +88,8 @@ export const Routes: RoutesInterface = {
     path: '/:lang([a-z]{2})?/users/:userId',
     exact: true,
     auth: false,
-    initialDataLoadersVisitor: [initialUserLoader],
-    initialDataLoadersSession: [initialUserLoader],
+    initialDataLoadersVisitor: [],
+    initialDataLoadersSession: [],
     layout: 'withLeftSidebar',
   },
 
@@ -103,8 +99,8 @@ export const Routes: RoutesInterface = {
     route: '/users',
     exact: true,
     auth: false,
-    initialDataLoadersVisitor: [initialUsersLoader],
-    initialDataLoadersSession: [initialUsersLoader],
+    initialDataLoadersVisitor: [],
+    initialDataLoadersSession: [],
     layout: 'withLeftSidebar',
   },
 
@@ -135,8 +131,8 @@ export const Routes: RoutesInterface = {
     route: '/lists',
     exact: true,
     auth: false,
-    initialDataLoadersVisitor: [initialListsLoader],
-    initialDataLoadersSession: [initialListsLoader],
+    initialDataLoadersVisitor: [],
+    initialDataLoadersSession: [],
     layout: 'withLeftSidebar',
   },
 

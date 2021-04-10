@@ -1,9 +1,12 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { linksLoad } from 'Modules/Links/actions/linksLoad';
-import { selectLinksAllIds } from 'Modules/Links/selectors/selectLinksAllIds';
-import { selectLinksLoading } from 'Modules/Links/selectors/selectLinksLoading';
+import { bookmarksRecommended } from 'Modules/Bookmarks/actions/bookmarksRecommended';
+import { selectBookmarksCurrentIds } from 'Modules/Bookmarks/selectors/selectBookmarksCurrentIds';
+import { selectBookmarksLoading } from 'Modules/Bookmarks/selectors/selectBookmarksLoading';
+import { selectBookmarksTotalItems } from 'Modules/Bookmarks/selectors/selectBookmarkTotalItems';
+import { selectCurrentFullUrl } from 'Modules/Routes/selectors/selectCurrentFullUrl';
+import { selectCurrentRouteQueryParamPage } from 'Modules/Routes/selectors/selectCurrentRouteQueryParamPage';
 import { sectionsMostFollowedUsersLoad } from 'Modules/Sections/actions/sectionsMostFollowedUsersLoad';
 import { sectionsNewUsersLoad } from 'Modules/Sections/actions/sectionsNewUsersLoad';
 import { selectMostFollowedUsers } from 'Modules/Sections/selectors/selectMostFollowedUsers';
@@ -11,20 +14,19 @@ import { selectMostFollowedUsersLoading } from 'Modules/Sections/selectors/selec
 import { selectNewUsers } from 'Modules/Sections/selectors/selectNewUsers';
 import { selectNewUsersLoading } from 'Modules/Sections/selectors/selectNewUsersLoading';
 import { tagsLoad } from 'Modules/Tags/actions/tagsLoad';
-import { selectTagsAll } from 'Modules/Tags/selectors/selectAllTags';
-import { selectTagsLoading } from 'Modules/Tags/selectors/selectAllTagsLoading';
 import { Home as HomeUI } from './Home';
 
 const Home: React.FC = () => {
   const dispatch = useDispatch();
-  const linksAllIds = useSelector(selectLinksAllIds);
-  const linksAllIdsLoading = useSelector(selectLinksLoading);
+  const bookmarksCurrentIds = useSelector(selectBookmarksCurrentIds);
+  const bookmarksCurrentIdsLoading = useSelector(selectBookmarksLoading);
   const mostFollowedUsers = useSelector(selectMostFollowedUsers);
   const mostFollowedUsersLoading = useSelector(selectMostFollowedUsersLoading);
   const newUsers = useSelector(selectNewUsers);
   const newUsersLoading = useSelector(selectNewUsersLoading);
-  const allTags = useSelector(selectTagsAll).slice(0, 50);
-  const allTagsLoading = useSelector(selectTagsLoading);
+  const page = useSelector(selectCurrentRouteQueryParamPage);
+  const totalItems = useSelector(selectBookmarksTotalItems);
+  const url = useSelector(selectCurrentFullUrl);
 
   useEffect(() => {
     dispatch(sectionsMostFollowedUsersLoad());
@@ -33,19 +35,20 @@ const Home: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    dispatch(linksLoad(5));
-  }, []);
+    dispatch(bookmarksRecommended());
+  }, [url]);
 
   return (
     <HomeUI
-      linksIds={linksAllIds}
-      linksIdsLoading={linksAllIdsLoading}
+      bookmarksIds={bookmarksCurrentIds}
+      bookmarksIdsLoading={bookmarksCurrentIdsLoading}
       mostFollowedUsers={mostFollowedUsers}
       mostFollowedUsersLoading={mostFollowedUsersLoading}
       newUsers={newUsers}
       newUsersLoading={newUsersLoading}
-      allTagsLoading={allTagsLoading}
-      allTags={allTags}
+      page={page}
+      totalItems={totalItems}
+      url={url}
     />
   );
 };

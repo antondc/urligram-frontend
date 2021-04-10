@@ -92,8 +92,8 @@ export const SidebarLeft: React.FC = () => {
           <li className="SidebarLeft-item">
             <span className="SidebarLeft-bullet">•</span>
             <Span bold>
-              <A href="/links" frontend>
-                All links
+              <A href="/bookmarks?" frontend>
+                All bookmarks
               </A>
             </Span>
           </li>

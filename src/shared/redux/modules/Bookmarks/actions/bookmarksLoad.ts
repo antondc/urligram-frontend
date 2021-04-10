@@ -22,7 +22,7 @@ export const bookmarksLoad = (): AppThunk<Promise<BookmarkState[]>, BookmarksAct
     const {
       meta: { totalItems, sort },
       data,
-    } = await HttpClient.get<void, BookmarksGetApiResponse>(`bookmarks${window.location.search}`);
+    } = await HttpClient.get<void, BookmarksGetApiResponse>(`/bookmarks${window.location.search}`);
     const { Bookmarks: bookmarksAfterResponse } = getState();
 
     const bookmarksArray = data?.map((item) => item.attributes);

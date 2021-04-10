@@ -1,86 +1,70 @@
 import React from 'react';
 
 import A from 'Components/A';
-import LinkRow from 'Components/LinkRow';
+import BookmarkRow from 'Components/BookmarkRow';
 import { LinkRowSkeletonGroup } from 'Components/LinkRow/LinkRowSkeletonGroup';
 import Main from 'Components/Main';
 import Sidebar from 'Components/Sidebar';
 import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListUsers from 'Components/SidebarListUsers';
-import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { AIcon, Border, FadeInOut, Flex, H4, Hr, Span, Tag } from '@antoniodcorrea/components';
+import Pagination from '../../components/Pagination';
 
 import './Home.less';
 
 export interface Props {
-  linksIds: number[];
-  linksIdsLoading: boolean;
+  bookmarksIds: number[];
+  bookmarksIdsLoading: boolean;
   mostFollowedUsers: UserState[];
   mostFollowedUsersLoading: boolean;
   newUsers: UserState[];
   newUsersLoading: boolean;
-  allTags: TagState[];
-  allTagsLoading: boolean;
+  page: {
+    size: number;
+    offset: number;
+  };
+  totalItems: number;
+  url: string;
 }
 
 export const Home: React.FC<Props> = ({
-  linksIds,
-  linksIdsLoading,
+  bookmarksIds,
+  bookmarksIdsLoading,
   mostFollowedUsers,
   mostFollowedUsersLoading,
   newUsers,
   newUsersLoading,
-  allTags,
-  allTagsLoading,
+  page,
+  totalItems,
+  url,
 }) => (
   <div className="Home">
     <Flex horizontal="between" vertical="top">
       <Main>
-        <Border className="Home-tags" grow>
-          <H4>Trending Tags</H4>
-          <Hr spacer />
-          {allTagsLoading ? (
-            <div>...loading</div>
-          ) : (
-            allTags?.map((item) => (
-              <A
-                className="SidebarListTags-tag"
-                href={`/links?filter[tags][]=${item.name}`}
-                key={`SidebarListTags-tags-${item.id}`}
-                styled={false}
-                frontend
-              >
-                <Tag size="medium">{item.name}</Tag>
-              </A>
-            ))
-          )}
-          {!allTagsLoading && !allTags?.length && <Span bold>ⵁ We didnt find any tag.</Span>}
-        </Border>
-        <Hr spacer />
         <Border className="Home-links" grow>
           <Flex horizontal="between" vertical="bottom">
-            <H4>Links</H4>
-            {!!linksIds?.length && (
-              <A href={'links'} frontend>
-                <AIcon size="small">See more</AIcon>
-              </A>
-            )}
+            <H4>Recommended bookmarks</H4>
           </Flex>
           <Hr spacer size="small" />
-          <FadeInOut valueToUpdate={linksIdsLoading} speed="fastest" appear>
-            {linksIdsLoading ? (
+          <FadeInOut valueToUpdate={bookmarksIdsLoading} speed="fastest" appear>
+            {bookmarksIdsLoading ? (
               <LinkRowSkeletonGroup length={5} />
             ) : (
-              linksIds?.map((id, index) => (
+              bookmarksIds?.map((id, index) => (
                 <React.Fragment key={id}>
                   {!!index && <Hr spacer size="small" />}
-                  <LinkRow id={id} />
+                  <BookmarkRow id={id} />
                 </React.Fragment>
               ))
             )}
-            {!linksIdsLoading && !linksIds?.length && <Span bold>ⵁ We didnt find any link.</Span>}
+            {!bookmarksIdsLoading && !bookmarksIds?.length && (
+              <Span bold>ⵁ Start following users to receive recommended bookmarks.</Span>
+            )}
           </FadeInOut>
+          <Flex horizontal="center">
+            <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
+          </Flex>
         </Border>
       </Main>
       <Sidebar>

@@ -7,9 +7,15 @@ import { selectBookmarksLoading } from 'Modules/Bookmarks/selectors/selectBookma
 import { selectBookmarksMetaSort } from 'Modules/Bookmarks/selectors/selectBookmarksMetaSort';
 import { selectBookmarksTotalItems } from 'Modules/Bookmarks/selectors/selectBookmarkTotalItems';
 import { selectCurrentFullUrl } from 'Modules/Routes/selectors/selectCurrentFullUrl';
+import { selectCurrentRouteQueryParamFilter } from 'Modules/Routes/selectors/selectCurrentRouteQueryParamFilter';
 import { selectCurrentRouteQueryParamPage } from 'Modules/Routes/selectors/selectCurrentRouteQueryParamPage';
 import { sectionsPopularListsLoad } from 'Modules/Sections/actions/sectionsPopularListsLoad';
 import { selectPopularLists } from 'Modules/Sections/selectors/selectPopularLists';
+import { tagsSearchLoad } from 'Modules/Tags/actions/tagsSearchLoad';
+import { selectTagsAll } from 'Modules/Tags/selectors/selectAllTags';
+import { selectTagsSearch } from 'Modules/Tags/selectors/selectTagsSearch';
+import history from 'Services/History';
+import { URLWrapper } from 'Services/URLWrapper';
 import { Bookmarks as BookmarksUi } from './Bookmarks';
 
 const Home: React.FC = () => {
@@ -23,13 +29,38 @@ const Home: React.FC = () => {
   const url = useSelector(selectCurrentFullUrl);
   const sort = useSelector(selectBookmarksMetaSort);
 
+  const tagsSearch = useSelector(selectTagsSearch);
+  const tagsSearchFormatted = tagsSearch?.map((item) => ({ label: item.name, value: item.name })) || [];
+  const allTags = useSelector(selectTagsAll);
+  const currentQueryParamFilter = useSelector(selectCurrentRouteQueryParamFilter);
+  const currentQueryParamFilterTags =
+    currentQueryParamFilter?.tags?.map((item) => ({
+      label: item.toString(),
+      value: item,
+    })) || [];
+
   useEffect(() => {
-    dispatch(sectionsPopularListsLoad());
+    // dispatch(sectionsPopularListsLoad());
   }, []);
 
   useEffect(() => {
     dispatch(bookmarksLoad());
-  }, [page]);
+    dispatch(tagsSearchLoad());
+  }, [url]);
+
+  const onInputChange = (string: string) => {
+    !!string && dispatch(tagsSearchLoad(string));
+  };
+
+  const onChange = (values) => {
+    const tags: string[] = values?.map((item) => item.value);
+    const myUrl = new URLWrapper(window.document.location.href);
+
+    myUrl.upsertSearchParams({ filter: { tags } });
+    const redirectPath = myUrl.getPathAndSearch();
+
+    history.push(redirectPath);
+  };
 
   return (
     <BookmarksUi
@@ -40,6 +71,11 @@ const Home: React.FC = () => {
       totalItems={totalItems}
       url={url}
       sort={sort}
+      tagsSearchFormatted={tagsSearchFormatted}
+      allTags={allTags}
+      onInputChange={onInputChange}
+      currentQueryParamFilterTags={currentQueryParamFilterTags}
+      onChange={onChange}
     />
   );
 };
