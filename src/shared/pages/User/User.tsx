@@ -107,7 +107,9 @@ export const User: React.FC<Props> = ({
                 styled={false}
                 frontend
               >
-                <Tag size="small">{item.name}</Tag>
+                <Tag variant="simple" size="small">
+                  {item.name}
+                </Tag>
               </A>
             ))}
           </Flex>

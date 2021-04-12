@@ -9,7 +9,9 @@ import { selectBookmarksTotalItems } from 'Modules/Bookmarks/selectors/selectBoo
 import { selectCurrentFullUrl } from 'Modules/Routes/selectors/selectCurrentFullUrl';
 import { selectCurrentRouteQueryParamFilter } from 'Modules/Routes/selectors/selectCurrentRouteQueryParamFilter';
 import { selectCurrentRouteQueryParamPage } from 'Modules/Routes/selectors/selectCurrentRouteQueryParamPage';
-import { sectionsPopularListsLoad } from 'Modules/Sections/actions/sectionsPopularListsLoad';
+import { sectionsMostUsedTagsLoad } from 'Modules/Sections/actions/sectionsMostUsedTagsLoad';
+import { selectMostUsedTags } from 'Modules/Sections/selectors/selectMostUsedTags';
+import { selectMostUsedTagsLoading } from 'Modules/Sections/selectors/selectMostUsedTagsLoading';
 import { selectPopularLists } from 'Modules/Sections/selectors/selectPopularLists';
 import { tagsSearchLoad } from 'Modules/Tags/actions/tagsSearchLoad';
 import { selectTagsAll } from 'Modules/Tags/selectors/selectAllTags';
@@ -26,6 +28,8 @@ const Home: React.FC = () => {
   const loading = useSelector(selectBookmarksLoading);
   const page = useSelector(selectCurrentRouteQueryParamPage);
   const totalItems = useSelector(selectBookmarksTotalItems);
+  const mostUsedTags = useSelector(selectMostUsedTags);
+  const mostUsedTagsLoading = useSelector(selectMostUsedTagsLoading);
   const url = useSelector(selectCurrentFullUrl);
   const sort = useSelector(selectBookmarksMetaSort);
 
@@ -40,7 +44,7 @@ const Home: React.FC = () => {
     })) || [];
 
   useEffect(() => {
-    // dispatch(sectionsPopularListsLoad());
+    dispatch(sectionsMostUsedTagsLoad());
   }, []);
 
   useEffect(() => {
@@ -76,6 +80,8 @@ const Home: React.FC = () => {
       onInputChange={onInputChange}
       currentQueryParamFilterTags={currentQueryParamFilterTags}
       onChange={onChange}
+      mostUsedTags={mostUsedTags}
+      mostUsedTagsLoading={mostUsedTagsLoading}
     />
   );
 };

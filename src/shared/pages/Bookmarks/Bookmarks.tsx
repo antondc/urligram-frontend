@@ -9,6 +9,8 @@ import { ListState } from 'Modules/Lists/lists.types';
 import { TagState } from 'Modules/Tags/tags.types';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
 import { Border, FadeInOut, Flex, Hr, Select, SelectValue, SortBy, Span } from '@antoniodcorrea/components';
+import SidebarBlock from '../../components/SidebarBlock';
+import SidebarListTags from '../../components/SidebarListTags';
 
 import './Bookmarks.less';
 
@@ -17,6 +19,8 @@ interface Props {
   bookmarksIds: number[];
   popularLists: ListState[];
   loading: boolean;
+  mostUsedTags: TagState[];
+  mostUsedTagsLoading: boolean;
   page: {
     size: number;
     offset: number;
@@ -38,6 +42,8 @@ export const Bookmarks: React.FC<Props> = ({
   url,
   bookmarksIds,
   loading,
+  mostUsedTags,
+  mostUsedTagsLoading,
   page,
   totalItems,
   sort,
@@ -63,6 +69,7 @@ export const Bookmarks: React.FC<Props> = ({
             onInputChange={onInputChange}
             onChange={onChange}
             maxItems={4}
+            grow
           />
           <SortBy
             options={[
@@ -94,13 +101,9 @@ export const Bookmarks: React.FC<Props> = ({
         </Border>
       </Main>
       <Sidebar>
-        {/* <SidebarListTags title="Trending Tags" items={tags} />
-        <Hr spacer />
-        <SidebarListUsers title="Popular Users" items={users} />
-        <Hr spacer />
-        <SidebarListUsers title="Following" items={users} />
-        <Hr spacer />
-        <SidebarListUsers title="Followers" items={users} /> */}
+        <SidebarBlock title="Most Followed Tags" loading={mostUsedTagsLoading}>
+          <SidebarListTags items={mostUsedTags} />
+        </SidebarBlock>
       </Sidebar>
     </Flex>
   </div>

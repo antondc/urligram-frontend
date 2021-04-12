@@ -4,7 +4,7 @@ import A from 'Components/A';
 import { RenderInPortal } from 'Components/Portal';
 import { UserState } from 'Modules/Users/users.types';
 import { stringToDashCase } from 'Tools/utils/string/stringToDashCase';
-import { Hr, Span, Tooltip } from '@antoniodcorrea/components';
+import { Bookmark, Hr, Span, Tooltip, User } from '@antoniodcorrea/components';
 import { SidebarListUsersSkeleton } from './SidebarListUsersSkeleton';
 
 import './SidebarListUsers.less';
@@ -26,7 +26,7 @@ const SidebarListUsers: React.FC<Props> = ({ items, loading, title: blockTitle }
           {!!index && <Hr spacer size="micro" />}
           <dd className="SidebarListUsers-user">
             <div className="SidebarListUsers-userName">
-              <A href={`users/${id}`} frontend styled>
+              <A href={`users/${id}`} frontend>
                 <Span bold>@{name}</Span>
               </A>
             </div>
@@ -40,13 +40,13 @@ const SidebarListUsers: React.FC<Props> = ({ items, loading, title: blockTitle }
                       delay={0.5}
                     />
                   </RenderInPortal>
-                  <A href={`users/${id}/followers`} frontend>
+                  <A href={`users/${id}/followers`} frontend styled={false}>
                     <Span
                       id={`${stringToDashCase(blockTitle)}-followers-${index}`}
                       className="SidebarListUsers-userData"
                       size="small"
                     >
-                      {followers?.length}
+                      @{followers?.length}
                       {(!!following?.length || !!bookmarksIds?.length) && <> · </>}
                     </Span>
                   </A>
@@ -61,13 +61,13 @@ const SidebarListUsers: React.FC<Props> = ({ items, loading, title: blockTitle }
                       delay={0.5}
                     />
                   </RenderInPortal>
-                  <A href={`users/${id}/following`} frontend>
+                  <A href={`users/${id}/following`} frontend styled={false}>
                     <Span
                       id={`${stringToDashCase(blockTitle)}-following-${index}`}
                       className="SidebarListUsers-userData"
                       size="small"
                     >
-                      {following?.length}
+                      @{following?.length}
                       {!!bookmarksIds?.length && <> · </>}
                     </Span>
                   </A>
@@ -82,12 +82,13 @@ const SidebarListUsers: React.FC<Props> = ({ items, loading, title: blockTitle }
                       delay={0.5}
                     />
                   </RenderInPortal>
-                  <A href={`users/${id}/bookmarks`} frontend>
+                  <A href={`users/${id}/bookmarks`} frontend styled={false}>
                     <Span
                       id={`${stringToDashCase(blockTitle)}-bookmarks-${index}`}
                       className="SidebarListUsers-userData"
                       size="small"
                     >
+                      <Bookmark size="micro" className="SidebarListUsers-icon" />
                       {bookmarksIds?.length}
                     </Span>
                   </A>
