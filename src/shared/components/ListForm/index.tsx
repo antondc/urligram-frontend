@@ -34,6 +34,7 @@ const ListForm: React.FC<Props> = ({ closeModal }) => {
   const sessionId = useSelector(selectSessionUserId);
   const listModal = useSelector(selectUiListModal);
   const list = useSelector((state: RootState) => selectListById(state, { id: listModal?.listId }));
+  const isUpdate = !!list?.id;
   const [nameValue, setNameValue] = useState<string>(list?.name);
   const [nameError, setNameError] = useState<string>(undefined);
   const [descriptionValue, setDescriptionValue] = useState<string>(list?.description);
@@ -157,6 +158,7 @@ const ListForm: React.FC<Props> = ({ closeModal }) => {
 
   return (
     <ListFormUi
+      isUpdate={isUpdate}
       nameValue={nameValue}
       nameError={nameError}
       onChangeName={onChangeName}

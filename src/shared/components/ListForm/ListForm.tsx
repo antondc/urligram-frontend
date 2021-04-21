@@ -5,6 +5,7 @@ import { Button, Fade, FadeInOut, Flex, Hr, Input, Span, SpinnerCircle, Switch }
 import './ListForm.less';
 
 interface Props {
+  isUpdate: boolean;
   nameValue: string;
   nameError: string;
   onChangeName: (e: React.FormEvent<HTMLInputElement>) => void;
@@ -25,6 +26,7 @@ interface Props {
 }
 
 export const ListForm: React.FC<Props> = ({
+  isUpdate,
   nameValue,
   nameError,
   onChangeName,
@@ -109,15 +111,19 @@ export const ListForm: React.FC<Props> = ({
       </Span>
     </FadeInOut>
     <Hr spacer />
-    <Button
-      text="Remove list"
-      type="submit"
-      variant="delete"
-      onClick={onRemove}
-      error={!!submitError}
-      success={submitSuccess}
-      grow
-    />
+
+    {isUpdate && (
+      <Button
+        text="Remove list"
+        type="submit"
+        variant="delete"
+        onClick={onRemove}
+        error={!!submitError}
+        success={submitSuccess}
+        grow
+      />
+    )}
+
     <Hr size="nano" spacer />
     <Fade mounted={submitInProcess} position="absolute">
       <SpinnerCircle background />

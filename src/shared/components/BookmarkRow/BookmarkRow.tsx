@@ -70,8 +70,8 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
     </div>
     <div className="BookmarkRow-right">
       <Flex horizontal="right" growVertical={false} vertical="bottom" noWrap>
-        {sessionUserBookmarkedLink && <BookmarkLists bookmarkId={id} />}
-        {isPrivate && <Private size="micro" className="BookmarkRow-icon BookmarkRow-private" />}
+        {!!sessionUserBookmarkedLink && <BookmarkLists bookmarkId={id} />}
+        {!!isPrivate && <Private size="micro" className="BookmarkRow-icon BookmarkRow-private" />}
         <Vote className="BookmarkRow-icon " vote={statistics?.vote} changeVote={onVote} loading={statistics?.loading} />
       </Flex>
       <div className="BookmarkRow-stats">
