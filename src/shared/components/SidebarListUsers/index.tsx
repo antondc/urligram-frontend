@@ -44,7 +44,7 @@ const SidebarListUsers: React.FC<Props> = ({ items, loading, title: blockTitle }
                     <Span
                       id={`${stringToDashCase(blockTitle)}-followers-${index}`}
                       className="SidebarListUsers-userData"
-                      size="small"
+                      size="micro"
                     >
                       @{followers?.length}
                       {(!!following?.length || !!bookmarksIds?.length) && <> · </>}
@@ -65,7 +65,7 @@ const SidebarListUsers: React.FC<Props> = ({ items, loading, title: blockTitle }
                     <Span
                       id={`${stringToDashCase(blockTitle)}-following-${index}`}
                       className="SidebarListUsers-userData"
-                      size="small"
+                      size="micro"
                     >
                       @{following?.length}
                       {!!bookmarksIds?.length && <> · </>}
@@ -86,7 +86,7 @@ const SidebarListUsers: React.FC<Props> = ({ items, loading, title: blockTitle }
                     <Span
                       id={`${stringToDashCase(blockTitle)}-bookmarks-${index}`}
                       className="SidebarListUsers-userData"
-                      size="small"
+                      size="micro"
                     >
                       <Bookmark size="micro" className="SidebarListUsers-icon" />
                       {bookmarksIds?.length}

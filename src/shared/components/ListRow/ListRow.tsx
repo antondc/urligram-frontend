@@ -1,9 +1,9 @@
 import React from 'react';
 
 import A from 'Components/A';
-import { Bookmark, Border, Flex, Private, Space, Span, Tag, User } from 'Vendor/components';
 import { ListState } from 'Modules/Lists/lists.types';
 import { SessionState } from 'Modules/Session/session.types';
+import { Bookmark, Border, Flex, Private, Space, Span, Tag, User } from 'Vendor/components';
 import ListFollowButton from '../ListFollowButton';
 
 import './ListRow.less';

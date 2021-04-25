@@ -29,7 +29,7 @@ export const ListFollowButton: React.FC<Props> = ({
   onUnfollowList,
   onFollowList,
 }) => (
-  <div className={'ListFollowButton' + (className ? ' ' + className : '')} onMouseOut={onMouseOut}>
+  <div className={'ListFollowButton ' + (className ? ' ' + className : '')} onMouseOut={onMouseOut}>
     {sessionUserOwnsList && (
       <>
         <img className="ListFollowButton-userLogo" src={image} />
