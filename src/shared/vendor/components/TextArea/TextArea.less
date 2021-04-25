@@ -1,0 +1,79 @@
+@import '../../../css/imports.less';
+
+@c: .TextArea;
+
+@{c} {
+  display: inline-flex;
+  position: relative;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 6px;
+  text-align: left;
+  border: 2px solid @c-base;
+  transition: border @td-fast @ease;
+
+  .default();
+
+  &-textArea {
+    font-weight: @fw-bold;
+    line-height: @fh-normal;
+    overflow: auto;
+    background: @c-background;
+    border: none;
+    outline: none;
+    transition: color @td-fast @ease;
+    resize: none;
+    box-shadow: none;
+
+    .default();
+
+    &:focus,
+    &:not(:placeholder-shown) {
+      & + label {
+        padding: 0 7px 0 6px;
+        transform: translate(2px, -18px) scale(0.8);
+      }
+    }
+  }
+
+  &-label {
+    display: flex;
+    position: absolute;
+    justify-content: flex-start;
+    align-items: center;
+    height: 20px;
+    top: 9px;
+    left: 0;
+    padding: 0 8px;
+    white-space: nowrap;
+    color: @c-disabled;
+    overflow: hidden;
+    background: @c-background;
+    transform-origin: left top;
+    transition: all @td-fast @ease;
+    user-select: none;
+  }
+
+  &--grow {
+    width: 100%;
+  }
+
+  &--success {
+    border: 2px solid @c-success;
+  }
+
+  &--error {
+    border: 2px solid @c-error;
+  }
+
+  &--disabled,
+  &--readOnly {
+    border: 2px solid @c-disabled;
+
+    @{c}-textArea {
+      color: @c-disabled;
+      pointer-events: none;
+      user-select: none;
+    }
+  }
+}

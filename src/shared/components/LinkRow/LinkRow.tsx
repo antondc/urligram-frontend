@@ -2,8 +2,8 @@ import React from 'react';
 
 import A from 'Components/A';
 import BookmarkActions from 'Components/BookmarkActions';
+import { Border, Flex, Span, Tag, Vote } from 'Vendor/components';
 import { LinkState } from 'Modules/Links/links.types';
-import { Border, Flex, Span, Tag, Vote } from '@antoniodcorrea/components';
 
 import './LinkRow.less';
 

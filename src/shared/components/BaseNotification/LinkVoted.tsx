@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { NotificationState } from 'Modules/Ui/ui.types';
-import { Span } from '@antoniodcorrea/components';
+import { Span } from 'Vendor/components';
 
 interface Props {
   notification: NotificationState;

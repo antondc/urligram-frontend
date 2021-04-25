@@ -15,7 +15,7 @@ import {
   PopOver,
   Span,
   SpinnerLoader,
-} from '@antoniodcorrea/components';
+} from 'Vendor/components';
 
 import './BookmarkLists.less';
 

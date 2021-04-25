@@ -1,0 +1,59 @@
+@import '../../../css/imports.less';
+
+@c: .Tooltip;
+
+@{c} {
+  max-width: 300px;
+  opacity: 0;
+  transition: opacity @td-fast @ease;
+  z-index: @z-index-1000;
+  pointer-events: none;
+
+  &[data-show] {
+    opacity: 1;
+  }
+
+  &-arrow:before {
+    content: '';
+    position: absolute;
+    height: 10px;
+    width: 10px;
+    background: @c-background;
+    transform: rotate(45deg);
+    box-shadow: -2px -2px 0 0 @c-base;
+  }
+
+  &[data-popper-placement^='top'] > @{c}-arrow {
+    bottom: 8px;
+
+    &:before {
+      box-shadow: 2px 2px 0 0 @c-base;
+    }
+  }
+
+  &[data-popper-placement^='bottom'] > @{c}-arrow {
+    top: -2px;
+
+    &:before {
+      box-shadow: -2px -2px 0 0 @c-base;
+    }
+  }
+
+  &[data-popper-placement^='left'] > @{c}-arrow {
+    right: 8px;
+
+    &:before {
+      top: -4px;
+      box-shadow: 2px -2px 0 0 @c-base;
+    }
+  }
+
+  &[data-popper-placement^='right'] > @{c}-arrow {
+    left: -2px;
+
+    &:before {
+      top: -3px;
+      box-shadow: -2px 2px 0 0 @c-base;
+    }
+  }
+}

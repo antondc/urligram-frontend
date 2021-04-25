@@ -18,7 +18,7 @@ import SignUp from 'Pages/SignUp';
 import SignUpConfirmation from 'Pages/SignUpConfirmation';
 import { Routes } from 'Router/routes';
 import { Location } from 'Services/History';
-import { FadeInOut } from '@antoniodcorrea/components';
+import { FadeInOut } from 'Vendor/components';
 
 import './FullPage.less';
 

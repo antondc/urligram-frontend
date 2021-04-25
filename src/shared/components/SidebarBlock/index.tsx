@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import A from 'Components/A';
-import { Border, FadeInOut, H4, Hr } from '@antoniodcorrea/components';
+import { Border, FadeInOut, H4, Hr } from 'Vendor/components';
 
 import './SidebarBlock.less';
 

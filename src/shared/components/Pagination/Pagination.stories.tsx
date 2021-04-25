@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { H1, Hr } from '@antoniodcorrea/components';
+import { H1, Hr } from 'Vendor/components';
 import { boolean, number, text, withKnobs } from '@storybook/addon-knobs';
 import Pagination from './index';
 

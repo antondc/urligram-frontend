@@ -5,12 +5,10 @@ import Cross from 'Assets/svg/cross.svg';
 import A from 'Components/A';
 import BaseModal from 'Components/BaseModal';
 import LoginForm from 'Components/LoginForm';
+import { Border, Flex, H3, Hr, Span } from 'Vendor/components';
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
-import { Border, Flex, H3, Hr, Span } from '@antoniodcorrea/components';
 
 import './LoginModal.less';
-
-
 
 const LoginModal: React.FC = () => {
   const dispatch = useDispatch();
@@ -46,7 +44,7 @@ const LoginModal: React.FC = () => {
         </Flex>
       </Border>
     </BaseModal>
-  );};
-
+  );
+};
 
 export default LoginModal;

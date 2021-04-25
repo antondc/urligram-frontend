@@ -12,7 +12,7 @@ import {
   Span,
   SpinnerCircle,
   Switch,
-} from '@antoniodcorrea/components';
+} from 'Vendor/components';
 import { TagValue } from '.';
 
 import './BookmarkUpdateForm.less';

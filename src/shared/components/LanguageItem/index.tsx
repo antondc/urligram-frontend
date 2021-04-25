@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { A, Span } from '@antoniodcorrea/components';
+import { A, Span } from 'Vendor/components';
 
 import './LanguageItem.less';
 

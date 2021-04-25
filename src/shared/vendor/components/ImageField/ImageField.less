@@ -1,0 +1,139 @@
+@import '../../../css/imports.less';
+
+@c: .ImageField;
+
+@{c} {
+  display: inline-flex;
+  position: relative;
+  flex-direction: column;
+  height: 300px;
+  width: 300px;
+  border: 2px dashed @c-base;
+  user-select: none;
+
+  &:hover {
+    @{c}-background {
+      opacity: 1;
+    }
+
+    @{c}-icons {
+      opacity: 1;
+    }
+
+    @{c}-upload {
+      opacity: 1;
+    }
+  }
+
+  &-image {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  &-background {
+    content: ' ';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    background: @c-traslucid--hard;
+    transition: opacity @td-fast @ease;
+  }
+
+  &-progress {
+    display: flex;
+    position: absolute;
+    align-items: center;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px;
+    opacity: 0;
+    background: @c-traslucid--hard;
+    transition: opacity @td-fast @ease;
+    pointer-events: none;
+  }
+
+  &--loading {
+    opacity: 1;
+  }
+
+  &-upload {
+    content: '';
+    display: flex;
+    position: absolute !important;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    opacity: 1;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &--hasImage {
+    border: none;
+
+    @{c}-upload {
+      opacity: 0;
+    }
+
+    @{c}-icon {
+      fill: @c-background;
+    }
+  }
+
+  &--grow {
+    width: 100%;
+  }
+
+  &--error {
+    border: 2px dashed @c-error;
+
+    @{c}-icon {
+      fill: @c-error;
+    }
+  }
+
+  &--disabled {
+    border-color: @c-disabled;
+    pointer-events: none;
+
+    @{c}-icon {
+      fill: @c-disabled;
+    }
+
+    @{c}-background {
+      opacity: 1;
+    }
+  }
+
+  &--success {
+    border: 2px dashed @c-success;
+
+    @{c}-icon {
+      fill: @c-success;
+    }
+  }
+
+  &--rounded {
+    border-radius: 50%;
+
+    @{c}-image {
+      border-radius: 50%;
+    }
+
+    @{c}-background {
+      border-radius: 50%;
+    }
+  }
+}

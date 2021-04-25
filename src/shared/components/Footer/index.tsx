@@ -9,7 +9,7 @@ import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCur
 import { selectCurrentPathname } from 'Modules/Routes/selectors/selectCurrentPathname';
 import { switchLanguagesModal } from 'Modules/Ui/actions/switchLanguagesModal';
 import { selectUiLanguagesModalMounted } from 'Modules/Ui/selectors/selectUiLanguagesModalMounted';
-import { Border, Fade, Hr, Span } from '@antoniodcorrea/components';
+import { Border, Fade, Hr, Span } from 'Vendor/components';
 
 import './Footer.less';
 

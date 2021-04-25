@@ -1,7 +1,7 @@
 import React from 'react';
 
 import A from 'Components/A';
-import { Span, Tag } from '@antoniodcorrea/components';
+import { Span, Tag } from 'Vendor/components';
 import { SidebarListTagsSkeleton } from './SidebarListTagsSkeleton';
 
 import './SidebarListTags.less';

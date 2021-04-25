@@ -1,0 +1,210 @@
+@import '../../../css/imports.less';
+
+@c: .Select;
+
+@{c} {
+  display: inline-flex;
+  position: relative;
+  flex-wrap: nowrap;
+  align-items: flex-end;
+  font-family: @ff-sans;
+
+  &__container:not(.noClass) {
+    width: 100%;
+    max-height: 30px;
+    min-width: 150px;
+    padding: 0;
+  }
+
+  &__control:not(.noClass) {
+    align-items: flex-start;
+    height: 30px;
+    width: 100%;
+    min-height: unset;
+    padding: 0;
+    background: @c-background;
+    border: none;
+    border: 1.5px solid @c-base;
+    border-radius: 3px;
+    box-shadow: none;
+
+    &:hover {
+      border: 1.5px solid @c-base;
+    }
+  }
+
+  &__control--menu-is-open:not(.noClass) {
+    // border-radius: 4px 4px 0 0;
+  }
+
+  &__label:not(.noClass) {
+    display: flex;
+    position: absolute;
+    align-items: center;
+    height: 5px;
+    top: 12px;
+    left: 12px;
+    padding: 0 7px 0 4px;
+    font-size: @fs-small;
+    color: @c-base;
+    background: @c-transparent;
+    transform: translate(-4px, 0) scale(1);
+    transition: transform @td-fast @ease;
+    will-change: transform;
+    pointer-events: none;
+  }
+
+  &__label-background {
+    content: ' ';
+    position: absolute;
+    height: 5px;
+    width: 100%;
+    top: 3px;
+    left: 0;
+    background: @c-background;
+    z-index: -1;
+  }
+
+  &__control--is-focused:not(.noClass) ~ @{c}__label,
+  @{c}__label--active {
+    transform: translate(-13px, -15px) scale(0.8);
+  }
+
+  &__indicator-separator:not(.noClass) {
+    margin: 0;
+    background: @c-transparent;
+  }
+
+  &__indicators:not(.noClass) {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &__clear-indicator:not(.noClass) {
+    padding: 3px;
+  }
+
+  &__dropdown-indicator:not(.noClass) {
+    padding: 3px 9px 3px 0;
+  }
+
+  &__value-container:not(.noClass) {
+    flex-wrap: nowrap;
+    height: 27px;
+    margin: 0;
+    padding: 0 0 0 6px;
+    font-size: @fs-small;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    cursor: text;
+
+    .hideScrollbar();
+  }
+
+  &__multi-value:not(.noClass) {
+    flex-wrap: nowrap;
+    min-width: unset;
+    margin: 0 4px 0 0;
+    padding: 0;
+    background: transparent;
+    border: 1px solid @c-base;
+    transition: background @td-fast @ease;
+    border-radius: 4px;
+
+    &:hover {
+      background: @c-base;
+      cursor: default;
+
+      @{c}__multi-value__remove:not(.noClass) {
+        fill: @c-background;
+      }
+
+      @{c}__multi-value__label:not(.noClass) {
+        color: @c-background;
+      }
+    }
+  }
+
+  &__multi-value__label:not(.noClass) {
+    padding: 2px 2px 2px 6px;
+    font-size: @fs-small;
+    font-weight: @fw-bold;
+    line-height: @fs-small;
+    white-space: unset;
+    transition: color @td-fast @ease;
+    text-overflow: unset;
+  }
+
+  &__multi-value__remove:not(.noClass) {
+    padding-right: 6px;
+    border-radius: 0;
+
+    &:hover {
+      background-color: @c-transparent;
+      cursor: pointer;
+    }
+  }
+
+  &__menu:not(.noClass) {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    font-weight: @fw-bold;
+    background: @c-background;
+    transform: translateY(-1.5px);
+    box-shadow: none;
+  }
+
+  &__menu-list:not(.noClass) {
+    margin: 0;
+    padding: 0;
+    border-radius: 0 0 4px 4px;
+
+    .hideScrollbar();
+  }
+
+  &__option:not(.noClass) {
+    padding: 6px 12px;
+    font-size: @fs-small;
+    background: @c-transparent;
+    border-top: 0 dashed @c-transparent;
+    border-bottom: 1px dashed @c-base;
+    border-left: 1.5px solid @c-base;
+    border-right: 1.5px solid @c-base;
+    transition: color @td-fast @ease;
+
+    &:first-child {
+      border-top: 1.5px solid @c-base;
+    }
+
+    &:last-child {
+      border-radius: 0 0 4px 4px;
+      border-bottom: 1.5px solid @c-base;
+    }
+
+    &:hover {
+      color: @c-accent;
+      cursor: pointer;
+    }
+  }
+
+  &__option--is-focused:not(.noClass) {
+    color: @c-accent;
+    outline: 0;
+  }
+
+  &__option--is-disabled:not(.noClass) {
+    font-weight: @fw-regular;
+    color: @c-base;
+    border-bottom: 1.5px solid @c-base;
+    border-left: 1.5px solid @c-base;
+    border-right: 1.5px solid @c-base;
+    box-shadow: 0 1.5px 0 0 @c-base;
+    border-radius: 0 0 3px 3px;
+  }
+
+  &--grow {
+    width: 100%;
+  }
+}

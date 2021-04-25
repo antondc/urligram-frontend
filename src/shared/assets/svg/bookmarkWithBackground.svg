@@ -1,0 +1,7 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" xml:space="preserve">
+  <path
+    data-id="foreground"
+    d="M11.9 0v100l9.6-5.8 28.5-17 28.3 17 9.6 5.8V0h-76zm63.5 77.6L53.3 64.3l-3.3-2-3.3 2-22.1 13.3V12.7h50.8v64.9z"
+  />
+  <path data-id="background" d="M24.6 77.6l22.1-13.3 3.3-2 3.3 2 22.1 13.3V12.7H24.6z" />
+</svg>

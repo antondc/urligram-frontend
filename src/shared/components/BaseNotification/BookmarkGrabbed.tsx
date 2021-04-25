@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import A from 'Components/A';
 import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUserId';
 import { NotificationState } from 'Modules/Ui/ui.types';
-import { Span } from '@antoniodcorrea/components';
+import { Span } from 'Vendor/components';
 
 interface Props {
   notification: NotificationState;

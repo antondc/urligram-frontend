@@ -13,6 +13,7 @@ import Header from 'Components/Header';
 import ListModal from 'Components/ListModal';
 import LoginModal from 'Components/LoginModal';
 import ModalMessage from 'Components/ModalMessage';
+import Notifications from 'Components/Notifications';
 import ResetPasswordModal from 'Components/ResetPasswordModal';
 import SignUpModal from 'Components/SignUpModal';
 import UserModal from 'Components/UserModal';
@@ -40,7 +41,6 @@ import { routesList, routesWithoutOmmitedValues } from 'Router/routes';
 import enhanceRouteWithParams from 'Tools/utils/url/enhanceRouteWithParams';
 import findActiveRouteKey from 'Tools/utils/url/findActiveRouteKey';
 import { Fade, SpinnerCircle } from '@antoniodcorrea/components';
-import Notifications from '../../components/Notifications';
 
 import './Layout.less';
 
@@ -171,7 +171,7 @@ class Layout extends React.Component<Props> {
           <Fade mounted={resetPasswordModalMounted} speed="fastest" position="fixed" appear>
             <ResetPasswordModal />
           </Fade>
-          <Fade mounted={bookmarkCreateModalMounted} speed="fastest" position="fixed" appear>
+          <Fade mounted={bookmarkCreateModalMounted} speed="slow" position="fixed" appear>
             <BookmarkCreateModal />
           </Fade>
           <Fade mounted={bookmarkUpdateModalMounted} speed="fastest" position="fixed" appear>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Tag } from '@antoniodcorrea/components';
+import { Tag } from 'Vendor/components';
 
 import './SidebarListTagsSkeleton.less';
 

@@ -4,7 +4,7 @@ import Cross from 'Assets/svg/cross.svg';
 import User from 'Assets/svg/user.svg';
 import A from 'Components/A';
 import { SessionState } from 'Modules/Session/session.types';
-import { Border, Hr, Span } from '@antoniodcorrea/components';
+import { Border, Hr, Span } from 'Vendor/components';
 
 import './UserModal.less';
 

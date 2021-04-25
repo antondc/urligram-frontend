@@ -1,0 +1,193 @@
+@import '../../../css/imports.less';
+
+@c: .FileField;
+
+@{c} {
+  display: inline-flex;
+  flex-direction: column;
+  user-select: none;
+
+  .default();
+
+  &-label {
+    //
+  }
+
+  &-content {
+    position: relative;
+  }
+
+  &-progress {
+    display: flex;
+    position: absolute;
+    align-items: center;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px;
+    opacity: 0;
+    background: @c-traslucid--hard;
+    transition: opacity @td-fast @ease;
+    pointer-events: none;
+  }
+
+  &-dropzone {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    padding: 0 30px;
+    border: 2px dashed;
+    border-color: @c-base;
+    transition: border-color @td-fast @ease, color @td-fast @ease;
+    cursor: pointer;
+
+    .default();
+  }
+
+  &-textIcon {
+    margin-right: 10px;
+  }
+
+  &-file {
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    width: 100%;
+    padding: 0 45px 0 20px;
+    border-bottom: 2px solid @c-base;
+    transition: border-bottom @td-fast @ease;
+  }
+
+  &-name {
+    position: absolute;
+    left: 10px;
+    right: 10px;
+    white-space: nowrap;
+    overflow-x: hidden;
+    transition: color @td-fast @ease;
+
+    @{c}--removable & {
+      right: 30px;
+    }
+
+    &:before {
+      content: ' ';
+      position: absolute;
+      width: 10px;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      background: linear-gradient(90deg, @c-transparent 0%, @c-background 90%);
+    }
+  }
+
+  &-remove {
+    position: absolute;
+    right: 10px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &--loading {
+    opacity: 1;
+  }
+
+  &--grow,
+  &--inline {
+    width: 100%;
+  }
+
+  &--inline {
+    //
+  }
+
+  &--reverse {
+    //
+  }
+
+  &--success {
+    @{c}-dropzone {
+      color: @c-success;
+      border-color: @c-success;
+    }
+
+    @{c}-textIcon {
+      fill: @c-success;
+    }
+
+    @{c}-file {
+      border-bottom: 2px solid @c-success;
+    }
+
+    @{c}-name {
+      color: @c-success;
+    }
+
+    @{c}-remove {
+      fill: @c-success;
+    }
+  }
+
+  &--error {
+    @{c}-dropzone {
+      color: @c-error;
+      border-color: @c-error;
+    }
+
+    @{c}-textIcon {
+      fill: @c-error;
+    }
+
+    @{c}-file {
+      border-bottom: 2px solid @c-error;
+    }
+
+    @{c}-name {
+      color: @c-error;
+    }
+
+    @{c}-remove {
+      fill: @c-error;
+    }
+  }
+
+  &--disabled {
+    @{c}-dropzone {
+      color: @c-disabled;
+      border-color: @c-disabled;
+    }
+
+    @{c}-textIcon {
+      fill: @c-disabled;
+    }
+
+    @{c}-file {
+      border-bottom: 2px solid @c-disabled;
+    }
+
+    @{c}-name {
+      color: @c-disabled;
+    }
+
+    @{c}-remove {
+      fill: @c-disabled;
+    }
+  }
+
+  &--uploaded {
+    @{c}-progress {
+      transition: width @td-normal;
+    }
+  }
+
+  &--type {
+    //
+  }
+}

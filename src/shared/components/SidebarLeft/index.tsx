@@ -6,7 +6,7 @@ import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLo
 import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUserId';
 import { switchBookmarkCreateModal } from 'Modules/Ui/actions/switchBookmarkCreateModal';
 import { switchListModal } from 'Modules/Ui/actions/switchListModal';
-import { Border, Span } from '@antoniodcorrea/components';
+import { Border, Span } from 'Vendor/components';
 
 import './SidebarLeft.less';
 

@@ -59,6 +59,7 @@ module.exports = {
       Services: path.resolve(process.cwd(), 'src/shared/services/'),
       Ui: path.resolve(process.cwd(), 'src/shared/ui/'),
       Pages: path.resolve(process.cwd(), 'src/shared/pages/'),
+      Vendor: path.resolve(process.cwd(), 'src/shared/vendor/'),
     };
 
     return config;

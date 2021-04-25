@@ -6,7 +6,7 @@ import BaseModal from 'Components/BaseModal';
 import ListForm from 'Components/ListForm';
 import { switchListModal } from 'Modules/Ui/actions/switchListModal';
 import { selectUiListModal } from 'Modules/Ui/selectors/selectUiListModal';
-import { Border, Flex, H3, Hr } from '@antoniodcorrea/components';
+import { Border, Flex, H3, Hr } from 'Vendor/components';
 
 import './ListModal.less';
 

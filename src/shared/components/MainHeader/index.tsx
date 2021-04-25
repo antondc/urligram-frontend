@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 import FilterDown from 'Assets/svg/filterDown.svg';
-import { H4, Hr, Span } from '@antoniodcorrea/components';
+import { H4, Hr, Span } from 'Vendor/components';
 
 import './MainHeader.less';
 

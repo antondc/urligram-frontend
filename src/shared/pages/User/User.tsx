@@ -9,7 +9,7 @@ import Sidebar from 'Components/Sidebar';
 import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListUsers from 'Components/SidebarListUsers';
 import { UserState } from 'Modules/Users/users.types';
-import { AIcon, Border, FadeInOut, Flex, H4, Hr, Span, Tag } from '@antoniodcorrea/components';
+import { AIcon, Border, FadeInOut, Flex, H4, Hr, Span, Tag } from 'Vendor/components';
 
 import './User.less';
 

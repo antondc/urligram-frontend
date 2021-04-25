@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { UserRowSkeleton } from 'Components/UserRow/UserRowSkeleton';
-import { Hr } from '@antoniodcorrea/components';
+import { Hr } from 'Vendor/components';
 
 interface Props {
   length?: number;

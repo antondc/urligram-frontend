@@ -20,7 +20,7 @@ import UserLists from 'Pages/UserLists';
 import Users from 'Pages/Users';
 import { Routes } from 'Router/routes';
 import { Location } from 'Services/History';
-import { Fade, FadeInOut, Flex, Hr } from '@antoniodcorrea/components';
+import { Fade, FadeInOut, Flex, Hr } from 'Vendor/components';
 
 import './Content.less';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Button, Fade, FadeInOut, Flex, Hr, Input, Span, SpinnerCircle, Switch } from '@antoniodcorrea/components';
+import { Button, Fade, FadeInOut, Flex, Hr, Input, Span, SpinnerCircle, Switch } from 'Vendor/components';
 
 import './ListForm.less';
 

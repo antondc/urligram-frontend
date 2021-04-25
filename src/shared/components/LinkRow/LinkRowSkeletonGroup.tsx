@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { LinkRowSkeleton } from 'Components/LinkRow/LinkRowSkeleton';
-import { Hr } from '@antoniodcorrea/components';
+import { Hr } from 'Vendor/components';
 
 interface Props {
   length?: number;

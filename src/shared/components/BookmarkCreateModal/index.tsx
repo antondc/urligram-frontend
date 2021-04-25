@@ -5,7 +5,7 @@ import Cross from 'Assets/svg/cross.svg';
 import BaseModal from 'Components/BaseModal';
 import BookmarkCreateForm from 'Components/BookmarkCreateForm';
 import { switchBookmarkCreateModal } from 'Modules/Ui/actions/switchBookmarkCreateModal';
-import { Border, Flex, H3, Hr } from '@antoniodcorrea/components';
+import { Border, Flex, H3, Hr } from 'Vendor/components';
 
 import './BookmarkCreateModal.less';
 

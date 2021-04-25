@@ -26,6 +26,7 @@ const webpackClientCommonConfig = {
       Services: path.resolve(WEBPACK_ROOT, 'src/shared/services/'),
       Ui: path.resolve(WEBPACK_ROOT, 'src/shared/ui/'),
       Pages: path.resolve(WEBPACK_ROOT, 'src/shared/pages/'),
+      Vendor: path.resolve(WEBPACK_ROOT, 'src/shared/vendor/'),
     },
   },
   module: {

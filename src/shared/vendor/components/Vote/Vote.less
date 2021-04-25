@@ -1,0 +1,71 @@
+@import '../../../css/imports.less';
+
+@c: .Vote;
+
+@{c} {
+  display: flex;
+  position: relative;
+  opacity: 1;
+
+  &-icon {
+    height: 12px;
+    width: 12px;
+
+    path {
+      fill: @c-background;
+      stroke-width: 8px;
+      transition: fill @td-fastest @ease;
+      stroke-dasharray: 1;
+    }
+  }
+
+  &-minus {
+    stroke: @c-accent;
+    transform: rotate(180deg) translateX(-4px);
+
+    &--active {
+      path {
+        fill: @c-error;
+        stroke: @c-error;
+      }
+    }
+  }
+
+  &-plus {
+    stroke: @c-accent;
+
+    &--active {
+      path {
+        fill: @c-success;
+        stroke: @c-success;
+      }
+    }
+  }
+
+  &--active {
+    path {
+      fill: @c-base;
+    }
+  }
+
+  &--loading {
+    path {
+      fill: @c-background;
+      animation: voteLoadingAnimation @td-one @ease-out infinite;
+    }
+  }
+
+  @keyframes voteLoadingAnimation {
+    0% {
+      stroke-dashoffset: 1;
+    }
+
+    50% {
+      stroke-dashoffset: 0;
+    }
+
+    100% {
+      stroke-dashoffset: -1;
+    }
+  }
+}

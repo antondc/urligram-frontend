@@ -1,0 +1,164 @@
+@import '../../../css/imports.less';
+
+@c: .Range;
+
+@{c} {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+
+  .default();
+
+  &-label {
+    width: 100%;
+  }
+
+  &-fields {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  &-value {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20px;
+    width: 20px;
+    max-width: 20px;
+    min-width: 20px;
+    margin-right: 5px;
+    padding: 3px;
+    font-size: @fs-micro;
+    font-weight: @fw-bold;
+    border: 2px solid @c-base;
+    user-select: none;
+  }
+
+  &-input {
+    height: 4px;
+    width: 100%;
+    opacity: 1;
+    background: @c-base;
+    outline: none;
+    -webkit-transition: @td-fast;
+    transition: opacity @td-fast;
+    -webkit-appearance: none;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    &::-webkit-slider-thumb {
+      height: 14px;
+      width: 14px;
+      background: @c-base;
+      cursor: grab;
+      -webkit-appearance: none;
+      border-radius: 50%;
+      appearance: none;
+      box-shadow: 0 0 0 1px @c-background;
+
+      &:active {
+        cursor: grabbing;
+      }
+    }
+
+    &::-moz-range-thumb {
+      height: 14px;
+      width: 14px;
+      background: @c-base;
+      cursor: pointer;
+      border-radius: 50%;
+      box-shadow: 0 0 0 1px @c-background;
+
+      &:active {
+        cursor: grabbing;
+      }
+    }
+  }
+
+  &--grow {
+    width: 100%;
+  }
+
+  &--success {
+    @{c}-value {
+      color: @c-success;
+      border: 2px solid @c-success;
+    }
+
+    @{c}-input {
+      background: @c-success;
+    }
+
+    @{c}-icon {
+      fill: @c-success;
+    }
+
+    @{c}-input::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      background-color: @c-success;
+    }
+
+    @{c}-input::-moz-range-thumb {
+      -webkit-appearance: none;
+      background-color: @c-success;
+    }
+  }
+
+  &--error {
+    @{c}-value {
+      color: @c-error;
+      border: 2px solid @c-error;
+    }
+
+    @{c}-input {
+      background: @c-error;
+    }
+
+    @{c}-icon {
+      fill: @c-error;
+    }
+
+    @{c}-input::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      background-color: @c-error;
+    }
+
+    @{c}-input::-moz-range-thumb {
+      background-color: @c-error;
+      cursor: default;
+      -webkit-appearance: none;
+    }
+  }
+
+  &--disabled {
+    pointer-events: none;
+
+    @{c}-value {
+      color: @c-disabled;
+      border: 2px solid @c-disabled;
+    }
+
+    @{c}-input {
+      background: @c-disabled;
+    }
+
+    @{c}-icon {
+      fill: @c-disabled;
+    }
+
+    @{c}-input::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      background-color: @c-disabled;
+    }
+
+    @{c}-input::-moz-range-thumb {
+      -webkit-appearance: none;
+      background-color: @c-disabled;
+    }
+  }
+}

@@ -8,7 +8,7 @@ import Sidebar from 'Components/Sidebar';
 import { ListState } from 'Modules/Lists/lists.types';
 import { TagState } from 'Modules/Tags/tags.types';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
-import { Border, FadeInOut, Flex, Hr, Select, SelectValue, SortBy, Span } from '@antoniodcorrea/components';
+import { Border, FadeInOut, Flex, Hr, Select, SelectValue, SortBy, Span } from 'Vendor/components';
 import SidebarBlock from '../../components/SidebarBlock';
 import SidebarListTags from '../../components/SidebarListTags';
 

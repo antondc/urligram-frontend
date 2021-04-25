@@ -25,7 +25,8 @@
       "Tools/*": ["./src/shared/tools/*"],
       "Services/*": ["./src/shared/services/*"],
       "Ui/*": ["./src/shared/ui/*"],
-      "Pages/*": ["./src/shared/pages/*"]
+      "Pages/*": ["./src/shared/pages/*"],
+      "Vendor/*": ["./src/shared/vendor/*"]
     }
   },
   "include": ["./src/**/*", "./*"]

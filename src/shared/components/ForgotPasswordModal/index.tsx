@@ -6,7 +6,7 @@ import BaseModal from 'Components/BaseModal';
 import { switchForgotPasswordModal } from 'Modules/Ui/actions/switchForgotPasswordModal';
 import { Routes } from 'Router/routes';
 import history from 'Services/History';
-import { Border, Flex, H4, Hr, P, Span } from '@antoniodcorrea/components';
+import { Border, Flex, H4, Hr, P, Span } from 'Vendor/components';
 
 import './ForgotPasswordModal.less';
 

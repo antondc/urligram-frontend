@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import A from 'Components/A';
 import { selectCurrentGlossary } from 'Modules/Languages/selectors/selectCurrentGlossary';
 import { Routes } from 'Router/routes';
-import { H1, Hr, P, Span } from '@antoniodcorrea/components';
+import { H1, Hr, P, Span } from 'Vendor/components';
 
 import './NotFound.less';
 

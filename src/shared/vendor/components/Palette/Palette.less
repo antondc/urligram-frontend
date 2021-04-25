@@ -1,0 +1,302 @@
+@import '../../../css/imports.less';
+
+@c: .Palette;
+
+@{c} {
+  .default();
+
+  &-grid {
+    display: flex;
+    flex-wrap: wrap;
+    width: 930px;
+    padding: 50px;
+    background: white;
+  }
+
+  &-colors {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px 20px 0 20px;
+    background: #f3f3f3;
+  }
+
+  &-color {
+    display: flex;
+    height: 75px;
+    width: 225px;
+    margin: 0 20px 20px 0;
+    background: white;
+  }
+
+  &-sample {
+    height: 100%;
+    width: 75px;
+  }
+
+  &-description {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 15px;
+  }
+
+  &-color--base {
+    @{c}-sample {
+      background: @c-base;
+    }
+  }
+
+  &-color--background {
+    @{c}-sample {
+      background: @c-background;
+    }
+  }
+
+  &-color--accent {
+    @{c}-sample {
+      background: @c-accent;
+    }
+  }
+
+  &-color--success {
+    @{c}-sample {
+      background: @c-success;
+    }
+  }
+
+  &-color--alert {
+    @{c}-sample {
+      background: @c-alert;
+    }
+  }
+
+  &-color--error {
+    @{c}-sample {
+      background: @c-error;
+    }
+  }
+
+  &-color--disabled {
+    @{c}-sample {
+      background: @c-disabled;
+    }
+  }
+
+  &-item {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    width: 100px;
+    margin: 0 18px 18px 0;
+    font-size: 10px;
+    color: white;
+    transition: box-shadow @td-slow @ease;
+    box-shadow: 2px 2px 20px @c-transparent;
+    border-radius: 4px;
+
+    &:hover:not(.Palette--noHover) {
+      cursor: default;
+      box-shadow: 2px 2px 20px lightgray;
+    }
+
+    &:before {
+      display: flex;
+      position: absolute;
+      justify-content: center;
+      align-items: center;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 10px;
+    }
+  }
+
+  &-item--base {
+    background: @c-base;
+  }
+
+  &-item--background {
+    color: @c-base;
+    background: @c-background;
+  }
+
+  &-item--accent {
+    background: @c-accent;
+  }
+
+  &-item--success {
+    color: @c-base;
+    background: @c-success;
+  }
+
+  &-item--alert {
+    color: @c-base;
+    background: @c-alert;
+  }
+
+  &-item--error {
+    background: @c-error;
+  }
+
+  &-item--disabled {
+    color: @c-base;
+    background: @c-disabled;
+  }
+
+  &-item--blue-1 {
+    background: @gradientColors[blue-1];
+  }
+
+  &-item--blue-2 {
+    background: @gradientColors[blue-2];
+  }
+
+  &-item--blue-3 {
+    background: @gradientColors[blue-3];
+  }
+
+  &-item--blue-4 {
+    color: @c-base;
+    background: @gradientColors[blue-4];
+  }
+
+  &-item--blue-5 {
+    color: @c-base;
+    background: @gradientColors[blue-5];
+  }
+
+  &-item--green-1 {
+    background: @gradientColors[green-1];
+  }
+
+  &-item--green-2 {
+    color: @c-base;
+    background: @gradientColors[green-2];
+  }
+
+  &-item--green-3 {
+    color: @c-base;
+    background: @gradientColors[green-3];
+  }
+
+  &-item--green-4 {
+    color: @c-base;
+    background: @gradientColors[green-4];
+  }
+
+  &-item--green-5 {
+    color: @c-base;
+    background: @gradientColors[green-5];
+  }
+
+  &-item--red-1 {
+    background: @gradientColors[red-1];
+  }
+
+  &-item--red-2 {
+    background: @gradientColors[red-2];
+  }
+
+  &-item--red-3 {
+    background: @gradientColors[red-3];
+  }
+
+  &-item--red-4 {
+    background: @gradientColors[red-4];
+  }
+
+  &-item--red-5 {
+    color: @c-base;
+    background: @gradientColors[red-5];
+  }
+
+  &-item--yellow-1 {
+    color: @c-base;
+    background: @gradientColors[yellow-1];
+  }
+
+  &-item--yellow-2 {
+    color: @c-base;
+    background: @gradientColors[yellow-2];
+  }
+
+  &-item--yellow-3 {
+    color: @c-base;
+    background: @gradientColors[yellow-3];
+  }
+
+  &-item--yellow-4 {
+    color: @c-base;
+    background: @gradientColors[yellow-4];
+  }
+
+  &-item--yellow-5 {
+    color: @c-base;
+    background: @gradientColors[yellow-5];
+  }
+
+  &-item--yellow-6 {
+    color: @c-base;
+    background: @gradientColors[yellow-6];
+  }
+
+  &-item--black-0 {
+    background: @gradientColors[black-1];
+  }
+
+  &-item--black-1 {
+    background: @gradientColors[black-1];
+  }
+
+  &-item--black-2 {
+    background: @gradientColors[black-2];
+  }
+
+  &-item--black-3 {
+    background: @gradientColors[black-3];
+  }
+
+  &-item--black-4 {
+    color: @c-base;
+    background: @gradientColors[black-4];
+  }
+
+  &-item--black-5 {
+    color: @c-base;
+    background: @gradientColors[black-5];
+  }
+
+  &-item--black-6 {
+    color: @c-base;
+    background: @gradientColors[black-6];
+  }
+
+  &-item--black-traslucid-1 {
+    color: @c-base;
+    background: @c-traslucid--hardest;
+  }
+
+  &-item--black-traslucid-2 {
+    color: @c-base;
+    background: @c-traslucid--hard;
+  }
+
+  &-item--black-traslucid-3 {
+    color: @c-base;
+    background: @c-traslucid--light;
+  }
+
+  &-item--black-traslucid-4 {
+    color: @c-base;
+    background: @c-traslucid--lightest;
+  }
+
+  &-item--black-traslucid-5 {
+    color: @c-base;
+    background: @c-traslucid--ultralight;
+  }
+}

@@ -6,7 +6,7 @@ import {
   EditCircle,
   PlusCircleWithBackground,
   SpinnerLoader,
-} from '@antoniodcorrea/components';
+} from 'Vendor/components';
 
 import './BookmarkActions.less';
 

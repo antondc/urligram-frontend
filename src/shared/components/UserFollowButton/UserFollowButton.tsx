@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { PlusCircleWithBackground, SpinnerLoader } from '@antoniodcorrea/components';
+import { PlusCircleWithBackground, SpinnerLoader } from 'Vendor/components';
 
 import './UserFollowButton.less';
 

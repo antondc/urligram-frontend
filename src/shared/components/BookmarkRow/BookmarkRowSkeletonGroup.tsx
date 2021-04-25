@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { BookmarkRowSkeleton } from 'Components/BookmarkRow/BookmarkRowSkeleton';
-import { Hr } from '@antoniodcorrea/components';
+import { Hr } from 'Vendor/components';
 
 interface Props {
   length?: number;

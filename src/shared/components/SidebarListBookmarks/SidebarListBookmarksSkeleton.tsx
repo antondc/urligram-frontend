@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Hr, SkeletonItem } from '@antoniodcorrea/components';
+import { Hr, SkeletonItem } from 'Vendor/components';
 
 import './SidebarListBookmarksSkeleton.less';
 

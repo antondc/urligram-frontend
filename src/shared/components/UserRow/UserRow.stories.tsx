@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { FadeInOut } from '@antoniodcorrea/components';
+import { FadeInOut } from 'Vendor/components';
 import { boolean, withKnobs } from '@storybook/addon-knobs';
 import { UserRow } from './UserRow';
 import { UserRowSkeleton } from './UserRowSkeleton';

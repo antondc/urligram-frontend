@@ -2,8 +2,8 @@ import React from 'react';
 
 import A from 'Components/A';
 import UserFollowButton from 'Components/UserFollowButton';
+import { Border, Span, Tag } from 'Vendor/components';
 import { UserState } from 'Modules/Users/users.types';
-import { Border, Span, Tag } from '@antoniodcorrea/components';
 
 import './UserRow.less';
 

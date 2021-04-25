@@ -1,0 +1,89 @@
+@import '../../../css/imports.less';
+
+@c: .SpinnerCircle;
+
+@{c} {
+  display: flex;
+  position: absolute;
+  justify-content: space-around;
+  align-items: center;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  &--background {
+    &:before {
+      content: ' ';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: @c-traslucid;
+    }
+  }
+
+  &-inner1,
+  &-inner2 {
+    position: absolute;
+    height: 30px;
+    width: 30px;
+    background: @c-base;
+    border-radius: 50%;
+    animation: animation1 1.5s infinite;
+  }
+
+  &-inner2 {
+    background: @c-base;
+    animation: animation2 1.5s infinite;
+  }
+
+  &--fast {
+    @{c}-inner1 {
+      animation: animation1 0.5s infinite;
+      animation-delay: 0.2s;
+    }
+
+    @{c}-inner2 {
+      animation: animation2 0.5s infinite;
+    }
+  }
+
+  &--nano {
+    @{c}-inner1,
+    @{c}-inner2 {
+      height: 20px;
+      width: 20px;
+    }
+  }
+
+  @keyframes animation1 {
+    0% {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    100% {
+      opacity: 0;
+      transform: scale(1.5);
+    }
+  }
+
+  @keyframes animation2 {
+    0% {
+      opacity: 0;
+      transform: scale(0.3);
+    }
+
+    66% {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}

@@ -5,7 +5,7 @@ import Cross from 'Assets/svg/cross.svg';
 import BaseModal from 'Components/BaseModal';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { switchWelcomeModal } from 'Modules/Ui/actions/switchWelcomeModal';
-import { Border, Flex, H4, Hr, P, Span } from '@antoniodcorrea/components';
+import { Border, Flex, H4, Hr, P, Span } from 'Vendor/components';
 
 import './WelcomeModal.less';
 

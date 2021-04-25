@@ -9,7 +9,7 @@ import UserRow from 'Components/UserRow';
 import { UserRowSkeletonGroup } from 'Components/UserRow/UserRowSkeletonGroup';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
-import { Border, FadeInOut, Flex, H4, Hr, SortBy, Span } from '@antoniodcorrea/components';
+import { Border, FadeInOut, Flex, H4, Hr, SortBy, Span } from 'Vendor/components';
 
 import './Users.less';
 

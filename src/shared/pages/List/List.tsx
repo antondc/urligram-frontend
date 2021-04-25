@@ -12,7 +12,7 @@ import { ListState } from 'Modules/Lists/lists.types';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
-import { Border, FadeInOut, Flex, H4, Hr, Private, SortBy, Span } from '@antoniodcorrea/components';
+import { Border, FadeInOut, Flex, H4, Hr, Private, SortBy, Span } from 'Vendor/components';
 import ListFollowButton from '../../components/ListFollowButton';
 
 import './List.less';

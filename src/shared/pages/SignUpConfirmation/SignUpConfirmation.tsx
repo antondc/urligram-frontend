@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Flex, Hr, Span } from '@antoniodcorrea/components';
+import { Flex, Hr, Span } from 'Vendor/components';
 
 import './SignUpConfirmation.less';
 

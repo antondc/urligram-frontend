@@ -7,7 +7,7 @@ import CreatableSelect, {
   MultiValueProps,
 } from 'react-select';
 
-import { ArrowDown, Cross } from '@antoniodcorrea/components';
+import { ArrowDown, Cross } from 'Vendor/components';
 import { Value } from '.';
 
 import './SelectSync.less';

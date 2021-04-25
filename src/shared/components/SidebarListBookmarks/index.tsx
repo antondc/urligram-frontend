@@ -4,7 +4,7 @@ import A from 'Components/A';
 import { RenderInPortal } from 'Components/Portal';
 import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
 import { stringToDashCase } from 'Tools/utils/string/stringToDashCase';
-import { Hr, Span, Tooltip } from '@antoniodcorrea/components';
+import { Hr, Span, Tooltip } from 'Vendor/components';
 import { SidebarListBookmarksSkeleton } from './SidebarListBookmarksSkeleton';
 
 import './SidebarListBookmarks.less';

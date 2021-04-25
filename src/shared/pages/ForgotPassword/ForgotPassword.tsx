@@ -1,7 +1,7 @@
 import React from 'react';
 
 import A from 'Components/A';
-import { Button, FadeInOut, Flex, H1, Hr, Input, Span } from '@antoniodcorrea/components';
+import { Button, FadeInOut, Flex, H1, Hr, Input, Span } from 'Vendor/components';
 
 import './ForgotPassword.less';
 

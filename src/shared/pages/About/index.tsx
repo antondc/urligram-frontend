@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Hr } from '@antoniodcorrea/components';
+import { Hr } from 'Vendor/components';
 
 import './About.less';
 

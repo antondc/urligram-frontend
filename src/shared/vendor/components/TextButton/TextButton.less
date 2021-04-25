@@ -1,0 +1,47 @@
+@import '../../../css/imports.less';
+
+@c: .TextButton;
+
+@{c} {
+  .default();
+
+  display: flex;
+  align-items: center;
+
+  &-text {
+    margin-right: 3px;
+    color: @c-base;
+    transition: color @td-fast @ease;
+  }
+
+  &-icon {
+    fill: @c-base;
+    transform: translateX(0);
+    transition: fill @td-fast @ease, transform @td-normal @ease;
+  }
+
+  &:hover {
+    cursor: pointer;
+
+    @{c}-text {
+      color: @c-accent;
+    }
+
+    @{c}-icon {
+      fill: @c-accent;
+      transform: translateX(1px);
+    }
+  }
+
+  &--disabled {
+    pointer-events: none;
+
+    @{c}-text {
+      color: @c-disabled;
+    }
+
+    @{c}-icon {
+      fill: @c-disabled;
+    }
+  }
+}

@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react';
 import { animateScroll as scroll } from 'react-scroll';
 
+import { A, Border, Fade, Hr } from 'Vendor/components';
 import history from 'Services/History';
 import { URLWrapper } from 'Services/URLWrapper';
-import { A, Border, Fade, Hr } from '@antoniodcorrea/components';
 import { calculatePages } from './calculatePages';
 
 import './Pagination.less';

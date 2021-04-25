@@ -7,7 +7,7 @@ import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListUsers from 'Components/SidebarListUsers';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
-import { Border, Flex, H4, Hr, Tag } from '@antoniodcorrea/components';
+import { Border, Flex, H4, Hr, Tag } from 'Vendor/components';
 
 import './Tags.less';
 

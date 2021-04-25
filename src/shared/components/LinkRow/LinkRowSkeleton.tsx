@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Border, SkeletonItem } from '@antoniodcorrea/components';
+import { Border, SkeletonItem } from 'Vendor/components';
 
 import './LinkRowSkeleton.less';
 

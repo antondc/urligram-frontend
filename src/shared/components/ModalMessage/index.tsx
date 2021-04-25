@@ -5,7 +5,7 @@ import { createStructuredSelector } from 'reselect';
 import Cross from 'Assets/svg/cross.svg';
 import BaseModal from 'Components/BaseModal';
 import { switchMessageModal } from 'Modules/Ui/actions/switchMessageModal';
-import { Border, Button, Flex, Hr, Span } from '@antoniodcorrea/components';
+import { Border, Button, Flex, Hr, Span } from 'Vendor/components';
 
 import './ModalMessage.less';
 

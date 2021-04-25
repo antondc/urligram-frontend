@@ -1,0 +1,126 @@
+@import '../../../css/imports.less';
+
+@c: .Input;
+
+@{c} {
+  .default();
+
+  display: inline-flex;
+  position: relative;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 50px;
+  text-align: left;
+
+  &-label {
+    display: flex;
+    position: absolute;
+    justify-content: flex-start;
+    align-items: center;
+    height: 20px;
+    bottom: 10px;
+    left: 0;
+    padding: 0 10px 0 2px;
+    white-space: nowrap;
+    color: @c-disabled;
+    overflow: hidden;
+    background: @c-transparent;
+    transform-origin: left top;
+    transition: all @td-fast @ease;
+    user-select: none;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &-input {
+    .default();
+
+    height: 30px;
+    right: 8px;
+    padding: 0 10px 0 2px;
+    font-size: @fs-normal;
+    font-weight: @fw-bold;
+    background: @c-background;
+    border: 0;
+    border-bottom: 2px solid @c-base;
+    outline: none;
+    transition: border-color @td-fast @ease, color @td-fast @ease;
+    box-shadow: none;
+
+    &[type='date']::-webkit-inner-spin-button,
+    &[type='date']::-webkit-calendar-picker-indicator,
+    &[type='date']::-webkit-input-placeholder {
+      display: none;
+      visibility: hidden !important;
+      -webkit-appearance: none;
+    }
+
+    &[type='search']::-webkit-search-cancel-button {
+      display: none;
+    }
+
+    &:focus {
+      & ~ @{c}-svgBackground {
+        // opacity: 0;
+      }
+    }
+
+    &:focus,
+    &:not(:placeholder-shown) {
+      & + label {
+        background: @c-background;
+        transform: translateY(-18px) scale(0.8);
+      }
+    }
+
+    &:read-only {
+      user-select: none;
+    }
+
+    @{c}--success & {
+      border: 2px solid @c-success;
+    }
+
+    @{c}--error & {
+      border: 2px solid @c-error;
+    }
+
+    @{c}--disabled &,
+    @{c}--readOnly & {
+      color: @c-disabled;
+      border: 2px solid @c-disabled;
+    }
+  }
+
+  &-svgBackground {
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    height: 35px;
+    width: 30px;
+    top: 12px;
+    right: 3px;
+    background: linear-gradient(90deg, @c-transparent 0%, @c-background 30%);
+    transition: background @td-fast @ease;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &-svg {
+    top: 0;
+    top: 4px;
+    right: 0;
+    right: 10px;
+    overflow: hidden;
+    fill: @c-base;
+  }
+
+  &--grow {
+    width: 100%;
+  }
+}

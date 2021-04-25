@@ -3,9 +3,9 @@ import React from 'react';
 import Logo from 'Assets/svg/logo.svg';
 import User from 'Assets/svg/user.svg';
 import A from 'Components/A';
+import { Border, H3, H4 } from 'Vendor/components';
 import { GlossaryState } from 'Modules/Languages/languages.types';
 import { SessionState } from 'Modules/Session/session.types';
-import { Border, H3, H4 } from '@antoniodcorrea/components';
 
 import './Header.less';
 

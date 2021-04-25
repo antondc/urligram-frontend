@@ -1,0 +1,158 @@
+@import '../../../css/imports.less';
+
+@c: .Button;
+
+@{c} {
+  .default();
+
+  display: inline-block;
+  position: relative;
+  height: 50px;
+  padding: 0 4px 4px 0;
+  color: @c-base;
+  user-select: none;
+
+  &-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 1px 30px 0;
+    background: @c-background;
+    border: 2px solid @c-base;
+    transition: transform @td-fast @ease, border @td-fast @ease, color @td-fast @ease, background @td-fast @ease;
+    border-radius: 4px;
+    will-change: transform;
+
+    @{c}-svg {
+      height: 15px;
+      margin-left: 5px;
+      padding-bottom: 1px;
+      transition: fill @td-fast @ease, width @td-fast @ease, margin @td-fast @ease;
+    }
+
+    &:active {
+      @{c}:not(@{c}--success)& {
+        transform: translate(3px, 3px);
+        box-shadow: 2px 2px 0 0 @c-accent;
+      }
+    }
+  }
+
+  &-shadow {
+    content: ' ';
+    position: absolute;
+    top: 0;
+    bottom: 4px;
+    left: 0;
+    right: 4px;
+    box-shadow: 4px 4px 0 0 @c-base;
+    border-radius: 4px;
+    transition: box-shadow @td-fast @ease;
+  }
+
+  &:hover:not(@{c}--success) {
+    cursor: pointer;
+
+    @{c}-content {
+      transform: translate(1px, 1px);
+    }
+  }
+
+  &:active:not(@{c}--success) {
+    @{c}-content {
+      transform: translate(2px, 2px);
+    }
+  }
+
+  &--grow {
+    width: 100%;
+  }
+
+  &-variant {
+    &--alternate {
+      @{c}-content {
+        // Styles pending
+      }
+    }
+
+    &--delete {
+      @{c}-content {
+        color: @c-error;
+        background: @c-background;
+        border-color: @c-error;
+
+        @{c}-svg {
+          width: 0;
+          min-width: 0;
+          margin: 0;
+          fill: @c-error;
+        }
+      }
+
+      @{c}-shadow {
+        box-shadow: 4px 4px 0 0 @c-error;
+      }
+    }
+  }
+
+  &--disabled {
+    pointer-events: none;
+
+    @{c}-content {
+      color: @c-disabled;
+      background: @c-background;
+      border-color: @c-disabled;
+
+      @{c}-svg {
+        width: 0;
+        min-width: 0;
+        margin: 0;
+        fill: @c-disabled;
+      }
+    }
+
+    @{c}-shadow {
+      box-shadow: 4px 4px 0 0 @c-disabled;
+    }
+  }
+
+  &--success {
+    @{c}-content {
+      color: @c-success;
+      background: @c-background;
+      border-color: @c-success;
+      pointer-events: none;
+
+      @{c}-svg {
+        width: 0;
+        min-width: 0;
+        margin: 0;
+        fill: @c-background;
+      }
+    }
+
+    @{c}-shadow {
+      box-shadow: 4px 4px 0 0 @c-success;
+    }
+  }
+
+  &--error {
+    @{c}-content {
+      color: @c-error;
+      background: @c-background;
+      border-color: @c-error;
+
+      @{c}-svg {
+        width: 0;
+        min-width: 0;
+        margin: 0;
+        fill: @c-error;
+      }
+    }
+
+    @{c}-shadow {
+      box-shadow: 4px 4px 0 0 @c-error;
+    }
+  }
+}

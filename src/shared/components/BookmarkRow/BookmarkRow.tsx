@@ -4,7 +4,7 @@ import A from 'Components/A';
 import BookmarkActions from 'Components/BookmarkActions';
 import BookmarkLists from 'Components/BookmarkLists';
 import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
-import { Border, Flex, Private, Span, Tag, Vote } from '@antoniodcorrea/components';
+import { Border, Flex, Private, Span, Tag, Vote } from 'Vendor/components';
 
 import './BookmarkRow.less';
 

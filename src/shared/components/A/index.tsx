@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
-import { A as ComponentsA } from '@antoniodcorrea/components';
+import { A as ComponentsA } from 'Vendor/components';
 
 interface Props {
   children: React.ReactNode;

@@ -11,7 +11,7 @@ import SidebarListUsers from 'Components/SidebarListUsers';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
-import { Border, Flex, H4, Hr, Select, SelectValue, SortBy, Span } from '@antoniodcorrea/components';
+import { Border, Flex, H4, Hr, Select, SelectValue, SortBy, Span } from 'Vendor/components';
 
 import './Links.less';
 
