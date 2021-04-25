@@ -171,7 +171,7 @@ class Layout extends React.Component<Props> {
           <Fade mounted={resetPasswordModalMounted} speed="fastest" position="fixed" appear>
             <ResetPasswordModal />
           </Fade>
-          <Fade mounted={bookmarkCreateModalMounted} speed="slow" position="fixed" appear>
+          <Fade mounted={bookmarkCreateModalMounted} speed="fastest" position="fixed" appear>
             <BookmarkCreateModal />
           </Fade>
           <Fade mounted={bookmarkUpdateModalMounted} speed="fastest" position="fixed" appear>
