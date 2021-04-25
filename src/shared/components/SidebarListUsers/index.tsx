@@ -2,9 +2,9 @@ import React from 'react';
 
 import A from 'Components/A';
 import { RenderInPortal } from 'Components/Portal';
-import { Bookmark, Hr, Span, Tooltip, User } from 'Vendor/components';
 import { UserState } from 'Modules/Users/users.types';
 import { stringToDashCase } from 'Tools/utils/string/stringToDashCase';
+import { Bookmark, Hr, Span, Tooltip } from 'Vendor/components';
 import { SidebarListUsersSkeleton } from './SidebarListUsersSkeleton';
 
 import './SidebarListUsers.less';

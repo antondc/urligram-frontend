@@ -3,10 +3,24 @@
 @c: .SidebarListUsers;
 
 @{c} {
-  //
   &-user {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 10px;
+    overflow: hidden;
+  }
+
+  &-userName {
+    white-space: nowrap;
+  }
+
+  &-userDescription {
+    text-align: right;
+    white-space: nowrap;
+    overflow-x: scroll;
+    overflow-y: hidden;
+
+    .hideScrollbar;
   }
 
   &-userData {

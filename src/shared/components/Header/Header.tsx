@@ -3,9 +3,9 @@ import React from 'react';
 import Logo from 'Assets/svg/logo.svg';
 import User from 'Assets/svg/user.svg';
 import A from 'Components/A';
-import { Border, H3, H4 } from 'Vendor/components';
 import { GlossaryState } from 'Modules/Languages/languages.types';
 import { SessionState } from 'Modules/Session/session.types';
+import { Border, H3 } from 'Vendor/components';
 
 import './Header.less';
 
@@ -35,15 +35,15 @@ export const Header: React.FC<Props> = ({
       <nav className="Header-navigation">
         <span className="Header-bar">|</span>
         <A className="Header-link" href={'/bookmarks?'} frontend>
-          <H4>{currentGlossary?.bookmarks}</H4>
+          <H3>{currentGlossary?.bookmarks}</H3>
         </A>
         <span className="Header-bar">|</span>
         <A className="Header-link" href={'/users'} frontend>
-          <H4>{currentGlossary?.users}</H4>
+          <H3>{currentGlossary?.users}</H3>
         </A>
         <span className="Header-bar">|</span>
         <A className="Header-link" href={'/lists'} frontend>
-          <H4>{currentGlossary?.lists}</H4>
+          <H3>{currentGlossary?.lists}</H3>
         </A>
       </nav>
       <div className="Header-user">

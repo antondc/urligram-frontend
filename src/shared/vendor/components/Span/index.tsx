@@ -2,7 +2,7 @@ import React, { HTMLProps } from 'react';
 
 import './Span.less';
 
-export type SpanSize = 'normal' | 'small' | 'micro' | 'nano';
+export type SpanSize = 'normal' | 'small' | 'micro' | 'nano' | 'medium' | 'big';
 
 interface Props extends Omit<HTMLProps<HTMLSpanElement>, 'size'> {
   children: React.ReactNode;
@@ -17,7 +17,7 @@ interface Props extends Omit<HTMLProps<HTMLSpanElement>, 'size'> {
   center?: boolean;
 }
 
-export const Span: React.SFC<Props> = ({
+export const Span: React.FC<Props> = ({
   children,
   size = 'normal',
   bold = false,
