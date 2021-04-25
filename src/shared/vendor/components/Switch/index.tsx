@@ -15,10 +15,10 @@ export const Switch: React.FC<Props> = ({ name, checked = false, ...props }) => 
     <span className="Switch-slider " />
     <span className="Switch-icons">
       <span className="Switch-icon Switch-true">
-        <Check />
+        <Check size="small" />
       </span>
       <span className="Switch-icon Switch-false">
-        <Cross />
+        <Cross size="small" />
       </span>
     </span>
   </label>
