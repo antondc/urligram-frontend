@@ -1,18 +1,19 @@
 import { bookmarkCreateFailure } from 'Modules/Bookmarks/actions/bookmarkCreateFailure';
 import { bookmarkCreateSuccess } from 'Modules/Bookmarks/actions/bookmarkCreateSuccess';
 import {
+  BOOKMARK_CREATE_SUCCESS,
   BookmarkCreateApiRequest,
   BookmarkCreateApiResponse,
   BookmarksActions,
   BookmarkState,
 } from 'Modules/Bookmarks/bookmarks.types';
-import { linkLoadById } from 'Modules/Links/actions/linkLoadById';
 import { LinksActions } from 'Modules/Links/links.types';
 import { uiNotificationPush } from 'Modules/Ui/actions/uiNotificationPush';
 import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
 import { AppThunk } from '../../../index';
 import { bookmarkCreateRequest } from './bookmarkCreateRequest';
+import { bookmarkLoadById } from './bookmarkLoadById';
 
 export const bookmarkCreate = ({
   title,
@@ -34,38 +35,41 @@ export const bookmarkCreate = ({
       isPrivate,
       tags,
     });
+
+    console.log('=======');
+    console.log('bookmarkData:');
+    console.log(JSON.stringify(bookmarkData, null, 4));
+    console.log('=======');
+
     const { Bookmarks: bookmarksAfterResponse } = getState();
 
     const bookmarksToUpdate = Object.values(bookmarksAfterResponse.byKey).filter(
       (item) => item?.linkId === bookmarkData?.attributes?.linkId
     );
-    const bookmarksWithNewUser = bookmarksToUpdate.map((item) => ({
+    const bookmarksWithNewBookmark = bookmarksToUpdate.map((item) => ({
       ...item,
-      users: [...(item?.users || []), bookmarkData.attributes.userId],
+      bookmarksRelated: [
+        ...(item?.bookmarksRelated || []),
+        {
+          id: bookmarkData?.attributes?.id,
+          title: bookmarkData?.attributes?.title,
+          userId: bookmarkData?.attributes?.userId,
+        },
+      ],
     }));
 
-    dispatch(
-      bookmarkCreateSuccess({
+    dispatch({
+      type: BOOKMARK_CREATE_SUCCESS,
+      payload: {
         ...bookmarksAfterResponse,
         byKey: {
           ...bookmarksAfterResponse.byKey,
-          ...serializerFromArrayToByKey<BookmarkState, BookmarkState>({ data: bookmarksWithNewUser }),
-          [bookmarkData?.attributes?.id]: {
-            ...bookmarksAfterResponse.byKey[bookmarkData?.attributes?.id],
-            ...bookmarkData?.attributes,
-            bookmarksRelated: [
-              ...(bookmarksAfterResponse.byKey[bookmarkData?.attributes?.id]?.bookmarksRelated || []),
-              {
-                id: bookmarkData?.attributes?.id,
-                userId: bookmarkData?.attributes?.userId,
-                title: bookmarkData?.attributes?.title,
-              },
-            ],
-          },
+          ...serializerFromArrayToByKey<BookmarkState, BookmarkState>({ data: bookmarksWithNewBookmark }),
+          [bookmarkData?.attributes?.id]: bookmarkData?.attributes,
         },
-      })
-    );
-    await dispatch(linkLoadById(bookmarkData?.attributes?.linkId));
+      },
+    });
+    // await dispatch(bookmarkLoadById({ bookmarkId: bookmarkData?.attributes?.id }));
 
     dispatch(
       uiNotificationPush({

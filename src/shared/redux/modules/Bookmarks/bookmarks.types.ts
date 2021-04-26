@@ -15,6 +15,9 @@ export const BOOKMARK_DELETE_FAILURE = 'BOOKMARK_DELETE_FAILURE';
 export const BOOKMARKS_RECOMMENDED_REQUEST = 'BOOKMARKS_RECOMMENDED_REQUEST';
 export const BOOKMARKS_RECOMMENDED_SUCCESS = 'BOOKMARKS_RECOMMENDED_SUCCESS';
 export const BOOKMARKS_RECOMMENDED_FAILURE = 'BOOKMARKS_RECOMMENDED_FAILURE';
+export const BOOKMARK_LOAD_BY_ID_REQUEST = 'BOOKMARK_LOAD_BY_ID_REQUEST';
+export const BOOKMARK_LOAD_BY_ID_SUCCESS = 'BOOKMARK_LOAD_BY_ID_SUCCESS';
+export const BOOKMARK_LOAD_BY_ID_FAILURE = 'BOOKMARK_LOAD_BY_ID_FAILURE';
 
 export interface BookmarkError extends Error {
   field: string;
@@ -82,6 +85,14 @@ export interface BookmarkGetItemResponse {
   type: 'bookmark';
   id: number;
   attributes: BookmarkState;
+}
+
+export interface BookmarkGetApiResponse {
+  data: BookmarkGetItemResponse;
+  meta: {
+    totalItems: number;
+    sort: string;
+  };
 }
 
 export interface BookmarksGetApiResponse {
@@ -219,6 +230,21 @@ export interface BookmarkRecommendedFailureAction {
   payload: BookmarksState;
 }
 
+export interface BookmarkLoadByIdRequestAction {
+  type: typeof BOOKMARK_LOAD_BY_ID_REQUEST;
+  payload: BookmarksState;
+}
+
+export interface BookmarkLoadByIdSuccessAction {
+  type: typeof BOOKMARK_LOAD_BY_ID_SUCCESS;
+  payload: BookmarksState;
+}
+
+export interface BookmarkLoadByIdFailureAction {
+  type: typeof BOOKMARK_LOAD_BY_ID_FAILURE;
+  payload: BookmarksState;
+}
+
 export type BookmarksActions =
   | BookmarksLoadRequestAction
   | BookmarksLoadSuccessAction
@@ -236,4 +262,7 @@ export type BookmarksActions =
   | BookmarkDeleteFailureAction
   | BookmarkRecommendedRequestAction
   | BookmarkRecommendedSuccessAction
-  | BookmarkRecommendedFailureAction;
+  | BookmarkRecommendedFailureAction
+  | BookmarkLoadByIdRequestAction
+  | BookmarkLoadByIdSuccessAction
+  | BookmarkLoadByIdFailureAction;

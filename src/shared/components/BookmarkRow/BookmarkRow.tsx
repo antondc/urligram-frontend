@@ -4,57 +4,53 @@ import A from 'Components/A';
 import BookmarkActions from 'Components/BookmarkActions';
 import BookmarkLists from 'Components/BookmarkLists';
 import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
-import { Border, Edit, Flex, Private, Span, Tag, Vote } from 'Vendor/components';
+import { Border, Edit, Fade, Flex, Private, Span, Tag, Vote } from 'Vendor/components';
 
 import './BookmarkRow.less';
 
 interface BookmarkRow extends BookmarkState {
   userId: string;
+  bookmark: Partial<BookmarkState>;
   recentlyCreated: boolean;
   sessionUserBookmarkedLink: boolean;
   onVote: (vote: boolean | null) => void;
   onBookmarkRowMouseLeave: () => void;
+  onEdit: () => void;
 }
 
 export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
   userId,
-  id,
-  title,
-  linkId,
-  url,
-  tags = [],
-  statistics,
-  isPrivate,
+  bookmark,
   onVote,
-  favicon,
-  recentlyCreated,
   sessionUserBookmarkedLink,
+  recentlyCreated,
   onBookmarkRowMouseLeave,
+  onEdit,
 }) => (
   <Border
     grow
     className={'BookmarkRow' + (recentlyCreated ? ' BookmarkRow-recentlyCreated' : '')}
     data-test-id="BookmarkRow"
-    key={id}
+    key={bookmark?.id}
     onMouseLeave={onBookmarkRowMouseLeave}
   >
     <div className="BookmarkRow-left">
       <Flex vertical="top" growVertical={false} horizontal="left" noWrap>
-        <img className="BookmarkRow-favicon" src={favicon} />
+        <img className="BookmarkRow-favicon" src={bookmark?.favicon} />
         <Span bold className="BookmarkRow-title">
-          <A className="BookmarkRow-link" href={url} targetBlank styled={false}>
-            {title}
+          <A className="BookmarkRow-link" href={bookmark?.url} targetBlank styled={false}>
+            {bookmark?.title}
           </A>
         </Span>
       </Flex>
       <Span className="BookmarkRow-url" size="small">
-        <A href={url} targetBlank>
-          {url}
+        <A href={bookmark?.url} targetBlank>
+          {bookmark?.url}
         </A>
       </Span>
     </div>
     <div className="BookmarkRow-center">
-      {tags?.map((item) => (
+      {bookmark?.tags?.map((item) => (
         <A
           className="BookmarkRow-tag"
           href={`users/${userId}/bookmarks?filter[tags][]=${item.name}`}
@@ -70,36 +66,36 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
     </div>
     <div className="BookmarkRow-right">
       <Flex horizontal="right" growVertical={false} vertical="top" noWrap>
+        {!!bookmark?.isPrivate && <Private size="micro" className="BookmarkRow-icon BookmarkRow-private" />}
         {!!sessionUserBookmarkedLink && (
           <>
-            <BookmarkLists bookmarkId={id} />
-            <Edit size="micro" className="BookmarkRow-icon BookmarkRow-edit" />
+            <BookmarkLists bookmarkId={bookmark?.id} />
+            <Edit size="micro" className="BookmarkRow-icon BookmarkRow-edit" onClick={onEdit} />
           </>
         )}
-        {!!isPrivate && <Private size="micro" className="BookmarkRow-icon BookmarkRow-private" />}
         <Vote
           className="BookmarkRow-icon BookmarkRow-vote"
-          vote={statistics?.vote}
+          vote={bookmark?.statistics?.vote}
           changeVote={onVote}
-          loading={statistics?.loading}
+          loading={bookmark?.statistics?.loading}
         />
       </Flex>
       <div className="BookmarkRow-stats">
-        <Span size="micro" className="BookmarkRow-stat">
+        <Span size="micro" className="BookmarkRow-stat BookmarkRow-statVote">
           <Span size="small" className="BookmarkRow-statIcon">
             ▲
           </Span>
-          {statistics?.absoluteVote || 0}
+          {bookmark?.statistics?.absoluteVote || 0}
         </Span>
-        <Span size="micro" className="BookmarkRow-stat">
+        <Span size="micro" className="BookmarkRow-stat  BookmarkRow-statBookmarks">
           <Span size="small" className="BookmarkRow-statIcon">
             ⚭
           </Span>
-          {statistics?.timesBookmarked || 0}
+          {bookmark?.statistics?.timesBookmarked || 0}
         </Span>
       </div>
     </div>
-    <BookmarkActions className="BookmarkRow-actionButton" linkId={linkId} bookmarkId={id} />
+    <BookmarkActions className="BookmarkRow-actionButton" linkId={bookmark?.linkId} bookmarkId={bookmark?.id} />
   </Border>
 );
 

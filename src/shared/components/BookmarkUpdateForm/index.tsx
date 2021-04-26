@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { bookmarkDelete } from 'Modules/Bookmarks/actions/bookmarkDelete';
 import { bookmarkUpdate } from 'Modules/Bookmarks/actions/bookmarkUpdate';
 import { selectBookmarksById } from 'Modules/Bookmarks/selectors/selectBookmarkById';
 import { selectBookmarksErrorLast } from 'Modules/Bookmarks/selectors/selectBookmarksErrorLast';
@@ -99,18 +98,6 @@ const BookmarkUpdateForm: React.FC<Props> = ({ closeModal }) => {
     setSubmitInProcess(false);
   };
 
-  const onRemove = async (e: React.FormEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    setSubmitInProcess(true);
-
-    await dispatch(bookmarkDelete({ bookmarkId: bookmark?.id, linkId: bookmark?.linkId }));
-    setSubmitInProcess(false);
-
-    setTimeout(() => {
-      closeModal();
-    }, DELAY_SLOW_MS);
-  };
-
   useEffect(() => {
     setSubmitError(undefined);
     setTitleError(undefined);
@@ -146,7 +133,6 @@ const BookmarkUpdateForm: React.FC<Props> = ({ closeModal }) => {
       submitInProcess={submitInProcess}
       submitSuccess={submitSuccess}
       submitError={submitError}
-      onRemove={onRemove}
     />
   );
 };

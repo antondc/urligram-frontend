@@ -33,7 +33,6 @@ interface Props {
   submitSuccess: boolean;
   submitError: string;
   onSubmit: (e: React.FormEvent<HTMLElement>) => void;
-  onRemove: (e: React.FormEvent<HTMLButtonElement>) => void;
 }
 
 export const BookmarkUpdateForm: React.FC<Props> = ({
@@ -52,7 +51,6 @@ export const BookmarkUpdateForm: React.FC<Props> = ({
   submitSuccess,
   submitError,
   onSubmit,
-  onRemove,
 }) => (
   <form className="BookmarkUpdateForm" onSubmit={onSubmit}>
     <Input
@@ -103,19 +101,6 @@ export const BookmarkUpdateForm: React.FC<Props> = ({
       disabled={submitDisabled}
       grow
     />
-    <Hr spacer />
-    <Button
-      text="Remove bookmark"
-      type="submit"
-      variant="delete"
-      onClick={onRemove}
-      error={!!submitError}
-      success={submitSuccess}
-      disabled={submitDisabled}
-      grow
-    />
-    <Hr size="nano" spacer />
-
     <FadeInOut valueToUpdate={!!submitError} speed="fast">
       <Span className="BookmarkUpdateForm-error" size="small">
         {submitError}

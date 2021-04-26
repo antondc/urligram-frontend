@@ -4,6 +4,9 @@ import {
   BOOKMARK_CREATE_SUCCESS,
   BOOKMARK_DELETE_FAILURE,
   BOOKMARK_DELETE_SUCCESS,
+  BOOKMARK_LOAD_BY_ID_FAILURE,
+  BOOKMARK_LOAD_BY_ID_REQUEST,
+  BOOKMARK_LOAD_BY_ID_SUCCESS,
   BOOKMARK_UPDATE_FAILURE,
   BOOKMARK_UPDATE_REQUEST,
   BOOKMARK_UPDATE_SUCCESS,
@@ -40,6 +43,9 @@ export const Bookmarks = (state = initialState, action: BookmarksActions): Bookm
     case BOOKMARKS_RECOMMENDED_REQUEST:
     case BOOKMARKS_RECOMMENDED_SUCCESS:
     case BOOKMARKS_RECOMMENDED_FAILURE:
+    case BOOKMARK_LOAD_BY_ID_REQUEST:
+    case BOOKMARK_LOAD_BY_ID_SUCCESS:
+    case BOOKMARK_LOAD_BY_ID_FAILURE:
       return Object.assign({}, state, action.payload);
     default:
       return Object.assign({}, state);

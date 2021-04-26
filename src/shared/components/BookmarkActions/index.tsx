@@ -8,7 +8,6 @@ import { selectBookmarksById } from 'Modules/Bookmarks/selectors/selectBookmarkB
 import { selectLinkById } from 'Modules/Links/selectors/selectLinkById';
 import { RootState } from 'Modules/rootType';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
-import { switchBookmarkUpdateModal } from 'Modules/Ui/actions/switchBookmarkUpdateModal';
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
 import { BookmarkActions as BookmarkActionsUi } from './BookmarkActions';
 
@@ -67,12 +66,6 @@ export const BookmarkActions: React.FC<Props> = ({ className, linkId, bookmarkId
     setLoading(false);
   };
 
-  const onEdit = async () => {
-    if (!session?.id) return dispatch(switchLoginModal(true));
-    if (!isOwnBookmark) return;
-    await dispatch(switchBookmarkUpdateModal({ mounted: true, bookmarkId: bookmarksSessionBookmark?.id }));
-  };
-
   return (
     <BookmarkActionsUi
       loading={loading}
@@ -80,7 +73,6 @@ export const BookmarkActions: React.FC<Props> = ({ className, linkId, bookmarkId
       userBookmarkedLink={userBookmarkedLink}
       onBookmarkGrab={onBookmarkGrab}
       onBookmarkDelete={onBookmarkDelete}
-      onEdit={onEdit}
       className={className}
     />
   );
