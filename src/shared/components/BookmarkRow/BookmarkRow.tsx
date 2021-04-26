@@ -39,10 +39,10 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
     onMouseLeave={onBookmarkRowMouseLeave}
   >
     <div className="BookmarkRow-left">
-      <Flex vertical="center" growVertical={false} horizontal="left" noWrap>
-        <img className="LinkRow-favicon" src={favicon} />
-        <Span bold className="LinkRow-title">
-          <A href={url} targetBlank styled={false}>
+      <Flex vertical="top" growVertical={false} horizontal="left" noWrap>
+        <img className="BookmarkRow-favicon" src={favicon} />
+        <Span bold className="BookmarkRow-title">
+          <A className="BookmarkRow-link" href={url} targetBlank styled={false}>
             {title}
           </A>
         </Span>
@@ -75,14 +75,14 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
         <Vote className="BookmarkRow-icon " vote={statistics?.vote} changeVote={onVote} loading={statistics?.loading} />
       </Flex>
       <div className="BookmarkRow-stats">
-        <Span size="micro" className="LinkRow-stat">
-          <Span size="small" className="LinkRow-statIcon">
+        <Span size="micro" className="BookmarkRow-stat">
+          <Span size="small" className="BookmarkRow-statIcon">
             ▲
           </Span>
           {statistics?.absoluteVote || 0}
         </Span>
-        <Span size="micro" className="LinkRow-stat">
-          <Span size="small" className="LinkRow-statIcon">
+        <Span size="micro" className="BookmarkRow-stat">
+          <Span size="small" className="BookmarkRow-statIcon">
             ⚭
           </Span>
           {statistics?.timesBookmarked || 0}

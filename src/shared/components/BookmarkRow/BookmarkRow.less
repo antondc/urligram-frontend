@@ -8,6 +8,7 @@
   flex-wrap: wrap;
   justify-content: space-between;
   grid-template-columns: 3fr 1fr 0fr;
+  height: 45px;
   padding: 8px 13px 7px;
   column-gap: 10px;
 
@@ -40,7 +41,8 @@
   }
 
   &-title {
-    line-height: 19px;
+    margin-top: -3px; // Position diacriticals outside the box
+    line-height: initial;
     white-space: nowrap;
     overflow-x: scroll;
     overflow-y: hidden;
