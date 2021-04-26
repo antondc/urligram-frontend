@@ -4,7 +4,7 @@ import A from 'Components/A';
 import BookmarkActions from 'Components/BookmarkActions';
 import BookmarkLists from 'Components/BookmarkLists';
 import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
-import { Border, Flex, Private, Span, Tag, Vote } from 'Vendor/components';
+import { Border, Edit, Flex, Private, Span, Tag, Vote } from 'Vendor/components';
 
 import './BookmarkRow.less';
 
@@ -69,10 +69,20 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
       ))}
     </div>
     <div className="BookmarkRow-right">
-      <Flex horizontal="right" growVertical={false} vertical="bottom" noWrap>
-        {!!sessionUserBookmarkedLink && <BookmarkLists bookmarkId={id} />}
+      <Flex horizontal="right" growVertical={false} vertical="top" noWrap>
+        {!!sessionUserBookmarkedLink && (
+          <>
+            <BookmarkLists bookmarkId={id} />
+            <Edit size="micro" className="BookmarkRow-icon BookmarkRow-edit" />
+          </>
+        )}
         {!!isPrivate && <Private size="micro" className="BookmarkRow-icon BookmarkRow-private" />}
-        <Vote className="BookmarkRow-icon " vote={statistics?.vote} changeVote={onVote} loading={statistics?.loading} />
+        <Vote
+          className="BookmarkRow-icon BookmarkRow-vote"
+          vote={statistics?.vote}
+          changeVote={onVote}
+          loading={statistics?.loading}
+        />
       </Flex>
       <div className="BookmarkRow-stats">
         <Span size="micro" className="BookmarkRow-stat">

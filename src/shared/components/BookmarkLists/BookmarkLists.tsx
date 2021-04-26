@@ -62,7 +62,7 @@ export const BookmarkLists: React.FC<Props> = ({
   onIconLeave,
 }) => (
   <span className="BookmarkLists" id={`BookmarkLists-${bookmarkId}`}>
-    <List className="BookmarkLists-listIcon" size="small" onClick={onListsClick} />
+    <List className="BookmarkLists-listIcon" size="micro" onClick={onListsClick} />
     <RenderInPortal elementId={`BookmarkLists-portal--${bookmarkId}`}>
       <Fade mounted={mounted}>
         <PopOver elementId={`BookmarkLists-${bookmarkId}`} placement="right-start">

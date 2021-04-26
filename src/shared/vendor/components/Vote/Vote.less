@@ -5,25 +5,21 @@
 @{c} {
   display: flex;
   position: relative;
+  width: 17px;
   opacity: 1;
 
   &-icon {
-    height: 12px;
-    width: 12px;
-    min-height: 12px;
-    min-width: 12px;
-
     path {
       fill: @c-background;
-      stroke-width: 8px;
       transition: fill @td-fastest @ease;
+      stroke-width: 8px;
       stroke-dasharray: 1;
     }
   }
 
   &-minus {
     stroke: @c-accent;
-    transform: rotate(180deg) translateX(-4px);
+    transform: rotate(180deg);
 
     &--active {
       path {
@@ -35,6 +31,7 @@
 
   &-plus {
     stroke: @c-accent;
+    transform: translateX(-3px);
 
     &--active {
       path {

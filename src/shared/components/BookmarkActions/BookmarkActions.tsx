@@ -32,23 +32,24 @@ export const BookmarkActions: React.FC<Props> = ({
   <div className={'BookmarkActions' + (className ? ' ' + className : '')}>
     {!loading && isOwnBookmark && (
       <>
-        <BookmarkFilled className="BookmarkActions-bookmark BookmarkActions-bookmarkFilled" />
-        <EditCircle className="BookmarkActions-edit" size="medium" onClick={onEdit} />
+        <BookmarkFilled className="BookmarkActions-bookmark BookmarkActions-bookmarkFilled" size="small" />
+        <EditCircle className="BookmarkActions-edit" size="small" onClick={onEdit} />
       </>
     )}
     {!loading && !isOwnBookmark && !userBookmarkedLink && (
       <BookmarkWithBackground
         className={'BookmarkActions-bookmark BookmarkActions-bookmarkEmpty'}
+        size="small"
         onClick={onBookmarkGrab}
       />
     )}
     {!loading && !isOwnBookmark && userBookmarkedLink && (
       <>
-        <BookmarkWithBackground className="BookmarkActions-bookmarked" />
-        <PlusCircleWithBackground className="BookmarkActions-bookmarkRemove" onClick={onBookmarkDelete} />
+        <BookmarkWithBackground className="BookmarkActions-bookmarked" size="small" />
+        <PlusCircleWithBackground className="BookmarkActions-bookmarkRemove" size="small" onClick={onBookmarkDelete} />
       </>
     )}
-    {loading && <SpinnerLoader className="BookmarkActions-loader" size="nano" />}
+    {loading && <SpinnerLoader className="BookmarkActions-loader" size="small" />}
   </div>
 );
 

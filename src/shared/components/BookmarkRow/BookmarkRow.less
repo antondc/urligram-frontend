@@ -90,11 +90,6 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-end;
-    padding: 1px 5px 0;
-
-    @media @br-mobile {
-      padding: 0;
-    }
   }
 
   &-image {
@@ -107,7 +102,7 @@
   }
 
   &-icon {
-    flex-shrink: 0;
+    //
   }
 
   &-private {
@@ -117,9 +112,12 @@
   &-edit {
     .hoverTransition(0.5);
 
-    margin-left: 5px;
-    fill: @c-traslucid--hardest;
+    margin-left: 4px;
     transition: fill @td-fast @ease, transform @td-fast @ease;
+  }
+
+  &-vote {
+    margin-left: 2px;
   }
 
   &--pending {
@@ -156,10 +154,10 @@
 
   &-actionButton {
     position: absolute;
-    height: 18px;
-    width: 18px;
+    height: 14px;
+    width: 14px;
     top: -5px;
-    right: 9px;
+    right: 5px;
     border-radius: 50%;
   }
 }

@@ -43,6 +43,7 @@ const props = {
     loading: false,
   },
   onVote: noop,
+  sessionUserBookmarkedLink: true,
 };
 
 const knobs = {
