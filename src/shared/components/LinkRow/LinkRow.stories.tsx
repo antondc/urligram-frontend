@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { ProviderWrapper } from 'Tools/storybook/provider';
 import { FadeInOut, Hr } from 'Vendor/components';
 import { boolean, withKnobs } from '@storybook/addon-knobs';
 import { LinkRow } from './LinkRow';
@@ -51,31 +52,33 @@ const knobs = {
 };
 
 export const Default: React.ReactNode = () => (
-  <FadeInOut valueToUpdate={knobs.skeleton()} speed="fastest" appear>
-    {!knobs.skeleton() ? (
-      <>
-        <LinkRow {...props} />
-        <Hr size="small" spacer />
-        <LinkRow {...props} />
-        <Hr size="small" spacer />
-        <LinkRow {...props} />
-        <Hr size="small" spacer />
-        <LinkRow {...props} />
-        <Hr size="small" spacer />
-        <LinkRow {...props} />
-      </>
-    ) : (
-      <>
-        <LinkRowSkeleton {...props} />
-        <Hr size="small" spacer />
-        <LinkRowSkeleton {...props} />
-        <Hr size="small" spacer />
-        <LinkRowSkeleton {...props} />
-        <Hr size="small" spacer />
-        <LinkRowSkeleton {...props} />
-        <Hr size="small" spacer />
-        <LinkRowSkeleton {...props} />
-      </>
-    )}
-  </FadeInOut>
+  <ProviderWrapper>
+    <FadeInOut valueToUpdate={knobs.skeleton()} speed="fastest" appear>
+      {!knobs.skeleton() ? (
+        <>
+          <LinkRow {...props} />
+          <Hr size="small" spacer />
+          <LinkRow {...props} />
+          <Hr size="small" spacer />
+          <LinkRow {...props} />
+          <Hr size="small" spacer />
+          <LinkRow {...props} />
+          <Hr size="small" spacer />
+          <LinkRow {...props} />
+        </>
+      ) : (
+        <>
+          <LinkRowSkeleton {...props} />
+          <Hr size="small" spacer />
+          <LinkRowSkeleton {...props} />
+          <Hr size="small" spacer />
+          <LinkRowSkeleton {...props} />
+          <Hr size="small" spacer />
+          <LinkRowSkeleton {...props} />
+          <Hr size="small" spacer />
+          <LinkRowSkeleton {...props} />
+        </>
+      )}
+    </FadeInOut>
+  </ProviderWrapper>
 );

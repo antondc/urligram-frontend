@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { ProviderWrapper } from 'Tools/storybook/provider';
 import { FadeInOut } from 'Vendor/components';
 import { boolean, withKnobs } from '@storybook/addon-knobs';
 import { UserRow } from './UserRow';
@@ -109,7 +110,9 @@ const knobs = {
 };
 
 export const Default: React.ReactNode = () => (
-  <FadeInOut valueToUpdate={knobs.skeleton()} speed="fastest">
-    {!knobs.skeleton() ? <UserRow {...props} /> : <UserRowSkeleton id="1" />}
-  </FadeInOut>
+  <ProviderWrapper>
+    <FadeInOut valueToUpdate={knobs.skeleton()} speed="fastest">
+      {!knobs.skeleton() ? <UserRow {...props} /> : <UserRowSkeleton id="1" />}
+    </FadeInOut>
+  </ProviderWrapper>
 );

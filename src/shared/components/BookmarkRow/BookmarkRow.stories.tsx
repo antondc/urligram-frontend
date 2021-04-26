@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { ProviderWrapper } from 'Tools/storybook/provider';
 import { FadeInOut, Hr } from 'Vendor/components';
 import { boolean, withKnobs } from '@storybook/addon-knobs';
 import { BookmarkRow } from './BookmarkRow';
@@ -49,31 +50,33 @@ const knobs = {
 };
 
 export const Default: React.ReactNode = () => (
-  <FadeInOut valueToUpdate={knobs.skeleton()} speed="fastest" appear>
-    {!knobs.skeleton() ? (
-      <>
-        <BookmarkRow {...props} />
-        <Hr size="small" spacer />
-        <BookmarkRow {...props} />
-        <Hr size="small" spacer />
-        <BookmarkRow {...props} />
-        <Hr size="small" spacer />
-        <BookmarkRow {...props} />
-        <Hr size="small" spacer />
-        <BookmarkRow {...props} />
-      </>
-    ) : (
-      <>
-        <BookmarkRowSkeleton {...props} />
-        <Hr size="small" spacer />
-        <BookmarkRowSkeleton {...props} />
-        <Hr size="small" spacer />
-        <BookmarkRowSkeleton {...props} />
-        <Hr size="small" spacer />
-        <BookmarkRowSkeleton {...props} />
-        <Hr size="small" spacer />
-        <BookmarkRowSkeleton {...props} />
-      </>
-    )}
-  </FadeInOut>
+  <ProviderWrapper>
+    <FadeInOut valueToUpdate={knobs.skeleton()} speed="fastest" appear>
+      {!knobs.skeleton() ? (
+        <>
+          <BookmarkRow {...props} />
+          <Hr size="small" spacer />
+          <BookmarkRow {...props} />
+          <Hr size="small" spacer />
+          <BookmarkRow {...props} />
+          <Hr size="small" spacer />
+          <BookmarkRow {...props} />
+          <Hr size="small" spacer />
+          <BookmarkRow {...props} />
+        </>
+      ) : (
+        <>
+          <BookmarkRowSkeleton {...props} />
+          <Hr size="small" spacer />
+          <BookmarkRowSkeleton {...props} />
+          <Hr size="small" spacer />
+          <BookmarkRowSkeleton {...props} />
+          <Hr size="small" spacer />
+          <BookmarkRowSkeleton {...props} />
+          <Hr size="small" spacer />
+          <BookmarkRowSkeleton {...props} />
+        </>
+      )}
+    </FadeInOut>
+  </ProviderWrapper>
 );

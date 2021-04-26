@@ -1,6 +1,7 @@
 import React from 'react';
 
 import SidebarBlock from 'Components/SidebarBlock';
+import { ProviderWrapper } from 'Tools/storybook/provider';
 import { boolean, withKnobs } from '@storybook/addon-knobs';
 import SidebarTags from '.';
 
@@ -18,9 +19,11 @@ const knobs = {
 };
 
 export const Default: React.ReactNode = () => (
-  <div style={{ padding: '30px', width: '400px' }}>
-    <SidebarBlock loading={knobs.skeleton()} title="My Tags" href="test-url">
-      <SidebarTags items={props.tags} />
-    </SidebarBlock>
-  </div>
+  <ProviderWrapper>
+    <div style={{ padding: '30px', width: '400px' }}>
+      <SidebarBlock loading={knobs.skeleton()} title="My Tags" href="test-url">
+        <SidebarTags items={props.tags} />
+      </SidebarBlock>
+    </div>
+  </ProviderWrapper>
 );
