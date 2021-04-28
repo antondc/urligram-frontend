@@ -3,47 +3,52 @@
 @c: .UserRow;
 
 @{c} {
-  display: flex;
+  display: grid;
   position: relative;
-  flex-wrap: nowrap;
-  padding: 9px 19px;
+  grid-template: 'left center right' auto / 1fr 2fr 0fr;
+  height: 45px;
+  padding: 8px 13px 7px;
+  column-gap: 10px;
+
+  @media @br-mobile {
+    grid-template:
+      'left right' auto
+      '. .' 5px
+      'center center' auto
+      'center center' auto
+      / 1fr 0fr;
+    height: unset;
+  }
 
   &-left {
     display: flex;
     flex-direction: column;
     flex-shrink: 0;
-    margin-right: 10px;
-    padding-top: 4px;
+    grid-area: left;
   }
 
   &-center {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    align-content: space-between;
-    flex: 1;
-    height: 36px;
-    max-height: 36px;
-    margin-right: 6px;
-    padding-top: 2px;
+    align-items: flex-end;
+    grid-area: center;
     overflow-x: scroll;
-    overflow-y: hidden;
+    overflow-y: visible;
 
     .hideScrollbar;
   }
 
   &-tag {
-    margin-bottom: 4px;
-    margin-right: 4px;
+    margin-right: 5px;
   }
 
   &-right {
     flex-shrink: 0;
+    grid-area: right;
   }
 
   &-image {
-    height: 37px;
-    width: 37px;
+    height: 27px;
+    width: 27px;
     border-radius: 50%;
   }
 
