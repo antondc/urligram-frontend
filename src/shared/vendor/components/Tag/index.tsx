@@ -16,16 +16,23 @@ interface Props extends Omit<HTMLProps<HTMLDivElement>, 'size'> {
   notification?: NotificationDot;
 }
 
-export const Tag: React.FC<Props> = ({ children, size = 'small', variant, notification, className, ...props }) => {
+export const Tag: React.FC<Props> = ({
+  children,
+  size = 'small',
+  variant = 'simple',
+  notification,
+  className,
+  ...props
+}) => {
   const sizeMap = {
     nano: 'nano',
     small: 'micro',
-    medium: 'micro',
+    medium: 'small',
   };
 
   const boldMap = {
-    nano: true,
-    small: true,
+    nano: false,
+    small: false,
     medium: true,
     big: true,
   };

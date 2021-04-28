@@ -17,9 +17,10 @@ import './ListFollowButton.less';
 interface Props {
   listId: number;
   className?: string;
+  size?: 'small' | 'normal';
 }
 
-export const ListFollowButton: React.FC<Props> = ({ listId, className }) => {
+export const ListFollowButton: React.FC<Props> = ({ listId, className, size }) => {
   const dispatch = useDispatch();
   const list = useSelector((state: RootState) => selectListById(state, { id: listId }));
   const session = useSelector(selectSession);
@@ -64,6 +65,7 @@ export const ListFollowButton: React.FC<Props> = ({ listId, className }) => {
 
   return (
     <ListFollowButtonUi
+      size={size}
       loading={listLoading}
       onEdit={onEdit}
       recentlyChanged={recentlyChanged}

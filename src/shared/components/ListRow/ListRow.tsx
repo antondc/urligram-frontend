@@ -41,7 +41,7 @@ export const ListRow: React.FC<Props> = ({ id, name, tags, bookmarksIds, members
       ))}
     </div>
     <div className="ListRow-right">
-      <ListFollowButton listId={id} />
+      <ListFollowButton listId={id} size="small" />
       <Flex horizontal="right" growVertical={false} vertical="bottom" noWrap>
         <Bookmark size="nano" className="ListRow-icon" />
         <Span size="micro" className="ListRow-iconText">

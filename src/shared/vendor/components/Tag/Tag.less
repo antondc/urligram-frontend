@@ -5,6 +5,7 @@
 @{c} {
   position: relative;
   font-family: @ff-sans;
+  text-transform: capitalize;
 
   &-content {
     display: flex;
@@ -26,7 +27,6 @@
       color: @c-accent;
       border-color: @c-accent;
       cursor: pointer;
-      box-shadow: 2px 2px 0 0 @c-accent;
     }
   }
 
@@ -36,44 +36,37 @@
     right: -3px;
   }
 
-  &--medium {
-    @{c}-content {
-      font-size: @fs-micro;
-      border: 1.5px solid @c-base;
-      box-shadow: 2px 2px 0 0 @c-base;
-
-      &:hover {
-        border: 1.5px solid @c-accent;
-      }
-    }
-  }
-
-  &--dark {
-    @{c}-content {
-      color: @c-background;
-      background: @c-base;
-      box-shadow: 2px 2px 0 0 @c-background, 4px 4px 0 0 @c-base;
-
-      &:hover {
-        color: @c-background;
-        background: @c-accent;
-        box-shadow: 2px 2px 0 0 @c-background, 4px 4px 0 0 @c-accent;
-      }
-    }
-  }
-
   &--simple {
     @{c}-content {
-      padding: 1px 7px;
-      font-size: @fs-nano;
       color: @c-base;
-      border: 1.5px solid @c-base;
+      border: 2px solid @c-base;
       box-shadow: none;
       border-radius: 4px;
+    }
 
-      &:hover {
+    &@{c}--nano {
+      @{c}-content {
+        padding: 1px 4px;
+        border: 1px solid @c-base;
+      }
+    }
+
+    &@{c}--small {
+      @{c}-content {
+        padding: 1px 4px;
+      }
+    }
+
+    &@{c}--medium {
+      @{c}-content {
+        padding: 2px 8px;
+      }
+    }
+
+    &:hover {
+      @{c}-content {
         color: @c-accent;
-        border: 1.5px solid @c-accent;
+        border-color: @c-accent;
         box-shadow: none;
       }
     }
