@@ -5,7 +5,7 @@
 @{c} {
   display: grid;
   position: relative;
-  grid-template: 'left center right' auto / 1fr 2fr 0fr;
+  grid-template: 'left center right' auto / 1fr 1fr 0fr;
   height: 45px;
   padding: 8px 13px 7px;
   column-gap: 10px;
@@ -23,8 +23,16 @@
   &-left {
     display: flex;
     flex-direction: column;
-    flex-shrink: 0;
     grid-area: left;
+    overflow: hidden;
+  }
+
+  &-details {
+    white-space: nowrap;
+    overflow-x: scroll;
+    overflow-y: hidden;
+
+    .hideScrollbar;
   }
 
   &-center {
@@ -54,11 +62,11 @@
 
   &-followButton {
     position: absolute;
-    height: 20px;
-    width: 20px;
-    top: -5px;
-    right: 9px;
-    outline: 2px solid @c-background;
+    height: 12px;
+    width: 12px;
+    top: 4px;
+    right: 6px;
+    outline: 1px solid @c-background;
     border-radius: 50%;
   }
 }

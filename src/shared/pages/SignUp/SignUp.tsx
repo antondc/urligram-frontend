@@ -115,7 +115,7 @@ export const SignUp: React.FC<Props> = ({
           </FadeInOut>
           <Hr size="normal" spacer />
           <Button
-            text="Enter"
+            text="Submit"
             type="submit"
             onClick={onSubmit}
             error={!!submitError}

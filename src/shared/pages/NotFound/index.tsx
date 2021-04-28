@@ -22,8 +22,8 @@ const NotFound: React.FC = () => {
         <P>
           <Span bold>
             But you can continue searching for{' '}
-            <A href={Routes.Links.route} frontend underlined>
-              links
+            <A href={Routes.Home.route} frontend underlined>
+              bookmarks
             </A>
             ,{' '}
             <A href={Routes.Lists.route} frontend underlined>

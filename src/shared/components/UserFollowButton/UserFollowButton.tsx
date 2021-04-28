@@ -29,7 +29,7 @@ export const UserFollowButton: React.FC<Props> = ({
         className={
           'UserFollowButton-listFollowed ' + (recentlyChanged ? ' UserFollowButton-listFollowed--recentlyChanged' : '')
         }
-        size="normal"
+        size="micro"
         onClick={onUnfollow}
       />
     )}
@@ -39,7 +39,7 @@ export const UserFollowButton: React.FC<Props> = ({
           'UserFollowButton-listNotFollowed' +
           (recentlyChanged ? ' UserFollowButton-listNotFollowed--recentlyChanged' : '')
         }
-        size="normal"
+        size="micro"
         onClick={onFollow}
       />
     )}

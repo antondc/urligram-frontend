@@ -7,19 +7,25 @@
   position: relative;
   flex-wrap: wrap;
   justify-content: space-between;
-  grid-template-columns: 1fr 1fr 0.55fr;
+  grid-template: 'left center right' auto / 1fr 2fr 0fr;
   padding: 8px 13px 7px;
   column-gap: 10px;
 
   @media @br-mobile {
-    grid-template-columns: 1fr 0fr;
-    padding: 8px 13px 3px;
+    grid-template:
+      'left right' auto
+      '. .' 5px
+      'center center' auto
+      'center center' auto
+      / 1fr 0fr;
+    height: unset;
   }
 
   &-left {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    grid-area: left;
     overflow: hidden;
   }
 
@@ -44,8 +50,6 @@
 
   &-description {
     position: relative;
-    font-size: @fs-small;
-    line-height: 12px;
     white-space: nowrap;
     overflow: hidden;
     overflow-x: scroll;
@@ -58,17 +62,11 @@
   &-center {
     display: flex;
     align-items: flex-end;
+    grid-area: center;
     overflow-x: scroll;
     overflow-y: visible;
 
     .hideScrollbar;
-
-    @media @br-mobile {
-      grid-column: auto / span 2;
-      margin: 0;
-      padding: 5px 0 2px;
-      order: 1;
-    }
   }
 
   &-tag {
@@ -80,11 +78,7 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-end;
-
-    @media @br-mobile {
-      justify-content: flex-end;
-      padding: 0;
-    }
+    grid-area: right;
   }
 
   &-image {
@@ -120,10 +114,6 @@
     line-height: 7px;
     text-align: end;
     white-space: nowrap;
-
-    @media @br-mobile {
-      line-height: 12px;
-    }
   }
 
   &-icon {

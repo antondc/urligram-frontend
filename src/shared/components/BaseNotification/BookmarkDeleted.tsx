@@ -7,19 +7,6 @@ interface Props {
   notification: NotificationState;
 }
 
-const BookmarkDeleted: React.FC<Props> = () => (
-  <div>
-    <div>
-      <Span bold size="normal">
-        Your bookmark was successfully deleted
-      </Span>
-    </div>
-    <Span size="small">
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempore, nisi quaerat ad aliquid nostrum perferendis
-      eveniet vitae minus temporibus reprehenderit provident, odio veritatis id molestiae excepturi? Vitae beatae
-      perspiciatis modi!
-    </Span>
-  </div>
-);
+const BookmarkDeleted: React.FC<Props> = () => <Span size="normal">Your bookmark was successfully deleted</Span>;
 
 export default BookmarkDeleted;

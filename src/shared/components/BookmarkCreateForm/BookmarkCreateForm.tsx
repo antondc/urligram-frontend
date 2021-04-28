@@ -142,7 +142,7 @@ export const BookmarkCreateForm: React.FC<Props> = ({
           <Hr spacer />
           <Hr size="big" spacer />
           <Button
-            text="Enter"
+            text="Save"
             type="submit"
             onClick={onSubmit}
             error={!!submitError}

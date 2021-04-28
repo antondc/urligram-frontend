@@ -66,7 +66,7 @@ export const LoginForm: React.FC<Props> = ({
     </FadeInOut>
     <Hr size="big" spacer />
     <Button
-      text="Enter"
+      text="Submit"
       type="submit"
       onClick={onSubmit}
       error={!!submitError}

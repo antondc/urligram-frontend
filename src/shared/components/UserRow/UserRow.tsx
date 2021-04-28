@@ -34,20 +34,35 @@ export const UserRow: React.FC<UserRow> = ({
           @{name}
         </Span>
       </A>
-      <Span size="nano">
-        <A href={`users/${id}/lists`} styled frontend disabled={!ammountLists}>
-          {ammountLists} lists
-        </A>
-        <span className="UserRow-dot">·</span>
-        <A href={`users/${id}/bookmarks`} styled frontend disabled={!ammountBookmarks}>
-          {ammountBookmarks} bookmarks
-        </A>
-        <span className="UserRow-dot">·</span>
-        <A href={`users/${id}`} styled frontend disabled={!connections}>
-          {connections} connections
-        </A>
-        <span className="UserRow-dot">·</span> {sinceTranslation?.toLocaleLowerCase()} {createdAtFormatted}
-      </Span>
+      <div className="UserRow-details">
+        <Span size="nano">
+          <A href={`users/${id}/lists`} styled frontend disabled={!ammountLists}>
+            {ammountLists} lists
+          </A>
+        </Span>
+        <Span className="UserRow-dot" size="nano">
+          ·
+        </Span>
+        <Span size="nano">
+          <A href={`users/${id}/bookmarks`} styled frontend disabled={!ammountBookmarks}>
+            {ammountBookmarks} bookmarks
+          </A>
+        </Span>
+        <Span className="UserRow-dot" size="nano">
+          ·
+        </Span>
+        <Span size="nano">
+          <A href={`users/${id}`} styled frontend disabled={!connections}>
+            {connections} connections
+          </A>
+        </Span>
+        <Span className="UserRow-dot" size="nano">
+          ·
+        </Span>
+        <Span size="nano">
+          {sinceTranslation?.toLocaleLowerCase()} {createdAtFormatted}
+        </Span>
+      </div>
     </div>
     <div className="UserRow-center">
       {tags?.map((item) => (

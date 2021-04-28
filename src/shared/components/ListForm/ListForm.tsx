@@ -96,7 +96,7 @@ export const ListForm: React.FC<Props> = ({
     </FadeInOut>
     <Hr size="big" spacer />
     <Button
-      text="Enter"
+      text="Save"
       type="submit"
       onClick={onSubmit}
       error={!!submitError}

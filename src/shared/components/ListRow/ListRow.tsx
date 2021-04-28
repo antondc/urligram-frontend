@@ -20,7 +20,7 @@ export const ListRow: React.FC<Props> = ({ id, name, tags, bookmarksIds, members
           {name}
         </A>
       </Span>
-      <Span className="ListRow-description" size="small">
+      <Span className="ListRow-description" size="micro">
         {description}
         <Space />
       </Span>
