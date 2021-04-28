@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { EditCircle, PlusCircleWithBackground, SpinnerLoader } from 'Vendor/components';
+import { EditCircle, Flex, PlusCircleWithBackground, Private, SpinnerLoader } from 'Vendor/components';
 
 import './ListFollowButton.less';
 
@@ -9,8 +9,8 @@ interface Props {
   sessionUserOwnsList: boolean;
   sessionUserFollowsList: boolean;
   loading: boolean;
-  image: string;
   recentlyChanged: boolean;
+  isPrivate: boolean;
   onEdit: () => void;
   onMouseOut: () => void;
   onUnfollowList: () => void;
@@ -19,44 +19,37 @@ interface Props {
 
 export const ListFollowButton: React.FC<Props> = ({
   className,
-  image,
   loading,
   recentlyChanged,
   sessionUserOwnsList,
   sessionUserFollowsList,
+  isPrivate,
   onEdit,
   onMouseOut,
   onUnfollowList,
   onFollowList,
 }) => (
-  <div className={'ListFollowButton ' + (className ? ' ' + className : '')} onMouseOut={onMouseOut}>
-    {sessionUserOwnsList && (
-      <>
-        <img className="ListFollowButton-userLogo" src={image} />
-        <EditCircle className="ListFollowButton-listEdit" size="medium" onClick={onEdit} />
-      </>
-    )}
-    {!sessionUserOwnsList && sessionUserFollowsList && (
+  <Flex className={className} growVertical={false} vertical="top" horizontal="right" noWrap onMouseOut={onMouseOut}>
+    {isPrivate && <Private size="micro" className="ListRow-private" />}
+    {!sessionUserOwnsList && !loading && sessionUserFollowsList && (
       <PlusCircleWithBackground
-        className={
-          'ListFollowButton-listFollowed ' + (recentlyChanged ? ' ListFollowButton-listFollowed--recentlyChanged' : '')
-        }
-        size="medium"
+        className={'ListRow-listFollowed ' + (recentlyChanged ? ' ListRow-listFollowed--recentlyChanged' : '')}
+        size="small"
         onClick={onUnfollowList}
+        onMouseOut={onMouseOut}
       />
     )}
-    {!sessionUserOwnsList && !sessionUserFollowsList && (
+    {!sessionUserOwnsList && !loading && !sessionUserFollowsList && (
       <PlusCircleWithBackground
-        className={
-          'ListFollowButton-listNotFollowed' +
-          (recentlyChanged ? ' ListFollowButton-listNotFollowed--recentlyChanged' : '')
-        }
-        size="medium"
+        className={'ListRow-listNotFollowed' + (recentlyChanged ? ' ListRow-listNotFollowed--recentlyChanged' : '')}
+        size="small"
         onClick={onFollowList}
+        onMouseOut={onMouseOut}
       />
     )}
-    {loading && <SpinnerLoader className="ListFollowButton-loader" size="nano" />}
-  </div>
+    {sessionUserOwnsList && !loading && <EditCircle className="ListRow-listEdit" size="small" onClick={onEdit} />}
+    {loading && <SpinnerLoader className="ListRow-loader" size="small" />}
+  </Flex>
 );
 
 export default ListFollowButton;

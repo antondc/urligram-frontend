@@ -1,8 +1,8 @@
 import React from 'react';
 
 import { ListRowSkeleton } from 'Components/ListRow/ListRowSkeleton';
-import { Hr } from 'Vendor/components';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
+import { Hr } from 'Vendor/components';
 
 interface Props {
   length?: number;

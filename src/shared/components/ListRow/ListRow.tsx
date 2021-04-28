@@ -3,18 +3,16 @@ import React from 'react';
 import A from 'Components/A';
 import { ListState } from 'Modules/Lists/lists.types';
 import { SessionState } from 'Modules/Session/session.types';
-import { Bookmark, Border, Flex, Private, Space, Span, Tag, User } from 'Vendor/components';
+import { Bookmark, Border, Flex, Space, Span, Tag, User } from 'Vendor/components';
 import ListFollowButton from '../ListFollowButton';
 
 import './ListRow.less';
 
 interface Props extends Partial<ListState> {
   session?: SessionState;
-  onEdit: () => void;
-  onPrivateSwitch: () => void;
 }
 
-export const ListRow: React.FC<Props> = ({ id, name, tags, bookmarksIds, members, description, isPrivate }) => (
+export const ListRow: React.FC<Props> = ({ id, name, tags, bookmarksIds, members, description }) => (
   <Border grow className="ListRow" data-test-id="ListRow" key={id}>
     <div className="ListRow-left">
       <Span size="normal" bold className="ListRow-title">
@@ -43,8 +41,8 @@ export const ListRow: React.FC<Props> = ({ id, name, tags, bookmarksIds, members
       ))}
     </div>
     <div className="ListRow-right">
-      <Flex horizontal="right" noWrap vertical="bottom">
-        {isPrivate && <Private size="nano" className="ListRow-stat ListRow-private" />}
+      <ListFollowButton listId={id} />
+      <Flex horizontal="right" growVertical={false} vertical="bottom" noWrap>
         <Bookmark size="nano" className="ListRow-icon" />
         <Span size="micro" className="ListRow-iconText">
           {bookmarksIds?.length || 0}
@@ -55,7 +53,6 @@ export const ListRow: React.FC<Props> = ({ id, name, tags, bookmarksIds, members
         </Span>
       </Flex>
     </div>
-    <ListFollowButton listId={id} className="ListRow-followButton" />
   </Border>
 );
 

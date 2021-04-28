@@ -129,6 +129,7 @@ const ListForm: React.FC<Props> = ({ closeModal }) => {
 
     setTimeout(() => {
       closeModal();
+      history.push(`/${currentLanguageSlug}/users/${sessionId}/lists`);
     }, DELAY_SLOW_MS);
   };
 

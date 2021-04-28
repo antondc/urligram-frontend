@@ -103,10 +103,7 @@
   }
 
   &-private {
-    .hoverTransition(0.5);
-
-    margin-left: 5px;
-    fill: @c-error;
+    margin-right: 5px;
   }
 
   &-stats {
@@ -135,13 +132,56 @@
     line-height: 0;
   }
 
-  &-followButton {
-    position: absolute;
-    height: 20px;
-    width: 20px;
-    top: -5px;
-    right: 9px;
-    outline: 2px solid @c-background;
+  &-listEdit {
+    .hoverTransition;
+  }
+
+  &-listEdit,
+  &-listFollowed,
+  &-listNotFollowed,
+  &-loader {
+    transition: transform @td-fastest @ease, fill @td-fastest @ease, opacity @td-fastest @ease;
+
+    path[data-id='background'] {
+      opacity: 1;
+      fill: @c-background;
+    }
+  }
+
+  &-loader {
     border-radius: 50%;
+    background: @c-background;
+    fill: @c-background;
+    stroke: @c-success;
+  }
+
+  &-listNotFollowed {
+    fill: @c-accentLight;
+
+    &:hover {
+      fill: @c-success;
+    }
+
+    &--recentlyChanged {
+      &:hover {
+        fill: @c-accentLight;
+      }
+    }
+  }
+
+  &-listFollowed {
+    fill: @c-success;
+
+    &:hover {
+      fill: @c-error;
+      transform: rotate(-45deg);
+    }
+
+    &--recentlyChanged {
+      &:hover {
+        fill: @c-success;
+        transform: rotate(-0);
+      }
+    }
   }
 }

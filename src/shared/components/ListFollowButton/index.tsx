@@ -24,27 +24,29 @@ export const ListFollowButton: React.FC<Props> = ({ listId, className }) => {
   const list = useSelector((state: RootState) => selectListById(state, { id: listId }));
   const session = useSelector(selectSession);
   const listLoading = useSelector((state: RootState) => selectListLoading(state, { id: listId }));
-  const sessionUserFollowsList = list?.members?.some((item) => item.id === session?.id);
-  const sessionUserOwnsList = list?.userId === session?.id;
   const [recentlyChanged, setRecentlyChanged] = useState<boolean>(false);
+  const sessionUserFollowsList = list?.members?.some((item) => item.id === session?.id);
+  const sessionUserOwnsList = session?.id === list?.userId;
 
   const onEdit = async () => {
     if (!session?.id) return dispatch(switchLoginModal(true));
+    if (!listId) return;
 
-    await dispatch(switchListModal({ mounted: true, listId: list?.id }));
+    await dispatch(switchListModal({ mounted: true, listId }));
+    // loadMainContent();
   };
 
   const onFollowList = async () => {
     if (!session?.id) return dispatch(switchLoginModal(true));
     if (sessionUserFollowsList) return;
-    await dispatch(listFollow({ listId: listId, userId: session?.id }));
+    await dispatch(listFollow({ listId, userId: session?.id }));
     setRecentlyChanged(true);
   };
 
   const onUnfollowList = async () => {
     if (!session?.id) return dispatch(switchLoginModal(true));
     if (!sessionUserFollowsList) return;
-    await dispatch(listUnfollow({ listId: listId, userId: session?.id }));
+    await dispatch(listUnfollow({ listId, userId: session?.id }));
     setRecentlyChanged(true);
   };
 
@@ -53,9 +55,7 @@ export const ListFollowButton: React.FC<Props> = ({ listId, className }) => {
   };
 
   useEffect(() => {
-    const recentlyChangedTimeout = setTimeout(() => {
-      !recentlyChanged && setRecentlyChanged(false);
-    }, DELAY_THREE_SEC);
+    const recentlyChangedTimeout = setTimeout(() => setRecentlyChanged(false), DELAY_THREE_SEC);
 
     return () => {
       clearTimeout(recentlyChangedTimeout);
@@ -64,7 +64,6 @@ export const ListFollowButton: React.FC<Props> = ({ listId, className }) => {
 
   return (
     <ListFollowButtonUi
-      image={session?.image}
       loading={listLoading}
       onEdit={onEdit}
       recentlyChanged={recentlyChanged}
@@ -73,6 +72,7 @@ export const ListFollowButton: React.FC<Props> = ({ listId, className }) => {
       onUnfollowList={onUnfollowList}
       className={className}
       sessionUserOwnsList={sessionUserOwnsList}
+      isPrivate={list?.isPrivate}
       sessionUserFollowsList={sessionUserFollowsList}
     />
   );

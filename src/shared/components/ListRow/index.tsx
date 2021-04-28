@@ -1,62 +1,29 @@
-import React from 'react';
-import { connect, useDispatch, useSelector } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
-import { listUpdate } from 'Modules/Lists/actions/listUpdate';
-import { ListState } from 'Modules/Lists/lists.types';
 import { selectListById } from 'Modules/Lists/selectors/selectListById';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
-import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUserId';
 import { switchListModal } from 'Modules/Ui/actions/switchListModal';
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
+import { DELAY_THREE_SEC } from '../../constants';
+import { listFollow } from '../../redux/modules/Lists/actions/listFollow';
+import { listUnfollow } from '../../redux/modules/Lists/actions/listUnfollow';
+import { selectListLoading } from '../../redux/modules/Lists/selectors/selectListLoading';
+import { RootState } from '../../redux/modules/rootType';
 import { ListRow as ListRowUi } from './ListRow';
 
 import './ListRow.less';
 
 interface Props {
   id: number;
-  list: ListState;
-  sessionId: string;
-  slug?: string;
 }
 
-const ListRow: React.FC<Props> = ({
-  id,
-  list: { userId, name, image, tags, bookmarksIds, description, members, isPrivate } = {},
-}) => {
-  const dispatch = useDispatch();
-  const isLogged = useSelector(selectSessionLoggedIn);
-  const sessionId = useSelector(selectSessionUserId);
+const ListRow: React.FC<Props> = ({ id }) => {
   const session = useSelector(selectSession);
-
-  const sessionUserOwnsList = userId === sessionId;
-
-  const onEdit = async () => {
-    if (!isLogged) return dispatch(switchLoginModal(true));
-    if (!id) return;
-
-    await dispatch(switchListModal({ mounted: true, listId: id }));
-    // loadMainContent();
-  };
-
-  const onPrivateSwitch = async () => {
-    if (!isLogged) return dispatch(switchLoginModal(true));
-    if (!sessionUserOwnsList) return;
-
-    const listData = {
-      listId: id,
-      listName: name,
-      listDescription: description,
-      listIsPrivate: !isPrivate,
-    };
-    const response = await dispatch(listUpdate(listData));
-
-    if (!response.id) {
-      return;
-    }
-  };
+  const { name, image, tags, bookmarksIds, description, members, isPrivate } = useSelector((state: RootState) =>
+    selectListById(state, { id })
+  );
 
   return (
     <ListRowUi
@@ -69,16 +36,8 @@ const ListRow: React.FC<Props> = ({
       image={image}
       tags={tags}
       bookmarksIds={bookmarksIds}
-      onEdit={onEdit}
-      onPrivateSwitch={onPrivateSwitch}
     />
   );
 };
 
-const mapStateToProps = createStructuredSelector({
-  sessionId: selectSessionUserId,
-  slug: selectCurrentLanguageSlug,
-  list: selectListById,
-});
-
-export default connect(mapStateToProps, {})(ListRow);
+export default ListRow;

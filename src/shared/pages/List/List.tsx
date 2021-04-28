@@ -12,7 +12,7 @@ import { ListState } from 'Modules/Lists/lists.types';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
-import { Border, FadeInOut, Flex, H4, Hr, Private, SortBy, Span } from 'Vendor/components';
+import { Border, FadeInOut, Flex, H4, Hr, SortBy, Span } from 'Vendor/components';
 import ListFollowButton from '../../components/ListFollowButton';
 
 import './List.less';
@@ -66,7 +66,6 @@ export const List: React.FC<Props> = ({
           <Flex horizontal="between" noWrap>
             <H4>Bookmarks in {list?.name}</H4>
             <Flex growHorizontal={false} vertical="top">
-              {list?.isPrivate && <Private className="List-icon List-iconIsPrivate" />}
               <ListFollowButton className="List-joinList" listId={list?.id} />
             </Flex>
           </Flex>

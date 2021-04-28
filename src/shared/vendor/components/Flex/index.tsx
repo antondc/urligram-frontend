@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { HTMLProps } from 'react';
 
 import './Flex.less';
 
 export type FlexHorizontal = 'center' | 'right' | 'left' | 'even' | 'around' | 'between';
 export type FlexVertical = 'center' | 'top' | 'bottom';
 
-interface Props {
+interface Props extends HTMLProps<HTMLDivElement> {
   children: React.ReactNode;
+  className?: string;
   horizontal?: FlexHorizontal;
   vertical?: FlexVertical;
   noWrap?: boolean;
@@ -16,11 +17,13 @@ interface Props {
 
 export const Flex: React.FC<Props> = ({
   children,
+  className,
   horizontal,
   vertical,
   noWrap,
   growVertical = true,
   growHorizontal = true,
+  ...props
 }) => (
   <div
     className={
@@ -29,8 +32,10 @@ export const Flex: React.FC<Props> = ({
       (vertical ? ' Flex-vertical--' + vertical : '') +
       (!!noWrap ? ' Flex-noWrap' : '') +
       (!!growVertical ? ' Flex-growVertical' : '') +
-      (!!growHorizontal ? ' Flex-growHorizontal' : '')
+      (!!growHorizontal ? ' Flex-growHorizontal' : '') +
+      (!!className ? ' ' + className : '')
     }
+    {...props}
   >
     {children}
   </div>
