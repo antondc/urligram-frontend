@@ -104,17 +104,6 @@ export const Routes: RoutesInterface = {
     layout: 'withLeftSidebar',
   },
 
-  Links: {
-    name: 'Links',
-    path: '/:lang([a-z]{2})?/links',
-    route: '/links',
-    exact: false,
-    auth: false,
-    initialDataLoadersVisitor: [],
-    initialDataLoadersSession: [],
-    layout: 'withLeftSidebar',
-  },
-
   List: {
     name: 'List',
     path: '/:lang([a-z]{2})?/lists/:listId',

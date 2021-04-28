@@ -1,14 +1,13 @@
 import React from 'react';
 
-import A from 'Components/A';
 import BookmarkRow from 'Components/BookmarkRow';
-import { LinkRowSkeletonGroup } from 'Components/LinkRow/LinkRowSkeletonGroup';
 import Main from 'Components/Main';
 import Sidebar from 'Components/Sidebar';
 import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListUsers from 'Components/SidebarListUsers';
 import { UserState } from 'Modules/Users/users.types';
-import { AIcon, Border, FadeInOut, Flex, H4, Hr, Span, Tag } from 'Vendor/components';
+import { Border, FadeInOut, Flex, H4, Hr, Span } from 'Vendor/components';
+import { BookmarkRowSkeletonGroup } from '../../components/BookmarkRow/BookmarkRowSkeletonGroup';
 import Pagination from '../../components/Pagination';
 
 import './Home.less';
@@ -49,7 +48,7 @@ export const Home: React.FC<Props> = ({
           <Hr spacer size="small" />
           <FadeInOut valueToUpdate={bookmarksIdsLoading} speed="fastest" appear>
             {bookmarksIdsLoading ? (
-              <LinkRowSkeletonGroup length={5} />
+              <BookmarkRowSkeletonGroup length={5} />
             ) : (
               bookmarksIds?.map((id, index) => (
                 <React.Fragment key={id}>

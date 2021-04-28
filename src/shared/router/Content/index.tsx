@@ -10,7 +10,6 @@ import Bookmarks from 'Pages/Bookmarks';
 import Followers from 'Pages/Followers';
 import Following from 'Pages/Following';
 import Home from 'Pages/Home';
-import Links from 'Pages/Links';
 import List from 'Pages/List';
 import Lists from 'Pages/Lists';
 import Tags from 'Pages/Tags';
@@ -44,7 +43,6 @@ const Content: React.FC<Props> = ({ location, pathWithoutLanguageParam }) => (
               <Route exact={Routes.UserBookmarks.exact} path={Routes.UserBookmarks.path} component={UserBookmarks} />
               <Route exact={Routes.User.exact} path={Routes.User.path} component={User} />
               <Route exact={Routes.Users.exact} path={Routes.Users.path} component={Users} />
-              <Route exact={Routes.Links.exact} path={Routes.Links.path} component={Links} />
               <Route exact={Routes.List.exact} path={Routes.List.path} component={List} />
               <Route exact={Routes.Lists.exact} path={Routes.Lists.path} component={Lists} />
               <Route exact={Routes.Bookmarks.exact} path={Routes.Bookmarks.path} component={Bookmarks} />
