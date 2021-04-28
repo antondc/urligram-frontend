@@ -32,40 +32,31 @@
     }
     @{c}-listsItemIcon {
       transition: transform @td-fast @ease, fill @td-fast @ease;
-    }
 
-    .hoverTransition;
-
-    &:hover {
-      // color: @c-success;
-      @{c}-listsItemIcon {
+      &:hover {
         opacity: 1;
         fill: @c-success;
       }
     }
 
+    .hoverTransition;
+
     &--included {
       // color: @c-success;
       fill: @c-success;
 
-      &:hover {
-        // color: @c-error;
-        cursor: pointer;
-
-        @{c}-listsItemIcon {
+      @{c}-listsItemIcon {
+        &:hover {
           fill: @c-error;
           transform: rotate(45deg);
+          // color: @c-error;
+          cursor: pointer;
         }
       }
 
       &@{c}-listsItem--recentlyUpdated {
-        &:hover {
-          // color: @c-success;
-
-          @{c}-listsItemText {
-            // color: @c-success;
-          }
-          @{c}-listsItemIcon {
+        @{c}-listsItemIcon {
+          &:hover {
             opacity: 1;
             fill: @c-success;
             transform: unset;
@@ -75,9 +66,8 @@
     }
 
     &--recentlyUpdated {
-      &:hover {
-        // color: @c-accent;
-        @{c}-listsItemIcon {
+      @{c}-listsItemIcon {
+        &:hover {
           opacity: 1;
           fill: @c-accent;
           transform: unset;
