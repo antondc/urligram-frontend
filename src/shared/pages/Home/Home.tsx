@@ -6,7 +6,7 @@ import Sidebar from 'Components/Sidebar';
 import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListUsers from 'Components/SidebarListUsers';
 import { UserState } from 'Modules/Users/users.types';
-import { Border, FadeInOut, Flex, H4, Hr, Span } from 'Vendor/components';
+import { Border, Flex, H4, Hr, Span } from 'Vendor/components';
 import { BookmarkRowSkeletonGroup } from '../../components/BookmarkRow/BookmarkRowSkeletonGroup';
 import Pagination from '../../components/Pagination';
 
@@ -46,21 +46,19 @@ export const Home: React.FC<Props> = ({
             <H4>Recommended bookmarks</H4>
           </Flex>
           <Hr spacer size="small" />
-          <FadeInOut valueToUpdate={bookmarksIdsLoading} speed="fastest" appear>
-            {bookmarksIdsLoading ? (
-              <BookmarkRowSkeletonGroup length={5} />
-            ) : (
-              bookmarksIds?.map((id, index) => (
-                <React.Fragment key={id}>
-                  {!!index && <Hr spacer size="small" />}
-                  <BookmarkRow id={id} />
-                </React.Fragment>
-              ))
-            )}
-            {!bookmarksIdsLoading && !bookmarksIds?.length && (
-              <Span bold>ⵁ Start following users to receive recommended bookmarks.</Span>
-            )}
-          </FadeInOut>
+          {bookmarksIdsLoading ? (
+            <BookmarkRowSkeletonGroup length={5} />
+          ) : (
+            bookmarksIds?.map((id, index) => (
+              <React.Fragment key={id}>
+                {!!index && <Hr spacer size="small" />}
+                <BookmarkRow id={id} />
+              </React.Fragment>
+            ))
+          )}
+          {!bookmarksIdsLoading && !bookmarksIds?.length && (
+            <Span bold>ⵁ Start following users to receive recommended bookmarks.</Span>
+          )}
           <Flex horizontal="center">
             <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
           </Flex>

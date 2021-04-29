@@ -3,59 +3,52 @@
 @c: .UserRowSkeleton;
 
 @{c} {
-  display: flex;
-  flex-wrap: nowrap;
-  padding: 9px 19px;
-  border-color: @c-traslucid;
-  box-shadow: 4px 4px 0 0 @c-traslucid;
+  display: grid;
+  position: relative;
+  justify-content: space-between;
+  grid-template: 'left center right' auto / 1fr 2fr 0fr;
+  height: 45px;
+  padding: 8px 13px 7px;
+  column-gap: 10px;
+
+  @media @br-mobile {
+    grid-template:
+      'left right' auto
+      '. .' 5px
+      'center center' auto
+      'center center' auto
+      / 1fr 0fr;
+    height: unset;
+  }
 
   &-left {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    flex-shrink: 0;
-    margin-right: 10px;
-    padding-top: 2px;
+    grid-area: left;
   }
 
-  &-title,
-  &-details {
-    height: 15px;
-    width: 150px;
+  &-title {
+    height: 10px;
+    width: 100%;
+  }
+
+  &-url {
+    height: 10px;
+    width: 100%;
   }
 
   &-center {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    align-content: space-between;
-    flex: 1;
-    height: 36px;
-    max-height: 36px;
-    margin-right: 6px;
-    padding-top: 2px;
-    overflow-x: scroll;
-    overflow-y: hidden;
-
-    .hideScrollbar;
+    align-items: flex-end;
+    grid-area: center;
+    overflow: hidden;
   }
 
   &-tag {
-    width: 70px;
-    margin-bottom: 4px;
-    margin-right: 4px;
-  }
-
-  &-tag1 {
+    height: 12px;
     width: 60px;
-  }
-
-  &-tag2 {
-    width: 40px;
-  }
-
-  &-tag3 {
-    width: 50px;
+    margin-right: 4px;
   }
 
   &-right {
@@ -63,8 +56,8 @@
   }
 
   &-image {
-    height: 37px;
-    width: 37px;
+    height: 27px;
+    width: 27px;
     border-radius: 50%;
   }
 }

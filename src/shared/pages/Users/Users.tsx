@@ -9,7 +9,7 @@ import UserRow from 'Components/UserRow';
 import { UserRowSkeletonGroup } from 'Components/UserRow/UserRowSkeletonGroup';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
-import { Border, FadeInOut, Flex, H4, Hr, SortBy, Span } from 'Vendor/components';
+import { Border, Flex, H4, Hr, SortBy, Span } from 'Vendor/components';
 
 import './Users.less';
 
@@ -51,19 +51,17 @@ export const Users: React.FC<Props> = ({
         <Border className="Users-users" grow>
           <H4>Users</H4>
           <Hr spacer />
-          <FadeInOut valueToUpdate={usersLoading} speed="fastest" appear>
-            {usersLoading ? (
-              <UserRowSkeletonGroup length={usersCurrentIds?.length || DEFAULT_PAGE_SIZE} />
-            ) : (
-              usersCurrentIds?.map((id, index) => (
-                <React.Fragment key={id}>
-                  {!!index && <Hr spacer size="small" />}
-                  <UserRow id={id} />
-                </React.Fragment>
-              ))
-            )}
-            {!usersLoading && !usersCurrentIds?.length && <Span bold>ⵁ We didn find any user.</Span>}
-          </FadeInOut>
+          {usersLoading ? (
+            <UserRowSkeletonGroup length={usersCurrentIds?.length || DEFAULT_PAGE_SIZE} />
+          ) : (
+            usersCurrentIds?.map((id, index) => (
+              <React.Fragment key={id}>
+                {!!index && <Hr spacer size="small" />}
+                <UserRow id={id} />
+              </React.Fragment>
+            ))
+          )}
+          {!usersLoading && !usersCurrentIds?.length && <Span bold>ⵁ We didn find any user.</Span>}
           <Flex horizontal="center">
             <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
           </Flex>

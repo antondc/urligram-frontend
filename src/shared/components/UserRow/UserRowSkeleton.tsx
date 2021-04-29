@@ -9,23 +9,15 @@ interface UserRowSkeleton {
 }
 
 export const UserRowSkeleton: React.FC<UserRowSkeleton> = ({ id }) => (
-  <Border grow className="UserRowSkeleton" data-test-id="UserRowSkeleton" key={'UserRowSkeleton-' + id}>
+  <Border grow className="UserRowSkeleton" data-test-id="UserRowSkeleton" key={id}>
     <div className="UserRowSkeleton-left">
       <SkeletonItem className="UserRowSkeleton-title" />
-      <SkeletonItem className="UserRowSkeleton-details" />
+      <SkeletonItem className="UserRowSkeleton-url" />
     </div>
     <div className="UserRowSkeleton-center">
-      <SkeletonItem className="UserRowSkeleton-tag UserRowSkeleton-tag1" />
-      <SkeletonItem className="UserRowSkeleton-tag UserRowSkeleton-tag2" />
-      <SkeletonItem className="UserRowSkeleton-tag UserRowSkeleton-tag3" />
-      <SkeletonItem className="UserRowSkeleton-tag UserRowSkeleton-tag1" />
-      <SkeletonItem className="UserRowSkeleton-tag UserRowSkeleton-tag1" />
-      <SkeletonItem className="UserRowSkeleton-tag UserRowSkeleton-tag2" />
-      <SkeletonItem className="UserRowSkeleton-tag UserRowSkeleton-tag3" />
-      <SkeletonItem className="UserRowSkeleton-tag UserRowSkeleton-tag1" />
-      <SkeletonItem className="UserRowSkeleton-tag UserRowSkeleton-tag1" />
-      <SkeletonItem className="UserRowSkeleton-tag UserRowSkeleton-tag1" />
-      <SkeletonItem className="UserRowSkeleton-tag UserRowSkeleton-tag2" />
+      <SkeletonItem className="UserRowSkeleton-tag" />
+      <SkeletonItem className="UserRowSkeleton-tag" />
+      <SkeletonItem className="UserRowSkeleton-tag" />
     </div>
     <div className="UserRowSkeleton-right">
       <SkeletonItem className="UserRowSkeleton-image" />

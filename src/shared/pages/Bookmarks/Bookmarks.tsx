@@ -8,7 +8,7 @@ import Sidebar from 'Components/Sidebar';
 import { ListState } from 'Modules/Lists/lists.types';
 import { TagState } from 'Modules/Tags/tags.types';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
-import { Border, FadeInOut, Flex, Hr, Select, SelectValue, SortBy, Span } from 'Vendor/components';
+import { Border, Flex, Hr, Select, SelectValue, SortBy, Span } from 'Vendor/components';
 import SidebarBlock from '../../components/SidebarBlock';
 import SidebarListTags from '../../components/SidebarListTags';
 
@@ -82,19 +82,17 @@ export const Bookmarks: React.FC<Props> = ({
         </Flex>
         <Hr spacer size="small" />
         <Border grow>
-          <FadeInOut valueToUpdate={loading} speed="fastest" appear>
-            {loading ? (
-              <BookmarkRowSkeletonGroup length={bookmarksIds?.length || DEFAULT_PAGE_SIZE} />
-            ) : (
-              bookmarksIds?.map((id, index) => (
-                <React.Fragment key={id}>
-                  {!!index && <Hr spacer size="small" />}
-                  <BookmarkRow id={id} />
-                </React.Fragment>
-              ))
-            )}
-            {!loading && !bookmarksIds?.length && <Span bold>ⵁ We didnt find any bookmark.</Span>}
-          </FadeInOut>
+          {loading ? (
+            <BookmarkRowSkeletonGroup length={bookmarksIds?.length || DEFAULT_PAGE_SIZE} />
+          ) : (
+            bookmarksIds?.map((id, index) => (
+              <React.Fragment key={id}>
+                {!!index && <Hr spacer size="small" />}
+                <BookmarkRow id={id} />
+              </React.Fragment>
+            ))
+          )}
+          {!loading && !bookmarksIds?.length && <Span bold>ⵁ We didnt find any bookmark.</Span>}
           <Flex horizontal="center">
             <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
           </Flex>

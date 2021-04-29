@@ -12,7 +12,7 @@ import { ListState } from 'Modules/Lists/lists.types';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
-import { Border, FadeInOut, Flex, H4, Hr, SortBy, Span } from 'Vendor/components';
+import { Border, Flex, H4, Hr, SortBy, Span } from 'Vendor/components';
 import ListFollowButton from '../../components/ListFollowButton';
 
 import './List.less';
@@ -71,19 +71,17 @@ export const List: React.FC<Props> = ({
           </Flex>
           <Span>{list?.description}</Span>
           <Hr spacer />
-          <FadeInOut valueToUpdate={bookmarksLoading} speed="fastest" appear>
-            {bookmarksLoading ? (
-              <BookmarkRowSkeletonGroup length={bookmarksIds?.length || DEFAULT_PAGE_SIZE} />
-            ) : (
-              bookmarksIds?.map((id, index) => (
-                <React.Fragment key={id}>
-                  {!!index && <Hr spacer size="small" />}
-                  <BookmarkRow id={id} />
-                </React.Fragment>
-              ))
-            )}
-            {!bookmarksLoading && !bookmarksIds?.length && <Span bold>ⵁ We didn find any bookmark.</Span>}
-          </FadeInOut>
+          {bookmarksLoading ? (
+            <BookmarkRowSkeletonGroup length={bookmarksIds?.length || DEFAULT_PAGE_SIZE} />
+          ) : (
+            bookmarksIds?.map((id, index) => (
+              <React.Fragment key={id}>
+                {!!index && <Hr spacer size="small" />}
+                <BookmarkRow id={id} />
+              </React.Fragment>
+            ))
+          )}
+          {!bookmarksLoading && !bookmarksIds?.length && <Span bold>ⵁ We didn find any bookmark.</Span>}
           <Flex horizontal="center">
             <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
           </Flex>

@@ -11,7 +11,7 @@ import SidebarListUsers from 'Components/SidebarListUsers';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
-import { Border, FadeInOut, Flex, H4, Hr, SortBy, Span } from 'Vendor/components';
+import { Border, Flex, H4, Hr, SortBy, Span } from 'Vendor/components';
 
 import './Lists.less';
 
@@ -61,19 +61,17 @@ export const Lists: React.FC<Props> = ({
         <Border grow>
           <H4>All Lists</H4>
           <Hr spacer size="small" />
-          <FadeInOut valueToUpdate={listsIdsLoading} speed="fastest" appear>
-            {listsIdsLoading ? (
-              <ListRowSkeletonGroup length={listsIds?.length || DEFAULT_PAGE_SIZE} />
-            ) : (
-              listsIds?.map((id, index) => (
-                <React.Fragment key={id}>
-                  {!!index && <Hr spacer size="small" />}
-                  <ListRow id={id} />
-                </React.Fragment>
-              ))
-            )}
-            {!listsIdsLoading && !listsIds?.length && <Span bold>ⵁ We didn find any list.</Span>}
-          </FadeInOut>
+          {listsIdsLoading ? (
+            <ListRowSkeletonGroup length={listsIds?.length || DEFAULT_PAGE_SIZE} />
+          ) : (
+            listsIds?.map((id, index) => (
+              <React.Fragment key={id}>
+                {!!index && <Hr spacer size="small" />}
+                <ListRow id={id} />
+              </React.Fragment>
+            ))
+          )}
+          {!listsIdsLoading && !listsIds?.length && <Span bold>ⵁ We didn find any list.</Span>}
           <Flex horizontal="center">
             <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
           </Flex>
