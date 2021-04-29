@@ -1,0 +1,50 @@
+@import '../../css/imports.less';
+@c: .UserForm;
+
+@{c} {
+  display: grid;
+  grid-template:
+    'title title title' auto
+    'statement . image' 50px
+    'statement . .' auto
+    'statementError . imageError' auto
+    / 3fr 3fr 50px;
+  column-gap: 10px;
+  row-gap: 10px;
+
+  @media @br-mobile {
+    grid-template:
+      'title' auto
+      'statement' auto
+      'statementError' auto
+      'image' auto
+      'imageError' auto
+      / 1fr;
+  }
+
+  &-title {
+    grid-area: title;
+  }
+
+  &-statement {
+    grid-area: statement;
+  }
+
+  &-statementError {
+    grid-area: statementError;
+  }
+
+  &-image {
+    grid-area: image;
+    height: 50px;
+    width: 50px;
+    max-height: 50px;
+    max-width: 50px;
+    min-height: 50px;
+    min-width: 50px;
+  }
+
+  &-imageError {
+    grid-area: imageError;
+  }
+}

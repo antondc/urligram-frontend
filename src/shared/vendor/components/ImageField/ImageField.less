@@ -6,9 +6,11 @@
   display: inline-flex;
   position: relative;
   flex-direction: column;
-  height: 300px;
-  width: 300px;
-  border: 2px dashed @c-base;
+  align-items: flex-start;
+  width: 100%;
+  padding-top: 100%;
+  box-sizing: border-box;
+  outline: 2px dashed @c-base;
   user-select: none;
 
   &:hover {
@@ -26,7 +28,6 @@
   }
 
   &-image {
-    height: 100%;
     width: 100%;
     object-fit: cover;
     object-position: center;
@@ -59,6 +60,13 @@
     pointer-events: none;
   }
 
+  &-icon {
+    height: 30%;
+    width: 30%;
+    max-height: 30%;
+    max-width: 30%;
+  }
+
   &--loading {
     opacity: 1;
   }
@@ -81,7 +89,8 @@
   }
 
   &--hasImage {
-    border: none;
+    padding-top: 0;
+    outline: none;
 
     @{c}-upload {
       opacity: 0;
@@ -97,7 +106,7 @@
   }
 
   &--error {
-    border: 2px dashed @c-error;
+    outline: 2px dashed @c-error;
 
     @{c}-icon {
       fill: @c-error;
@@ -105,7 +114,7 @@
   }
 
   &--disabled {
-    border-color: @c-disabled;
+    outline-color: @c-disabled;
     pointer-events: none;
 
     @{c}-icon {
@@ -118,7 +127,7 @@
   }
 
   &--success {
-    border: 2px dashed @c-success;
+    outline: 2px dashed @c-success;
 
     @{c}-icon {
       fill: @c-success;

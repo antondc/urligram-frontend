@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { boolean, number, text, withKnobs } from '@storybook/addon-knobs';
 import { H1 } from '../H1';
 import { Hr } from '../Hr';
-import { WithUploadLogic } from '../WithUploadLogic/WithUploadLogic';
+import { WithUploadLogic } from '../WithUploadLogic';
 import { ImageField } from '.';
 
 export default {

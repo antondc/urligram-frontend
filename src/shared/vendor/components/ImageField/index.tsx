@@ -72,7 +72,7 @@ export const ImageField: React.FC<Props> = ({
         onChange={onChange}
         disabled={disabled}
       >
-        <Upload className={'ImageField-icon'} size="biggest" />
+        <Upload className="ImageField-icon" />
       </Dropzone>
     </div>
   );

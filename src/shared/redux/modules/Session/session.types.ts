@@ -36,6 +36,7 @@ export interface SessionState {
   name?: string;
   email?: string;
   status?: SessionStatus;
+  statement?: string;
   level?: SessionLevel;
   logged?: boolean;
   image?: string;

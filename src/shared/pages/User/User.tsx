@@ -8,6 +8,7 @@ import Main from 'Components/Main';
 import Sidebar from 'Components/Sidebar';
 import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListUsers from 'Components/SidebarListUsers';
+import UserForm from 'Components/UserForm';
 import { UserState } from 'Modules/Users/users.types';
 import { AIcon, Border, Flex, H4, Hr, Span, Tag } from 'Vendor/components';
 
@@ -39,6 +40,10 @@ export const User: React.FC<Props> = ({
   <div className="User">
     <Flex horizontal="between" vertical="top">
       <Main>
+        <Border>
+          <UserForm />
+        </Border>
+        <Hr spacer />
         <Border grow>
           <Flex horizontal="between">
             <div>
