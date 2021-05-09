@@ -1,5 +1,4 @@
 import { bookmarkCreateFailure } from 'Modules/Bookmarks/actions/bookmarkCreateFailure';
-import { bookmarkCreateSuccess } from 'Modules/Bookmarks/actions/bookmarkCreateSuccess';
 import {
   BOOKMARK_CREATE_SUCCESS,
   BookmarkCreateApiRequest,
@@ -13,7 +12,6 @@ import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
 import { AppThunk } from '../../../index';
 import { bookmarkCreateRequest } from './bookmarkCreateRequest';
-import { bookmarkLoadById } from './bookmarkLoadById';
 
 export const bookmarkCreate = ({
   title,

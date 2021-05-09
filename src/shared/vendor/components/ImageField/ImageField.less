@@ -3,22 +3,24 @@
 @c: .ImageField;
 
 @{c} {
-  display: inline-flex;
+  display: flex;
   position: relative;
-  flex-direction: column;
-  align-items: flex-start;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
   width: 100%;
   padding-top: 100%;
   box-sizing: border-box;
-  outline: 2px dashed @c-base;
   user-select: none;
 
   &:hover {
+    cursor: pointer;
+
     @{c}-background {
       opacity: 1;
     }
 
-    @{c}-icons {
+    @{c}-icon {
       opacity: 1;
     }
 
@@ -28,12 +30,14 @@
   }
 
   &-image {
+    position: absolute;
+    height: 100%;
     width: 100%;
     object-fit: cover;
     object-position: center;
   }
 
-  &-background {
+  &-overlay {
     content: ' ';
     position: absolute;
     top: 0;
@@ -61,10 +65,15 @@
   }
 
   &-icon {
-    height: 30%;
-    width: 30%;
-    max-height: 30%;
-    max-width: 30%;
+    z-index: @z-index-1;
+
+    .hoverTransition();
+  }
+
+  &-remove {
+    position: absolute;
+    top: 10px;
+    right: 10px;
   }
 
   &--loading {
@@ -72,27 +81,19 @@
   }
 
   &-upload {
-    content: '';
     display: flex;
-    position: absolute !important;
     justify-content: center;
     align-items: center;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
     opacity: 1;
-
-    &:hover {
-      cursor: pointer;
-    }
+    pointer-events: none;
   }
 
   &--hasImage {
     padding-top: 0;
     outline: none;
 
-    @{c}-upload {
+    @{c}-upload,
+    @{c}-remove {
       opacity: 0;
     }
 
@@ -114,8 +115,12 @@
   }
 
   &--disabled {
-    outline-color: @c-disabled;
     pointer-events: none;
+    outline-color: @c-disabled;
+
+    &:hover {
+      cursor: default;
+    }
 
     @{c}-icon {
       fill: @c-disabled;

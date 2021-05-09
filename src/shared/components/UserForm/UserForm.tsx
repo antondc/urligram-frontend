@@ -1,9 +1,7 @@
 import React from 'react';
 
 import { SessionState } from 'Modules/Session/session.types';
-import { FadeInOut, ImageField, Span, TextArea, WithUploadLogic } from 'Vendor/components';
-
-const ImageFieldWithUploadApi = WithUploadLogic(ImageField);
+import { FadeInOut, ImageField, Span, TextArea } from 'Vendor/components';
 
 interface Props {
   session: SessionState;
@@ -11,8 +9,10 @@ interface Props {
   statementError: string;
   image: string;
   imageError: string;
+  percentCompleted: number;
   onChangeStatement: (e: React.FormEvent<HTMLTextAreaElement>) => void;
-  onChangeImage: (value: string) => void;
+  uploadFilesToServer: (file: File) => void;
+  removeFilesFromServer: (file: any) => void;
 }
 
 export const UserForm: React.FC<Props> = ({
@@ -22,7 +22,9 @@ export const UserForm: React.FC<Props> = ({
   onChangeStatement,
   image,
   imageError,
-  onChangeImage,
+  percentCompleted,
+  uploadFilesToServer,
+  removeFilesFromServer,
 }) => (
   <form className="UserForm" onSubmit={() => {}}>
     <Span className="UserForm-title" bold>
@@ -42,14 +44,16 @@ export const UserForm: React.FC<Props> = ({
         {statementError}
       </Span>
     </FadeInOut>
-    <ImageFieldWithUploadApi
+    <ImageField
       className="UserForm-image"
       label="My file"
-      name="Some file"
-      rounded
-      urlApiUpload="http://example.com/api/v1/upload"
-      url={image}
-      onUploaded={onChangeImage}
+      name="Some image"
+      image={image}
+      grow={false}
+      uploadFiles={uploadFilesToServer}
+      onRemove={removeFilesFromServer}
+      percentCompleted={percentCompleted}
+      removable
     />
     <FadeInOut valueToUpdate={!!imageError} speed="fast">
       <Span className="UserForm-imageError" size="small">

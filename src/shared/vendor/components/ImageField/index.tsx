@@ -1,79 +1,87 @@
 import React from 'react';
-import Dropzone from 'react-dropzone';
 
-import { Loader } from '../Loader';
-import { Upload } from '../Svg';
-
-import './ImageField.less';
+import { FileType, ImageField as ImageFieldUi } from './ImageField';
 
 export interface Props {
   name?: string;
-  label?: string;
-  url?: string;
-  textButton?: string;
   className?: string;
-  file?: string;
+  image: string;
   grow?: boolean;
-  percentCompleted?: number;
-  accept?: string;
-  size?: string;
-  maxLength?: number;
+  rounded?: boolean;
+  label?: string;
+  removable?: boolean;
+  accept?: FileType;
+  percentCompleted: number;
+  disabled?: boolean;
+  maxSize?: number;
   error?: boolean;
   success?: boolean;
-  disabled?: boolean;
-  rounded?: boolean;
-  onDrop?: (acceptedFiles: File[]) => void;
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onRemove?: () => void;
+  uploadFiles: (file: File) => void;
+  onRemove?: (url: string) => void;
 }
 
 export const ImageField: React.FC<Props> = ({
   className,
-  url,
   grow,
   rounded,
+  label,
+  image,
   name,
   accept,
-  percentCompleted,
+  removable = false,
+  maxSize,
+  disabled,
   error,
   success,
-  disabled,
-  onDrop,
-  onChange,
+  percentCompleted,
+  uploadFiles,
+  onRemove,
 }) => {
-  const fileName = url && url.split('/').pop();
-  const hasImage = !!url;
+  const onChange = (e: React.FormEvent<HTMLInputElement>) => {
+    const { files } = e.currentTarget;
+    if (!files || !files.length) return;
+
+    const file = files[0];
+
+    uploadFilesToServer(file);
+  };
+
+  const onDropAccepted = (files: File[]) => {
+    if (!files || !files.length) return;
+    const file = files[0];
+
+    uploadFilesToServer(file);
+  };
+
+  const uploadFilesToServer = async (file: File) => {
+    await uploadFiles(file);
+  };
+
+  const onFileRemove = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    onRemove(image);
+  };
 
   return (
-    <div
-      className={
-        'ImageField ' +
-        (className ? className : '') +
-        (grow ? ' ImageField--grow' : '') +
-        (rounded ? ' ImageField--rounded' : '') +
-        (url ? ' ImageField--uploaded' : '') +
-        (error ? ' ImageField--error' : '') +
-        (success ? ' ImageField--success' : '') +
-        (disabled ? ' ImageField--disabled' : '') +
-        (hasImage ? ' ImageField--hasImage' : '')
-      }
-    >
-      {hasImage && <img className="ImageField-image" src={url} alt={fileName} title={fileName} />}
-      <div className={'ImageField-progress ' + (percentCompleted > 0 ? 'ImageField--loading' : '')}>
-        <Loader loaded={percentCompleted} grow />
-      </div>
-      {hasImage && <div className={'ImageField-background'} />}
-      <Dropzone
-        className={'ImageField-upload'}
-        name={name}
-        multiple={false}
-        accept={accept}
-        onDrop={onDrop}
-        onChange={onChange}
-        disabled={disabled}
-      >
-        <Upload className="ImageField-icon" />
-      </Dropzone>
-    </div>
+    <ImageFieldUi
+      className={className}
+      grow={grow}
+      image={image}
+      label={label}
+      name={name}
+      accept={accept}
+      maxSize={maxSize}
+      removable={removable}
+      percentCompleted={percentCompleted}
+      rounded={rounded}
+      disabled={disabled}
+      error={error}
+      success={success}
+      onDropAccepted={onDropAccepted}
+      onChange={onChange}
+      onFileRemove={onFileRemove}
+    />
   );
 };

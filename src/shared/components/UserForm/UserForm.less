@@ -5,10 +5,10 @@
   display: grid;
   grid-template:
     'title title title' auto
-    'statement . image' 50px
+    'statement . image' 100px
     'statement . .' auto
     'statementError . imageError' auto
-    / 3fr 3fr 50px;
+    / 3fr 3fr 100px;
   column-gap: 10px;
   row-gap: 10px;
 
@@ -36,12 +36,12 @@
 
   &-image {
     grid-area: image;
-    height: 50px;
-    width: 50px;
-    max-height: 50px;
-    max-width: 50px;
-    min-height: 50px;
-    min-width: 50px;
+    height: 100px;
+    width: 100px;
+    max-height: 100px;
+    max-width: 100px;
+    min-height: 100px;
+    min-width: 100px;
   }
 
   &-imageError {
