@@ -15,6 +15,7 @@ import { AIcon, Border, Flex, H4, Hr, Span, Tag } from 'Vendor/components';
 import './User.less';
 
 interface Props {
+  userIdIsSessionId: boolean;
   userId: string;
   user: UserState;
   createdAtFormatted: string;
@@ -27,6 +28,7 @@ interface Props {
 }
 
 export const User: React.FC<Props> = ({
+  userIdIsSessionId,
   userId,
   user,
   createdAtFormatted,
@@ -40,10 +42,14 @@ export const User: React.FC<Props> = ({
   <div className="User">
     <Flex horizontal="between" vertical="top">
       <Main>
-        <Border>
-          <UserForm />
-        </Border>
-        <Hr spacer />
+        {userIdIsSessionId && (
+          <>
+            <Border grow>
+              <UserForm />
+            </Border>
+            <Hr spacer />
+          </>
+        )}
         <Border grow>
           <Flex horizontal="between">
             <div>

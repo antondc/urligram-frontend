@@ -35,6 +35,14 @@ export class URLWrapper {
     return this.url.pathname;
   }
 
+  getFilename(): string | undefined {
+    if (!this.url.pathname.includes('.')) return undefined;
+
+    const filename = this.url.pathname.substring(this.url.pathname.lastIndexOf('/') + 1);
+
+    return filename;
+  }
+
   getPath(): string | undefined {
     return this.path;
   }

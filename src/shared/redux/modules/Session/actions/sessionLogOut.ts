@@ -1,8 +1,7 @@
+import { SESSION_LOG_IN_FAILURE, SESSION_LOG_OUT_REQUEST } from 'Modules/Session/session.types';
 import HttpClient from 'Services/HttpClient';
 import { AppThunk } from '../../..';
 import { SessionActions } from '../session.types';
-import { sessionLogInFailure } from './sessionLogInFailure';
-import { sessionLogOutSuccess } from './sessionLogOutSuccess';
 
 export const sessionLogOut = (): AppThunk<Promise<void>, SessionActions> => async (dispatch): Promise<void> => {
   const emptyUser = {
@@ -19,18 +18,29 @@ export const sessionLogOut = (): AppThunk<Promise<void>, SessionActions> => asyn
     errors: undefined,
     passwordRequested: undefined,
     passwordReset: undefined,
+    image: undefined,
+    statement: undefined,
+    location: undefined,
+    createdAt: undefined,
+    updatedAt: undefined,
   };
 
   // Remove the cookie on server using the base api
   await HttpClient.delete('/login')
-    .then(() => dispatch(sessionLogOutSuccess(emptyUser)))
+    .then(() =>
+      dispatch({
+        type: SESSION_LOG_OUT_REQUEST,
+        payload: emptyUser,
+      })
+    )
     .catch((error) => {
-      dispatch(
-        sessionLogInFailure({
+      dispatch({
+        type: SESSION_LOG_IN_FAILURE,
+        payload: {
           errors: [error],
           loading: false,
-        })
-      );
+        },
+      });
       throw new Error(error);
     });
 

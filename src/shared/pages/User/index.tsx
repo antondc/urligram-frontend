@@ -14,6 +14,7 @@ import { selectFollowersUsers } from 'Modules/Sections/selectors/selectFollowers
 import { selectFollowersUsersLoading } from 'Modules/Sections/selectors/selectFollowersUsersLoading';
 import { selectFollowingUsers } from 'Modules/Sections/selectors/selectFollowingUsers';
 import { selectFollowingUsersLoading } from 'Modules/Sections/selectors/selectFollowingUsersLoading';
+import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { userLoad } from 'Modules/Users/actions/userLoad';
 import { selectUserById } from 'Modules/Users/selectors/selectUserById';
 import { LocaleFormattedDate } from 'Tools/utils/Date/localeFormattedDate';
@@ -26,8 +27,10 @@ interface Props {
 
 const User: React.FC<Props> = () => {
   const dispatch = useDispatch();
+  const session = useSelector(selectSession);
   const userId = useSelector(selectCurrentRouteParamUserId);
   const user = useSelector((state: RootState) => selectUserById(state, { id: userId }));
+  const userIdIsSessionId = userId === session?.id;
   const bookmarksLoading = useSelector(selectBookmarksLoading);
   const bookmarksIds = useSelector(selectBookmarksCurrentIds);
   const followingUsers = useSelector(selectFollowingUsers);
@@ -48,6 +51,7 @@ const User: React.FC<Props> = () => {
 
   return (
     <UserUi
+      userIdIsSessionId={userIdIsSessionId}
       userId={userId}
       user={user}
       createdAtFormatted={createdAtFormatted}

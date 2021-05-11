@@ -1,10 +1,9 @@
 import React from 'react';
 
-import { SessionState } from 'Modules/Session/session.types';
 import { FadeInOut, ImageField, Span, TextArea } from 'Vendor/components';
 
 interface Props {
-  session: SessionState;
+  name: string;
   statement: string;
   statementError: string;
   image: string;
@@ -16,7 +15,7 @@ interface Props {
 }
 
 export const UserForm: React.FC<Props> = ({
-  session,
+  name,
   statement,
   statementError,
   onChangeStatement,
@@ -28,7 +27,7 @@ export const UserForm: React.FC<Props> = ({
 }) => (
   <form className="UserForm" onSubmit={() => {}}>
     <Span className="UserForm-title" bold>
-      @{session?.name}
+      @{name}
     </Span>
     <TextArea
       className="UserForm-statement"

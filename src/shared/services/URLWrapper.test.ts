@@ -90,4 +90,31 @@ describe('URLWrapper', () => {
 
     expect(queryString).toEqual('?a[]=1&a[]=2&b[c][]=312&b[d]=1');
   });
+
+  test('it should retrieve filename if exists', () => {
+    const urlString = 'https://dev.linking.me/en/bookmarks/image.jpg';
+    const urlObject = new URLWrapper(urlString);
+
+    const filename = urlObject.getFilename();
+
+    expect(filename).toEqual('image.jpg');
+  });
+
+  test('it should not retrieve filename if doesnt exists', () => {
+    const urlString = 'https://dev.linking.me/en/bookmarks/';
+    const urlObject = new URLWrapper(urlString);
+
+    const filename = urlObject.getFilename();
+
+    expect(filename).toEqual(undefined);
+  });
+
+  test('it should not retrieve filename if doesnt have extension', () => {
+    const urlString = 'https://dev.linking.me/en/bookmarks/filename';
+    const urlObject = new URLWrapper(urlString);
+
+    const filename = urlObject.getFilename();
+
+    expect(filename).toEqual(undefined);
+  });
 });
