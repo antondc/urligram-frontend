@@ -10,7 +10,7 @@ export default {
 export const Default: React.FC = () => {
   const uploadFilesToServer = async (e) => {
     console.log('=======');
-    console.log('removeFilesFromServer.e:');
+    console.log('uploadFilesToServer.e:');
     console.log(e);
     console.log('=======');
   };
@@ -33,6 +33,7 @@ export const Default: React.FC = () => {
         onRemove={removeFilesFromServer}
         percentCompleted={0}
         removable
+        accept=".jpg,.jpeg"
       />
     </div>
   );

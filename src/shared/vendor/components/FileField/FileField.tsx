@@ -20,7 +20,7 @@ export interface Props {
   maxSize: number;
   percentCompleted?: number;
   removable?: boolean;
-  accept?: any;
+  accept?: string;
   size?: string;
   error?: boolean;
   success?: boolean;

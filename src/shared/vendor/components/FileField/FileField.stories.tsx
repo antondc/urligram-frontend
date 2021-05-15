@@ -12,7 +12,7 @@ export default {
 export const Default: React.FC = () => {
   const uploadFilesToServer = async (e) => {
     console.log('=======');
-    console.log('removeFilesFromServer.e:');
+    console.log('uploadFilesToServer.e:');
     console.log(e);
     console.log('=======');
   };
@@ -32,6 +32,7 @@ export const Default: React.FC = () => {
         <FileField
           label="My file"
           name="Some file"
+          accept=".pdf"
           fileUrl="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
           uploadFiles={uploadFilesToServer}
           onRemove={removeFilesFromServer}
