@@ -1,5 +1,8 @@
 import HttpClient from 'Services/HttpClient';
 
+const UPLOAD_ENDPOINT = '/files/upload/single';
+const DELETE_ENDPOINT = '/files/upload/single';
+
 type ImageUploadResponse = {
   data: {
     image: string;
@@ -14,13 +17,7 @@ type UploadFileToServer = (options: {
 type RemoveFileFromServer = (options: { url: string; onRemoved: () => void }) => Promise<void>;
 
 export class ImageUpload {
-  private uploadEndpoint: string;
-  private deleteEndpoint: string;
 
-  constructor() {
-    this.uploadEndpoint = '/images/upload/single';
-    this.deleteEndpoint = '/images/single';
-  }
 
   uploadFileToServer: UploadFileToServer = async ({ file, setPercentCompleted }) => {
     const formData = new FormData();
@@ -36,7 +33,7 @@ export class ImageUpload {
     };
 
     try {
-      const { data } = await HttpClient.post<void, ImageUploadResponse>(this.uploadEndpoint, formData, config);
+      const { data } = await HttpClient.post<void, ImageUploadResponse>(UPLOAD_ENDPOINT, formData, config);
 
       return data;
     } finally {
@@ -47,9 +44,8 @@ export class ImageUpload {
   removeFileFromServer: RemoveFileFromServer = async ({ url, onRemoved }) => {
     if (!confirm('Are you sure?')) return;
 
-    // TODO: WIP, read from WithUploadLogic
     try {
-      await HttpClient.delete<void, ImageUploadResponse>(this.deleteEndpoint, { url });
+      await HttpClient.delete<void, ImageUploadResponse>(DELETE_ENDPOINT, { url });
 
       onRemoved();
     } finally {

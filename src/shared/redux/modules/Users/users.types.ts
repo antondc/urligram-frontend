@@ -8,11 +8,16 @@ export const USER_FOLLOW_CREATE_FAILURE = 'USER_FOLLOW_CREATE_FAILURE';
 export const USER_FOLLOW_DELETE_REQUEST = 'USER_FOLLOW_DELETE_REQUEST';
 export const USER_FOLLOW_DELETE_SUCCEED = 'USER_FOLLOW_DELETE_SUCCEED';
 export const USER_FOLLOW_DELETE_FAILURE = 'USER_FOLLOW_DELETE_FAILURE';
+export const USER_UPDATE_DETAILS = 'USER_UPDATE_DETAILS';
 
 export interface UserState {
   id: string;
   name: string;
-  image: string;
+  image: {
+    original: string;
+    w200h200?: string;
+    w500h500?: string;
+  };
   level: string;
   email: string;
   status: string;
@@ -125,6 +130,11 @@ interface UserFollowDeleteFailureAction {
   payload: Partial<UsersState>;
 }
 
+interface UserUpdateDetailsAction {
+  type: typeof USER_UPDATE_DETAILS;
+  payload: Partial<UsersState>;
+}
+
 export type UsersActions =
   | UsersLoadRequestAction
   | UsersLoadSuccessAction
@@ -135,4 +145,5 @@ export type UsersActions =
   | UserFollowCreateFailureAction
   | UserFollowDeleteRequestAction
   | UserFollowDeleteSuccessAction
-  | UserFollowDeleteFailureAction;
+  | UserFollowDeleteFailureAction
+  | UserUpdateDetailsAction;

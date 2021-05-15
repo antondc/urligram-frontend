@@ -15,6 +15,7 @@ interface Props extends HTMLProps<HTMLTextAreaElement> {
   success?: boolean;
   disabled?: boolean;
   grow?: boolean;
+  maxLength?: number;
   onChange?: (e) => void;
 }
 
@@ -30,6 +31,7 @@ export const TextArea: React.FC<Props> = ({
   disabled,
   grow,
   onChange,
+  maxLength,
 }) => {
   const id = uniqueId();
 
@@ -53,6 +55,7 @@ export const TextArea: React.FC<Props> = ({
         onChange={onChange}
         placeholder=" "
         spellCheck={spellCheck}
+        maxLength={maxLength}
       />
       {label && (
         <label className="TextArea-label" htmlFor={'Input-' + id}>

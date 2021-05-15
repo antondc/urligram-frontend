@@ -12,6 +12,9 @@ import {
   SESSION_SIGN_UP_FAILURE,
   SESSION_SIGN_UP_REQUEST,
   SESSION_SIGN_UP_SUCCESS,
+  SESSION_UPDATE_DETAILS_FAILURE,
+  SESSION_UPDATE_DETAILS_REQUEST,
+  SESSION_UPDATE_DETAILS_SUCCESS,
   SessionActions,
   SessionState,
 } from './session.types';
@@ -35,6 +38,9 @@ export const Session = (state = initialState, action: SessionActions): SessionSt
     case SESSION_RESET_PASSWORD_REQUEST:
     case SESSION_RESET_PASSWORD_SUCCESS:
     case SESSION_RESET_PASSWORD_FAILURE:
+    case SESSION_UPDATE_DETAILS_REQUEST:
+    case SESSION_UPDATE_DETAILS_SUCCESS:
+    case SESSION_UPDATE_DETAILS_FAILURE:
       return Object.assign({}, state, action.payload);
 
     default:

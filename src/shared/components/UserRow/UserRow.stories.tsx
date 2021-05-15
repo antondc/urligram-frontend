@@ -15,7 +15,11 @@ export default {
 const props = {
   id: 'string1',
   name: 'Emile_879',
-  image: 'https://cdn-images-1.medium.com/max/1200/1*NpUUls7kjn9JhO4ChjGV7w.png',
+  image: {
+    original: 'https://cdn-images-1.medium.com/max/1200/original/1*NpUUls7kjn9JhO4ChjGV7w.png',
+    w500h500: 'https://dev.linking.me:3000/media/files/users/image/w500h500/f71215e7-2d74-434a-b63b-f6cbd67f8b08.jpg',
+    w200h50: 'https://dev.linking.me:3000/media/files/users/image/w200h50/f71215e7-2d74-434a-b63b-f6cbd67f8b08.jpg',
+  },
   level: 'admin',
   email: 'hello@example.com',
   status: 'active',

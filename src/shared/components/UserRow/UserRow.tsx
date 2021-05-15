@@ -81,7 +81,7 @@ export const UserRow: React.FC<UserRow> = ({
     </div>
     <div className="UserRow-right">
       <A href={`users/${id}`} styled={false} frontend>
-        <img className="UserRow-image" src={image} />
+        <img className="UserRow-image" src={image?.original} />
       </A>
     </div>
     <UserFollowButton className="UserRow-followButton" userId={id} />

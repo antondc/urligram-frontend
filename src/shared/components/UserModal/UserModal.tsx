@@ -24,7 +24,11 @@ export const UserModal: React.FC<Props> = ({
   switchMessageModal,
 }) => (
   <Border className="UserModal" onClick={switchUserModal} onMouseLeave={switchUserModal}>
-    {sessionId ? <img className="UserModal-userLogo" src={session?.image} /> : <Cross className="UserModal-cross" />}
+    {sessionId ? (
+      <img className="UserModal-userLogo" src={session?.image?.original} />
+    ) : (
+      <Cross className="UserModal-cross" />
+    )}
     {!sessionId && <User className="UserModal-userLogo" onClick={switchMessageModal} />}
     <ul>
       <li>

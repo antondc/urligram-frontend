@@ -34,11 +34,6 @@ export const bookmarkCreate = ({
       tags,
     });
 
-    console.log('=======');
-    console.log('bookmarkData:');
-    console.log(JSON.stringify(bookmarkData, null, 4));
-    console.log('=======');
-
     const { Bookmarks: bookmarksAfterResponse } = getState();
 
     const bookmarksToUpdate = Object.values(bookmarksAfterResponse.byKey).filter(

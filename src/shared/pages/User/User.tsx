@@ -68,7 +68,7 @@ export const User: React.FC<Props> = ({
               <Span bold>Created at:</Span>
               <Span> {createdAtFormatted}</Span>
             </div>
-            <img className="User-image" src={user?.image} />
+            <img className="User-image" src={user?.image?.original} />
           </Flex>
           <Hr spacer />
           <Flex>

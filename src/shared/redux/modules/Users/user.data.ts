@@ -3,7 +3,11 @@ export const mockUser = {
   name: 'User3',
   level: 'user',
   email: 'hello1@example.com',
-  image: 'https://loremflickr.com/300/300/portrait',
+  image: {
+    original: 'https://cdn-images-1.medium.com/max/1200/original/1*NpUUls7kjn9JhO4ChjGV7w.png',
+    w500h500: 'https://dev.linking.me:3000/media/files/users/image/w500h500/f71215e7-2d74-434a-b63b-f6cbd67f8b08.jpg',
+    w200h50: 'https://dev.linking.me:3000/media/files/users/image/w200h50/f71215e7-2d74-434a-b63b-f6cbd67f8b08.jpg',
+  },
   status: 'active',
   statement: 'The quick brown fox jumps over the lazy dog',
   location: 'Moon',

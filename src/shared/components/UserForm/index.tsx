@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { RootState } from 'Modules/rootType';
 import { selectCurrentRouteParamUserId } from 'Modules/Routes/selectors/selectCurrentRouteParamUserId';
+import { sessionUpdateDetails } from 'Modules/Session/actions/sessionUpdateDetails';
 import { selectUserById } from 'Modules/Users/selectors/selectUserById';
 import { ImageUpload } from 'Services/ImageUpload';
 import { UserForm as UserFormUi } from './UserForm';
@@ -10,11 +11,12 @@ import { UserForm as UserFormUi } from './UserForm';
 import './UserForm.less';
 
 const UserForm: React.FC = () => {
+  const dispatch = useDispatch();
   const userId = useSelector(selectCurrentRouteParamUserId);
   const user = useSelector((state: RootState) => selectUserById(state, { id: userId }));
-  const [statement, setStatement] = useState<string>(user?.statement);
+  const [statement, setStatement] = useState<string>(undefined);
   const [statementError, setStatementError] = useState<string>(null);
-  const [image, setImage] = useState(user?.image);
+  const [image, setImage] = useState<{ original: string }>(undefined);
   const [imageError, setImageError] = useState<string>(null);
   const [percentCompleted, setPercentCompleted] = useState<number>(0);
   const imageUpload = new ImageUpload();
@@ -32,7 +34,9 @@ const UserForm: React.FC = () => {
         file,
         setPercentCompleted,
       });
-      await setImage(data?.image);
+      await setImage({
+        original: data?.image,
+      });
     } catch (error) {
       setImageError(error.message);
     }
@@ -54,17 +58,39 @@ const UserForm: React.FC = () => {
     }
   };
 
+  const onSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    const data = {
+      name: user?.name,
+      email: user?.email,
+      statement: statement,
+      location: user?.location,
+      image: image,
+    };
+
+    dispatch(sessionUpdateDetails(data));
+  };
+
+  useEffect(() => {
+    setImage({
+      original: user?.image?.original,
+    });
+    setStatement(user?.statement);
+  }, [user]);
+
   return (
     <UserFormUi
       name={user?.name}
       statement={statement}
       onChangeStatement={onChangeStatement}
       statementError={statementError}
-      image={image}
+      image={image?.original}
       imageError={imageError}
       percentCompleted={percentCompleted}
       uploadFilesToServer={uploadFilesToServer}
       removeFilesFromServer={removeFilesFromServer}
+      onSubmit={onSubmit}
     />
   );
 };

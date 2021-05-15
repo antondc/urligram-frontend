@@ -7,6 +7,7 @@ import {
   USER_FOLLOW_DELETE_SUCCEED,
   USER_LOAD_REQUEST,
   USER_LOAD_SUCCEED,
+  USER_UPDATE_DETAILS,
   USERS_LOAD_REQUEST,
   USERS_LOAD_SUCCEED,
   UsersActions,
@@ -29,6 +30,7 @@ export const Users = (state = initialState, action: UsersActions): UsersState =>
     case USER_FOLLOW_DELETE_REQUEST:
     case USER_FOLLOW_DELETE_SUCCEED:
     case USER_FOLLOW_DELETE_FAILURE:
+    case USER_UPDATE_DETAILS:
       return Object.assign({}, state, action.payload);
 
     default:

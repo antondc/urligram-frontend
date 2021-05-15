@@ -8,6 +8,7 @@
     'statement . image' 100px
     'statement . .' auto
     'statementError . imageError' auto
+    'submitButton . .' auto
     / 3fr 3fr 100px;
   column-gap: 10px;
   row-gap: 10px;
@@ -19,6 +20,7 @@
       'statementError' auto
       'image' auto
       'imageError' auto
+      'submitButton' auto
       / 1fr;
   }
 
@@ -46,5 +48,9 @@
 
   &-imageError {
     grid-area: imageError;
+  }
+
+  &-submitButton {
+    grid-area: submitButton;
   }
 }

@@ -52,7 +52,7 @@ export const ImageField: React.FC<Props> = ({
     <div
       className={
         'ImageField ' +
-        (className ? className : '') +
+        (className ? className : ' ') +
         (grow ? ' ImageField--grow' : '') +
         (rounded ? ' ImageField--rounded' : '') +
         (image ? ' ImageField--uploaded' : '') +

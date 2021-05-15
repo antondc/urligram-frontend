@@ -11,6 +11,9 @@ export const SESSION_FORGOT_PASSWORD_FAILURE = 'SESSION_FORGOT_PASSWORD_FAILURE'
 export const SESSION_RESET_PASSWORD_REQUEST = 'SESSION_RESET_PASSWORD_REQUEST';
 export const SESSION_RESET_PASSWORD_SUCCESS = 'SESSION_RESET_PASSWORD_SUCCESS';
 export const SESSION_RESET_PASSWORD_FAILURE = 'SESSION_RESET_PASSWORD_FAILURE';
+export const SESSION_UPDATE_DETAILS_REQUEST = 'SESSION_UPDATE_DETAILS_REQUEST';
+export const SESSION_UPDATE_DETAILS_SUCCESS = 'SESSION_UPDATE_DETAILS_SUCCESS';
+export const SESSION_UPDATE_DETAILS_FAILURE = 'SESSION_UPDATE_DETAILS_FAILURE';
 
 export const SESSION_STATUS_ACTIVE = 'active';
 export const SESSION_STATUS_INACTIVE = 'inactive';
@@ -39,7 +42,12 @@ export interface SessionState {
   statement?: string;
   level?: SessionLevel;
   logged?: boolean;
-  image?: string;
+  location?: string;
+  image?: {
+    original: string;
+    w200h200?: string;
+    w500h500?: string;
+  };
   token?: string;
   iat?: number;
   errors?: SessionError[];
@@ -172,6 +180,21 @@ interface ForgotPasswordFailureAction {
   payload: SessionState;
 }
 
+interface SessionUpdateDetailsRequestAction {
+  type: typeof SESSION_UPDATE_DETAILS_REQUEST;
+  payload: SessionState;
+}
+
+interface SessionUpdateDetailSuccessAction {
+  type: typeof SESSION_UPDATE_DETAILS_SUCCESS;
+  payload: SessionState;
+}
+
+interface SessionUpdateDetailsFailureAction {
+  type: typeof SESSION_UPDATE_DETAILS_FAILURE;
+  payload: SessionState;
+}
+
 export type SessionActions =
   | LogInFailureAction
   | LogInSuccessAction
@@ -185,4 +208,7 @@ export type SessionActions =
   | ForgotPasswordFailureAction
   | ResetPasswordRequestAction
   | ResetPasswordSucessAction
-  | ResetPasswordFailureAction;
+  | ResetPasswordFailureAction
+  | SessionUpdateDetailsRequestAction
+  | SessionUpdateDetailSuccessAction
+  | SessionUpdateDetailsFailureAction;
