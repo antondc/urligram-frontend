@@ -1,108 +1,108 @@
-// import React from 'react';
-// import Dropzone from 'react-dropzone';
+import React from 'react';
 
-// import { A } from '../A';
-// import { Hr } from '../Hr';
-// import { Loader } from '../Loader';
-// import { Span } from '../Span';
-// import { Cross, Upload } from '../Svg';
+import { URLWrapper } from 'Root/src/shared/services/URLWrapper';
+import { FileField as FileFieldUi } from './FileField';
 
-// import './FileField.less';
+import './FileField.less';
 
-// export interface Props {
-//   name?: string;
-//   label?: string;
-//   url?: string;
-//   textButton?: string;
-//   className?: string;
-//   file?: string;
-//   grow?: boolean;
-//   rounded?: boolean;
-//   percentCompleted?: number;
-//   removable?: boolean;
-//   accept?: any;
-//   size?: string;
-//   maxLength?: number;
-//   error?: boolean;
-//   success?: boolean;
-//   disabled?: boolean;
-//   onDrop?: (acceptedFiles: File[]) => void;
-//   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-//   onRemove?: () => void;
-// }
+export interface Props {
+  name?: string;
+  label?: string;
+  fileUrl?: string;
+  buttonText?: string;
+  className?: string;
+  grow?: boolean;
+  rounded?: boolean;
+  percentCompleted?: number;
+  removable?: boolean;
+  accept?: any;
+  size?: string;
+  maxLength?: number;
+  maxSize?: number;
+  error?: boolean;
+  success?: boolean;
+  disabled?: boolean;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  uploadFiles: (file: File) => void;
+  onRemove?: (url: string) => void;
+}
 
-// export const FileField: React.FC<Props> = ({
-//   className,
-//   url,
-//   grow,
-//   label,
-//   textButton,
-//   name,
-//   accept,
-//   removable = true,
-//   percentCompleted,
-//   maxLength,
-//   error,
-//   success,
-//   disabled,
-//   onDrop,
-//   onChange,
-//   onRemove,
-// }) => {
-//   const textButtonToRender = textButton ? textButton : 'Upload file';
-//   const file = url && url.split('/').pop();
-//   const fileName = file && file.split('.').shift();
-//   const extension = url && url.split('.').pop();
-//   const shouldBeShortened = !maxLength || fileName.length <= maxLength;
-//   const truncatedFilename = shouldBeShortened ? file : fileName.substring(0, maxLength) + '[...].' + extension;
+export const FileField: React.FC<Props> = ({
+  className,
+  fileUrl,
+  grow,
+  label,
+  buttonText,
+  name,
+  accept,
+  removable = true,
+  percentCompleted,
+  rounded,
+  maxLength,
+  maxSize,
+  size,
+  error,
+  success,
+  disabled,
+  uploadFiles,
+  onRemove,
+}) => {
+  const fileUrlWrapper = new URLWrapper(fileUrl);
+  const filename = fileUrlWrapper.getFilename();
+  const buttonTextToRender = buttonText ? buttonText : 'Upload file';
+  const shouldBeShortened = !maxLength || filename.length <= maxLength;
+  const extension = fileUrl && fileUrl.split('.').pop();
+  const truncatedFilename = shouldBeShortened ? filename.substring(0, maxLength) + '[...].' + extension : filename;
 
-//   return (
-//     <div
-//       className={
-//         'FileField ' +
-//         (className ? className : '') +
-//         (grow ? ' FileField--grow' : '') +
-//         (removable ? ' FileField--removable' : '') +
-//         (url ? ' FileField--uploaded' : '') +
-//         (error ? ' FileField--error' : '') +
-//         (success ? ' FileField--success' : '') +
-//         (disabled ? ' FileField--disabled' : '')
-//       }
-//     >
-//       {label && (
-//         <label className="FileField-label">
-//           <Span bold>{label}</Span>
-//         </label>
-//       )}
-//       <Hr spacer size="micro" />
-//       <Dropzone
-//         className="FileField-dropzone"
-//         name={name}
-//         multiple={false}
-//         accept={accept}
-//         onDrop={onDrop}
-//         onChange={onChange}
-//       >
-//         <Upload className="FileField-textIcon" size="small" />
-//         <Span bold uppercase>
-//           {textButtonToRender}
-//         </Span>
-//         <div className={'FileField-progress ' + (percentCompleted > 0 ? 'FileField--loading' : '')}>
-//           <Loader loaded={percentCompleted} grow />
-//         </div>
-//       </Dropzone>
-//       {url && (
-//         <div className="FileField-file">
-//           <Span bold className="FileField-name">
-//             {url && (
-//               <A href={url} title={file} targetBlank>
-//                 {truncatedFilename}
-//               </A>
-//             )}
-//           </Span>
-//           {removable && url && <Cross className="FileField-remove" size="small" onClick={onRemove} />}
-//         </div>
-//       )}
-//     </div>
-//   );
-// };
+  const onChange = (e: React.FormEvent<HTMLInputElement>) => {
+    const { files } = e.currentTarget;
+    if (!files || !files.length) return;
+
+    const file = files[0];
+
+    uploadFilesToServer(file);
+  };
+
+  const onDropAccepted = (files: File[]) => {
+    if (!files || !files.length) return;
+    const file = files[0];
+
+    uploadFilesToServer(file);
+  };
+
+  const uploadFilesToServer = async (file: File) => {
+    await uploadFiles(file);
+  };
+
+  const onFileRemove = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    onRemove(fileUrl);
+  };
+
+  return (
+    <FileFieldUi
+      name={name}
+      label={label}
+      fileUrl={fileUrl}
+      buttonText={buttonText}
+      className={className}
+      grow={grow}
+      rounded={rounded}
+      maxSize={maxSize}
+      percentCompleted={percentCompleted}
+      removable={removable}
+      accept={accept}
+      size={size}
+      error={error}
+      success={success}
+      disabled={disabled}
+      buttonTextToRender={buttonTextToRender}
+      truncatedFilename={truncatedFilename}
+      onDropAccepted={onDropAccepted}
+      onChange={onChange}
+      onFileRemove={onFileRemove}
+    />
+  );
+};
