@@ -8,6 +8,7 @@ import {
 } from 'Modules/Bookmarks/bookmarks.types';
 import { LinksActions } from 'Modules/Links/links.types';
 import { uiNotificationPush } from 'Modules/Ui/actions/uiNotificationPush';
+import { USERS_LOAD_SUCCEED, UsersActions } from 'Modules/Users/users.types';
 import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
 import { AppThunk } from '../../../index';
@@ -18,10 +19,10 @@ export const bookmarkCreate = ({
   url,
   isPrivate,
   tags,
-}: BookmarkCreateApiRequest): AppThunk<Promise<BookmarkState>, BookmarksActions | LinksActions> => async (
-  dispatch,
-  getState
-) => {
+}: BookmarkCreateApiRequest): AppThunk<
+  Promise<BookmarkState>,
+  BookmarksActions | LinksActions | UsersActions
+> => async (dispatch, getState) => {
   const { Bookmarks: bookmarksBeforeRequest } = getState();
 
   try {
@@ -34,7 +35,7 @@ export const bookmarkCreate = ({
       tags,
     });
 
-    const { Bookmarks: bookmarksAfterResponse } = getState();
+    const { Bookmarks: bookmarksAfterResponse, Users: usersAfterResponse } = getState();
 
     const bookmarksToUpdate = Object.values(bookmarksAfterResponse.byKey).filter(
       (item) => item?.linkId === bookmarkData?.attributes?.linkId
@@ -60,18 +61,26 @@ export const bookmarkCreate = ({
           ...serializerFromArrayToByKey<BookmarkState, BookmarkState>({ data: bookmarksWithNewBookmark }),
           [bookmarkData?.attributes?.id]: bookmarkData?.attributes,
         },
+        currentIds: [bookmarkData?.attributes?.id, ...(bookmarksAfterResponse?.currentIds || [])],
       },
     });
-    // await dispatch(bookmarkLoadById({ bookmarkId: bookmarkData?.attributes?.id }));
 
-    dispatch(
-      uiNotificationPush({
-        bookmarkId: bookmarkData.attributes.id,
-        type: 'bookmark-grabbed',
-        style: 'success',
-        status: 'pending',
-      })
-    );
+    dispatch({
+      type: USERS_LOAD_SUCCEED,
+      payload: {
+        ...usersAfterResponse,
+        byKey: {
+          ...usersAfterResponse.byKey,
+          [bookmarkData?.attributes?.userId]: {
+            ...usersAfterResponse.byKey[bookmarkData?.attributes?.userId],
+            bookmarksIds: [
+              bookmarkData?.attributes?.id,
+              ...(usersAfterResponse.byKey[bookmarkData?.attributes?.userId]?.bookmarksIds || []),
+            ],
+          },
+        },
+      },
+    });
 
     return bookmarkData?.attributes;
   } catch (error) {
