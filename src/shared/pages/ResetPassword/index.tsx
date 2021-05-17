@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectCurrentRouteQueryParams } from 'Modules/Routes/selectors/selectCurrentRouteQueryParams';
 import { sessionResetPassword } from 'Modules/Session/actions/sessionResetPassword';
 import { selectSessionErrorLast } from 'Modules/Session/selectors/selectSessionErrorLast';
+import { selectSessionLoading } from 'Modules/Session/selectors/selectSessionLoading';
 import { selectSessionPasswordRequested } from 'Modules/Session/selectors/selectSessionPasswordRequested';
 import { validatePassword } from 'Tools/utils/string/validatePassword';
 import { ResetPassword as ResetPasswordUi } from './ResetPassword';
@@ -16,6 +17,8 @@ const ResetPassword: React.FC = () => {
 
   const sessionError = useSelector(selectSessionErrorLast);
   const sessionPasswordRequested = useSelector(selectSessionPasswordRequested);
+  const sessionLoading = useSelector(selectSessionLoading);
+
   //
   const [passwordValue, setPasswordValue] = useState<string>(undefined);
   const [passwordError, setPasswordError] = useState<string>(undefined);
@@ -110,6 +113,7 @@ const ResetPassword: React.FC = () => {
       submitDisabled={submitDisabled}
       submitSuccess={submitSuccess}
       submitError={submitError}
+      sessionLoading={sessionLoading}
     />
   );
 };

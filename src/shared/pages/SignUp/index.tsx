@@ -3,11 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { sessionSignUp } from 'Modules/Session/actions/sessionSignUp';
 import { selectSessionErrorLast } from 'Modules/Session/selectors/selectSessionErrorLast';
+import { selectSessionLoading } from 'Modules/Session/selectors/selectSessionLoading';
 import { selectSessionStatus } from 'Modules/Session/selectors/selectSessionStatus';
 import { SESSION_STATUS_INACTIVE } from 'Modules/Session/session.types';
+import { testStringHasWhiteSpaces } from 'Tools/utils/string/testStringHasWhiteSpaces';
 import { validateEmailAddress } from 'Tools/utils/string/validateEmailAddress';
 import { validatePassword } from 'Tools/utils/string/validatePassword';
-import { testStringHasWhiteSpaces } from '../../tools/utils/string/testStringHasWhiteSpaces';
 import { SignUp as SignUpUi } from './SignUp';
 
 import './SignUp.less';
@@ -17,7 +18,7 @@ const SignUp: React.FC = () => {
   const sessionError = useSelector(selectSessionErrorLast);
   const sessionStatus = useSelector(selectSessionStatus);
   const sessionStatusInactive = sessionStatus === SESSION_STATUS_INACTIVE;
-
+  const sessionLoading = useSelector(selectSessionLoading);
   const [emailValue, setEmailValue] = useState<string>(undefined);
   const [emailError, setEmailError] = useState<string>(undefined);
   const [nameValue, setNameValue] = useState<string>(undefined);
@@ -172,6 +173,7 @@ const SignUp: React.FC = () => {
       submitDisabled={submitDisabled}
       submitSuccess={submitSuccess}
       submitError={submitError}
+      submitting={sessionLoading}
     />
   );
 };

@@ -15,6 +15,7 @@ interface Props {
   submitDisabled: boolean;
   submitSuccess: boolean;
   submitError: string;
+  sessionLoading: boolean;
   onSubmit: (e: React.FormEvent<HTMLButtonElement>) => void;
 }
 
@@ -28,6 +29,7 @@ export const ResetPassword: React.FC<Props> = ({
   submitDisabled,
   submitSuccess,
   submitError,
+  sessionLoading,
   onSubmit,
 }) => (
   <>
@@ -78,6 +80,7 @@ export const ResetPassword: React.FC<Props> = ({
             error={!!submitError}
             success={submitSuccess}
             disabled={submitDisabled}
+            loading={sessionLoading}
           />
           <Hr size="nano" spacer />
           <FadeInOut valueToUpdate={!!submitError} speed="fast">

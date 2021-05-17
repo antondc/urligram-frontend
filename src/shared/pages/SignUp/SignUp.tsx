@@ -21,6 +21,7 @@ interface Props {
   submitDisabled: boolean;
   submitSuccess: boolean;
   submitError: string;
+  submitting: boolean;
   onSubmit: (e: React.FormEvent<HTMLButtonElement>) => void;
 }
 
@@ -40,6 +41,7 @@ export const SignUp: React.FC<Props> = ({
   submitDisabled,
   submitSuccess,
   submitError,
+  submitting,
   onSubmit,
 }) => (
   <>
@@ -121,6 +123,7 @@ export const SignUp: React.FC<Props> = ({
             error={!!submitError}
             success={submitSuccess}
             disabled={submitDisabled}
+            loading={submitting}
           />
           <Hr size="nano" spacer />
           <FadeInOut valueToUpdate={!!submitError} speed="fast">

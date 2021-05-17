@@ -1,6 +1,5 @@
 import React, { HTMLProps } from 'react';
 
-import { Fade } from '../Fade';
 import { Span } from '../Span';
 import { SpinnerLoader } from '../SpinnerLoader';
 import { IconsType, SvgIcon } from '../Svg';
@@ -55,7 +54,7 @@ export const Button: React.FC<Props> = ({
     <Span className="Button-content" bold uppercase>
       {text}
       {icon && <SvgIcon name={icon} size="small" className="Button-svg" />}
-      {<SpinnerLoader size="small" className="Button-loader" />}
+      {<SpinnerLoader className="Button-loader" size="small" />}
     </Span>
   </button>
 );

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { sessionForgotPassword } from 'Modules/Session/actions/sessionForgotPassword';
 import { selectSessionErrorLast } from 'Modules/Session/selectors/selectSessionErrorLast';
+import { selectSessionLoading } from 'Modules/Session/selectors/selectSessionLoading';
 import { selectSessionPasswordRequested } from 'Modules/Session/selectors/selectSessionPasswordRequested';
 import { testStringHasWhiteSpaces } from 'Tools/utils/string/testStringHasWhiteSpaces';
 import { validateEmailAddress } from 'Tools/utils/string/validateEmailAddress';
@@ -14,11 +15,11 @@ const ForgotPassword: React.FC = () => {
   const dispatch = useDispatch();
   const sessionError = useSelector(selectSessionErrorLast);
   const sessionPasswordRequested = useSelector(selectSessionPasswordRequested);
+  const sessionLoading = useSelector(selectSessionLoading);
   const [nameOrEmailValue, setNameValue] = useState<string>(undefined);
   const [nameOrEmailError, setNameOrEmailError] = useState<string>(undefined);
   const [submitSuccess, setSubmitSuccess] = useState<boolean>(false);
   const [submitError, setSubmitError] = useState<string>(undefined);
-
   const submitDisabled = !nameOrEmailValue || !!nameOrEmailError;
 
   const onChangeNameOrEmail = async (e: React.FormEvent<HTMLInputElement>) => {
@@ -62,7 +63,7 @@ const ForgotPassword: React.FC = () => {
       nameOrEmail: nameOrEmailValue,
     };
 
-    dispatch(sessionForgotPassword(data));
+    await dispatch(sessionForgotPassword(data));
   };
 
   useEffect(() => {
@@ -93,6 +94,7 @@ const ForgotPassword: React.FC = () => {
       submitDisabled={submitDisabled}
       submitSuccess={submitSuccess}
       submitError={submitError}
+      submitting={sessionLoading}
     />
   );
 };

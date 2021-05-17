@@ -35,7 +35,7 @@ const BookmarkUpdateForm: React.FC<Props> = ({ closeModal }) => {
   const [titleError, setTitleError] = useState<string>(undefined);
   const [isPrivateValue, setIsPrivateValue] = useState<boolean>(false);
   const [tagsValue, setTagsValue] = useState<TagValue[]>([]);
-  const [submitInProcess, setSubmitInProcess] = useState<boolean>(undefined);
+  const [submitting, setSubmitting] = useState<boolean>(undefined);
   const [submitSuccess, setSubmitSuccess] = useState<boolean>(undefined);
   const [submitError, setSubmitError] = useState<string>(undefined);
 
@@ -71,7 +71,7 @@ const BookmarkUpdateForm: React.FC<Props> = ({ closeModal }) => {
   const onSubmit = async (e: React.FormEvent<HTMLElement>) => {
     e.preventDefault();
 
-    setSubmitInProcess(true);
+    setSubmitting(true);
 
     const transformedTags = tagsValue.map((item) => ({ tag: item.value }));
 
@@ -86,7 +86,7 @@ const BookmarkUpdateForm: React.FC<Props> = ({ closeModal }) => {
     const bookmark = await dispatch(bookmarkUpdate(data));
 
     if (!!bookmark?.id) {
-      setSubmitInProcess(false);
+      setSubmitting(false);
       setSubmitSuccess(true);
 
       setTimeout(() => {
@@ -95,7 +95,7 @@ const BookmarkUpdateForm: React.FC<Props> = ({ closeModal }) => {
 
       return;
     }
-    setSubmitInProcess(false);
+    setSubmitting(false);
   };
 
   useEffect(() => {
@@ -130,7 +130,7 @@ const BookmarkUpdateForm: React.FC<Props> = ({ closeModal }) => {
       onChangeTagsInput={onChangeTagsInput}
       onSubmit={onSubmit}
       submitDisabled={submitDisabled}
-      submitInProcess={submitInProcess}
+      submitting={submitting}
       submitSuccess={submitSuccess}
       submitError={submitError}
     />

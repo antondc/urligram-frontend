@@ -12,6 +12,7 @@ import {
   Select,
   SelectValue,
   Span,
+  SpinnerLoader,
   Switch,
 } from 'Vendor/components';
 import { TagValue } from '.';
@@ -68,7 +69,7 @@ export const BookmarkCreateForm: React.FC<Props> = ({
   onSubmit,
 }) => (
   <form className="BookmarkCreateForm" onSubmit={onSubmit}>
-    <Flex growVertical={false} horizontal="left" vertical="bottom" noWrap>
+    <Flex growVertical={false} horizontal="left" vertical="baseline" noWrap>
       <Input
         name="url"
         type="text"
@@ -80,9 +81,12 @@ export const BookmarkCreateForm: React.FC<Props> = ({
         grow
         autoFocus
       />
-      <Fade mounted={urlValue && !urlError && !urlSubmitted}>
-        <ArrowRight className="BookmarkCreateForm-urlArrow" size="small" />
-      </Fade>
+      <FadeInOut valueToUpdate={urlValue && !urlError && !urlSubmitted && urlLoading} speed="fast">
+        {urlValue && !urlError && !urlSubmitted && !urlLoading && (
+          <ArrowRight className="BookmarkCreateForm-urlArrow" size="small" />
+        )}
+        {urlLoading && <SpinnerLoader className="BookmarkCreateForm-loader" />}
+      </FadeInOut>
     </Flex>
     <Hr size="nano" spacer />
     <FadeInOut valueToUpdate={!!urlError} speed="fast">

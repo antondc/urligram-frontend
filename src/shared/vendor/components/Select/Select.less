@@ -25,7 +25,8 @@
     background: @c-background;
     border: none;
     border: 1.5px solid @c-base;
-    border-radius: 3px;
+    // border-radius: 3px;
+    border-radius: 0;
     box-shadow: none;
 
     &:hover {
@@ -35,6 +36,7 @@
 
   &__control--menu-is-open:not(.noClass) {
     // border-radius: 4px 4px 0 0;
+    border-radius: 0;
   }
 
   &__label:not(.noClass) {
@@ -110,7 +112,8 @@
     background: transparent;
     border: 1px solid @c-base;
     transition: background @td-fast @ease;
-    border-radius: 4px;
+    // border-radius: 4px;
+    border-radius: 0;
 
     &:hover {
       background: @c-base;
@@ -159,7 +162,8 @@
   &__menu-list:not(.noClass) {
     margin: 0;
     padding: 0;
-    border-radius: 0 0 4px 4px;
+    // border-radius: 0 0 4px 4px;
+    border-radius: 0;
 
     .hideScrollbar();
   }
@@ -179,7 +183,8 @@
 
     &:last-child {
       border-bottom: 1.5px solid @c-base;
-      border-radius: 0 0 4px 4px;
+      // border-radius: 0 0 4px 4px;
+      border-radius: 0;
     }
 
     &:hover {
@@ -213,7 +218,8 @@
     border-left: 1.5px solid @c-base;
     border-right: 1.5px solid @c-base;
     box-shadow: 0 1.5px 0 0 @c-base;
-    border-radius: 0 0 3px 3px;
+    // border-radius: 0 0 3px 3px;
+    border-radius: 0;
   }
 
   &--grow {

@@ -3,7 +3,7 @@ import React, { HTMLProps } from 'react';
 import './Flex.less';
 
 export type FlexHorizontal = 'center' | 'right' | 'left' | 'even' | 'around' | 'between';
-export type FlexVertical = 'center' | 'top' | 'bottom';
+export type FlexVertical = 'center' | 'top' | 'bottom' | 'baseline';
 
 interface Props extends HTMLProps<HTMLDivElement> {
   children: React.ReactNode;

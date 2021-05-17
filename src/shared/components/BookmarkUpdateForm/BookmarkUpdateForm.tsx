@@ -1,18 +1,7 @@
 import React from 'react';
 
 import { TagState } from 'Modules/Tags/tags.types';
-import {
-  Button,
-  Fade,
-  FadeInOut,
-  Hr,
-  Input,
-  Select,
-  SelectValue,
-  Span,
-  SpinnerCircle,
-  Switch,
-} from 'Vendor/components';
+import { Button, FadeInOut, Hr, Input, Select, SelectValue, Span, Switch } from 'Vendor/components';
 import { TagValue } from '.';
 
 import './BookmarkUpdateForm.less';
@@ -29,7 +18,7 @@ interface Props {
   onChangeTagsInput: (string: string) => void;
   onChangeTags: (string: SelectValue[]) => void;
   submitDisabled: boolean;
-  submitInProcess: boolean;
+  submitting: boolean;
   submitSuccess: boolean;
   submitError: string;
   onSubmit: (e: React.FormEvent<HTMLElement>) => void;
@@ -47,7 +36,7 @@ export const BookmarkUpdateForm: React.FC<Props> = ({
   onChangeTagsInput,
   onChangeTags,
   submitDisabled,
-  submitInProcess,
+  submitting,
   submitSuccess,
   submitError,
   onSubmit,
@@ -99,6 +88,7 @@ export const BookmarkUpdateForm: React.FC<Props> = ({
       error={!!submitError}
       success={submitSuccess}
       disabled={submitDisabled}
+      loading={submitting}
       grow
     />
     <FadeInOut valueToUpdate={!!submitError} speed="fast">
@@ -106,8 +96,5 @@ export const BookmarkUpdateForm: React.FC<Props> = ({
         {submitError}
       </Span>
     </FadeInOut>
-    <Fade mounted={submitInProcess} position="absolute">
-      <SpinnerCircle background />
-    </Fade>
   </form>
 );

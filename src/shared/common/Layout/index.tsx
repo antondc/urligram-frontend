@@ -132,7 +132,6 @@ class Layout extends React.Component<Props> {
     } = this.props;
 
     const mounted = !languageLoading;
-    const showLoader = false;
 
     return (
       mounted && (
@@ -147,9 +146,6 @@ class Layout extends React.Component<Props> {
               <UserModal />
             </Fade>
           </LayoutContent>
-          <Fade mounted={showLoader} speed="fastest" position="fixed" appear>
-            <SpinnerCircle />
-          </Fade>
           <Fade mounted={messageModalMounted} speed="fastest" position="fixed" appear>
             <ModalMessage message="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus gravida augue sed ipsum pulvinar, vel pretium tellus commodo. Aliquam erat volutpat. Morbi placerat justo massa, eget laoreet enim cursus et. Aliquam id scelerisque ipsum, ac rutrum erat. Donec sed blandit metus. Maecenas pellentesque, neque vel " />
           </Fade>
