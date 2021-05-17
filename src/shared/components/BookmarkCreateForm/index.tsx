@@ -164,9 +164,6 @@ const BookmarkCreateForm: React.FC<Props> = ({ closeModal }) => {
     if (response?.title) {
       setSubmitInProcess(false);
       setSubmitSuccess(true);
-      // dispatch(bookmarksLoad());
-      // dispatch(bookmarksLoadByUserId(sessionId));
-      // dispatch(linksLoad());
 
       setTimeout(() => {
         history.push(`/${currentLanguageSlug}/users/${sessionId}/bookmarks`);
