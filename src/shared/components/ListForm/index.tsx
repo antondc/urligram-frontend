@@ -11,7 +11,7 @@ import { selectListsErrorLast } from 'Modules/Lists/selectors/selectListsErrorLa
 import { RootState } from 'Modules/rootType';
 import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUserId';
 import { selectUiListModal } from 'Modules/Ui/selectors/selectUiListModal';
-import { DELAY_MEDIUM_MS, DELAY_SLOW_MS } from 'Root/src/shared/constants';
+import { DELAY_FAST_MS, DELAY_SLOW_MS } from 'Root/src/shared/constants';
 import history from 'Services/History';
 import { urlRemoveLeadingCharacters } from 'Tools/utils/url/urlRemoveLeadingCharacters';
 import { ListForm as ListFormUi } from './ListForm';
@@ -34,17 +34,18 @@ const ListForm: React.FC<Props> = ({ closeModal }) => {
   const sessionId = useSelector(selectSessionUserId);
   const listModal = useSelector(selectUiListModal);
   const list = useSelector((state: RootState) => selectListById(state, { id: listModal?.listId }));
-  const isUpdate = !!list?.id;
   const [nameValue, setNameValue] = useState<string>(list?.name);
   const [nameError, setNameError] = useState<string>(undefined);
   const [descriptionValue, setDescriptionValue] = useState<string>(list?.description);
   const [descriptionError, setDescriptionError] = useState<string>(undefined);
   const [isPrivateValue, setIsPrivateValue] = useState<boolean>(list?.isPrivate);
   const [isPrivateError, setIsPrivateError] = useState<string>(undefined);
-  const [submitInProcess, setSubmitInProcess] = useState<boolean>(undefined);
+  const [submitting, setSubmitting] = useState<boolean>(undefined);
+  const [removing, setRemoving] = useState<boolean>(undefined);
   const [submitSuccess, setSubmitSuccess] = useState<boolean>(undefined);
   const [submitError, setSubmitError] = useState<string>(undefined);
   const submitDisabled = !nameValue || !!nameError || !descriptionValue || !!descriptionError;
+  const isUpdate = !!list?.id || !removing;
 
   const onChangeName = (e: React.FormEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
@@ -94,7 +95,7 @@ const ListForm: React.FC<Props> = ({ closeModal }) => {
   const onSubmit = async (e: React.FormEvent<HTMLElement>) => {
     e.preventDefault();
 
-    setSubmitInProcess(true);
+    setSubmitting(true);
 
     const data = {
       listId: list?.id,
@@ -108,24 +109,24 @@ const ListForm: React.FC<Props> = ({ closeModal }) => {
     if (!!response?.id) closeModal();
 
     if (!list?.id && !!response?.id) {
-      setSubmitInProcess(false);
+      setSubmitting(false);
       setSubmitSuccess(true);
 
       setTimeout(() => {
         history.push(`/${currentLanguageSlug}/users/${sessionId}/lists`);
-      }, DELAY_MEDIUM_MS);
 
-      return;
+        return;
+      }, DELAY_SLOW_MS);
+      setSubmitting(false);
     }
-    setSubmitInProcess(false);
   };
 
   const onRemove = async (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    setSubmitInProcess(true);
+    setRemoving(true);
 
     await dispatch(listDelete({ listId: list?.id }));
-    setSubmitInProcess(false);
+    setRemoving(false);
 
     setTimeout(() => {
       closeModal();
@@ -171,7 +172,8 @@ const ListForm: React.FC<Props> = ({ closeModal }) => {
       onChangeIsPrivate={onChangeIsPrivate}
       onSubmit={onSubmit}
       submitDisabled={submitDisabled}
-      submitInProcess={submitInProcess}
+      submitting={submitting}
+      removing={removing}
       submitSuccess={submitSuccess}
       submitError={submitError}
       onBlurTitle={onBlurTitle}

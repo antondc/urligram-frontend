@@ -9,6 +9,7 @@ interface Props {
   image: string;
   imageError: string;
   percentCompleted: number;
+  submitting: boolean;
   onChangeStatement: (e: React.FormEvent<HTMLTextAreaElement>) => void;
   uploadFilesToServer: (file: File) => void;
   removeFilesFromServer: (file: any) => void;
@@ -23,6 +24,7 @@ export const UserForm: React.FC<Props> = ({
   image,
   imageError,
   percentCompleted,
+  submitting,
   uploadFilesToServer,
   removeFilesFromServer,
   onSubmit,
@@ -67,6 +69,7 @@ export const UserForm: React.FC<Props> = ({
       text="Save"
       type="submit"
       onClick={onSubmit}
+      loading={submitting}
       // error={!!submitError}
       // success={submitSuccess}
       // disabled={submitDisabled}

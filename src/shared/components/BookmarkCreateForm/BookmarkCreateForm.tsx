@@ -12,7 +12,6 @@ import {
   Select,
   SelectValue,
   Span,
-  SpinnerCircle,
   Switch,
 } from 'Vendor/components';
 import { TagValue } from '.';
@@ -148,6 +147,7 @@ export const BookmarkCreateForm: React.FC<Props> = ({
             error={!!submitError}
             success={submitSuccess}
             disabled={submitDisabled}
+            loading={urlLoading || submitInProcess}
             grow
           />
           <Hr size="nano" spacer />
@@ -159,8 +159,5 @@ export const BookmarkCreateForm: React.FC<Props> = ({
         </>
       )}
     </FadeInOut>
-    <Fade mounted={urlLoading || submitInProcess} position="absolute">
-      <SpinnerCircle background />
-    </Fade>
   </form>
 );

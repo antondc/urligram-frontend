@@ -15,6 +15,7 @@ interface Props {
   submitDisabled: boolean;
   submitSuccess: boolean;
   submitError: string;
+  submitting: boolean;
   onSubmit: (e: React.FormEvent<HTMLButtonElement>) => void;
 }
 
@@ -28,6 +29,7 @@ export const LoginForm: React.FC<Props> = ({
   submitDisabled,
   submitSuccess,
   submitError,
+  submitting,
   onSubmit,
 }) => (
   <form className="LoginForm">
@@ -72,6 +74,7 @@ export const LoginForm: React.FC<Props> = ({
       error={!!submitError}
       success={submitSuccess}
       disabled={submitDisabled}
+      loading={submitting}
       grow
     />
     <Hr size="nano" spacer />

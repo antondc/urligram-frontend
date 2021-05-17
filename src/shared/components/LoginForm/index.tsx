@@ -18,6 +18,7 @@ const LoginForm: React.FC = () => {
   const [passwordValue, setPasswordValue] = useState<string>(undefined);
   const [passwordError, setPasswordError] = useState<string>(undefined);
   const [submitError, setSubmitError] = useState<string>(undefined);
+  const [submitting, setSubmitting] = useState<boolean>(undefined);
   const submitDisabled = !nameOrEmailValue || !!nameOrEmailError || !passwordValue || !!passwordError;
 
   const onChangeNameOrEmail = async (e: React.FormEvent<HTMLInputElement>) => {
@@ -56,12 +57,15 @@ const LoginForm: React.FC = () => {
   const onSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
+    setSubmitting(true);
+
     const data = {
       nameOrEmail: nameOrEmailValue,
       password: passwordValue,
     };
 
-    dispatch(sessionLogIn(data));
+    await dispatch(sessionLogIn(data));
+    setSubmitting(false);
   };
 
   useEffect(() => {
@@ -71,6 +75,7 @@ const LoginForm: React.FC = () => {
       setSubmitError(undefined);
       setPasswordError(undefined);
       setNameOrEmailError(undefined);
+      setSubmitting(undefined);
     };
   }, []);
 
@@ -102,6 +107,7 @@ const LoginForm: React.FC = () => {
       submitDisabled={submitDisabled}
       submitSuccess={isLoggedIn}
       submitError={submitError}
+      submitting={submitting}
     />
   );
 };

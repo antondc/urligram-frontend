@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Button, Fade, FadeInOut, Flex, Hr, Input, Span, SpinnerCircle, Switch } from 'Vendor/components';
+import { Button, FadeInOut, Flex, Hr, Input, Span, Switch } from 'Vendor/components';
 
 import './ListForm.less';
 
@@ -16,9 +16,10 @@ interface Props {
   isPrivateError: string;
   onChangeIsPrivate: (e: React.FormEvent<HTMLInputElement>) => void;
   submitDisabled: boolean;
-  submitInProcess: boolean;
+  submitting: boolean;
   submitSuccess: boolean;
   submitError: string;
+  removing: boolean;
   onSubmit: (e: React.FormEvent<HTMLElement>) => void;
   onRemove: (e: React.FormEvent<HTMLElement>) => void;
   onBlurTitle: (e: React.FormEvent<HTMLInputElement>) => void;
@@ -37,9 +38,10 @@ export const ListForm: React.FC<Props> = ({
   isPrivateError,
   onChangeIsPrivate,
   submitDisabled,
-  submitInProcess,
+  submitting,
   submitSuccess,
   submitError,
+  removing,
   onSubmit,
   onBlurTitle,
   onBlurDescription,
@@ -101,6 +103,7 @@ export const ListForm: React.FC<Props> = ({
       onClick={onSubmit}
       error={!!submitError}
       success={submitSuccess}
+      loading={submitting}
       disabled={submitDisabled}
       grow
     />
@@ -120,13 +123,9 @@ export const ListForm: React.FC<Props> = ({
         onClick={onRemove}
         error={!!submitError}
         success={submitSuccess}
+        loading={removing}
         grow
       />
     )}
-
-    <Hr size="nano" spacer />
-    <Fade mounted={submitInProcess} position="absolute">
-      <SpinnerCircle background />
-    </Fade>
   </form>
 );

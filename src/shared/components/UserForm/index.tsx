@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'Modules/rootType';
 import { selectCurrentRouteParamUserId } from 'Modules/Routes/selectors/selectCurrentRouteParamUserId';
 import { sessionUpdateDetails } from 'Modules/Session/actions/sessionUpdateDetails';
+import { selectSessionLoading } from 'Modules/Session/selectors/selectSessionLoading';
 import { selectUserById } from 'Modules/Users/selectors/selectUserById';
 import { ImageUpload } from 'Services/ImageUpload';
 import { UserForm as UserFormUi } from './UserForm';
@@ -14,6 +15,7 @@ const UserForm: React.FC = () => {
   const dispatch = useDispatch();
   const userId = useSelector(selectCurrentRouteParamUserId);
   const user = useSelector((state: RootState) => selectUserById(state, { id: userId }));
+  const sessionLoading = useSelector(selectSessionLoading);
   const [statement, setStatement] = useState<string>(undefined);
   const [statementError, setStatementError] = useState<string>(null);
   const [image, setImage] = useState<{ original: string }>(undefined);
@@ -69,7 +71,7 @@ const UserForm: React.FC = () => {
       image: image,
     };
 
-    dispatch(sessionUpdateDetails(data));
+    await dispatch(sessionUpdateDetails(data));
   };
 
   useEffect(() => {
@@ -91,6 +93,7 @@ const UserForm: React.FC = () => {
       uploadFilesToServer={uploadFilesToServer}
       removeFilesFromServer={removeFilesFromServer}
       onSubmit={onSubmit}
+      submitting={sessionLoading}
     />
   );
 };

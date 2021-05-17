@@ -2,7 +2,7 @@ import React, { HTMLProps } from 'react';
 
 import { Fade } from '../Fade';
 import { Span } from '../Span';
-import { SpinnerCircle } from '../SpinnerCircle';
+import { SpinnerLoader } from '../SpinnerLoader';
 import { IconsType, SvgIcon } from '../Svg';
 
 import './Button.less';
@@ -44,7 +44,8 @@ export const Button: React.FC<Props> = ({
       (grow ? ' Button--grow' : '') +
       (success ? ' Button--success' : '') +
       (error ? ' Button--error' : '') +
-      (disabled ? ' Button--disabled' : '')
+      (disabled ? ' Button--disabled' : '') +
+      (loading ? ' Button--loading' : '')
     }
     type={type}
     disabled={!!disabled || !!error}
@@ -54,9 +55,7 @@ export const Button: React.FC<Props> = ({
     <Span className="Button-content" bold uppercase>
       {text}
       {icon && <SvgIcon name={icon} size="small" className="Button-svg" />}
+      {<SpinnerLoader size="small" className="Button-loader" />}
     </Span>
-    <Fade mounted={loading} position="absolute">
-      <SpinnerCircle size="nano" />
-    </Fade>
   </button>
 );

@@ -12,7 +12,7 @@ export default {
 
 const knobs = {
   text: (): string => text('Button', 'Click me!'),
-  grow: (): boolean => boolean('Grow', false),
+  grow: (): boolean => boolean('Grow', true),
   disabled: (): boolean => boolean('Disabled', false),
   success: (): boolean => boolean('Success', false),
   error: (): boolean => boolean('Error', false),
@@ -21,36 +21,42 @@ const knobs = {
 };
 
 export const Default: React.FC = () => (
-  <div style={{ width: '200px' }}>
-    <Button
-      text={knobs.text()}
-      grow={knobs.grow()}
-      disabled={knobs.disabled()}
-      error={knobs.error()}
-      success={knobs.success()}
-      variant={knobs.variant()}
-      loading={knobs.loading()}
-    />
+  <>
+    <div style={{ width: '200px', outline: '2px solid rgba(255, 0, 255, .0)' }}>
+      <Button
+        text={knobs.text()}
+        grow={knobs.grow()}
+        disabled={knobs.disabled()}
+        error={knobs.error()}
+        success={knobs.success()}
+        variant={knobs.variant()}
+        loading={knobs.loading()}
+      />
+    </div>
     <Hr spacer />
-    <Button
-      text={knobs.text()}
-      grow={knobs.grow()}
-      disabled={knobs.disabled()}
-      error={knobs.error()}
-      success={knobs.success()}
-      variant={knobs.variant()}
-      loading={knobs.loading()}
-      icon="ArrowRight"
-    />
+    <div style={{ width: '200px', outline: '2px solid rgba(255, 0, 255, .0)' }}>
+      <Button
+        text={knobs.text()}
+        grow={knobs.grow()}
+        disabled={knobs.disabled()}
+        error={knobs.error()}
+        success={knobs.success()}
+        variant={knobs.variant()}
+        loading={knobs.loading()}
+        icon="ArrowRight"
+      />
+    </div>
     <Hr spacer />
-    <Button
-      text={knobs.text()}
-      grow={knobs.grow()}
-      disabled={knobs.disabled()}
-      error={knobs.error()}
-      success={knobs.success()}
-      variant={knobs.variant()}
-      loading={knobs.loading()}
-    />
-  </div>
+    <div style={{ width: '200px', outline: '2px solid rgba(255, 0, 255, .0)' }}>
+      <Button
+        text={knobs.text()}
+        grow={knobs.grow()}
+        disabled={knobs.disabled()}
+        error={knobs.error()}
+        success={knobs.success()}
+        variant={knobs.variant()}
+        loading={knobs.loading()}
+      />
+    </div>
+  </>
 );

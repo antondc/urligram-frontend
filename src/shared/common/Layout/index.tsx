@@ -22,7 +22,6 @@ import { selectLanguageLoading } from 'Modules/Languages/selectors/selectLanguag
 import { pushNewRoute } from 'Modules/Routes/actions/pushNewRoute';
 import { RouteState } from 'Modules/Routes/routes.types';
 import { selectPathWithoutLanguageParam } from 'Modules/Routes/selectors/selectPathWithoutLanguageParam';
-import { selectSessionLoading } from 'Modules/Session/selectors/selectSessionLoading';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import { uiResetState } from 'Modules/Ui/actions/uiResetState';
 import { selectUiBookmarkCreateModalMounted } from 'Modules/Ui/selectors/selectUiBookmarkCreateModalMounted';
@@ -62,7 +61,6 @@ interface Props {
   uiScreenLocked: boolean;
   isLogged: boolean;
   pathWithoutLanguageParam: string;
-  sessionLoading: boolean;
   pushNewRoute: (route) => void;
   uiResetState: () => void;
 }
@@ -131,11 +129,10 @@ class Layout extends React.Component<Props> {
       bookmarkCreateModalMounted,
       bookmarkUpdateModalMounted,
       listModalMounted,
-      sessionLoading,
     } = this.props;
 
     const mounted = !languageLoading;
-    const showLoader = sessionLoading;
+    const showLoader = false;
 
     return (
       mounted && (
@@ -196,7 +193,6 @@ const mapStateToProps = createStructuredSelector({
   loginModalMounted: selectUiLoginModalMounted,
   isLogged: selectSessionLoggedIn,
   pathWithoutLanguageParam: selectPathWithoutLanguageParam,
-  sessionLoading: selectSessionLoading,
   welcomeModalMounted: selectUiWelcomeModalMounted,
   signUpModalMounted: selectUiSignUpModalMounted,
   forgotPasswordModalMounted: selectUiForgotPasswordModalMounted,
