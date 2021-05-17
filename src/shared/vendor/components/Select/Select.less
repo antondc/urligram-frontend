@@ -172,26 +172,38 @@
     border-bottom: 1px dashed @c-base;
     border-left: 1.5px solid @c-base;
     border-right: 1.5px solid @c-base;
-    transition: color @td-fast @ease;
 
     &:first-child {
       border-top: 1.5px solid @c-base;
     }
 
     &:last-child {
-      border-radius: 0 0 4px 4px;
       border-bottom: 1.5px solid @c-base;
+      border-radius: 0 0 4px 4px;
     }
 
     &:hover {
-      color: @c-accent;
       cursor: pointer;
     }
   }
 
-  &__option--is-focused:not(.noClass) {
-    color: @c-accent;
-    outline: 0;
+  &__option--is-focused:not(.noClass):not(.noClass) {
+    position: relative;
+
+    // Hide dashed bottom border of previous item
+    &:before {
+      content: ' ';
+      position: absolute;
+      height: 1px;
+      top: -1px;
+      left: 0;
+      right: 0;
+      background: @c-base;
+    }
+
+    color: @c-background;
+    background: @c-base;
+    outline: 1px solid @c-base;
   }
 
   &__option--is-disabled:not(.noClass) {
