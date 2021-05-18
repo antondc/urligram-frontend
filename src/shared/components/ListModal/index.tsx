@@ -22,7 +22,7 @@ const ListModal: React.FC = () => {
   };
 
   return (
-    <BaseModal onClick={closeModal}>
+    <BaseModal>
       <Border className="ListModal" grow>
         <Cross className="ListModal-cross" onClick={closeModal} />
         <Flex horizontal="center">

@@ -19,7 +19,7 @@ const BookmarkUpdateModal: React.FC = () => {
   };
 
   return (
-    <BaseModal onClick={closeModal}>
+    <BaseModal>
       <Border className="BookmarkUpdateModal" grow>
         <Cross className="BookmarkUpdateModal-cross" onClick={closeModal} />
         <Flex horizontal="center">

@@ -2,11 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { bookmarkCreate } from 'Modules/Bookmarks/actions/bookmarkCreate';
-import { bookmarksLoad } from 'Modules/Bookmarks/actions/bookmarksLoad';
-import { bookmarksLoadByUserId } from 'Modules/Bookmarks/actions/bookmarksLoadByUserId';
 import { selectBookmarksErrorLast } from 'Modules/Bookmarks/selectors/selectBookmarksErrorLast';
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
-import { linksLoad } from 'Modules/Links/actions/linksLoad';
 import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUserId';
 import { tagsSearchLoad } from 'Modules/Tags/actions/tagsSearchLoad';
 import { selectTagsAll } from 'Modules/Tags/selectors/selectAllTags';
@@ -75,7 +72,7 @@ const BookmarkCreateForm: React.FC<Props> = ({ closeModal, setModalLocked }) => 
 
       return;
     }
-
+    setModalLocked(true);
     setSubmitSuccess(undefined);
     const urlHasProtocol = testUrlHasProtocol(urlValue);
 
@@ -99,14 +96,15 @@ const BookmarkCreateForm: React.FC<Props> = ({ closeModal, setModalLocked }) => 
 
       if (urlInfo?.title) setTitleValue(urlInfo?.title);
 
-      setUrlLoading(false);
       setUrlSubmitted(true);
       setUrlValue(valueWithProtocol);
       setUrlError(undefined);
       setSubmitError(undefined);
-    } catch (err) {
+    } catch (error) {
+      setUrlError(error?.message);
+    } finally {
       setUrlLoading(false);
-      setUrlError(err?.message);
+      setModalLocked(false);
     }
   };
 

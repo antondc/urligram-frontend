@@ -20,7 +20,7 @@ const LoginModal: React.FC = () => {
   };
 
   return (
-    <BaseModal onClick={closeModal}>
+    <BaseModal>
       <Border className="LoginModal" grow>
         <Cross className="LoginModal-cross" onClick={closeModal} />
         <Flex horizontal="center">

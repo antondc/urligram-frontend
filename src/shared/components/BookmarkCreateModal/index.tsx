@@ -11,7 +11,7 @@ import './BookmarkCreateModal.less';
 
 const BookmarkCreateModal: React.FC = () => {
   const dispatch = useDispatch();
-  const [modalLocked, setModalLocked] = useState<boolean>(false);
+  const [modalLocked, setModalLocked] = useState<boolean>(true);
 
   const closeModal = () => {
     if (modalLocked) return;
@@ -19,7 +19,7 @@ const BookmarkCreateModal: React.FC = () => {
   };
 
   return (
-    <BaseModal onClick={closeModal}>
+    <BaseModal>
       <Border className="BookmarkCreateModal" grow>
         <Cross className="BookmarkCreateModal-cross" onClick={closeModal} />
         <Flex horizontal="center">
