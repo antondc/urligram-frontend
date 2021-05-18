@@ -40,9 +40,12 @@ export const BookmarkLists: React.FC<Props> = ({ bookmarkId }) => {
   };
 
   const onListLeave = () => {
+    if (itemsLoading?.length) {
+      return;
+    }
+
     setSubmitError(undefined);
     setListInputName(undefined);
-
     dispatch(bookmarkListsModalUnmount({ bookmarkId }));
     setInList(false);
   };

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import Cross from 'Assets/svg/cross.svg';
@@ -11,8 +11,10 @@ import './BookmarkCreateModal.less';
 
 const BookmarkCreateModal: React.FC = () => {
   const dispatch = useDispatch();
+  const [modalLocked, setModalLocked] = useState<boolean>(false);
 
   const closeModal = () => {
+    if (modalLocked) return;
     dispatch(switchBookmarkCreateModal(false));
   };
 
@@ -24,7 +26,7 @@ const BookmarkCreateModal: React.FC = () => {
           <H3>Add bookmark</H3>
         </Flex>
         <Hr spacer size="small" />
-        <BookmarkCreateForm closeModal={closeModal} />
+        <BookmarkCreateForm closeModal={closeModal} setModalLocked={setModalLocked} />
         <Hr spacer size="big" />
       </Border>
     </BaseModal>

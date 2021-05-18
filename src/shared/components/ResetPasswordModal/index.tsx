@@ -3,10 +3,10 @@ import { useDispatch } from 'react-redux';
 
 import Cross from 'Assets/svg/cross.svg';
 import BaseModal from 'Components/BaseModal';
-import { Border, Flex, H4, Hr, P, Span } from 'Vendor/components';
 import { switchResetPasswordModal } from 'Modules/Ui/actions/switchResetPasswordModal';
 import { Routes } from 'Router/routes';
 import history from 'Services/History';
+import { Border, Flex, H4, Hr, P, Span } from 'Vendor/components';
 
 import './ResetPasswordModal.less';
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Cross from 'Assets/svg/cross.svg';
@@ -13,9 +13,11 @@ import './ListModal.less';
 const ListModal: React.FC = () => {
   const dispatch = useDispatch();
   const { listId } = useSelector(selectUiListModal);
+  const [modalLocked, setModalLocked] = useState<boolean>(false);
   const isUpdate = !!listId;
 
   const closeModal = () => {
+    if (modalLocked) return;
     dispatch(switchListModal({ mounted: false }));
   };
 
@@ -27,7 +29,7 @@ const ListModal: React.FC = () => {
           <H3>{!!isUpdate ? 'Update List' : 'Create List'}</H3>
         </Flex>
         <Hr spacer size="small" />
-        <ListForm closeModal={closeModal} />
+        <ListForm closeModal={closeModal} setModalLocked={setModalLocked} />
         <Hr spacer size="big" />
       </Border>
     </BaseModal>

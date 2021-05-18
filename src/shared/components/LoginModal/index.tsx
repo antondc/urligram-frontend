@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import Cross from 'Assets/svg/cross.svg';
@@ -12,8 +12,10 @@ import './LoginModal.less';
 
 const LoginModal: React.FC = () => {
   const dispatch = useDispatch();
+  const [modalLocked, setModalLocked] = useState<boolean>(false);
 
   const closeModal = () => {
+    if (modalLocked) return;
     dispatch(switchLoginModal(false));
   };
 
@@ -25,7 +27,7 @@ const LoginModal: React.FC = () => {
           <H3>Log in</H3>
         </Flex>
         <Hr spacer size="small" />
-        <LoginForm />
+        <LoginForm setModalLocked={setModalLocked} />
         <Hr spacer size="big" />
         <Flex horizontal="center">
           <div className="Login-section">

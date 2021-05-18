@@ -28,9 +28,10 @@ export type TagValue = {
 
 interface Props {
   closeModal: () => void;
+  setModalLocked: (value: boolean) => void;
 }
 
-const BookmarkCreateForm: React.FC<Props> = ({ closeModal }) => {
+const BookmarkCreateForm: React.FC<Props> = ({ closeModal, setModalLocked }) => {
   const dispatch = useDispatch();
   const bookmarkError = useSelector(selectBookmarksErrorLast);
   const allTags = useSelector(selectTagsAll);
@@ -50,7 +51,6 @@ const BookmarkCreateForm: React.FC<Props> = ({ closeModal }) => {
   const [submitInProcess, setSubmitInProcess] = useState<boolean>(undefined);
   const [submitSuccess, setSubmitSuccess] = useState<boolean>(undefined);
   const [submitError, setSubmitError] = useState<string>(undefined);
-
   const submitDisabled = !titleValue || !!titleError;
 
   const onChangeUrl = (e: React.FormEvent<HTMLInputElement>) => {
@@ -148,7 +148,7 @@ const BookmarkCreateForm: React.FC<Props> = ({ closeModal }) => {
     }
 
     setSubmitInProcess(true);
-
+    setModalLocked(true);
     const transformedTags = tagsValue.map((item) => ({ tag: item.value }));
 
     const data = {
@@ -160,9 +160,9 @@ const BookmarkCreateForm: React.FC<Props> = ({ closeModal }) => {
 
     const response = await dispatch(bookmarkCreate(data));
     setSubmitInProcess(false);
+    setModalLocked(false);
 
     if (response?.title) {
-      setSubmitInProcess(false);
       setSubmitSuccess(true);
 
       setTimeout(() => {

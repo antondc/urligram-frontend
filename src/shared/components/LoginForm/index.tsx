@@ -9,7 +9,11 @@ import { LoginForm as LoginFormUi } from './LoginForm';
 
 import './LoginForm.less';
 
-const LoginForm: React.FC = () => {
+interface Props {
+  setModalLocked?: (locked: boolean) => void;
+}
+
+const LoginForm: React.FC<Props> = ({ setModalLocked }) => {
   const dispatch = useDispatch();
   const sessionError = useSelector(selectSessionErrorLast);
   const isLoggedIn = useSelector(selectSessionLoggedIn);
@@ -58,6 +62,7 @@ const LoginForm: React.FC = () => {
     e.preventDefault();
 
     setSubmitting(true);
+    setModalLocked(true);
 
     const data = {
       nameOrEmail: nameOrEmailValue,
@@ -66,6 +71,7 @@ const LoginForm: React.FC = () => {
 
     await dispatch(sessionLogIn(data));
     setSubmitting(false);
+    setModalLocked(false);
   };
 
   useEffect(() => {
@@ -76,6 +82,7 @@ const LoginForm: React.FC = () => {
       setPasswordError(undefined);
       setNameOrEmailError(undefined);
       setSubmitting(undefined);
+      setModalLocked(undefined);
     };
   }, []);
 

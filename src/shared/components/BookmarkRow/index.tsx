@@ -8,9 +8,7 @@ import { RootState } from 'Modules/rootType';
 import { selectCurrentRouteParamUserId } from 'Modules/Routes/selectors/selectCurrentRouteParamUserId';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
-import { bookmarkListsModalUnmount } from 'Modules/Ui/actions/bookmarkListsModalUnmount';
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
-import { selecBookmarkListsModal } from 'Modules/Ui/selectors/selecBookmarkListsModal';
 import { TIME_RECENTLY_CREATED_BOOKMARK } from 'Root/src/shared/constants';
 import { unixTimeElapsed } from 'Tools/utils/Date/unixTimeElapsed';
 import { switchBookmarkUpdateModal } from '../../redux/modules/Ui/actions/switchBookmarkUpdateModal';
@@ -29,8 +27,6 @@ const BookmarkRow: React.FC<Props> = ({ id }) => {
   const routeUserId = paramUserId || session?.id || bookmark?.userId;
   const timePassed = unixTimeElapsed(bookmark?.createdAt);
   const recentlyCreated = timePassed < TIME_RECENTLY_CREATED_BOOKMARK;
-  const bookmarkListsModal = useSelector((state: RootState) => selecBookmarkListsModal(state, { bookmarkId: id }));
-  const modalMounted = !!bookmarkListsModal?.bookmarkId;
   const sessionUserBookmarkId = bookmark?.bookmarksRelated?.find((item) => item?.userId === session?.id)?.id;
   const sessionUserBookmarkedLink = !!sessionUserBookmarkId;
   const sessionUserBookmark = useSelector((state: RootState) =>
@@ -51,10 +47,6 @@ const BookmarkRow: React.FC<Props> = ({ id }) => {
 
   if (!id) return null;
 
-  const onBookmarkRowMouseLeave = () => {
-    !!modalMounted && dispatch(bookmarkListsModalUnmount({ bookmarkId: id }));
-  };
-
   useEffect(() => {
     if (!!sessionUserBookmarkedLink) dispatch(bookmarkLoadById({ bookmarkId: sessionUserBookmarkId }));
   }, [sessionUserBookmarkId]);
@@ -67,7 +59,6 @@ const BookmarkRow: React.FC<Props> = ({ id }) => {
       onVote={onVote}
       recentlyCreated={recentlyCreated}
       sessionUserBookmarkedLink={sessionUserBookmarkedLink}
-      onBookmarkRowMouseLeave={onBookmarkRowMouseLeave}
       onEdit={onEdit}
     />
   );

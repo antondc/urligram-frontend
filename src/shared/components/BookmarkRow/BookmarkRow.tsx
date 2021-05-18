@@ -14,7 +14,6 @@ interface BookmarkRow extends BookmarkState {
   recentlyCreated: boolean;
   sessionUserBookmarkedLink: boolean;
   onVote: (vote: boolean | null) => void;
-  onBookmarkRowMouseLeave: () => void;
   onEdit: () => void;
 }
 
@@ -24,7 +23,6 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
   onVote,
   sessionUserBookmarkedLink,
   recentlyCreated,
-  onBookmarkRowMouseLeave,
   onEdit,
 }) => (
   <Border
@@ -32,7 +30,6 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
     className={'BookmarkRow' + (recentlyCreated ? ' BookmarkRow-recentlyCreated' : '')}
     data-test-id="BookmarkRow"
     key={bookmark?.id}
-    onMouseLeave={onBookmarkRowMouseLeave}
   >
     <div className="BookmarkRow-left">
       <Flex vertical="top" growVertical={false} horizontal="left" noWrap>

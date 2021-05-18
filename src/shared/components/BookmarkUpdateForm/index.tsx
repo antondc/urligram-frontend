@@ -21,9 +21,10 @@ export type TagValue = {
 
 interface Props {
   closeModal: () => void;
+  setModalLocked: (value: boolean) => void;
 }
 
-const BookmarkUpdateForm: React.FC<Props> = ({ closeModal }) => {
+const BookmarkUpdateForm: React.FC<Props> = ({ closeModal, setModalLocked }) => {
   const dispatch = useDispatch();
   const bookmarkError = useSelector(selectBookmarksErrorLast);
   const allTags = useSelector(selectTagsAll);
@@ -72,6 +73,7 @@ const BookmarkUpdateForm: React.FC<Props> = ({ closeModal }) => {
     e.preventDefault();
 
     setSubmitting(true);
+    setModalLocked(true);
 
     const transformedTags = tagsValue.map((item) => ({ tag: item.value }));
 
@@ -87,6 +89,7 @@ const BookmarkUpdateForm: React.FC<Props> = ({ closeModal }) => {
 
     if (!!bookmark?.id) {
       setSubmitting(false);
+      setModalLocked(false);
       setSubmitSuccess(true);
 
       setTimeout(() => {
@@ -96,6 +99,7 @@ const BookmarkUpdateForm: React.FC<Props> = ({ closeModal }) => {
       return;
     }
     setSubmitting(false);
+    setModalLocked(false);
   };
 
   useEffect(() => {
