@@ -23,3 +23,24 @@ export type ResponseStatus = typeof REQUEST_STARTED | typeof REQUEST_SUCCEEDED |
 
 export const BROWSER_CHROME = 'Chrome';
 export const BROWSER_FIREFOX = 'Firefox';
+
+export const USER_RESET = {
+  loading: undefined,
+  id: undefined,
+  order: undefined,
+  name: undefined,
+  email: undefined,
+  status: undefined,
+  level: undefined,
+  logged: undefined,
+  token: undefined,
+  iat: undefined,
+  errors: undefined,
+  passwordRequested: undefined,
+  passwordReset: undefined,
+  image: undefined,
+  statement: undefined,
+  location: undefined,
+  createdAt: undefined,
+  updatedAt: undefined,
+};

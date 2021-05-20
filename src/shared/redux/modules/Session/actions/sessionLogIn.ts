@@ -31,7 +31,7 @@ export const sessionLogIn = ({
     const { data }: SessionLogInApiResponse = await HttpClient.post('/login', { nameOrEmail, password });
 
     if (userAgent === BROWSER_FIREFOX) {
-      await browser.storage.local.set({ Session: data });
+      await browser.storage.local.set({ Session: data?.attributes });
     }
 
     await dispatch({

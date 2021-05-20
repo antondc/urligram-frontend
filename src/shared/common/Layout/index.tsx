@@ -6,9 +6,9 @@ import BookmarkForm from 'Components/BookmarkForm';
 import LoginForm from 'Components/LoginForm';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { SESSION_LOG_IN_SUCCESS } from 'Modules/Session/session.types';
-import { BROWSER_CHROME, BROWSER_FIREFOX } from 'Root/src/shared/constants';
+import { BROWSER_CHROME, BROWSER_FIREFOX, USER_RESET } from 'Root/src/shared/constants';
 import { identifyBrowser } from 'Tools/utils/browser/identifyBrowser';
-import { FadeInOut, Hr } from 'Vendor/components';
+import { Button, FadeInOut, Flex, Hr } from 'Vendor/components';
 
 import './Layout.less';
 
@@ -17,6 +17,17 @@ const Layout: React.FC = () => {
   const userAgent = identifyBrowser();
   const [authed, setAuthed] = useState<boolean>(null);
   const session = useSelector(selectSession);
+
+  const logOut = async () => {
+    if (userAgent === BROWSER_FIREFOX) {
+      await browser.storage.local.remove('Session');
+
+      await dispatch({
+        type: SESSION_LOG_IN_SUCCESS,
+        payload: USER_RESET,
+      });
+    }
+  };
 
   useEffect(() => {
     document.body.classList.remove('preload'); // Preventing animations on load
@@ -63,12 +74,23 @@ const Layout: React.FC = () => {
   return (
     <div>
       <LayoutContent>
-        session: {session.id}
+        <Flex horizontal="right" growHorizontal>
+          <img className="Layout-image" src={session?.image?.w200h200} />
+        </Flex>
+        <Hr spacer />
         <Hr size="micro" />
         <Hr spacer />
         <FadeInOut valueToUpdate={authed} appear>
           {authed ? <BookmarkForm /> : <LoginForm />}
         </FadeInOut>
+        {authed && (
+          <>
+            <Hr spacer />
+            <Hr size="micro" />
+            <Hr spacer />
+            <Button onClick={logOut} text="Log lout" />
+          </>
+        )}
       </LayoutContent>
     </div>
   );
