@@ -1,0 +1,50 @@
+@import '../../css/imports.less';
+
+.BookmarkForm {
+  width: 800px;
+  padding: 20px;
+  background: whitesmoke;
+
+  &-logOut {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+
+    &:after {
+      content: '❌';
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: normal;
+    align-items: center;
+
+    & > div {
+      width: 100%;
+    }
+  }
+
+  &-formInput,
+  &-formSelect {
+    margin-bottom: 15px;
+  }
+
+  &-form--error {
+    border: 1px solid @c-tomato;
+  }
+
+  &-button2 {
+    height: 30px;
+    width: 30px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

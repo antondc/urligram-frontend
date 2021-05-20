@@ -1,0 +1,27 @@
+import {
+  SESSION_ERROR_CLEAR,
+  SESSION_LOG_IN_FAILURE,
+  SESSION_LOG_IN_REQUEST,
+  SESSION_LOG_IN_SUCCESS,
+  SESSION_LOG_OUT_REQUEST,
+  SessionActions,
+  SessionState,
+} from './session.types';
+
+export const initialState: SessionState = {
+  errors: [],
+};
+
+export const Session = (state = initialState, action: SessionActions): SessionState => {
+  switch (action.type) {
+    case SESSION_LOG_IN_REQUEST:
+    case SESSION_LOG_IN_SUCCESS:
+    case SESSION_LOG_OUT_REQUEST:
+    case SESSION_LOG_IN_FAILURE:
+    case SESSION_ERROR_CLEAR:
+      return Object.assign({}, state, action.payload);
+
+    default:
+      return Object.assign({}, initialState, state);
+  }
+};

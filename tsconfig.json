@@ -11,7 +11,7 @@
     "experimentalDecorators": true,
     "importHelpers": true,
     "target": "ES6",
-    "lib": ["ES6", "dom", "esnext"],
+    "lib": ["ES6", "DOM", "ESNext"],
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "paths": {
