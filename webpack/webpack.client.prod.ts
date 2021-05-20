@@ -7,12 +7,11 @@ import { WEBPACK_DIST, WEBPACK_SRC_CLIENT } from './constants';
 import webpackClientCommonConfig from './webpack.client.common';
 
 const webpackClientProdConfig = {
-  entry: [WEBPACK_SRC_CLIENT],
   mode: 'production',
+  entry: [WEBPACK_SRC_CLIENT],
   output: {
     filename: 'client-[hash:4].js',
     path: WEBPACK_DIST,
-    publicPath: '/',
   },
   devtool: 'none',
   stats: 'errors-only',

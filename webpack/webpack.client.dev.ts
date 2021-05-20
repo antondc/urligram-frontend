@@ -3,15 +3,15 @@ import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import merge from 'webpack-merge';
 
 import { development } from '../config.test.json';
-import { WEBPACK_ROOT, WEBPACK_SRC_CLIENT } from './constants';
+import { WEBPACK_DIST, WEBPACK_SRC_CLIENT } from './constants';
 import webpackClientCommonConfig from './webpack.client.common';
 
 const webpackClientDevConfig = {
   mode: 'development',
-  entry: ['webpack-hot-middleware/client', WEBPACK_SRC_CLIENT],
+  entry: [WEBPACK_SRC_CLIENT],
   output: {
     filename: 'client-[hash:4].js',
-    publicPath: WEBPACK_ROOT,
+    path: WEBPACK_DIST,
   },
   devtool: '#source-map',
   stats: 'normal',
@@ -26,7 +26,6 @@ const webpackClientDevConfig = {
   },
   plugins: [
     ...webpackClientCommonConfig.plugins,
-    new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
         ENDPOINT_API: JSON.stringify(development.API_URL),

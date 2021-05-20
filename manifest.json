@@ -1,0 +1,24 @@
+{
+    "name": "Chrome Extension Example",
+    "version": "1.0",
+    "description": "Linking extension",
+    "manifest_version": 2,
+    "browser_action": {
+        "default_popup": "popup.html",
+        "default_icon": {
+            "16": "img/logo.png",
+            "32": "img/logo.png",
+            "48": "img/logo.png",
+            "128": "img/logo.png"
+        }
+    },
+    "icons": {
+        "16": "img/logo.png",
+        "32": "img/logo.png",
+        "48": "img/logo.png",
+        "128": "img/logo.png"
+    },
+
+    "content_security_policy": "script-src 'self' 'sha256-88ceb059818a36306e3c5c4d0dafd45d2f3f670d1c5d5ff41c4b0b888596873b='; object-src 'self'",
+    "permissions": ["activeTab", "storage", "declarativeContent", "*://*.linking.me/*"]
+}
