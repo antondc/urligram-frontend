@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import LayoutContent from 'Common/LayoutContent';
@@ -6,27 +6,24 @@ import BookmarkForm from 'Components/BookmarkForm';
 import LoginForm from 'Components/LoginForm';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { SESSION_LOG_IN_SUCCESS } from 'Modules/Session/session.types';
-import { BROWSER_CHROME, BROWSER_FIREFOX, USER_RESET } from 'Root/src/shared/constants';
-import { identifyBrowser } from 'Tools/utils/browser/identifyBrowser';
-import { Button, FadeInOut, Flex, Hr } from 'Vendor/components';
+import { USER_RESET } from 'Root/src/shared/constants';
+import { Border, Cross, Flex, Hr, User } from 'Vendor/components';
+import { PersistSessionData } from '../../services/PersistSessionData';
 
 import './Layout.less';
 
 const Layout: React.FC = () => {
   const dispatch = useDispatch();
-  const userAgent = identifyBrowser();
-  const [authed, setAuthed] = useState<boolean>(null);
   const session = useSelector(selectSession);
+  const persistSessionData = new PersistSessionData();
 
   const logOut = async () => {
-    if (userAgent === BROWSER_FIREFOX) {
-      await browser.storage.local.remove('Session');
+    await persistSessionData.remove();
 
-      await dispatch({
-        type: SESSION_LOG_IN_SUCCESS,
-        payload: USER_RESET,
-      });
-    }
+    await dispatch({
+      type: SESSION_LOG_IN_SUCCESS,
+      payload: USER_RESET,
+    });
   };
 
   useEffect(() => {
@@ -35,64 +32,46 @@ const Layout: React.FC = () => {
   }, []);
 
   useEffect(() => {
+    
     const asyncFunction = async () => {
-      if (userAgent === BROWSER_CHROME) {
-        chrome.storage.sync.get(['Session'], (result) => {
-          if (result.Session) {
-            setAuthed(true);
-          } else {
-            setAuthed(false);
-          }
-        });
-      }
-      if (userAgent === BROWSER_FIREFOX) {
-        const storageRaw = await browser.storage.local.get('Session');
-        const storageStringified = JSON.stringify(storageRaw);
-        const storageParsed = JSON.parse(storageStringified);
-        if (!storageParsed?.Session?.id) {
-          setAuthed(false);
+      const sessionData = await persistSessionData.get();
+      const authed = sessionData?.id;
+      if (!authed) return;
 
-          return;
-        }
-        if (storageParsed?.Session?.id) {
-          setAuthed(true);
-
-          await dispatch({
-            type: SESSION_LOG_IN_SUCCESS,
-            payload: {
-              ...storageParsed?.Session,
-            },
-          });
-        }
-      }
+      await dispatch({
+        type: SESSION_LOG_IN_SUCCESS,
+        payload: {
+          ...sessionData,
+        },
+      });
     };
     asyncFunction();
   }, [session]);
 
-  if (authed === null) return <div />;
-
   return (
-    <div>
-      <LayoutContent>
-        <Flex horizontal="right" growHorizontal>
-          <img className="Layout-image" src={session?.image?.w200h200} />
+    <LayoutContent>
+      <Border>
+        <Flex horizontal="between" growHorizontal vertical="top">
+          {session?.id ? (
+            <div className="Layout-close" onClick={logOut}>
+              <Cross size="small" />
+            </div>
+          ) : (
+            <div />
+          )}
+          {session?.id ? (
+            <img className="Layout-image" src={session?.image?.w200h200} />
+          ) : (
+            <User name="User" className="Layout-userLogo" />
+          )}
         </Flex>
         <Hr spacer />
         <Hr size="micro" />
         <Hr spacer />
-        <FadeInOut valueToUpdate={authed} appear>
-          {authed ? <BookmarkForm /> : <LoginForm />}
-        </FadeInOut>
-        {authed && (
-          <>
-            <Hr spacer />
-            <Hr size="micro" />
-            <Hr spacer />
-            <Button onClick={logOut} text="Log lout" />
-          </>
-        )}
-      </LayoutContent>
-    </div>
+        {!!session?.id ? <BookmarkForm /> : <LoginForm />}
+        <Hr spacer />
+      </Border>
+    </LayoutContent>
   );
 };
 
