@@ -7,18 +7,17 @@ import LoginForm from 'Components/LoginForm';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { SESSION_LOG_IN_SUCCESS } from 'Modules/Session/session.types';
 import { USER_RESET } from 'Root/src/shared/constants';
+import { SessionDataStorage } from 'Services/SessionDataStorage';
 import { Border, Cross, Flex, Hr, User } from 'Vendor/components';
-import { PersistSessionData } from '../../services/PersistSessionData';
 
 import './Layout.less';
 
 const Layout: React.FC = () => {
   const dispatch = useDispatch();
   const session = useSelector(selectSession);
-  const persistSessionData = new PersistSessionData();
-
+  const sessionDataStorage = new SessionDataStorage();
   const logOut = async () => {
-    await persistSessionData.remove();
+    await sessionDataStorage.remove('Session');
 
     await dispatch({
       type: SESSION_LOG_IN_SUCCESS,
@@ -32,9 +31,8 @@ const Layout: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    
     const asyncFunction = async () => {
-      const sessionData = await persistSessionData.get();
+      const sessionData = await sessionDataStorage.get('Session');
       const authed = sessionData?.id;
       if (!authed) return;
 
@@ -46,7 +44,7 @@ const Layout: React.FC = () => {
       });
     };
     asyncFunction();
-  }, [session]);
+  }, []);
 
   return (
     <LayoutContent>

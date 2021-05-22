@@ -1,10 +1,11 @@
 import { AnyAction, applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import thunk, { ThunkAction } from 'redux-thunk';
 
+import { logger } from './middlewares/logger';
 import { RootState } from './modules/rootType';
 import { RootReducers } from './rootReducers';
 
-const middleware = [thunk];
+const middleware = [thunk, logger];
 
 // Type for thunks
 export type AppThunk<ReturnType, Action extends AnyAction = AnyAction> = ThunkAction<
