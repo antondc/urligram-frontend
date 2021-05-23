@@ -21,8 +21,8 @@ export const REQUEST_SUCCEEDED = 'request-succeeded';
 export const REQUEST_FAILED = 'request-failed';
 export type ResponseStatus = typeof REQUEST_STARTED | typeof REQUEST_SUCCEEDED | typeof REQUEST_FAILED;
 
-export const EXTENSION_CHROME = 'ExtensionChrome';
-export const EXTENSION_FIREFOX = 'ExtensionFirefox';
+export const BROWSER_CHROME = 'Chrome';
+export const BROWSER_FIREFOX = 'Firefox';
 
 export const USER_RESET = {
   loading: undefined,

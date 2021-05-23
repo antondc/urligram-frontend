@@ -57,11 +57,7 @@ const webpackClientCommonConfig = {
       dry: false,
       verbose: true,
       protectWebpackAssets: false,
-      cleanOnceBeforeBuildPatterns: [
-        path.join(WEBPACK_DIST, 'main-*'),
-        path.join(WEBPACK_DIST, 'client-*'),
-        path.join(WEBPACK_DIST, '*hot-update*'),
-      ],
+      cleanOnceBeforeBuildPatterns: [path.join(WEBPACK_DIST, 'client-*'), path.join(WEBPACK_DIST, '*hot-update*')],
       cleanAfterEveryBuildPatterns: [],
     }),
     new HtmlWebPackPlugin({

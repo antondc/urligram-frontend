@@ -20,5 +20,5 @@
   },
 
   "content_security_policy": "script-src 'self' 'sha256-88ceb059818a36306e3c5c4d0dafd45d2f3f670d1c5d5ff41c4b0b888596873b='; object-src 'self'",
-  "permissions": ["activeTab", "storage", "declarativeContent", "*://*.linking.me/*"]
+  "permissions": ["activeTab", "storage", "declarativeContent", "*://*.linking.me/*", "https://dev.linking.me:3000"]
 }

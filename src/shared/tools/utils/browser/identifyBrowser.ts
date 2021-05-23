@@ -1,11 +1,13 @@
-import { EXTENSION_CHROME, EXTENSION_FIREFOX } from 'Root/src/shared/constants';
+import { BROWSER_CHROME, BROWSER_FIREFOX } from 'Root/src/shared/constants';
 
-export const identifyBrowser = (): 'ExtensionChrome' | 'ExtensionFirefox' | 'Browser' => {
+export const identifyBrowser = (): 'Chrome' | 'Firefox' => {
+  const userAgentLowerCase = navigator.userAgent.toLowerCase();
+
   switch (true) {
-    case navigator.userAgent.toLowerCase().includes('chrome'):
-      return EXTENSION_CHROME;
-    case navigator.userAgent.toLowerCase().includes('firefox'):
-      return EXTENSION_FIREFOX;
+    case userAgentLowerCase.includes(BROWSER_CHROME.toLowerCase()):
+      return BROWSER_CHROME;
+    case userAgentLowerCase.includes(BROWSER_FIREFOX.toLowerCase()):
+      return BROWSER_FIREFOX;
 
     default:
       break;
