@@ -7,7 +7,7 @@ import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListUsers from 'Components/SidebarListUsers';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
-import { Border, Flex, H4, Hr, Space, Tag } from 'Vendor/components';
+import { Border, Flex, H4, Hr, SortBy, Space, Tag } from 'Vendor/components';
 
 import './Tags.less';
 
@@ -18,6 +18,8 @@ interface Props {
   mostFollowedUsersLoading: boolean;
   newUsers: UserState[];
   newUsersLoading: boolean;
+  url: string;
+  sort: string;
 }
 
 export const Tags: React.FC<Props> = ({
@@ -27,12 +29,24 @@ export const Tags: React.FC<Props> = ({
   mostFollowedUsersLoading,
   newUsers,
   newUsersLoading,
+  url,
+  sort,
 }) => (
   <div className="Tags">
     <Flex horizontal="between" vertical="top">
       <Main>
         <Border grow>
-          <H4>All Tags</H4>
+          <Flex horizontal="between" vertical="top" growHorizontal>
+            <H4>All Tags</H4>
+            <SortBy
+              options={[
+                { label: 'Bookmarks', field: 'count' },
+                { label: 'Name', field: 'name' },
+              ]}
+              href={url}
+              currentSort={sort}
+            />
+          </Flex>
           <Hr spacer />
           <Flex>
             {tagsLoading ? (

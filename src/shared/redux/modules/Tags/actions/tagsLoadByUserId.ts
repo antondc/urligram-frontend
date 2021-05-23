@@ -1,7 +1,7 @@
 import {
-  TAGS_LOAD_FAILURE,
-  TAGS_LOAD_REQUEST,
-  TAGS_LOAD_SUCCESS,
+  TAGS_LOAD_BY_USER_ID_FAILURE,
+  TAGS_LOAD_BY_USER_ID_REQUEST,
+  TAGS_LOAD_BY_USER_ID_SUCCESS,
   TagsActions,
   TagsLoadApiResponse,
   TagState,
@@ -9,40 +9,43 @@ import {
 import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
 import { AppThunk } from '../../..';
-import { tagsLoadSuccess } from './tagsLoadSuccess';
 
-export const tagsLoad = (): AppThunk<Promise<TagState[]>, TagsActions> => async (
+export const tagsLoadByUserId = (userId: string): AppThunk<Promise<TagState[]>, TagsActions> => async (
   dispatch,
   getState
 ): Promise<TagState[]> => {
-  const { Tags: tagsBeforeApi } = getState();
-  try {
-    dispatch({
-      type: TAGS_LOAD_REQUEST,
-      payload: {
-        ...tagsBeforeApi,
-        loading: true,
-      },
-    });
+  const { Tags: tagsBeforeRequest } = getState();
 
-    const { meta, data } = await HttpClient.get<void, TagsLoadApiResponse>(`/tags${window.location.search}`);
-    const { Tags: tagsAfterApi } = getState();
+  dispatch({
+    type: TAGS_LOAD_BY_USER_ID_REQUEST,
+    payload: {
+      ...tagsBeforeRequest,
+      loading: true,
+    },
+  });
+
+  try {
+    const { meta, data } = await HttpClient.get<void, TagsLoadApiResponse>(
+      `/users/${userId}/tags${window.location.search}`
+    );
+
+    const { Tags: tagsAfterResponse } = getState();
     const tagsArray = data?.map((item) => item.attributes);
 
     dispatch({
-      type: TAGS_LOAD_SUCCESS,
+      type: TAGS_LOAD_BY_USER_ID_SUCCESS,
       payload: {
-        ...tagsAfterApi,
+        ...tagsAfterResponse,
         byKey: {
-          ...tagsAfterApi.byKey,
+          ...tagsAfterResponse.byKey,
           ...serializerFromArrayToByKey<TagState, TagState>({ data: tagsArray }),
         },
         currentIds: data?.map((item) => item.id),
-        loading: false,
         meta: {
           sort: meta?.sort,
           totalItems: meta?.totalItems,
         },
+        loading: false,
       },
     });
 
@@ -51,7 +54,7 @@ export const tagsLoad = (): AppThunk<Promise<TagState[]>, TagsActions> => async 
     const { Tags: tagsOnError } = getState();
 
     dispatch({
-      type: TAGS_LOAD_FAILURE,
+      type: TAGS_LOAD_BY_USER_ID_FAILURE,
       payload: {
         ...tagsOnError,
         loading: false,

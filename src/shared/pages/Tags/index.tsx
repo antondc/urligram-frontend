@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { selectCurrentFullUrl } from 'Modules/Routes/selectors/selectCurrentFullUrl';
 import { sectionsMostFollowedUsersLoad } from 'Modules/Sections/actions/sectionsMostFollowedUsersLoad';
 import { sectionsNewUsersLoad } from 'Modules/Sections/actions/sectionsNewUsersLoad';
 import { selectMostFollowedUsers } from 'Modules/Sections/selectors/selectMostFollowedUsers';
@@ -10,6 +11,7 @@ import { selectNewUsersLoading } from 'Modules/Sections/selectors/selectNewUsers
 import { tagsLoad } from 'Modules/Tags/actions/tagsLoad';
 import { selectTagsLoading } from 'Modules/Tags/selectors/selectAllTagsLoading';
 import { selectTagsCurrent } from 'Modules/Tags/selectors/selectTagsCurrent';
+import { selectTagsMetaSort } from 'Modules/Tags/selectors/selectTagsMetaSort';
 import { Tags as TagsUi } from './Tags';
 
 const Tags: React.FC = () => {
@@ -20,9 +22,14 @@ const Tags: React.FC = () => {
   const mostFollowedUsersLoading = useSelector(selectMostFollowedUsersLoading);
   const newUsers = useSelector(selectNewUsers);
   const newUsersLoading = useSelector(selectNewUsersLoading);
+  const url = useSelector(selectCurrentFullUrl);
+  const sort = useSelector(selectTagsMetaSort);
 
   useEffect(() => {
     dispatch(tagsLoad());
+  }, [url]);
+
+  useEffect(() => {
     dispatch(sectionsMostFollowedUsersLoad());
     dispatch(sectionsNewUsersLoad());
   }, []);
@@ -35,6 +42,8 @@ const Tags: React.FC = () => {
       mostFollowedUsersLoading={mostFollowedUsersLoading}
       newUsers={newUsers}
       newUsersLoading={newUsersLoading}
+      url={url}
+      sort={sort}
     />
   );
 };

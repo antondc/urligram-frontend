@@ -1,5 +1,9 @@
 export const TAGS_LOAD_REQUEST = 'TAGS_LOAD_REQUEST';
 export const TAGS_LOAD_SUCCESS = 'TAGS_LOAD_SUCCESS';
+export const TAGS_LOAD_FAILURE = 'TAGS_LOAD_FAILURE';
+export const TAGS_LOAD_BY_USER_ID_REQUEST = 'TAGS_LOAD_BY_USER_ID_REQUEST';
+export const TAGS_LOAD_BY_USER_ID_SUCCESS = 'TAGS_LOAD_BY_USER_ID_SUCCESS';
+export const TAGS_LOAD_BY_USER_ID_FAILURE = 'TAGS_LOAD_BY_USER_ID_FAILURE';
 
 export interface TagState {
   id: number;
@@ -14,6 +18,10 @@ export interface TagsState {
   loading?: boolean;
   currentIds?: number[];
   searchIds?: number[];
+  meta?: {
+    totalItems?: number;
+    sort?: string;
+  };
 }
 
 export interface TagsLoadApiResponseItem {
@@ -23,6 +31,10 @@ export interface TagsLoadApiResponseItem {
 }
 
 export interface TagsLoadApiResponse {
+  meta?: {
+    totalItems?: number;
+    sort?: string;
+  };
   data: TagsLoadApiResponseItem[];
 }
 
@@ -36,4 +48,30 @@ interface ReceiveTagsAction {
   payload: Partial<TagsState>;
 }
 
-export type TagsActions = TagsLoadRequestAction | ReceiveTagsAction;
+interface TagsLoadFailureAction {
+  type: typeof TAGS_LOAD_FAILURE;
+  payload: Partial<TagsState>;
+}
+
+interface TagsLoadByUserIdRequestAction {
+  type: typeof TAGS_LOAD_BY_USER_ID_REQUEST;
+  payload: Partial<TagsState>;
+}
+
+interface TagsLoadByUserIdSuccesAction {
+  type: typeof TAGS_LOAD_BY_USER_ID_SUCCESS;
+  payload: Partial<TagsState>;
+}
+
+interface TagsLoadByUserIdFailureAction {
+  type: typeof TAGS_LOAD_BY_USER_ID_FAILURE;
+  payload: Partial<TagsState>;
+}
+
+export type TagsActions =
+  | TagsLoadRequestAction
+  | ReceiveTagsAction
+  | TagsLoadFailureAction
+  | TagsLoadByUserIdRequestAction
+  | TagsLoadByUserIdSuccesAction
+  | TagsLoadByUserIdFailureAction;
