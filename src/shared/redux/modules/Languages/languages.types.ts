@@ -13,8 +13,11 @@ export interface GlossaryState {
   tags: string;
   trending: string;
   lists: string;
+  allBookmarks: string;
+  myBookmarks: string;
   bookmarks: string;
   links: string;
+  myUser: string;
   users: string;
   following: string;
   followers: string;

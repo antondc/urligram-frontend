@@ -7,6 +7,7 @@ import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUser
 import { switchBookmarkCreateModal } from 'Modules/Ui/actions/switchBookmarkCreateModal';
 import { switchListModal } from 'Modules/Ui/actions/switchListModal';
 import { Border, Span } from 'Vendor/components';
+import { selectCurrentGlossary } from '../../redux/modules/Languages/selectors/selectCurrentGlossary';
 
 import './SidebarLeft.less';
 
@@ -14,6 +15,7 @@ export const SidebarLeft: React.FC = () => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(selectSessionLoggedIn);
   const sessionId = useSelector(selectSessionUserId);
+  const glossary = useSelector(selectCurrentGlossary);
 
   const switchUiBookmarkModal = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
@@ -33,7 +35,7 @@ export const SidebarLeft: React.FC = () => {
             <span className="SidebarLeft-bullet">•</span>
             <Span size="medium" bold>
               <A href={`users/${sessionId}`} frontend>
-                User
+                {glossary.myUser}
               </A>
             </Span>
           </li>
@@ -41,7 +43,7 @@ export const SidebarLeft: React.FC = () => {
             <span className="SidebarLeft-bullet">•</span>
             <Span size="medium" bold>
               <A href={`users/${sessionId}/bookmarks`} frontend>
-                My bookmarks
+                {glossary.myBookmarks}
               </A>
             </Span>
           </li>
