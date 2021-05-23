@@ -1,0 +1,106 @@
+@import '../../css/imports.less';
+
+@c: .BookmarkLists;
+
+@{c} {
+  display: flex;
+  position: relative;
+  align-content: flex-end;
+
+  &-listIcon {
+    fill: @c-base;
+    .hoverTransition;
+  }
+
+  &-lists {
+    max-height: 400px;
+    min-width: 150px;
+    overflow-y: scroll;
+
+    .hideScrollbar;
+  }
+
+  &-listsItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1px;
+    transition: fill @td-fast @ease;
+
+    @{c}-listsItemText {
+      transition: color @td-fast @ease;
+    }
+    @{c}-listsItemIcon {
+      transition: transform @td-fast @ease, fill @td-fast @ease;
+
+      &:hover {
+        opacity: 1;
+        fill: @c-success;
+      }
+    }
+
+    .hoverTransition;
+
+    &--included {
+      // color: @c-success;
+      fill: @c-success;
+
+      @{c}-listsItemIcon {
+        &:hover {
+          fill: @c-error;
+          transform: rotate(45deg);
+          // color: @c-error;
+          cursor: pointer;
+        }
+      }
+
+      &@{c}-listsItem--recentlyUpdated {
+        @{c}-listsItemIcon {
+          &:hover {
+            opacity: 1;
+            fill: @c-success;
+            transform: unset;
+          }
+        }
+      }
+    }
+
+    &--recentlyUpdated {
+      @{c}-listsItemIcon {
+        &:hover {
+          opacity: 1;
+          fill: @c-accent;
+          transform: unset;
+        }
+      }
+    }
+  }
+
+  &-listsItemText {
+    //
+  }
+
+  &-listsItemIcon {
+    margin-left: 30px;
+    opacity: 1;
+    transition: opacity @td-fast @ease, fill @td-fast @ease;
+  }
+
+  &-listsItemLoader {
+    margin-left: 30px;
+    stroke: @c-success;
+  }
+
+  &-listNameInput {
+    .Input-input {
+      padding: 0;
+    }
+  }
+
+  &-button {
+    .Button-content {
+      padding: 0;
+    }
+    //
+  }
+}

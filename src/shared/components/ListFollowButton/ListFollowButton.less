@@ -1,0 +1,86 @@
+@import '../../css/imports.less';
+
+@c: .ListFollowButton;
+
+@{c} {
+  position: relative;
+  height: 50px;
+  width: 50px;
+  outline: 2px solid @c-background;
+  border-radius: 50%;
+
+  &-userLogo,
+  &-listEdit,
+  &-listFollowed,
+  &-listNotFollowed,
+  &-loader {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    transition: transform @td-fastest @ease, fill @td-fastest @ease, opacity @td-fastest @ease;
+
+    path[data-id='background'] {
+      opacity: 1;
+      fill: @c-background;
+    }
+  }
+
+  &-userLogo,
+  &-loader {
+    border-radius: 50%;
+  }
+
+  &-listEdit {
+    opacity: 0;
+    background: @c-background;
+    border-radius: 50%;
+  }
+
+  &:hover {
+    cursor: pointer;
+
+    @{c}-listEdit {
+      opacity: 1;
+    }
+
+    @{c}-userLogo {
+      opacity: 0;
+    }
+  }
+
+  &-loader {
+    background: @c-background;
+    fill: @c-background;
+    stroke: @c-success;
+  }
+
+  &-listNotFollowed {
+    fill: @c-accentLight;
+
+    &:hover {
+      fill: @c-success;
+    }
+
+    &--recentlyChanged {
+      &:hover {
+        fill: @c-accentLight;
+      }
+    }
+  }
+
+  &-listFollowed {
+    fill: @c-success;
+
+    &:hover {
+      fill: @c-error;
+      transform: rotate(-45deg);
+    }
+
+    &--recentlyChanged {
+      &:hover {
+        fill: @c-success;
+        transform: rotate(-0);
+      }
+    }
+  }
+}

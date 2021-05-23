@@ -1,0 +1,40 @@
+@import '../../css/imports.less';
+@c: .UserModal;
+
+@{c} {
+  position: absolute;
+  top: 45px;
+  right: 40px;
+  padding: 60px 30px 30px;
+
+  &-cross {
+    position: absolute;
+    height: 15px;
+    width: 15px;
+    top: 10px;
+    right: 10px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &-userLogo {
+    border-radius: 50%;
+    position: absolute;
+    height: 35px;
+    width: 36px;
+    top: 10px;
+    left: 10px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &-sessionLogOut {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

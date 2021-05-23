@@ -1,0 +1,13 @@
+@import '../../css/imports.less';
+
+@c: .SubHeader;
+
+@{c} {
+  display: flex;
+  align-items: flex-end;
+
+  &-filter {
+    .calcgrid(@property: width; @columns: 3; @parentColumns: 12; @addGutter: 0; @hasParentPaddings: 0);
+    .calcgrid(@property: margin-left; @columns: 6; @parentColumns: 12; @addGutter: 1; @hasParentPaddings: 0);
+  }
+}

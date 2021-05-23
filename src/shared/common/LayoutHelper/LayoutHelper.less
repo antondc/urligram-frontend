@@ -1,0 +1,80 @@
+@import '../../css/imports.less';
+
+@c: .LayoutHelper;
+
+@{c} {
+  &-columns,
+  &-rows {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    padding: 0;
+    font-size: 0;
+    overflow: hidden;
+    z-index: @z-index-1000;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  &-rows {
+    // display: none;
+  }
+
+  &-column {
+    display: inline-block;
+    position: relative;
+    height: 100%;
+    background-color: @c-traslucid--lightest;
+
+    .calcgrid(@property: width; @columns: 1; @parentColumns: 12; @addGutter: 0; @hasParentPaddings: 1);
+
+    @media @br-mobile {
+      .calcgrid(@property: width; @columns: 1; @parentColumns: 2; @addGutter: 0; @hasParentPaddings: 1);
+    }
+  }
+
+  &-gutter {
+    display: inline-block;
+    position: relative;
+    height: 100%;
+    width: @lay-gutter;
+
+    @media @br-desktopSmall {
+      width: @lay-gutterSmall;
+    }
+
+    @media @br-mobile {
+      width: @lay-gutterMicro;
+    }
+  }
+
+  &-externalPadding {
+    display: inline-block;
+    position: relative;
+    height: 100%;
+    width: @lay-outerPadding;
+
+    @media @br-desktopSmall {
+      width: @lay-outerPaddingSmall;
+    }
+
+    @media @br-mobile {
+      width: @lay-outerPaddingMicro;
+    }
+  }
+
+  &-row {
+    height: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    border-bottom: 1px solid @c-traslucid--hard;
+  }
+
+  &-rowGap {
+    height: 10px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+}

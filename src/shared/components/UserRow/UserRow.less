@@ -1,0 +1,72 @@
+@import '../../css/imports.less';
+
+@c: .UserRow;
+
+@{c} {
+  display: grid;
+  position: relative;
+  grid-template: 'left center right' auto / 3fr 2fr 0fr;
+  height: 45px;
+  padding: 8px 13px 7px;
+  column-gap: 10px;
+
+  @media @br-mobile {
+    grid-template:
+      'left right' auto
+      '. .' 5px
+      'center center' auto
+      'center center' auto
+      / 1fr 0fr;
+    height: unset;
+  }
+
+  &-left {
+    display: flex;
+    flex-direction: column;
+    grid-area: left;
+    overflow: hidden;
+  }
+
+  &-details {
+    white-space: nowrap;
+    overflow-x: scroll;
+    overflow-y: hidden;
+
+    .hideScrollbar;
+  }
+
+  &-center {
+    display: flex;
+    align-items: flex-end;
+    grid-area: center;
+    overflow-x: scroll;
+    overflow-y: visible;
+
+    .hideScrollbar;
+  }
+
+  &-tag {
+    margin-right: 5px;
+  }
+
+  &-right {
+    flex-shrink: 0;
+    grid-area: right;
+  }
+
+  &-image {
+    height: 27px;
+    width: 27px;
+    border-radius: 50%;
+  }
+
+  &-followButton {
+    position: absolute;
+    height: 12px;
+    width: 12px;
+    top: 4px;
+    right: 6px;
+    outline: 1px solid @c-background;
+    border-radius: 50%;
+  }
+}

@@ -1,0 +1,163 @@
+@import '../../css/imports.less';
+
+@c: .BookmarkRow;
+
+@{c} {
+  display: grid;
+  position: relative;
+  justify-content: space-between;
+  grid-template: 'left center right' auto / 3fr 2fr 0fr;
+  height: 45px;
+  padding: 8px 13px 7px;
+  column-gap: 10px;
+
+  @media @br-mobile {
+    grid-template:
+      'left right' auto
+      '. .' 5px
+      'center center' auto
+      'center center' auto
+      / 1fr 0fr;
+    height: unset;
+  }
+
+  &-recentlyCreated {
+    border: 2px solid @gradientColors[green-1];
+    transition: border @td-fast @ease box-shadow @td-fast @ease;
+    box-shadow: 4px 4px 0 0 @gradientColors[green-1];
+  }
+
+  &-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    grid-area: left;
+    overflow: hidden;
+  }
+
+  &-icons {
+    display: flex;
+  }
+
+  &-favicon {
+    height: 10px;
+    width: 10px;
+    margin-right: 3px;
+  }
+
+  &-title {
+    margin-top: -3px; // Position diacriticals outside the box
+    line-height: initial;
+    white-space: nowrap;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    text-overflow: ellipsis;
+
+    .hideScrollbar;
+    .hoverTransition(0.8);
+  }
+
+  &-url {
+    position: relative;
+    line-height: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    text-overflow: ellipsis;
+
+    .hideScrollbar;
+  }
+
+  &-center {
+    display: flex;
+    align-items: flex-end;
+    grid-area: center;
+    overflow-x: scroll;
+    overflow-y: visible;
+
+    .hideScrollbar;
+  }
+
+  &-tag {
+    margin-right: 5px;
+  }
+
+  &-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    grid-area: right;
+  }
+
+  &-image {
+    height: 100%;
+    width: 110px;
+    margin-right: 20px;
+    object-fit: cover;
+    object-position: center;
+    border: 2px solid @c-base;
+  }
+
+  &-icon {
+    //
+  }
+
+  &-private {
+    margin-right: 3px;
+    background: @c-background;
+  }
+
+  &-edit {
+    .hoverTransition(0.5);
+
+    margin-left: 4px;
+    transition: fill @td-fast @ease, transform @td-fast @ease;
+  }
+
+  &-vote {
+    margin-left: 2px;
+  }
+
+  &--pending {
+    fill: @c-accent;
+    animation: hearthBeat 1.5s ease infinite;
+  }
+
+  &--failed {
+    fill: @c-error;
+  }
+
+  &-stats {
+    display: flex;
+    align-items: center;
+    font-family: @ff-din;
+    font-size: @fs-small;
+    line-height: @fh-small;
+  }
+
+  &-stat {
+    display: flex;
+    justify-content: flex-end;
+    align-items: baseline;
+    margin-left: 5px;
+    line-height: 7px;
+    text-align: end;
+    white-space: nowrap;
+  }
+
+  &-statIcon {
+    margin-right: 1px;
+    line-height: 0;
+  }
+
+  &-actionButton {
+    position: absolute;
+    height: 14px;
+    width: 14px;
+    top: -5px;
+    right: 5px;
+    border-radius: 50%;
+  }
+}

@@ -1,0 +1,56 @@
+@import '../../css/imports.less';
+@c: .UserForm;
+
+@{c} {
+  display: grid;
+  grid-template:
+    'title title title' auto
+    'statement . image' 100px
+    'statement . .' auto
+    'statementError . imageError' auto
+    'submitButton . .' auto
+    / 3fr 3fr 100px;
+  column-gap: 10px;
+  row-gap: 10px;
+
+  @media @br-mobile {
+    grid-template:
+      'title' auto
+      'statement' auto
+      'statementError' auto
+      'image' auto
+      'imageError' auto
+      'submitButton' auto
+      / 1fr;
+  }
+
+  &-title {
+    grid-area: title;
+  }
+
+  &-statement {
+    grid-area: statement;
+  }
+
+  &-statementError {
+    grid-area: statementError;
+  }
+
+  &-image {
+    grid-area: image;
+    height: 100px;
+    width: 100px;
+    max-height: 100px;
+    max-width: 100px;
+    min-height: 100px;
+    min-width: 100px;
+  }
+
+  &-imageError {
+    grid-area: imageError;
+  }
+
+  &-submitButton {
+    grid-area: submitButton;
+  }
+}
