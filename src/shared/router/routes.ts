@@ -93,6 +93,16 @@ export const Routes: RoutesInterface = {
     layout: 'withLeftSidebar',
   },
 
+  UserTags: {
+    name: 'UserTags',
+    path: '/:lang([a-z]{2})?/users/:userId/tags',
+    exact: true,
+    auth: false,
+    initialDataLoadersVisitor: [],
+    initialDataLoadersSession: [],
+    layout: 'withLeftSidebar',
+  },
+
   Users: {
     name: 'Users',
     path: '/:lang([a-z]{2})?/users',

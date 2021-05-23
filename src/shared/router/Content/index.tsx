@@ -17,6 +17,7 @@ import User from 'Pages/User';
 import UserBookmarks from 'Pages/UserBookmarks';
 import UserLists from 'Pages/UserLists';
 import Users from 'Pages/Users';
+import UserTags from 'Pages/UserTags';
 import { Routes } from 'Router/routes';
 import { Location } from 'Services/History';
 import { Fade, FadeInOut, Flex, Hr } from 'Vendor/components';
@@ -50,6 +51,7 @@ const Content: React.FC<Props> = ({ location, pathWithoutLanguageParam }) => (
               <Route exact={Routes.Followers.exact} path={Routes.Followers.path} component={Followers} />
               <Route exact={Routes.Following.exact} path={Routes.Following.path} component={Following} />
               <Route exact={Routes.UserLists.exact} path={Routes.UserLists.path} component={UserLists} />
+              <Route exact={Routes.UserTags.exact} path={Routes.UserTags.path} component={UserTags} />
               <Route exact={Routes.Tags.exact} path={Routes.Tags.path} component={Tags} />
             </Switch>
           </FadeInOut>

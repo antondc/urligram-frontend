@@ -9,7 +9,7 @@ export type NotificationDot = 'success' | 'error' | 'alert';
 export type Size = 'small' | 'medium' | 'big';
 
 interface Props extends Omit<HTMLProps<HTMLDivElement>, 'size'> {
-  children: string;
+  children: string | React.ReactNode | React.ReactNode[];
   className?: string;
   size?: 'small' | 'medium' | 'big' | 'nano';
   variant?: 'dark' | 'simple';

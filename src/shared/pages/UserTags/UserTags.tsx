@@ -9,7 +9,7 @@ import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { Border, Flex, H4, Hr, Space, Tag } from 'Vendor/components';
 
-import './Tags.less';
+import './UserTags.less';
 
 interface Props {
   tags: TagState[];
@@ -20,7 +20,7 @@ interface Props {
   newUsersLoading: boolean;
 }
 
-export const Tags: React.FC<Props> = ({
+export const UserTags: React.FC<Props> = ({
   tags,
   tagsLoading,
   mostFollowedUsers,
@@ -28,11 +28,11 @@ export const Tags: React.FC<Props> = ({
   newUsers,
   newUsersLoading,
 }) => (
-  <div className="Tags">
+  <div className="UserTags">
     <Flex horizontal="between" vertical="top">
       <Main>
         <Border grow>
-          <H4>All Tags</H4>
+          <H4>My Tags</H4>
           <Hr spacer />
           <Flex>
             {tagsLoading ? (
@@ -40,9 +40,9 @@ export const Tags: React.FC<Props> = ({
             ) : (
               tags?.map((item) => (
                 <A
-                  className="Tags-tag"
-                  href={`/bookmarks?filter[tags][]=${item.name}`}
-                  key={item.id}
+                  className="UserTags-tag"
+                  href={`/bookmarks?filter[tags][]=${item?.name}`}
+                  key={item?.id}
                   styled={false}
                   frontend
                 >

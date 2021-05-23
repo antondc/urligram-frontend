@@ -2,12 +2,12 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import A from 'Components/A';
+import { selectCurrentGlossary } from 'Modules/Languages/selectors/selectCurrentGlossary';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUserId';
 import { switchBookmarkCreateModal } from 'Modules/Ui/actions/switchBookmarkCreateModal';
 import { switchListModal } from 'Modules/Ui/actions/switchListModal';
 import { Border, Span } from 'Vendor/components';
-import { selectCurrentGlossary } from '../../redux/modules/Languages/selectors/selectCurrentGlossary';
 
 import './SidebarLeft.less';
 
@@ -44,6 +44,14 @@ export const SidebarLeft: React.FC = () => {
             <Span size="medium" bold>
               <A href={`users/${sessionId}/bookmarks`} frontend>
                 {glossary.myBookmarks}
+              </A>
+            </Span>
+          </li>
+          <li className="SidebarLeft-item">
+            <span className="SidebarLeft-bullet">•</span>
+            <Span size="medium" bold>
+              <A href={`users/${sessionId}/tags`} frontend>
+                My Tags
               </A>
             </Span>
           </li>

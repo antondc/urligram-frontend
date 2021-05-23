@@ -35,15 +35,19 @@ export const Header: React.FC<Props> = ({
       <nav className="Header-navigation">
         <span className="Header-bar">|</span>
         <A className="Header-link" href={'/bookmarks?'} frontend>
-          <H3>{currentGlossary?.myBookmarks}</H3>
+          <H3>{currentGlossary?.allBookmarks}</H3>
         </A>
         <span className="Header-bar">|</span>
         <A className="Header-link" href={'/users'} frontend>
-          <H3>{currentGlossary?.users}</H3>
+          <H3>All Users</H3>
+        </A>
+        <span className="Header-bar">|</span>
+        <A className="Header-link" href={'/tags'} frontend>
+          <H3>All Tags</H3>
         </A>
         <span className="Header-bar">|</span>
         <A className="Header-link" href={'/lists'} frontend>
-          <H3>{currentGlossary?.lists}</H3>
+          <H3>All Lists</H3>
         </A>
       </nav>
       <div className="Header-user">
