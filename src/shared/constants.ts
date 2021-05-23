@@ -20,6 +20,3 @@ export const REQUEST_STARTED = 'request-started';
 export const REQUEST_SUCCEEDED = 'request-succeeded';
 export const REQUEST_FAILED = 'request-failed';
 export type ResponseStatus = typeof REQUEST_STARTED | typeof REQUEST_SUCCEEDED | typeof REQUEST_FAILED;
-
-export const BROWSER_CHROME = 'Chrome';
-export const BROWSER_FIREFOX = 'Firefox';
