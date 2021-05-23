@@ -48,7 +48,7 @@ export const LoginForm: React.FC<Props> = ({
         {nameOrEmailError}
       </Span>
     </FadeInOut>
-    <Hr size="small" spacer />
+    <Hr size="nano" spacer />
     <Input
       name="password"
       type="password"

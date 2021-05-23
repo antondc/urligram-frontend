@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { sessionErrorClear } from 'Modules/Session/actions/sessionErrorClear';
 import { sessionLogIn } from 'Modules/Session/actions/sessionLogIn';
 import { selectSessionErrorLast } from 'Modules/Session/selectors/selectSessionErrorLast';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
-import { PersistSessionData } from 'Services/PersistSessionData';
 import { validateEmailAddress } from 'Tools/utils/string/validateEmailAddress';
+import { sessionErrorClear } from '../../redux/modules/Session/actions/sessionErrorClear';
 import { LoginForm as LoginFormUi } from './LoginForm';
 
 import './LoginForm.less';
 
 const LoginForm: React.FC = () => {
-  const persistSessionData = new PersistSessionData();
   const dispatch = useDispatch();
   const sessionError = useSelector(selectSessionErrorLast);
   const isLoggedIn = useSelector(selectSessionLoggedIn);
@@ -70,11 +68,10 @@ const LoginForm: React.FC = () => {
     };
 
     try {
-      const sessionData = await dispatch(sessionLogIn(data));
-      await persistSessionData.set(sessionData);
-    } catch (error) {
-      alert(error?.message);
+      await dispatch(sessionLogIn(data));
     } finally {
+      console.log('finally');
+
       setSubmitting(false);
     }
   };
