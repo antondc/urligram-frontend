@@ -1,7 +1,9 @@
 export const SESSION_LOG_IN_REQUEST = 'SESSION_LOG_IN_REQUEST';
 export const SESSION_LOG_IN_SUCCESS = 'SESSION_LOG_IN_SUCCESS';
-export const SESSION_LOG_OUT_REQUEST = 'SESSION_LOG_OUT_REQUEST';
 export const SESSION_LOG_IN_FAILURE = 'SESSION_LOG_IN_FAILURE';
+export const SESSION_LOG_OUT_REQUEST = 'SESSION_LOG_OUT_REQUEST';
+export const SESSION_LOG_OUT_SUCCESS = 'SESSION_LOG_OUT_SUCCESS';
+export const SESSION_LOG_OUT_FAILURE = 'SESSION_LOG_OUT_FAILURE';
 export const SESSION_SIGN_UP_REQUEST = 'SESSION_SIGN_UP_REQUEST';
 export const SESSION_SIGN_UP_SUCCESS = 'SESSION_SIGN_UP_SUCCESS';
 export const SESSION_SIGN_UP_FAILURE = 'SESSION_SIGN_UP_FAILURE';
@@ -130,6 +132,21 @@ interface LogInFailureAction {
   payload: SessionState;
 }
 
+interface LogOutRequestAction {
+  type: typeof SESSION_LOG_OUT_REQUEST;
+  payload: SessionState;
+}
+
+interface LogOutSuccessAction {
+  type: typeof SESSION_LOG_OUT_SUCCESS;
+  payload: SessionState;
+}
+
+interface LogOutFailureAction {
+  type: typeof SESSION_LOG_OUT_FAILURE;
+  payload: SessionState;
+}
+
 interface SignUpRequestAction {
   type: typeof SESSION_SIGN_UP_REQUEST;
   payload: SessionState;
@@ -157,11 +174,6 @@ interface ResetPasswordSucessAction {
 
 interface ResetPasswordFailureAction {
   type: typeof SESSION_RESET_PASSWORD_FAILURE;
-  payload: SessionState;
-}
-
-interface LogOutReceiveAction {
-  type: typeof SESSION_LOG_OUT_REQUEST;
   payload: SessionState;
 }
 
@@ -199,7 +211,9 @@ export type SessionActions =
   | LogInFailureAction
   | LogInSuccessAction
   | LogInRequestAction
-  | LogOutReceiveAction
+  | LogOutRequestAction
+  | LogOutSuccessAction
+  | LogOutFailureAction
   | SignUpRequestAction
   | SignUpSucessAction
   | SignUpFailureAction

@@ -9,6 +9,7 @@ import { selectCurrentGlossary } from 'Modules/Languages/selectors/selectCurrent
 import { selectLinksLoading } from 'Modules/Links/selectors/selectLinksLoading';
 import { selectLinksVoteLoading } from 'Modules/Links/selectors/selectLinksVoteLoading';
 import { selectListsLoading } from 'Modules/Lists/selectors/selectListsLoading';
+import { selectSessionLoading } from 'Modules/Session/selectors/selectSessionLoading';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import { selectSessionUser } from 'Modules/Session/selectors/selectSessionUser';
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
@@ -27,6 +28,7 @@ interface Props {
   bookmarksVoteLoading: boolean;
   usersLoading: boolean;
   listsLoading: boolean;
+  sessionLoading: boolean;
   switchUserModal: () => void;
   switchLoginModal: (mount: true) => void;
 }
@@ -42,6 +44,7 @@ const Header: React.FC<Props> = ({
   bookmarksVoteLoading,
   usersLoading,
   listsLoading,
+  sessionLoading,
 }) => {
   const loading =
     bookmarksLoading || linksLoading || linksVoteLoading || bookmarksVoteLoading || usersLoading || listsLoading;
@@ -55,6 +58,7 @@ const Header: React.FC<Props> = ({
       switchUserModal={switchUserModal}
       switchLoginModal={switchLoginModal}
       loading={loading}
+      sessionLoading={sessionLoading}
     />
   );
 };
@@ -68,6 +72,7 @@ const mapStateToProps = createStructuredSelector({
   bookmarksVoteLoading: selectBookmarksVoteLoading,
   usersLoading: selectUsersLoading,
   listsLoading: selectListsLoading,
+  sessionLoading: selectSessionLoading,
 });
 
 export default connect(mapStateToProps, {

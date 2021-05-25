@@ -5,7 +5,7 @@ import User from 'Assets/svg/user.svg';
 import A from 'Components/A';
 import { GlossaryState } from 'Modules/Languages/languages.types';
 import { UserState } from 'Modules/Users/users.types';
-import { Border, H3 } from 'Vendor/components';
+import { Border, H3, SpinnerLoader } from 'Vendor/components';
 
 import './Header.less';
 
@@ -14,6 +14,7 @@ interface Props {
   sessionUser: UserState;
   currentGlossary: GlossaryState;
   loading: boolean;
+  sessionLoading: boolean;
   switchUserModal: () => void;
   switchLoginModal: (mount: true) => void;
 }
@@ -24,6 +25,7 @@ export const Header: React.FC<Props> = ({
   switchUserModal,
   switchLoginModal,
   loading,
+  sessionLoading,
   sessionUser,
 }) => (
   <header>
@@ -51,19 +53,21 @@ export const Header: React.FC<Props> = ({
         </A>
       </nav>
       <div className="Header-user">
-        {isLogged ? (
+        {!sessionLoading && isLogged && (
           <img
             className="Header-userLogo"
             src={sessionUser?.image?.original}
             onClick={isLogged ? switchUserModal : () => switchLoginModal(true)}
           />
-        ) : (
+        )}
+        {!sessionLoading && !isLogged && (
           <User
             name="User"
             className={'Header-userLogo' + (isLogged ? ' Header-userLogo--isActive' : '')}
             onClick={isLogged ? switchUserModal : () => switchLoginModal(true)}
           />
         )}
+        {sessionLoading && <SpinnerLoader className="Header-loader" />}
       </div>
     </Border>
   </header>

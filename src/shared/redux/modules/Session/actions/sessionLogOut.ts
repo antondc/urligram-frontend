@@ -1,11 +1,28 @@
-import { SESSION_LOG_IN_FAILURE, SESSION_LOG_OUT_REQUEST } from 'Modules/Session/session.types';
+import {
+  SESSION_LOG_IN_FAILURE,
+  SESSION_LOG_OUT_REQUEST,
+  SESSION_LOG_OUT_SUCCESS,
+} from 'Modules/Session/session.types';
 import HttpClient from 'Services/HttpClient';
 import { AppThunk } from '../../..';
 import { SessionActions } from '../session.types';
 
-export const sessionLogOut = (): AppThunk<Promise<void>, SessionActions> => async (dispatch): Promise<void> => {
+export const sessionLogOut = (): AppThunk<Promise<void>, SessionActions> => async (
+  dispatch,
+  getState
+): Promise<void> => {
+  const { Session: sessionBeforeRequest } = getState();
+
+  dispatch({
+    type: SESSION_LOG_OUT_REQUEST,
+    payload: {
+      ...sessionBeforeRequest,
+      loading: true,
+    },
+  });
+
   const emptyUser = {
-    loading: undefined,
+    loading: false,
     id: undefined,
     order: undefined,
     name: undefined,
@@ -26,23 +43,23 @@ export const sessionLogOut = (): AppThunk<Promise<void>, SessionActions> => asyn
   };
 
   // Remove the cookie on server using the base api
-  await HttpClient.delete('/login')
-    .then(() =>
-      dispatch({
-        type: SESSION_LOG_OUT_REQUEST,
-        payload: emptyUser,
-      })
-    )
-    .catch((error) => {
-      dispatch({
-        type: SESSION_LOG_IN_FAILURE,
-        payload: {
-          errors: [error],
-          loading: false,
-        },
-      });
-      throw new Error(error);
-    });
+  try {
+    await HttpClient.delete('/login');
 
-  return;
+    dispatch({
+      type: SESSION_LOG_OUT_SUCCESS,
+      payload: emptyUser,
+    });
+  } catch (error) {
+    const { Session: sessionOnError } = getState();
+
+    dispatch({
+      type: SESSION_LOG_IN_FAILURE,
+      payload: {
+        ...sessionOnError,
+        errors: [...(sessionOnError?.errors || []), error],
+        loading: false,
+      },
+    });
+  }
 };
