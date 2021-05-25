@@ -1,10 +1,14 @@
 import { switchSignUpModal } from 'Modules/Ui/actions/switchSignUpModal';
 import HttpClient from 'Services/HttpClient';
 import { AppThunk } from '../../..';
-import { SessionActions, SessionSignUpApiRequest, SessionSignUpApiResponse } from '../session.types';
-import { sessionSignUpFailure } from './sessionSignUpFailure';
-import { sessionSignUpRequest } from './sessionSignUpRequest';
-import { sessionSignUpSuccess } from './sessionSignUpSuccess';
+import {
+  SESSION_SIGN_UP_FAILURE,
+  SESSION_SIGN_UP_REQUEST,
+  SESSION_SIGN_UP_SUCCESS,
+  SessionActions,
+  SessionSignUpApiRequest,
+  SessionSignUpApiResponse,
+} from '../session.types';
 
 export const sessionSignUp = (userData: SessionSignUpApiRequest): AppThunk<Promise<void>, SessionActions> => async (
   dispatch,
@@ -12,27 +16,36 @@ export const sessionSignUp = (userData: SessionSignUpApiRequest): AppThunk<Promi
 ): Promise<void> => {
   try {
     const { Session: sessionBeforeRequest } = getState();
-    await dispatch(
-      sessionSignUpRequest({
+    await dispatch({
+      type: SESSION_SIGN_UP_REQUEST,
+      payload: {
         ...sessionBeforeRequest,
         loading: true,
-      })
-    );
+      },
+    });
 
     const { data }: SessionSignUpApiResponse = await HttpClient.post('/users', userData);
 
     await dispatch(switchSignUpModal(true));
-    await dispatch(sessionSignUpSuccess(data.attributes));
-  } catch (error) {
-    const { Session: sessiononError } = getState();
-
-    await dispatch(
-      sessionSignUpFailure({
-        ...sessiononError,
-        errors: [...sessiononError.errors, error],
+    await dispatch({
+      type: SESSION_SIGN_UP_SUCCESS,
+      payload: {
+        ...data.attributes,
         loading: false,
-      })
-    );
+      },
+    });
+  } catch (error) {
+    const { Session: sessionOnError } = getState();
+
+    await dispatch({
+      type: SESSION_SIGN_UP_FAILURE,
+      payload: {
+        ...sessionOnError,
+        errors: [...sessionOnError.errors, error],
+        loading: false,
+      },
+    });
+
     throw new Error(error);
   }
 };

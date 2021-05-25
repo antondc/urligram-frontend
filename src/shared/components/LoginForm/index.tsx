@@ -62,7 +62,7 @@ const LoginForm: React.FC<Props> = ({ setModalLocked }) => {
     e.preventDefault();
 
     setSubmitting(true);
-    setModalLocked(true);
+    if (setModalLocked) setModalLocked(true);
 
     const data = {
       nameOrEmail: nameOrEmailValue,
@@ -71,7 +71,7 @@ const LoginForm: React.FC<Props> = ({ setModalLocked }) => {
 
     await dispatch(sessionLogIn(data));
     setSubmitting(false);
-    setModalLocked(false);
+    if (setModalLocked) setModalLocked(false);
   };
 
   useEffect(() => {
@@ -82,7 +82,7 @@ const LoginForm: React.FC<Props> = ({ setModalLocked }) => {
       setPasswordError(undefined);
       setNameOrEmailError(undefined);
       setSubmitting(undefined);
-      setModalLocked(undefined);
+      if (setModalLocked) setModalLocked(undefined);
     };
   }, []);
 

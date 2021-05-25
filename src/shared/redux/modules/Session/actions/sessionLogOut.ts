@@ -7,6 +7,27 @@ import HttpClient from 'Services/HttpClient';
 import { AppThunk } from '../../..';
 import { SessionActions } from '../session.types';
 
+const emptyUser = {
+  loading: false,
+  id: undefined,
+  order: undefined,
+  name: undefined,
+  email: undefined,
+  status: undefined,
+  level: undefined,
+  logged: undefined,
+  token: undefined,
+  iat: undefined,
+  errors: undefined,
+  passwordRequested: undefined,
+  passwordReset: undefined,
+  image: undefined,
+  statement: undefined,
+  location: undefined,
+  createdAt: undefined,
+  updatedAt: undefined,
+};
+
 export const sessionLogOut = (): AppThunk<Promise<void>, SessionActions> => async (
   dispatch,
   getState
@@ -20,27 +41,6 @@ export const sessionLogOut = (): AppThunk<Promise<void>, SessionActions> => asyn
       loading: true,
     },
   });
-
-  const emptyUser = {
-    loading: false,
-    id: undefined,
-    order: undefined,
-    name: undefined,
-    email: undefined,
-    status: undefined,
-    level: undefined,
-    logged: undefined,
-    token: undefined,
-    iat: undefined,
-    errors: undefined,
-    passwordRequested: undefined,
-    passwordReset: undefined,
-    image: undefined,
-    statement: undefined,
-    location: undefined,
-    createdAt: undefined,
-    updatedAt: undefined,
-  };
 
   // Remove the cookie on server using the base api
   try {
