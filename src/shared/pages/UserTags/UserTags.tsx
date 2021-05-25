@@ -4,6 +4,7 @@ import A from 'Components/A';
 import Main from 'Components/Main';
 import Sidebar from 'Components/Sidebar';
 import SidebarBlock from 'Components/SidebarBlock';
+import { SidebarListTagsSkeleton } from 'Components/SidebarListTags/SidebarListTagsSkeleton';
 import SidebarListUsers from 'Components/SidebarListUsers';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
@@ -36,8 +37,7 @@ export const UserTags: React.FC<Props> = ({
     <Flex horizontal="between" vertical="top">
       <Main>
         <Border grow>
-          <Flex horizontal="between" vertical="top" growHorizontal>
-            <H4>My Tags</H4>
+          <Flex horizontal="right" vertical="top" growHorizontal>
             <SortBy
               options={[
                 { label: 'Bookmarks', field: 'count' },
@@ -47,10 +47,11 @@ export const UserTags: React.FC<Props> = ({
               currentSort={sort}
             />
           </Flex>
+          <H4>My Tags</H4>
           <Hr spacer />
           <Flex>
             {tagsLoading ? (
-              <>...loading</>
+              <SidebarListTagsSkeleton />
             ) : (
               tags?.map((item) => (
                 <A
