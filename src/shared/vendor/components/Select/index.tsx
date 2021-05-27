@@ -13,6 +13,7 @@ interface Props {
   placeholder?: string;
   label?: string;
   options: SelectValue[];
+  isMulti?: boolean;
   value: SelectValue[];
   defaultOptions: SelectValue[];
   grow?: boolean;
@@ -27,6 +28,7 @@ export const Select: React.FC<Props> = ({
   placeholder,
   label,
   options,
+  isMulti = true,
   value,
   defaultOptions,
   onInputChange,
@@ -35,10 +37,15 @@ export const Select: React.FC<Props> = ({
   maxItems,
 }) => {
   const [focus, setFocus] = useState(false);
-  const focusOrContent = !!value?.length || focus;
+  const focusOrContent = (!!value?.length && value[0] !== null) || focus;
 
   const onSelectValueChange = (values) => {
-    onChange(values);
+    const isArray = Array.isArray(values);
+    const valuesArray = !isArray ? [values] : values;
+    const valuesArrayNoNull = valuesArray.filter((item) => item !== null);
+    const finalValues = valuesArrayNoNull;
+
+    onChange(finalValues);
   };
 
   return (
@@ -49,6 +56,7 @@ export const Select: React.FC<Props> = ({
       label={label}
       focusOrContent={focusOrContent}
       options={options}
+      isMulti={isMulti}
       value={value}
       defaultOptions={defaultOptions}
       onInputChange={onInputChange}

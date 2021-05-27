@@ -20,6 +20,7 @@ interface Props {
   label?: string;
   focusOrContent: boolean;
   options: SelectValue[];
+  isMulti: boolean;
   value: SelectValue[];
   defaultOptions: SelectValue[];
   grow?: boolean;
@@ -30,17 +31,17 @@ interface Props {
   onBlur: () => void;
 }
 
-type MenyType = {
+type MenuType = {
   selectProps: {
     maxItems: number;
   };
 };
 
-const Menu = ({ ...props }: MenyType & MenuProps<any, any>): JSX.Element => {
+const Menu = ({ ...props }: MenuType & MenuProps<any, any>): JSX.Element => {
   const {
-    selectProps: { maxItems },
+    selectProps: { maxItems, isMulti },
   } = props;
-  const showOptions = !maxItems || (props.getValue().length || 0) < maxItems;
+  const showOptions = !isMulti || !maxItems || (props.getValue().length || 0) < maxItems;
 
   return (
     <Components.Menu {...props}>
@@ -80,6 +81,7 @@ export const SelectUi: React.FC<Props> = ({
   isCreatable,
   className,
   options,
+  isMulti,
   value,
   defaultOptions,
   onInputChange,
@@ -99,7 +101,8 @@ export const SelectUi: React.FC<Props> = ({
       classNamePrefix="Select"
       closeMenuOnSelect
       value={value}
-      isMulti
+      isMulti={isMulti}
+      isClearable
       placeholder={!label ? placeholder : ' '}
       cacheOptions
       defaultOptions={defaultOptions}

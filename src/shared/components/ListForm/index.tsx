@@ -11,7 +11,7 @@ import { selectListsErrorLast } from 'Modules/Lists/selectors/selectListsErrorLa
 import { RootState } from 'Modules/rootType';
 import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUserId';
 import { selectUiListModal } from 'Modules/Ui/selectors/selectUiListModal';
-import { DELAY_FAST_MS, DELAY_SLOW_MS } from 'Root/src/shared/constants';
+import { DELAY_SLOW_MS } from 'Root/src/shared/constants';
 import history from 'Services/History';
 import { urlRemoveLeadingCharacters } from 'Tools/utils/url/urlRemoveLeadingCharacters';
 import { ListForm as ListFormUi } from './ListForm';

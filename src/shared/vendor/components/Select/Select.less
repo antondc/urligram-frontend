@@ -104,6 +104,10 @@
     .hideScrollbar();
   }
 
+  &__single-value {
+    font-weight: @fw-bold;
+  }
+
   &__multi-value:not(.noClass) {
     flex-wrap: nowrap;
     min-width: unset;
@@ -209,6 +213,10 @@
     color: @c-background;
     background: @c-base;
     outline: 1px solid @c-base;
+  }
+
+  &__option--is-selected:not(.noClass):not(.noClass) {
+    display: none;
   }
 
   &__option--is-disabled:not(.noClass) {
