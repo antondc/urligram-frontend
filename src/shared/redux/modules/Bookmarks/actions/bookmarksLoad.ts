@@ -1,4 +1,9 @@
-import { BookmarksActions, BookmarksGetApiResponse, BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
+import {
+  BOOKMARKS_LOAD_FAILURE,
+  BookmarksActions,
+  BookmarksGetApiResponse,
+  BookmarkState,
+} from 'Modules/Bookmarks/bookmarks.types';
 import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
 import { AppThunk } from '../../..';
@@ -43,7 +48,16 @@ export const bookmarksLoad = (): AppThunk<Promise<BookmarkState[]>, BookmarksAct
     );
 
     return bookmarksArray;
-  } catch (err) {
-    throw new Error(err);
+  } catch (error) {
+    const { Bookmarks: bookmarksOnError } = getState();
+
+    dispatch({
+      type: BOOKMARKS_LOAD_FAILURE,
+      payload: {
+        ...bookmarksOnError,
+        loading: false,
+        errors: [...(bookmarksOnError.errors || []), error],
+      },
+    });
   }
 };
