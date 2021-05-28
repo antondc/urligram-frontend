@@ -35,6 +35,7 @@ export const sectionsMostUsedTagsLoad = (): AppThunk<Promise<TagState[]>, TagsAc
           ...tagsAfterApi.byKey,
           ...serializerFromArrayToByKey<TagState, TagState>({ data: tagsArray }),
         },
+        loading: false,
       })
     );
     dispatch(
