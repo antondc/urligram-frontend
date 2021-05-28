@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import Cross from 'Assets/svg/cross.svg';
@@ -11,15 +11,15 @@ import './BookmarkCreateModal.less';
 
 const BookmarkCreateModal: React.FC = () => {
   const dispatch = useDispatch();
-  const [modalLocked, setModalLocked] = useState<boolean>(true);
+  const [modalLocked, setModalLocked] = useState<boolean>(false);
 
   const closeModal = () => {
-    if (modalLocked) return;
+    if (!!modalLocked) return;
     dispatch(switchBookmarkCreateModal(false));
   };
 
   return (
-    <BaseModal>
+    <BaseModal onClick={closeModal}>
       <Border className="BookmarkCreateModal" grow>
         <Cross className="BookmarkCreateModal-cross" onClick={closeModal} />
         <Flex horizontal="center">
