@@ -1,10 +1,14 @@
 import { switchWelcomeModal } from 'Modules/Ui/actions/switchWelcomeModal';
 import HttpClient from 'Services/HttpClient';
 import { AppThunk } from '../../..';
-import { SessionActions, SessionLogInApiResponse, SessionSignUpConfirmationApiRequest } from '../session.types';
-import { sessionLogInFailure } from './sessionLogInFailure';
-import { sessionLogInRequest } from './sessionLogInRequest';
-import { sessionLogInSuccess } from './sessionLogInSuccess';
+import {
+  SESSION_LOG_IN_FAILURE,
+  SESSION_LOG_IN_REQUEST,
+  SESSION_LOG_IN_SUCCESS,
+  SessionActions,
+  SessionLogInApiResponse,
+  SessionSignUpConfirmationApiRequest,
+} from '../session.types';
 
 // Request a cookie from api server using the base api
 export const sessionSignUpConfirmation = ({
@@ -16,12 +20,13 @@ export const sessionSignUpConfirmation = ({
 ): Promise<void> => {
   try {
     const { Session: sessionBeforeRequest } = getState();
-    await dispatch(
-      sessionLogInRequest({
+    await dispatch({
+      type: SESSION_LOG_IN_REQUEST,
+      payload: {
         ...sessionBeforeRequest,
         loading: true,
-      })
-    );
+      },
+    });
 
     const { data } = await HttpClient.post<void, SessionLogInApiResponse>('/users/sign-up-confirmation', {
       name,
@@ -29,17 +34,24 @@ export const sessionSignUpConfirmation = ({
     });
 
     await dispatch(switchWelcomeModal(true));
-    await dispatch(sessionLogInSuccess(data.attributes));
+    await dispatch({
+      type: SESSION_LOG_IN_SUCCESS,
+      payload: {
+        ...data.attributes,
+        loading: false,
+      },
+    });
   } catch (error) {
     const { Session: sessionOnError } = getState();
 
-    await dispatch(
-      sessionLogInFailure({
+    await dispatch({
+      type: SESSION_LOG_IN_FAILURE,
+      payload: {
         ...sessionOnError,
         errors: [...sessionOnError.errors, error],
         loading: false,
-      })
-    );
+      },
+    });
     throw new Error(error);
   }
 };

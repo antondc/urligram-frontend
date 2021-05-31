@@ -1,12 +1,14 @@
-import { bookmarksLoadByUserId } from 'Modules/Bookmarks/actions/bookmarksLoadByUserId';
-import { listsLoadByUserId } from 'Modules/Lists/actions/listsLoadByUserId';
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
 import HttpClient from 'Services/HttpClient';
 import { AppThunk } from '../../..';
-import { SessionActions, SessionLogInApiRequest, SessionLogInApiResponse } from '../session.types';
-import { sessionLogInFailure } from './sessionLogInFailure';
-import { sessionLogInRequest } from './sessionLogInRequest';
-import { sessionLogInSuccess } from './sessionLogInSuccess';
+import {
+  SESSION_LOG_IN_FAILURE,
+  SESSION_LOG_IN_REQUEST,
+  SESSION_LOG_IN_SUCCESS,
+  SessionActions,
+  SessionLogInApiRequest,
+  SessionLogInApiResponse,
+} from '../session.types';
 
 // Request a cookie from api server using the base api
 export const sessionLogIn = ({
@@ -15,34 +17,36 @@ export const sessionLogIn = ({
 }: SessionLogInApiRequest): AppThunk<Promise<void>, SessionActions> => async (dispatch, getState): Promise<void> => {
   try {
     const { Session: sessionBeforeRequest } = getState();
-    await dispatch(
-      sessionLogInRequest({
+    await dispatch({
+      type: SESSION_LOG_IN_REQUEST,
+      payload: {
         ...sessionBeforeRequest,
         loading: true,
-      })
-    );
+      },
+    });
 
     const { data }: SessionLogInApiResponse = await HttpClient.post('/login', { nameOrEmail, password });
 
-    await dispatch(bookmarksLoadByUserId(data?.attributes?.id));
-    await dispatch(listsLoadByUserId(data?.attributes?.id));
     await dispatch(switchLoginModal(false));
-    await dispatch(
-      sessionLogInSuccess({
+
+    await dispatch({
+      type: SESSION_LOG_IN_SUCCESS,
+      payload: {
         ...data.attributes,
         loading: false,
-      })
-    );
+      },
+    });
   } catch (error) {
     const { Session: sessionOnError } = getState();
 
-    await dispatch(
-      sessionLogInFailure({
+    await dispatch({
+      type: SESSION_LOG_IN_FAILURE,
+      payload: {
         ...sessionOnError,
         errors: [...sessionOnError.errors, error],
         loading: false,
-      })
-    );
+      },
+    });
     throw new Error(error);
   }
 };
