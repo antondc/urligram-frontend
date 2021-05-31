@@ -1,4 +1,5 @@
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
+import { userLoad } from 'Modules/Users/actions/userLoad';
 import HttpClient from 'Services/HttpClient';
 import { AppThunk } from '../../..';
 import {
@@ -27,6 +28,7 @@ export const sessionLogIn = ({
 
     const { data }: SessionLogInApiResponse = await HttpClient.post('/login', { nameOrEmail, password });
 
+    await dispatch(userLoad(data?.attributes?.id));
     await dispatch(switchLoginModal(false));
 
     await dispatch({

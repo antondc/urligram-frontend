@@ -9,9 +9,9 @@ import { selectCurrentGlossary } from 'Modules/Languages/selectors/selectCurrent
 import { selectLinksLoading } from 'Modules/Links/selectors/selectLinksLoading';
 import { selectLinksVoteLoading } from 'Modules/Links/selectors/selectLinksVoteLoading';
 import { selectListsLoading } from 'Modules/Lists/selectors/selectListsLoading';
+import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { selectSessionLoading } from 'Modules/Session/selectors/selectSessionLoading';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
-import { selectSessionUser } from 'Modules/Session/selectors/selectSessionUser';
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
 import { switchUserModal } from 'Modules/Ui/actions/switchUserModal';
 import { selectUsersLoading } from 'Modules/Users/selectors/selectUsersLoading';
@@ -48,12 +48,12 @@ const Header: React.FC<Props> = ({
 }) => {
   const loading =
     bookmarksLoading || linksLoading || linksVoteLoading || bookmarksVoteLoading || usersLoading || listsLoading;
-  const sessionUser = useSelector(selectSessionUser);
+  const session = useSelector(selectSession);
 
   return (
     <HeaderUi
       isLogged={isLogged}
-      sessionUser={sessionUser}
+      session={session}
       currentGlossary={currentGlossary}
       switchUserModal={switchUserModal}
       switchLoginModal={switchLoginModal}

@@ -4,14 +4,14 @@ import Logo from 'Assets/svg/logo.svg';
 import User from 'Assets/svg/user.svg';
 import A from 'Components/A';
 import { GlossaryState } from 'Modules/Languages/languages.types';
-import { UserState } from 'Modules/Users/users.types';
+import { SessionState } from 'Modules/Session/session.types';
 import { Border, H3, SpinnerLoader } from 'Vendor/components';
 
 import './Header.less';
 
 interface Props {
   isLogged: boolean;
-  sessionUser: UserState;
+  session: SessionState;
   currentGlossary: GlossaryState;
   loading: boolean;
   sessionLoading: boolean;
@@ -26,7 +26,7 @@ export const Header: React.FC<Props> = ({
   switchLoginModal,
   loading,
   sessionLoading,
-  sessionUser,
+  session,
 }) => (
   <header>
     <Border className="Header" weight="thick">
@@ -56,7 +56,7 @@ export const Header: React.FC<Props> = ({
         {!sessionLoading && isLogged && (
           <img
             className="Header-userLogo"
-            src={sessionUser?.image?.original}
+            src={session?.image?.original}
             onClick={isLogged ? switchUserModal : () => switchLoginModal(true)}
           />
         )}
