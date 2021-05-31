@@ -13,11 +13,14 @@ import { selectMostFollowedUsers } from 'Modules/Sections/selectors/selectMostFo
 import { selectMostFollowedUsersLoading } from 'Modules/Sections/selectors/selectMostFollowedUsersLoading';
 import { selectNewUsers } from 'Modules/Sections/selectors/selectNewUsers';
 import { selectNewUsersLoading } from 'Modules/Sections/selectors/selectNewUsersLoading';
+import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { tagsLoad } from 'Modules/Tags/actions/tagsLoad';
 import { Home as HomeUI } from './Home';
 
 const Home: React.FC = () => {
   const dispatch = useDispatch();
+
+  const session = useSelector(selectSession);
   const bookmarksCurrentIds = useSelector(selectBookmarksCurrentIds);
   const bookmarksCurrentIdsLoading = useSelector(selectBookmarksLoading);
   const mostFollowedUsers = useSelector(selectMostFollowedUsers);
@@ -32,11 +35,11 @@ const Home: React.FC = () => {
     dispatch(sectionsMostFollowedUsersLoad());
     dispatch(sectionsNewUsersLoad());
     dispatch(tagsLoad());
-  }, []);
+  }, [session?.id]);
 
   useEffect(() => {
     dispatch(bookmarksRecommended());
-  }, [url]);
+  }, [url, session?.id]);
 
   return (
     <HomeUI

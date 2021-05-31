@@ -18,6 +18,7 @@ import { sectionsFollowingUsersLoad } from 'Modules/Sections/actions/sectionsFol
 import { selectFollowersUsers } from 'Modules/Sections/selectors/selectFollowersUsers';
 import { selectFollowingUsers } from 'Modules/Sections/selectors/selectFollowingUsers';
 import { selectFollowingUsersLoading } from 'Modules/Sections/selectors/selectFollowingUsersLoading';
+import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { tagsSearchLoad } from 'Modules/Tags/actions/tagsSearchLoad';
 import { selectTagsAll } from 'Modules/Tags/selectors/selectAllTags';
 import { selectTagsSearch } from 'Modules/Tags/selectors/selectTagsSearch';
@@ -29,6 +30,8 @@ import { UserBookmarks as UserBookmarksUi } from './UserBookmarks';
 
 const UserBookmarks: React.FC = () => {
   const dispatch = useDispatch();
+
+  const session = useSelector(selectSession);
   const userId = useSelector(selectCurrentRouteParamUserId);
   const user = useSelector((state: RootState) => selectUserById(state, { id: userId }));
   const bookmarksIds = useSelector(selectBookmarksCurrentIds);
@@ -70,13 +73,13 @@ const UserBookmarks: React.FC = () => {
     dispatch(userLoad(userId));
     dispatch(sectionsFollowersUsersLoad(userId));
     dispatch(sectionsFollowingUsersLoad(userId));
-  }, []);
+  }, [session?.id]);
 
   useEffect(() => {
     dispatch(bookmarksLoadByUserId(userId));
     dispatch(listsLoadByUserId(userId));
     dispatch(tagsSearchLoad());
-  }, [url]);
+  }, [url, session?.id]);
 
   return (
     <UserBookmarksUi

@@ -25,6 +25,7 @@ import { List as ListUI } from './List';
 
 const List: React.FC = () => {
   const dispatch = useDispatch();
+
   const session = useSelector(selectSession);
   const listId = useSelector(selectCurrentRouteParamListId);
   const list = useSelector((state: RootState) => selectListById(state, { id: listId }));
@@ -44,15 +45,15 @@ const List: React.FC = () => {
     dispatch(listLoadById(listId));
     dispatch(sectionsTagsInThisListLoad(listId));
     dispatch(listsLoadByUserId(session?.id));
-  }, []);
+  }, [session?.id]);
 
   useEffect(() => {
     !!listId && dispatch(bookmarksLoadByListId(listId));
-  }, [url]);
+  }, [url, session?.id]);
 
   useEffect(() => {
     usersInThisListIds?.length && dispatch(sectionsUsersInThisListLoad(usersInThisListIds));
-  }, [JSON.stringify(usersInThisListIds)]);
+  }, [JSON.stringify(usersInThisListIds), session?.id]);
 
   return (
     <ListUI

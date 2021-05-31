@@ -13,6 +13,7 @@ import { sectionsMostUsedTagsLoad } from 'Modules/Sections/actions/sectionsMostU
 import { selectMostUsedTags } from 'Modules/Sections/selectors/selectMostUsedTags';
 import { selectMostUsedTagsLoading } from 'Modules/Sections/selectors/selectMostUsedTagsLoading';
 import { selectPopularLists } from 'Modules/Sections/selectors/selectPopularLists';
+import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { tagsSearchLoad } from 'Modules/Tags/actions/tagsSearchLoad';
 import { selectTagsAll } from 'Modules/Tags/selectors/selectAllTags';
 import { selectTagsSearch } from 'Modules/Tags/selectors/selectTagsSearch';
@@ -23,6 +24,7 @@ import { Bookmarks as BookmarksUi } from './Bookmarks';
 const Home: React.FC = () => {
   const dispatch = useDispatch();
 
+  const session = useSelector(selectSession);
   const popularLists = useSelector(selectPopularLists);
   const bookmarksIds = useSelector(selectBookmarksCurrentIds);
   const loading = useSelector(selectBookmarksLoading);
@@ -50,7 +52,7 @@ const Home: React.FC = () => {
   useEffect(() => {
     dispatch(bookmarksLoad());
     dispatch(tagsSearchLoad());
-  }, [url]);
+  }, [url, session?.id]);
 
   const onInputChange = (string: string) => {
     !!string && dispatch(tagsSearchLoad(string));

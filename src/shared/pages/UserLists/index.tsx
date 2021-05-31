@@ -16,12 +16,15 @@ import { selectMostUsedTags } from 'Modules/Sections/selectors/selectMostUsedTag
 import { selectMostUsedTagsLoading } from 'Modules/Sections/selectors/selectMostUsedTagsLoading';
 import { selectUserMostUsedTags } from 'Modules/Sections/selectors/selectUserMostUsedTags';
 import { selectUserMostUsedTagsLoading } from 'Modules/Sections/selectors/selectUserMostUsedTagsLoading';
+import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { userLoad } from 'Modules/Users/actions/userLoad';
 import { selectUserById } from 'Modules/Users/selectors/selectUserById';
 import { UserLists as UserListsUi } from './UserLists';
 
 const UserLists: React.FC = () => {
   const dispatch = useDispatch();
+
+  const session = useSelector(selectSession);
   const userId = useSelector(selectCurrentRouteParamUserId);
   const user = useSelector((state: RootState) => selectUserById(state, { id: userId }));
   const listsIds = useSelector(selectListsAllIds);
@@ -39,11 +42,11 @@ const UserLists: React.FC = () => {
     dispatch(userLoad(userId));
     dispatch(sectionsUserMostUsedTagsLoad(userId));
     dispatch(sectionsMostUsedTagsLoad());
-  }, []);
+  }, [session?.id]);
 
   useEffect(() => {
     dispatch(listsLoadByUserId(userId));
-  }, [page]);
+  }, [page, session?.id]);
 
   return (
     <UserListsUi

@@ -27,6 +27,7 @@ interface Props {
 
 const User: React.FC<Props> = () => {
   const dispatch = useDispatch();
+
   const session = useSelector(selectSession);
   const userId = useSelector(selectCurrentRouteParamUserId);
   const user = useSelector((state: RootState) => selectUserById(state, { id: userId }));
@@ -47,7 +48,7 @@ const User: React.FC<Props> = () => {
 
     dispatch(sectionsFollowingUsersLoad(userId));
     dispatch(sectionsFollowersUsersLoad(userId));
-  }, []);
+  }, [session?.id]);
 
   return (
     <UserUi

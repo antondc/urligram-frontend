@@ -10,6 +10,7 @@ import { selectMostFollowedUsers } from 'Modules/Sections/selectors/selectMostFo
 import { selectMostFollowedUsersLoading } from 'Modules/Sections/selectors/selectMostFollowedUsersLoading';
 import { selectNewUsers } from 'Modules/Sections/selectors/selectNewUsers';
 import { selectNewUsersLoading } from 'Modules/Sections/selectors/selectNewUsersLoading';
+import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { usersLoad } from 'Modules/Users/actions/usersLoad';
 import { selectUsersCurrentIds } from 'Modules/Users/selectors/selectUsersCurrentIds';
 import { selectUsersLoading } from 'Modules/Users/selectors/selectUsersLoading';
@@ -19,6 +20,8 @@ import { Users as UsersUI } from './Users';
 
 const Users: React.FC = () => {
   const dispatch = useDispatch();
+
+  const session = useSelector(selectSession);
   const mostFollowedUsers = useSelector(selectMostFollowedUsers);
   const mostFollowedUsersLoading = useSelector(selectMostFollowedUsersLoading);
   const newUsers = useSelector(selectNewUsers);
@@ -34,11 +37,11 @@ const Users: React.FC = () => {
     dispatch(sectionsMostFollowedUsersLoad());
     dispatch(sectionsNewUsersLoad());
     dispatch(bookmarksLoadBySize(5));
-  }, []);
+  }, [session?.id]);
 
   useEffect(() => {
     dispatch(usersLoad());
-  }, [page]);
+  }, [page, session?.id]);
 
   return (
     <UsersUI

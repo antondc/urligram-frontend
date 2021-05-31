@@ -14,10 +14,13 @@ import { selectMostUsedTags } from 'Modules/Sections/selectors/selectMostUsedTag
 import { selectMostUsedTagsLoading } from 'Modules/Sections/selectors/selectMostUsedTagsLoading';
 import { selectNewUsers } from 'Modules/Sections/selectors/selectNewUsers';
 import { selectNewUsersLoading } from 'Modules/Sections/selectors/selectNewUsersLoading';
+import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { Lists as ListsUI } from './Lists';
 
 const Lists: React.FC = () => {
   const dispatch = useDispatch();
+
+  const session = useSelector(selectSession);
   const listsIds = useSelector(selectListsAllIds);
   const listsIdsLoading = useSelector(selectListsLoading);
   const mostUsedTags = useSelector(selectMostUsedTags);
@@ -32,11 +35,11 @@ const Lists: React.FC = () => {
   useEffect(() => {
     dispatch(sectionsMostUsedTagsLoad());
     dispatch(sectionsNewUsersLoad());
-  }, []);
+  }, [session?.id]);
 
   useEffect(() => {
     dispatch(listsLoad());
-  }, [page]);
+  }, [page, session?.id]);
 
   return (
     <ListsUI
