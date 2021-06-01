@@ -44,7 +44,7 @@ export const usersLoad = (): AppThunk<Promise<UserState[]>, UsersActions> => asy
     );
 
     return usersArray;
-  } catch (err) {
-    throw new Error(err);
+  } catch (error) {
+    throw error;
   }
 };

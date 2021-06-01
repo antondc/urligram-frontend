@@ -52,7 +52,7 @@ export const sectionsNewUsersLoad = (): AppThunk<Promise<UserState[]>, UsersActi
     );
 
     return usersArray;
-  } catch (err) {
-    throw new Error(err);
+  } catch (error) {
+    throw error;
   }
 };

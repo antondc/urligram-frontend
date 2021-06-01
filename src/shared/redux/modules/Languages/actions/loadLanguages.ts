@@ -47,7 +47,7 @@ export const loadLanguages = (lang: string): AppThunk<Promise<LanguageState[]>, 
     );
 
     return languagesArray;
-  } catch (err) {
-    throw new Error(err);
+  } catch (error) {
+    throw error;
   }
 };

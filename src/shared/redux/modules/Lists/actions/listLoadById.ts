@@ -38,7 +38,7 @@ export const listLoadById = (listId: number): AppThunk<Promise<ListState>, Lists
     );
 
     return listData?.attributes;
-  } catch (err) {
-    throw new Error(err);
+  } catch (error) {
+    throw error;
   }
 };

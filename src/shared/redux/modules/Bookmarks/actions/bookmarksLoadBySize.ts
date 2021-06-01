@@ -52,6 +52,7 @@ export const bookmarksLoadBySize = (size?: number): AppThunk<Promise<BookmarkSta
         errors: [...(bookmarksOnError?.errors || []), error],
       })
     );
-    throw new Error(error);
+
+    throw error;
   }
 };

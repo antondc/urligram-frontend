@@ -7,12 +7,6 @@ interface Options {
   timeout: number;
 }
 
-export const DEFAULT_ASYNC_ERROR = {
-  message: 'An error ocurred',
-  statusCode: 500,
-  category: 'Error',
-};
-
 export class HttpClient {
   private static staticInstance: AxiosInstance;
   public publicInstance: AxiosInstance;
@@ -32,7 +26,7 @@ export class HttpClient {
 
     axiosInstance.interceptors.response.use(
       (response) => response.data,
-      (err) => Promise.reject(err?.response?.data?.error || DEFAULT_ASYNC_ERROR)
+      (err) => Promise.reject(err)
     );
 
     HttpClient.staticInstance = axiosInstance;

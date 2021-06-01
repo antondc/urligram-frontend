@@ -52,6 +52,6 @@ export const sessionSignUpConfirmation = ({
         loading: false,
       },
     });
-    throw new Error(error);
+    throw error;
   }
 };

@@ -49,6 +49,6 @@ export const listDelete = ({ listId }: ListDeleteApiRequest): AppThunk<Promise<L
       },
     });
 
-    throw new Error(error);
+    throw error;
   }
 };

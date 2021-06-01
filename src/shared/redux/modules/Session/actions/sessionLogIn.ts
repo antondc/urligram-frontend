@@ -49,6 +49,6 @@ export const sessionLogIn = ({
         loading: false,
       },
     });
-    throw new Error(error);
+    throw error;
   }
 };

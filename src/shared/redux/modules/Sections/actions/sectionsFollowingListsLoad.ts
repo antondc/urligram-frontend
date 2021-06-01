@@ -55,7 +55,7 @@ export const sectionsFollowingListsLoad = (
     );
 
     return listsArray;
-  } catch (err) {
-    throw new Error(err);
+  } catch (error) {
+    throw error;
   }
 };

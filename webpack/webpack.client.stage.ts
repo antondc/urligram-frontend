@@ -3,7 +3,7 @@ import webpack from 'webpack';
 import merge from 'webpack-merge';
 
 import { staging } from '../config.test.json';
-import { WEBPACK_DIST, WEBPACK_SRC_CLIENT } from './constants';
+import { ENVIRONMENT_STAGING, WEBPACK_DIST, WEBPACK_SRC_CLIENT } from './constants';
 import webpackClientCommonConfig from './webpack.client.common';
 
 const webpackClientProdConfig = {
@@ -30,6 +30,7 @@ const webpackClientProdConfig = {
     new webpack.DefinePlugin({
       'process.env': {
         ENDPOINT_API: JSON.stringify(staging.API_URL),
+        ENVIRONMENT: JSON.stringify(ENVIRONMENT_STAGING),
       },
     }),
     new MiniCssExtractPlugin({

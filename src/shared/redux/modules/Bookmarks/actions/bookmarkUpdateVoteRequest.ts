@@ -30,6 +30,6 @@ export const bookmarkUpdateVoteRequest = ({ linkId }: { linkId: number }): AppTh
       },
     });
   } catch (error) {
-    throw new Error(error);
+    throw error;
   }
 };

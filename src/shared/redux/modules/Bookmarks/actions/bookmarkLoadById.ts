@@ -51,6 +51,7 @@ export const bookmarkLoadById = ({ bookmarkId }: Params): AppThunk<Promise<Bookm
         errors: [...(bookmarksOnError?.errors || []), error],
       },
     });
-    throw new Error(error);
+
+    throw error;
   }
 };

@@ -8,6 +8,8 @@ export const userLoad = (userId: string): AppThunk<Promise<UserState>, UsersActi
   dispatch,
   getState
 ): Promise<UserState> => {
+  if (!userId) return;
+
   const { Users } = getState();
 
   try {
@@ -33,7 +35,7 @@ export const userLoad = (userId: string): AppThunk<Promise<UserState>, UsersActi
     );
 
     return data.attributes;
-  } catch (err) {
-    throw new Error(err);
+  } catch (error) {
+    throw error;
   }
 };

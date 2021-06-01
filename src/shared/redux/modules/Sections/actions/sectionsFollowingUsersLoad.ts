@@ -13,6 +13,8 @@ export const sectionsFollowingUsersLoad = (
   dispatch,
   getState
 ): Promise<UserState[]> => {
+  if (!sessionId) return;
+
   const { Sections: sectionsBeforeApi } = getState();
   try {
     dispatch(
@@ -57,7 +59,7 @@ export const sectionsFollowingUsersLoad = (
     );
 
     return usersArray;
-  } catch (err) {
-    throw new Error(err);
+  } catch (error) {
+    throw error;
   }
 };

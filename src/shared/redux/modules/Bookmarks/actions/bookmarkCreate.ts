@@ -7,7 +7,6 @@ import {
   BookmarkState,
 } from 'Modules/Bookmarks/bookmarks.types';
 import { LinksActions } from 'Modules/Links/links.types';
-import { uiNotificationPush } from 'Modules/Ui/actions/uiNotificationPush';
 import { USERS_LOAD_SUCCEED, UsersActions } from 'Modules/Users/users.types';
 import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
@@ -92,6 +91,6 @@ export const bookmarkCreate = ({
       })
     );
 
-    throw new Error(error);
+    throw error;
   }
 };

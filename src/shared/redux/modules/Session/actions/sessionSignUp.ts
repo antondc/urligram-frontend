@@ -46,6 +46,6 @@ export const sessionSignUp = (userData: SessionSignUpApiRequest): AppThunk<Promi
       },
     });
 
-    throw new Error(error);
+    throw error;
   }
 };

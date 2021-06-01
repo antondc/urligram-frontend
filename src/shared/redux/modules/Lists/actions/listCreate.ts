@@ -45,6 +45,6 @@ export const listCreate = ({
       })
     );
 
-    throw new Error(error);
+    throw error;
   }
 };

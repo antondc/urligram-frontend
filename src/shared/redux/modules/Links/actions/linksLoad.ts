@@ -55,7 +55,7 @@ export const linksLoad = (size?: number): AppThunk<Promise<LinkState[]>, LinksAc
     dispatch(linksLoadSuccess(payload));
 
     return linksArray;
-  } catch (err) {
-    throw new Error(err);
+  } catch (error) {
+    throw error;
   }
 };

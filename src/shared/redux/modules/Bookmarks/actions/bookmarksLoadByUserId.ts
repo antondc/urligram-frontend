@@ -11,6 +11,8 @@ export const bookmarksLoadByUserId = (
   userId: string,
   size?: number
 ): AppThunk<Promise<BookmarkState[]>, BookmarksActions> => async (dispatch, getState): Promise<BookmarkState[]> => {
+  if (!userId) return;
+
   try {
     const { Bookmarks: bookmarksBeforeRequest } = getState();
     const activeSort = bookmarksBeforeRequest?.meta?.sort;
@@ -30,6 +32,7 @@ export const bookmarksLoadByUserId = (
     const { meta, data = [] } = await HttpClient.get<void, BookmarksGetApiResponse>(
       `/users/${userId}/bookmarks?${queryStringUpdated}`
     );
+
     const { Bookmarks: bookmarksAfterResponse } = getState();
     const bookmarksArray = data?.map((item) => item.attributes);
 
@@ -58,6 +61,7 @@ export const bookmarksLoadByUserId = (
         errors: [...(bookmarksOnError?.errors || []), error],
       })
     );
-    throw new Error(error);
+
+    throw error;
   }
 };

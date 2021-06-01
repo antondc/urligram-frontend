@@ -78,6 +78,6 @@ export const listUnfollow = ({
       },
     });
 
-    throw new Error(error);
+    throw error;
   }
 };

@@ -9,6 +9,8 @@ export const userFollowingLoad = (userId: string): AppThunk<Promise<UserState[]>
   dispatch,
   getState
 ): Promise<UserState[]> => {
+  if (!userId) return;
+
   const { Users } = getState();
   try {
     dispatch(
@@ -44,7 +46,7 @@ export const userFollowingLoad = (userId: string): AppThunk<Promise<UserState[]>
     );
 
     return usersArray;
-  } catch (err) {
-    throw new Error(err);
+  } catch (error) {
+    throw error;
   }
 };

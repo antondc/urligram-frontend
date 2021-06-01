@@ -55,6 +55,6 @@ export const bookmarkUpdate = ({
       })
     );
 
-    throw new Error(error);
+    throw error;
   }
 };

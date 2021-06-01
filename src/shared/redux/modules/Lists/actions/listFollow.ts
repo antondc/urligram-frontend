@@ -81,6 +81,6 @@ export const listFollow = ({
       },
     });
 
-    throw new Error(error);
+    throw error;
   }
 };

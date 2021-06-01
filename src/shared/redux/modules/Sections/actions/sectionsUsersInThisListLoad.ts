@@ -52,7 +52,7 @@ export const sectionsUsersInThisListLoad = (
     );
 
     return usersArray;
-  } catch (err) {
-    throw new Error(err);
+  } catch (error) {
+    throw error;
   }
 };

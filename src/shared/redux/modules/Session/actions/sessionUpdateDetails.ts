@@ -55,6 +55,6 @@ export const sessionUpdateDetails = ({
         errors: [...sessionOnError.errors, error],
       },
     });
-    throw new Error(error);
+    throw error;
   }
 };

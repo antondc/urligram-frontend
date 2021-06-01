@@ -2,6 +2,7 @@ import webpack from 'webpack';
 import merge from 'webpack-merge';
 
 import { production } from '../config.test.json';
+import { ENVIRONMENT_PRODUCTION } from './constants';
 import webpackServerCommonConfig from './webpack.server.common';
 
 const webpackServerProdConfig = {
@@ -17,6 +18,7 @@ const webpackServerProdConfig = {
         SERVER_PORT_HTTP: production.PORT_HTTP,
         SERVER_PORT_HTTPS: production.PORT_HTTPS,
         ENDPOINT_API: JSON.stringify(production.API_URL),
+        ENVIRONMENT: JSON.stringify(ENVIRONMENT_PRODUCTION),
       },
     }),
   ],

@@ -9,9 +9,10 @@ export const listsLoadByUserId = (userId: string): AppThunk<Promise<ListState>, 
   dispatch,
   getState
 ): Promise<ListState> => {
+  if (!userId) return;
+
   const { Lists: listsBeforeRequest } = getState();
 
-  if (!userId) return;
   try {
     dispatch(
       listsLoadRequest({
@@ -47,8 +48,8 @@ export const listsLoadByUserId = (userId: string): AppThunk<Promise<ListState>, 
         loading: false,
       })
     );
-  } catch (err) {
-    throw new Error(err);
+  } catch (error) {
+    throw error;
   }
 
   return;

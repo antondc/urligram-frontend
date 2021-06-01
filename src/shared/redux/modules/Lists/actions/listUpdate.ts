@@ -67,6 +67,6 @@ export const listUpdate = ({
       })
     );
 
-    throw new Error(error);
+    throw error;
   }
 };

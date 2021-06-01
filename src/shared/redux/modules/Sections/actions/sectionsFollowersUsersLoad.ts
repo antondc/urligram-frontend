@@ -14,6 +14,7 @@ export const sectionsFollowersUsersLoad = (
   getState
 ): Promise<UserState[]> => {
   if (!userId) return;
+
   const { Sections: sectionsBeforeApi } = getState();
   try {
     dispatch(
@@ -57,7 +58,7 @@ export const sectionsFollowersUsersLoad = (
     );
 
     return usersArray;
-  } catch (err) {
-    throw new Error(err);
+  } catch (error) {
+    throw error;
   }
 };

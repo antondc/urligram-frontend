@@ -51,6 +51,6 @@ export const linkLoadById = (linkId: number): AppThunk<Promise<LinkState>, Links
       })
     );
 
-    throw new Error(error);
+    throw error;
   }
 };

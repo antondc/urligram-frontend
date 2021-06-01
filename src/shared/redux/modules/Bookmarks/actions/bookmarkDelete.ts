@@ -97,6 +97,7 @@ export const bookmarkDelete = ({
         errors: [...(bookmarksOnError.errors || []), error],
       })
     );
-    throw new Error(error);
+
+    throw error;
   }
 };

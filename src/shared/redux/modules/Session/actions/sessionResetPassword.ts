@@ -64,6 +64,6 @@ export const sessionResetPassword = ({
         loading: false,
       },
     });
-    throw new Error(error);
+    throw error;
   }
 };

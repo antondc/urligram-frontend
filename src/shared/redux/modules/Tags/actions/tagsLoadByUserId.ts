@@ -14,6 +14,8 @@ export const tagsLoadByUserId = (userId: string): AppThunk<Promise<TagState[]>, 
   dispatch,
   getState
 ): Promise<TagState[]> => {
+  if (!userId) return;
+
   const { Tags: tagsBeforeRequest } = getState();
 
   dispatch({

@@ -3,7 +3,7 @@ import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import merge from 'webpack-merge';
 
 import { development } from '../config.test.json';
-import { WEBPACK_ROOT, WEBPACK_SRC_CLIENT } from './constants';
+import { ENVIRONMENT_DEV, WEBPACK_ROOT, WEBPACK_SRC_CLIENT } from './constants';
 import webpackClientCommonConfig from './webpack.client.common';
 
 const webpackClientDevConfig = {
@@ -30,6 +30,7 @@ const webpackClientDevConfig = {
     new webpack.DefinePlugin({
       'process.env': {
         ENDPOINT_API: JSON.stringify(development.API_URL),
+        ENVIRONMENT: JSON.stringify(ENVIRONMENT_DEV),
       },
     }),
     new BundleAnalyzerPlugin({

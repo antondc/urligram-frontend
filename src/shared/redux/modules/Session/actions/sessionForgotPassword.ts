@@ -42,6 +42,6 @@ export const sessionForgotPassword = ({
         errors: [...sessionOnError.errors, error],
       })
     );
-    throw new Error(error);
+    throw error;
   }
 };

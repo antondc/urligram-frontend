@@ -51,6 +51,7 @@ export const bookmarksLoadByListId = (listId: number): AppThunk<Promise<Bookmark
         errors: [...(bookmarksOnError?.errors || []), error],
       })
     );
-    throw new Error(error);
+
+    throw error;
   }
 };
