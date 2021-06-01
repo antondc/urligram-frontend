@@ -11,8 +11,9 @@ import { RootState } from 'Modules/rootType';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { bookmarkListsModalMount } from 'Modules/Ui/actions/bookmarkListsModalMount';
 import { bookmarkListsModalUnmount } from 'Modules/Ui/actions/bookmarkListsModalUnmount';
-import { selecBookmarkListsModal } from 'Modules/Ui/selectors/selecBookmarkListsModal';
+import { selectBookmarkListsModal } from 'Modules/Ui/selectors/selectBookmarkListsModal';
 import { DELAY_THREE_SEC } from 'Root/src/shared/constants';
+import { selectBookmarkListsModalsMounted } from 'Root/src/shared/redux/modules/Ui/selectors/selectBookmarkListsModalsMounted';
 import { BookmarkLists as BookmarkListsUi } from './BookmarkLists';
 
 interface Props {
@@ -25,7 +26,8 @@ export const BookmarkLists: React.FC<Props> = ({ bookmarkId }) => {
   const session = useSelector(selectSession);
   const [itemsLoading, setItemsLoading] = useState<number[]>([]);
   const [createListSubmitting, setCreateListSubmitting] = useState<boolean>(false);
-  const bookmarkListsModal = useSelector((state: RootState) => selecBookmarkListsModal(state, { bookmarkId }));
+  const bookmarkListsModalsMounted = useSelector(selectBookmarkListsModalsMounted);
+  const bookmarkListsModal = useSelector((state: RootState) => selectBookmarkListsModal(state, { bookmarkId }));
   const modalMounted = !!bookmarkListsModal?.bookmarkId;
   const [showCreateList, setShowCreateList] = useState<boolean>(false);
   const [listInputName, setListInputName] = useState<string>(undefined);
@@ -51,6 +53,8 @@ export const BookmarkLists: React.FC<Props> = ({ bookmarkId }) => {
   };
 
   const onListsClick = () => {
+    if (bookmarkListsModalsMounted.length) return;
+    
     !!modalMounted && dispatch(bookmarkListsModalUnmount({ bookmarkId }));
     !modalMounted && dispatch(bookmarkListsModalMount({ bookmarkId }));
   };
