@@ -1,5 +1,5 @@
 // General
-export const DEFAULT_PAGE_SIZE = 10;
+export const DEFAULT_PAGE_SIZE = 20;
 
 // Delays
 export const DELAY_FASTEST_MS = 150;
