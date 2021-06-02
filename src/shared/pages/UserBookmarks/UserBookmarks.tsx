@@ -67,15 +67,15 @@ export const UserBookmarks: React.FC<Props> = ({
   <div className="UserBookmarks">
     <Flex horizontal="between" vertical="top">
       <Main>
-        <Frame grow padding="none">
-          <Frame grow padding="small" shadow={false} weight="none">
-            <H4>
-              Bookmarks of{' '}
-              <A frontend href={`/users/${userId}`}>
-                @{user?.name}
-              </A>
-            </H4>
-          </Frame>
+        <Frame grow padding="none" borderTop={false} borderBottom={false}>
+          <Hr spacer size="small" />
+          <H4>
+            Bookmarks of{' '}
+            <A frontend href={`/users/${userId}`}>
+              @{user?.name}
+            </A>
+          </H4>
+          <Hr spacer size="small" />
           <Hr size="nano" />
           <Frame grow padding="none" shadow={false} weight="none">
             <Flex horizontal="between" noWrap>
@@ -129,7 +129,6 @@ export const UserBookmarks: React.FC<Props> = ({
         <SidebarBlock title="Following Users" href={`users/${userId}/following`} loading={followingUsersLoading}>
           <SidebarListUsers items={followingUsers} />
         </SidebarBlock>
-        <Hr spacer />
         <SidebarBlock title="Followers" href={`users/${userId}/followers`} loading={followersUsersLoading}>
           <SidebarListUsers items={followersUsers} />
         </SidebarBlock>

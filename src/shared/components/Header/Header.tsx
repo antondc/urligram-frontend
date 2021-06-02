@@ -29,7 +29,7 @@ export const Header: React.FC<Props> = ({
   session,
 }) => (
   <header>
-    <Frame className="Header" weight="thick">
+    <Frame className="Header">
       <A className="Header-brand" href={'/'} frontend>
         <Logo className={'Header-logo' + (loading ? ' Header-logo--loading' : '')} />
         <H3 className="Header-title">Linking</H3>

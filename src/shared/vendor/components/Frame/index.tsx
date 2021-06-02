@@ -12,6 +12,10 @@ interface Props extends HTMLProps<HTMLDivElement> {
   shadow?: boolean;
   padding?: FramePadding;
   grow?: boolean;
+  borderTop?: boolean;
+  borderRight?: boolean;
+  borderBottom?: boolean;
+  borderLeft?: boolean;
 }
 
 export const Frame: React.FC<Props> = ({
@@ -19,9 +23,13 @@ export const Frame: React.FC<Props> = ({
   children,
   weight = 'thin',
   padding = 'normal',
-  shadow = true,
+  shadow,
   grow,
   className,
+  borderTop = true,
+  borderRight = true,
+  borderBottom = true,
+  borderLeft = true,
   ...props
 }) => (
   <div
@@ -32,7 +40,11 @@ export const Frame: React.FC<Props> = ({
       (padding ? ' Frame-padding--' + padding : '') +
       (' Frame--' + weight) +
       (grow ? ' Frame--grow' : '') +
-      (shadow ? ' Frame--shadow' : '')
+      (shadow ? ' Frame--shadow' : '') +
+      (borderTop ? ' Frame--borderTop' : '') +
+      (borderRight ? ' Frame--borderRight' : '') +
+      (borderBottom ? ' Frame--borderBottom' : '') +
+      (borderLeft ? ' Frame--borderLeft' : '')
     }
     {...props}
   >

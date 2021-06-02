@@ -28,7 +28,7 @@ export const SidebarLeft: React.FC = () => {
   };
 
   return (
-    <Frame className="SidebarLeft" data-test-id="SidebarLeft">
+    <Frame className="SidebarLeft" data-test-id="SidebarLeft" borderTop={false} borderLeft={false} borderRight={false}>
       {isLoggedIn && (
         <ul>
           <li className="SidebarLeft-item">

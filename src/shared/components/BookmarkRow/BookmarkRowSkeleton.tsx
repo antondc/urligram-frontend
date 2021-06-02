@@ -9,7 +9,15 @@ interface BookmarkRowSkeleton {
 }
 
 export const BookmarkRowSkeleton: React.FC<BookmarkRowSkeleton> = ({ id }) => (
-  <Frame grow className="BookmarkRowSkeleton" data-test-id="BookmarkRowSkeleton" key={id}>
+  <Frame
+    grow
+    className="BookmarkRowSkeleton"
+    data-test-id="BookmarkRowSkeleton"
+    key={id}
+    borderTop={false}
+    borderLeft={false}
+    borderRight={false}
+  >
     <div className="BookmarkRowSkeleton-left">
       <div className="BookmarkRowSkeleton-icons">
         <SkeletonItem className="BookmarkRowSkeleton-icon" />

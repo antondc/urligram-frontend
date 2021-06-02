@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 
 import SidebarLeft from 'Components/SidebarLeft';
+import Subheader from 'Components/Subheader';
 import { selectPathWithoutLanguageParam } from 'Modules/Routes/selectors/selectPathWithoutLanguageParam';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import Bookmarks from 'Pages/Bookmarks';
@@ -20,7 +21,7 @@ import Users from 'Pages/Users';
 import UserTags from 'Pages/UserTags';
 import { Routes } from 'Router/routes';
 import { Location } from 'Services/History';
-import { Fade, FadeInOut, Flex, Hr } from 'Vendor/components';
+import { Fade, FadeInOut, Flex, Frame } from 'Vendor/components';
 
 import './Content.less';
 
@@ -32,8 +33,8 @@ interface Props {
 
 const Content: React.FC<Props> = ({ location, pathWithoutLanguageParam }) => (
   <>
-    <Hr spacer size="big" />
-    <div className="Content">
+    <Subheader />
+    <Frame className="Content" padding="none">
       <Flex vertical="top">
         <Fade classname="Content-sidebarLeft" mounted speed="fastest" delayIn={250} appear>
           <SidebarLeft />
@@ -57,7 +58,7 @@ const Content: React.FC<Props> = ({ location, pathWithoutLanguageParam }) => (
           </FadeInOut>
         </div>
       </Flex>
-    </div>
+    </Frame>
   </>
 );
 

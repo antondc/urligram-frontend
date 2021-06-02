@@ -29,7 +29,7 @@ const SidebarBlock: React.FC<Props> = ({ title, href, loading, children }) => {
   });
 
   return (
-    <Frame grow>
+    <Frame grow borderTop={false} borderLeft={false} borderRight={false}>
       {!!href ? (
         <A href={href} styled={!!href} frontend>
           <H4>{title}</H4>
