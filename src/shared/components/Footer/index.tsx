@@ -9,7 +9,7 @@ import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCur
 import { selectCurrentPathname } from 'Modules/Routes/selectors/selectCurrentPathname';
 import { switchLanguagesModal } from 'Modules/Ui/actions/switchLanguagesModal';
 import { selectUiLanguagesModalMounted } from 'Modules/Ui/selectors/selectUiLanguagesModalMounted';
-import { Border, Fade, Hr, Span } from 'Vendor/components';
+import { Fade, Frame, Hr, Span } from 'Vendor/components';
 
 import './Footer.less';
 
@@ -28,7 +28,7 @@ const Footer: React.FC<Props> = ({
 }) => (
   <>
     <Hr spacer />
-    <Border className="Footer" weight="thick">
+    <Frame className="Footer" weight="thick">
       <div className="Footer-section">
         <A href="sign-up" frontend>
           <Span bold>Sign up</Span>
@@ -65,7 +65,7 @@ const Footer: React.FC<Props> = ({
         </Fade>
         <LanguageItem lang={currentLanguageSlug} onClick={switchLanguagesModal} href={currentPathName} />
       </div>
-    </Border>
+    </Frame>
   </>
 );
 

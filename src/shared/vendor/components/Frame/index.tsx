@@ -1,23 +1,25 @@
 import React, { HTMLProps } from 'react';
 
-import './Border.less';
+import './Frame.less';
 
-export type BorderPadding = 'small' | 'normal' | 'big';
+export type FramePadding = 'none' | 'small' | 'normal' | 'big';
 
 interface Props extends HTMLProps<HTMLDivElement> {
   id?: string;
   className?: string;
   children: React.ReactNode | React.ReactNode[];
-  weight?: 'thick' | 'thin';
-  padding?: BorderPadding;
+  weight?: 'none' | 'thick' | 'thin';
+  shadow?: boolean;
+  padding?: FramePadding;
   grow?: boolean;
 }
 
-export const Border: React.FC<Props> = ({
+export const Frame: React.FC<Props> = ({
   id,
   children,
   weight = 'thin',
   padding = 'normal',
+  shadow = true,
   grow,
   className,
   ...props
@@ -26,10 +28,11 @@ export const Border: React.FC<Props> = ({
     id={id}
     className={
       (className ? className + ' ' : '') +
-      'Border' +
-      (padding ? ' Border-padding--' + padding : '') +
-      (' Border--' + weight) +
-      (grow ? ' Border--grow' : '')
+      'Frame' +
+      (padding ? ' Frame-padding--' + padding : '') +
+      (' Frame--' + weight) +
+      (grow ? ' Frame--grow' : '') +
+      (shadow ? ' Frame--shadow' : '')
     }
     {...props}
   >

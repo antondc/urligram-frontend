@@ -1,12 +1,17 @@
 @import '../../../css/imports.less';
 
-@c: .Border;
+@c: .Frame;
 
 @{c} {
   display: inline-block;
   background: @c-background;
   border-color: @c-base;
   transition: box-shadow @td-fast @ease-custom, border @td-fast @ease-custom, color @td-fast @ease-custom;
+  box-shadow: none;
+
+  &-padding--none {
+    padding: 0;
+  }
 
   &-padding--small {
     padding: 10px;
@@ -24,15 +29,26 @@
     width: 100%;
   }
 
+  &--none {
+    border: 0;
+    box-shadow: none;
+  }
+
   &--thin {
     border: 2px solid @c-base;
-    box-shadow: 4px 4px 0 0 @c-base;
+
+    &@{c}--shadow {
+      box-shadow: 4px 4px 0 0 @c-base;
+    }
     // border-radius: 4px;
   }
 
   &--thick {
     border: 3px solid @c-base;
-    box-shadow: 6px 6px 0 0 @c-base;
+
+    &@{c}--shadow {
+      box-shadow: 6px 6px 0 0 @c-base;
+    }
     // border-radius: 4px;
   }
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Border, SkeletonItem } from 'Vendor/components';
+import { Frame, SkeletonItem } from 'Vendor/components';
 
 import './BookmarkRowSkeleton.less';
 
@@ -9,7 +9,7 @@ interface BookmarkRowSkeleton {
 }
 
 export const BookmarkRowSkeleton: React.FC<BookmarkRowSkeleton> = ({ id }) => (
-  <Border grow className="BookmarkRowSkeleton" data-test-id="BookmarkRowSkeleton" key={id}>
+  <Frame grow className="BookmarkRowSkeleton" data-test-id="BookmarkRowSkeleton" key={id}>
     <div className="BookmarkRowSkeleton-left">
       <div className="BookmarkRowSkeleton-icons">
         <SkeletonItem className="BookmarkRowSkeleton-icon" />
@@ -26,7 +26,7 @@ export const BookmarkRowSkeleton: React.FC<BookmarkRowSkeleton> = ({ id }) => (
       <SkeletonItem className="BookmarkRowSkeleton-vote" />
       <SkeletonItem className="BookmarkRowSkeleton-stat" />
     </div>
-  </Border>
+  </Frame>
 );
 
 export default BookmarkRowSkeleton;

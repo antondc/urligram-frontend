@@ -1,14 +1,14 @@
 import React from 'react';
 
 import BookmarkRow from 'Components/BookmarkRow';
+import { BookmarkRowSkeletonGroup } from 'Components/BookmarkRow/BookmarkRowSkeletonGroup';
 import Main from 'Components/Main';
+import Pagination from 'Components/Pagination';
 import Sidebar from 'Components/Sidebar';
 import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListUsers from 'Components/SidebarListUsers';
 import { UserState } from 'Modules/Users/users.types';
-import { Border, Flex, H4, Hr, Span } from 'Vendor/components';
-import { BookmarkRowSkeletonGroup } from '../../components/BookmarkRow/BookmarkRowSkeletonGroup';
-import Pagination from '../../components/Pagination';
+import { Flex, Frame, H4, Hr, Span } from 'Vendor/components';
 
 import './Home.less';
 
@@ -41,7 +41,7 @@ export const Home: React.FC<Props> = ({
   <div className="Home">
     <Flex horizontal="between" vertical="top">
       <Main>
-        <Border className="Home-links" grow>
+        <Frame className="Home-links" grow>
           <Flex horizontal="between" vertical="bottom">
             <H4>Recommended bookmarks</H4>
           </Flex>
@@ -62,7 +62,7 @@ export const Home: React.FC<Props> = ({
           <Flex horizontal="center">
             <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
           </Flex>
-        </Border>
+        </Frame>
       </Main>
       <Sidebar>
         <SidebarBlock

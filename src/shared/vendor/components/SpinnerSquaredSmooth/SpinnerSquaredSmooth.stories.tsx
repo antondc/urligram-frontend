@@ -1,8 +1,8 @@
 import React from 'react';
 
 import { boolean, select, withKnobs } from '@storybook/addon-knobs';
-import { Border } from '../Border';
 import { Fade } from '../Fade';
+import { Frame } from '../Frame';
 import { Span } from '../Span';
 import { SpinnerSquaredSmooth, SpinnerSquaredSmoothSize, SpinnerSquaredSmoothSpeed } from '.';
 
@@ -21,7 +21,7 @@ const knobs = {
 export const Default: React.ReactNode = () => (
   <div>
     <div style={{ width: '300px', position: 'relative', left: '50px' }}>
-      <Border>
+      <Frame>
         <Fade mounted={knobs.mounted()} position="absolute">
           <SpinnerSquaredSmooth size={knobs.size()} speed="normal" />
         </Fade>
@@ -29,7 +29,7 @@ export const Default: React.ReactNode = () => (
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maxime eos necessitatibus fuga inventore eaque
           dolorum aliquam. Eius a consectetur ut, assumenda tenetur odio rem, molestiae in quos, excepturi nisi facere.
         </Span>
-      </Border>
+      </Frame>
     </div>
   </div>
 );

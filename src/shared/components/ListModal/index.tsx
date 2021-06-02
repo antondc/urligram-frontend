@@ -6,7 +6,7 @@ import BaseModal from 'Components/BaseModal';
 import ListForm from 'Components/ListForm';
 import { switchListModal } from 'Modules/Ui/actions/switchListModal';
 import { selectUiListModal } from 'Modules/Ui/selectors/selectUiListModal';
-import { Border, Flex, H3, Hr } from 'Vendor/components';
+import { Flex, Frame, H3, Hr } from 'Vendor/components';
 
 import './ListModal.less';
 
@@ -23,7 +23,7 @@ const ListModal: React.FC = () => {
 
   return (
     <BaseModal>
-      <Border className="ListModal" grow>
+      <Frame className="ListModal" grow>
         <Cross className="ListModal-cross" onClick={closeModal} />
         <Flex horizontal="center">
           <H3>{!!isUpdate ? 'Update List' : 'Create List'}</H3>
@@ -31,7 +31,7 @@ const ListModal: React.FC = () => {
         <Hr spacer size="small" />
         <ListForm closeModal={closeModal} setModalLocked={setModalLocked} />
         <Hr spacer size="big" />
-      </Border>
+      </Frame>
     </BaseModal>
   );
 };

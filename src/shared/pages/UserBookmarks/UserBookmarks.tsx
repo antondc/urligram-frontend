@@ -13,7 +13,7 @@ import { BookmarksByKey } from 'Modules/Bookmarks/bookmarks.types';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
-import { Border, FadeInOut, Flex, H4, Hr, Select, SelectValue, SortBy } from 'Vendor/components';
+import { FadeInOut, Flex, Frame, H4, Hr, Select, SelectValue, SortBy } from 'Vendor/components';
 
 import './UserBookmarks.less';
 
@@ -67,48 +67,53 @@ export const UserBookmarks: React.FC<Props> = ({
   <div className="UserBookmarks">
     <Flex horizontal="between" vertical="top">
       <Main>
-        <Flex horizontal="between" noWrap>
-          <Select
-            className="Links-select"
-            label="Select tags"
-            value={currentQueryParamFilterTags}
-            defaultOptions={allTags.map((item) => ({ label: item.name, value: item.name }))}
-            options={[
-              ...tagsSearchFormatted,
-              ...allTags.map((item) => ({ label: item.name, value: item.name })),
-            ].filter((v, i, a) => a.findIndex((t) => t.value === v.value) === i)}
-            onInputChange={onInputChange}
-            onChange={onChange}
-            maxItems={4}
-          />
-          <SortBy
-            options={[
-              { label: 'Rating', field: 'vote' },
-              { label: 'Bookmarked', field: 'timesbookmarked' },
-              { label: 'Created', field: 'createdAt' },
-            ]}
-            href={url}
-            currentSort={sort}
-          />
-        </Flex>
-        <Hr spacer size="small" />
-        <Border grow>
-          <H4>
-            Bookmarks of{' '}
-            <A frontend href={`/users/${userId}`}>
-              @{user?.name}
-            </A>
-          </H4>
-          <Hr spacer />
+        <Frame grow padding="none">
+          <Frame grow padding="small" shadow={false} weight="none">
+            <H4>
+              Bookmarks of{' '}
+              <A frontend href={`/users/${userId}`}>
+                @{user?.name}
+              </A>
+            </H4>
+          </Frame>
+          <Hr size="nano" />
+          <Frame grow padding="none" shadow={false} weight="none">
+            <Flex horizontal="between" noWrap>
+              <Select
+                className="UserBookmarks-select"
+                label="Select tags"
+                value={currentQueryParamFilterTags}
+                defaultOptions={allTags.map((item) => ({ label: item.name, value: item.name }))}
+                options={[
+                  ...tagsSearchFormatted,
+                  ...allTags.map((item) => ({ label: item.name, value: item.name })),
+                ].filter((v, i, a) => a.findIndex((t) => t.value === v.value) === i)}
+                onInputChange={onInputChange}
+                onChange={onChange}
+                maxItems={4}
+              />
+              <SortBy
+                options={[
+                  { label: 'Rating', field: 'vote' },
+                  { label: 'Bookmarked', field: 'timesbookmarked' },
+                  { label: 'Created', field: 'createdAt' },
+                ]}
+                href={url}
+                currentSort={sort}
+              />
+            </Flex>
+          </Frame>
+          <Hr size="nano" />
+
           {bookmarksLoading ? (
             <BookmarkRowSkeletonGroup length={bookmarksIds?.length || DEFAULT_PAGE_SIZE} />
           ) : (
-            bookmarksIds?.map((id, index) => (
+            bookmarksIds?.map((id) => (
               <FadeInOut valueToUpdate={bookmarksByKey[id]?.deleting} appear key={id}>
                 {!bookmarksByKey[id]?.deleting && (
                   <>
-                    {!!index && <Hr spacer size="small" />}
                     <BookmarkRow id={id} />
+                    <Hr size="nano" />
                   </>
                 )}
               </FadeInOut>
@@ -118,7 +123,7 @@ export const UserBookmarks: React.FC<Props> = ({
           <Flex horizontal="center">
             <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
           </Flex>
-        </Border>
+        </Frame>
       </Main>
       <Sidebar>
         <SidebarBlock title="Following Users" href={`users/${userId}/following`} loading={followingUsersLoading}>

@@ -11,7 +11,7 @@ import SidebarListTags from 'Components/SidebarListTags';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
-import { Border, FadeInOut, Flex, H4, Hr, SortBy, Span } from 'Vendor/components';
+import { FadeInOut, Flex, Frame, H4, Hr, SortBy, Span } from 'Vendor/components';
 
 import './UserLists.less';
 
@@ -62,7 +62,7 @@ export const UserLists: React.FC<Props> = ({
           />
         </Flex>
         <Hr spacer size="small" />
-        <Border grow>
+        <Frame grow>
           <H4>
             Lists of <A href={`/users/${userId}`}>@{user?.name}</A>
           </H4>
@@ -83,7 +83,7 @@ export const UserLists: React.FC<Props> = ({
           <Flex horizontal="center">
             <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
           </Flex>
-        </Border>
+        </Frame>
       </Main>
       <Sidebar>
         <SidebarBlock title="My Tags" href={`users/${userId}/tags`} loading={userMostUsedTagsLoading}>

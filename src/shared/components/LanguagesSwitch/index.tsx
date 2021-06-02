@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 import LanguageItem from 'Components/LanguageItem';
-import { Border } from 'Vendor/components';
 import { switchCurrentLanguage } from 'Modules/Languages/actions/switchCurrentLanguage';
 import { LanguageState } from 'Modules/Languages/languages.types';
 import { selectCurrentLanguage } from 'Modules/Languages/selectors/selectCurrentLanguage';
@@ -12,6 +11,7 @@ import { selectCurrentPathname } from 'Modules/Routes/selectors/selectCurrentPat
 import { selectCurrentRouteParamLanguage } from 'Modules/Routes/selectors/selectCurrentRouteParamLanguage';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import { switchLanguagesModal } from 'Modules/Ui/actions/switchLanguagesModal';
+import { Frame } from 'Vendor/components';
 
 import './LanguagesSwitch.less';
 
@@ -46,7 +46,7 @@ const LanguagesSwitch: React.FC<Props> = ({
   const languagesWithoutCurrent = languagesWithLink.filter((item) => currentLanguage.slug !== item.slug);
 
   return (
-    <Border className="LanguagesSwitch" onClick={switchLanguagesModal}>
+    <Frame className="LanguagesSwitch" onClick={switchLanguagesModal}>
       {languagesWithoutCurrent.map((item) => (
         <LanguageItem
           key={item.id}
@@ -63,7 +63,7 @@ const LanguagesSwitch: React.FC<Props> = ({
         isCurrent
         onClick={() => switchCurrentLanguage(currentLanguage.slug)}
       />
-    </Border>
+    </Frame>
   );
 };
 

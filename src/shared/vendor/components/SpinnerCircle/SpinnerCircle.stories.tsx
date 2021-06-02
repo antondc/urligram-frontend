@@ -1,8 +1,8 @@
 import React from 'react';
 
 import { boolean, select, withKnobs } from '@storybook/addon-knobs';
-import { Border } from '../Border';
 import { Fade, FadeSpeed } from '../Fade';
+import { Frame } from '../Frame';
 import { Hr } from '../Hr';
 import { Span } from '../Span';
 import { Vote } from '../Vote';
@@ -27,12 +27,12 @@ export const Default: React.FC = () => (
       <Fade mounted={knobs.mounted()} speed={knobs.speed()} position="absolute">
         <SpinnerCircle size={knobs.size()} />
       </Fade>
-      <Border>
+      <Frame>
         <Span bold>
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maxime eos necessitatibus fuga inventore eaque
           dolorum aliquam. Eius a consectetur ut, assumenda tenetur odio rem, molestiae in quos, excepturi nisi facere.
         </Span>
-      </Border>
+      </Frame>
     </div>
     <Hr spacer />
     <Hr spacer />

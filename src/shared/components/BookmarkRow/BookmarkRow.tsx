@@ -4,7 +4,7 @@ import A from 'Components/A';
 import BookmarkActions from 'Components/BookmarkActions';
 import BookmarkLists from 'Components/BookmarkLists';
 import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
-import { Border, Edit, Flex, Private, Span, Tag, Vote } from 'Vendor/components';
+import { Edit, Flex, Private, Span, Tag, Vote } from 'Vendor/components';
 
 import './BookmarkRow.less';
 
@@ -25,8 +25,7 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
   recentlyCreated,
   onEdit,
 }) => (
-  <Border
-    grow
+  <div
     className={'BookmarkRow' + (recentlyCreated ? ' BookmarkRow-recentlyCreated' : '')}
     data-test-id="BookmarkRow"
     key={bookmark?.id}
@@ -76,6 +75,7 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
           changeVote={onVote}
           loading={bookmark?.statistics?.loading}
         />
+        <BookmarkActions className="BookmarkRow-actionButton" linkId={bookmark?.linkId} bookmarkId={bookmark?.id} />
       </Flex>
       <div className="BookmarkRow-stats">
         <Span size="micro" className="BookmarkRow-stat BookmarkRow-statVote">
@@ -92,8 +92,7 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
         </Span>
       </div>
     </div>
-    <BookmarkActions className="BookmarkRow-actionButton" linkId={bookmark?.linkId} bookmarkId={bookmark?.id} />
-  </Border>
+  </div>
 );
 
 export default BookmarkRow;

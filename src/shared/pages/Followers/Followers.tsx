@@ -10,7 +10,7 @@ import { UserRowSkeletonGroup } from 'Components/UserRow/UserRowSkeletonGroup';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
-import { Border, Flex, H4, Hr, SortBy, Span } from 'Vendor/components';
+import { Flex, Frame, H4, Hr, SortBy, Span } from 'Vendor/components';
 
 import './Followers.less';
 
@@ -61,7 +61,7 @@ export const Followers: React.FC<Props> = ({
           />
         </Flex>
         <Hr spacer size="small" />
-        <Border className="Followers-tags" grow>
+        <Frame className="Followers-tags" grow>
           <H4>Users following @{user?.name}</H4>
           <Hr spacer />
           {usersLoading ? (
@@ -78,7 +78,7 @@ export const Followers: React.FC<Props> = ({
           <Flex horizontal="center">
             <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
           </Flex>
-        </Border>
+        </Frame>
       </Main>
       <Sidebar>
         <SidebarBlock

@@ -4,10 +4,10 @@ import A from 'Components/A';
 import { RenderInPortal } from 'Components/Portal';
 import { ListState } from 'Modules/Lists/lists.types';
 import {
-  Border,
   Button,
   Fade,
   FadeInOut,
+  Frame,
   Hr,
   Input,
   List,
@@ -66,7 +66,7 @@ export const BookmarkLists: React.FC<Props> = ({
     <RenderInPortal elementId={`BookmarkLists-portal--${bookmarkId}`}>
       <Fade mounted={mounted}>
         <PopOver elementId={`BookmarkLists-${bookmarkId}`} placement="right-start">
-          <Border onMouseLeave={onListLeave} onMouseEnter={onListEnter}>
+          <Frame onMouseLeave={onListLeave} onMouseEnter={onListEnter}>
             <ul className="BookmarkLists-lists">
               {lists?.map((item) => {
                 const isBookmarkInList = !!item?.bookmarksIds?.includes(bookmarkId);
@@ -143,7 +143,7 @@ export const BookmarkLists: React.FC<Props> = ({
                 />
               )}
             </FadeInOut>
-          </Border>
+          </Frame>
         </PopOver>
       </Fade>
     </RenderInPortal>

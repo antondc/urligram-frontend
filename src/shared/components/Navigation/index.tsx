@@ -1,7 +1,7 @@
 import React from 'react';
 
 import A from 'Components/A';
-import { Border, Span } from 'Vendor/components';
+import { Frame, Span } from 'Vendor/components';
 
 import './Navigation.less';
 
@@ -10,7 +10,7 @@ interface Props {
 }
 
 const Navigation: React.FC<Props> = ({ className }) => (
-  <Border className={(className ? className + ' ' : '') + 'Navigation'}>
+  <Frame className={(className ? className + ' ' : '') + 'Navigation'}>
     <A className="Navigation-page" href="" styled frontend>
       <Span bold>Page</Span>
     </A>
@@ -22,7 +22,7 @@ const Navigation: React.FC<Props> = ({ className }) => (
     <A className="Navigation-item" href="" styled frontend>
       <Span bold>Item</Span>
     </A>
-  </Border>
+  </Frame>
 );
 
 export default Navigation;

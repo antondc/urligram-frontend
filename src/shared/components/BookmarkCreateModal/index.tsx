@@ -5,7 +5,7 @@ import Cross from 'Assets/svg/cross.svg';
 import BaseModal from 'Components/BaseModal';
 import BookmarkCreateForm from 'Components/BookmarkCreateForm';
 import { switchBookmarkCreateModal } from 'Modules/Ui/actions/switchBookmarkCreateModal';
-import { Border, Flex, H3, Hr } from 'Vendor/components';
+import { Flex, Frame, H3, Hr } from 'Vendor/components';
 
 import './BookmarkCreateModal.less';
 
@@ -20,7 +20,7 @@ const BookmarkCreateModal: React.FC = () => {
 
   return (
     <BaseModal onClick={closeModal}>
-      <Border className="BookmarkCreateModal" grow>
+      <Frame className="BookmarkCreateModal" grow>
         <Cross className="BookmarkCreateModal-cross" onClick={closeModal} />
         <Flex horizontal="center">
           <H3>Add bookmark</H3>
@@ -28,7 +28,7 @@ const BookmarkCreateModal: React.FC = () => {
         <Hr spacer size="small" />
         <BookmarkCreateForm closeModal={closeModal} setModalLocked={setModalLocked} />
         <Hr spacer size="big" />
-      </Border>
+      </Frame>
     </BaseModal>
   );
 };

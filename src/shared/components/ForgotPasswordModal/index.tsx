@@ -6,7 +6,7 @@ import BaseModal from 'Components/BaseModal';
 import { switchForgotPasswordModal } from 'Modules/Ui/actions/switchForgotPasswordModal';
 import { Routes } from 'Router/routes';
 import history from 'Services/History';
-import { Border, Flex, H4, Hr, P, Span } from 'Vendor/components';
+import { Flex, Frame, H4, Hr, P, Span } from 'Vendor/components';
 
 import './ForgotPasswordModal.less';
 
@@ -20,7 +20,7 @@ const ForgotPasswordModal: React.FC = () => {
 
   return (
     <BaseModal onClick={closeForgotPasswordModal}>
-      <Border className="ForgotPasswordModal" grow>
+      <Frame className="ForgotPasswordModal" grow>
         <Cross className="ForgotPasswordModal-cross" onClick={closeForgotPasswordModal} />
         <Flex horizontal="center">
           <H4>We received your request</H4>
@@ -37,7 +37,7 @@ const ForgotPasswordModal: React.FC = () => {
             </Span>
           </P>
         </Flex>
-      </Border>
+      </Frame>
     </BaseModal>
   );
 };

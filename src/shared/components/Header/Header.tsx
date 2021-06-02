@@ -5,7 +5,7 @@ import User from 'Assets/svg/user.svg';
 import A from 'Components/A';
 import { GlossaryState } from 'Modules/Languages/languages.types';
 import { SessionState } from 'Modules/Session/session.types';
-import { Border, H3, SpinnerLoader } from 'Vendor/components';
+import { Frame, H3, SpinnerLoader } from 'Vendor/components';
 
 import './Header.less';
 
@@ -29,7 +29,7 @@ export const Header: React.FC<Props> = ({
   session,
 }) => (
   <header>
-    <Border className="Header" weight="thick">
+    <Frame className="Header" weight="thick">
       <A className="Header-brand" href={'/'} frontend>
         <Logo className={'Header-logo' + (loading ? ' Header-logo--loading' : '')} />
         <H3 className="Header-title">Linking</H3>
@@ -69,6 +69,6 @@ export const Header: React.FC<Props> = ({
         )}
         {sessionLoading && <SpinnerLoader className="Header-loader" />}
       </div>
-    </Border>
+    </Frame>
   </header>
 );

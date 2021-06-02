@@ -3,7 +3,7 @@ import { animateScroll as scroll } from 'react-scroll';
 
 import history from 'Services/History';
 import { URLWrapper } from 'Services/URLWrapper';
-import { A, Border, Fade, Hr } from 'Vendor/components';
+import { A, Fade, Frame, Hr } from 'Vendor/components';
 import { calculatePages } from './calculatePages';
 
 import './Pagination.less';
@@ -44,9 +44,8 @@ const Pagination: React.FC<Props> = ({
 
   return (
     <Fade mounted={mounted} speed="slow">
-      <Hr size="big" spacer />
       <div className={'Pagination ' + (grow ? 'Pagination-grow' : '')}>
-        <Border className="Pagination-border" padding="small" grow={grow}>
+        <Frame className="Pagination-border" padding="small" grow={grow} weight="none">
           {pages.map((item, index) =>
             !!item ? (
               <A
@@ -66,7 +65,7 @@ const Pagination: React.FC<Props> = ({
               </Fragment>
             )
           )}
-        </Border>
+        </Frame>
       </div>
     </Fade>
   );

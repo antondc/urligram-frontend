@@ -3,7 +3,7 @@ import React from 'react';
 import A from 'Components/A';
 import UserFollowButton from 'Components/UserFollowButton';
 import { UserState } from 'Modules/Users/users.types';
-import { Border, Span, Tag } from 'Vendor/components';
+import { Frame, Span, Tag } from 'Vendor/components';
 
 import './UserRow.less';
 
@@ -27,7 +27,7 @@ export const UserRow: React.FC<UserRow> = ({
   ammountBookmarks,
   sinceTranslation,
 }) => (
-  <Border grow className="UserRow" data-test-id="UserRow" key={'UserRow-' + id}>
+  <Frame grow className="UserRow" data-test-id="UserRow" key={'UserRow-' + id}>
     <div className="UserRow-left">
       <A href={`users/${id}`} styled frontend>
         <Span bold size="small" className="UserRow-title">
@@ -85,7 +85,7 @@ export const UserRow: React.FC<UserRow> = ({
       </A>
     </div>
     <UserFollowButton className="UserRow-followButton" userId={id} />
-  </Border>
+  </Frame>
 );
 
 export default UserRow;

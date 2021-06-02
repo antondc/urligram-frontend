@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import A from 'Components/A';
-import { Border, FadeInOut, H4, Hr } from 'Vendor/components';
+import { FadeInOut, Frame, H4, Hr } from 'Vendor/components';
 
 import './SidebarBlock.less';
 
@@ -29,7 +29,7 @@ const SidebarBlock: React.FC<Props> = ({ title, href, loading, children }) => {
   });
 
   return (
-    <Border grow>
+    <Frame grow>
       {!!href ? (
         <A href={href} styled={!!href} frontend>
           <H4>{title}</H4>
@@ -42,7 +42,7 @@ const SidebarBlock: React.FC<Props> = ({ title, href, loading, children }) => {
       <FadeInOut valueToUpdate={computedLoadingState} appear>
         {childrenWithProps}
       </FadeInOut>
-    </Border>
+    </Frame>
   );
 };
 

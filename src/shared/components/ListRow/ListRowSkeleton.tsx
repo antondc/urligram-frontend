@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Border, SkeletonItem } from 'Vendor/components';
+import { Frame, SkeletonItem } from 'Vendor/components';
 
 import './ListRowSkeleton.less';
 
@@ -9,7 +9,7 @@ interface ListRowSkeleton {
 }
 
 export const ListRowSkeleton: React.FC<ListRowSkeleton> = ({ id }) => (
-  <Border grow className="ListRowSkeleton" data-test-id="ListRowSkeleton" key={id}>
+  <Frame grow className="ListRowSkeleton" data-test-id="ListRowSkeleton" key={id}>
     <div className="ListRowSkeleton-left">
       <div className="ListRowSkeleton-icons">
         <SkeletonItem className="ListRowSkeleton-icon" />
@@ -26,7 +26,7 @@ export const ListRowSkeleton: React.FC<ListRowSkeleton> = ({ id }) => (
       <SkeletonItem className="ListRowSkeleton-vote" />
       <SkeletonItem className="ListRowSkeleton-stat" />
     </div>
-  </Border>
+  </Frame>
 );
 
 export default ListRowSkeleton;

@@ -9,7 +9,7 @@ import UserRow from 'Components/UserRow';
 import { UserRowSkeletonGroup } from 'Components/UserRow/UserRowSkeletonGroup';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
-import { Border, Flex, H4, Hr, SortBy, Span } from 'Vendor/components';
+import { Flex, Frame, H4, Hr, SortBy, Span } from 'Vendor/components';
 
 import './Users.less';
 
@@ -48,7 +48,7 @@ export const Users: React.FC<Props> = ({
           <SortBy options={[{ label: 'Created', field: 'createdAt' }]} href={url} currentSort={sort} />
         </Flex>
         <Hr spacer size="small" />
-        <Border className="Users-users" grow>
+        <Frame className="Users-users" grow>
           <H4>Users</H4>
           <Hr spacer />
           {usersLoading ? (
@@ -65,7 +65,7 @@ export const Users: React.FC<Props> = ({
           <Flex horizontal="center">
             <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
           </Flex>
-        </Border>
+        </Frame>
       </Main>
       <Sidebar>
         <SidebarBlock

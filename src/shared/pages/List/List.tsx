@@ -2,6 +2,7 @@ import React from 'react';
 
 import BookmarkRow from 'Components/BookmarkRow';
 import { BookmarkRowSkeletonGroup } from 'Components/BookmarkRow/BookmarkRowSkeletonGroup';
+import ListFollowButton from 'Components/ListFollowButton';
 import Main from 'Components/Main';
 import Pagination from 'Components/Pagination';
 import Sidebar from 'Components/Sidebar';
@@ -12,8 +13,7 @@ import { ListState } from 'Modules/Lists/lists.types';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
-import { Border, Flex, H4, Hr, SortBy, Span } from 'Vendor/components';
-import ListFollowButton from '../../components/ListFollowButton';
+import { Flex, Frame, H4, Hr, SortBy, Span } from 'Vendor/components';
 
 import './List.less';
 
@@ -62,7 +62,7 @@ export const List: React.FC<Props> = ({
           />
         </Flex>
         <Hr spacer size="small" />
-        <Border grow>
+        <Frame grow>
           <Flex horizontal="between" noWrap>
             <H4>Bookmarks in {list?.name}</H4>
             <Flex growHorizontal={false} vertical="top">
@@ -85,7 +85,7 @@ export const List: React.FC<Props> = ({
           <Flex horizontal="center">
             <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
           </Flex>
-        </Border>
+        </Frame>
       </Main>
       <Sidebar>
         <SidebarBlock title="People in this list" loading={usersInThisListLoading}>

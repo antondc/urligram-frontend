@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { select, withKnobs } from '@storybook/addon-knobs';
-import { Border } from '../Border';
+import { Frame } from '../Frame';
 import { Hr } from '../Hr';
 import { Tooltip } from '.';
 
@@ -17,9 +17,9 @@ const knobs = {
 
 export const Default: React.FC = () => (
   <div style={{ padding: '200px', border: '1px solid' }}>
-    <Border id="MyElement1">
+    <Frame id="MyElement1">
       <span>Element with tooltip delayed</span>
-    </Border>
+    </Frame>
 
     <Tooltip
       placement={knobs.placement()}
@@ -27,9 +27,9 @@ export const Default: React.FC = () => (
       content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae, rem. Quo eos error non totam sint obcaecati voluptatibus possimus eaque fuga esse minus provident, eligendi aliquam unde quisquam laborum reiciendis."
     />
     <Hr spacer />
-    <Border id="MyElement2">
+    <Frame id="MyElement2">
       <span>Element with tooltip not delayed</span>
-    </Border>
+    </Frame>
 
     <Tooltip
       placement={knobs.placement()}

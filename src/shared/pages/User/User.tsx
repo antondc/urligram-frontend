@@ -10,7 +10,7 @@ import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListUsers from 'Components/SidebarListUsers';
 import UserForm from 'Components/UserForm';
 import { UserState } from 'Modules/Users/users.types';
-import { AIcon, Border, Flex, H4, Hr, Span, Tag } from 'Vendor/components';
+import { AIcon, Flex, Frame, H4, Hr, Span, Tag } from 'Vendor/components';
 
 import './User.less';
 
@@ -44,13 +44,13 @@ export const User: React.FC<Props> = ({
       <Main>
         {userIdIsSessionId && (
           <>
-            <Border grow>
+            <Frame grow>
               <UserForm />
-            </Border>
+            </Frame>
             <Hr spacer />
           </>
         )}
-        <Border grow>
+        <Frame grow>
           <Flex horizontal="between">
             <div>
               <Span bold>Name:</Span>
@@ -124,9 +124,9 @@ export const User: React.FC<Props> = ({
               </A>
             ))}
           </Flex>
-        </Border>
+        </Frame>
         <Hr spacer />
-        <Border grow>
+        <Frame grow>
           <Flex horizontal="between" vertical="bottom">
             <H4>User bookmarks</H4>
             <A href={`users/${userId}/bookmarks`} frontend>
@@ -145,7 +145,7 @@ export const User: React.FC<Props> = ({
             ))
           )}
           {!bookmarksLoading && !bookmarksIds?.length && <Empty message="ⵁ This user has no bookmarks yet" />}
-        </Border>
+        </Frame>
       </Main>
       <Sidebar>
         <SidebarBlock title="Following Users" href={`users/${userId}/following`} loading={followingUsersLoading}>

@@ -7,7 +7,7 @@ import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLo
 import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUserId';
 import { switchBookmarkCreateModal } from 'Modules/Ui/actions/switchBookmarkCreateModal';
 import { switchListModal } from 'Modules/Ui/actions/switchListModal';
-import { Border, Span } from 'Vendor/components';
+import { Frame, Span } from 'Vendor/components';
 
 import './SidebarLeft.less';
 
@@ -28,7 +28,7 @@ export const SidebarLeft: React.FC = () => {
   };
 
   return (
-    <Border className="SidebarLeft" data-test-id="SidebarLeft">
+    <Frame className="SidebarLeft" data-test-id="SidebarLeft">
       {isLoggedIn && (
         <ul>
           <li className="SidebarLeft-item">
@@ -133,7 +133,7 @@ export const SidebarLeft: React.FC = () => {
           </li>
         </ul>
       )}
-    </Border>
+    </Frame>
   );
 };
 

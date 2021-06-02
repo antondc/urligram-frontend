@@ -5,12 +5,12 @@ import { BookmarkRowSkeletonGroup } from 'Components/BookmarkRow/BookmarkRowSkel
 import Main from 'Components/Main';
 import Pagination from 'Components/Pagination';
 import Sidebar from 'Components/Sidebar';
+import SidebarBlock from 'Components/SidebarBlock';
+import SidebarListTags from 'Components/SidebarListTags';
 import { ListState } from 'Modules/Lists/lists.types';
 import { TagState } from 'Modules/Tags/tags.types';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
-import { Border, Flex, Hr, Select, SelectValue, SortBy, Span } from 'Vendor/components';
-import SidebarBlock from '../../components/SidebarBlock';
-import SidebarListTags from '../../components/SidebarListTags';
+import { Flex, Frame, Hr, Select, SelectValue, SortBy, Span } from 'Vendor/components';
 
 import './Bookmarks.less';
 
@@ -81,7 +81,7 @@ export const Bookmarks: React.FC<Props> = ({
           />
         </Flex>
         <Hr spacer size="small" />
-        <Border grow>
+        <Frame grow>
           {loading ? (
             <BookmarkRowSkeletonGroup length={bookmarksIds?.length || DEFAULT_PAGE_SIZE} />
           ) : (
@@ -96,7 +96,7 @@ export const Bookmarks: React.FC<Props> = ({
           <Flex horizontal="center">
             <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
           </Flex>
-        </Border>
+        </Frame>
       </Main>
       <Sidebar>
         <SidebarBlock title="Most Followed Tags" loading={mostUsedTagsLoading}>

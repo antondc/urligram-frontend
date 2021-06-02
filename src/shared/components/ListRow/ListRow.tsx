@@ -3,7 +3,7 @@ import React from 'react';
 import A from 'Components/A';
 import { ListState } from 'Modules/Lists/lists.types';
 import { SessionState } from 'Modules/Session/session.types';
-import { Bookmark, Border, Flex, Space, Span, Tag, User } from 'Vendor/components';
+import { Bookmark, Flex, Frame, Space, Span, Tag, User } from 'Vendor/components';
 import ListFollowButton from '../ListFollowButton';
 
 import './ListRow.less';
@@ -13,7 +13,7 @@ interface Props extends Partial<ListState> {
 }
 
 export const ListRow: React.FC<Props> = ({ id, name, tags, bookmarksIds, members, description }) => (
-  <Border grow className="ListRow" data-test-id="ListRow" key={id}>
+  <Frame grow className="ListRow" data-test-id="ListRow" key={id}>
     <div className="ListRow-left">
       <Span size="normal" bold className="ListRow-title">
         <A href={`/lists/${id}`} frontend styled={false}>
@@ -53,7 +53,7 @@ export const ListRow: React.FC<Props> = ({ id, name, tags, bookmarksIds, members
         </Span>
       </Flex>
     </div>
-  </Border>
+  </Frame>
 );
 
 export default ListRow;

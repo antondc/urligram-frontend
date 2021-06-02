@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import { boolean, withKnobs } from '@storybook/addon-knobs';
-import { Border } from '../Border';
+import { Frame } from '../Frame';
 import { H1 } from '../H1';
 import { Hr } from '../Hr';
 import { Radio } from '.';
@@ -26,7 +26,7 @@ export const Empty: React.FC = () => {
       <Hr spacer size="micro" />
       <Hr size="micro" />
       <Hr spacer />
-      <Border>
+      <Frame>
         <Radio
           value={value}
           name="gender"
@@ -50,7 +50,7 @@ export const Empty: React.FC = () => {
           grow={knobs.grow()}
           inline={knobs.inline()}
         />
-      </Border>
+      </Frame>
     </>
   );
 };

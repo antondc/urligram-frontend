@@ -8,7 +8,7 @@ import { SidebarListTagsSkeleton } from 'Components/SidebarListTags/SidebarListT
 import SidebarListUsers from 'Components/SidebarListUsers';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
-import { Border, Flex, H4, Hr, SortBy, Space, Tag } from 'Vendor/components';
+import { Flex, Frame, H4, Hr, SortBy, Space, Tag } from 'Vendor/components';
 
 import './Tags.less';
 
@@ -48,7 +48,7 @@ export const Tags: React.FC<Props> = ({
         </Flex>
         <Hr spacer size="small" />
 
-        <Border grow>
+        <Frame grow>
           <H4>All Tags</H4>
 
           <Hr spacer />
@@ -73,7 +73,7 @@ export const Tags: React.FC<Props> = ({
               ))
             )}
           </Flex>
-        </Border>
+        </Frame>
       </Main>
       <Sidebar>
         <SidebarBlock

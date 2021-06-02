@@ -4,7 +4,7 @@ import Cross from 'Assets/svg/cross.svg';
 import User from 'Assets/svg/user.svg';
 import A from 'Components/A';
 import { SessionState } from 'Modules/Session/session.types';
-import { Border, Hr, Span } from 'Vendor/components';
+import { Frame, Hr, Span } from 'Vendor/components';
 
 import './UserModal.less';
 
@@ -23,7 +23,7 @@ export const UserModal: React.FC<Props> = ({
   switchUserModal,
   switchMessageModal,
 }) => (
-  <Border className="UserModal" onClick={switchUserModal} onMouseLeave={switchUserModal}>
+  <Frame className="UserModal" onClick={switchUserModal} onMouseLeave={switchUserModal}>
     {sessionId ? (
       <img className="UserModal-userLogo" src={session?.image?.original} />
     ) : (
@@ -65,5 +65,5 @@ export const UserModal: React.FC<Props> = ({
         <Span bold>Log out</Span>
       </li>
     </ul>
-  </Border>
+  </Frame>
 );

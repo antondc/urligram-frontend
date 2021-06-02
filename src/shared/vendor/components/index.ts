@@ -1,5 +1,5 @@
 export { A } from './A';
-export { Border } from './Border';
+export { Frame } from './Frame';
 export { Button } from './Button';
 export { Checkbox } from './Checkbox';
 export { DatePicker } from './DatePicker';
