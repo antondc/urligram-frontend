@@ -19,16 +19,11 @@ const Subheader: React.FC = () => {
     const asyncFunction = async () => {
       try {
         const httpClient = new HttpClient({ credentials: false });
-        const weatherSymbol: string = await httpClient.publicInstance.get(
-          // 'https://wttr.in/?format=%l:+%c+•+%t+•+%m+•+%P+•+%w'
-          'https://wttr.in/?format=%c'
-        );
-        const temperatureSymbol: string = await httpClient.publicInstance.get(
-          // 'https://wttr.in/?format=%l:+%c+•+%t+•+%m+•+%P+•+%w'
-          'https://wttr.in/?format=%t'
+        const weatherString: string = await httpClient.publicInstance.get(
+          'https://wttr.in/?format=%l:+%c+•+%t+•+%m+•+%P+•+%w'
         );
 
-        setWheatherString(`${weatherSymbol} ${temperatureSymbol}`);
+        setWheatherString(`${weatherString}`);
       } catch (error) {
         console.log('Subheader.useEffect.catch error: ', error);
       }
