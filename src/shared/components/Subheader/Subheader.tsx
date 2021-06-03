@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Clock from 'Components/Clock';
-import { Flex, Frame, Span } from 'Vendor/components';
+import { Flex, Frame, Span, SpinnerCircularBrute } from 'Vendor/components';
 
 import './Subheader.less';
 
@@ -13,6 +13,19 @@ interface Props {
 export const Subheader: React.FC<Props> = ({ formattedDate, weatherString }) => (
   <Frame className="Subheader" padding="none" borderBottom={false} borderTop={false}>
     <Flex growHorizontal growVertical horizontal="between" vertical="stretch" noWrap>
+      <Frame
+        className="Subheader-item"
+        grow
+        padding="small"
+        borderBottom={false}
+        borderTop={false}
+        borderRight={false}
+        borderLeft={false}
+      >
+        <Flex vertical="center" horizontal="left">
+          <SpinnerCircularBrute />
+        </Flex>
+      </Frame>
       <Frame
         className="Subheader-item Subheader-weather"
         grow

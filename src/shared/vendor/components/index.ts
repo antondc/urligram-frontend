@@ -27,6 +27,7 @@ export { SpinnerCircle } from './SpinnerCircle';
 export { SpinnerSquaredBrute } from './SpinnerSquaredBrute';
 export { SpinnerSquaredSmooth } from './SpinnerSquaredSmooth';
 export { SpinnerLoader } from './SpinnerLoader';
+export { SpinnerCircularBrute } from './SpinnerCircularBrute';
 export { Vote } from './Vote';
 export {
   SvgIcon,
