@@ -13,7 +13,7 @@ interface Props {
 export const Subheader: React.FC<Props> = ({ formattedDate, weatherString }) => (
   <Frame className="Subheader" padding="none" borderBottom={false} borderTop={false}>
     <Flex growHorizontal growVertical horizontal="between" vertical="stretch" noWrap>
-      <Frame
+      {/* <Frame
         className="Subheader-item"
         grow
         padding="small"
@@ -25,7 +25,7 @@ export const Subheader: React.FC<Props> = ({ formattedDate, weatherString }) => 
         <Flex vertical="center" horizontal="left">
           <SpinnerCircularBrute />
         </Flex>
-      </Frame>
+      </Frame> */}
       <Frame
         className="Subheader-item Subheader-weather"
         grow
