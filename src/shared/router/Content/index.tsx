@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 
+import HeaderSecond from 'Components/HeaderSecond';
 import SidebarLeft from 'Components/SidebarLeft';
-import Subheader from 'Components/Subheader';
 import { selectPathWithoutLanguageParam } from 'Modules/Routes/selectors/selectPathWithoutLanguageParam';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import Bookmarks from 'Pages/Bookmarks';
@@ -33,7 +33,7 @@ interface Props {
 
 const Content: React.FC<Props> = ({ location, pathWithoutLanguageParam }) => (
   <>
-    <Subheader />
+    <HeaderSecond />
     <Frame className="Content" padding="none">
       <Flex vertical="top">
         <Fade classname="Content-sidebarLeft" mounted speed="fastest" delayIn={250} appear>

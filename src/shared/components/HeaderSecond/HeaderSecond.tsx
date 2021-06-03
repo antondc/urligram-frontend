@@ -3,18 +3,18 @@ import React from 'react';
 import Clock from 'Components/Clock';
 import { Flex, Frame, Span, SpinnerCircularBrute } from 'Vendor/components';
 
-import './Subheader.less';
+import './HeaderSecond.less';
 
 interface Props {
   formattedDate: string;
   weatherString: string;
 }
 
-export const Subheader: React.FC<Props> = ({ formattedDate, weatherString }) => (
-  <Frame className="Subheader" padding="none" borderBottom={false} borderTop={false}>
+export const HeaderSecond: React.FC<Props> = ({ formattedDate, weatherString }) => (
+  <Frame className="HeaderSecond" padding="none" borderBottom={false} borderTop={false}>
     <Flex growHorizontal growVertical horizontal="between" vertical="stretch" noWrap>
       {/* <Frame
-        className="Subheader-item"
+        className="HeaderSecond-item"
         grow
         padding="small"
         borderBottom={false}
@@ -27,7 +27,7 @@ export const Subheader: React.FC<Props> = ({ formattedDate, weatherString }) => 
         </Flex>
       </Frame> */}
       <Frame
-        className="Subheader-item Subheader-weather"
+        className="HeaderSecond-item HeaderSecond-weather"
         grow
         padding="small"
         borderBottom={false}
@@ -36,13 +36,13 @@ export const Subheader: React.FC<Props> = ({ formattedDate, weatherString }) => 
         borderLeft={false}
       >
         <Flex vertical="center" horizontal="left">
-          <Span className="Subheader-weatherText" bold>
+          <Span className="HeaderSecond-weatherText" bold>
             {weatherString}
           </Span>
         </Flex>
       </Frame>
       <Frame
-        className="Subheader-item Subheader-date"
+        className="HeaderSecond-item HeaderSecond-date"
         grow={false}
         padding="small"
         borderBottom={false}
@@ -53,7 +53,7 @@ export const Subheader: React.FC<Props> = ({ formattedDate, weatherString }) => 
         </Flex>
       </Frame>
       <Frame
-        className="Subheader-item Subheader-clock"
+        className="HeaderSecond-item HeaderSecond-clock"
         grow={false}
         padding="small"
         borderBottom={false}

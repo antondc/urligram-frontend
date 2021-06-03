@@ -30,89 +30,97 @@ export const Header: React.FC<Props> = ({
 }) => (
   <header>
     <Frame className="Header" padding="none">
-      <Flex vertical="stretch">
+      <Flex growVertical horizontal="between" vertical="stretch" noWrap>
         <Frame
-          className="Header-item Header-weather"
-          grow
           padding="small"
+          className="Header-brand"
           borderBottom={false}
           borderTop={false}
           borderLeft={false}
+          grow={false}
         >
-          <A className="Header-brand" href={'/'} frontend>
-            <Logo className={'Header-logo' + (loading ? ' Header-logo--loading' : '')} />
-            <H3 className="Header-title">Linking</H3>
+          <A href={'/'} frontend>
+            <Flex horizontal="left" vertical="center" noWrap>
+              <Logo className={'Header-logo' + (loading ? ' Header-logo--loading' : '')} />
+              <H3 className="Header-title">Linking</H3>
+            </Flex>
           </A>
         </Frame>
         <nav className="Header-navigation">
-          <Flex vertical="stretch">
+          <Flex growHorizontal growVertical horizontal="even" vertical="stretch" noWrap>
             <Frame
               className="Header-item Header-weather"
               grow
-              padding="small"
               borderBottom={false}
               borderTop={false}
-              borderRight={false}
+              borderLeft={false}
             >
-              <A className="Header-link" href={'/bookmarks?'} frontend>
-                <H3>{currentGlossary?.allBookmarks}</H3>
-              </A>
+              <Flex horizontal="center" vertical="center">
+                <A className="Header-link" href={'/bookmarks?'} frontend>
+                  <H3>{currentGlossary?.allBookmarks}</H3>
+                </A>
+              </Flex>
             </Frame>
             <Frame
               className="Header-item Header-weather"
               grow
-              padding="small"
               borderBottom={false}
               borderTop={false}
-              borderRight={false}
+              borderLeft={false}
             >
-              <A className="Header-link" href={'/users'} frontend>
-                <H3>All Users</H3>
-              </A>
+              <Flex horizontal="center" vertical="center">
+                <A className="Header-link" href={'/users'} frontend>
+                  <H3>All Users</H3>
+                </A>
+              </Flex>
             </Frame>
             <Frame
               className="Header-item Header-weather"
               grow
-              padding="small"
               borderBottom={false}
               borderTop={false}
-              borderRight={false}
+              borderLeft={false}
             >
-              <A className="Header-link" href={'/tags'} frontend>
-                <H3>All Tags</H3>
-              </A>
+              <Flex horizontal="center" vertical="center">
+                <A className="Header-link" href={'/tags'} frontend>
+                  <H3>All Tags</H3>
+                </A>
+              </Flex>
             </Frame>
             <Frame
               className="Header-item Header-weather"
               grow
-              padding="small"
               borderBottom={false}
               borderTop={false}
-              borderRight={false}
+              borderLeft={false}
             >
-              <A className="Header-link" href={'/lists'} frontend>
-                <H3>All Lists</H3>
-              </A>
+              <Flex horizontal="center" vertical="center">
+                <A className="Header-link" href={'/lists'} frontend>
+                  <H3>All Lists</H3>
+                </A>
+              </Flex>
+            </Frame>
+            <Frame padding="small" borderTop={false} borderRight={false} borderBottom={false} borderLeft={false}>
+              <Flex className="Header-user" vertical="center" growHorizontal={false}>
+                {!sessionLoading && isLogged && (
+                  <img
+                    className="Header-userLogo"
+                    src={session?.image?.original}
+                    onClick={isLogged ? switchUserModal : () => switchLoginModal(true)}
+                  />
+                )}
+                {!sessionLoading && !isLogged && (
+                  <User
+                    name="User"
+                    className={'Header-userLogo' + (isLogged ? ' Header-userLogo--isActive' : '')}
+                    onClick={isLogged ? switchUserModal : () => switchLoginModal(true)}
+                  />
+                )}
+                {sessionLoading && <SpinnerLoader className="Header-loader" />}
+              </Flex>
             </Frame>
           </Flex>
         </nav>
-        <div className="Header-user">
-          {!sessionLoading && isLogged && (
-            <img
-              className="Header-userLogo"
-              src={session?.image?.original}
-              onClick={isLogged ? switchUserModal : () => switchLoginModal(true)}
-            />
-          )}
-          {!sessionLoading && !isLogged && (
-            <User
-              name="User"
-              className={'Header-userLogo' + (isLogged ? ' Header-userLogo--isActive' : '')}
-              onClick={isLogged ? switchUserModal : () => switchLoginModal(true)}
-            />
-          )}
-          {sessionLoading && <SpinnerLoader className="Header-loader" />}
-        </div>
       </Flex>
     </Frame>
   </header>
