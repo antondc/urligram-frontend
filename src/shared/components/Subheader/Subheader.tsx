@@ -3,18 +3,18 @@ import React from 'react';
 import Clock from 'Components/Clock';
 import { Flex, Frame, Span } from 'Vendor/components';
 
-import './Subheader_.less';
+import './Subheader.less';
 
 interface Props {
   formattedDate: string;
   weatherString: string;
 }
 
-export const Subheader_: React.FC<Props> = ({ formattedDate, weatherString }) => (
-  <Frame className="Subheader_" padding="none" borderBottom={false} borderTop={false}>
+export const Subheader: React.FC<Props> = ({ formattedDate, weatherString }) => (
+  <Frame className="Subheader" padding="none" borderBottom={false} borderTop={false}>
     <Flex growHorizontal growVertical horizontal="between" vertical="stretch" noWrap>
       <Frame
-        className="Subheader_-item Subheader_-weather"
+        className="Subheader-item Subheader-weather"
         grow
         padding="small"
         borderBottom={false}
@@ -23,13 +23,13 @@ export const Subheader_: React.FC<Props> = ({ formattedDate, weatherString }) =>
         borderLeft={false}
       >
         <Flex vertical="center" horizontal="left">
-          <Span className="Subheader_-weatherText" bold>
+          <Span className="Subheader-weatherText" bold>
             {weatherString}
           </Span>
         </Flex>
       </Frame>
       <Frame
-        className="Subheader_-item Subheader_-date"
+        className="Subheader-item Subheader-date"
         grow={false}
         padding="small"
         borderBottom={false}
@@ -40,7 +40,7 @@ export const Subheader_: React.FC<Props> = ({ formattedDate, weatherString }) =>
         </Flex>
       </Frame>
       <Frame
-        className="Subheader_-item Subheader_-clock"
+        className="Subheader-item Subheader-clock"
         grow={false}
         padding="small"
         borderBottom={false}

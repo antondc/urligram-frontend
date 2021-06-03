@@ -4,11 +4,11 @@ import { useSelector } from 'react-redux';
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
 import { HttpClient } from 'Services/HttpClient';
 import { LocaleFormattedDate } from 'Tools/utils/Date/localeFormattedDate';
-import { Subheader_ as SubheaderUi } from './Subheader_';
+import { Subheader as SubheaderUi } from './Subheader';
 
-import './Subheader_.less';
+import './Subheader.less';
 
-const Subheader_: React.FC = () => {
+const Subheader: React.FC = () => {
   const [weatherString, setWheatherString] = useState<string>(undefined);
   const currentLanguageSlug = useSelector(selectCurrentLanguageSlug);
   const dateNowMs = Math.floor(Date.now() / 1000);
@@ -24,7 +24,7 @@ const Subheader_: React.FC = () => {
         );
         setWheatherString(weather);
       } catch (error) {
-        console.log('Subheader_.useEffect.catch error: ', error);
+        console.log('Subheader.useEffect.catch error: ', error);
       }
     };
 
@@ -34,4 +34,4 @@ const Subheader_: React.FC = () => {
   return <SubheaderUi formattedDate={formattedDate} weatherString={weatherString} />;
 };
 
-export default Subheader_;
+export default Subheader;
