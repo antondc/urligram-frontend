@@ -4,7 +4,8 @@ import https from 'https';
 import { QueryStringWrapper } from './QueryStringWrapper';
 
 interface Options {
-  timeout: number;
+  timeout?: number;
+  credentials?: boolean;
 }
 
 export class HttpClient {
@@ -12,6 +13,7 @@ export class HttpClient {
   public publicInstance: AxiosInstance;
 
   constructor(options?: Options) {
+    const credentials = options?.credentials === undefined ? true : options?.credentials;
     const axiosInstance = axios.create({
       baseURL: process.env.ENDPOINT_API,
       httpsAgent: new https.Agent({
@@ -22,7 +24,7 @@ export class HttpClient {
     axiosInstance.defaults.timeout = options?.timeout;
     axiosInstance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
     axiosInstance.defaults.paramsSerializer = this.paramsSerializer;
-    axiosInstance.defaults.withCredentials = true;
+    axiosInstance.defaults.withCredentials = credentials;
 
     axiosInstance.interceptors.response.use(
       (response) => response.data,
