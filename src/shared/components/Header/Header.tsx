@@ -5,7 +5,7 @@ import User from 'Assets/svg/user.svg';
 import A from 'Components/A';
 import { GlossaryState } from 'Modules/Languages/languages.types';
 import { SessionState } from 'Modules/Session/session.types';
-import { Flex, Frame, H3, SpinnerLoader } from 'Vendor/components';
+import { Flex, Frame, H3, Span, SpinnerLoader } from 'Vendor/components';
 
 import './Header.less';
 
