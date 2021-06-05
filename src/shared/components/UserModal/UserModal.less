@@ -28,6 +28,7 @@
     left: 10px;
     object-fit: cover;
     object-position: center;
+    outline: 2px solid @c-base;
 
     &:hover {
       cursor: pointer;
@@ -36,6 +37,16 @@
 
   &-sessionLogOut {
     &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &-link:not(.noClass) {
+    text-decoration-thickness: 2px !important;
+
+    &:hover {
+      text-decoration-thickness: 2px !important;
+      text-decoration: underline;
       cursor: pointer;
     }
   }

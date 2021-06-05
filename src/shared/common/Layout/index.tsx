@@ -39,7 +39,7 @@ import Router from 'Router/index';
 import { routesList, routesWithoutOmmitedValues } from 'Router/routes';
 import enhanceRouteWithParams from 'Tools/utils/url/enhanceRouteWithParams';
 import findActiveRouteKey from 'Tools/utils/url/findActiveRouteKey';
-import { Fade, SpinnerCircle } from 'Vendor/components';
+import { Fade } from 'Vendor/components';
 
 import './Layout.less';
 

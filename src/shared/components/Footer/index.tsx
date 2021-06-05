@@ -6,14 +6,18 @@ import A from 'Components/A';
 import LanguageItem from 'Components/LanguageItem';
 import LanguagesSwitch from 'Components/LanguagesSwitch';
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
+import { RouteState } from 'Modules/Routes/routes.types';
 import { selectCurrentPathname } from 'Modules/Routes/selectors/selectCurrentPathname';
+import { selectCurrentRoute } from 'Modules/Routes/selectors/selectCurrentRoute';
 import { switchLanguagesModal } from 'Modules/Ui/actions/switchLanguagesModal';
 import { selectUiLanguagesModalMounted } from 'Modules/Ui/selectors/selectUiLanguagesModalMounted';
 import { Fade, Frame, Span } from 'Vendor/components';
+import { Routes } from '../../router/routes';
 
 import './Footer.less';
 
 interface Props {
+  currentRoute: RouteState;
   currentLanguageSlug: string;
   uiLanguagesModalMounted: boolean;
   currentPathName: string;
@@ -21,6 +25,7 @@ interface Props {
 }
 
 const Footer: React.FC<Props> = ({
+  currentRoute,
   currentLanguageSlug,
   uiLanguagesModalMounted,
   currentPathName,
@@ -29,34 +34,52 @@ const Footer: React.FC<Props> = ({
   <>
     <Frame className="Footer" borderTop={false}>
       <div className="Footer-section">
-        <A href="sign-up" frontend>
-          <Span bold>Sign up</Span>
-        </A>
+        <Span size="medium" bold>
+          <A
+            className="Footer-link"
+            href="sign-up"
+            frontend
+            underlined
+            active={currentRoute?.name === Routes.Tags.name}
+          >
+            Sign up
+          </A>
+        </Span>
       </div>
       <div className="Footer-section">
-        <A href="about" frontend>
-          <Span bold>About</Span>
-        </A>
+        <Span size="medium" bold>
+          <A className="Footer-link" href="about" frontend underlined active={currentRoute?.name === Routes.About.name}>
+            About
+          </A>
+        </Span>
       </div>
       <div className="Footer-section">
-        <A href="" frontend>
-          <Span bold>Disclaimer</Span>
-        </A>
+        <Span size="medium" bold>
+          <A className="Footer-link" href="" frontend underlined active={currentRoute?.name === undefined}>
+            Disclaimer
+          </A>
+        </Span>
       </div>
       <div className="Footer-section">
-        <A href="" frontend>
-          <Span bold>FAQ</Span>
-        </A>
+        <Span size="medium" bold>
+          <A className="Footer-link" href="" frontend underlined active={currentRoute?.name === undefined}>
+            FAQ
+          </A>
+        </Span>
       </div>
       <div className="Footer-section">
-        <A href="" frontend>
-          <Span bold>Download</Span>
-        </A>
+        <Span size="medium" bold>
+          <A className="Footer-link" href="" frontend underlined active={currentRoute?.name === undefined}>
+            Download
+          </A>
+        </Span>
       </div>
       <div className="Footer-section">
-        <A href="" frontend>
-          <Span bold>Contact</Span>
-        </A>
+        <Span size="medium" bold>
+          <A className="Footer-link" href="" frontend underlined active={currentRoute?.name === undefined}>
+            Contact
+          </A>
+        </Span>
       </div>
       <div className="Footer-section Footer-lastSection">
         <Fade mounted={uiLanguagesModalMounted}>
@@ -72,6 +95,7 @@ const mapStateToProps = createStructuredSelector({
   currentLanguageSlug: selectCurrentLanguageSlug,
   uiLanguagesModalMounted: selectUiLanguagesModalMounted,
   currentPathName: selectCurrentPathname,
+  currentRoute: selectCurrentRoute,
 });
 
 export default connect(mapStateToProps, {

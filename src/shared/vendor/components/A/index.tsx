@@ -9,6 +9,7 @@ interface Props {
   className?: string;
   href: string;
   frontend?: boolean;
+  active?: boolean;
   styled?: boolean;
   targetBlank?: boolean;
   disabled?: boolean;
@@ -29,12 +30,14 @@ export const A: React.FC<Props> = ({
   disabled = false,
   title,
   underlined = false,
+  active,
 }) => {
   const _className =
     (styled ? 'A' : 'A--default') +
     (className ? ' ' + className : '') +
     (styled && disabled ? ' A--disabled' : '') +
-    (styled && underlined ? ' ' + 'A--underlined' : '');
+    (styled && underlined ? ' ' + 'A--underlined' : '') +
+    (styled && active ? ' ' + 'A--active' : '');
 
   const target = targetBlank ? '_blank' : '_self';
 

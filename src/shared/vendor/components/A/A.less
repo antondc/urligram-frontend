@@ -9,7 +9,7 @@
   transition: text-decoration-color @td-fastest @ease-custom;
 
   &--underlined {
-    text-decoration-color: @c-base;
+    text-decoration-color: @c-transparent;
   }
 
   &:hover {
@@ -19,7 +19,8 @@
     cursor: pointer;
 
     &@{c}--underlined {
-      text-decoration-color: @c-accent;
+      text-decoration-color: @c-base;
+      color: @c-base;
     }
   }
 
@@ -27,6 +28,10 @@
     text-decoration-color: @c-accent;
     color: @c-accent;
     cursor: pointer;
+  }
+
+  &--active {
+    text-decoration: underline;
   }
 
   &--default {

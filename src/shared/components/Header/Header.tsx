@@ -5,11 +5,12 @@ import User from 'Assets/svg/user.svg';
 import A from 'Components/A';
 import { GlossaryState } from 'Modules/Languages/languages.types';
 import { SessionState } from 'Modules/Session/session.types';
-import { Flex, Frame, H3, Span, SpinnerLoader } from 'Vendor/components';
+import { Flex, Frame, H3, SpinnerLoader } from 'Vendor/components';
 
 import './Header.less';
 
 interface Props {
+  routeName: string;
   isLogged: boolean;
   session: SessionState;
   currentGlossary: GlossaryState;
@@ -20,6 +21,7 @@ interface Props {
 }
 
 export const Header: React.FC<Props> = ({
+  routeName,
   isLogged,
   currentGlossary,
   switchUserModal,
@@ -39,7 +41,7 @@ export const Header: React.FC<Props> = ({
           borderLeft={false}
           grow={false}
         >
-          <A href={'/'} frontend>
+          <A href={'/'} frontend underlined active={routeName === 'Home'} className="Header-link">
             <Flex horizontal="left" vertical="center" noWrap>
               <Logo className={'Header-logo' + (loading ? ' Header-logo--loading' : '')} />
               <H3 className="Header-title">Linking</H3>
@@ -56,7 +58,7 @@ export const Header: React.FC<Props> = ({
               borderLeft={false}
             >
               <Flex horizontal="center" vertical="center">
-                <A className="Header-link" href={'/bookmarks?'} frontend>
+                <A className="Header-link" href={'/bookmarks?'} frontend underlined active={routeName === 'Bookmarks'}>
                   <H3>{currentGlossary?.allBookmarks}</H3>
                 </A>
               </Flex>
@@ -69,7 +71,7 @@ export const Header: React.FC<Props> = ({
               borderLeft={false}
             >
               <Flex horizontal="center" vertical="center">
-                <A className="Header-link" href={'/users'} frontend>
+                <A className="Header-link" href={'/users'} frontend underlined active={routeName === 'Users'}>
                   <H3>All Users</H3>
                 </A>
               </Flex>
@@ -82,7 +84,7 @@ export const Header: React.FC<Props> = ({
               borderLeft={false}
             >
               <Flex horizontal="center" vertical="center">
-                <A className="Header-link" href={'/tags'} frontend>
+                <A className="Header-link" href={'/tags'} frontend underlined active={routeName === 'Tags'}>
                   <H3>All Tags</H3>
                 </A>
               </Flex>
@@ -95,7 +97,7 @@ export const Header: React.FC<Props> = ({
               borderLeft={false}
             >
               <Flex horizontal="center" vertical="center">
-                <A className="Header-link" href={'/lists'} frontend>
+                <A className="Header-link" href={'/lists'} frontend underlined active={routeName === 'Lists'}>
                   <H3>All Lists</H3>
                 </A>
               </Flex>

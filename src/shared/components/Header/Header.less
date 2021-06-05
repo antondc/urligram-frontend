@@ -52,6 +52,8 @@
     border-radius: 50%;
 
     &:hover {
+      outline: 2.5px solid;
+      outline-offset: -2px;
       cursor: pointer;
     }
 
@@ -76,6 +78,15 @@
 
   &-item {
     white-space: nowrap;
+  }
+
+  &-link {
+    text-decoration-thickness: 3px;
+
+    &:hover {
+      cursor: pointer;
+      text-decoration-thickness: 3px;
+    }
   }
 
   @keyframes hearthBeat {

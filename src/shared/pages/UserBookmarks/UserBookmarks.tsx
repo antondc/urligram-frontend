@@ -1,6 +1,5 @@
 import React from 'react';
 
-import A from 'Components/A';
 import BookmarkRow from 'Components/BookmarkRow';
 import { BookmarkRowSkeletonGroup } from 'Components/BookmarkRow/BookmarkRowSkeletonGroup';
 import Empty from 'Components/Empty';
@@ -13,7 +12,7 @@ import { BookmarksByKey } from 'Modules/Bookmarks/bookmarks.types';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
-import { FadeInOut, Flex, Frame, H4, Hr, Select, SelectValue, SortBy } from 'Vendor/components';
+import { FadeInOut, Flex, Frame, Hr, Select, SelectValue, SortBy } from 'Vendor/components';
 
 import './UserBookmarks.less';
 
@@ -46,7 +45,6 @@ interface Props {
 
 export const UserBookmarks: React.FC<Props> = ({
   userId,
-  user,
   bookmarksByKey,
   bookmarksIds,
   bookmarksLoading,
@@ -67,16 +65,9 @@ export const UserBookmarks: React.FC<Props> = ({
   <div className="UserBookmarks">
     <Flex horizontal="between" vertical="top">
       <Main>
-        <Frame grow padding="none" borderTop={false} borderBottom={false}>
-          <Hr spacer size="small" />
-          <H4>
-            Bookmarks of{' '}
-            <A frontend href={`/users/${userId}`}>
-              @{user?.name}
-            </A>
-          </H4>
-          <Hr spacer size="small" />
-          <Hr size="nano" />
+        <Hr spacer size="nano" />
+        <Hr spacer />
+        <Frame grow padding="none">
           <Frame grow padding="none" shadow={false} weight="none">
             <Flex horizontal="between" noWrap>
               <Select
@@ -124,6 +115,8 @@ export const UserBookmarks: React.FC<Props> = ({
             <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
           </Flex>
         </Frame>
+        <Hr spacer size="nano" />
+        <Hr spacer />
       </Main>
       <Sidebar>
         <SidebarBlock title="Following Users" href={`users/${userId}/following`} loading={followingUsersLoading}>

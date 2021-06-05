@@ -10,6 +10,7 @@ interface Props {
   href: string;
   frontend?: boolean;
   styled?: boolean;
+  active?: boolean;
   targetBlank?: boolean;
   disabled?: boolean;
   title?: string;

@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { selectCurrentGlossary } from 'Modules/Languages/selectors/selectCurrentGlossary';
+import { selectCurrentRoute } from 'Modules/Routes/selectors/selectCurrentRoute';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUserId';
 import { switchBookmarkCreateModal } from 'Modules/Ui/actions/switchBookmarkCreateModal';
@@ -13,6 +14,7 @@ export const SidebarLeft: React.FC = () => {
   const isLoggedIn = useSelector(selectSessionLoggedIn);
   const sessionId = useSelector(selectSessionUserId);
   const glossary = useSelector(selectCurrentGlossary);
+  const route = useSelector(selectCurrentRoute);
 
   const switchUiBookmarkModal = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
@@ -26,6 +28,7 @@ export const SidebarLeft: React.FC = () => {
 
   return (
     <SidebarLeftUi
+      routeName={route?.name}
       isLoggedIn={isLoggedIn}
       sessionId={sessionId}
       glossary={glossary}

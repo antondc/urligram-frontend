@@ -17,7 +17,27 @@ export interface Route {
 }
 
 export interface RoutesInterface {
-  [key: string]: Route;
+  Tags: Route;
+  Bookmarks: Route;
+  UserBookmarks: Route;
+  UserLists: Route;
+  Following: Route;
+  Followers: Route;
+  User: Route;
+  UserTags: Route;
+  Users: Route;
+  List: Route;
+  Lists: Route;
+  Login: Route;
+  SignUp: Route;
+  Home: Route;
+  About: Route;
+  ForgotPassword: Route;
+  ResetPassword: Route;
+  SignUpConfirmation: Route;
+  Control: Route;
+  ServerError: Route;
+  NotFound: Route;
 }
 
 export const Routes: RoutesInterface = {
@@ -263,12 +283,15 @@ export const Routes: RoutesInterface = {
 };
 
 // Export routes without specific values values
-export const routesWithoutOmmitedValues: RoutesInterface = Object.entries(Routes).reduce((acc, [key, value]) => {
-  const valuesToRemove = ['initialDataLoadersVisitor', 'initialDataLoadersSession' /* etc. */];
-  const routeWithoutOmmitedValues = omit(value, valuesToRemove);
+export const routesWithoutOmmitedValues: Partial<RoutesInterface> = Object.entries(Routes).reduce(
+  (acc, [key, value]) => {
+    const valuesToRemove = ['initialDataLoadersVisitor', 'initialDataLoadersSession' /* etc. */];
+    const routeWithoutOmmitedValues = omit(value, valuesToRemove);
 
-  return { ...acc, [key]: routeWithoutOmmitedValues };
-}, {});
+    return { ...acc, [key]: routeWithoutOmmitedValues };
+  },
+  {}
+);
 
 export const pathsByLayout = (layout: Layout): string[] =>
   Object.values(Routes)

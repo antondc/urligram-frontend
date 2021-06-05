@@ -7,6 +7,7 @@ import { Frame, Span } from 'Vendor/components';
 import './SidebarLeft.less';
 
 interface Props {
+  routeName: string;
   isLoggedIn: boolean;
   sessionId: string;
   glossary: GlossaryState;
@@ -15,6 +16,7 @@ interface Props {
 }
 
 export const SidebarLeft: React.FC<Props> = ({
+  routeName,
   isLoggedIn,
   sessionId,
   glossary,
@@ -26,56 +28,92 @@ export const SidebarLeft: React.FC<Props> = ({
       <ul>
         <li className="SidebarLeft-item">
           <Span size="medium" bold>
-            <A href={`users/${sessionId}`} frontend>
+            <A
+              className="SidebarLeft-link"
+              href={`users/${sessionId}`}
+              frontend
+              underlined
+              active={routeName === 'User'}
+            >
               {glossary.myUser}
             </A>
           </Span>
         </li>
         <li className="SidebarLeft-item">
           <Span size="medium" bold>
-            <A href={`users/${sessionId}/bookmarks`} frontend>
+            <A
+              className="SidebarLeft-link"
+              href={`users/${sessionId}/bookmarks`}
+              frontend
+              underlined
+              active={routeName === 'UserBookmarks'}
+            >
               {glossary.myBookmarks}
             </A>
           </Span>
         </li>
         <li className="SidebarLeft-item">
           <Span size="medium" bold>
-            <A href={`users/${sessionId}/tags`} frontend>
+            <A
+              className="SidebarLeft-link"
+              href={`users/${sessionId}/tags`}
+              frontend
+              underlined
+              active={routeName === 'UserTags'}
+            >
               My Tags
             </A>
           </Span>
         </li>
-        <li>
+        <li className="SidebarLeft-item">
           <Span size="medium" bold>
-            <A href="" frontend onClick={switchUiBookmarkModal}>
+            <A className="SidebarLeft-link" href="" frontend underlined onClick={switchUiBookmarkModal}>
               Add bookmark
             </A>
           </Span>
         </li>
-        <li>
+        <li className="SidebarLeft-item">
           <Span size="medium" bold>
-            <A href="" frontend onClick={switchUiListModal}>
+            <A className="SidebarLeft-link" href="" frontend underlined onClick={switchUiListModal}>
               Create list
             </A>
           </Span>
         </li>
         <li className="SidebarLeft-item">
           <Span size="medium" bold>
-            <A href={`users/${sessionId}/lists?sort=-createdAt`} frontend>
+            <A
+              className="SidebarLeft-link"
+              href={`users/${sessionId}/lists?sort=-createdAt`}
+              frontend
+              underlined
+              active={routeName === 'UserLists'}
+            >
               My Lists
             </A>
           </Span>
         </li>
         <li className="SidebarLeft-item">
           <Span size="medium" bold>
-            <A href={`users/${sessionId}/followers`} frontend>
+            <A
+              className="SidebarLeft-link"
+              href={`users/${sessionId}/followers`}
+              frontend
+              underlined
+              active={routeName === 'UserFollowers'}
+            >
               Followers
             </A>
           </Span>
         </li>
         <li className="SidebarLeft-item">
           <Span size="medium" bold>
-            <A href={`users/${sessionId}/following`} frontend>
+            <A
+              className="SidebarLeft-link"
+              href={`users/${sessionId}/following`}
+              frontend
+              underlined
+              active={routeName === 'UserFollowing'}
+            >
               Following
             </A>
           </Span>
@@ -86,28 +124,34 @@ export const SidebarLeft: React.FC<Props> = ({
       <ul>
         <li className="SidebarLeft-item">
           <Span size="medium" bold>
-            <A href="/bookmarks?" frontend>
+            <A className="SidebarLeft-link" href="/bookmarks" frontend underlined active={routeName === 'Bookmarks'}>
               All bookmarks
             </A>
           </Span>
         </li>
         <li className="SidebarLeft-item">
           <Span size="medium" bold>
-            <A href="/lists" frontend>
+            <A className="SidebarLeft-link" href="/lists" frontend underlined active={routeName === 'Lists'}>
               All lists
             </A>
           </Span>
         </li>
         <li className="SidebarLeft-item">
           <Span size="medium" bold>
-            <A href="/bookmarks?sort=-createdAt" frontend>
+            <A
+              className="SidebarLeft-link"
+              href="/bookmarks?sort=-createdAt"
+              frontend
+              underlined
+              active={routeName === 'Bookmarks'}
+            >
               Recent bookmarks
             </A>
           </Span>
         </li>
         <li className="SidebarLeft-item">
           <Span size="medium" bold>
-            <A href="/tags" frontend>
+            <A className="SidebarLeft-link" href="/tags" frontend underlined active={routeName === 'Tags'}>
               Tags
             </A>
           </Span>

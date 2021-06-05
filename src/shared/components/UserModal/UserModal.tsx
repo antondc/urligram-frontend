@@ -32,37 +32,49 @@ export const UserModal: React.FC<Props> = ({
     {!sessionId && <User className="UserModal-userLogo" onClick={switchMessageModal} />}
     <ul>
       <li>
-        <A href={`users/${sessionId}`} frontend>
-          <Span bold>My account</Span>
-        </A>
+        <Span bold>
+          <A className="UserModal-link" href={`users/${sessionId}`} frontend underlined>
+            My account
+          </A>
+        </Span>
       </li>
       <Hr spacer size="small" />
       <li>
-        <A href={`users/${sessionId}/followers`} frontend>
-          <Span bold>Followers</Span>
-        </A>
+        <Span bold>
+          <A className="UserModal-link" href={`users/${sessionId}/followers`} frontend underlined>
+            Followers
+          </A>
+        </Span>
       </li>
       <Hr spacer size="small" />
       <li>
-        <A href={`users/${sessionId}/following`} frontend>
-          <Span bold>Following</Span>
-        </A>
+        <Span bold>
+          <A className="UserModal-link" href={`users/${sessionId}/following`} frontend underlined>
+            Following
+          </A>
+        </Span>
       </li>
       <Hr spacer size="small" />
       <li>
-        <A href={`users/${sessionId}/bookmarks`} frontend>
-          <Span bold>My bookmarks</Span>
-        </A>
+        <Span bold>
+          <A className="UserModal-link" href={`users/${sessionId}/bookmarks`} frontend underlined>
+            My bookmarks
+          </A>
+        </Span>
       </li>
       <Hr spacer size="small" />
       <li>
-        <A href={`users/${sessionId}/lists`} frontend>
-          <Span bold>My lists</Span>
-        </A>
+        <Span bold>
+          <A className="UserModal-link" href={`users/${sessionId}/lists`} frontend underlined>
+            My lists
+          </A>
+        </Span>
       </li>
       <Hr spacer size="small" />
       <li className="UserModal-sessionLogOut" onClick={sessionLogOut}>
-        <Span bold>Log out</Span>
+        <Span className="UserModal-link" bold>
+          Log out
+        </Span>
       </li>
     </ul>
   </Frame>

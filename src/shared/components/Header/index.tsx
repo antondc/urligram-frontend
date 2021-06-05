@@ -9,6 +9,7 @@ import { selectCurrentGlossary } from 'Modules/Languages/selectors/selectCurrent
 import { selectLinksLoading } from 'Modules/Links/selectors/selectLinksLoading';
 import { selectLinksVoteLoading } from 'Modules/Links/selectors/selectLinksVoteLoading';
 import { selectListsLoading } from 'Modules/Lists/selectors/selectListsLoading';
+import { selectCurrentRoute } from 'Modules/Routes/selectors/selectCurrentRoute';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { selectSessionLoading } from 'Modules/Session/selectors/selectSessionLoading';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
@@ -49,9 +50,11 @@ const Header: React.FC<Props> = ({
   const loading =
     bookmarksLoading || linksLoading || linksVoteLoading || bookmarksVoteLoading || usersLoading || listsLoading;
   const session = useSelector(selectSession);
+  const route = useSelector(selectCurrentRoute);
 
   return (
     <HeaderUi
+      routeName={route?.name}
       isLogged={isLogged}
       session={session}
       currentGlossary={currentGlossary}
