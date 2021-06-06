@@ -12,7 +12,7 @@ import {
   Select,
   SelectValue,
   Span,
-  SpinnerLoader,
+  SpinnerCircularBrute,
   Switch,
 } from 'Vendor/components';
 import { TagValue } from '.';
@@ -85,7 +85,7 @@ export const BookmarkCreateForm: React.FC<Props> = ({
         {urlValue && !urlError && !urlSubmitted && !urlLoading && (
           <ArrowRight className="BookmarkCreateForm-urlArrow" size="small" />
         )}
-        {urlLoading && <SpinnerLoader className="BookmarkCreateForm-loader" />}
+        {urlLoading && <SpinnerCircularBrute className="BookmarkCreateForm-loader" />}
       </FadeInOut>
     </Flex>
     <Hr size="nano" spacer />

@@ -79,9 +79,9 @@
 
     &--delete {
       @{c}-content {
-        color: @c-error;
+        color: @c-accentLight;
         background: @c-background;
-        border-color: @c-error;
+        border-color: @c-accentLight;
 
         @{c}-svg {
           width: 0;
@@ -92,7 +92,18 @@
       }
 
       @{c}-shadow {
-        box-shadow: 4px 4px 0 0 @c-error;
+        box-shadow: 4px 4px 0 0 @c-accentLight;
+      }
+
+      &:hover {
+        @{c}-content {
+          color: @c-error;
+          border-color: @c-error;
+        }
+
+        @{c}-shadow {
+          box-shadow: 4px 4px 0 0 @c-error;
+        }
       }
     }
   }

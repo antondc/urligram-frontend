@@ -46,7 +46,7 @@ const ListForm: React.FC<Props> = ({ closeModal, setModalLocked }) => {
   const [submitSuccess, setSubmitSuccess] = useState<boolean>(undefined);
   const [submitError, setSubmitError] = useState<string>(undefined);
   const submitDisabled = !nameValue || !!nameError || !descriptionValue || !!descriptionError;
-  const isUpdate = !!list?.id || !removing;
+  const isUpdate = !!list?.id || !!removing;
 
   const onChangeName = (e: React.FormEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;

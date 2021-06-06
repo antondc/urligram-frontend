@@ -114,8 +114,7 @@ export const ListForm: React.FC<Props> = ({
       </Span>
     </FadeInOut>
     <Hr spacer />
-
-    {isUpdate && (
+    {!!isUpdate && (
       <Button
         text="Remove list"
         type="submit"

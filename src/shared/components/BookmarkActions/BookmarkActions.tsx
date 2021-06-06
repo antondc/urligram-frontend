@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { BookmarkWithBackground, PlusCircleWithBackground, SpinnerLoader } from 'Vendor/components';
+import { BookmarkWithBackground, PlusCircleWithBackground, SpinnerCircularBrute } from 'Vendor/components';
 
 import './BookmarkActions.less';
 
@@ -35,7 +35,7 @@ export const BookmarkActions: React.FC<Props> = ({
         <PlusCircleWithBackground className="BookmarkActions-bookmarkRemove" size="small" onClick={onBookmarkDelete} />
       </>
     )}
-    {loading && <SpinnerLoader className="BookmarkActions-loader" size="small" />}
+    {loading && <SpinnerCircularBrute className="BookmarkActions-loader" size="small" />}
   </div>
 );
 

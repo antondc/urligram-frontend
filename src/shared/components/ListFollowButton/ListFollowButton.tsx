@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { EditCircle, Flex, PlusCircleWithBackground, Private, SpinnerLoader } from 'Vendor/components';
+import { EditCircle, Flex, PlusCircleWithBackground, Private, SpinnerCircularBrute } from 'Vendor/components';
 
 import './ListFollowButton.less';
 
@@ -50,7 +50,7 @@ export const ListFollowButton: React.FC<Props> = ({
       />
     )}
     {sessionUserOwnsList && !loading && <EditCircle className="ListRow-listEdit" size={size} onClick={onEdit} />}
-    {loading && <SpinnerLoader className="ListRow-loader" size={size} />}
+    {loading && <SpinnerCircularBrute className="ListRow-loader" size={size} />}
   </Flex>
 );
 

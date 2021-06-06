@@ -1,6 +1,7 @@
 import React, { HTMLProps } from 'react';
 
 import { Span } from '../Span';
+import { SpinnerCircularBrute } from '../SpinnerCircularBrute';
 import { SpinnerLoader } from '../SpinnerLoader';
 import { IconsType, SvgIcon } from '../Svg';
 
@@ -54,7 +55,7 @@ export const Button: React.FC<Props> = ({
     <Span className="Button-content" bold uppercase>
       {text}
       {icon && <SvgIcon name={icon} size="small" className="Button-svg" />}
-      {<SpinnerLoader className="Button-loader" size="small" />}
+      {<SpinnerCircularBrute className="Button-loader" size="small" />}
     </Span>
   </button>
 );

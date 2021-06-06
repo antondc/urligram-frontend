@@ -14,7 +14,7 @@ import {
   PlusCircleWithBackground,
   PopOver,
   Span,
-  SpinnerLoader,
+  SpinnerCircularBrute,
 } from 'Vendor/components';
 
 import './BookmarkLists.less';
@@ -87,7 +87,7 @@ export const BookmarkLists: React.FC<Props> = ({
                       </A>
                     </Span>
                     {itemsLoading?.includes(item.id) ? (
-                      <SpinnerLoader className="BookmarkLists-listsItemLoader" />
+                      <SpinnerCircularBrute className="BookmarkLists-listsItemLoader" />
                     ) : (
                       <PlusCircleWithBackground
                         className={'BookmarkLists-listsItemIcon'}
