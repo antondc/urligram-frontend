@@ -109,7 +109,7 @@ export const Header: React.FC<Props> = ({
               <Flex className="Header-user" vertical="center" growHorizontal={false}>
                 {!sessionLoading && isLogged && (
                   <img
-                    className="Header-userLogo"
+                    className="Header-userImage"
                     src={session?.image?.original}
                     onClick={isLogged ? switchUserModal : () => switchLoginModal(true)}
                   />
@@ -117,7 +117,7 @@ export const Header: React.FC<Props> = ({
                 {!sessionLoading && !isLogged && (
                   <User
                     name="User"
-                    className={'Header-userLogo' + (isLogged ? ' Header-userLogo--isActive' : '')}
+                    className={'Header-userLogo'}
                     onClick={isLogged ? switchUserModal : () => switchLoginModal(true)}
                   />
                 )}

@@ -38,7 +38,8 @@
     width: 60px;
   }
 
-  &-userLogo {
+  &-userLogo,
+  &-userImage {
     position: relative;
     height: 50px;
     width: 50px;
@@ -47,12 +48,14 @@
     border-radius: 50%;
 
     &:hover {
-      box-shadow: 0 0 0 2pt @c-base;
       cursor: pointer;
     }
+  }
 
-    &--isActive {
-      fill: @c-success;
+  &-userImage {
+    &:hover {
+      box-shadow: 0 0 0 2pt @c-base;
+      cursor: pointer;
     }
   }
 
