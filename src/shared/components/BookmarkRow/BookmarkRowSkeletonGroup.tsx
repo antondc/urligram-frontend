@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { BookmarkRowSkeleton } from 'Components/BookmarkRow/BookmarkRowSkeleton';
-import { Hr } from 'Vendor/components';
 
 interface Props {
   length?: number;
@@ -10,10 +9,7 @@ interface Props {
 export const BookmarkRowSkeletonGroup: React.FC<Props> = ({ length = 10 }) => (
   <>
     {Array.from({ length }, (_, index) => (
-      <React.Fragment key={index}>
-        <BookmarkRowSkeleton id={index} />
-        {index !== length - 1 && <Hr spacer size="small" />}
-      </React.Fragment>
+      <BookmarkRowSkeleton id={index} key={index} />
     ))}
   </>
 );

@@ -3,7 +3,7 @@ import { animateScroll as scroll } from 'react-scroll';
 
 import history from 'Services/History';
 import { URLWrapper } from 'Services/URLWrapper';
-import { A, Fade, Frame, Hr } from 'Vendor/components';
+import { A, Fade, Frame, Span } from 'Vendor/components';
 import { calculatePages } from './calculatePages';
 
 import './Pagination.less';
@@ -48,20 +48,24 @@ const Pagination: React.FC<Props> = ({
         <Frame className="Pagination-border" padding="small" grow={grow} weight="none">
           {pages.map((item, index) =>
             !!item ? (
-              <A
-                className="Pagination-item"
-                href={item.path}
-                key={index}
-                styled
-                disabled={item?.current}
-                frontend
-                onClick={scrollToTop}
-              >
-                {item.page}
-              </A>
+              <Span bold>
+                <A
+                  className="Pagination-item"
+                  href={item.path}
+                  key={index}
+                  underlined
+                  disabled={item?.current}
+                  frontend
+                  onClick={scrollToTop}
+                >
+                  {item.page}
+                </A>
+              </Span>
             ) : (
               <Fragment key={index}>
-                <span className="Pagination-dots Pagination-item">...</span>
+                <Span bold className="Pagination-dots Pagination-item">
+                  ...
+                </Span>
               </Fragment>
             )
           )}

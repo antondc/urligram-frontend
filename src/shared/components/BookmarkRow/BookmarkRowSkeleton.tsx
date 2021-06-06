@@ -17,6 +17,7 @@ export const BookmarkRowSkeleton: React.FC<BookmarkRowSkeleton> = ({ id }) => (
     borderTop={false}
     borderLeft={false}
     borderRight={false}
+    borderBottom={false}
   >
     <div className="BookmarkRowSkeleton-left">
       <div className="BookmarkRowSkeleton-icons">

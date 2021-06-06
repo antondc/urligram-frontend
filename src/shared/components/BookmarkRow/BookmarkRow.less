@@ -6,11 +6,13 @@
   display: grid;
   position: relative;
   justify-content: space-between;
-  grid-template: 'left center right' auto / 3fr 2fr 0fr;
+  grid-template:
+    'main icons voteNumber' auto
+    'main tags voteIcon' auto
+    / 4fr 2fr 0fr;
   height: 45px;
   padding: 8px 13px 7px;
   column-gap: 10px;
-  // border-bottom: 2px solid @c-base;
 
   @media @br-mobile {
     grid-template:
@@ -32,12 +34,10 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    grid-area: left;
+    align-content: space-between;
+    grid-area: main;
+    padding-top: 4px;
     overflow: hidden;
-  }
-
-  &-icons {
-    display: flex;
   }
 
   &-favicon {
@@ -58,38 +58,42 @@
     .hoverTransition(0.8);
   }
 
-  &-url {
-    position: relative;
-    line-height: 12px;
-    white-space: nowrap;
-    overflow: hidden;
-    overflow-x: scroll;
-    overflow-y: hidden;
-    text-overflow: ellipsis;
-
-    .hideScrollbar;
-  }
-
-  &-center {
+  &-leftBottom {
     display: flex;
-    align-items: flex-end;
-    grid-area: center;
-    overflow-x: scroll;
-    overflow-y: visible;
+    padding-bottom: 2px;
+    line-height: 6px;
 
-    .hideScrollbar;
+    span {
+      line-height: 6px;
+    }
   }
 
-  &-tag {
-    margin-right: 5px;
+  &-editButton,
+  &-voteButton {
+    &:hover {
+      text-decoration: underline;
+      cursor: pointer;
+      text-decoration-thickness: 2px;
+    }
   }
 
-  &-right {
+  &-voteButton {
+    &--active {
+      text-decoration-thickness: 2px;
+      text-decoration: underline;
+    }
+
+    &--loading {
+      color: @c-accentLight;
+    }
+  }
+
+  &-icons {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-end;
-    grid-area: right;
+    grid-area: icons;
   }
 
   &-image {
@@ -102,23 +106,29 @@
   }
 
   &-icon {
-    //
+    height: 10px;
+    width: 10px;
+    margin-left: 3px;
+
+    svg {
+      height: 10px;
+      width: 10px;
+      min-height: 10px;
+      min-width: 10px;
+    }
   }
 
-  &-private {
-    margin-right: 3px;
-    background: @c-background;
-  }
+  &-iconLists {
+    height: 8px;
+    width: 8px;
+    padding-top: 1px;
 
-  &-edit {
-    .hoverTransition(0.5);
-
-    margin-left: 4px;
-    transition: fill @td-fast @ease, transform @td-fast @ease;
-  }
-
-  &-vote {
-    margin-left: 2px;
+    svg {
+      height: 8px;
+      width: 8px;
+      min-height: 8px;
+      min-width: 8px;
+    }
   }
 
   &--pending {
@@ -130,44 +140,18 @@
     fill: @c-error;
   }
 
-  &-stats {
+  &-tags {
     display: flex;
-    align-items: center;
-    font-family: @ff-din;
-    font-size: @fs-small;
-    line-height: @fh-small;
+    align-items: flex-end;
+    grid-area: tags;
+    overflow-x: scroll;
+    overflow-y: visible;
+    direction: rtl;
+
+    .hideScrollbar;
   }
 
-  &-stat {
-    display: flex;
-    justify-content: flex-end;
-    align-items: baseline;
+  &-tag {
     margin-left: 5px;
-    line-height: 7px;
-    text-align: end;
-    white-space: nowrap;
-  }
-
-  &-statIcon {
-    margin-right: 1px;
-    line-height: 0;
-  }
-
-  &-actionButton {
-    // position: absolute;
-    height: 10px;
-    width: 10px;
-
-    svg {
-      height: 10px;
-      width: 10px;
-      min-height: 10px;
-      min-width: 10px;
-    }
-
-    margin-left: 1px;
-    // top: -5px;
-    // right: 5px;
-    // border-radius: 50%;
   }
 }

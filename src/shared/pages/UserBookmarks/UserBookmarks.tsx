@@ -101,16 +101,12 @@ export const UserBookmarks: React.FC<Props> = ({
           ) : (
             bookmarksIds?.map((id) => (
               <FadeInOut valueToUpdate={bookmarksByKey[id]?.deleting} appear key={id}>
-                {!bookmarksByKey[id]?.deleting && (
-                  <>
-                    <BookmarkRow id={id} />
-                    <Hr size="nano" />
-                  </>
-                )}
+                {!bookmarksByKey[id]?.deleting && <BookmarkRow id={id} key={id} />}
               </FadeInOut>
             ))
           )}
           {!bookmarksLoading && !bookmarksIds?.length && <Empty message="ⵁ This user has no bookmarks yet" />}
+          <Hr size="nano" />
           <Flex horizontal="center">
             <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
           </Flex>
