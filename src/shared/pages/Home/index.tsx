@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { bookmarksLoad } from 'Modules/Bookmarks/actions/bookmarksLoad';
 import { bookmarksRecommended } from 'Modules/Bookmarks/actions/bookmarksRecommended';
 import { selectBookmarksCurrentIds } from 'Modules/Bookmarks/selectors/selectBookmarksCurrentIds';
 import { selectBookmarksLoading } from 'Modules/Bookmarks/selectors/selectBookmarksLoading';
@@ -19,7 +20,6 @@ import { Home as HomeUI } from './Home';
 
 const Home: React.FC = () => {
   const dispatch = useDispatch();
-
   const session = useSelector(selectSession);
   const bookmarksCurrentIds = useSelector(selectBookmarksCurrentIds);
   const bookmarksCurrentIdsLoading = useSelector(selectBookmarksLoading);
@@ -38,7 +38,12 @@ const Home: React.FC = () => {
   }, [session?.id]);
 
   useEffect(() => {
-    dispatch(bookmarksRecommended());
+    if (!!session?.id) {
+      dispatch(bookmarksRecommended());
+
+      return;
+    }
+    dispatch(bookmarksLoad());
   }, [url, session?.id]);
 
   return (

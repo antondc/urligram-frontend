@@ -7,7 +7,7 @@ import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
 import { userFollowCreate } from 'Modules/Users/actions/userFollowCreate';
 import { userFollowDelete } from 'Modules/Users/actions/userFollowDelete';
 import { selectUserById } from 'Modules/Users/selectors/selectUserById';
-import { DELAY_THREE_SEC } from '../../constants';
+import { DELAY_THREE_SEC } from 'Root/src/shared/constants';
 import { UserFollowButton as UserFollowButtonUi } from './UserFollowButton';
 
 import './UserFollowButton.less';

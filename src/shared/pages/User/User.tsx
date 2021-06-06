@@ -10,7 +10,7 @@ import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListUsers from 'Components/SidebarListUsers';
 import UserForm from 'Components/UserForm';
 import { UserState } from 'Modules/Users/users.types';
-import { AIcon, Flex, Frame, Hr, Span, Tag } from 'Vendor/components';
+import { AIcon, Flex, Frame, Hr, Space, Span, Tag } from 'Vendor/components';
 
 import './User.less';
 
@@ -52,58 +52,95 @@ export const User: React.FC<Props> = ({
         <Frame grow>
           <Flex horizontal="between">
             <div>
-              <Span bold>Name:</Span>
-              <Span> @{user?.name}</Span>
+              <Flex vertical="bottom" growVertical={false} noWrap>
+                <Span bold>Name:</Span> <Space />
+                <Span bold size="small">
+                  @{user?.name}
+                </Span>
+              </Flex>
               <Hr spacer size="zero" />
               <Hr spacer size="micro" />
-              <Span bold>Location:</Span>
-              <Span> {user?.location}</Span>
+              <Flex vertical="bottom" growVertical={false} noWrap>
+                <Span bold>Location:</Span> <Space />
+                <Span bold size="small">
+                  {user?.location}
+                </Span>
+              </Flex>
               <Hr spacer size="zero" />
               <Hr spacer size="micro" />
-              <Span bold>Statement:</Span>
-              <Span> {user?.statement}</Span>
+              <Flex vertical="bottom" growVertical={false} noWrap>
+                <Span bold>Statement:</Span> <Space />
+                <Span bold size="small">
+                  {user?.statement}
+                </Span>
+              </Flex>
               <Hr spacer size="zero" />
               <Hr spacer size="micro" />
-              <Span bold>Created at:</Span>
-              <Span> {createdAtFormatted}</Span>
+              <Flex vertical="bottom" growVertical={false} noWrap>
+                <Span bold>Created at:</Span> <Space />
+                <Span bold size="small">
+                  {createdAtFormatted}
+                </Span>
+              </Flex>
             </div>
             <img className="User-image" src={user?.image?.original} />
           </Flex>
+          <Hr spacer />
           <Flex>
-            <Span className="User-detail" size="small">
-              Bookmarks:{' '}
-              <A href={`users/${userId}/bookmarks`} frontend>
-                {user?.bookmarksIds?.length}
-              </A>
+            <A href={`users/${userId}/bookmarks`} frontend underlined>
+              <Span size="small" bold>
+                Bookmarks:
+              </Span>
+            </A>
+            <Span size="small" bold>
+              <Space />
+              {user?.bookmarksIds?.length}
             </Span>
-            ·
-            <Span className="User-detail" size="small">
-              Following:{' '}
-              <A href={`users/${userId}/following`} frontend>
-                {user?.following?.length}
-              </A>
+            <Space />
+            <Space />·<Space />
+            <A href={`users/${userId}/following`} frontend underlined>
+              <Span size="small" bold>
+                Following:
+              </Span>
+            </A>
+            <Span size="small" bold>
+              <Space />
+              {user?.following?.length}
             </Span>
-            ·
-            <Span className="User-detail" size="small">
-              Followers:{' '}
-              <A href={`users/${userId}/followers`} frontend>
+            <Space />
+            <Space />·<Space />
+            <A href={`users/${userId}/followers`} frontend underlined>
+              <Span size="small" bold>
+                Followers:
+              </Span>
+              <Span size="small" bold>
+                <Space />
                 {user?.followers?.length}
-              </A>
+              </Span>
+            </A>
+            <Space />
+            <Space />·<Space />
+            <A href={`users/${userId}/followers`} frontend underlined>
+              <Span size="small" bold>
+                Tags:
+              </Span>
+            </A>
+            <Span size="small" bold>
+              <Space />
+              {user?.tags?.length}
             </Span>
-            ·
-            <Span className="User-detail" size="small">
-              Tags: {user?.tags?.length}
-            </Span>
-            ·
-            <Span className="User-detail" size="small">
-              Lists:{' '}
-              <A href={`users/${userId}/lists`} frontend>
-                {user?.lists?.length}
-              </A>
+            <Space />
+            <Space />·<Space />
+            <A href={`users/${userId}/lists`} frontend underlined>
+              <Span size="small" bold>
+                Lists:
+              </Span>
+            </A>
+            <Span size="small" bold>
+              <Space />
+              {user?.lists?.length}
             </Span>
           </Flex>
-          <Hr spacer />
-          <Hr size="nano" />
           <Hr spacer />
           <Span bold>Tags:</Span>
           <Hr spacer size="small" />
@@ -115,6 +152,7 @@ export const User: React.FC<Props> = ({
                 key={item.id}
                 styled={false}
                 frontend
+                underlined
               >
                 <Tag variant="simple" size="small">
                   {item.name}
@@ -128,7 +166,7 @@ export const User: React.FC<Props> = ({
             <Span size="normal" bold>
               User bookmarks
             </Span>
-            <A href={`users/${userId}/bookmarks`} frontend>
+            <A href={`users/${userId}/bookmarks`} frontend underlined>
               <AIcon size="small">See more</AIcon>
             </A>
           </Flex>

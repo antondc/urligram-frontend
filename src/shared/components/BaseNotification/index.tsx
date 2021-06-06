@@ -3,8 +3,8 @@ import { useDispatch } from 'react-redux';
 
 import { uiNotificationViewed } from 'Modules/Ui/actions/uiNotificationViewed';
 import { NotificationState } from 'Modules/Ui/ui.types';
+import { DELAY_THREE_SEC } from 'Root/src/shared/constants';
 import { Hr, Notification } from 'Vendor/components';
-import { DELAY_THREE_SEC } from '../../constants';
 import BookmarkDeleted from './BookmarkDeleted';
 import BookmarkGrabbed from './BookmarkGrabbed';
 import LinkVoted from './LinkVoted';

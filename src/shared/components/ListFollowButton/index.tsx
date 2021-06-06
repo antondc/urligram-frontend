@@ -9,7 +9,7 @@ import { RootState } from 'Modules/rootType';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { switchListModal } from 'Modules/Ui/actions/switchListModal';
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
-import { DELAY_THREE_SEC } from '../../constants';
+import { DELAY_THREE_SEC } from 'Root/src/shared/constants';
 import { ListFollowButton as ListFollowButtonUi } from './ListFollowButton';
 
 import './ListFollowButton.less';

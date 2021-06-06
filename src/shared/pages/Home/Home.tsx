@@ -8,6 +8,7 @@ import Sidebar from 'Components/Sidebar';
 import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListUsers from 'Components/SidebarListUsers';
 import { UserState } from 'Modules/Users/users.types';
+import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
 import { Flex, Frame, Hr, Span } from 'Vendor/components';
 
 import './Home.less';
@@ -45,7 +46,7 @@ export const Home: React.FC<Props> = ({
         <Hr spacer />
         <Frame className="Home-links" grow padding="small">
           {bookmarksIdsLoading ? (
-            <BookmarkRowSkeletonGroup length={5} />
+            <BookmarkRowSkeletonGroup length={bookmarksIds?.length || DEFAULT_PAGE_SIZE} />
           ) : (
             bookmarksIds?.map((id) => <BookmarkRow id={id} key={id} />)
           )}

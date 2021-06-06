@@ -4,9 +4,9 @@ import { TagState } from 'Modules/Tags/tags.types';
 import {
   ArrowRight,
   Button,
-  Fade,
   FadeInOut,
   Flex,
+  Frame,
   Hr,
   Input,
   Select,
@@ -115,21 +115,23 @@ export const BookmarkCreateForm: React.FC<Props> = ({
             </Span>
           </FadeInOut>
           <Hr spacer />
-          <Select
-            className="BookmarkCreateForm-tags"
-            label="Select tags"
-            value={tagsValue}
-            defaultOptions={[]}
-            options={[
-              ...tagsSearchFormatted,
-              ...allTags.map((item) => ({ label: item.name, value: item.name })),
-            ].filter((v, i, a) => a.findIndex((t) => t.value === v.value) === i)}
-            onInputChange={onChangeTagsInput}
-            onChange={onChangeTags}
-            maxItems={4}
-            grow
-            isCreatable
-          />
+          <Frame padding="none">
+            <Select
+              className="BookmarkCreateForm-tags"
+              label="Select tags"
+              value={tagsValue}
+              defaultOptions={[]}
+              options={[
+                ...tagsSearchFormatted,
+                ...allTags.map((item) => ({ label: item.name, value: item.name })),
+              ].filter((v, i, a) => a.findIndex((t) => t.value === v.value) === i)}
+              onInputChange={onChangeTagsInput}
+              onChange={onChangeTags}
+              maxItems={4}
+              grow
+              isCreatable
+            />
+          </Frame>
           <Hr spacer />
           <Span size="small" className="BookmarkCreateForm-private">
             Is Private

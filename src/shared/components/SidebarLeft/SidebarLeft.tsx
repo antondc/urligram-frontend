@@ -124,35 +124,36 @@ export const SidebarLeft: React.FC<Props> = ({
       <ul>
         <li className="SidebarLeft-item">
           <Span size="medium" bold>
-            <A className="SidebarLeft-link" href="/bookmarks" frontend underlined active={routeName === 'Bookmarks'}>
-              All bookmarks
+            <A className="SidebarLeft-link" href="" frontend underlined>
+              Dont
             </A>
           </Span>
         </li>
         <li className="SidebarLeft-item">
           <Span size="medium" bold>
-            <A className="SidebarLeft-link" href="/lists" frontend underlined active={routeName === 'Lists'}>
-              All lists
+            <A className="SidebarLeft-link" href="" frontend underlined>
+              Know
             </A>
           </Span>
         </li>
         <li className="SidebarLeft-item">
           <Span size="medium" bold>
-            <A
-              className="SidebarLeft-link"
-              href="/bookmarks?sort=-createdAt"
-              frontend
-              underlined
-              active={routeName === 'Bookmarks'}
-            >
-              Recent bookmarks
+            <A className="SidebarLeft-link" href="" frontend underlined>
+              What
             </A>
           </Span>
         </li>
         <li className="SidebarLeft-item">
           <Span size="medium" bold>
-            <A className="SidebarLeft-link" href="/tags" frontend underlined active={routeName === 'Tags'}>
-              Tags
+            <A className="SidebarLeft-link" href="" frontend underlined>
+              Goes
+            </A>
+          </Span>
+        </li>
+        <li className="SidebarLeft-item">
+          <Span size="medium" bold>
+            <A className="SidebarLeft-link" href="" frontend underlined>
+              Here
             </A>
           </Span>
         </li>
