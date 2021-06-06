@@ -19,21 +19,20 @@ export const BookmarkRowSkeleton: React.FC<BookmarkRowSkeleton> = ({ id }) => (
     borderRight={false}
     borderBottom={false}
   >
-    <div className="BookmarkRowSkeleton-left">
-      <div className="BookmarkRowSkeleton-icons">
-        <SkeletonItem className="BookmarkRowSkeleton-icon" />
-        <SkeletonItem className="BookmarkRowSkeleton-title" />
-      </div>
-      <SkeletonItem className="BookmarkRowSkeleton-url" />
+    <div className="BookmarkRowSkeleton-main">
+      <SkeletonItem className="BookmarkRowSkeleton-mainTitle" />
+      <SkeletonItem className="BookmarkRowSkeleton-mainDetails" />
     </div>
-    <div className="BookmarkRowSkeleton-center">
-      <SkeletonItem className="BookmarkRowSkeleton-tag" />
-      <SkeletonItem className="BookmarkRowSkeleton-tag" />
-      <SkeletonItem className="BookmarkRowSkeleton-tag" />
+
+    <div className="BookmarkRowSkeleton-icons">
+      <SkeletonItem className="BookmarkRowSkeleton-icon" />
+      <SkeletonItem className="BookmarkRowSkeleton-icon" />
+      <SkeletonItem className="BookmarkRowSkeleton-icon" />
     </div>
-    <div className="BookmarkRowSkeleton-right">
-      <SkeletonItem className="BookmarkRowSkeleton-vote" />
-      <SkeletonItem className="BookmarkRowSkeleton-stat" />
+    <div className="BookmarkRowSkeleton-tags">
+      <SkeletonItem className="BookmarkRowSkeleton-tag" />
+      <SkeletonItem className="BookmarkRowSkeleton-tag" />
+      <SkeletonItem className="BookmarkRowSkeleton-tag" />
     </div>
   </Frame>
 );

@@ -30,7 +30,7 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
     data-test-id="BookmarkRow"
     key={bookmark?.id}
   >
-    <div className="BookmarkRow-left">
+    <div className="BookmarkRow-main">
       <Flex vertical="top" growVertical={false} horizontal="left" noWrap>
         <img className="BookmarkRow-favicon" src={bookmark?.favicon} />
         <Span bold className="BookmarkRow-title">
@@ -39,7 +39,7 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
           </A>
         </Span>
       </Flex>
-      <div className="BookmarkRow-leftBottom">
+      <div className="BookmarkRow-mainBottom">
         <Span size="nano">Shared by</Span>
         <Space />
         <Span size="nano" bold>

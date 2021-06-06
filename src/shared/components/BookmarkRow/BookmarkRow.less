@@ -7,8 +7,8 @@
   position: relative;
   justify-content: space-between;
   grid-template:
-    'main icons voteNumber' auto
-    'main tags voteIcon' auto
+    'main icons' auto
+    'main tags' auto
     / 4fr 2fr 0fr;
   height: 45px;
   padding: 8px 13px 7px;
@@ -30,7 +30,7 @@
     box-shadow: 4px 4px 0 0 @gradientColors[green-1];
   }
 
-  &-left {
+  &-main {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -58,7 +58,7 @@
     .hoverTransition(0.8);
   }
 
-  &-leftBottom {
+  &-mainBottom {
     display: flex;
     padding-bottom: 2px;
     line-height: 6px;

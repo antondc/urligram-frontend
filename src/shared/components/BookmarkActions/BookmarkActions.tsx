@@ -29,7 +29,7 @@ export const BookmarkActions: React.FC<Props> = ({
         onClick={onBookmarkGrab}
       />
     )}
-    {!loading && userBookmarkedLink && (
+    {!loading && (userBookmarkedLink || isOwnBookmark) && (
       <>
         <BookmarkWithBackground className="BookmarkActions-bookmarked" size="small" />
         <PlusCircleWithBackground className="BookmarkActions-bookmarkRemove" size="small" onClick={onBookmarkDelete} />

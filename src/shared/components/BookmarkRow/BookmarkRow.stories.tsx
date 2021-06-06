@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { ProviderWrapper } from 'Tools/storybook/provider';
-import { FadeInOut, Hr } from 'Vendor/components';
+import { FadeInOut, Frame, Hr } from 'Vendor/components';
 import { boolean, withKnobs } from '@storybook/addon-knobs';
 import { BookmarkRow } from './BookmarkRow';
 import { BookmarkRowSkeleton } from './BookmarkRowSkeleton';
@@ -43,6 +43,9 @@ const props = {
       vote: false,
       loading: false,
     },
+    loading: false,
+    isOwnBookmark: false,
+    userBookmarkedLink: false,
   },
   onVote: noop,
   sessionUserBookmarkedLink: true,
@@ -54,32 +57,28 @@ const knobs = {
 
 export const Default: React.ReactNode = () => (
   <ProviderWrapper>
-    <FadeInOut valueToUpdate={knobs.skeleton()} speed="fastest" appear>
-      {!knobs.skeleton() ? (
-        <>
-          <BookmarkRow {...props} />
-          <Hr size="small" spacer />
-          <BookmarkRow {...props} />
-          <Hr size="small" spacer />
-          <BookmarkRow {...props} />
-          <Hr size="small" spacer />
-          <BookmarkRow {...props} />
-          <Hr size="small" spacer />
-          <BookmarkRow {...props} />
-        </>
-      ) : (
-        <>
-          <BookmarkRowSkeleton {...props} />
-          <Hr size="small" spacer />
-          <BookmarkRowSkeleton {...props} />
-          <Hr size="small" spacer />
-          <BookmarkRowSkeleton {...props} />
-          <Hr size="small" spacer />
-          <BookmarkRowSkeleton {...props} />
-          <Hr size="small" spacer />
-          <BookmarkRowSkeleton {...props} />
-        </>
-      )}
-    </FadeInOut>
+    <Frame weight="none">
+      <Frame>
+        <FadeInOut valueToUpdate={knobs.skeleton()} speed="fastest" appear>
+          {!knobs.skeleton() ? (
+            <>
+              <BookmarkRow {...props} />
+              <BookmarkRow {...props} />
+              <BookmarkRow {...props} />
+              <BookmarkRow {...props} />
+              <BookmarkRow {...props} />
+            </>
+          ) : (
+            <>
+              <BookmarkRowSkeleton {...props} />
+              <BookmarkRowSkeleton {...props} />
+              <BookmarkRowSkeleton {...props} />
+              <BookmarkRowSkeleton {...props} />
+              <BookmarkRowSkeleton {...props} />
+            </>
+          )}
+        </FadeInOut>
+      </Frame>
+    </Frame>
   </ProviderWrapper>
 );
