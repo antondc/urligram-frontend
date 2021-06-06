@@ -43,7 +43,7 @@ export const Home: React.FC<Props> = ({
       <Main>
         <Hr spacer size="nano" />
         <Hr spacer />
-        <Frame className="Home-links" grow padding="none">
+        <Frame className="Home-links" grow padding="small">
           {bookmarksIdsLoading ? (
             <BookmarkRowSkeletonGroup length={5} />
           ) : (

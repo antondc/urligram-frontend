@@ -133,7 +133,7 @@ export const User: React.FC<Props> = ({
             </A>
           </Flex>
         </Frame>
-        <Frame grow padding="none" borderTop={false}>
+        <Frame grow padding="small" borderTop={false}>
           {!!bookmarksLoading ? (
             <BookmarkRowSkeletonGroup length={5} />
           ) : (

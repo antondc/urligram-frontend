@@ -69,7 +69,7 @@ export const UserLists: React.FC<Props> = ({
             />
           </Flex>
         </Frame>
-        <Frame grow padding="none" borderBottom={false}>
+        <Frame grow padding="small">
           <FadeInOut valueToUpdate={listsLoading} speed="fastest" appear>
             {listsLoading ? (
               <BookmarkRowSkeletonGroup length={listsIds?.length || DEFAULT_PAGE_SIZE} />

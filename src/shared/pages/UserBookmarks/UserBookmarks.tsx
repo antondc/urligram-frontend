@@ -99,7 +99,7 @@ export const UserBookmarks: React.FC<Props> = ({
             />
           </Flex>
         </Frame>
-        <Frame grow padding="none" borderTop={false}>
+        <Frame grow padding="small" borderTop={false}>
           {bookmarksLoading ? (
             <BookmarkRowSkeletonGroup length={bookmarksIds?.length || DEFAULT_PAGE_SIZE} />
           ) : (

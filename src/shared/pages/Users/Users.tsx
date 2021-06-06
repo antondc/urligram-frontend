@@ -51,7 +51,7 @@ export const Users: React.FC<Props> = ({
             <SortBy options={[{ label: 'Created at', field: 'createdAt' }]} href={url} currentSort={sort} />
           </Flex>
         </Frame>
-        <Frame className="Users-users" grow padding="none">
+        <Frame className="Users-users" grow padding="small">
           {usersLoading ? (
             <UserRowSkeletonGroup length={usersCurrentIds?.length || DEFAULT_PAGE_SIZE} />
           ) : (

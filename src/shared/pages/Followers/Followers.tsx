@@ -69,7 +69,7 @@ export const Followers: React.FC<Props> = ({
             />
           </Flex>
         </Frame>
-        <Frame className="Followers-tags" grow padding="none" borderBottom={false}>
+        <Frame className="Followers-tags" grow padding="small">
           {usersLoading ? (
             <UserRowSkeletonGroup length={usersCurrentIds?.length || DEFAULT_PAGE_SIZE} />
           ) : (

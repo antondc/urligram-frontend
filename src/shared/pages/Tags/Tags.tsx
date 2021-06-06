@@ -50,7 +50,7 @@ export const Tags: React.FC<Props> = ({
             />
           </Flex>
         </Frame>
-        <Frame grow>
+        <Frame grow padding="normal">
           <Flex>
             {tagsLoading ? (
               <SidebarListTagsSkeleton />

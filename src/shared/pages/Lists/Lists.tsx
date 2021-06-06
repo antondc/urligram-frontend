@@ -61,7 +61,7 @@ export const Lists: React.FC<Props> = ({
             />
           </Flex>
         </Frame>
-        <Frame grow padding="none">
+        <Frame grow padding="small">
           {listsIdsLoading ? (
             <ListRowSkeletonGroup length={listsIds?.length || DEFAULT_PAGE_SIZE} />
           ) : (

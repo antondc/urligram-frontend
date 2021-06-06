@@ -67,32 +67,32 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
         <Space />·<Space />
         <Span
           className={
-            'BookmarkRow-voteButton' +
+            'BookmarkRow-voteButton BookmarkRow-downvote' +
             (bookmark?.statistics?.loading ? ' BookmarkRow-voteButton--loading' : '') +
-            (bookmark?.statistics?.vote === true ? ' BookmarkRow-voteButton--active' : '')
+            (bookmark?.statistics?.vote === false ? ' BookmarkRow-voteButton--active' : '') +
+            (bookmark?.statistics?.vote === false ? ' BookmarkRow-voteButton--downvoted' : '')
           }
-          size="nano"
+          bold
+          size="small"
+          onClick={() => onVote(bookmark?.statistics?.vote === false ? null : false)}
+        >
+          ▲
+        </Span>
+        <Span className="BookmarkRow-voteSlash" size="micro" bold>
+          /
+        </Span>
+        <Span
+          className={
+            'BookmarkRow-voteButton BookmarkRow-upvote' +
+            (bookmark?.statistics?.loading ? ' BookmarkRow-voteButton--loading' : '') +
+            (bookmark?.statistics?.vote === true ? ' BookmarkRow-voteButton--active' : '') +
+            (bookmark?.statistics?.vote === true ? ' BookmarkRow-voteButton--upvoted' : '')
+          }
+          size="small"
           bold
           onClick={() => onVote(bookmark?.statistics?.vote === true ? null : true)}
         >
-          {bookmark?.statistics?.vote === true ? 'Upvoted' : 'Upvote'}
-        </Span>
-        <Space />
-        <Span size="nano" bold>
-          /
-        </Span>
-        <Space />
-        <Span
-          className={
-            'BookmarkRow-voteButton' +
-            (bookmark?.statistics?.loading ? ' BookmarkRow-voteButton--loading' : '') +
-            (bookmark?.statistics?.vote === false ? ' BookmarkRow-voteButton--active' : '')
-          }
-          size="nano"
-          bold
-          onClick={() => onVote(bookmark?.statistics?.vote === false ? null : false)}
-        >
-          {bookmark?.statistics?.vote === false ? 'Downvoted' : 'Downvote'}
+          ▲
         </Span>
       </div>
     </div>

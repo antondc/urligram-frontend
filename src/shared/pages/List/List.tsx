@@ -75,7 +75,7 @@ export const List: React.FC<Props> = ({
             />
           </Flex>
         </Frame>
-        <Frame grow padding="none">
+        <Frame grow padding="small">
           {bookmarksLoading ? (
             <BookmarkRowSkeletonGroup length={bookmarksIds?.length || DEFAULT_PAGE_SIZE} />
           ) : (

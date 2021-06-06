@@ -68,8 +68,7 @@
     }
   }
 
-  &-editButton,
-  &-voteButton {
+  &-editButton {
     &:hover {
       text-decoration: underline;
       cursor: pointer;
@@ -77,14 +76,50 @@
     }
   }
 
-  &-voteButton {
-    &--active {
-      text-decoration-thickness: 2px !important;
-      text-decoration: underline;
+  &-downvote {
+    justify-self: flex-end;
+    bottom: 0;
+    left: 0;
+    transform: rotate(180deg);
+
+    &:hover {
+      color: @gradientColors[red-3];
     }
+  }
+
+  &-upvote {
+    justify-self: flex-end;
+    bottom: -2px;
+    right: 0;
+
+    &:hover {
+      color: @gradientColors[green-1];
+    }
+  }
+
+  &-voteSlash {
+    justify-self: flex-end;
+    bottom: 0;
+    left: 10px;
+  }
+
+  &-voteButton {
+    transition: color @td-fast @ease;
 
     &--loading {
       color: @c-accentLight;
+    }
+
+    &--upvoted {
+      color: @gradientColors[green-1];
+    }
+
+    &--downvoted {
+      color: @gradientColors[red-3];
+    }
+
+    &:hover {
+      cursor: pointer;
     }
   }
 
