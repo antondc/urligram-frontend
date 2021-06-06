@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { TagState } from 'Modules/Tags/tags.types';
-import { Button, FadeInOut, Hr, Input, Select, SelectValue, Span, Switch } from 'Vendor/components';
+import { Button, FadeInOut, Frame, Hr, Input, Select, SelectValue, Span, Switch } from 'Vendor/components';
 import { TagValue } from '.';
 
 import './BookmarkUpdateForm.less';
@@ -59,20 +59,22 @@ export const BookmarkUpdateForm: React.FC<Props> = ({
       </Span>
     </FadeInOut>
     <Hr spacer />
-    <Select
-      className="BookmarkUpdateForm-tags"
-      label="Select tags"
-      value={tagsValue}
-      defaultOptions={[]}
-      options={[...tagsSearchFormatted, ...allTags.map((item) => ({ label: item.name, value: item.name }))].filter(
-        (v, i, a) => a.findIndex((t) => t.value === v.value) === i
-      )}
-      onInputChange={onChangeTagsInput}
-      onChange={onChangeTags}
-      maxItems={4}
-      grow
-      isCreatable
-    />
+    <Frame padding="none" grow>
+      <Select
+        className="BookmarkUpdateForm-tags"
+        label="Select tags"
+        value={tagsValue}
+        defaultOptions={[]}
+        options={[...tagsSearchFormatted, ...allTags.map((item) => ({ label: item.name, value: item.name }))].filter(
+          (v, i, a) => a.findIndex((t) => t.value === v.value) === i
+        )}
+        onInputChange={onChangeTagsInput}
+        onChange={onChangeTags}
+        maxItems={4}
+        grow
+        isCreatable
+      />
+    </Frame>
     <Hr spacer />
     <Span size="small" className="BookmarkUpdateForm-private">
       Is Private

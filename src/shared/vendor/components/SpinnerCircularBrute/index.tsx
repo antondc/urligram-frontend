@@ -13,11 +13,11 @@ interface Props {
 }
 
 export const SpinnerCircularBrute: React.FC<Props> = ({ className, size = 'normal', speed = 'fast' }) => {
-  const [index, setIndex] = useState<number>(0);
+  const [index, setIndex] = useState<number>(2);
 
   const speedMap = {
     slow: 500,
-    normal: 300,
+    normal: 225,
     fast: 175,
     fastest: 100,
   };

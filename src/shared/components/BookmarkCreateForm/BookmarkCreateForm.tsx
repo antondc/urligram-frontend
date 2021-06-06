@@ -115,7 +115,7 @@ export const BookmarkCreateForm: React.FC<Props> = ({
             </Span>
           </FadeInOut>
           <Hr spacer />
-          <Frame padding="none">
+          <Frame padding="none" grow>
             <Select
               className="BookmarkCreateForm-tags"
               label="Select tags"

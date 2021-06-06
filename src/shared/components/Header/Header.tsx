@@ -1,8 +1,9 @@
 import React from 'react';
 
-import Logo from 'Assets/svg/logo.svg';
+// import Logo from 'Assets/svg/logo.svg';
 import User from 'Assets/svg/user.svg';
 import A from 'Components/A';
+import Logo from 'Components/Logo';
 import { GlossaryState } from 'Modules/Languages/languages.types';
 import { SessionState } from 'Modules/Session/session.types';
 import { Flex, Frame, H3, SpinnerCircularBrute } from 'Vendor/components';
@@ -14,7 +15,8 @@ interface Props {
   isLogged: boolean;
   session: SessionState;
   currentGlossary: GlossaryState;
-  loading: boolean;
+  logoLoadingHeartBeat: boolean;
+  logoLoadingColors: boolean;
   sessionLoading: boolean;
   switchUserModal: () => void;
   switchLoginModal: (mount: true) => void;
@@ -26,7 +28,8 @@ export const Header: React.FC<Props> = ({
   currentGlossary,
   switchUserModal,
   switchLoginModal,
-  loading,
+  logoLoadingHeartBeat,
+  logoLoadingColors,
   sessionLoading,
   session,
 }) => (
@@ -43,7 +46,7 @@ export const Header: React.FC<Props> = ({
         >
           <A href={'/'} frontend underlined active={routeName === 'Home'} className="Header-link">
             <Flex horizontal="left" vertical="center" noWrap>
-              <Logo className={'Header-logo' + (loading ? ' Header-logo--loading' : '')} />
+              <Logo className="Header-logo" loadingBeat={logoLoadingHeartBeat} loadingColors={logoLoadingColors} />
               <H3 className="Header-title">Linking</H3>
             </Flex>
           </A>
@@ -118,7 +121,7 @@ export const Header: React.FC<Props> = ({
                     onClick={isLogged ? switchUserModal : () => switchLoginModal(true)}
                   />
                 )}
-                {sessionLoading && <SpinnerCircularBrute className="Header-loader" />}
+                {sessionLoading && <SpinnerCircularBrute className="Header-loader" speed="normal" />}
               </Flex>
             </Frame>
           </Flex>

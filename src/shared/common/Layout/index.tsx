@@ -39,7 +39,7 @@ import Router from 'Router/index';
 import { routesList, routesWithoutOmmitedValues } from 'Router/routes';
 import enhanceRouteWithParams from 'Tools/utils/url/enhanceRouteWithParams';
 import findActiveRouteKey from 'Tools/utils/url/findActiveRouteKey';
-import { Fade } from 'Vendor/components';
+import { Fade, SpinnerCircularBrute } from 'Vendor/components';
 
 import './Layout.less';
 
@@ -131,52 +131,55 @@ class Layout extends React.Component<Props> {
       listModalMounted,
     } = this.props;
 
-    const mounted = !languageLoading;
+    const renderLoader = languageLoading;
 
     return (
-      mounted && (
-        <div className="Layout">
-          <div className="Layout-background" />
-          <LayoutContent>
-            <LayoutHelper />
-            <Header />
-            <Router />
-            <Footer />
-            <Fade mounted={userModalMounted} position="absolute" appear>
-              <UserModal />
-            </Fade>
-          </LayoutContent>
-          <Fade mounted={messageModalMounted} speed="fastest" position="fixed" appear>
-            <ModalMessage message="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus gravida augue sed ipsum pulvinar, vel pretium tellus commodo. Aliquam erat volutpat. Morbi placerat justo massa, eget laoreet enim cursus et. Aliquam id scelerisque ipsum, ac rutrum erat. Donec sed blandit metus. Maecenas pellentesque, neque vel " />
+      <div className="Layout">
+        <div className="Layout-background" />
+        <LayoutContent>
+          <LayoutHelper />
+          <Header />
+          <Router />
+          <Footer />
+          <Fade mounted={userModalMounted} position="absolute" appear>
+            <UserModal />
           </Fade>
-          <Fade mounted={loginModalMounted} speed="fastest" position="fixed" appear>
-            <LoginModal />
-          </Fade>
-          <Fade mounted={signUpModalMounted} speed="fastest" position="fixed" appear>
-            <SignUpModal />
-          </Fade>
-          <Fade mounted={welcomeModalMounted} speed="fastest" position="fixed" appear>
-            <WelcomeModal />
-          </Fade>
-          <Fade mounted={forgotPasswordModalMounted} speed="fastest" position="fixed" appear>
-            <ForgotPasswordModal />
-          </Fade>
-          <Fade mounted={resetPasswordModalMounted} speed="fastest" position="fixed" appear>
-            <ResetPasswordModal />
-          </Fade>
-          <Fade mounted={bookmarkCreateModalMounted} speed="fastest" position="fixed" appear>
-            <BookmarkCreateModal />
-          </Fade>
-          <Fade mounted={bookmarkUpdateModalMounted} speed="fastest" position="fixed" appear>
-            <BookmarkUpdateModal />
-          </Fade>
-          <Fade mounted={listModalMounted} speed="fastest" position="fixed" appear>
-            <ListModal />
-          </Fade>
-          <Notifications />
-          <div id="Tooltips" />
-        </div>
-      )
+        </LayoutContent>
+        <Fade mounted={messageModalMounted} speed="fastest" position="fixed" appear>
+          <ModalMessage message="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus gravida augue sed ipsum pulvinar, vel pretium tellus commodo. Aliquam erat volutpat. Morbi placerat justo massa, eget laoreet enim cursus et. Aliquam id scelerisque ipsum, ac rutrum erat. Donec sed blandit metus. Maecenas pellentesque, neque vel " />
+        </Fade>
+        <Fade mounted={loginModalMounted} speed="fastest" position="fixed" appear>
+          <LoginModal />
+        </Fade>
+        <Fade mounted={signUpModalMounted} speed="fastest" position="fixed" appear>
+          <SignUpModal />
+        </Fade>
+        <Fade mounted={welcomeModalMounted} speed="fastest" position="fixed" appear>
+          <WelcomeModal />
+        </Fade>
+        <Fade mounted={forgotPasswordModalMounted} speed="fastest" position="fixed" appear>
+          <ForgotPasswordModal />
+        </Fade>
+        <Fade mounted={resetPasswordModalMounted} speed="fastest" position="fixed" appear>
+          <ResetPasswordModal />
+        </Fade>
+        <Fade mounted={bookmarkCreateModalMounted} speed="fastest" position="fixed" appear>
+          <BookmarkCreateModal />
+        </Fade>
+        <Fade mounted={bookmarkUpdateModalMounted} speed="fastest" position="fixed" appear>
+          <BookmarkUpdateModal />
+        </Fade>
+        <Fade mounted={listModalMounted} speed="fastest" position="fixed" appear>
+          <ListModal />
+        </Fade>
+        <Notifications />
+        <div id="Tooltips" />
+        <Fade mounted={renderLoader} speed="fastest" position="fixed" appear>
+          <div className="Layout-loader">
+            <SpinnerCircularBrute className="Layout-loaderIcon" size="huge" />
+          </div>
+        </Fade>
+      </div>
     );
   };
 }

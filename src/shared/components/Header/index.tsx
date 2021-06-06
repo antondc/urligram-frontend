@@ -47,8 +47,9 @@ const Header: React.FC<Props> = ({
   listsLoading,
   sessionLoading,
 }) => {
-  const loading =
+  const logoLoadingHeartBeat =
     bookmarksLoading || linksLoading || linksVoteLoading || bookmarksVoteLoading || usersLoading || listsLoading;
+  const logoLoadingColors = sessionLoading;
   const session = useSelector(selectSession);
   const route = useSelector(selectCurrentRoute);
 
@@ -60,7 +61,8 @@ const Header: React.FC<Props> = ({
       currentGlossary={currentGlossary}
       switchUserModal={switchUserModal}
       switchLoginModal={switchLoginModal}
-      loading={loading}
+      logoLoadingHeartBeat={logoLoadingHeartBeat}
+      logoLoadingColors={logoLoadingColors}
       sessionLoading={sessionLoading}
     />
   );
