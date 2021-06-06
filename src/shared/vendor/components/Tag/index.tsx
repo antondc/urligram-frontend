@@ -31,8 +31,8 @@ export const Tag: React.FC<Props> = ({
   };
 
   const boldMap = {
-    nano: false,
-    small: false,
+    nano: true,
+    small: true,
     medium: true,
     big: true,
   };

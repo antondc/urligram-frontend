@@ -2,6 +2,7 @@ import React from 'react';
 
 import { URLWrapper } from '../../../services/URLWrapper';
 import { A } from '../A';
+import { Span } from '../Span';
 import { Sort } from '../Svg';
 
 import './SortBy.less';
@@ -35,7 +36,9 @@ export const SortBy: React.FC<Props> = ({ className, href, options, currentSort 
         return (
           <li className={'SortBy-listItem' + (isActiveItem ? ' SortBy-listItem--active' : '')} key={index}>
             <A href={displayedUrl} styled={false} frontend className="SortBy-listItemLink">
-              {item.label}{' '}
+              <Span size="small" bold>
+                {item.label}{' '}
+              </Span>
               <Sort
                 size="micro"
                 className={

@@ -8,6 +8,7 @@ import Select, {
 } from 'react-select';
 import CreatableSelect from 'react-select/creatable';
 
+import { Span } from '../Span';
 import { ArrowDown, Cross } from '../Svg';
 import { SelectValue } from '.';
 
@@ -124,7 +125,9 @@ export const SelectUi: React.FC<Props> = ({
     {!placeholder && (
       <label className={'Select__label ' + (focusOrContent ? 'Select__label--active' : '')}>
         <span className="Select__label-background" />
-        {label}
+        <Span size="small" bold>
+          {label}
+        </Span>
       </label>
     )}
   </div>
