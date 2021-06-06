@@ -7,27 +7,29 @@
   position: relative;
   flex-wrap: wrap;
   justify-content: space-between;
-  grid-template: 'left center right' auto / 3fr 2fr 0fr;
+  grid-template: 'main tags icons' auto / 3fr 2fr 0fr;
   height: 45px;
   padding: 8px 13px 7px;
   column-gap: 10px;
 
   @media @br-mobile {
     grid-template:
-      'left right' auto
+      'main icons' auto
       '. .' 5px
-      'center center' auto
-      'center center' auto
+      'tags tags' auto
+      'tags tags' auto
       / 1fr 0fr;
     height: unset;
   }
 
-  &-left {
+  &-main {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    grid-area: left;
+    grid-area: main;
+    padding-top: 3px;
     overflow: hidden;
+    // background: orange;
   }
 
   &-favicon {
@@ -43,6 +45,7 @@
     white-space: nowrap;
     overflow-x: scroll;
     overflow-y: hidden;
+    // background: tomato;
     text-overflow: ellipsis;
 
     .hideScrollbar;
@@ -55,17 +58,19 @@
     overflow: hidden;
     overflow-x: scroll;
     overflow-y: hidden;
+    // background: pink;
     text-overflow: ellipsis;
 
     .hideScrollbar;
   }
 
-  &-center {
+  &-tags {
     display: flex;
     align-items: flex-end;
-    grid-area: center;
+    grid-area: tags;
     overflow-x: scroll;
     overflow-y: visible;
+    // background: turquoise;
 
     .hideScrollbar;
   }
@@ -74,12 +79,13 @@
     margin-right: 5px;
   }
 
-  &-right {
+  &-icons {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-end;
-    grid-area: right;
+    grid-area: icons;
+    // background: lightcoral;
   }
 
   &-image {

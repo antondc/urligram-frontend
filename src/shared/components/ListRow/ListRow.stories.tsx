@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { ProviderWrapper } from 'Tools/storybook/provider';
-import { FadeInOut, Hr } from 'Vendor/components';
+import { FadeInOut, Frame, Hr } from 'Vendor/components';
 import { boolean, withKnobs } from '@storybook/addon-knobs';
 import { ListRow } from './ListRow';
 import { ListRowSkeleton } from './ListRowSkeleton';
@@ -114,32 +114,28 @@ const knobs = {
 
 export const Default: React.ReactNode = () => (
   <ProviderWrapper>
-    <FadeInOut valueToUpdate={knobs.skeleton()} speed="fastest" appear>
-      {!knobs.skeleton() ? (
-        <>
-          <ListRow {...props} />
-          <Hr size="small" spacer />
-          <ListRow {...props} />
-          <Hr size="small" spacer />
-          <ListRow {...props} />
-          <Hr size="small" spacer />
-          <ListRow {...props} />
-          <Hr size="small" spacer />
-          <ListRow {...props} />
-        </>
-      ) : (
-        <>
-          <ListRowSkeleton {...props} />
-          <Hr size="small" spacer />
-          <ListRowSkeleton {...props} />
-          <Hr size="small" spacer />
-          <ListRowSkeleton {...props} />
-          <Hr size="small" spacer />
-          <ListRowSkeleton {...props} />
-          <Hr size="small" spacer />
-          <ListRowSkeleton {...props} />
-        </>
-      )}
-    </FadeInOut>
+    <Frame weight="none">
+      <Frame>
+        <FadeInOut valueToUpdate={knobs.skeleton()} speed="fastest" appear>
+          {!knobs.skeleton() ? (
+            <>
+              <ListRow {...props} />
+              <ListRow {...props} />
+              <ListRow {...props} />
+              <ListRow {...props} />
+              <ListRow {...props} />
+            </>
+          ) : (
+            <>
+              <ListRowSkeleton {...props} />
+              <ListRowSkeleton {...props} />
+              <ListRowSkeleton {...props} />
+              <ListRowSkeleton {...props} />
+              <ListRowSkeleton {...props} />
+            </>
+          )}
+        </FadeInOut>
+      </Frame>
+    </Frame>
   </ProviderWrapper>
 );

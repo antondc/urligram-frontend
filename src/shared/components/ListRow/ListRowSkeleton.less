@@ -6,53 +6,43 @@
   display: grid;
   position: relative;
   justify-content: space-between;
-  grid-template: 'left center right' auto / 1fr 2fr 0fr;
+  grid-template: 'main tags icons' auto / 1fr 2fr 0fr;
   height: 45px;
   padding: 8px 13px 7px;
   column-gap: 10px;
 
   @media @br-mobile {
     grid-template:
-      'left right' auto
+      'main icons' auto
       '. .' 5px
-      'center center' auto
-      'center center' auto
+      'tags tags' auto
+      'tags tags' auto
       / 1fr 0fr;
     height: unset;
   }
 
-  &-left {
+  &-main {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    grid-area: left;
-  }
-
-  &-icons {
-    display: flex;
-  }
-
-  &-icon {
-    height: 10px;
-    width: 10px;
-    min-width: 10px;
-    margin-right: 5px;
+    grid-area: main;
   }
 
   &-title {
-    height: 10px;
+    height: @fs-normal;
     width: 200px;
   }
 
-  &-url {
-    height: @fs-micro;
+  &-description {
+    height: @fs-nano;
     width: 100%;
   }
 
-  &-center {
+  &-tags {
     display: flex;
+    justify-content: flex-end;
     align-items: flex-end;
-    grid-area: center;
+    grid-area: tags;
     overflow: hidden;
   }
 
@@ -62,25 +52,25 @@
     margin-right: 4px;
   }
 
-  &-right {
+  &-icons {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-end;
-    grid-area: right;
+    grid-area: icons;
   }
 
-  &-vote {
+  &-icon {
     height: @fs-normal;
     height: 10px;
-    width: 25px;
+    width: 10px;
+    min-width: 10px;
   }
 
-  &-stat {
-    display: flex;
-    justify-content: flex-end;
+  &-iconLarge {
+    height: @fs-normal;
     height: 10px;
-    width: 50px;
-    text-align: end;
+    width: 30px;
+    min-width: 30px;
   }
 }

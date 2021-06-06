@@ -9,22 +9,19 @@ interface ListRowSkeleton {
 }
 
 export const ListRowSkeleton: React.FC<ListRowSkeleton> = ({ id }) => (
-  <Frame grow className="ListRowSkeleton" data-test-id="ListRowSkeleton" key={id}>
-    <div className="ListRowSkeleton-left">
-      <div className="ListRowSkeleton-icons">
-        <SkeletonItem className="ListRowSkeleton-icon" />
-        <SkeletonItem className="ListRowSkeleton-title" />
-      </div>
-      <SkeletonItem className="ListRowSkeleton-url" />
+  <Frame grow className="ListRowSkeleton" data-test-id="ListRowSkeleton" key={id} borders={false}>
+    <div className="ListRowSkeleton-main">
+      <SkeletonItem className="ListRowSkeleton-title" />
+      <SkeletonItem className="ListRowSkeleton-description" />
     </div>
-    <div className="ListRowSkeleton-center">
+    <div className="ListRowSkeleton-tags">
       <SkeletonItem className="ListRowSkeleton-tag" />
       <SkeletonItem className="ListRowSkeleton-tag" />
       <SkeletonItem className="ListRowSkeleton-tag" />
     </div>
-    <div className="ListRowSkeleton-right">
-      <SkeletonItem className="ListRowSkeleton-vote" />
-      <SkeletonItem className="ListRowSkeleton-stat" />
+    <div className="ListRowSkeleton-icons">
+      <SkeletonItem className="ListRowSkeleton-icon" />
+      <SkeletonItem className="ListRowSkeleton-icon ListRowSkeleton-iconLarge" />
     </div>
   </Frame>
 );

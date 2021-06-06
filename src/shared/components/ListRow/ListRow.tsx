@@ -13,19 +13,19 @@ interface Props extends Partial<ListState> {
 }
 
 export const ListRow: React.FC<Props> = ({ id, name, tags, bookmarksIds, members, description }) => (
-  <Frame grow className="ListRow" data-test-id="ListRow" key={id}>
-    <div className="ListRow-left">
+  <Frame grow className="ListRow" data-test-id="ListRow" key={id} borders={false}>
+    <div className="ListRow-main">
       <Span size="normal" bold className="ListRow-title">
         <A href={`/lists/${id}`} frontend styled={false}>
           {name}
         </A>
       </Span>
-      <Span className="ListRow-description" size="micro">
+      <Span className="ListRow-description" size="nano">
         {description}
         <Space />
       </Span>
     </div>
-    <div className="ListRow-center">
+    <div className="ListRow-tags">
       {tags?.map((item) => (
         <A
           className="ListRow-tag"
@@ -40,7 +40,7 @@ export const ListRow: React.FC<Props> = ({ id, name, tags, bookmarksIds, members
         </A>
       ))}
     </div>
-    <div className="ListRow-right">
+    <div className="ListRow-icons">
       <ListFollowButton listId={id} size="small" />
       <Flex horizontal="right" growVertical={false} vertical="bottom" noWrap>
         <Bookmark size="nano" className="ListRow-icon" />
