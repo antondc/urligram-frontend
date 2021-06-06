@@ -9,17 +9,26 @@ interface UserRowSkeleton {
 }
 
 export const UserRowSkeleton: React.FC<UserRowSkeleton> = ({ id }) => (
-  <Frame grow className="UserRowSkeleton" data-test-id="UserRowSkeleton" key={id}>
-    <div className="UserRowSkeleton-left">
-      <SkeletonItem className="UserRowSkeleton-title" />
-      <SkeletonItem className="UserRowSkeleton-url" />
+  <Frame
+    grow
+    className="UserRowSkeleton"
+    data-test-id="UserRowSkeleton"
+    key={id}
+    borderTop={false}
+    borderLeft={false}
+    borderRight={false}
+    borderBottom={false}
+  >
+    <div className="UserRowSkeleton-main">
+      <SkeletonItem className="UserRowSkeleton-name" />
+      <SkeletonItem className="UserRowSkeleton-details" />
     </div>
-    <div className="UserRowSkeleton-center">
+    <div className="UserRowSkeleton-tags">
       <SkeletonItem className="UserRowSkeleton-tag" />
       <SkeletonItem className="UserRowSkeleton-tag" />
       <SkeletonItem className="UserRowSkeleton-tag" />
     </div>
-    <div className="UserRowSkeleton-right">
+    <div className="UserRowSkeleton-imageContainer">
       <SkeletonItem className="UserRowSkeleton-image" />
     </div>
   </Frame>

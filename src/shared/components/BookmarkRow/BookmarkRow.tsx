@@ -48,17 +48,17 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
         <Space />
         <Span size="nano">
           user
-          {bookmark?.statistics?.timesBookmarked > 1 ? 's' : ''}
+          {bookmark?.statistics?.timesBookmarked !== 1 ? 's' : ''}
         </Span>
         {!!sessionUserBookmarkedLink && (
           <>
-            <Space />-<Space />
+            <Space />·<Space />
             <Span className="BookmarkRow-editButton" size="nano" bold>
               <TextButton size="nano" text="Edit" onClick={onEdit} />
             </Span>
           </>
         )}
-        <Space />-<Space />
+        <Space />·<Space />
         <Span
           className={
             'BookmarkRow-voteButton' +
@@ -88,7 +88,7 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
         >
           {bookmark?.statistics?.vote === false ? 'Downvoted' : 'Downvote'}
         </Span>
-        <Space />-<Space />
+        <Space />·<Space />
         <Span size="nano">Ranking</Span>
         <Space />
         <Span size="nano" bold>

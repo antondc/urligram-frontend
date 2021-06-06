@@ -3,7 +3,7 @@ import React from 'react';
 import A from 'Components/A';
 import UserFollowButton from 'Components/UserFollowButton';
 import { UserState } from 'Modules/Users/users.types';
-import { Frame, Span, Tag } from 'Vendor/components';
+import { Frame, Space, Span, Tag } from 'Vendor/components';
 
 import './UserRow.less';
 
@@ -27,44 +27,62 @@ export const UserRow: React.FC<UserRow> = ({
   ammountBookmarks,
   sinceTranslation,
 }) => (
-  <Frame grow className="UserRow" data-test-id="UserRow" key={'UserRow-' + id}>
-    <div className="UserRow-left">
+  <Frame grow className="UserRow" data-test-id="UserRow" key={'UserRow-' + id} borders={false}>
+    <div className="UserRow-main">
       <A href={`users/${id}`} styled frontend>
-        <Span bold size="small" className="UserRow-title">
+        <Span bold size="small" className="UserRow-name">
           @{name}
         </Span>
       </A>
       <div className="UserRow-details">
         <Span size="nano">
-          <A href={`users/${id}/lists`} styled frontend disabled={!ammountLists}>
-            {ammountLists} lists
+          <A href={`users/${id}/lists`} styled frontend disabled={!ammountLists} underlined>
+            <Span size="nano" bold>
+              {ammountLists}
+            </Span>
+            <Space />
+            lists
           </A>
-        </Span>
-        <Span className="UserRow-dot" size="nano">
-          ·
-        </Span>
-        <Span size="nano">
-          <A href={`users/${id}/bookmarks`} styled frontend disabled={!ammountBookmarks}>
-            {ammountBookmarks} bookmarks
+          <Space />
+          <Space />
+          <Span size="nano" bold>
+            ·
+          </Span>
+          <Space />
+          <Space />
+          <A href={`users/${id}/bookmarks`} styled frontend disabled={!ammountBookmarks} underlined>
+            <Span size="nano" bold>
+              {ammountBookmarks}
+            </Span>
+            <Space />
+            bookmarks
           </A>
-        </Span>
-        <Span className="UserRow-dot" size="nano">
-          ·
-        </Span>
-        <Span size="nano">
-          <A href={`users/${id}`} styled frontend disabled={!connections}>
-            {connections} connections
+          <Space />
+          <Space />
+          <Span size="nano" bold>
+            ·
+          </Span>
+          <Space />
+          <Space />
+          <A href={`users/${id}`} styled frontend disabled={!connections} underlined>
+            <Span size="nano" bold>
+              {connections}
+            </Span>
+            <Space />
+            connections
           </A>
-        </Span>
-        <Span className="UserRow-dot" size="nano">
-          ·
-        </Span>
-        <Span size="nano">
+          <Space />
+          <Space />
+          <Span size="nano" bold>
+            ·
+          </Span>
+          <Space />
+          <Space />
           {sinceTranslation?.toLocaleLowerCase()} {createdAtFormatted}
         </Span>
       </div>
     </div>
-    <div className="UserRow-center">
+    <div className="UserRow-tags">
       {tags?.map((item) => (
         <A
           className="UserRow-tag"
@@ -79,7 +97,7 @@ export const UserRow: React.FC<UserRow> = ({
         </A>
       ))}
     </div>
-    <div className="UserRow-right">
+    <div className="UserRow-imageContainer">
       <A href={`users/${id}`} styled={false} frontend>
         <img className="UserRow-image" src={image?.original} />
       </A>

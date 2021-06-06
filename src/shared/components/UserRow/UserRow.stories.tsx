@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { ProviderWrapper } from 'Tools/storybook/provider';
-import { FadeInOut, Hr } from 'Vendor/components';
+import { FadeInOut, Frame, Hr } from 'Vendor/components';
 import { boolean, withKnobs } from '@storybook/addon-knobs';
 import { UserRow } from './UserRow';
 import { UserRowSkeleton } from './UserRowSkeleton';
@@ -16,9 +16,9 @@ const props = {
   id: 'string1',
   name: 'Emile_879',
   image: {
-    original: 'https://cdn-images-1.medium.com/max/1200/original/1*NpUUls7kjn9JhO4ChjGV7w.png',
-    w500h500: 'https://dev.linking.me:3000/media/files/users/image/w500h500/f71215e7-2d74-434a-b63b-f6cbd67f8b08.jpg',
-    w200h50: 'https://dev.linking.me:3000/media/files/users/image/w200h50/f71215e7-2d74-434a-b63b-f6cbd67f8b08.jpg',
+    original: 'https://picsum.photos/300/300',
+    w500h500: 'https://picsum.photos/300/300',
+    w200h50: 'https://picsum.photos/300/300',
   },
   level: 'admin',
   email: 'hello@example.com',
@@ -115,16 +115,28 @@ const knobs = {
 
 export const Default: React.ReactNode = () => (
   <ProviderWrapper>
-    <FadeInOut valueToUpdate={knobs.skeleton()} speed="fastest" appear>
-      {!knobs.skeleton() ? <UserRow {...props} /> : <UserRowSkeleton id="1" />}
-      <Hr size="small" spacer />
-      {!knobs.skeleton() ? <UserRow {...props} /> : <UserRowSkeleton id="1" />}
-      <Hr size="small" spacer />
-      {!knobs.skeleton() ? <UserRow {...props} /> : <UserRowSkeleton id="1" />}
-      <Hr size="small" spacer />
-      {!knobs.skeleton() ? <UserRow {...props} /> : <UserRowSkeleton id="1" />}
-      <Hr size="small" spacer />
-      {!knobs.skeleton() ? <UserRow {...props} /> : <UserRowSkeleton id="1" />}
-    </FadeInOut>
+    <Frame weight="none">
+      <Frame>
+        <FadeInOut valueToUpdate={knobs.skeleton()} speed="fastest" appear>
+          {!knobs.skeleton() ? (
+            <>
+              <UserRow {...props} />
+              <UserRow {...props} />
+              <UserRow {...props} />
+              <UserRow {...props} />
+              <UserRow {...props} />
+            </>
+          ) : (
+            <>
+              <UserRowSkeleton {...props} />
+              <UserRowSkeleton {...props} />
+              <UserRowSkeleton {...props} />
+              <UserRowSkeleton {...props} />
+              <UserRowSkeleton {...props} />
+            </>
+          )}
+        </FadeInOut>
+      </Frame>
+    </Frame>
   </ProviderWrapper>
 );

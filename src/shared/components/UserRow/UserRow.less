@@ -5,42 +5,53 @@
 @{c} {
   display: grid;
   position: relative;
-  grid-template: 'left center right' auto / 3fr 2fr 0fr;
+  grid-template: 'main tags image' auto / 3fr 2fr 0fr;
   height: 45px;
   padding: 8px 13px 7px;
   column-gap: 10px;
+  // background: tan;
 
   @media @br-mobile {
     grid-template:
-      'left right' auto
+      'main image' auto
       '. .' 5px
-      'center center' auto
-      'center center' auto
+      'tags tags' auto
+      'tags tags' auto
       / 1fr 0fr;
     height: unset;
   }
 
-  &-left {
+  &-main {
     display: flex;
     flex-direction: column;
-    grid-area: left;
+    justify-content: space-between;
+    grid-area: main;
     overflow: hidden;
+    // background: orange;
+  }
+
+  &-name {
+    // background: turquoise;
   }
 
   &-details {
+    display: flex;
+    align-items: flex-end;
     white-space: nowrap;
     overflow-x: scroll;
     overflow-y: hidden;
+    // background: yellow;
 
     .hideScrollbar;
   }
 
-  &-center {
+  &-tags {
     display: flex;
     align-items: flex-end;
-    grid-area: center;
+    grid-area: tags;
     overflow-x: scroll;
     overflow-y: visible;
+    // background: tomato;
 
     .hideScrollbar;
   }
@@ -49,14 +60,15 @@
     margin-right: 5px;
   }
 
-  &-right {
+  &-imageContainer {
     flex-shrink: 0;
-    grid-area: right;
+    grid-area: image;
+    // background: pink;
   }
 
   &-image {
-    height: 27px;
-    width: 27px;
+    height: 30px;
+    width: 30px;
     border-radius: 50%;
     object-fit: cover;
     object-position: center;
@@ -68,7 +80,7 @@
     width: 12px;
     top: 4px;
     right: 6px;
-    outline: 1px solid @c-background;
+    // outline: 1px solid @c-background;
     border-radius: 50%;
   }
 }
