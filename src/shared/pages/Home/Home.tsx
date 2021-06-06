@@ -8,7 +8,7 @@ import Sidebar from 'Components/Sidebar';
 import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListUsers from 'Components/SidebarListUsers';
 import { UserState } from 'Modules/Users/users.types';
-import { Flex, Frame, H4, Hr, Span } from 'Vendor/components';
+import { Flex, Frame, Hr, Span } from 'Vendor/components';
 
 import './Home.less';
 
@@ -41,28 +41,19 @@ export const Home: React.FC<Props> = ({
   <div className="Home">
     <Flex horizontal="between" vertical="top">
       <Main>
-        <Frame className="Home-links" grow>
-          <Flex horizontal="between" vertical="bottom">
-            <H4>Recommended bookmarks</H4>
-          </Flex>
-          <Hr spacer size="small" />
+        <Hr spacer size="nano" />
+        <Hr spacer />
+        <Frame className="Home-links" grow padding="none">
           {bookmarksIdsLoading ? (
             <BookmarkRowSkeletonGroup length={5} />
           ) : (
-            bookmarksIds?.map((id, index) => (
-              <React.Fragment key={id}>
-                {!!index && <Hr spacer size="small" />}
-                <BookmarkRow id={id} />
-              </React.Fragment>
-            ))
+            bookmarksIds?.map((id) => <BookmarkRow id={id} key={id} />)
           )}
           {!bookmarksIdsLoading && !bookmarksIds?.length && (
             <Span bold>ⵁ Start following users to receive recommended bookmarks.</Span>
           )}
-          <Flex horizontal="center">
-            <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
-          </Flex>
         </Frame>
+        <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
       </Main>
       <Sidebar>
         <SidebarBlock

@@ -10,7 +10,7 @@ import { UserRowSkeletonGroup } from 'Components/UserRow/UserRowSkeletonGroup';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
-import { Flex, Frame, H4, Hr, SortBy, Span } from 'Vendor/components';
+import { A, Flex, Frame, Hr, SortBy, Span } from 'Vendor/components';
 
 import './Following.less';
 
@@ -49,36 +49,35 @@ export const Following: React.FC<Props> = ({
   <div className="Following">
     <Flex horizontal="between" vertical="top">
       <Main>
-        <Flex horizontal="right">
-          <SortBy
-            options={[
-              { label: 'Name', field: 'name' },
-              { label: 'Login', field: 'login' },
-              { label: 'Bookmarks', field: 'bookmarks' },
-            ]}
-            href={url}
-            currentSort={sort}
-          />
-        </Flex>
-        <Hr spacer size="small" />
-        <Frame className="Following-tags" grow>
-          <H4>Users followed by @{user?.name}</H4>
-          <Hr spacer />
+        <Hr spacer size="nano" />
+        <Hr spacer />
+        <Frame grow padding="small">
+          <Span size="normal" bold>
+            Users following <A href={`/users/${userId}/folloing`}>@{user?.name}</A>
+          </Span>
+        </Frame>
+        <Frame grow padding="none" shadow={false} borderBottom={false} borderTop={false}>
+          <Flex horizontal="right">
+            <SortBy
+              options={[
+                { label: 'Name', field: 'name' },
+                { label: 'Login', field: 'login' },
+                { label: 'Bookmarks', field: 'bookmarks' },
+              ]}
+              href={url}
+              currentSort={sort}
+            />
+          </Flex>
+        </Frame>
+        <Frame className="Following-tags" grow padding="none" borderBottom={false}>
           {usersLoading ? (
             <UserRowSkeletonGroup length={usersCurrentIds?.length || DEFAULT_PAGE_SIZE} />
           ) : (
-            usersCurrentIds?.map((id, index) => (
-              <React.Fragment key={id}>
-                {!!index && <Hr spacer size="small" />}
-                <UserRow id={id} />
-              </React.Fragment>
-            ))
+            usersCurrentIds?.map((id) => <UserRow id={id} key={id} />)
           )}
           {!usersLoading && !usersCurrentIds?.length && <Span bold>ⵁ We didnt find any user.</Span>}
-          <Flex horizontal="center">
-            <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
-          </Flex>
         </Frame>
+        <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
       </Main>
       <Sidebar>
         <SidebarBlock

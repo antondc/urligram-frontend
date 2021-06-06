@@ -1,6 +1,5 @@
 import React from 'react';
 
-import A from 'Components/A';
 import { BookmarkRowSkeletonGroup } from 'Components/BookmarkRow/BookmarkRowSkeletonGroup';
 import ListRow from 'Components/ListRow';
 import Main from 'Components/Main';
@@ -11,7 +10,7 @@ import SidebarListTags from 'Components/SidebarListTags';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
-import { FadeInOut, Flex, Frame, H4, Hr, SortBy, Span } from 'Vendor/components';
+import { A, FadeInOut, Flex, Frame, Hr, SortBy, Span } from 'Vendor/components';
 
 import './UserLists.less';
 
@@ -50,40 +49,37 @@ export const UserLists: React.FC<Props> = ({
   <div className="UserLists">
     <Flex horizontal="between" vertical="top">
       <Main>
-        <Flex horizontal="right">
-          <SortBy
-            options={[
-              { label: 'Created at', field: 'createdAt' },
-              { label: 'Members', field: 'members' },
-              { label: 'Bookmarks', field: 'bookmarks' },
-            ]}
-            href={url}
-            currentSort={sort}
-          />
-        </Flex>
-        <Hr spacer size="small" />
-        <Frame grow>
-          <H4>
+        <Hr spacer size="nano" />
+        <Hr spacer />
+        <Frame grow padding="small">
+          <Span size="normal" bold>
             Lists of <A href={`/users/${userId}`}>@{user?.name}</A>
-          </H4>
-          <Hr spacer />
+          </Span>
+        </Frame>
+        <Frame grow padding="none" shadow={false} borderBottom={false} borderTop={false}>
+          <Flex horizontal="right">
+            <SortBy
+              options={[
+                { label: 'Created at', field: 'createdAt' },
+                { label: 'Members', field: 'members' },
+                { label: 'Bookmarks', field: 'bookmarks' },
+              ]}
+              href={url}
+              currentSort={sort}
+            />
+          </Flex>
+        </Frame>
+        <Frame grow padding="none" borderBottom={false}>
           <FadeInOut valueToUpdate={listsLoading} speed="fastest" appear>
             {listsLoading ? (
               <BookmarkRowSkeletonGroup length={listsIds?.length || DEFAULT_PAGE_SIZE} />
             ) : (
-              listsIds?.map((id, index) => (
-                <React.Fragment key={id}>
-                  {!!index && <Hr spacer size="small" />}
-                  <ListRow id={id} />
-                </React.Fragment>
-              ))
+              listsIds?.map((id) => <ListRow id={id} key={id} />)
             )}
             {!listsLoading && !listsIds?.length && <Span bold>ⵁ We didn find any list.</Span>}
           </FadeInOut>
-          <Flex horizontal="center">
-            <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
-          </Flex>
         </Frame>
+        <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
       </Main>
       <Sidebar>
         <SidebarBlock title="My Tags" href={`users/${userId}/tags`} loading={userMostUsedTagsLoading}>

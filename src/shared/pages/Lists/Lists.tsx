@@ -11,7 +11,7 @@ import SidebarListUsers from 'Components/SidebarListUsers';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
-import { Flex, Frame, H4, Hr, SortBy, Span } from 'Vendor/components';
+import { Flex, Frame, Hr, SortBy, Span } from 'Vendor/components';
 
 import './Lists.less';
 
@@ -46,36 +46,30 @@ export const Lists: React.FC<Props> = ({
   <div className="Lists">
     <Flex horizontal="between" vertical="top">
       <Main>
-        <Flex horizontal="right">
-          <SortBy
-            options={[
-              { label: 'Date', field: 'createdAt' },
-              { label: 'Updated', field: 'updatedAt' },
-              { label: 'Members', field: 'members' },
-            ]}
-            href={url}
-            currentSort={sort}
-          />
-        </Flex>
-        <Hr spacer size="small" />
-        <Frame grow>
-          <H4>All Lists</H4>
-          <Hr spacer size="small" />
+        <Hr spacer size="nano" />
+        <Hr spacer />
+        <Frame grow padding="none" shadow={false} borderBottom={false}>
+          <Flex horizontal="right">
+            <SortBy
+              options={[
+                { label: 'Date', field: 'createdAt' },
+                { label: 'Updated', field: 'updatedAt' },
+                { label: 'Members', field: 'members' },
+              ]}
+              href={url}
+              currentSort={sort}
+            />
+          </Flex>
+        </Frame>
+        <Frame grow padding="none">
           {listsIdsLoading ? (
             <ListRowSkeletonGroup length={listsIds?.length || DEFAULT_PAGE_SIZE} />
           ) : (
-            listsIds?.map((id, index) => (
-              <React.Fragment key={id}>
-                {!!index && <Hr spacer size="small" />}
-                <ListRow id={id} />
-              </React.Fragment>
-            ))
+            listsIds?.map((id) => <ListRow id={id} key={id} />)
           )}
           {!listsIdsLoading && !listsIds?.length && <Span bold>ⵁ We didn find any list.</Span>}
-          <Flex horizontal="center">
-            <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
-          </Flex>
         </Frame>
+        <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
       </Main>
       <Sidebar>
         <SidebarBlock title="Most Used Tags" loading={mostUsedTagsLoading}>

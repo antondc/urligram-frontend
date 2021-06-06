@@ -59,6 +59,12 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
           </>
         )}
         <Space />·<Space />
+        <Span size="nano">Ranking</Span>
+        <Space />
+        <Span size="nano" bold>
+          {bookmark?.statistics?.absoluteVote || 0}
+        </Span>
+        <Space />·<Space />
         <Span
           className={
             'BookmarkRow-voteButton' +
@@ -87,12 +93,6 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
           onClick={() => onVote(bookmark?.statistics?.vote === false ? null : false)}
         >
           {bookmark?.statistics?.vote === false ? 'Downvoted' : 'Downvote'}
-        </Span>
-        <Space />·<Space />
-        <Span size="nano">Ranking</Span>
-        <Space />
-        <Span size="nano" bold>
-          {bookmark?.statistics?.absoluteVote || 0}
         </Span>
       </div>
     </div>

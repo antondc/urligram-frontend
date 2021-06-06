@@ -12,7 +12,7 @@ import { BookmarksByKey } from 'Modules/Bookmarks/bookmarks.types';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
-import { FadeInOut, Flex, Frame, Hr, Select, SelectValue, SortBy } from 'Vendor/components';
+import { A, FadeInOut, Flex, Frame, Hr, Select, SelectValue, SortBy, Span } from 'Vendor/components';
 
 import './UserBookmarks.less';
 
@@ -45,6 +45,7 @@ interface Props {
 
 export const UserBookmarks: React.FC<Props> = ({
   userId,
+  user,
   bookmarksByKey,
   bookmarksIds,
   bookmarksLoading,
@@ -67,35 +68,38 @@ export const UserBookmarks: React.FC<Props> = ({
       <Main>
         <Hr spacer size="nano" />
         <Hr spacer />
-        <Frame grow padding="none">
-          <Frame grow padding="none" shadow={false} weight="none">
-            <Flex horizontal="between" noWrap>
-              <Select
-                className="UserBookmarks-select"
-                label="Select tags"
-                value={currentQueryParamFilterTags}
-                defaultOptions={allTags.map((item) => ({ label: item.name, value: item.name }))}
-                options={[
-                  ...tagsSearchFormatted,
-                  ...allTags.map((item) => ({ label: item.name, value: item.name })),
-                ].filter((v, i, a) => a.findIndex((t) => t.value === v.value) === i)}
-                onInputChange={onInputChange}
-                onChange={onChange}
-                maxItems={4}
-              />
-              <SortBy
-                options={[
-                  { label: 'Rating', field: 'vote' },
-                  { label: 'Bookmarked', field: 'timesbookmarked' },
-                  { label: 'Created', field: 'createdAt' },
-                ]}
-                href={url}
-                currentSort={sort}
-              />
-            </Flex>
-          </Frame>
-          <Hr size="nano" />
-
+        <Frame grow padding="small">
+          <Span size="normal" bold>
+            Bookmarks of <A href={`/users/${userId}`}>@{user?.name}</A>
+          </Span>
+        </Frame>
+        <Frame grow padding="none" shadow={false} borderTop={false}>
+          <Flex horizontal="between" noWrap>
+            <Select
+              className="UserBookmarks-select"
+              label="Select tags"
+              value={currentQueryParamFilterTags}
+              defaultOptions={allTags.map((item) => ({ label: item.name, value: item.name }))}
+              options={[
+                ...tagsSearchFormatted,
+                ...allTags.map((item) => ({ label: item.name, value: item.name })),
+              ].filter((v, i, a) => a.findIndex((t) => t.value === v.value) === i)}
+              onInputChange={onInputChange}
+              onChange={onChange}
+              maxItems={4}
+            />
+            <SortBy
+              options={[
+                { label: 'Rating', field: 'vote' },
+                { label: 'Bookmarked', field: 'timesbookmarked' },
+                { label: 'Created', field: 'createdAt' },
+              ]}
+              href={url}
+              currentSort={sort}
+            />
+          </Flex>
+        </Frame>
+        <Frame grow padding="none" borderTop={false}>
           {bookmarksLoading ? (
             <BookmarkRowSkeletonGroup length={bookmarksIds?.length || DEFAULT_PAGE_SIZE} />
           ) : (
@@ -106,11 +110,8 @@ export const UserBookmarks: React.FC<Props> = ({
             ))
           )}
           {!bookmarksLoading && !bookmarksIds?.length && <Empty message="ⵁ This user has no bookmarks yet" />}
-          <Hr size="nano" />
-          <Flex horizontal="center">
-            <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
-          </Flex>
         </Frame>
+        <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
         <Hr spacer size="nano" />
         <Hr spacer />
       </Main>

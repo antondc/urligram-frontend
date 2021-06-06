@@ -2,7 +2,7 @@ import React from 'react';
 
 import { ProviderWrapper } from 'Tools/storybook/provider';
 import { H1, Hr } from 'Vendor/components';
-import { boolean, number, text, withKnobs } from '@storybook/addon-knobs';
+import { number, text, withKnobs } from '@storybook/addon-knobs';
 import Pagination from './index';
 
 export default {
@@ -17,7 +17,6 @@ const knobs = {
   offset: (): number => number('Offset', 30),
   pageNeighbours: (): number => number('Page neigbours', 2),
   path: (): string => text('Path', 'https://example.com'),
-  grow: (): boolean => boolean('Grow', false),
 };
 
 export const Default: React.FC = () => (
@@ -30,7 +29,6 @@ export const Default: React.FC = () => (
       offset={knobs.offset()}
       pageNeighbours={knobs.pageNeighbours()}
       path={knobs.path()}
-      grow={knobs.grow()}
     />
   </ProviderWrapper>
 );

@@ -8,7 +8,7 @@ import { SidebarListTagsSkeleton } from 'Components/SidebarListTags/SidebarListT
 import SidebarListUsers from 'Components/SidebarListUsers';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
-import { Flex, Frame, H4, Hr, SortBy, Space, Tag } from 'Vendor/components';
+import { Flex, Frame, Hr, SortBy, Space, Tag } from 'Vendor/components';
 
 import './UserTags.less';
 
@@ -36,7 +36,9 @@ export const UserTags: React.FC<Props> = ({
   <div className="UserTags">
     <Flex horizontal="between" vertical="top">
       <Main>
-        <Frame grow>
+        <Hr spacer size="nano" />
+        <Hr spacer />
+        <Frame grow padding="none" shadow={false} borderBottom={false}>
           <Flex horizontal="right" vertical="top" growHorizontal>
             <SortBy
               options={[
@@ -47,8 +49,8 @@ export const UserTags: React.FC<Props> = ({
               currentSort={sort}
             />
           </Flex>
-          <H4>My Tags</H4>
-          <Hr spacer />
+        </Frame>
+        <Frame grow>
           <Flex>
             {tagsLoading ? (
               <SidebarListTagsSkeleton />

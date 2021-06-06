@@ -10,7 +10,7 @@ import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListUsers from 'Components/SidebarListUsers';
 import UserForm from 'Components/UserForm';
 import { UserState } from 'Modules/Users/users.types';
-import { AIcon, Flex, Frame, H4, Hr, Span, Tag } from 'Vendor/components';
+import { AIcon, Flex, Frame, Hr, Span, Tag } from 'Vendor/components';
 
 import './User.less';
 
@@ -42,13 +42,12 @@ export const User: React.FC<Props> = ({
   <div className="User">
     <Flex horizontal="between" vertical="top">
       <Main>
+        <Hr spacer size="nano" />
+        <Hr spacer />
         {userIdIsSessionId && (
-          <>
-            <Frame grow>
-              <UserForm />
-            </Frame>
-            <Hr spacer />
-          </>
+          <Frame grow borderBottom={false}>
+            <UserForm />
+          </Frame>
         )}
         <Frame grow>
           <Flex horizontal="between">
@@ -70,7 +69,6 @@ export const User: React.FC<Props> = ({
             </div>
             <img className="User-image" src={user?.image?.original} />
           </Flex>
-          <Hr spacer />
           <Flex>
             <Span className="User-detail" size="small">
               Bookmarks:{' '}
@@ -125,24 +123,21 @@ export const User: React.FC<Props> = ({
             ))}
           </Flex>
         </Frame>
-        <Hr spacer />
-        <Frame grow>
+        <Frame grow padding="small" borderTop={false}>
           <Flex horizontal="between" vertical="bottom">
-            <H4>User bookmarks</H4>
+            <Span size="normal" bold>
+              User bookmarks
+            </Span>
             <A href={`users/${userId}/bookmarks`} frontend>
               <AIcon size="small">See more</AIcon>
             </A>
           </Flex>
-          <Hr spacer />
+        </Frame>
+        <Frame grow padding="none" borderTop={false}>
           {!!bookmarksLoading ? (
             <BookmarkRowSkeletonGroup length={5} />
           ) : (
-            bookmarksIds?.map((id, index) => (
-              <React.Fragment key={id}>
-                {!!index && <Hr spacer size="small" />}
-                <BookmarkRow id={id} />
-              </React.Fragment>
-            ))
+            bookmarksIds?.map((id) => <BookmarkRow id={id} key={id} />)
           )}
           {!bookmarksLoading && !bookmarksIds?.length && <Empty message="ⵁ This user has no bookmarks yet" />}
         </Frame>

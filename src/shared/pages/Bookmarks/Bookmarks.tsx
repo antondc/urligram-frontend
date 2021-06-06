@@ -56,47 +56,43 @@ export const Bookmarks: React.FC<Props> = ({
   <div className="Bookmarks">
     <Flex horizontal="between" vertical="top">
       <Main>
-        <Flex horizontal="between" noWrap>
-          <Select
-            className="Bookmarks-select"
-            label="Select tags"
-            value={currentQueryParamFilterTags}
-            defaultOptions={allTags.map((item) => ({ label: item.name, value: item.name }))}
-            options={[
-              ...tagsSearchFormatted,
-              ...allTags.map((item) => ({ label: item.name, value: item.name })),
-            ].filter((v, i, a) => a.findIndex((t) => t.value === v.value) === i)}
-            onInputChange={onInputChange}
-            onChange={onChange}
-            maxItems={4}
-            grow
-          />
-          <SortBy
-            options={[
-              { label: 'Created at', field: 'createdAt' },
-              { label: 'Rating', field: 'vote' },
-            ]}
-            href={url}
-            currentSort={sort}
-          />
-        </Flex>
-        <Hr spacer size="small" />
-        <Frame grow>
+        <Hr spacer size="nano" />
+        <Hr spacer />
+        <Frame grow padding="none" shadow={false} borderBottom={false}>
+          <Flex horizontal="between" noWrap>
+            <Select
+              className="Bookmarks-select"
+              label="Select tags"
+              value={currentQueryParamFilterTags}
+              defaultOptions={allTags.map((item) => ({ label: item.name, value: item.name }))}
+              options={[
+                ...tagsSearchFormatted,
+                ...allTags.map((item) => ({ label: item.name, value: item.name })),
+              ].filter((v, i, a) => a.findIndex((t) => t.value === v.value) === i)}
+              onInputChange={onInputChange}
+              onChange={onChange}
+              maxItems={4}
+              grow
+            />
+            <SortBy
+              options={[
+                { label: 'Created at', field: 'createdAt' },
+                { label: 'Rating', field: 'vote' },
+              ]}
+              href={url}
+              currentSort={sort}
+            />
+          </Flex>
+        </Frame>
+        <Frame grow padding="none">
           {loading ? (
             <BookmarkRowSkeletonGroup length={bookmarksIds?.length || DEFAULT_PAGE_SIZE} />
           ) : (
-            bookmarksIds?.map((id, index) => (
-              <React.Fragment key={id}>
-                {!!index && <Hr spacer size="small" />}
-                <BookmarkRow id={id} />
-              </React.Fragment>
-            ))
+            bookmarksIds?.map((id) => <BookmarkRow id={id} key={id} />)
           )}
           {!loading && !bookmarksIds?.length && <Span bold>ⵁ We didnt find any bookmark.</Span>}
-          <Flex horizontal="center">
-            <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
-          </Flex>
         </Frame>
+        <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
       </Main>
       <Sidebar>
         <SidebarBlock title="Most Followed Tags" loading={mostUsedTagsLoading}>

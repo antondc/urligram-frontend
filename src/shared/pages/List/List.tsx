@@ -13,7 +13,7 @@ import { ListState } from 'Modules/Lists/lists.types';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
-import { Flex, Frame, H4, Hr, SortBy, Span } from 'Vendor/components';
+import { A, Flex, Frame, Hr, SortBy, Span } from 'Vendor/components';
 
 import './List.less';
 
@@ -50,42 +50,40 @@ export const List: React.FC<Props> = ({
   <div className="List">
     <Flex horizontal="between" vertical="top">
       <Main>
-        <Flex horizontal="between">
-          <SortBy
-            options={[
-              { label: 'Rating', field: 'vote' },
-              { label: 'Bookmarks', field: 'timesbookmarked' },
-              { label: 'Date', field: 'createdAt' },
-            ]}
-            href={url}
-            currentSort={sort}
-          />
-        </Flex>
-        <Hr spacer size="small" />
-        <Frame grow>
+        <Hr spacer size="nano" />
+        <Hr spacer />
+        <Frame grow padding="small">
           <Flex horizontal="between" noWrap>
-            <H4>Bookmarks in {list?.name}</H4>
+            <Span size="normal" bold>
+              Bookmarks in <A href={`/lists/${list?.id}`}>{list?.name}</A>
+            </Span>
             <Flex growHorizontal={false} vertical="top">
               <ListFollowButton className="List-joinList" listId={list?.id} size="normal" />
             </Flex>
           </Flex>
-          <Span>{list?.description}</Span>
-          <Hr spacer />
+        </Frame>
+        <Frame grow padding="none" shadow={false} borderTop={false} borderBottom={false}>
+          <Flex horizontal="between">
+            <SortBy
+              options={[
+                { label: 'Rating', field: 'vote' },
+                { label: 'Bookmarks', field: 'timesbookmarked' },
+                { label: 'Date', field: 'createdAt' },
+              ]}
+              href={url}
+              currentSort={sort}
+            />
+          </Flex>
+        </Frame>
+        <Frame grow padding="none">
           {bookmarksLoading ? (
             <BookmarkRowSkeletonGroup length={bookmarksIds?.length || DEFAULT_PAGE_SIZE} />
           ) : (
-            bookmarksIds?.map((id, index) => (
-              <React.Fragment key={id}>
-                {!!index && <Hr spacer size="small" />}
-                <BookmarkRow id={id} />
-              </React.Fragment>
-            ))
+            bookmarksIds?.map((id) => <BookmarkRow id={id} key={id} />)
           )}
           {!bookmarksLoading && !bookmarksIds?.length && <Span bold>ⵁ We didn find any bookmark.</Span>}
-          <Flex horizontal="center">
-            <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
-          </Flex>
         </Frame>
+        <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
       </Main>
       <Sidebar>
         <SidebarBlock title="People in this list" loading={usersInThisListLoading}>

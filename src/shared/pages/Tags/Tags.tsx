@@ -8,7 +8,7 @@ import { SidebarListTagsSkeleton } from 'Components/SidebarListTags/SidebarListT
 import SidebarListUsers from 'Components/SidebarListUsers';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
-import { Flex, Frame, H4, Hr, SortBy, Space, Tag } from 'Vendor/components';
+import { Flex, Frame, Hr, SortBy, Space, Tag } from 'Vendor/components';
 
 import './Tags.less';
 
@@ -36,22 +36,21 @@ export const Tags: React.FC<Props> = ({
   <div className="Tags">
     <Flex horizontal="between" vertical="top">
       <Main>
-        <Flex horizontal="right" vertical="top" growHorizontal>
-          <SortBy
-            options={[
-              { label: 'Bookmarks', field: 'count' },
-              { label: 'Name', field: 'name' },
-            ]}
-            href={url}
-            currentSort={sort}
-          />
-        </Flex>
-        <Hr spacer size="small" />
-
+        <Hr spacer size="nano" />
+        <Hr spacer />
+        <Frame grow padding="none" shadow={false} borderBottom={false}>
+          <Flex horizontal="right" vertical="top" growHorizontal>
+            <SortBy
+              options={[
+                { label: 'Bookmarks', field: 'count' },
+                { label: 'Name', field: 'name' },
+              ]}
+              href={url}
+              currentSort={sort}
+            />
+          </Flex>
+        </Frame>
         <Frame grow>
-          <H4>All Tags</H4>
-
-          <Hr spacer />
           <Flex>
             {tagsLoading ? (
               <SidebarListTagsSkeleton />
