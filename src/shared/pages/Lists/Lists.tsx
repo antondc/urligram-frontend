@@ -3,6 +3,7 @@ import React from 'react';
 import ListRow from 'Components/ListRow';
 import { ListRowSkeletonGroup } from 'Components/ListRow/ListSkeletonGroup';
 import Main from 'Components/Main';
+import MainContent from 'Components/MainContent';
 import Pagination from 'Components/Pagination';
 import Sidebar from 'Components/Sidebar';
 import SidebarBlock from 'Components/SidebarBlock';
@@ -62,12 +63,14 @@ export const Lists: React.FC<Props> = ({
           </Flex>
         </Frame>
         <Frame grow padding="small">
-          {listsIdsLoading ? (
-            <ListRowSkeletonGroup length={listsIds?.length || DEFAULT_PAGE_SIZE} />
-          ) : (
-            listsIds?.map((id) => <ListRow id={id} key={id} />)
-          )}
-          {!listsIdsLoading && !listsIds?.length && <Span bold>ⵁ We didn find any list.</Span>}
+          <MainContent>
+            {listsIdsLoading ? (
+              <ListRowSkeletonGroup length={listsIds?.length || DEFAULT_PAGE_SIZE} />
+            ) : (
+              listsIds?.map((id) => <ListRow id={id} key={id} />)
+            )}
+            {!listsIdsLoading && !listsIds?.length && <Span bold>ⵁ We didn find any list.</Span>}
+          </MainContent>
         </Frame>
         <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
       </Main>

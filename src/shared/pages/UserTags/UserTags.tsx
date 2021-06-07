@@ -2,6 +2,7 @@ import React from 'react';
 
 import A from 'Components/A';
 import Main from 'Components/Main';
+import MainContent from 'Components/MainContent';
 import Sidebar from 'Components/Sidebar';
 import SidebarBlock from 'Components/SidebarBlock';
 import { SidebarListTagsSkeleton } from 'Components/SidebarListTags/SidebarListTagsSkeleton';
@@ -51,27 +52,29 @@ export const UserTags: React.FC<Props> = ({
           </Flex>
         </Frame>
         <Frame grow padding="normal">
-          <Flex>
-            {tagsLoading ? (
-              <SidebarListTagsSkeleton />
-            ) : (
-              tags?.map((item) => (
-                <A
-                  className="UserTags-tag"
-                  href={`/bookmarks?filter[tags][]=${item?.name}`}
-                  key={item?.id}
-                  styled={false}
-                  frontend
-                >
-                  <Tag size="medium">
-                    {item?.name}
-                    <Space />
-                    {item?.count}
-                  </Tag>
-                </A>
-              ))
-            )}
-          </Flex>
+          <MainContent>
+            <Flex>
+              {tagsLoading ? (
+                <SidebarListTagsSkeleton />
+              ) : (
+                tags?.map((item) => (
+                  <A
+                    className="UserTags-tag"
+                    href={`/bookmarks?filter[tags][]=${item?.name}`}
+                    key={item?.id}
+                    styled={false}
+                    frontend
+                  >
+                    <Tag size="medium">
+                      {item?.name}
+                      <Space />
+                      {item?.count}
+                    </Tag>
+                  </A>
+                ))
+              )}
+            </Flex>
+          </MainContent>
         </Frame>
       </Main>
       <Sidebar>

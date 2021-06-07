@@ -4,6 +4,7 @@ import BookmarkRow from 'Components/BookmarkRow';
 import { BookmarkRowSkeletonGroup } from 'Components/BookmarkRow/BookmarkRowSkeletonGroup';
 import Empty from 'Components/Empty';
 import Main from 'Components/Main';
+import MainContent from 'Components/MainContent';
 import Pagination from 'Components/Pagination';
 import Sidebar from 'Components/Sidebar';
 import SidebarBlock from 'Components/SidebarBlock';
@@ -100,16 +101,18 @@ export const UserBookmarks: React.FC<Props> = ({
           </Flex>
         </Frame>
         <Frame grow padding="small" borderTop={false}>
-          {bookmarksLoading ? (
-            <BookmarkRowSkeletonGroup length={bookmarksIds?.length || DEFAULT_PAGE_SIZE} />
-          ) : (
-            bookmarksIds?.map((id) => (
-              <FadeInOut valueToUpdate={bookmarksByKey[id]?.deleting} appear key={id}>
-                {!bookmarksByKey[id]?.deleting && <BookmarkRow id={id} key={id} />}
-              </FadeInOut>
-            ))
-          )}
-          {!bookmarksLoading && !bookmarksIds?.length && <Empty message="ⵁ This user has no bookmarks yet" />}
+          <MainContent>
+            {bookmarksLoading ? (
+              <BookmarkRowSkeletonGroup length={bookmarksIds?.length || DEFAULT_PAGE_SIZE} />
+            ) : (
+              bookmarksIds?.map((id) => (
+                <FadeInOut valueToUpdate={bookmarksByKey[id]?.deleting} appear key={id}>
+                  {!bookmarksByKey[id]?.deleting && <BookmarkRow id={id} key={id} />}
+                </FadeInOut>
+              ))
+            )}
+            {!bookmarksLoading && !bookmarksIds?.length && <Empty message="ⵁ This user has no bookmarks yet" />}
+          </MainContent>
         </Frame>
         <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
         <Hr spacer size="nano" />

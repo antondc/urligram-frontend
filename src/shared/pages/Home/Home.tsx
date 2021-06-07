@@ -3,6 +3,7 @@ import React from 'react';
 import BookmarkRow from 'Components/BookmarkRow';
 import { BookmarkRowSkeletonGroup } from 'Components/BookmarkRow/BookmarkRowSkeletonGroup';
 import Main from 'Components/Main';
+import MainContent from 'Components/MainContent';
 import Pagination from 'Components/Pagination';
 import Sidebar from 'Components/Sidebar';
 import SidebarBlock from 'Components/SidebarBlock';
@@ -45,14 +46,16 @@ export const Home: React.FC<Props> = ({
         <Hr spacer size="nano" />
         <Hr spacer />
         <Frame className="Home-links" grow padding="small">
-          {bookmarksIdsLoading ? (
-            <BookmarkRowSkeletonGroup length={bookmarksIds?.length || DEFAULT_PAGE_SIZE} />
-          ) : (
-            bookmarksIds?.map((id) => <BookmarkRow id={id} key={id} />)
-          )}
-          {!bookmarksIdsLoading && !bookmarksIds?.length && (
-            <Span bold>ⵁ Start following users to receive recommended bookmarks.</Span>
-          )}
+          <MainContent>
+            {bookmarksIdsLoading ? (
+              <BookmarkRowSkeletonGroup length={bookmarksIds?.length || DEFAULT_PAGE_SIZE} />
+            ) : (
+              bookmarksIds?.map((id) => <BookmarkRow id={id} key={id} />)
+            )}
+            {!bookmarksIdsLoading && !bookmarksIds?.length && (
+              <Span bold>ⵁ Start following users to receive recommended bookmarks.</Span>
+            )}
+          </MainContent>
         </Frame>
         <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
       </Main>

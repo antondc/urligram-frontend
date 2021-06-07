@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Main from 'Components/Main';
+import MainContent from 'Components/MainContent';
 import Pagination from 'Components/Pagination';
 import Sidebar from 'Components/Sidebar';
 import SidebarBlock from 'Components/SidebarBlock';
@@ -70,12 +71,14 @@ export const Following: React.FC<Props> = ({
           </Flex>
         </Frame>
         <Frame className="Following-tags" grow padding="small">
-          {usersLoading ? (
-            <UserRowSkeletonGroup length={usersCurrentIds?.length || DEFAULT_PAGE_SIZE} />
-          ) : (
-            usersCurrentIds?.map((id) => <UserRow id={id} key={id} />)
-          )}
-          {!usersLoading && !usersCurrentIds?.length && <Span bold>ⵁ We didnt find any user.</Span>}
+          <MainContent>
+            {usersLoading ? (
+              <UserRowSkeletonGroup length={usersCurrentIds?.length || DEFAULT_PAGE_SIZE} />
+            ) : (
+              usersCurrentIds?.map((id) => <UserRow id={id} key={id} />)
+            )}
+            {!usersLoading && !usersCurrentIds?.length && <Span bold>ⵁ We didnt find any user.</Span>}
+          </MainContent>
         </Frame>
         <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
       </Main>

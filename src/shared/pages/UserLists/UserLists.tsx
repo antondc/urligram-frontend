@@ -3,6 +3,7 @@ import React from 'react';
 import { BookmarkRowSkeletonGroup } from 'Components/BookmarkRow/BookmarkRowSkeletonGroup';
 import ListRow from 'Components/ListRow';
 import Main from 'Components/Main';
+import MainContent from 'Components/MainContent';
 import Pagination from 'Components/Pagination';
 import Sidebar from 'Components/Sidebar';
 import SidebarBlock from 'Components/SidebarBlock';
@@ -71,12 +72,14 @@ export const UserLists: React.FC<Props> = ({
         </Frame>
         <Frame grow padding="small">
           <FadeInOut valueToUpdate={listsLoading} speed="fastest" appear>
-            {listsLoading ? (
-              <BookmarkRowSkeletonGroup length={listsIds?.length || DEFAULT_PAGE_SIZE} />
-            ) : (
-              listsIds?.map((id) => <ListRow id={id} key={id} />)
-            )}
-            {!listsLoading && !listsIds?.length && <Span bold>ⵁ We didn find any list.</Span>}
+            <MainContent>
+              {listsLoading ? (
+                <BookmarkRowSkeletonGroup length={listsIds?.length || DEFAULT_PAGE_SIZE} />
+              ) : (
+                listsIds?.map((id) => <ListRow id={id} key={id} />)
+              )}
+              {!listsLoading && !listsIds?.length && <Span bold>ⵁ We didn find any list.</Span>}
+            </MainContent>
           </FadeInOut>
         </Frame>
         <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />

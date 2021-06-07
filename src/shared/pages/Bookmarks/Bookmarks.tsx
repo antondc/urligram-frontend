@@ -3,6 +3,7 @@ import React from 'react';
 import BookmarkRow from 'Components/BookmarkRow';
 import { BookmarkRowSkeletonGroup } from 'Components/BookmarkRow/BookmarkRowSkeletonGroup';
 import Main from 'Components/Main';
+import MainContent from 'Components/MainContent';
 import Pagination from 'Components/Pagination';
 import Sidebar from 'Components/Sidebar';
 import SidebarBlock from 'Components/SidebarBlock';
@@ -85,12 +86,14 @@ export const Bookmarks: React.FC<Props> = ({
           </Flex>
         </Frame>
         <Frame grow padding="small">
-          {loading ? (
-            <BookmarkRowSkeletonGroup length={bookmarksIds?.length || DEFAULT_PAGE_SIZE} />
-          ) : (
-            bookmarksIds?.map((id) => <BookmarkRow id={id} key={id} />)
-          )}
-          {!loading && !bookmarksIds?.length && <Span bold>ⵁ We didnt find any bookmark.</Span>}
+          <MainContent>
+            {loading ? (
+              <BookmarkRowSkeletonGroup length={bookmarksIds?.length || DEFAULT_PAGE_SIZE} />
+            ) : (
+              bookmarksIds?.map((id) => <BookmarkRow id={id} key={id} />)
+            )}
+            {!loading && !bookmarksIds?.length && <Span bold>ⵁ We didnt find any bookmark.</Span>}
+          </MainContent>
         </Frame>
         <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
       </Main>
