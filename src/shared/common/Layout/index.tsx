@@ -63,7 +63,7 @@ const Layout: React.FC<Props> = ({ location }) => {
   const bookmarkCreateModalMounted = useSelector(selectUiBookmarkCreateModalMounted);
   const bookmarkUpdateModalMounted = useSelector(selectUiBookmarkUpdateModalMounted);
   const listModalMounted = useSelector(selectUiListModalMounted);
-  const renderLoader = languageLoading; /* || otherVariables */
+  const renderLoader = !!languageLoading; /* || otherVariables */
 
   // Lock screen on Modal mount
   if (uiScreenLocked) {

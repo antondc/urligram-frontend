@@ -47,9 +47,10 @@ const BookmarkRow: React.FC<Props> = ({ id }) => {
 
   if (!id) return null;
 
-  useEffect(() => {
-    if (!!sessionUserBookmarkedLink) dispatch(bookmarkLoadById({ bookmarkId: sessionUserBookmarkId }));
-  }, [sessionUserBookmarkId]);
+  // TODO: confirm that there are no cases where we need to load the bookmark again
+  // useEffect(() => {
+  //   if (!!sessionUserBookmarkedLink) dispatch(bookmarkLoadById({ bookmarkId: sessionUserBookmarkId }));
+  // }, [sessionUserBookmarkId]);
 
   return (
     <BookmarkRowUi

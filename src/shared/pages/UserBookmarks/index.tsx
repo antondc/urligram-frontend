@@ -76,8 +76,11 @@ const UserBookmarks: React.FC = () => {
   }, [session?.id]);
 
   useEffect(() => {
+    dispatch(listsLoadByUserId(session?.id));
+  }, [session?.id]);
+
+  useEffect(() => {
     dispatch(bookmarksLoadByUserId(userId));
-    dispatch(listsLoadByUserId(userId));
     dispatch(tagsSearchLoad());
   }, [url, session?.id]);
 

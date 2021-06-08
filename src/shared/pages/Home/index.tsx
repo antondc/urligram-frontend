@@ -6,6 +6,7 @@ import { bookmarksRecommended } from 'Modules/Bookmarks/actions/bookmarksRecomme
 import { selectBookmarksCurrentIds } from 'Modules/Bookmarks/selectors/selectBookmarksCurrentIds';
 import { selectBookmarksLoading } from 'Modules/Bookmarks/selectors/selectBookmarksLoading';
 import { selectBookmarksTotalItems } from 'Modules/Bookmarks/selectors/selectBookmarkTotalItems';
+import { listsLoadByUserId } from 'Modules/Lists/actions/listsLoadByUserId';
 import { selectCurrentFullUrl } from 'Modules/Routes/selectors/selectCurrentFullUrl';
 import { selectCurrentRouteQueryParamPage } from 'Modules/Routes/selectors/selectCurrentRouteQueryParamPage';
 import { sectionsMostFollowedUsersLoad } from 'Modules/Sections/actions/sectionsMostFollowedUsersLoad';
@@ -35,6 +36,7 @@ const Home: React.FC = () => {
     dispatch(sectionsMostFollowedUsersLoad());
     dispatch(sectionsNewUsersLoad());
     dispatch(tagsLoad());
+    dispatch(listsLoadByUserId(session?.id));
   }, [session?.id]);
 
   useEffect(() => {

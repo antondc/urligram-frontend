@@ -36,7 +36,8 @@ const Pagination: React.FC<Props> = ({ totalItems = 0, itemsPerPage = 10, offset
 
   useEffect(() => {
     const pages = calculatePages({ totalItems, itemsPerPage, path, offset, pageNeighbours });
-    const mounted = totalItems && pages?.length > 1;
+    const mounted = !!totalItems && pages?.length > 1;
+
     setPages(pages);
     setMounted(mounted);
   }, [totalItems, itemsPerPage, offset, pageNeighbours, path]);

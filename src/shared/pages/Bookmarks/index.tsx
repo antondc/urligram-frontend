@@ -6,6 +6,7 @@ import { selectBookmarksCurrentIds } from 'Modules/Bookmarks/selectors/selectBoo
 import { selectBookmarksLoading } from 'Modules/Bookmarks/selectors/selectBookmarksLoading';
 import { selectBookmarksMetaSort } from 'Modules/Bookmarks/selectors/selectBookmarksMetaSort';
 import { selectBookmarksTotalItems } from 'Modules/Bookmarks/selectors/selectBookmarkTotalItems';
+import { listsLoadByUserId } from 'Modules/Lists/actions/listsLoadByUserId';
 import { selectCurrentFullUrl } from 'Modules/Routes/selectors/selectCurrentFullUrl';
 import { selectCurrentRouteQueryParamFilter } from 'Modules/Routes/selectors/selectCurrentRouteQueryParamFilter';
 import { selectCurrentRouteQueryParamPage } from 'Modules/Routes/selectors/selectCurrentRouteQueryParamPage';
@@ -34,7 +35,6 @@ const Home: React.FC = () => {
   const mostUsedTagsLoading = useSelector(selectMostUsedTagsLoading);
   const url = useSelector(selectCurrentFullUrl);
   const sort = useSelector(selectBookmarksMetaSort);
-
   const tagsSearch = useSelector(selectTagsSearch);
   const tagsSearchFormatted = tagsSearch?.map((item) => ({ label: item.name, value: item.name })) || [];
   const allTags = useSelector(selectTagsAll);
@@ -48,6 +48,10 @@ const Home: React.FC = () => {
   useEffect(() => {
     dispatch(sectionsMostUsedTagsLoad());
   }, []);
+
+  useEffect(() => {
+    dispatch(listsLoadByUserId(session?.id));
+  }, [session?.id]);
 
   useEffect(() => {
     dispatch(bookmarksLoad());

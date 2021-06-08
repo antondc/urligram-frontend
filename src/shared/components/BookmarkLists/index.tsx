@@ -54,7 +54,7 @@ export const BookmarkLists: React.FC<Props> = ({ bookmarkId }) => {
 
   const onListsClick = () => {
     if (bookmarkListsModalsMounted.length) return;
-    
+
     !!modalMounted && dispatch(bookmarkListsModalUnmount({ bookmarkId }));
     !modalMounted && dispatch(bookmarkListsModalMount({ bookmarkId }));
   };
@@ -118,10 +118,6 @@ export const BookmarkLists: React.FC<Props> = ({ bookmarkId }) => {
   useEffect(() => {
     setSubmitError(listError?.message);
   }, [listError]);
-
-  useEffect(() => {
-    dispatch(listsLoadByUserId(session?.id));
-  }, []);
 
   return (
     <BookmarkListsUi
