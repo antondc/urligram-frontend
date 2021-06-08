@@ -64,6 +64,7 @@ const UserBookmarks: React.FC = () => {
     const myUrl = new URLWrapper(window.document.location.href);
 
     myUrl.upsertSearchParams({ filter: { tags } });
+    myUrl.deleteSearchParam('page[offset]'); // Restart page on new search
     const redirectPath = myUrl.getPathAndSearch();
 
     history.push(redirectPath);
