@@ -45,7 +45,7 @@ const webpackClientCommonConfig = {
         loader: 'file-loader',
         options: {
           outputPath: 'fonts/',
-          publicPath: path.join(WEBPACK_DIST, 'fonts'),
+          publicPath: '/fonts',
           name: '[name].[ext]',
         },
       },
