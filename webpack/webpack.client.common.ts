@@ -44,8 +44,9 @@ const webpackClientCommonConfig = {
         test: /\.(woff|woff2|eot|ttf)$/,
         loader: 'file-loader',
         options: {
-          outputPath: 'fonts',
-          name: '[path][name].[ext]',
+          outputPath: 'fonts/',
+          publicPath: path.join(WEBPACK_DIST, 'fonts'),
+          name: '[name].[ext]',
         },
       },
     ],
