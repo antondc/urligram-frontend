@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Hr } from '../../vendor/components';
+
 import './Main.less';
 
 interface Props {
@@ -8,7 +10,10 @@ interface Props {
 }
 
 const Main: React.FC<Props> = ({ children, className }) => (
-  <main className={'Main ' + (className ? className : '')}>{children}</main>
+  <main className={'Main ' + (className ? className : '')}>
+    {children}
+    <Hr spacer size="big" />
+  </main>
 );
 
 export default Main;

@@ -45,7 +45,7 @@ const Pagination: React.FC<Props> = ({ totalItems = 0, itemsPerPage = 10, offset
     <Fade mounted={mounted}>
       <>
         <div className="Pagination">
-          <Frame grow padding="small" borderTop={false}>
+          <Frame grow borderTop={false}>
             <Flex growHorizontal horizontal="center">
               {pages.map((item, index) =>
                 !!item ? (
