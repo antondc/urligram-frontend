@@ -164,7 +164,7 @@ const BookmarkCreateForm: React.FC<Props> = ({ closeModal, setModalLocked }) => 
       setSubmitSuccess(true);
 
       setTimeout(() => {
-        history.push(`/${currentLanguageSlug}/users/${sessionId}/bookmarks`);
+        history.push(`/${currentLanguageSlug}/users/${sessionId}/bookmarks?sort=-createdAt`);
         closeModal();
       }, DELAY_SLOW_MS);
 

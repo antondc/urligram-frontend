@@ -116,7 +116,7 @@ const ListForm: React.FC<Props> = ({ closeModal, setModalLocked }) => {
       setSubmitSuccess(true);
 
       setTimeout(() => {
-        history.push(`/${currentLanguageSlug}/users/${sessionId}/lists`);
+        history.push(`/${currentLanguageSlug}/users/${sessionId}/lists?sort=-createdAt`);
 
         return;
       }, DELAY_SLOW_MS);
