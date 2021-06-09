@@ -1,0 +1,35 @@
+@import '../../css/imports.less';
+
+@c: .CookiesBanner;
+
+@{c} {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  .u-blackBars;
+
+  &-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    flex: 1;
+    padding: 20px;
+  }
+
+  &-textSpan {
+    background: @c-background;
+  }
+
+  &-textSpanTitle {
+    padding: 4px 10px 0;
+  }
+
+  &-textSpanBody {
+    padding: 4px 10px;
+  }
+
+  &-buttons {
+    padding: 20px;
+  }
+}

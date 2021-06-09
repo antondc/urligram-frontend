@@ -2,7 +2,6 @@ import React, { HTMLProps } from 'react';
 
 import { Span } from '../Span';
 import { SpinnerCircularBrute } from '../SpinnerCircularBrute';
-import { SpinnerLoader } from '../SpinnerLoader';
 import { IconsType, SvgIcon } from '../Svg';
 
 import './Button.less';

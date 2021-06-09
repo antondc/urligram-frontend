@@ -6,6 +6,7 @@ import LayoutContent from 'Common/LayoutContent';
 import LayoutHelper from 'Common/LayoutHelper';
 import BookmarkCreateModal from 'Components/BookmarkCreateModal';
 import BookmarkUpdateModal from 'Components/BookmarkUpdateModal';
+import CookiesBanner from 'Components/CookiesBanner';
 import Footer from 'Components/Footer';
 import ForgotPasswordModal from 'Components/ForgotPasswordModal';
 import Header from 'Components/Header';
@@ -118,6 +119,7 @@ const Layout: React.FC<Props> = ({ location }) => {
       <LayoutContent>
         <LayoutHelper />
         <Header />
+        <CookiesBanner />
         <Router />
         <Footer />
         <Fade mounted={userModalMounted} position="absolute" appear>
