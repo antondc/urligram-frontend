@@ -18,7 +18,7 @@ const ModalMessage: React.FC<Props> = ({ message, switchMessageModal }) => (
   <BaseModal onClick={switchMessageModal}>
     <Frame className="ModalMessage" grow>
       <Cross className="ModalMessage-cross" onClick={switchMessageModal} />
-      <Span className="ModalMessage-message" bold>
+      <Span className="ModalMessage-message" weight="semiBold">
         {message}
       </Span>
       <Hr spacer size="big" />

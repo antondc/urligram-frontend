@@ -3,11 +3,12 @@ import React, { HTMLProps } from 'react';
 import './Span.less';
 
 export type SpanSize = 'normal' | 'small' | 'micro' | 'nano' | 'medium' | 'big';
+export type SpanWeight = 'regular' | 'medium' | 'semiBold' | 'bold' | 'extraBold';
 
 interface Props extends Omit<HTMLProps<HTMLSpanElement>, 'size'> {
   children: React.ReactNode;
   size?: SpanSize;
-  bold?: boolean;
+  weight?: SpanWeight;
   extraBold?: boolean;
   italics?: boolean;
   uppercase?: boolean;
@@ -21,7 +22,7 @@ interface Props extends Omit<HTMLProps<HTMLSpanElement>, 'size'> {
 export const Span: React.FC<Props> = ({
   children,
   size = 'normal',
-  bold = false,
+  weight = 'medium',
   extraBold = false,
   italics = false,
   disabled = false,
@@ -37,7 +38,7 @@ export const Span: React.FC<Props> = ({
     className={
       'Span' +
       (' Span-' + size) +
-      (bold ? ' Span--bold' : '') +
+      (weight ? ' Span--' + weight : '') +
       (extraBold ? ' Span--extraBold' : '') +
       (italics ? ' Span--italics' : '') +
       (disabled ? ' Span--disabled' : '') +

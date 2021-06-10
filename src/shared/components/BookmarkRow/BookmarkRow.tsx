@@ -34,8 +34,7 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
       <Flex vertical="baseline" growVertical={false} horizontal="left" noWrap>
         <img className="BookmarkRow-favicon" src={bookmark?.favicon} />
         <Space />
-        <Space />
-        <Span bold className="BookmarkRow-title">
+        <Span weight="semiBold" className="BookmarkRow-title">
           <A className="BookmarkRow-link" href={bookmark?.url} targetBlank styled={false}>
             {bookmark?.title}
           </A>
@@ -44,7 +43,7 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
       <div className="BookmarkRow-mainBottom">
         <Span size="nano">Shared by</Span>
         <Space />
-        <Span size="nano" bold>
+        <Span size="nano" weight="semiBold">
           {bookmark?.statistics?.timesBookmarked || 0}
         </Span>
         <Space />
@@ -55,7 +54,7 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
         {!!sessionUserBookmarkedLink && (
           <>
             <Space />·<Space />
-            <Span className="BookmarkRow-editButton" size="nano" bold>
+            <Span className="BookmarkRow-editButton" size="nano" weight="semiBold">
               <TextButton size="nano" text="Edit" onClick={onEdit} />
             </Span>
           </>
@@ -63,7 +62,7 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
         <Space />·<Space />
         <Span size="nano">Ranking</Span>
         <Space />
-        <Span size="nano" bold>
+        <Span size="nano" weight="semiBold">
           {bookmark?.statistics?.absoluteVote || 0}
         </Span>
         <Space />·<Space />
@@ -74,13 +73,13 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
             (bookmark?.statistics?.vote === false ? ' BookmarkRow-voteButton--active' : '') +
             (bookmark?.statistics?.vote === false ? ' BookmarkRow-voteButton--downvoted' : '')
           }
-          bold
+          weight="semiBold"
           size="small"
           onClick={() => onVote(bookmark?.statistics?.vote === false ? null : false)}
         >
           ▲
         </Span>
-        <Span className="BookmarkRow-voteSlash" size="micro" bold>
+        <Span className="BookmarkRow-voteSlash" size="micro" weight="semiBold">
           /
         </Span>
         <Span
@@ -91,7 +90,7 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
             (bookmark?.statistics?.vote === true ? ' BookmarkRow-voteButton--upvoted' : '')
           }
           size="small"
-          bold
+          weight="semiBold"
           onClick={() => onVote(bookmark?.statistics?.vote === true ? null : true)}
         >
           ▲

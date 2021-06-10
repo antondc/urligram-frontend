@@ -63,7 +63,7 @@ export const Range: React.FC<Props> = ({
       {label && (
         <>
           <label className="Range-label" htmlFor={'Range-' + id}>
-            <Span bold> {label}</Span>
+            <Span weight="semiBold"> {label}</Span>
           </label>
           <Hr spacer size="micro" />
         </>

@@ -27,13 +27,13 @@ export const Empty: React.FC = () => {
       <H1>Switches</H1>
       <Hr spacer />
       <Frame>
-        <Span bold>With default value</Span>
+        <Span weight="semiBold">With default value</Span>
         <Hr spacer size="small" />
         <Switch name="Test" checked={knobs.checked()} />
         <Hr spacer size="small" />
         <Hr size="nano" />
         <Hr spacer />
-        <Span bold>Other situations</Span>
+        <Span weight="semiBold">Other situations</Span>
         <Hr spacer size="small" />
         <Switch name="Test" checked={value1} onChange={(e): void => setValue1(e.currentTarget.checked)} />
         <Hr spacer size="small" />

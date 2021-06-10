@@ -24,7 +24,7 @@ export const AIcon: React.FC<Props> = ({ className, children, icon = 'ArrowRight
 
   return (
     <span className={'AIcon' + (className ? className : '')}>
-      <Span bold size={size}>
+      <Span weight="semiBold" size={size}>
         {children}
       </Span>
       {icon && <SvgIcon name={icon} size={svgSizeMap[size]} className="AIcon-svg" />}

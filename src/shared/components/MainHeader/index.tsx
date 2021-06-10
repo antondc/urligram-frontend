@@ -19,7 +19,7 @@ const MainHeader: React.FC<Props> = ({ className, activeFilter, title }) => (
       <H4>{title}</H4>
       <div className="MainHeader-filters">
         <div className="MainHeader-filter">
-          <Span className="MainHeader-filterName" bold size="small">
+          <Span className="MainHeader-filterName" weight="semiBold" size="small">
             My vote
           </Span>
           <FilterDown
@@ -27,7 +27,7 @@ const MainHeader: React.FC<Props> = ({ className, activeFilter, title }) => (
           />
         </div>
         <div className="MainHeader-filter">
-          <Span className="MainHeader-filterName" bold size="small">
+          <Span className="MainHeader-filterName" weight="semiBold" size="small">
             №. votes
           </Span>
           <FilterDown
@@ -37,7 +37,7 @@ const MainHeader: React.FC<Props> = ({ className, activeFilter, title }) => (
           />
         </div>
         <div className="MainHeader-filter">
-          <Span className="MainHeader-filterName" bold size="small">
+          <Span className="MainHeader-filterName" weight="semiBold" size="small">
             Ranking
           </Span>
           <FilterDown

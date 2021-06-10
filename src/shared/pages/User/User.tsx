@@ -53,32 +53,32 @@ export const User: React.FC<Props> = ({
           <Flex horizontal="between">
             <div>
               <Flex vertical="bottom" growVertical={false} noWrap>
-                <Span bold>Name:</Span> <Space />
-                <Span bold size="small">
+                <Span weight="semiBold">Name:</Span> <Space />
+                <Span weight="semiBold" size="small">
                   @{user?.name}
                 </Span>
               </Flex>
               <Hr spacer size="zero" />
               <Hr spacer size="micro" />
               <Flex vertical="bottom" growVertical={false} noWrap>
-                <Span bold>Location:</Span> <Space />
-                <Span bold size="small">
+                <Span weight="semiBold">Location:</Span> <Space />
+                <Span weight="semiBold" size="small">
                   {user?.location}
                 </Span>
               </Flex>
               <Hr spacer size="zero" />
               <Hr spacer size="micro" />
               <Flex vertical="bottom" growVertical={false} noWrap>
-                <Span bold>Statement:</Span> <Space />
-                <Span bold size="small">
+                <Span weight="semiBold">Statement:</Span> <Space />
+                <Span weight="semiBold" size="small">
                   {user?.statement}
                 </Span>
               </Flex>
               <Hr spacer size="zero" />
               <Hr spacer size="micro" />
               <Flex vertical="bottom" growVertical={false} noWrap>
-                <Span bold>Created at:</Span> <Space />
-                <Span bold size="small">
+                <Span weight="semiBold">Created at:</Span> <Space />
+                <Span weight="semiBold" size="small">
                   {createdAtFormatted}
                 </Span>
               </Flex>
@@ -88,32 +88,32 @@ export const User: React.FC<Props> = ({
           <Hr spacer />
           <Flex>
             <A href={`users/${userId}/bookmarks`} frontend underlined>
-              <Span size="small" bold>
+              <Span size="small" weight="semiBold">
                 Bookmarks:
               </Span>
             </A>
-            <Span size="small" bold>
+            <Span size="small" weight="semiBold">
               <Space />
               {user?.bookmarksIds?.length}
             </Span>
             <Space />
             <Space />·<Space />
             <A href={`users/${userId}/following`} frontend underlined>
-              <Span size="small" bold>
+              <Span size="small" weight="semiBold">
                 Following:
               </Span>
             </A>
-            <Span size="small" bold>
+            <Span size="small" weight="semiBold">
               <Space />
               {user?.following?.length}
             </Span>
             <Space />
             <Space />·<Space />
             <A href={`users/${userId}/followers`} frontend underlined>
-              <Span size="small" bold>
+              <Span size="small" weight="semiBold">
                 Followers:
               </Span>
-              <Span size="small" bold>
+              <Span size="small" weight="semiBold">
                 <Space />
                 {user?.followers?.length}
               </Span>
@@ -121,28 +121,28 @@ export const User: React.FC<Props> = ({
             <Space />
             <Space />·<Space />
             <A href={`users/${userId}/followers`} frontend underlined>
-              <Span size="small" bold>
+              <Span size="small" weight="semiBold">
                 Tags:
               </Span>
             </A>
-            <Span size="small" bold>
+            <Span size="small" weight="semiBold">
               <Space />
               {user?.tags?.length}
             </Span>
             <Space />
             <Space />·<Space />
             <A href={`users/${userId}/lists`} frontend underlined>
-              <Span size="small" bold>
+              <Span size="small" weight="semiBold">
                 Lists:
               </Span>
             </A>
-            <Span size="small" bold>
+            <Span size="small" weight="semiBold">
               <Space />
               {user?.lists?.length}
             </Span>
           </Flex>
           <Hr spacer />
-          <Span bold>Tags:</Span>
+          <Span weight="semiBold">Tags:</Span>
           <Hr spacer size="small" />
           <Flex>
             {user?.tags?.map((item) => (
@@ -163,7 +163,7 @@ export const User: React.FC<Props> = ({
         </Frame>
         <Frame grow padding="small" borderTop={false}>
           <Flex horizontal="between" vertical="bottom">
-            <Span size="normal" bold>
+            <Span size="normal" weight="semiBold">
               User bookmarks
             </Span>
             <A href={`users/${userId}/bookmarks`} frontend underlined>

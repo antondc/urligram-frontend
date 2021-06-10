@@ -82,7 +82,7 @@ export const Tooltip: React.FC<Props> = ({ content, parentElementId, delay, time
   return (
     <div className="Tooltip" ref={tooltipElementRef} aria-describedby="tooltip">
       <Frame padding="small">
-        <Span bold>{content}</Span>
+        <Span weight="semiBold">{content}</Span>
       </Frame>
       <div className="Tooltip-arrow" data-popper-arrow />
     </div>

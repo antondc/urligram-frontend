@@ -68,7 +68,7 @@ export const FileField: React.FC<Props> = ({
     >
       {label && (
         <label className="FileField-label">
-          <Span bold>{label}</Span>
+          <Span weight="semiBold">{label}</Span>
         </label>
       )}
       <Hr spacer size="micro" />
@@ -83,7 +83,7 @@ export const FileField: React.FC<Props> = ({
           <div {...getRootProps()} className="FileField-dropzone">
             <input {...getInputProps()} onChange={onChange} name={name} type="file" />
             <Upload className="FileField-textIcon" size="small" />
-            <Span bold uppercase>
+            <Span weight="semiBold" uppercase>
               {buttonTextToRender}
             </Span>
             <div className={'FileField-progress ' + (percentCompleted > 0 ? 'FileField--loading' : '')}>
@@ -94,7 +94,7 @@ export const FileField: React.FC<Props> = ({
       </Dropzone>
       {fileUrl && (
         <div className="FileField-file">
-          <Span bold className="FileField-name">
+          <Span weight="semiBold" className="FileField-name">
             {fileUrl && (
               <A href={fileUrl} title={fileUrl} targetBlank styled={false}>
                 {truncatedFilename}

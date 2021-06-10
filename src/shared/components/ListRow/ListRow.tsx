@@ -15,7 +15,7 @@ interface Props extends Partial<ListState> {
 export const ListRow: React.FC<Props> = ({ id, name, tags, bookmarksIds, members, description }) => (
   <div className="ListRow" data-test-id="ListRow" key={id}>
     <div className="ListRow-main">
-      <Span size="normal" bold className="ListRow-title">
+      <Span size="normal" weight="semiBold" className="ListRow-title">
         <A href={`/lists/${id}`} frontend styled={false}>
           {name}
         </A>

@@ -25,12 +25,12 @@ const SignUpModal: React.FC = () => {
           <H3>Thanks @{name}!</H3>
           <Hr size="big" spacer />
           <P>
-            <Span size="normal" bold>
+            <Span size="normal" weight="semiBold">
               Your account has been created and is on stand by. Please check your email to activate it!
             </Span>
           </P>
           <P>
-            <Span size="normal" bold>
+            <Span size="normal" weight="semiBold">
               ✉️&nbsp;&nbsp;&nbsp;🚀
             </Span>
           </P>

@@ -8,7 +8,7 @@ interface Props {
 }
 
 const BookmarkDeleted: React.FC<Props> = () => (
-  <Span size="normal" bold>
+  <Span size="normal" weight="semiBold">
     Your bookmark was successfully deleted
   </Span>
 );

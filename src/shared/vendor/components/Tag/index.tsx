@@ -1,7 +1,7 @@
 import React, { HTMLProps } from 'react';
 
 import { NotificationDot } from '../NotificationDot';
-import { Span } from '../Span';
+import { Span, SpanWeight } from '../Span';
 
 import './Tag.less';
 
@@ -30,11 +30,13 @@ export const Tag: React.FC<Props> = ({
     medium: 'small',
   };
 
-  const boldMap = {
-    nano: true,
-    small: true,
-    medium: true,
-    big: true,
+  const boldMap: {
+    [key: string]: SpanWeight;
+  } = {
+    nano: 'bold',
+    small: 'bold',
+    medium: 'extraBold',
+    big: 'extraBold',
   };
 
   return (
@@ -46,7 +48,7 @@ export const Tag: React.FC<Props> = ({
     >
       <NotificationDot className="Tag-notification" type={notification} size="small" />
       <div className="Tag-content">
-        <Span bold={boldMap[size]} size={sizeMap[size]}>
+        <Span weight={boldMap[size]} size={sizeMap[size]}>
           {children}
         </Span>
       </div>

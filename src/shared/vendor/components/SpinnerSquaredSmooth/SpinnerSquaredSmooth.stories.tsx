@@ -25,7 +25,7 @@ export const Default: React.ReactNode = () => (
         <Fade mounted={knobs.mounted()} position="absolute">
           <SpinnerSquaredSmooth size={knobs.size()} speed="normal" />
         </Fade>
-        <Span bold>
+        <Span weight="semiBold">
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maxime eos necessitatibus fuga inventore eaque
           dolorum aliquam. Eius a consectetur ut, assumenda tenetur odio rem, molestiae in quos, excepturi nisi facere.
         </Span>

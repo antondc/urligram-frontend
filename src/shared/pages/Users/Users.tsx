@@ -59,7 +59,7 @@ export const Users: React.FC<Props> = ({
             ) : (
               usersCurrentIds?.map((id) => <UserRow id={id} key={id} />)
             )}
-            {!usersLoading && !usersCurrentIds?.length && <Span bold>ⵁ We didn find any user.</Span>}
+            {!usersLoading && !usersCurrentIds?.length && <Span weight="semiBold">ⵁ We didn find any user.</Span>}
           </MainContent>
         </Frame>
         <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />

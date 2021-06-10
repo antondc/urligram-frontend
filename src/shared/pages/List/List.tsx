@@ -55,7 +55,7 @@ export const List: React.FC<Props> = ({
         <Hr spacer />
         <Frame grow padding="small">
           <Flex horizontal="between" noWrap>
-            <Span size="normal" bold>
+            <Span size="normal" weight="semiBold">
               Bookmarks in <A href={`/lists/${list?.id}`}>{list?.name}</A>
             </Span>
             <Flex growHorizontal={false} vertical="top">
@@ -83,7 +83,7 @@ export const List: React.FC<Props> = ({
             ) : (
               bookmarksIds?.map((id) => <BookmarkRow id={id} key={id} />)
             )}
-            {!bookmarksLoading && !bookmarksIds?.length && <Span bold>ⵁ We didn find any bookmark.</Span>}
+            {!bookmarksLoading && !bookmarksIds?.length && <Span weight="semiBold">ⵁ We didn find any bookmark.</Span>}
           </MainContent>
         </Frame>
         <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />

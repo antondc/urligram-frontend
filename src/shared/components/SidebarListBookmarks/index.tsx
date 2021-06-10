@@ -23,7 +23,7 @@ const SidebarListBookmarks: React.FC<Props> = ({ items, loading, title: blockTit
           {!!index && <Hr spacer size="micro" />}
           <dd className="SidebarListBookmarks-bookmark">
             <A href={`links/${linkId}`} frontend>
-              <Span bold>⚭ {title}</Span>
+              <Span weight="semiBold">⚭ {title}</Span>
             </A>
             <div>
               <RenderInPortal>

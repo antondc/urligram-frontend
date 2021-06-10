@@ -15,7 +15,7 @@ export default {
 export const Default: React.FC = () => (
   <>
     <Notification type="success">
-      <Span bold size="normal">
+      <Span weight="semiBold" size="normal">
         Some title
       </Span>
       <div>
@@ -30,7 +30,7 @@ export const Default: React.FC = () => (
     </Notification>
     <Hr spacer size="small" />
     <Notification type="error">
-      <Span bold size="normal">
+      <Span weight="semiBold" size="normal">
         Some title
       </Span>
       <div>
@@ -45,7 +45,7 @@ export const Default: React.FC = () => (
     </Notification>
     <Hr spacer size="small" />
     <Notification type="alert">
-      <Span bold size="normal">
+      <Span weight="semiBold" size="normal">
         Some title
       </Span>
       <div>

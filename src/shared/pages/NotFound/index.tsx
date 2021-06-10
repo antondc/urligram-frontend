@@ -17,10 +17,10 @@ const NotFound: React.FC = () => {
         <H1 className="NotFound-h1">{currentGlossary?.notFound} 😵</H1>
         <Hr spacer />
         <P>
-          <Span bold>We couldnt find what you were looking for.</Span>
+          <Span weight="semiBold">We couldnt find what you were looking for.</Span>
         </P>
         <P>
-          <Span bold>
+          <Span weight="semiBold">
             But you can continue searching for{' '}
             <A href={Routes.Home.route} frontend underlined>
               bookmarks

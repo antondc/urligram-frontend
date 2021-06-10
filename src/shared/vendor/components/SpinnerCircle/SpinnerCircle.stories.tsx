@@ -28,7 +28,7 @@ export const Default: React.FC = () => (
         <SpinnerCircle size={knobs.size()} />
       </Fade>
       <Frame>
-        <Span bold>
+        <Span weight="semiBold">
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maxime eos necessitatibus fuga inventore eaque
           dolorum aliquam. Eius a consectetur ut, assumenda tenetur odio rem, molestiae in quos, excepturi nisi facere.
         </Span>

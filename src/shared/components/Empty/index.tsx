@@ -9,7 +9,7 @@ interface Props {
 const Empty: React.FC<Props> = ({ message = 'ⵁ Empty set' }) => (
   <Flex horizontal="center">
     <Hr size="normal" spacer />
-    <Span bold>{message}</Span>
+    <Span weight="semiBold">{message}</Span>
     <Hr size="normal" spacer />
   </Flex>
 );

@@ -70,7 +70,7 @@ export const UserBookmarks: React.FC<Props> = ({
         <Hr spacer size="nano" />
         <Hr spacer />
         <Frame grow padding="small">
-          <Span size="normal" bold>
+          <Span size="normal" weight="semiBold">
             Bookmarks of <A href={`/users/${userId}`}>@{user?.name}</A>
           </Span>
         </Frame>

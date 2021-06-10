@@ -53,7 +53,7 @@ export const UserLists: React.FC<Props> = ({
         <Hr spacer size="nano" />
         <Hr spacer />
         <Frame grow padding="small">
-          <Span size="normal" bold>
+          <Span size="normal" weight="semiBold">
             Lists of <A href={`/users/${userId}`}>@{user?.name}</A>
           </Span>
         </Frame>
@@ -78,7 +78,7 @@ export const UserLists: React.FC<Props> = ({
               ) : (
                 listsIds?.map((id) => <ListRow id={id} key={id} />)
               )}
-              {!listsLoading && !listsIds?.length && <Span bold>ⵁ We didn find any list.</Span>}
+              {!listsLoading && !listsIds?.length && <Span weight="semiBold">ⵁ We didn find any list.</Span>}
             </MainContent>
           </FadeInOut>
         </Frame>

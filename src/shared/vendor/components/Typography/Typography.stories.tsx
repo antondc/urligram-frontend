@@ -38,23 +38,23 @@ export const Default: React.FC = () => (
     <Hr spacer size="micro" />
     <H4>{knobs.H4()}</H4>
     <Hr spacer size="micro" />
-    <Span bold>{knobs.SpanNormalBold()}</Span>
+    <Span weight="semiBold">{knobs.SpanNormalBold()}</Span>
     <Hr spacer size="micro" />
     <Span>{knobs.SpanNormalRegular()}</Span>
     <Hr spacer size="micro" />
-    <Span bold size="small">
+    <Span weight="semiBold" size="small">
       {knobs.SpanSmallBold()}
     </Span>
     <Hr spacer size="zero" />
     <Span size="small">{knobs.SpanSmallRegular()}</Span>
     <Hr spacer size="micro" />
-    <Span bold size="micro">
+    <Span weight="semiBold" size="micro">
       {knobs.SpanMicroBold()}
     </Span>
     <Hr spacer size="zero" />
     <Span size="micro">{knobs.SpanMicroRegular()}</Span>
     <Hr spacer size="micro" />
-    <Span bold size="nano">
+    <Span weight="semiBold" size="nano">
       {knobs.SpanNanoBold()}
     </Span>
     <Hr spacer size="zero" />

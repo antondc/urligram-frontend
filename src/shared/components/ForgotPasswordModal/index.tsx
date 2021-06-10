@@ -26,13 +26,13 @@ const ForgotPasswordModal: React.FC = () => {
           <H4>We received your request</H4>
           <Hr size="normal" spacer />
           <P>
-            <Span size="normal" bold>
+            <Span size="normal" weight="semiBold">
               Please check your email
             </Span>
           </P>
           <Hr size="zero" spacer />
           <P>
-            <Span size="normal" bold>
+            <Span size="normal" weight="semiBold">
               ✉️&nbsp;&nbsp;&nbsp;🚀
             </Span>
           </P>

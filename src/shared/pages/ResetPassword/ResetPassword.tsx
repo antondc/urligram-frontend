@@ -92,16 +92,16 @@ export const ResetPassword: React.FC<Props> = ({
         <Hr size="big" spacer />
         <Flex horizontal="center">
           <div className="ResetPassword-section">
-            <Span bold>Remember it?: </Span>
+            <Span weight="semiBold">Remember it?: </Span>
             <A href="login" styled underlined frontend>
-              <Span bold>log in</Span>
+              <Span weight="semiBold">log in</Span>
             </A>
           </div>
           <Hr size="micro" spacer />
           <div className="ResetPassword-section">
-            <Span bold>Dont have an account?: </Span>
+            <Span weight="semiBold">Dont have an account?: </Span>
             <A href="sign-up" styled underlined frontend>
-              <Span bold>sign up</Span>
+              <Span weight="semiBold">sign up</Span>
             </A>
           </div>
         </Flex>

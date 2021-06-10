@@ -30,14 +30,14 @@ export const UserRow: React.FC<UserRow> = ({
   <div className="UserRow" data-test-id="UserRow" key={'UserRow-' + id}>
     <div className="UserRow-main">
       <A href={`users/${id}`} styled frontend>
-        <Span bold size="small" className="UserRow-name">
+        <Span weight="semiBold" size="small" className="UserRow-name">
           @{name}
         </Span>
       </A>
       <div className="UserRow-details">
         <Span size="nano">
           <A href={`users/${id}/lists`} styled frontend disabled={!ammountLists} underlined>
-            <Span size="nano" bold>
+            <Span size="nano" weight="semiBold">
               {ammountLists}
             </Span>
             <Space />
@@ -45,13 +45,13 @@ export const UserRow: React.FC<UserRow> = ({
           </A>
           <Space />
           <Space />
-          <Span size="nano" bold>
+          <Span size="nano" weight="semiBold">
             ·
           </Span>
           <Space />
           <Space />
           <A href={`users/${id}/bookmarks`} styled frontend disabled={!ammountBookmarks} underlined>
-            <Span size="nano" bold>
+            <Span size="nano" weight="semiBold">
               {ammountBookmarks}
             </Span>
             <Space />
@@ -59,13 +59,13 @@ export const UserRow: React.FC<UserRow> = ({
           </A>
           <Space />
           <Space />
-          <Span size="nano" bold>
+          <Span size="nano" weight="semiBold">
             ·
           </Span>
           <Space />
           <Space />
           <A href={`users/${id}`} styled frontend disabled={!connections} underlined>
-            <Span size="nano" bold>
+            <Span size="nano" weight="semiBold">
               {connections}
             </Span>
             <Space />
@@ -73,7 +73,7 @@ export const UserRow: React.FC<UserRow> = ({
           </A>
           <Space />
           <Space />
-          <Span size="nano" bold>
+          <Span size="nano" weight="semiBold">
             ·
           </Span>
           <Space />

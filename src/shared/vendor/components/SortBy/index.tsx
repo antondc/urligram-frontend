@@ -36,7 +36,7 @@ export const SortBy: React.FC<Props> = ({ className, href, options, currentSort 
         return (
           <li className={'SortBy-listItem' + (isActiveItem ? ' SortBy-listItem--active' : '')} key={index}>
             <A href={displayedUrl} styled={false} frontend className="SortBy-listItemLink">
-              <Span size="small" extraBold>
+              <Span size="small" weight="extraBold">
                 {item.label}{' '}
               </Span>
               <Sort

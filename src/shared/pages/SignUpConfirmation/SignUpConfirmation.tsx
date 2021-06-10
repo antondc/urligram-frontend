@@ -10,7 +10,7 @@ export const SignUpConfirmation: React.FC = () => (
     <Hr spacer size="big" />
     <Hr spacer size="big" />
     <Flex horizontal="center">
-      <Span bold size="normal">
+      <Span weight="semiBold" size="normal">
         Please check your email
       </Span>
       <Hr spacer size="zero" />

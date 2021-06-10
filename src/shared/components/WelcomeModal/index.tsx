@@ -25,13 +25,13 @@ const WelcomeModal: React.FC = () => {
           <H4>Welcome @{name}!</H4>
           <Hr size="normal" spacer />
           <P>
-            <Span size="normal" bold>
+            <Span size="normal" weight="semiBold">
               Your account is active now
             </Span>
           </P>
           <Hr size="zero" spacer />
           <P>
-            <Span size="normal" bold>
+            <Span size="normal" weight="semiBold">
               🎉&nbsp;&nbsp;&nbsp;🥳
             </Span>
           </P>

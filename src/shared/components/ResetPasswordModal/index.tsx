@@ -26,13 +26,13 @@ const ResetPasswordModal: React.FC = () => {
           <H4>Password reset success!</H4>
           <Hr size="normal" spacer />
           <P>
-            <Span size="normal" bold>
+            <Span size="normal" weight="semiBold">
               Save it in a safe place
             </Span>
           </P>
           <Hr size="zero" spacer />
           <P>
-            <Span size="normal" bold>
+            <Span size="normal" weight="semiBold">
               🎉&nbsp;&nbsp;&nbsp;🥳
             </Span>
           </P>

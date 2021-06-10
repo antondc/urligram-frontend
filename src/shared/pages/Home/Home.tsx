@@ -53,7 +53,7 @@ export const Home: React.FC<Props> = ({
               bookmarksIds?.map((id) => <BookmarkRow id={id} key={id} />)
             )}
             {!bookmarksIdsLoading && !bookmarksIds?.length && (
-              <Span bold>ⵁ Start following users to receive recommended bookmarks.</Span>
+              <Span weight="semiBold">ⵁ Start following users to receive recommended bookmarks.</Span>
             )}
           </MainContent>
         </Frame>

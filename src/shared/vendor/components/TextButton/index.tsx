@@ -20,7 +20,7 @@ export const TextButton: React.FC<Props> = ({ text, icon, variant, disabled, siz
     className={'TextButton ' + (variant ? ' TextButton--' + variant : '') + (disabled ? ' TextButton--disabled' : '')}
     {...props}
   >
-    <Span size={size} className="TextButton-text" bold>
+    <Span size={size} className="TextButton-text" weight="semiBold">
       {text}
     </Span>
     {icon && <SvgIcon name={icon} size="small" className="TextButton-icon" />}

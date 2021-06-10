@@ -53,7 +53,7 @@ export const Followers: React.FC<Props> = ({
         <Hr spacer size="nano" />
         <Hr spacer />
         <Frame grow padding="small">
-          <Span size="normal" bold>
+          <Span size="normal" weight="semiBold">
             Followers of <A href={`/users/${userId}/following`}>@{user?.name}</A>
           </Span>
         </Frame>
@@ -77,7 +77,7 @@ export const Followers: React.FC<Props> = ({
             ) : (
               usersCurrentIds?.map((id) => <UserRow id={id} key={id} />)
             )}
-            {!usersLoading && !usersCurrentIds?.length && <Span bold>ⵁ We didnt find any user.</Span>}
+            {!usersLoading && !usersCurrentIds?.length && <Span weight="semiBold">ⵁ We didnt find any user.</Span>}
           </MainContent>
         </Frame>
         <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />

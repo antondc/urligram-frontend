@@ -32,27 +32,27 @@ export const HeaderSecond: React.FC<Props> = ({ formattedDate, weatherData }) =>
           <WeatherIcon className="HeaderSecond-weatherIcon" weatherCode={weatherData?.weatherCode} />
           <Space />
           <Space />
-          <Span size="small" bold>
+          <Span size="small" weight="semiBold">
             {weatherData?.weatherDesc}
           </Span>
           <Space />•<Space />
           <Termometer className="HeaderSecond-smallIcon" />
-          <Span size="small" bold>
+          <Span size="small" weight="semiBold">
             {weatherData?.temperature} Cº
           </Span>
           <Space />•<Space />
           <Precipitations className="HeaderSecond-smallIcon" />
-          <Span size="small" bold>
+          <Span size="small" weight="semiBold">
             {weatherData?.precipitations}mm
           </Span>
           <Space />•<Space />
           <Humidity className="HeaderSecond-smallIcon" />
-          <Span size="small" bold>
+          <Span size="small" weight="semiBold">
             {weatherData?.humidity} %
           </Span>
           <Space />•<Space />
           <Wind className="HeaderSecond-smallIcon" />
-          <Span size="small" bold>
+          <Span size="small" weight="semiBold">
             {weatherData?.windSpeed} km/h
           </Span>
         </Flex>
@@ -65,7 +65,7 @@ export const HeaderSecond: React.FC<Props> = ({ formattedDate, weatherData }) =>
         borderTop={false}
       >
         <Flex vertical="center">
-          <Span bold>{formattedDate}</Span>
+          <Span weight="semiBold">{formattedDate}</Span>
         </Flex>
       </Frame>
       <Frame

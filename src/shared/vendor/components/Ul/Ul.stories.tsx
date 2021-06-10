@@ -30,7 +30,7 @@ export const Default: React.FC = () => (
         vitae nobis minima aspernatur sunt voluptatibus odit deleniti vel.
       </li>
       <li>
-        <Span bold> Adipisicing: </Span> elit. <A href="http://example.com"> Temporibus</A> fugit{' '}
+        <Span weight="semiBold"> Adipisicing: </Span> elit. <A href="http://example.com"> Temporibus</A> fugit{' '}
         <Span italics>
           eligendi optio veritatis vitae nobis minima aspernatur sunt voluptatibus odit deleniti vel, error aut.{' '}
         </Span>

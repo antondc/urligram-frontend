@@ -31,16 +31,16 @@ const LoginModal: React.FC = () => {
         <Hr spacer size="big" />
         <Flex horizontal="center">
           <div className="Login-section">
-            <Span bold>Forgot password?: </Span>
+            <Span weight="semiBold">Forgot password?: </Span>
             <A href="forgot-password" styled underlined frontend onClick={closeModal}>
-              <Span bold>reset it</Span>
+              <Span weight="semiBold">reset it</Span>
             </A>
           </div>
           <Hr size="micro" spacer />
           <div className="Login-section">
-            <Span bold>Dont have an account?: </Span>
+            <Span weight="semiBold">Dont have an account?: </Span>
             <A href="sign-up" styled underlined frontend onClick={closeModal}>
-              <Span bold>sign up</Span>
+              <Span weight="semiBold">sign up</Span>
             </A>
           </div>
         </Flex>

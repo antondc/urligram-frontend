@@ -81,7 +81,7 @@ export const BookmarkLists: React.FC<Props> = ({
                     }
                     key={item.id}
                   >
-                    <Span className="BookmarkList-listsItemText" bold>
+                    <Span className="BookmarkList-listsItemText" weight="semiBold">
                       <A href={`lists/${item?.id}?sort=-updatedAt`} frontend onClick={onListLeave}>
                         {item.name}
                       </A>

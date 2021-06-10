@@ -69,7 +69,7 @@ export const Lists: React.FC<Props> = ({
             ) : (
               listsIds?.map((id) => <ListRow id={id} key={id} />)
             )}
-            {!listsIdsLoading && !listsIds?.length && <Span bold>ⵁ We didn find any list.</Span>}
+            {!listsIdsLoading && !listsIds?.length && <Span weight="semiBold">ⵁ We didn find any list.</Span>}
           </MainContent>
         </Frame>
         <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />

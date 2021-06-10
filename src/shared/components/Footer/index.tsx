@@ -34,7 +34,7 @@ const Footer: React.FC<Props> = ({
   <>
     <Frame className="Footer" borderTop={false}>
       <div className="Footer-section">
-        <Span size="medium" bold>
+        <Span size="medium" weight="extraBold">
           <A
             className="Footer-link"
             href="sign-up"
@@ -47,35 +47,35 @@ const Footer: React.FC<Props> = ({
         </Span>
       </div>
       <div className="Footer-section">
-        <Span size="medium" bold>
+        <Span size="medium" weight="extraBold">
           <A className="Footer-link" href="about" frontend underlined active={currentRoute?.name === Routes.About.name}>
             About
           </A>
         </Span>
       </div>
       <div className="Footer-section">
-        <Span size="medium" bold>
+        <Span size="medium" weight="extraBold">
           <A className="Footer-link" href="" frontend underlined active={currentRoute?.name === undefined}>
             Disclaimer
           </A>
         </Span>
       </div>
       <div className="Footer-section">
-        <Span size="medium" bold>
+        <Span size="medium" weight="extraBold">
           <A className="Footer-link" href="" frontend underlined active={currentRoute?.name === undefined}>
             FAQ
           </A>
         </Span>
       </div>
       <div className="Footer-section">
-        <Span size="medium" bold>
+        <Span size="medium" weight="extraBold">
           <A className="Footer-link" href="" frontend underlined active={currentRoute?.name === undefined}>
             Download
           </A>
         </Span>
       </div>
       <div className="Footer-section">
-        <Span size="medium" bold>
+        <Span size="medium" weight="extraBold">
           <A className="Footer-link" href="" frontend underlined active={currentRoute?.name === undefined}>
             Contact
           </A>

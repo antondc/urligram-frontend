@@ -17,7 +17,7 @@ interface Props {
 
 const SidebarListUsers: React.FC<Props> = ({ items, loading, title: blockTitle }) => {
   if (loading) return <SidebarListUsersSkeleton />;
-  if (!items?.length) return <Span bold>ⵁ Nothing here yet.</Span>;
+  if (!items?.length) return <Span weight="semiBold">ⵁ Nothing here yet.</Span>;
 
   return (
     <>
@@ -27,7 +27,7 @@ const SidebarListUsers: React.FC<Props> = ({ items, loading, title: blockTitle }
           <dd className="SidebarListUsers-user">
             <div className="SidebarListUsers-userName">
               <A href={`users/${id}`} frontend>
-                <Span extraBold>@{name}</Span>
+                <Span weight="extraBold">@{name}</Span>
               </A>
             </div>
             <div className="SidebarListUsers-userDescription">
@@ -45,7 +45,7 @@ const SidebarListUsers: React.FC<Props> = ({ items, loading, title: blockTitle }
                       id={`${stringToDashCase(blockTitle)}-followers-${index}`}
                       className="SidebarListUsers-userData"
                       size="micro"
-                      bold
+                      weight="semiBold"
                     >
                       @{followers?.length}
                       {(!!following?.length || !!bookmarksIds?.length) && <> · </>}
@@ -67,7 +67,7 @@ const SidebarListUsers: React.FC<Props> = ({ items, loading, title: blockTitle }
                       id={`${stringToDashCase(blockTitle)}-following-${index}`}
                       className="SidebarListUsers-userData"
                       size="micro"
-                      bold
+                      weight="semiBold"
                     >
                       @{following?.length}
                       {!!bookmarksIds?.length && <> · </>}
@@ -89,7 +89,7 @@ const SidebarListUsers: React.FC<Props> = ({ items, loading, title: blockTitle }
                       id={`${stringToDashCase(blockTitle)}-bookmarks-${index}`}
                       className="SidebarListUsers-userData"
                       size="micro"
-                      bold
+                      weight="semiBold"
                     >
                       <Bookmark size="micro" className="SidebarListUsers-icon" />
                       {bookmarksIds?.length}

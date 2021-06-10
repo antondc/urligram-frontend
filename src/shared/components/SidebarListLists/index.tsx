@@ -17,7 +17,7 @@ interface Props {
 
 const SidebarListLists: React.FC<Props> = ({ items, loading, title: blockTitle }) => {
   if (loading) return <SidebarListListsSkeleton />;
-  if (!items?.length) return <Span bold>ⵁ Nothing here yet.</Span>;
+  if (!items?.length) return <Span weight="semiBold">ⵁ Nothing here yet.</Span>;
 
   return (
     <dl className="SidebarListLists-lists">
@@ -27,7 +27,7 @@ const SidebarListLists: React.FC<Props> = ({ items, loading, title: blockTitle }
           <dd className="SidebarListLists-list">
             <div className="SidebarListLists-listName">
               <A href={`lists/${id}`} frontend>
-                <Span bold>+ {name}</Span>
+                <Span weight="semiBold">+ {name}</Span>
               </A>
             </div>
             <div id={id + '-' + index} className="SidebarListLists-listDescription">

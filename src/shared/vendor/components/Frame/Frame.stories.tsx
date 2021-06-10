@@ -20,7 +20,7 @@ const knobs = {
 export const Default: React.FC = () => (
   <div style={{ width: '300px' }}>
     <Frame grow={knobs.grow()} weight={knobs.weight()} padding={knobs.padding()}>
-      <Span bold>{knobs.text()}</Span>
+      <Span weight="semiBold">{knobs.text()}</Span>
     </Frame>
   </div>
 );
