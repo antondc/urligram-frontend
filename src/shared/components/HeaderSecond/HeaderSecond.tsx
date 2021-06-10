@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Clock from 'Components/Clock';
-import { Flex, Frame, Space, Span, SpinnerCircularBrute } from 'Vendor/components';
+import { Flex, Frame, Space, Span } from 'Vendor/components';
 import Humidity from 'Vendor/WeatherIcons/svg/wi-cloud.svg';
 import Precipitations from 'Vendor/WeatherIcons/svg/wi-raindrop.svg';
 import Wind from 'Vendor/WeatherIcons/svg/wi-small-craft-advisory.svg';
@@ -32,27 +32,27 @@ export const HeaderSecond: React.FC<Props> = ({ formattedDate, weatherData }) =>
           <WeatherIcon className="HeaderSecond-weatherIcon" weatherCode={weatherData?.weatherCode} />
           <Space />
           <Space />
-          <Span size="small" weight="semiBold">
+          <Span size="small" weight="extraBold">
             {weatherData?.weatherDesc}
           </Span>
           <Space />•<Space />
           <Termometer className="HeaderSecond-smallIcon" />
-          <Span size="small" weight="semiBold">
+          <Span size="small" weight="extraBold">
             {weatherData?.temperature} Cº
           </Span>
           <Space />•<Space />
           <Precipitations className="HeaderSecond-smallIcon" />
-          <Span size="small" weight="semiBold">
+          <Span size="small" weight="extraBold">
             {weatherData?.precipitations}mm
           </Span>
           <Space />•<Space />
           <Humidity className="HeaderSecond-smallIcon" />
-          <Span size="small" weight="semiBold">
+          <Span size="small" weight="extraBold">
             {weatherData?.humidity} %
           </Span>
           <Space />•<Space />
           <Wind className="HeaderSecond-smallIcon" />
-          <Span size="small" weight="semiBold">
+          <Span size="small" weight="extraBold">
             {weatherData?.windSpeed} km/h
           </Span>
         </Flex>
@@ -65,7 +65,7 @@ export const HeaderSecond: React.FC<Props> = ({ formattedDate, weatherData }) =>
         borderTop={false}
       >
         <Flex vertical="center">
-          <Span weight="semiBold">{formattedDate}</Span>
+          <Span weight="extraBold">{formattedDate}</Span>
         </Flex>
       </Frame>
       <Frame

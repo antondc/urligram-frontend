@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { ProviderWrapper } from 'Tools/storybook/provider';
-import { FadeInOut, Frame, Hr } from 'Vendor/components';
+import { Frame } from 'Vendor/components';
 import { boolean, withKnobs } from '@storybook/addon-knobs';
 import { BookmarkRow } from './BookmarkRow';
 import { BookmarkRowSkeleton } from './BookmarkRowSkeleton';
@@ -14,43 +14,181 @@ export default {
 
 const noop = () => {};
 
-const props = {
-  id: 1,
-  bookmark: {
-    linkId: 12,
-    title:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos eveniet ut, autem mollitia culpa soluta obcaecati, laborum eos iusto cupiditate aspernatur veniam ipsum necessitatibus neque. Veritatis quisquam ex nam deleniti.',
-    url: 'https://en.wikipedia.org/wiki/Khanty',
-    img: 'https://picsum.photos/id/123/300/200',
-    tags: [
-      { id: 3, name: 'Cool' },
-      { id: 7, name: 'Taf' },
-      { id: 1, name: 'Cool' },
-      { id: 4, name: 'Aaa' },
-      { id: 2, name: 'Interesting' },
-      { id: 8, name: 'Rgsg' },
-      { id: 5, name: 'Interesting' },
-      { id: 6, name: 'Cool' },
-      { id: 9, name: 'Cool' },
-      { id: 10, name: 'AeFu' },
-    ],
-    favicon: 'https://www.google.com/s2/favicons?domain=www.aeroprakt.com',
-    statistics: {
-      absoluteVote: 0,
-      timesVoted: 0,
-      averageVote: 0,
-      timesBookmarked: 0,
-      vote: false,
+const items = [
+  {
+    id: 1,
+    bookmark: {
+      linkId: 12,
+      title: 'The Geography of Nowhere - Wikipedia',
+      img: 'https://www.google.com/s2/favicons?domain=https://en.wikipedia.org',
+      tags: [
+        { id: 3, name: 'Cool' },
+        { id: 7, name: 'Taf' },
+        { id: 1, name: 'Cool' },
+        { id: 4, name: 'Aaa' },
+        { id: 2, name: 'Interesting' },
+        { id: 8, name: 'Rgsg' },
+        { id: 5, name: 'Interesting' },
+        { id: 6, name: 'Cool' },
+        { id: 9, name: 'Cool' },
+        { id: 10, name: 'AeFu' },
+      ],
+      favicon: 'https://www.google.com/s2/favicons?domain=https://en.wikipedia.org',
+      statistics: {
+        absoluteVote: 0,
+        timesVoted: 0,
+        averageVote: 0,
+        timesBookmarked: 0,
+        vote: true,
+        loading: false,
+      },
       loading: false,
+      isOwnBookmark: false,
+      userBookmarkedLink: false,
+      isPrivate: true,
     },
-    loading: false,
-    isOwnBookmark: false,
-    userBookmarkedLink: false,
+    onVote: noop,
+    sessionUserBookmarkedLink: true,
   },
-  onVote: noop,
-  sessionUserBookmarkedLink: true,
-};
+  {
+    id: 1,
+    bookmark: {
+      linkId: 12,
+      title: 'Cross-Origin Resource Sharing (CORS) - HTTP | MDN',
+      img: 'https://www.google.com/s2/favicons?domain=https://developer.mozilla.org',
+      tags: [
+        { id: 3, name: 'Cool' },
+        { id: 7, name: 'Taf' },
+        { id: 1, name: 'Cool' },
+        { id: 4, name: 'Aaa' },
+        { id: 2, name: 'Interesting' },
+        { id: 8, name: 'Rgsg' },
+        { id: 5, name: 'Interesting' },
+        { id: 6, name: 'Cool' },
+        { id: 9, name: 'Cool' },
+        { id: 10, name: 'AeFu' },
+      ],
+      favicon: 'https://www.google.com/s2/favicons?domain=https://developer.mozilla.org',
+      statistics: {
+        absoluteVote: 0,
+        timesVoted: 0,
+        averageVote: 0,
+        timesBookmarked: 0,
+        vote: false,
+        loading: false,
+      },
+      loading: false,
+      isOwnBookmark: false,
+      userBookmarkedLink: false,
+    },
+    onVote: noop,
+    sessionUserBookmarkedLink: true,
+  },
+  {
+    id: 1,
+    bookmark: {
+      linkId: 12,
+      title: 'Clean Architecture — A little introduction - DEV Community',
+      img: 'https://www.google.com/s2/favicons?domain=https://dev.to',
+      tags: [
+        { id: 3, name: 'Cool' },
+        { id: 7, name: 'Taf' },
+        { id: 1, name: 'Cool' },
+        { id: 4, name: 'Aaa' },
+        { id: 2, name: 'Interesting' },
+        { id: 8, name: 'Rgsg' },
+        { id: 5, name: 'Interesting' },
+        { id: 6, name: 'Cool' },
+        { id: 9, name: 'Cool' },
+        { id: 10, name: 'AeFu' },
+      ],
+      favicon: 'https://www.google.com/s2/favicons?domain=https://dev.to',
+      statistics: {
+        absoluteVote: 0,
+        timesVoted: 0,
+        averageVote: 0,
+        timesBookmarked: 0,
+        vote: false,
+        loading: false,
+      },
+      loading: false,
+      isOwnBookmark: false,
+      userBookmarkedLink: false,
+    },
+    onVote: noop,
+    sessionUserBookmarkedLink: true,
+  },
+  {
+    id: 1,
+    bookmark: {
+      linkId: 12,
+      title: 'Entrepreneurship 101: Who is your customer? | edX',
+      img: 'https://www.google.com/s2/favicons?domain=https://www.edx.org',
+      tags: [
+        { id: 3, name: 'Cool' },
+        { id: 7, name: 'Taf' },
+        { id: 1, name: 'Cool' },
+        { id: 4, name: 'Aaa' },
+        { id: 2, name: 'Interesting' },
+        { id: 8, name: 'Rgsg' },
+        { id: 5, name: 'Interesting' },
+        { id: 6, name: 'Cool' },
+        { id: 9, name: 'Cool' },
+        { id: 10, name: 'AeFu' },
+      ],
+      favicon: 'https://www.google.com/s2/favicons?domain=https://www.edx.org',
+      statistics: {
+        absoluteVote: 0,
+        timesVoted: 0,
+        averageVote: 0,
+        timesBookmarked: 0,
+        vote: true,
+        loading: false,
+      },
+      loading: false,
+      isOwnBookmark: false,
+      userBookmarkedLink: false,
+    },
+    onVote: noop,
+    sessionUserBookmarkedLink: true,
+  },
+  {
+    id: 1,
+    bookmark: {
+      linkId: 12,
+      title: 'A 5G future – O’Reilly',
+      img: 'https://www.google.com/s2/favicons?domain=https://www.oreilly.com',
+      tags: [
+        { id: 3, name: 'Cool' },
+        { id: 7, name: 'Taf' },
+        { id: 1, name: 'Cool' },
+        { id: 4, name: 'Aaa' },
+        { id: 2, name: 'Interesting' },
+        { id: 8, name: 'Rgsg' },
+        { id: 5, name: 'Interesting' },
+        { id: 6, name: 'Cool' },
+        { id: 9, name: 'Cool' },
+        { id: 10, name: 'AeFu' },
+      ],
+      favicon: 'https://www.google.com/s2/favicons?domain=https://www.oreilly.com',
+      statistics: {
+        absoluteVote: 0,
+        timesVoted: 0,
+        averageVote: 0,
+        timesBookmarked: 0,
+        vote: false,
+        loading: false,
+      },
+      loading: false,
+      isOwnBookmark: false,
+      userBookmarkedLink: false,
+    },
+    onVote: noop,
+    sessionUserBookmarkedLink: true,
+  },
+];
 
+const allItems = [...items, ...items, ...items];
 const knobs = {
   skeleton: (): boolean => boolean('Skeleton', false),
 };
@@ -59,25 +197,9 @@ export const Default: React.ReactNode = () => (
   <ProviderWrapper>
     <Frame weight="none">
       <Frame>
-        <FadeInOut valueToUpdate={knobs.skeleton()} speed="fastest" appear>
-          {!knobs.skeleton() ? (
-            <>
-              <BookmarkRow {...props} />
-              <BookmarkRow {...props} />
-              <BookmarkRow {...props} />
-              <BookmarkRow {...props} />
-              <BookmarkRow {...props} />
-            </>
-          ) : (
-            <>
-              <BookmarkRowSkeleton {...props} />
-              <BookmarkRowSkeleton {...props} />
-              <BookmarkRowSkeleton {...props} />
-              <BookmarkRowSkeleton {...props} />
-              <BookmarkRowSkeleton {...props} />
-            </>
-          )}
-        </FadeInOut>
+        {!knobs.skeleton()
+          ? allItems.map((item, index) => <BookmarkRow key={index} {...item} />)
+          : allItems?.map((item, index) => <BookmarkRowSkeleton key={index} {...item} />)}
       </Frame>
     </Frame>
   </ProviderWrapper>

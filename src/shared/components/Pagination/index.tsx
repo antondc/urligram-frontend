@@ -50,7 +50,7 @@ const Pagination: React.FC<Props> = ({ totalItems = 0, itemsPerPage = 10, offset
             <Flex growHorizontal horizontal="center">
               {pages.map((item, index) =>
                 !!item ? (
-                  <Span weight="semiBold" key={index}>
+                  <Span weight="extraBold" key={index}>
                     <A
                       className="Pagination-item"
                       href={item.path}
@@ -64,7 +64,7 @@ const Pagination: React.FC<Props> = ({ totalItems = 0, itemsPerPage = 10, offset
                   </Span>
                 ) : (
                   <Fragment key={index}>
-                    <Span weight="semiBold" className="Pagination-dots Pagination-item">
+                    <Span weight="extraBold" className="Pagination-dots Pagination-item">
                       ...
                     </Span>
                   </Fragment>

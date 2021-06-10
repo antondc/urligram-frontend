@@ -14,8 +14,8 @@ const customViewports = {
   Desktop: {
     name: 'Desktop',
     styles: {
-      width: '1200px',
-      height: '900px',
+      width: '600px',
+      height: '1200px',
       padding: '0',
       border: 'none',
     },
@@ -43,6 +43,6 @@ const customViewports = {
 addParameters({
   viewport: {
     viewports: customViewports, // newViewports would be an ViewportMap. (see below for examples)
-    defaultViewport: 'Tablet',
+    defaultViewport: 'Desktop',
   },
 });

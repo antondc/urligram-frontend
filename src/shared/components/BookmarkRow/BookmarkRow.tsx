@@ -4,7 +4,7 @@ import A from 'Components/A';
 import BookmarkActions from 'Components/BookmarkActions';
 import BookmarkLists from 'Components/BookmarkLists';
 import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
-import { Flex, Private, Space, Span, Tag, TextButton } from 'Vendor/components';
+import { EditCircle, Flex, Private, Space, Span, Tag, Vote } from 'Vendor/components';
 
 import './BookmarkRow.less';
 
@@ -43,7 +43,7 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
       <div className="BookmarkRow-mainBottom">
         <Span size="nano">Shared by</Span>
         <Space />
-        <Span size="nano" weight="semiBold">
+        <Span size="nano" weight="extraBold">
           {bookmark?.statistics?.timesBookmarked || 0}
         </Span>
         <Space />
@@ -51,49 +51,11 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
           user
           {bookmark?.statistics?.timesBookmarked !== 1 ? 's' : ''}
         </Span>
-        {!!sessionUserBookmarkedLink && (
-          <>
-            <Space />·<Space />
-            <Span className="BookmarkRow-editButton" size="nano" weight="semiBold">
-              <TextButton size="nano" text="Edit" onClick={onEdit} />
-            </Span>
-          </>
-        )}
         <Space />·<Space />
-        <Span size="nano">Ranking</Span>
+        <Span size="nano">Total votes</Span>
         <Space />
-        <Span size="nano" weight="semiBold">
+        <Span size="nano" weight="extraBold">
           {bookmark?.statistics?.absoluteVote || 0}
-        </Span>
-        <Space />·<Space />
-        <Span
-          className={
-            'BookmarkRow-voteButton BookmarkRow-downvote' +
-            (bookmark?.statistics?.loading ? ' BookmarkRow-voteButton--loading' : '') +
-            (bookmark?.statistics?.vote === false ? ' BookmarkRow-voteButton--active' : '') +
-            (bookmark?.statistics?.vote === false ? ' BookmarkRow-voteButton--downvoted' : '')
-          }
-          weight="semiBold"
-          size="small"
-          onClick={() => onVote(bookmark?.statistics?.vote === false ? null : false)}
-        >
-          ▲
-        </Span>
-        <Span className="BookmarkRow-voteSlash" size="micro" weight="semiBold">
-          /
-        </Span>
-        <Span
-          className={
-            'BookmarkRow-voteButton BookmarkRow-upvote' +
-            (bookmark?.statistics?.loading ? ' BookmarkRow-voteButton--loading' : '') +
-            (bookmark?.statistics?.vote === true ? ' BookmarkRow-voteButton--active' : '') +
-            (bookmark?.statistics?.vote === true ? ' BookmarkRow-voteButton--upvoted' : '')
-          }
-          size="small"
-          weight="semiBold"
-          onClick={() => onVote(bookmark?.statistics?.vote === true ? null : true)}
-        >
-          ▲
         </Span>
       </div>
     </div>
@@ -115,11 +77,18 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
     <div className="BookmarkRow-icons">
       <Flex horizontal="right" growVertical={false} vertical="top" noWrap>
         {!!bookmark?.isPrivate && <Private size="micro" className="BookmarkRow-icon BookmarkRow-private" />}
+        {!!sessionUserBookmarkedLink && <EditCircle className="BookmarkRow-icon" size="micro" onClick={onEdit} />}
         {!!sessionUserBookmarkedLink && (
           <div className="BookmarkRow-icon BookmarkRow-iconLists">
             <BookmarkLists bookmarkId={bookmark?.id} />
           </div>
         )}
+        <Vote
+          className="BookmarkRow-iconVote"
+          vote={bookmark?.statistics?.vote}
+          loading={bookmark?.statistics?.loading}
+          changeVote={onVote}
+        />
         <BookmarkActions
           className="BookmarkRow-icon BookmarkRow-actionButton"
           linkId={bookmark?.linkId}

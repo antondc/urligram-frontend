@@ -20,7 +20,7 @@ const LanguageItem: React.FC<Props> = ({ lang, href, isCurrent, onClick }) => (
     disabled={isCurrent}
     onClick={onClick}
   >
-    <Span weight="semiBold" className="LanguageItem-text">
+    <Span weight="extraBold" className="LanguageItem-text">
       {lang}
     </Span>
   </A>

@@ -16,12 +16,9 @@
 
   @media @br-mobile {
     grid-template:
-      'left right' auto
-      '. .' 5px
-      'center center' auto
-      'center center' auto
-      / 1fr 0fr;
-    height: unset;
+      'main icons' auto
+      'main tags' auto
+      / 4fr 2fr 0fr;
   }
 
   &-recentlyCreated {
@@ -38,6 +35,7 @@
     grid-area: main;
     padding-top: 4px;
     overflow: hidden;
+    // background: gold;
   }
 
   &-favicon {
@@ -51,6 +49,7 @@
     white-space: nowrap;
     overflow-x: scroll;
     overflow-y: hidden;
+    // background: orange;
     text-overflow: ellipsis;
 
     .hideScrollbar;
@@ -61,6 +60,7 @@
     display: flex;
     padding-bottom: 2px;
     line-height: 6px;
+    // background: turquoise;
 
     span {
       line-height: 6px;
@@ -128,6 +128,7 @@
     justify-content: space-between;
     align-items: flex-end;
     grid-area: icons;
+    // background: salmon;
   }
 
   &-image {
@@ -150,6 +151,14 @@
       min-height: 10px;
       min-width: 10px;
     }
+  }
+
+  &-actionButton {
+    margin-left: 1px;
+  }
+
+  &-iconVote {
+    margin-left: 3px;
   }
 
   &-iconLists {
@@ -180,6 +189,7 @@
     grid-area: tags;
     overflow-x: scroll;
     overflow-y: visible;
+    // background: darkcyan;
     direction: rtl;
 
     .hideScrollbar;
