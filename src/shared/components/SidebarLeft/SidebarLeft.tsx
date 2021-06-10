@@ -27,7 +27,7 @@ export const SidebarLeft: React.FC<Props> = ({
     {isLoggedIn && (
       <ul>
         <li className="SidebarLeft-item">
-          <Span size="medium" bold>
+          <Span size="medium" extraBold>
             <A
               className="SidebarLeft-link"
               href={`users/${sessionId}`}
@@ -40,7 +40,7 @@ export const SidebarLeft: React.FC<Props> = ({
           </Span>
         </li>
         <li className="SidebarLeft-item">
-          <Span size="medium" bold>
+          <Span size="medium" extraBold>
             <A
               className="SidebarLeft-link"
               href={`users/${sessionId}/bookmarks`}
@@ -53,7 +53,7 @@ export const SidebarLeft: React.FC<Props> = ({
           </Span>
         </li>
         <li className="SidebarLeft-item">
-          <Span size="medium" bold>
+          <Span size="medium" extraBold>
             <A
               className="SidebarLeft-link"
               href={`users/${sessionId}/tags`}
@@ -66,21 +66,21 @@ export const SidebarLeft: React.FC<Props> = ({
           </Span>
         </li>
         <li className="SidebarLeft-item">
-          <Span size="medium" bold>
+          <Span size="medium" extraBold>
             <A className="SidebarLeft-link" href="" frontend underlined onClick={switchUiBookmarkModal}>
               Add bookmark
             </A>
           </Span>
         </li>
         <li className="SidebarLeft-item">
-          <Span size="medium" bold>
+          <Span size="medium" extraBold>
             <A className="SidebarLeft-link" href="" frontend underlined onClick={switchUiListModal}>
               Create list
             </A>
           </Span>
         </li>
         <li className="SidebarLeft-item">
-          <Span size="medium" bold>
+          <Span size="medium" extraBold>
             <A
               className="SidebarLeft-link"
               href={`users/${sessionId}/lists?sort=-createdAt`}
@@ -93,7 +93,7 @@ export const SidebarLeft: React.FC<Props> = ({
           </Span>
         </li>
         <li className="SidebarLeft-item">
-          <Span size="medium" bold>
+          <Span size="medium" extraBold>
             <A
               className="SidebarLeft-link"
               href={`users/${sessionId}/followers`}
@@ -106,7 +106,7 @@ export const SidebarLeft: React.FC<Props> = ({
           </Span>
         </li>
         <li className="SidebarLeft-item">
-          <Span size="medium" bold>
+          <Span size="medium" extraBold>
             <A
               className="SidebarLeft-link"
               href={`users/${sessionId}/following`}
@@ -123,35 +123,35 @@ export const SidebarLeft: React.FC<Props> = ({
     {!isLoggedIn && (
       <ul>
         <li className="SidebarLeft-item">
-          <Span size="medium" bold>
+          <Span size="medium" extraBold>
             <A className="SidebarLeft-link" href="" frontend underlined>
               Dont
             </A>
           </Span>
         </li>
         <li className="SidebarLeft-item">
-          <Span size="medium" bold>
+          <Span size="medium" extraBold>
             <A className="SidebarLeft-link" href="" frontend underlined>
               Know
             </A>
           </Span>
         </li>
         <li className="SidebarLeft-item">
-          <Span size="medium" bold>
+          <Span size="medium" extraBold>
             <A className="SidebarLeft-link" href="" frontend underlined>
               What
             </A>
           </Span>
         </li>
         <li className="SidebarLeft-item">
-          <Span size="medium" bold>
+          <Span size="medium" extraBold>
             <A className="SidebarLeft-link" href="" frontend underlined>
               Goes
             </A>
           </Span>
         </li>
         <li className="SidebarLeft-item">
-          <Span size="medium" bold>
+          <Span size="medium" extraBold>
             <A className="SidebarLeft-link" href="" frontend underlined>
               Here
             </A>

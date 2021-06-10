@@ -8,6 +8,7 @@ interface Props extends Omit<HTMLProps<HTMLSpanElement>, 'size'> {
   children: React.ReactNode;
   size?: SpanSize;
   bold?: boolean;
+  extraBold?: boolean;
   italics?: boolean;
   uppercase?: boolean;
   disabled?: boolean;
@@ -21,6 +22,7 @@ export const Span: React.FC<Props> = ({
   children,
   size = 'normal',
   bold = false,
+  extraBold = false,
   italics = false,
   disabled = false,
   uppercase = false,
@@ -36,6 +38,7 @@ export const Span: React.FC<Props> = ({
       'Span' +
       (' Span-' + size) +
       (bold ? ' Span--bold' : '') +
+      (extraBold ? ' Span--extraBold' : '') +
       (italics ? ' Span--italics' : '') +
       (disabled ? ' Span--disabled' : '') +
       (uppercase ? ' Span--uppercase' : '') +

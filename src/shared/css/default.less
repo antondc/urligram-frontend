@@ -4,10 +4,10 @@
 body {
   .hideScrollbar();
 
+  font-weight: @fw-medium;
   color: @c-base;
   opacity: 0;
   transition: opacity @td-fast ease;
-
   // No transitions on load
   &.preload * {
     transition: none !important;

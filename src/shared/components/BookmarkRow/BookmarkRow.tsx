@@ -31,8 +31,10 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
     key={bookmark?.id}
   >
     <div className="BookmarkRow-main">
-      <Flex vertical="top" growVertical={false} horizontal="left" noWrap>
+      <Flex vertical="baseline" growVertical={false} horizontal="left" noWrap>
         <img className="BookmarkRow-favicon" src={bookmark?.favicon} />
+        <Space />
+        <Space />
         <Span bold className="BookmarkRow-title">
           <A className="BookmarkRow-link" href={bookmark?.url} targetBlank styled={false}>
             {bookmark?.title}

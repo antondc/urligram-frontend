@@ -27,7 +27,7 @@ const SidebarListUsers: React.FC<Props> = ({ items, loading, title: blockTitle }
           <dd className="SidebarListUsers-user">
             <div className="SidebarListUsers-userName">
               <A href={`users/${id}`} frontend>
-                <Span bold>@{name}</Span>
+                <Span extraBold>@{name}</Span>
               </A>
             </div>
             <div className="SidebarListUsers-userDescription">

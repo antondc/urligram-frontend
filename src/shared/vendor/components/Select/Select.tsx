@@ -125,7 +125,7 @@ export const SelectUi: React.FC<Props> = ({
     {!placeholder && (
       <label className={'Select__label ' + (focusOrContent ? 'Select__label--active' : '')}>
         <span className="Select__label-background" />
-        <Span size="small" bold>
+        <Span size="small" extraBold>
           {label}
         </Span>
       </label>
