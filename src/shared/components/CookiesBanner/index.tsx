@@ -2,36 +2,33 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { selectSession } from 'Modules/Session/selectors/selectSession';
-import { COOKIE_POLICY_COOKIE, DELAY_ONE_HALF_SEC } from 'Root/src/shared/constants';
+import { COOKIE_POLICY_COOKIE, DELAY_SLOW_MS } from 'Root/src/shared/constants';
 import { CookiesWrapper } from 'Services/CookiesWrapper';
 import { CookiesBanner as CookiesBannerUi } from './CookiesBanner';
 
 const CookiesBanner: React.FC = () => {
   const session = useSelector(selectSession);
   const cookiesWrapper = new CookiesWrapper();
-  const acceptedCookiesPoliciy = cookiesWrapper.getCookie(COOKIE_POLICY_COOKIE);
+  const acceptedCookiesPolicy = cookiesWrapper.getCookie(COOKIE_POLICY_COOKIE);
   const [accepted, setAccepted] = useState<boolean>(false);
-  const [render, setRender] = useState<boolean>(!session?.id && !acceptedCookiesPoliciy);
+  const [show, setShow] = useState<boolean>(!session?.id && !acceptedCookiesPolicy);
 
   const onAccept = () => {
     const cookiesWrapper = new CookiesWrapper();
     cookiesWrapper.setCookie(COOKIE_POLICY_COOKIE, '1');
     setAccepted(true);
+
+    setTimeout(() => {
+      setShow(false);
+    }, DELAY_SLOW_MS);
   };
 
   useEffect(() => {
-    if (acceptedCookiesPoliciy) {
-      setTimeout(() => setRender(false), DELAY_ONE_HALF_SEC);
+    if (session?.id) setShow(false);
+    if (!session?.id && !acceptedCookiesPolicy) setShow(true);
+  }, [session]);
 
-      return;
-    }
-
-    setRender(true);
-  }, [accepted]);
-
-  if (!render) return null;
-
-  return <CookiesBannerUi onAccept={onAccept} accepted={accepted} />;
+  return <CookiesBannerUi onAccept={onAccept} accepted={accepted} show={show} />;
 };
 
 export default CookiesBanner;
