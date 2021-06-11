@@ -27,7 +27,7 @@
     display: flex;
     align-items: center;
     white-space: nowrap;
-    color: @c-traslucid--hardest;
+    color: @c-traslucid;
     transition: color @td-fast @ease-outCubic;
 
     &:hover {
@@ -37,7 +37,7 @@
     @{c}-listItemIcon {
       flex-shrink: 0;
       margin-left: 4px;
-      fill: @c-traslucid--hardest;
+      fill: @c-traslucid;
       transition: fill @td-fast @ease-outCubic, transform @td-fast @ease-outCubic !important;
     }
   }
@@ -53,6 +53,14 @@
 
     @{c}-listItemIcon--asc {
       transform: scaleY(-1);
+    }
+  }
+
+  &--loading {
+    @{c}-listItemLink,
+    @{c}-listItemIcon {
+      color: @c-traslucid;
+      fill: @c-traslucid;
     }
   }
 }

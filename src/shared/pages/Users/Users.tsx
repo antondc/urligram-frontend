@@ -49,7 +49,12 @@ export const Users: React.FC<Props> = ({
         <Hr spacer />
         <Frame grow padding="none" shadow={false} borderBottom={false}>
           <Flex horizontal="right">
-            <SortBy options={[{ label: 'Created at', field: 'createdAt' }]} href={url} currentSort={sort} />
+            <SortBy
+              options={[{ label: 'Created at', field: 'createdAt' }]}
+              href={url}
+              currentSort={sort}
+              loading={usersLoading}
+            />
           </Flex>
         </Frame>
         <Frame className="Users-users" grow padding="small">

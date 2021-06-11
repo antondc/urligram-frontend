@@ -67,6 +67,7 @@ export const Following: React.FC<Props> = ({
               ]}
               href={url}
               currentSort={sort}
+              loading={usersLoading}
             />
           </Flex>
         </Frame>

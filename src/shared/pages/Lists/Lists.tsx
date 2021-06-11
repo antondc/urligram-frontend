@@ -59,6 +59,7 @@ export const Lists: React.FC<Props> = ({
               ]}
               href={url}
               currentSort={sort}
+              loading={listsIdsLoading}
             />
           </Flex>
         </Frame>

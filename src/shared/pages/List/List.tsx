@@ -73,6 +73,7 @@ export const List: React.FC<Props> = ({
               ]}
               href={url}
               currentSort={sort}
+              loading={bookmarksLoading}
             />
           </Flex>
         </Frame>

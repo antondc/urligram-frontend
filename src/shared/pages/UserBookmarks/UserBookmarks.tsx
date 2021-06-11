@@ -97,6 +97,7 @@ export const UserBookmarks: React.FC<Props> = ({
               ]}
               href={url}
               currentSort={sort}
+              loading={bookmarksLoading}
             />
           </Flex>
         </Frame>

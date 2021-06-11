@@ -67,6 +67,7 @@ export const UserLists: React.FC<Props> = ({
               ]}
               href={url}
               currentSort={sort}
+              loading={listsLoading}
             />
           </Flex>
         </Frame>

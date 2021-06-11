@@ -82,6 +82,7 @@ export const Bookmarks: React.FC<Props> = ({
               ]}
               href={url}
               currentSort={sort}
+              loading={loading}
             />
           </Flex>
         </Frame>

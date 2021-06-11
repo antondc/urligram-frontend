@@ -15,16 +15,17 @@ interface Props {
     field: string;
   }[];
   currentSort: string;
+  loading?: boolean;
 }
 
-export const SortBy: React.FC<Props> = ({ className, href, options, currentSort }) => {
+export const SortBy: React.FC<Props> = ({ className, href, options, currentSort, loading }) => {
   const url = new URLWrapper(href);
   url.deleteSearchParam('page[offset]'); // Reset offset on click
   const currentSortIsAsc = !currentSort?.startsWith('-');
   const currentSortIsDesc = currentSort?.startsWith('-');
 
   return (
-    <ul className={'SortBy' + (className ? ' ' + className : '')}>
+    <ul className={'SortBy' + (className ? ' ' + className : '') + (loading ? ' SortBy--loading' : '')}>
       {options.map((item, index) => {
         const isActiveItem = item.field === currentSort || `-${item.field}` === currentSort;
         url.upsertSearchParams({ sort: item.field });

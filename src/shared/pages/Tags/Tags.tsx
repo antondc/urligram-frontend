@@ -48,6 +48,7 @@ export const Tags: React.FC<Props> = ({
               ]}
               href={url}
               currentSort={sort}
+              loading={tagsLoading}
             />
           </Flex>
         </Frame>
