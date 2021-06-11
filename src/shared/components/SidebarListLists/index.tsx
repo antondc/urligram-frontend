@@ -4,7 +4,7 @@ import A from 'Components/A';
 import { RenderInPortal } from 'Components/Portal';
 import { ListState } from 'Modules/Lists/lists.types';
 import { stringToDashCase } from 'Tools/utils/string/stringToDashCase';
-import { Hr, Span, Tooltip } from 'Vendor/components';
+import { Bookmark, Flex, Hr, List, Space, Span, Tooltip } from 'Vendor/components';
 import { SidebarListListsSkeleton } from './SidebarListListsSkeleton';
 
 import './SidebarListLists.less';
@@ -26,9 +26,15 @@ const SidebarListLists: React.FC<Props> = ({ items, loading, title: blockTitle }
           {!!index && <Hr spacer size="micro" />}
           <dd className="SidebarListLists-list">
             <div className="SidebarListLists-listName">
-              <A href={`lists/${id}`} frontend>
-                <Span weight="semiBold">+ {name}</Span>
-              </A>
+              <Flex vertical="center">
+                <List size="nano" />
+                <Space />
+                <Span weight="extraBold">
+                  <A href={`lists/${id}`} frontend underlined>
+                    {name}
+                  </A>
+                </Span>
+              </Flex>
             </div>
             <div id={id + '-' + index} className="SidebarListLists-listDescription">
               {!!members?.length && (
@@ -41,8 +47,8 @@ const SidebarListLists: React.FC<Props> = ({ items, loading, title: blockTitle }
                     />
                   </RenderInPortal>
                   <A href={`lists/${id}/users`} frontend>
-                    <Span id={`${stringToDashCase(blockTitle)}-members-${id}`} size="small">
-                      {members?.length + 1}
+                    <Span id={`${stringToDashCase(blockTitle)}-members-${id}`} size="micro" weight="semiBold">
+                      @{members?.length + 1}
                       {bookmarksIds?.length && <> · </>}
                     </Span>
                   </A>
@@ -58,7 +64,8 @@ const SidebarListLists: React.FC<Props> = ({ items, loading, title: blockTitle }
                     />
                   </RenderInPortal>
                   <A href={`lists/${id}`} frontend>
-                    <Span id={`${stringToDashCase(blockTitle)}-bookmarks-${id}`} size="small">
+                    <Span id={`${stringToDashCase(blockTitle)}-bookmarks-${id}`} size="micro" weight="semiBold">
+                      <Bookmark size="micro" className="SidebarListLists-icon" />
                       {bookmarksIds?.length}
                     </Span>
                   </A>

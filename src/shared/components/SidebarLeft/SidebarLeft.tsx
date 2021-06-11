@@ -1,8 +1,10 @@
 import React from 'react';
 
 import A from 'Components/A';
+import SidebarListLists from 'Components/SidebarListLists';
 import { GlossaryState } from 'Modules/Languages/languages.types';
-import { Frame, Span } from 'Vendor/components';
+import { ListState } from 'Modules/Lists/lists.types';
+import { Frame, Hr, Span } from 'Vendor/components';
 
 import './SidebarLeft.less';
 
@@ -11,6 +13,7 @@ interface Props {
   isLoggedIn: boolean;
   sessionId: string;
   glossary: GlossaryState;
+  lists: ListState[];
   switchUiBookmarkModal: (e: React.MouseEvent<HTMLAnchorElement>) => void;
   switchUiListModal: (e: React.MouseEvent<HTMLAnchorElement>) => void;
 }
@@ -20,12 +23,13 @@ export const SidebarLeft: React.FC<Props> = ({
   isLoggedIn,
   sessionId,
   glossary,
+  lists,
   switchUiBookmarkModal,
   switchUiListModal,
 }) => (
   <Frame className="SidebarLeft" data-test-id="SidebarLeft" borderTop={false} borderLeft={false} borderRight={false}>
     {isLoggedIn && (
-      <ul>
+      <ul className="SidebarLeft-list">
         <li className="SidebarLeft-item">
           <Span size="medium" extraBold>
             <A
@@ -74,26 +78,6 @@ export const SidebarLeft: React.FC<Props> = ({
         </li>
         <li className="SidebarLeft-item">
           <Span size="medium" extraBold>
-            <A className="SidebarLeft-link" href="" frontend underlined onClick={switchUiListModal}>
-              Create list
-            </A>
-          </Span>
-        </li>
-        <li className="SidebarLeft-item">
-          <Span size="medium" extraBold>
-            <A
-              className="SidebarLeft-link"
-              href={`users/${sessionId}/lists?sort=-createdAt`}
-              frontend
-              underlined
-              active={routeName === 'UserLists'}
-            >
-              My Lists
-            </A>
-          </Span>
-        </li>
-        <li className="SidebarLeft-item">
-          <Span size="medium" extraBold>
             <A
               className="SidebarLeft-link"
               href={`users/${sessionId}/followers`}
@@ -118,10 +102,30 @@ export const SidebarLeft: React.FC<Props> = ({
             </A>
           </Span>
         </li>
+        <li className="SidebarLeft-item">
+          <Span size="medium" extraBold>
+            <A className="SidebarLeft-link" href="" frontend underlined onClick={switchUiListModal}>
+              Create list
+            </A>
+          </Span>
+        </li>
+        <li className="SidebarLeft-item">
+          <Span size="medium" extraBold>
+            <A
+              className="SidebarLeft-link"
+              href={`users/${sessionId}/lists?sort=-createdAt`}
+              frontend
+              underlined
+              active={routeName === 'UserLists'}
+            >
+              My Lists
+            </A>
+          </Span>
+        </li>
       </ul>
     )}
     {!isLoggedIn && (
-      <ul>
+      <ul className="SidebarLeft-list">
         <li className="SidebarLeft-item">
           <Span size="medium" extraBold>
             <A className="SidebarLeft-link" href="" frontend underlined>
@@ -159,5 +163,7 @@ export const SidebarLeft: React.FC<Props> = ({
         </li>
       </ul>
     )}
+    <Hr spacer size="micro" />
+    <SidebarListLists items={lists} title="SidebarLeft-lists" />
   </Frame>
 );

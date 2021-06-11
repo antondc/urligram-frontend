@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { selectCurrentGlossary } from 'Modules/Languages/selectors/selectCurrentGlossary';
+import { listsLoadByUserId } from 'Modules/Lists/actions/listsLoadByUserId';
+import { selectListsByUserId } from 'Modules/Lists/selectors/selectListsByUserId';
+import { RootState } from 'Modules/rootType';
 import { selectCurrentRoute } from 'Modules/Routes/selectors/selectCurrentRoute';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUserId';
@@ -15,6 +18,7 @@ export const SidebarLeft: React.FC = () => {
   const sessionId = useSelector(selectSessionUserId);
   const glossary = useSelector(selectCurrentGlossary);
   const route = useSelector(selectCurrentRoute);
+  const lists = useSelector((state: RootState) => selectListsByUserId(state, { userId: sessionId }));
 
   const switchUiBookmarkModal = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
@@ -26,6 +30,10 @@ export const SidebarLeft: React.FC = () => {
     dispatch(switchListModal({ mounted: true }));
   };
 
+  useEffect(() => {
+    dispatch(listsLoadByUserId(sessionId));
+  }, [sessionId]);
+
   return (
     <SidebarLeftUi
       routeName={route?.name}
@@ -34,6 +42,7 @@ export const SidebarLeft: React.FC = () => {
       glossary={glossary}
       switchUiBookmarkModal={switchUiBookmarkModal}
       switchUiListModal={switchUiListModal}
+      lists={lists}
     />
   );
 };
