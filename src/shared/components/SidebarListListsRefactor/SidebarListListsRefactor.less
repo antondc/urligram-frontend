@@ -1,0 +1,23 @@
+@import '../../css/imports.less';
+
+@c: .SidebarListLists;
+
+@{c} {
+  &-grid {
+    display: grid;
+    grid-template-columns: 4fr auto auto auto;
+    column-gap: 5px;
+  }
+
+  &-spacer {
+    display: grid;
+    grid-column-start: 1;
+    grid-column-end: 5;
+  }
+
+  &-descriptionItem {
+    text-align: right;
+
+    .hoverTransition;
+  }
+}

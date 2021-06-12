@@ -10,9 +10,9 @@ import { SidebarListBookmarksSkeleton } from './SidebarListBookmarksSkeleton';
 import './SidebarListBookmarks.less';
 
 interface Props {
+  title: string;
   bookmarks: BookmarkState[];
   loading?: boolean;
-  title?: string;
   href?: string;
 }
 

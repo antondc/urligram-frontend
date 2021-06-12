@@ -10,9 +10,9 @@ import { SidebarListUsersSkeleton } from './SidebarListUsersSkeleton';
 import './SidebarListUsers.less';
 
 interface Props {
+  title: string;
   users: UserState[];
   loading: boolean;
-  title: string;
   href?: string;
 }
 

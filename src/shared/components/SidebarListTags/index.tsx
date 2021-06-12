@@ -7,12 +7,12 @@ import { SidebarListTagsSkeleton } from './SidebarListTagsSkeleton';
 import './SidebarListTags.less';
 
 interface Props {
+  title: string;
   loading?: boolean;
   tags: {
     id: number;
     name: string;
   }[];
-  title: string;
   href?: string;
 }
 

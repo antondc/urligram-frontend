@@ -23,6 +23,8 @@ import { selectTagsAll } from 'Modules/Tags/selectors/selectAllTags';
 import { selectTagsSearch } from 'Modules/Tags/selectors/selectTagsSearch';
 import history from 'Services/History';
 import { URLWrapper } from 'Services/URLWrapper';
+import { sectionsPopularListsLoad } from '../../redux/modules/Sections/actions/sectionsPopularListsLoad';
+import { selectPopularListsLoading } from '../../redux/modules/Sections/selectors/selectPopularListsLoading';
 import { Bookmarks as BookmarksUi } from './Bookmarks';
 
 const Home: React.FC = () => {
@@ -31,13 +33,14 @@ const Home: React.FC = () => {
   const session = useSelector(selectSession);
   const myRecentBookmarks = useSelector(selectMyRecentBookmarks);
   const myRecentBookmarksLoading = useSelector(selectMyRecentBookmarksLoading);
-  const popularLists = useSelector(selectPopularLists);
   const bookmarksIds = useSelector(selectBookmarksCurrentIds);
   const loading = useSelector(selectBookmarksLoading);
   const page = useSelector(selectCurrentRouteQueryParamPage);
   const totalItems = useSelector(selectBookmarksTotalItems);
   const mostUsedTags = useSelector(selectMostUsedTags);
   const mostUsedTagsLoading = useSelector(selectMostUsedTagsLoading);
+  const popularLists = useSelector(selectPopularLists);
+  const popularListsLoading = useSelector(selectPopularListsLoading);
   const url = useSelector(selectCurrentFullUrl);
   const sort = useSelector(selectBookmarksMetaSort);
   const tagsSearch = useSelector(selectTagsSearch);
@@ -52,6 +55,7 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     dispatch(sectionsMostUsedTagsLoad());
+    dispatch(sectionsPopularListsLoad());
   }, []);
 
   useEffect(() => {
@@ -83,7 +87,6 @@ const Home: React.FC = () => {
     <BookmarksUi
       session={session}
       bookmarksIds={bookmarksIds}
-      popularLists={popularLists}
       loading={loading}
       page={page}
       totalItems={totalItems}
@@ -98,6 +101,8 @@ const Home: React.FC = () => {
       mostUsedTagsLoading={mostUsedTagsLoading}
       myRecentBookmarks={myRecentBookmarks}
       myRecentBookmarksLoading={myRecentBookmarksLoading}
+      popularLists={popularLists}
+      popularListsLoading={popularListsLoading}
     />
   );
 };

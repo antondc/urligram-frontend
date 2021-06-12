@@ -14,6 +14,7 @@ import { SessionState } from 'Modules/Session/session.types';
 import { TagState } from 'Modules/Tags/tags.types';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
 import { Flex, Frame, Hr, Select, SelectValue, SortBy, Span } from 'Vendor/components';
+import SidebarListListsRefactor from '../../components/SidebarListListsRefactor';
 
 import './Bookmarks.less';
 
@@ -21,12 +22,13 @@ interface Props {
   session: SessionState;
   url: string;
   bookmarksIds: number[];
-  popularLists: ListState[];
   loading: boolean;
   mostUsedTags: TagState[];
   mostUsedTagsLoading: boolean;
   myRecentBookmarks: BookmarkState[];
   myRecentBookmarksLoading: boolean;
+  popularLists: ListState[];
+  popularListsLoading: boolean;
   page: {
     size: number;
     offset: number;
@@ -61,6 +63,8 @@ export const Bookmarks: React.FC<Props> = ({
   allTags,
   currentQueryParamFilterTags,
   onChange,
+  popularLists,
+  popularListsLoading,
 }) => (
   <div className="Bookmarks">
     <Flex horizontal="between" vertical="top">
@@ -118,6 +122,14 @@ export const Bookmarks: React.FC<Props> = ({
           </>
         )}
         <SidebarListTags title="Most Followed Tags" loading={mostUsedTagsLoading} tags={mostUsedTags} />
+        <Hr size="nano" />
+        <SidebarListListsRefactor
+          title="Popular lists"
+          lists={popularLists}
+          loading={popularListsLoading}
+          href="/lists?sort=-members"
+        />
+        <Hr size="nano" />
       </Sidebar>
     </Flex>
   </div>
