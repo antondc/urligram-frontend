@@ -6,8 +6,7 @@ import Main from 'Components/Main';
 import MainContent from 'Components/MainContent';
 import Pagination from 'Components/Pagination';
 import Sidebar from 'Components/Sidebar';
-import SidebarBlock from 'Components/SidebarBlock';
-import SidebarListTags from 'Components/SidebarListTags';
+import SidebarListTagsRefactor from 'Components/SidebarListTagsRefactor';
 import SidebarListUsers from 'Components/SidebarListUsers';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
@@ -76,9 +75,7 @@ export const Lists: React.FC<Props> = ({
         <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
       </Main>
       <Sidebar>
-        <SidebarBlock title="Most Used Tags" loading={mostUsedTagsLoading}>
-          <SidebarListTags items={mostUsedTags} />
-        </SidebarBlock>
+        <SidebarListTagsRefactor title="Most Used Tags" loading={mostUsedTagsLoading} tags={mostUsedTags} />
         <Hr size="nano" />
         <SidebarListUsers
           title="New Users"

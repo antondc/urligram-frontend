@@ -6,8 +6,7 @@ import Main from 'Components/Main';
 import MainContent from 'Components/MainContent';
 import Pagination from 'Components/Pagination';
 import Sidebar from 'Components/Sidebar';
-import SidebarBlock from 'Components/SidebarBlock';
-import SidebarListTags from 'Components/SidebarListTags';
+import SidebarListTagsRefactor from 'Components/SidebarListTagsRefactor';
 import { ListState } from 'Modules/Lists/lists.types';
 import { TagState } from 'Modules/Tags/tags.types';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
@@ -99,9 +98,7 @@ export const Bookmarks: React.FC<Props> = ({
         <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
       </Main>
       <Sidebar>
-        <SidebarBlock title="Most Followed Tags" loading={mostUsedTagsLoading}>
-          <SidebarListTags items={mostUsedTags} />
-        </SidebarBlock>
+        <SidebarListTagsRefactor title="Most Followed Tags" loading={mostUsedTagsLoading} tags={mostUsedTags} />
       </Sidebar>
     </Flex>
   </div>

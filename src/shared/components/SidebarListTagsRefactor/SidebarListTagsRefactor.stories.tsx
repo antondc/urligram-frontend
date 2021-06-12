@@ -1,16 +1,15 @@
 import React from 'react';
 
-import SidebarBlock from 'Components/SidebarBlock';
 import { ProviderWrapper } from 'Tools/storybook/provider';
 import { boolean, withKnobs } from '@storybook/addon-knobs';
-import SidebarTags from '.';
+import SidebarListTagsRefactor from '.';
 
 const props = {
   tags: [],
 };
 export default {
-  component: SidebarTags,
-  title: 'SidebarTags',
+  component: SidebarListTagsRefactor,
+  title: 'SidebarListTagsRefactor',
   decorators: [withKnobs],
 };
 
@@ -21,9 +20,7 @@ const knobs = {
 export const Default: React.ReactNode = () => (
   <ProviderWrapper>
     <div style={{ padding: '30px', width: '400px' }}>
-      <SidebarBlock loading={knobs.skeleton()} title="My Tags" href="test-url">
-        <SidebarTags items={props.tags} />
-      </SidebarBlock>
+      <SidebarListTagsRefactor tags={props.tags} loading={knobs.skeleton()} title="My Tags" href="test-url" />
     </div>
   </ProviderWrapper>
 );

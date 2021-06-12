@@ -6,8 +6,7 @@ import Main from 'Components/Main';
 import MainContent from 'Components/MainContent';
 import Pagination from 'Components/Pagination';
 import Sidebar from 'Components/Sidebar';
-import SidebarBlock from 'Components/SidebarBlock';
-import SidebarListTags from 'Components/SidebarListTags';
+import SidebarListTagsRefactor from 'Components/SidebarListTagsRefactor';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
@@ -86,13 +85,19 @@ export const UserLists: React.FC<Props> = ({
         <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
       </Main>
       <Sidebar>
-        <SidebarBlock title="My Tags" href={`users/${userId}/tags`} loading={userMostUsedTagsLoading}>
-          <SidebarListTags items={userMostUsedTags} />
-        </SidebarBlock>
+        <SidebarListTagsRefactor
+          title="My Tags"
+          href={`users/${userId}/tags`}
+          loading={userMostUsedTagsLoading}
+          tags={userMostUsedTags}
+        />
         <Hr spacer />
-        <SidebarBlock title="Most Used Tags" href={`users/${userId}/tags`} loading={mostFollowedTagsLoading}>
-          <SidebarListTags items={mostFollowedTags} />
-        </SidebarBlock>
+        <SidebarListTagsRefactor
+          title="Most Used Tags"
+          href={`users/${userId}/tags`}
+          loading={mostFollowedTagsLoading}
+          tags={mostFollowedTags}
+        />
       </Sidebar>
     </Flex>
   </div>

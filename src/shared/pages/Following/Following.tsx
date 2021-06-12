@@ -4,8 +4,7 @@ import Main from 'Components/Main';
 import MainContent from 'Components/MainContent';
 import Pagination from 'Components/Pagination';
 import Sidebar from 'Components/Sidebar';
-import SidebarBlock from 'Components/SidebarBlock';
-import SidebarListTags from 'Components/SidebarListTags';
+import SidebarListTagsRefactor from 'Components/SidebarListTagsRefactor';
 import UserRow from 'Components/UserRow';
 import { UserRowSkeletonGroup } from 'Components/UserRow/UserRowSkeletonGroup';
 import { TagState } from 'Modules/Tags/tags.types';
@@ -84,17 +83,14 @@ export const Following: React.FC<Props> = ({
         <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
       </Main>
       <Sidebar>
-        <SidebarBlock
+        <SidebarListTagsRefactor
           title="User Most Followed Tags"
           href={`users/${userId}/bookmarks`}
           loading={userMostUsedTagsLoading}
-        >
-          <SidebarListTags items={userMostUsedTags} />
-        </SidebarBlock>
+          tags={userMostUsedTags}
+        />
         <Hr spacer />
-        <SidebarBlock title="Most Followed Tags" loading={mostUsedTagsLoading}>
-          <SidebarListTags items={mostUsedTags} />
-        </SidebarBlock>
+        <SidebarListTagsRefactor title="Most Followed Tags" loading={mostUsedTagsLoading} tags={mostUsedTags} />
       </Sidebar>
     </Flex>
   </div>
