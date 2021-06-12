@@ -95,31 +95,33 @@ const ListForm: React.FC<Props> = ({ closeModal, setModalLocked }) => {
 
   const onSubmit = async (e: React.FormEvent<HTMLElement>) => {
     e.preventDefault();
-
     setSubmitting(true);
     setModalLocked(true);
 
-    const data = {
-      listId: list?.id,
-      listName: nameValue,
-      listDescription: descriptionValue,
-      listIsPrivate: isPrivateValue,
-    };
+    try {
+      const data = {
+        listId: list?.id,
+        listName: nameValue,
+        listDescription: descriptionValue,
+        listIsPrivate: isPrivateValue,
+      };
 
-    const response = !!list?.id ? await dispatch(listUpdate(data)) : await dispatch(listCreate(data));
+      const response = !!list?.id ? await dispatch(listUpdate(data)) : await dispatch(listCreate(data));
 
-    if (!!response?.id) closeModal();
+      if (!!response?.id) closeModal();
 
-    if (!list?.id && !!response?.id) {
+      if (!list?.id && !!response?.id) {
+        setSubmitSuccess(true);
+
+        setTimeout(() => {
+          history.push(`/${currentLanguageSlug}/users/${sessionId}/lists?sort=-createdAt`);
+
+          return;
+        }, DELAY_SLOW_MS);
+      }
+    } finally {
       setSubmitting(false);
       setModalLocked(false);
-      setSubmitSuccess(true);
-
-      setTimeout(() => {
-        history.push(`/${currentLanguageSlug}/users/${sessionId}/lists?sort=-createdAt`);
-
-        return;
-      }, DELAY_SLOW_MS);
       setSubmitting(false);
     }
   };
@@ -128,14 +130,18 @@ const ListForm: React.FC<Props> = ({ closeModal, setModalLocked }) => {
     e.preventDefault();
     setRemoving(true);
     setModalLocked(true);
-    await dispatch(listDelete({ listId: list?.id }));
-    setRemoving(false);
-    setModalLocked(false);
 
-    setTimeout(() => {
-      closeModal();
-      history.push(`/${currentLanguageSlug}/users/${sessionId}/lists`);
-    }, DELAY_SLOW_MS);
+    try {
+      await dispatch(listDelete({ listId: list?.id }));
+
+      setTimeout(() => {
+        closeModal();
+        history.push(`/${currentLanguageSlug}/users/${sessionId}/lists`);
+      }, DELAY_SLOW_MS);
+    } finally {
+      setRemoving(false);
+      setModalLocked(false);
+    }
   };
 
   useEffect(() => {

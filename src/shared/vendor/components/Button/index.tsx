@@ -41,10 +41,9 @@ export const Button: React.FC<Props> = ({
       (size ? ' Button--' + size : '') +
       (variant ? ' Button-variant--' + variant : '') +
       (grow ? ' Button--grow' : '') +
-      (success ? ' Button--success' : '') +
-      (error ? ' Button--error' : '') +
-      (disabled ? ' Button--disabled' : '') +
-      (loading ? ' Button--loading' : '')
+      (!disabled && !error && success ? ' Button--success' : '') +
+      (!disabled && !error && loading ? ' Button--loading' : '') +
+      (error ? ' Button--error' : '')
     }
     type={type}
     disabled={!!disabled || !!error}
@@ -54,7 +53,7 @@ export const Button: React.FC<Props> = ({
     <Span className="Button-content" weight="semiBold" uppercase>
       {text}
       {icon && <SvgIcon name={icon} size="small" className="Button-svg" />}
-      {<SpinnerCircularBrute className="Button-loader" size="small" />}
+      {!disabled && !error && <SpinnerCircularBrute className="Button-loader" size="small" />}
     </Span>
   </button>
 );
