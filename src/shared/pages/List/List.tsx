@@ -7,7 +7,7 @@ import Main from 'Components/Main';
 import MainContent from 'Components/MainContent';
 import Pagination from 'Components/Pagination';
 import Sidebar from 'Components/Sidebar';
-import SidebarListTagsRefactor from 'Components/SidebarListTagsRefactor';
+import SidebarListTags from 'Components/SidebarListTags';
 import SidebarListUsers from 'Components/SidebarListUsers';
 import { ListState } from 'Modules/Lists/lists.types';
 import { TagState } from 'Modules/Tags/tags.types';
@@ -91,7 +91,7 @@ export const List: React.FC<Props> = ({
       <Sidebar>
         <SidebarListUsers title="People in this list" users={usersInThisList} loading={usersInThisListLoading} />
         <Hr size="nano" />
-        <SidebarListTagsRefactor title="Tags In This List" loading={tagsInThisListLoading} tags={tagsInThisList} />
+        <SidebarListTags title="Tags In This List" loading={tagsInThisListLoading} tags={tagsInThisList} />
       </Sidebar>
     </Flex>
   </div>

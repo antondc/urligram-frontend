@@ -6,7 +6,7 @@ import Main from 'Components/Main';
 import MainContent from 'Components/MainContent';
 import Pagination from 'Components/Pagination';
 import Sidebar from 'Components/Sidebar';
-import SidebarListTagsRefactor from 'Components/SidebarListTagsRefactor';
+import SidebarListTags from 'Components/SidebarListTags';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
@@ -85,14 +85,14 @@ export const UserLists: React.FC<Props> = ({
         <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
       </Main>
       <Sidebar>
-        <SidebarListTagsRefactor
+        <SidebarListTags
           title="My Tags"
           href={`users/${userId}/tags`}
           loading={userMostUsedTagsLoading}
           tags={userMostUsedTags}
         />
         <Hr spacer />
-        <SidebarListTagsRefactor
+        <SidebarListTags
           title="Most Used Tags"
           href={`users/${userId}/tags`}
           loading={mostFollowedTagsLoading}

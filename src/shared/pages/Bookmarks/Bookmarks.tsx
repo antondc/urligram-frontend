@@ -7,7 +7,7 @@ import MainContent from 'Components/MainContent';
 import Pagination from 'Components/Pagination';
 import Sidebar from 'Components/Sidebar';
 import SidebarListBookmarks from 'Components/SidebarListBookmarks';
-import SidebarListTagsRefactor from 'Components/SidebarListTagsRefactor';
+import SidebarListTags from 'Components/SidebarListTags';
 import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
 import { ListState } from 'Modules/Lists/lists.types';
 import { SessionState } from 'Modules/Session/session.types';
@@ -117,7 +117,7 @@ export const Bookmarks: React.FC<Props> = ({
             <Hr size="nano" />
           </>
         )}
-        <SidebarListTagsRefactor title="Most Followed Tags" loading={mostUsedTagsLoading} tags={mostUsedTags} />
+        <SidebarListTags title="Most Followed Tags" loading={mostUsedTagsLoading} tags={mostUsedTags} />
       </Sidebar>
     </Flex>
   </div>

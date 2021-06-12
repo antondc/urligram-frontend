@@ -2,9 +2,9 @@ import React from 'react';
 
 import A from 'Components/A';
 import { FadeInOut, Frame, H4, Hr, Span, Tag } from 'Vendor/components';
-import { SidebarListTagsRefactorSkeleton } from './SidebarListTagsRefactorSkeleton';
+import { SidebarListTagsSkeleton } from './SidebarListTagsSkeleton';
 
-import './SidebarListTagsRefactor.less';
+import './SidebarListTags.less';
 
 interface Props {
   loading?: boolean;
@@ -16,25 +16,25 @@ interface Props {
   href?: string;
 }
 
-const SidebarListTagsRefactor: React.FC<Props> = ({ tags, loading, title, href }) => {
+const SidebarListTags: React.FC<Props> = ({ tags, loading, title, href }) => {
   if (!tags?.length && !loading) return <Span weight="semiBold">ⵁ Nothing here yet.</Span>;
 
   return (
-    <Frame className="SidebarListTagsRefactor" grow borders={false}>
+    <Frame className="SidebarListTags" grow borders={false}>
       <A href={href} frontend styled={!!href} disabled={!href}>
         <H4>{title}</H4>
       </A>
       <Hr size="small" spacer />
-      <FadeInOut className="SidebarListTagsRefactor-tags" valueToUpdate={loading} appear>
+      <FadeInOut className="SidebarListTags-tags" valueToUpdate={loading} appear>
         {!tags?.length && <Span weight="semiBold">ⵁ Nothing here yet.</Span>}
-        {!!tags?.length && !!loading && <SidebarListTagsRefactorSkeleton />}
+        {!!tags?.length && !!loading && <SidebarListTagsSkeleton />}
         {!loading &&
           tags?.length &&
           tags.map((tag) => (
             <A
-              className="SidebarListTagsRefactor-tag"
+              className="SidebarListTags-tag"
               href={`/bookmarks?filter[tags][]=${tag.name}`}
-              key={`SidebarListTagsRefactor-tags-${tag.id}`}
+              key={`SidebarListTags-tags-${tag.id}`}
               styled={false}
               frontend
             >
@@ -47,4 +47,4 @@ const SidebarListTagsRefactor: React.FC<Props> = ({ tags, loading, title, href }
     </Frame>
   );
 };
-export default SidebarListTagsRefactor;
+export default SidebarListTags;

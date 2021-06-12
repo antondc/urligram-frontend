@@ -4,7 +4,7 @@ import A from 'Components/A';
 import Main from 'Components/Main';
 import MainContent from 'Components/MainContent';
 import Sidebar from 'Components/Sidebar';
-import { SidebarListTagsSkeleton } from 'Components/SidebarListTags/SidebarListTagsSkeleton';
+import { SidebarListTagsSkeleton } from 'Root/src/shared/components/SidebarListTags/SidebarListTagsSkeleton';
 import SidebarListUsers from 'Components/SidebarListUsers';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
