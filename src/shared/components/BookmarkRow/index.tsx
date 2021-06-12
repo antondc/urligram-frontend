@@ -1,17 +1,16 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { bookmarkLoadById } from 'Modules/Bookmarks/actions/bookmarkLoadById';
 import { selectBookmarksById } from 'Modules/Bookmarks/selectors/selectBookmarkById';
 import { linkUpdateVote } from 'Modules/Links/actions/linkUpdateVote';
 import { RootState } from 'Modules/rootType';
 import { selectCurrentRouteParamUserId } from 'Modules/Routes/selectors/selectCurrentRouteParamUserId';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
+import { switchBookmarkUpdateModal } from 'Modules/Ui/actions/switchBookmarkUpdateModal';
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
 import { TIME_RECENTLY_CREATED_BOOKMARK } from 'Root/src/shared/constants';
 import { unixTimeElapsed } from 'Tools/utils/Date/unixTimeElapsed';
-import { switchBookmarkUpdateModal } from '../../redux/modules/Ui/actions/switchBookmarkUpdateModal';
 import { BookmarkRow as BookmarkRowUi } from './BookmarkRow';
 
 interface Props {

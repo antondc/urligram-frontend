@@ -6,7 +6,6 @@ import Main from 'Components/Main';
 import MainContent from 'Components/MainContent';
 import Pagination from 'Components/Pagination';
 import Sidebar from 'Components/Sidebar';
-import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListUsers from 'Components/SidebarListUsers';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
@@ -60,17 +59,20 @@ export const Home: React.FC<Props> = ({
         <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
       </Main>
       <Sidebar>
-        <SidebarBlock
-          title="Most Followed Users"
-          href="users?sort=-followers&page[size]=10"
+        <SidebarListUsers
+          title="Followers"
+          users={mostFollowedUsers}
           loading={mostFollowedUsersLoading}
-        >
-          <SidebarListUsers items={mostFollowedUsers} />
-        </SidebarBlock>
-        <Hr spacer />
-        <SidebarBlock title="New Users" href="users?sort=createdAt&page[size]=10" loading={newUsersLoading}>
-          <SidebarListUsers items={newUsers} />
-        </SidebarBlock>
+          href="users?sort=-followers&page[size]=10"
+        />
+        <Hr size="nano" />
+        <SidebarListUsers
+          title="Followers"
+          users={newUsers}
+          loading={newUsersLoading}
+          href="users?sort=createdAt&page[size]=10"
+        />
+        <Hr size="nano" />
       </Sidebar>
     </Flex>
   </div>

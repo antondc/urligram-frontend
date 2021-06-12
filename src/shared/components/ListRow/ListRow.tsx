@@ -1,10 +1,10 @@
 import React from 'react';
 
 import A from 'Components/A';
+import ListFollowButton from 'Components/ListFollowButton';
 import { ListState } from 'Modules/Lists/lists.types';
 import { SessionState } from 'Modules/Session/session.types';
 import { Bookmark, Flex, Space, Span, Tag, User } from 'Vendor/components';
-import ListFollowButton from '../ListFollowButton';
 
 import './ListRow.less';
 

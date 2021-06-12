@@ -4,7 +4,6 @@ import Main from 'Components/Main';
 import MainContent from 'Components/MainContent';
 import Pagination from 'Components/Pagination';
 import Sidebar from 'Components/Sidebar';
-import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListUsers from 'Components/SidebarListUsers';
 import UserRow from 'Components/UserRow';
 import { UserRowSkeletonGroup } from 'Components/UserRow/UserRowSkeletonGroup';
@@ -70,17 +69,20 @@ export const Users: React.FC<Props> = ({
         <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
       </Main>
       <Sidebar>
-        <SidebarBlock
+        <SidebarListUsers
           title="Most Followed Users"
           href="users?sort=-followers&page[size]=10"
           loading={mostFollowedUsersLoading}
-        >
-          <SidebarListUsers items={mostFollowedUsers} />
-        </SidebarBlock>
-        <Hr spacer />
-        <SidebarBlock title="New Users" href="users?sort=createdAt&page[size]=10" loading={newUsersLoading}>
-          <SidebarListUsers items={newUsers} />
-        </SidebarBlock>
+          users={mostFollowedUsers}
+        />
+        <Hr size="nano" />
+        <SidebarListUsers
+          title="New Users"
+          href="users?sort=createdAt&page[size]=10"
+          loading={newUsersLoading}
+          users={newUsers}
+        />
+        <Hr size="nano" />
       </Sidebar>
     </Flex>
   </div>

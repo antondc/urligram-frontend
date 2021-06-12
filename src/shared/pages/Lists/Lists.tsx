@@ -79,10 +79,14 @@ export const Lists: React.FC<Props> = ({
         <SidebarBlock title="Most Used Tags" loading={mostUsedTagsLoading}>
           <SidebarListTags items={mostUsedTags} />
         </SidebarBlock>
-        <Hr spacer />
-        <SidebarBlock title="New Users" href="users?sort=createdAt&page[size]=10" loading={newUsersLoading}>
-          <SidebarListUsers items={newUsers} />
-        </SidebarBlock>
+        <Hr size="nano" />
+        <SidebarListUsers
+          title="New Users"
+          users={newUsers}
+          loading={newUsersLoading}
+          href="users?sort=createdAt&page[size]=10"
+        />
+        <Hr size="nano" />
       </Sidebar>
     </Flex>
   </div>

@@ -7,7 +7,6 @@ import Main from 'Components/Main';
 import MainContent from 'Components/MainContent';
 import Pagination from 'Components/Pagination';
 import Sidebar from 'Components/Sidebar';
-import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListUsers from 'Components/SidebarListUsers';
 import { BookmarksByKey } from 'Modules/Bookmarks/bookmarks.types';
 import { TagState } from 'Modules/Tags/tags.types';
@@ -120,12 +119,20 @@ export const UserBookmarks: React.FC<Props> = ({
         <Hr spacer />
       </Main>
       <Sidebar>
-        <SidebarBlock title="Following Users" href={`users/${userId}/following`} loading={followingUsersLoading}>
-          <SidebarListUsers items={followingUsers} />
-        </SidebarBlock>
-        <SidebarBlock title="Followers" href={`users/${userId}/followers`} loading={followersUsersLoading}>
-          <SidebarListUsers items={followersUsers} />
-        </SidebarBlock>
+        <SidebarListUsers
+          users={followingUsers}
+          title="Following Users"
+          href={`users/${userId}/following`}
+          loading={followingUsersLoading}
+        />
+        <Hr size="nano" />
+        <SidebarListUsers
+          title="Followers"
+          href={`users/${userId}/followers`}
+          loading={followersUsersLoading}
+          users={followersUsers}
+        />
+        <Hr size="nano" />
       </Sidebar>
     </Flex>
   </div>

@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
 import HttpClient from 'Services/HttpClient';
+import { LocalStorageWrapper } from 'Services/LocalStorageWrapper';
 import { LocaleFormattedDate } from 'Tools/utils/Date/localeFormattedDate';
 import { HeaderSecond as HeaderSecondUi } from './HeaderSecond';
 
@@ -22,8 +23,6 @@ export interface WeatherApiResponse {
     attributes: WeatherData;
   };
 }
-
-import { LocalStorageWrapper } from '../../services/LocalStorageWrapper';
 
 import './HeaderSecond.less';
 

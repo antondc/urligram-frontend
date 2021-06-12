@@ -20,4 +20,43 @@
       text-decoration-thickness: 2px;
     }
   }
+
+  &-1 {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 30px;
+    // background: tomato;
+  }
+
+  &-2 {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 30px;
+    // background: gold;
+  }
+
+  &-list {
+    display: flex;
+    justify-content: space-between;
+    line-height: @fh-normal;
+  }
+
+  &-listName {
+    //
+  }
+
+  &-listDescription {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    &:hover {
+      cursor: default;
+    }
+  }
+
+  &-icon {
+    margin-right: 3px;
+  }
 }

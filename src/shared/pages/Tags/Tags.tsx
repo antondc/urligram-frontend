@@ -4,7 +4,6 @@ import A from 'Components/A';
 import Main from 'Components/Main';
 import MainContent from 'Components/MainContent';
 import Sidebar from 'Components/Sidebar';
-import SidebarBlock from 'Components/SidebarBlock';
 import { SidebarListTagsSkeleton } from 'Components/SidebarListTags/SidebarListTagsSkeleton';
 import SidebarListUsers from 'Components/SidebarListUsers';
 import { TagState } from 'Modules/Tags/tags.types';
@@ -79,17 +78,20 @@ export const Tags: React.FC<Props> = ({
         </Frame>
       </Main>
       <Sidebar>
-        <SidebarBlock
+        <SidebarListUsers
           title="Following Users"
+          users={mostFollowedUsers}
           href={'/users?sort=-followers&page[size]=10'}
           loading={mostFollowedUsersLoading}
-        >
-          <SidebarListUsers items={mostFollowedUsers} />
-        </SidebarBlock>
-        <Hr spacer />
-        <SidebarBlock title="Following Users" href={'/users?sort=-createdAt&page[size]=10'} loading={newUsersLoading}>
-          <SidebarListUsers items={newUsers} />
-        </SidebarBlock>
+        />
+        <Hr size="nano" />
+        <SidebarListUsers
+          users={newUsers}
+          title="Following Users"
+          href={'/users?sort=-createdAt&page[size]=10'}
+          loading={newUsersLoading}
+        />
+        <Hr size="nano" />
       </Sidebar>
     </Flex>
   </div>

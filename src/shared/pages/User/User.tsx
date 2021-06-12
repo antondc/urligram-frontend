@@ -6,7 +6,6 @@ import { BookmarkRowSkeletonGroup } from 'Components/BookmarkRow/BookmarkRowSkel
 import Empty from 'Components/Empty';
 import Main from 'Components/Main';
 import Sidebar from 'Components/Sidebar';
-import SidebarBlock from 'Components/SidebarBlock';
 import SidebarListUsers from 'Components/SidebarListUsers';
 import UserForm from 'Components/UserForm';
 import { UserState } from 'Modules/Users/users.types';
@@ -181,13 +180,20 @@ export const User: React.FC<Props> = ({
         </Frame>
       </Main>
       <Sidebar>
-        <SidebarBlock title="Following Users" href={`users/${userId}/following`} loading={followingUsersLoading}>
-          <SidebarListUsers items={followingUsers} />
-        </SidebarBlock>
-        <Hr spacer />
-        <SidebarBlock title="Followers" href={`users/${userId}/followers`} loading={followersUsersLoading}>
-          <SidebarListUsers items={followersUsers} />
-        </SidebarBlock>
+        <SidebarListUsers
+          users={followingUsers}
+          title="Following Users"
+          href={`users/${userId}/following`}
+          loading={followingUsersLoading}
+        />
+        <Hr size="nano" />
+        <SidebarListUsers
+          title="Followers"
+          href={`users/${userId}/followers`}
+          loading={followersUsersLoading}
+          users={followersUsers}
+        />
+        <Hr size="nano" />
       </Sidebar>
     </Flex>
   </div>

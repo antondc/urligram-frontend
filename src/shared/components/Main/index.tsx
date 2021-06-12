@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Hr } from '../../vendor/components';
+import { Hr } from 'Vendor/components';
 
 import './Main.less';
 

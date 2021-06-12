@@ -90,13 +90,12 @@ export const List: React.FC<Props> = ({
         <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
       </Main>
       <Sidebar>
-        <SidebarBlock title="People in this list" loading={usersInThisListLoading}>
-          <SidebarListUsers items={usersInThisList} />
-        </SidebarBlock>
-        <Hr spacer />
+        <SidebarListUsers title="People in this list" users={usersInThisList} loading={usersInThisListLoading} />
+        <Hr size="nano" />
         <SidebarBlock title="Tags In This List" loading={tagsInThisListLoading}>
           <SidebarListTags items={tagsInThisList} />
-        </SidebarBlock>
+        </SidebarBlock>{' '}
+        <Hr size="nano" />
       </Sidebar>
     </Flex>
   </div>

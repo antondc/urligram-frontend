@@ -3,34 +3,21 @@
 @c: .SidebarListUsers;
 
 @{c} {
-  &-user {
+  &-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 4fr auto auto auto;
     column-gap: 5px;
-    overflow: hidden;
   }
 
-  &-userName {
-    white-space: nowrap;
+  &-spacer {
+    display: grid;
+    grid-column-start: 1;
+    grid-column-end: 5;
   }
 
-  &-userDescription {
-    direction: ltr;
+  &-descriptionItem {
     text-align: right;
-    white-space: nowrap;
-    overflow-x: scroll;
-    overflow-y: hidden;
-
-    .hideScrollbar;
-  }
-
-  &-userData {
-    vertical-align: initial;
 
     .hoverTransition;
-  }
-
-  &-icon {
-    margin-right: 1px;
   }
 }

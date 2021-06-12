@@ -11,8 +11,8 @@ import { selectCurrentPathname } from 'Modules/Routes/selectors/selectCurrentPat
 import { selectCurrentRoute } from 'Modules/Routes/selectors/selectCurrentRoute';
 import { switchLanguagesModal } from 'Modules/Ui/actions/switchLanguagesModal';
 import { selectUiLanguagesModalMounted } from 'Modules/Ui/selectors/selectUiLanguagesModalMounted';
+import { Routes } from 'Router/routes';
 import { Fade, Frame, Span } from 'Vendor/components';
-import { Routes } from '../../router/routes';
 
 import './Footer.less';
 
