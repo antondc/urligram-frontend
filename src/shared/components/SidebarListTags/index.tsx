@@ -15,7 +15,7 @@ interface Props {
 }
 
 const SidebarListTags: React.FC<Props> = ({ items, loading }) => {
-  if (!items?.length) return <Span weight="semiBold">ⵁ Nothing here yet.</Span>;
+  if (!items?.length && !loading) return <Span weight="semiBold">ⵁ Nothing here yet.</Span>;
 
   return (
     <dl className="SidebarListTags-tags">

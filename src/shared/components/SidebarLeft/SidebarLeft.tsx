@@ -5,6 +5,7 @@ import { RenderInPortal } from 'Components/Portal';
 import { GlossaryState } from 'Modules/Languages/languages.types';
 import { ListState } from 'Modules/Lists/lists.types';
 import { Bookmark, Flex, Frame, Hr, List, Space, Span, Tooltip } from 'Vendor/components';
+import { SidebarLeftLists } from './SidebarLeftLists';
 
 import './SidebarLeft.less';
 
@@ -164,67 +165,6 @@ export const SidebarLeft: React.FC<Props> = ({
       </ul>
     )}
     <Hr spacer size="micro" />
-    {/* <SidebarLeft items={lists} title="SidebarLeft-lists" /> */}
-    <dl className="SidebarLeft-lists">
-      {lists.map(({ id, name, members, bookmarksIds }, index) => (
-        <React.Fragment key={id}>
-          {!!index && <Hr spacer size="micro" />}
-          <dd className="SidebarLeft-list">
-            <div className="SidebarLeft-listName">
-              <Flex vertical="center">
-                <Space />
-                <List size="nano" />
-                <Space />
-                <Span weight="semiBold">
-                  <A href={`lists/${id}`} frontend underlined>
-                    {name}
-                  </A>
-                </Span>
-              </Flex>
-            </div>
-            <div id={id + '-' + index} className="SidebarLeft-listDescription">
-              {/* {!!members?.length && ( */}
-              <>
-                <RenderInPortal>
-                  <Tooltip
-                    parentElementId={`SidebarLeftMembers-${id}`}
-                    content="Users following this list"
-                    delay={0.5}
-                  />
-                </RenderInPortal>
-                <A className="SidebarLeft-1" href={`lists/${id}/users`} frontend>
-                  <Span id={`SidebarLeftMembers-${id}`} size="micro" weight="semiBold">
-                    {members?.length && `${members?.length + 1}@`}
-                    {/* {members?.length && bookmarksIds?.length && <> · </>} */}
-                  </Span>
-                </A>
-              </>
-              {/* )} */}
-              {/* {!!bookmarksIds?.length && ( */}
-              <>
-                <RenderInPortal>
-                  <Tooltip
-                    parentElementId={`SidebarLeftBookmarks-${id}`}
-                    content="Bookmarks within this list"
-                    delay={0.5}
-                  />
-                </RenderInPortal>
-                <A className="SidebarLeft-2" href={`lists/${id}`} frontend>
-                  <Span id={`SidebarLeftBookmarks-${id}`} size="micro" weight="semiBold">
-                    {bookmarksIds?.length && (
-                      <>
-                        {bookmarksIds?.length}
-                        <Bookmark size="micro" className="SidebarLeft-icon" />
-                      </>
-                    )}
-                  </Span>
-                </A>
-              </>
-              {/* )} */}
-            </div>
-          </dd>
-        </React.Fragment>
-      ))}
-    </dl>
+    <SidebarLeftLists lists={lists} />
   </Frame>
 );
