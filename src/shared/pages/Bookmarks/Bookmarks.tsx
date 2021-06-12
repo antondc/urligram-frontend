@@ -6,7 +6,7 @@ import Main from 'Components/Main';
 import MainContent from 'Components/MainContent';
 import Pagination from 'Components/Pagination';
 import Sidebar from 'Components/Sidebar';
-import SidebarListBookmarksRefactor from 'Components/SidebarListBookmarksRefactor';
+import SidebarListBookmarks from 'Components/SidebarListBookmarks';
 import SidebarListTagsRefactor from 'Components/SidebarListTagsRefactor';
 import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
 import { ListState } from 'Modules/Lists/lists.types';
@@ -109,7 +109,7 @@ export const Bookmarks: React.FC<Props> = ({
       <Sidebar>
         {!!session?.id && (
           <>
-            <SidebarListBookmarksRefactor
+            <SidebarListBookmarks
               title="My recent bookmarks"
               loading={myRecentBookmarksLoading}
               bookmarks={myRecentBookmarks}

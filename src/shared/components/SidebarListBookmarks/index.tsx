@@ -4,10 +4,10 @@ import A from 'Components/A';
 import { RenderInPortal } from 'Components/Portal';
 import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
 import { stringToDashCase } from 'Tools/utils/string/stringToDashCase';
-import { Bookmark, FadeInOut, Frame, H4, Hr, Span, Tooltip, Triangle } from 'Vendor/components';
-import { SidebarListBookmarksRefactorSkeleton } from './SidebarListBookmarksRefactorSkeleton';
+import { Bookmark, FadeInOut, Flex, Frame, H4, Hr, Span, Tooltip, Triangle } from 'Vendor/components';
+import { SidebarListBookmarksSkeleton } from './SidebarListBookmarksSkeleton';
 
-import './SidebarListBookmarksRefactor.less';
+import './SidebarListBookmarks.less';
 
 interface Props {
   bookmarks: BookmarkState[];
@@ -16,23 +16,26 @@ interface Props {
   href?: string;
 }
 
-const SidebarListBookmarksRefactor: React.FC<Props> = ({ bookmarks, loading, title, href }) => (
-  <Frame className="SidebarListBookmarksRefactor" grow borders={false}>
+const SidebarListBookmarks: React.FC<Props> = ({ bookmarks, loading, title, href }) => (
+  <Frame className="SidebarListBookmarks" grow borders={false}>
     <A href={href} frontend styled={!!href} disabled={!href}>
       <H4>{title}</H4>
     </A>
     <Hr size="small" spacer />
-    <FadeInOut className="SidebarListBookmarksRefactor-grid" valueToUpdate={loading} appear>
+    <FadeInOut className="SidebarListBookmarks-grid" valueToUpdate={loading} appear>
       {!bookmarks?.length && <Span weight="semiBold">ⵁ Nothing here yet.</Span>}
-      {!!bookmarks?.length && loading && <SidebarListBookmarksRefactorSkeleton />}
+      {!!bookmarks?.length && loading && <SidebarListBookmarksSkeleton />}
       {!!bookmarks?.length &&
         !loading &&
-        bookmarks?.map(({ id, title, url, statistics }, index) => (
+        bookmarks?.map(({ id, favicon, title, url, statistics }, index) => (
           <React.Fragment key={`${id}-${index}`}>
-            <Span className="SidebarListBookmarksRefactor-title" weight="semiBold">
-              <A href={url} targetBlank underlined>
-                {title}
-              </A>
+            <Span className="SidebarListBookmarks-title" weight="semiBold">
+              <Flex horizontal="left" vertical="center" noWrap>
+                <img className="SidebarListBookmarks-favicon" src={favicon} />
+                <A href={url} targetBlank underlined>
+                  {title}
+                </A>
+              </Flex>
             </Span>
             <RenderInPortal>
               <Tooltip
@@ -42,7 +45,7 @@ const SidebarListBookmarksRefactor: React.FC<Props> = ({ bookmarks, loading, tit
               />
             </RenderInPortal>
             <Span
-              className="SidebarListBookmarksRefactor-descriptionItem"
+              className="SidebarListBookmarks-descriptionItem"
               id={`${stringToDashCase(title)}-averageVote-${id}`}
               size="small"
             >
@@ -61,7 +64,7 @@ const SidebarListBookmarksRefactor: React.FC<Props> = ({ bookmarks, loading, tit
               />
             </RenderInPortal>
             <Span
-              className="SidebarListBookmarksRefactor-descriptionItem"
+              className="SidebarListBookmarks-descriptionItem"
               id={`${stringToDashCase(title)}-timesBookmarked-${id}`}
               size="small"
             >
@@ -72,13 +75,11 @@ const SidebarListBookmarksRefactor: React.FC<Props> = ({ bookmarks, loading, tit
                 </>
               )}
             </Span>
-            {index < bookmarks?.length - 1 && (
-              <Hr className="SidebarListBookmarksRefactor-spacer" spacer size="micro" />
-            )}
+            {index < bookmarks?.length - 1 && <Hr className="SidebarListBookmarks-spacer" spacer size="micro" />}
           </React.Fragment>
         ))}
     </FadeInOut>
   </Frame>
 );
 
-export default SidebarListBookmarksRefactor;
+export default SidebarListBookmarks;
