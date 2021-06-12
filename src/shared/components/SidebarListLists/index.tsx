@@ -4,7 +4,7 @@ import A from 'Components/A';
 import { RenderInPortal } from 'Components/Portal';
 import { ListState } from 'Modules/Lists/lists.types';
 import { stringToDashCase } from 'Tools/utils/string/stringToDashCase';
-import { Bookmark, FadeInOut, Flex, Frame, H4, Hr, List, Space, Span, Tooltip } from 'Vendor/components';
+import { Bookmark, Flex, Frame, H4, Hr, Space, Span, Tooltip, Triangle } from 'Vendor/components';
 import { SidebarListListsSkeleton } from './SidebarListListsSkeleton';
 
 import './SidebarListLists.less';
@@ -35,15 +35,14 @@ const SidebarListLists: React.FC<Props> = ({ lists, loading, title, href, paddin
         <H4>{title}</H4>
       </A>
       <Hr size="small" spacer />
-      <FadeInOut className="SidebarListLists-grid" valueToUpdate={loading} appear speed="fastest">
+      <div className="SidebarListLists-grid">
         {!!loading && <SidebarListListsSkeleton />}
         {!loading &&
-          !!lists?.length &&
           lists?.map(({ id, name, members, bookmarksIds }, index) => (
             <React.Fragment key={`${id}-${index}`}>
               <Flex vertical="center" horizontal="left">
                 <Space />
-                <List size="nano" />
+                <Triangle size="nano" className="SidebarListLists-triangle" />
                 <Space />
                 <Span weight="semiBold">
                   <A href={`lists/${id}`} frontend underlined>
@@ -93,7 +92,7 @@ const SidebarListLists: React.FC<Props> = ({ lists, loading, title, href, paddin
               {index < lists?.length - 1 && <Hr className="SidebarListLists-spacer" spacer size="micro" />}
             </React.Fragment>
           ))}
-      </FadeInOut>
+      </div>
     </Frame>
   );
 };

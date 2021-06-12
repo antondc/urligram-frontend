@@ -4,7 +4,7 @@ import A from 'Components/A';
 import { RenderInPortal } from 'Components/Portal';
 import { UserState } from 'Modules/Users/users.types';
 import { stringToDashCase } from 'Tools/utils/string/stringToDashCase';
-import { Bookmark, FadeInOut, Frame, H4, Hr, Span, Tooltip } from 'Vendor/components';
+import { Bookmark, Frame, H4, Hr, Span, Tooltip } from 'Vendor/components';
 import { SidebarListUsersSkeleton } from './SidebarListUsersSkeleton';
 
 import './SidebarListUsers.less';
@@ -35,10 +35,9 @@ const SidebarListUsers: React.FC<Props> = ({ users, loading, title, href, paddin
         <H4>{title}</H4>
       </A>
       <Hr size="small" spacer />
-      <FadeInOut className="SidebarListUsers-grid" valueToUpdate={loading} appear speed="fastest">
+      <div className="SidebarListUsers-grid">
         {!!loading && <SidebarListUsersSkeleton />}
         {!loading &&
-          !!users?.length &&
           users?.map(({ id, name, followers, following, bookmarksIds }, index) => (
             <React.Fragment key={`${id}-${index}`}>
               <Span weight="extraBold">
@@ -107,7 +106,7 @@ const SidebarListUsers: React.FC<Props> = ({ users, loading, title, href, paddin
               {index < users?.length - 1 && <Hr className="SidebarListUsers-spacer" spacer size="micro" />}
             </React.Fragment>
           ))}
-      </FadeInOut>
+      </div>
     </Frame>
   );
 };

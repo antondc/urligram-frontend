@@ -1,7 +1,7 @@
 import React from 'react';
 
 import A from 'Components/A';
-import { FadeInOut, Frame, H4, Hr, Tag } from 'Vendor/components';
+import { Frame, H4, Hr, Tag } from 'Vendor/components';
 import { SidebarListTagsSkeleton } from './SidebarListTagsSkeleton';
 
 import './SidebarListTags.less';
@@ -35,10 +35,9 @@ const SidebarListTags: React.FC<Props> = ({ tags, loading, title, href, padding 
         <H4>{title}</H4>
       </A>
       <Hr size="small" spacer />
-      <FadeInOut className="SidebarListTags-tags" valueToUpdate={loading} appear speed="fastest">
+      <div className="SidebarListTags-tags">
         {!!loading && <SidebarListTagsSkeleton />}
         {!loading &&
-          tags?.length &&
           tags.map((tag) => (
             <A
               className="SidebarListTags-tag"
@@ -52,7 +51,7 @@ const SidebarListTags: React.FC<Props> = ({ tags, loading, title, href, padding 
               </Tag>
             </A>
           ))}
-      </FadeInOut>
+      </div>
     </Frame>
   );
 };

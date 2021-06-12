@@ -4,7 +4,7 @@ import A from 'Components/A';
 import { RenderInPortal } from 'Components/Portal';
 import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
 import { stringToDashCase } from 'Tools/utils/string/stringToDashCase';
-import { Bookmark, FadeInOut, Flex, Frame, H4, Hr, Span, Tooltip, Triangle } from 'Vendor/components';
+import { Bookmark, Flex, Frame, H4, Hr, Span, Tooltip, Triangle } from 'Vendor/components';
 import { SidebarListBookmarksSkeleton } from './SidebarListBookmarksSkeleton';
 
 import './SidebarListBookmarks.less';
@@ -42,10 +42,9 @@ const SidebarListBookmarks: React.FC<Props> = ({
         <H4>{title}</H4>
       </A>
       <Hr size="small" spacer />
-      <FadeInOut className="SidebarListBookmarks-grid" valueToUpdate={loading} appear speed="fastest">
+      <div className="SidebarListBookmarks-grid">
         {!!loading && <SidebarListBookmarksSkeleton />}
         {!loading &&
-          !!bookmarks?.length &&
           bookmarks?.map(({ id, favicon, title, url, statistics }, index) => (
             <React.Fragment key={`${id}-${index}`}>
               <Span className="SidebarListBookmarks-title" weight="semiBold">
@@ -97,7 +96,7 @@ const SidebarListBookmarks: React.FC<Props> = ({
               {index < bookmarks?.length - 1 && <Hr className="SidebarListBookmarks-spacer" spacer size="micro" />}
             </React.Fragment>
           ))}
-      </FadeInOut>
+      </div>
     </Frame>
   );
 };
