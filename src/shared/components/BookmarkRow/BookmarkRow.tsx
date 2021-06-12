@@ -13,6 +13,7 @@ interface BookmarkRow extends BookmarkState {
   bookmark: Partial<BookmarkState>;
   recentlyCreated: boolean;
   sessionUserBookmarkedLink: boolean;
+  createdAtFormatted: string;
   onVote: (vote: boolean | null) => void;
   onEdit: () => void;
 }
@@ -22,6 +23,7 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
   bookmark,
   onVote,
   sessionUserBookmarkedLink,
+  createdAtFormatted,
   recentlyCreated,
   onEdit,
 }) => (
@@ -41,21 +43,35 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
         </Span>
       </Flex>
       <div className="BookmarkRow-mainBottom">
-        <Span size="nano">Shared by</Span>
-        <Space />
-        <Span size="nano" weight="extraBold">
-          {bookmark?.statistics?.timesBookmarked || 0}
-        </Span>
-        <Space />
         <Span size="nano">
-          user
-          {bookmark?.statistics?.timesBookmarked !== 1 ? 's' : ''}
-        </Span>
-        <Space />·<Space />
-        <Span size="nano">Total votes</Span>
-        <Space />
-        <Span size="nano" weight="extraBold">
-          {bookmark?.statistics?.absoluteVote || 0}
+          {!!bookmark?.statistics?.timesBookmarked && (
+            <>
+              Shared by
+              <Space />
+              <Span size="nano" weight="extraBold">
+                {bookmark?.statistics?.timesBookmarked}
+              </Span>
+              <Space />
+              user
+              {bookmark?.statistics?.timesBookmarked !== 1 ? 's' : ''}
+            </>
+          )}
+          {!!bookmark?.statistics?.timesBookmarked && !!bookmark?.statistics?.absoluteVote && (
+            <>
+              <Space />·<Space />
+            </>
+          )}
+          {!!bookmark?.statistics?.absoluteVote && (
+            <>
+              Total votes
+              <Space />
+              <Span size="nano" weight="extraBold">
+                {bookmark?.statistics?.absoluteVote}
+              </Span>
+            </>
+          )}
+          <Space />·<Space />
+          Created at {createdAtFormatted}
         </Span>
       </div>
     </div>

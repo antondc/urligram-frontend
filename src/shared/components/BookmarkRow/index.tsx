@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { selectBookmarksById } from 'Modules/Bookmarks/selectors/selectBookmarkById';
+import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
 import { linkUpdateVote } from 'Modules/Links/actions/linkUpdateVote';
 import { RootState } from 'Modules/rootType';
 import { selectCurrentRouteParamUserId } from 'Modules/Routes/selectors/selectCurrentRouteParamUserId';
@@ -10,6 +11,7 @@ import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLo
 import { switchBookmarkUpdateModal } from 'Modules/Ui/actions/switchBookmarkUpdateModal';
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
 import { TIME_RECENTLY_CREATED_BOOKMARK } from 'Root/src/shared/constants';
+import { LocaleFormattedDate } from 'Tools/utils/Date/localeFormattedDate';
 import { unixTimeElapsed } from 'Tools/utils/Date/unixTimeElapsed';
 import { BookmarkRow as BookmarkRowUi } from './BookmarkRow';
 
@@ -20,12 +22,15 @@ interface Props {
 const BookmarkRow: React.FC<Props> = ({ id }) => {
   const dispatch = useDispatch();
   const isLogged = useSelector(selectSessionLoggedIn);
+  const slug = useSelector(selectCurrentLanguageSlug);
   const session = useSelector(selectSession);
   const bookmark = useSelector((state: RootState) => selectBookmarksById(state, { bookmarkId: id }));
   const paramUserId = useSelector(selectCurrentRouteParamUserId);
   const routeUserId = paramUserId || session?.id || bookmark?.userId;
   const timePassed = unixTimeElapsed(bookmark?.createdAt);
   const recentlyCreated = timePassed < TIME_RECENTLY_CREATED_BOOKMARK;
+  const date = new LocaleFormattedDate({ unixTime: bookmark.createdAt, locale: slug });
+  const createdAtFormatted = date.getLocaleFormattedDate();
   const sessionUserBookmarkId = bookmark?.bookmarksRelated?.find((item) => item?.userId === session?.id)?.id;
   const sessionUserBookmarkedLink = !!sessionUserBookmarkId;
   const sessionUserBookmark = useSelector((state: RootState) =>
@@ -56,6 +61,7 @@ const BookmarkRow: React.FC<Props> = ({ id }) => {
       id={id}
       userId={routeUserId}
       bookmark={sessionUserBookmarkedLink ? sessionUserBookmark : bookmark}
+      createdAtFormatted={createdAtFormatted}
       onVote={onVote}
       recentlyCreated={recentlyCreated}
       sessionUserBookmarkedLink={sessionUserBookmarkedLink}

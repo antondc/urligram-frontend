@@ -36,49 +36,63 @@ export const UserRow: React.FC<UserRow> = ({
       </A>
       <div className="UserRow-details">
         <Span size="nano">
-          <A href={`users/${id}/lists`} styled frontend disabled={!ammountLists} underlined>
-            <Span size="nano" weight="semiBold">
-              {ammountLists}
-            </Span>
-            <Space />
-            lists
-          </A>
-          <Space />
-          <Space />
-          <Span size="nano" weight="semiBold">
-            ·
-          </Span>
-          <Space />
-          <Space />
-          <A href={`users/${id}/bookmarks`} styled frontend disabled={!ammountBookmarks} underlined>
-            <Span size="nano" weight="semiBold">
-              {ammountBookmarks}
-            </Span>
-            <Space />
-            bookmarks
-          </A>
-          <Space />
-          <Space />
-          <Span size="nano" weight="semiBold">
-            ·
-          </Span>
-          <Space />
-          <Space />
-          <A href={`users/${id}`} styled frontend disabled={!connections} underlined>
-            <Span size="nano" weight="semiBold">
-              {connections}
-            </Span>
-            <Space />
-            connections
-          </A>
-          <Space />
-          <Space />
-          <Span size="nano" weight="semiBold">
-            ·
-          </Span>
-          <Space />
-          <Space />
-          {sinceTranslation?.toLocaleLowerCase()} {createdAtFormatted}
+          {!!ammountLists && (
+            <>
+              <Span size="nano" weight="extraBold">
+                {ammountLists}
+              </Span>
+              <Space />
+              <A href={`users/${id}/lists`} styled frontend disabled={!ammountLists} underlined>
+                lists
+              </A>
+              <Space />
+              <Space />
+              <Span size="nano" weight="semiBold">
+                ·
+              </Span>
+              <Space />
+              <Space />
+            </>
+          )}
+          {!!ammountBookmarks && (
+            <>
+              <Span size="nano" weight="extraBold">
+                {ammountBookmarks}
+              </Span>
+              <Space />
+              <A href={`users/${id}/bookmarks`} styled frontend disabled={!ammountBookmarks} underlined>
+                bookmarks
+              </A>
+              <Space />
+              <Space />
+              <Span size="nano" weight="semiBold">
+                ·
+              </Span>
+              <Space />
+              <Space />
+            </>
+          )}
+          {!!ammountBookmarks && (
+            <>
+              <Span size="nano" weight="extraBold">
+                {connections}
+              </Span>
+              <Space />
+              <A href={`users/${id}`} styled frontend disabled={!connections} underlined>
+                connections
+              </A>
+              <Space />
+              <Space />
+              <Span size="nano" weight="semiBold">
+                ·
+              </Span>
+              <Space />
+              <Space />
+            </>
+          )}
+          <span className="UserRow-since">
+            {sinceTranslation?.toLocaleLowerCase()} {createdAtFormatted}
+          </span>
         </Span>
       </div>
     </div>
