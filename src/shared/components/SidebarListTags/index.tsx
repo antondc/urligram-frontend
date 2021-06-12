@@ -1,7 +1,7 @@
 import React from 'react';
 
 import A from 'Components/A';
-import { FadeInOut, Frame, H4, Hr, Span, Tag } from 'Vendor/components';
+import { FadeInOut, Frame, H4, Hr, Tag } from 'Vendor/components';
 import { SidebarListTagsSkeleton } from './SidebarListTagsSkeleton';
 
 import './SidebarListTags.less';
@@ -14,20 +14,29 @@ interface Props {
     name: string;
   }[];
   href?: string;
+  padding?: boolean;
+  borderBottom?: boolean;
 }
 
-const SidebarListTags: React.FC<Props> = ({ tags, loading, title, href }) => {
-  if (!tags?.length && !loading) return <Span weight="semiBold">ⵁ Nothing here yet.</Span>;
+const SidebarListTags: React.FC<Props> = ({ tags, loading, title, href, padding = true, borderBottom = true }) => {
+  if (!tags?.length && !loading) return null;
 
   return (
-    <Frame className="SidebarListTags" grow borders={false}>
-      <A href={href} frontend styled={!!href} disabled={!href}>
+    <Frame
+      className="SidebarListTags"
+      grow
+      borderTop={false}
+      borderRight={false}
+      borderLeft={false}
+      borderBottom={borderBottom}
+      padding={!!padding ? 'normal' : 'none'}
+    >
+      <A href={href} frontend styled={!!href} disabled={!href} underlined>
         <H4>{title}</H4>
       </A>
       <Hr size="small" spacer />
-      <FadeInOut className="SidebarListTags-tags" valueToUpdate={loading} appear>
-        {!tags?.length && <Span weight="semiBold">ⵁ Nothing here yet.</Span>}
-        {!!tags?.length && !!loading && <SidebarListTagsSkeleton />}
+      <FadeInOut className="SidebarListTags-tags" valueToUpdate={loading} appear speed="fastest">
+        {!!loading && <SidebarListTagsSkeleton />}
         {!loading &&
           tags?.length &&
           tags.map((tag) => (

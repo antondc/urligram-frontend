@@ -12,19 +12,19 @@ import { selectCurrentRouteQueryParamFilter } from 'Modules/Routes/selectors/sel
 import { selectCurrentRouteQueryParamPage } from 'Modules/Routes/selectors/selectCurrentRouteQueryParamPage';
 import { sectionsMostUsedTagsLoad } from 'Modules/Sections/actions/sectionsMostUsedTagsLoad';
 import { sectionsMyRecentBookmarksLoad } from 'Modules/Sections/actions/sectionsMyRecentBookmarksLoad';
+import { sectionsPopularListsLoad } from 'Modules/Sections/actions/sectionsPopularListsLoad';
 import { selectMostUsedTags } from 'Modules/Sections/selectors/selectMostUsedTags';
 import { selectMostUsedTagsLoading } from 'Modules/Sections/selectors/selectMostUsedTagsLoading';
 import { selectMyRecentBookmarks } from 'Modules/Sections/selectors/selectMyRecentBookmarks';
 import { selectMyRecentBookmarksLoading } from 'Modules/Sections/selectors/selectMyRecentBookmarksLoading';
 import { selectPopularLists } from 'Modules/Sections/selectors/selectPopularLists';
+import { selectPopularListsLoading } from 'Modules/Sections/selectors/selectPopularListsLoading';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { tagsSearchLoad } from 'Modules/Tags/actions/tagsSearchLoad';
 import { selectTagsAll } from 'Modules/Tags/selectors/selectAllTags';
 import { selectTagsSearch } from 'Modules/Tags/selectors/selectTagsSearch';
 import history from 'Services/History';
 import { URLWrapper } from 'Services/URLWrapper';
-import { sectionsPopularListsLoad } from '../../redux/modules/Sections/actions/sectionsPopularListsLoad';
-import { selectPopularListsLoading } from '../../redux/modules/Sections/selectors/selectPopularListsLoading';
 import { Bookmarks as BookmarksUi } from './Bookmarks';
 
 const Home: React.FC = () => {

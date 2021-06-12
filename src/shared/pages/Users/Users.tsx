@@ -75,14 +75,12 @@ export const Users: React.FC<Props> = ({
           loading={mostFollowedUsersLoading}
           users={mostFollowedUsers}
         />
-        <Hr size="nano" />
         <SidebarListUsers
           title="New Users"
           href="users?sort=createdAt&page[size]=10"
           loading={newUsersLoading}
           users={newUsers}
         />
-        <Hr size="nano" />
       </Sidebar>
     </Flex>
   </div>

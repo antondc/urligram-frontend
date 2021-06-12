@@ -89,7 +89,6 @@ export const Following: React.FC<Props> = ({
           loading={userMostUsedTagsLoading}
           tags={userMostUsedTags}
         />
-        <Hr spacer />
         <SidebarListTags title="Most Followed Tags" loading={mostUsedTagsLoading} tags={mostUsedTags} />
       </Sidebar>
     </Flex>

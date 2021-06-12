@@ -14,74 +14,94 @@ interface Props {
   lists: ListState[];
   loading?: boolean;
   href?: string;
+  padding?: boolean;
+  borderBottom?: boolean;
 }
 
-const SidebarListListsRefactor: React.FC<Props> = ({ lists, loading, title, href }) => (
-  <Frame className="SidebarListLists" grow borders={false}>
-    <A href={href} frontend styled={!!href} disabled={!href}>
-      <H4>{title}</H4>
-    </A>
-    <Hr size="small" spacer />
-    <FadeInOut className="SidebarListLists-grid" valueToUpdate={loading} appear>
-      {!lists?.length && <Span weight="semiBold">ⵁ Nothing here yet.</Span>}
-      {!!lists?.length && loading && <SidebarListListsRefactorSkeleton />}
-      {!!lists?.length &&
-        !loading &&
-        lists?.map(({ id, name, members, bookmarksIds }, index) => (
-          <React.Fragment key={`${id}-${index}`}>
-            <Flex vertical="center" horizontal="left">
-              <Space />
-              <List size="nano" />
-              <Space />
-              <Span weight="semiBold">
-                <A href={`lists/${id}`} frontend underlined>
-                  {name}
-                </A>
+const SidebarListListsRefactor: React.FC<Props> = ({
+  lists,
+  loading,
+  title,
+  href,
+  padding = true,
+  borderBottom = true,
+}) => {
+  if (!lists?.length && !loading) return null;
+
+  return (
+    <Frame
+      className="SidebarListListsRefactor"
+      grow
+      borderTop={false}
+      borderRight={false}
+      borderLeft={false}
+      borderBottom={borderBottom}
+      padding={!!padding ? 'normal' : 'none'}
+    >
+      <A href={href} frontend styled={!!href} disabled={!href} underlined>
+        <H4>{title}</H4>
+      </A>
+      <Hr size="small" spacer />
+      <FadeInOut className="SidebarListListsRefactor-grid" valueToUpdate={loading} appear speed="fastest">
+        {!!loading && <SidebarListListsRefactorSkeleton />}
+        {!loading &&
+          !!lists?.length &&
+          lists?.map(({ id, name, members, bookmarksIds }, index) => (
+            <React.Fragment key={`${id}-${index}`}>
+              <Flex vertical="center" horizontal="left">
+                <Space />
+                <List size="nano" />
+                <Space />
+                <Span weight="semiBold">
+                  <A href={`lists/${id}`} frontend underlined>
+                    {name}
+                  </A>
+                </Span>
+              </Flex>
+              <RenderInPortal>
+                <Tooltip
+                  parentElementId={`${stringToDashCase(title)}-members-${id}`}
+                  content="Users in this list"
+                  delay={0.5}
+                />
+              </RenderInPortal>
+              <Span
+                id={`${stringToDashCase(title)}-members-${id}`}
+                className="SidebarListListsRefactor-descriptionItem"
+                size="micro"
+                weight="semiBold"
+              >
+                {!!members?.length && (
+                  <A href={`lists/${id}`} frontend styled={false}>
+                    <span>{members?.length}</span>@
+                  </A>
+                )}
               </Span>
-            </Flex>
-            <RenderInPortal>
-              <Tooltip
-                parentElementId={`${stringToDashCase(title)}-followers-${id}`}
-                content="Followers of this user"
-                delay={0.5}
-              />
-            </RenderInPortal>
-            <Span
-              id={`${stringToDashCase(title)}-followers-${id}`}
-              className="SidebarListLists-descriptionItem"
-              size="micro"
-              weight="semiBold"
-            >
-              {!!members?.length && (
-                <A href={`lists/${id}`} frontend styled={false}>
-                  <span>{members?.length}</span>@
-                </A>
-              )}
-            </Span>
-            <RenderInPortal>
-              <Tooltip
-                parentElementId={`${stringToDashCase(title)}-following-${id}`}
-                content="People following to this user"
-                delay={0.5}
-              />
-            </RenderInPortal>
-            <Span
-              id={`${stringToDashCase(title)}-following-${id}`}
-              className="SidebarListLists-descriptionItem"
-              size="micro"
-              weight="semiBold"
-            >
-              {!!bookmarksIds?.length && (
-                <A href={`lists/${id}`} frontend styled={false}>
-                  <span>{bookmarksIds?.length}</span>
-                  <Bookmark size="micro" />
-                </A>
-              )}
-            </Span>
-            {index < lists?.length - 1 && <Hr className="SidebarListLists-spacer" spacer size="micro" />}
-          </React.Fragment>
-        ))}
-    </FadeInOut>
-  </Frame>
-);
+              <RenderInPortal>
+                <Tooltip
+                  parentElementId={`${stringToDashCase(title)}-bookmarks-${id}`}
+                  content="Bookmarks in this list"
+                  delay={0.5}
+                />
+              </RenderInPortal>
+              <Span
+                id={`${stringToDashCase(title)}-bookmarks-${id}`}
+                className="SidebarListListsRefactor-descriptionItem"
+                size="micro"
+                weight="semiBold"
+              >
+                {!!bookmarksIds?.length && (
+                  <A href={`lists/${id}`} frontend styled={false}>
+                    <span>{bookmarksIds?.length}</span>
+                    <Bookmark size="micro" />
+                  </A>
+                )}
+              </Span>
+              {index < lists?.length - 1 && <Hr className="SidebarListListsRefactor-spacer" spacer size="micro" />}
+            </React.Fragment>
+          ))}
+      </FadeInOut>
+    </Frame>
+  );
+};
 export default SidebarListListsRefactor;

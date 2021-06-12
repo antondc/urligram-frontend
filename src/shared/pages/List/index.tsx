@@ -43,12 +43,12 @@ const List: React.FC = () => {
 
   useEffect(() => {
     dispatch(listLoadById(listId));
-    dispatch(sectionsTagsInThisListLoad(listId));
     dispatch(listsLoadByUserId(session?.id));
   }, [session?.id]);
 
   useEffect(() => {
     !!listId && dispatch(bookmarksLoadByListId(listId));
+    dispatch(sectionsTagsInThisListLoad(listId));
   }, [url, session?.id]);
 
   useEffect(() => {

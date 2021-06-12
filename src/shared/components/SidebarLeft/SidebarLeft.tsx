@@ -1,11 +1,10 @@
 import React from 'react';
 
 import A from 'Components/A';
-import { RenderInPortal } from 'Components/Portal';
+import SidebarListListsRefactor from 'Components/SidebarListListsRefactor';
 import { GlossaryState } from 'Modules/Languages/languages.types';
 import { ListState } from 'Modules/Lists/lists.types';
-import { Bookmark, Flex, Frame, Hr, List, Space, Span, Tooltip } from 'Vendor/components';
-import { SidebarLeftLists } from './SidebarLeftLists';
+import { Frame, Hr, Span } from 'Vendor/components';
 
 import './SidebarLeft.less';
 
@@ -15,6 +14,7 @@ interface Props {
   sessionId: string;
   glossary: GlossaryState;
   lists: ListState[];
+  listsLoading: boolean;
   switchUiBookmarkModal: (e: React.MouseEvent<HTMLAnchorElement>) => void;
   switchUiListModal: (e: React.MouseEvent<HTMLAnchorElement>) => void;
 }
@@ -44,19 +44,7 @@ export const SidebarLeft: React.FC<Props> = ({
             </A>
           </Span>
         </li>
-        <li className="SidebarLeft-item">
-          <Span size="medium" extraBold>
-            <A
-              className="SidebarLeft-link"
-              href={`users/${sessionId}/bookmarks`}
-              frontend
-              underlined
-              active={routeName === 'UserBookmarks'}
-            >
-              {glossary.myBookmarks}
-            </A>
-          </Span>
-        </li>
+
         <li className="SidebarLeft-item">
           <Span size="medium" extraBold>
             <A
@@ -74,6 +62,19 @@ export const SidebarLeft: React.FC<Props> = ({
           <Span size="medium" extraBold>
             <A className="SidebarLeft-link" href="" frontend underlined onClick={switchUiBookmarkModal}>
               Add bookmark
+            </A>
+          </Span>
+        </li>
+        <li className="SidebarLeft-item">
+          <Span size="medium" extraBold>
+            <A
+              className="SidebarLeft-link"
+              href={`users/${sessionId}/bookmarks`}
+              frontend
+              underlined
+              active={routeName === 'UserBookmarks'}
+            >
+              {glossary.myBookmarks}
             </A>
           </Span>
         </li>
@@ -107,19 +108,6 @@ export const SidebarLeft: React.FC<Props> = ({
           <Span size="medium" extraBold>
             <A className="SidebarLeft-link" href="" frontend underlined onClick={switchUiListModal}>
               Create list
-            </A>
-          </Span>
-        </li>
-        <li className="SidebarLeft-item">
-          <Span size="medium" extraBold>
-            <A
-              className="SidebarLeft-link"
-              href={`users/${sessionId}/lists?sort=-createdAt`}
-              frontend
-              underlined
-              active={routeName === 'UserLists'}
-            >
-              My Lists
             </A>
           </Span>
         </li>
@@ -164,7 +152,19 @@ export const SidebarLeft: React.FC<Props> = ({
         </li>
       </ul>
     )}
-    <Hr spacer size="micro" />
-    <SidebarLeftLists lists={lists} />
+    {!!isLoggedIn && (
+      <>
+        <Hr spacer size="nano" />
+        <Hr spacer size="nano" />
+        <SidebarListListsRefactor
+          lists={lists}
+          loading={false}
+          title="My Lists"
+          href={`users/${sessionId}/lists?sort=-createdAt`}
+          padding={false}
+          borderBottom={false}
+        />
+      </>
+    )}
   </Frame>
 );

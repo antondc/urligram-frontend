@@ -74,23 +74,18 @@ export const Home: React.FC<Props> = ({
           loading={mostFollowedUsersLoading}
           href="users?sort=-followers&page[size]=10"
         />
-        <Hr size="nano" />
         <SidebarListUsers
           title="Followers"
           users={newUsers}
           loading={newUsersLoading}
           href="users?sort=createdAt&page[size]=10"
         />
-        <Hr size="nano" />
         {!!session?.id && (
-          <>
-            <SidebarListBookmarks
-              title="My recent bookmarks"
-              loading={myRecentBookmarksLoading}
-              bookmarks={myRecentBookmarks}
-            />
-            <Hr size="nano" />
-          </>
+          <SidebarListBookmarks
+            title="My recent bookmarks"
+            loading={myRecentBookmarksLoading}
+            bookmarks={myRecentBookmarks}
+          />
         )}
       </Sidebar>
     </Flex>

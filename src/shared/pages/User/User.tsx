@@ -186,14 +186,12 @@ export const User: React.FC<Props> = ({
           href={`users/${userId}/following`}
           loading={followingUsersLoading}
         />
-        <Hr size="nano" />
         <SidebarListUsers
           title="Followers"
           href={`users/${userId}/followers`}
           loading={followersUsersLoading}
           users={followersUsers}
         />
-        <Hr size="nano" />
       </Sidebar>
     </Flex>
   </div>

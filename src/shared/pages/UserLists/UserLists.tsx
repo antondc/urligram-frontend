@@ -91,7 +91,6 @@ export const UserLists: React.FC<Props> = ({
           loading={userMostUsedTagsLoading}
           tags={userMostUsedTags}
         />
-        <Hr spacer />
         <SidebarListTags
           title="Most Used Tags"
           href={`users/${userId}/tags`}

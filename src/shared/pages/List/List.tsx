@@ -90,7 +90,6 @@ export const List: React.FC<Props> = ({
       </Main>
       <Sidebar>
         <SidebarListUsers title="People in this list" users={usersInThisList} loading={usersInThisListLoading} />
-        <Hr size="nano" />
         <SidebarListTags title="Tags In This List" loading={tagsInThisListLoading} tags={tagsInThisList} />
       </Sidebar>
     </Flex>

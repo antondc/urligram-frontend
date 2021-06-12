@@ -112,24 +112,19 @@ export const Bookmarks: React.FC<Props> = ({
       </Main>
       <Sidebar>
         {!!session?.id && (
-          <>
-            <SidebarListBookmarks
-              title="My recent bookmarks"
-              loading={myRecentBookmarksLoading}
-              bookmarks={myRecentBookmarks}
-            />
-            <Hr size="nano" />
-          </>
+          <SidebarListBookmarks
+            title="My recent bookmarks"
+            loading={myRecentBookmarksLoading}
+            bookmarks={myRecentBookmarks}
+          />
         )}
         <SidebarListTags title="Most Followed Tags" loading={mostUsedTagsLoading} tags={mostUsedTags} />
-        <Hr size="nano" />
         <SidebarListListsRefactor
           title="Popular lists"
           lists={popularLists}
           loading={popularListsLoading}
           href="/lists?sort=-members"
         />
-        <Hr size="nano" />
       </Sidebar>
     </Flex>
   </div>

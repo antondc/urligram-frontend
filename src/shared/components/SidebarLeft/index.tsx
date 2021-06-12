@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectCurrentGlossary } from 'Modules/Languages/selectors/selectCurrentGlossary';
 import { listsLoadByUserId } from 'Modules/Lists/actions/listsLoadByUserId';
 import { selectListsByUserId } from 'Modules/Lists/selectors/selectListsByUserId';
+import { selectListsLoading } from 'Modules/Lists/selectors/selectListsLoading';
 import { RootState } from 'Modules/rootType';
 import { selectCurrentRoute } from 'Modules/Routes/selectors/selectCurrentRoute';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
@@ -19,6 +20,7 @@ export const SidebarLeft: React.FC = () => {
   const glossary = useSelector(selectCurrentGlossary);
   const route = useSelector(selectCurrentRoute);
   const lists = useSelector((state: RootState) => selectListsByUserId(state, { userId: sessionId }));
+  const listsLoading = useSelector(selectListsLoading);
 
   const switchUiBookmarkModal = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
@@ -43,6 +45,7 @@ export const SidebarLeft: React.FC = () => {
       switchUiBookmarkModal={switchUiBookmarkModal}
       switchUiListModal={switchUiListModal}
       lists={lists}
+      listsLoading={listsLoading}
     />
   );
 };

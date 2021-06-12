@@ -89,7 +89,6 @@ export const Followers: React.FC<Props> = ({
           href={`users/${userId}/bookmarks`}
           loading={userMostUsedTagsLoading}
         />
-        <Hr spacer />
         <SidebarListTags title="Most Followed Tags" loading={mostUsedTagsLoading} tags={mostUsedTags} />
       </Sidebar>
     </Flex>
