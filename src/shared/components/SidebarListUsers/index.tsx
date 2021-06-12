@@ -90,6 +90,7 @@ const SidebarListUsers: React.FC<Props> = ({ users, loading, title, href }) => (
                 </A>
               )}
             </Span>
+            {index < users?.length - 1 && <Hr className="SidebarListUsers-spacer" spacer size="micro" />}
           </React.Fragment>
         ))}
     </FadeInOut>

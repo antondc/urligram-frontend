@@ -1,0 +1,34 @@
+@import '../../css/imports.less';
+
+@c: .SidebarListBookmarksRefactor;
+
+@{c} {
+  &-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) auto auto;
+    column-gap: 5px;
+    overflow: hidden;
+  }
+
+  &-title {
+    position: relative;
+    margin-right: 10px;
+    white-space: nowrap;
+    overflow-x: scroll;
+    overflow-y: hidden;
+
+    .hideScrollbar;
+  }
+
+  &-descriptionItem {
+    text-align: right;
+
+    .hoverTransition;
+  }
+
+  &-spacer {
+    display: grid;
+    grid-column-start: 1;
+    grid-column-end: 4;
+  }
+}

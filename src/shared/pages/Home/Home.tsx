@@ -6,7 +6,10 @@ import Main from 'Components/Main';
 import MainContent from 'Components/MainContent';
 import Pagination from 'Components/Pagination';
 import Sidebar from 'Components/Sidebar';
+import SidebarListBookmarksRefactor from 'Components/SidebarListBookmarksRefactor';
 import SidebarListUsers from 'Components/SidebarListUsers';
+import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
+import { SessionState } from 'Modules/Session/session.types';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
 import { Flex, Frame, Hr, Span } from 'Vendor/components';
@@ -14,12 +17,15 @@ import { Flex, Frame, Hr, Span } from 'Vendor/components';
 import './Home.less';
 
 export interface Props {
+  session: SessionState;
   bookmarksIds: number[];
   bookmarksIdsLoading: boolean;
   mostFollowedUsers: UserState[];
   mostFollowedUsersLoading: boolean;
   newUsers: UserState[];
   newUsersLoading: boolean;
+  myRecentBookmarks: BookmarkState[];
+  myRecentBookmarksLoading: boolean;
   page: {
     size: number;
     offset: number;
@@ -29,12 +35,15 @@ export interface Props {
 }
 
 export const Home: React.FC<Props> = ({
+  session,
   bookmarksIds,
   bookmarksIdsLoading,
   mostFollowedUsers,
   mostFollowedUsersLoading,
   newUsers,
   newUsersLoading,
+  myRecentBookmarks,
+  myRecentBookmarksLoading,
   page,
   totalItems,
   url,
@@ -73,6 +82,16 @@ export const Home: React.FC<Props> = ({
           href="users?sort=createdAt&page[size]=10"
         />
         <Hr size="nano" />
+        {!!session?.id && (
+          <>
+            <SidebarListBookmarksRefactor
+              title="My recent bookmarks"
+              loading={myRecentBookmarksLoading}
+              bookmarks={myRecentBookmarks}
+            />
+            <Hr size="nano" />
+          </>
+        )}
       </Sidebar>
     </Flex>
   </div>

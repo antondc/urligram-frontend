@@ -11,8 +11,11 @@ import { selectCurrentFullUrl } from 'Modules/Routes/selectors/selectCurrentFull
 import { selectCurrentRouteQueryParamFilter } from 'Modules/Routes/selectors/selectCurrentRouteQueryParamFilter';
 import { selectCurrentRouteQueryParamPage } from 'Modules/Routes/selectors/selectCurrentRouteQueryParamPage';
 import { sectionsMostUsedTagsLoad } from 'Modules/Sections/actions/sectionsMostUsedTagsLoad';
+import { sectionsMyRecentBookmarksLoad } from 'Modules/Sections/actions/sectionsMyRecentBookmarksLoad';
 import { selectMostUsedTags } from 'Modules/Sections/selectors/selectMostUsedTags';
 import { selectMostUsedTagsLoading } from 'Modules/Sections/selectors/selectMostUsedTagsLoading';
+import { selectMyRecentBookmarks } from 'Modules/Sections/selectors/selectMyRecentBookmarks';
+import { selectMyRecentBookmarksLoading } from 'Modules/Sections/selectors/selectMyRecentBookmarksLoading';
 import { selectPopularLists } from 'Modules/Sections/selectors/selectPopularLists';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { tagsSearchLoad } from 'Modules/Tags/actions/tagsSearchLoad';
@@ -26,6 +29,8 @@ const Home: React.FC = () => {
   const dispatch = useDispatch();
 
   const session = useSelector(selectSession);
+  const myRecentBookmarks = useSelector(selectMyRecentBookmarks);
+  const myRecentBookmarksLoading = useSelector(selectMyRecentBookmarksLoading);
   const popularLists = useSelector(selectPopularLists);
   const bookmarksIds = useSelector(selectBookmarksCurrentIds);
   const loading = useSelector(selectBookmarksLoading);
@@ -50,6 +55,7 @@ const Home: React.FC = () => {
   }, []);
 
   useEffect(() => {
+    dispatch(sectionsMyRecentBookmarksLoad(session?.id));
     dispatch(listsLoadByUserId(session?.id));
   }, [session?.id]);
 
@@ -75,6 +81,7 @@ const Home: React.FC = () => {
 
   return (
     <BookmarksUi
+      session={session}
       bookmarksIds={bookmarksIds}
       popularLists={popularLists}
       loading={loading}
@@ -89,6 +96,8 @@ const Home: React.FC = () => {
       onChange={onChange}
       mostUsedTags={mostUsedTags}
       mostUsedTagsLoading={mostUsedTagsLoading}
+      myRecentBookmarks={myRecentBookmarks}
+      myRecentBookmarksLoading={myRecentBookmarksLoading}
     />
   );
 };

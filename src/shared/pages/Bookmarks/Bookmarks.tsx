@@ -6,8 +6,11 @@ import Main from 'Components/Main';
 import MainContent from 'Components/MainContent';
 import Pagination from 'Components/Pagination';
 import Sidebar from 'Components/Sidebar';
+import SidebarListBookmarksRefactor from 'Components/SidebarListBookmarksRefactor';
 import SidebarListTagsRefactor from 'Components/SidebarListTagsRefactor';
+import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
 import { ListState } from 'Modules/Lists/lists.types';
+import { SessionState } from 'Modules/Session/session.types';
 import { TagState } from 'Modules/Tags/tags.types';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
 import { Flex, Frame, Hr, Select, SelectValue, SortBy, Span } from 'Vendor/components';
@@ -15,12 +18,15 @@ import { Flex, Frame, Hr, Select, SelectValue, SortBy, Span } from 'Vendor/compo
 import './Bookmarks.less';
 
 interface Props {
+  session: SessionState;
   url: string;
   bookmarksIds: number[];
   popularLists: ListState[];
   loading: boolean;
   mostUsedTags: TagState[];
   mostUsedTagsLoading: boolean;
+  myRecentBookmarks: BookmarkState[];
+  myRecentBookmarksLoading: boolean;
   page: {
     size: number;
     offset: number;
@@ -39,11 +45,14 @@ interface Props {
 }
 
 export const Bookmarks: React.FC<Props> = ({
+  session,
   url,
   bookmarksIds,
   loading,
   mostUsedTags,
   mostUsedTagsLoading,
+  myRecentBookmarks,
+  myRecentBookmarksLoading,
   page,
   totalItems,
   sort,
@@ -98,6 +107,16 @@ export const Bookmarks: React.FC<Props> = ({
         <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
       </Main>
       <Sidebar>
+        {!!session?.id && (
+          <>
+            <SidebarListBookmarksRefactor
+              title="My recent bookmarks"
+              loading={myRecentBookmarksLoading}
+              bookmarks={myRecentBookmarks}
+            />
+            <Hr size="nano" />
+          </>
+        )}
         <SidebarListTagsRefactor title="Most Followed Tags" loading={mostUsedTagsLoading} tags={mostUsedTags} />
       </Sidebar>
     </Flex>
