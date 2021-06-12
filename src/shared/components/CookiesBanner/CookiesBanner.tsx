@@ -20,7 +20,7 @@ export const CookiesBanner: React.FC<Props> = ({ onAccept, accepted, show }) => 
         </Span>
         <Hr spacer size="zero" />
         <Span className="CookiesBanner-textSpan CookiesBanner-textSpanBody" size="small">
-          We use cookies to improve the user experience of this site. We have all the info at
+          We use cookies to improve the user experience of this site. You can find all the info at
           <Space />
           <A href="/policy" frontend underlined>
             <Span weight="semiBold" size="small">

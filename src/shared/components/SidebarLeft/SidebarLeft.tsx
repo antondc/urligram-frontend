@@ -1,7 +1,7 @@
 import React from 'react';
 
 import A from 'Components/A';
-import SidebarListListsRefactor from 'Components/SidebarListListsRefactor';
+import SidebarListLists from 'Components/SidebarListLists';
 import { GlossaryState } from 'Modules/Languages/languages.types';
 import { ListState } from 'Modules/Lists/lists.types';
 import { Frame, Hr, Span } from 'Vendor/components';
@@ -156,7 +156,7 @@ export const SidebarLeft: React.FC<Props> = ({
       <>
         <Hr spacer size="nano" />
         <Hr spacer size="nano" />
-        <SidebarListListsRefactor
+        <SidebarListLists
           lists={lists}
           loading={false}
           title="My Lists"

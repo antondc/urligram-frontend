@@ -31,7 +31,10 @@ export const bookmarksLoadByListId = (listId: number): AppThunk<Promise<Bookmark
     dispatch(
       bookmarksLoadSuccess({
         ...bookmarksAfterResponse,
-        byKey: serializerFromArrayToByKey<BookmarkState, BookmarkState>({ data: bookmarksArray }),
+        byKey: {
+          ...bookmarksAfterResponse.byKey,
+          ...serializerFromArrayToByKey<BookmarkState, BookmarkState>({ data: bookmarksArray }),
+        },
         currentIds: bookmarksData.map((item) => item.id),
         loading: false,
         meta: {

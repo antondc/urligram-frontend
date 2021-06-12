@@ -7,6 +7,7 @@ import MainContent from 'Components/MainContent';
 import Pagination from 'Components/Pagination';
 import Sidebar from 'Components/Sidebar';
 import SidebarListBookmarks from 'Components/SidebarListBookmarks';
+import SidebarListLists from 'Components/SidebarListLists';
 import SidebarListTags from 'Components/SidebarListTags';
 import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
 import { ListState } from 'Modules/Lists/lists.types';
@@ -14,7 +15,6 @@ import { SessionState } from 'Modules/Session/session.types';
 import { TagState } from 'Modules/Tags/tags.types';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
 import { Flex, Frame, Hr, Select, SelectValue, SortBy, Span } from 'Vendor/components';
-import SidebarListListsRefactor from '../../components/SidebarListListsRefactor';
 
 import './Bookmarks.less';
 
@@ -119,7 +119,7 @@ export const Bookmarks: React.FC<Props> = ({
           />
         )}
         <SidebarListTags title="Most Followed Tags" loading={mostUsedTagsLoading} tags={mostUsedTags} />
-        <SidebarListListsRefactor
+        <SidebarListLists
           title="Popular lists"
           lists={popularLists}
           loading={popularListsLoading}

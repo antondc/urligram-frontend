@@ -5,9 +5,9 @@ import { RenderInPortal } from 'Components/Portal';
 import { ListState } from 'Modules/Lists/lists.types';
 import { stringToDashCase } from 'Tools/utils/string/stringToDashCase';
 import { Bookmark, FadeInOut, Flex, Frame, H4, Hr, List, Space, Span, Tooltip } from 'Vendor/components';
-import { SidebarListListsRefactorSkeleton } from './SidebarListListsRefactorSkeleton';
+import { SidebarListListsSkeleton } from './SidebarListListsSkeleton';
 
-import './SidebarListListsRefactor.less';
+import './SidebarListLists.less';
 
 interface Props {
   title: string;
@@ -18,19 +18,12 @@ interface Props {
   borderBottom?: boolean;
 }
 
-const SidebarListListsRefactor: React.FC<Props> = ({
-  lists,
-  loading,
-  title,
-  href,
-  padding = true,
-  borderBottom = true,
-}) => {
+const SidebarListLists: React.FC<Props> = ({ lists, loading, title, href, padding = true, borderBottom = true }) => {
   if (!lists?.length && !loading) return null;
 
   return (
     <Frame
-      className="SidebarListListsRefactor"
+      className="SidebarListLists"
       grow
       borderTop={false}
       borderRight={false}
@@ -42,8 +35,8 @@ const SidebarListListsRefactor: React.FC<Props> = ({
         <H4>{title}</H4>
       </A>
       <Hr size="small" spacer />
-      <FadeInOut className="SidebarListListsRefactor-grid" valueToUpdate={loading} appear speed="fastest">
-        {!!loading && <SidebarListListsRefactorSkeleton />}
+      <FadeInOut className="SidebarListLists-grid" valueToUpdate={loading} appear speed="fastest">
+        {!!loading && <SidebarListListsSkeleton />}
         {!loading &&
           !!lists?.length &&
           lists?.map(({ id, name, members, bookmarksIds }, index) => (
@@ -67,7 +60,7 @@ const SidebarListListsRefactor: React.FC<Props> = ({
               </RenderInPortal>
               <Span
                 id={`${stringToDashCase(title)}-members-${id}`}
-                className="SidebarListListsRefactor-descriptionItem"
+                className="SidebarListLists-descriptionItem"
                 size="micro"
                 weight="semiBold"
               >
@@ -86,7 +79,7 @@ const SidebarListListsRefactor: React.FC<Props> = ({
               </RenderInPortal>
               <Span
                 id={`${stringToDashCase(title)}-bookmarks-${id}`}
-                className="SidebarListListsRefactor-descriptionItem"
+                className="SidebarListLists-descriptionItem"
                 size="micro"
                 weight="semiBold"
               >
@@ -97,11 +90,11 @@ const SidebarListListsRefactor: React.FC<Props> = ({
                   </A>
                 )}
               </Span>
-              {index < lists?.length - 1 && <Hr className="SidebarListListsRefactor-spacer" spacer size="micro" />}
+              {index < lists?.length - 1 && <Hr className="SidebarListLists-spacer" spacer size="micro" />}
             </React.Fragment>
           ))}
       </FadeInOut>
     </Frame>
   );
 };
-export default SidebarListListsRefactor;
+export default SidebarListLists;

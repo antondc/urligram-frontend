@@ -32,7 +32,7 @@ export const UserModal: React.FC<Props> = ({
     {!sessionId && <User className="UserModal-userLogo" onClick={switchMessageModal} />}
     <ul>
       <li>
-        <Span weight="semiBold">
+        <Span weight="extraBold">
           <A className="UserModal-link" href={`users/${sessionId}`} frontend underlined>
             My account
           </A>
@@ -40,7 +40,7 @@ export const UserModal: React.FC<Props> = ({
       </li>
       <Hr spacer size="small" />
       <li>
-        <Span weight="semiBold">
+        <Span weight="extraBold">
           <A className="UserModal-link" href={`users/${sessionId}/followers`} frontend underlined>
             Followers
           </A>
@@ -48,7 +48,7 @@ export const UserModal: React.FC<Props> = ({
       </li>
       <Hr spacer size="small" />
       <li>
-        <Span weight="semiBold">
+        <Span weight="extraBold">
           <A className="UserModal-link" href={`users/${sessionId}/following`} frontend underlined>
             Following
           </A>
@@ -56,7 +56,7 @@ export const UserModal: React.FC<Props> = ({
       </li>
       <Hr spacer size="small" />
       <li>
-        <Span weight="semiBold">
+        <Span weight="extraBold">
           <A className="UserModal-link" href={`users/${sessionId}/bookmarks`} frontend underlined>
             My bookmarks
           </A>
@@ -64,7 +64,7 @@ export const UserModal: React.FC<Props> = ({
       </li>
       <Hr spacer size="small" />
       <li>
-        <Span weight="semiBold">
+        <Span weight="extraBold">
           <A className="UserModal-link" href={`users/${sessionId}/lists`} frontend underlined>
             My lists
           </A>
@@ -72,7 +72,7 @@ export const UserModal: React.FC<Props> = ({
       </li>
       <Hr spacer size="small" />
       <li className="UserModal-sessionLogOut" onClick={sessionLogOut}>
-        <Span className="UserModal-link" weight="semiBold">
+        <Span className="UserModal-link" weight="extraBold">
           Log out
         </Span>
       </li>
