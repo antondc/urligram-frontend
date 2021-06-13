@@ -51,9 +51,9 @@ export const SidebarLeft: React.FC = () => {
   }, [sessionId]);
 
   useEffect(() => {
-    const { mounted: sidebarLeftListsShown } = localStorageWrapper.getValue<LocalStorageListsShown>('listsShown');
+    const sidebarLeftListsShown = localStorageWrapper.getValue<LocalStorageListsShown>('listsShown');
 
-    setListsShown(Boolean(sidebarLeftListsShown));
+    setListsShown(Boolean(sidebarLeftListsShown?.mounted));
   }, []);
 
   return (
