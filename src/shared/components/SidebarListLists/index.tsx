@@ -7,8 +7,8 @@ import { stringToDashCase } from 'Tools/utils/string/stringToDashCase';
 import {
   AnimateHeight,
   Bookmark,
+  DotsVertical,
   Flex,
-  Folder,
   Frame,
   H4,
   Hr,
@@ -61,7 +61,7 @@ const SidebarListLists: React.FC<Props> = ({
         <Space />
         <Triangle
           className={'SidebarListLists-triangle' + (listsShown ? ' SidebarListLists-triangle--show' : '')}
-          size="nano"
+          size="pico"
         />
       </Flex>
       <Hr size="small" spacer />
@@ -73,7 +73,7 @@ const SidebarListLists: React.FC<Props> = ({
               <React.Fragment key={`${id}-${index}`}>
                 <Flex vertical="center" horizontal="left">
                   <Space />
-                  <Folder size="micro" />
+                  <DotsVertical size="nano" />
                   <Space />
                   <Span weight="semiBold">
                     <A href={`lists/${id}`} frontend underlined>
@@ -95,9 +95,9 @@ const SidebarListLists: React.FC<Props> = ({
                   weight="semiBold"
                 >
                   {!!members?.length && (
-                    <A href={`lists/${id}`} frontend styled={false}>
+                    <>
                       <span>{members?.length}</span>@
-                    </A>
+                    </>
                   )}
                 </Span>
                 <RenderInPortal>
@@ -114,10 +114,10 @@ const SidebarListLists: React.FC<Props> = ({
                   weight="semiBold"
                 >
                   {!!bookmarksIds?.length && (
-                    <A href={`lists/${id}`} frontend styled={false}>
+                    <>
                       <span>{bookmarksIds?.length}</span>
                       <Bookmark size="micro" />
-                    </A>
+                    </>
                   )}
                 </Span>
                 {index < lists?.length - 1 && <Hr className="SidebarListLists-spacer" spacer size="micro" />}

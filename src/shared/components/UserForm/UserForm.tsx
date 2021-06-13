@@ -30,7 +30,7 @@ export const UserForm: React.FC<Props> = ({
   onSubmit,
 }) => (
   <form className="UserForm" onSubmit={onSubmit}>
-    <Span className="UserForm-title" weight="semiBold">
+    <Span className="UserForm-title" weight="extraBold">
       @{name}
     </Span>
     <TextArea

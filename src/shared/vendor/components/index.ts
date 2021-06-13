@@ -59,6 +59,7 @@ export {
   Sort,
   List,
   Folder,
+  DotsVertical,
 } from './Svg';
 export { Switch } from './Switch';
 export { Tag } from './Tag';

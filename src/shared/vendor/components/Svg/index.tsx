@@ -10,6 +10,7 @@ import BookmarkWithBackgroundSvg from '../../../assets/svg/bookmarkWithBackgroun
 import CheckSvg from '../../../assets/svg/check.svg';
 import CircleSvg from '../../../assets/svg/circle.svg';
 import CrossSvg from '../../../assets/svg/cross.svg';
+import DotsVerticalSvg from '../../../assets/svg/dotsVertical.svg';
 import EditSvg from '../../../assets/svg/edit.svg';
 import EditCircleSvg from '../../../assets/svg/editCircle.svg';
 import FolderSvg from '../../../assets/svg/folder.svg';
@@ -31,7 +32,7 @@ import * as Icons from '.';
 
 import './Svg.less';
 
-export type IconSize = 'nano' | 'micro' | 'small' | 'normal' | 'medium' | 'big' | 'biggest' | 'huge';
+export type IconSize = 'pico' | 'nano' | 'micro' | 'small' | 'normal' | 'medium' | 'big' | 'biggest' | 'huge';
 
 export type IconsType =
   | 'Sort'
@@ -44,6 +45,7 @@ export type IconsType =
   | 'ArrowUp'
   | 'ArrowDown'
   | 'ArrowLeft'
+  | 'DotsVertical'
   | 'Folder'
   | 'Loupe'
   | 'Upload'
@@ -99,6 +101,7 @@ export const ArrowRight: React.FC<Props> = (props) => Svg(ArrowRightSvg)(props);
 export const ArrowUp: React.FC<Props> = (props) => Svg(ArrowUpSvg)(props);
 export const ArrowDown: React.FC<Props> = (props) => Svg(ArrowDownSvg)(props);
 export const ArrowLeft: React.FC<Props> = (props) => Svg(ArrowLeftSvg)(props);
+export const DotsVertical: React.FC<Props> = (props) => Svg(DotsVerticalSvg)(props);
 export const Folder: React.FC<Props> = (props) => Svg(FolderSvg)(props);
 export const Loupe: React.FC<Props> = (props) => Svg(LoupeSvg)(props);
 export const Upload: React.FC<Props> = (props) => Svg(UploadSvg)(props);

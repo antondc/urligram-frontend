@@ -12,7 +12,9 @@
   &-descriptionItem {
     text-align: right;
 
-    .hoverTransition;
+    &:hover {
+      cursor: default;
+    }
   }
 
   &-spacer {
@@ -22,10 +24,10 @@
   }
 
   &-triangle {
-    fill: @c-transparent;
     stroke: @c-base;
-    stroke-width: 10px;
     transform: rotate(90deg);
+    transition: transform @td-fast @ease-outQuint;
+    stroke-width: 10px;
 
     &--show {
       transform: rotate(180deg);

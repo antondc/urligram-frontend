@@ -12,7 +12,7 @@ import { BookmarksByKey } from 'Modules/Bookmarks/bookmarks.types';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
-import { A, FadeInOut, Flex, Frame, Hr, Select, SelectValue, SortBy, Span } from 'Vendor/components';
+import { A, FadeInOut, Flex, Frame, Hr, Select, SelectValue, SortBy, Space, Span } from 'Vendor/components';
 
 import './UserBookmarks.less';
 
@@ -69,8 +69,12 @@ export const UserBookmarks: React.FC<Props> = ({
         <Hr spacer size="nano" />
         <Hr spacer />
         <Frame grow padding="small">
-          <Span size="normal" weight="semiBold">
-            Bookmarks of <A href={`/users/${userId}`}>@{user?.name}</A>
+          <Span size="normal" weight="extraBold">
+            Bookmarks of
+            <Space />
+            <A href={`/users/${userId}`} underlined>
+              @{user?.name}
+            </A>
           </Span>
         </Frame>
         <Frame grow padding="none" shadow={false} borderTop={false}>

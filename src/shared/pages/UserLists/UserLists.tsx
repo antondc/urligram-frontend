@@ -10,7 +10,7 @@ import SidebarListTags from 'Components/SidebarListTags';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
-import { A, FadeInOut, Flex, Frame, Hr, SortBy, Span } from 'Vendor/components';
+import { A, FadeInOut, Flex, Frame, Hr, SortBy, Space, Span } from 'Vendor/components';
 
 import './UserLists.less';
 
@@ -52,8 +52,11 @@ export const UserLists: React.FC<Props> = ({
         <Hr spacer size="nano" />
         <Hr spacer />
         <Frame grow padding="small">
-          <Span size="normal" weight="semiBold">
-            Lists of <A href={`/users/${userId}`}>@{user?.name}</A>
+          <Span size="normal" weight="extraBold">
+            Lists of <Space />
+            <A href={`/users/${userId}`} underlined>
+              @{user?.name}
+            </A>
           </Span>
         </Frame>
         <Frame grow padding="none" shadow={false} borderBottom={false} borderTop={false}>

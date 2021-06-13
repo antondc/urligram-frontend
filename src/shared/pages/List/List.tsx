@@ -13,7 +13,7 @@ import { ListState } from 'Modules/Lists/lists.types';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
-import { A, Flex, Frame, Hr, SortBy, Span } from 'Vendor/components';
+import { A, Flex, Frame, Hr, SortBy, Space, Span } from 'Vendor/components';
 
 import './List.less';
 
@@ -54,8 +54,12 @@ export const List: React.FC<Props> = ({
         <Hr spacer />
         <Frame grow padding="small">
           <Flex horizontal="between" noWrap>
-            <Span size="normal" weight="semiBold">
-              Bookmarks in <A href={`/lists/${list?.id}`}>{list?.name}</A>
+            <Span size="normal" weight="extraBold">
+              Bookmarks in
+              <Space />
+              <A href={`/lists/${list?.id}`} underlined>
+                {list?.name}
+              </A>
             </Span>
             <Flex growHorizontal={false} vertical="top">
               <ListFollowButton className="List-joinList" listId={list?.id} size="normal" />

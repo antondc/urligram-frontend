@@ -10,7 +10,7 @@ import { UserRowSkeletonGroup } from 'Components/UserRow/UserRowSkeletonGroup';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
-import { A, Flex, Frame, Hr, SortBy, Span } from 'Vendor/components';
+import { A, Flex, Frame, Hr, SortBy, Space, Span } from 'Vendor/components';
 
 import './Followers.less';
 
@@ -52,8 +52,12 @@ export const Followers: React.FC<Props> = ({
         <Hr spacer size="nano" />
         <Hr spacer />
         <Frame grow padding="small">
-          <Span size="normal" weight="semiBold">
-            Followers of <A href={`/users/${userId}/following`}>@{user?.name}</A>
+          <Span size="normal" weight="extraBold">
+            Followers of
+            <Space />
+            <A href={`/users/${userId}/followers`} underlined>
+              @{user?.name}
+            </A>
           </Span>
         </Frame>
         <Frame grow padding="none" shadow={false} borderBottom={false} borderTop={false}>
