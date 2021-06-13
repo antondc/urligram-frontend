@@ -1,8 +1,10 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 import A from 'Components/A';
 import { RenderInPortal } from 'Components/Portal';
 import { ListState } from 'Modules/Lists/lists.types';
+import { selectCurrentRouteParams } from 'Modules/Routes/selectors/selectCurrentRouteParams';
 import { stringToDashCase } from 'Tools/utils/string/stringToDashCase';
 import {
   AnimateHeight,
@@ -43,6 +45,8 @@ const SidebarListLists: React.FC<Props> = ({
   onListTitleClick = () => {},
 }) => {
   if (!lists?.length && !loading) return null;
+  const currentRouteParams = useSelector(selectCurrentRouteParams);
+  const currentListId = Number(currentRouteParams?.listId);
 
   return (
     <Frame
@@ -76,7 +80,13 @@ const SidebarListLists: React.FC<Props> = ({
                   <DotsVertical size="nano" />
                   <Space />
                   <Span weight="semiBold">
-                    <A href={`lists/${id}`} frontend underlined>
+                    <A
+                      className="SidebarListLists-link"
+                      href={`lists/${id}`}
+                      frontend
+                      underlined
+                      active={currentListId === id}
+                    >
                       {name}
                     </A>
                   </Span>
