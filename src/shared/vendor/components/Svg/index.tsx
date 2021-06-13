@@ -12,6 +12,7 @@ import CircleSvg from '../../../assets/svg/circle.svg';
 import CrossSvg from '../../../assets/svg/cross.svg';
 import EditSvg from '../../../assets/svg/edit.svg';
 import EditCircleSvg from '../../../assets/svg/editCircle.svg';
+import FolderSvg from '../../../assets/svg/folder.svg';
 import LinkSvg from '../../../assets/svg/link.svg';
 import ListSvg from '../../../assets/svg/list.svg';
 import LoupeSvg from '../../../assets/svg/loupe.svg';
@@ -43,6 +44,7 @@ export type IconsType =
   | 'ArrowUp'
   | 'ArrowDown'
   | 'ArrowLeft'
+  | 'Folder'
   | 'Loupe'
   | 'Upload'
   | 'User'
@@ -97,6 +99,7 @@ export const ArrowRight: React.FC<Props> = (props) => Svg(ArrowRightSvg)(props);
 export const ArrowUp: React.FC<Props> = (props) => Svg(ArrowUpSvg)(props);
 export const ArrowDown: React.FC<Props> = (props) => Svg(ArrowDownSvg)(props);
 export const ArrowLeft: React.FC<Props> = (props) => Svg(ArrowLeftSvg)(props);
+export const Folder: React.FC<Props> = (props) => Svg(FolderSvg)(props);
 export const Loupe: React.FC<Props> = (props) => Svg(LoupeSvg)(props);
 export const Upload: React.FC<Props> = (props) => Svg(UploadSvg)(props);
 export const User: React.FC<Props> = (props) => Svg(UserSvg)(props);

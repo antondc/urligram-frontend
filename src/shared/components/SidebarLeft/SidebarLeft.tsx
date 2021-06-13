@@ -15,6 +15,8 @@ interface Props {
   glossary: GlossaryState;
   lists: ListState[];
   listsLoading: boolean;
+  listsShown: boolean;
+  onListTitleClick: () => void;
   switchUiBookmarkModal: (e: React.MouseEvent<HTMLAnchorElement>) => void;
   switchUiListModal: (e: React.MouseEvent<HTMLAnchorElement>) => void;
 }
@@ -25,6 +27,8 @@ export const SidebarLeft: React.FC<Props> = ({
   sessionId,
   glossary,
   lists,
+  listsShown,
+  onListTitleClick,
   switchUiBookmarkModal,
   switchUiListModal,
 }) => (
@@ -163,6 +167,8 @@ export const SidebarLeft: React.FC<Props> = ({
           href={`users/${sessionId}/lists?sort=-createdAt`}
           padding={false}
           borderBottom={false}
+          listsShown={listsShown}
+          onListTitleClick={onListTitleClick}
         />
       </>
     )}

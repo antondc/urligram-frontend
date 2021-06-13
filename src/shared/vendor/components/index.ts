@@ -58,6 +58,7 @@ export {
   PlusCircleWithBackground,
   Sort,
   List,
+  Folder,
 } from './Svg';
 export { Switch } from './Switch';
 export { Tag } from './Tag';
