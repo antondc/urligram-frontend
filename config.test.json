@@ -7,12 +7,12 @@
   "staging": {
     "PORT_HTTP": 80,
     "PORT_HTTPS": 0,
-    "API_URL": "https://linking-api-staging.antoniodiaz.me/api/v1/"
+    "API_URL": "https://linking-api-staging.woprs.com/api/v1/"
   },
   "production": {
     "PORT_HTTP": 80,
     "PORT_HTTPS": 0,
-    "API_URL": "https://linking-api-production.antoniodiaz.me/api/v1/"
+    "API_URL": "https://linking-api-production.woprs.com/api/v1/"
   },
   "SECRET": "superSecret",
   "ENABLE_ISOMORPHISM": false,
