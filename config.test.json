@@ -5,12 +5,12 @@
     "API_URL": "https://dev.linking.me:3000/api/v1/"
   },
   "staging": {
-    "PORT_HTTP": 11923,
+    "PORT_HTTP": 80,
     "PORT_HTTPS": 0,
     "API_URL": "https://linking-api-staging.antoniodiaz.me/api/v1/"
   },
   "production": {
-    "PORT_HTTP": 11917,
+    "PORT_HTTP": 80,
     "PORT_HTTPS": 0,
     "API_URL": "https://linking-api-production.antoniodiaz.me/api/v1/"
   },
