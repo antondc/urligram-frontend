@@ -68,7 +68,8 @@ deploy_production:
   only:
     - master
   script:
-    - ssh antoniodiaz@antoniodiaz.me "cd ~/www/linking_frontend_production && rm -rf node_modules dist/* tmp"
-    - ssh antoniodiaz@antoniodiaz.me "cd ~/www/linking_frontend_production && git pull"
-    - ssh antoniodiaz@antoniodiaz.me "source ~/.bash_profile && export NPM_TOKEN=${NPM_TOKEN} && cd ~/www/linking_frontend_production && nvm use --delete-prefix && git checkout master && npm ci --verbose && npm run prod"
-    - ssh antoniodiaz@antoniodiaz.me "cd ~/www/linking_frontend_production && mkdir -p tmp/always_restart.txt"
+    - ssh xum35s@ec2-3-64-180-27.eu-central-1.compute.amazonaws.com "cd /var/www/html/linking_frontend_production && rm -rf node_modules dist/* tmp"
+    - ssh xum35s@ec2-3-64-180-27.eu-central-1.compute.amazonaws.com "cd /var/www/html/linking_frontend_production && git pull origin master"
+    - ssh xum35s@ec2-3-64-180-27.eu-central-1.compute.amazonaws.com "source ~/.bash_profile && export NPM_TOKEN=${NPM_TOKEN} && cd /var/www/html/linking_frontend_production && nvm use --delete-prefix && git checkout master && npm ci --verbose && npm run prod"
+    - ssh xum35s@ec2-3-64-180-27.eu-central-1.compute.amazonaws.com "cd /var/www/html/linking_frontend_production && pm2 stop ./dist/server.js"
+    - ssh xum35s@ec2-3-64-180-27.eu-central-1.compute.amazonaws.com "cd /var/www/html/linking_frontend_production && NODE_ENV=production pm2 start ./dist/server.js"
