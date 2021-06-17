@@ -53,7 +53,11 @@ export const Button: React.FC<Props> = ({
     <Span className="Button-content" weight="semiBold" uppercase>
       {text}
       {icon && <SvgIcon name={icon} size="small" className="Button-svg" />}
-      {!disabled && !error && <SpinnerCircularBrute className="Button-loader" size="small" />}
+      {!disabled && !error && (
+        <div className="Button-loader">
+          <SpinnerCircularBrute size="small" />
+        </div>
+      )}
     </Span>
   </button>
 );

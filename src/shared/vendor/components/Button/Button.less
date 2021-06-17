@@ -174,13 +174,15 @@
   }
 
   &-loader {
+    display: flex;
+    align-items: center;
     max-width: 0;
-    margin-left: 10px;
+    margin-left: 0;
     overflow: hidden;
-    transition: max-width @td-normalSlow @ease-outCustom1;
 
     @{c}--loading && {
       max-width: 16px;
+      margin-left: 5px;
     }
   }
 }
