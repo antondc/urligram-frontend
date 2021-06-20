@@ -45,25 +45,27 @@ const Pagination: React.FC<Props> = ({ totalItems = 0, itemsPerPage = 10, offset
   return (
     <div className="Pagination">
       <Fade mounted={mounted}>
-        {pages.map((item, index) =>
-          !!item ? (
-            <A
-              className="Pagination-item"
-              key={index}
-              href={item.path}
-              underlined
-              active={item?.current}
-              frontend
-              onClick={scrollToTop}
-            >
-              {item.page}
-            </A>
-          ) : (
-            <span className="Pagination-dots Pagination-item" key={index}>
-              ...
-            </span>
-          )
-        )}
+        <div className="Pagination-wrapper">
+          {pages.map((item, index) =>
+            !!item ? (
+              <A
+                className="Pagination-item"
+                key={index}
+                href={item.path}
+                underlined
+                active={item?.current}
+                frontend
+                onClick={scrollToTop}
+              >
+                {item.page}
+              </A>
+            ) : (
+              <span className="Pagination-dots Pagination-item" key={index}>
+                ...
+              </span>
+            )
+          )}
+        </div>
       </Fade>
     </div>
   );

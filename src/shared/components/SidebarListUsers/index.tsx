@@ -4,7 +4,7 @@ import A from 'Components/A';
 import { RenderInPortal } from 'Components/Portal';
 import { UserState } from 'Modules/Users/users.types';
 import { stringToDashCase } from 'Tools/utils/string/stringToDashCase';
-import { Bookmark, Frame, H4, Hr, Tooltip } from 'Vendor/components';
+import { Bookmark, Tooltip } from 'Vendor/components';
 import { SidebarListUsersSkeleton } from './SidebarListUsersSkeleton';
 
 import './SidebarListUsers.less';
@@ -24,10 +24,9 @@ const SidebarListUsers: React.FC<Props> = ({ users, loading, title, href, classN
 
   return (
     <div className={'SidebarListUsers' + (className ? ' ' + className : '')}>
-      <A href={href} frontend styled={!!href} disabled={!href} underlined>
-        <h4 className="SidebarListUsers-title">{title}</h4>
+      <A className="SidebarListUsers-title" href={href} frontend styled={!!href} disabled={!href} underlined>
+        {title}
       </A>
-      <Hr size="small" spacer />
       <div className="SidebarListUsers-grid">
         {!!loading && <SidebarListUsersSkeleton />}
         {!loading &&
@@ -75,11 +74,10 @@ const SidebarListUsers: React.FC<Props> = ({ users, loading, title, href, classN
                 {!!bookmarksIds?.length && (
                   <A href={`users/${id}/bookmarks`} frontend styled={false}>
                     {bookmarksIds?.length}
-                    <Bookmark size="micro" />
+                    <Bookmark className="SidebarListUsers-bookmarkIcon" />
                   </A>
                 )}
               </span>
-              {index < users?.length - 1 && <Hr className="SidebarListUsers-spacer" spacer size="micro" />}
             </React.Fragment>
           ))}
       </div>

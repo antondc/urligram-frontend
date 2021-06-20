@@ -72,7 +72,7 @@ export const Followers: React.FC<Props> = ({
           usersCurrentIds?.map((id) => <UserRow id={id} key={id} />)
         )}
         {!usersLoading && !usersCurrentIds?.length && (
-          <span className="Followers-noResults">ⵁ We didnt find any user.</span>
+          <div className="Followers-noResults">ⵁ We didnt find any user.</div>
         )}
       </div>
       <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />

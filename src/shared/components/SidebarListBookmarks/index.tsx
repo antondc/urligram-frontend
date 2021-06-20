@@ -22,10 +22,9 @@ const SidebarListBookmarks: React.FC<Props> = ({ bookmarks, loading, title, href
 
   return (
     <div className={'SidebarListBookmarks' + (className ? ' ' + className : '')}>
-      <A href={href} frontend styled={!!href} disabled={!href} underlined>
-        <H4>{title}</H4>
+      <A className="SidebarListBookmarks-header" href={href} frontend styled={!!href} disabled={!href} underlined>
+        {title}
       </A>
-      <Hr size="small" spacer />
       <div className="SidebarListBookmarks-grid">
         {!!loading && <SidebarListBookmarksSkeleton />}
         {!loading &&
@@ -33,7 +32,7 @@ const SidebarListBookmarks: React.FC<Props> = ({ bookmarks, loading, title, href
             <React.Fragment key={`${id}-${index}`}>
               <span className="SidebarListBookmarks-title">
                 <img className="SidebarListBookmarks-favicon" src={favicon} />
-                <A href={url} targetBlank underlined>
+                <A className="SidebarListBookmarks-link" href={url} targetBlank underlined>
                   {title}
                 </A>
               </span>
@@ -69,11 +68,10 @@ const SidebarListBookmarks: React.FC<Props> = ({ bookmarks, loading, title, href
                 {!!statistics?.timesBookmarked && (
                   <>
                     {statistics?.timesBookmarked}
-                    <Bookmark size="micro" />
+                    <Bookmark className="SidebarListBookmarks-icon" />
                   </>
                 )}
               </span>
-              {index < bookmarks?.length - 1 && <Hr className="SidebarListBookmarks-spacer" spacer size="micro" />}
             </React.Fragment>
           ))}
       </div>

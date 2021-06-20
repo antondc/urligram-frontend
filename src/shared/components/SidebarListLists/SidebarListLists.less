@@ -22,6 +22,8 @@
     display: grid;
     grid-template-columns: 4fr auto auto;
     column-gap: 5px;
+    padding-top: 10px;
+    gap: 5px;
   }
 
   &-descriptionItem {
@@ -50,6 +52,7 @@
   }
 
   &-triangle {
+    display: none;
     stroke: @c-base;
     transform: rotate(90deg);
     transition: transform @td-fast @ease-outQuint;

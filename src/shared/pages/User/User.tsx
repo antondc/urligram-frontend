@@ -45,27 +45,29 @@ export const User: React.FC<Props> = ({
         </div>
       )}
       <div className="User-details">
-        <div className="User-detailsItem">
-          Name: <Space />
-          <span className="User-detailsItemData">@{user?.name}</span>
-        </div>
-        <Hr spacer size="zero" />
-        <Hr spacer size="micro" />
-        <div className="User-detailsItem">
-          Location: <Space />
-          <span className="User-detailsItemData">{user?.location}</span>
-        </div>
-        <Hr spacer size="zero" />
-        <Hr spacer size="micro" />
-        <div className="User-detailsItem">
-          Statement: <Space />
-          <span className="User-detailsItemData">{user?.statement}</span>
-        </div>
-        <Hr spacer size="zero" />
-        <Hr spacer size="micro" />
-        <div className="User-detailsItem">
-          Created at: <Space />
-          <span className="User-detailsItemData">{createdAtFormatted}</span>
+        <div>
+          <div className="User-detailsItem">
+            Name: <Space />
+            <span className="User-detailsItemData">@{user?.name}</span>
+          </div>
+          <Hr spacer size="zero" />
+          <Hr spacer size="micro" />
+          <div className="User-detailsItem">
+            Location: <Space />
+            <span className="User-detailsItemData">{user?.location}</span>
+          </div>
+          <Hr spacer size="zero" />
+          <Hr spacer size="micro" />
+          <div className="User-detailsItem">
+            Statement: <Space />
+            <span className="User-detailsItemData">{user?.statement}</span>
+          </div>
+          <Hr spacer size="zero" />
+          <Hr spacer size="micro" />
+          <div className="User-detailsItem">
+            Created at: <Space />
+            <span className="User-detailsItemData">{createdAtFormatted}</span>
+          </div>
         </div>
         <img className="User-image" src={user?.image?.original} />
         <Hr spacer />

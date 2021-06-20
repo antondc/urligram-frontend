@@ -96,9 +96,7 @@ export const Bookmarks: React.FC<Props> = ({
         ) : (
           bookmarksIds?.map((id) => <BookmarkRow id={id} key={id} />)
         )}
-        {!loading && !bookmarksIds?.length && (
-          <span className="Bookmarks-noResults">ⵁ We didnt find any bookmark.</span>
-        )}
+        {!loading && !bookmarksIds?.length && <div className="Bookmarks-noResults">ⵁ We didnt find any bookmark.</div>}
       </div>
       <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
       <Hr spacer size="normal" />

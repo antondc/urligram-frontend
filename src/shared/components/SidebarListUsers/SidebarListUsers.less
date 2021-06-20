@@ -9,30 +9,60 @@
   &-title {
     font-size: @fs-medium;
     font-weight: @fw-extraBold;
-    line-height: @fh-medium;
+
+    @media @br-tabletHorizontal {
+      font-size: @fs-normal;
+    }
   }
 
   &-grid {
     display: grid;
     grid-template-columns: 4fr auto auto auto;
     column-gap: 5px;
+    padding-top: 10px;
+    gap: 5px;
+
+    @media @br-tabletHorizontal {
+      padding-top: 5px;
+    }
   }
 
-  &-spacer {
-    display: grid;
-    grid-column-start: 1;
-    grid-column-end: 5;
+  &-name {
+    font-weight: @fw-extraBold;
+
+    @media @br-tabletHorizontal {
+      font-size: @fs-small;
+    }
   }
 
   &-descriptionItem {
     font-size: @fs-micro;
     font-weight: @fw-semibold;
     text-align: right;
+    white-space: nowrap;
+
+    @media @br-tabletHorizontal {
+      font-size: @fs-nano;
+    }
 
     .hoverTransition;
   }
 
-  &-name {
-    font-weight: @fw-extraBold;
+  &-bookmarkIcon {
+    height: 10px;
+    width: 10px;
+    min-height: 10px;
+    min-width: 10px;
+
+    @media @br-tabletHorizontal {
+      height: 8px;
+      width: 8px;
+      min-height: 8px;
+      min-width: 8px;
+    }
+  }
+
+  &-skeletonItem {
+    margin-bottom: 5px;
   }
 }

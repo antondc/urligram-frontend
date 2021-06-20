@@ -55,7 +55,7 @@ export const Home: React.FC<Props> = ({
           bookmarksIds?.map((id) => <BookmarkRow id={id} key={id} />)
         )}
         {!bookmarksIdsLoading && !bookmarksIds?.length && (
-          <span className="Home-noResults">ⵁ Start following users to receive recommended bookmarks.</span>
+          <div className="Home-noResults">ⵁ Start following users to receive recommended bookmarks.</div>
         )}
       </div>
       <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />

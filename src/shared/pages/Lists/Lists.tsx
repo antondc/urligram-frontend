@@ -62,7 +62,7 @@ export const Lists: React.FC<Props> = ({
           listsIds?.map((id) => <ListRow id={id} key={id} />)
         )}
         {!listsIdsLoading && !listsIds?.length && (
-          <span className="UserBookmarks-noResults">ⵁ We didnt find any list.</span>
+          <div className="UserBookmarks-noResults">ⵁ We didnt find any list.</div>
         )}
       </div>
       <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />

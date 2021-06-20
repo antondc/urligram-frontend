@@ -76,7 +76,7 @@ export const List: React.FC<Props> = ({
           bookmarksIds?.map((id) => <BookmarkRow id={id} key={id} />)
         )}
         {!bookmarksLoading && !bookmarksIds?.length && (
-          <span className="UserBookmarks-noResults">ⵁ We didnt find any bookmark.</span>
+          <div className="UserBookmarks-noResults">ⵁ We didnt find any bookmark.</div>
         )}
       </div>
       <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />

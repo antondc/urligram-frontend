@@ -36,6 +36,7 @@ export const A: React.FC<Props> = ({
     (styled ? 'A' : 'A--default') +
     (className ? ' ' + className : '') +
     (styled && disabled ? ' A--disabled' : '') +
+    (!styled && disabled ? ' A--noEvents' : '') +
     (styled && active ? ' ' + 'A--active' : '') +
     (styled && underlined ? ' ' + 'A--underlined' : '');
 

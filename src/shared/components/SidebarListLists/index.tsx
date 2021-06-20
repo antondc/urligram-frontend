@@ -46,7 +46,6 @@ const SidebarListLists: React.FC<Props> = ({
           size="pico"
         />
       </div>
-      <Hr size="small" spacer />
       <AnimateHeight mounted={listsShown} speed="fastest" ease={[1, 0.02, 0.83, 1.15]}>
         <div className="SidebarListLists-grid">
           {!!loading && <SidebarListListsSkeleton />}
@@ -96,7 +95,6 @@ const SidebarListLists: React.FC<Props> = ({
                     </>
                   )}
                 </span>
-                {index < lists?.length - 1 && <Hr className="SidebarListLists-spacer" spacer size="micro" />}
               </React.Fragment>
             ))}
         </div>

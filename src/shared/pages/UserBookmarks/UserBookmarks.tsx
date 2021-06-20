@@ -104,7 +104,7 @@ export const UserBookmarks: React.FC<Props> = ({
           ))
         )}
         {!bookmarksLoading && !bookmarksIds?.length && (
-          <span className="UserBookmarks-noResults">ⵁ We didnt find any bookmark.</span>
+          <div className="UserBookmarks-noResults">ⵁ We didnt find any bookmark.</div>
         )}
       </div>
       <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
