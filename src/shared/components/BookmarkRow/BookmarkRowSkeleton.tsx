@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Frame, SkeletonItem } from 'Vendor/components';
+import { SkeletonItem } from 'Vendor/components';
 
 import './BookmarkRowSkeleton.less';
 
@@ -9,21 +9,11 @@ interface BookmarkRowSkeleton {
 }
 
 export const BookmarkRowSkeleton: React.FC<BookmarkRowSkeleton> = ({ id }) => (
-  <Frame
-    grow
-    className="BookmarkRowSkeleton"
-    data-test-id="BookmarkRowSkeleton"
-    key={id}
-    borderTop={false}
-    borderLeft={false}
-    borderRight={false}
-    borderBottom={false}
-  >
+  <div className="BookmarkRowSkeleton" data-test-id="BookmarkRowSkeleton" key={id}>
     <div className="BookmarkRowSkeleton-main">
       <SkeletonItem className="BookmarkRowSkeleton-mainTitle" />
       <SkeletonItem className="BookmarkRowSkeleton-mainDetails" />
     </div>
-
     <div className="BookmarkRowSkeleton-icons">
       <SkeletonItem className="BookmarkRowSkeleton-icon" />
       <SkeletonItem className="BookmarkRowSkeleton-icon" />
@@ -34,7 +24,7 @@ export const BookmarkRowSkeleton: React.FC<BookmarkRowSkeleton> = ({ id }) => (
       <SkeletonItem className="BookmarkRowSkeleton-tag" />
       <SkeletonItem className="BookmarkRowSkeleton-tag" />
     </div>
-  </Frame>
+  </div>
 );
 
 export default BookmarkRowSkeleton;

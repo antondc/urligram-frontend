@@ -3,6 +3,15 @@
 @c: .SidebarListUsers;
 
 @{c} {
+  padding: 20px;
+  border-bottom: 2px solid @c-base;
+
+  &-title {
+    font-size: @fs-medium;
+    font-weight: @fw-extraBold;
+    line-height: @fh-medium;
+  }
+
   &-grid {
     display: grid;
     grid-template-columns: 4fr auto auto auto;
@@ -16,8 +25,14 @@
   }
 
   &-descriptionItem {
+    font-size: @fs-micro;
+    font-weight: @fw-semibold;
     text-align: right;
 
     .hoverTransition;
+  }
+
+  &-name {
+    font-weight: @fw-extraBold;
   }
 }

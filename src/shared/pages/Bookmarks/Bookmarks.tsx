@@ -90,7 +90,7 @@ export const Bookmarks: React.FC<Props> = ({
           loading={loading}
         />
       </div>
-      <div className="Bookmarks-main">
+      <div className="Bookmarks-bookmarks">
         {loading ? (
           <BookmarkRowSkeletonGroup length={bookmarksIds?.length || DEFAULT_PAGE_SIZE} />
         ) : (

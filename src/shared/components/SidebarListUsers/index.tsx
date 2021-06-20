@@ -4,12 +4,13 @@ import A from 'Components/A';
 import { RenderInPortal } from 'Components/Portal';
 import { UserState } from 'Modules/Users/users.types';
 import { stringToDashCase } from 'Tools/utils/string/stringToDashCase';
-import { Bookmark, Frame, H4, Hr, Span, Tooltip } from 'Vendor/components';
+import { Bookmark, Frame, H4, Hr, Tooltip } from 'Vendor/components';
 import { SidebarListUsersSkeleton } from './SidebarListUsersSkeleton';
 
 import './SidebarListUsers.less';
 
 interface Props {
+  className?: string;
   title: string;
   users: UserState[];
   loading: boolean;
@@ -18,21 +19,13 @@ interface Props {
   borderBottom?: boolean;
 }
 
-const SidebarListUsers: React.FC<Props> = ({ users, loading, title, href, padding = true, borderBottom = true }) => {
+const SidebarListUsers: React.FC<Props> = ({ users, loading, title, href, className }) => {
   if (!users?.length && !loading) return null;
 
   return (
-    <Frame
-      className="SidebarListUsers"
-      grow
-      borderTop={false}
-      borderRight={false}
-      borderLeft={false}
-      borderBottom={borderBottom}
-      padding={!!padding ? 'normal' : 'none'}
-    >
+    <div className={'SidebarListUsers' + (className ? ' ' + className : '')}>
       <A href={href} frontend styled={!!href} disabled={!href} underlined>
-        <H4>{title}</H4>
+        <h4 className="SidebarListUsers-title">{title}</h4>
       </A>
       <Hr size="small" spacer />
       <div className="SidebarListUsers-grid">
@@ -40,11 +33,9 @@ const SidebarListUsers: React.FC<Props> = ({ users, loading, title, href, paddin
         {!loading &&
           users?.map(({ id, name, followers, following, bookmarksIds }, index) => (
             <React.Fragment key={`${id}-${index}`}>
-              <Span weight="extraBold">
-                <A href={`users/${id}`} frontend underlined>
-                  @{name}
-                </A>
-              </Span>
+              <A className="SidebarListUsers-name" href={`users/${id}`} frontend underlined>
+                @{name}
+              </A>
               <RenderInPortal>
                 <Tooltip
                   parentElementId={`${stringToDashCase(title)}-followers-${id}`}
@@ -52,18 +43,13 @@ const SidebarListUsers: React.FC<Props> = ({ users, loading, title, href, paddin
                   delay={0.5}
                 />
               </RenderInPortal>
-              <Span
-                id={`${stringToDashCase(title)}-followers-${id}`}
-                className="SidebarListUsers-descriptionItem"
-                size="micro"
-                weight="semiBold"
-              >
+              <span id={`${stringToDashCase(title)}-followers-${id}`} className="SidebarListUsers-descriptionItem">
                 {!!followers?.length && (
                   <A href={`users/${id}/followers`} frontend styled={false}>
-                    <span> {followers?.length}</span>@
+                    {followers?.length}@
                   </A>
                 )}
-              </Span>
+              </span>
               <RenderInPortal>
                 <Tooltip
                   parentElementId={`${stringToDashCase(title)}-following-${id}`}
@@ -71,18 +57,13 @@ const SidebarListUsers: React.FC<Props> = ({ users, loading, title, href, paddin
                   delay={0.5}
                 />
               </RenderInPortal>
-              <Span
-                id={`${stringToDashCase(title)}-following-${id}`}
-                className="SidebarListUsers-descriptionItem"
-                size="micro"
-                weight="semiBold"
-              >
+              <span id={`${stringToDashCase(title)}-following-${id}`} className="SidebarListUsers-descriptionItem">
                 {!!following?.length && (
                   <A href={`users/${id}/following`} frontend styled={false}>
-                    <span>{following?.length}</span>@
+                    {following?.length}@
                   </A>
                 )}
-              </Span>
+              </span>
               <RenderInPortal>
                 <Tooltip
                   parentElementId={`${stringToDashCase(title)}-bookmarks-${id}`}
@@ -90,24 +71,19 @@ const SidebarListUsers: React.FC<Props> = ({ users, loading, title, href, paddin
                   delay={0.5}
                 />
               </RenderInPortal>
-              <Span
-                id={`${stringToDashCase(title)}-bookmarks-${id}`}
-                className="SidebarListUsers-descriptionItem"
-                size="micro"
-                weight="semiBold"
-              >
+              <span id={`${stringToDashCase(title)}-bookmarks-${id}`} className="SidebarListUsers-descriptionItem">
                 {!!bookmarksIds?.length && (
                   <A href={`users/${id}/bookmarks`} frontend styled={false}>
-                    <span>{bookmarksIds?.length} </span>
+                    {bookmarksIds?.length}
                     <Bookmark size="micro" />
                   </A>
                 )}
-              </Span>
+              </span>
               {index < users?.length - 1 && <Hr className="SidebarListUsers-spacer" spacer size="micro" />}
             </React.Fragment>
           ))}
       </div>
-    </Frame>
+    </div>
   );
 };
 export default SidebarListUsers;
