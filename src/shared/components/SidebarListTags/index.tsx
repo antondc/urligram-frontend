@@ -1,12 +1,13 @@
 import React from 'react';
 
 import A from 'Components/A';
-import { Frame, H4, Hr, Tag } from 'Vendor/components';
+import { H4, Hr, Tag } from 'Vendor/components';
 import { SidebarListTagsSkeleton } from './SidebarListTagsSkeleton';
 
 import './SidebarListTags.less';
 
 interface Props {
+  className?: string;
   title: string;
   loading?: boolean;
   tags: {
@@ -14,23 +15,13 @@ interface Props {
     name: string;
   }[];
   href?: string;
-  padding?: boolean;
-  borderBottom?: boolean;
 }
 
-const SidebarListTags: React.FC<Props> = ({ tags, loading, title, href, padding = true, borderBottom = true }) => {
+const SidebarListTags: React.FC<Props> = ({ tags, loading, title, href, className }) => {
   if (!tags?.length && !loading) return null;
 
   return (
-    <Frame
-      className="SidebarListTags"
-      grow
-      borderTop={false}
-      borderRight={false}
-      borderLeft={false}
-      borderBottom={borderBottom}
-      padding={!!padding ? 'normal' : 'none'}
-    >
+    <div className={'SidebarListTags' + (className ? ' ' + className : '')}>
       <A href={href} frontend styled={!!href} disabled={!href} underlined>
         <H4>{title}</H4>
       </A>
@@ -52,7 +43,7 @@ const SidebarListTags: React.FC<Props> = ({ tags, loading, title, href, padding 
             </A>
           ))}
       </div>
-    </Frame>
+    </div>
   );
 };
 export default SidebarListTags;

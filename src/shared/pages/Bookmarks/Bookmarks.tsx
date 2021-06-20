@@ -2,8 +2,6 @@ import React from 'react';
 
 import BookmarkRow from 'Components/BookmarkRow';
 import { BookmarkRowSkeletonGroup } from 'Components/BookmarkRow/BookmarkRowSkeletonGroup';
-import Main from 'Components/Main';
-import MainContent from 'Components/MainContent';
 import Pagination from 'Components/Pagination';
 import Sidebar from 'Components/Sidebar';
 import SidebarListBookmarks from 'Components/SidebarListBookmarks';
@@ -14,7 +12,7 @@ import { ListState } from 'Modules/Lists/lists.types';
 import { SessionState } from 'Modules/Session/session.types';
 import { TagState } from 'Modules/Tags/tags.types';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
-import { Flex, Frame, Hr, Select, SelectValue, SortBy, Span } from 'Vendor/components';
+import { Hr, Select, SelectValue, SortBy } from 'Vendor/components';
 
 import './Bookmarks.less';
 
@@ -68,8 +66,6 @@ export const Bookmarks: React.FC<Props> = ({
 }) => (
   <>
     <div className="Bookmarks">
-      <Hr spacer size="nano" />
-      <Hr spacer />
       <div className="Bookmarks-header">
         <Select
           className="Bookmarks-select"
@@ -100,7 +96,9 @@ export const Bookmarks: React.FC<Props> = ({
         ) : (
           bookmarksIds?.map((id) => <BookmarkRow id={id} key={id} />)
         )}
-        {!loading && !bookmarksIds?.length && <Span weight="semiBold">ⵁ We didnt find any bookmark.</Span>}
+        {!loading && !bookmarksIds?.length && (
+          <span className="Bookmarks-noResults">ⵁ We didnt find any bookmark.</span>
+        )}
       </div>
       <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
       <Hr spacer size="normal" />
@@ -108,6 +106,7 @@ export const Bookmarks: React.FC<Props> = ({
     <Sidebar>
       {!!session?.id && (
         <SidebarListBookmarks
+          className="Bookmarks-myRecentBookmarks"
           title="My recent bookmarks"
           loading={myRecentBookmarksLoading}
           bookmarks={myRecentBookmarks}

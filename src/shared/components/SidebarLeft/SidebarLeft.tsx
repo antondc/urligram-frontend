@@ -32,7 +32,7 @@ export const SidebarLeft: React.FC<Props> = ({
   switchUiBookmarkModal,
   switchUiListModal,
 }) => (
-  <Frame className="SidebarLeft" data-test-id="SidebarLeft" borderTop={false} borderLeft={false} borderRight={false}>
+  <div className="SidebarLeft" data-test-id="SidebarLeft">
     {isLoggedIn && (
       <ul>
         <li className="SidebarLeft-item">
@@ -161,16 +161,15 @@ export const SidebarLeft: React.FC<Props> = ({
         <Hr spacer size="nano" />
         <Hr spacer size="nano" />
         <SidebarListLists
+          className="SidebarLeft-sidebarListLists"
           lists={lists}
           loading={false}
           title="My Lists"
           href={`users/${sessionId}/lists?sort=-createdAt`}
-          padding={false}
-          borderBottom={false}
           listsShown={listsShown}
           onListTitleClick={onListTitleClick}
         />
       </>
     )}
-  </Frame>
+  </div>
 );

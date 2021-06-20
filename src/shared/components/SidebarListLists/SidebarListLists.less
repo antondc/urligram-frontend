@@ -3,6 +3,21 @@
 @c: .SidebarListLists;
 
 @{c} {
+  padding: 20px;
+  border-bottom: 2px solid @c-base;
+
+  &-header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  &-itemHeader {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
   &-grid {
     display: grid;
     grid-template-columns: 4fr auto auto;
@@ -10,6 +25,11 @@
   }
 
   &-descriptionItem {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: @fs-micro;
+    font-weight: @fw-semibold;
     text-align: right;
 
     &:hover {
@@ -18,7 +38,9 @@
   }
 
   &-link {
+    font-size: @fs-normal;
     text-decoration-thickness: 2px;
+    font-weight: @fw-semibold;
   }
 
   &-spacer {

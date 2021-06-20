@@ -6,19 +6,7 @@ import { RenderInPortal } from 'Components/Portal';
 import { ListState } from 'Modules/Lists/lists.types';
 import { selectCurrentRouteParams } from 'Modules/Routes/selectors/selectCurrentRouteParams';
 import { stringToDashCase } from 'Tools/utils/string/stringToDashCase';
-import {
-  AnimateHeight,
-  Bookmark,
-  DotsVertical,
-  Flex,
-  Frame,
-  H4,
-  Hr,
-  Space,
-  Span,
-  Tooltip,
-  Triangle,
-} from 'Vendor/components';
+import { AnimateHeight, Bookmark, DotsVertical, H4, Hr, Space, Tooltip, Triangle } from 'Vendor/components';
 import { SidebarListListsSkeleton } from './SidebarListListsSkeleton';
 
 import './SidebarListLists.less';
@@ -28,8 +16,7 @@ interface Props {
   lists: ListState[];
   loading?: boolean;
   href?: string;
-  padding?: boolean;
-  borderBottom?: boolean;
+  className?: string;
   listsShown?: boolean;
   onListTitleClick?: () => void;
 }
@@ -39,8 +26,7 @@ const SidebarListLists: React.FC<Props> = ({
   loading,
   title,
   href,
-  padding = true,
-  borderBottom = true,
+  className,
   listsShown = true,
   onListTitleClick = () => {},
 }) => {
@@ -49,16 +35,8 @@ const SidebarListLists: React.FC<Props> = ({
   const currentListId = Number(currentRouteParams?.listId);
 
   return (
-    <Frame
-      className="SidebarListLists"
-      grow
-      borderTop={false}
-      borderRight={false}
-      borderLeft={false}
-      borderBottom={borderBottom}
-      padding={!!padding ? 'normal' : 'none'}
-    >
-      <Flex horizontal="left" vertical="center">
+    <div className={'SidebarListLists' + (className ? ' ' + className : '')}>
+      <div className="SidebarListLists-header">
         <A href={href} frontend styled={!!href} disabled={!href} underlined onClick={onListTitleClick}>
           <H4>{title}</H4>
         </A>
@@ -67,7 +45,7 @@ const SidebarListLists: React.FC<Props> = ({
           className={'SidebarListLists-triangle' + (listsShown ? ' SidebarListLists-triangle--show' : '')}
           size="pico"
         />
-      </Flex>
+      </div>
       <Hr size="small" spacer />
       <AnimateHeight mounted={listsShown} speed="fastest" ease={[1, 0.02, 0.83, 1.15]}>
         <div className="SidebarListLists-grid">
@@ -75,22 +53,20 @@ const SidebarListLists: React.FC<Props> = ({
           {!loading &&
             lists?.map(({ id, name, members, bookmarksIds }, index) => (
               <React.Fragment key={`${id}-${index}`}>
-                <Flex vertical="center" horizontal="left">
+                <div className="SidebarListLists-itemHeader">
                   <Space />
                   <DotsVertical size="nano" />
                   <Space />
-                  <Span weight="semiBold">
-                    <A
-                      className="SidebarListLists-link"
-                      href={`lists/${id}`}
-                      frontend
-                      underlined
-                      active={currentListId === id}
-                    >
-                      {name}
-                    </A>
-                  </Span>
-                </Flex>
+                  <A
+                    className="SidebarListLists-link"
+                    href={`lists/${id}`}
+                    frontend
+                    underlined
+                    active={currentListId === id}
+                  >
+                    {name}
+                  </A>
+                </div>
                 <RenderInPortal>
                   <Tooltip
                     parentElementId={`${stringToDashCase(title)}-members-${id}`}
@@ -98,18 +74,13 @@ const SidebarListLists: React.FC<Props> = ({
                     delay={0.5}
                   />
                 </RenderInPortal>
-                <Span
-                  id={`${stringToDashCase(title)}-members-${id}`}
-                  className="SidebarListLists-descriptionItem"
-                  size="micro"
-                  weight="semiBold"
-                >
+                <span id={`${stringToDashCase(title)}-members-${id}`} className="SidebarListLists-descriptionItem">
                   {!!members?.length && (
                     <>
                       <span>{members?.length}</span>@
                     </>
                   )}
-                </Span>
+                </span>
                 <RenderInPortal>
                   <Tooltip
                     parentElementId={`${stringToDashCase(title)}-bookmarks-${id}`}
@@ -117,25 +88,20 @@ const SidebarListLists: React.FC<Props> = ({
                     delay={0.5}
                   />
                 </RenderInPortal>
-                <Span
-                  id={`${stringToDashCase(title)}-bookmarks-${id}`}
-                  className="SidebarListLists-descriptionItem"
-                  size="micro"
-                  weight="semiBold"
-                >
+                <span id={`${stringToDashCase(title)}-bookmarks-${id}`} className="SidebarListLists-descriptionItem">
                   {!!bookmarksIds?.length && (
                     <>
                       <span>{bookmarksIds?.length}</span>
                       <Bookmark size="micro" />
                     </>
                   )}
-                </Span>
+                </span>
                 {index < lists?.length - 1 && <Hr className="SidebarListLists-spacer" spacer size="micro" />}
               </React.Fragment>
             ))}
         </div>
       </AnimateHeight>
-    </Frame>
+    </div>
   );
 };
 export default SidebarListLists;

@@ -4,40 +4,24 @@ import A from 'Components/A';
 import { RenderInPortal } from 'Components/Portal';
 import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
 import { stringToDashCase } from 'Tools/utils/string/stringToDashCase';
-import { Bookmark, Flex, Frame, H4, Hr, Span, Tooltip, Triangle } from 'Vendor/components';
+import { Bookmark, H4, Hr, Tooltip, Triangle } from 'Vendor/components';
 import { SidebarListBookmarksSkeleton } from './SidebarListBookmarksSkeleton';
 
 import './SidebarListBookmarks.less';
 
 interface Props {
+  className?: string;
   title: string;
   bookmarks: BookmarkState[];
   loading?: boolean;
   href?: string;
-  padding?: boolean;
-  borderBottom?: boolean;
 }
 
-const SidebarListBookmarks: React.FC<Props> = ({
-  bookmarks,
-  loading,
-  title,
-  href,
-  padding = true,
-  borderBottom = true,
-}) => {
+const SidebarListBookmarks: React.FC<Props> = ({ bookmarks, loading, title, href, className }) => {
   if (!bookmarks?.length && !loading) return null;
 
   return (
-    <Frame
-      className="SidebarListBookmarks"
-      grow
-      borderTop={false}
-      borderRight={false}
-      borderLeft={false}
-      borderBottom={borderBottom}
-      padding={!!padding ? 'normal' : 'none'}
-    >
+    <div className={'SidebarListBookmarks' + (className ? ' ' + className : '')}>
       <A href={href} frontend styled={!!href} disabled={!href} underlined>
         <H4>{title}</H4>
       </A>
@@ -47,14 +31,12 @@ const SidebarListBookmarks: React.FC<Props> = ({
         {!loading &&
           bookmarks?.map(({ id, favicon, title, url, statistics }, index) => (
             <React.Fragment key={`${id}-${index}`}>
-              <Span className="SidebarListBookmarks-title" weight="semiBold">
-                <Flex horizontal="left" vertical="center" noWrap>
-                  <img className="SidebarListBookmarks-favicon" src={favicon} />
-                  <A href={url} targetBlank underlined>
-                    {title}
-                  </A>
-                </Flex>
-              </Span>
+              <span className="SidebarListBookmarks-title">
+                <img className="SidebarListBookmarks-favicon" src={favicon} />
+                <A href={url} targetBlank underlined>
+                  {title}
+                </A>
+              </span>
               <RenderInPortal>
                 <Tooltip
                   parentElementId={`${stringToDashCase(title)}-averageVote-${id}`}
@@ -62,10 +44,9 @@ const SidebarListBookmarks: React.FC<Props> = ({
                   delay={1.5}
                 />
               </RenderInPortal>
-              <Span
+              <span
                 className="SidebarListBookmarks-descriptionItem"
                 id={`${stringToDashCase(title)}-averageVote-${id}`}
-                size="small"
               >
                 {!!statistics?.averageVote && (
                   <>
@@ -73,7 +54,7 @@ const SidebarListBookmarks: React.FC<Props> = ({
                     <Triangle size="nano" />
                   </>
                 )}
-              </Span>
+              </span>
               <RenderInPortal>
                 <Tooltip
                   parentElementId={`${stringToDashCase(title)}-timesBookmarked-${id}`}
@@ -81,10 +62,9 @@ const SidebarListBookmarks: React.FC<Props> = ({
                   delay={1.5}
                 />
               </RenderInPortal>
-              <Span
+              <span
                 className="SidebarListBookmarks-descriptionItem"
                 id={`${stringToDashCase(title)}-timesBookmarked-${id}`}
-                size="small"
               >
                 {!!statistics?.timesBookmarked && (
                   <>
@@ -92,12 +72,12 @@ const SidebarListBookmarks: React.FC<Props> = ({
                     <Bookmark size="micro" />
                   </>
                 )}
-              </Span>
+              </span>
               {index < bookmarks?.length - 1 && <Hr className="SidebarListBookmarks-spacer" spacer size="micro" />}
             </React.Fragment>
           ))}
       </div>
-    </Frame>
+    </div>
   );
 };
 
