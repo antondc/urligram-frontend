@@ -43,38 +43,29 @@ const Pagination: React.FC<Props> = ({ totalItems = 0, itemsPerPage = 10, offset
   }, [totalItems, itemsPerPage, offset, pageNeighbours, path]);
 
   return (
-    <Fade mounted={mounted}>
-      <>
-        <div className="Pagination">
-          <Frame grow borderTop={false}>
-            <Flex growHorizontal horizontal="center">
-              {pages.map((item, index) =>
-                !!item ? (
-                  <Span weight="extraBold" key={index}>
-                    <A
-                      className="Pagination-item"
-                      href={item.path}
-                      underlined
-                      active={item?.current}
-                      frontend
-                      onClick={scrollToTop}
-                    >
-                      {item.page}
-                    </A>
-                  </Span>
-                ) : (
-                  <Fragment key={index}>
-                    <Span weight="extraBold" className="Pagination-dots Pagination-item">
-                      ...
-                    </Span>
-                  </Fragment>
-                )
-              )}
-            </Flex>
-          </Frame>
-        </div>
-      </>
-    </Fade>
+    <div className="Pagination">
+      <Fade mounted={mounted}>
+        {pages.map((item, index) =>
+          !!item ? (
+            <A
+              className="Pagination-item"
+              key={index}
+              href={item.path}
+              underlined
+              active={item?.current}
+              frontend
+              onClick={scrollToTop}
+            >
+              {item.page}
+            </A>
+          ) : (
+            <span className="Pagination-dots Pagination-item" key={index}>
+              ...
+            </span>
+          )
+        )}
+      </Fade>
+    </div>
   );
 };
 

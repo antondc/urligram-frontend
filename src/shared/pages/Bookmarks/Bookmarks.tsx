@@ -66,66 +66,60 @@ export const Bookmarks: React.FC<Props> = ({
   popularLists,
   popularListsLoading,
 }) => (
-  <div className="Bookmarks">
-    <Flex horizontal="between" vertical="top">
-      <Main>
-        <Hr spacer size="nano" />
-        <Hr spacer />
-        <Frame grow padding="none" shadow={false} borderBottom={false}>
-          <Flex horizontal="between" noWrap>
-            <Select
-              className="Bookmarks-select"
-              label="Select tags"
-              value={currentQueryParamFilterTags}
-              defaultOptions={allTags.map((item) => ({ label: item.name, value: item.name }))}
-              options={[
-                ...tagsSearchFormatted,
-                ...allTags.map((item) => ({ label: item.name, value: item.name })),
-              ].filter((v, i, a) => a.findIndex((t) => t.value === v.value) === i)}
-              onInputChange={onInputChange}
-              onChange={onChange}
-              maxItems={4}
-              grow
-            />
-            <SortBy
-              options={[
-                { label: 'Created at', field: 'createdAt' },
-                { label: 'Rating', field: 'vote' },
-              ]}
-              href={url}
-              currentSort={sort}
-              loading={loading}
-            />
-          </Flex>
-        </Frame>
-        <Frame grow padding="small">
-          <MainContent>
-            {loading ? (
-              <BookmarkRowSkeletonGroup length={bookmarksIds?.length || DEFAULT_PAGE_SIZE} />
-            ) : (
-              bookmarksIds?.map((id) => <BookmarkRow id={id} key={id} />)
-            )}
-            {!loading && !bookmarksIds?.length && <Span weight="semiBold">ⵁ We didnt find any bookmark.</Span>}
-          </MainContent>
-        </Frame>
-        <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
-      </Main>
-      <Sidebar>
-        {!!session?.id && (
-          <SidebarListBookmarks
-            title="My recent bookmarks"
-            loading={myRecentBookmarksLoading}
-            bookmarks={myRecentBookmarks}
-          />
-        )}
-        <SidebarListTags title="Most Followed Tags" loading={mostUsedTagsLoading} tags={mostUsedTags} />
-        <SidebarListLists
-          title="Popular lists"
-          lists={popularLists}
-          loading={popularListsLoading}
-          href="/lists?sort=-members"
+  <>
+    <div className="Bookmarks">
+      <Hr spacer size="nano" />
+      <Hr spacer />
+      <div className="Bookmarks-header">
+        <Select
+          className="Bookmarks-select"
+          label="Select tags"
+          value={currentQueryParamFilterTags}
+          defaultOptions={allTags.map((item) => ({ label: item.name, value: item.name }))}
+          options={[...tagsSearchFormatted, ...allTags.map((item) => ({ label: item.name, value: item.name }))].filter(
+            (v, i, a) => a.findIndex((t) => t.value === v.value) === i
+          )}
+          onInputChange={onInputChange}
+          onChange={onChange}
+          maxItems={4}
+          grow
         />
-      </Sidebar>
-    </Flex>
-  </div>
+        <SortBy
+          options={[
+            { label: 'Created at', field: 'createdAt' },
+            { label: 'Rating', field: 'vote' },
+          ]}
+          href={url}
+          currentSort={sort}
+          loading={loading}
+        />
+      </div>
+      <div className="Bookmarks-main">
+        {loading ? (
+          <BookmarkRowSkeletonGroup length={bookmarksIds?.length || DEFAULT_PAGE_SIZE} />
+        ) : (
+          bookmarksIds?.map((id) => <BookmarkRow id={id} key={id} />)
+        )}
+        {!loading && !bookmarksIds?.length && <Span weight="semiBold">ⵁ We didnt find any bookmark.</Span>}
+      </div>
+      <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
+      <Hr spacer size="normal" />
+    </div>
+    <Sidebar>
+      {!!session?.id && (
+        <SidebarListBookmarks
+          title="My recent bookmarks"
+          loading={myRecentBookmarksLoading}
+          bookmarks={myRecentBookmarks}
+        />
+      )}
+      <SidebarListTags title="Most Followed Tags" loading={mostUsedTagsLoading} tags={mostUsedTags} />
+      <SidebarListLists
+        title="Popular lists"
+        lists={popularLists}
+        loading={popularListsLoading}
+        href="/lists?sort=-members"
+      />
+    </Sidebar>
+  </>
 );

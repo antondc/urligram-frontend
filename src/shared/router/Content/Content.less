@@ -3,13 +3,20 @@
 @c: .Content;
 
 @{c} {
-  flex: 1;
+  display: grid;
+  align-items: flex-start;
+  grid-template: 'sidebarMain sidebarMain sidebarMain main main main main main main sidebarSecond sidebarSecond sidebarSecond' auto;
+  grid-template-columns: repeat(12, 1fr);
+  // background: @c-background;
+  border: 2px solid @c-base;
 
-  &-content {
-    .calcgrid(@property: width; @columns: 9; @parentColumns: 12; @addGutter: 0; @hasParentPaddings: 0);
+  @media @br-tabletHorizontal {
+    grid-template:
+      'sidebarMain sidebarMain sidebarMain main main main main main main main main main' auto
+      'sidebarSecond sidebarSecond sidebarSecond main main main main main main main main main' auto;
   }
 
-  &-sidebarLeft {
-    flex: 1;
+  &-sidebarMain {
+    grid-area: sidebarMain;
   }
 }

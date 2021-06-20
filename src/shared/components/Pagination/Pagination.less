@@ -3,10 +3,17 @@
 @c: .Pagination;
 
 @{c} {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
+  padding: 20px;
+  border: 2px solid @c-base;
+  border-top: none;
 
   &-item {
     margin: 0 10px;
+    font-weight: @fw-extraBold;
     text-decoration-thickness: 2px;
 
     &:hover {

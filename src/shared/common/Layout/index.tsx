@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Location } from 'history';
 
 import LayoutContent from 'Common/LayoutContent';
-import LayoutHelper from 'Common/LayoutHelper';
+import LayoutHelperGrid from 'Common/LayoutHelperGrid';
 import BookmarkCreateModal from 'Components/BookmarkCreateModal';
 import BookmarkUpdateModal from 'Components/BookmarkUpdateModal';
 import CookiesBanner from 'Components/CookiesBanner';
@@ -117,7 +117,7 @@ const Layout: React.FC<Props> = ({ location }) => {
     <div className="Layout">
       <div className="Layout-background" />
       <LayoutContent>
-        <LayoutHelper />
+        <LayoutHelperGrid />
         <Header />
         <CookiesBanner />
         <Router />
