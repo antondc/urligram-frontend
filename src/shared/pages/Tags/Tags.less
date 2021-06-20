@@ -3,7 +3,34 @@
 @c: .Tags;
 
 @{c} {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  grid-area: main;
+
+  &-header {
+    display: flex;
+    width: 100%;
+    border: 2px solid @c-base;
+    border-bottom: none;
+  }
+
+  &-tags {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    align-content: flex-start;
+    min-height: 50vh;
+    padding: 20px;
+    border: 2px solid @c-base;
+  }
+
   &-tag {
     margin: 0 8px 8px 0;
+  }
+
+  &-sidebarListUsersFirst {
+    padding: 0 20px 20px;
   }
 }

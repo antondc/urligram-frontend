@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Frame, SkeletonItem } from 'Vendor/components';
+import { SkeletonItem } from 'Vendor/components';
 
 import './UserRowSkeleton.less';
 
@@ -9,16 +9,7 @@ interface UserRowSkeleton {
 }
 
 export const UserRowSkeleton: React.FC<UserRowSkeleton> = ({ id }) => (
-  <Frame
-    grow
-    className="UserRowSkeleton"
-    data-test-id="UserRowSkeleton"
-    key={id}
-    borderTop={false}
-    borderLeft={false}
-    borderRight={false}
-    borderBottom={false}
-  >
+  <div className="UserRowSkeleton" data-test-id="UserRowSkeleton" key={id}>
     <div className="UserRowSkeleton-main">
       <SkeletonItem className="UserRowSkeleton-name" />
       <SkeletonItem className="UserRowSkeleton-details" />
@@ -31,7 +22,7 @@ export const UserRowSkeleton: React.FC<UserRowSkeleton> = ({ id }) => (
     <div className="UserRowSkeleton-imageContainer">
       <SkeletonItem className="UserRowSkeleton-image" />
     </div>
-  </Frame>
+  </div>
 );
 
 export default UserRowSkeleton;

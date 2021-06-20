@@ -1,7 +1,5 @@
 import React from 'react';
 
-import Main from 'Components/Main';
-import MainContent from 'Components/MainContent';
 import Pagination from 'Components/Pagination';
 import Sidebar from 'Components/Sidebar';
 import SidebarListTags from 'Components/SidebarListTags';
@@ -10,7 +8,7 @@ import { UserRowSkeletonGroup } from 'Components/UserRow/UserRowSkeletonGroup';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
-import { A, Flex, Frame, Hr, SortBy, Space, Span } from 'Vendor/components';
+import { A, Hr, SortBy, Space } from 'Vendor/components';
 
 import './Following.less';
 
@@ -46,56 +44,50 @@ export const Following: React.FC<Props> = ({
   url,
   sort,
 }) => (
-  <div className="Following">
-    <Flex horizontal="between" vertical="top">
-      <Main>
-        <Hr spacer size="nano" />
-        <Hr spacer />
-        <Frame grow padding="small">
-          <Span size="normal" weight="extraBold">
-            Users following
-            <Space />
-            <A href={`/users/${userId}/following`} underlined>
-              @{user?.name}
-            </A>
-          </Span>
-        </Frame>
-
-        <Frame grow padding="none" shadow={false} borderBottom={false} borderTop={false}>
-          <Flex horizontal="right">
-            <SortBy
-              options={[
-                { label: 'Name', field: 'name' },
-                { label: 'Login', field: 'login' },
-                { label: 'Bookmarks', field: 'bookmarks' },
-              ]}
-              href={url}
-              currentSort={sort}
-              loading={usersLoading}
-            />
-          </Flex>
-        </Frame>
-        <Frame className="Following-tags" grow padding="small">
-          <MainContent>
-            {usersLoading ? (
-              <UserRowSkeletonGroup length={usersCurrentIds?.length || DEFAULT_PAGE_SIZE} />
-            ) : (
-              usersCurrentIds?.map((id) => <UserRow id={id} key={id} />)
-            )}
-            {!usersLoading && !usersCurrentIds?.length && <Span weight="semiBold">ⵁ We didnt find any user.</Span>}
-          </MainContent>
-        </Frame>
-        <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
-      </Main>
-      <Sidebar>
-        <SidebarListTags
-          title="User Most Followed Tags"
-          href={`users/${userId}/bookmarks`}
-          loading={userMostUsedTagsLoading}
-          tags={userMostUsedTags}
+  <>
+    <div className="Following">
+      <div className="Following-header Following-headerTitle">
+        Users following
+        <Space />
+        <A href={`/users/${userId}/following`} underlined>
+          @{user?.name}
+        </A>
+      </div>
+      <div className="Following-header">
+        <SortBy
+          options={[
+            { label: 'Name', field: 'name' },
+            { label: 'Login', field: 'login' },
+            { label: 'Bookmarks', field: 'bookmarks' },
+          ]}
+          href={url}
+          currentSort={sort}
+          loading={usersLoading}
         />
-        <SidebarListTags title="Most Followed Tags" loading={mostUsedTagsLoading} tags={mostUsedTags} />
-      </Sidebar>
-    </Flex>
-  </div>
+      </div>
+
+      <div className="Following-following">
+        {usersLoading ? (
+          <UserRowSkeletonGroup length={usersCurrentIds?.length || DEFAULT_PAGE_SIZE} />
+        ) : (
+          usersCurrentIds?.map((id) => <UserRow id={id} key={id} />)
+        )}
+        {!usersLoading && !usersCurrentIds?.length && (
+          <span className="Following-noResults">ⵁ We didnt find any user.</span>
+        )}
+      </div>
+      <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
+      <Hr spacer size="normal" />
+    </div>
+    <Sidebar>
+      <SidebarListTags
+        className="Following-sidebarListTagsFirst"
+        title="User Most Followed Tags"
+        href={`users/${userId}/bookmarks`}
+        loading={userMostUsedTagsLoading}
+        tags={userMostUsedTags}
+      />
+      <SidebarListTags title="Most Followed Tags" loading={mostUsedTagsLoading} tags={mostUsedTags} />
+    </Sidebar>
+  </>
 );

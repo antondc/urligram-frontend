@@ -2,15 +2,13 @@ import React from 'react';
 
 import { BookmarkRowSkeletonGroup } from 'Components/BookmarkRow/BookmarkRowSkeletonGroup';
 import ListRow from 'Components/ListRow';
-import Main from 'Components/Main';
-import MainContent from 'Components/MainContent';
 import Pagination from 'Components/Pagination';
 import Sidebar from 'Components/Sidebar';
 import SidebarListTags from 'Components/SidebarListTags';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
-import { A, FadeInOut, Flex, Frame, Hr, SortBy, Space, Span } from 'Vendor/components';
+import { A, Hr, SortBy, Space } from 'Vendor/components';
 
 import './UserLists.less';
 
@@ -46,61 +44,51 @@ export const UserLists: React.FC<Props> = ({
   totalItems,
   sort,
 }) => (
-  <div className="UserLists">
-    <Flex horizontal="between" vertical="top">
-      <Main>
-        <Hr spacer size="nano" />
-        <Hr spacer />
-        <Frame grow padding="small">
-          <Span size="normal" weight="extraBold">
-            Lists of <Space />
-            <A href={`/users/${userId}`} underlined>
-              @{user?.name}
-            </A>
-          </Span>
-        </Frame>
-        <Frame grow padding="none" shadow={false} borderBottom={false} borderTop={false}>
-          <Flex horizontal="right">
-            <SortBy
-              options={[
-                { label: 'Created at', field: 'createdAt' },
-                { label: 'Members', field: 'members' },
-                { label: 'Bookmarks', field: 'bookmarks' },
-              ]}
-              href={url}
-              currentSort={sort}
-              loading={listsLoading}
-            />
-          </Flex>
-        </Frame>
-        <Frame grow padding="small">
-          <FadeInOut valueToUpdate={listsLoading} speed="fastest" appear>
-            <MainContent>
-              {listsLoading ? (
-                <BookmarkRowSkeletonGroup length={listsIds?.length || DEFAULT_PAGE_SIZE} />
-              ) : (
-                listsIds?.map((id) => <ListRow id={id} key={id} />)
-              )}
-              {!listsLoading && !listsIds?.length && <Span weight="semiBold">ⵁ We didn find any list.</Span>}
-            </MainContent>
-          </FadeInOut>
-        </Frame>
-        <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
-      </Main>
-      <Sidebar>
-        <SidebarListTags
-          title="My Tags"
-          href={`users/${userId}/tags`}
-          loading={userMostUsedTagsLoading}
-          tags={userMostUsedTags}
+  <>
+    <div className="UserLists">
+      <div className="UserLists-header UserLists-headerTitle">
+        Lists of <Space />
+        <A href={`/users/${userId}`} underlined>
+          @{user?.name}
+        </A>
+      </div>
+      <div className="UserLists-header">
+        <SortBy
+          options={[
+            { label: 'Created at', field: 'createdAt' },
+            { label: 'Members', field: 'members' },
+            { label: 'Bookmarks', field: 'bookmarks' },
+          ]}
+          href={url}
+          currentSort={sort}
+          loading={listsLoading}
         />
-        <SidebarListTags
-          title="Most Used Tags"
-          href={`users/${userId}/tags`}
-          loading={mostFollowedTagsLoading}
-          tags={mostFollowedTags}
-        />
-      </Sidebar>
-    </Flex>
-  </div>
+      </div>
+      <div className="UserLists-lists">
+        {listsLoading ? (
+          <BookmarkRowSkeletonGroup length={listsIds?.length || DEFAULT_PAGE_SIZE} />
+        ) : (
+          listsIds?.map((id) => <ListRow id={id} key={id} />)
+        )}
+        {!listsLoading && !listsIds?.length && <span className="UserLists-noResults">ⵁ We didn find any list.</span>}
+      </div>
+      <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
+      <Hr spacer size="normal" />
+    </div>
+    <Sidebar>
+      <SidebarListTags
+        className="UserLists-sidebarListTagsFirst"
+        title="My Tags"
+        href={`users/${userId}/tags`}
+        loading={userMostUsedTagsLoading}
+        tags={userMostUsedTags}
+      />
+      <SidebarListTags
+        title="Most Used Tags"
+        href={`users/${userId}/tags`}
+        loading={mostFollowedTagsLoading}
+        tags={mostFollowedTags}
+      />
+    </Sidebar>
+  </>
 );

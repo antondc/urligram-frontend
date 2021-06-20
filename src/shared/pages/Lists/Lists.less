@@ -4,19 +4,26 @@
 
 @{c} {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  grid-area: main;
 
-  &-content {
-    .calcgrid(@property: width; @columns: 2; @parentColumns: 12; @addGutter: 2; @hasParentPaddings: 0);
-
-    @media @br-mobile {
-      .calcgrid(@property: width; @columns: 2; @parentColumns: 2; @addGutter: 2; @hasParentPaddings: 0);
-    }
+  &-header {
+    display: flex;
+    width: 100%;
+    border: 2px solid @c-base;
+    border-bottom: none;
   }
 
-  &-form {
-    display: flex;
-    flex-direction: column;
+  &-lists {
+    width: 100%;
+    min-height: 50vh;
+    padding: 20px;
+    border: 2px solid @c-base;
+  }
+
+  &-sidebarListUsersFirst {
+    padding: 0 20px 20px;
   }
 }

@@ -1,14 +1,12 @@
 import React from 'react';
 
 import A from 'Components/A';
-import Main from 'Components/Main';
-import MainContent from 'Components/MainContent';
 import Sidebar from 'Components/Sidebar';
 import { SidebarListTagsSkeleton } from 'Components/SidebarListTags/SidebarListTagsSkeleton';
 import SidebarListUsers from 'Components/SidebarListUsers';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
-import { Flex, Frame, Hr, SortBy, Space, Tag } from 'Vendor/components';
+import { Hr, SortBy, Space, Tag } from 'Vendor/components';
 
 import './Tags.less';
 
@@ -33,64 +31,56 @@ export const Tags: React.FC<Props> = ({
   url,
   sort,
 }) => (
-  <div className="Tags">
-    <Flex horizontal="between" vertical="top">
-      <Main>
-        <Hr spacer size="nano" />
-        <Hr spacer />
-        <Frame grow padding="none" shadow={false} borderBottom={false}>
-          <Flex horizontal="right" vertical="top" growHorizontal>
-            <SortBy
-              options={[
-                { label: 'Bookmarks', field: 'count' },
-                { label: 'Name', field: 'name' },
-              ]}
-              href={url}
-              currentSort={sort}
-              loading={tagsLoading}
-            />
-          </Flex>
-        </Frame>
-        <Frame grow padding="normal">
-          <MainContent>
-            <Flex>
-              {tagsLoading ? (
-                <SidebarListTagsSkeleton />
-              ) : (
-                tags?.map((item) => (
-                  <A
-                    className="Tags-tag"
-                    href={`/bookmarks?filter[tags][]=${item.name}`}
-                    key={item.id}
-                    styled={false}
-                    frontend
-                  >
-                    <Tag size="medium">
-                      {item?.name}
-                      <Space />
-                      {item?.count}
-                    </Tag>
-                  </A>
-                ))
-              )}
-            </Flex>
-          </MainContent>
-        </Frame>
-      </Main>
-      <Sidebar>
-        <SidebarListUsers
-          title="Following Users"
-          users={mostFollowedUsers}
-          href={'/users?sort=-followers&page[size]=10'}
-          loading={mostFollowedUsersLoading}
+  <>
+    <div className="Tags">
+      <div className="Tags-header">
+        <SortBy
+          options={[
+            { label: 'Bookmarks', field: 'count' },
+            { label: 'Name', field: 'name' },
+          ]}
+          href={url}
+          currentSort={sort}
+          loading={tagsLoading}
         />
-        <SidebarListUsers
-          users={newUsers}
-          title="Following Users"
-          href={'/users?sort=-createdAt&page[size]=10'}
-          loading={newUsersLoading}
-        />
-      </Sidebar>
-    </Flex>
-  </div>
+      </div>
+      <div className="Tags-tags">
+        {tagsLoading ? (
+          <SidebarListTagsSkeleton length={tags?.length || 70} />
+        ) : (
+          tags?.map((item) => (
+            <A
+              className="Tags-tag"
+              href={`/bookmarks?filter[tags][]=${item.name}`}
+              key={item.id}
+              styled={false}
+              frontend
+            >
+              <Tag size="medium">
+                {item?.name}
+                <Space />
+                {item?.count}
+              </Tag>
+            </A>
+          ))
+        )}
+      </div>
+      <Hr spacer size="normal" />
+    </div>
+    <Sidebar>
+      <SidebarListUsers
+        className="Tags-sidebarListUsersFirst"
+        title="Following Users"
+        users={mostFollowedUsers}
+        href={'/users?sort=-followers&page[size]=10'}
+        loading={mostFollowedUsersLoading}
+      />
+      <SidebarListUsers
+        users={newUsers}
+        title="Following Users"
+        href={'/users?sort=-createdAt&page[size]=10'}
+        loading={newUsersLoading}
+      />
+    </Sidebar>
+  </>
 );

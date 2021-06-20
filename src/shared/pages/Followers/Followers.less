@@ -3,5 +3,32 @@
 @c: .Followers;
 
 @{c} {
-  //
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  grid-area: main;
+
+  &-header {
+    display: flex;
+    width: 100%;
+    border: 2px solid @c-base;
+    border-bottom: none;
+  }
+
+  &-headerTitle {
+    padding: 10px;
+    font-weight: @fw-extraBold;
+  }
+
+  &-followers {
+    width: 100%;
+    min-height: 50vh;
+    padding: 20px;
+    border: 2px solid @c-base;
+  }
+
+  &-sidebarListTagsFirst {
+    padding: 0 20px 20px;
+  }
 }

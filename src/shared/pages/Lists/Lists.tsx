@@ -2,8 +2,6 @@ import React from 'react';
 
 import ListRow from 'Components/ListRow';
 import { ListRowSkeletonGroup } from 'Components/ListRow/ListSkeletonGroup';
-import Main from 'Components/Main';
-import MainContent from 'Components/MainContent';
 import Pagination from 'Components/Pagination';
 import Sidebar from 'Components/Sidebar';
 import SidebarListTags from 'Components/SidebarListTags';
@@ -11,7 +9,7 @@ import SidebarListUsers from 'Components/SidebarListUsers';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
-import { Flex, Frame, Hr, SortBy, Span } from 'Vendor/components';
+import { Hr, SortBy, Span } from 'Vendor/components';
 
 import './Lists.less';
 
@@ -43,46 +41,46 @@ export const Lists: React.FC<Props> = ({
   totalItems,
   sort,
 }) => (
-  <div className="Lists">
-    <Flex horizontal="between" vertical="top">
-      <Main>
-        <Hr spacer size="nano" />
-        <Hr spacer />
-        <Frame grow padding="none" shadow={false} borderBottom={false}>
-          <Flex horizontal="right">
-            <SortBy
-              options={[
-                { label: 'Date', field: 'createdAt' },
-                { label: 'Updated', field: 'updatedAt' },
-                { label: 'Members', field: 'members' },
-              ]}
-              href={url}
-              currentSort={sort}
-              loading={listsIdsLoading}
-            />
-          </Flex>
-        </Frame>
-        <Frame grow padding="small">
-          <MainContent>
-            {listsIdsLoading ? (
-              <ListRowSkeletonGroup length={listsIds?.length || DEFAULT_PAGE_SIZE} />
-            ) : (
-              listsIds?.map((id) => <ListRow id={id} key={id} />)
-            )}
-            {!listsIdsLoading && !listsIds?.length && <Span weight="semiBold">ⵁ We didn find any list.</Span>}
-          </MainContent>
-        </Frame>
-        <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
-      </Main>
-      <Sidebar>
-        <SidebarListTags title="Most Used Tags" loading={mostUsedTagsLoading} tags={mostUsedTags} />
-        <SidebarListUsers
-          title="New Users"
-          users={newUsers}
-          loading={newUsersLoading}
-          href="users?sort=createdAt&page[size]=10"
+  <>
+    <div className="Lists">
+      <div className="Lists-header">
+        <SortBy
+          options={[
+            { label: 'Date', field: 'createdAt' },
+            { label: 'Updated', field: 'updatedAt' },
+            { label: 'Members', field: 'members' },
+          ]}
+          href={url}
+          currentSort={sort}
+          loading={listsIdsLoading}
         />
-      </Sidebar>
-    </Flex>
-  </div>
+      </div>
+      <div className="Lists-lists">
+        {listsIdsLoading ? (
+          <ListRowSkeletonGroup length={listsIds?.length || DEFAULT_PAGE_SIZE} />
+        ) : (
+          listsIds?.map((id) => <ListRow id={id} key={id} />)
+        )}
+        {!listsIdsLoading && !listsIds?.length && (
+          <span className="UserBookmarks-noResults">ⵁ We didnt find any list.</span>
+        )}
+      </div>
+      <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
+      <Hr spacer size="normal" />
+    </div>
+    <Sidebar>
+      <SidebarListTags
+        className="Lists-sidebarListUsersFirst"
+        title="Most Used Tags"
+        loading={mostUsedTagsLoading}
+        tags={mostUsedTags}
+      />
+      <SidebarListUsers
+        title="New Users"
+        users={newUsers}
+        loading={newUsersLoading}
+        href="users?sort=createdAt&page[size]=10"
+      />
+    </Sidebar>
+  </>
 );

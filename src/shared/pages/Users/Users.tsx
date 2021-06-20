@@ -1,7 +1,5 @@
 import React from 'react';
 
-import Main from 'Components/Main';
-import MainContent from 'Components/MainContent';
 import Pagination from 'Components/Pagination';
 import Sidebar from 'Components/Sidebar';
 import SidebarListUsers from 'Components/SidebarListUsers';
@@ -9,7 +7,7 @@ import UserRow from 'Components/UserRow';
 import { UserRowSkeletonGroup } from 'Components/UserRow/UserRowSkeletonGroup';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
-import { Flex, Frame, Hr, SortBy, Span } from 'Vendor/components';
+import { Hr, SortBy } from 'Vendor/components';
 
 import './Users.less';
 
@@ -41,47 +39,43 @@ export const Users: React.FC<Props> = ({
   url,
   sort,
 }) => (
-  <div className="Users">
-    <Flex horizontal="between" vertical="top">
-      <Main>
-        <Hr spacer size="nano" />
-        <Hr spacer />
-        <Frame grow padding="none" shadow={false} borderBottom={false}>
-          <Flex horizontal="right">
-            <SortBy
-              options={[{ label: 'Created at', field: 'createdAt' }]}
-              href={url}
-              currentSort={sort}
-              loading={usersLoading}
-            />
-          </Flex>
-        </Frame>
-        <Frame className="Users-users" grow padding="small">
-          <MainContent>
-            {usersLoading ? (
-              <UserRowSkeletonGroup length={usersCurrentIds?.length || DEFAULT_PAGE_SIZE} />
-            ) : (
-              usersCurrentIds?.map((id) => <UserRow id={id} key={id} />)
-            )}
-            {!usersLoading && !usersCurrentIds?.length && <Span weight="semiBold">ⵁ We didn find any user.</Span>}
-          </MainContent>
-        </Frame>
-        <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
-      </Main>
-      <Sidebar>
-        <SidebarListUsers
-          title="Most Followed Users"
-          href="users?sort=-followers&page[size]=10"
-          loading={mostFollowedUsersLoading}
-          users={mostFollowedUsers}
+  <>
+    <div className="Users">
+      <div className="Users-header">
+        <SortBy
+          options={[{ label: 'Created at', field: 'createdAt' }]}
+          href={url}
+          currentSort={sort}
+          loading={usersLoading}
         />
-        <SidebarListUsers
-          title="New Users"
-          href="users?sort=createdAt&page[size]=10"
-          loading={newUsersLoading}
-          users={newUsers}
-        />
-      </Sidebar>
-    </Flex>
-  </div>
+      </div>
+      <div className="Users-users">
+        {usersLoading ? (
+          <UserRowSkeletonGroup length={usersCurrentIds?.length || DEFAULT_PAGE_SIZE} />
+        ) : (
+          usersCurrentIds?.map((id) => <UserRow id={id} key={id} />)
+        )}
+        {!usersLoading && !usersCurrentIds?.length && (
+          <span className="Bookmarks-noResults">ⵁ We didn find any user.</span>
+        )}
+      </div>
+      <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
+      <Hr spacer size="normal" />
+    </div>
+    <Sidebar>
+      <SidebarListUsers
+        className="Users-sidebarListUsersFirst"
+        title="Most Followed Users"
+        href="users?sort=-followers&page[size]=10"
+        loading={mostFollowedUsersLoading}
+        users={mostFollowedUsers}
+      />
+      <SidebarListUsers
+        title="New Users"
+        href="users?sort=createdAt&page[size]=10"
+        loading={newUsersLoading}
+        users={newUsers}
+      />
+    </Sidebar>
+  </>
 );

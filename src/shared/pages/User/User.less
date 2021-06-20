@@ -3,6 +3,64 @@
 @c: .User;
 
 @{c} {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  grid-area: main;
+
+  &-form {
+    padding: 20px;
+    border: 2px solid @c-base;
+  }
+
+  &-details {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 20px;
+    border: 2px solid @c-base;
+    border-top: none;
+  }
+
+  &-detailsItem {
+    display: flex;
+    align-items: bottom;
+    font-weight: @fw-semibold;
+  }
+
+  &-detailsItemData {
+    font-size: @fs-small;
+  }
+
+  &-lineDetails {
+    display: flex;
+    font-size: @fs-small;
+    font-weight: @fw-semibold;
+  }
+
+  &-tags {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &-bookmarksHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    border: 2px solid @c-base;
+    border-top: none;
+  }
+
+  &-bookmarks {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid @c-base;
+    border-top: none;
+  }
+
   &-image {
     height: 50px;
     width: 50px;
@@ -14,5 +72,9 @@
 
   &-tag {
     margin: 0 8px 8px 0;
+  }
+
+  &-sidebarListUsersFirst {
+    padding: 0 20px 20px;
   }
 }

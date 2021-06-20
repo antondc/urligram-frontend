@@ -1,7 +1,5 @@
 import React from 'react';
 
-import Main from 'Components/Main';
-import MainContent from 'Components/MainContent';
 import Pagination from 'Components/Pagination';
 import Sidebar from 'Components/Sidebar';
 import SidebarListTags from 'Components/SidebarListTags';
@@ -10,7 +8,7 @@ import { UserRowSkeletonGroup } from 'Components/UserRow/UserRowSkeletonGroup';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
-import { A, Flex, Frame, Hr, SortBy, Space, Span } from 'Vendor/components';
+import { A, Hr, SortBy, Space } from 'Vendor/components';
 
 import './Followers.less';
 
@@ -46,55 +44,49 @@ export const Followers: React.FC<Props> = ({
   url,
   sort,
 }) => (
-  <div className="Followers">
-    <Flex horizontal="between" vertical="top">
-      <Main>
-        <Hr spacer size="nano" />
-        <Hr spacer />
-        <Frame grow padding="small">
-          <Span size="normal" weight="extraBold">
-            Followers of
-            <Space />
-            <A href={`/users/${userId}/followers`} underlined>
-              @{user?.name}
-            </A>
-          </Span>
-        </Frame>
-        <Frame grow padding="none" shadow={false} borderBottom={false} borderTop={false}>
-          <Flex horizontal="right">
-            <SortBy
-              options={[
-                { label: 'Name', field: 'name' },
-                { label: 'Login', field: 'login' },
-                { label: 'Bookmarks', field: 'bookmarks' },
-              ]}
-              href={url}
-              currentSort={sort}
-              loading={usersLoading}
-            />
-          </Flex>
-        </Frame>
-        <Frame className="Followers-tags" grow padding="small">
-          <MainContent>
-            {usersLoading ? (
-              <UserRowSkeletonGroup length={usersCurrentIds?.length || DEFAULT_PAGE_SIZE} />
-            ) : (
-              usersCurrentIds?.map((id) => <UserRow id={id} key={id} />)
-            )}
-            {!usersLoading && !usersCurrentIds?.length && <Span weight="semiBold">ⵁ We didnt find any user.</Span>}
-          </MainContent>
-        </Frame>
-        <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
-      </Main>
-      <Sidebar>
-        <SidebarListTags
-          tags={userMostUsedTags}
-          title="User Most Followed Tags"
-          href={`users/${userId}/bookmarks`}
-          loading={userMostUsedTagsLoading}
+  <>
+    <div className="Followers">
+      <div className="Followers-header Followers-headerTitle">
+        Followers of
+        <Space />
+        <A href={`/users/${userId}/followers`} underlined>
+          @{user?.name}
+        </A>
+      </div>
+      <div className="Followers-header">
+        <SortBy
+          options={[
+            { label: 'Name', field: 'name' },
+            { label: 'Login', field: 'login' },
+            { label: 'Bookmarks', field: 'bookmarks' },
+          ]}
+          href={url}
+          currentSort={sort}
+          loading={usersLoading}
         />
-        <SidebarListTags title="Most Followed Tags" loading={mostUsedTagsLoading} tags={mostUsedTags} />
-      </Sidebar>
-    </Flex>
-  </div>
+      </div>
+      <div className="Followers-followers">
+        {usersLoading ? (
+          <UserRowSkeletonGroup length={usersCurrentIds?.length || DEFAULT_PAGE_SIZE} />
+        ) : (
+          usersCurrentIds?.map((id) => <UserRow id={id} key={id} />)
+        )}
+        {!usersLoading && !usersCurrentIds?.length && (
+          <span className="Followers-noResults">ⵁ We didnt find any user.</span>
+        )}
+      </div>
+      <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
+      <Hr spacer size="normal" />
+    </div>
+    <Sidebar>
+      <SidebarListTags
+        className="Followers-sidebarListTagsFirst"
+        tags={userMostUsedTags}
+        title="User Most Followed Tags"
+        href={`users/${userId}/bookmarks`}
+        loading={userMostUsedTagsLoading}
+      />
+      <SidebarListTags title="Most Followed Tags" loading={mostUsedTagsLoading} tags={mostUsedTags} />
+    </Sidebar>
+  </>
 );
