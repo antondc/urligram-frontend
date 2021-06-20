@@ -41,35 +41,37 @@ export const User: React.FC<Props> = ({
     <div className="User">
       {userIdIsSessionId && (
         <div className="User-form">
-          <UserForm />
+          <UserForm />{' '}
         </div>
       )}
-      <div className="User-details">
-        <div>
-          <div className="User-detailsItem">
-            Name: <Space />
-            <span className="User-detailsItemData">@{user?.name}</span>
+      <div className="User-top">
+        <div className="User-details">
+          <div>
+            <div className="User-detailsItem">
+              Name: <Space />
+              <span className="User-detailsItemData">@{user?.name}</span>
+            </div>
+            <Hr spacer size="zero" />
+            <Hr spacer size="micro" />
+            <div className="User-detailsItem">
+              Location: <Space />
+              <span className="User-detailsItemData">{user?.location}</span>
+            </div>
+            <Hr spacer size="zero" />
+            <Hr spacer size="micro" />
+            <div className="User-detailsItem">
+              Statement: <Space />
+              <span className="User-detailsItemData">{user?.statement}</span>
+            </div>
+            <Hr spacer size="zero" />
+            <Hr spacer size="micro" />
+            <div className="User-detailsItem">
+              Created at: <Space />
+              <span className="User-detailsItemData">{createdAtFormatted}</span>
+            </div>
           </div>
-          <Hr spacer size="zero" />
-          <Hr spacer size="micro" />
-          <div className="User-detailsItem">
-            Location: <Space />
-            <span className="User-detailsItemData">{user?.location}</span>
-          </div>
-          <Hr spacer size="zero" />
-          <Hr spacer size="micro" />
-          <div className="User-detailsItem">
-            Statement: <Space />
-            <span className="User-detailsItemData">{user?.statement}</span>
-          </div>
-          <Hr spacer size="zero" />
-          <Hr spacer size="micro" />
-          <div className="User-detailsItem">
-            Created at: <Space />
-            <span className="User-detailsItemData">{createdAtFormatted}</span>
-          </div>
+          <img className="User-image" src={user?.image?.original} />
         </div>
-        <img className="User-image" src={user?.image?.original} />
         <Hr spacer />
         <div className="User-lineDetails">
           <A href={`users/${userId}/bookmarks`} frontend underlined>
@@ -140,6 +142,7 @@ export const User: React.FC<Props> = ({
         )}
         {!bookmarksLoading && !bookmarksIds?.length && <Empty message="ⵁ This user has no bookmarks yet" />}
       </div>
+      <Hr spacer />
     </div>
     <Sidebar>
       <SidebarListUsers
