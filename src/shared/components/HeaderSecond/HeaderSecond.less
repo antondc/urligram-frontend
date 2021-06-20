@@ -3,28 +3,69 @@
 @c: .HeaderSecond;
 
 @{c} {
+  .default();
+
+  font-size: @fs-small;
+  font-weight: @fw-extraBold;
+  white-space: nowrap;
+
+  @media @br-tabletHorizontal {
+    font-size: @fs-micro;
+  }
+
+  &-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+
+    @media @br-tabletHorizontal {
+      padding: 5px 20px;
+    }
+  }
+
   &-weather {
-    padding-left: 20px;
+    width: 100%;
     background: @gradientColors[green-1];
   }
 
   &-weatherIcon {
     height: 30px;
     width: 30px;
+
+    @media @br-tabletHorizontal {
+      height: 20px;
+      width: 20px;
+    }
   }
 
   &-smallIcon {
     height: 20px;
     width: 20px;
+
+    @media @br-tabletHorizontal {
+      height: 15px;
+      width: 15px;
+    }
   }
 
   &-date {
     white-space: nowrap;
     background: @gradientColors[yellow-1];
+    border-left: 2px solid @c-base;
+    border-right: 2px solid @c-base;
   }
 
   &-clock {
+    flex-shrink: 0;
+    height: 50px;
+    width: 50px;
     white-space: nowrap;
     background: @gradientColors[red-2];
+
+    @media @br-tabletHorizontal {
+      height: 40px;
+      width: 40px;
+      padding: 5px;
+    }
   }
 }

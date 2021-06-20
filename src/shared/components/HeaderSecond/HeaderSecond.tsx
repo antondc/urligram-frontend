@@ -19,66 +19,30 @@ interface Props {
 export const HeaderSecond: React.FC<Props> = ({ formattedDate, weatherData }) => (
   <Frame className="HeaderSecond" padding="none" borderBottom={false} borderTop={false}>
     <Flex growHorizontal growVertical horizontal="between" vertical="stretch" noWrap>
-      <Frame
-        className="HeaderSecond-item HeaderSecond-weather"
-        grow
-        padding="small"
-        borderBottom={false}
-        borderTop={false}
-        borderRight={false}
-        borderLeft={false}
-      >
+      <div className="HeaderSecond-item HeaderSecond-weather">
         <Flex vertical="center" horizontal="left" noWrap>
           <WeatherIcon className="HeaderSecond-weatherIcon" weatherCode={weatherData?.weatherCode} />
           <Space />
           <Space />
-          <Span size="small" weight="extraBold">
-            {weatherData?.weatherDesc}
-          </Span>
+          {weatherData?.weatherDesc}
           <Space />•<Space />
           <Termometer className="HeaderSecond-smallIcon" />
-          <Span size="small" weight="extraBold">
-            {weatherData?.temperature} Cº
-          </Span>
+          {weatherData?.temperature} Cº
           <Space />•<Space />
           <Precipitations className="HeaderSecond-smallIcon" />
-          <Span size="small" weight="extraBold">
-            {weatherData?.precipitations}mm
-          </Span>
+          {weatherData?.precipitations}mm
           <Space />•<Space />
           <Humidity className="HeaderSecond-smallIcon" />
-          <Span size="small" weight="extraBold">
-            {weatherData?.humidity} %
-          </Span>
+          {weatherData?.humidity} %
           <Space />•<Space />
           <Wind className="HeaderSecond-smallIcon" />
-          <Span size="small" weight="extraBold">
-            {weatherData?.windSpeed} km/h
-          </Span>
+          {weatherData?.windSpeed} km/h
         </Flex>
-      </Frame>
-      <Frame
-        className="HeaderSecond-item HeaderSecond-date"
-        grow={false}
-        padding="small"
-        borderBottom={false}
-        borderTop={false}
-      >
-        <Flex vertical="center">
-          <Span weight="extraBold">{formattedDate}</Span>
-        </Flex>
-      </Frame>
-      <Frame
-        className="HeaderSecond-item HeaderSecond-clock"
-        grow={false}
-        padding="small"
-        borderBottom={false}
-        borderTop={false}
-        borderRight={false}
-        borderLeft={false}
-      >
+      </div>
+      <div className="HeaderSecond-item HeaderSecond-date">{formattedDate}</div>
+      <div className="HeaderSecond-item HeaderSecond-clock">
         <Clock />
-      </Frame>
+      </div>
     </Flex>
   </Frame>
 );
