@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Hr, SkeletonItem } from 'Vendor/components';
+import { SkeletonItem } from 'Vendor/components';
 
 export const SidebarListListsSkeleton: React.FC = () => (
   <>

@@ -6,7 +6,7 @@ import { RenderInPortal } from 'Components/Portal';
 import { ListState } from 'Modules/Lists/lists.types';
 import { selectCurrentRouteParams } from 'Modules/Routes/selectors/selectCurrentRouteParams';
 import { stringToDashCase } from 'Tools/utils/string/stringToDashCase';
-import { AnimateHeight, Bookmark, DotsVertical, H4, Hr, Space, Tooltip, Triangle } from 'Vendor/components';
+import { AnimateHeight, Bookmark, DotsVertical, Space, Tooltip, Triangle } from 'Vendor/components';
 import { SidebarListListsSkeleton } from './SidebarListListsSkeleton';
 
 import './SidebarListLists.less';
@@ -38,7 +38,7 @@ const SidebarListLists: React.FC<Props> = ({
     <div className={'SidebarListLists' + (className ? ' ' + className : '')}>
       <div className="SidebarListLists-header">
         <A href={href} frontend styled={!!href} disabled={!href} underlined onClick={onListTitleClick}>
-          <H4>{title}</H4>
+          {title}
         </A>
         <Space />
         <Triangle

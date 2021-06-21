@@ -39,4 +39,22 @@
     background: @c-background;
     fill: @gradientColors[yellow-1];
   }
+
+  &-content {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    justify-content: space-between;
+    max-width: @lay-maxWidth;
+    min-height: 100vh;
+    margin: 0 auto;
+    padding: 30px 24px;
+  }
+
+  &-spanner {
+    flex: 1;
+    background: @c-background;
+    border: 2px solid @c-base;
+    border-top: none;
+  }
 }

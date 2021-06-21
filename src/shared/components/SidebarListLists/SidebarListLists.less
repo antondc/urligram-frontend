@@ -6,10 +6,21 @@
   padding: 20px;
   border-bottom: 2px solid @c-base;
 
+  @media @br-tablet {
+    border-right: 2px solid @c-base;
+  }
+
   &-header {
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    font-size: @fs-medium;
+    font-weight: @fw-extraBold;
+
+    @media @br-tabletHorizontal {
+      font-size: @fs-normal;
+      font-weight: @fw-bold;
+    }
   }
 
   &-itemHeader {

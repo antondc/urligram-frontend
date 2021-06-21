@@ -24,7 +24,7 @@ const SidebarListUsers: React.FC<Props> = ({ users, loading, title, href, classN
 
   return (
     <div className={'SidebarListUsers' + (className ? ' ' + className : '')}>
-      <A className="SidebarListUsers-title" href={href} frontend styled={!!href} disabled={!href} underlined>
+      <A className="SidebarListUsers-header" href={href} frontend styled={!!href} disabled={!href} underlined>
         {title}
       </A>
       <div className="SidebarListUsers-grid">

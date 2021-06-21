@@ -1,7 +1,5 @@
 import React from 'react';
 
-import LayoutContent from 'Common/LayoutContent';
-
 import './BaseModal.less';
 
 interface Props {
@@ -11,10 +9,10 @@ interface Props {
 
 const BaseModal: React.FC<Props> = ({ children, onClick }) => (
   <div className="BaseModal">
-    <LayoutContent className="BaseModal-center">
+    <div className="BaseModal-container">
       <div className="BaseModal-background" onClick={onClick} />
       <div className="BaseModal-content">{children}</div>
-    </LayoutContent>
+    </div>
   </div>
 );
 

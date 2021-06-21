@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Location } from 'history';
 
-import LayoutContent from 'Common/LayoutContent';
 import LayoutHelperGrid from 'Common/LayoutHelperGrid';
 import BookmarkCreateModal from 'Components/BookmarkCreateModal';
 import BookmarkUpdateModal from 'Components/BookmarkUpdateModal';
@@ -116,16 +115,17 @@ const Layout: React.FC<Props> = ({ location }) => {
   return (
     <div className="Layout">
       <div className="Layout-background" />
-      <LayoutContent>
+      <div className="Layout-content">
         <LayoutHelperGrid />
         <Header />
         <CookiesBanner />
         <Router />
+        <div className="Layout-spanner" />
         <Footer />
         <Fade mounted={userModalMounted} position="absolute" appear>
           <UserModal />
         </Fade>
-      </LayoutContent>
+      </div>
       <Fade mounted={messageModalMounted} speed="fastest" position="fixed" appear>
         <ModalMessage message="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus gravida augue sed ipsum pulvinar, vel pretium tellus commodo. Aliquam erat volutpat. Morbi placerat justo massa, eget laoreet enim cursus et. Aliquam id scelerisque ipsum, ac rutrum erat. Donec sed blandit metus. Maecenas pellentesque, neque vel " />
       </Fade>

@@ -5,17 +5,17 @@
 @{c} {
   display: grid;
   align-items: flex-start;
-  flex: 1;
   grid-template: 'sidebarMain sidebarMain sidebarMain main main main main main main sidebarSecond sidebarSecond sidebarSecond' auto;
   grid-template-columns: repeat(12, 1fr);
   padding-top: 30px;
   background: @c-background;
   border: 2px solid @c-base;
+  border-bottom: none;
 
   @media @br-tablet {
     grid-template:
-      'sidebarMain sidebarMain sidebarMain main main main main main main main main main' auto
-      '. . . main main main main main main main main main' auto;
+      'sidebarMain sidebarMain main main main main main main main main main main' auto
+      'sidebarSecond sidebarSecond main main main main main main main main main main' auto;
   }
 
   &-sidebarMain {

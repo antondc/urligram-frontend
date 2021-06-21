@@ -4,7 +4,7 @@ import A from 'Components/A';
 import SidebarListLists from 'Components/SidebarListLists';
 import { GlossaryState } from 'Modules/Languages/languages.types';
 import { ListState } from 'Modules/Lists/lists.types';
-import { Frame, Hr, Span } from 'Vendor/components';
+import { Hr } from 'Vendor/components';
 
 import './SidebarLeft.less';
 
@@ -36,123 +36,93 @@ export const SidebarLeft: React.FC<Props> = ({
     {isLoggedIn && (
       <ul>
         <li className="SidebarLeft-item">
-          <Span size="medium" extraBold>
-            <A
-              className="SidebarLeft-link"
-              href={`users/${sessionId}`}
-              frontend
-              underlined
-              active={routeName === 'User'}
-            >
-              {glossary.myUser}
-            </A>
-          </Span>
+          <A className="SidebarLeft-link" href={`users/${sessionId}`} frontend underlined active={routeName === 'User'}>
+            {glossary.myUser}
+          </A>
         </li>
 
         <li className="SidebarLeft-item">
-          <Span size="medium" extraBold>
-            <A
-              className="SidebarLeft-link"
-              href={`users/${sessionId}/tags`}
-              frontend
-              underlined
-              active={routeName === 'UserTags'}
-            >
-              My Tags
-            </A>
-          </Span>
+          <A
+            className="SidebarLeft-link"
+            href={`users/${sessionId}/tags`}
+            frontend
+            underlined
+            active={routeName === 'UserTags'}
+          >
+            My Tags
+          </A>
         </li>
         <li className="SidebarLeft-item">
-          <Span size="medium" extraBold>
-            <A className="SidebarLeft-link" href="" frontend underlined onClick={switchUiBookmarkModal}>
-              Add bookmark
-            </A>
-          </Span>
+          <A className="SidebarLeft-link" href="" frontend underlined onClick={switchUiBookmarkModal}>
+            Add bookmark
+          </A>
         </li>
         <li className="SidebarLeft-item">
-          <Span size="medium" extraBold>
-            <A
-              className="SidebarLeft-link"
-              href={`users/${sessionId}/bookmarks`}
-              frontend
-              underlined
-              active={routeName === 'UserBookmarks'}
-            >
-              {glossary.myBookmarks}
-            </A>
-          </Span>
+          <A
+            className="SidebarLeft-link"
+            href={`users/${sessionId}/bookmarks`}
+            frontend
+            underlined
+            active={routeName === 'UserBookmarks'}
+          >
+            {glossary.myBookmarks}
+          </A>
         </li>
         <li className="SidebarLeft-item">
-          <Span size="medium" extraBold>
-            <A
-              className="SidebarLeft-link"
-              href={`users/${sessionId}/followers`}
-              frontend
-              underlined
-              active={routeName === 'UserFollowers'}
-            >
-              Followers
-            </A>
-          </Span>
+          <A
+            className="SidebarLeft-link"
+            href={`users/${sessionId}/followers`}
+            frontend
+            underlined
+            active={routeName === 'UserFollowers'}
+          >
+            Followers
+          </A>
         </li>
         <li className="SidebarLeft-item">
-          <Span size="medium" extraBold>
-            <A
-              className="SidebarLeft-link"
-              href={`users/${sessionId}/following`}
-              frontend
-              underlined
-              active={routeName === 'UserFollowing'}
-            >
-              Following
-            </A>
-          </Span>
+          <A
+            className="SidebarLeft-link"
+            href={`users/${sessionId}/following`}
+            frontend
+            underlined
+            active={routeName === 'UserFollowing'}
+          >
+            Following
+          </A>
         </li>
         <li className="SidebarLeft-item">
-          <Span size="medium" extraBold>
-            <A className="SidebarLeft-link" href="" frontend underlined onClick={switchUiListModal}>
-              Create list
-            </A>
-          </Span>
+          <A className="SidebarLeft-link" href="" frontend underlined onClick={switchUiListModal}>
+            Create list
+          </A>
         </li>
       </ul>
     )}
     {!isLoggedIn && (
       <ul className="SidebarLeft-list">
         <li className="SidebarLeft-item">
-          <Span size="medium" extraBold>
-            <A className="SidebarLeft-link" href="" frontend underlined>
-              Dont
-            </A>
-          </Span>
+          <A className="SidebarLeft-link" href="" frontend underlined>
+            Dont
+          </A>
         </li>
         <li className="SidebarLeft-item">
-          <Span size="medium" extraBold>
-            <A className="SidebarLeft-link" href="" frontend underlined>
-              Know
-            </A>
-          </Span>
+          <A className="SidebarLeft-link" href="" frontend underlined>
+            Know
+          </A>
         </li>
         <li className="SidebarLeft-item">
-          <Span size="medium" extraBold>
-            <A className="SidebarLeft-link" href="" frontend underlined>
-              What
-            </A>
-          </Span>
+          <A className="SidebarLeft-link" href="" frontend underlined>
+            What
+          </A>
         </li>
         <li className="SidebarLeft-item">
-          <Span size="medium" extraBold>
-            <A className="SidebarLeft-link" href="" frontend underlined>
-              Goes
-            </A>
-          </Span>
+          <A className="SidebarLeft-link" href="" frontend underlined>
+            Goes
+          </A>
         </li>
         <li className="SidebarLeft-item">
-          <Span size="medium" extraBold>
-            <A className="SidebarLeft-link" href="" frontend underlined>
-              Here
-            </A>
-          </Span>
+          <A className="SidebarLeft-link" href="" frontend underlined>
+            Here
+          </A>
         </li>
       </ul>
     )}

@@ -5,12 +5,20 @@
 @{c} {
   width: 100%;
   padding: 0 20px 20px;
+  font-size: @fs-medium;
+  font-weight: @fw-extraBold;
   border-bottom: 2px solid @c-base;
 
-  li {
+  @media @br-tablet {
+    font-size: @fs-normal;
+    font-weight: @fw-bold;
+    line-height: @fh-normal;
+    border-right: 2px solid @c-base;
+  }
+
+  &-item {
     display: flex;
     align-items: center;
-    font-weight: @fw-bold;
   }
 
   &-link {
@@ -61,6 +69,10 @@
   &-sidebarListLists {
     padding: 0;
     border: none;
+
+    .SidebarListLists-header {
+      // display: block;
+    }
 
     .SidebarListLists-triangle {
       display: block;
