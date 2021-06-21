@@ -3,6 +3,8 @@
 @c: .BookmarkRow;
 
 @{c} {
+  .default();
+
   display: grid;
   position: relative;
   justify-content: space-between;
@@ -35,7 +37,10 @@
     grid-area: main;
     padding-top: 4px;
     overflow: hidden;
-    // background: gold;
+  }
+
+  &-mainTitle {
+    display: flex;
   }
 
   &-favicon {
@@ -45,11 +50,11 @@
 
   &-title {
     margin-top: -3px; // Position diacriticals outside the box
+    font-weight: @fw-semibold;
     line-height: initial;
     white-space: nowrap;
     overflow-x: scroll;
     overflow-y: hidden;
-    // background: orange;
     text-overflow: ellipsis;
 
     .hideScrollbar;
@@ -59,12 +64,18 @@
   &-mainBottom {
     display: flex;
     padding-bottom: 2px;
+    font-size: @fs-nano;
     line-height: 6px;
-    // background: turquoise;
+    white-space: nowrap;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    text-overflow: ellipsis;
 
-    span {
-      line-height: 6px;
-    }
+    .hideScrollbar;
+  }
+
+  &-mainBottomNumber {
+    font-weight: @fw-extraBold;
   }
 
   &-editButton {
@@ -124,11 +135,10 @@
 
   &-icons {
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: flex-end;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    align-items: flex-start;
     grid-area: icons;
-    // background: salmon;
   }
 
   &-image {
