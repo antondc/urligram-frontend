@@ -77,7 +77,7 @@ export const ImageField: React.FC<Props> = ({
           <div {...getRootProps()}>
             <input {...getInputProps()} onChange={onChange} name={name} type="file" />
 
-            {hasImage && !loading && <div className={'ImageField-overlay'} />}
+            {!loading && <div className="ImageField-overlay" />}
           </div>
         )}
       </Dropzone>
