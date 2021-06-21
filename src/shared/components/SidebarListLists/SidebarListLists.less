@@ -32,9 +32,13 @@
   &-grid {
     display: grid;
     grid-template-columns: 4fr auto auto;
-    column-gap: 5px;
     padding-top: 10px;
     gap: 5px;
+
+    @media @br-tabletHorizontal {
+      padding-top: 5px;
+      gap: 0;
+    }
   }
 
   &-descriptionItem {
@@ -45,21 +49,37 @@
     font-weight: @fw-semibold;
     text-align: right;
 
+    @media @br-tabletHorizontal {
+      font-size: @fs-nano;
+    }
+
     &:hover {
       cursor: default;
     }
   }
 
-  &-link {
+  &-bookmarkIcon {
+    height: 10px;
+    width: 10px;
+    min-height: 10px;
+    min-width: 10px;
+
+    @media @br-tabletHorizontal {
+      height: 8px;
+      width: 8px;
+      min-height: 8px;
+      min-width: 8px;
+    }
+  }
+
+  &-name {
     font-size: @fs-normal;
     text-decoration-thickness: 2px;
     font-weight: @fw-semibold;
-  }
 
-  &-spacer {
-    display: grid;
-    grid-column-start: 1;
-    grid-column-end: 4;
+    @media @br-tabletHorizontal {
+      font-size: @fs-small;
+    }
   }
 
   &-triangle {

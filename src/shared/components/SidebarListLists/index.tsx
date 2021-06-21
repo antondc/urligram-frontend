@@ -53,11 +53,10 @@ const SidebarListLists: React.FC<Props> = ({
             lists?.map(({ id, name, members, bookmarksIds }, index) => (
               <React.Fragment key={`${id}-${index}`}>
                 <div className="SidebarListLists-itemHeader">
-                  <Space />
                   <DotsVertical size="nano" />
                   <Space />
                   <A
-                    className="SidebarListLists-link"
+                    className="SidebarListLists-name"
                     href={`lists/${id}`}
                     frontend
                     underlined
@@ -91,7 +90,7 @@ const SidebarListLists: React.FC<Props> = ({
                   {!!bookmarksIds?.length && (
                     <>
                       <span>{bookmarksIds?.length}</span>
-                      <Bookmark size="micro" />
+                      <Bookmark className="SidebarListLists-bookmarkIcon" />
                     </>
                   )}
                 </span>

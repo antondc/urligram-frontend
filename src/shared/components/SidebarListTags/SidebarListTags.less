@@ -10,6 +10,16 @@
     border-right: 2px solid @c-base;
   }
 
+  &-header {
+    font-size: @fs-medium;
+    font-weight: @fw-extraBold;
+
+    @media @br-tabletHorizontal {
+      font-size: @fs-normal;
+      font-weight: @fw-bold;
+    }
+  }
+
   &-tags {
     display: flex;
     flex-wrap: wrap;

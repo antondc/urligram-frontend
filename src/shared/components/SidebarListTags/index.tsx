@@ -22,8 +22,8 @@ const SidebarListTags: React.FC<Props> = ({ tags, loading, title, href, classNam
 
   return (
     <div className={'SidebarListTags' + (className ? ' ' + className : '')}>
-      <A href={href} frontend styled={!!href} disabled={!href} underlined>
-        <H4>{title}</H4>
+      <A className="SidebarListTags-header" href={href} frontend styled={!!href} disabled={!href} underlined>
+        {title}
       </A>
       <Hr size="small" spacer />
       <div className="SidebarListTags-tags">
