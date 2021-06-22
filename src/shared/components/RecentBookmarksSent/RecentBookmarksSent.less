@@ -1,0 +1,91 @@
+@import '../../css/imports.less';
+
+@c: .RecentBookmarksSent;
+
+@{c} {
+  padding: 20px;
+  overflow: hidden;
+  border-bottom: 2px solid @c-base;
+
+  @media @br-tablet {
+    border-right: 2px solid @c-base;
+  }
+
+  &-list {
+    padding-top: 10px;
+    overflow: hidden;
+
+    @media @br-tabletHorizontal {
+      padding-top: 5px;
+    }
+  }
+
+  &-header {
+    display: flex;
+    position: relative;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    font-size: @fs-medium;
+    font-weight: @fw-extraBold;
+    white-space: nowrap;
+    overflow-x: scroll;
+    overflow-y: hidden;
+
+    .hideScrollbar;
+
+    @media @br-tabletHorizontal {
+      font-size: @fs-normal;
+      font-weight: @fw-bold;
+    }
+  }
+
+  &-item {
+    position: relative;
+    width: 100%;
+    white-space: nowrap;
+    overflow-x: scroll;
+    overflow-y: hidden;
+
+    .hideScrollbar;
+  }
+
+  &-title {
+    display: flex;
+    position: relative;
+    justify-content: flex-start;
+    align-items: center;
+    margin-right: 10px;
+    font-weight: @fw-semibold;
+    white-space: nowrap;
+    overflow-x: scroll;
+    overflow-y: hidden;
+
+    @media @br-tabletHorizontal {
+      font-size: @fs-small;
+      text-decoration-thickness: 1.5px;
+    }
+
+    .hideScrollbar;
+  }
+
+  &-link {
+    @media @br-tabletHorizontal {
+      &:hover {
+        text-decoration-thickness: 1.5px;
+      }
+    }
+  }
+
+  &-favicon {
+    height: 10px;
+    width: 10px;
+    margin-right: 3px;
+  }
+
+  &-notification {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}

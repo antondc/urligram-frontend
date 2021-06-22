@@ -9,9 +9,10 @@ interface Props {
   className?: string;
   type?: NotificationDotType;
   size?: NotificationDotSize;
+  onClick?: () => void;
 }
 
-export const NotificationDot: React.FC<Props> = ({ className, type, size = 'normal' }) => (
+export const NotificationDot: React.FC<Props> = ({ className, type, size = 'normal', onClick }) => (
   <div
     className={
       'NotificationDot' +
@@ -19,5 +20,6 @@ export const NotificationDot: React.FC<Props> = ({ className, type, size = 'norm
       (type ? ' NotificationDot--' + type : '') +
       (className ? ' ' + className : '')
     }
+    onClick={onClick}
   />
 );

@@ -9,6 +9,11 @@ import { RootState } from 'Modules/rootType';
 import { selectCurrentRoute } from 'Modules/Routes/selectors/selectCurrentRoute';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUserId';
+import { bookmarksLoadReceived } from 'Modules/Shared/actions/bookmarksLoadReceived';
+import { bookmarksLoadSent } from 'Modules/Shared/actions/bookmarksLoadSent';
+import { selectMyRecentBookmarksReceived } from 'Modules/Shared/selectors/selectMyRecentBookmarksReceived';
+import { selectMyRecentBookmarksSent } from 'Modules/Shared/selectors/selectMyRecentBookmarksSent';
+import { selectSharedLoading } from 'Modules/Shared/selectors/selectSharedLoading';
 import { switchBookmarkCreateModal } from 'Modules/Ui/actions/switchBookmarkCreateModal';
 import { switchListModal } from 'Modules/Ui/actions/switchListModal';
 import { LocalStorageWrapper } from 'Services/LocalStorageWrapper';
@@ -28,6 +33,9 @@ export const SidebarLeft: React.FC = () => {
   const listsLoading = useSelector(selectListsLoading);
   const [listsShown, setListsShown] = useState<boolean>(true);
   const timeMsInFourHours = Date.now() + 4 * 60 * 60 * 1000;
+  const myRecentBookmarksSent = useSelector(selectMyRecentBookmarksSent);
+  const myRecentBookmarksReceived = useSelector(selectMyRecentBookmarksReceived);
+  const sharedBookmarksLoading = useSelector(selectSharedLoading);
 
   const switchUiBookmarkModal = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
@@ -56,6 +64,11 @@ export const SidebarLeft: React.FC = () => {
     setListsShown(Boolean(sidebarLeftListsShown?.mounted));
   }, []);
 
+  useEffect(() => {
+    dispatch(bookmarksLoadReceived());
+    dispatch(bookmarksLoadSent());
+  }, []);
+
   return (
     <SidebarLeftUi
       routeName={route?.name}
@@ -68,6 +81,9 @@ export const SidebarLeft: React.FC = () => {
       listsLoading={listsLoading}
       listsShown={listsShown}
       onListTitleClick={onListTitleClick}
+      myRecentBookmarksSent={myRecentBookmarksSent}
+      myRecentBookmarksReceived={myRecentBookmarksReceived}
+      sharedBookmarksLoading={sharedBookmarksLoading}
     />
   );
 };

@@ -7,6 +7,7 @@
   padding: 0 20px 20px;
   font-size: @fs-medium;
   font-weight: @fw-extraBold;
+  overflow: hidden;
   border-bottom: 2px solid @c-base;
 
   @media @br-tablet {
@@ -68,6 +69,7 @@
 
   &-sidebarListLists {
     padding: 0;
+    overflow: hidden;
     border: none;
 
     .SidebarListLists-header {
@@ -79,6 +81,19 @@
 
     .SidebarListLists-triangle {
       display: block;
+    }
+  }
+
+  &-sidebarListBookmarksReceived {
+    padding: 0;
+    padding-top: 20px;
+    font-size: @fs-normal;
+    overflow: hidden;
+    border: none;
+
+    @media @br-tabletHorizontal {
+      font-size: @fs-medium;
+      font-weight: @fw-extraBold;
     }
   }
 }
