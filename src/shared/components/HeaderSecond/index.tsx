@@ -17,16 +17,15 @@ const HeaderSecond: React.FC = () => {
   const [bookmarks, setBookmarks] = useState<BookmarkState[]>([]);
 
   useEffect(() => {
-    const myFunc = async () => {
+    const asyncFunction = async () => {
       const { data } = await HttpClient.get<void, BookmarksGetApiResponse>('/bookmarks?page[size]=20');
 
       const bookmarksArray = data?.map((item) => item.attributes);
-
       setBookmarks(bookmarksArray);
     };
 
-    myFunc();
-  });
+    asyncFunction();
+  }, []);
 
   return <HeaderSecondUi formattedDate={formattedDate} bookmarks={bookmarks} />;
 };
