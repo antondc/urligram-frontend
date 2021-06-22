@@ -17,10 +17,9 @@ import './ListFollowButton.less';
 interface Props {
   listId: number;
   className?: string;
-  size?: 'small' | 'normal';
 }
 
-export const ListFollowButton: React.FC<Props> = ({ listId, className, size }) => {
+export const ListFollowButton: React.FC<Props> = ({ listId, className }) => {
   const dispatch = useDispatch();
   const list = useSelector((state: RootState) => selectListById(state, { id: listId }));
   const session = useSelector(selectSession);
@@ -65,7 +64,6 @@ export const ListFollowButton: React.FC<Props> = ({ listId, className, size }) =
 
   return (
     <ListFollowButtonUi
-      size={size}
       loading={listLoading}
       onEdit={onEdit}
       recentlyChanged={recentlyChanged}
@@ -74,7 +72,6 @@ export const ListFollowButton: React.FC<Props> = ({ listId, className, size }) =
       onUnfollowList={onUnfollowList}
       className={className}
       sessionUserOwnsList={sessionUserOwnsList}
-      isPrivate={list?.isPrivate}
       sessionUserFollowsList={sessionUserFollowsList}
     />
   );

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { EditCircle, Flex, PlusCircleWithBackground, Private, SpinnerCircularBrute } from 'Vendor/components';
+import { EditCircle, PlusCircleWithBackground, SpinnerCircularBrute } from 'Vendor/components';
 
 import './ListFollowButton.less';
 
@@ -10,8 +10,6 @@ interface Props {
   sessionUserFollowsList: boolean;
   loading: boolean;
   recentlyChanged: boolean;
-  isPrivate: boolean;
-  size: 'small' | 'normal';
   onEdit: () => void;
   onMouseOut: () => void;
   onUnfollowList: () => void;
@@ -24,34 +22,34 @@ export const ListFollowButton: React.FC<Props> = ({
   recentlyChanged,
   sessionUserOwnsList,
   sessionUserFollowsList,
-  isPrivate,
   onEdit,
   onMouseOut,
   onUnfollowList,
   onFollowList,
-  size,
 }) => (
-  <Flex className={className} growVertical={false} vertical="top" horizontal="right" noWrap onMouseOut={onMouseOut}>
-    {isPrivate && <Private size={size === 'normal' ? 'small' : 'micro'} className="ListRow-private" />}
+  <div className={'ListFollowButton' + (className ? ' ' + className : '')} onMouseOut={onMouseOut}>
     {!sessionUserOwnsList && !loading && sessionUserFollowsList && (
       <PlusCircleWithBackground
-        className={'ListRow-listFollowed ' + (recentlyChanged ? ' ListRow-listFollowed--recentlyChanged' : '')}
-        size={size}
+        className={
+          'ListFollowButton-listFollowed ' + (recentlyChanged ? ' ListFollowButton-listFollowed--recentlyChanged' : '')
+        }
         onClick={onUnfollowList}
         onMouseOut={onMouseOut}
       />
     )}
     {!sessionUserOwnsList && !loading && !sessionUserFollowsList && (
       <PlusCircleWithBackground
-        className={'ListRow-listNotFollowed' + (recentlyChanged ? ' ListRow-listNotFollowed--recentlyChanged' : '')}
-        size={size}
+        className={
+          'ListFollowButton-listNotFollowed' +
+          (recentlyChanged ? ' ListFollowButton-listNotFollowed--recentlyChanged' : '')
+        }
         onClick={onFollowList}
         onMouseOut={onMouseOut}
       />
     )}
-    {sessionUserOwnsList && !loading && <EditCircle className="ListRow-listEdit" size={size} onClick={onEdit} />}
-    {loading && <SpinnerCircularBrute className="ListRow-loader" size={size} />}
-  </Flex>
+    {sessionUserOwnsList && !loading && <EditCircle className="ListFollowButton-listEdit" onClick={onEdit} />}
+    {loading && <SpinnerCircularBrute className="ListFollowButton-loader" />}
+  </div>
 );
 
 export default ListFollowButton;

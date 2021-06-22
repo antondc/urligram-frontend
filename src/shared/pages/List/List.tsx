@@ -55,7 +55,7 @@ export const List: React.FC<Props> = ({
             {list?.name}
           </A>
         </span>
-        <ListFollowButton className="List-joinList" listId={list?.id} size="normal" />
+        <ListFollowButton className="List-joinList" listId={list?.id} />
       </div>
       <div className="List-header">
         <SortBy
