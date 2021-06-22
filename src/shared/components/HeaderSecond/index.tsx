@@ -1,26 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
+import { BookmarksGetApiResponse, BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
+import HttpClient from 'Services/HttpClient';
 import { LocaleFormattedDate } from 'Tools/utils/Date/localeFormattedDate';
 import { HeaderSecond as HeaderSecondUi } from './HeaderSecond';
-
-export type WeatherData = {
-  temperature: number;
-  humidity: number;
-  weatherCode: number;
-  windSpeed: number;
-  widDirection: string;
-  pressure: number;
-  weatherDesc: string;
-  precipitations: number;
-};
-
-export interface WeatherApiResponse {
-  data: {
-    attributes: WeatherData;
-  };
-}
 
 import './HeaderSecond.less';
 
@@ -29,8 +14,21 @@ const HeaderSecond: React.FC = () => {
   const dateNowMs = Math.floor(Date.now() / 1000);
   const date = new LocaleFormattedDate({ unixTime: dateNowMs, locale: currentLanguageSlug });
   const formattedDate = date.getLocaleFormattedDate();
+  const [bookmarks, setBookmarks] = useState<BookmarkState[]>([]);
 
-  return <HeaderSecondUi formattedDate={formattedDate} />;
+  useEffect(() => {
+    const myFunc = async () => {
+      const { data } = await HttpClient.get<void, BookmarksGetApiResponse>('/bookmarks?page[size]=20');
+
+      const bookmarksArray = data?.map((item) => item.attributes);
+
+      setBookmarks(bookmarksArray);
+    };
+
+    myFunc();
+  });
+
+  return <HeaderSecondUi formattedDate={formattedDate} bookmarks={bookmarks} />;
 };
 
 export default HeaderSecond;
