@@ -14,7 +14,7 @@ interface Props {
 
 export const HeaderSecond: React.FC<Props> = ({ formattedDate, bookmarks }) => (
   <div className="HeaderSecond">
-    <div className="HeaderSecond-item HeaderSecond-main">
+    <div className="HeaderSecond-item HeaderSecond-main" id="HeaderSecond-main">
       {bookmarks.map((bookmark, index) => (
         <div className="HeaderSecond-bookmarkItem" key={bookmark.id}>
           <A className="HeaderSecond-title" href={bookmark?.url} targetBlank underlined>
