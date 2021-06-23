@@ -17,9 +17,10 @@ interface Props {
   className?: string;
   linkId: number;
   bookmarkId?: number;
+  onBookmarked?: () => void;
 }
 
-export const BookmarkActions: React.FC<Props> = ({ className, linkId, bookmarkId }) => {
+export const BookmarkActions: React.FC<Props> = ({ className, linkId, bookmarkId, onBookmarked }) => {
   const dispatch = useDispatch();
   const session = useSelector(selectSession);
   const link = useSelector((state: RootState) => selectLinkById(state, { id: linkId }));
@@ -49,6 +50,9 @@ export const BookmarkActions: React.FC<Props> = ({ className, linkId, bookmarkId
     };
 
     await dispatch(bookmarkCreate(data));
+
+    onBookmarked && onBookmarked();
+
     setLoading(false);
   };
 
@@ -68,12 +72,12 @@ export const BookmarkActions: React.FC<Props> = ({ className, linkId, bookmarkId
 
   return (
     <BookmarkActionsUi
+      className={className}
       loading={loading}
       isOwnBookmark={isOwnBookmark}
       userBookmarkedLink={userBookmarkedLink}
       onBookmarkGrab={onBookmarkGrab}
       onBookmarkDelete={onBookmarkDelete}
-      className={className}
     />
   );
 };

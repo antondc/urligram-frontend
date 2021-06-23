@@ -1,17 +1,16 @@
-import isEqual from 'lodash/isEqual';
-import uniqWith from 'lodash/uniqWith';
-
 import {
   SHARED_LOAD_RECEIVED_FAILURE,
   SHARED_LOAD_RECEIVED_REQUEST,
   SHARED_LOAD_RECEIVED_SUCCESS,
   SharedActions,
-  SharedBookmarksGetApiResponse,
 } from 'Modules/Shared/shared.types';
 import HttpClient from 'Services/HttpClient';
+import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
 import { AppThunk } from '../../..';
+import { bookmarksLoadSuccess } from '../../Bookmarks/actions/bookmarksLoadSuccess';
+import { BookmarksActions, BookmarksGetApiResponse, BookmarkState } from '../../Bookmarks/bookmarks.types';
 
-export const bookmarksLoadReceived = (): AppThunk<Promise<void>, SharedActions> => async (
+export const bookmarksLoadReceived = (): AppThunk<Promise<void>, SharedActions | BookmarksActions> => async (
   dispatch,
   getState
 ): Promise<void> => {
@@ -26,20 +25,28 @@ export const bookmarksLoadReceived = (): AppThunk<Promise<void>, SharedActions> 
       },
     });
 
-    const { data } = await HttpClient.get<void, SharedBookmarksGetApiResponse>(
+    const { data } = await HttpClient.get<void, BookmarksGetApiResponse>(
       `/users/me/bookmarks/received${window.location.search}`
     );
-    const { Shared: sharedAfterResponse } = getState();
+    const { Shared: sharedAfterResponse, Bookmarks: bookmarksAfterApi } = getState();
+    const bookmarksArray = data?.map((item) => item.attributes);
+    const bookmarkIdsArray = data?.map((item) => item.attributes?.id);
 
-    const sharedBookmarksArray = data?.map((item) => item?.attributes);
-    const arrayWithPreviousState = [...sharedAfterResponse.bookmarksReceived, ...sharedBookmarksArray];
-    const arrayWithoutDuplicates = uniqWith(arrayWithPreviousState, isEqual);
+    dispatch(
+      bookmarksLoadSuccess({
+        ...bookmarksAfterApi,
+        byKey: {
+          ...bookmarksAfterApi.byKey,
+          ...serializerFromArrayToByKey<BookmarkState, BookmarkState>({ data: bookmarksArray }),
+        },
+      })
+    );
 
     dispatch({
       type: SHARED_LOAD_RECEIVED_SUCCESS,
       payload: {
         ...sharedAfterResponse,
-        bookmarksReceived: arrayWithoutDuplicates,
+        bookmarksReceived: bookmarkIdsArray,
         loading: false,
       },
     });

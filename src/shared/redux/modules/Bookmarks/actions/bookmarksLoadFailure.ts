@@ -2,5 +2,5 @@ import { BOOKMARKS_LOAD_FAILURE, BookmarksActions, BookmarksState } from 'Module
 
 export const bookmarksLoadFailure = (payload: BookmarksState): BookmarksActions => ({
   type: BOOKMARKS_LOAD_FAILURE,
-  payload,
+  payload: payload,
 });

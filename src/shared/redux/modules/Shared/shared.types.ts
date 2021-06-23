@@ -31,8 +31,8 @@ export interface SharedItemState {
 }
 
 export interface SharedState {
-  bookmarksSent: SharedItemState[];
-  bookmarksReceived: SharedItemState[];
+  bookmarksSent: number[];
+  bookmarksReceived: number[];
   loading?: boolean;
   meta?: {
     totalItems?: number;

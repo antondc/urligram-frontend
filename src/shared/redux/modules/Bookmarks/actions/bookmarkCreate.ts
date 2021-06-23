@@ -39,6 +39,7 @@ export const bookmarkCreate = ({
     const bookmarksToUpdate = Object.values(bookmarksAfterResponse.byKey).filter(
       (item) => item?.linkId === bookmarkData?.attributes?.linkId
     );
+
     const bookmarksWithNewBookmark = bookmarksToUpdate.map((item) => ({
       ...item,
       bookmarksRelated: [
@@ -49,6 +50,7 @@ export const bookmarkCreate = ({
           userId: bookmarkData?.attributes?.userId,
         },
       ],
+      users: [...item?.users, bookmarkData?.attributes?.userId],
     }));
 
     dispatch({

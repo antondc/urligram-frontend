@@ -49,6 +49,7 @@ export const bookmarksLoadBySize = (size?: number): AppThunk<Promise<BookmarkSta
     dispatch(
       bookmarksLoadFailure({
         ...bookmarksOnError,
+        loading: false,
         errors: [...(bookmarksOnError?.errors || []), error],
       })
     );

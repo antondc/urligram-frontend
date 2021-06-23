@@ -2,9 +2,9 @@ import React from 'react';
 
 import A from 'Components/A';
 import SidebarListLists from 'Components/SidebarListLists';
+import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
 import { GlossaryState } from 'Modules/Languages/languages.types';
 import { ListState } from 'Modules/Lists/lists.types';
-import { SharedItemState } from 'Modules/Shared/shared.types';
 import { Hr } from 'Vendor/components';
 import RecentBookmarksReceived from '../RecentBookmarksReceived';
 import RecentBookmarksSent from '../RecentBookmarksSent';
@@ -19,8 +19,8 @@ interface Props {
   lists: ListState[];
   listsLoading: boolean;
   listsShown: boolean;
-  myRecentBookmarksSent: SharedItemState[];
-  myRecentBookmarksReceived: SharedItemState[];
+  myRecentBookmarksSent: BookmarkState[];
+  myRecentBookmarksReceived: BookmarkState[];
   sharedBookmarksLoading: boolean;
   onListTitleClick: () => void;
   switchUiBookmarkModal: (e: React.MouseEvent<HTMLAnchorElement>) => void;

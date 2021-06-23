@@ -27,4 +27,7 @@ export const mockBookmark: BookmarkState = {
     vote: true,
     loading: false,
   },
+  bookmarkReceivedFrom: [],
+  bookmarkSentTo: [],
+  bookmarksRelated: [],
 };

@@ -51,6 +51,7 @@ export const bookmarksLoadByListId = (listId: number): AppThunk<Promise<Bookmark
     dispatch(
       bookmarksLoadFailure({
         ...bookmarksOnError,
+        loading: false,
         errors: [...(bookmarksOnError?.errors || []), error],
       })
     );

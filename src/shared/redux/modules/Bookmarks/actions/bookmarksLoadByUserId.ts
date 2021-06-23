@@ -55,9 +55,11 @@ export const bookmarksLoadByUserId = (
     return bookmarksArray;
   } catch (error) {
     const { Bookmarks: bookmarksOnError } = getState();
+
     dispatch(
       bookmarksLoadFailure({
         ...bookmarksOnError,
+        loading: false,
         errors: [...(bookmarksOnError?.errors || []), error],
       })
     );

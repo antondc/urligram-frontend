@@ -1,5 +1,5 @@
 import { RootState } from 'Modules/rootType';
-import { SharedItemState } from '../shared.types';
+import { BookmarkState } from '../../Bookmarks/bookmarks.types';
 
-export const selectMyRecentBookmarksReceived = (state: RootState): SharedItemState[] =>
-  state.Shared?.bookmarksReceived.slice(0, 4);
+export const selectMyRecentBookmarksReceived = (state: RootState): BookmarkState[] =>
+  state.Shared?.bookmarksReceived?.map((item) => state.Bookmarks.byKey[item]);

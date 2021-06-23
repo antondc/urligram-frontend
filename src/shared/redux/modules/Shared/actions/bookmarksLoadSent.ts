@@ -1,17 +1,16 @@
-import isEqual from 'lodash/isEqual';
-import uniqWith from 'lodash/uniqWith';
-
 import {
-  SHARED_LOAD_SENT_FAILURE,
-  SHARED_LOAD_SENT_REQUEST,
-  SHARED_LOAD_SENT_SUCCESS,
+  SHARED_LOAD_RECEIVED_FAILURE,
+  SHARED_LOAD_RECEIVED_REQUEST,
+  SHARED_LOAD_RECEIVED_SUCCESS,
   SharedActions,
-  SharedBookmarksGetApiResponse,
 } from 'Modules/Shared/shared.types';
 import HttpClient from 'Services/HttpClient';
+import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
 import { AppThunk } from '../../..';
+import { bookmarksLoadSuccess } from '../../Bookmarks/actions/bookmarksLoadSuccess';
+import { BookmarksActions, BookmarksGetApiResponse, BookmarkState } from '../../Bookmarks/bookmarks.types';
 
-export const bookmarksLoadSent = (): AppThunk<Promise<void>, SharedActions> => async (
+export const bookmarksLoadSent = (): AppThunk<Promise<void>, SharedActions | BookmarksActions> => async (
   dispatch,
   getState
 ): Promise<void> => {
@@ -19,27 +18,35 @@ export const bookmarksLoadSent = (): AppThunk<Promise<void>, SharedActions> => a
     const { Shared: sharedBeforeRequest } = getState();
 
     dispatch({
-      type: SHARED_LOAD_SENT_REQUEST,
+      type: SHARED_LOAD_RECEIVED_REQUEST,
       payload: {
         ...sharedBeforeRequest,
         loading: true,
       },
     });
 
-    const { data } = await HttpClient.get<void, SharedBookmarksGetApiResponse>(
+    const { data } = await HttpClient.get<void, BookmarksGetApiResponse>(
       `/users/me/bookmarks/sent${window.location.search}`
     );
-    const { Shared: sharedAfterResponse } = getState();
+    const { Shared: sharedAfterResponse, Bookmarks: bookmarksAfterApi } = getState();
+    const bookmarksArray = data?.map((item) => item.attributes);
+    const bookmarkIdsArray = data?.map((item) => item.attributes?.id);
 
-    const sharedBookmarksArray = data?.map((item) => item?.attributes);
-    const arrayWithPreviousState = [...sharedAfterResponse.bookmarksReceived, ...sharedBookmarksArray];
-    const arrayWithoutDuplicates = uniqWith(arrayWithPreviousState, isEqual);
+    dispatch(
+      bookmarksLoadSuccess({
+        ...bookmarksAfterApi,
+        byKey: {
+          ...bookmarksAfterApi.byKey,
+          ...serializerFromArrayToByKey<BookmarkState, BookmarkState>({ data: bookmarksArray }),
+        },
+      })
+    );
 
     dispatch({
-      type: SHARED_LOAD_SENT_SUCCESS,
+      type: SHARED_LOAD_RECEIVED_SUCCESS,
       payload: {
         ...sharedAfterResponse,
-        bookmarksSent: arrayWithoutDuplicates,
+        bookmarksSent: bookmarkIdsArray,
         loading: false,
       },
     });
@@ -49,7 +56,7 @@ export const bookmarksLoadSent = (): AppThunk<Promise<void>, SharedActions> => a
     const { Shared: sharedOnError } = getState();
 
     dispatch({
-      type: SHARED_LOAD_SENT_FAILURE,
+      type: SHARED_LOAD_RECEIVED_FAILURE,
       payload: {
         ...sharedOnError,
         loading: false,

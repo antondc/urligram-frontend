@@ -59,6 +59,16 @@ export interface BookmarkState {
   statistics: LinkStatistics;
   deleting?: boolean;
   loading?: boolean;
+  bookmarkReceivedFrom: {
+    senderId: string;
+    receiverId: string;
+    viewed: string;
+  }[];
+  bookmarkSentTo: {
+    senderId: string;
+    receiverId: string;
+    viewed: string;
+  }[];
 }
 
 export type BookmarksByKey = {
