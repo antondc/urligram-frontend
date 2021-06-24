@@ -20,6 +20,7 @@ import LoupeSvg from '../../../assets/svg/loupe.svg';
 import PlusCircleSvg from '../../../assets/svg/plusCircle.svg';
 import PlusCircleWithBackgroundSvg from '../../../assets/svg/plusCircleWithBackground.svg';
 import PrivateSvg from '../../../assets/svg/private.svg';
+import SendSvg from '../../../assets/svg/send.svg';
 import SortSvg from '../../../assets/svg/sort.svg';
 import SquareSvg from '../../../assets/svg/square.svg';
 import TriangleSvg from '../../../assets/svg/triangle.svg';
@@ -59,6 +60,7 @@ export type IconsType =
   | 'BookmarkWithBackground'
   | 'Private'
   | 'Edit'
+  | 'Send'
   | 'PlusCircle'
   | 'EditCircle'
   | 'PlusCircleWithBackground'
@@ -118,6 +120,7 @@ export const Edit: React.FC<Props> = (props) => Svg(EditSvg)(props);
 export const PlusCircle: React.FC<Props> = (props) => Svg(PlusCircleSvg)(props);
 export const EditCircle: React.FC<Props> = (props) => Svg(EditCircleSvg)(props);
 export const PlusCircleWithBackground: React.FC<Props> = (props) => Svg(PlusCircleWithBackgroundSvg)(props);
+export const Send: React.FC<Props> = (props) => Svg(SendSvg)(props);
 export const Sort: React.FC<Props> = (props) => Svg(SortSvg)(props);
 export const List: React.FC<Props> = (props) => Svg(ListSvg)(props);
 

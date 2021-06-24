@@ -43,7 +43,12 @@ export type BookmarkListsModal = {
   bookmarkId?: number;
 } & UiBaseModal;
 
+export type BookmarkSendModal = {
+  bookmarkId?: number;
+} & UiBaseModal;
+
 export type BookmarkListsModals = Array<BookmarkListsModal>;
+export type BookmarkSendModals = Array<BookmarkSendModal>;
 
 export type UiState = {
   screenLocked: boolean;
@@ -63,6 +68,7 @@ export type UiState = {
     listId?: number;
   } & UiBaseModal;
   bookmarkListsModals: BookmarkListsModals;
+  bookmarkSendModals: BookmarkSendModals;
   notifications?: NotificationState[];
 };
 

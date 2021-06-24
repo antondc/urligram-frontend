@@ -28,15 +28,15 @@ export const bookmarksLoadSent = (): AppThunk<Promise<void>, SharedActions | Boo
     const { data } = await HttpClient.get<void, BookmarksGetApiResponse>(
       `/users/me/bookmarks/sent${window.location.search}`
     );
-    const { Shared: sharedAfterResponse, Bookmarks: bookmarksAfterApi } = getState();
+    const { Shared: sharedAfterResponse, Bookmarks: bookmarksAfterResponse } = getState();
     const bookmarksArray = data?.map((item) => item.attributes);
     const bookmarkIdsArray = data?.map((item) => item.attributes?.id);
 
     dispatch(
       bookmarksLoadSuccess({
-        ...bookmarksAfterApi,
+        ...bookmarksAfterResponse,
         byKey: {
-          ...bookmarksAfterApi.byKey,
+          ...bookmarksAfterResponse.byKey,
           ...serializerFromArrayToByKey<BookmarkState, BookmarkState>({ data: bookmarksArray }),
         },
       })

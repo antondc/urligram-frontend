@@ -11,6 +11,9 @@ export const SHARED_LOAD_SENT_FAILURE = 'SHARED_LOAD_SENT_FAILURE';
 export const SHARED_VIEWED_REQUEST = 'SHARED_VIEWED_REQUEST';
 export const SHARED_VIEWED_SUCCESS = 'SHARED_VIEWED_SUCCESS';
 export const SHARED_VIEWED_FAILURE = 'SHARED_VIEWED_FAILURE';
+export const SHARED_SEND_REQUEST = 'SHARED_SEND_REQUEST';
+export const SHARED_SEND_SUCCESS = 'SHARED_SEND_SUCCESS';
+export const SHARED_SEND_FAILURE = 'SHARED_SEND_FAILURE';
 
 export interface BookmarkError extends Error {
   field: string;
@@ -41,6 +44,17 @@ export interface SharedState {
   errors?: BookmarkError[];
 }
 
+export interface SharedSentGetApiResponse {
+  data: {
+    type: 'bookmark';
+    id: number;
+    attributes: {
+      userFrom: string;
+      bookmarkId: number;
+      userTo: string;
+    };
+  };
+}
 export interface SharedViewedGetApiResponse {
   data: {
     type: 'bookmark';
@@ -122,6 +136,21 @@ export interface SharedViewedFailureAction {
   payload: SharedState;
 }
 
+export interface SharedSendRequestAction {
+  type: typeof SHARED_SEND_REQUEST;
+  payload: SharedState;
+}
+
+export interface SharedSendSuccessAction {
+  type: typeof SHARED_SEND_SUCCESS;
+  payload: SharedState;
+}
+
+export interface SharedSendFailureAction {
+  type: typeof SHARED_SEND_FAILURE;
+  payload: SharedState;
+}
+
 export type SharedActions =
   | SharedResetAction
   | SharedLoadSuccessAction
@@ -133,4 +162,7 @@ export type SharedActions =
   | SharedLoadSentFailureAction
   | SharedViewedRequestAction
   | SharedViewedSuccessAction
-  | SharedViewedFailureAction;
+  | SharedViewedFailureAction
+  | SharedSendRequestAction
+  | SharedSendSuccessAction
+  | SharedSendFailureAction;

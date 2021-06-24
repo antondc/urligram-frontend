@@ -67,6 +67,7 @@ export const initialState: UiState = {
     mounted: false,
   },
   bookmarkListsModals: [],
+  bookmarkSendModals: [],
   notifications: [],
 };
 

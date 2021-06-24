@@ -45,6 +45,8 @@ export interface SessionState {
   level?: SessionLevel;
   logged?: boolean;
   location?: string;
+  followers?: string[];
+  following?: string[];
   image?: {
     original: string;
     w200h200?: string;

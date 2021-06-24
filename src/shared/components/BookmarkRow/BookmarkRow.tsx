@@ -3,6 +3,7 @@ import React from 'react';
 import A from 'Components/A';
 import BookmarkActions from 'Components/BookmarkActions';
 import BookmarkLists from 'Components/BookmarkLists';
+import BookmarkRowSend from 'Components/BookmarkRowSend';
 import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
 import { EditCircle, Private, Space, Tag, Vote } from 'Vendor/components';
 
@@ -85,6 +86,11 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
       ))}
     </div>
     <div className="BookmarkRow-icons">
+      {!!sessionUserBookmarkedLink && (
+        <div className="BookmarkRow-icon BookmarkRow-iconSend">
+          <BookmarkRowSend bookmarkId={bookmark?.id} />
+        </div>
+      )}
       {!!bookmark?.isPrivate && <Private size="micro" className="BookmarkRow-icon BookmarkRow-private" />}
       {!!sessionUserBookmarkedLink && <EditCircle className="BookmarkRow-icon" size="micro" onClick={onEdit} />}
       {!!sessionUserBookmarkedLink && (

@@ -6,6 +6,9 @@ import {
   SHARED_LOAD_SENT_REQUEST,
   SHARED_LOAD_SENT_SUCCESS,
   SHARED_RESET,
+  SHARED_SEND_FAILURE,
+  SHARED_SEND_REQUEST,
+  SHARED_SEND_SUCCESS,
   SHARED_VIEWED_FAILURE,
   SHARED_VIEWED_REQUEST,
   SHARED_VIEWED_SUCCESS,
@@ -31,6 +34,9 @@ export const Shared = (state = initialState, action: SharedActions): SharedState
     case SHARED_VIEWED_REQUEST:
     case SHARED_VIEWED_SUCCESS:
     case SHARED_VIEWED_FAILURE:
+    case SHARED_SEND_REQUEST:
+    case SHARED_SEND_SUCCESS:
+    case SHARED_SEND_FAILURE:
       return Object.assign({}, state, action.payload);
     default:
       return Object.assign({}, state);

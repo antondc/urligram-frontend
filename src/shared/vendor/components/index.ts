@@ -58,6 +58,7 @@ export {
   PlusCircleWithBackground,
   Sort,
   List,
+  Send,
   Folder,
   DotsVertical,
 } from './Svg';

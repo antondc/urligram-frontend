@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { listBookmarkCreate } from 'Modules/Lists/actions/listBookmarkCreate';
 import { listBookmarkDelete } from 'Modules/Lists/actions/listBookmarkDelete';
 import { listCreate } from 'Modules/Lists/actions/listCreate';
-import { listsLoadByUserId } from 'Modules/Lists/actions/listsLoadByUserId';
 import { selectListsByUserId } from 'Modules/Lists/selectors/selectListsByUserId';
 import { selectListsErrorLast } from 'Modules/Lists/selectors/selectListsErrorLast';
 import { RootState } from 'Modules/rootType';
@@ -12,8 +11,8 @@ import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { bookmarkListsModalMount } from 'Modules/Ui/actions/bookmarkListsModalMount';
 import { bookmarkListsModalUnmount } from 'Modules/Ui/actions/bookmarkListsModalUnmount';
 import { selectBookmarkListsModal } from 'Modules/Ui/selectors/selectBookmarkListsModal';
+import { selectBookmarkListsModalsMounted } from 'Modules/Ui/selectors/selectBookmarkListsModalsMounted';
 import { DELAY_THREE_SEC } from 'Root/src/shared/constants';
-import { selectBookmarkListsModalsMounted } from 'Root/src/shared/redux/modules/Ui/selectors/selectBookmarkListsModalsMounted';
 import { BookmarkLists as BookmarkListsUi } from './BookmarkLists';
 
 interface Props {

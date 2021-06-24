@@ -18,9 +18,11 @@ import SignUpModal from 'Components/SignUpModal';
 import UserModal from 'Components/UserModal';
 import WelcomeModal from 'Components/WelcomeModal';
 import { selectLanguageLoading } from 'Modules/Languages/selectors/selectLanguageLoading';
+import { RootState } from 'Modules/rootType';
 import { pushNewRoute } from 'Modules/Routes/actions/pushNewRoute';
 import { RouteState } from 'Modules/Routes/routes.types';
 import { selectCurrentPathAndQuery } from 'Modules/Routes/selectors/selectCurrentPathAndQuery';
+import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { uiResetState } from 'Modules/Ui/actions/uiResetState';
 import { selectUiBookmarkCreateModalMounted } from 'Modules/Ui/selectors/selectUiBookmarkCreateModalMounted';
 import { selectUiBookmarkUpdateModalMounted } from 'Modules/Ui/selectors/selectUiBookmarkUpdateModalMounted';
@@ -33,6 +35,9 @@ import { selectUiScreenLocked } from 'Modules/Ui/selectors/selectUiScreenLocked'
 import { selectUiSignUpModalMounted } from 'Modules/Ui/selectors/selectUiSignUpModalMounted';
 import { selectUiUserModalMounted } from 'Modules/Ui/selectors/selectUiUserModalMounted';
 import { selectUiWelcomeModalMounted } from 'Modules/Ui/selectors/selectUiWelcomeModalMounted';
+import { userFollowingLoad } from 'Modules/Users/actions/userFollowingLoad';
+import { userLoad } from 'Modules/Users/actions/userLoad';
+import { selectUserById } from 'Modules/Users/selectors/selectUserById';
 import Router from 'Router/index';
 import { routesList, routesWithoutOmmitedValues } from 'Router/routes';
 import enhanceRouteWithParams from 'Tools/utils/url/enhanceRouteWithParams';
@@ -49,6 +54,8 @@ interface Props {
 
 const Layout: React.FC<Props> = ({ location }) => {
   const dispatch = useDispatch();
+  const session = useSelector(selectSession);
+  const user = useSelector((state: RootState) => selectUserById(state, { id: session?.id }));
   const locationPathAndSearchQuery = `${location.pathname}${location.search}`;
   const currentPathAndQuery = useSelector(selectCurrentPathAndQuery);
   const languageLoading = useSelector(selectLanguageLoading);
@@ -111,6 +118,11 @@ const Layout: React.FC<Props> = ({ location }) => {
 
     dispatch(pushNewRoute(enhancedRoute));
   }, [locationPathAndSearchQuery]); // Update by props, not by state, as this useEffect aims to update the state
+
+  useEffect(() => {
+    dispatch(userLoad(session?.id));
+    dispatch(userFollowingLoad(session?.id));
+  }, [session?.id]);
 
   return (
     <div className="Layout">

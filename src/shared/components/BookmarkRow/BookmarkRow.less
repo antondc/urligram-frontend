@@ -139,6 +139,12 @@
     justify-content: flex-end;
     align-items: flex-start;
     grid-area: icons;
+
+    &:hover {
+      @{c}-iconSend {
+        opacity: 1;
+      }
+    }
   }
 
   &-image {
@@ -164,6 +170,12 @@
 
   &-iconVote {
     margin-left: 3px;
+  }
+
+  &-iconSend {
+    margin-right: 3px;
+    opacity: 0;
+    transition: opacity @td-fastest @ease;
   }
 
   &-iconLists {

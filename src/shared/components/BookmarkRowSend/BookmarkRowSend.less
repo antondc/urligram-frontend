@@ -1,0 +1,102 @@
+@import '../../css/imports.less';
+
+@c: .BookmarkRowSend;
+
+@{c} {
+  display: flex;
+  position: relative;
+  align-content: flex-end;
+
+  &-iconSend {
+    height: 10px;
+    width: 10px;
+    margin-left: 3px;
+    fill: @c-base;
+    transition: opacity @td-fastest @ease;
+
+    path[data-id='foreground'],
+    path[data-id='background'] {
+      transition: opacity @td-fastest @ease, fill @td-fastest @ease;
+    }
+
+    path[data-id='foreground'] {
+      opacity: 1;
+    }
+
+    path[data-id='background'] {
+      opacity: 0;
+    }
+
+    &:hover {
+      path[data-id='foreground'],
+      path[data-id='background'] {
+        fill: @c-error;
+      }
+
+      path[data-id='background'] {
+        opacity: 1;
+      }
+    }
+  }
+
+  &-users {
+    max-height: 400px;
+    min-width: 150px;
+    overflow-y: scroll;
+
+    .hideScrollbar;
+  }
+
+  &-usersItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1px;
+    transition: fill @td-fast @ease;
+  }
+
+  &-usersItemText {
+    font-weight: @fw-semibold;
+    transition: color @td-fast @ease;
+
+    .hoverTransition;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &-usersItemIcon {
+    margin-left: 30px;
+    opacity: 1;
+    transition: transform @td-fast @ease, fill @td-fast @ease, opacity @td-fast @ease;
+
+    .hoverTransition;
+
+    &:hover {
+      fill: @c-success;
+    }
+  }
+
+  &-usersItem--alreadySent {
+    @{c}-usersItemIcon {
+      pointer-events: none;
+
+      &:hover {
+        opacity: 1;
+        cursor: default;
+      }
+
+      path[data-id='foreground'],
+      path[data-id='background'] {
+        opacity: 1;
+        fill: @c-success;
+      }
+    }
+  }
+
+  &-usersItemLoader {
+    margin-left: 30px;
+    stroke: @c-success;
+  }
+}

@@ -24,31 +24,37 @@ export const bookmarkViewed = (bookmarkId: number): AppThunk<Promise<void>, Shar
     const { data } = await HttpClient.put<void, SharedViewedGetApiResponse>(
       `/users/me/bookmarks/received/${bookmarkId}`
     );
-    const { Shared: sharedAfterResponse, Bookmarks: bookmarksAfterApi } = getState();
+    const { Shared: sharedAfterResponse, Bookmarks: bookmarksAfterResponse } = getState();
 
-    const bookmarkReceivedFromUpdated = bookmarksAfterApi.byKey[data?.attributes?.bookmarkId].bookmarkReceivedFrom?.map(
-      (item) => ({
-        ...item,
-        viewed: true,
-      })
-    );
+    const bookmarkReceivedFromUpdated = bookmarksAfterResponse.byKey[
+      data?.attributes?.bookmarkId
+    ].bookmarkReceivedFrom?.map((item) => ({
+      ...item,
+      viewed: true,
+    }));
 
     dispatch(
       bookmarksLoadSuccess({
-        ...bookmarksAfterApi,
+        ...bookmarksAfterResponse,
         byKey: {
-          ...bookmarksAfterApi.byKey,
+          ...bookmarksAfterResponse.byKey,
           [data?.attributes?.bookmarkId]: {
-            ...bookmarksAfterApi.byKey[data?.attributes?.bookmarkId],
+            ...bookmarksAfterResponse.byKey[data?.attributes?.bookmarkId],
             bookmarkReceivedFrom: bookmarkReceivedFromUpdated,
           },
         },
       })
     );
+    const filteredBookmarksReceived = sharedAfterResponse.bookmarksReceived.filter(
+      (item) => item !== data?.attributes?.bookmarkId
+    );
 
     dispatch({
       type: SHARED_VIEWED_SUCCESS,
-      payload: sharedAfterResponse,
+      payload: {
+        ...sharedAfterResponse,
+        bookmarksReceived: filteredBookmarksReceived,
+      },
     });
 
     return;
