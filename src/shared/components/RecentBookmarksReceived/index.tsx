@@ -70,7 +70,7 @@ const RecentBookmarksReceived: React.FC<Props> = ({ bookmarks, loading, title, h
         <div className="RecentBookmarksReceived-list">
           {!!loading && <RecentBookmarksReceivedSkeleton />}
           {!loading &&
-            bookmarks?.map(({ id, linkId, favicon, title, url, users, bookmarkReceivedFrom }) => {
+            bookmarks?.slice(0, 5)?.map(({ id, linkId, favicon, title, url, users, bookmarkReceivedFrom }) => {
               const userBookmarked = users.includes(session?.id);
 
               return (

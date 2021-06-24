@@ -30,7 +30,7 @@ export const bookmarksLoadReceived = (): AppThunk<Promise<void>, SharedActions |
     );
     const { Shared: sharedAfterResponse, Bookmarks: bookmarksAfterApi } = getState();
     const bookmarksArray = data?.map((item) => item.attributes);
-    const bookmarkIdsArray = data?.map((item) => item.attributes?.id);
+    const bookmarksReceivedArray = data?.reduce((acc, curr) => [...acc, ...curr.attributes.bookmarkReceivedFrom], []);
 
     dispatch(
       bookmarksLoadSuccess({
@@ -46,7 +46,7 @@ export const bookmarksLoadReceived = (): AppThunk<Promise<void>, SharedActions |
       type: SHARED_LOAD_RECEIVED_SUCCESS,
       payload: {
         ...sharedAfterResponse,
-        bookmarksReceived: bookmarkIdsArray,
+        bookmarksReceived: bookmarksReceivedArray,
         loading: false,
       },
     });

@@ -55,8 +55,8 @@ const RecentBookmarksSent: React.FC<Props> = ({ bookmarks, loading, title, href,
         <div className="RecentBookmarksSent-list">
           {!!loading && <RecentBookmarksSentSkeleton />}
           {!loading &&
-            bookmarks?.map(({ id, favicon, title, url }) => (
-              <div className="RecentBookmarksSent-item" key={id}>
+            bookmarks?.slice(0, 5)?.map(({ favicon, title, url }, index) => (
+              <div className="RecentBookmarksSent-item" key={index}>
                 <span className="RecentBookmarksSent-title">
                   <img className="RecentBookmarksSent-favicon" src={favicon} />
                   <A className="RecentBookmarksSent-link" href={url} targetBlank underlined>

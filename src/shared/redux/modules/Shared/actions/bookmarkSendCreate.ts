@@ -57,7 +57,15 @@ export const bookmarkSendCreate = ({
       type: SHARED_SEND_SUCCESS,
       payload: {
         ...sharedAfterResponse,
-        bookmarksSent: [...sharedAfterResponse.bookmarksSent, data?.attributes?.bookmarkId],
+        bookmarksSent: [
+          ...sharedAfterResponse.bookmarksSent,
+          {
+            bookmarkId: data?.attributes?.bookmarkId,
+            senderId: data?.attributes?.userFrom,
+            receiverId: userId,
+            viewed: false,
+          },
+        ],
       },
     });
 

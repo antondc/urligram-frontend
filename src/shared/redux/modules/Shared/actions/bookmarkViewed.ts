@@ -45,15 +45,23 @@ export const bookmarkViewed = (bookmarkId: number): AppThunk<Promise<void>, Shar
         },
       })
     );
-    const filteredBookmarksReceived = sharedAfterResponse.bookmarksReceived.filter(
-      (item) => item !== data?.attributes?.bookmarkId
-    );
+
+    const updatedBookmarksReceived = sharedAfterResponse.bookmarksReceived.map((item) => {
+      if (item.bookmarkId !== data?.attributes?.bookmarkId) {
+        return {
+          ...item,
+          viewed: true,
+        };
+      }
+
+      return item;
+    });
 
     dispatch({
       type: SHARED_VIEWED_SUCCESS,
       payload: {
         ...sharedAfterResponse,
-        bookmarksReceived: filteredBookmarksReceived,
+        bookmarksReceived: updatedBookmarksReceived,
       },
     });
 
