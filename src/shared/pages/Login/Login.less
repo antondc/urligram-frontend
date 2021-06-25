@@ -20,6 +20,11 @@
     .calcgrid(@property: width; @columns: 4; @parentColumns: 12; @addGutter: 0; @hasParentPaddings: 0);
   }
 
+  input:not(.noClass),
+  label:not(.noClass) {
+    background: @gradientColors[blue-6];
+  }
+
   &-error {
     color: @c-error;
   }

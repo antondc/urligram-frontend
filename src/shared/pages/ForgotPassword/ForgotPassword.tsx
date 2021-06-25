@@ -36,6 +36,7 @@ export const ForgotPassword: React.FC<Props> = ({
         <form className="ForgotPassword-form">
           <Hr size="normal" spacer />
           <Input
+            className="ForgotPassword-input"
             name="nameOrEmail"
             type="text"
             label="Name or email"

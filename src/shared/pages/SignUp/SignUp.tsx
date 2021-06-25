@@ -54,6 +54,7 @@ export const SignUp: React.FC<Props> = ({
         <form className="SignUp-form">
           <Hr size="normal" spacer />
           <Input
+            className="SignUp-input"
             name="name"
             type="text"
             label="Name"
@@ -69,6 +70,7 @@ export const SignUp: React.FC<Props> = ({
           </FadeInOut>
           <Hr size="nano" spacer />
           <Input
+            className="SignUp-input"
             name="email"
             type="email"
             label="Email"
@@ -85,6 +87,7 @@ export const SignUp: React.FC<Props> = ({
           </FadeInOut>
           <Hr size="nano" spacer />
           <Input
+            className="SignUp-input"
             name="password"
             type="password"
             label="Password"
@@ -101,6 +104,7 @@ export const SignUp: React.FC<Props> = ({
           </FadeInOut>
           <Hr size="nano" spacer />
           <Input
+            className="SignUp-input"
             name="password_repeated"
             type="password"
             label="Repeat password"
