@@ -12,7 +12,7 @@ import { selectCurrentRoute } from 'Modules/Routes/selectors/selectCurrentRoute'
 import { switchLanguagesModal } from 'Modules/Ui/actions/switchLanguagesModal';
 import { selectUiLanguagesModalMounted } from 'Modules/Ui/selectors/selectUiLanguagesModalMounted';
 import { Routes } from 'Router/routes';
-import { Fade, Frame, Span } from 'Vendor/components';
+import { Fade, Span } from 'Vendor/components';
 
 import './Footer.less';
 
@@ -32,7 +32,7 @@ const Footer: React.FC<Props> = ({
   switchLanguagesModal,
 }) => (
   <>
-    <Frame className="Footer" borderTop={false}>
+    <div className="Footer">
       <div className="Footer-section">
         <Span size="medium" weight="extraBold">
           <A
@@ -48,7 +48,7 @@ const Footer: React.FC<Props> = ({
       </div>
       <div className="Footer-section">
         <Span size="medium" weight="extraBold">
-          <A className="Footer-link" href="" frontend underlined active={currentRoute?.name === undefined}>
+          <A className="Footer-link" href="faq" frontend underlined active={currentRoute?.name === undefined}>
             FAQ
           </A>
         </Span>
@@ -73,7 +73,7 @@ const Footer: React.FC<Props> = ({
         </Fade>
         <LanguageItem lang={currentLanguageSlug} onClick={switchLanguagesModal} href={currentPathName} />
       </div>
-    </Frame>
+    </div>
   </>
 );
 

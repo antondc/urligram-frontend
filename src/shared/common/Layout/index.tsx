@@ -132,7 +132,6 @@ const Layout: React.FC<Props> = ({ location }) => {
         <Header />
         <CookiesBanner />
         <Router />
-        <div className="Layout-spanner" />
         <Footer />
         <Fade mounted={userModalMounted} position="absolute" appear>
           <UserModal />

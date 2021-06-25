@@ -36,6 +36,7 @@ export interface RoutesInterface {
   ResetPassword: Route;
   SignUpConfirmation: Route;
   Control: Route;
+  FAQ: Route;
   ServerError: Route;
   NotFound: Route;
 }
@@ -153,6 +154,17 @@ export const Routes: RoutesInterface = {
     initialDataLoadersVisitor: [],
     initialDataLoadersSession: [],
     layout: 'withLeftSidebar',
+  },
+
+  FAQ: {
+    name: 'FAQ',
+    path: '/:lang([a-z]{2})?/faq',
+    route: '/faq',
+    exact: true,
+    auth: false,
+    initialDataLoadersVisitor: [],
+    initialDataLoadersSession: [],
+    layout: 'fullPage',
   },
 
   Login: {
