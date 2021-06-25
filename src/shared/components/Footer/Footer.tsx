@@ -70,7 +70,7 @@ export const Footer: React.FC<Props> = ({
         </A>
       </Span>
     </div>
-    <div className="Footer-section">
+    {/* <div className="Footer-section">
       <Span size="medium" weight="extraBold">
         <A
           className="Footer-link"
@@ -82,7 +82,7 @@ export const Footer: React.FC<Props> = ({
           Download
         </A>
       </Span>
-    </div>
+    </div> */}
     <div className="Footer-section">
       <Span size="medium" weight="extraBold">
         <A

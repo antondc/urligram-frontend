@@ -42,7 +42,6 @@ export const ResetPassword: React.FC<Props> = ({
         <form className="ResetPassword-form">
           <Hr size="normal" spacer />
           <Input
-            className="ResetPassword-input"
             name="password"
             type="password"
             label="Password"
@@ -59,7 +58,6 @@ export const ResetPassword: React.FC<Props> = ({
           </FadeInOut>
           <Hr size="nano" spacer />
           <Input
-            className="ResetPassword-input"
             name="password_repeated"
             type="password"
             label="Repeat password"
