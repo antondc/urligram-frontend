@@ -1,0 +1,33 @@
+@import '../../css/imports.less';
+
+@c: .Download;
+
+@{c} {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  padding-top: 100px;
+
+  &-left {
+    grid-column: 0 / span 3;
+  }
+
+  &-content {
+    grid-column: 4 / span 6;
+  }
+
+  &-title {
+    padding-bottom: 30px;
+    font-size: @fs-huge;
+    font-weight: @fw-bold;
+    line-height: @fs-huge;
+  }
+
+  &-item {
+    padding-bottom: 20px;
+    user-select: none;
+  }
+
+  &-text {
+    //
+  }
+}

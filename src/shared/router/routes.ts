@@ -37,6 +37,8 @@ export interface RoutesInterface {
   SignUpConfirmation: Route;
   Control: Route;
   FAQ: Route;
+  Download: Route;
+  Disclaimer: Route;
   ServerError: Route;
   NotFound: Route;
 }
@@ -154,6 +156,27 @@ export const Routes: RoutesInterface = {
     initialDataLoadersVisitor: [],
     initialDataLoadersSession: [],
     layout: 'withLeftSidebar',
+  },
+
+  Disclaimer: {
+    name: 'Disclaimer',
+    path: '/:lang([a-z]{2})?/disclaimer',
+    route: '/disclaimer',
+    exact: true,
+    auth: false,
+    initialDataLoadersVisitor: [],
+    initialDataLoadersSession: [],
+    layout: 'fullPage',
+  },
+  Download: {
+    name: 'Download',
+    path: '/:lang([a-z]{2})?/download',
+    route: '/download',
+    exact: true,
+    auth: false,
+    initialDataLoadersVisitor: [],
+    initialDataLoadersSession: [],
+    layout: 'fullPage',
   },
 
   FAQ: {
