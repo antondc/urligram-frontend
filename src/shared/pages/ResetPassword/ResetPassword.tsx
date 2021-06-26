@@ -1,7 +1,7 @@
 import React from 'react';
 
 import A from 'Components/A';
-import { Button, FadeInOut, Flex, H1, Hr, Input, Span } from 'Vendor/components';
+import { Button, FadeInOut, H1, Input, Span } from 'Vendor/components';
 
 import './ResetPassword.less';
 
@@ -33,14 +33,10 @@ export const ResetPassword: React.FC<Props> = ({
   onSubmit,
 }) => (
   <>
-    <Hr spacer size="big" />
-    <Hr spacer size="big" />
-    <Hr spacer size="big" />
     <div className="ResetPassword">
       <div className="ResetPassword-content">
         <H1 className="ResetPassword-h1">Password forgotten</H1>
         <form className="ResetPassword-form">
-          <Hr size="normal" spacer />
           <Input
             name="password"
             type="password"
@@ -50,13 +46,11 @@ export const ResetPassword: React.FC<Props> = ({
             value={passwordValue}
             error={passwordError}
           />
-          <Hr size="nano" spacer />
           <FadeInOut valueToUpdate={!!passwordError} speed="fast">
             <Span className="SignUp-error" size="small">
               {passwordError}
             </Span>
           </FadeInOut>
-          <Hr size="nano" spacer />
           <Input
             name="password_repeated"
             type="password"
@@ -66,14 +60,13 @@ export const ResetPassword: React.FC<Props> = ({
             value={passwordRepeatedValue}
             error={passwordRepeatedError}
           />
-          <Hr size="nano" spacer />
           <FadeInOut valueToUpdate={!!passwordRepeatedError} speed="fast">
             <Span className="SignUp-error" size="small">
               {passwordRepeatedError}
             </Span>
           </FadeInOut>
-          <Hr size="normal" spacer />
           <Button
+            className="ResetPassword-submit"
             text="Submit"
             type="submit"
             onClick={onSubmit}
@@ -82,29 +75,26 @@ export const ResetPassword: React.FC<Props> = ({
             disabled={submitDisabled}
             loading={sessionLoading}
           />
-          <Hr size="nano" spacer />
           <FadeInOut valueToUpdate={!!submitError} speed="fast">
             <Span className="SignUp-error" size="small">
               {submitError}
             </Span>
           </FadeInOut>
         </form>
-        <Hr size="big" spacer />
-        <Flex horizontal="center">
+        <div className="ResetPassword-footer">
           <div className="ResetPassword-section">
             <Span weight="semiBold">Remember it?: </Span>
             <A href="login" styled underlined frontend>
               <Span weight="semiBold">log in</Span>
             </A>
           </div>
-          <Hr size="micro" spacer />
           <div className="ResetPassword-section">
             <Span weight="semiBold">Dont have an account?: </Span>
             <A href="sign-up" styled underlined frontend>
               <Span weight="semiBold">sign up</Span>
             </A>
           </div>
-        </Flex>
+        </div>
       </div>
     </div>
   </>

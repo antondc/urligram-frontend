@@ -3,21 +3,38 @@
 @c: .Login;
 
 @{c} {
-  display: flex;
+  display: grid;
   justify-content: center;
   align-items: center;
+  grid-template-columns: repeat(24, 1fr);
+  padding-top: 100px;
+
+  &-content {
+    display: grid;
+    align-items: center;
+    grid-column: 9 / span 8;
+    grid-template-columns: repeat(8, 1fr);
+  }
 
   &-h1 {
+    grid-column: 1 / span 8;
     text-align: center;
   }
 
-  &-content {
+  &-form {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    flex-shrink: 1;
+    grid-column: 2 / span 6;
+    padding-top: 50px;
+  }
 
-    .calcgrid(@property: width; @columns: 4; @parentColumns: 12; @addGutter: 0; @hasParentPaddings: 0);
+  &-submit {
+    margin-top: 50px;
+  }
+
+  &-footer {
+    grid-column: 2 / span 6;
+    margin-top: 20px;
   }
 
   &-error {

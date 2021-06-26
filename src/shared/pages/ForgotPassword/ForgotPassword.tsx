@@ -1,7 +1,7 @@
 import React from 'react';
 
 import A from 'Components/A';
-import { Button, FadeInOut, Flex, H1, Hr, Input, Span } from 'Vendor/components';
+import { Button, FadeInOut, H1, Input, Span } from 'Vendor/components';
 
 import './ForgotPassword.less';
 
@@ -27,14 +27,10 @@ export const ForgotPassword: React.FC<Props> = ({
   onSubmit,
 }) => (
   <>
-    <Hr spacer size="big" />
-    <Hr spacer size="big" />
-    <Hr spacer size="big" />
     <div className="ForgotPassword">
       <div className="ForgotPassword-content">
         <H1 className="ForgotPassword-h1">Password forgotten</H1>
         <form className="ForgotPassword-form">
-          <Hr size="normal" spacer />
           <Input
             name="nameOrEmail"
             type="text"
@@ -49,8 +45,8 @@ export const ForgotPassword: React.FC<Props> = ({
               {nameOrEmailError}
             </Span>
           </FadeInOut>
-          <Hr size="normal" spacer />
           <Button
+            className="ForgotPassword-submit"
             text="Submit"
             type="submit"
             onClick={onSubmit}
@@ -59,29 +55,26 @@ export const ForgotPassword: React.FC<Props> = ({
             disabled={submitDisabled}
             loading={submitting}
           />
-          <Hr size="nano" spacer />
           <FadeInOut valueToUpdate={!!submitError} speed="fast">
             <Span className="ForgotPassword-error" size="small">
               {submitError}
             </Span>
           </FadeInOut>
         </form>
-        <Hr size="big" spacer />
-        <Flex horizontal="center">
+        <div className="ForgotPassword-footer">
           <div className="ForgotPassword-section">
             <Span weight="semiBold">Remember it?: </Span>
             <A href="login" styled underlined frontend>
               <Span weight="semiBold">log in</Span>
             </A>
           </div>
-          <Hr size="micro" spacer />
           <div className="ForgotPassword-section">
             <Span weight="semiBold">Dont have an account?: </Span>
             <A href="sign-up" styled underlined frontend>
               <Span weight="semiBold">sign up</Span>
             </A>
           </div>
-        </Flex>
+        </div>
       </div>
     </div>
   </>

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import A from 'Components/A';
-import { Button, FadeInOut, Flex, H1, Hr, Input, Span } from 'Vendor/components';
+import { Button, FadeInOut, H1, Input, Span } from 'Vendor/components';
 
 import './SignUp.less';
 
@@ -45,14 +45,10 @@ export const SignUp: React.FC<Props> = ({
   onSubmit,
 }) => (
   <>
-    <Hr spacer size="big" />
-    <Hr spacer size="big" />
-    <Hr spacer size="big" />
     <div className="SignUp">
       <div className="SignUp-content">
         <H1 className="SignUp-h1">Sign up</H1>
         <form className="SignUp-form">
-          <Hr size="normal" spacer />
           <Input
             name="name"
             type="text"
@@ -67,7 +63,6 @@ export const SignUp: React.FC<Props> = ({
               {nameError}
             </Span>
           </FadeInOut>
-          <Hr size="nano" spacer />
           <Input
             name="email"
             type="email"
@@ -77,13 +72,11 @@ export const SignUp: React.FC<Props> = ({
             value={emailValue}
             error={emailError}
           />
-          <Hr size="nano" spacer />
           <FadeInOut valueToUpdate={!!emailError} speed="fast">
             <Span className="SignUp-error" size="small">
               {emailError}
             </Span>
           </FadeInOut>
-          <Hr size="nano" spacer />
           <Input
             name="password"
             type="password"
@@ -93,13 +86,11 @@ export const SignUp: React.FC<Props> = ({
             value={passwordValue}
             error={passwordError}
           />
-          <Hr size="nano" spacer />
           <FadeInOut valueToUpdate={!!passwordError} speed="fast">
             <Span className="SignUp-error" size="small">
               {passwordError}
             </Span>
           </FadeInOut>
-          <Hr size="nano" spacer />
           <Input
             name="password_repeated"
             type="password"
@@ -109,14 +100,13 @@ export const SignUp: React.FC<Props> = ({
             value={passwordRepeatedValue}
             error={passwordRepeatedError}
           />
-          <Hr size="nano" spacer />
           <FadeInOut valueToUpdate={!!passwordRepeatedError} speed="fast">
             <Span className="SignUp-error" size="small">
               {passwordRepeatedError}
             </Span>
           </FadeInOut>
-          <Hr size="normal" spacer />
           <Button
+            className="SignUp-submit"
             text="Submit"
             type="submit"
             onClick={onSubmit}
@@ -125,29 +115,26 @@ export const SignUp: React.FC<Props> = ({
             disabled={submitDisabled}
             loading={submitting}
           />
-          <Hr size="nano" spacer />
           <FadeInOut valueToUpdate={!!submitError} speed="fast">
             <Span className="SignUp-error" size="small">
               {submitError}
             </Span>
           </FadeInOut>
         </form>
-        <Hr size="big" spacer />
-        <Flex horizontal="center">
+        <div className="SignUp-footer">
           <div className="SignUp-section">
             <Span weight="semiBold">Forgot password?: </Span>
             <A href="forgot-password" styled underlined frontend>
               <Span weight="semiBold">reset it</Span>
             </A>
           </div>
-          <Hr size="micro" spacer />
           <div className="SignUp-section">
             <Span weight="semiBold">Already have an account?: </Span>
             <A href="login" styled underlined frontend>
               <Span weight="semiBold">login</Span>
             </A>
           </div>
-        </Flex>
+        </div>
       </div>
     </div>
   </>
