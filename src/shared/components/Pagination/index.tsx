@@ -1,9 +1,10 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { animateScroll as scroll } from 'react-scroll';
 
+import A from 'Components/A';
 import history from 'Services/History';
 import { URLWrapper } from 'Services/URLWrapper';
-import { A, Fade, Flex, Frame, Span } from 'Vendor/components';
+import { Fade } from 'Vendor/components';
 import { calculatePages } from './calculatePages';
 
 import './Pagination.less';

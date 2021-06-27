@@ -1,5 +1,6 @@
 import React from 'react';
 
+import A from 'Components/A';
 import BookmarkRow from 'Components/BookmarkRow';
 import { BookmarkRowSkeletonGroup } from 'Components/BookmarkRow/BookmarkRowSkeletonGroup';
 import Pagination from 'Components/Pagination';
@@ -9,7 +10,7 @@ import { BookmarksByKey } from 'Modules/Bookmarks/bookmarks.types';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
-import { A, FadeInOut, Hr, Select, SelectValue, SortBy, Space } from 'Vendor/components';
+import { FadeInOut, Hr, Select, SelectValue, SortBy, Space } from 'Vendor/components';
 
 import './UserBookmarks.less';
 

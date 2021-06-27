@@ -1,5 +1,6 @@
 import React from 'react';
 
+import A from 'Components/A';
 import BookmarkRow from 'Components/BookmarkRow';
 import { BookmarkRowSkeletonGroup } from 'Components/BookmarkRow/BookmarkRowSkeletonGroup';
 import ListFollowButton from 'Components/ListFollowButton';
@@ -11,7 +12,7 @@ import { ListState } from 'Modules/Lists/lists.types';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
-import { A, Hr, SortBy, Space } from 'Vendor/components';
+import { Hr, SortBy, Space } from 'Vendor/components';
 
 import './List.less';
 

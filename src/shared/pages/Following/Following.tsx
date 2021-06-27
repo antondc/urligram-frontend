@@ -1,5 +1,6 @@
 import React from 'react';
 
+import A from 'Components/A';
 import Pagination from 'Components/Pagination';
 import Sidebar from 'Components/Sidebar';
 import SidebarListTags from 'Components/SidebarListTags';
@@ -8,7 +9,7 @@ import { UserRowSkeletonGroup } from 'Components/UserRow/UserRowSkeletonGroup';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
-import { A, Hr, SortBy, Space } from 'Vendor/components';
+import { Hr, SortBy, Space } from 'Vendor/components';
 
 import './Following.less';
 

@@ -1,5 +1,6 @@
 import React from 'react';
 
+import A from 'Components/A';
 import { BookmarkRowSkeletonGroup } from 'Components/BookmarkRow/BookmarkRowSkeletonGroup';
 import ListRow from 'Components/ListRow';
 import Pagination from 'Components/Pagination';
@@ -8,7 +9,7 @@ import SidebarListTags from 'Components/SidebarListTags';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
-import { A, Hr, SortBy, Space } from 'Vendor/components';
+import { Hr, SortBy, Space } from 'Vendor/components';
 
 import './UserLists.less';
 
