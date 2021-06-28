@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { HTMLProps } from 'react';
 import { useSelector } from 'react-redux';
 
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
 import { A as ComponentsA } from 'Vendor/components';
 
-interface Props {
+interface Props extends HTMLProps<HTMLAnchorElement> {
   children: React.ReactNode;
   className?: string;
+  id?: string;
   href: string;
   frontend?: boolean;
   styled?: boolean;

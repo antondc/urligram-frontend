@@ -79,12 +79,11 @@
     width: 20px;
     overflow: hidden;
     background: @c-background;
-    outline: 2px solid @c-background;
+    border: 2px solid @c-base;
+    outline: 1px solid @c-background;
     transform: scale(1);
     transform-origin: center;
     transition: transform @td-fast @ease-outCustom1;
-    outline-offset: 2px;
-    box-shadow: 0 0 0 2px @c-base;
     border-radius: 50%;
   }
 
@@ -93,6 +92,8 @@
   }
 
   &-headerImagesItemJoined {
+    margin-right: -5px;
+
     &:last-of-type {
       margin: 0;
     }
@@ -103,11 +104,11 @@
     }
 
     &--pending {
-      box-shadow: 0 0 0 2px @c-alert;
+      border: 2px solid @c-alert;
     }
 
     &--active {
-      box-shadow: 0 0 0 2px @c-success;
+      border: 2px solid @c-success;
     }
   }
 
@@ -132,12 +133,35 @@
     transform: rotate(0deg);
     box-shadow: 0 0 0 0 @c-base;
     border-radius: 50%;
+    transition: fill @td-fast @ease;
   }
 
   &-joinList {
     height: 20px;
     width: 20px;
     margin-left: 8px;
+  }
+
+  &-iconRole {
+    height: 20px;
+    width: 20px;
+    margin-left: 5px;
+    fill: @c-accent;
+    transition: fill @td-fast @ease;
+  }
+
+  &-iconReader,
+  &-iconEditor {
+    fill: @c-accentLight;
+    pointer-events: none;
+  }
+
+  &-iconAdmin {
+    &:hover {
+      fill: @c-success;
+    }
+
+    .hoverTransition;
   }
 
   &-select {

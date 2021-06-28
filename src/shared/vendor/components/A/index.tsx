@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { HTMLProps } from 'react';
 import { Link } from 'react-router-dom';
 
 import './A.less';
 
-interface Props {
+interface Props extends HTMLProps<HTMLAnchorElement> {
   children: React.ReactNode;
   id?: string;
   className?: string;

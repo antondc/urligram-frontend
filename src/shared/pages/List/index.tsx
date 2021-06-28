@@ -23,6 +23,8 @@ import { selectUsersInThisList } from 'Modules/Sections/selectors/selectUsersInT
 import { selectUsersInThisListIds } from 'Modules/Sections/selectors/selectUsersInThisListIds';
 import { selectUsersInThisListLoading } from 'Modules/Sections/selectors/selectUsersInThisListLoading';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
+import { switchListModal } from 'Modules/Ui/actions/switchListModal';
+import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
 import { userLoad } from 'Modules/Users/actions/userLoad';
 import { selectUserById } from 'Modules/Users/selectors/selectUserById';
 import { DELAY_FAST_MS } from 'Root/src/shared/constants';
@@ -52,6 +54,7 @@ const List: React.FC = () => {
   const listUserOwner = useSelector((state: RootState) => selectUserById(state, { id: list?.userId }));
   const sessionUserInThisList = usersInThisList.find((item) => item.id === session?.id);
   const listInvitationRole = list?.members?.find((item) => item.id === session?.id)?.userRole;
+  const sessionUserListRole = list?.userId === session?.id ? 'admin' : sessionUserInThisList?.userRole;
 
   const onInviteAccept = async () => {
     setAcceptLoading(true);
@@ -65,6 +68,14 @@ const List: React.FC = () => {
     await dispatch(listUserDelete({ listId, userId: session?.id }));
     setRejectLoading(false);
     setTimeout(() => setShowBanner(false), DELAY_FAST_MS);
+  };
+
+  const onEditClick = async () => {
+    if (!session?.id) return dispatch(switchLoginModal(true));
+    if (!listId) return;
+
+    await dispatch(switchListModal({ mounted: true, listId }));
+    // loadMainContent();
   };
 
   useEffect(() => {
@@ -92,6 +103,7 @@ const List: React.FC = () => {
 
   return (
     <ListUI
+      sessionUserListRole={sessionUserListRole}
       listInvitationRole={listInvitationRole}
       sessionUserOwnsList={sessionUserOwnsList}
       onInviteAccept={onInviteAccept}
@@ -111,6 +123,7 @@ const List: React.FC = () => {
       totalItems={totalItems}
       url={url}
       sort={sort}
+      onEditClick={onEditClick}
     />
   );
 };
