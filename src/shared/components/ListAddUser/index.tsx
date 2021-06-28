@@ -41,7 +41,7 @@ export const ListAddUser: React.FC<Props> = ({ listId }) => {
   const onListLeave = () => {
     if (itemsLoadingReader?.length || itemsLoadingEditor?.length) return;
 
-    // dispatch(listAddUserUnMount());
+    dispatch(listAddUserUnMount());
     setInList(false);
   };
 
@@ -67,6 +67,9 @@ export const ListAddUser: React.FC<Props> = ({ listId }) => {
   };
 
   const onRemoveFromList = async (userId: string) => {
+    const confirmedDelete = confirm('Are you sure you want to remove this user from this list?');
+    if (!confirmedDelete) return;
+
     setItemsLoadingRemove([...itemsLoadingEditor, userId]);
     await dispatch(listUserDelete({ listId: list?.id, userId }));
     setItemsLoadingRemove(itemsLoadingEditor.filter((item) => item !== userId));
