@@ -61,6 +61,7 @@ export {
   Send,
   Folder,
   DotsVertical,
+  Eye,
 } from './Svg';
 export { Switch } from './Switch';
 export { Tag } from './Tag';

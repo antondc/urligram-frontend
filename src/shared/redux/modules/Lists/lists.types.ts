@@ -27,13 +27,20 @@ export const LIST_BOOKMARK_DELETE_FAILURE = 'LIST_BOOKMARK_DELETE_FAILURE';
 export const LIST_DELETE_REQUEST = 'LIST_DELETE_REQUEST';
 export const LIST_DELETE_SUCCESS = 'LIST_DELETE_SUCCESS';
 export const LIST_DELETE_FAILURE = 'LIST_DELETE_FAILURE';
+export const LIST_USER_UPSERT_REQUEST = 'LIST_USER_UPSERT_REQUEST';
+export const LIST_USER_UPSERT_SUCCESS = 'LIST_USER_UPSERT_SUCCESS';
+export const LIST_USER_UPSERT_FAILURE = 'LIST_USER_UPSERT_FAILURE';
+export const LIST_USER_DELETE_REQUEST = 'LIST_USER_DELETE_REQUEST';
+export const LIST_USER_DELETE_SUCCESS = 'LIST_USER_DELETE_SUCCESS';
+export const LIST_USER_DELETE_FAILURE = 'LIST_USER_DELETE_FAILURE';
 
 export interface ListsError extends Error {
   field: string;
 }
 
 export interface ListUser extends UserState {
-  userRole: string;
+  userRole: 'reader' | 'editor';
+  userStatus: 'pending' | 'active';
 }
 
 export interface ListState {
@@ -48,6 +55,7 @@ export interface ListState {
   members: {
     id: string;
     userRole: 'editor' | 'reader';
+    userListStatus: 'active' | 'pending';
   }[];
   tags: {
     id: number;
@@ -285,6 +293,36 @@ interface ListDeleteFailureAction {
   payload: Partial<BookmarkState>;
 }
 
+interface ListUserUpsertRequestAction {
+  type: typeof LIST_USER_UPSERT_REQUEST;
+  payload: Partial<BookmarkState>;
+}
+
+interface ListUserUpsertSuccessAction {
+  type: typeof LIST_USER_UPSERT_SUCCESS;
+  payload: Partial<BookmarkState>;
+}
+
+interface ListUserUpsertFailureAction {
+  type: typeof LIST_USER_UPSERT_FAILURE;
+  payload: Partial<BookmarkState>;
+}
+
+interface ListUserDeleteRequestAction {
+  type: typeof LIST_USER_DELETE_REQUEST;
+  payload: Partial<BookmarkState>;
+}
+
+interface ListUserDeleteSuccessAction {
+  type: typeof LIST_USER_DELETE_SUCCESS;
+  payload: Partial<BookmarkState>;
+}
+
+interface ListUserDeleteFailureAction {
+  type: typeof LIST_USER_DELETE_FAILURE;
+  payload: Partial<BookmarkState>;
+}
+
 export type ListsActions =
   | ListsLoadRequestAction
   | ListsLoadSuccessAction
@@ -311,4 +349,10 @@ export type ListsActions =
   | ListBookmarkDeleteFailureAction
   | ListDeleteRequestAction
   | ListDeleteSuccessAction
-  | ListDeleteFailureAction;
+  | ListDeleteFailureAction
+  | ListUserUpsertRequestAction
+  | ListUserUpsertSuccessAction
+  | ListUserUpsertFailureAction
+  | ListUserDeleteRequestAction
+  | ListUserDeleteSuccessAction
+  | ListUserDeleteFailureAction;

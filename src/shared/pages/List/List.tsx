@@ -3,14 +3,14 @@ import React from 'react';
 import A from 'Components/A';
 import BookmarkRow from 'Components/BookmarkRow';
 import { BookmarkRowSkeletonGroup } from 'Components/BookmarkRow/BookmarkRowSkeletonGroup';
+import ListAddUser from 'Components/ListAddUser';
 import ListFollowButton from 'Components/ListFollowButton';
 import Pagination from 'Components/Pagination';
 import Sidebar from 'Components/Sidebar';
 import SidebarListTags from 'Components/SidebarListTags';
 import SidebarListUsers from 'Components/SidebarListUsers';
-import { ListState } from 'Modules/Lists/lists.types';
+import { ListState, ListUser } from 'Modules/Lists/lists.types';
 import { TagState } from 'Modules/Tags/tags.types';
-import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
 import { Hr, SortBy, Space } from 'Vendor/components';
 
@@ -18,9 +18,10 @@ import './List.less';
 
 interface Props {
   list: ListState;
+  sessionUserOwnsList: boolean;
   bookmarksIds: number[];
   bookmarksLoading: boolean;
-  usersInThisList: UserState[];
+  usersInThisList: ListUser[];
   usersInThisListLoading: boolean;
   tagsInThisList: TagState[];
   tagsInThisListLoading: boolean;
@@ -35,6 +36,7 @@ interface Props {
 
 export const List: React.FC<Props> = ({
   list,
+  sessionUserOwnsList,
   bookmarksIds,
   bookmarksLoading,
   usersInThisList,
@@ -49,13 +51,34 @@ export const List: React.FC<Props> = ({
   <>
     <div className="List">
       <div className="List-header List-headerTitle">
-        <span>
+        <div className="List-headerTitleText">
           Bookmarks in
           <Space />
           <A href={`/lists/${list?.id}`} underlined>
             {list?.name}
           </A>
-        </span>
+        </div>
+        <div className="List-headerImages">
+          {usersInThisList.map((item) => (
+            <A
+              className={
+                'List-headerImagesItem' +
+                (item?.userStatus === 'pending' ? ' List-headerImagesItem--pending' : ' List-headerImagesItem--active')
+              }
+              href={`/users/${item?.id}`}
+              styled={false}
+              key={item?.id}
+              frontend
+            >
+              <img className="List-headerImagesItemImage" src={item.image?.w200h200} alt={item.name} />
+            </A>
+          ))}
+          {sessionUserOwnsList && (
+            <div className="List-headerPlusIcon">
+              <ListAddUser listId={list?.id} />
+            </div>
+          )}
+        </div>
         <ListFollowButton className="List-joinList" listId={list?.id} />
       </div>
       <div className="List-header">

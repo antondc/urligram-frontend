@@ -3,6 +3,7 @@ import {
   SWITCH_BOOKMARK_UPDATE_MODAL,
   SWITCH_FORGOT_PASSWORD_MODAL,
   SWITCH_LANGUAGES_MODAL,
+  SWITCH_LIST_ADD_USER_MODAL,
   SWITCH_LIST_MODAL,
   SWITCH_LOGIN_MODAL,
   SWITCH_MESSAGE_MODAL,
@@ -66,6 +67,10 @@ export const initialState: UiState = {
     type: 'popup',
     mounted: false,
   },
+  listAddUserModal: {
+    type: 'popup',
+    mounted: false,
+  },
   bookmarkListsModals: [],
   bookmarkSendModals: [],
   notifications: [],
@@ -89,6 +94,7 @@ export const Ui = (state = initialState, action: UiActions): UiState => {
     case UI_NOTIFICATION_VIEWED:
     case UI_NOTIFICATION_PUSH:
     case UI_CLOSE_ALL_MODALS:
+    case SWITCH_LIST_ADD_USER_MODAL:
       return Object.assign({}, state, action.payload);
 
     default:

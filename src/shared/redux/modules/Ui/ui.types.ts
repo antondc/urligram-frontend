@@ -8,6 +8,7 @@ export const SWITCH_FORGOT_PASSWORD_MODAL = 'SWITCH_FORGOT_PASSWORD_MODAL';
 export const SWITCH_RESET_PASSWORD_MODAL = 'SWITCH_RESET_PASSWORD_MODAL';
 export const SWITCH_BOOKMARK_CREATE_MODAL = 'SWITCH_BOOKMARK_CREATE_MODAL';
 export const SWITCH_BOOKMARK_UPDATE_MODAL = 'SWITCH_BOOKMARK_UPDATE_MODAL';
+export const SWITCH_LIST_ADD_USER_MODAL = 'SWITCH_LIST_ADD_USER_MODAL';
 export const UI_BOOKMARK_LISTS_MODALS_MOUNT = 'UI_BOOKMARK_LISTS_MODALS_MOUNT';
 export const UI_BOOKMARK_LISTS_MODALS_UNMOUNT = 'UI_BOOKMARK_LISTS_MODALS_UNMOUNT';
 export const SWITCH_LIST_MODAL = 'SWITCH_LIST_MODAL';
@@ -67,6 +68,7 @@ export type UiState = {
   listModal: {
     listId?: number;
   } & UiBaseModal;
+  listAddUserModal: UiBaseModal;
   bookmarkListsModals: BookmarkListsModals;
   bookmarkSendModals: BookmarkSendModals;
   notifications?: NotificationState[];
@@ -152,6 +154,11 @@ interface UiCloseAllModals {
   payload: UiState;
 }
 
+interface SwitchListAddUserModal {
+  type: typeof SWITCH_LIST_ADD_USER_MODAL;
+  payload: UiState;
+}
+
 export type UiActions =
   | SwitchUserModal
   | SwitchLanguagesModal
@@ -168,4 +175,5 @@ export type UiActions =
   | BookmarkListModalsUnmount
   | UiNotificationViewedAction
   | UiNotificationPushAction
-  | UiCloseAllModals;
+  | UiCloseAllModals
+  | SwitchListAddUserModal;

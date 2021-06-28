@@ -1,0 +1,152 @@
+@import '../../css/imports.less';
+
+@c: .ListAddUser;
+
+@{c} {
+  display: flex;
+  height: 15px;
+  width: 15px;
+  padding: 0;
+
+  &-iconSend {
+    height: 100%;
+    width: 100%;
+    min-height: unset;
+    min-width: unset;
+    fill: @c-base;
+    transition: fill @td-fastest @ease;
+
+    &:hover {
+      fill: @c-success;
+    }
+  }
+
+  &-users {
+    display: grid;
+    max-height: 150px;
+    min-width: 150px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    gap: 5px;
+
+    .hideScrollbar;
+  }
+
+  &-usersItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1px;
+    transition: fill @td-fast @ease;
+
+    &:hover {
+      @{c}-usersItemIcon {
+        opacity: 1;
+      }
+    }
+  }
+
+  &-usersItemText {
+    flex: 1;
+    margin-right: 20px;
+    font-weight: @fw-semibold;
+    transition: color @td-fast @ease;
+
+    .hoverTransition;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &-usersItemIcon {
+    margin-left: 5px;
+    opacity: 0;
+    fill: @gradientColors[black-4];
+    transition: fill @td-normal @ease, opacity @td-normal @ease;
+
+    .hoverTransition;
+
+    &:hover {
+      fill: @gradientColors[yellow-1];
+    }
+  }
+
+  &-usersItemIconRemoveFromList {
+    margin-left: 5px;
+    opacity: 0;
+    fill: @gradientColors[black-4];
+    transform: rotate(0deg);
+    transition: fill @td-normal @ease, opacity @td-normal @ease, transform @td-normal @ease;
+
+    &--inactive {
+      fill: @gradientColors[black-4];
+
+      &:hover {
+        fill: @gradientColors[black-4];
+        cursor: default;
+        pointer-events: none;
+      }
+    }
+
+    &--active {
+      &:hover {
+        fill: @c-error;
+        transform: rotate(45deg);
+      }
+    }
+  }
+
+  &-usersItem--userIsReader {
+    @{c}-usersItemIconReader {
+      opacity: 1;
+      fill: @c-success;
+
+      &:hover {
+        opacity: 1;
+        cursor: default;
+      }
+    }
+  }
+
+  &-usersItem--userIsReaderPending {
+    @{c}-usersItemIconReader {
+      opacity: 1;
+      fill: @gradientColors[yellow-1];
+
+      &:hover {
+        opacity: 1;
+        cursor: default;
+      }
+    }
+  }
+
+  &-usersItem--userIsEditor {
+    @{c}-usersItemIconEditor {
+      opacity: 1;
+      fill: @c-success;
+
+      &:hover {
+        opacity: 1;
+        cursor: default;
+      }
+    }
+  }
+
+  &-usersItem--userIsEditorPending {
+    @{c}-usersItemIconEditor {
+      opacity: 1;
+      fill: @gradientColors[yellow-1];
+
+      &:hover {
+        opacity: 1;
+        cursor: default;
+      }
+    }
+  }
+
+  &-usersItemLoader {
+    margin-left: 5px;
+    stroke: @c-success;
+  }
+}

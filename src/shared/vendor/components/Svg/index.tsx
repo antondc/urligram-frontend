@@ -13,6 +13,7 @@ import CrossSvg from '../../../assets/svg/cross.svg';
 import DotsVerticalSvg from '../../../assets/svg/dotsVertical.svg';
 import EditSvg from '../../../assets/svg/edit.svg';
 import EditCircleSvg from '../../../assets/svg/editCircle.svg';
+import EyeSvg from '../../../assets/svg/eye.svg';
 import FolderSvg from '../../../assets/svg/folder.svg';
 import LinkSvg from '../../../assets/svg/link.svg';
 import ListSvg from '../../../assets/svg/list.svg';
@@ -64,7 +65,8 @@ export type IconsType =
   | 'PlusCircle'
   | 'EditCircle'
   | 'PlusCircleWithBackground'
-  | 'List';
+  | 'List'
+  | 'Eye';
 
 export interface Props extends SVGProps<SVGElement> {
   size?: IconSize;
@@ -123,6 +125,7 @@ export const PlusCircleWithBackground: React.FC<Props> = (props) => Svg(PlusCirc
 export const Send: React.FC<Props> = (props) => Svg(SendSvg)(props);
 export const Sort: React.FC<Props> = (props) => Svg(SortSvg)(props);
 export const List: React.FC<Props> = (props) => Svg(ListSvg)(props);
+export const Eye: React.FC<Props> = (props) => Svg(EyeSvg)(props);
 
 interface IconProps extends Props {
   name: IconsType;

@@ -24,6 +24,74 @@
     font-weight: @fw-extraBold;
   }
 
+  &-headerTitleText {
+    flex: 1;
+  }
+
+  &-headerImages {
+    display: flex;
+    position: relative;
+    align-items: center;
+  }
+
+  &-headerImagesItem {
+    position: relative;
+    height: 20px;
+    width: 20px;
+    // margin-right: -5px;
+    overflow: hidden;
+    background: @c-background;
+    outline: 2px solid @c-background;
+    transform: scale(1);
+    transform-origin: center;
+    transition: transform @td-fast @ease-outCustom1;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 2px @c-base;
+    border-radius: 50%;
+
+    &:last-of-type {
+      margin: 0;
+    }
+
+    &:hover {
+      transform: scale(1.15);
+      cursor: pointer;
+    }
+
+    &--pending {
+      box-shadow: 0 0 0 2px @c-alert;
+    }
+
+    &--active {
+      box-shadow: 0 0 0 2px @c-success;
+    }
+  }
+
+  &-headerImagesItemImage {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    object-fit: contain;
+    object-position: center;
+  }
+
+  &-headerPlusIcon {
+    position: absolute;
+    height: 15px;
+    width: 15px;
+    top: -7px;
+    right: -7px;
+    overflow: hidden;
+    background: @c-background;
+    outline: 1.5px solid @c-background;
+    box-shadow: 0 0 0 0 @c-base;
+    border-radius: 50%;
+  }
+
   &-joinList {
     height: 20px;
     width: 20px;

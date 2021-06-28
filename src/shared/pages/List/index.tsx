@@ -40,6 +40,7 @@ const List: React.FC = () => {
   const totalItems = useSelector(selectBookmarksTotalItems);
   const url = useSelector(selectCurrentFullUrl);
   const sort = useSelector(selectBookmarksMetaSort);
+  const sessionUserOwnsList = session?.id === list?.userId;
 
   useEffect(() => {
     dispatch(listLoadById(listId));
@@ -57,6 +58,7 @@ const List: React.FC = () => {
 
   return (
     <ListUI
+      sessionUserOwnsList={sessionUserOwnsList}
       list={list}
       bookmarksIds={bookmarksIds}
       bookmarksLoading={bookmarksLoading}

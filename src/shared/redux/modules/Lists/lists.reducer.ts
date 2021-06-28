@@ -21,6 +21,12 @@ import {
   LIST_UPDATE_FAILURE,
   LIST_UPDATE_REQUEST,
   LIST_UPDATE_SUCCESS,
+  LIST_USER_DELETE_FAILURE,
+  LIST_USER_DELETE_REQUEST,
+  LIST_USER_DELETE_SUCCESS,
+  LIST_USER_UPSERT_FAILURE,
+  LIST_USER_UPSERT_REQUEST,
+  LIST_USER_UPSERT_SUCCESS,
   LISTS_LOAD_REQUEST,
   LISTS_LOAD_SUCCESS,
   ListsActions,
@@ -58,6 +64,12 @@ export const Lists = (state = initialState, action: ListsActions): ListsState =>
     case LIST_DELETE_REQUEST:
     case LIST_DELETE_SUCCESS:
     case LIST_DELETE_FAILURE:
+    case LIST_USER_UPSERT_REQUEST:
+    case LIST_USER_UPSERT_SUCCESS:
+    case LIST_USER_UPSERT_FAILURE:
+    case LIST_USER_DELETE_REQUEST:
+    case LIST_USER_DELETE_SUCCESS:
+    case LIST_USER_DELETE_FAILURE:
       return Object.assign({}, state, action.payload);
 
     default:
