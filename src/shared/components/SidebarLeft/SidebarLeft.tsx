@@ -2,12 +2,9 @@ import React from 'react';
 
 import A from 'Components/A';
 import SidebarListLists from 'Components/SidebarListLists';
-import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
 import { GlossaryState } from 'Modules/Languages/languages.types';
 import { ListState } from 'Modules/Lists/lists.types';
 import { Hr } from 'Vendor/components';
-import RecentBookmarksReceived from '../RecentBookmarksReceived';
-import RecentBookmarksSent from '../RecentBookmarksSent';
 
 import './SidebarLeft.less';
 
@@ -19,9 +16,6 @@ interface Props {
   lists: ListState[];
   listsLoading: boolean;
   listsShown: boolean;
-  myRecentBookmarksSent: BookmarkState[];
-  myRecentBookmarksReceived: BookmarkState[];
-  sharedBookmarksLoading: boolean;
   onListTitleClick: () => void;
   switchUiBookmarkModal: (e: React.MouseEvent<HTMLAnchorElement>) => void;
   switchUiListModal: (e: React.MouseEvent<HTMLAnchorElement>) => void;
@@ -37,9 +31,6 @@ export const SidebarLeft: React.FC<Props> = ({
   onListTitleClick,
   switchUiBookmarkModal,
   switchUiListModal,
-  myRecentBookmarksSent,
-  myRecentBookmarksReceived,
-  sharedBookmarksLoading,
 }) => (
   <div className="SidebarLeft" data-test-id="SidebarLeft">
     {isLoggedIn && (
@@ -147,18 +138,6 @@ export const SidebarLeft: React.FC<Props> = ({
           href={`users/${sessionId}/lists?sort=-createdAt`}
           listsShown={listsShown}
           onListTitleClick={onListTitleClick}
-        />
-        <RecentBookmarksSent
-          className="SidebarLeft-sidebarListBookmarksReceived"
-          title="Recently sent"
-          loading={sharedBookmarksLoading}
-          bookmarks={myRecentBookmarksSent}
-        />
-        <RecentBookmarksReceived
-          className="SidebarLeft-sidebarListBookmarksReceived"
-          title="Received"
-          loading={sharedBookmarksLoading}
-          bookmarks={myRecentBookmarksReceived}
         />
       </>
     )}

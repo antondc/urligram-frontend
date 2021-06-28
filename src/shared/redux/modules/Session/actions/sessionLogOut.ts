@@ -5,8 +5,6 @@ import {
 } from 'Modules/Session/session.types';
 import HttpClient from 'Services/HttpClient';
 import { AppThunk } from '../../..';
-import { sharedReset } from '../../Shared/actions/sharedReset';
-import { SharedActions } from '../../Shared/shared.types';
 import { SessionActions } from '../session.types';
 
 const emptyUser = {
@@ -30,7 +28,7 @@ const emptyUser = {
   updatedAt: undefined,
 };
 
-export const sessionLogOut = (): AppThunk<Promise<void>, SessionActions | SharedActions> => async (
+export const sessionLogOut = (): AppThunk<Promise<void>, SessionActions> => async (
   dispatch,
   getState
 ): Promise<void> => {
@@ -48,7 +46,6 @@ export const sessionLogOut = (): AppThunk<Promise<void>, SessionActions | Shared
   try {
     await HttpClient.delete('/login');
 
-    dispatch(sharedReset());
     dispatch({
       type: SESSION_LOG_OUT_SUCCESS,
       payload: emptyUser,

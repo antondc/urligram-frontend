@@ -2,9 +2,6 @@ import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
 import { userLoad } from 'Modules/Users/actions/userLoad';
 import HttpClient from 'Services/HttpClient';
 import { AppThunk } from '../../..';
-import { bookmarksLoadReceived } from '../../Shared/actions/bookmarksLoadReceived';
-import { bookmarksLoadSent } from '../../Shared/actions/bookmarksLoadSent';
-import { SharedActions } from '../../Shared/shared.types';
 import {
   SESSION_LOG_IN_FAILURE,
   SESSION_LOG_IN_REQUEST,
@@ -18,10 +15,7 @@ import {
 export const sessionLogIn = ({
   nameOrEmail,
   password,
-}: SessionLogInApiRequest): AppThunk<Promise<void>, SessionActions | SharedActions> => async (
-  dispatch,
-  getState
-): Promise<void> => {
+}: SessionLogInApiRequest): AppThunk<Promise<void>, SessionActions> => async (dispatch, getState): Promise<void> => {
   try {
     const { Session: sessionBeforeRequest } = getState();
     await dispatch({
@@ -36,8 +30,6 @@ export const sessionLogIn = ({
 
     await dispatch(userLoad(data?.attributes?.id));
     await dispatch(switchLoginModal(false));
-    await dispatch(bookmarksLoadReceived());
-    await dispatch(bookmarksLoadSent());
 
     await dispatch({
       type: SESSION_LOG_IN_SUCCESS,
