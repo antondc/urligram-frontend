@@ -21,9 +21,12 @@ interface Props {
 const A: React.FC<Props> = ({ href, targetBlank, ...props }) => {
   const currentLanguageSlug = useSelector(selectCurrentLanguageSlug);
   const hrefWithoutLeadingSlash = href?.replace(/^\//, '');
+  const hrefAlreadyHasSlug = hrefWithoutLeadingSlash?.startsWith(currentLanguageSlug);
 
   const hrefWithCurrentSlug =
-    !!currentLanguageSlug && !targetBlank ? `/${currentLanguageSlug}/${hrefWithoutLeadingSlash}` : href;
+    !!currentLanguageSlug && !targetBlank && !hrefAlreadyHasSlug
+      ? `/${currentLanguageSlug}/${hrefWithoutLeadingSlash}`
+      : href;
 
   return <ComponentsA {...props} href={hrefWithCurrentSlug} targetBlank={targetBlank} />;
 };

@@ -79,14 +79,14 @@ export const BookmarkLists: React.FC<Props> = ({
                       (isBookmarkInList ? ' BookmarkLists-listsItem--included' : '') +
                       (wasRecentlyUpdated ? ' BookmarkLists-listsItem--recentlyUpdated' : '')
                     }
-                    key={item.id}
+                    key={item?.id}
                   >
                     <Span className="BookmarkList-listsItemText" weight="semiBold">
                       <A href={`lists/${item?.id}?sort=-updatedAt`} frontend onClick={onListLeave}>
-                        {item.name}
+                        {item?.name}
                       </A>
                     </Span>
-                    {itemsLoading?.includes(item.id) ? (
+                    {itemsLoading?.includes(item?.id) ? (
                       <SpinnerCircularBrute className="BookmarkLists-listsItemLoader" />
                     ) : (
                       <PlusCircleWithBackground

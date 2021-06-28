@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { bookmarkLoadById } from 'Modules/Bookmarks/actions/bookmarkLoadById';
 import { selectBookmarksById } from 'Modules/Bookmarks/selectors/selectBookmarkById';
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
 import { linkUpdateVote } from 'Modules/Links/actions/linkUpdateVote';
@@ -48,6 +49,12 @@ const BookmarkRow: React.FC<Props> = ({ id }) => {
     if (!sessionUserBookmarkedLink) return;
     await dispatch(switchBookmarkUpdateModal({ mounted: true, bookmarkId: sessionUserBookmarkId }));
   };
+
+  useEffect(() => {
+    // If user has bookmarked this link, but it hasnt been retrieved yet from API, retrieve it
+    if (!!sessionUserBookmarkedLink && !sessionUserBookmark?.id)
+      dispatch(bookmarkLoadById({ bookmarkId: sessionUserBookmarkId }));
+  }, [sessionUserBookmarkedLink]);
 
   if (!id) return null;
 

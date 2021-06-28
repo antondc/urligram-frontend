@@ -1,7 +1,6 @@
 import React from 'react';
 
 import A from 'Components/A';
-import ListFollowButton from 'Components/ListFollowButton';
 import { ListState } from 'Modules/Lists/lists.types';
 import { SessionState } from 'Modules/Session/session.types';
 import { Private, Space, Span, Tag } from 'Vendor/components';
@@ -40,10 +39,7 @@ export const ListRow: React.FC<Props> = ({ id, name, tags, description, isPrivat
         </A>
       ))}
     </div>
-    <div className="ListRow-icons">
-      {isPrivate && <Private className="ListRow-icon" />}
-      <ListFollowButton listId={id} />
-    </div>
+    <div className="ListRow-icons">{isPrivate && <Private className="ListRow-icon" />}</div>
   </div>
 );
 

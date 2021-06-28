@@ -4,7 +4,6 @@ import A from 'Components/A';
 import BookmarkRow from 'Components/BookmarkRow';
 import { BookmarkRowSkeletonGroup } from 'Components/BookmarkRow/BookmarkRowSkeletonGroup';
 import ListAddUser from 'Components/ListAddUser';
-import ListFollowButton from 'Components/ListFollowButton';
 import Pagination from 'Components/Pagination';
 import Sidebar from 'Components/Sidebar';
 import SidebarListTags from 'Components/SidebarListTags';
@@ -13,11 +12,13 @@ import { ListState, ListUser } from 'Modules/Lists/lists.types';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
-import { Hr, SortBy, Space } from 'Vendor/components';
+import { AnimateHeight, Check, Cross, Hr, SortBy, Space, SpinnerCircularBrute } from 'Vendor/components';
 
 import './List.less';
 
 interface Props {
+  showBanner: boolean;
+  listInvitationRole: 'reader' | 'editor' | 'admin';
   list: ListState;
   listUserOwner: UserState;
   sessionUserOwnsList: boolean;
@@ -34,12 +35,18 @@ interface Props {
   };
   totalItems: number;
   sort: string;
+  onInviteAccept: () => void;
+  onInviteReject: () => void;
+  acceptLoading: boolean;
+  rejectLoading: boolean;
 }
 
 export const List: React.FC<Props> = ({
+  listInvitationRole,
   list,
   listUserOwner,
   sessionUserOwnsList,
+  showBanner,
   bookmarksIds,
   bookmarksLoading,
   usersInThisList,
@@ -50,6 +57,10 @@ export const List: React.FC<Props> = ({
   totalItems,
   url,
   sort,
+  onInviteAccept,
+  onInviteReject,
+  acceptLoading,
+  rejectLoading,
 }) => (
   <>
     <div className="List">
@@ -67,6 +78,7 @@ export const List: React.FC<Props> = ({
             href={`/users/${listUserOwner?.id}`}
             styled={false}
             frontend
+            key={listUserOwner?.id}
           >
             <img
               className="List-headerImagesItemImage"
@@ -74,7 +86,7 @@ export const List: React.FC<Props> = ({
               alt={listUserOwner?.name}
             />
           </A>
-          {usersInThisList.map((item) => (
+          {usersInThisList?.map((item) => (
             <A
               className={
                 'List-headerImagesItem List-headerImagesItemJoined' +
@@ -96,8 +108,20 @@ export const List: React.FC<Props> = ({
             </div>
           )}
         </div>
-        <ListFollowButton className="List-joinList" listId={list?.id} />
       </div>
+      <AnimateHeight className="List-notification" mounted={showBanner} speed="fastest" ease={[1, 0.02, 0.83, 1.15]}>
+        <div className="List-notificationText">You were invited to this list as {listInvitationRole}: join it?</div>
+        {acceptLoading ? (
+          <SpinnerCircularBrute className="List-notificationIcon" />
+        ) : (
+          <Check className="List-notificationIcon List-notificationIconCheck" onClick={onInviteAccept} />
+        )}
+        {rejectLoading ? (
+          <SpinnerCircularBrute className="List-notificationIcon" />
+        ) : (
+          <Cross className="List-notificationIcon List-notificationIconCross" onClick={onInviteReject} />
+        )}
+      </AnimateHeight>
       <div className="List-header">
         <SortBy
           options={[
@@ -110,6 +134,7 @@ export const List: React.FC<Props> = ({
           loading={bookmarksLoading}
         />
       </div>
+
       <div className="List-bookmarks">
         {bookmarksLoading ? (
           <BookmarkRowSkeletonGroup length={bookmarksIds?.length || DEFAULT_PAGE_SIZE} />

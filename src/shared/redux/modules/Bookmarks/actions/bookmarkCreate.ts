@@ -11,6 +11,7 @@ import { USERS_LOAD_SUCCEED, UsersActions } from 'Modules/Users/users.types';
 import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
 import { AppThunk } from '../../../index';
+import { LISTS_LOAD_SUCCESS, ListsActions } from '../../Lists/lists.types';
 import { bookmarkCreateRequest } from './bookmarkCreateRequest';
 
 export const bookmarkCreate = ({
@@ -20,7 +21,7 @@ export const bookmarkCreate = ({
   tags,
 }: BookmarkCreateApiRequest): AppThunk<
   Promise<BookmarkState>,
-  BookmarksActions | LinksActions | UsersActions
+  BookmarksActions | LinksActions | UsersActions | ListsActions
 > => async (dispatch, getState) => {
   const { Bookmarks: bookmarksBeforeRequest } = getState();
 
@@ -34,8 +35,9 @@ export const bookmarkCreate = ({
       tags,
     });
 
-    const { Bookmarks: bookmarksAfterResponse, Users: usersAfterResponse } = getState();
+    const { Bookmarks: bookmarksAfterResponse, Users: usersAfterResponse, Lists: listsAfterResponse } = getState();
 
+    // Update all bookmarks that refer to the same linkId as the created one
     const bookmarksToUpdate = Object.values(bookmarksAfterResponse.byKey).filter(
       (item) => item?.linkId === bookmarkData?.attributes?.linkId
     );
@@ -53,6 +55,13 @@ export const bookmarkCreate = ({
       users: [...item?.users, bookmarkData?.attributes?.userId],
     }));
 
+    // If any of the currentIds has same linkId as the newly created bookmark, then replace it for the new bookmark id
+    const currentIdsWithNewItemReplaced = bookmarksAfterResponse.currentIds.map((item) => {
+      if (bookmarksToUpdate.map((item) => item?.id).includes(item)) return bookmarkData?.attributes?.id;
+
+      return item;
+    });
+
     dispatch({
       type: BOOKMARK_CREATE_SUCCESS,
       payload: {
@@ -62,7 +71,17 @@ export const bookmarkCreate = ({
           ...serializerFromArrayToByKey<BookmarkState, BookmarkState>({ data: bookmarksWithNewBookmark }),
           [bookmarkData?.attributes?.id]: bookmarkData?.attributes,
         },
-        currentIds: [bookmarkData?.attributes?.id, ...(bookmarksAfterResponse?.currentIds || [])],
+        currentIds: currentIdsWithNewItemReplaced,
+      },
+    });
+
+    dispatch({
+      type: LISTS_LOAD_SUCCESS,
+      payload: {
+        ...listsAfterResponse,
+        byKey: {
+          ...listsAfterResponse.byKey,
+        },
       },
     });
 

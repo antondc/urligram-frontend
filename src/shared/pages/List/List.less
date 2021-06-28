@@ -16,6 +16,44 @@
     border-bottom: none;
   }
 
+  &-notification {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    background: @c-alert;
+    border: 2px solid @c-base;
+    border-bottom: none;
+  }
+
+  &-notificationText {
+    flex: 1;
+    font-weight: @fw-bold;
+  }
+
+  &-notificationIcon {
+    height: 16px;
+    width: 16px;
+    min-height: 16px;
+    min-width: 16px;
+    margin-left: 10px;
+
+    .hoverTransition;
+  }
+
+  &-notificationIconCross {
+    height: 14px;
+    width: 14px;
+    min-height: 14px;
+    min-width: 14px;
+    fill: @c-error;
+  }
+
+  &-notificationIconCheck {
+    fill: @c-success;
+  }
+
   &-headerTitle {
     display: flex;
     justify-content: space-between;

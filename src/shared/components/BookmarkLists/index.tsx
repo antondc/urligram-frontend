@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { listBookmarkCreate } from 'Modules/Lists/actions/listBookmarkCreate';
 import { listBookmarkDelete } from 'Modules/Lists/actions/listBookmarkDelete';
 import { listCreate } from 'Modules/Lists/actions/listCreate';
-import { selectListsByUserId } from 'Modules/Lists/selectors/selectListsByUserId';
+import { selectListsByUserIdAdminOrEditor } from 'Modules/Lists/selectors/selectListsByUserIdAdminOrEditor';
 import { selectListsErrorLast } from 'Modules/Lists/selectors/selectListsErrorLast';
 import { RootState } from 'Modules/rootType';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
@@ -34,7 +34,9 @@ export const BookmarkLists: React.FC<Props> = ({ bookmarkId }) => {
   const [submitError, setSubmitError] = useState<string>(undefined);
   const [recentlyUpdated, setRecentlyUpdated] = useState<number[]>([]);
   const [inList, setInList] = useState<boolean>(false);
-  const lists = useSelector((state: RootState) => selectListsByUserId(state, { userId: session?.id }));
+  const listsEditable = useSelector((state: RootState) =>
+    selectListsByUserIdAdminOrEditor(state, { userId: session?.id })
+  );
 
   const onListEnter = () => {
     setInList(true);
@@ -131,7 +133,7 @@ export const BookmarkLists: React.FC<Props> = ({ bookmarkId }) => {
       onCreateListSubmit={onCreateListSubmit}
       listInputName={listInputName}
       submitError={submitError}
-      lists={lists}
+      lists={listsEditable}
       itemsLoading={itemsLoading}
       onListTitleInputChange={onListTitleInputChange}
       showCreateList={showCreateList}

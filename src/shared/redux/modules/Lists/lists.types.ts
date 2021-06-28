@@ -39,8 +39,8 @@ export interface ListsError extends Error {
 }
 
 export interface ListUser extends UserState {
-  userRole: 'reader' | 'editor';
-  userStatus: 'pending' | 'active';
+  userRole?: 'reader' | 'editor' | 'admin';
+  userStatus?: 'pending' | 'active';
 }
 
 export interface ListState {
@@ -54,7 +54,7 @@ export interface ListState {
   loading?: boolean;
   members: {
     id: string;
-    userRole: 'editor' | 'reader';
+    userRole: 'reader' | 'editor' | 'admin';
     userListStatus: 'active' | 'pending';
   }[];
   tags: {

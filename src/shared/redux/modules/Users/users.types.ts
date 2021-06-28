@@ -30,7 +30,8 @@ export interface UserState {
   following?: string[];
   lists?: {
     id: number;
-    userRole: string;
+    userRole: 'reader' | 'editor' | 'admin';
+    userListStatus?: 'pending' | 'active';
   }[];
   bookmarksIds?: number[];
   tags?: {

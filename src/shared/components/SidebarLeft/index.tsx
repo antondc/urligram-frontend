@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { selectCurrentGlossary } from 'Modules/Languages/selectors/selectCurrentGlossary';
 import { listsLoadByUserId } from 'Modules/Lists/actions/listsLoadByUserId';
-import { selectListsByUserId } from 'Modules/Lists/selectors/selectListsByUserId';
+import { selectListsByUserIdAll } from 'Modules/Lists/selectors/selectListsByUserIdAll';
 import { selectListsLoading } from 'Modules/Lists/selectors/selectListsLoading';
 import { RootState } from 'Modules/rootType';
 import { selectCurrentRoute } from 'Modules/Routes/selectors/selectCurrentRoute';
@@ -29,7 +29,7 @@ export const SidebarLeft: React.FC = () => {
   const sessionId = useSelector(selectSessionUserId);
   const glossary = useSelector(selectCurrentGlossary);
   const route = useSelector(selectCurrentRoute);
-  const lists = useSelector((state: RootState) => selectListsByUserId(state, { userId: sessionId }));
+  const lists = useSelector((state: RootState) => selectListsByUserIdAll(state, { userId: sessionId }));
   const listsLoading = useSelector(selectListsLoading);
   const [listsShown, setListsShown] = useState<boolean>(true);
   const timeMsInFourHours = Date.now() + 4 * 60 * 60 * 1000;

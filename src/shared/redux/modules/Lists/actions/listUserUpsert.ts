@@ -10,7 +10,7 @@ import { AppThunk } from '../../..';
 interface ListUserUpsert {
   listId: number;
   userId: string;
-  userRole: 'reader' | 'editor';
+  userRole: 'reader' | 'editor' | 'admin';
 }
 
 interface ListUserUpsertResponse {
@@ -18,7 +18,7 @@ interface ListUserUpsertResponse {
     attributes: {
       id: string;
       userListStatus: boolean;
-      userRole: 'reader' | 'editor';
+      userRole: 'reader' | 'editor' | 'admin';
     };
   };
 }
