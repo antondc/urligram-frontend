@@ -21,6 +21,8 @@ import { selectUsersInThisList } from 'Modules/Sections/selectors/selectUsersInT
 import { selectUsersInThisListIds } from 'Modules/Sections/selectors/selectUsersInThisListIds';
 import { selectUsersInThisListLoading } from 'Modules/Sections/selectors/selectUsersInThisListLoading';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
+import { userLoad } from 'Modules/Users/actions/userLoad';
+import { selectUserById } from 'Modules/Users/selectors/selectUserById';
 import { List as ListUI } from './List';
 
 const List: React.FC = () => {
@@ -41,6 +43,7 @@ const List: React.FC = () => {
   const url = useSelector(selectCurrentFullUrl);
   const sort = useSelector(selectBookmarksMetaSort);
   const sessionUserOwnsList = session?.id === list?.userId;
+  const listUserOwner = useSelector((state: RootState) => selectUserById(state, { id: list?.userId }));
 
   useEffect(() => {
     dispatch(listLoadById(listId));
@@ -56,10 +59,15 @@ const List: React.FC = () => {
     usersInThisListIds?.length && dispatch(sectionsUsersInThisListLoad(usersInThisListIds));
   }, [JSON.stringify(usersInThisListIds), session?.id]);
 
+  useEffect(() => {
+    !listUserOwner?.id && dispatch(userLoad(list?.userId));
+  }, [list?.id]);
+
   return (
     <ListUI
       sessionUserOwnsList={sessionUserOwnsList}
       list={list}
+      listUserOwner={listUserOwner}
       bookmarksIds={bookmarksIds}
       bookmarksLoading={bookmarksLoading}
       usersInThisList={usersInThisList}

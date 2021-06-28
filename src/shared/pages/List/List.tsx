@@ -11,6 +11,7 @@ import SidebarListTags from 'Components/SidebarListTags';
 import SidebarListUsers from 'Components/SidebarListUsers';
 import { ListState, ListUser } from 'Modules/Lists/lists.types';
 import { TagState } from 'Modules/Tags/tags.types';
+import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
 import { Hr, SortBy, Space } from 'Vendor/components';
 
@@ -18,6 +19,7 @@ import './List.less';
 
 interface Props {
   list: ListState;
+  listUserOwner: UserState;
   sessionUserOwnsList: boolean;
   bookmarksIds: number[];
   bookmarksLoading: boolean;
@@ -36,6 +38,7 @@ interface Props {
 
 export const List: React.FC<Props> = ({
   list,
+  listUserOwner,
   sessionUserOwnsList,
   bookmarksIds,
   bookmarksLoading,
@@ -59,11 +62,25 @@ export const List: React.FC<Props> = ({
           </A>
         </div>
         <div className="List-headerImages">
+          <A
+            className="List-headerImagesItem List-headerImagesItemOwner"
+            href={`/users/${listUserOwner?.id}`}
+            styled={false}
+            frontend
+          >
+            <img
+              className="List-headerImagesItemImage"
+              src={listUserOwner?.image?.w200h200}
+              alt={listUserOwner?.name}
+            />
+          </A>
           {usersInThisList.map((item) => (
             <A
               className={
-                'List-headerImagesItem' +
-                (item?.userStatus === 'pending' ? ' List-headerImagesItem--pending' : ' List-headerImagesItem--active')
+                'List-headerImagesItem List-headerImagesItemJoined' +
+                (item?.userStatus === 'pending'
+                  ? ' List-headerImagesItemJoined--pending'
+                  : ' List-headerImagesItemJoined--active')
               }
               href={`/users/${item?.id}`}
               styled={false}
