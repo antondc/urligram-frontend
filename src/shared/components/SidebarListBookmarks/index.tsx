@@ -4,7 +4,7 @@ import A from 'Components/A';
 import { RenderInPortal } from 'Components/Portal';
 import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
 import { stringToDashCase } from 'Tools/utils/string/stringToDashCase';
-import { Bookmark, H4, Hr, Tooltip, Triangle } from 'Vendor/components';
+import { Bookmark, Tooltip, Triangle } from 'Vendor/components';
 import { SidebarListBookmarksSkeleton } from './SidebarListBookmarksSkeleton';
 
 import './SidebarListBookmarks.less';
@@ -33,19 +33,19 @@ const SidebarListBookmarks: React.FC<Props> = ({ bookmarks, loading, title, href
               <span className="SidebarListBookmarks-title">
                 <img className="SidebarListBookmarks-favicon" src={item?.favicon} />
                 <A className="SidebarListBookmarks-link" href={item?.url} targetBlank underlined>
-                  {title}
+                  {item?.title}
                 </A>
               </span>
               <RenderInPortal>
                 <Tooltip
-                  parentElementId={`${stringToDashCase(title)}-averageVote-${item?.id}`}
+                  parentElementId={`${stringToDashCase(item?.title)}-averageVote-${item?.id}`}
                   content="Average vote"
                   delay={1.5}
                 />
               </RenderInPortal>
               <span
                 className="SidebarListBookmarks-descriptionItem"
-                id={`${stringToDashCase(title)}-averageVote-${item?.id}`}
+                id={`${stringToDashCase(item?.title)}-averageVote-${item?.id}`}
               >
                 {!!item?.statistics?.averageVote && (
                   <>
@@ -56,14 +56,14 @@ const SidebarListBookmarks: React.FC<Props> = ({ bookmarks, loading, title, href
               </span>
               <RenderInPortal>
                 <Tooltip
-                  parentElementId={`${stringToDashCase(title)}-timesBookmarked-${item?.id}`}
+                  parentElementId={`${stringToDashCase(item?.title)}-timesBookmarked-${item?.id}`}
                   content="Times bookmarked"
                   delay={1.5}
                 />
               </RenderInPortal>
               <span
                 className="SidebarListBookmarks-descriptionItem"
-                id={`${stringToDashCase(title)}-timesBookmarked-${item?.id}`}
+                id={`${stringToDashCase(item?.title)}-timesBookmarked-${item?.id}`}
               >
                 {!!item?.statistics?.timesBookmarked && (
                   <>
