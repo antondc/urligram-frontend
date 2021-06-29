@@ -47,10 +47,10 @@ export const Footer: React.FC<Props> = ({
         <Span size="medium" weight="extraBold">
           <A
             className="Footer-link"
-            href={Routes.ResetPassword.route}
+            href={Routes.ForgotPassword.route}
             frontend
             underlined
-            active={currentRoute?.name === Routes.ResetPassword.name}
+            active={currentRoute?.name === Routes.ForgotPassword.name}
           >
             Forgot password?
           </A>

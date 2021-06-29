@@ -38,6 +38,7 @@ export const sectionsMyRecentBookmarksLoad = (
           ...bookmarksAfterApi.byKey,
           ...serializerFromArrayToByKey<BookmarkState, BookmarkState>({ data: bookmarksArray }),
         },
+        loading: false,
       })
     );
 
