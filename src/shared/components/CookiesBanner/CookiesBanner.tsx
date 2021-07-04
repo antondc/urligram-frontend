@@ -13,7 +13,7 @@ interface Props {
 
 export const CookiesBanner: React.FC<Props> = ({ onAccept, accepted, show }) => (
   <AnimateHeight mounted={show} speed="fastest" ease={[1, 0.02, 0.83, 1.15]}>
-    <Frame className={'CookiesBanner' + (accepted ? ' CookiesBanner--accepted' : '')} borderTop={false} padding="none">
+    <div className={'CookiesBanner' + (accepted ? ' CookiesBanner--accepted' : '')}>
       <div className="CookiesBanner-text">
         <Span className="CookiesBanner-textSpan CookiesBanner-textSpanTitle" weight="semiBold" size="medium">
           We use cookies
@@ -40,6 +40,6 @@ export const CookiesBanner: React.FC<Props> = ({ onAccept, accepted, show }) => 
           success={accepted}
         />
       </div>
-    </Frame>
+    </div>
   </AnimateHeight>
 );

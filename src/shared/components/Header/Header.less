@@ -12,7 +12,7 @@
     / 0fr 1fr 0fr;
   height: 80px;
   padding: 0;
-  background: @c-background;
+  border-radius: 4px;
   border: 2px solid @c-base;
 
   @media @br-tablet {
@@ -24,7 +24,7 @@
     justify-content: center;
     align-items: center;
     grid-area: brand;
-    padding: 0 40px 0 20px;
+    padding: 0 90px 0 20px;
     font-size: @fs-big;
     text-decoration-thickness: 3px;
 
@@ -80,7 +80,6 @@
     font-size: @fs-big;
     font-weight: @fw-black;
     white-space: nowrap;
-    border-left: 2px solid @c-base;
     text-decoration-thickness: 3px;
 
     &:hover {
@@ -109,7 +108,6 @@
     grid-area: user;
     width: 80px;
     padding: 5px;
-    border-left: 2px solid @c-base;
 
     @media @br-tablet {
       width: auto;
