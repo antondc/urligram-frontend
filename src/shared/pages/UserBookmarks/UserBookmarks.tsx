@@ -82,6 +82,7 @@ export const UserBookmarks: React.FC<Props> = ({
           onInputChange={onInputChange}
           onChange={onChange}
           maxItems={4}
+          hideLabelOnFill
         />
         <SortBy
           options={[
