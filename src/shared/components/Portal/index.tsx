@@ -14,6 +14,7 @@ export const RenderInPortal: React.FC<Props> = ({ children, elementId, className
 
   if (!domAvailable) return <></>;
 
+  const portalsElement = document.getElementById('Portals');
   const existingElement = document.getElementById(elementId);
   if (!!existingElement) {
     return createPortal(children, existingElement);
@@ -24,10 +25,10 @@ export const RenderInPortal: React.FC<Props> = ({ children, elementId, className
   newElement.setAttribute('class', 'Portal' + (!!className ? ` ${className}` : ''));
 
   useEffect(() => {
-    document.body.appendChild(newElement);
+    portalsElement?.appendChild(newElement);
 
     return () => {
-      document.body.removeChild(newElement);
+      portalsElement?.removeChild(newElement);
     };
   }, [children]);
 

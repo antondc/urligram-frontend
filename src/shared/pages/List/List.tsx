@@ -5,6 +5,7 @@ import BookmarkRow from 'Components/BookmarkRow';
 import { BookmarkRowSkeletonGroup } from 'Components/BookmarkRow/BookmarkRowSkeletonGroup';
 import ListAddUser from 'Components/ListAddUser';
 import Pagination from 'Components/Pagination';
+import { RenderInPortal } from 'Components/Portal';
 import Sidebar from 'Components/Sidebar';
 import SidebarListTags from 'Components/SidebarListTags';
 import SidebarListUsers from 'Components/SidebarListUsers';
@@ -89,7 +90,9 @@ export const List: React.FC<Props> = ({
         </div>
         <div className="List-headerImages">
           <>
-            <Tooltip parentElementId="List-tooltipUserImage" content={`@${listUserOwner?.name}`} delay={0.5} />
+            <RenderInPortal>
+              <Tooltip parentElementId="List-tooltipUserImage" content={`@${listUserOwner?.name}`} delay={0.5} />
+            </RenderInPortal>
             <A
               className="List-headerImagesItem List-headerImagesItemOwner"
               href={`/users/${listUserOwner?.id}`}
@@ -107,7 +110,9 @@ export const List: React.FC<Props> = ({
           </>
           {usersInThisList?.map((item) => (
             <>
-              <Tooltip parentElementId={`List-${item?.id}}`} content={`@${item?.name}`} delay={0.5} />
+              <RenderInPortal>
+                <Tooltip parentElementId={`List-${item?.id}}`} content={`@${item?.name}`} delay={0.5} />
+              </RenderInPortal>
               <A
                 className={
                   'List-headerImagesItem List-headerImagesItemJoined' +
@@ -127,7 +132,9 @@ export const List: React.FC<Props> = ({
           ))}
           {sessionUserOwnsList && (
             <>
-              <Tooltip parentElementId="List-tooltipAddUser" content="Add user" delay={0.5} />
+              <RenderInPortal>
+                <Tooltip parentElementId="List-tooltipAddUser" content="Add user" delay={0.5} />
+              </RenderInPortal>
               <div className="List-headerPlusIcon" id="List-tooltipAddUser">
                 <ListAddUser listId={list?.id} />
               </div>
@@ -135,19 +142,25 @@ export const List: React.FC<Props> = ({
           )}
           {sessionUserListRole === 'reader' && (
             <>
-              <Tooltip parentElementId="List-tooltipReader" content="Reader" delay={2} />
+              <RenderInPortal>
+                <Tooltip parentElementId="List-tooltipReader" content="Reader" delay={2} />
+              </RenderInPortal>
               <Eye className="List-iconRole List-iconReader" id="List-tooltipReader" />
             </>
           )}
           {sessionUserListRole === 'editor' && (
             <>
-              <Tooltip parentElementId="List-tooltipEditor" content="Editor" delay={2} />
+              <RenderInPortal>
+                <Tooltip parentElementId="List-tooltipEditor" content="Editor" delay={2} />
+              </RenderInPortal>
               <EditCircle className="List-iconRole List-iconEditor" id="List-tooltipEditor" />
             </>
           )}
           {sessionUserListRole === 'admin' && (
             <>
-              <Tooltip parentElementId="List-tooltipAdmin" content="Admin" delay={2} />
+              <RenderInPortal>
+                <Tooltip parentElementId="List-tooltipAdmin" content="Admin" delay={2} />
+              </RenderInPortal>
               <EditCircle className="List-iconRole List-iconAdmin" id="List-tooltipAdmin" onClick={onEditClick} />
             </>
           )}

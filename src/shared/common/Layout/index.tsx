@@ -137,6 +137,7 @@ const Layout: React.FC<Props> = ({ location }) => {
           <UserModal />
         </Fade>
       </div>
+
       <Fade mounted={messageModalMounted} speed="fastest" position="fixed" appear>
         <ModalMessage message="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus gravida augue sed ipsum pulvinar, vel pretium tellus commodo. Aliquam erat volutpat. Morbi placerat justo massa, eget laoreet enim cursus et. Aliquam id scelerisque ipsum, ac rutrum erat. Donec sed blandit metus. Maecenas pellentesque, neque vel " />
       </Fade>
@@ -165,12 +166,13 @@ const Layout: React.FC<Props> = ({ location }) => {
         <ListModal />
       </Fade>
       <Notifications />
-      <div id="Tooltips" />
       <Fade mounted={renderLoader} speed="fastest" position="fixed" appear>
         <div className="Layout-loader">
           <SpinnerCircularBrute className="Layout-loaderIcon" size="huge" />
         </div>
       </Fade>
+      <div id="Tooltips" />
+      <div id="Portals" />
     </div>
   );
 };
