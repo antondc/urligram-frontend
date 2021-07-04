@@ -4,6 +4,7 @@ import A from 'Components/A';
 import BookmarkRow from 'Components/BookmarkRow';
 import { BookmarkRowSkeletonGroup } from 'Components/BookmarkRow/BookmarkRowSkeletonGroup';
 import Empty from 'Components/Empty';
+import ListRow from 'Components/ListRow';
 import Sidebar from 'Components/Sidebar';
 import SidebarListUsers from 'Components/SidebarListUsers';
 import UserForm from 'Components/UserForm';
@@ -16,6 +17,8 @@ interface Props {
   userIdIsSessionId: boolean;
   userId: string;
   user: UserState;
+  listsIds: number[];
+  listsLoading: boolean;
   createdAtFormatted: string;
   bookmarksIds: number[];
   bookmarksLoading: boolean;
@@ -29,6 +32,8 @@ export const User: React.FC<Props> = ({
   userIdIsSessionId,
   userId,
   user,
+  listsIds,
+  listsLoading,
   createdAtFormatted,
   bookmarksIds,
   bookmarksLoading,
@@ -129,7 +134,7 @@ export const User: React.FC<Props> = ({
         </div>
       </div>
       <div className="User-bookmarksHeader">
-        User bookmarks
+        Bookmarks
         <A href={`users/${userId}/bookmarks`} frontend underlined>
           <AIcon size="small">See more</AIcon>
         </A>
@@ -141,6 +146,16 @@ export const User: React.FC<Props> = ({
           bookmarksIds?.map((id) => <BookmarkRow id={id} key={id} />)
         )}
         {!bookmarksLoading && !bookmarksIds?.length && <Empty message="ⵁ This user has no bookmarks yet" />}
+      </div>
+      <div className="User-listsHeader">
+        Lists
+        <A href={`users/${userId}/lists`} frontend underlined>
+          <AIcon size="small">See more</AIcon>
+        </A>
+      </div>
+      <div className="User-lists">
+        {listsLoading ? <BookmarkRowSkeletonGroup length={5} /> : listsIds?.map((id) => <ListRow id={id} key={id} />)}
+        {!listsLoading && !listsIds?.length && <div className="UserLists-noResults">ⵁ We didn find any list.</div>}
       </div>
       <Hr spacer />
     </div>

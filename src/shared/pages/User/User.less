@@ -20,7 +20,6 @@
     padding: 20px;
     overflow: hidden;
     border: 2px solid @c-base;
-    border-top: none;
   }
 
   &-details {
@@ -68,7 +67,8 @@
     flex-wrap: wrap;
   }
 
-  &-bookmarksHeader {
+  &-bookmarksHeader,
+  &-listsHeader {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -79,7 +79,8 @@
     border-top: none;
   }
 
-  &-bookmarks {
+  &-bookmarks,
+  &-lists {
     width: 100%;
     padding: 10px;
     border: 2px solid @c-base;

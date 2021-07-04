@@ -5,7 +5,10 @@ import { bookmarksLoadByUserId } from 'Modules/Bookmarks/actions/bookmarksLoadBy
 import { selectBookmarksCurrentIds } from 'Modules/Bookmarks/selectors/selectBookmarksCurrentIds';
 import { selectBookmarksLoading } from 'Modules/Bookmarks/selectors/selectBookmarksLoading';
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
+import { listsLoadByUserId } from 'Modules/Lists/actions/listsLoadByUserId';
 import { ListState } from 'Modules/Lists/lists.types';
+import { selectListsAllIds } from 'Modules/Lists/selectors/selectListsAllIds';
+import { selectListsLoading } from 'Modules/Lists/selectors/selectListsLoading';
 import { RootState } from 'Modules/rootType';
 import { selectCurrentRouteParamUserId } from 'Modules/Routes/selectors/selectCurrentRouteParamUserId';
 import { sectionsFollowersUsersLoad } from 'Modules/Sections/actions/sectionsFollowersUsersLoad';
@@ -32,6 +35,8 @@ const User: React.FC<Props> = () => {
   const userId = useSelector(selectCurrentRouteParamUserId);
   const user = useSelector((state: RootState) => selectUserById(state, { id: userId }));
   const userIdIsSessionId = userId === session?.id;
+  const listsLoading = useSelector(selectListsLoading);
+  const listsIds = useSelector(selectListsAllIds);
   const bookmarksLoading = useSelector(selectBookmarksLoading);
   const bookmarksIds = useSelector(selectBookmarksCurrentIds);
   const followingUsers = useSelector(selectFollowingUsers);
@@ -47,6 +52,7 @@ const User: React.FC<Props> = () => {
     dispatch(userLoad(userId));
     dispatch(sectionsFollowingUsersLoad(userId));
     dispatch(sectionsFollowersUsersLoad(userId));
+    dispatch(listsLoadByUserId(userId));
   }, [session?.id]);
 
   return (
@@ -54,6 +60,8 @@ const User: React.FC<Props> = () => {
       userIdIsSessionId={userIdIsSessionId}
       userId={userId}
       user={user}
+      listsIds={listsIds}
+      listsLoading={listsLoading}
       createdAtFormatted={createdAtFormatted}
       bookmarksIds={bookmarksIds}
       bookmarksLoading={bookmarksLoading}
