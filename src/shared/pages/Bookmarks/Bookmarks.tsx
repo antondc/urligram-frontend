@@ -79,6 +79,7 @@ export const Bookmarks: React.FC<Props> = ({
           onChange={onChange}
           maxItems={4}
           grow
+          hideLabelOnFill
         />
         <SortBy
           className="Bookmarks-sortBy"

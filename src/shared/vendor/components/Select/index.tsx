@@ -18,6 +18,7 @@ interface Props {
   defaultOptions: SelectValue[];
   grow?: boolean;
   maxItems?: number;
+  hideLabelOnFill?: boolean;
   onChange?: (params: SelectValue[]) => void;
   onInputChange?: (params: unknown) => void;
 }
@@ -27,6 +28,7 @@ export const Select: React.FC<Props> = ({
   className,
   placeholder,
   label,
+  hideLabelOnFill,
   options,
   isMulti = true,
   value,
@@ -54,6 +56,7 @@ export const Select: React.FC<Props> = ({
       className={className}
       placeholder={placeholder}
       label={label}
+      hideLabelOnFill={hideLabelOnFill}
       focusOrContent={focusOrContent}
       options={options}
       isMulti={isMulti}

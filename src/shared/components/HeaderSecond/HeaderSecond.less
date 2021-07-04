@@ -6,11 +6,10 @@
   display: flex;
   justify-content: space-between;
   align-items: stretch;
+  margin: 10px 0;
   font-size: @fs-small;
   font-weight: @fw-extraBold;
   white-space: nowrap;
-  border-left: 2px solid @c-base;
-  border-right: 2px solid @c-base;
 
   @media @br-tabletHorizontal {
     font-size: @fs-micro;
@@ -36,7 +35,9 @@
     overflow-x: scroll;
     overflow-y: hidden;
     background: @gradientColors[green-1];
+    border-radius: 4px;
 
+    .boxShadowLight;
     .hideScrollbar;
   }
 
@@ -51,18 +52,23 @@
   }
 
   &-date {
+    margin: 0 10px;
     white-space: nowrap;
     background: @gradientColors[yellow-1];
-    border-left: 2px solid @c-base;
-    border-right: 2px solid @c-base;
+    border-radius: 4px;
+
+    .boxShadowLight;
   }
 
   &-clock {
     flex-shrink: 0;
+    border-radius: 4px;
     height: 50px;
     width: 50px;
     white-space: nowrap;
     background: @gradientColors[red-2];
+
+    .boxShadowLight;
 
     @media @br-tabletHorizontal {
       height: 40px;

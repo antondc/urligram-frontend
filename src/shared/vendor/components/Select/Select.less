@@ -49,9 +49,10 @@
     padding: 0 7px 0 4px;
     font-size: @fs-small;
     color: @c-base;
+    opacity: 1;
     background: @c-transparent;
     transform: translate(-4px, 0) scale(1);
-    transition: transform @td-fast @ease;
+    transition: transform @td-fast @ease, opacity @td-fastest @ease-out;
     will-change: transform;
     pointer-events: none;
   }
@@ -70,6 +71,11 @@
   &__control--is-focused:not(.noClass) ~ @{c}__label,
   @{c}__label--active {
     transform: translate(-13px, -17px) scale(0.8);
+  }
+
+  &__control--is-focused:not(.noClass) ~ @{c}__label--hideLabel,
+  @{c}__label--active@{c}__label--hideLabel {
+    opacity: 0;
   }
 
   &__indicator-separator:not(.noClass) {
@@ -116,8 +122,7 @@
     background: transparent;
     border: 1px solid @c-base;
     transition: background @td-fast @ease;
-    // border-radius: 4px;
-    border-radius: 0;
+    border-radius: 2px;
 
     &:hover {
       background: @c-base;
@@ -158,15 +163,14 @@
     margin: 0;
     padding: 0;
     font-weight: @fw-bold;
+    overflow: hidden;
     background: @c-background;
-    transform: translateY(-1.5px);
-    box-shadow: none;
+    border-radius: 4px;
   }
 
   &__menu-list:not(.noClass) {
     margin: 0;
     padding: 0;
-    // border-radius: 0 0 4px 4px;
     border-radius: 0;
 
     .hideScrollbar();
@@ -176,20 +180,6 @@
     padding: 6px 12px;
     font-size: @fs-small;
     background: @c-transparent;
-    border-top: 0 dashed @c-transparent;
-    border-bottom: 1px dashed @c-base;
-    border-left: 1.5px solid @c-base;
-    border-right: 1.5px solid @c-base;
-
-    &:first-child {
-      border-top: 1.5px solid @c-base;
-    }
-
-    &:last-child {
-      border-bottom: 1.5px solid @c-base;
-      // border-radius: 0 0 4px 4px;
-      border-radius: 0;
-    }
 
     &:hover {
       cursor: pointer;
@@ -198,18 +188,6 @@
 
   &__option--is-focused:not(.noClass):not(.noClass) {
     position: relative;
-
-    // Hide dashed bottom border of previous item
-    &:before {
-      content: ' ';
-      position: absolute;
-      height: 1px;
-      top: -1px;
-      left: 0;
-      right: 0;
-      background: @c-base;
-    }
-
     color: @c-background;
     background: @c-base;
     outline: 1px solid @c-base;
@@ -222,11 +200,6 @@
   &__option--is-disabled:not(.noClass) {
     font-weight: @fw-regular;
     color: @c-base;
-    border-bottom: 1.5px solid @c-base;
-    border-left: 1.5px solid @c-base;
-    border-right: 1.5px solid @c-base;
-    box-shadow: 0 1.5px 0 0 @c-base;
-    // border-radius: 0 0 3px 3px;
     border-radius: 0;
   }
 

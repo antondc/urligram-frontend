@@ -8,12 +8,13 @@
   flex: 1;
   grid-template: 'sidebarMain sidebarMain sidebarMain main main main main main main sidebarSecond sidebarSecond sidebarSecond' auto;
   grid-template-columns: repeat(12, 1fr);
-  padding: 10px;
+  padding: 10px 10px 20px 10px;
   padding-top: 10px;
   background: @gradientColors[blue-4];
-  border: 2px solid @c-base;
-  border-bottom: none;
   gap: 10px;
+  border-radius: 4px;
+
+  .boxShadowLight;
 
   @media @br-tablet {
     grid-template:
@@ -24,9 +25,10 @@
   &-sidebarMain {
     grid-area: sidebarMain;
     padding: 5px;
-    border-radius: 4px;
     overflow: hidden;
     background: @c-background;
-    box-shadow: 2px 2px 0 2px @c-traslucid--light;
+    border-radius: 4px;
+
+    .boxShadow;
   }
 }

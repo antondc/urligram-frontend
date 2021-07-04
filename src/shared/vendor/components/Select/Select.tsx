@@ -19,6 +19,7 @@ interface Props {
   className?: string;
   placeholder?: string;
   label?: string;
+  hideLabelOnFill?: boolean;
   focusOrContent: boolean;
   options: SelectValue[];
   isMulti: boolean;
@@ -90,6 +91,7 @@ export const SelectUi: React.FC<Props> = ({
   onChange,
   placeholder,
   label,
+  hideLabelOnFill,
   focusOrContent,
   onFocus,
   onBlur,
@@ -122,9 +124,15 @@ export const SelectUi: React.FC<Props> = ({
         NoOptionsMessage: NoOptionsMessage,
       }}
     />
-    {!placeholder && (
-      <label className={'Select__label ' + (focusOrContent ? 'Select__label--active' : '')}>
-        <span className="Select__label-background" />
+    {!placeholder && label && (
+      <label
+        className={
+          'Select__label' +
+          (focusOrContent ? ' Select__label--active' : '') +
+          (hideLabelOnFill ? ' Select__label--hideLabel' : '')
+        }
+      >
+        {/* <span className="Select__label-background" /> */}
         <Span size="small" weight="extraBold">
           {label}
         </Span>

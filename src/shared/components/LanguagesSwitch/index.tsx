@@ -46,7 +46,7 @@ const LanguagesSwitch: React.FC<Props> = ({
   const languagesWithoutCurrent = languagesWithLink.filter((item) => currentLanguage.slug !== item.slug);
 
   return (
-    <Frame className="LanguagesSwitch" onClick={switchLanguagesModal}>
+    <div className="LanguagesSwitch" onClick={switchLanguagesModal}>
       {languagesWithoutCurrent.map((item) => (
         <LanguageItem
           key={item.id}
@@ -63,7 +63,7 @@ const LanguagesSwitch: React.FC<Props> = ({
         isCurrent
         onClick={() => switchCurrentLanguage(currentLanguage.slug)}
       />
-    </Frame>
+    </div>
   );
 };
 

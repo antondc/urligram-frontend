@@ -5,13 +5,27 @@
   display: flex;
   justify-content: space-between;
   flex-shrink: 0;
+  margin-top: 10px;
   padding: 30px 30px 30px 100px;
-  background: @c-background;
-  border: 2px solid @c-base;
+  background: @c-base;
+  border-radius: 4px;
 
-  &-section {
+  .boxShadowLight;
+
+  &-link:not(.noClass) {
     display: flex;
     align-items: center;
+    font-size: @fs-medium;
+    font-weight: @fw-extraBold;
+    text-decoration-color: @c-transparent;
+    color: @c-background;
+
+    &:hover,
+    &:active {
+      text-decoration-color: @c-background;
+      color: @c-background;
+      cursor: pointer;
+    }
   }
 
   &-lastSection {
@@ -29,12 +43,6 @@
     height: 35px;
     width: 35px;
 
-    &:hover {
-      cursor: pointer;
-    }
-  }
-
-  &-link {
     &:hover {
       cursor: pointer;
     }
