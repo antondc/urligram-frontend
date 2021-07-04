@@ -49,7 +49,7 @@ export const UserLists: React.FC<Props> = ({
     <div className="UserLists">
       <div className="UserLists-header UserLists-headerTitle">
         Lists of <Space />
-        <A href={`/users/${userId}`} underlined>
+        <A href={`/users/${userId}`} underlined frontend>
           @{user?.name}
         </A>
       </div>

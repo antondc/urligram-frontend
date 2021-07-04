@@ -66,7 +66,7 @@ export const UserBookmarks: React.FC<Props> = ({
       <div className="UserBookmarks-header UserBookmarks-headerTitle">
         Bookmarks of
         <Space />
-        <A href={`/users/${userId}`} underlined>
+        <A href={`/users/${userId}`} underlined frontend>
           @{user?.name}
         </A>
       </div>

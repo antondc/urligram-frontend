@@ -50,7 +50,7 @@ export const Following: React.FC<Props> = ({
       <div className="Following-header Following-headerTitle">
         Users following
         <Space />
-        <A href={`/users/${userId}/following`} underlined>
+        <A href={`/users/${userId}/following`} underlined frontend>
           @{user?.name}
         </A>
       </div>

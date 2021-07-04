@@ -83,7 +83,7 @@ export const List: React.FC<Props> = ({
         <div className="List-headerTitleText">
           Bookmarks in
           <Space />
-          <A href={`/lists/${list?.id}`} underlined>
+          <A href={`/lists/${list?.id}`} underlined frontend>
             {list?.name}
           </A>
         </div>
