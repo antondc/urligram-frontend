@@ -8,10 +8,12 @@
   flex: 1;
   grid-template: 'sidebarMain sidebarMain sidebarMain main main main main main main sidebarSecond sidebarSecond sidebarSecond' auto;
   grid-template-columns: repeat(12, 1fr);
-  padding-top: 30px;
+  padding: 10px;
+  padding-top: 10px;
   background: @c-background;
   border: 2px solid @c-base;
   border-bottom: none;
+  gap: 10px;
 
   @media @br-tablet {
     grid-template:
@@ -21,6 +23,9 @@
 
   &-sidebarMain {
     grid-area: sidebarMain;
+    padding: 5px;
     overflow: hidden;
+
+    .u-blackBars;
   }
 }

@@ -8,28 +8,29 @@
   justify-content: space-between;
   align-items: flex-start;
   grid-area: main;
+  .u-blackBars;
 
   &-header {
     display: flex;
     width: 100%;
-    border: 2px solid @c-base;
-    border-bottom: none;
+    padding: 5px;
+  }
+
+  &-sortBy {
+    background: @c-background;
   }
 
   &-bookmarks {
     width: 100%;
     min-height: 50vh;
-    padding: 20px;
-    border: 2px solid @c-base;
+    padding: 0 5px;
   }
 
   &-select {
     width: 100%;
-    border-right: 2px solid @c-base;
   }
 
   &-myRecentBookmarks {
-    padding: 0 20px 20px;
   }
 
   &-noResults {

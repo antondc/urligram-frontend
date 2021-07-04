@@ -21,7 +21,6 @@ import Users from 'Pages/Users';
 import UserTags from 'Pages/UserTags';
 import { Routes } from 'Router/routes';
 import { Location } from 'Services/History';
-import { Flex, Frame } from 'Vendor/components';
 
 import './Content.less';
 

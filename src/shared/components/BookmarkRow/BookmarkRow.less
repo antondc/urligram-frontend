@@ -13,8 +13,9 @@
     'main tags' auto
     / 4fr 2fr 0fr;
   height: 45px;
-  padding: 8px 13px 7px;
+  padding: 8px 0 7px 10px;
   column-gap: 10px;
+  background: @c-background;
 
   @media @br-mobile {
     grid-template:
@@ -85,10 +86,10 @@
   }
 
   &-downvote {
-    justify-self: flex-end;
     bottom: 0;
     left: 0;
     transform: rotate(180deg);
+    justify-self: flex-end;
 
     &:hover {
       color: @gradientColors[red-3];
@@ -96,9 +97,9 @@
   }
 
   &-upvote {
-    justify-self: flex-end;
     bottom: -2px;
     right: 0;
+    justify-self: flex-end;
 
     &:hover {
       color: @gradientColors[green-1];
@@ -106,9 +107,9 @@
   }
 
   &-voteSlash {
-    justify-self: flex-end;
     bottom: 0;
     left: 10px;
+    justify-self: flex-end;
   }
 
   &-voteButton {

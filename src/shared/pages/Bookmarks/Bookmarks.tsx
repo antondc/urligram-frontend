@@ -12,7 +12,7 @@ import { ListState } from 'Modules/Lists/lists.types';
 import { SessionState } from 'Modules/Session/session.types';
 import { TagState } from 'Modules/Tags/tags.types';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
-import { Hr, Select, SelectValue, SortBy } from 'Vendor/components';
+import { Select, SelectValue, SortBy } from 'Vendor/components';
 
 import './Bookmarks.less';
 
@@ -81,6 +81,7 @@ export const Bookmarks: React.FC<Props> = ({
           grow
         />
         <SortBy
+          className="Bookmarks-sortBy"
           options={[
             { label: 'Created at', field: 'createdAt' },
             { label: 'Rating', field: 'vote' },
@@ -99,7 +100,6 @@ export const Bookmarks: React.FC<Props> = ({
         {!loading && !bookmarksIds?.length && <div className="Bookmarks-noResults">ⵁ We didnt find any bookmark.</div>}
       </div>
       <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
-      <Hr spacer size="normal" />
     </div>
     <Sidebar>
       {!!session?.id && (
