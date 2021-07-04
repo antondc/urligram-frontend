@@ -30,7 +30,7 @@ const BookmarkRow: React.FC<Props> = ({ id }) => {
   const routeUserId = paramUserId || session?.id || bookmark?.userId;
   const timePassed = unixTimeElapsed(bookmark?.createdAt);
   const recentlyCreated = timePassed < TIME_RECENTLY_CREATED_BOOKMARK;
-  const date = new LocaleFormattedDate({ unixTime: bookmark.createdAt, locale: slug });
+  const date = new LocaleFormattedDate({ unixTime: bookmark?.createdAt, locale: slug });
   const createdAtFormatted = date.getLocaleFormattedDate();
   const sessionUserBookmarkId = bookmark?.bookmarksRelated?.find((item) => item?.userId === session?.id)?.id;
   const sessionUserBookmarkedLink = !!sessionUserBookmarkId;

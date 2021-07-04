@@ -52,7 +52,6 @@ const BookmarkUpdateForm: React.FC<Props> = ({ closeModal, setModalLocked }) => 
 
   const onChangeIsPrivate = (e: React.FormEvent<HTMLInputElement>) => {
     const { checked } = e.currentTarget;
-    console.log('onChangeIsPrivate: ', checked);
     setIsPrivateValue(checked);
     setSubmitSuccess(undefined);
     setSubmitError(undefined);

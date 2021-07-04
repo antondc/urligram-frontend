@@ -97,6 +97,10 @@ const List: React.FC = () => {
   }, [list?.id]);
 
   useEffect(() => {
+    dispatch(bookmarksLoadByListId(listId));
+  }, [list?.bookmarksIds]);
+
+  useEffect(() => {
     // If the session member of this list is pending, display banner
     if (sessionUserInThisList?.userStatus === 'pending') setShowBanner(true);
   }, [sessionUserInThisList?.userStatus]);

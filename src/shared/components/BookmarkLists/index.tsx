@@ -70,6 +70,7 @@ export const BookmarkLists: React.FC<Props> = ({ bookmarkId }) => {
   const onListDeleteBookmark = async (listId: number) => {
     setItemsLoading([...itemsLoading, listId]);
     await dispatch(listBookmarkDelete({ listId, bookmarkId }));
+    dispatch(bookmarkListsModalUnmount({ bookmarkId }));
     setItemsLoading(itemsLoading.filter((item) => item !== listId));
     setRecentlyUpdated([...recentlyUpdated, listId]);
   };
