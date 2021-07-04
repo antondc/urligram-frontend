@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { listBookmarkCreate } from 'Modules/Lists/actions/listBookmarkCreate';
 import { listBookmarkDelete } from 'Modules/Lists/actions/listBookmarkDelete';
 import { listCreate } from 'Modules/Lists/actions/listCreate';
+import { listsLoadByUserId } from 'Modules/Lists/actions/listsLoadByUserId';
 import { selectListsByUserIdAdminOrEditor } from 'Modules/Lists/selectors/selectListsByUserIdAdminOrEditor';
 import { selectListsErrorLast } from 'Modules/Lists/selectors/selectListsErrorLast';
 import { RootState } from 'Modules/rootType';
@@ -93,6 +94,8 @@ export const BookmarkLists: React.FC<Props> = ({ bookmarkId }) => {
     };
 
     await dispatch(listCreate(data));
+    await dispatch(listsLoadByUserId(session?.id));
+
     setShowCreateList(false);
     setCreateListSubmitting(false);
     setListInputName(undefined);
