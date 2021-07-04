@@ -1,8 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 
 import { createPopper } from '@popperjs/core';
-import { Frame } from '../Frame';
-import { Span } from '../Span';
 
 import './Tooltip.less';
 
@@ -81,9 +79,7 @@ export const Tooltip: React.FC<Props> = ({ content, parentElementId, delay, time
 
   return (
     <div className="Tooltip" ref={tooltipElementRef} aria-describedby="tooltip">
-      <Frame padding="small">
-        <Span weight="semiBold">{content}</Span>
-      </Frame>
+      <span className="Tooltip-text">{content}</span>
       <div className="Tooltip-arrow" data-popper-arrow />
     </div>
   );
