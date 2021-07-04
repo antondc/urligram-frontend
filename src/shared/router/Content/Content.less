@@ -10,7 +10,7 @@
   grid-template-columns: repeat(12, 1fr);
   padding: 10px;
   padding-top: 10px;
-  background: @c-background;
+  background: @gradientColors[blue-4];
   border: 2px solid @c-base;
   border-bottom: none;
   gap: 10px;
@@ -24,8 +24,9 @@
   &-sidebarMain {
     grid-area: sidebarMain;
     padding: 5px;
+    border-radius: 4px;
     overflow: hidden;
-
-    .u-blackBars;
+    background: @c-background;
+    box-shadow: 2px 2px 0 2px @c-traslucid--light;
   }
 }

@@ -3,8 +3,11 @@
 @c: .SidebarListUsers;
 
 @{c} {
-  padding: 20px 20px 0 20px;
+  margin-bottom: 10px;
+  padding: 20px;
   background: @c-background;
+  border-radius: 4px;
+  box-shadow: 2px 2px 0 2px @c-traslucid--light;
 
   @media @br-tablet {
     border-right: 2px solid @c-base;
@@ -22,8 +25,8 @@
   &-grid {
     display: grid;
     grid-template-columns: 4fr auto auto auto;
-    column-gap: 5px;
     padding-top: 10px;
+    column-gap: 5px;
     gap: 5px;
 
     @media @br-tabletHorizontal {
