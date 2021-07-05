@@ -15,20 +15,22 @@ interface Props {
 export const HeaderSecond: React.FC<Props> = ({ formattedDate, bookmarks }) => (
   <div className="HeaderSecond">
     <div className="HeaderSecond-item HeaderSecond-main" id="HeaderSecond-main">
-      {bookmarks.map((bookmark, index) => (
-        <div className="HeaderSecond-bookmarkItem" key={bookmark.id}>
-          <A className="HeaderSecond-title" href={bookmark?.url} targetBlank underlined>
-            {bookmark?.title}
-          </A>
-          {index !== bookmarks.length - 1 && (
-            <>
-              <Space />
-              ·
-              <Space />
-            </>
-          )}
-        </div>
-      ))}
+      <div className="HeaderSecond-mainElement">
+        {bookmarks.map((bookmark, index) => (
+          <div className="HeaderSecond-bookmarkItem" key={bookmark.id}>
+            <A className="HeaderSecond-title" href={bookmark?.url} targetBlank underlined>
+              {bookmark?.title}
+            </A>
+            {index !== bookmarks.length - 1 && (
+              <>
+                <Space />
+                ·
+                <Space />
+              </>
+            )}
+          </div>
+        ))}
+      </div>
     </div>
     <div className="HeaderSecond-item HeaderSecond-date">{formattedDate}</div>
     <div className="HeaderSecond-item HeaderSecond-clock">

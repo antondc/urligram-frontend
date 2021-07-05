@@ -7,6 +7,7 @@
   position: relative;
   grid-template: 'main tags image' auto / 3fr 2fr 0fr;
   height: 45px;
+  width: 100%;
   padding: 8px 13px 7px;
   column-gap: 10px;
 
@@ -64,9 +65,9 @@
   &-image {
     height: 30px;
     width: 30px;
-    border-radius: 50%;
     object-fit: cover;
     object-position: center;
+    border-radius: 50%;
   }
 
   &-followButton {
@@ -75,7 +76,7 @@
     width: 12px;
     top: 6px;
     right: 9px;
-    border-radius: 50%;
     outline: 1px solid @c-background;
+    border-radius: 50%;
   }
 }

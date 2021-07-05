@@ -26,18 +26,43 @@
   }
 
   &-main {
+    position: relative;
+    flex: 1;
+    overflow: hidden;
+    background: @gradientColors[green-1];
+    border-radius: 4px;
+
+    &:before,
+    &:after {
+      content: ' ';
+      position: absolute;
+      width: 10px;
+      top: 0;
+      bottom: 0;
+      background: @gradientColors[green-1];
+    }
+
+    &:before {
+      right: 0;
+    }
+
+    &:after {
+      left: 0;
+    }
+
+    .boxShadowLight;
+    .hideScrollbar;
+  }
+
+  &-mainElement {
     display: flex;
-    width: 100%;
     padding: 0 20px;
     font-size: @fs-normal;
     font-weight: @fw-semibold;
     white-space: nowrap;
     overflow-x: scroll;
     overflow-y: hidden;
-    background: @gradientColors[green-1];
-    border-radius: 4px;
 
-    .boxShadowLight;
     .hideScrollbar;
   }
 

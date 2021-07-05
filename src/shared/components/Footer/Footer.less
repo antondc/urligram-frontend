@@ -7,8 +7,9 @@
   flex-shrink: 0;
   margin-top: 10px;
   padding: 30px 30px 30px 100px;
-  background: @c-base;
+  background: @c-background;
   border-radius: 4px;
+  border: 2px solid @c-base;
 
   .boxShadowLight;
 
@@ -17,15 +18,6 @@
     align-items: center;
     font-size: @fs-medium;
     font-weight: @fw-extraBold;
-    text-decoration-color: @c-transparent;
-    color: @c-background;
-
-    &:hover,
-    &:active {
-      text-decoration-color: @c-background;
-      color: @c-background;
-      cursor: pointer;
-    }
   }
 
   &-lastSection {
