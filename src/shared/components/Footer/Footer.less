@@ -13,11 +13,30 @@
 
   .boxShadowLight;
 
+  @media @br-mobile {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+    align-item: center;
+  }
+
   &-link:not(.noClass) {
     display: flex;
     align-items: center;
     font-size: @fs-medium;
     font-weight: @fw-extraBold;
+
+    @media @br-mobile {
+      padding-bottom: 5px;
+      font-size: @fs-normal;
+      font-weight: @fw-bold;
+
+      &:last-of-type {
+        padding-bottom: 0;
+      }
+    }
   }
 
   &-lastSection {
@@ -25,6 +44,13 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-end;
+
+    @media @br-mobile {
+      display: flex;
+      position: absolute;
+      top: 18px;
+      right: 18px;
+    }
   }
 
   &-languages {

@@ -10,6 +10,7 @@
   grid-template-columns: repeat(12, 1fr);
   padding: 10px 10px 20px 10px;
   padding-top: 10px;
+  overflow: hidden;
   background: @gradientColors[blue-4];
   gap: 10px;
   border-radius: 4px;
@@ -22,6 +23,12 @@
       'sidebarSecond sidebarSecond main main main main main main main main main main' auto;
   }
 
+  @media @br-mobile {
+    grid-template:
+      'main' auto
+      'sidebarSecond' auto;
+  }
+
   &-sidebarMain {
     grid-area: sidebarMain;
     padding: 5px;
@@ -30,5 +37,9 @@
     border-radius: 4px;
 
     .boxShadow;
+
+    @media @br-mobile {
+      display: none;
+    }
   }
 }

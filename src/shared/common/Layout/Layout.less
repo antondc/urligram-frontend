@@ -6,6 +6,7 @@
   .default();
 
   position: relative;
+  overflow: hidden;
 
   &-background {
     position: absolute;
@@ -49,6 +50,10 @@
     min-height: 100vh;
     margin: 0 auto;
     padding: 30px 24px;
+
+    @media @br-mobile {
+      padding: 10px;
+    }
   }
 
   &-spanner {
