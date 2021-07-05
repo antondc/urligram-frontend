@@ -7,7 +7,6 @@ import {
   Button,
   Fade,
   FadeInOut,
-  Frame,
   Hr,
   Input,
   List,
@@ -66,8 +65,8 @@ export const BookmarkLists: React.FC<Props> = ({
     <RenderInPortal elementId={`BookmarkLists-portal--${bookmarkId}`}>
       <Fade mounted={mounted}>
         <PopOver elementId={`BookmarkLists-${bookmarkId}`} placement="right-start">
-          <Frame onMouseLeave={onListLeave} onMouseEnter={onListEnter}>
-            <ul className="BookmarkLists-lists">
+          <div className="BookmarkLists-modal">
+            <ul className="BookmarkLists-lists" onMouseLeave={onListLeave} onMouseEnter={onListEnter}>
               {lists?.map((item) => {
                 const isBookmarkInList = !!item?.bookmarksIds?.includes(bookmarkId);
                 const wasRecentlyUpdated = recentlyUpdated?.includes(item?.id);
@@ -143,7 +142,7 @@ export const BookmarkLists: React.FC<Props> = ({
                 />
               )}
             </FadeInOut>
-          </Frame>
+          </div>
         </PopOver>
       </Fade>
     </RenderInPortal>

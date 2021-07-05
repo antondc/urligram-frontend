@@ -11,7 +11,17 @@
     height: 10px;
     width: 10px;
     fill: @c-base;
+
     .hoverTransition;
+  }
+
+  &-modal {
+    padding: 20px;
+    background: @c-background;
+    outline: 2px solid @c-traslucid--light;
+    border-radius: 4px;
+
+    .boxShadow;
   }
 
   &-lists {
@@ -44,14 +54,12 @@
     .hoverTransition;
 
     &--included {
-      // color: @c-success;
       fill: @c-success;
 
       @{c}-listsItemIcon {
         &:hover {
           fill: @c-error;
           transform: rotate(45deg);
-          // color: @c-error;
           cursor: pointer;
         }
       }

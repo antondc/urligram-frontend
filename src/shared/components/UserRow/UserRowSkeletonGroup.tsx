@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { UserRowSkeleton } from 'Components/UserRow/UserRowSkeleton';
-import { Hr } from 'Vendor/components';
 
 interface Props {
   length?: number;
@@ -10,10 +9,7 @@ interface Props {
 export const UserRowSkeletonGroup: React.FC<Props> = ({ length = 10 }) => (
   <>
     {Array.from({ length }, (_, index) => (
-      <React.Fragment key={index}>
-        <UserRowSkeleton id={index.toString()} />
-        {index !== length - 1 && <Hr spacer size="small" />}
-      </React.Fragment>
+      <UserRowSkeleton id={index.toString()} key={index} />
     ))}
   </>
 );

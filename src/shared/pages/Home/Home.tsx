@@ -48,6 +48,7 @@ export const Home: React.FC<Props> = ({
 }) => (
   <>
     <div className="Home">
+      <div className="Home-headerTitle">Home</div>
       <div className="Home-bookmarks">
         {bookmarksIdsLoading ? (
           <BookmarkRowSkeletonGroup length={bookmarksIds?.length || DEFAULT_PAGE_SIZE} />

@@ -6,6 +6,9 @@
   top: 45px;
   right: 40px;
   padding: 60px 30px 30px;
+  background: @c-background;
+  border: 2px solid @c-base;
+  border-radius: 4px;
 
   &-cross {
     position: absolute;
@@ -20,7 +23,6 @@
   }
 
   &-userLogo {
-    border-radius: 50%;
     position: absolute;
     height: 35px;
     width: 36px;
@@ -28,6 +30,7 @@
     left: 10px;
     object-fit: cover;
     object-position: center;
+    border-radius: 50%;
     box-shadow: 0 0 0 2pt @c-base;
 
     &:hover {

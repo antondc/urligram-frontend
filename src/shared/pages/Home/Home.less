@@ -9,19 +9,21 @@
   align-items: flex-start;
   grid-area: main;
 
+  &-headerTitle {
+    display: flex;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    font-weight: @fw-extraBold;
+    background: @c-background;
+    border-radius: 4px;
+
+    .boxShadow;
+  }
+
   &-bookmarks {
     width: 100%;
     min-height: 50vh;
-    border-radius: 4px;
-    padding: 10px 5px;
-    background: @c-background;
-
-    .boxShadow;
-
-    @media @br-tablet {
-      border-left: none;
-      border-right: none;
-    }
   }
 
   &-tags {
@@ -38,6 +40,13 @@
   &-noResults {
     display: flex;
     justify-content: center;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
     font-weight: @fw-semibold;
+    background: @c-background;
+    border-radius: 4px;
+
+    .boxShadow;
   }
 }
