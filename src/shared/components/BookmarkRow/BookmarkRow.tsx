@@ -4,7 +4,9 @@ import A from 'Components/A';
 import BookmarkActions from 'Components/BookmarkActions';
 import BookmarkLists from 'Components/BookmarkLists';
 import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
-import { EditCircle, Private, Space, Tag, Vote } from 'Vendor/components';
+import { EditCircle, Private, Space, Tag, Tooltip, Vote } from 'Vendor/components';
+import { stringToDashCase } from '../../tools/utils/string/stringToDashCase';
+import { RenderInPortal } from '../Portal';
 
 import './BookmarkRow.less';
 
@@ -98,6 +100,12 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
         loading={bookmark?.statistics?.loading}
         changeVote={onVote}
       />
+      <RenderInPortal>
+        <Tooltip parentElementId={`BookmarkRow-averageVote-${bookmark?.id}`} content="Users in this list" delay={0.5} />
+      </RenderInPortal>
+      <div className="BookmarkRow-averageVote" id={`BookmarkRow-averageVote-${bookmark?.id}`}>
+        {bookmark?.statistics?.absoluteVote || 0}
+      </div>
       <BookmarkActions
         className="BookmarkRow-icon BookmarkRow-actionButton"
         linkId={bookmark?.linkId}

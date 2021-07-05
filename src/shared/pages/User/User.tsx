@@ -154,7 +154,11 @@ export const User: React.FC<Props> = ({
         </A>
       </div>
       <div className="User-lists">
-        {listsLoading ? <BookmarkRowSkeletonGroup length={5} /> : listsIds?.map((id) => <ListRow id={id} key={id} />)}
+        {listsLoading ? (
+          <BookmarkRowSkeletonGroup length={5} />
+        ) : (
+          listsIds?.slice(0, 5)?.map((id) => <ListRow id={id} key={id} />)
+        )}
         {!listsLoading && !listsIds?.length && <div className="UserLists-noResults">ⵁ We didn find any list.</div>}
       </div>
       <Hr spacer />

@@ -159,7 +159,7 @@ export const List: React.FC<Props> = ({
           {sessionUserListRole === 'admin' && (
             <>
               <RenderInPortal>
-                <Tooltip parentElementId="List-tooltipAdmin" content="Admin" delay={2} />
+                <Tooltip parentElementId="List-tooltipAdmin" content="Edit list" delay={1} />
               </RenderInPortal>
               <EditCircle className="List-iconRole List-iconAdmin" id="List-tooltipAdmin" onClick={onEditClick} />
             </>

@@ -38,7 +38,7 @@ const items = [
       statistics: {
         absoluteVote: 43,
         timesVoted: 123,
-        averageVote: 4,
+        averageVote: 155,
         timesBookmarked: 20,
         vote: false,
         loading: false,
@@ -74,7 +74,7 @@ const items = [
       statistics: {
         absoluteVote: 43,
         timesVoted: 123,
-        averageVote: 4,
+        averageVote: 13,
         timesBookmarked: 20,
         vote: false,
         loading: false,
@@ -109,7 +109,7 @@ const items = [
       statistics: {
         absoluteVote: 43,
         timesVoted: 123,
-        averageVote: 4,
+        averageVote: 645,
         timesBookmarked: 20,
         vote: false,
         loading: false,
@@ -144,7 +144,7 @@ const items = [
       statistics: {
         absoluteVote: 43,
         timesVoted: 123,
-        averageVote: 4,
+        averageVote: 23,
         timesBookmarked: 20,
         vote: false,
         loading: false,
@@ -179,7 +179,7 @@ const items = [
       statistics: {
         absoluteVote: 43,
         timesVoted: 123,
-        averageVote: 4,
+        averageVote: 432,
         timesBookmarked: 20,
         vote: false,
         loading: false,
@@ -200,8 +200,8 @@ const knobs = {
 
 export const Default: React.ReactNode = () => (
   <ProviderWrapper>
-    <Frame weight="none">
-      <Frame>
+    <Frame weight="none" borders={false}>
+      <Frame borders={false}>
         {!knobs.skeleton()
           ? allItems.map((item, index) => <BookmarkRow key={index} {...item} />)
           : allItems?.map((item, index) => <BookmarkRowSkeleton key={index} {...item} />)}
