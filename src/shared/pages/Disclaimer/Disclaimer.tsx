@@ -15,8 +15,9 @@ interface Props {
 export const Disclaimer: React.FC<Props> = () => (
   <div className="Disclaimer">
     <div className="Disclaimer-content">
+      <h1 className="Disclaimer-title">Disclaimer</h1>
       <div className="Disclaimer-part">
-        <h1 className="Disclaimer-title">Disclaimer</h1>
+        <h2 className="Disclaimer-subHeader">General</h2>
         <p className="Disclaimer-paragraph">
           All the information on this website is published in good faith and for general information purpose only. This
           site does not make any warranties about the completeness, reliability and accuracy of this information. Any
@@ -37,13 +38,13 @@ export const Disclaimer: React.FC<Props> = () => (
         </p>
       </div>
       <div className="Disclaimer-part">
-        <h2 className="Disclaimer-secondHeader">Consent</h2>
+        <h2 className="Disclaimer-subHeader">Consent</h2>
         <p className="Disclaimer-paragraph">
           By using our website, you hereby consent to our disclaimer and agree to its terms.
         </p>
       </div>
       <div className="Disclaimer-part">
-        <h2 className="Disclaimer-secondHeader">Update</h2>
+        <h2 className="Disclaimer-subHeader">Update</h2>
         <p className="Disclaimer-paragraph">
           Should we update, amend or make any changes to this document, those changes will be prominently posted here.
         </p>

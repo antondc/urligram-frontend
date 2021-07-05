@@ -6,7 +6,7 @@ import A from 'Components/A';
 import BaseModal from 'Components/BaseModal';
 import LoginForm from 'Components/LoginForm';
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
-import { Flex, Frame, H3, Hr, Span } from 'Vendor/components';
+import { Flex, H3, Hr, Span } from 'Vendor/components';
 
 import './LoginModal.less';
 
@@ -21,7 +21,7 @@ const LoginModal: React.FC = () => {
 
   return (
     <BaseModal>
-      <Frame className="LoginModal" grow>
+      <div className="LoginModal">
         <Cross className="LoginModal-cross" onClick={closeModal} />
         <Flex horizontal="center">
           <H3>Log in</H3>
@@ -44,7 +44,7 @@ const LoginModal: React.FC = () => {
             </A>
           </div>
         </Flex>
-      </Frame>
+      </div>
     </BaseModal>
   );
 };

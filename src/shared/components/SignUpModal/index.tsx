@@ -5,7 +5,7 @@ import Cross from 'Assets/svg/cross.svg';
 import BaseModal from 'Components/BaseModal';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { switchSignUpModal } from 'Modules/Ui/actions/switchSignUpModal';
-import { Flex, Frame, H3, Hr, P, Span } from 'Vendor/components';
+import { Flex, H3, Hr, P, Span } from 'Vendor/components';
 
 import './SignUpModal.less';
 
@@ -19,7 +19,7 @@ const SignUpModal: React.FC = () => {
 
   return (
     <BaseModal onClick={closeSignUpModal}>
-      <Frame className="SignUpModal" grow>
+      <div className="SignUpModal">
         <Cross className="SignUpModal-cross" onClick={closeSignUpModal} />
         <Flex horizontal="center">
           <H3>Thanks @{name}!</H3>
@@ -35,7 +35,7 @@ const SignUpModal: React.FC = () => {
             </Span>
           </P>
         </Flex>
-      </Frame>
+      </div>
     </BaseModal>
   );
 };

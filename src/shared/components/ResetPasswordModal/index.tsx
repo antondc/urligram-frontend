@@ -6,7 +6,7 @@ import BaseModal from 'Components/BaseModal';
 import { switchResetPasswordModal } from 'Modules/Ui/actions/switchResetPasswordModal';
 import { Routes } from 'Router/routes';
 import history from 'Services/History';
-import { Flex, Frame, H4, Hr, P, Span } from 'Vendor/components';
+import { Flex, H4, Hr, P, Span } from 'Vendor/components';
 
 import './ResetPasswordModal.less';
 
@@ -20,7 +20,7 @@ const ResetPasswordModal: React.FC = () => {
 
   return (
     <BaseModal onClick={closeResetPasswordModal}>
-      <Frame className="ResetPasswordModal" grow>
+      <div className="ResetPasswordModal">
         <Cross className="ResetPasswordModal-cross" onClick={closeResetPasswordModal} />
         <Flex horizontal="center">
           <H4>Password reset success!</H4>
@@ -37,7 +37,7 @@ const ResetPasswordModal: React.FC = () => {
             </Span>
           </P>
         </Flex>
-      </Frame>
+      </div>
     </BaseModal>
   );
 };

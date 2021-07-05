@@ -11,14 +11,12 @@ import ForgotPasswordModal from 'Components/ForgotPasswordModal';
 import Header from 'Components/Header';
 import ListModal from 'Components/ListModal';
 import LoginModal from 'Components/LoginModal';
-import ModalMessage from 'Components/ModalMessage';
 import Notifications from 'Components/Notifications';
 import ResetPasswordModal from 'Components/ResetPasswordModal';
 import SignUpModal from 'Components/SignUpModal';
 import UserModal from 'Components/UserModal';
 import WelcomeModal from 'Components/WelcomeModal';
 import { selectLanguageLoading } from 'Modules/Languages/selectors/selectLanguageLoading';
-import { RootState } from 'Modules/rootType';
 import { pushNewRoute } from 'Modules/Routes/actions/pushNewRoute';
 import { RouteState } from 'Modules/Routes/routes.types';
 import { selectCurrentPathAndQuery } from 'Modules/Routes/selectors/selectCurrentPathAndQuery';
@@ -29,7 +27,6 @@ import { selectUiBookmarkUpdateModalMounted } from 'Modules/Ui/selectors/selectU
 import { selectUiForgotPasswordModalMounted } from 'Modules/Ui/selectors/selectUiForgotPasswordModalMounted';
 import { selectUiListModalMounted } from 'Modules/Ui/selectors/selectUiListModalMounted';
 import { selectUiLoginModalMounted } from 'Modules/Ui/selectors/selectUiLoginModalMounted';
-import { selectUiMessageModalMounted } from 'Modules/Ui/selectors/selectUiMessageModalMounted';
 import { selectUiResetPasswordModalMounted } from 'Modules/Ui/selectors/selectUiResetPasswordModalMounted';
 import { selectUiScreenLocked } from 'Modules/Ui/selectors/selectUiScreenLocked';
 import { selectUiSignUpModalMounted } from 'Modules/Ui/selectors/selectUiSignUpModalMounted';
@@ -37,7 +34,6 @@ import { selectUiUserModalMounted } from 'Modules/Ui/selectors/selectUiUserModal
 import { selectUiWelcomeModalMounted } from 'Modules/Ui/selectors/selectUiWelcomeModalMounted';
 import { userFollowingLoad } from 'Modules/Users/actions/userFollowingLoad';
 import { userLoad } from 'Modules/Users/actions/userLoad';
-import { selectUserById } from 'Modules/Users/selectors/selectUserById';
 import Router from 'Router/index';
 import { routesList, routesWithoutOmmitedValues } from 'Router/routes';
 import enhanceRouteWithParams from 'Tools/utils/url/enhanceRouteWithParams';
@@ -55,12 +51,10 @@ interface Props {
 const Layout: React.FC<Props> = ({ location }) => {
   const dispatch = useDispatch();
   const session = useSelector(selectSession);
-  const user = useSelector((state: RootState) => selectUserById(state, { id: session?.id }));
   const locationPathAndSearchQuery = `${location.pathname}${location.search}`;
   const currentPathAndQuery = useSelector(selectCurrentPathAndQuery);
   const languageLoading = useSelector(selectLanguageLoading);
   const userModalMounted = useSelector(selectUiUserModalMounted);
-  const messageModalMounted = useSelector(selectUiMessageModalMounted);
   const uiScreenLocked = useSelector(selectUiScreenLocked);
   const loginModalMounted = useSelector(selectUiLoginModalMounted);
   const welcomeModalMounted = useSelector(selectUiWelcomeModalMounted);
@@ -137,10 +131,6 @@ const Layout: React.FC<Props> = ({ location }) => {
           <UserModal />
         </Fade>
       </div>
-
-      <Fade mounted={messageModalMounted} speed="fastest" position="fixed" appear>
-        <ModalMessage message="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus gravida augue sed ipsum pulvinar, vel pretium tellus commodo. Aliquam erat volutpat. Morbi placerat justo massa, eget laoreet enim cursus et. Aliquam id scelerisque ipsum, ac rutrum erat. Donec sed blandit metus. Maecenas pellentesque, neque vel " />
-      </Fade>
       <Fade mounted={loginModalMounted} speed="fastest" position="fixed" appear>
         <LoginModal />
       </Fade>

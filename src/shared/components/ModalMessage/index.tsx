@@ -5,7 +5,7 @@ import { createStructuredSelector } from 'reselect';
 import Cross from 'Assets/svg/cross.svg';
 import BaseModal from 'Components/BaseModal';
 import { switchMessageModal } from 'Modules/Ui/actions/switchMessageModal';
-import { Button, Flex, Frame, Hr, Span } from 'Vendor/components';
+import { Button, Flex, Hr, Span } from 'Vendor/components';
 
 import './ModalMessage.less';
 
@@ -16,7 +16,7 @@ interface Props {
 
 const ModalMessage: React.FC<Props> = ({ message, switchMessageModal }) => (
   <BaseModal onClick={switchMessageModal}>
-    <Frame className="ModalMessage" grow>
+    <div className="ModalMessage">
       <Cross className="ModalMessage-cross" onClick={switchMessageModal} />
       <Span className="ModalMessage-message" weight="semiBold">
         {message}
@@ -25,7 +25,7 @@ const ModalMessage: React.FC<Props> = ({ message, switchMessageModal }) => (
       <Flex horizontal="center">
         <Button text="Submit" onClick={switchMessageModal} />
       </Flex>
-    </Frame>
+    </div>
   </BaseModal>
 );
 
