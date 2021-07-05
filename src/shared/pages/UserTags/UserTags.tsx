@@ -76,7 +76,7 @@ export const UserTags: React.FC<Props> = ({
         users={mostFollowedUsers}
       />
       <SidebarListUsers
-        title="Following Users"
+        title="New Users"
         href={'/users?sort=-createdAt&page[size]=10'}
         loading={newUsersLoading}
         users={newUsers}
