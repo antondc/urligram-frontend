@@ -25,7 +25,7 @@ cache:
 install:
   stage: install
   script:
-    - npm install --verbose
+    - npm install --verbose -f
   artifacts:
     paths:
       - node_modules/
