@@ -3,16 +3,19 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { sessionLogOut } from 'Modules/Session/actions/sessionLogOut';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
-import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUserId';
 import { switchMessageModal } from 'Modules/Ui/actions/switchMessageModal';
-import { switchUserModal } from 'Modules/Ui/actions/switchUserModal';
+import { userModalMount } from 'Modules/Ui/actions/userModalMount';
+import { userModalUnmount } from 'Modules/Ui/actions/userModalUnmount';
 import { UserModal as UserModalUi } from './UserModal';
 
 import './UserModal.less';
 
-const UserModal: React.FC = () => {
+interface Props {
+  userModalMounted: boolean;
+}
+
+const UserModal: React.FC<Props> = ({ userModalMounted }) => {
   const dispatch = useDispatch();
-  const sessionId = useSelector(selectSessionUserId);
   const session = useSelector(selectSession);
 
   const logOutDispatched = () => {
@@ -20,16 +23,23 @@ const UserModal: React.FC = () => {
   };
 
   const switchUserModalDispatched = () => {
-    dispatch(switchUserModal());
+    if (!userModalMounted) {
+      dispatch(userModalMount());
+
+      return;
+    }
+    dispatch(userModalUnmount());
   };
 
   const switchMessageModalDispatched = () => {
     dispatch(switchMessageModal());
   };
 
+  if (!session?.id) return null;
+
   return (
     <UserModalUi
-      sessionId={sessionId}
+      userModalMounted={userModalMounted}
       session={session}
       sessionLogOut={logOutDispatched}
       switchUserModal={switchUserModalDispatched}

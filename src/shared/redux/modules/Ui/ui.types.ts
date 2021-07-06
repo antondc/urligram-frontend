@@ -1,4 +1,5 @@
-export const SWITCH_USER_MODAL = 'SWITCH_USER_MODAL';
+export const USER_MODAL_MOUNT = 'USER_MODAL_MOUNT';
+export const USER_MODAL_UNMOUNT = 'USER_MODAL_UNMOUNT';
 export const SWITCH_MESSAGE_MODAL = 'SWITCH_MESSAGE_MODAL';
 export const SWITCH_LOGIN_MODAL = 'SWITCH_LOGIN_MODAL';
 export const SWITCH_LANGUAGES_MODAL = 'SWITCH_LANGUAGES_MODAL';
@@ -74,8 +75,13 @@ export type UiState = {
   notifications?: NotificationState[];
 };
 
-interface SwitchUserModal {
-  type: typeof SWITCH_USER_MODAL;
+interface UserModalMount {
+  type: typeof USER_MODAL_MOUNT;
+  payload: Partial<UiState>;
+}
+
+interface UserModalUnmount {
+  type: typeof USER_MODAL_UNMOUNT;
   payload: Partial<UiState>;
 }
 
@@ -160,7 +166,8 @@ interface SwitchListAddUserModal {
 }
 
 export type UiActions =
-  | SwitchUserModal
+  | UserModalMount
+  | UserModalUnmount
   | SwitchLanguagesModal
   | SwitchMessageModal
   | SwitchLoginModal

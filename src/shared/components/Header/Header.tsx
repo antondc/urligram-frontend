@@ -18,14 +18,14 @@ interface Props {
   logoLoadingHeartBeat: boolean;
   logoLoadingColors: boolean;
   sessionLoading: boolean;
-  switchUserModal: () => void;
+  userModalMount: () => void;
   switchLoginModal: (mount: true) => void;
 }
 
 export const Header: React.FC<Props> = ({
   routeName,
   isLogged,
-  switchUserModal,
+  userModalMount,
   switchLoginModal,
   logoLoadingHeartBeat,
   logoLoadingColors,
@@ -56,14 +56,14 @@ export const Header: React.FC<Props> = ({
         <img
           className="Header-userImage"
           src={session?.image?.original}
-          onClick={isLogged ? switchUserModal : () => switchLoginModal(true)}
+          onClick={isLogged ? userModalMount : () => switchLoginModal(true)}
         />
       )}
       {!sessionLoading && !isLogged && (
         <User
           name="User"
           className={'Header-userLogo'}
-          onClick={isLogged ? switchUserModal : () => switchLoginModal(true)}
+          onClick={isLogged ? userModalMount : () => switchLoginModal(true)}
         />
       )}
       {sessionLoading && <SpinnerCircularBrute className="Header-loader" speed="normal" />}

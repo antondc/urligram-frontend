@@ -4,12 +4,11 @@ import Cross from 'Assets/svg/cross.svg';
 import User from 'Assets/svg/user.svg';
 import A from 'Components/A';
 import { SessionState } from 'Modules/Session/session.types';
-import { Hr, Span } from 'Vendor/components';
 
 import './UserModal.less';
 
 interface Props {
-  sessionId: string;
+  userModalMounted: boolean;
   session: SessionState;
   sessionLogOut: () => void;
   switchMessageModal: () => void;
@@ -17,64 +16,72 @@ interface Props {
 }
 
 export const UserModal: React.FC<Props> = ({
-  sessionId,
+  userModalMounted,
   session,
   sessionLogOut,
   switchUserModal,
   switchMessageModal,
 }) => (
-  <div className="UserModal" onClick={switchUserModal} onMouseLeave={switchUserModal}>
-    {sessionId ? (
-      <img className="UserModal-userLogo" src={session?.image?.original} />
-    ) : (
-      <Cross className="UserModal-cross" />
-    )}
-    {!sessionId && <User className="UserModal-userLogo" onClick={switchMessageModal} />}
-    <ul>
-      <li>
-        <Span weight="extraBold">
-          <A className="UserModal-link" href={`users/${sessionId}`} frontend underlined>
-            My account
-          </A>
-        </Span>
+  <div
+    className={'UserModal' + (userModalMounted ? ' UserModal--mounted' : '')}
+    onClick={switchUserModal}
+    onMouseLeave={switchUserModal}
+  >
+    <img className="UserModal-userLogo" src={session?.image?.original} />
+    <Cross className="UserModal-cross" />
+    {!session?.id && <User className="UserModal-userLogo" onClick={switchMessageModal} />}
+    <ul className="UserModal-list">
+      <li className="UserModal-item">
+        <A href={`users/${session?.id}`} frontend underlined>
+          My account
+        </A>
       </li>
-      <Hr spacer size="small" />
-      <li>
-        <Span weight="extraBold">
-          <A className="UserModal-link" href={`users/${sessionId}/followers`} frontend underlined>
-            Followers
-          </A>
-        </Span>
+      <li className="UserModal-item">
+        <A href={`users/${session?.id}/followers`} frontend underlined>
+          Followers
+        </A>
       </li>
-      <Hr spacer size="small" />
-      <li>
-        <Span weight="extraBold">
-          <A className="UserModal-link" href={`users/${sessionId}/following`} frontend underlined>
-            Following
-          </A>
-        </Span>
+      <li className="UserModal-item">
+        <A href={`users/${session?.id}/following`} frontend underlined>
+          Following
+        </A>
       </li>
-      <Hr spacer size="small" />
-      <li>
-        <Span weight="extraBold">
-          <A className="UserModal-link" href={`users/${sessionId}/bookmarks`} frontend underlined>
-            My bookmarks
-          </A>
-        </Span>
+      <li className="UserModal-item">
+        <A href={`users/${session?.id}/bookmarks`} frontend underlined>
+          My bookmarks
+        </A>
       </li>
-      <Hr spacer size="small" />
-      <li>
-        <Span weight="extraBold">
-          <A className="UserModal-link" href={`users/${sessionId}/lists`} frontend underlined>
-            My lists
-          </A>
-        </Span>
+      <li className="UserModal-item">
+        <A href={`users/${session?.id}/lists`} frontend underlined>
+          My lists
+        </A>
       </li>
-      <Hr spacer size="small" />
-      <li className="UserModal-sessionLogOut" onClick={sessionLogOut}>
-        <Span className="UserModal-link" weight="extraBold">
-          Log out
-        </Span>
+      <li className="UserModal-item" onClick={sessionLogOut}>
+        Log out
+      </li>
+      <li className="UserModal-item" onClick={sessionLogOut}>
+        Log out
+      </li>
+      <li className="UserModal-item" onClick={sessionLogOut}>
+        Log out
+      </li>
+      <li className="UserModal-item" onClick={sessionLogOut}>
+        Log out
+      </li>
+      <li className="UserModal-item" onClick={sessionLogOut}>
+        Log out
+      </li>
+      <li className="UserModal-item" onClick={sessionLogOut}>
+        Log out
+      </li>
+      <li className="UserModal-item" onClick={sessionLogOut}>
+        Log out
+      </li>
+      <li className="UserModal-item" onClick={sessionLogOut}>
+        Log out
+      </li>
+      <li className="UserModal-item" onClick={sessionLogOut}>
+        Log out
       </li>
     </ul>
   </div>

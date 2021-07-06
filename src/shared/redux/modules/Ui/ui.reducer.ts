@@ -9,7 +9,6 @@ import {
   SWITCH_MESSAGE_MODAL,
   SWITCH_RESET_PASSWORD_MODAL,
   SWITCH_SIGN_UP_MODAL,
-  SWITCH_USER_MODAL,
   SWITCH_WELCOME_MODAL,
   UI_BOOKMARK_LISTS_MODALS_MOUNT,
   UI_BOOKMARK_LISTS_MODALS_UNMOUNT,
@@ -18,6 +17,8 @@ import {
   UI_NOTIFICATION_VIEWED,
   UiActions,
   UiState,
+  USER_MODAL_MOUNT,
+  USER_MODAL_UNMOUNT,
 } from './ui.types';
 
 export const initialState: UiState = {
@@ -78,7 +79,8 @@ export const initialState: UiState = {
 
 export const Ui = (state = initialState, action: UiActions): UiState => {
   switch (action.type) {
-    case SWITCH_USER_MODAL:
+    case USER_MODAL_MOUNT:
+    case USER_MODAL_UNMOUNT:
     case SWITCH_LANGUAGES_MODAL:
     case SWITCH_MESSAGE_MODAL:
     case SWITCH_LOGIN_MODAL:

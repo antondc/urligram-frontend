@@ -14,7 +14,7 @@ import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { selectSessionLoading } from 'Modules/Session/selectors/selectSessionLoading';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
-import { switchUserModal } from 'Modules/Ui/actions/switchUserModal';
+import { userModalMount } from 'Modules/Ui/actions/userModalMount';
 import { selectUsersLoading } from 'Modules/Users/selectors/selectUsersLoading';
 import { Header as HeaderUi } from './Header';
 
@@ -30,14 +30,14 @@ interface Props {
   usersLoading: boolean;
   listsLoading: boolean;
   sessionLoading: boolean;
-  switchUserModal: () => void;
+  userModalMount: () => void;
   switchLoginModal: (mount: true) => void;
 }
 
 const Header: React.FC<Props> = ({
   isLogged,
   currentGlossary,
-  switchUserModal,
+  userModalMount,
   switchLoginModal,
   bookmarksLoading,
   linksLoading,
@@ -59,7 +59,7 @@ const Header: React.FC<Props> = ({
       isLogged={isLogged}
       session={session}
       currentGlossary={currentGlossary}
-      switchUserModal={switchUserModal}
+      userModalMount={userModalMount}
       switchLoginModal={switchLoginModal}
       logoLoadingHeartBeat={logoLoadingHeartBeat}
       logoLoadingColors={logoLoadingColors}
@@ -81,6 +81,6 @@ const mapStateToProps = createStructuredSelector({
 });
 
 export default connect(mapStateToProps, {
-  switchUserModal,
+  userModalMount,
   switchLoginModal,
 })(Header);
