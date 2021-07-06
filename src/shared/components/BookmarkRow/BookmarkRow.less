@@ -9,13 +9,13 @@
   position: relative;
   justify-content: space-between;
   grid-template:
-    'main icons' auto
-    'main tags' auto
-    / 4fr 2fr 0fr;
-  height: 45px;
+    'title title icons' auto
+    'details tags icons' auto
+    / 8fr 6fr auto;
+  height: 55px;
   width: 100%;
   margin-bottom: 5px;
-  padding: 8px 0 7px 10px;
+  padding: 10px 15px;
   background: @c-background;
   column-gap: 10px;
   border-radius: 4px;
@@ -24,8 +24,8 @@
 
   @media @br-mobile {
     grid-template:
-      'main icons' auto
-      'main tags' auto
+      'title icons' auto
+      'title tags' auto
       / 4fr 2fr 0fr;
   }
 
@@ -35,43 +35,29 @@
     box-shadow: 4px 4px 0 0 @gradientColors[green-1];
   }
 
-  &-main {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-content: space-between;
-    grid-area: main;
-    padding-top: 4px;
-    overflow: hidden;
-  }
-
-  &-mainTitle {
-    display: flex;
-  }
-
   &-favicon {
+    align-self: center;
     height: 10px;
     width: 10px;
+    margin-right: 4px;
   }
 
   &-title {
-    margin-top: -3px; // Position diacriticals outside the box
+    display: flex;
+    position: relative;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-content: space-between;
+    grid-area: title;
+    font-size: @fs-normal;
     font-weight: @fw-semibold;
     line-height: initial;
-    white-space: nowrap;
-    overflow-x: scroll;
-    overflow-y: hidden;
-    text-overflow: ellipsis;
+    overflow: hidden;
 
-    .hideScrollbar;
     .hoverTransition(0.8);
   }
 
-  &-mainBottom {
-    display: flex;
-    padding-bottom: 2px;
-    font-size: @fs-nano;
-    line-height: 6px;
+  &-link {
     white-space: nowrap;
     overflow-x: scroll;
     overflow-y: hidden;
@@ -80,57 +66,24 @@
     .hideScrollbar;
   }
 
-  &-mainBottomNumber {
-    font-weight: @fw-extraBold;
+  &-details {
+    display: flex;
+    grid-area: details;
+    font-size: @fs-micro;
+    font-weight: @fw-light;
+    line-height: 21px;
+    white-space: nowrap;
+    color: @c-accentLight;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    text-overflow: ellipsis;
+
+    .hideScrollbar;
   }
 
   &-editButton {
-    &:hover {
-      cursor: pointer;
-    }
-  }
-
-  &-downvote {
-    bottom: 0;
-    left: 0;
-    transform: rotate(180deg);
-    justify-self: flex-end;
-
-    &:hover {
-      color: @gradientColors[red-3];
-    }
-  }
-
-  &-upvote {
-    bottom: -2px;
-    right: 0;
-    justify-self: flex-end;
-
-    &:hover {
-      color: @gradientColors[green-1];
-    }
-  }
-
-  &-voteSlash {
-    bottom: 0;
-    left: 10px;
-    justify-self: flex-end;
-  }
-
-  &-voteButton {
-    transition: color @td-fast @ease;
-
-    &--loading {
-      color: @c-accentLight;
-    }
-
-    &--upvoted {
-      color: @gradientColors[green-1];
-    }
-
-    &--downvoted {
-      color: @gradientColors[red-3];
-    }
+    grid-area: editButton;
+    margin-left: 3px;
 
     &:hover {
       cursor: pointer;
@@ -139,10 +92,11 @@
 
   &-icons {
     display: flex;
-    flex-wrap: nowrap;
-    justify-content: flex-end;
-    align-items: flex-start;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
     grid-area: icons;
+    height: 100%;
 
     &:hover {
       @{c}-iconSend {
@@ -151,13 +105,13 @@
     }
   }
 
-  &-image {
-    height: 100%;
-    width: 110px;
-    margin-right: 20px;
-    object-fit: cover;
-    object-position: center;
-    border: 2px solid @c-base;
+  &-iconsFirst {
+    display: flex;
+    padding-top: 4px;
+  }
+
+  &-iconsSecond {
+    display: flex;
   }
 
   &-icon {
@@ -165,38 +119,40 @@
     width: 10px;
     min-height: 10px;
     min-width: 10px;
-    margin-left: 3px;
   }
 
   &-actionButton {
+    grid-area: actionButton;
     margin-left: 3px;
+    margin-right: 1px;
   }
 
   &-iconVote {
+    align-self: center;
+    grid-area: iconVote;
+    margin-bottom: -4px;
     margin-left: 3px;
+    margin-right: -2px;
   }
 
   &-averageVote {
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    align-self: center;
+    grid-area: averageVote;
     height: 10px;
     margin-left: 3px;
     font-size: 10px;
     font-weight: 600;
-  }
-
-  &-iconSend {
-    margin-right: 3px;
-    opacity: 0;
-    transition: opacity @td-fastest @ease;
+    color: @c-base;
+    justify-self: flex-end;
   }
 
   &-iconLists {
-    height: 8px;
-    width: 8px;
-    margin-left: 5px;
-    padding-top: 1px;
+    grid-area: iconLists;
+    margin-top: 1px;
+    margin-left: 3px;
 
     svg {
       height: 8px;
@@ -206,22 +162,13 @@
     }
   }
 
-  &--pending {
-    fill: @c-accent;
-    animation: hearthBeat 1.5s ease infinite;
-  }
-
-  &--failed {
-    fill: @c-error;
-  }
-
   &-tags {
     display: flex;
     align-items: flex-end;
     grid-area: tags;
+    min-width: 50px;
     overflow-x: scroll;
     overflow-y: visible;
-    // background: darkcyan;
     direction: rtl;
 
     .hideScrollbar;
