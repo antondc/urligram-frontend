@@ -59,30 +59,6 @@ export const UserModal: React.FC<Props> = ({
       <li className="UserModal-item" onClick={sessionLogOut}>
         Log out
       </li>
-      <li className="UserModal-item" onClick={sessionLogOut}>
-        Log out
-      </li>
-      <li className="UserModal-item" onClick={sessionLogOut}>
-        Log out
-      </li>
-      <li className="UserModal-item" onClick={sessionLogOut}>
-        Log out
-      </li>
-      <li className="UserModal-item" onClick={sessionLogOut}>
-        Log out
-      </li>
-      <li className="UserModal-item" onClick={sessionLogOut}>
-        Log out
-      </li>
-      <li className="UserModal-item" onClick={sessionLogOut}>
-        Log out
-      </li>
-      <li className="UserModal-item" onClick={sessionLogOut}>
-        Log out
-      </li>
-      <li className="UserModal-item" onClick={sessionLogOut}>
-        Log out
-      </li>
     </ul>
   </div>
 );
