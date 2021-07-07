@@ -43,6 +43,7 @@ export const Button: React.FC<Props> = ({
       (grow ? ' Button--grow' : '') +
       (!disabled && !error && success ? ' Button--success' : '') +
       (!disabled && !error && loading ? ' Button--loading' : '') +
+      (disabled ? ' Button--disabled' : '') +
       (error ? ' Button--error' : '')
     }
     type={type}

@@ -9,6 +9,7 @@ interface Props {
   nameOrEmailValue: string;
   nameOrEmailError: string;
   onChangeNameOrEmail: (e: React.FormEvent<HTMLInputElement>) => void;
+  onBlurNameOrEmail: (e: React.FormEvent<HTMLInputElement>) => void;
   submitDisabled: boolean;
   submitSuccess: boolean;
   submitError: string;
@@ -20,6 +21,7 @@ export const ForgotPassword: React.FC<Props> = ({
   nameOrEmailValue,
   nameOrEmailError,
   onChangeNameOrEmail,
+  onBlurNameOrEmail,
   submitDisabled,
   submitSuccess,
   submitError,
@@ -36,7 +38,7 @@ export const ForgotPassword: React.FC<Props> = ({
             type="text"
             label="Name or email"
             onChange={onChangeNameOrEmail}
-            onBlur={onChangeNameOrEmail}
+            onBlur={onBlurNameOrEmail}
             value={nameOrEmailValue}
             error={nameOrEmailError}
           />

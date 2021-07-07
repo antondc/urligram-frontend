@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import debounce from 'lodash/debounce';
 
 import { sessionForgotPassword } from 'Modules/Session/actions/sessionForgotPassword';
 import { selectSessionErrorLast } from 'Modules/Session/selectors/selectSessionErrorLast';
 import { selectSessionLoading } from 'Modules/Session/selectors/selectSessionLoading';
 import { selectSessionPasswordRequested } from 'Modules/Session/selectors/selectSessionPasswordRequested';
+import { DELAY_MEDIUM_MS } from 'Root/src/shared/constants';
 import { testStringHasWhiteSpaces } from 'Tools/utils/string/testStringHasWhiteSpaces';
 import { validateEmailAddress } from 'Tools/utils/string/validateEmailAddress';
 import { ForgotPassword as ForgotPasswordUi } from './ForgotPassword';
@@ -16,35 +18,24 @@ const ForgotPassword: React.FC = () => {
   const sessionError = useSelector(selectSessionErrorLast);
   const sessionPasswordRequested = useSelector(selectSessionPasswordRequested);
   const sessionLoading = useSelector(selectSessionLoading);
-  const [nameOrEmailValue, setNameValue] = useState<string>(undefined);
+  const [nameOrEmailValue, setNameOrEmailValue] = useState<string>(undefined);
   const [nameOrEmailError, setNameOrEmailError] = useState<string>(undefined);
   const [submitSuccess, setSubmitSuccess] = useState<boolean>(false);
   const [submitError, setSubmitError] = useState<string>(undefined);
   const submitDisabled = !nameOrEmailValue || !!nameOrEmailError;
 
-  const onChangeNameOrEmail = async (e: React.FormEvent<HTMLInputElement>) => {
-    const { value } = e.currentTarget;
-    setNameValue(value);
+  const onNameOrEmailValidate = (value: string) => {
     setSubmitError(undefined);
     setSubmitSuccess(undefined);
 
-    const stringHasWhiteSpaces = testStringHasWhiteSpaces(value);
-
-    if (stringHasWhiteSpaces) {
-      setNameOrEmailError('Name can not contain spaces');
-
-      return;
-    }
-
-    const isNameOrEmailLengthValid = value.length > 5;
-
+    const isNameOrEmailLengthValid = value?.length > 5;
     if (!isNameOrEmailLengthValid) {
       setNameOrEmailError('Name or Email too short');
 
       return;
     }
 
-    const isEmail = value.includes('@');
+    const isEmail = value?.includes('@');
     const isValidEmail = validateEmailAddress(value);
 
     if (isEmail && !isValidEmail) {
@@ -53,7 +44,29 @@ const ForgotPassword: React.FC = () => {
       return;
     }
 
+    const stringHasWhiteSpaces = testStringHasWhiteSpaces(value);
+    if (stringHasWhiteSpaces) {
+      setNameOrEmailError('Name can not contain spaces');
+
+      return;
+    }
     setNameOrEmailError(undefined);
+  };
+
+  // To debounce the validation we need to memoize it as well
+  const onNameOrEmailValidateDebounced = useCallback(debounce(onNameOrEmailValidate, DELAY_MEDIUM_MS), []);
+
+  const onChangeNameOrEmail = async (e: React.FormEvent<HTMLInputElement>) => {
+    const { value } = e.currentTarget;
+    setNameOrEmailError(undefined);
+    setNameOrEmailValue(value);
+    onNameOrEmailValidateDebounced(value);
+  };
+
+  const onBlurNameOrEmail = async (e: React.FormEvent<HTMLInputElement>) => {
+    const { value } = e.currentTarget;
+
+    onNameOrEmailValidate(value);
   };
 
   const onSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
@@ -90,6 +103,7 @@ const ForgotPassword: React.FC = () => {
       nameOrEmailValue={nameOrEmailValue}
       nameOrEmailError={nameOrEmailError}
       onChangeNameOrEmail={onChangeNameOrEmail}
+      onBlurNameOrEmail={onBlurNameOrEmail}
       onSubmit={onSubmit}
       submitDisabled={submitDisabled}
       submitSuccess={submitSuccess}
