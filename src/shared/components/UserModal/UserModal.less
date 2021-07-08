@@ -107,8 +107,30 @@
     }
   }
 
-  &-arrow {
+  &-label {
+    flex: 1;
+  }
+
+  &-iconMobile {
     display: none;
+    fill: @c-base;
+
+    @media @br-mobile {
+      display: inline;
+      width: 25px;
+      margin-right: 20px;
+    }
+  }
+
+  &-iconLists {
+    @media @br-mobile {
+      width: 22px;
+    }
+  }
+
+  &-iconArrow {
+    display: none;
+    fill: @c-base;
 
     @media @br-mobile {
       display: inline;

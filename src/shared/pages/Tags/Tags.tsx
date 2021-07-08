@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Bookmark from 'Assets/svg/bookmarkRounded.svg';
+import Title from 'Assets/svg/sortTitle.svg';
 import A from 'Components/A';
 import Sidebar from 'Components/Sidebar';
 import { SidebarListTagsSkeleton } from 'Components/SidebarListTags/SidebarListTagsSkeleton';
@@ -36,8 +38,8 @@ export const Tags: React.FC<Props> = ({
       <div className="Tags-header">
         <SortBy
           options={[
-            { label: 'Bookmarks', field: 'count' },
-            { label: 'Name', field: 'name' },
+            { label: 'Bookmarks', field: 'count', icon: Bookmark },
+            { label: 'Name', field: 'name', icon: Title },
           ]}
           href={url}
           currentSort={sort}

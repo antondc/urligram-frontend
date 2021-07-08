@@ -1,5 +1,8 @@
 import React from 'react';
 
+import Bookmark from 'Assets/svg/bookmarkRounded.svg';
+import Clock from 'Assets/svg/spinner6.svg';
+import User from 'Assets/svg/userFill.svg';
 import A from 'Components/A';
 import { BookmarkRowSkeletonGroup } from 'Components/BookmarkRow/BookmarkRowSkeletonGroup';
 import ListRow from 'Components/ListRow';
@@ -56,9 +59,9 @@ export const UserLists: React.FC<Props> = ({
       <div className="UserLists-header">
         <SortBy
           options={[
-            { label: 'Created at', field: 'createdAt' },
-            { label: 'Members', field: 'members' },
-            { label: 'Bookmarks', field: 'bookmarks' },
+            { label: 'Created at', field: 'createdAt', icon: Clock },
+            { label: 'Members', field: 'members', icon: User },
+            { label: 'Bookmarks', field: 'bookmarks', icon: Bookmark },
           ]}
           href={url}
           currentSort={sort}

@@ -1,5 +1,8 @@
 import React from 'react';
 
+import Bookmark from 'Assets/svg/bookmarkRounded.svg';
+import Rating from 'Assets/svg/rating.svg';
+import Clock from 'Assets/svg/spinner6.svg';
 import A from 'Components/A';
 import BookmarkRow from 'Components/BookmarkRow';
 import { BookmarkRowSkeletonGroup } from 'Components/BookmarkRow/BookmarkRowSkeletonGroup';
@@ -10,7 +13,7 @@ import { BookmarksByKey } from 'Modules/Bookmarks/bookmarks.types';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
-import { FadeInOut, Hr, Select, SelectValue, SortBy, Space } from 'Vendor/components';
+import { FadeInOut, Hr, Select, SelectValue, SortBy } from 'Vendor/components';
 
 import './UserBookmarks.less';
 
@@ -64,8 +67,7 @@ export const UserBookmarks: React.FC<Props> = ({
   <>
     <div className="UserBookmarks">
       <div className="UserBookmarks-header UserBookmarks-headerTitle">
-        Bookmarks of
-        <Space />
+        Bookmarks of{' '}
         <A href={`/users/${userId}`} underlined frontend>
           @{user?.name}
         </A>
@@ -85,10 +87,11 @@ export const UserBookmarks: React.FC<Props> = ({
           hideLabelOnFill
         />
         <SortBy
+          className="UserBookmarks-sortBy"
           options={[
-            { label: 'Rating', field: 'vote' },
-            { label: 'Bookmarked', field: 'timesbookmarked' },
-            { label: 'Created', field: 'createdAt' },
+            { label: 'Rating', field: 'vote', icon: Rating },
+            { label: 'Bookmarked', field: 'timesbookmarked', icon: Bookmark },
+            { label: 'Created', field: 'createdAt', icon: Clock },
           ]}
           href={url}
           currentSort={sort}

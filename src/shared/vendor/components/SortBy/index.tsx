@@ -2,7 +2,6 @@ import React from 'react';
 
 import { URLWrapper } from '../../../services/URLWrapper';
 import { A } from '../A';
-import { Span } from '../Span';
 import { Sort } from '../Svg';
 
 import './SortBy.less';
@@ -13,6 +12,7 @@ interface Props {
   options: {
     label: string;
     field: string;
+    icon?: React.ElementType;
   }[];
   currentSort: string;
   loading?: boolean;
@@ -33,13 +33,13 @@ export const SortBy: React.FC<Props> = ({ className, href, options, currentSort,
         url.upsertSearchParams({ sort: `-${item.field}` });
         const redirectUrlDesc = url.getPathAndSearch();
         const displayedUrl = currentSortIsDesc && isActiveItem ? redirectUrlAsc : redirectUrlDesc;
+        const Icon = item?.icon;
 
         return (
           <li className={'SortBy-listItem' + (isActiveItem ? ' SortBy-listItem--active' : '')} key={index}>
             <A href={displayedUrl} styled={false} frontend className="SortBy-listItemLink">
-              <Span size="small" weight="extraBold">
-                {item.label}{' '}
-              </Span>
+              <span className="SortBy-label">{item.label}</span>
+              {item?.icon && <Icon className="SortBy-icon" />}
               <Sort
                 size="micro"
                 className={

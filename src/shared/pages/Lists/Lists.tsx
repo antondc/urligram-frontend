@@ -1,5 +1,8 @@
 import React from 'react';
 
+import Clock from 'Assets/svg/spinner6.svg';
+import Updated from 'Assets/svg/updated.svg';
+import User from 'Assets/svg/userFill.svg';
 import ListRow from 'Components/ListRow';
 import { ListRowSkeletonGroup } from 'Components/ListRow/ListSkeletonGroup';
 import Pagination from 'Components/Pagination';
@@ -9,7 +12,7 @@ import SidebarListUsers from 'Components/SidebarListUsers';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
-import { Hr, SortBy, Span } from 'Vendor/components';
+import { Hr, SortBy } from 'Vendor/components';
 
 import './Lists.less';
 
@@ -46,9 +49,9 @@ export const Lists: React.FC<Props> = ({
       <div className="Lists-header">
         <SortBy
           options={[
-            { label: 'Date', field: 'createdAt' },
-            { label: 'Updated', field: 'updatedAt' },
-            { label: 'Members', field: 'members' },
+            { label: 'Date', field: 'createdAt', icon: Clock },
+            { label: 'Updated', field: 'updatedAt', icon: Updated },
+            { label: 'Members', field: 'members', icon: User },
           ]}
           href={url}
           currentSort={sort}

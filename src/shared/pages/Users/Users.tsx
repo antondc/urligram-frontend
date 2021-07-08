@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Clock from 'Assets/svg/spinner6.svg';
 import Pagination from 'Components/Pagination';
 import Sidebar from 'Components/Sidebar';
 import SidebarListUsers from 'Components/SidebarListUsers';
@@ -43,7 +44,7 @@ export const Users: React.FC<Props> = ({
     <div className="Users">
       <div className="Users-header">
         <SortBy
-          options={[{ label: 'Created at', field: 'createdAt' }]}
+          options={[{ label: 'Created at', field: 'createdAt', icon: Clock }]}
           href={url}
           currentSort={sort}
           loading={usersLoading}

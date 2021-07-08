@@ -1,5 +1,8 @@
 import React from 'react';
 
+import Bookmark from 'Assets/svg/bookmarkFilled.svg';
+import Title from 'Assets/svg/sortTitle.svg';
+import Clock from 'Assets/svg/spinner6.svg';
 import A from 'Components/A';
 import Pagination from 'Components/Pagination';
 import Sidebar from 'Components/Sidebar';
@@ -57,9 +60,9 @@ export const Followers: React.FC<Props> = ({
       <div className="Followers-header">
         <SortBy
           options={[
-            { label: 'Name', field: 'name' },
-            { label: 'Login', field: 'login' },
-            { label: 'Bookmarks', field: 'bookmarks' },
+            { label: 'Bookmarks', field: 'bookmarks', icon: Bookmark },
+            { label: 'Login', field: 'login', icon: Clock },
+            { label: 'Name', field: 'name', icon: Title },
           ]}
           href={url}
           currentSort={sort}

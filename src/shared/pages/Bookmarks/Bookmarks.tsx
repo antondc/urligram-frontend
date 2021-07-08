@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Rating from 'Assets/svg/rating.svg';
+import Clock from 'Assets/svg/spinner6.svg';
 import BookmarkRow from 'Components/BookmarkRow';
 import { BookmarkRowSkeletonGroup } from 'Components/BookmarkRow/BookmarkRowSkeletonGroup';
 import Pagination from 'Components/Pagination';
@@ -84,8 +86,8 @@ export const Bookmarks: React.FC<Props> = ({
         <SortBy
           className="Bookmarks-sortBy"
           options={[
-            { label: 'Created at', field: 'createdAt' },
-            { label: 'Rating', field: 'vote' },
+            { label: 'Created at', field: 'createdAt', icon: Clock },
+            { label: 'Rating', field: 'vote', icon: Rating },
           ]}
           href={url}
           currentSort={sort}

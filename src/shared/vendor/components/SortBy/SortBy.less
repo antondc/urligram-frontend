@@ -10,8 +10,10 @@
   padding: 5px 10px;
   font-family: @ff-sans;
   line-height: @fs-normal;
-  // border: 1.5px solid @c-base;
-  // border-radius: 3px;
+
+  @media @br-mobile {
+    background: @c-background;
+  }
 
   &-listItem {
     margin-right: 10px;
@@ -19,6 +21,27 @@
 
     &:last-of-type {
       margin-right: 0;
+    }
+  }
+
+  &-label {
+    font-size: @fs-small;
+    font-weight: @fw-extraBold;
+
+    @media @br-mobile {
+      display: none;
+    }
+  }
+
+  &-icon {
+    display: none;
+    height: 12px;
+    width: 12px;
+    fill: @c-traslucid;
+    transition: fill @td-fast @ease-outCubic, transform @td-fast @ease-outCubic !important;
+
+    @media @br-mobile {
+      display: block;
     }
   }
 
@@ -50,6 +73,10 @@
       fill: @c-base;
     }
 
+    @{c}-icon {
+      fill: @c-base;
+    }
+
     @{c}-listItemIcon--asc {
       transform: scaleY(-1);
     }
@@ -57,7 +84,8 @@
 
   &--loading {
     @{c}-listItemLink,
-    @{c}-listItemIcon {
+    @{c}-listItemIcon,
+    @{c}-icon {
       color: @c-traslucid;
       fill: @c-traslucid;
     }

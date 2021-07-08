@@ -1,8 +1,15 @@
 import React from 'react';
 
 import ArrowRight from 'Assets/svg/arrowRight.svg';
+import Bookmark from 'Assets/svg/bookmarkRounded.svg';
 import Cross from 'Assets/svg/cross.svg';
+import FlagLeft from 'Assets/svg/flagLeft.svg';
+import FlagRight from 'Assets/svg/flagRight.svg';
+import List from 'Assets/svg/list.svg';
+import LogOut from 'Assets/svg/logOut.svg';
+import Tag from 'Assets/svg/tag.svg';
 import User from 'Assets/svg/user.svg';
+import UserFill from 'Assets/svg/userFill.svg';
 import A from 'Components/A';
 import { SessionState } from 'Modules/Session/session.types';
 
@@ -30,31 +37,50 @@ export const UserModal: React.FC<Props> = ({
     <ul className="UserModal-list">
       <A href={`users/${session?.id}`} frontend underlined>
         <li className="UserModal-item">
-          My account <ArrowRight className="UserModal-arrow" />
+          <UserFill className="UserModal-iconMobile" />
+          <span className="UserModal-label">My account </span>
+          <ArrowRight className="UserModal-iconArrow" />
         </li>
       </A>
       <A href={`users/${session?.id}/followers`} frontend underlined>
         <li className="UserModal-item">
-          Followers <ArrowRight className="UserModal-arrow" />
+          <FlagRight className="UserModal-iconMobile" />
+          <span className="UserModal-label">Followers </span>
+          <ArrowRight className="UserModal-iconArrow" />
         </li>
       </A>
       <A href={`users/${session?.id}/following`} frontend underlined>
         <li className="UserModal-item">
-          Following <ArrowRight className="UserModal-arrow" />
+          <FlagLeft className="UserModal-iconMobile" />
+          <span className="UserModal-label">Following </span>
+          <ArrowRight className="UserModal-iconArrow" />
         </li>
       </A>
       <A href={`users/${session?.id}/bookmarks`} frontend underlined>
         <li className="UserModal-item">
-          My bookmarks <ArrowRight className="UserModal-arrow" />
+          <Bookmark className="UserModal-iconMobile" />
+          <span className="UserModal-label">My bookmarks </span>
+          <ArrowRight className="UserModal-iconArrow" />
         </li>
       </A>
       <A href={`users/${session?.id}/lists`} frontend underlined>
         <li className="UserModal-item">
-          My lists <ArrowRight className="UserModal-arrow" />
+          <List className="UserModal-iconMobile UserModal-iconLists" />
+          <span className="UserModal-label">My lists </span>
+          <ArrowRight className="UserModal-iconArrow" />
+        </li>
+      </A>
+      <A href={`users/${session?.id}/tags`} frontend underlined>
+        <li className="UserModal-item">
+          <Tag className="UserModal-iconMobile" />
+          <span className="UserModal-label">My tags </span>
+          <ArrowRight className="UserModal-iconArrow" />
         </li>
       </A>
       <li className="UserModal-item" onClick={sessionLogOut}>
-        Log out <ArrowRight className="UserModal-arrow" />
+        <LogOut className="UserModal-iconMobile" />
+        <span className="UserModal-label">Log out </span>
+        <ArrowRight className="UserModal-iconArrow" />
       </li>
     </ul>
   </div>
