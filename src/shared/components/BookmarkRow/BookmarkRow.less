@@ -24,9 +24,11 @@
 
   @media @br-mobile {
     grid-template:
-      'title icons' auto
-      'title tags' auto
-      / 4fr 2fr 0fr;
+      'title title icons' auto
+      'details details icons' auto
+      'tags tags icons' auto
+      / 1fr 1fr auto;
+    height: 70px;
   }
 
   &-recentlyCreated {
@@ -79,6 +81,10 @@
     text-overflow: ellipsis;
 
     .hideScrollbar;
+
+    @media @br-mobile {
+      line-height: @fh-nano;
+    }
   }
 
   &-editButton {
@@ -172,9 +178,18 @@
     direction: rtl;
 
     .hideScrollbar;
+
+    @media @br-mobile {
+      direction: ltr;
+    }
   }
 
   &-tag {
     margin-left: 5px;
+
+    @media @br-mobile {
+      margin-left: 0;
+      margin-right: 5px;
+    }
   }
 }
