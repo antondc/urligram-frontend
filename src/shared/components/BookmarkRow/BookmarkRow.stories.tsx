@@ -200,8 +200,8 @@ const knobs = {
 
 export const Default: React.ReactNode = () => (
   <ProviderWrapper>
-    <Frame weight="none" borders={false}>
-      <Frame borders={false}>
+    <Frame weight="none" borders={false} grow>
+      <Frame borders={false} grow>
         {!knobs.skeleton()
           ? allItems.map((item, index) => <BookmarkRow key={index} {...item} />)
           : allItems?.map((item, index) => <BookmarkRowSkeleton key={index} {...item} />)}

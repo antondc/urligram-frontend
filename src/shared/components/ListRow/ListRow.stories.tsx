@@ -114,27 +114,25 @@ const knobs = {
 
 export const Default: React.ReactNode = () => (
   <ProviderWrapper>
-    <Frame weight="none">
-      <Frame>
-        <FadeInOut valueToUpdate={knobs.skeleton()} speed="fastest" appear>
-          {!knobs.skeleton() ? (
-            <>
-              <ListRow {...props} />
-              <ListRow {...props} />
-              <ListRow {...props} />
-              <ListRow {...props} />
-              <ListRow {...props} />
-            </>
-          ) : (
-            <>
-              <ListRowSkeleton {...props} />
-              <ListRowSkeleton {...props} />
-              <ListRowSkeleton {...props} />
-              <ListRowSkeleton {...props} />
-              <ListRowSkeleton {...props} />
-            </>
-          )}
-        </FadeInOut>
+    <Frame weight="none" grow>
+      <Frame grow>
+        {!knobs.skeleton() ? (
+          <>
+            <ListRow {...props} />
+            <ListRow {...props} />
+            <ListRow {...props} />
+            <ListRow {...props} />
+            <ListRow {...props} />
+          </>
+        ) : (
+          <>
+            <ListRowSkeleton {...props} />
+            <ListRowSkeleton {...props} />
+            <ListRowSkeleton {...props} />
+            <ListRowSkeleton {...props} />
+            <ListRowSkeleton {...props} />
+          </>
+        )}
       </Frame>
     </Frame>
   </ProviderWrapper>
