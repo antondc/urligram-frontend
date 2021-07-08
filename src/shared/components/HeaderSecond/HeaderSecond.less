@@ -23,6 +23,10 @@
     @media @br-tabletHorizontal {
       padding: 5px 20px;
     }
+
+    @media @br-mobile {
+      padding: 5px 10px;
+    }
   }
 
   &-main {
@@ -40,6 +44,10 @@
       top: 0;
       bottom: 0;
       background: @gradientColors[green-1];
+
+      @media @br-mobile {
+        width: 5px;
+      }
     }
 
     &:before {
@@ -57,8 +65,6 @@
   &-mainElement {
     display: flex;
     padding: 0 20px;
-    font-size: @fs-normal;
-    font-weight: @fw-semibold;
     white-space: nowrap;
     overflow-x: scroll;
     overflow-y: hidden;
@@ -73,6 +79,12 @@
   &-bookmarkItem {
     display: flex;
     align-items: center;
+    font-size: @fs-normal;
+    font-weight: @fw-semibold;
+
+    @media @br-mobile {
+      font-size: @fs-small;
+    }
   }
 
   &-favicon {

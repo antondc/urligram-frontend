@@ -116,6 +116,20 @@
     flex: 1;
   }
 
+  &-link {
+    @media @br-mobile {
+      text-decoration-thickness: 4px;
+    }
+  }
+
+  &-logOut {
+    @media @br-mobile {
+      text-decoration: underline;
+      text-decoration-color: @c-base;
+      text-decoration-thickness: 4px;
+    }
+  }
+
   &-iconMobile {
     display: none;
     fill: @c-base;

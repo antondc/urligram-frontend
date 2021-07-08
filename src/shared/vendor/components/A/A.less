@@ -5,12 +5,16 @@
 @{c} {
   text-decoration: underline;
   text-decoration-color: @c-transparent;
+  text-decoration-thickness: 2px;
   color: @c-base;
   transition: text-decoration-color @td-fastest @ease-custom;
-  text-decoration-thickness: 2px;
 
   &--underlined {
     text-decoration-color: @c-transparent;
+
+    @media @br-mobile {
+      text-decoration-color: @c-base;
+    }
   }
 
   &:hover {

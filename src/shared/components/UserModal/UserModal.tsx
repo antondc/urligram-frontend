@@ -35,49 +35,49 @@ export const UserModal: React.FC<Props> = ({
     <Cross className="UserModal-cross" />
     {!session?.id && <User className="UserModal-userLogo" onClick={switchMessageModal} />}
     <ul className="UserModal-list">
-      <A href={`users/${session?.id}`} frontend underlined>
+      <A className="UserModal-link" href={`users/${session?.id}`} frontend underlined>
         <li className="UserModal-item">
           <UserFill className="UserModal-iconMobile" />
           <span className="UserModal-label">My account </span>
           <ArrowRight className="UserModal-iconArrow" />
         </li>
       </A>
-      <A href={`users/${session?.id}/followers`} frontend underlined>
+      <A className="UserModal-link" href={`users/${session?.id}/followers`} frontend underlined>
         <li className="UserModal-item">
           <FlagRight className="UserModal-iconMobile" />
           <span className="UserModal-label">Followers </span>
           <ArrowRight className="UserModal-iconArrow" />
         </li>
       </A>
-      <A href={`users/${session?.id}/following`} frontend underlined>
+      <A className="UserModal-link" href={`users/${session?.id}/following`} frontend underlined>
         <li className="UserModal-item">
           <FlagLeft className="UserModal-iconMobile" />
           <span className="UserModal-label">Following </span>
           <ArrowRight className="UserModal-iconArrow" />
         </li>
       </A>
-      <A href={`users/${session?.id}/bookmarks`} frontend underlined>
+      <A className="UserModal-link" href={`users/${session?.id}/bookmarks`} frontend underlined>
         <li className="UserModal-item">
           <Bookmark className="UserModal-iconMobile" />
           <span className="UserModal-label">My bookmarks </span>
           <ArrowRight className="UserModal-iconArrow" />
         </li>
       </A>
-      <A href={`users/${session?.id}/lists`} frontend underlined>
+      <A className="UserModal-link" href={`users/${session?.id}/lists`} frontend underlined>
         <li className="UserModal-item">
           <List className="UserModal-iconMobile UserModal-iconLists" />
           <span className="UserModal-label">My lists </span>
           <ArrowRight className="UserModal-iconArrow" />
         </li>
       </A>
-      <A href={`users/${session?.id}/tags`} frontend underlined>
+      <A className="UserModal-link" href={`users/${session?.id}/tags`} frontend underlined>
         <li className="UserModal-item">
           <Tag className="UserModal-iconMobile" />
           <span className="UserModal-label">My tags </span>
           <ArrowRight className="UserModal-iconArrow" />
         </li>
       </A>
-      <li className="UserModal-item" onClick={sessionLogOut}>
+      <li className="UserModal-item UserModal-logOut" onClick={sessionLogOut}>
         <LogOut className="UserModal-iconMobile" />
         <span className="UserModal-label">Log out </span>
         <ArrowRight className="UserModal-iconArrow" />
