@@ -56,7 +56,7 @@
 
   &-mainElement {
     display: flex;
-    padding: 0 20px 0 0;
+    padding: 0 20px;
     font-size: @fs-normal;
     font-weight: @fw-semibold;
     white-space: nowrap;
@@ -64,6 +64,10 @@
     overflow-y: hidden;
 
     .hideScrollbar;
+
+    @media @mobile {
+      padding: 0 20px 0 0;
+    }
   }
 
   &-bookmarkItem {
