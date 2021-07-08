@@ -31,6 +31,11 @@
     max-width: 1200px;
     margin: 0 auto;
     padding: 24px;
+
+    @media @br-mobile {
+      display: block;
+      padding: 10px;
+    }
   }
 
   &-content {
@@ -40,6 +45,14 @@
     @media @br-tabletHorizontal {
       grid-column: 5 / span 16;
       grid-row: 8;
+    }
+
+    @media @br-mobile {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      width: 100%;
     }
   }
 }

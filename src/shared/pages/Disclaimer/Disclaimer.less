@@ -7,6 +7,12 @@
   grid-template-columns: repeat(12, 1fr);
   padding-top: 40px;
 
+  @media @br-mobile {
+    display: flex;
+    flex-direction: column;
+    padding-top: 0;
+  }
+
   &-content {
     grid-column: 4 / span 6;
   }
@@ -20,6 +26,10 @@
     border-radius: 4px;
 
     .boxShadow;
+
+    @media @br-mobile {
+      line-height: @fh-big;
+    }
   }
 
   &-part {

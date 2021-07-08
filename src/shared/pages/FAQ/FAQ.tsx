@@ -17,7 +17,6 @@ interface Props {
 
 export const FAQ: React.FC<Props> = ({ data, currentSlug }) => (
   <div className="FAQ">
-    <div className="FAQ-left" />
     <div className="FAQ-content">
       <h1 className="FAQ-title">{data[currentSlug]?.title}</h1>
       {data[currentSlug]?.questions.map((item, index) => (

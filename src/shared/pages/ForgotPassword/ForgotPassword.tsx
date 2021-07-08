@@ -66,13 +66,13 @@ export const ForgotPassword: React.FC<Props> = ({
         <div className="ForgotPassword-footer">
           <div className="ForgotPassword-section">
             <Span weight="semiBold">Remember it?: </Span>
-            <A href="login" styled underlined frontend>
+            <A className="ForgotPassword-link" href="login" styled underlined frontend>
               <Span weight="semiBold">log in</Span>
             </A>
           </div>
           <div className="ForgotPassword-section">
             <Span weight="semiBold">Dont have an account?: </Span>
-            <A href="sign-up" styled underlined frontend>
+            <A className="ForgotPassword-link" href="sign-up" styled underlined frontend>
               <Span weight="semiBold">sign up</Span>
             </A>
           </div>

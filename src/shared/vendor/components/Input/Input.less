@@ -48,6 +48,7 @@
     outline: none;
     transition: border-color @td-fast @ease, color @td-fast @ease;
     box-shadow: none;
+    border-radius: 0;
 
     &[type='date']::-webkit-inner-spin-button,
     &[type='date']::-webkit-calendar-picker-indicator,
@@ -59,6 +60,10 @@
 
     &[type='search']::-webkit-search-cancel-button {
       display: none;
+    }
+
+    &[type='search'] {
+      -webkit-appearance: none;
     }
 
     &:focus {

@@ -74,7 +74,8 @@
     @media @br-mobile {
       height: 25px;
       margin: 0;
-      fill: @gradientColors[blue-2];
+      opacity: 0.85;
+      fill: @c-error;
     }
   }
 
@@ -124,6 +125,14 @@
 
     @media @br-mobile {
       padding: 0;
+      opacity: 0.85;
+      transition: opacity @td-fast @ease;
+    }
+  }
+
+  &-item--active {
+    @media @br-mobile {
+      opacity: 1;
     }
   }
 
@@ -198,6 +207,7 @@
     @media @br-mobile {
       height: 30px;
       width: 30px;
+      fill: @c-background;
     }
 
     &:hover {
@@ -226,5 +236,10 @@
     margin: 5px;
     stroke: @c-base;
     border-radius: 50%;
+
+    @media @br-mobile {
+      fill: @c-background;
+      stroke: none;
+    }
   }
 }

@@ -12,6 +12,10 @@
 
   .u-blackBars;
 
+  @media @br-mobile {
+    padding: 10px;
+  }
+
   &-text {
     display: flex;
     flex-direction: column;
@@ -19,6 +23,11 @@
     align-items: flex-start;
     flex: 1;
     padding: 20px;
+
+    @media @br-mobile {
+      border-radius: 4px;
+      padding: 0;
+    }
   }
 
   &-textSpan {
@@ -27,13 +36,28 @@
 
   &-textSpanTitle {
     padding: 4px 20px 0 10px;
+
+    @media @br-mobile {
+      margin-right: 10px;
+    }
   }
 
   &-textSpanBody {
     padding: 4px 10px;
+
+    @media @br-mobile {
+      margin-right: 10px;
+    }
   }
 
   &-buttons {
     padding: 20px;
+
+    @media @br-mobile {
+      display: flex;
+      justify-content: flex-end;
+      align-items: flex-end;
+      padding: 0;
+    }
   }
 }

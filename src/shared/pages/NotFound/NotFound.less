@@ -9,6 +9,20 @@
   align-items: center;
   flex: 1;
 
+  @media @br-mobile {
+    padding: 40px;
+    background: @c-background;
+    border-radius: 4px;
+
+    .boxShadow;
+  }
+
+  &-link {
+    @media @br-mobile {
+      text-decoration-color: @c-base;
+    }
+  }
+
   &-dinosaur {
     font-size: @fs-biggest;
   }

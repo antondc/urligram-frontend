@@ -17,13 +17,13 @@ export const Login: React.FC = ({}) => (
         <div className="Login-footer">
           <div className="Login-section">
             <Span weight="semiBold">Forgot password?: </Span>
-            <A href="forgot-password" styled underlined frontend>
+            <A className="Login-link" href="forgot-password" styled underlined frontend>
               <Span weight="semiBold">reset it</Span>
             </A>
           </div>
           <div className="Login-section">
             <Span weight="semiBold">Dont have an account?: </Span>
-            <A href="sign-up" styled underlined frontend>
+            <A className="Login-link" href="sign-up" styled underlined frontend>
               <Span weight="semiBold">sign up</Span>
             </A>
           </div>

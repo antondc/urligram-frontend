@@ -22,15 +22,15 @@ const NotFound: React.FC = () => {
         <P>
           <Span weight="semiBold">
             But you can continue searching for{' '}
-            <A href={Routes.Home.route} frontend underlined>
+            <A className="NotFound-link" href={Routes.Home.route} frontend underlined>
               bookmarks
             </A>
             ,{' '}
-            <A href={Routes.Lists.route} frontend underlined>
+            <A className="NotFound-link" href={Routes.Lists.route} frontend underlined>
               lists
             </A>{' '}
             or{' '}
-            <A href={Routes.Users.route} frontend underlined>
+            <A className="NotFound-link" href={Routes.Users.route} frontend underlined>
               users
             </A>{' '}
             .

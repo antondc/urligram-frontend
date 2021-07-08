@@ -124,13 +124,13 @@ export const SignUp: React.FC<Props> = ({
         <div className="SignUp-footer">
           <div className="SignUp-section">
             <Span weight="semiBold">Forgot password?: </Span>
-            <A href="forgot-password" styled underlined frontend>
+            <A className="SignUp-link" href="forgot-password" styled underlined frontend>
               <Span weight="semiBold">reset it</Span>
             </A>
           </div>
           <div className="SignUp-section">
             <Span weight="semiBold">Already have an account?: </Span>
-            <A href="login" styled underlined frontend>
+            <A className="SignUp-link" href="login" styled underlined frontend>
               <Span weight="semiBold">login</Span>
             </A>
           </div>

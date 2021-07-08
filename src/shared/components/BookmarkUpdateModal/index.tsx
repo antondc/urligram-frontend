@@ -25,9 +25,7 @@ const BookmarkUpdateModal: React.FC = () => {
         <Flex horizontal="center">
           <H3>Edit bookmark</H3>
         </Flex>
-        <Hr spacer size="small" />
         <BookmarkUpdateForm closeModal={closeModal} setModalLocked={setModalLocked} />
-        <Hr spacer size="big" />
       </div>
     </BaseModal>
   );

@@ -37,19 +37,43 @@ export const Header: React.FC<Props> = ({
       <h3 className="Header-title">Linking</h3>
     </A>
     <nav className="Header-navigation">
-      <A className="Header-item" href={'/bookmarks?'} frontend underlined active={routeName === 'Bookmarks'}>
+      <A
+        className={'Header-item' + (routeName === 'Bookmarks' ? ' Header-item--active' : '')}
+        href={'/bookmarks?'}
+        frontend
+        underlined
+        active={routeName === 'Bookmarks'}
+      >
         <h3 className="Header-text">Bookmarks</h3>
         <BookmarkFilled className="Header-icon Header-iconBookmark" />
       </A>
-      <A className="Header-item" href={'/users'} frontend underlined active={routeName === 'Users'}>
+      <A
+        className={'Header-item' + (routeName === 'Users' ? ' Header-item--active' : '')}
+        href={'/users'}
+        frontend
+        underlined
+        active={routeName === 'Users'}
+      >
         <h3 className="Header-text">Users</h3>
         <UserFill className="Header-icon Header-iconUser" />
       </A>
-      <A className="Header-item" href={'/tags'} frontend underlined active={routeName === 'Tags'}>
+      <A
+        className={'Header-item' + (routeName === 'Tags' ? ' Header-item--active' : '')}
+        href={'/tags'}
+        frontend
+        underlined
+        active={routeName === 'Tags'}
+      >
         <h3 className="Header-text">Tags</h3>
         <Tag className="Header-icon Header-iconTag" />
       </A>
-      <A className="Header-item" href={'/lists'} frontend underlined active={routeName === 'Lists'}>
+      <A
+        className={'Header-item' + (routeName === 'Lists' ? ' Header-item--active' : '')}
+        href={'/lists'}
+        frontend
+        underlined
+        active={routeName === 'Lists'}
+      >
         <h3 className="Header-text">Lists</h3>
         <List className="Header-icon Header-iconList" />
       </A>
