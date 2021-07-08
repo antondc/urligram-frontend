@@ -98,12 +98,21 @@
 
     @media @br-mobile {
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
-      padding: 30px 10px;
+      padding: 30px 20px;
       font-size: @fs-biggest;
       font-weight: @fw-extraBold;
       border-bottom: 2px solid @c-base;
+    }
+  }
+
+  &-arrow {
+    display: none;
+
+    @media @br-mobile {
+      display: inline;
+      width: 30px;
     }
   }
 }

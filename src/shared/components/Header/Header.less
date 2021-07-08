@@ -21,6 +21,11 @@
     height: auto;
   }
 
+  @media @br-mobile {
+    padding: 10px;
+    background: @gradientColors[blue-2];
+  }
+
   &-brand {
     display: flex;
     justify-content: center;
@@ -42,6 +47,15 @@
     @media @br-tablet {
       padding: 10px;
     }
+
+    @media @br-mobile {
+      height: 30px;
+      width: 30px;
+      margin-right: 20px;
+      padding: 5px;
+      background: @c-background;
+      border-radius: 50%;
+    }
   }
 
   &-logo {
@@ -55,6 +69,12 @@
 
     @media @br-tablet {
       margin-right: 0;
+    }
+
+    @media @br-mobile {
+      height: 25px;
+      margin: 0;
+      fill: @gradientColors[blue-2];
     }
   }
 
@@ -101,6 +121,46 @@
       padding: 10px;
       font-size: @fs-normal;
     }
+
+    @media @br-mobile {
+      padding: 0;
+    }
+  }
+
+  &-text {
+    @media @br-mobile {
+      display: none;
+    }
+  }
+
+  &-icon {
+    display: none;
+    align-self: center;
+    fill: @c-background;
+
+    @media @br-mobile {
+      display: block;
+    }
+  }
+
+  &-iconBookmark {
+    height: 20px;
+    width: 20px;
+  }
+
+  &-iconTag {
+    height: 20px;
+    width: 20px;
+  }
+
+  &-iconUser {
+    height: 20px;
+    width: 20px;
+  }
+
+  &-iconList {
+    height: 18px;
+    width: 18px;
   }
 
   &-user {
@@ -113,6 +173,11 @@
 
     @media @br-tablet {
       width: auto;
+    }
+
+    @media @br-mobile {
+      margin-left: 20px;
+      padding: 0;
     }
   }
 
@@ -130,6 +195,11 @@
       width: 35px;
     }
 
+    @media @br-mobile {
+      height: 30px;
+      width: 30px;
+    }
+
     &:hover {
       cursor: pointer;
     }
@@ -142,6 +212,10 @@
 
       @media @br-tabletHorizontal {
         box-shadow: 0 0 0 1.5pt @c-base;
+      }
+
+      @media @br-mobile {
+        box-shadow: none;
       }
     }
   }

@@ -127,7 +127,7 @@ const Layout: React.FC<Props> = ({ location }) => {
         <CookiesBanner />
         <Router />
         <Footer />
-        <UserModal userModalMounted={userModalMounted} />
+        <UserModal />
       </div>
       <Fade mounted={loginModalMounted} speed="fastest" position="fixed" appear>
         <LoginModal />

@@ -6,23 +6,21 @@ import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { switchMessageModal } from 'Modules/Ui/actions/switchMessageModal';
 import { userModalMount } from 'Modules/Ui/actions/userModalMount';
 import { userModalUnmount } from 'Modules/Ui/actions/userModalUnmount';
+import { selectUiUserModalMounted } from 'Modules/Ui/selectors/selectUiUserModalMounted';
 import { UserModal as UserModalUi } from './UserModal';
 
 import './UserModal.less';
 
-interface Props {
-  userModalMounted: boolean;
-}
-
-const UserModal: React.FC<Props> = ({ userModalMounted }) => {
+const UserModal: React.FC = () => {
   const dispatch = useDispatch();
   const session = useSelector(selectSession);
+  const userModalMounted = useSelector(selectUiUserModalMounted);
 
   const logOutDispatched = () => {
     dispatch(sessionLogOut());
   };
 
-  const switchUserModalDispatched = () => {
+  const switchUserModal = () => {
     if (!userModalMounted) {
       dispatch(userModalMount());
 
@@ -42,7 +40,7 @@ const UserModal: React.FC<Props> = ({ userModalMounted }) => {
       userModalMounted={userModalMounted}
       session={session}
       sessionLogOut={logOutDispatched}
-      switchUserModal={switchUserModalDispatched}
+      onCloseClick={switchUserModal}
       switchMessageModal={switchMessageModalDispatched}
     />
   );

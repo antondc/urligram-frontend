@@ -1,7 +1,10 @@
 import React from 'react';
 
-// import Logo from 'Assets/svg/logo.svg';
+import BookmarkFilled from 'Assets/svg/bookmarkFilled.svg';
+import List from 'Assets/svg/list.svg';
+import Tag from 'Assets/svg/tag.svg';
 import User from 'Assets/svg/user.svg';
+import UserFill from 'Assets/svg/userFill.svg';
 import A from 'Components/A';
 import Logo from 'Components/Logo';
 import { GlossaryState } from 'Modules/Languages/languages.types';
@@ -12,21 +15,17 @@ import './Header.less';
 
 interface Props {
   routeName: string;
-  isLogged: boolean;
   session: SessionState;
   currentGlossary: GlossaryState;
   logoLoadingHeartBeat: boolean;
   logoLoadingColors: boolean;
   sessionLoading: boolean;
-  userModalMount: () => void;
-  switchLoginModal: (mount: true) => void;
+  onUserClick: () => void;
 }
 
 export const Header: React.FC<Props> = ({
   routeName,
-  isLogged,
-  userModalMount,
-  switchLoginModal,
+  onUserClick,
   logoLoadingHeartBeat,
   logoLoadingColors,
   sessionLoading,
@@ -39,33 +38,27 @@ export const Header: React.FC<Props> = ({
     </A>
     <nav className="Header-navigation">
       <A className="Header-item" href={'/bookmarks?'} frontend underlined active={routeName === 'Bookmarks'}>
-        <h3>Bookmarks</h3>
+        <h3 className="Header-text">Bookmarks</h3>
+        <BookmarkFilled className="Header-icon Header-iconBookmark" />
       </A>
       <A className="Header-item" href={'/users'} frontend underlined active={routeName === 'Users'}>
-        <h3>Users</h3>
+        <h3 className="Header-text">Users</h3>
+        <UserFill className="Header-icon Header-iconUser" />
       </A>
       <A className="Header-item" href={'/tags'} frontend underlined active={routeName === 'Tags'}>
-        <h3>Tags</h3>
+        <h3 className="Header-text">Tags</h3>
+        <Tag className="Header-icon Header-iconTag" />
       </A>
       <A className="Header-item" href={'/lists'} frontend underlined active={routeName === 'Lists'}>
-        <h3>Lists</h3>
+        <h3 className="Header-text">Lists</h3>
+        <List className="Header-icon Header-iconList" />
       </A>
     </nav>
     <div className="Header-user">
-      {!sessionLoading && isLogged && (
-        <img
-          className="Header-userImage"
-          src={session?.image?.original}
-          onClick={isLogged ? userModalMount : () => switchLoginModal(true)}
-        />
+      {!sessionLoading && session?.id && (
+        <img className="Header-userImage" src={session?.image?.original} onClick={onUserClick} />
       )}
-      {!sessionLoading && !isLogged && (
-        <User
-          name="User"
-          className={'Header-userLogo'}
-          onClick={isLogged ? userModalMount : () => switchLoginModal(true)}
-        />
-      )}
+      {!sessionLoading && !session?.id && <User name="User" className={'Header-userLogo'} onClick={onUserClick} />}
       {sessionLoading && <SpinnerCircularBrute className="Header-loader" speed="normal" />}
     </div>
   </header>
