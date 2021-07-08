@@ -23,9 +23,9 @@ export const UserModal: React.FC<Props> = ({
   onCloseClick,
   switchMessageModal,
 }) => (
-  <div className={'UserModal' + (userModalMounted ? ' UserModal--mounted' : '')}>
+  <div className={'UserModal' + (userModalMounted ? ' UserModal--mounted' : '')} onClick={onCloseClick}>
     <img className="UserModal-userLogo" src={session?.image?.original} />
-    <Cross className="UserModal-cross" onClick={onCloseClick} />
+    <Cross className="UserModal-cross" />
     {!session?.id && <User className="UserModal-userLogo" onClick={switchMessageModal} />}
     <ul className="UserModal-list">
       <A href={`users/${session?.id}`} frontend underlined>
