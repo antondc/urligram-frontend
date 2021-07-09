@@ -9,8 +9,10 @@ import { RootState } from 'Modules/rootType';
 import { selectCurrentRouteParamUserId } from 'Modules/Routes/selectors/selectCurrentRouteParamUserId';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
+import { bookmarkListsModalMount } from 'Modules/Ui/actions/bookmarkListsModalMount';
 import { switchBookmarkUpdateModal } from 'Modules/Ui/actions/switchBookmarkUpdateModal';
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
+import { selectBookmarkListsModalMounted } from 'Modules/Ui/selectors/selectBookmarkListsModalMounted';
 import { TIME_RECENTLY_CREATED_BOOKMARK } from 'Root/src/shared/constants';
 import { LocaleFormattedDate } from 'Tools/utils/Date/localeFormattedDate';
 import { unixTimeElapsed } from 'Tools/utils/Date/unixTimeElapsed';
@@ -37,6 +39,7 @@ const BookmarkRow: React.FC<Props> = ({ id }) => {
   const sessionUserBookmark = useSelector((state: RootState) =>
     selectBookmarksById(state, { bookmarkId: sessionUserBookmarkId })
   );
+  const bookmarkListsModalMounted = useSelector(selectBookmarkListsModalMounted);
 
   const onVote = (vote) => {
     if (!isLogged) return dispatch(switchLoginModal(true));
@@ -48,6 +51,14 @@ const BookmarkRow: React.FC<Props> = ({ id }) => {
     if (!session?.id) return dispatch(switchLoginModal(true));
     if (!sessionUserBookmarkedLink) return;
     await dispatch(switchBookmarkUpdateModal({ mounted: true, bookmarkId: sessionUserBookmarkId }));
+  };
+
+  const onListsClick = () => {
+    console.log('onListsClick: ', bookmarkListsModalMounted);
+
+    if (bookmarkListsModalMounted) return;
+
+    dispatch(bookmarkListsModalMount({ bookmarkId: bookmark?.id }));
   };
 
   useEffect(() => {
@@ -73,6 +84,7 @@ const BookmarkRow: React.FC<Props> = ({ id }) => {
       recentlyCreated={recentlyCreated}
       sessionUserBookmarkedLink={sessionUserBookmarkedLink}
       onEdit={onEdit}
+      onListsClick={onListsClick}
     />
   );
 };

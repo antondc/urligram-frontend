@@ -1,0 +1,26 @@
+@import '../../css/imports.less';
+
+@c: .BookmarkLists;
+
+@{c} {
+  display: flex;
+  position: relative;
+  align-content: flex-end;
+
+  &-listIcon {
+    height: 10px;
+    width: 10px;
+    fill: @c-base;
+
+    .hoverTransition;
+  }
+
+  &-test {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: white;
+    z-index: 100000;
+    pointer-events: none;
+  }
+}

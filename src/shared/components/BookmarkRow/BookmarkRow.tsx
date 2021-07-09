@@ -2,9 +2,8 @@ import React from 'react';
 
 import A from 'Components/A';
 import BookmarkActions from 'Components/BookmarkActions';
-import BookmarkLists from 'Components/BookmarkLists';
 import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
-import { EditCircle, Private, Space, Tag, Tooltip, Vote } from 'Vendor/components';
+import { EditCircle, List, Private, Space, Tag, Tooltip, Vote } from 'Vendor/components';
 import { RenderInPortal } from '../Portal';
 
 import './BookmarkRow.less';
@@ -17,6 +16,7 @@ interface BookmarkRow extends BookmarkState {
   createdAtFormatted: string;
   onVote: (vote: boolean | null) => void;
   onEdit: () => void;
+  onListsClick: () => void;
 }
 
 export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
@@ -27,6 +27,7 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
   createdAtFormatted,
   recentlyCreated,
   onEdit,
+  onListsClick,
 }) => (
   <div
     className={'BookmarkRow' + (recentlyCreated ? ' BookmarkRow-recentlyCreated' : '')}
@@ -87,9 +88,7 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
           <EditCircle className="BookmarkRow-icon BookmarkRow-editButton" size="micro" onClick={onEdit} />
         )}
         {!!sessionUserBookmarkedLink && (
-          <div className="BookmarkRow-icon BookmarkRow-iconLists">
-            <BookmarkLists bookmarkId={bookmark?.id} />
-          </div>
+          <List className="BookmarkRow-icon BookmarkRow-iconLists" onClick={onListsClick} />
         )}
 
         <BookmarkActions

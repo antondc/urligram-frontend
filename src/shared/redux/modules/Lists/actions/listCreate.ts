@@ -1,6 +1,8 @@
 import { ListCreateApiRequest, ListCreateApiResponse, ListsActions, ListState } from 'Modules/Lists/lists.types';
 import HttpClient from 'Services/HttpClient';
 import { AppThunk } from '../../..';
+import { usersReceive } from '../../Users/actions/usersReceive';
+import { UsersActions } from '../../Users/users.types';
 import { listCreateFailure } from './listCreateFailure';
 import { listCreateRequest } from './listCreateRequest';
 import { listCreateSuccess } from './listCreateSuccess';
@@ -9,7 +11,7 @@ export const listCreate = ({
   listName,
   listDescription,
   listIsPrivate,
-}: ListCreateApiRequest): AppThunk<Promise<ListState>, ListsActions> => async (
+}: ListCreateApiRequest): AppThunk<Promise<ListState>, ListsActions | UsersActions> => async (
   dispatch,
   getState
 ): Promise<ListState> => {
@@ -22,7 +24,7 @@ export const listCreate = ({
       listDescription,
       listIsPrivate,
     });
-    const { Lists: listsAfterResponse } = getState();
+    const { Lists: listsAfterResponse, Users: usersAfterResponse, Session: sessionAfterResponse } = getState();
 
     await dispatch(
       listCreateSuccess({
@@ -30,6 +32,26 @@ export const listCreate = ({
         byKey: {
           ...listsAfterResponse.byKey,
           [data.attributes.id]: data.attributes,
+        },
+      })
+    );
+
+    // Add list to user
+    dispatch(
+      usersReceive({
+        ...usersAfterResponse,
+        byKey: {
+          ...usersAfterResponse.byKey,
+          [sessionAfterResponse?.id]: {
+            ...usersAfterResponse.byKey[sessionAfterResponse?.id],
+            lists: [
+              ...(usersAfterResponse.byKey[sessionAfterResponse?.id]?.lists || []),
+              {
+                id: data.attributes.id,
+                userRole: 'admin',
+              },
+            ],
+          },
         },
       })
     );

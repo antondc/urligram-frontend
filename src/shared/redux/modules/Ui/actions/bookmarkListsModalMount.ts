@@ -13,14 +13,12 @@ export const bookmarkListsModalMount = ({ bookmarkId }: Props): AppThunk<void, U
   dispatch({
     type: UI_BOOKMARK_LISTS_MODALS_MOUNT,
     payload: {
-      bookmarkListsModals: [
-        ...Ui.bookmarkListsModals,
-        {
-          type: 'popup',
-          mounted: true,
-          bookmarkId,
-        },
-      ],
+      ...Ui.bookmarkListsModal,
+      bookmarkListsModal: {
+        type: 'popup',
+        mounted: true,
+        bookmarkId,
+      },
     },
   });
 };

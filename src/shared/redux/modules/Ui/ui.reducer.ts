@@ -72,7 +72,11 @@ export const initialState: UiState = {
     type: 'popup',
     mounted: false,
   },
-  bookmarkListsModals: [],
+  bookmarkListsModal: {
+    type: 'modal',
+    mounted: false,
+    bookmarkId: undefined,
+  },
   bookmarkSendModals: [],
   notifications: [],
 };

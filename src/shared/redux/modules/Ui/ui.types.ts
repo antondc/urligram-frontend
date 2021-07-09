@@ -70,7 +70,9 @@ export type UiState = {
     listId?: number;
   } & UiBaseModal;
   listAddUserModal: UiBaseModal;
-  bookmarkListsModals: BookmarkListsModals;
+  bookmarkListsModal: {
+    bookmarkId?: number;
+  } & UiBaseModal;
   bookmarkSendModals: BookmarkSendModals;
   notifications?: NotificationState[];
 };

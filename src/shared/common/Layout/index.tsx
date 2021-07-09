@@ -30,7 +30,6 @@ import { selectUiLoginModalMounted } from 'Modules/Ui/selectors/selectUiLoginMod
 import { selectUiResetPasswordModalMounted } from 'Modules/Ui/selectors/selectUiResetPasswordModalMounted';
 import { selectUiScreenLocked } from 'Modules/Ui/selectors/selectUiScreenLocked';
 import { selectUiSignUpModalMounted } from 'Modules/Ui/selectors/selectUiSignUpModalMounted';
-import { selectUiUserModalMounted } from 'Modules/Ui/selectors/selectUiUserModalMounted';
 import { selectUiWelcomeModalMounted } from 'Modules/Ui/selectors/selectUiWelcomeModalMounted';
 import { userFollowingLoad } from 'Modules/Users/actions/userFollowingLoad';
 import { userLoad } from 'Modules/Users/actions/userLoad';
@@ -54,7 +53,6 @@ const Layout: React.FC<Props> = ({ location }) => {
   const locationPathAndSearchQuery = `${location.pathname}${location.search}`;
   const currentPathAndQuery = useSelector(selectCurrentPathAndQuery);
   const languageLoading = useSelector(selectLanguageLoading);
-  const userModalMounted = useSelector(selectUiUserModalMounted);
   const uiScreenLocked = useSelector(selectUiScreenLocked);
   const loginModalMounted = useSelector(selectUiLoginModalMounted);
   const welcomeModalMounted = useSelector(selectUiWelcomeModalMounted);
