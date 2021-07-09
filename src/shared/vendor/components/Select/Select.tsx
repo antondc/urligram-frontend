@@ -132,7 +132,7 @@ export const SelectUi: React.FC<Props> = ({
           (hideLabelOnFill ? ' Select__label--hideLabel' : '')
         }
       >
-        {/* <span className="Select__label-background" /> */}
+        <span className="Select__label-background" />
         <Span size="small" weight="extraBold">
           {label}
         </Span>
