@@ -9,7 +9,6 @@
   margin: 10px 0;
   font-size: @fs-small;
   font-weight: @fw-extraBold;
-  white-space: nowrap;
 
   @media @br-tabletHorizontal {
     font-size: @fs-micro;
@@ -63,7 +62,6 @@
   }
 
   &-mainElement {
-    display: flex;
     padding: 0 20px;
     white-space: nowrap;
     overflow-x: scroll;
@@ -76,12 +74,7 @@
     }
   }
 
-  &-bookmarkItem {
-    display: flex;
-    align-items: center;
-  }
-
-  &-title {
+  &-link {
     font-size: @fs-normal;
     font-weight: @fw-semibold;
 

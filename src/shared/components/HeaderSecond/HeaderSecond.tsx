@@ -17,8 +17,8 @@ export const HeaderSecond: React.FC<Props> = ({ formattedDate, bookmarks }) => (
     <div className="HeaderSecond-item HeaderSecond-main" id="HeaderSecond-main">
       <div className="HeaderSecond-mainElement">
         {bookmarks.map((bookmark, index) => (
-          <div className="HeaderSecond-bookmarkItem" key={bookmark.id}>
-            <A className="HeaderSecond-title" href={bookmark?.url} targetBlank underlined>
+          <>
+            <A className="HeaderSecond-link" href={bookmark?.url} targetBlank underlined key={bookmark.id}>
               {bookmark?.title}
             </A>
             {index !== bookmarks.length - 1 && (
@@ -28,7 +28,7 @@ export const HeaderSecond: React.FC<Props> = ({ formattedDate, bookmarks }) => (
                 <Space />
               </>
             )}
-          </div>
+          </>
         ))}
       </div>
     </div>
