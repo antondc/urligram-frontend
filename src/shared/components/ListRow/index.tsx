@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 
 import { selectListById } from 'Modules/Lists/selectors/selectListById';
 import { RootState } from 'Modules/rootType';
+import { selectCurrentPathname } from 'Modules/Routes/selectors/selectCurrentPathname';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { ListRow as ListRowUi } from './ListRow';
 
@@ -17,6 +18,7 @@ const ListRow: React.FC<Props> = ({ id }) => {
   const { name, image, tags, bookmarksIds, description, members, isPrivate } = useSelector((state: RootState) =>
     selectListById(state, { id })
   );
+  const currentPathname = useSelector(selectCurrentPathname);
 
   return (
     <ListRowUi
@@ -28,6 +30,7 @@ const ListRow: React.FC<Props> = ({ id }) => {
       members={members}
       image={image}
       tags={tags}
+      currentPathname={currentPathname}
       bookmarksIds={bookmarksIds}
     />
   );

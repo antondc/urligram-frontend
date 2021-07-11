@@ -14,6 +14,7 @@ interface UserRow extends Partial<UserState> {
   ammountBookmarks: number;
   sinceTranslation: string;
   createdAtFormatted: string;
+  currentPathName: string;
 }
 
 export const UserRow: React.FC<UserRow> = ({
@@ -26,6 +27,7 @@ export const UserRow: React.FC<UserRow> = ({
   ammountLists,
   ammountBookmarks,
   sinceTranslation,
+  currentPathName,
 }) => (
   <div className="UserRow" data-test-id="UserRow" key={'UserRow-' + id}>
     <div className="UserRow-main">
@@ -100,7 +102,7 @@ export const UserRow: React.FC<UserRow> = ({
       {tags?.map((item) => (
         <A
           className="UserRow-tag"
-          href={`/bookmarks?filter[tags][]=${item.name}`}
+          href={`${currentPathName}?filter[tags][]=${item.name}`}
           key={item.id}
           styled={false}
           frontend

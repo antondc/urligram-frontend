@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { ProviderWrapper } from 'Tools/storybook/provider';
-import { FadeInOut, Frame, Hr } from 'Vendor/components';
+import { FadeInOut, Frame } from 'Vendor/components';
 import { boolean, withKnobs } from '@storybook/addon-knobs';
 import { UserRow } from './UserRow';
 import { UserRowSkeleton } from './UserRowSkeleton';
@@ -33,6 +33,7 @@ const props = {
   createdAtFormatted: '29794',
   updatedAt: 29794,
   sinceTranslation: 'since',
+  currentPathName: '',
   tags: [
     {
       id: 1,

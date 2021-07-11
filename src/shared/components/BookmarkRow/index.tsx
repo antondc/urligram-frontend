@@ -6,6 +6,7 @@ import { selectBookmarksById } from 'Modules/Bookmarks/selectors/selectBookmarkB
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
 import { linkUpdateVote } from 'Modules/Links/actions/linkUpdateVote';
 import { RootState } from 'Modules/rootType';
+import { selectCurrentPathname } from 'Modules/Routes/selectors/selectCurrentPathname';
 import { selectCurrentRouteParamUserId } from 'Modules/Routes/selectors/selectCurrentRouteParamUserId';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
@@ -37,6 +38,7 @@ const BookmarkRow: React.FC<Props> = ({ id }) => {
   const sessionUserBookmark = useSelector((state: RootState) =>
     selectBookmarksById(state, { bookmarkId: sessionUserBookmarkId })
   );
+  const currentPathname = useSelector(selectCurrentPathname);
 
   const onVote = (vote) => {
     if (!isLogged) return dispatch(switchLoginModal(true));
@@ -72,6 +74,7 @@ const BookmarkRow: React.FC<Props> = ({ id }) => {
       onVote={onVote}
       recentlyCreated={recentlyCreated}
       sessionUserBookmarkedLink={sessionUserBookmarkedLink}
+      currentPathname={currentPathname}
       onEdit={onEdit}
     />
   );
