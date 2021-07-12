@@ -15,7 +15,7 @@ interface BookmarkRow extends BookmarkState {
   recentlyCreated: boolean;
   sessionUserBookmarkedLink: boolean;
   createdAtFormatted: string;
-  currentPathname: string;
+  pathForTagLink: string;
   onVote: (vote: boolean | null) => void;
   onEdit: () => void;
 }
@@ -26,7 +26,7 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
   onVote,
   sessionUserBookmarkedLink,
   createdAtFormatted,
-  currentPathname,
+  pathForTagLink,
   recentlyCreated,
   onEdit,
 }) => (
@@ -71,7 +71,7 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
       {bookmark?.tags?.map((item) => (
         <A
           className="BookmarkRow-tag"
-          href={`${currentPathname}?filter[tags][]=${item.name}`}
+          href={`${pathForTagLink}?filter[tags][]=${item.name}`}
           key={item.id}
           styled={false}
           frontend

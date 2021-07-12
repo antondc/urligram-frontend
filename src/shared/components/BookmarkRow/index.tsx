@@ -7,12 +7,14 @@ import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCur
 import { linkUpdateVote } from 'Modules/Links/actions/linkUpdateVote';
 import { RootState } from 'Modules/rootType';
 import { selectCurrentPathname } from 'Modules/Routes/selectors/selectCurrentPathname';
+import { selectCurrentRoute } from 'Modules/Routes/selectors/selectCurrentRoute';
 import { selectCurrentRouteParamUserId } from 'Modules/Routes/selectors/selectCurrentRouteParamUserId';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import { switchBookmarkUpdateModal } from 'Modules/Ui/actions/switchBookmarkUpdateModal';
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
 import { TIME_RECENTLY_CREATED_BOOKMARK } from 'Root/src/shared/constants';
+import { Routes } from 'Router/routes';
 import { LocaleFormattedDate } from 'Tools/utils/Date/localeFormattedDate';
 import { unixTimeElapsed } from 'Tools/utils/Date/unixTimeElapsed';
 import { BookmarkRow as BookmarkRowUi } from './BookmarkRow';
@@ -38,7 +40,13 @@ const BookmarkRow: React.FC<Props> = ({ id }) => {
   const sessionUserBookmark = useSelector((state: RootState) =>
     selectBookmarksById(state, { bookmarkId: sessionUserBookmarkId })
   );
+  const currentRoute = useSelector(selectCurrentRoute);
+  const currentLanguageSlug = useSelector(selectCurrentLanguageSlug);
   const currentPathname = useSelector(selectCurrentPathname);
+  // If we are at Home page, we want tags to link to Bookmarks page
+  const isHome = currentRoute?.name === Routes.Home.name;
+  const pathNameIfHome = `/${currentLanguageSlug}/bookmarks`;
+  const pathForTagLink = isHome ? pathNameIfHome : currentPathname;
 
   const onVote = (vote) => {
     if (!isLogged) return dispatch(switchLoginModal(true));
@@ -74,7 +82,7 @@ const BookmarkRow: React.FC<Props> = ({ id }) => {
       onVote={onVote}
       recentlyCreated={recentlyCreated}
       sessionUserBookmarkedLink={sessionUserBookmarkedLink}
-      currentPathname={currentPathname}
+      pathForTagLink={pathForTagLink}
       onEdit={onEdit}
     />
   );
