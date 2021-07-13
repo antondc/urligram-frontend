@@ -9,14 +9,14 @@ export const listsLoad = (): AppThunk<Promise<ListState[]>, ListsActions> => asy
   dispatch,
   getState
 ): Promise<ListState[]> => {
-  const { Lists } = getState();
+  const { Lists: listsBeforeRequest } = getState();
   try {
     dispatch(
       listsLoadRequest({
-        ...Lists,
+        ...listsBeforeRequest,
         loading: true,
         meta: {
-          ...Lists.meta,
+          ...listsBeforeRequest.meta,
           sort: undefined,
         },
       })
@@ -26,14 +26,17 @@ export const listsLoad = (): AppThunk<Promise<ListState[]>, ListsActions> => asy
       meta: { totalItems, sort },
       data,
     } = await HttpClient.get<void, ListsLoadApiResponse>('/lists' + window.location.search);
+    const { Lists: listsAfterResponse } = getState();
 
     const listsArray = data?.map((item) => item.attributes);
 
     dispatch(
       listsLoadReceive({
-        byKey: serializerFromArrayToByKey<ListState, ListState>({
-          data: listsArray,
-        }),
+        ...listsAfterResponse,
+        byKey: {
+          ...listsAfterResponse.byKey,
+          ...serializerFromArrayToByKey<ListState, ListState>({ data: listsArray }),
+        },
         currentIds: data?.map((item) => item.id),
         meta: {
           totalItems,
