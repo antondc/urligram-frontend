@@ -94,7 +94,7 @@ export const BookmarkLists: React.FC<Props> = ({ bookmarkId }) => {
     };
 
     await dispatch(listCreate(data));
-    await dispatch(listsLoadByUserId(session?.id));
+    await dispatch(listsLoadByUserId({ userId: session?.id, rawData: true }));
 
     setShowCreateList(false);
     setCreateListSubmitting(false);

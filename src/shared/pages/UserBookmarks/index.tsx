@@ -77,7 +77,7 @@ const UserBookmarks: React.FC = () => {
   }, [session?.id]);
 
   useEffect(() => {
-    dispatch(listsLoadByUserId(session?.id));
+    dispatch(listsLoadByUserId({ userId: session?.id }));
   }, [session?.id]);
 
   useEffect(() => {

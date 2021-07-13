@@ -75,7 +75,7 @@ const UserLists: React.FC = () => {
   }, [session?.id]);
 
   useEffect(() => {
-    dispatch(listsLoadByUserId(userId));
+    dispatch(listsLoadByUserId({ userId }));
   }, [page, session?.id]);
 
   return (

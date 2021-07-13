@@ -47,7 +47,7 @@ export const SidebarLeft: React.FC = () => {
   };
 
   useEffect(() => {
-    dispatch(listsLoadByUserId(sessionId));
+    dispatch(listsLoadByUserId({ userId: sessionId, rawData: true }));
   }, [sessionId]);
 
   useEffect(() => {

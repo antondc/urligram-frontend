@@ -52,7 +52,7 @@ const User: React.FC<Props> = () => {
     dispatch(userLoad(userId));
     dispatch(sectionsFollowingUsersLoad(userId));
     dispatch(sectionsFollowersUsersLoad(userId));
-    dispatch(listsLoadByUserId(userId));
+    dispatch(listsLoadByUserId({ userId }));
   }, [session?.id]);
 
   return (

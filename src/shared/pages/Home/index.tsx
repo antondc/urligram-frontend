@@ -41,7 +41,7 @@ const Home: React.FC = () => {
     dispatch(sectionsMostFollowedUsersLoad());
     dispatch(sectionsNewUsersLoad());
     dispatch(tagsLoad());
-    dispatch(listsLoadByUserId(session?.id));
+    dispatch(listsLoadByUserId({ userId: session?.id }));
     dispatch(sectionsMyRecentBookmarksLoad(session?.id));
   }, [session?.id]);
 

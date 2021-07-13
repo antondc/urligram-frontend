@@ -110,7 +110,7 @@ const List: React.FC = () => {
 
   useEffect(() => {
     dispatch(listLoadById(listId));
-    dispatch(listsLoadByUserId(session?.id));
+    dispatch(listsLoadByUserId({ userId: session?.id }));
   }, [session?.id]);
 
   useEffect(() => {
