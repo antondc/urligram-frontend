@@ -4,6 +4,7 @@ import { Location } from 'history';
 
 import LayoutHelperGrid from 'Common/LayoutHelperGrid';
 import BookmarkCreateModal from 'Components/BookmarkCreateModal';
+import BookmarkListsModal from 'Components/BookmarkListsModal';
 import BookmarkUpdateModal from 'Components/BookmarkUpdateModal';
 import CookiesBanner from 'Components/CookiesBanner';
 import Footer from 'Components/Footer';
@@ -23,6 +24,7 @@ import { RouteState } from 'Modules/Routes/routes.types';
 import { selectCurrentPathAndQuery } from 'Modules/Routes/selectors/selectCurrentPathAndQuery';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { uiResetState } from 'Modules/Ui/actions/uiResetState';
+import { selectBookmarkListsModal } from 'Modules/Ui/selectors/selectBookmarkListsModal';
 import { selectUiBookmarkCreateModalMounted } from 'Modules/Ui/selectors/selectUiBookmarkCreateModalMounted';
 import { selectUiBookmarkUpdateModalMounted } from 'Modules/Ui/selectors/selectUiBookmarkUpdateModalMounted';
 import { selectUiForgotPasswordModalMounted } from 'Modules/Ui/selectors/selectUiForgotPasswordModalMounted';
@@ -64,6 +66,7 @@ const Layout: React.FC<Props> = ({ location }) => {
   const bookmarkUpdateModalMounted = useSelector(selectUiBookmarkUpdateModalMounted);
   const listModalMounted = useSelector(selectUiListModalMounted);
   const renderLoader = !!languageLoading; /* || otherVariables */
+  const bookmarkListsModal = useSelector(selectBookmarkListsModal);
 
   // Lock screen on Modal mount
   if (uiScreenLocked) {
@@ -129,6 +132,9 @@ const Layout: React.FC<Props> = ({ location }) => {
         <Footer />
         <UserModal />
       </div>
+      <Fade mounted={bookmarkListsModal?.mounted} speed="fastest" position="fixed" appear>
+        <BookmarkListsModal bookmarkId={bookmarkListsModal?.bookmarkId} />
+      </Fade>
       <Fade mounted={loginModalMounted} speed="fastest" position="fixed" appear>
         <LoginModal />
       </Fade>

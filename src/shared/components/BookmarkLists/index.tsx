@@ -89,15 +89,15 @@ export const BookmarkLists: React.FC<Props> = ({ bookmarkId }) => {
     setRecentlyUpdated(recentlyUpdated?.filter((item) => item !== listId));
   };
 
-  useEffect(() => {
-    const unMountTimeout = setTimeout(() => {
-      !inList && !!modalMounted && dispatch(bookmarkListsModalUnmount());
-    }, DELAY_THREE_SEC);
+  // useEffect(() => {
+  //   const unMountTimeout = setTimeout(() => {
+  //     !inList && !!modalMounted && dispatch(bookmarkListsModalUnmount());
+  //   }, DELAY_THREE_SEC);
 
-    return () => {
-      clearTimeout(unMountTimeout);
-    };
-  }, [modalMounted, inList]);
+  //   return () => {
+  //     clearTimeout(unMountTimeout);
+  //   };
+  // }, [modalMounted, inList]);
 
   useEffect(() => {
     setSubmitError(listError?.message);

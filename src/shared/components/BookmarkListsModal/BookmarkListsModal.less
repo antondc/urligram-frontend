@@ -1,0 +1,42 @@
+@import '../../css/imports.less';
+
+@c: .BookmarkListsModal;
+
+@{c} {
+  display: none;
+
+  @media @br-mobile {
+    display: block;
+  }
+
+  &-content {
+    display: flex;
+    position: relative;
+    align-content: flex-end;
+    width: 100%;
+    padding: 50px 20px 20px;
+    background: @c-background;
+    border-radius: 4px;
+    .boxShadow;
+  }
+
+  &-cross {
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    top: 20px;
+    right: 20px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &-listIcon {
+    height: 10px;
+    width: 10px;
+    fill: @c-base;
+
+    .hoverTransition;
+  }
+}
