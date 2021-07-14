@@ -5,7 +5,12 @@ import { AppThunk } from '../../..';
 import { listsLoadReceive } from './listsLoadReceive';
 import { listsLoadRequest } from './listsLoadRequest';
 
-export const listsLoadByUserId = (userId: string): AppThunk<Promise<ListState>, ListsActions> => async (
+type Params = {
+  userId: string;
+  rawData?: boolean;
+};
+
+export const listsLoadByUserId = ({ userId, rawData }: Params): AppThunk<Promise<ListState>, ListsActions> => async (
   dispatch,
   getState
 ): Promise<ListState> => {
@@ -28,10 +33,15 @@ export const listsLoadByUserId = (userId: string): AppThunk<Promise<ListState>, 
     const {
       meta: { totalItems, sort },
       data,
-    } = await HttpClient.get<void, ListsLoadApiResponse>(`/users/${userId}/lists${window.location.search}`);
+    } = await HttpClient.get<void, ListsLoadApiResponse>(
+      `/users/${userId}/lists${!!rawData ? '' : window.location.search}`
+    );
     const { Lists: listsAfterResponse } = getState();
 
     const listsArray = data?.map((item) => item.attributes);
+
+    // If we are retrieving rawData data, we don't want to update the currentIds
+    const updatedIds = rawData ? listsAfterResponse.currentIds : data?.map((item) => item.id);
 
     dispatch(
       listsLoadReceive({
@@ -40,7 +50,7 @@ export const listsLoadByUserId = (userId: string): AppThunk<Promise<ListState>, 
           ...listsAfterResponse.byKey,
           ...serializerFromArrayToByKey<ListState, ListState>({ data: listsArray }),
         },
-        currentIds: data?.map((item) => item.id),
+        currentIds: updatedIds,
         meta: {
           totalItems,
           sort,
@@ -49,6 +59,8 @@ export const listsLoadByUserId = (userId: string): AppThunk<Promise<ListState>, 
       })
     );
   } catch (error) {
+    console.log('error: ', error);
+
     throw error;
   }
 

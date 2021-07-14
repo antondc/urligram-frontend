@@ -12,7 +12,7 @@ import SidebarListUsers from 'Components/SidebarListUsers';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
-import { Hr, SortBy } from 'Vendor/components';
+import { Hr, Select, SelectValue, SortBy } from 'Vendor/components';
 
 import './Lists.less';
 
@@ -30,6 +30,14 @@ interface Props {
   };
   totalItems: number;
   sort: string;
+  allTags: TagState[];
+  currentQueryParamFilterTags: SelectValue[];
+  tagsSearchFormatted: {
+    label: string;
+    value: string;
+  }[];
+  onInputChange: (string: string) => void;
+  onChange: (string: SelectValue[]) => void;
 }
 
 export const Lists: React.FC<Props> = ({
@@ -43,10 +51,29 @@ export const Lists: React.FC<Props> = ({
   page,
   totalItems,
   sort,
+  allTags,
+  currentQueryParamFilterTags,
+  tagsSearchFormatted,
+  onInputChange,
+  onChange,
 }) => (
   <>
     <div className="Lists">
       <div className="Lists-header">
+        <Select
+          className="Bookmarks-select"
+          label="Select tags"
+          value={currentQueryParamFilterTags}
+          defaultOptions={allTags.map((item) => ({ label: item.name, value: item.name }))}
+          options={[...tagsSearchFormatted, ...allTags.map((item) => ({ label: item.name, value: item.name }))].filter(
+            (v, i, a) => a.findIndex((t) => t.value === v.value) === i
+          )}
+          onInputChange={onInputChange}
+          onChange={onChange}
+          maxItems={4}
+          grow
+          hideLabelOnFill
+        />
         <SortBy
           options={[
             { label: 'Date', field: 'createdAt', icon: Clock },

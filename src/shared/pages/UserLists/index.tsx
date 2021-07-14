@@ -9,6 +9,7 @@ import { selectListsTotalItems } from 'Modules/Lists/selectors/selectListsTotalI
 import { RootState } from 'Modules/rootType';
 import { selectCurrentFullUrl } from 'Modules/Routes/selectors/selectCurrentFullUrl';
 import { selectCurrentRouteParamUserId } from 'Modules/Routes/selectors/selectCurrentRouteParamUserId';
+import { selectCurrentRouteQueryParamFilter } from 'Modules/Routes/selectors/selectCurrentRouteQueryParamFilter';
 import { selectCurrentRouteQueryParamPage } from 'Modules/Routes/selectors/selectCurrentRouteQueryParamPage';
 import { sectionsMostUsedTagsLoad } from 'Modules/Sections/actions/sectionsMostUsedTagsLoad';
 import { sectionsUserMostUsedTagsLoad } from 'Modules/Sections/actions/sectionsUserMostFollowedTagsLoad';
@@ -17,8 +18,13 @@ import { selectMostUsedTagsLoading } from 'Modules/Sections/selectors/selectMost
 import { selectUserMostUsedTags } from 'Modules/Sections/selectors/selectUserMostUsedTags';
 import { selectUserMostUsedTagsLoading } from 'Modules/Sections/selectors/selectUserMostUsedTagsLoading';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
+import { tagsSearchLoad } from 'Modules/Tags/actions/tagsSearchLoad';
+import { selectTagsAll } from 'Modules/Tags/selectors/selectAllTags';
+import { selectTagsSearch } from 'Modules/Tags/selectors/selectTagsSearch';
 import { userLoad } from 'Modules/Users/actions/userLoad';
 import { selectUserById } from 'Modules/Users/selectors/selectUserById';
+import history from 'Services/History';
+import { URLWrapper } from 'Services/URLWrapper';
 import { UserLists as UserListsUi } from './UserLists';
 
 const UserLists: React.FC = () => {
@@ -37,6 +43,30 @@ const UserLists: React.FC = () => {
   const totalItems = useSelector(selectListsTotalItems);
   const url = useSelector(selectCurrentFullUrl);
   const sort = useSelector(selectListsMetaSort);
+  const allTags = useSelector(selectTagsAll);
+  const currentQueryParamFilter = useSelector(selectCurrentRouteQueryParamFilter);
+  const tagsSearch = useSelector(selectTagsSearch);
+  const currentQueryParamFilterTags =
+    currentQueryParamFilter?.tags?.map((item) => ({
+      label: item.toString(),
+      value: item,
+    })) || [];
+  const tagsSearchFormatted = tagsSearch?.map((item) => ({ label: item.name, value: item.name })) || [];
+
+  const onInputChange = (string: string) => {
+    !!string && dispatch(tagsSearchLoad(string));
+  };
+
+  const onChange = (values) => {
+    const tags: string[] = values?.map((item) => item.value);
+    const myUrl = new URLWrapper(window.document.location.href);
+
+    myUrl.upsertSearchParams({ filter: { tags } });
+    myUrl.deleteSearchParam('page[offset]'); // Restart page on new search
+    const redirectPath = myUrl.getPathAndSearch();
+
+    history.push(redirectPath);
+  };
 
   useEffect(() => {
     dispatch(userLoad(userId));
@@ -45,7 +75,7 @@ const UserLists: React.FC = () => {
   }, [session?.id]);
 
   useEffect(() => {
-    dispatch(listsLoadByUserId(userId));
+    dispatch(listsLoadByUserId({ userId }));
   }, [page, session?.id]);
 
   return (
@@ -62,6 +92,11 @@ const UserLists: React.FC = () => {
       totalItems={totalItems}
       url={url}
       sort={sort}
+      currentQueryParamFilterTags={currentQueryParamFilterTags}
+      tagsSearchFormatted={tagsSearchFormatted}
+      allTags={allTags}
+      onChange={onChange}
+      onInputChange={onInputChange}
     />
   );
 };

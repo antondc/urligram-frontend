@@ -35,15 +35,14 @@ interface Props {
   };
   totalItems: number;
   sort: string;
-  // ---
-  tagsSearchFormatted: {
-    label: string;
-    value: string;
-  }[];
   onInputChange: (string: string) => void;
   onChange: (string: SelectValue[]) => void;
   allTags: TagState[];
   currentQueryParamFilterTags: SelectValue[];
+  tagsSearchFormatted: {
+    label: string;
+    value: string;
+  }[];
 }
 
 export const Bookmarks: React.FC<Props> = ({

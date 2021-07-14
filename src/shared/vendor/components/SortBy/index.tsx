@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { URLWrapper } from '../../../services/URLWrapper';
+import { URLWrapper } from 'Services/URLWrapper';
 import { A } from '../A';
 import { Sort } from '../Svg';
 

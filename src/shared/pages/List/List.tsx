@@ -23,6 +23,8 @@ import {
   EditCircle,
   Eye,
   Hr,
+  Select,
+  SelectValue,
   SortBy,
   Space,
   SpinnerCircularBrute,
@@ -56,6 +58,14 @@ interface Props {
   acceptLoading: boolean;
   rejectLoading: boolean;
   onEditClick: () => void;
+  allTags: TagState[];
+  currentQueryParamFilterTags: SelectValue[];
+  tagsSearchFormatted: {
+    label: string;
+    value: string;
+  }[];
+  onInputChange: (string: string) => void;
+  onChange: (string: SelectValue[]) => void;
 }
 
 export const List: React.FC<Props> = ({
@@ -80,6 +90,11 @@ export const List: React.FC<Props> = ({
   acceptLoading,
   rejectLoading,
   onEditClick,
+  allTags,
+  currentQueryParamFilterTags,
+  tagsSearchFormatted,
+  onInputChange,
+  onChange,
 }) => (
   <>
     <div className="List">
@@ -183,6 +198,20 @@ export const List: React.FC<Props> = ({
         )}
       </AnimateHeight>
       <div className="List-header">
+        <Select
+          className="Bookmarks-select"
+          label="Select tags"
+          value={currentQueryParamFilterTags}
+          defaultOptions={allTags.map((item) => ({ label: item.name, value: item.name }))}
+          options={[...tagsSearchFormatted, ...allTags.map((item) => ({ label: item.name, value: item.name }))].filter(
+            (v, i, a) => a.findIndex((t) => t.value === v.value) === i
+          )}
+          onInputChange={onInputChange}
+          onChange={onChange}
+          maxItems={4}
+          grow
+          hideLabelOnFill
+        />
         <SortBy
           options={[
             { label: 'Rating', field: 'vote', icon: Rating },

@@ -17,6 +17,7 @@ import SignUpModal from 'Components/SignUpModal';
 import UserModal from 'Components/UserModal';
 import WelcomeModal from 'Components/WelcomeModal';
 import { selectLanguageLoading } from 'Modules/Languages/selectors/selectLanguageLoading';
+import { listsLoadByUserId } from 'Modules/Lists/actions/listsLoadByUserId';
 import { pushNewRoute } from 'Modules/Routes/actions/pushNewRoute';
 import { RouteState } from 'Modules/Routes/routes.types';
 import { selectCurrentPathAndQuery } from 'Modules/Routes/selectors/selectCurrentPathAndQuery';
@@ -114,6 +115,7 @@ const Layout: React.FC<Props> = ({ location }) => {
   useEffect(() => {
     dispatch(userLoad(session?.id));
     dispatch(userFollowingLoad(session?.id));
+    dispatch(listsLoadByUserId({ userId: session?.id, rawData: true }));
   }, [session?.id]);
 
   return (

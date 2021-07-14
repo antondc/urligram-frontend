@@ -60,7 +60,7 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     dispatch(sectionsMyRecentBookmarksLoad(session?.id));
-    dispatch(listsLoadByUserId(session?.id));
+    dispatch(listsLoadByUserId({ userId: session?.id }));
   }, [session?.id]);
 
   useEffect(() => {

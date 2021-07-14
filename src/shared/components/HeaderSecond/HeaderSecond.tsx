@@ -3,7 +3,6 @@ import React from 'react';
 import A from 'Components/A';
 import Clock from 'Components/Clock';
 import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
-import { Space } from 'Vendor/components';
 
 import './HeaderSecond.less';
 
@@ -21,13 +20,7 @@ export const HeaderSecond: React.FC<Props> = ({ formattedDate, bookmarks }) => (
             <A className="HeaderSecond-link" href={bookmark?.url} targetBlank underlined key={bookmark.id}>
               {bookmark?.title}
             </A>
-            {index !== bookmarks.length - 1 && (
-              <>
-                <Space />
-                ·
-                <Space />
-              </>
-            )}
+            {index !== bookmarks.length - 1 && <span className="HeaderSecond-separator">·</span>}
           </>
         ))}
       </div>

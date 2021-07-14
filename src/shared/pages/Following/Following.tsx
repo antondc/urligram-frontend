@@ -12,7 +12,7 @@ import { UserRowSkeletonGroup } from 'Components/UserRow/UserRowSkeletonGroup';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
-import { Hr, SortBy, Space } from 'Vendor/components';
+import { Hr, Select, SelectValue, SortBy, Space } from 'Vendor/components';
 
 import './Following.less';
 
@@ -32,6 +32,14 @@ export interface Props {
   };
   totalItems: number;
   sort: string;
+  allTags: TagState[];
+  currentQueryParamFilterTags: SelectValue[];
+  tagsSearchFormatted: {
+    label: string;
+    value: string;
+  }[];
+  onInputChange: (string: string) => void;
+  onChange: (string: SelectValue[]) => void;
 }
 
 export const Following: React.FC<Props> = ({
@@ -47,6 +55,12 @@ export const Following: React.FC<Props> = ({
   totalItems,
   url,
   sort,
+
+  allTags,
+  currentQueryParamFilterTags,
+  tagsSearchFormatted,
+  onInputChange,
+  onChange,
 }) => (
   <>
     <div className="Following">
@@ -58,6 +72,20 @@ export const Following: React.FC<Props> = ({
         </A>
       </div>
       <div className="Following-header">
+        <Select
+          className="Bookmarks-select"
+          label="Select tags"
+          value={currentQueryParamFilterTags}
+          defaultOptions={allTags.map((item) => ({ label: item.name, value: item.name }))}
+          options={[...tagsSearchFormatted, ...allTags.map((item) => ({ label: item.name, value: item.name }))].filter(
+            (v, i, a) => a.findIndex((t) => t.value === v.value) === i
+          )}
+          onInputChange={onInputChange}
+          onChange={onChange}
+          maxItems={4}
+          grow
+          hideLabelOnFill
+        />
         <SortBy
           options={[
             { label: 'Name', field: 'name', icon: Title },

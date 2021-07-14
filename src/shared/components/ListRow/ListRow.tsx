@@ -9,9 +9,10 @@ import './ListRow.less';
 
 interface Props extends Partial<ListState> {
   session?: SessionState;
+  currentPathname?: string;
 }
 
-export const ListRow: React.FC<Props> = ({ id, name, tags, description, isPrivate }) => (
+export const ListRow: React.FC<Props> = ({ id, name, tags, description, isPrivate, currentPathname }) => (
   <div className="ListRow" data-test-id="ListRow" key={id}>
     <div className="ListRow-main">
       <Span size="normal" weight="semiBold" className="ListRow-title">
@@ -28,7 +29,7 @@ export const ListRow: React.FC<Props> = ({ id, name, tags, description, isPrivat
       {tags?.map((item) => (
         <A
           className="ListRow-tag"
-          href={`/bookmarks?filter[tags][]=${item.name}`}
+          href={`${currentPathname}?filter[tags][]=${item.name}`}
           key={item.id}
           styled={false}
           frontend

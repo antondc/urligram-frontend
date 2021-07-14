@@ -38,7 +38,7 @@ const SidebarListLists: React.FC<Props> = ({
   if (!lists?.length && !loading) return null;
 
   return (
-    <div className={'SidebarListLists' + (className ? ' ' + className : '')}>
+    <div className={'SidebarListLists' + (!!className ? ' ' + className : '')}>
       <div className="SidebarListLists-header">
         <A href={href} frontend styled={!!href} disabled={!href} underlined onClick={onListTitleClick}>
           {title}
