@@ -4,6 +4,7 @@ export { Button } from './Button';
 export { Checkbox } from './Checkbox';
 export { DatePicker } from './DatePicker';
 export { Fade } from './Fade';
+export { AnimateSheet } from './AnimateSheet';
 export { AnimateHeight } from './AnimateHeight';
 export { FadeInOut } from './FadeInOut';
 // export { FileField } from './FileField';

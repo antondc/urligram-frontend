@@ -2,7 +2,7 @@ import React from 'react';
 
 import A from 'Components/A';
 import { ListState } from 'Modules/Lists/lists.types';
-import { Button, FadeInOut, Hr, Input, PlusCircleWithBackground, Span, SpinnerCircularBrute } from 'Vendor/components';
+import { Button, FadeInOut, Input, PlusCircleWithBackground, Span, SpinnerCircularBrute } from 'Vendor/components';
 
 import './BookmarkLists.less';
 
@@ -57,11 +57,9 @@ export const BookmarkLists: React.FC<Props> = ({
             }
             key={item?.id}
           >
-            <Span className="BookmarkList-listsItemText" weight="semiBold">
-              <A href={`lists/${item?.id}?sort=-updatedAt`} frontend>
-                {item?.name}
-              </A>
-            </Span>
+            <A className="BookmarkLists-listsItemText" href={`lists/${item?.id}?sort=-updatedAt`} frontend>
+              {item?.name}
+            </A>
             {itemsLoading?.includes(item?.id) ? (
               <SpinnerCircularBrute className="BookmarkLists-listsItemLoader" />
             ) : (
@@ -75,10 +73,7 @@ export const BookmarkLists: React.FC<Props> = ({
         );
       })}
     </ul>
-    <Hr size="small" spacer />
-    <Hr size="nano" />
-    <Hr size="small" spacer />
-    <FadeInOut valueToUpdate={showCreateList} appear>
+    <FadeInOut className="BookmarkList-bottom" valueToUpdate={showCreateList} appear>
       {showCreateList ? (
         <form onMouseLeave={onShowCreateList} onSubmit={onCreateListSubmit}>
           <Input
@@ -89,7 +84,6 @@ export const BookmarkLists: React.FC<Props> = ({
             autoFocus
             grow
           />
-          <Hr size="small" spacer />
           <Button
             className="BookmarkLists-button"
             text="Create"
@@ -98,11 +92,8 @@ export const BookmarkLists: React.FC<Props> = ({
             error={!!submitError}
             grow
           />
-          <Hr size="nano" spacer />
           <FadeInOut valueToUpdate={!!submitError} speed="fast">
-            <Span className="BookmarkLists-error" size="small">
-              {submitError}
-            </Span>
+            <span className="BookmarkLists-error">{submitError}</span>
           </FadeInOut>
         </form>
       ) : (

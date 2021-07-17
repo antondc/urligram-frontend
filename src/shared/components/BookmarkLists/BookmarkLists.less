@@ -3,14 +3,36 @@
 @c: .BookmarkLists;
 
 @{c} {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  flex: 1;
+  height: 100%;
   width: 100%;
+  overflow: hidden;
+
+  &:before {
+    content: ' ';
+    position: absolute;
+    height: 10px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(0deg, @c-transparent 0%, @c-background 90%);
+  }
 
   &-lists {
-    max-height: 400px;
+    flex: 1;
+    // max-height: 400px;
     min-width: 150px;
     overflow-y: scroll;
 
     .hideScrollbar;
+
+    @media @br-mobile {
+      padding: 10px;
+    }
   }
 
   &-listsItem {
@@ -20,9 +42,14 @@
     padding: 1px;
     transition: fill @td-fast @ease;
 
+    @media @br-mobile {
+      padding-bottom: 5px;
+    }
+
     @{c}-listsItemText {
       transition: color @td-fast @ease;
     }
+
     @{c}-listsItemIcon {
       transition: transform @td-fast @ease, fill @td-fast @ease;
 
@@ -68,7 +95,11 @@
   }
 
   &-listsItemText {
-    //
+    font-weight: @fw-semibold;
+
+    @media @br-mobile {
+      font-size: @fs-mediumBig;
+    }
   }
 
   &-listsItemIcon {
@@ -86,6 +117,15 @@
     .Input-input {
       padding: 0;
     }
+  }
+
+  &-error {
+    font-size: @fs-small;
+  }
+
+  &-bottom {
+    position: sticky;
+    bottom: 20px;
   }
 
   &-button {

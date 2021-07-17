@@ -1,9 +1,10 @@
 @import '../../css/imports.less';
 
-@c: .BookmarkListsModal;
+@c: .BookmarkListsSheet;
 
 @{c} {
   display: none;
+  height: 100%;
 
   @media @br-mobile {
     display: block;
@@ -12,18 +13,17 @@
   &-content {
     display: flex;
     position: relative;
+    flex-direction: column;
     align-content: flex-end;
+    height: 100%;
     width: 100%;
     padding: 50px 20px 20px;
-    background: @c-background;
-    border-radius: 4px;
-    .boxShadow;
   }
 
   &-cross {
     position: absolute;
-    height: 20px;
-    width: 20px;
+    height: 15px;
+    width: 15px;
     top: 20px;
     right: 20px;
 
@@ -38,5 +38,12 @@
     fill: @c-base;
 
     .hoverTransition;
+  }
+
+  &-title {
+    padding-bottom: 20px;
+    font-size: @fs-big;
+    font-weight: @fw-bold;
+    text-align: center;
   }
 }

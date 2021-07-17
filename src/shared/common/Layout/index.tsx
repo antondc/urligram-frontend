@@ -40,7 +40,7 @@ import Router from 'Router/index';
 import { routesList, routesWithoutOmmitedValues } from 'Router/routes';
 import enhanceRouteWithParams from 'Tools/utils/url/enhanceRouteWithParams';
 import findActiveRouteKey from 'Tools/utils/url/findActiveRouteKey';
-import { Fade, SpinnerCircularBrute } from 'Vendor/components';
+import { AnimateSheet, Fade, SpinnerCircularBrute } from 'Vendor/components';
 
 import './Layout.less';
 
@@ -132,9 +132,9 @@ const Layout: React.FC<Props> = ({ location }) => {
         <Footer />
         <UserModal />
       </div>
-      <Fade mounted={bookmarkListsModal?.mounted} speed="fastest" position="fixed" appear>
+      <AnimateSheet mounted={bookmarkListsModal?.mounted}>
         <BookmarkListsModal bookmarkId={bookmarkListsModal?.bookmarkId} />
-      </Fade>
+      </AnimateSheet>
       <Fade mounted={loginModalMounted} speed="fastest" position="fixed" appear>
         <LoginModal />
       </Fade>
