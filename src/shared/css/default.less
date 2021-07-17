@@ -20,6 +20,12 @@ body {
   &.scrollLocked {
     overflow: hidden !important;
   }
+
+  &.scrollMobileLocked {
+    @media @br-mobile {
+      overflow: hidden !important;
+    }
+  }
 }
 
 html {

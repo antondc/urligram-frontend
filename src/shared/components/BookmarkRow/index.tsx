@@ -14,7 +14,6 @@ import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLo
 import { bookmarkListsModalMount } from 'Modules/Ui/actions/bookmarkListsModalMount';
 import { switchBookmarkUpdateModal } from 'Modules/Ui/actions/switchBookmarkUpdateModal';
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
-import { uiScreenLock } from 'Modules/Ui/actions/uiScreenLock';
 import { selectBookmarkListsModalMounted } from 'Modules/Ui/selectors/selectBookmarkListsModalMounted';
 import { TIME_RECENTLY_CREATED_BOOKMARK } from 'Root/src/shared/constants';
 import { Routes } from 'Router/routes';
@@ -69,7 +68,6 @@ const BookmarkRow: React.FC<Props> = ({ id }) => {
 
     if (bookmarkListsModalMounted) return;
 
-    dispatch(uiScreenLock());
     dispatch(bookmarkListsModalMount({ bookmarkId: bookmark?.id }));
   };
 

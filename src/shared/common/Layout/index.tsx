@@ -41,6 +41,7 @@ import { routesList, routesWithoutOmmitedValues } from 'Router/routes';
 import enhanceRouteWithParams from 'Tools/utils/url/enhanceRouteWithParams';
 import findActiveRouteKey from 'Tools/utils/url/findActiveRouteKey';
 import { AnimateSheet, Fade, SpinnerCircularBrute } from 'Vendor/components';
+import { selectUiScreenMobileLocked } from '../../redux/modules/Ui/selectors/selectUiScreenMobileLocked';
 
 import './Layout.less';
 
@@ -57,6 +58,7 @@ const Layout: React.FC<Props> = ({ location }) => {
   const currentPathAndQuery = useSelector(selectCurrentPathAndQuery);
   const languageLoading = useSelector(selectLanguageLoading);
   const uiScreenLocked = useSelector(selectUiScreenLocked);
+  const uiScreenMobileLocked = useSelector(selectUiScreenMobileLocked);
   const loginModalMounted = useSelector(selectUiLoginModalMounted);
   const welcomeModalMounted = useSelector(selectUiWelcomeModalMounted);
   const signUpModalMounted = useSelector(selectUiSignUpModalMounted);
@@ -68,11 +70,18 @@ const Layout: React.FC<Props> = ({ location }) => {
   const renderLoader = !!languageLoading; /* || otherVariables */
   const bookmarkListsModal = useSelector(selectBookmarkListsModal);
 
-  // Lock screen on Modal mount
+  // Lock screen
   if (uiScreenLocked) {
     document.body.classList.add('scrollLocked');
   } else {
     document.body.classList.remove('scrollLocked');
+  }
+
+  // Lock mobile screen
+  if (uiScreenMobileLocked) {
+    document.body.classList.add('scrollMobileLocked');
+  } else {
+    document.body.classList.remove('scrollMobileLocked');
   }
 
   const addBodyClasses = () => {

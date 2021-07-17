@@ -1,5 +1,5 @@
-export const UI_SCREEN_LOCK = 'UI_SCREEN_LOCK';
-export const UI_SCREEN_UNLOCK = 'UI_SCREEN_UNLOCK';
+export const UI_SCREEN_MOBILE_LOCK = 'UI_SCREEN_MOBILE_LOCK';
+export const UI_SCREEN_MOBILE_UNLOCK = 'UI_SCREEN_MOBILE_UNLOCK';
 export const USER_MODAL_MOUNT = 'USER_MODAL_MOUNT';
 export const USER_MODAL_UNMOUNT = 'USER_MODAL_UNMOUNT';
 export const SWITCH_MESSAGE_MODAL = 'SWITCH_MESSAGE_MODAL';
@@ -55,6 +55,7 @@ export type BookmarkListsModals = Array<BookmarkListsModal>;
 export type BookmarkSendModals = Array<BookmarkSendModal>;
 
 export type UiState = {
+  screenMobileLocked: boolean;
   screenLocked: boolean;
   userModal: UiBaseModal;
   languagesModal: UiBaseModal;
@@ -80,12 +81,12 @@ export type UiState = {
 };
 
 interface UiScreenLock {
-  type: typeof UI_SCREEN_LOCK;
+  type: typeof UI_SCREEN_MOBILE_LOCK;
   payload: Partial<UiState>;
 }
 
 interface UiScreenUnLock {
-  type: typeof UI_SCREEN_UNLOCK;
+  type: typeof UI_SCREEN_MOBILE_UNLOCK;
   payload: Partial<UiState>;
 }
 

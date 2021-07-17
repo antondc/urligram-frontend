@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { bookmarkListsModalUnmount } from 'Modules/Ui/actions/bookmarkListsModalUnmount';
-import { uiScreenUnLock } from 'Modules/Ui/actions/uiScreenUnLock';
+import { uiScreenMobileLock } from 'Modules/Ui/actions/uiScreenMobileLock';
+import { uiScreenMobileUnLock } from 'Modules/Ui/actions/uiScreenMobileUnLock';
 import { BookmarkListsSheet as BookmarkListsSheetUi } from './BookmarkListsSheet';
 
 interface Props {
@@ -13,11 +14,14 @@ export const BookmarkListsSheet: React.FC<Props> = ({ bookmarkId }) => {
   const dispatch = useDispatch();
 
   const onCloseClick = () => {
-    dispatch(uiScreenUnLock());
+    dispatch(uiScreenMobileUnLock());
     dispatch(bookmarkListsModalUnmount());
   };
 
-  // TODO: maybe lock screen here on useEffect
+  useEffect(() => {
+    dispatch(uiScreenMobileLock());
+  }, []);
+
   return <BookmarkListsSheetUi bookmarkId={bookmarkId} onCloseClick={onCloseClick} />;
 };
 

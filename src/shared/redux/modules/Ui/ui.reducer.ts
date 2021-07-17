@@ -15,8 +15,8 @@ import {
   UI_CLOSE_ALL_MODALS,
   UI_NOTIFICATION_PUSH,
   UI_NOTIFICATION_VIEWED,
-  UI_SCREEN_LOCK,
-  UI_SCREEN_UNLOCK,
+  UI_SCREEN_MOBILE_LOCK,
+  UI_SCREEN_MOBILE_UNLOCK,
   UiActions,
   UiState,
   USER_MODAL_MOUNT,
@@ -25,6 +25,7 @@ import {
 
 export const initialState: UiState = {
   screenLocked: false,
+  screenMobileLocked: false,
   userModal: {
     type: 'modal',
     mounted: false,
@@ -85,8 +86,8 @@ export const initialState: UiState = {
 
 export const Ui = (state = initialState, action: UiActions): UiState => {
   switch (action.type) {
-    case UI_SCREEN_LOCK:
-    case UI_SCREEN_UNLOCK:
+    case UI_SCREEN_MOBILE_LOCK:
+    case UI_SCREEN_MOBILE_UNLOCK:
     case USER_MODAL_MOUNT:
     case USER_MODAL_UNMOUNT:
     case SWITCH_LANGUAGES_MODAL:
