@@ -33,7 +33,7 @@ export const AnimateSheet: React.FC<Props> = ({
 }) => (
   <AnimatePresence onExitComplete={onExitComplete}>
     {mounted && (
-      <>
+      <div className={className ? ` ${className}` : ''}>
         <motion.div
           initial="hidden"
           animate="shown"
@@ -98,11 +98,11 @@ export const AnimateSheet: React.FC<Props> = ({
               },
             },
           }}
-          className={'AnimateSheet' + (className ? ` ${className}` : '')}
+          className={'AnimateSheet'}
         >
           {children}
         </motion.div>
-      </>
+      </div>
     )}
   </AnimatePresence>
 );

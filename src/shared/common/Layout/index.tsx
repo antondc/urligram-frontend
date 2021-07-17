@@ -132,7 +132,7 @@ const Layout: React.FC<Props> = ({ location }) => {
         <Footer />
         <UserModal />
       </div>
-      <AnimateSheet mounted={bookmarkListsModal?.mounted}>
+      <AnimateSheet className="Layout-animateSheetMobile" mounted={bookmarkListsModal?.mounted}>
         <BookmarkListsModal bookmarkId={bookmarkListsModal?.bookmarkId} />
       </AnimateSheet>
       <Fade mounted={loginModalMounted} speed="fastest" position="fixed" appear>
