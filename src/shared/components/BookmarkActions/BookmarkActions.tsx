@@ -1,6 +1,8 @@
 import React from 'react';
 
-import { BookmarkWithBackground, PlusCircleWithBackground, SpinnerCircularBrute } from 'Vendor/components';
+import BookmarkWithBackground from 'Assets/svg/bookmarkWithBackground.svg';
+import PlusCircleWithBackground from 'Assets/svg/plusCircleWithBackground.svg';
+import { SpinnerCircularBrute } from 'Vendor/components';
 
 import './BookmarkActions.less';
 
@@ -25,14 +27,13 @@ export const BookmarkActions: React.FC<Props> = ({
     {!loading && !isOwnBookmark && !userBookmarkedLink && (
       <BookmarkWithBackground
         className={'BookmarkActions-bookmark BookmarkActions-bookmarkEmpty'}
-        size="small"
         onClick={onBookmarkGrab}
       />
     )}
     {!loading && (userBookmarkedLink || isOwnBookmark) && (
       <>
-        <BookmarkWithBackground className="BookmarkActions-bookmarked" size="small" />
-        <PlusCircleWithBackground className="BookmarkActions-bookmarkRemove" size="small" onClick={onBookmarkDelete} />
+        <BookmarkWithBackground className="BookmarkActions-bookmarked" />
+        <PlusCircleWithBackground className="BookmarkActions-bookmarkRemove" onClick={onBookmarkDelete} />
       </>
     )}
     {loading && <SpinnerCircularBrute className="BookmarkActions-loader" size="small" />}

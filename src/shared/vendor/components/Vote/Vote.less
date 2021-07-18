@@ -5,18 +5,29 @@
 @{c} {
   display: flex;
   position: relative;
-  width: 19px;
-  padding-top: 1px;
+  justify-content: space-between;
   opacity: 1;
 
   &-icon {
+    position: absolute;
+    height: 100%;
+    top: 0;
+    bottom: 0;
+    transition: filter @td-fastest @ease;
+
     path {
-      fill: @c-accent;
+      fill: @c-base;
       transition: fill @td-fastest @ease;
+    }
+
+    &:hover {
+      filter: drop-shadow(0 0 1px @c-accent);
+      cursor: pointer;
     }
   }
 
   &-minus {
+    left: 0;
     transform: rotate(180deg);
 
     &--active {
@@ -27,7 +38,7 @@
   }
 
   &-plus {
-    transform: translateX(-2px);
+    right: 0;
 
     &--active {
       path {
@@ -47,11 +58,6 @@
       fill: @c-alert;
       animation: voteLoadingAnimation @td-one @ease-out infinite;
     }
-  }
-
-  &-voteSlash {
-    color: @c-accent;
-    transform: translate(-1px, -2px) rotate(6deg);
   }
 
   @keyframes voteLoadingAnimation {

@@ -1,10 +1,13 @@
 import React from 'react';
 
+import EditCircle from 'Assets/svg/editCircle.svg';
+import List from 'Assets/svg/list.svg';
+import Private from 'Assets/svg/private.svg';
 import A from 'Components/A';
 import BookmarkActions from 'Components/BookmarkActions';
 import BookmarkListsPopOver from 'Components/BookmarkListsPopOver';
 import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
-import { EditCircle, List, Private, Space, Tag, Tooltip, Vote } from 'Vendor/components';
+import { Space, Tag, Tooltip, Vote } from 'Vendor/components';
 import { RenderInPortal } from '../Portal';
 
 import './BookmarkRow.less';
@@ -83,45 +86,35 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
       ))}
     </div>
     <div className="BookmarkRow-icons">
-      <div className="BookmarkRow-iconsFirst">
-        {!!bookmark?.isPrivate && <Private size="micro" className="BookmarkRow-icon BookmarkRow-private" />}
-        {!!sessionUserBookmarkedLink && (
-          <EditCircle className="BookmarkRow-icon BookmarkRow-editButton" size="micro" onClick={onEdit} />
-        )}
-        {!!sessionUserBookmarkedLink && (
-          <>
-            <List
-              className="BookmarkRow-icon BookmarkRow-iconLists"
-              id={`BookmarkRow-${bookmark?.id}`}
-              onClick={onListsClick}
-            />
-            <BookmarkListsPopOver bookmarkId={bookmark?.id} />
-          </>
-        )}
-        <BookmarkActions
-          className="BookmarkRow-icon BookmarkRow-actionButton"
-          linkId={bookmark?.linkId}
-          bookmarkId={bookmark?.id}
+      {!!sessionUserBookmarkedLink && <EditCircle className="BookmarkRow-icon BookmarkRow-iconEdit" onClick={onEdit} />}
+      {!!sessionUserBookmarkedLink && (
+        <span className="BookmarkRow-icon BookmarkRow-iconLists">
+          <List id={`BookmarkRow-${bookmark?.id}`} onClick={onListsClick} />
+          <BookmarkListsPopOver bookmarkId={bookmark?.id} />
+        </span>
+      )}
+      <BookmarkActions
+        className="BookmarkRow-icon BookmarkRow-iconBookmark"
+        linkId={bookmark?.linkId}
+        bookmarkId={bookmark?.id}
+      />
+      {!!bookmark?.isPrivate && <Private className="BookmarkRow-icon BookmarkRow-iconPrivate" />}
+      <RenderInPortal>
+        <Tooltip
+          parentElementId={`BookmarkRow-iconAverageVote-${bookmark?.id}`}
+          content="Users in this list"
+          delay={0.5}
         />
+      </RenderInPortal>
+      <div className="BookmarkRow-iconAverageVote" id={`BookmarkRow-iconAverageVote-${bookmark?.id}`}>
+        {bookmark?.statistics?.absoluteVote || 0}
       </div>
-      <div className="BookmarkRow-iconsSecond">
-        <RenderInPortal>
-          <Tooltip
-            parentElementId={`BookmarkRow-averageVote-${bookmark?.id}`}
-            content="Users in this list"
-            delay={0.5}
-          />
-        </RenderInPortal>
-        <div className="BookmarkRow-averageVote" id={`BookmarkRow-averageVote-${bookmark?.id}`}>
-          {bookmark?.statistics?.absoluteVote || 0}
-        </div>
-        <Vote
-          className="BookmarkRow-iconVote"
-          vote={bookmark?.statistics?.vote}
-          loading={bookmark?.statistics?.loading}
-          changeVote={onVote}
-        />
-      </div>
+      <Vote
+        className="BookmarkRow-iconVote"
+        vote={bookmark?.statistics?.vote}
+        loading={bookmark?.statistics?.loading}
+        changeVote={onVote}
+      />
     </div>
   </div>
 );

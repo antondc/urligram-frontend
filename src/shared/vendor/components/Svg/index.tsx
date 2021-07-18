@@ -76,25 +76,22 @@ export interface Props extends SVGProps<SVGElement> {
 
 export type SvgSpriteType = (SvgComponent: React.FC<Props>) => (props: Props) => JSX.Element;
 
-const Svg: SvgSpriteType = (SvgComponent) => ({
-  className,
-  size = 'normal',
-  onClick,
-  filled,
-  ...props
-}): React.ReactElement => (
-  <SvgComponent
-    className={
-      'Svg ' +
-      (className ? className : '') +
-      (size ? ' Svg-' + size : '') +
-      (onClick ? ' Svg--hover' : '') +
-      (filled ? ' Svg--filled' : '')
-    }
-    onClick={onClick}
-    {...props}
-  />
-);
+const Svg: SvgSpriteType =
+  (SvgComponent) =>
+  ({ className, size = 'normal', onClick, filled, ...props }): React.ReactElement =>
+    (
+      <SvgComponent
+        className={
+          'Svg ' +
+          (className ? className : '') +
+          (size ? ' Svg-' + size : '') +
+          (onClick ? ' Svg--hover' : '') +
+          (filled ? ' Svg--filled' : '')
+        }
+        onClick={onClick}
+        {...props}
+      />
+    );
 
 export const Triangle: React.FC<Props> = (props) => Svg(TriangleSvg)(props);
 export const Square: React.FC<Props> = (props) => Svg(SquareSvg)(props);
