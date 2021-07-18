@@ -10,8 +10,6 @@ import { selectListsErrorLast } from 'Modules/Lists/selectors/selectListsErrorLa
 import { RootState } from 'Modules/rootType';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { bookmarkListsModalUnmount } from 'Modules/Ui/actions/bookmarkListsModalUnmount';
-import { selectBookmarkListsModal } from 'Modules/Ui/selectors/selectBookmarkListsModal';
-import { DELAY_THREE_SEC } from 'Root/src/shared/constants';
 import { BookmarkLists as BookmarkListsUi } from './BookmarkLists';
 
 interface Props {
@@ -24,21 +22,14 @@ export const BookmarkLists: React.FC<Props> = ({ bookmarkId }) => {
   const session = useSelector(selectSession);
   const [itemsLoading, setItemsLoading] = useState<number[]>([]);
   const [createListSubmitting, setCreateListSubmitting] = useState<boolean>(false);
-  const bookmarkListsModal = useSelector(selectBookmarkListsModal);
-  const modalMounted = !!bookmarkListsModal?.bookmarkId;
   const [showCreateList, setShowCreateList] = useState<boolean>(false);
   const [listInputName, setListInputName] = useState<string>(undefined);
   const listError = useSelector(selectListsErrorLast);
   const [submitError, setSubmitError] = useState<string>(undefined);
   const [recentlyUpdated, setRecentlyUpdated] = useState<number[]>([]);
-  const [inList, setInList] = useState<boolean>(false);
   const listsEditable = useSelector((state: RootState) =>
     selectListsByUserIdAdminOrEditor(state, { userId: session?.id })
   );
-
-  const onListEnter = () => {
-    setInList(true);
-  };
 
   const onListAddBookmark = async (listId: number) => {
     setItemsLoading([...itemsLoading, listId]);
@@ -89,16 +80,6 @@ export const BookmarkLists: React.FC<Props> = ({ bookmarkId }) => {
     setRecentlyUpdated(recentlyUpdated?.filter((item) => item !== listId));
   };
 
-  // useEffect(() => {
-  //   const unMountTimeout = setTimeout(() => {
-  //     !inList && !!modalMounted && dispatch(bookmarkListsModalUnmount());
-  //   }, DELAY_THREE_SEC);
-
-  //   return () => {
-  //     clearTimeout(unMountTimeout);
-  //   };
-  // }, [modalMounted, inList]);
-
   useEffect(() => {
     setSubmitError(listError?.message);
   }, [listError]);
@@ -107,7 +88,6 @@ export const BookmarkLists: React.FC<Props> = ({ bookmarkId }) => {
     <BookmarkListsUi
       sessionId={session?.id}
       bookmarkId={bookmarkId}
-      onListEnter={onListEnter}
       onListAddBookmark={onListAddBookmark}
       onListDeleteBookmark={onListDeleteBookmark}
       onCreateListSubmit={onCreateListSubmit}

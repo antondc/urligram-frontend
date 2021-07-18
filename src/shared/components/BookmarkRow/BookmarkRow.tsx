@@ -4,6 +4,7 @@ import A from 'Components/A';
 import BookmarkActions from 'Components/BookmarkActions';
 import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
 import { EditCircle, List, Private, Space, Tag, Tooltip, Vote } from 'Vendor/components';
+import BookmarkListsPopOver from 'Components/BookmarkListsPopOver';
 import { RenderInPortal } from '../Portal';
 
 import './BookmarkRow.less';
@@ -15,6 +16,7 @@ interface BookmarkRow extends BookmarkState {
   sessionUserBookmarkedLink: boolean;
   createdAtFormatted: string;
   pathForTagLink: string;
+  uiScreenTypeIsMobile: boolean;
   onVote: (vote: boolean | null) => void;
   onEdit: () => void;
   onListsClick: () => void;
@@ -27,6 +29,7 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
   sessionUserBookmarkedLink,
   createdAtFormatted,
   pathForTagLink,
+  uiScreenTypeIsMobile,
   recentlyCreated,
   onEdit,
   onListsClick,
@@ -90,9 +93,15 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
           <EditCircle className="BookmarkRow-icon BookmarkRow-editButton" size="micro" onClick={onEdit} />
         )}
         {!!sessionUserBookmarkedLink && (
-          <List className="BookmarkRow-icon BookmarkRow-iconLists" onClick={onListsClick} />
+          <>
+            <List
+              className="BookmarkRow-icon BookmarkRow-iconLists"
+              id={`BookmarkRow-${bookmark?.id}`}
+              onClick={onListsClick}
+            />
+            {!!uiScreenTypeIsMobile ? <div>IS_MOBILE</div> : <BookmarkListsPopOver bookmarkId={bookmark?.id} />}
+          </>
         )}
-
         <BookmarkActions
           className="BookmarkRow-icon BookmarkRow-actionButton"
           linkId={bookmark?.linkId}

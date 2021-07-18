@@ -4,7 +4,6 @@ import { Location } from 'history';
 
 import LayoutHelperGrid from 'Common/LayoutHelperGrid';
 import BookmarkCreateModal from 'Components/BookmarkCreateModal';
-import BookmarkListsSheet from 'Components/BookmarkListsSheet';
 import BookmarkUpdateModal from 'Components/BookmarkUpdateModal';
 import CookiesBanner from 'Components/CookiesBanner';
 import Footer from 'Components/Footer';
@@ -14,6 +13,7 @@ import ListModal from 'Components/ListModal';
 import LoginModal from 'Components/LoginModal';
 import Notifications from 'Components/Notifications';
 import ResetPasswordModal from 'Components/ResetPasswordModal';
+import ScreenSizePixel from 'Components/ScreenSizePixel';
 import SignUpModal from 'Components/SignUpModal';
 import UserModal from 'Components/UserModal';
 import WelcomeModal from 'Components/WelcomeModal';
@@ -42,7 +42,6 @@ import { routesList, routesWithoutOmmitedValues } from 'Router/routes';
 import enhanceRouteWithParams from 'Tools/utils/url/enhanceRouteWithParams';
 import findActiveRouteKey from 'Tools/utils/url/findActiveRouteKey';
 import { AnimateSheet, Fade, SpinnerCircularBrute } from 'Vendor/components';
-import ScreenSizePixel from '../../components/ScreenSizePixel';
 
 import './Layout.less';
 
@@ -143,9 +142,9 @@ const Layout: React.FC<Props> = ({ location }) => {
         <Footer />
         <UserModal />
       </div>
-      <AnimateSheet className="Layout-animateSheetMobile" mounted={bookmarkListsModal?.mounted}>
+      {/* <AnimateSheet className="Layout-animateSheetMobile" mounted={bookmarkListsModal?.mounted}>
         <BookmarkListsSheet bookmarkId={bookmarkListsModal?.bookmarkId} />
-      </AnimateSheet>
+      </AnimateSheet> */}
       <Fade mounted={loginModalMounted} speed="fastest" position="fixed" appear>
         <LoginModal />
       </Fade>

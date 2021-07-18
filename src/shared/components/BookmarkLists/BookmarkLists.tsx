@@ -13,7 +13,6 @@ interface Props {
   submitError: string;
   itemsLoading: number[];
   lists: ListState[];
-  onListEnter: () => void;
   onListAddBookmark: (listId?: number) => void;
   onListDeleteBookmark: (listId?: number) => void;
   onCreateListSubmit: (e: React.FormEvent<HTMLElement>) => void;
@@ -28,7 +27,6 @@ interface Props {
 export const BookmarkLists: React.FC<Props> = ({
   bookmarkId,
   lists,
-  onListEnter,
   onListAddBookmark,
   onListDeleteBookmark,
   itemsLoading,
@@ -43,8 +41,15 @@ export const BookmarkLists: React.FC<Props> = ({
   onIconLeave,
 }) => (
   <div className="BookmarkLists">
-    <ul className="BookmarkLists-lists" onMouseEnter={onListEnter}>
-      {lists?.map((item) => {
+    <ul className="BookmarkLists-lists">
+      {[
+        ...(lists || []),
+        ...(lists || []),
+        ...(lists || []),
+        ...(lists || []),
+        ...(lists || []),
+        ...(lists || []),
+      ]?.map((item) => {
         const isBookmarkInList = !!item?.bookmarksIds?.includes(bookmarkId);
         const wasRecentlyUpdated = recentlyUpdated?.includes(item?.id);
 
@@ -73,7 +78,7 @@ export const BookmarkLists: React.FC<Props> = ({
         );
       })}
     </ul>
-    <FadeInOut className="BookmarkList-bottom" valueToUpdate={showCreateList} appear>
+    <FadeInOut className="BookmarkLists-bottom" valueToUpdate={showCreateList} appear>
       {showCreateList ? (
         <form onMouseLeave={onShowCreateList} onSubmit={onCreateListSubmit}>
           <Input

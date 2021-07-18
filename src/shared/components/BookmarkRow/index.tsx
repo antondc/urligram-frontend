@@ -15,6 +15,7 @@ import { bookmarkListsModalMount } from 'Modules/Ui/actions/bookmarkListsModalMo
 import { switchBookmarkUpdateModal } from 'Modules/Ui/actions/switchBookmarkUpdateModal';
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
 import { selectBookmarkListsModalMounted } from 'Modules/Ui/selectors/selectBookmarkListsModalMounted';
+import { selectUiScreenTypeIsMobile } from 'Modules/Ui/selectors/selectUiScreenTypeIsMobile';
 import { TIME_RECENTLY_CREATED_BOOKMARK } from 'Root/src/shared/constants';
 import { Routes } from 'Router/routes';
 import { LocaleFormattedDate } from 'Tools/utils/Date/localeFormattedDate';
@@ -50,6 +51,7 @@ const BookmarkRow: React.FC<Props> = ({ id }) => {
   const isHome = currentRoute?.name === Routes.Home.name;
   const pathNameIfHome = `/${currentLanguageSlug}/bookmarks`;
   const pathForTagLink = isHome ? pathNameIfHome : currentPathname;
+  const uiScreenTypeIsMobile = useSelector(selectUiScreenTypeIsMobile);
 
   const onVote = (vote) => {
     if (!isLogged) return dispatch(switchLoginModal(true));
@@ -96,6 +98,7 @@ const BookmarkRow: React.FC<Props> = ({ id }) => {
       pathForTagLink={pathForTagLink}
       onEdit={onEdit}
       onListsClick={onListsClick}
+      uiScreenTypeIsMobile={uiScreenTypeIsMobile}
     />
   );
 };

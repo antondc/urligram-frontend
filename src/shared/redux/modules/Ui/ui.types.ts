@@ -15,6 +15,7 @@ export const SWITCH_BOOKMARK_UPDATE_MODAL = 'SWITCH_BOOKMARK_UPDATE_MODAL';
 export const SWITCH_LIST_ADD_USER_MODAL = 'SWITCH_LIST_ADD_USER_MODAL';
 export const UI_BOOKMARK_LISTS_MODALS_MOUNT = 'UI_BOOKMARK_LISTS_MODALS_MOUNT';
 export const UI_BOOKMARK_LISTS_MODALS_UNMOUNT = 'UI_BOOKMARK_LISTS_MODALS_UNMOUNT';
+export const UI_BOOKMARK_LISTS_MODALS_LOADING = 'UI_BOOKMARK_LISTS_MODALS_LOADING';
 export const SWITCH_LIST_MODAL = 'SWITCH_LIST_MODAL';
 export const UI_NOTIFICATION_VIEWED = 'UI_NOTIFICATION_VIEWED';
 export const UI_NOTIFICATION_PUSH = 'UI_NOTIFICATION_PUSH';
@@ -46,6 +47,7 @@ export type NotificationState = {
 
 export type BookmarkListsModal = {
   bookmarkId?: number;
+  loading?: boolean;
 } & UiBaseModal;
 
 export type BookmarkSendModal = {
@@ -76,9 +78,7 @@ export type UiState = {
     listId?: number;
   } & UiBaseModal;
   listAddUserModal: UiBaseModal;
-  bookmarkListsModal: {
-    bookmarkId?: number;
-  } & UiBaseModal;
+  bookmarkListsModal: BookmarkListsModal;
   bookmarkSendModals: BookmarkSendModals;
   notifications?: NotificationState[];
 };
@@ -168,6 +168,11 @@ interface BookmarkListModalsUnmount {
   payload: Partial<UiState>;
 }
 
+interface BookmarkListModalsLoading {
+  type: typeof UI_BOOKMARK_LISTS_MODALS_LOADING;
+  payload: Partial<UiState>;
+}
+
 interface UiNotificationViewedAction {
   type: typeof UI_NOTIFICATION_VIEWED;
   payload: UiState;
@@ -206,6 +211,7 @@ export type UiActions =
   | SwitchListModal
   | BookmarkListModalsMount
   | BookmarkListModalsUnmount
+  | BookmarkListModalsLoading
   | UiNotificationViewedAction
   | UiNotificationPushAction
   | UiCloseAllModals

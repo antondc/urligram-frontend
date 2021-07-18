@@ -2,13 +2,14 @@ import { AppThunk } from '../../../index';
 import { UI_BOOKMARK_LISTS_MODALS_MOUNT, UiActions } from '../ui.types';
 
 interface Props {
-  bookmarkId: number;
+  loading: boolean;
 }
 
-export const bookmarkListsModalMount =
-  ({ bookmarkId }: Props): AppThunk<void, UiActions> =>
+export const bookmarkListsModalLoading =
+  ({ loading }: Props): AppThunk<void, UiActions> =>
   async (dispatch, getState): Promise<void> => {
     const { Ui } = getState();
+
     dispatch({
       type: UI_BOOKMARK_LISTS_MODALS_MOUNT,
       payload: {
@@ -16,7 +17,7 @@ export const bookmarkListsModalMount =
           ...Ui.bookmarkListsModal,
           type: 'popup',
           mounted: true,
-          bookmarkId,
+          loading,
         },
       },
     });
