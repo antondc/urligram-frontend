@@ -11,10 +11,10 @@ const ScreenSizePixel: React.FC = () => {
   useEffect(() => {
     const element = window.document.getElementById('ScreenSizePixel');
     const styleBefore = window.getComputedStyle(element, '::before');
-    const content = styleBefore.content;
-    const contentIsDesktop = content.includes('desktop');
-    const contentIsTablet = content.includes('tablet');
-    const contentIsMobile = content.includes('mobile');
+    const content = styleBefore?.content;
+    const contentIsDesktop = content?.includes('desktop');
+    const contentIsTablet = content?.includes('tablet');
+    const contentIsMobile = content?.includes('mobile');
 
     switch (true) {
       case contentIsDesktop:
