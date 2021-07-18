@@ -10,26 +10,22 @@ import { RenderInPortal } from '../Portal';
 import './BookmarkRow.less';
 
 interface BookmarkRow extends BookmarkState {
-  userId: string;
   bookmark: Partial<BookmarkState>;
   recentlyCreated: boolean;
   sessionUserBookmarkedLink: boolean;
   createdAtFormatted: string;
   pathForTagLink: string;
-  uiScreenTypeIsMobile: boolean;
   onVote: (vote: boolean | null) => void;
   onEdit: () => void;
   onListsClick: () => void;
 }
 
 export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
-  userId,
   bookmark,
   onVote,
   sessionUserBookmarkedLink,
   createdAtFormatted,
   pathForTagLink,
-  uiScreenTypeIsMobile,
   recentlyCreated,
   onEdit,
   onListsClick,
@@ -99,7 +95,7 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
               id={`BookmarkRow-${bookmark?.id}`}
               onClick={onListsClick}
             />
-            {!!uiScreenTypeIsMobile ? <div>IS_MOBILE</div> : <BookmarkListsPopOver bookmarkId={bookmark?.id} />}
+            <BookmarkListsPopOver bookmarkId={bookmark?.id} />
           </>
         )}
         <BookmarkActions

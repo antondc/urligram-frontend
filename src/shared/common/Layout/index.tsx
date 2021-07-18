@@ -42,8 +42,10 @@ import { routesList, routesWithoutOmmitedValues } from 'Router/routes';
 import enhanceRouteWithParams from 'Tools/utils/url/enhanceRouteWithParams';
 import findActiveRouteKey from 'Tools/utils/url/findActiveRouteKey';
 import { AnimateSheet, Fade, SpinnerCircularBrute } from 'Vendor/components';
+import BookmarkListsSheet from 'Components/BookmarkListsSheet';
 
 import './Layout.less';
+import { selectUiScreenTypeIsMobile } from 'Modules/Ui/selectors/selectUiScreenTypeIsMobile';
 
 const KEY_CODE = 'Escape';
 
@@ -69,7 +71,7 @@ const Layout: React.FC<Props> = ({ location }) => {
   const listModalMounted = useSelector(selectUiListModalMounted);
   const renderLoader = !!languageLoading; /* || otherVariables */
   const bookmarkListsModal = useSelector(selectBookmarkListsModal);
-
+  const uiScreenTypeIsMobile = useSelector(selectUiScreenTypeIsMobile);
   // Lock screen
   if (uiScreenLocked) {
     document.body.classList.add('scrollLocked');
@@ -142,9 +144,9 @@ const Layout: React.FC<Props> = ({ location }) => {
         <Footer />
         <UserModal />
       </div>
-      {/* <AnimateSheet className="Layout-animateSheetMobile" mounted={bookmarkListsModal?.mounted}>
+      <AnimateSheet className="Layout-animateSheetMobile" mounted={uiScreenTypeIsMobile && bookmarkListsModal?.mounted}>
         <BookmarkListsSheet bookmarkId={bookmarkListsModal?.bookmarkId} />
-      </AnimateSheet> */}
+      </AnimateSheet>
       <Fade mounted={loginModalMounted} speed="fastest" position="fixed" appear>
         <LoginModal />
       </Fade>

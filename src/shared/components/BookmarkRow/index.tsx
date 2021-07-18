@@ -8,14 +8,12 @@ import { linkUpdateVote } from 'Modules/Links/actions/linkUpdateVote';
 import { RootState } from 'Modules/rootType';
 import { selectCurrentPathname } from 'Modules/Routes/selectors/selectCurrentPathname';
 import { selectCurrentRoute } from 'Modules/Routes/selectors/selectCurrentRoute';
-import { selectCurrentRouteParamUserId } from 'Modules/Routes/selectors/selectCurrentRouteParamUserId';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import { bookmarkListsModalMount } from 'Modules/Ui/actions/bookmarkListsModalMount';
 import { switchBookmarkUpdateModal } from 'Modules/Ui/actions/switchBookmarkUpdateModal';
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
 import { selectBookmarkListsModalMounted } from 'Modules/Ui/selectors/selectBookmarkListsModalMounted';
-import { selectUiScreenTypeIsMobile } from 'Modules/Ui/selectors/selectUiScreenTypeIsMobile';
 import { TIME_RECENTLY_CREATED_BOOKMARK } from 'Root/src/shared/constants';
 import { Routes } from 'Router/routes';
 import { LocaleFormattedDate } from 'Tools/utils/Date/localeFormattedDate';
@@ -32,8 +30,6 @@ const BookmarkRow: React.FC<Props> = ({ id }) => {
   const slug = useSelector(selectCurrentLanguageSlug);
   const session = useSelector(selectSession);
   const bookmark = useSelector((state: RootState) => selectBookmarksById(state, { bookmarkId: id }));
-  const paramUserId = useSelector(selectCurrentRouteParamUserId);
-  const routeUserId = paramUserId || session?.id || bookmark?.userId;
   const timePassed = unixTimeElapsed(bookmark?.createdAt);
   const recentlyCreated = timePassed < TIME_RECENTLY_CREATED_BOOKMARK;
   const date = new LocaleFormattedDate({ unixTime: bookmark?.createdAt, locale: slug });
@@ -51,7 +47,6 @@ const BookmarkRow: React.FC<Props> = ({ id }) => {
   const isHome = currentRoute?.name === Routes.Home.name;
   const pathNameIfHome = `/${currentLanguageSlug}/bookmarks`;
   const pathForTagLink = isHome ? pathNameIfHome : currentPathname;
-  const uiScreenTypeIsMobile = useSelector(selectUiScreenTypeIsMobile);
 
   const onVote = (vote) => {
     if (!isLogged) return dispatch(switchLoginModal(true));
@@ -66,8 +61,6 @@ const BookmarkRow: React.FC<Props> = ({ id }) => {
   };
 
   const onListsClick = () => {
-    console.log('onListsClick: ', bookmarkListsModalMounted);
-
     if (bookmarkListsModalMounted) return;
 
     dispatch(bookmarkListsModalMount({ bookmarkId: bookmark?.id }));
@@ -89,7 +82,6 @@ const BookmarkRow: React.FC<Props> = ({ id }) => {
   return (
     <BookmarkRowUi
       id={id}
-      userId={routeUserId}
       bookmark={sessionUserBookmarkedLink ? sessionUserBookmark : bookmark}
       createdAtFormatted={createdAtFormatted}
       onVote={onVote}
@@ -98,7 +90,6 @@ const BookmarkRow: React.FC<Props> = ({ id }) => {
       pathForTagLink={pathForTagLink}
       onEdit={onEdit}
       onListsClick={onListsClick}
-      uiScreenTypeIsMobile={uiScreenTypeIsMobile}
     />
   );
 };

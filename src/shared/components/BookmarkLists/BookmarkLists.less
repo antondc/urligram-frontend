@@ -6,8 +6,14 @@
   display: flex;
   position: relative;
   flex-direction: column;
+  justify-content: space-between;
   width: 100%;
   overflow: hidden;
+
+  @media @br-mobile {
+    height: 100%;
+    padding: 10px;
+  }
 
   &-lists {
     flex: 1;
@@ -19,6 +25,7 @@
     .hideScrollbar;
 
     @media @br-mobile {
+      max-height: unset;
       padding: 10px;
     }
   }

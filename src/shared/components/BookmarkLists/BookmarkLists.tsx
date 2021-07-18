@@ -42,14 +42,7 @@ export const BookmarkLists: React.FC<Props> = ({
 }) => (
   <div className="BookmarkLists">
     <ul className="BookmarkLists-lists">
-      {[
-        ...(lists || []),
-        ...(lists || []),
-        ...(lists || []),
-        ...(lists || []),
-        ...(lists || []),
-        ...(lists || []),
-      ]?.map((item) => {
+      {lists?.map((item) => {
         const isBookmarkInList = !!item?.bookmarksIds?.includes(bookmarkId);
         const wasRecentlyUpdated = recentlyUpdated?.includes(item?.id);
 
