@@ -21,8 +21,7 @@
     "react",
     "@typescript-eslint",
     "simple-import-sort", // sorts our imports
-    "import", // additional formatting for imports
-    "plugin:prettier/recommended"
+    "import" // additional formatting for imports
   ],
   "rules": {
     "import/newline-after-import": "error", // Add newline after imports section

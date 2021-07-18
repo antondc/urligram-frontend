@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { bookmarkListsModalUnmount } from 'Modules/Ui/actions/bookmarkListsModalUnmount';
 import { selectBookmarkListsModal } from 'Modules/Ui/selectors/selectBookmarkListsModal';
+import { selectUiScreenTypeIsMobile } from 'Modules/Ui/selectors/selectUiScreenTypeIsMobile';
 import { DELAY_THREE_SEC } from 'Root/src/shared/constants';
 import { BookmarkListsPopOver as BookmarkListsPopOverUi } from './BookmarkListsPopOver';
-import { selectUiScreenTypeIsMobile } from 'Modules/Ui/selectors/selectUiScreenTypeIsMobile';
 
 interface Props {
   bookmarkId: number;

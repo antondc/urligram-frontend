@@ -2,9 +2,9 @@ import React from 'react';
 
 import A from 'Components/A';
 import BookmarkActions from 'Components/BookmarkActions';
+import BookmarkListsPopOver from 'Components/BookmarkListsPopOver';
 import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
 import { EditCircle, List, Private, Space, Tag, Tooltip, Vote } from 'Vendor/components';
-import BookmarkListsPopOver from 'Components/BookmarkListsPopOver';
 import { RenderInPortal } from '../Portal';
 
 import './BookmarkRow.less';
