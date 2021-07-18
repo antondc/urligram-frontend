@@ -4,7 +4,7 @@ import { Location } from 'history';
 
 import LayoutHelperGrid from 'Common/LayoutHelperGrid';
 import BookmarkCreateModal from 'Components/BookmarkCreateModal';
-import BookmarkListsModal from 'Components/BookmarkListsModal';
+import BookmarkListsSheet from 'Components/BookmarkListsSheet';
 import BookmarkUpdateModal from 'Components/BookmarkUpdateModal';
 import CookiesBanner from 'Components/CookiesBanner';
 import Footer from 'Components/Footer';
@@ -32,6 +32,7 @@ import { selectUiListModalMounted } from 'Modules/Ui/selectors/selectUiListModal
 import { selectUiLoginModalMounted } from 'Modules/Ui/selectors/selectUiLoginModalMounted';
 import { selectUiResetPasswordModalMounted } from 'Modules/Ui/selectors/selectUiResetPasswordModalMounted';
 import { selectUiScreenLocked } from 'Modules/Ui/selectors/selectUiScreenLocked';
+import { selectUiScreenMobileLocked } from 'Modules/Ui/selectors/selectUiScreenMobileLocked';
 import { selectUiSignUpModalMounted } from 'Modules/Ui/selectors/selectUiSignUpModalMounted';
 import { selectUiWelcomeModalMounted } from 'Modules/Ui/selectors/selectUiWelcomeModalMounted';
 import { userFollowingLoad } from 'Modules/Users/actions/userFollowingLoad';
@@ -41,7 +42,7 @@ import { routesList, routesWithoutOmmitedValues } from 'Router/routes';
 import enhanceRouteWithParams from 'Tools/utils/url/enhanceRouteWithParams';
 import findActiveRouteKey from 'Tools/utils/url/findActiveRouteKey';
 import { AnimateSheet, Fade, SpinnerCircularBrute } from 'Vendor/components';
-import { selectUiScreenMobileLocked } from '../../redux/modules/Ui/selectors/selectUiScreenMobileLocked';
+import ScreenSizePixel from '../../components/ScreenSizePixel';
 
 import './Layout.less';
 
@@ -132,6 +133,7 @@ const Layout: React.FC<Props> = ({ location }) => {
 
   return (
     <div className="Layout">
+      <ScreenSizePixel />
       <div className="Layout-background" />
       <div className="Layout-content">
         <LayoutHelperGrid />
@@ -142,7 +144,7 @@ const Layout: React.FC<Props> = ({ location }) => {
         <UserModal />
       </div>
       <AnimateSheet className="Layout-animateSheetMobile" mounted={bookmarkListsModal?.mounted}>
-        <BookmarkListsModal bookmarkId={bookmarkListsModal?.bookmarkId} />
+        <BookmarkListsSheet bookmarkId={bookmarkListsModal?.bookmarkId} />
       </AnimateSheet>
       <Fade mounted={loginModalMounted} speed="fastest" position="fixed" appear>
         <LoginModal />

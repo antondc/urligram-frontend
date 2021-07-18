@@ -1,0 +1,21 @@
+@import '../../css/imports.less';
+
+@c: .ScreenSizePixel;
+
+@{c} {
+  display: none;
+  visibility: hidden;
+  pointer-events: none;
+
+  &:before {
+    content: 'desktop';
+
+    @media @br-tablet {
+      content: 'tablet';
+    }
+
+    @media @br-mobile {
+      content: 'mobile';
+    }
+  }
+}

@@ -1,3 +1,4 @@
+export const UI_SCREEN_TYPE_SET = 'UI_SCREEN_TYPE_SET';
 export const UI_SCREEN_MOBILE_LOCK = 'UI_SCREEN_MOBILE_LOCK';
 export const UI_SCREEN_MOBILE_UNLOCK = 'UI_SCREEN_MOBILE_UNLOCK';
 export const USER_MODAL_MOUNT = 'USER_MODAL_MOUNT';
@@ -53,8 +54,10 @@ export type BookmarkSendModal = {
 
 export type BookmarkListsModals = Array<BookmarkListsModal>;
 export type BookmarkSendModals = Array<BookmarkSendModal>;
+export type ScreenType = 'desktop' | 'tablet' | 'mobile';
 
 export type UiState = {
+  screenType: ScreenType;
   screenMobileLocked: boolean;
   screenLocked: boolean;
   userModal: UiBaseModal;
@@ -79,6 +82,11 @@ export type UiState = {
   bookmarkSendModals: BookmarkSendModals;
   notifications?: NotificationState[];
 };
+
+interface UiScreenTypeSet {
+  type: typeof UI_SCREEN_TYPE_SET;
+  payload: Partial<UiState>;
+}
 
 interface UiScreenLock {
   type: typeof UI_SCREEN_MOBILE_LOCK;
@@ -181,6 +189,7 @@ interface SwitchListAddUserModal {
 }
 
 export type UiActions =
+  | UiScreenTypeSet
   | UiScreenLock
   | UiScreenUnLock
   | UserModalMount
