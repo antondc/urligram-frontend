@@ -5,7 +5,7 @@ import Cross from 'Assets/svg/cross.svg';
 import BaseModal from 'Components/BaseModal';
 import BookmarkUpdateForm from 'Components/BookmarkUpdateForm';
 import { switchBookmarkUpdateModal } from 'Modules/Ui/actions/switchBookmarkUpdateModal';
-import { Flex, H3, Hr } from 'Vendor/components';
+import { Flex, H3 } from 'Vendor/components';
 
 import './BookmarkUpdateModal.less';
 

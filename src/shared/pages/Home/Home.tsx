@@ -10,7 +10,6 @@ import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
 import { SessionState } from 'Modules/Session/session.types';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
-import { Span } from 'Vendor/components';
 
 import './Home.less';
 

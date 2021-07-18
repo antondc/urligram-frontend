@@ -2,7 +2,7 @@ import React from 'react';
 
 import A from 'Components/A';
 import LoginForm from 'Components/LoginForm';
-import { Flex, H1, Span } from 'Vendor/components';
+import { H1, Span } from 'Vendor/components';
 
 import './Login.less';
 

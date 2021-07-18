@@ -2,7 +2,7 @@ import React from 'react';
 
 import A from 'Components/A';
 import { ListState } from 'Modules/Lists/lists.types';
-import { Button, FadeInOut, Input, PlusCircleWithBackground, Span, SpinnerCircularBrute } from 'Vendor/components';
+import { Button, FadeInOut, Input, PlusCircleWithBackground, SpinnerCircularBrute } from 'Vendor/components';
 
 import './BookmarkLists.less';
 

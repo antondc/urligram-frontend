@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { ProviderWrapper } from 'Tools/storybook/provider';
-import { FadeInOut, Frame, Hr } from 'Vendor/components';
+import { Frame } from 'Vendor/components';
 import { boolean, withKnobs } from '@storybook/addon-knobs';
 import { ListRow } from './ListRow';
 import { ListRowSkeleton } from './ListRowSkeleton';

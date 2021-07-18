@@ -1,7 +1,7 @@
 import React from 'react';
 
 import A from 'Components/A';
-import { H4, Hr, Tag } from 'Vendor/components';
+import { Hr, Tag } from 'Vendor/components';
 import { SidebarListTagsSkeleton } from './SidebarListTagsSkeleton';
 
 import './SidebarListTags.less';
