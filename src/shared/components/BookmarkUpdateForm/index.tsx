@@ -20,8 +20,8 @@ export type TagValue = {
 };
 
 interface Props {
-  closeModal: () => void;
-  setModalLocked: (value: boolean) => void;
+  closeModal?: () => void;
+  setModalLocked?: (value: boolean) => void;
 }
 
 const BookmarkUpdateForm: React.FC<Props> = ({ closeModal, setModalLocked }) => {

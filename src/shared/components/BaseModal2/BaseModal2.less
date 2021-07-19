@@ -1,0 +1,76 @@
+@import '../../css/imports.less';
+
+@c: .BaseModal2;
+
+@{c} {
+  position: fixed;
+  height: 100vh;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  &-background {
+    position: fixed;
+    height: 100vh;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: @c-traslucid--hardest;
+    transform: scale(2);
+  }
+
+  &-container {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: repeat(24, 1fr);
+    grid-template-rows: repeat(24, 1fr);
+    height: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px;
+
+    @media @br-mobile {
+      display: block;
+      padding: 10px;
+    }
+  }
+
+  &-content {
+    position: relative;
+    grid-column: 7 / span 12;
+    grid-row: 8;
+    padding: 60px 100px 40px;
+    background: @c-background;
+    border-radius: 4px;
+
+    .boxShadow;
+
+    @media @br-tabletHorizontal {
+      grid-column: 5 / span 16;
+      grid-row: 8;
+    }
+
+    @media @br-mobile {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  &-cross {
+    position: absolute;
+    height: 15px;
+    width: 15px;
+    top: 20px;
+    right: 20px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

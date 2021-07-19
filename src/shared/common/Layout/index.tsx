@@ -4,8 +4,7 @@ import { Location } from 'history';
 
 import LayoutHelperGrid from 'Common/LayoutHelperGrid';
 import BookmarkCreateModal from 'Components/BookmarkCreateModal';
-import BookmarkListsSheet from 'Components/BookmarkListsSheet';
-import BookmarkUpdateModal from 'Components/BookmarkUpdateModal';
+import BookmarkUpdateModalOrSheet from 'Components/BookmarkUpdateModalOrSheet';
 import CookiesBanner from 'Components/CookiesBanner';
 import Footer from 'Components/Footer';
 import ForgotPasswordModal from 'Components/ForgotPasswordModal';
@@ -25,16 +24,13 @@ import { RouteState } from 'Modules/Routes/routes.types';
 import { selectCurrentPathAndQuery } from 'Modules/Routes/selectors/selectCurrentPathAndQuery';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { uiResetState } from 'Modules/Ui/actions/uiResetState';
-import { selectBookmarkListsModal } from 'Modules/Ui/selectors/selectBookmarkListsModal';
 import { selectUiBookmarkCreateModalMounted } from 'Modules/Ui/selectors/selectUiBookmarkCreateModalMounted';
-import { selectUiBookmarkUpdateModalMounted } from 'Modules/Ui/selectors/selectUiBookmarkUpdateModalMounted';
 import { selectUiForgotPasswordModalMounted } from 'Modules/Ui/selectors/selectUiForgotPasswordModalMounted';
 import { selectUiListModalMounted } from 'Modules/Ui/selectors/selectUiListModalMounted';
 import { selectUiLoginModalMounted } from 'Modules/Ui/selectors/selectUiLoginModalMounted';
 import { selectUiResetPasswordModalMounted } from 'Modules/Ui/selectors/selectUiResetPasswordModalMounted';
 import { selectUiScreenLocked } from 'Modules/Ui/selectors/selectUiScreenLocked';
 import { selectUiScreenMobileLocked } from 'Modules/Ui/selectors/selectUiScreenMobileLocked';
-import { selectUiScreenTypeIsMobile } from 'Modules/Ui/selectors/selectUiScreenTypeIsMobile';
 import { selectUiSignUpModalMounted } from 'Modules/Ui/selectors/selectUiSignUpModalMounted';
 import { selectUiWelcomeModalMounted } from 'Modules/Ui/selectors/selectUiWelcomeModalMounted';
 import { userFollowingLoad } from 'Modules/Users/actions/userFollowingLoad';
@@ -43,7 +39,7 @@ import Router from 'Router/index';
 import { routesList, routesWithoutOmmitedValues } from 'Router/routes';
 import enhanceRouteWithParams from 'Tools/utils/url/enhanceRouteWithParams';
 import findActiveRouteKey from 'Tools/utils/url/findActiveRouteKey';
-import { AnimateSheet, Fade, SpinnerCircularBrute } from 'Vendor/components';
+import { Fade, SpinnerCircularBrute } from 'Vendor/components';
 
 import './Layout.less';
 
@@ -67,11 +63,8 @@ const Layout: React.FC<Props> = ({ location }) => {
   const forgotPasswordModalMounted = useSelector(selectUiForgotPasswordModalMounted);
   const resetPasswordModalMounted = useSelector(selectUiResetPasswordModalMounted);
   const bookmarkCreateModalMounted = useSelector(selectUiBookmarkCreateModalMounted);
-  const bookmarkUpdateModalMounted = useSelector(selectUiBookmarkUpdateModalMounted);
   const listModalMounted = useSelector(selectUiListModalMounted);
   const renderLoader = !!languageLoading; /* || otherVariables */
-  const bookmarkListsModal = useSelector(selectBookmarkListsModal);
-  const uiScreenTypeIsMobile = useSelector(selectUiScreenTypeIsMobile);
   // Lock screen
   if (uiScreenLocked) {
     document.body.classList.add('scrollLocked');
@@ -144,9 +137,6 @@ const Layout: React.FC<Props> = ({ location }) => {
         <Footer />
         <UserModal />
       </div>
-      <AnimateSheet className="Layout-animateSheetMobile" mounted={uiScreenTypeIsMobile && bookmarkListsModal?.mounted}>
-        <BookmarkListsSheet bookmarkId={bookmarkListsModal?.bookmarkId} />
-      </AnimateSheet>
       <Fade mounted={loginModalMounted} speed="fastest" position="fixed" appear>
         <LoginModal />
       </Fade>
@@ -165,9 +155,7 @@ const Layout: React.FC<Props> = ({ location }) => {
       <Fade mounted={bookmarkCreateModalMounted} speed="fastest" position="fixed" appear>
         <BookmarkCreateModal />
       </Fade>
-      <Fade mounted={bookmarkUpdateModalMounted} speed="fastest" position="fixed" appear>
-        <BookmarkUpdateModal />
-      </Fade>
+      <BookmarkUpdateModalOrSheet />
       <Fade mounted={listModalMounted} speed="fastest" position="fixed" appear>
         <ListModal />
       </Fade>

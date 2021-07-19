@@ -1,0 +1,25 @@
+@import '../../css/imports.less';
+
+@c: .BaseSheet;
+
+@{c} {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-content: flex-end;
+  height: 100%;
+  width: 100%;
+  padding: 50px 20px 20px;
+
+  &-cross {
+    position: absolute;
+    height: 15px;
+    width: 15px;
+    top: 20px;
+    right: 20px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

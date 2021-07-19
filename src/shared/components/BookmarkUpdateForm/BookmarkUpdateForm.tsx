@@ -42,6 +42,7 @@ export const BookmarkUpdateForm: React.FC<Props> = ({
   onSubmit,
 }) => (
   <form className="BookmarkUpdateForm" onSubmit={onSubmit}>
+    <h2 className="BookmarkUpdateForm-title">Update Bookmark</h2>
     <Input
       name="title"
       type="text"
