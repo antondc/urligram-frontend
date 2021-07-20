@@ -25,10 +25,10 @@ export type TagValue = {
 
 interface Props {
   closeModal: () => void;
-  setModalLocked: (value: boolean) => void;
+  setLocked?: (value: boolean) => void;
 }
 
-const BookmarkCreateForm: React.FC<Props> = ({ closeModal, setModalLocked }) => {
+const BookmarkCreateForm: React.FC<Props> = ({ closeModal, setLocked }) => {
   const dispatch = useDispatch();
   const bookmarkError = useSelector(selectBookmarksErrorLast);
   const allTags = useSelector(selectTagsAll);
@@ -72,7 +72,7 @@ const BookmarkCreateForm: React.FC<Props> = ({ closeModal, setModalLocked }) => 
 
       return;
     }
-    setModalLocked(true);
+    setLocked(true);
     setSubmitSuccess(undefined);
     const urlHasProtocol = testUrlHasProtocol(urlValue);
 
@@ -104,7 +104,7 @@ const BookmarkCreateForm: React.FC<Props> = ({ closeModal, setModalLocked }) => 
       setUrlError(error?.message);
     } finally {
       setUrlLoading(false);
-      setModalLocked(false);
+      setLocked(false);
     }
   };
 
@@ -146,7 +146,7 @@ const BookmarkCreateForm: React.FC<Props> = ({ closeModal, setModalLocked }) => 
     }
 
     setSubmitInProcess(true);
-    setModalLocked(true);
+    setLocked(true);
     const transformedTags = tagsValue.map((item) => ({ tag: item.value }));
 
     const data = {
@@ -158,7 +158,7 @@ const BookmarkCreateForm: React.FC<Props> = ({ closeModal, setModalLocked }) => 
 
     const response = await dispatch(bookmarkCreate(data));
     setSubmitInProcess(false);
-    setModalLocked(false);
+    setLocked(false);
 
     if (response?.title) {
       setSubmitSuccess(true);

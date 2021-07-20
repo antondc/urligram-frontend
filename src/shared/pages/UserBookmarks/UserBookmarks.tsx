@@ -1,19 +1,21 @@
 import React from 'react';
 
 import Bookmark from 'Assets/svg/bookmarkRounded.svg';
+import Cross from 'Assets/svg/cross.svg';
 import Rating from 'Assets/svg/rating.svg';
 import Clock from 'Assets/svg/spinner6.svg';
 import A from 'Components/A';
 import BookmarkRow from 'Components/BookmarkRow';
 import { BookmarkRowSkeletonGroup } from 'Components/BookmarkRow/BookmarkRowSkeletonGroup';
 import Pagination from 'Components/Pagination';
+import { RenderInPortal } from 'Components/Portal';
 import Sidebar from 'Components/Sidebar';
 import SidebarListUsers from 'Components/SidebarListUsers';
 import { BookmarksByKey } from 'Modules/Bookmarks/bookmarks.types';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
-import { FadeInOut, Hr, Select, SelectValue, SortBy } from 'Vendor/components';
+import { FadeInOut, Hr, Select, SelectValue, SortBy, Space, Tooltip } from 'Vendor/components';
 
 import './UserBookmarks.less';
 
@@ -40,6 +42,7 @@ interface Props {
   }[];
   onInputChange: (string: string) => void;
   onChange: (string: SelectValue[]) => void;
+  onAddBookmarkClick: () => void;
   allTags: TagState[];
   currentQueryParamFilterTags: SelectValue[];
 }
@@ -61,16 +64,24 @@ export const UserBookmarks: React.FC<Props> = ({
   tagsSearchFormatted,
   onInputChange,
   onChange,
+  onAddBookmarkClick,
   allTags,
   currentQueryParamFilterTags,
 }) => (
   <>
     <div className="UserBookmarks">
       <div className="UserBookmarks-header UserBookmarks-headerTitle">
-        Bookmarks of{' '}
+        Bookmarks of
+        <Space />
         <A href={`/users/${userId}`} underlined frontend>
           @{user?.name}
         </A>
+        <RenderInPortal>
+          <Tooltip parentElementId="UserBookmarks-addBookmark" content="Add new bookmark" delay={2} />
+        </RenderInPortal>
+        <div className="UserBookmarks-addBookmark" id="UserBookmarks-addBookmark" onClick={onAddBookmarkClick}>
+          <Cross className="UserBookmarks-iconCross" />
+        </div>
       </div>
       <div className="UserBookmarks-header">
         <Select

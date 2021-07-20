@@ -13,11 +13,11 @@ import './ListModal.less';
 const ListModal: React.FC = () => {
   const dispatch = useDispatch();
   const { listId } = useSelector(selectUiListModal);
-  const [modalLocked, setModalLocked] = useState<boolean>(false);
+  const [locked, setLocked] = useState<boolean>(false);
   const isUpdate = !!listId;
 
   const closeModal = () => {
-    if (modalLocked) return;
+    if (locked) return;
     dispatch(switchListModal({ mounted: false }));
   };
 
@@ -29,7 +29,7 @@ const ListModal: React.FC = () => {
           <H3>{!!isUpdate ? 'Update List' : 'Create List'}</H3>
         </Flex>
         <Hr spacer size="small" />
-        <ListForm closeModal={closeModal} setModalLocked={setModalLocked} />
+        <ListForm closeModal={closeModal} setLocked={setLocked} />
         <Hr spacer size="big" />
       </div>
     </BaseModal>

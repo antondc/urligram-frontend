@@ -6,12 +6,29 @@
   display: flex;
   flex-direction: column;
 
+  &-title {
+    margin-bottom: 30px;
+    font-size: @fs-big;
+    font-weight: @fw-bold;
+    text-align: center;
+  }
+
   &-error {
     color: @c-error;
   }
 
   &-private {
     color: @c-traslucid--hardest;
+  }
+
+  &-url {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: baseline;
+
+    @media @br-mobile {
+      padding-top: 30px;
+    }
   }
 
   &-urlArrow {

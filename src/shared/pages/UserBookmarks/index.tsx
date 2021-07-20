@@ -22,6 +22,7 @@ import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { tagsSearchLoad } from 'Modules/Tags/actions/tagsSearchLoad';
 import { selectTagsAll } from 'Modules/Tags/selectors/selectAllTags';
 import { selectTagsSearch } from 'Modules/Tags/selectors/selectTagsSearch';
+import { switchBookmarkCreateModal } from 'Modules/Ui/actions/switchBookmarkCreateModal';
 import { userLoad } from 'Modules/Users/actions/userLoad';
 import { selectUserById } from 'Modules/Users/selectors/selectUserById';
 import history from 'Services/History';
@@ -54,6 +55,10 @@ const UserBookmarks: React.FC = () => {
       label: item.toString(),
       value: item,
     })) || [];
+
+  const onAddBookmarkClick = () => {
+    dispatch(switchBookmarkCreateModal(true));
+  };
 
   const onInputChange = (string: string) => {
     !!string && dispatch(tagsSearchLoad(string));
@@ -105,6 +110,7 @@ const UserBookmarks: React.FC = () => {
       onInputChange={onInputChange}
       currentQueryParamFilterTags={currentQueryParamFilterTags}
       onChange={onChange}
+      onAddBookmarkClick={onAddBookmarkClick}
     />
   );
 };

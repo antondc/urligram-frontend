@@ -25,10 +25,10 @@ export type TagValue = {
 
 interface Props {
   closeModal: () => void;
-  setModalLocked: (locked: boolean) => void;
+  setLocked: (locked: boolean) => void;
 }
 
-const ListForm: React.FC<Props> = ({ closeModal, setModalLocked }) => {
+const ListForm: React.FC<Props> = ({ closeModal, setLocked }) => {
   const dispatch = useDispatch();
   const listError = useSelector(selectListsErrorLast);
   const currentLanguageSlug = useSelector(selectCurrentLanguageSlug);
@@ -96,7 +96,7 @@ const ListForm: React.FC<Props> = ({ closeModal, setModalLocked }) => {
   const onSubmit = async (e: React.FormEvent<HTMLElement>) => {
     e.preventDefault();
     setSubmitting(true);
-    setModalLocked(true);
+    setLocked(true);
 
     try {
       const data = {
@@ -121,7 +121,7 @@ const ListForm: React.FC<Props> = ({ closeModal, setModalLocked }) => {
       }
     } finally {
       setSubmitting(false);
-      setModalLocked(false);
+      setLocked(false);
       setSubmitting(false);
     }
   };
@@ -129,7 +129,7 @@ const ListForm: React.FC<Props> = ({ closeModal, setModalLocked }) => {
   const onRemove = async (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setRemoving(true);
-    setModalLocked(true);
+    setLocked(true);
 
     try {
       await dispatch(listDelete({ listId: list?.id }));
@@ -140,7 +140,7 @@ const ListForm: React.FC<Props> = ({ closeModal, setModalLocked }) => {
       }, DELAY_SLOW_MS);
     } finally {
       setRemoving(false);
-      setModalLocked(false);
+      setLocked(false);
     }
   };
 

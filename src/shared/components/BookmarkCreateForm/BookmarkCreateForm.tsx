@@ -5,7 +5,6 @@ import {
   ArrowRight,
   Button,
   FadeInOut,
-  Flex,
   Frame,
   Hr,
   Input,
@@ -69,8 +68,10 @@ export const BookmarkCreateForm: React.FC<Props> = ({
   onSubmit,
 }) => (
   <form className="BookmarkCreateForm" onSubmit={onSubmit}>
-    <Flex growVertical={false} horizontal="left" vertical="baseline" noWrap>
+    <h2 className="BookmarkCreateForm-title">Add a Bookmark</h2>
+    <div className="BookmarkCreateForm-url">
       <Input
+        className="BookmarkCreateForm"
         name="url"
         type="text"
         label="Url"
@@ -87,7 +88,7 @@ export const BookmarkCreateForm: React.FC<Props> = ({
         )}
         {urlLoading && <SpinnerCircularBrute className="BookmarkCreateForm-loader" />}
       </FadeInOut>
-    </Flex>
+    </div>
     <Hr size="nano" spacer />
     <FadeInOut valueToUpdate={!!urlError} speed="fast">
       <Span className="BookmarkCreateForm-error" size="small">

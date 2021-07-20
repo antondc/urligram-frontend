@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Location } from 'history';
 
 import LayoutHelperGrid from 'Common/LayoutHelperGrid';
-import BookmarkCreateModal from 'Components/BookmarkCreateModal';
+import BookmarkCreateModalOrSheet from 'Components/BookmarkCreateModalOrSheet';
 import BookmarkUpdateModalOrSheet from 'Components/BookmarkUpdateModalOrSheet';
 import CookiesBanner from 'Components/CookiesBanner';
 import Footer from 'Components/Footer';
@@ -24,7 +24,6 @@ import { RouteState } from 'Modules/Routes/routes.types';
 import { selectCurrentPathAndQuery } from 'Modules/Routes/selectors/selectCurrentPathAndQuery';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { uiResetState } from 'Modules/Ui/actions/uiResetState';
-import { selectUiBookmarkCreateModalMounted } from 'Modules/Ui/selectors/selectUiBookmarkCreateModalMounted';
 import { selectUiForgotPasswordModalMounted } from 'Modules/Ui/selectors/selectUiForgotPasswordModalMounted';
 import { selectUiListModalMounted } from 'Modules/Ui/selectors/selectUiListModalMounted';
 import { selectUiLoginModalMounted } from 'Modules/Ui/selectors/selectUiLoginModalMounted';
@@ -62,9 +61,9 @@ const Layout: React.FC<Props> = ({ location }) => {
   const signUpModalMounted = useSelector(selectUiSignUpModalMounted);
   const forgotPasswordModalMounted = useSelector(selectUiForgotPasswordModalMounted);
   const resetPasswordModalMounted = useSelector(selectUiResetPasswordModalMounted);
-  const bookmarkCreateModalMounted = useSelector(selectUiBookmarkCreateModalMounted);
   const listModalMounted = useSelector(selectUiListModalMounted);
   const renderLoader = !!languageLoading; /* || otherVariables */
+
   // Lock screen
   if (uiScreenLocked) {
     document.body.classList.add('scrollLocked');
@@ -152,9 +151,7 @@ const Layout: React.FC<Props> = ({ location }) => {
       <Fade mounted={resetPasswordModalMounted} speed="fastest" position="fixed" appear>
         <ResetPasswordModal />
       </Fade>
-      <Fade mounted={bookmarkCreateModalMounted} speed="fastest" position="fixed" appear>
-        <BookmarkCreateModal />
-      </Fade>
+      <BookmarkCreateModalOrSheet />
       <BookmarkUpdateModalOrSheet />
       <Fade mounted={listModalMounted} speed="fastest" position="fixed" appear>
         <ListModal />

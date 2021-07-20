@@ -12,10 +12,10 @@ import './LoginModal.less';
 
 const LoginModal: React.FC = () => {
   const dispatch = useDispatch();
-  const [modalLocked, setModalLocked] = useState<boolean>(false);
+  const [locked, setLocked] = useState<boolean>(false);
 
   const closeModal = () => {
-    if (modalLocked) return;
+    if (locked) return;
     dispatch(switchLoginModal(false));
   };
 
@@ -27,7 +27,7 @@ const LoginModal: React.FC = () => {
           <H3>Log in</H3>
         </Flex>
         <Hr spacer size="small" />
-        <LoginForm setModalLocked={setModalLocked} />
+        <LoginForm setLocked={setLocked} />
         <Hr spacer size="big" />
         <Flex horizontal="center">
           <div className="Login-section">
