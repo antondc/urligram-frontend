@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Cross from 'Assets/svg/cross.svg';
+import { RenderInPortal } from 'Components/Portal';
 import { AnimateSheet } from 'Vendor/components';
 
 import './BaseSheet.less';
@@ -11,12 +12,14 @@ interface Props {
 }
 
 export const BaseSheet: React.FC<Props> = ({ children, onCloseClick, mounted }) => (
-  <AnimateSheet className="Layout-animateSheetMobile" mounted={mounted}>
-    <div className="BaseSheet">
-      <Cross className="BaseSheet-cross" onClick={onCloseClick} />
-      {children}
-    </div>
-  </AnimateSheet>
+  <RenderInPortal elementId="Layout-animateSheetMobile">
+    <AnimateSheet className="Layout-animateSheetMobile" mounted={mounted}>
+      <div className="BaseSheet">
+        <Cross className="BaseSheet-cross" onClick={onCloseClick} />
+        {children}
+      </div>
+    </AnimateSheet>
+  </RenderInPortal>
 );
 
 export default BaseSheet;

@@ -21,8 +21,8 @@ export const BookmarkCreateModalOrSheet: React.FC = () => {
   };
 
   useEffect(() => {
-    dispatch(uiScreenMobileLock());
-  }, []);
+    bookmarkCreateModalMounted && dispatch(uiScreenMobileLock());
+  }, [bookmarkCreateModalMounted]);
 
   if (uiScreenTypeIsMobile) {
     return (

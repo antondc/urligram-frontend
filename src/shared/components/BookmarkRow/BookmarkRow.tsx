@@ -5,10 +5,10 @@ import List from 'Assets/svg/list.svg';
 import Private from 'Assets/svg/private.svg';
 import A from 'Components/A';
 import BookmarkActions from 'Components/BookmarkActions';
-import BookmarkListsPopOver from 'Components/BookmarkListsPopOver';
+import BookmarkListsPopOverOrSheet from 'Components/BookmarkListsPopOverOrSheet';
+import { RenderInPortal } from 'Components/Portal';
 import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
 import { Space, Tag, Tooltip, Vote } from 'Vendor/components';
-import { RenderInPortal } from '../Portal';
 
 import './BookmarkRow.less';
 
@@ -90,7 +90,7 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
       {!!sessionUserBookmarkedLink && (
         <span className="BookmarkRow-icon BookmarkRow-iconLists">
           <List id={`BookmarkRow-${bookmark?.id}`} onClick={onListsClick} />
-          <BookmarkListsPopOver bookmarkId={bookmark?.id} />
+          <BookmarkListsPopOverOrSheet bookmarkId={bookmark?.id} />
         </span>
       )}
       <BookmarkActions

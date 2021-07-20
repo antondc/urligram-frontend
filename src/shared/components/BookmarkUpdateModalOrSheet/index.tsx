@@ -2,13 +2,13 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import BaseModal2 from 'Components/BaseModal2';
+import BaseSheet from 'Components/BaseSheet';
+import BookmarkUpdateForm from 'Components/BookmarkUpdateForm';
 import { switchBookmarkUpdateModal } from 'Modules/Ui/actions/switchBookmarkUpdateModal';
 import { uiScreenMobileLock } from 'Modules/Ui/actions/uiScreenMobileLock';
 import { uiScreenMobileUnLock } from 'Modules/Ui/actions/uiScreenMobileUnLock';
 import { selectUiBookmarkUpdateModalMounted } from 'Modules/Ui/selectors/selectUiBookmarkUpdateModalMounted';
 import { selectUiScreenTypeIsMobile } from 'Modules/Ui/selectors/selectUiScreenTypeIsMobile';
-import BaseSheet from '../BaseSheet';
-import BookmarkUpdateForm from '../BookmarkUpdateForm';
 
 export const BookmarkUpdateModalOrSheet: React.FC = () => {
   const dispatch = useDispatch();
@@ -21,8 +21,8 @@ export const BookmarkUpdateModalOrSheet: React.FC = () => {
   };
 
   useEffect(() => {
-    dispatch(uiScreenMobileLock());
-  }, []);
+    bookmarkUpdateModalMounted && dispatch(uiScreenMobileLock());
+  }, [bookmarkUpdateModalMounted]);
 
   if (uiScreenTypeIsMobile) {
     return (

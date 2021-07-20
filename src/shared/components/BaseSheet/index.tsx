@@ -19,7 +19,7 @@ export const BaseSheet: React.FC<Props> = ({ children, mounted, onCloseClick: on
     if (locked) return;
 
     dispatch(uiScreenMobileUnLock());
-    dispatch(onCloseClickCallback());
+    onCloseClickCallback();
   };
 
   useEffect(() => {
