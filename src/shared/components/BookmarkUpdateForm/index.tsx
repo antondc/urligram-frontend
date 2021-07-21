@@ -20,7 +20,7 @@ export type TagValue = {
 };
 
 interface Props {
-  closeModal?: () => void;
+  closeModal: () => void;
   setLocked?: (value: boolean) => void;
 }
 

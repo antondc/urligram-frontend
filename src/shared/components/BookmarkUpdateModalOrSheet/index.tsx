@@ -15,7 +15,7 @@ export const BookmarkUpdateModalOrSheet: React.FC = () => {
   const uiScreenTypeIsMobile = useSelector(selectUiScreenTypeIsMobile);
   const bookmarkUpdateModalMounted = useSelector(selectUiBookmarkUpdateModalMounted);
 
-  const onCloseClick = () => {
+  const onClose = () => {
     dispatch(uiScreenMobileUnLock());
     dispatch(switchBookmarkUpdateModal({ mounted: false }));
   };
@@ -26,15 +26,15 @@ export const BookmarkUpdateModalOrSheet: React.FC = () => {
 
   if (uiScreenTypeIsMobile) {
     return (
-      <BaseSheet mounted={bookmarkUpdateModalMounted} onCloseClick={onCloseClick}>
-        <BookmarkUpdateForm />
+      <BaseSheet mounted={bookmarkUpdateModalMounted} onCloseClick={onClose}>
+        <BookmarkUpdateForm closeModal={onClose} />
       </BaseSheet>
     );
   }
 
   return (
-    <BaseModal2 mounted={bookmarkUpdateModalMounted} onCloseClick={onCloseClick}>
-      <BookmarkUpdateForm />
+    <BaseModal2 mounted={bookmarkUpdateModalMounted} onCloseClick={onClose}>
+      <BookmarkUpdateForm closeModal={onClose} />
     </BaseModal2>
   );
 };
