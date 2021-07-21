@@ -8,12 +8,14 @@ import BookmarkActions from 'Components/BookmarkActions';
 import BookmarkListsPopOverOrSheet from 'Components/BookmarkListsPopOverOrSheet';
 import { RenderInPortal } from 'Components/Portal';
 import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
+import { TagState } from 'Modules/Tags/tags.types';
 import { Space, Tag, Tooltip, Vote } from 'Vendor/components';
 
 import './BookmarkRow.less';
 
 interface BookmarkRow extends BookmarkState {
   bookmark: Partial<BookmarkState>;
+  tags: TagState[];
   recentlyCreated: boolean;
   sessionUserBookmarkedLink: boolean;
   createdAtFormatted: string;
@@ -25,6 +27,7 @@ interface BookmarkRow extends BookmarkState {
 
 export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
   bookmark,
+  tags,
   onVote,
   sessionUserBookmarkedLink,
   createdAtFormatted,
@@ -71,7 +74,7 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
       Created at {createdAtFormatted}
     </div>
     <div className="BookmarkRow-tags">
-      {bookmark?.tags?.map((item) => (
+      {tags?.map((item) => (
         <A
           className="BookmarkRow-tag"
           href={`${pathForTagLink}?filter[tags][]=${item.name}`}
