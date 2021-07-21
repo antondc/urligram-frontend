@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { bookmarkLoadById } from 'Modules/Bookmarks/actions/bookmarkLoadById';
 import { bookmarksLoadByListId } from 'Modules/Bookmarks/actions/bookmarksLoadByListId';
 import { selectBookmarksCurrentIds } from 'Modules/Bookmarks/selectors/selectBookmarksCurrentIds';
 import { selectBookmarksLoading } from 'Modules/Bookmarks/selectors/selectBookmarksLoading';
@@ -127,7 +128,8 @@ const List: React.FC = () => {
   }, [list?.id]);
 
   useEffect(() => {
-    dispatch(bookmarksLoadByListId(listId));
+    // TODO: create a bookmarkLoadByIds endpoint and load from there
+    list?.bookmarksIds?.forEach((item) => dispatch(bookmarkLoadById({ bookmarkId: item })));
   }, [list?.bookmarksIds]);
 
   useEffect(() => {

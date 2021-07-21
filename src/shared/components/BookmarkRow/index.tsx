@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { bookmarkLoadById } from 'Modules/Bookmarks/actions/bookmarkLoadById';
 import { selectBookmarksById } from 'Modules/Bookmarks/selectors/selectBookmarkById';
+import { selectBookmarkTagsByLinkIdAndListId } from 'Modules/Bookmarks/selectors/selectBookmarkTagsByLinkIdAndListId';
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
 import { linkUpdateVote } from 'Modules/Links/actions/linkUpdateVote';
 import { RootState } from 'Modules/rootType';
@@ -15,7 +16,6 @@ import { switchBookmarkUpdateModal } from 'Modules/Ui/actions/switchBookmarkUpda
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
 import { selectBookmarkListsModalMounted } from 'Modules/Ui/selectors/selectBookmarkListsModalMounted';
 import { TIME_RECENTLY_CREATED_BOOKMARK } from 'Root/src/shared/constants';
-import { selectBookmarksByLinkIdAndListId } from 'Root/src/shared/redux/modules/Bookmarks/selectors/selectBookmarksByLinkIdAndListId';
 import { Routes } from 'Router/routes';
 import { LocaleFormattedDate } from 'Tools/utils/Date/localeFormattedDate';
 import { unixTimeElapsed } from 'Tools/utils/Date/unixTimeElapsed';
@@ -51,7 +51,7 @@ const BookmarkRow: React.FC<Props> = ({ id, listId }) => {
   const pathForTagLink = isHome ? pathNameIfHome : currentPathname;
   // If the bookmark is part of a list, display all tags from bookmarks sharing its linkId, when bookmark.userId is within list
   const tagsIfInList = useSelector((state: RootState) =>
-    selectBookmarksByLinkIdAndListId(state, { linkId: bookmark?.linkId, listId })
+    selectBookmarkTagsByLinkIdAndListId(state, { linkId: bookmark?.linkId, listId })
   );
   const tags = !!listId ? tagsIfInList : bookmark.tags;
 

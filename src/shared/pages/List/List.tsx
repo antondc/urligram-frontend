@@ -228,7 +228,7 @@ export const List: React.FC<Props> = ({
         {bookmarksLoading ? (
           <BookmarkRowSkeletonGroup length={bookmarksIds?.length || DEFAULT_PAGE_SIZE} />
         ) : (
-          bookmarksIds?.map((id) => <BookmarkRow id={id} key={id} />)
+          bookmarksIds?.map((id) => <BookmarkRow id={id} listId={list?.id} key={id} />)
         )}
         {!bookmarksLoading && !bookmarksIds?.length && (
           <div className="UserBookmarks-noResults">ⵁ We didnt find any bookmark.</div>
