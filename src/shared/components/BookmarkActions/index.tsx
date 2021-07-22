@@ -6,6 +6,7 @@ import { bookmarkDelete } from 'Modules/Bookmarks/actions/bookmarkDelete';
 import { BookmarkRelated } from 'Modules/Bookmarks/bookmarks.types';
 import { selectBookmarksById } from 'Modules/Bookmarks/selectors/selectBookmarkById';
 import { selectLinkById } from 'Modules/Links/selectors/selectLinkById';
+import { listBookmarkCreate } from 'Modules/Lists/actions/listBookmarkCreate';
 import { RootState } from 'Modules/rootType';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
@@ -16,11 +17,12 @@ import './BookmarkActions.less';
 interface Props {
   className?: string;
   linkId: number;
+  listId?: number;
   bookmarkId?: number;
   onBookmarked?: () => void;
 }
 
-export const BookmarkActions: React.FC<Props> = ({ className, linkId, bookmarkId, onBookmarked }) => {
+export const BookmarkActions: React.FC<Props> = ({ className, linkId, listId, bookmarkId, onBookmarked }) => {
   const dispatch = useDispatch();
   const session = useSelector(selectSession);
   const link = useSelector((state: RootState) => selectLinkById(state, { id: linkId }));
@@ -48,12 +50,15 @@ export const BookmarkActions: React.FC<Props> = ({ className, linkId, bookmarkId
       isPrivate: parentBookmark?.isPrivate || false,
       tags: bookmarkTags || linkTags,
     };
-
-    await dispatch(bookmarkCreate(data));
-
-    onBookmarked && onBookmarked();
-
-    setLoading(false);
+    try {
+      const { id: newBookmarkId } = await dispatch(bookmarkCreate(data));
+      if (!!listId) await dispatch(listBookmarkCreate({ listId, bookmarkId: newBookmarkId }));
+      onBookmarked && onBookmarked();
+    } catch (error) {
+      console.log('BookmarkActions.onBookmarkGrab.catch: ', error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const onBookmarkDelete = async () => {

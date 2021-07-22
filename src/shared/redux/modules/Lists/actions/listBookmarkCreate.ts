@@ -11,43 +11,39 @@ import HttpClient from 'Services/HttpClient';
 import { AppThunk } from '../../..';
 import { listLoadById } from './listLoadById';
 
-export const listBookmarkCreate = ({
-  bookmarkId,
-  listId,
-}: ListBookmarkCreateApiRequest): AppThunk<Promise<BookmarkState>, ListsActions> => async (
-  dispatch,
-  getState
-): Promise<BookmarkState> => {
-  const { Lists: listsBeforeRequest } = getState();
-  try {
-    dispatch({
-      type: LIST_BOOKMARK_CREATE_REQUEST,
-      payload: listsBeforeRequest,
-    });
+export const listBookmarkCreate =
+  ({ bookmarkId, listId }: ListBookmarkCreateApiRequest): AppThunk<Promise<BookmarkState>, ListsActions> =>
+  async (dispatch, getState): Promise<BookmarkState> => {
+    const { Lists: listsBeforeRequest } = getState();
+    try {
+      dispatch({
+        type: LIST_BOOKMARK_CREATE_REQUEST,
+        payload: listsBeforeRequest,
+      });
 
-    const { data } = await HttpClient.post<void, ListBookmarkCreateApiResponse>(
-      `/lists/${listId}/bookmarks/${bookmarkId}`
-    );
-    const { Lists: listsAfterResponse } = getState();
+      const { data } = await HttpClient.post<void, ListBookmarkCreateApiResponse>(
+        `/lists/${listId}/bookmarks/${bookmarkId}`
+      );
+      const { Lists: listsAfterResponse } = getState();
 
-    await dispatch({
-      type: LIST_BOOKMARK_CREATE_SUCCESS,
-      payload: listsAfterResponse,
-    });
-    await dispatch(listLoadById(listId));
+      await dispatch({
+        type: LIST_BOOKMARK_CREATE_SUCCESS,
+        payload: listsAfterResponse,
+      });
+      await dispatch(listLoadById(listId));
 
-    return data?.attributes;
-  } catch (error) {
-    const { Lists: listsOnError } = getState();
+      return data?.attributes;
+    } catch (error) {
+      const { Lists: listsOnError } = getState();
 
-    await dispatch({
-      type: LIST_BOOKMARK_CREATE_FAILURE,
-      payload: {
-        ...listsOnError,
-        errors: [...(listsOnError?.errors || []), error],
-      },
-    });
+      await dispatch({
+        type: LIST_BOOKMARK_CREATE_FAILURE,
+        payload: {
+          ...listsOnError,
+          errors: [...(listsOnError?.errors || []), error],
+        },
+      });
 
-    return;
-  }
-};
+      return;
+    }
+  };

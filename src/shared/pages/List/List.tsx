@@ -127,7 +127,7 @@ export const List: React.FC<Props> = ({
             </A>
           </>
           {usersInThisList?.map((item) => (
-            <>
+            <React.Fragment key={item.id}>
               <RenderInPortal>
                 <Tooltip parentElementId={`List-${item?.id}}`} content={`@${item?.name}`} delay={0.5} />
               </RenderInPortal>
@@ -146,7 +146,7 @@ export const List: React.FC<Props> = ({
               >
                 <img className="List-headerImagesItemImage" src={item.image?.w200h200} alt={item.name} />
               </A>
-            </>
+            </React.Fragment>
           ))}
           {sessionUserOwnsList && (
             <>

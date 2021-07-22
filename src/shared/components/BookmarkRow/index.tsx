@@ -89,6 +89,7 @@ const BookmarkRow: React.FC<Props> = ({ id, listId }) => {
   return (
     <BookmarkRowUi
       id={id}
+      listId={listId}
       bookmark={sessionUserBookmarkedLink ? sessionUserBookmark : bookmark}
       tags={tags}
       createdAtFormatted={createdAtFormatted}
