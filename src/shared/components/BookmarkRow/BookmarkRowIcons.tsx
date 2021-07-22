@@ -70,10 +70,10 @@ export const BookmarkRowIcons: React.FC<Partial<BookmarkRowIcons>> = ({
           <EditCircle className="BookmarkRowIcons-icon BookmarkRowIcons-iconEdit" onClick={onEdit} />
         )}
         {!!sessionUserBookmarkedLink && (
-          <span className="BookmarkRowIcons-icon BookmarkRowIcons-iconLists">
+          <div className="BookmarkRowIcons-icon BookmarkRowIcons-iconLists">
             <List id={`BookmarkRowIcons-${bookmark?.id}`} onClick={onListsClick} />
             <BookmarkListsPopOverOrSheet bookmarkId={bookmark?.id} />
-          </span>
+          </div>
         )}
 
         {!uiScreenTypeIsMobile && !!bookmark?.isPrivate && (

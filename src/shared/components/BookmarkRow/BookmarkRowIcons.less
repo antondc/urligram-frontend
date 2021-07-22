@@ -44,10 +44,10 @@
     justify-content: flex-end;
     grid-template:
       'iconEdit iconLists iconBookmark' auto
-      'iconPrivate iconAverageVote iconVote' auto
+      'iconPrivate iconVote iconVote' auto
       / 1fr 1fr 1fr;
     justify-items: flex-end;
-    gap: 0 1px;
+    gap: 0 6px;
     height: 100%;
 
     @media @br-mobile {
@@ -64,7 +64,7 @@
       top: 0;
       bottom: 0;
       right: 0;
-      padding: 0 20px;
+      padding: 0 30px;
       background: @c-background;
       gap: 20px;
       border-radius: 4px;
@@ -100,8 +100,8 @@
   }
 
   &-icon {
-    height: 11px;
-    width: 11px;
+    height: 14px;
+    width: 14px;
 
     @media @br-mobile {
       height: 10px;
@@ -111,25 +111,33 @@
 
   &-iconEdit {
     grid-area: iconEdit;
+    margin-top: -1px;
+    justify-self: flex-start;
 
     &:hover {
       cursor: pointer;
     }
 
     @media @br-mobile {
+      justify-self: unset;
       grid-area: unset;
       height: 20px;
       width: 20px;
+      margin-top: 0;
+      margin-right: 0;
     }
   }
 
   &-iconLists {
     display: flex;
     grid-area: iconLists;
+    height: 12px;
+    width: 12px;
+    justify-self: center;
 
     svg {
-      height: 10px;
-      width: 10px;
+      height: 12px;
+      width: 12px;
     }
 
     @media @br-mobile {
@@ -183,8 +191,8 @@
   &-iconVote {
     align-self: flex-end;
     grid-area: iconVote;
-    height: 10px;
-    width: 18px;
+    height: 12px;
+    width: 20px;
 
     @media @br-mobile {
       align-self: unset;
