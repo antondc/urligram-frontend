@@ -223,10 +223,9 @@ export const List: React.FC<Props> = ({
           loading={bookmarksLoading}
         />
       </div>
-
       <div className="List-bookmarks">
         {bookmarksLoading ? (
-          <BookmarkRowSkeletonGroup length={bookmarksIds?.length || DEFAULT_PAGE_SIZE} />
+          <BookmarkRowSkeletonGroup length={bookmarksIds?.length ?? DEFAULT_PAGE_SIZE} />
         ) : (
           bookmarksIds?.map((id) => <BookmarkRow id={id} listId={list?.id} key={id} />)
         )}

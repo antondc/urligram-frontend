@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { bookmarkCreate } from 'Modules/Bookmarks/actions/bookmarkCreate';
 import { bookmarkDelete } from 'Modules/Bookmarks/actions/bookmarkDelete';
+import { bookmarksLoadByListId } from 'Modules/Bookmarks/actions/bookmarksLoadByListId';
 import { BookmarkRelated } from 'Modules/Bookmarks/bookmarks.types';
 import { selectBookmarksById } from 'Modules/Bookmarks/selectors/selectBookmarkById';
 import { selectLinkById } from 'Modules/Links/selectors/selectLinkById';
@@ -66,13 +67,19 @@ export const BookmarkActions: React.FC<Props> = ({ className, linkId, listId, bo
     if (!userBookmarkedLink) return;
     setLoading(true);
 
-    await dispatch(
-      bookmarkDelete({
-        bookmarkId: linksSessionBookmark?.id || bookmarksSessionBookmark?.id,
-        linkId: link?.id || parentBookmark?.linkId,
-      })
-    );
-    setLoading(false);
+    try {
+      await dispatch(
+        bookmarkDelete({
+          bookmarkId: linksSessionBookmark?.id || bookmarksSessionBookmark?.id,
+          linkId: link?.id || parentBookmark?.linkId,
+        })
+      );
+      if (!!listId) await dispatch(bookmarksLoadByListId(listId));
+    } catch (error) {
+      console.log('BookmarkActions.onBookmarkDelete.catch: ', error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (

@@ -15,89 +15,88 @@ type BookmarkDelete = {
   linkId: number;
 };
 
-export const bookmarkDelete = ({
-  bookmarkId,
-  linkId,
-}: BookmarkDelete): AppThunk<Promise<Partial<BookmarkState>>, BookmarksActions | LinksActions> => async (
-  dispatch,
-  getState
-) => {
-  const { Bookmarks: bookmarksBeforeRequest, Links: linksBeforeRequest } = getState();
+export const bookmarkDelete =
+  ({
+    bookmarkId,
+    linkId,
+  }: BookmarkDelete): AppThunk<Promise<Partial<BookmarkState>>, BookmarksActions | LinksActions> =>
+  async (dispatch, getState) => {
+    const { Bookmarks: bookmarksBeforeRequest, Links: linksBeforeRequest } = getState();
 
-  try {
-    dispatch(linkLoadByIdRequest(linksBeforeRequest));
-    dispatch(bookmarkDeleteRequest(bookmarksBeforeRequest));
+    try {
+      dispatch(linkLoadByIdRequest(linksBeforeRequest));
+      dispatch(bookmarkDeleteRequest(bookmarksBeforeRequest));
 
-    const { data: bookmarkData } = await HttpClient.delete<void, BookmarkDeleteApiResponse>(
-      `/users/me/bookmarks/${bookmarkId}`
-    );
+      const { data: bookmarkData } = await HttpClient.delete<void, BookmarkDeleteApiResponse>(
+        `/users/me/bookmarks/${bookmarkId}`
+      );
 
-    const { Bookmarks: bookmarksAfterResponse, Links: linksAfterResponse } = getState();
+      const { Bookmarks: bookmarksAfterResponse, Links: linksAfterResponse } = getState();
 
-    const filteredBookmarksRelated = linksAfterResponse?.byKey?.[linkId]?.bookmarksRelated?.filter(
-      (item) => item.id !== bookmarkId
-    );
-    const linkWithBookmarksRelatedUpdated = {
-      ...linksAfterResponse.byKey[linkId],
-      bookmarksRelated: filteredBookmarksRelated,
-    };
-    const filteredAllIds = linksAfterResponse?.allIds?.filter((item) => item !== linkId);
-    const updatedLink = !!filteredBookmarksRelated?.length ? linkWithBookmarksRelatedUpdated : undefined;
-    const updatedAllLinksIds = !!filteredBookmarksRelated?.length ? linksAfterResponse?.allIds : filteredAllIds;
+      const filteredBookmarksRelated = linksAfterResponse?.byKey?.[linkId]?.bookmarksRelated?.filter(
+        (item) => item.id !== bookmarkId
+      );
+      const linkWithBookmarksRelatedUpdated = {
+        ...linksAfterResponse.byKey[linkId],
+        bookmarksRelated: filteredBookmarksRelated,
+      };
+      const filteredAllIds = linksAfterResponse?.allIds?.filter((item) => item !== linkId);
+      const updatedLink = !!filteredBookmarksRelated?.length ? linkWithBookmarksRelatedUpdated : undefined;
+      const updatedAllLinksIds = !!filteredBookmarksRelated?.length ? linksAfterResponse?.allIds : filteredAllIds;
 
-    await dispatch(
-      linkLoadByIdSuccess({
-        ...linksAfterResponse,
-        byKey: {
-          ...linksAfterResponse?.byKey,
-          [linkId]: updatedLink,
-        },
-        allIds: updatedAllLinksIds,
-      })
-    );
-    const bookmarksToUpdate = Object.values(bookmarksAfterResponse.byKey).filter((item) => item?.linkId === linkId);
+      await dispatch(
+        linkLoadByIdSuccess({
+          ...linksAfterResponse,
+          byKey: {
+            ...linksAfterResponse?.byKey,
+            [linkId]: updatedLink,
+          },
+          allIds: updatedAllLinksIds,
+        })
+      );
+      const bookmarksToUpdate = Object.values(bookmarksAfterResponse.byKey).filter((item) => item?.linkId === linkId);
 
-    const filteredBookmarks = bookmarksToUpdate.map((item) => ({
-      ...item,
-      bookmarksRelated: item.bookmarksRelated.filter((item) => item?.id !== bookmarkId),
-    }));
+      const filteredBookmarks = bookmarksToUpdate.map((item) => ({
+        ...item,
+        bookmarksRelated: item.bookmarksRelated.filter((item) => item?.id !== bookmarkId),
+      }));
 
-    const filteredCurrentIds = bookmarksAfterResponse?.currentIds?.filter((item) => item !== bookmarkId);
+      const filteredCurrentIds = bookmarksAfterResponse?.currentIds?.filter((item) => item !== bookmarkId);
 
-    await dispatch(
-      bookmarkDeleteSuccess({
-        ...bookmarksAfterResponse,
-        byKey: {
-          ...bookmarksAfterResponse.byKey,
-          ...serializerFromArrayToByKey<BookmarkState, BookmarkState>({ data: filteredBookmarks }),
-          [bookmarkId]: undefined,
-        },
-        currentIds: filteredCurrentIds,
-      })
-    );
+      await dispatch(
+        bookmarkDeleteSuccess({
+          ...bookmarksAfterResponse,
+          byKey: {
+            ...bookmarksAfterResponse.byKey,
+            ...serializerFromArrayToByKey<BookmarkState, BookmarkState>({ data: filteredBookmarks }),
+            [bookmarkId]: undefined,
+          },
+          currentIds: filteredCurrentIds,
+        })
+      );
 
-    await dispatch(
-      uiNotificationPush({
-        bookmarkId: bookmarkId,
-        type: 'bookmark-deleted',
-        style: 'alert',
-        status: 'pending',
-      })
-    );
+      await dispatch(
+        uiNotificationPush({
+          bookmarkId: bookmarkId,
+          type: 'bookmark-deleted',
+          style: 'alert',
+          status: 'pending',
+        })
+      );
 
-    return bookmarkData?.attributes;
-  } catch (error) {
-    const { Bookmarks: bookmarksOnError } = getState();
-    await dispatch(
-      bookmarkDeleteFailure({
-        ...bookmarksOnError,
-        byKey: {
-          ...bookmarksOnError.byKey,
-        },
-        errors: [...(bookmarksOnError.errors || []), error],
-      })
-    );
+      return bookmarkData?.attributes;
+    } catch (error) {
+      const { Bookmarks: bookmarksOnError } = getState();
+      await dispatch(
+        bookmarkDeleteFailure({
+          ...bookmarksOnError,
+          byKey: {
+            ...bookmarksOnError.byKey,
+          },
+          errors: [...(bookmarksOnError.errors || []), error],
+        })
+      );
 
-    throw error;
-  }
-};
+      throw error;
+    }
+  };
