@@ -43,47 +43,55 @@ export const BookmarkRowIcons: React.FC<Partial<BookmarkRowIcons>> = ({
 }) => (
   <div className="BookmarkRowIcons" data-test-id="BookmarkRowIcons">
     <DotsVertical className="BookmarkRowIcons-actionsIcon" onClick={onMobileBookmarkActionsIconClick} />
-    <Fade
-      className="BookmarkRowIcons-actionsIconsBackground"
-      onClick={onMobileBookmarkActionsBackgroundClick}
-      speed="normal"
-      mounted={uiScreenTypeIsMobile && bookmarkActionIconsMounted}
-    >
-      <Cross className="BookmarkRowIcons-actionsIconsBackgroundCloseIcon" />
-    </Fade>
-    <Fade
-      className="BookmarkRowIcons-actionsIcons"
-      mounted={bookmarkActionIconsMounted}
-      speed="fastest"
-      direction="right"
-      appear
-      disabled={!uiScreenTypeIsMobile}
-    >
-      {!!sessionUserBookmarkedLink && (
-        <EditCircle className="BookmarkRowIcons-icon BookmarkRowIcons-iconEdit" onClick={onEdit} />
-      )}
-      {!!sessionUserBookmarkedLink && (
-        <span className="BookmarkRowIcons-icon BookmarkRowIcons-iconLists">
-          <List id={`BookmarkRowIcons-${bookmark?.id}`} onClick={onListsClick} />
-          <BookmarkListsPopOverOrSheet bookmarkId={bookmark?.id} />
-        </span>
-      )}
 
-      {!uiScreenTypeIsMobile && !!bookmark?.isPrivate && (
-        <Private className="BookmarkRowIcons-icon BookmarkRowIcons-iconPrivate" />
-      )}
-      <Vote
-        className="BookmarkRowIcons-iconVote"
-        vote={bookmark?.statistics?.vote}
-        loading={bookmark?.statistics?.loading}
-        changeVote={onVote}
-      />
-      <BookmarkActions
-        className="BookmarkRowIcons-icon BookmarkRowIcons-iconBookmark"
-        linkId={bookmark?.linkId}
-        bookmarkId={bookmark?.id}
-        listId={listId}
-      />
-    </Fade>
+    <div
+      className={
+        'BookmarkRowIcons-actionsIconsWrapper' +
+        (bookmarkActionIconsMounted ? ' BookmarkRowIcons-actionsIconsWrapper--mounted' : '')
+      }
+    >
+      <Fade
+        className="BookmarkRowIcons-actionsIconsBackground"
+        onClick={onMobileBookmarkActionsBackgroundClick}
+        speed="normal"
+        mounted={uiScreenTypeIsMobile && bookmarkActionIconsMounted}
+      >
+        <Cross className="BookmarkRowIcons-actionsIconsBackgroundCloseIcon" />
+      </Fade>
+      <Fade
+        className="BookmarkRowIcons-actionsIcons"
+        mounted={bookmarkActionIconsMounted}
+        speed="fastest"
+        direction="right"
+        appear
+        disabled={!uiScreenTypeIsMobile}
+      >
+        {!!sessionUserBookmarkedLink && (
+          <EditCircle className="BookmarkRowIcons-icon BookmarkRowIcons-iconEdit" onClick={onEdit} />
+        )}
+        {!!sessionUserBookmarkedLink && (
+          <span className="BookmarkRowIcons-icon BookmarkRowIcons-iconLists">
+            <List id={`BookmarkRowIcons-${bookmark?.id}`} onClick={onListsClick} />
+            <BookmarkListsPopOverOrSheet bookmarkId={bookmark?.id} />
+          </span>
+        )}
+
+        {!uiScreenTypeIsMobile && !!bookmark?.isPrivate && (
+          <Private className="BookmarkRowIcons-icon BookmarkRowIcons-iconPrivate" />
+        )}
+        <Vote
+          className="BookmarkRowIcons-iconVote"
+          vote={bookmark?.statistics?.vote}
+          loading={bookmark?.statistics?.loading}
+          changeVote={onVote}
+        />
+        <BookmarkActions
+          className="BookmarkRowIcons-icon BookmarkRowIcons-iconBookmark"
+          linkId={bookmark?.linkId}
+          bookmarkId={bookmark?.id}
+          listId={listId}
+        />
+      </Fade>
+    </div>
   </div>
 );

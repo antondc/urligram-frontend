@@ -5,6 +5,100 @@
 @{c} {
   height: 100%;
 
+  &-actionsIcon {
+    display: none;
+
+    @media @br-mobile {
+      display: block;
+      height: 15px;
+      width: 15px;
+      padding: 4px;
+      border: 2px solid @c-accent;
+      fill: @c-accent;
+      border-radius: 50%;
+    }
+  }
+
+  &-actionsIconsWrapper {
+    grid-area: icons;
+    height: 100%;
+
+    @media @br-mobile {
+      position: absolute;
+      grid-area: unset;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      overflow: hidden;
+      pointer-events: none;
+
+      &--mounted {
+        pointer-events: unset;
+      }
+    }
+  }
+
+  &-actionsIcons {
+    display: grid;
+    justify-content: flex-end;
+    grid-template:
+      'iconEdit iconLists iconBookmark' auto
+      'iconPrivate iconAverageVote iconVote' auto
+      / 1fr 1fr 1fr;
+    justify-items: flex-end;
+    gap: 0 1px;
+    height: 100%;
+
+    @media @br-mobile {
+      display: grid;
+      justify-items: unset;
+      position: absolute;
+      justify-content: space-evenly;
+      align-items: center;
+      grid-area: unset;
+      grid-auto-flow: column;
+      grid-template: unset;
+      grid-template-columns: auto;
+      grid-template-rows: 1fr;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      padding: 0 20px;
+      background: @c-background;
+      gap: 20px;
+      border-radius: 4px;
+      box-shadow: -2px 0 4px 2px @c-traslucid--light;
+    }
+  }
+
+  &-actionsIconsBackground {
+    display: none;
+
+    @media @br-mobile {
+      display: block;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: @c-traslucid--light;
+    }
+  }
+
+  &-actionsIconsBackgroundCloseIcon {
+    position: absolute;
+    height: 10px;
+    width: 10px;
+    top: 10px;
+    left: 10px;
+    padding: 4px;
+    background: @c-background;
+    border-radius: 50%;
+
+    .boxShadow;
+  }
+
   &-icon {
     height: 11px;
     width: 11px;
@@ -98,80 +192,5 @@
       height: 20px;
       width: 34px;
     }
-  }
-
-  &-actionsIcon {
-    display: none;
-
-    @media @br-mobile {
-      display: block;
-      height: 15px;
-      width: 15px;
-      padding: 4px;
-      border: 2px solid @c-accent;
-      fill: @c-accent;
-      border-radius: 50%;
-    }
-  }
-
-  &-actionsIcons {
-    display: grid;
-    justify-content: flex-end;
-    grid-area: icons;
-    grid-template:
-      'iconEdit iconLists iconBookmark' auto
-      'iconPrivate iconAverageVote iconVote' auto
-      / 1fr 1fr 1fr;
-    justify-items: flex-end;
-    gap: 0 1px;
-    height: 100%;
-
-    @media @br-mobile {
-      display: grid;
-      justify-items: unset;
-      position: absolute;
-      justify-content: space-evenly;
-      align-items: center;
-      grid-area: unset;
-      grid-auto-flow: column;
-      grid-template: unset;
-      grid-template-columns: auto;
-      grid-template-rows: 1fr;
-      top: 0;
-      bottom: 0;
-      right: 0;
-      padding: 0 20px;
-      background: @c-background;
-      gap: 20px;
-      border-radius: 4px 0 0 4px;
-      box-shadow: -2px 0 4px 2px @c-traslucid--light;
-    }
-  }
-
-  &-actionsIconsBackground {
-    display: none;
-
-    @media @br-mobile {
-      display: block;
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: @c-traslucid--light;
-    }
-  }
-
-  &-actionsIconsBackgroundCloseIcon {
-    position: absolute;
-    height: 10px;
-    width: 10px;
-    top: 10px;
-    left: 10px;
-    padding: 4px;
-    background: @c-background;
-    border-radius: 50%;
-
-    .boxShadow;
   }
 }

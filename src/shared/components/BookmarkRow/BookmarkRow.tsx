@@ -1,9 +1,10 @@
 import React from 'react';
 
+import BookmarkWithBackground from 'Assets/svg/bookmarkWithBackground.svg';
 import A from 'Components/A';
 import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
 import { TagState } from 'Modules/Tags/tags.types';
-import { Space, Tag } from 'Vendor/components';
+import { Fade, Space, Tag } from 'Vendor/components';
 import { BookmarkRowIcons } from './BookmarkRowIcons';
 
 import './BookmarkRow.less';
@@ -94,6 +95,14 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
       ))}
     </div>
     <div className="BookmarkRow-icons">
+      <Fade
+        mounted={uiScreenTypeIsMobile && sessionUserBookmarkedLink && !bookmarkActionIconsMounted}
+        position="absolute"
+        className="BookmarkRow-iconBookmarkMobile"
+        appear
+      >
+        <BookmarkWithBackground className="BookmarkRow-iconBookmarkMobileSvg" />
+      </Fade>
       <BookmarkRowIcons
         bookmark={bookmark}
         listId={listId}
