@@ -24,7 +24,7 @@ export const selectBookmarkTagsByLinkIdAndListId: SelectBookmarkTagsByLinkIdAndL
     (item) => item.userId === list?.userId || listUsers?.includes(item.userId)
   );
 
-  const tagsFromBookmarksInLists = bookmarksWithUserInList.reduce((acc, curr) => acc.concat(curr?.tags), []);
+  const tagsFromBookmarksInLists = bookmarksWithUserInList.reduce((acc, curr) => acc.concat(curr?.tags || []), []);
 
   // Remove duplicates
   const tagsIds = tagsFromBookmarksInLists.map((item) => item.id);
