@@ -19,6 +19,8 @@ import {
   UI_SCREEN_MOBILE_LOCK,
   UI_SCREEN_MOBILE_UNLOCK,
   UI_SCREEN_TYPE_SET,
+  UI_SWITCH_BOOKMARK_ICONS_MOUNTED,
+  UI_SWITCH_BOOKMARK_ICONS_UNMOUNTED,
   UiActions,
   UiState,
   USER_MODAL_MOUNT,
@@ -86,6 +88,11 @@ export const initialState: UiState = {
   },
   bookmarkSendModals: [],
   notifications: [],
+  bookmarkActionsIcons: {
+    type: 'slider',
+    mounted: false,
+    bookmarkId: undefined,
+  },
 };
 
 export const Ui = (state = initialState, action: UiActions): UiState => {
@@ -112,6 +119,8 @@ export const Ui = (state = initialState, action: UiActions): UiState => {
     case UI_NOTIFICATION_PUSH:
     case UI_CLOSE_ALL_MODALS:
     case SWITCH_LIST_ADD_USER_MODAL:
+    case UI_SWITCH_BOOKMARK_ICONS_MOUNTED:
+    case UI_SWITCH_BOOKMARK_ICONS_UNMOUNTED:
       return Object.assign({}, state, action.payload);
 
     default:

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { HTMLProps } from 'react';
 import { CSSTransition } from 'react-transition-group';
 
 import { speedMap } from './speedMap';
@@ -7,9 +7,10 @@ import './Fade.less';
 
 export type FadeSpeed = 'slow' | 'normal' | 'fast' | 'fastest';
 
-interface Props {
-  classname?: string;
+interface Props extends HTMLProps<HTMLDivElement> {
+  className?: string;
   mounted?: boolean;
+  disabled?: boolean;
   unmountOnExit?: boolean;
   onEnter?: () => void;
   onEntered?: () => void;
@@ -25,7 +26,8 @@ interface Props {
 }
 
 export const Fade: React.FC<Props> = ({
-  classname,
+  className,
+  disabled,
   onEnter,
   onExited,
   children,
@@ -40,6 +42,7 @@ export const Fade: React.FC<Props> = ({
   easing = 'cubic-bezier(0.5, 1, 0.89, 1)',
   position,
   appear = false,
+  ...props
 }) => {
   const cssDelay = mounted === true ? delayIn : delayOut;
   const delayRule = cssDelay.toString() + 'ms';
@@ -50,11 +53,12 @@ export const Fade: React.FC<Props> = ({
       appear={appear}
       unmountOnExit={unmountOnExit}
       className={
-        (classname ? classname : ' ') +
+        (className ? className : ' ') +
         ' Fade ' +
         (' Fade--' + speed) +
         (position ? ' Fade--' + position : ' ') +
-        (direction ? ' Fade--' + direction : ' ')
+        (direction ? ' Fade--' + direction : ' ') +
+        (disabled ? ' Fade-enter-done' : ' ')
       }
       classNames={'Fade'}
       timeout={{
@@ -66,7 +70,9 @@ export const Fade: React.FC<Props> = ({
       onEnter={onEnter}
       onEntered={onEntered}
     >
-      <div style={{ transitionDelay: delayRule, transitionTimingFunction: easing }}>{children}</div>
+      <div style={{ transitionDelay: delayRule, transitionTimingFunction: easing }} {...props}>
+        {children}
+      </div>
     </CSSTransition>
   );
 };

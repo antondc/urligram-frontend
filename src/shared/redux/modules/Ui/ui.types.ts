@@ -20,9 +20,11 @@ export const SWITCH_LIST_MODAL = 'SWITCH_LIST_MODAL';
 export const UI_NOTIFICATION_VIEWED = 'UI_NOTIFICATION_VIEWED';
 export const UI_NOTIFICATION_PUSH = 'UI_NOTIFICATION_PUSH';
 export const UI_CLOSE_ALL_MODALS = 'UI_CLOSE_ALL_MODALS';
+export const UI_SWITCH_BOOKMARK_ICONS_MOUNTED = 'UI_SWITCH_BOOKMARK_ICONS_MOUNTED';
+export const UI_SWITCH_BOOKMARK_ICONS_UNMOUNTED = 'UI_SWITCH_BOOKMARK_ICONS_UNMOUNTED';
 
 export type UiBaseModal = {
-  type?: 'modal' | 'popup';
+  type?: 'modal' | 'popup' | 'slider';
   mounted: boolean;
 };
 
@@ -72,6 +74,9 @@ export type UiState = {
   resetPasswordModal: UiBaseModal;
   bookmarkCreateModal: UiBaseModal;
   bookmarkUpdateModal: {
+    bookmarkId: number;
+  } & UiBaseModal;
+  bookmarkActionsIcons: {
     bookmarkId: number;
   } & UiBaseModal;
   listModal: {
@@ -193,6 +198,16 @@ interface SwitchListAddUserModal {
   payload: UiState;
 }
 
+interface SwitchBookmarkActionsButtonMounted {
+  type: typeof UI_SWITCH_BOOKMARK_ICONS_MOUNTED;
+  payload: Partial<UiState>;
+}
+
+interface SwitchBookmarkActionsButtonUnmounted {
+  type: typeof UI_SWITCH_BOOKMARK_ICONS_UNMOUNTED;
+  payload: Partial<UiState>;
+}
+
 export type UiActions =
   | UiScreenTypeSet
   | UiScreenLock
@@ -215,4 +230,6 @@ export type UiActions =
   | UiNotificationViewedAction
   | UiNotificationPushAction
   | UiCloseAllModals
-  | SwitchListAddUserModal;
+  | SwitchListAddUserModal
+  | SwitchBookmarkActionsButtonMounted
+  | SwitchBookmarkActionsButtonUnmounted;

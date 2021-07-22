@@ -16,6 +16,7 @@
   width: 100%;
   margin-bottom: 5px;
   padding: 10px 15px;
+  overflow: hidden;
   background: @c-background;
   column-gap: 10px;
   border-radius: 4px;
@@ -88,120 +89,7 @@
   }
 
   &-icons {
-    display: grid;
-    justify-content: flex-end;
     grid-area: icons;
-    grid-template:
-      'iconEdit iconLists iconBookmark' auto
-      'iconPrivate iconAverageVote iconVote' auto
-      / 1fr 1fr 1fr;
-    justify-items: flex-end;
-    gap: 0 1px;
-
-    &:hover {
-      @{c}-iconSend {
-        opacity: 1;
-      }
-    }
-
-    @media @br-mobile {
-      gap: 0 8px;
-      grid-template:
-        'iconEdit iconLists iconBookmark' auto
-        '. . iconPrivate' auto
-        'iconAverageVote iconVote iconVote' auto
-        / 1fr 1fr 1fr;
-    }
-  }
-
-  &-icon {
-    height: 11px;
-    width: 11px;
-
-    @media @br-mobile {
-      height: 10px;
-      width: 10px;
-    }
-  }
-
-  &-iconEdit {
-    grid-area: iconEdit;
-
-    &:hover {
-      cursor: pointer;
-    }
-
-    @media @br-mobile {
-      height: 15px;
-      width: 15px;
-    }
-  }
-
-  &-iconLists {
-    display: flex;
-    grid-area: iconLists;
-
-    svg {
-      height: 10px;
-      width: 10px;
-    }
-
-    @media @br-mobile {
-      justify-self: center;
-      height: 13px;
-      width: 13px;
-
-      svg {
-        height: 13px;
-        width: 13px;
-      }
-    }
-  }
-
-  &-iconBookmark {
-    grid-area: iconBookmark;
-
-    @media @br-mobile {
-      height: 15px;
-      width: 15px;
-    }
-  }
-
-  &-iconPrivate {
-    align-self: flex-end;
-    grid-area: iconPrivate;
-
-    @media @br-mobile {
-      align-self: center;
-      height: 10px;
-      width: 10px;
-    }
-  }
-
-  &-iconAverageVote {
-    align-self: flex-end;
-    grid-area: iconAverageVote;
-    margin-right: 2px;
-    font-size: 10px;
-    font-weight: 600;
-    line-height: 8px;
-    color: @c-base;
-
-    @media @br-mobile {
-      justify-self: flex-start;
-    }
-  }
-
-  &-iconVote {
-    align-self: flex-end;
-    grid-area: iconVote;
-    height: 10px;
-    width: 18px;
-
-    @media @br-mobile {
-      height: 14px;
-      width: 24px;
-    }
   }
 
   &-tags {

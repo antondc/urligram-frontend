@@ -12,13 +12,18 @@ import { selectCurrentRoute } from 'Modules/Routes/selectors/selectCurrentRoute'
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import { bookmarkListsModalMount } from 'Modules/Ui/actions/bookmarkListsModalMount';
+import { switchBookmarkActionButtonsMounted } from 'Modules/Ui/actions/switchBookmarkActionButtonsMounted';
 import { switchBookmarkUpdateModal } from 'Modules/Ui/actions/switchBookmarkUpdateModal';
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
+import { selectBookmarkActionsIcons } from 'Modules/Ui/selectors/selectBookmarkActionsIcons';
 import { selectBookmarkListsModalMounted } from 'Modules/Ui/selectors/selectBookmarkListsModalMounted';
+import { selectUiScreenTypeIsMobile } from 'Modules/Ui/selectors/selectUiScreenTypeIsMobile';
 import { TIME_RECENTLY_CREATED_BOOKMARK } from 'Root/src/shared/constants';
 import { Routes } from 'Router/routes';
 import { LocaleFormattedDate } from 'Tools/utils/Date/localeFormattedDate';
 import { unixTimeElapsed } from 'Tools/utils/Date/unixTimeElapsed';
+import { switchBookmarkActionButtonsUnmounted } from '../../redux/modules/Ui/actions/switchBookmarkActionButtonsUnmounted';
+import { selectUiScreenTypeIsDesktop } from '../../redux/modules/Ui/selectors/selectUiScreenTypeIsDesktop';
 import { BookmarkRow as BookmarkRowUi } from './BookmarkRow';
 
 interface Props {
@@ -54,6 +59,18 @@ const BookmarkRow: React.FC<Props> = ({ id, listId }) => {
     selectBookmarkTagsByLinkIdAndListId(state, { linkId: bookmark?.linkId, listId })
   );
   const tags = !!listId ? tagsIfInList : bookmark.tags;
+  const uiScreenTypeIsMobile = useSelector(selectUiScreenTypeIsMobile);
+  const uiScreenTypeIsDesktop = useSelector(selectUiScreenTypeIsDesktop);
+  const bookmarkActionIcons = useSelector(selectBookmarkActionsIcons);
+  const bookmarkActionIconsMounted = uiScreenTypeIsDesktop || bookmarkActionIcons?.bookmarkId === id;
+
+  const onMobileBookmarkActionsIconClick = () => {
+    dispatch(switchBookmarkActionButtonsMounted({ bookmarkId: id }));
+  };
+
+  const onMobileBookmarkActionsBackgroundClick = () => {
+    dispatch(switchBookmarkActionButtonsUnmounted());
+  };
 
   const onVote = (vote) => {
     if (!isLogged) return dispatch(switchLoginModal(true));
@@ -79,6 +96,11 @@ const BookmarkRow: React.FC<Props> = ({ id, listId }) => {
       dispatch(bookmarkLoadById({ bookmarkId: sessionUserBookmarkId }));
   }, [sessionUserBookmarkedLink]);
 
+  useEffect(() => {
+    // If we are on desktop, hide icons by default
+    uiScreenTypeIsMobile && dispatch(switchBookmarkActionButtonsUnmounted());
+  }, [uiScreenTypeIsMobile]);
+
   if (!id) return null;
 
   // TODO: confirm that there are no cases where we need to load the bookmark again
@@ -91,14 +113,18 @@ const BookmarkRow: React.FC<Props> = ({ id, listId }) => {
       id={id}
       listId={listId}
       bookmark={sessionUserBookmarkedLink ? sessionUserBookmark : bookmark}
+      bookmarkActionIconsMounted={bookmarkActionIconsMounted}
       tags={tags}
       createdAtFormatted={createdAtFormatted}
       onVote={onVote}
       recentlyCreated={recentlyCreated}
       sessionUserBookmarkedLink={sessionUserBookmarkedLink}
       pathForTagLink={pathForTagLink}
+      uiScreenTypeIsMobile={uiScreenTypeIsMobile}
       onEdit={onEdit}
       onListsClick={onListsClick}
+      onMobileBookmarkActionsIconClick={onMobileBookmarkActionsIconClick}
+      onMobileBookmarkActionsBackgroundClick={onMobileBookmarkActionsBackgroundClick}
     />
   );
 };

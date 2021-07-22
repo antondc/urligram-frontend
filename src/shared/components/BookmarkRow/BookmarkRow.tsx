@@ -1,15 +1,10 @@
 import React from 'react';
 
-import EditCircle from 'Assets/svg/editCircle.svg';
-import List from 'Assets/svg/list.svg';
-import Private from 'Assets/svg/private.svg';
 import A from 'Components/A';
-import BookmarkActions from 'Components/BookmarkActions';
-import BookmarkListsPopOverOrSheet from 'Components/BookmarkListsPopOverOrSheet';
-import { RenderInPortal } from 'Components/Portal';
 import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
 import { TagState } from 'Modules/Tags/tags.types';
-import { Space, Tag, Tooltip, Vote } from 'Vendor/components';
+import { Space, Tag } from 'Vendor/components';
+import { BookmarkRowIcons } from './BookmarkRowIcons';
 
 import './BookmarkRow.less';
 
@@ -17,26 +12,34 @@ interface BookmarkRow extends BookmarkState {
   bookmark: Partial<BookmarkState>;
   listId?: number;
   tags: TagState[];
+  bookmarkActionIconsMounted: boolean;
   recentlyCreated: boolean;
   sessionUserBookmarkedLink: boolean;
   createdAtFormatted: string;
   pathForTagLink: string;
+  uiScreenTypeIsMobile: boolean;
   onVote: (vote: boolean | null) => void;
   onEdit: () => void;
   onListsClick: () => void;
+  onMobileBookmarkActionsIconClick: () => void;
+  onMobileBookmarkActionsBackgroundClick: () => void;
 }
 
 export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
   bookmark,
   listId,
   tags,
+  bookmarkActionIconsMounted,
   onVote,
   sessionUserBookmarkedLink,
   createdAtFormatted,
   pathForTagLink,
   recentlyCreated,
+  uiScreenTypeIsMobile,
   onEdit,
   onListsClick,
+  onMobileBookmarkActionsIconClick,
+  onMobileBookmarkActionsBackgroundClick,
 }) => (
   <div
     className={'BookmarkRow' + (recentlyCreated ? ' BookmarkRow-recentlyCreated' : '')}
@@ -91,35 +94,17 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
       ))}
     </div>
     <div className="BookmarkRow-icons">
-      {!!sessionUserBookmarkedLink && <EditCircle className="BookmarkRow-icon BookmarkRow-iconEdit" onClick={onEdit} />}
-      {!!sessionUserBookmarkedLink && (
-        <span className="BookmarkRow-icon BookmarkRow-iconLists">
-          <List id={`BookmarkRow-${bookmark?.id}`} onClick={onListsClick} />
-          <BookmarkListsPopOverOrSheet bookmarkId={bookmark?.id} />
-        </span>
-      )}
-      <BookmarkActions
-        className="BookmarkRow-icon BookmarkRow-iconBookmark"
-        linkId={bookmark?.linkId}
-        bookmarkId={bookmark?.id}
+      <BookmarkRowIcons
+        bookmark={bookmark}
         listId={listId}
-      />
-      {!!bookmark?.isPrivate && <Private className="BookmarkRow-icon BookmarkRow-iconPrivate" />}
-      <RenderInPortal>
-        <Tooltip
-          parentElementId={`BookmarkRow-iconAverageVote-${bookmark?.id}`}
-          content="Users in this list"
-          delay={0.5}
-        />
-      </RenderInPortal>
-      <div className="BookmarkRow-iconAverageVote" id={`BookmarkRow-iconAverageVote-${bookmark?.id}`}>
-        {bookmark?.statistics?.absoluteVote || 0}
-      </div>
-      <Vote
-        className="BookmarkRow-iconVote"
-        vote={bookmark?.statistics?.vote}
-        loading={bookmark?.statistics?.loading}
-        changeVote={onVote}
+        bookmarkActionIconsMounted={bookmarkActionIconsMounted}
+        onVote={onVote}
+        sessionUserBookmarkedLink={sessionUserBookmarkedLink}
+        uiScreenTypeIsMobile={uiScreenTypeIsMobile}
+        onEdit={onEdit}
+        onListsClick={onListsClick}
+        onMobileBookmarkActionsIconClick={onMobileBookmarkActionsIconClick}
+        onMobileBookmarkActionsBackgroundClick={onMobileBookmarkActionsBackgroundClick}
       />
     </div>
   </div>
