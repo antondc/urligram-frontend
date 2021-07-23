@@ -37,6 +37,18 @@
     box-shadow: 4px 4px 0 0 @gradientColors[green-1];
   }
 
+  &-notificationDot {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    opacity: 0;
+    transition: opacity @td-slow @ease;
+
+    &--viewPending {
+      opacity: 1;
+    }
+  }
+
   &-favicon {
     align-self: center;
     height: 10px;

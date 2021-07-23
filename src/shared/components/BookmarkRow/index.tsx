@@ -6,6 +6,8 @@ import { selectBookmarksById } from 'Modules/Bookmarks/selectors/selectBookmarkB
 import { selectBookmarkTagsByLinkIdAndListId } from 'Modules/Bookmarks/selectors/selectBookmarkTagsByLinkIdAndListId';
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
 import { linkUpdateVote } from 'Modules/Links/actions/linkUpdateVote';
+import { listNotificationViewed } from 'Modules/Notifications/actions/listNotificationViewed';
+import { selectNotificationByBookmarkIdAndListId } from 'Modules/Notifications/selectors/selectNotificationByBookmarkIdAndListId';
 import { RootState } from 'Modules/rootType';
 import { selectCurrentPathname } from 'Modules/Routes/selectors/selectCurrentPathname';
 import { selectCurrentRoute } from 'Modules/Routes/selectors/selectCurrentRoute';
@@ -13,17 +15,17 @@ import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import { bookmarkListsModalMount } from 'Modules/Ui/actions/bookmarkListsModalMount';
 import { switchBookmarkActionButtonsMounted } from 'Modules/Ui/actions/switchBookmarkActionButtonsMounted';
+import { switchBookmarkActionButtonsUnmounted } from 'Modules/Ui/actions/switchBookmarkActionButtonsUnmounted';
 import { switchBookmarkUpdateModal } from 'Modules/Ui/actions/switchBookmarkUpdateModal';
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
 import { selectBookmarkActionsIcons } from 'Modules/Ui/selectors/selectBookmarkActionsIcons';
 import { selectBookmarkListsModalMounted } from 'Modules/Ui/selectors/selectBookmarkListsModalMounted';
+import { selectUiScreenTypeIsDesktop } from 'Modules/Ui/selectors/selectUiScreenTypeIsDesktop';
 import { selectUiScreenTypeIsMobile } from 'Modules/Ui/selectors/selectUiScreenTypeIsMobile';
 import { TIME_RECENTLY_CREATED_BOOKMARK } from 'Root/src/shared/constants';
 import { Routes } from 'Router/routes';
 import { LocaleFormattedDate } from 'Tools/utils/Date/localeFormattedDate';
 import { unixTimeElapsed } from 'Tools/utils/Date/unixTimeElapsed';
-import { switchBookmarkActionButtonsUnmounted } from '../../redux/modules/Ui/actions/switchBookmarkActionButtonsUnmounted';
-import { selectUiScreenTypeIsDesktop } from '../../redux/modules/Ui/selectors/selectUiScreenTypeIsDesktop';
 import { BookmarkRow as BookmarkRowUi } from './BookmarkRow';
 
 interface Props {
@@ -63,6 +65,10 @@ const BookmarkRow: React.FC<Props> = ({ id, listId }) => {
   const uiScreenTypeIsDesktop = useSelector(selectUiScreenTypeIsDesktop);
   const bookmarkActionIcons = useSelector(selectBookmarkActionsIcons);
   const bookmarkActionIconsMounted = uiScreenTypeIsDesktop || bookmarkActionIcons?.bookmarkId === id;
+  const bookmarkListNotification =
+    listId &&
+    useSelector((state: RootState) => selectNotificationByBookmarkIdAndListId(state, { listId, bookmarkId: id }));
+  const viewPending = !!bookmarkListNotification?.viewPending;
 
   const onMobileBookmarkActionsIconClick = () => {
     dispatch(switchBookmarkActionButtonsMounted({ bookmarkId: id }));
@@ -88,6 +94,12 @@ const BookmarkRow: React.FC<Props> = ({ id, listId }) => {
     if (bookmarkListsModalMounted) return;
 
     dispatch(bookmarkListsModalMount({ bookmarkId: bookmark?.id }));
+  };
+
+  const bookmarkViewed = () => {
+    if (!viewPending) return;
+
+    dispatch(listNotificationViewed({ bookmarkId: bookmark?.id, listId }));
   };
 
   useEffect(() => {
@@ -118,6 +130,7 @@ const BookmarkRow: React.FC<Props> = ({ id, listId }) => {
       createdAtFormatted={createdAtFormatted}
       onVote={onVote}
       recentlyCreated={recentlyCreated}
+      viewPending={viewPending}
       sessionUserBookmarkedLink={sessionUserBookmarkedLink}
       pathForTagLink={pathForTagLink}
       uiScreenTypeIsMobile={uiScreenTypeIsMobile}
@@ -125,6 +138,7 @@ const BookmarkRow: React.FC<Props> = ({ id, listId }) => {
       onListsClick={onListsClick}
       onMobileBookmarkActionsIconClick={onMobileBookmarkActionsIconClick}
       onMobileBookmarkActionsBackgroundClick={onMobileBookmarkActionsBackgroundClick}
+      bookmarkViewed={bookmarkViewed}
     />
   );
 };

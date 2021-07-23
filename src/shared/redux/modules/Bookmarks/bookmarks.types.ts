@@ -69,6 +69,7 @@ export interface BookmarkState {
     receiverId: string;
     viewed: string;
   }[];
+  viewPending?: boolean;
 }
 
 export type BookmarksByKey = {

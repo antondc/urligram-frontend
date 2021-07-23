@@ -80,7 +80,8 @@ const SidebarListLists: React.FC<Props> = ({
                         'SidebarListLists-notificationDot' +
                         (sessionListMembership?.userListStatus === 'pending'
                           ? ' SidebarListLists-notificationDot--pending'
-                          : '')
+                          : '') +
+                        (!!item?.contentPending ? ' SidebarListLists-notificationDot--pending' : '')
                       }
                     />
                   </A>

@@ -4,7 +4,7 @@ import BookmarkWithBackground from 'Assets/svg/bookmarkWithBackground.svg';
 import A from 'Components/A';
 import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
 import { TagState } from 'Modules/Tags/tags.types';
-import { Fade, Space, Tag } from 'Vendor/components';
+import { Fade, NotificationDot, Space, Tag } from 'Vendor/components';
 import { BookmarkRowIcons } from './BookmarkRowIcons';
 
 import './BookmarkRow.less';
@@ -15,6 +15,7 @@ interface BookmarkRow extends BookmarkState {
   tags: TagState[];
   bookmarkActionIconsMounted: boolean;
   recentlyCreated: boolean;
+  viewPending: boolean;
   sessionUserBookmarkedLink: boolean;
   createdAtFormatted: string;
   pathForTagLink: string;
@@ -24,6 +25,7 @@ interface BookmarkRow extends BookmarkState {
   onListsClick: () => void;
   onMobileBookmarkActionsIconClick: () => void;
   onMobileBookmarkActionsBackgroundClick: () => void;
+  bookmarkViewed: () => void;
 }
 
 export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
@@ -36,16 +38,19 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
   createdAtFormatted,
   pathForTagLink,
   recentlyCreated,
+  viewPending,
   uiScreenTypeIsMobile,
   onEdit,
   onListsClick,
   onMobileBookmarkActionsIconClick,
   onMobileBookmarkActionsBackgroundClick,
+  bookmarkViewed,
 }) => (
   <div
     className={'BookmarkRow' + (recentlyCreated ? ' BookmarkRow-recentlyCreated' : '')}
     data-test-id="BookmarkRow"
     key={bookmark?.id}
+    onMouseEnter={bookmarkViewed}
   >
     <div className="BookmarkRow-title">
       <img className="BookmarkRow-favicon" src={bookmark?.favicon} />
@@ -116,6 +121,11 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
         onMobileBookmarkActionsBackgroundClick={onMobileBookmarkActionsBackgroundClick}
       />
     </div>
+    <NotificationDot
+      type="alert"
+      size="normal"
+      className={'BookmarkRow-notificationDot' + (viewPending ? ' BookmarkRow-notificationDot--viewPending' : '')}
+    />
   </div>
 );
 
