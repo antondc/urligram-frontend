@@ -63,7 +63,6 @@ export interface ListState {
   }[];
   createdAt: number;
   updatedAt: number;
-  contentPending?: boolean;
 }
 
 export interface ListsState {

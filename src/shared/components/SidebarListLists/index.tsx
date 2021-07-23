@@ -8,6 +8,7 @@ import { selectCurrentRouteParams } from 'Modules/Routes/selectors/selectCurrent
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { stringToDashCase } from 'Tools/utils/string/stringToDashCase';
 import { AnimateHeight, Bookmark, DotsVertical, NotificationDot, Space, Tooltip, Triangle } from 'Vendor/components';
+import { selectListNotifications } from '../../redux/modules/Notifications/selectors/selectListNotifications';
 import { SidebarListListsSkeleton } from './SidebarListListsSkeleton';
 
 import './SidebarListLists.less';
@@ -34,7 +35,10 @@ const SidebarListLists: React.FC<Props> = ({
   const currentRouteParams = useSelector(selectCurrentRouteParams);
   const currentListId = Number(currentRouteParams?.listId);
   const session = useSelector(selectSession);
-
+  const listNotifications = useSelector(selectListNotifications);
+  const listsWithNotifications = listNotifications
+    .filter((item) => item.viewPending === true)
+    .map((item) => item.listId);
   if (!lists?.length && !loading) return null;
 
   return (
@@ -59,6 +63,7 @@ const SidebarListLists: React.FC<Props> = ({
         {!loading &&
           lists?.map((item, index) => {
             const sessionListMembership = item?.members?.find((item) => item?.id === session?.id);
+            const listHasNotifications = listsWithNotifications.includes(item?.id);
 
             return (
               <React.Fragment key={`${item?.id}-${index}`}>
@@ -81,7 +86,7 @@ const SidebarListLists: React.FC<Props> = ({
                         (sessionListMembership?.userListStatus === 'pending'
                           ? ' SidebarListLists-notificationDot--pending'
                           : '') +
-                        (!!item?.contentPending ? ' SidebarListLists-notificationDot--pending' : '')
+                        (!!listHasNotifications ? ' SidebarListLists-notificationDot--pending' : '')
                       }
                     />
                   </A>
