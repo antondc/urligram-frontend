@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 import { SkeletonItem } from 'Vendor/components';
 
@@ -8,7 +8,7 @@ interface Props {
   length?: number;
 }
 
-export const SidebarListTagsSkeleton: React.FC<Props> = ({ length = 10 }) => (
+export const SidebarListTagsSkeleton: React.FC<Props> = memo(({ length = 10 }) => (
   <>
     {Array.from({ length }, (_, index) => (
       <SkeletonItem
@@ -17,4 +17,4 @@ export const SidebarListTagsSkeleton: React.FC<Props> = ({ length = 10 }) => (
       />
     ))}
   </>
-);
+));

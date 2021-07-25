@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { URLWrapper } from 'Root/src/shared/services/URLWrapper';
+import { URLWrapper } from 'Services/URLWrapper';
 import { FileField as FileFieldUi } from './FileField';
 
 import './FileField.less';

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { bookmarkLoadById } from 'Modules/Bookmarks/actions/bookmarkLoadById';
+import { bookmarkLoadByIds } from 'Modules/Bookmarks/actions/bookmarksLoadByIds';
 import { bookmarksLoadByListId } from 'Modules/Bookmarks/actions/bookmarksLoadByListId';
 import { selectBookmarksCurrentIds } from 'Modules/Bookmarks/selectors/selectBookmarksCurrentIds';
 import { selectBookmarksLoading } from 'Modules/Bookmarks/selectors/selectBookmarksLoading';
@@ -72,6 +72,8 @@ const List: React.FC = () => {
     })) || [];
   const tagsSearchFormatted = tagsSearch?.map((item) => ({ label: item.name, value: item.name })) || [];
 
+  if (!list) return null;
+
   const onInputChange = (string: string) => {
     !!string && dispatch(tagsSearchLoad(string));
   };
@@ -128,9 +130,8 @@ const List: React.FC = () => {
   }, [list?.id]);
 
   useEffect(() => {
-    // TODO: create a bookmarkLoadByIds endpoint and load from there
-    list?.bookmarksIds?.forEach((item) => dispatch(bookmarkLoadById({ bookmarkId: item })));
-  }, [list?.bookmarksIds]);
+    dispatch(bookmarkLoadByIds({ ids: list?.bookmarksIds }));
+  }, [JSON.stringify(list?.bookmarksIds)]);
 
   useEffect(() => {
     // If the session member of this list is pending, display banner
