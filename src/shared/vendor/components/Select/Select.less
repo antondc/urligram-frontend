@@ -48,7 +48,6 @@
     left: 12px;
     padding: 0 7px 0 4px;
     font-size: @fs-small;
-    color: @c-base;
     opacity: 1;
     background: @c-transparent;
     transform: translate(-4px, 0) scale(1);
@@ -91,10 +90,30 @@
 
   &__clear-indicator:not(.noClass) {
     padding: 3px;
+
+    svg {
+      transition: fill @td-fast @ease;
+    }
+
+    &:hover {
+      svg {
+        fill: @gradientColors[red-3];
+      }
+    }
   }
 
   &__dropdown-indicator:not(.noClass) {
     padding: 3px 9px 3px 0;
+
+    svg {
+      transition: fill @td-fast @ease;
+    }
+
+    &:hover {
+      svg {
+        fill: @gradientColors[yellow-1];
+      }
+    }
   }
 
   &__value-container:not(.noClass) {
@@ -118,42 +137,47 @@
     flex-wrap: nowrap;
     min-width: unset;
     margin: 0 4px 0 0;
-    padding: 0;
-    background: transparent;
-    border: 1px solid @c-base;
-    transition: background @td-fast @ease;
-    border-radius: 2px;
+    padding: 3px 3px 3px 8px;
+    background: @c-background;
+    border: 1px solid @gradientColors[blue-1];
+    transition: background @td-fast @ease, box-shadow @td-fast @ease;
+    border-radius: 4px;
 
-    &:hover {
-      background: @c-base;
-      cursor: default;
-
-      @{c}__multi-value__remove:not(.noClass) {
-        fill: @c-background;
-      }
-
-      @{c}__multi-value__label:not(.noClass) {
-        color: @c-background;
-      }
-    }
+    .boxShadowLight;
   }
 
   &__multi-value__label:not(.noClass) {
-    padding: 2px 2px 2px 6px;
-    font-size: @fs-micro;
-    font-weight: @fw-semibold;
-    line-height: @fs-small;
+    padding: 0;
+    font-size: @fs-small;
+    font-weight: @fw-extraBold;
+    line-height: @fh-small;
     white-space: unset;
-    transition: color @td-fast @ease;
     text-overflow: unset;
+    color: @gradientColors[blue-1];
+
+    &:first-letter {
+      text-transform: capitalize;
+    }
+  }
+
+  &__multi-value__label-custom:not(.noClass) {
+    color: @c-base;
   }
 
   &__multi-value__remove:not(.noClass) {
     padding-right: 6px;
+    fill: @gradientColors[blue-1];
+    transition: fill @td-fast @ease;
     border-radius: 0;
 
-    &:hover {
-      background-color: @c-transparent;
+    svg {
+      height: 10px;
+      width: 10px;
+    }
+
+    &:hover:not(.noClass):not(.noClass2) {
+      background: @c-transparent;
+      fill: @gradientColors[blue-3];
       cursor: pointer;
     }
   }
@@ -180,6 +204,7 @@
     padding: 6px 12px;
     font-size: @fs-small;
     background: @c-transparent;
+    transition: background @td-fast @ease, outline @td-fast @ease;
 
     &:hover {
       cursor: pointer;
@@ -189,8 +214,8 @@
   &__option--is-focused:not(.noClass):not(.noClass) {
     position: relative;
     color: @c-background;
-    background: @c-base;
-    outline: 1px solid @c-base;
+    background: @gradientColors[blue-2];
+    outline: 1px solid @gradientColors[blue-2];
   }
 
   &__option--is-selected:not(.noClass):not(.noClass) {

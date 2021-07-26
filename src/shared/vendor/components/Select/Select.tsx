@@ -8,8 +8,8 @@ import Select, {
 } from 'react-select';
 import CreatableSelect from 'react-select/creatable';
 
-import { Span } from '../Span';
-import { ArrowDown, Cross } from '../Svg';
+import Cross from 'Assets/svg/cross.svg';
+import { ArrowDown } from '../Svg';
 import { SelectValue } from '.';
 
 import './Select.less';
@@ -58,7 +58,7 @@ const Menu = ({ ...props }: MenuType & MenuProps<any, any>): JSX.Element => {
 
 const MultiValueRemove = (props: MultiValueProps<unknown>): JSX.Element => (
   <Components.MultiValueRemove {...props}>
-    <Cross size="nano" />
+    <Cross className="Select__multi-value__remove__svg" />
   </Components.MultiValueRemove>
 );
 
@@ -133,9 +133,7 @@ export const SelectUi: React.FC<Props> = ({
         }
       >
         <span className="Select__label-background" />
-        <Span size="small" weight="extraBold">
-          {label}
-        </Span>
+        <span className="Select__multi-value__label Select__multi-value__label-custom">{label}</span>
       </label>
     )}
   </div>

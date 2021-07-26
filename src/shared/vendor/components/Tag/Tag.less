@@ -13,7 +13,7 @@
     align-items: center;
     height: calc(100% - 4px);
     padding: 4px 12px 4px 12px;
-    border-radius: 2px;
+    border-radius: 4px;
     white-space: nowrap;
     color: @c-base;
     background: @c-background;
@@ -38,6 +38,8 @@
   }
 
   &--simple {
+    transition: background @td-fast @ease, box-shadow @td-fast @ease, color @td-fast @ease, border-color @td-fast @ease;
+
     @{c}-content {
       color: @c-base;
       border: 1px solid @c-base;
@@ -66,11 +68,9 @@
 
     &:hover {
       @{c}-content {
-        color: @c-background;
-        background: @c-base;
-        border-color: @c-base;
-        transition: none;
-        box-shadow: none;
+        color: @gradientColors[blue-1];
+        border-color: @gradientColors[blue-1];
+        box-shadow: 2px 2px 0 1px @c-traslucid--light;
       }
     }
   }
