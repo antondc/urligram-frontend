@@ -2,7 +2,7 @@ import React from 'react';
 
 import A from 'Components/A';
 import { Hr, Tag } from 'Vendor/components';
-import { SidebarListTagsSkeleton } from './SidebarListTagsSkeleton';
+import { SidebarListTagsSkeletonWithMemo } from './SidebarListTagsSkeleton';
 
 import './SidebarListTags.less';
 
@@ -27,7 +27,7 @@ const SidebarListTags: React.FC<Props> = ({ tags, loading, title, href, classNam
       </A>
       <Hr size="small" spacer />
       <div className="SidebarListTags-tags">
-        {!!loading && <SidebarListTagsSkeleton />}
+        {!!loading && <SidebarListTagsSkeletonWithMemo />}
         {!loading &&
           tags.map((tag) => (
             <A

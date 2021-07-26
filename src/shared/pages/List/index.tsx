@@ -35,7 +35,7 @@ import { selectUserById } from 'Modules/Users/selectors/selectUserById';
 import { DELAY_FAST_MS } from 'Root/src/shared/constants';
 import history from 'Services/History';
 import { URLWrapper } from 'Services/URLWrapper';
-import { List as ListUI } from './List';
+import { ListWithMemo as ListUI } from './List';
 
 const List: React.FC = () => {
   const dispatch = useDispatch();
@@ -71,8 +71,6 @@ const List: React.FC = () => {
       value: item,
     })) || [];
   const tagsSearchFormatted = tagsSearch?.map((item) => ({ label: item.name, value: item.name })) || [];
-
-  if (!list) return null;
 
   const onInputChange = (string: string) => {
     !!string && dispatch(tagsSearchLoad(string));
@@ -137,6 +135,8 @@ const List: React.FC = () => {
     // If the session member of this list is pending, display banner
     if (sessionUserInThisList?.userStatus === 'pending') setShowBanner(true);
   }, [sessionUserInThisList?.userStatus]);
+
+  if (!list) return null;
 
   return (
     <ListUI
