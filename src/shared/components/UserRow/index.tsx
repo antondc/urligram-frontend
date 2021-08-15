@@ -5,7 +5,6 @@ import { createStructuredSelector } from 'reselect';
 import { GlossaryState } from 'Modules/Languages/languages.types';
 import { selectCurrentGlossary } from 'Modules/Languages/selectors/selectCurrentGlossary';
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
-import { linkUpdateVote } from 'Modules/Links/actions/linkUpdateVote';
 import { selectCurrentPathname } from 'Modules/Routes/selectors/selectCurrentPathname';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUserId';
@@ -85,6 +84,4 @@ const mapStateToProps = createStructuredSelector({
   slug: selectCurrentLanguageSlug,
 });
 
-export default connect(mapStateToProps, {
-  linkUpdateVote,
-})(UserRow);
+export default connect(mapStateToProps)(UserRow);

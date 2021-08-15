@@ -5,14 +5,12 @@ import { bookmarkLoadById } from 'Modules/Bookmarks/actions/bookmarkLoadById';
 import { selectBookmarksById } from 'Modules/Bookmarks/selectors/selectBookmarkById';
 import { selectBookmarkTagsByLinkIdAndListId } from 'Modules/Bookmarks/selectors/selectBookmarkTagsByLinkIdAndListId';
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
-import { linkUpdateVote } from 'Modules/Links/actions/linkUpdateVote';
 import { listNotificationViewed } from 'Modules/Notifications/actions/listNotificationViewed';
 import { selectNotificationByBookmarkIdAndListId } from 'Modules/Notifications/selectors/selectNotificationByBookmarkIdAndListId';
 import { RootState } from 'Modules/rootType';
 import { selectCurrentPathname } from 'Modules/Routes/selectors/selectCurrentPathname';
 import { selectCurrentRoute } from 'Modules/Routes/selectors/selectCurrentRoute';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
-import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import { bookmarkListsModalMount } from 'Modules/Ui/actions/bookmarkListsModalMount';
 import { switchBookmarkActionButtonsMounted } from 'Modules/Ui/actions/switchBookmarkActionButtonsMounted';
 import { switchBookmarkActionButtonsUnmounted } from 'Modules/Ui/actions/switchBookmarkActionButtonsUnmounted';
@@ -35,7 +33,6 @@ interface Props {
 
 const BookmarkRow: React.FC<Props> = ({ id, listId }) => {
   const dispatch = useDispatch();
-  const isLogged = useSelector(selectSessionLoggedIn);
   const slug = useSelector(selectCurrentLanguageSlug);
   const session = useSelector(selectSession);
   const bookmark = useSelector((state: RootState) => selectBookmarksById(state, { bookmarkId: id }));
@@ -76,12 +73,6 @@ const BookmarkRow: React.FC<Props> = ({ id, listId }) => {
 
   const onMobileBookmarkActionsBackgroundClick = () => {
     dispatch(switchBookmarkActionButtonsUnmounted());
-  };
-
-  const onVote = (vote) => {
-    if (!isLogged) return dispatch(switchLoginModal(true));
-
-    dispatch(linkUpdateVote({ vote, linkId: bookmark?.linkId, userId: session?.id }));
   };
 
   const onEdit = async () => {
@@ -128,7 +119,6 @@ const BookmarkRow: React.FC<Props> = ({ id, listId }) => {
       bookmarkActionIconsMounted={bookmarkActionIconsMounted}
       tags={tags}
       createdAtFormatted={createdAtFormatted}
-      onVote={onVote}
       recentlyCreated={recentlyCreated}
       viewPending={viewPending}
       sessionUserBookmarkedLink={sessionUserBookmarkedLink}

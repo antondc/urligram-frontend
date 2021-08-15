@@ -22,7 +22,6 @@ interface BookmarkRowIcons extends BookmarkState {
   createdAtFormatted: string;
   pathForTagLink: string;
   uiScreenTypeIsMobile: boolean;
-  onVote: (vote: boolean | null) => void;
   onEdit: () => void;
   onListsClick: () => void;
   onMobileBookmarkActionsIconClick: () => void;
@@ -33,7 +32,6 @@ export const BookmarkRowIcons: React.FC<Partial<BookmarkRowIcons>> = ({
   bookmark,
   listId,
   bookmarkActionIconsMounted,
-  onVote,
   sessionUserBookmarkedLink,
   uiScreenTypeIsMobile,
   onEdit,
@@ -79,12 +77,6 @@ export const BookmarkRowIcons: React.FC<Partial<BookmarkRowIcons>> = ({
         {!uiScreenTypeIsMobile && !!bookmark?.isPrivate && (
           <Private className="BookmarkRowIcons-icon BookmarkRowIcons-iconPrivate" />
         )}
-        <Vote
-          className="BookmarkRowIcons-iconVote"
-          vote={bookmark?.statistics?.vote}
-          loading={bookmark?.statistics?.loading}
-          changeVote={onVote}
-        />
         <BookmarkActions
           className="BookmarkRowIcons-icon BookmarkRowIcons-iconBookmark"
           linkId={bookmark?.linkId}

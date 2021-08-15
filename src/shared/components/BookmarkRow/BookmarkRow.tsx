@@ -20,7 +20,6 @@ interface BookmarkRow extends BookmarkState {
   createdAtFormatted: string;
   pathForTagLink: string;
   uiScreenTypeIsMobile: boolean;
-  onVote: (vote: boolean | null) => void;
   onEdit: () => void;
   onListsClick: () => void;
   onMobileBookmarkActionsIconClick: () => void;
@@ -33,7 +32,6 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
   listId,
   tags,
   bookmarkActionIconsMounted,
-  onVote,
   sessionUserBookmarkedLink,
   createdAtFormatted,
   pathForTagLink,
@@ -112,7 +110,6 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
         bookmark={bookmark}
         listId={listId}
         bookmarkActionIconsMounted={bookmarkActionIconsMounted}
-        onVote={onVote}
         sessionUserBookmarkedLink={sessionUserBookmarkedLink}
         uiScreenTypeIsMobile={uiScreenTypeIsMobile}
         onEdit={onEdit}
