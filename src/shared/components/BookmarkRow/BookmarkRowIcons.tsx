@@ -88,7 +88,7 @@ export const BookmarkRowIcons: React.FC<Partial<BookmarkRowIcons>> = ({
           />
         </RenderInPortal>
         <BookmarkActions
-          className="BookmarkRowIcons-icon BookmarkRowIcons-iconBookmark"
+          className="BookmarkRowIcons-iconBookmark"
           linkId={bookmark?.linkId}
           bookmarkId={bookmark?.id}
           listId={listId}
