@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Bookmark from 'Assets/svg/bookmark.svg';
 import Cross from 'Assets/svg/cross.svg';
 import DotsVertical from 'Assets/svg/dotsVertical.svg';
 import EditCircle from 'Assets/svg/editCircle.svg';
@@ -9,7 +10,8 @@ import BookmarkActions from 'Components/BookmarkActions';
 import BookmarkListsPopOverOrSheet from 'Components/BookmarkListsPopOverOrSheet';
 import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
 import { TagState } from 'Modules/Tags/tags.types';
-import { Fade, Vote } from 'Vendor/components';
+import { Fade, Tooltip } from 'Vendor/components';
+import { RenderInPortal } from '../Portal';
 
 import './BookmarkRowIcons.less';
 
@@ -41,7 +43,6 @@ export const BookmarkRowIcons: React.FC<Partial<BookmarkRowIcons>> = ({
 }) => (
   <div className="BookmarkRowIcons" data-test-id="BookmarkRowIcons">
     <DotsVertical className="BookmarkRowIcons-actionsIcon" onClick={onMobileBookmarkActionsIconClick} />
-
     <div
       className={
         'BookmarkRowIcons-actionsIconsWrapper' +
@@ -73,10 +74,19 @@ export const BookmarkRowIcons: React.FC<Partial<BookmarkRowIcons>> = ({
             <BookmarkListsPopOverOrSheet bookmarkId={bookmark?.id} />
           </div>
         )}
-
         {!uiScreenTypeIsMobile && !!bookmark?.isPrivate && (
           <Private className="BookmarkRowIcons-icon BookmarkRowIcons-iconPrivate" />
         )}
+        <div className="BookmarkRowIcons-timesBookmarked" id={`BookmarkRowIcons-timesBookmarked--${bookmark.id}`}>
+          {bookmark.statistics.timesBookmarked} <Bookmark className="BookmarkRowIcons-timesBookmarkedIcon" />
+        </div>
+        <RenderInPortal>
+          <Tooltip
+            parentElementId={`BookmarkRowIcons-timesBookmarked--${bookmark.id}`}
+            content="Times bookmarked"
+            delay={1.5}
+          />
+        </RenderInPortal>
         <BookmarkActions
           className="BookmarkRowIcons-icon BookmarkRowIcons-iconBookmark"
           linkId={bookmark?.linkId}

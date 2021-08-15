@@ -1,14 +1,15 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
+import Bookmark from 'Assets/svg/bookmark.svg';
 import A from 'Components/A';
 import { RenderInPortal } from 'Components/Portal';
 import { ListState } from 'Modules/Lists/lists.types';
+import { selectListNotifications } from 'Modules/Notifications/selectors/selectListNotifications';
 import { selectCurrentRouteParams } from 'Modules/Routes/selectors/selectCurrentRouteParams';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { stringToDashCase } from 'Tools/utils/string/stringToDashCase';
-import { AnimateHeight, Bookmark, DotsVertical, NotificationDot, Space, Tooltip, Triangle } from 'Vendor/components';
-import { selectListNotifications } from '../../redux/modules/Notifications/selectors/selectListNotifications';
+import { AnimateHeight, DotsVertical, NotificationDot, Space, Tooltip, Triangle } from 'Vendor/components';
 import { SidebarListListsSkeleton } from './SidebarListListsSkeleton';
 
 import './SidebarListLists.less';

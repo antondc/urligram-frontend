@@ -44,7 +44,7 @@
     justify-content: flex-end;
     grid-template:
       'iconEdit iconLists iconBookmark' auto
-      'iconPrivate iconVote iconVote' auto
+      'iconPrivate timesBookmarked timesBookmarked' auto
       / 1fr 1fr 1fr;
     justify-items: flex-end;
     gap: 0 6px;
@@ -176,6 +176,31 @@
       height: 10px;
       width: 10px;
     }
+  }
+
+  &-timesBookmarked {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    grid-area: timesBookmarked;
+    font-size: @fs-small;
+    font-weight: @fw-semibold;
+    line-height: @fh-nano;
+
+    &:hover {
+      cursor: default;
+    }
+
+    @media @br-mobile {
+      align-self: unset;
+      height: 10px;
+      width: 10px;
+    }
+  }
+
+  &-timesBookmarkedIcon {
+    width: 10px;
+    transform: translateY(1px);
   }
 
   &-iconAverageVote {

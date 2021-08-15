@@ -1,10 +1,11 @@
 import React from 'react';
 
+import Bookmark from 'Assets/svg/bookmark.svg';
 import A from 'Components/A';
 import { RenderInPortal } from 'Components/Portal';
 import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
 import { stringToDashCase } from 'Tools/utils/string/stringToDashCase';
-import { Bookmark, Tooltip, Triangle } from 'Vendor/components';
+import { Tooltip } from 'Vendor/components';
 import { SidebarListBookmarksSkeleton } from './SidebarListBookmarksSkeleton';
 
 import './SidebarListBookmarks.less';
@@ -35,24 +36,6 @@ const SidebarListBookmarks: React.FC<Props> = ({ bookmarks, loading, title, href
                 <A className="SidebarListBookmarks-link" href={item?.url} targetBlank underlined>
                   {item?.title}
                 </A>
-              </span>
-              <RenderInPortal>
-                <Tooltip
-                  parentElementId={`${stringToDashCase(item?.title)}-averageVote-${item?.id}`}
-                  content="Average vote"
-                  delay={1.5}
-                />
-              </RenderInPortal>
-              <span
-                className="SidebarListBookmarks-descriptionItem"
-                id={`${stringToDashCase(item?.title)}-averageVote-${item?.id}`}
-              >
-                {!!item?.statistics?.averageVote && (
-                  <>
-                    {item?.statistics?.averageVote}
-                    <Triangle size="nano" />
-                  </>
-                )}
               </span>
               <RenderInPortal>
                 <Tooltip
