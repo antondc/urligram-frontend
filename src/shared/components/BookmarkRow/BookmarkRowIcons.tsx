@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Bookmark from 'Assets/svg/?svg';?
+import Bookmark from 'Assets/svg/bookmark.svg';
 import Cross from 'Assets/svg/cross.svg';
 import DotsVertical from 'Assets/svg/dotsVertical.svg';
 import EditCircle from 'Assets/svg/editCircle.svg';
