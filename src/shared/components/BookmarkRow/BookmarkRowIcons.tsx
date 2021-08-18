@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Bookmark from 'Assets/svg/bookmark.svg';
+import Bookmark from 'Assets/svg/?svg';?
 import Cross from 'Assets/svg/cross.svg';
 import DotsVertical from 'Assets/svg/dotsVertical.svg';
 import EditCircle from 'Assets/svg/editCircle.svg';
@@ -78,7 +78,7 @@ export const BookmarkRowIcons: React.FC<Partial<BookmarkRowIcons>> = ({
           <Private className="BookmarkRowIcons-icon BookmarkRowIcons-iconPrivate" />
         )}
         <div className="BookmarkRowIcons-timesBookmarked" id={`BookmarkRowIcons-timesBookmarked--${bookmark?.id}`}>
-          {bookmark.statistics.timesBookmarked} <Bookmark className="BookmarkRowIcons-timesBookmarkedIcon" />
+          {bookmark?.statistics?.timesBookmarked} <Bookmark className="BookmarkRowIcons-timesBookmarkedIcon" />
         </div>
         <RenderInPortal>
           <Tooltip
