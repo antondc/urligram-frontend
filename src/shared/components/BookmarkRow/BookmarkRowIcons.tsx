@@ -77,12 +77,12 @@ export const BookmarkRowIcons: React.FC<Partial<BookmarkRowIcons>> = ({
         {!uiScreenTypeIsMobile && !!bookmark?.isPrivate && (
           <Private className="BookmarkRowIcons-icon BookmarkRowIcons-iconPrivate" />
         )}
-        <div className="BookmarkRowIcons-timesBookmarked" id={`BookmarkRowIcons-timesBookmarked--${bookmark.id}`}>
+        <div className="BookmarkRowIcons-timesBookmarked" id={`BookmarkRowIcons-timesBookmarked--${bookmark?.id}`}>
           {bookmark.statistics.timesBookmarked} <Bookmark className="BookmarkRowIcons-timesBookmarkedIcon" />
         </div>
         <RenderInPortal>
           <Tooltip
-            parentElementId={`BookmarkRowIcons-timesBookmarked--${bookmark.id}`}
+            parentElementId={`BookmarkRowIcons-timesBookmarked--${bookmark?.id}`}
             content="Times bookmarked"
             delay={1.5}
           />
