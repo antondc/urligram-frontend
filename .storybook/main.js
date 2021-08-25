@@ -9,23 +9,21 @@ module.exports = {
     '@storybook/addon-knobs/register',
     '@storybook/addon-viewport/register',
   ],
+  // https://storybook.js.org/docs/react/configure/typescript
+  typescript: {
+    check: false,
+    checkOptions: {},
+    reactDocgen: 'react-docgen-typescript',
+    reactDocgenTypescriptOptions: {
+      shouldExtractLiteralValuesFromEnum: true,
+      propFilter: (prop) => (prop.parent ? !/node_modules/.test(prop.parent.fileName) : true),
+    },
+  },
   webpackFinal: async (config, { configType }) => {
     config.module.rules.push({
       test: /\.less$/,
       use: ['style-loader', 'css-loader', 'less-loader'],
       include: path.resolve(__dirname, '../'),
-    });
-
-    config.module.rules.push({
-      test: /\.(ts|tsx)$/,
-      use: [
-        {
-          loader: require.resolve('awesome-typescript-loader'),
-          options: {
-            configFileName: path.resolve(process.cwd(), '.storybook/tsconfig.json'),
-          },
-        },
-      ],
     });
 
     /* START https://github.com/storybookjs/storybook/issues/5708#issuecomment-467364602 */
