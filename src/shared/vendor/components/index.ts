@@ -26,6 +26,7 @@ export { Range } from './Range';
 export { Select, SelectValue } from './Select';
 export { Span } from './Span';
 export { SpinnerCircle } from './SpinnerCircle';
+export { SpinnerPie } from './SpinnerPie';
 export { SpinnerSquaredBrute } from './SpinnerSquaredBrute';
 export { SpinnerSquaredSmooth } from './SpinnerSquaredSmooth';
 export { SpinnerLoader } from './SpinnerLoader';

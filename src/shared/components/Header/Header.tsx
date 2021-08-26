@@ -9,7 +9,7 @@ import A from 'Components/A';
 import Logo from 'Components/Logo';
 import { GlossaryState } from 'Modules/Languages/languages.types';
 import { SessionState } from 'Modules/Session/session.types';
-import { SpinnerCircularBrute } from 'Vendor/components';
+import { SpinnerPie } from 'Vendor/components';
 
 import './Header.less';
 
@@ -83,7 +83,7 @@ export const Header: React.FC<Props> = ({
         <img className="Header-userImage" src={session?.image?.original} onClick={onUserClick} />
       )}
       {!sessionLoading && !session?.id && <User name="User" className={'Header-userLogo'} onClick={onUserClick} />}
-      {sessionLoading && <SpinnerCircularBrute className="Header-loader" speed="normal" />}
+      {sessionLoading && <SpinnerPie speed="normal" />}
     </div>
   </header>
 );
