@@ -83,7 +83,7 @@ export const Header: React.FC<Props> = ({
         <img className="Header-userImage" src={session?.image?.original} onClick={onUserClick} />
       )}
       {!sessionLoading && !session?.id && <User name="User" className={'Header-userLogo'} onClick={onUserClick} />}
-      {sessionLoading && <SpinnerPie speed="normal" />}
+      {sessionLoading && <SpinnerPie className="Header-loader" size="big" />}
     </div>
   </header>
 );
