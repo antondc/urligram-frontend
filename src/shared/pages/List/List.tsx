@@ -27,7 +27,7 @@ import {
   SelectValue,
   SortBy,
   Space,
-  SpinnerCircularBrute,
+  SpinnerPie,
   Tooltip,
 } from 'Vendor/components';
 
@@ -187,12 +187,12 @@ export const List: React.FC<Props> = ({
       <AnimateHeight className="List-notification" mounted={showBanner} speed="fastest" ease={[1, 0.02, 0.83, 1.15]}>
         <div className="List-notificationText">You were invited to this list as {listInvitationRole}: join it?</div>
         {acceptLoading ? (
-          <SpinnerCircularBrute className="List-notificationIcon" />
+          <SpinnerPie />
         ) : (
           <Check className="List-notificationIcon List-notificationIconCheck" onClick={onInviteAccept} />
         )}
         {rejectLoading ? (
-          <SpinnerCircularBrute className="List-notificationIcon" />
+          <SpinnerPie />
         ) : (
           <Cross className="List-notificationIcon List-notificationIconCross" onClick={onInviteReject} />
         )}

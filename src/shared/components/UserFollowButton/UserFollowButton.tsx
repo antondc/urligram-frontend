@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { PlusCircleWithBackground, SpinnerCircularBrute } from 'Vendor/components';
+import { PlusCircleWithBackground, SpinnerPie } from 'Vendor/components';
 
 import './UserFollowButton.less';
 
@@ -43,7 +43,7 @@ export const UserFollowButton: React.FC<Props> = ({
         onClick={onFollow}
       />
     )}
-    {loading && <SpinnerCircularBrute className="UserFollowButton-loader" size="nano" />}
+    {loading && <SpinnerPie className="UserFollowButton-loader" />}
   </div>
 );
 

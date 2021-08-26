@@ -7,15 +7,23 @@ export type SpinnerPieSize = 'nano' | 'micro' | 'small' | 'normal' | 'medium' | 
 interface Props {
   className?: string;
   speed?: 'fast' | 'normal' | 'slow';
+  size?: SpinnerPieSize;
 }
 
-export const SpinnerPie: React.FC<Props> = ({ speed = 'normal', className }) => (
-  <div className={'SpinnerPie' + (speed ? ' SpinnerPie-' + speed : '') + (className ? className : '')}>
-    <span className="SpinnerPie-side SpinnerPie-sideLeft">
-      <span className="SpinnerPie-leftFill" />
-    </span>
-    <span className="SpinnerPie-side SpinnerPie-sideRight">
-      <span className="SpinnerPie-rightFill" />
-    </span>
+export const SpinnerPie: React.FC<Props> = ({ speed = 'normal', className, size = 'normal' }) => (
+  <div
+    className={
+      'SpinnerPie' +
+      (speed ? ' SpinnerPie-' + speed : '') +
+      (className ? ' ' + className : '') +
+      (size ? ' SpinnerPie--' + size : '')
+    }
+  >
+    <div className="SpinnerPie-side SpinnerPie-sideLeft">
+      <span className="SpinnerPie-fill SpinnerPie-leftFill" />
+    </div>
+    <div className="SpinnerPie-side SpinnerPie-sideRight">
+      <span className="SpinnerPie-fill SpinnerPie-rightFill" />
+    </div>
   </div>
 );

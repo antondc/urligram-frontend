@@ -37,8 +37,11 @@
   }
 
   &-loaderIcon {
-    background: @c-background;
-    fill: @gradientColors[yellow-1];
+    outline-color: @gradientColors[yellow-1];
+
+    span {
+      background: @gradientColors[yellow-1];
+    }
   }
 
   &-content {

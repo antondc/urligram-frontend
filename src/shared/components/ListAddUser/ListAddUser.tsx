@@ -12,7 +12,7 @@ import {
   PlusCircle,
   PlusCircleWithBackground,
   PopOver,
-  SpinnerCircularBrute,
+  SpinnerPie,
 } from 'Vendor/components';
 
 import './ListAddUser.less';
@@ -99,7 +99,7 @@ export const ListAddUser: React.FC<Props> = ({
                       @{item?.name}
                     </A>
                     {itemsLoadingReader?.includes(item?.id) ? (
-                      <SpinnerCircularBrute className="ListAddUser-usersItemLoader" />
+                      <SpinnerPie className="ListAddUser-usersItemLoader" />
                     ) : (
                       <Eye
                         className="ListAddUser-usersItemIcon ListAddUser-usersItemIconReader"
@@ -111,7 +111,7 @@ export const ListAddUser: React.FC<Props> = ({
                       />
                     )}
                     {itemsLoadingEditor?.includes(item?.id) ? (
-                      <SpinnerCircularBrute className="ListAddUser-usersItemLoader" />
+                      <SpinnerPie className="ListAddUser-usersItemLoader" />
                     ) : (
                       <EditCircle
                         className="ListAddUser-usersItemIcon ListAddUser-usersItemIconEditor"
@@ -123,7 +123,7 @@ export const ListAddUser: React.FC<Props> = ({
                       />
                     )}
                     {itemsLoadingRemove?.includes(item?.id) ? (
-                      <SpinnerCircularBrute className="ListAddUser-usersItemLoader" />
+                      <SpinnerPie className="ListAddUser-usersItemLoader" />
                     ) : (
                       <PlusCircleWithBackground
                         className={

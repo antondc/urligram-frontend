@@ -2,7 +2,7 @@ import React from 'react';
 
 import A from 'Components/A';
 import { ListState } from 'Modules/Lists/lists.types';
-import { Button, FadeInOut, Input, PlusCircleWithBackground, SpinnerCircularBrute } from 'Vendor/components';
+import { Button, FadeInOut, Input, PlusCircleWithBackground, SpinnerPie } from 'Vendor/components';
 
 import './BookmarkLists.less';
 
@@ -59,7 +59,7 @@ export const BookmarkLists: React.FC<Props> = ({
               {item?.name}
             </A>
             {itemsLoading?.includes(item?.id) ? (
-              <SpinnerCircularBrute className="BookmarkLists-listsItemLoader" />
+              <SpinnerPie className="BookmarkLists-listsItemLoader" />
             ) : (
               <PlusCircleWithBackground
                 className={'BookmarkLists-listsItemIcon'}

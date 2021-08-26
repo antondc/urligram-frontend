@@ -39,7 +39,7 @@ import Router from 'Router/index';
 import { routesList, routesWithoutOmmitedValues } from 'Router/routes';
 import enhanceRouteWithParams from 'Tools/utils/url/enhanceRouteWithParams';
 import findActiveRouteKey from 'Tools/utils/url/findActiveRouteKey';
-import { Fade, SpinnerCircularBrute } from 'Vendor/components';
+import { Fade, SpinnerPie } from 'Vendor/components';
 
 import './Layout.less';
 
@@ -164,7 +164,7 @@ const Layout: React.FC<Props> = ({ location }) => {
       <Notifications />
       <Fade mounted={renderLoader} speed="fastest" position="fixed" appear>
         <div className="Layout-loader">
-          <SpinnerCircularBrute className="Layout-loaderIcon" size="huge" />
+          <SpinnerPie className="Layout-loaderIcon" size="huge" />
         </div>
       </Fade>
       <div id="Tooltips" />

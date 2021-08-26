@@ -1,7 +1,7 @@
 import React, { HTMLProps } from 'react';
 
 import { Span } from '../Span';
-import { SpinnerCircularBrute } from '../SpinnerCircularBrute';
+import { SpinnerPie } from '../SpinnerPie';
 import { IconsType, SvgIcon } from '../Svg';
 
 import './Button.less';
@@ -56,7 +56,7 @@ export const Button: React.FC<Props> = ({
       {icon && <SvgIcon name={icon} size="small" className="Button-svg" />}
       {!disabled && !error && (
         <div className="Button-loader">
-          <SpinnerCircularBrute size="small" />
+          <SpinnerPie size="small" />
         </div>
       )}
     </Span>

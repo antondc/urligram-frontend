@@ -21,8 +21,7 @@
     }
   }
 
-  &-userLogo,
-  &-loader {
+  &-userLogo {
     border-radius: 50%;
   }
 
@@ -45,9 +44,11 @@
   }
 
   &-loader {
-    background: @c-background;
-    fill: @gradientColors[yellow-1];
-    // stroke: @c-success;
+    outline-color: @gradientColors[yellow-1];
+
+    span {
+      background: @gradientColors[yellow-1];
+    }
   }
 
   &-listNotFollowed {
