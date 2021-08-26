@@ -107,7 +107,7 @@ export const List: React.FC<Props> = ({
           </A>
         </div>
         <div className="List-headerImages">
-          <>
+          <React.Fragment>
             <RenderInPortal>
               <Tooltip parentElementId="List-tooltipUserImage" content={`@${listUserOwner?.name}`} delay={0.5} />
             </RenderInPortal>
@@ -125,9 +125,9 @@ export const List: React.FC<Props> = ({
                 alt={listUserOwner?.name}
               />
             </A>
-          </>
+          </React.Fragment>
           {usersInThisList?.map((item) => (
-            <React.Fragment key={item.id}>
+            <React.Fragment key={item?.id}>
               <RenderInPortal>
                 <Tooltip parentElementId={`List-${item?.id}}`} content={`@${item?.name}`} delay={0.5} />
               </RenderInPortal>
@@ -243,7 +243,11 @@ export const List: React.FC<Props> = ({
         loading={tagsInThisListLoading}
         tags={tagsInThisList}
       />
-      <SidebarListUsers title="People in this list" users={usersInThisList} loading={usersInThisListLoading} />
+      <SidebarListUsers
+        title="People in this list"
+        users={!!listUserOwner ? [listUserOwner, ...usersInThisList] : usersInThisList}
+        loading={usersInThisListLoading}
+      />
     </Sidebar>
   </>
 );

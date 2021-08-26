@@ -43,6 +43,10 @@
     path[data-id='background'] {
       fill: @c-background;
     }
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   &-bookmarkFilled {
@@ -64,6 +68,14 @@
     opacity: 0;
     background: @c-background;
     outline: 2px solid @c-background;
+  }
+
+  &-loader {
+    outline-color: @c-error;
+
+    span {
+      background: @c-error;
+    }
   }
 
   &:hover {

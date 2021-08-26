@@ -103,11 +103,8 @@ const SidebarListLists: React.FC<Props> = ({
                   id={`${stringToDashCase(title)}-members-${item?.id}`}
                   className="SidebarListLists-descriptionItem"
                 >
-                  {!!item?.members?.length && (
-                    <>
-                      <span>{item?.members?.length}</span>@
-                    </>
-                  )}
+                  {/* Lists has at least the owned, plus the members */}
+                  {!!(item?.members?.length + 1) && <span>{item?.members?.length + 1}@</span>}
                 </span>
                 <RenderInPortal>
                   <Tooltip
