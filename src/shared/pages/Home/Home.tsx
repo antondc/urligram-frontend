@@ -69,7 +69,7 @@ export const Home: React.FC<Props> = ({
         href="users?sort=-followers&page[size]=10"
       />
       <SidebarListUsers
-        title="Followers"
+        title="New Users"
         users={newUsers}
         loading={newUsersLoading}
         href="users?sort=createdAt&page[size]=10"
