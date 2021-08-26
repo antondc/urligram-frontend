@@ -5,16 +5,17 @@ import './SpinnerPie.less';
 export type SpinnerPieSize = 'nano' | 'micro' | 'small' | 'normal' | 'medium' | 'big' | 'biggest' | 'huge';
 
 interface Props {
-  speed?: 'slow' | 'normal' | 'fast';
+  className?: string;
+  speed?: 'fast' | 'normal' | 'slow';
 }
 
-export const SpinnerPie: React.FC<Props> = () => (
-  <div className="ui-spinner">
-    <span className="side side-left">
-      <span className="fill"></span>
+export const SpinnerPie: React.FC<Props> = ({ speed = 'normal', className }) => (
+  <div className={'SpinnerPie' + (speed ? ' SpinnerPie-' + speed : '') + (className ? className : '')}>
+    <span className="SpinnerPie-side SpinnerPie-sideLeft">
+      <span className="SpinnerPie-leftFill" />
     </span>
-    <span className="side side-right">
-      <span className="fill"></span>
+    <span className="SpinnerPie-side SpinnerPie-sideRight">
+      <span className="SpinnerPie-rightFill" />
     </span>
   </div>
 );

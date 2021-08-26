@@ -1,66 +1,90 @@
 @import '../../../css/imports.less';
 
-.ui-spinner {
+@c: .SpinnerPie;
+
+@{c} {
   position: relative;
-  border-radius: 100%;
-  height: 46px;
-  width: 46px;
-  background: #ddd;
-}
-
-.ui-spinner .side {
-  position: absolute;
-  height: 100%;
-  width: 50%;
+  height: 50px;
+  width: 50px;
   overflow: hidden;
-}
-
-.ui-spinner .side .fill {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  border-radius: 999px;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
-  opacity: 0.8;
-  background: #3c76ca;
-  animation-duration: 3s;
-}
-
-.ui-spinner .side-left {
-  left: 0;
-}
-
-.ui-spinner .side-left .fill {
-  left: 100%;
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-  animation-name: ui-spinner-rotate-left;
-  transform-origin: 0 50%;
-}
-
-.ui-spinner .side-right {
-  left: 50%;
-}
-
-.ui-spinner .side-right .fill {
-  left: -100%;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-  animation-name: ui-spinner-rotate-right;
-  transform-origin: 100% 50%;
-}
-
-.ui-spinner:after {
-  content: '';
-  display: block;
-  position: absolute;
-  height: 28px;
-  width: 28px;
-  top: 9px;
-  left: 9px;
-  background: transparent;
+  background: @c-background;
+  border: 4px solid @c-base;
   border-radius: 50%;
+
+  &-side {
+    position: absolute;
+    height: 100%;
+    width: 50%;
+    overflow: hidden;
+  }
+
+  &-leftFill,
+  &-rightFill {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: @c-base;
+    border-radius: 50%;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+  }
+
+  &-sideLeft {
+    left: 0;
+  }
+
+  &-leftFill {
+    left: 100%;
+    transform-origin: 0 50%;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    animation-name: ui-spinner-rotate-left;
+  }
+
+  &-sideRight {
+    left: 50%;
+  }
+
+  &-rightFill {
+    left: -100%;
+    transform-origin: 100% 50%;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    animation-name: ui-spinner-rotate-right;
+  }
+
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    height: 50%;
+    width: 50%;
+    top: 25%;
+    left: 25%;
+    background: transparent;
+    border-radius: 50%;
+  }
+
+  &-fast {
+    @{c}-leftFill,
+    @{c}-rightFill {
+      animation-duration: 1s;
+    }
+  }
+
+  &-normal {
+    @{c}-leftFill,
+    @{c}-rightFill {
+      animation-duration: 2s;
+    }
+  }
+
+  &-slow {
+    @{c}-leftFill,
+    @{c}-rightFill {
+      animation-duration: 4s;
+    }
+  }
 }
 
 @keyframes ui-spinner-rotate-right {
