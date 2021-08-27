@@ -64,14 +64,17 @@
     font-weight: @fw-semibold;
     line-height: initial;
     overflow: hidden;
-
-    .hoverTransition(0.8);
   }
 
   &-link {
+    text-decoration: underline;
+    text-decoration-color: @c-accentLight-hard;
+    text-decoration-thickness: 2px;
     white-space: nowrap;
+    overflow: hidden;
     overflow-x: scroll;
     overflow-y: hidden;
+    transition: text-decoration-color @td-fast @ease;
     text-overflow: ellipsis;
 
     .hideScrollbar;

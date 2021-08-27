@@ -52,7 +52,7 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
   >
     <div className="BookmarkRow-title">
       <img className="BookmarkRow-favicon" src={bookmark?.favicon} />
-      <A className="BookmarkRow-link" href={bookmark?.url} targetBlank styled={false}>
+      <A className="BookmarkRow-link" href={bookmark?.url} targetBlank underlined>
         {bookmark?.title}
       </A>
     </div>

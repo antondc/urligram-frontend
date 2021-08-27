@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 import Bookmark from 'Assets/svg/bookmark.svg';
+import List from 'Assets/svg/list.svg';
 import A from 'Components/A';
 import { RenderInPortal } from 'Components/Portal';
 import { ListState } from 'Modules/Lists/lists.types';
@@ -45,6 +46,7 @@ const SidebarListLists: React.FC<Props> = ({
   return (
     <div className={'SidebarListLists' + (!!className ? ' ' + className : '')}>
       <div className="SidebarListLists-header">
+        <List className="SidebarListLists-icon" />
         <A href={href} frontend styled={!!href} disabled={!href} underlined onClick={onListTitleClick}>
           {title}
         </A>

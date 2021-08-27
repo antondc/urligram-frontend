@@ -123,7 +123,7 @@ export const ListAddUser: React.FC<Props> = ({
                       />
                     )}
                     {itemsLoadingRemove?.includes(item?.id) ? (
-                      <SpinnerPie className="ListAddUser-usersItemLoader" />
+                      <SpinnerPie className="ListAddUser-usersItemLoader ListAddUser-usersItemLoaderRemove" />
                     ) : (
                       <PlusCircleWithBackground
                         className={

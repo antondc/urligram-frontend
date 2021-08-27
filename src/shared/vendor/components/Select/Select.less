@@ -53,7 +53,7 @@
     transform: translate(-4px, 0) scale(1);
     transition: transform @td-fast @ease, opacity @td-fastest @ease-out;
     will-change: transform;
-    pointer-events: none;
+    // pointer-events: none;
   }
 
   &__label-background {
@@ -92,12 +92,13 @@
     padding: 3px;
 
     svg {
+      fill: @c-accentLight;
       transition: fill @td-fast @ease;
     }
 
     &:hover {
       svg {
-        fill: @gradientColors[red-3];
+        fill: @c-base;
       }
     }
   }
@@ -106,12 +107,13 @@
     padding: 3px 9px 3px 0;
 
     svg {
+      fill: @c-accentLight;
       transition: fill @td-fast @ease;
     }
 
     &:hover {
       svg {
-        fill: @gradientColors[yellow-1];
+        fill: @c-base;
       }
     }
   }
@@ -124,7 +126,7 @@
     font-size: @fs-small;
     overflow-x: scroll;
     overflow-y: hidden;
-    cursor: text;
+    // cursor: text;
 
     .hideScrollbar();
   }
@@ -139,11 +141,9 @@
     margin: 0 4px 0 0;
     padding: 3px 3px 3px 8px;
     background: @c-background;
-    border: 1px solid @gradientColors[blue-1];
+    border: 1px solid @c-base;
     transition: background @td-fast @ease, box-shadow @td-fast @ease;
     border-radius: 4px;
-
-    .boxShadowLight;
   }
 
   &__multi-value__label:not(.noClass) {
@@ -153,7 +153,6 @@
     line-height: @fh-small;
     white-space: unset;
     text-overflow: unset;
-    color: @gradientColors[blue-1];
 
     &:first-letter {
       text-transform: capitalize;
@@ -166,7 +165,7 @@
 
   &__multi-value__remove:not(.noClass) {
     padding-right: 6px;
-    fill: @gradientColors[blue-1];
+    fill: @c-base;
     transition: fill @td-fast @ease;
     border-radius: 0;
 
@@ -177,7 +176,7 @@
 
     &:hover:not(.noClass):not(.noClass2) {
       background: @c-transparent;
-      fill: @gradientColors[blue-3];
+      fill: @c-accentLight;
       cursor: pointer;
     }
   }
@@ -204,7 +203,7 @@
     padding: 6px 12px;
     font-size: @fs-small;
     background: @c-transparent;
-    transition: background @td-fast @ease, outline @td-fast @ease;
+    transition: background @td-fast @ease;
 
     &:hover {
       cursor: pointer;
@@ -213,9 +212,8 @@
 
   &__option--is-focused:not(.noClass):not(.noClass) {
     position: relative;
-    color: @c-background;
-    background: @gradientColors[blue-2];
-    outline: 1px solid @gradientColors[blue-2];
+    color: @c-base;
+    background: @c-accentLight-hardest;
   }
 
   &__option--is-selected:not(.noClass):not(.noClass) {

@@ -78,7 +78,7 @@ export const BookmarkRowIcons: React.FC<Partial<BookmarkRowIcons>> = ({
           <Private className="BookmarkRowIcons-icon BookmarkRowIcons-iconPrivate" />
         )}
         <div className="BookmarkRowIcons-timesBookmarked" id={`BookmarkRowIcons-timesBookmarked--${bookmark?.id}`}>
-          {bookmark?.statistics?.timesBookmarked} <Bookmark className="BookmarkRowIcons-timesBookmarkedIcon" />
+          {bookmark?.statistics?.timesBookmarked}
         </div>
         <RenderInPortal>
           <Tooltip

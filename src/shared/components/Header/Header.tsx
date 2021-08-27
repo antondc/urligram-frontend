@@ -44,7 +44,7 @@ export const Header: React.FC<Props> = ({
         underlined
         active={routeName === 'Bookmarks'}
       >
-        <h3 className="Header-text">Bookmarks</h3>
+        <h3 className="Header-text">All bookmarks</h3>
         <BookmarkFilled className="Header-icon Header-iconBookmark" />
       </A>
       <A
@@ -64,7 +64,7 @@ export const Header: React.FC<Props> = ({
         underlined
         active={routeName === 'Tags'}
       >
-        <h3 className="Header-text">Tags</h3>
+        <h3 className="Header-text">All tags</h3>
         <Tag className="Header-icon Header-iconTag" />
       </A>
       <A
@@ -74,7 +74,7 @@ export const Header: React.FC<Props> = ({
         underlined
         active={routeName === 'Lists'}
       >
-        <h3 className="Header-text">Lists</h3>
+        <h3 className="Header-text">All lists</h3>
         <List className="Header-icon Header-iconList" />
       </A>
     </nav>

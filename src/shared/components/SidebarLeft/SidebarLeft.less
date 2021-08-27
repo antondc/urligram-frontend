@@ -4,7 +4,7 @@
 
 @{c} {
   width: 100%;
-  padding: 15px 25px 30px 25px;
+  padding: 15px 15px 30px 15px;
   font-size: @fs-medium;
   font-weight: @fw-extraBold;
   overflow: hidden;
@@ -20,6 +20,12 @@
   &-item {
     display: flex;
     align-items: center;
+  }
+
+  &-icon  {
+    height: 15px;
+    width: 15px;
+    margin-right: 5px;
   }
 
   &-link {
@@ -59,10 +65,6 @@
     &:hover {
       cursor: default;
     }
-  }
-
-  &-icon {
-    margin-right: 3px;
   }
 
   &-sidebarListLists {
