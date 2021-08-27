@@ -5,17 +5,19 @@
 @{c} {
   display: grid;
   align-items: flex-start;
-  flex: 1;
-  grid-template: 'sidebarMain sidebarMain sidebarMain main main main main main main sidebarSecond sidebarSecond sidebarSecond' auto;
+  grid-template: 'sidebarMain sidebarMain main main main main main main main main sidebarSecond sidebarSecond' auto;
   grid-template-columns: repeat(12, 1fr);
-  gap: 10px;
-  border-radius: 4px;
-  padding-top: 10px;
+
+  @media @br-desktopSmall {
+    grid-template: 'sidebarMain sidebarMain main main main main main main main sidebarSecond sidebarSecond sidebarSecond' auto;
+    grid-template-columns: repeat(12, 1fr);
+  }
 
   @media @br-tablet {
     grid-template:
       'sidebarMain sidebarMain main main main main main main main main main main' auto
       'sidebarSecond sidebarSecond main main main main main main main main main main' auto;
+    grid-template-columns: repeat(12, 1fr);
   }
 
   @media @br-mobile {
@@ -26,12 +28,6 @@
 
   &-sidebarMain {
     grid-area: sidebarMain;
-    padding: 5px;
-    overflow: hidden;
-    background: @c-background;
-    border-radius: 4px;
-
-    .boxShadow;
 
     @media @br-mobile {
       display: none;

@@ -6,6 +6,7 @@
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   padding-top: 40px;
+  padding-bottom: 40px;
 
   @media @br-mobile {
     display: flex;
@@ -18,14 +19,10 @@
   }
 
   &-title {
-    margin-bottom: 10px;
-    padding: 20px;
+    padding: 20px 20px 0 20px;
     font-size: @fs-big;
     font-weight: @fw-bold;
     background: @c-background;
-    border-radius: 4px;
-
-    .boxShadow;
 
     @media @br-mobile {
       line-height: @fh-big;
@@ -33,21 +30,18 @@
   }
 
   &-part {
-    margin-bottom: 10px;
     padding: 20px;
     background: @c-background;
-    border-radius: 4px;
-
-    .boxShadow;
   }
 
   &-subHeader {
+    margin-bottom: 10px;
     font-size: @fs-mediumBig;
     font-weight: @fw-bold;
     line-height: @fs-mediumBig;
   }
 
   &-paragraph {
-    margin-top: 10px;
+    //
   }
 }

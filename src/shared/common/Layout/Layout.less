@@ -12,7 +12,7 @@
     position: absolute;
     height: 100%;
     width: 100%;
-    background: @gradientColors[blue-4];
+    background: @c-background;
     fill: @c-accent;
     z-index: -1;
     pointer-events: none;
@@ -52,11 +52,6 @@
     max-width: @lay-maxWidth;
     min-height: 100vh;
     margin: 0 auto;
-    padding: 30px 24px;
-
-    @media @br-mobile {
-      padding: 10px;
-    }
   }
 
   &-spanner {

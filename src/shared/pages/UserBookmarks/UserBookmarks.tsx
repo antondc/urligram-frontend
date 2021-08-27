@@ -124,7 +124,6 @@ export const UserBookmarks: React.FC<Props> = ({
         )}
       </div>
       <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
-      <Hr spacer size="normal" />
     </div>
     <Sidebar>
       <SidebarListUsers

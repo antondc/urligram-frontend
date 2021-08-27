@@ -11,14 +11,13 @@
     'brand navigation user' auto
     / 0fr 1fr 0fr;
   height: 80px;
-  padding: 0;
   background: @c-background;
-  border-radius: 4px;
-
-  .boxShadowLight;
+  border-top: 1px solid @c-accentLight-hard;
+  border-bottom: 1px solid @c-accentLight-hard;
 
   @media @br-tablet {
     height: auto;
+    border: none;
   }
 
   @media @br-mobile {

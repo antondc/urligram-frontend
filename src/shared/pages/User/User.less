@@ -6,29 +6,27 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  justify-content: flex-start;
   align-items: flex-start;
   grid-area: main;
+  height: 100%;
   overflow: hidden;
+  border-left: 1px solid @c-accentLight-hard;
+  border-right: 1px solid @c-accentLight-hard;
 
   &-form {
     width: 100%;
-    margin-bottom: 10px;
     padding: 20px;
     background: @c-background;
-    border-radius: 4px;
-
-    .boxShadow;
+    border-bottom: 1px solid @c-accentLight-hard;
   }
 
   &-top {
     width: 100%;
-    margin-bottom: 10px;
     padding: 20px;
     overflow: hidden;
     background: @c-background;
-    border-radius: 4px;
-
-    .boxShadow;
+    border-bottom: 1px solid @c-accentLight-hard;
   }
 
   &-details {
@@ -48,8 +46,8 @@
     width: 50px;
     margin-left: 30px;
     object-fit: cover;
-    border-radius: 50%;
     object-position: center;
+    border-radius: 50%;
   }
 
   &-detailsItemData {
@@ -81,19 +79,15 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    margin-bottom: 10px;
     padding: 10px 20px;
     font-weight: @fw-extraBold;
     background: @c-background;
-    border-radius: 4px;
-
-    .boxShadow;
+    border-bottom: 1px solid @c-accentLight-hard;
   }
 
   &-bookmarks,
   &-lists {
     width: 100%;
-    margin-bottom: 5px;
   }
 
   &-tag {

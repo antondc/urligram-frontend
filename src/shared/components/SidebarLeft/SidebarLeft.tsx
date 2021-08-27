@@ -74,7 +74,7 @@ export const SidebarLeft: React.FC<Props> = ({
             href={`users/${sessionId}/followers`}
             frontend
             underlined
-            active={routeName === 'UserFollowers'}
+            active={routeName === 'Followers'}
           >
             Followers
           </A>
@@ -85,7 +85,7 @@ export const SidebarLeft: React.FC<Props> = ({
             href={`users/${sessionId}/following`}
             frontend
             underlined
-            active={routeName === 'UserFollowing'}
+            active={routeName === 'Following'}
           >
             Following
           </A>

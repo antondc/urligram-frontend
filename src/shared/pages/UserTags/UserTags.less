@@ -8,17 +8,17 @@
   justify-content: center;
   align-items: center;
   grid-area: main;
+  height: 100%;
+  border-left: 1px solid @c-accentLight-hard;
+  border-right: 1px solid @c-accentLight-hard;
 
   &-header {
     display: flex;
     justify-content: flex-end;
     width: 100%;
-    margin-bottom: 10px;
     padding: 5px;
     background: @c-background;
-    border-radius: 4px;
-
-    .boxShadow;
+    border-bottom: 1px solid @c-accentLight-hard;
   }
 
   &-tags {
@@ -26,13 +26,10 @@
     flex-wrap: wrap;
     align-items: flex-start;
     align-content: flex-start;
+    height: 100%;
     width: 100%;
-    min-height: 50vh;
     padding: 20px;
     background: @c-background;
-    border-radius: 4px;
-
-    .boxShadow;
   }
 
   &-tag {
