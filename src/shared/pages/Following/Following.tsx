@@ -115,11 +115,17 @@ export const Following: React.FC<Props> = ({
       <SidebarListTags
         className="Following-sidebarListTagsFirst"
         title="User Most Followed Tags"
-        href={`users/${userId}/bookmarks`}
+        titleHref={`/users/${userId}/bookmarks`}
+        tagsPathname={`/users/${userId}/bookmarks`}
         loading={userMostUsedTagsLoading}
         tags={userMostUsedTags}
       />
-      <SidebarListTags title="Most Followed Tags" loading={mostUsedTagsLoading} tags={mostUsedTags} />
+      <SidebarListTags
+        title="Most Followed Tags"
+        loading={mostUsedTagsLoading}
+        tags={mostUsedTags}
+        tagsPathname="/bookmarks"
+      />
     </Sidebar>
   </>
 );

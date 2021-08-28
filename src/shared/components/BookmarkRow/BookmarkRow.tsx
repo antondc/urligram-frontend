@@ -4,7 +4,7 @@ import BookmarkWithBackground from 'Assets/svg/bookmarkWithBackground.svg';
 import A from 'Components/A';
 import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
 import { TagState } from 'Modules/Tags/tags.types';
-import { Fade, NotificationDot, Space, Tag } from 'Vendor/components';
+import { Fade, Space, Tag } from 'Vendor/components';
 import { BookmarkRowIcons } from './BookmarkRowIcons';
 
 import './BookmarkRow.less';
@@ -45,14 +45,17 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
   bookmarkViewed,
 }) => (
   <div
-    className={'BookmarkRow' + (recentlyCreated ? ' BookmarkRow-recentlyCreated' : '')}
+    className={
+      'BookmarkRow' +
+      (recentlyCreated ? ' BookmarkRow--recentlyCreated' : '') +
+      (viewPending ? ' BookmarkRow--viewPending' : '')
+    }
     data-test-id="BookmarkRow"
     key={bookmark?.id}
-    onMouseEnter={bookmarkViewed}
   >
     <div className="BookmarkRow-title">
       <img className="BookmarkRow-favicon" src={bookmark?.favicon} />
-      <A className="BookmarkRow-link" href={bookmark?.url} targetBlank underlined>
+      <A className="BookmarkRow-link" href={bookmark?.url} onClick={bookmarkViewed} targetBlank underlined>
         {bookmark?.title}
       </A>
     </div>
@@ -97,7 +100,7 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
         </A>
       ))}
     </div>
-    <div className="BookmarkRow-icons">
+    <div className="BookmarkRow-icons" onClick={bookmarkViewed}>
       <Fade
         mounted={uiScreenTypeIsMobile && sessionUserBookmarkedLink && !bookmarkActionIconsMounted}
         position="absolute"
@@ -118,11 +121,6 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
         onMobileBookmarkActionsBackgroundClick={onMobileBookmarkActionsBackgroundClick}
       />
     </div>
-    <NotificationDot
-      type="alert"
-      size="normal"
-      className={'BookmarkRow-notificationDot' + (viewPending ? ' BookmarkRow-notificationDot--viewPending' : '')}
-    />
   </div>
 );
 

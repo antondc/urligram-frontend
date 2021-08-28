@@ -4,7 +4,7 @@
 
 @{c} {
   width: 100%;
-  padding: 15px 15px 30px 15px;
+  padding: 15px;
   font-size: @fs-medium;
   font-weight: @fw-extraBold;
   overflow: hidden;
@@ -26,6 +26,12 @@
     height: 15px;
     width: 15px;
     margin-right: 5px;
+  }
+
+  &-iconLists {
+    height: 12px;
+    width: 12px;
+    padding: 2px;
   }
 
   &-link {
@@ -67,25 +73,16 @@
     }
   }
 
-  &-sidebarListLists {
-    padding: 0;
-    overflow: visible;
-    border: none;
-    box-shadow: none;
+  &-listsTriangle {
+    height: 6px;
+    width: 6px;
+    stroke: @c-base;
+    transform: rotate(90deg);
+    transition: transform @td-fast @ease-outQuint;
+    stroke-width: 10px;
 
-    .SidebarListLists-header {
-      @media @br-tabletHorizontal {
-        font-size: @fs-medium;
-        font-weight: @fw-extraBold;
-      }
-    }
-
-    .SidebarListLists-grid {
-      padding-top: 10px;
-    }
-
-    .SidebarListLists-triangle {
-      display: block;
+    &--show {
+      transform: rotate(180deg);
     }
   }
 

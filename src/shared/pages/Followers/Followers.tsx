@@ -114,10 +114,16 @@ export const Followers: React.FC<Props> = ({
         className="Followers-sidebarListTagsFirst"
         tags={userMostUsedTags}
         title="User Most Followed Tags"
-        href={`users/${userId}/bookmarks`}
+        titleHref={`/users/${userId}/bookmarks`}
+        tagsPathname={`/users/${userId}/bookmarks`}
         loading={userMostUsedTagsLoading}
       />
-      <SidebarListTags title="Most Followed Tags" loading={mostUsedTagsLoading} tags={mostUsedTags} />
+      <SidebarListTags
+        title="Most Followed Tags"
+        loading={mostUsedTagsLoading}
+        tags={mostUsedTags}
+        tagsPathname="/bookmarks"
+      />
     </Sidebar>
   </>
 );

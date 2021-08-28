@@ -242,6 +242,8 @@ export const List: React.FC<Props> = ({
         title="Tags In This List"
         loading={tagsInThisListLoading}
         tags={tagsInThisList}
+        titleHref={url}
+        tagsPathname={`/lists/${list?.id}`}
       />
       <SidebarListUsers
         title="People in this list"

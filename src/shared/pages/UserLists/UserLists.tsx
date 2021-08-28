@@ -110,13 +110,15 @@ export const UserLists: React.FC<Props> = ({
       <SidebarListTags
         className="UserLists-sidebarListTagsFirst"
         title="My Tags"
-        href={`users/${userId}/tags`}
+        titleHref={`/users/${userId}/tags`}
+        tagsPathname={`/users/${userId}/bookmarks`}
         loading={userMostUsedTagsLoading}
         tags={userMostUsedTags}
       />
       <SidebarListTags
         title="Most Used Tags"
-        href={`users/${userId}/tags`}
+        titleHref={`/bookmarks`}
+        tagsPathname={`/bookmarks`}
         loading={mostFollowedTagsLoading}
         tags={mostFollowedTags}
       />

@@ -1,19 +1,18 @@
 import React from 'react';
 
 import BookmarkFilled from 'Assets/svg/bookmarkFilled.svg';
-import Cross from 'Assets/svg/cross.svg';
 import FlagLeft from 'Assets/svg/flagLeft.svg';
 import FlagRight from 'Assets/svg/flagRight.svg';
 import List from 'Assets/svg/list.svg';
 import PlusCircle from 'Assets/svg/plusCircle.svg';
 import Tag from 'Assets/svg/tag.svg';
+import Triangle from 'Assets/svg/triangle.svg';
 import UserFill from 'Assets/svg/userFill.svg';
 import A from 'Components/A';
-import Logo from 'Components/Logo';
-import SidebarListLists from 'Components/SidebarListLists';
 import { GlossaryState } from 'Modules/Languages/languages.types';
 import { ListState } from 'Modules/Lists/lists.types';
-import { Hr } from 'Vendor/components';
+import { Space } from 'Vendor/components';
+import SidebarLeftLists from './SidebarLeftLists';
 
 import './SidebarLeft.less';
 
@@ -45,14 +44,14 @@ export const SidebarLeft: React.FC<Props> = ({
     {isLoggedIn && (
       <ul>
         <li className="SidebarLeft-item">
-          <UserFill className="SidebarLeft-icon SidebarLeft-user" />
+          <UserFill className="SidebarLeft-icon SidebarLeft-iconUser" />
           <A className="SidebarLeft-link" href={`users/${sessionId}`} frontend underlined active={routeName === 'User'}>
             {glossary.myUser}
           </A>
         </li>
 
         <li className="SidebarLeft-item">
-          <Tag className="SidebarLeft-icon SidebarLeft-userTags" />
+          <Tag className="SidebarLeft-icon SidebarLeft-iconUserTags" />
           <A
             className="SidebarLeft-link"
             href={`users/${sessionId}/tags`}
@@ -64,13 +63,13 @@ export const SidebarLeft: React.FC<Props> = ({
           </A>
         </li>
         <li className="SidebarLeft-item">
-          <PlusCircle className="SidebarLeft-icon SidebarLeft-plusCircle" />
+          <PlusCircle className="SidebarLeft-icon SidebarLeft-iconPlusCircle" />
           <A className="SidebarLeft-link" href="" frontend underlined onClick={switchUiBookmarkModal}>
             Add bookmark
           </A>
         </li>
         <li className="SidebarLeft-item">
-          <BookmarkFilled className="SidebarLeft-icon SidebarLeft-bookmarkFilled" />
+          <BookmarkFilled className="SidebarLeft-icon SidebarLeft-iconBookmarkFilled" />
           <A
             className="SidebarLeft-link"
             href={`users/${sessionId}/bookmarks`}
@@ -82,8 +81,8 @@ export const SidebarLeft: React.FC<Props> = ({
           </A>
         </li>
         <li className="SidebarLeft-item">
-          <FlagRight className="SidebarLeft-icon SidebarLeft-flagRight" />
-          
+          <FlagRight className="SidebarLeft-icon SidebarLeft-iconFlagRight" />
+
           <A
             className="SidebarLeft-link"
             href={`users/${sessionId}/followers`}
@@ -95,7 +94,7 @@ export const SidebarLeft: React.FC<Props> = ({
           </A>
         </li>
         <li className="SidebarLeft-item">
-          <FlagLeft className="SidebarLeft-icon SidebarLeft-flagLeft" />
+          <FlagLeft className="SidebarLeft-icon SidebarLeft-iconFlagLeft" />
           <A
             className="SidebarLeft-link"
             href={`users/${sessionId}/following`}
@@ -107,10 +106,24 @@ export const SidebarLeft: React.FC<Props> = ({
           </A>
         </li>
         <li className="SidebarLeft-item">
-          <PlusCircle className="SidebarLeft-icon SidebarLeft-plusCircle" />
+          <PlusCircle className="SidebarLeft-icon SidebarLeft-iconPlusCircle" />
           <A className="SidebarLeft-link" href="" frontend underlined onClick={switchUiListModal}>
             Create list
           </A>
+        </li>
+        <li className="SidebarLeft-item">
+          <List className="SidebarLeft-icon SidebarLeft-iconLists" />
+          <A
+            className="SidebarLeft-link"
+            href={`users/${sessionId}/lists?sort=-createdAt`}
+            frontend
+            underlined
+            onClick={onListTitleClick}
+          >
+            My Lists
+          </A>
+          <Space />
+          <Triangle className={'SidebarLeft-listsTriangle' + (listsShown ? ' SidebarLeft-listsTriangle--show' : '')} />
         </li>
       </ul>
     )}
@@ -143,20 +156,6 @@ export const SidebarLeft: React.FC<Props> = ({
         </li>
       </ul>
     )}
-    {!!isLoggedIn && (
-      <>
-        <Hr spacer size="nano" />
-        <Hr spacer size="nano" />
-        <SidebarListLists
-          className="SidebarLeft-sidebarListLists"
-          lists={lists}
-          loading={false}
-          title="My Lists"
-          href={`users/${sessionId}/lists?sort=-createdAt`}
-          listsShown={listsShown}
-          onListTitleClick={onListTitleClick}
-        />
-      </>
-    )}
+    {!!isLoggedIn && <SidebarLeftLists lists={lists} loading={false} listsShown={listsShown} />}
   </div>
 );

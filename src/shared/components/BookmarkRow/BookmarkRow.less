@@ -18,6 +18,7 @@
   background: @c-background;
   column-gap: 10px;
   border-bottom: 1px solid @c-accentLight-hardest;
+  transition: background @td-normal @ease;
 
   @media @br-mobile {
     grid-template:
@@ -28,21 +29,12 @@
     height: 70px;
   }
 
-  &-recentlyCreated {
-    border: 2px solid @gradientColors[green-1];
-    transition: border @td-fast @ease box-shadow @td-fast @ease;
-    box-shadow: 4px 4px 0 0 @gradientColors[green-1];
-  }
+  &--recentlyCreated,
+  &--viewPending {
+    background: @c-accentLight-hardest;
 
-  &-notificationDot {
-    position: absolute;
-    top: 4px;
-    left: 4px;
-    opacity: 0;
-    transition: opacity @td-slow @ease;
-
-    &--viewPending {
-      opacity: 1;
+    &:hover {
+      background: @gradientColors[black-6];
     }
   }
 

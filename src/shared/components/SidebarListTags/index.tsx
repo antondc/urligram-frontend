@@ -14,15 +14,23 @@ interface Props {
     id: number;
     name: string;
   }[];
-  href?: string;
+  titleHref?: string;
+  tagsPathname: string;
 }
 
-const SidebarListTags: React.FC<Props> = ({ tags, loading, title, href, className }) => {
+const SidebarListTags: React.FC<Props> = ({ className, tags, loading, title, titleHref, tagsPathname }) => {
   if (!tags?.length && !loading) return null;
 
   return (
     <div className={'SidebarListTags' + (className ? ' ' + className : '')}>
-      <A className="SidebarListTags-header" href={href} frontend styled={!!href} disabled={!href} underlined>
+      <A
+        className="SidebarListTags-header"
+        href={titleHref}
+        frontend
+        styled={!!titleHref}
+        disabled={!titleHref}
+        underlined
+      >
         {title}
       </A>
       <Hr size="small" spacer />
@@ -32,7 +40,7 @@ const SidebarListTags: React.FC<Props> = ({ tags, loading, title, href, classNam
           tags.map((tag) => (
             <A
               className="SidebarListTags-tag"
-              href={`/bookmarks?filter[tags][]=${tag.name}`}
+              href={`${tagsPathname}?filter[tags][]=${tag.name}`}
               key={`SidebarListTags-tags-${tag.id}`}
               styled={false}
               frontend

@@ -104,6 +104,7 @@ export const Lists: React.FC<Props> = ({
         title="Most Used Tags"
         loading={mostUsedTagsLoading}
         tags={mostUsedTags}
+        tagsPathname="/bookmarks"
       />
       <SidebarListUsers
         title="New Users"

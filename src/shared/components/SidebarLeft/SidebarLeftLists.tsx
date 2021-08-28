@@ -2,38 +2,23 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 import Bookmark from 'Assets/svg/bookmark.svg';
-import List from 'Assets/svg/list.svg';
 import A from 'Components/A';
 import { RenderInPortal } from 'Components/Portal';
 import { ListState } from 'Modules/Lists/lists.types';
 import { selectListWithNotificationsIds } from 'Modules/Lists/selectors/selectListWithNotificationsIds';
 import { selectCurrentRouteParams } from 'Modules/Routes/selectors/selectCurrentRouteParams';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
-import { stringToDashCase } from 'Tools/utils/string/stringToDashCase';
-import { AnimateHeight, DotsVertical, NotificationDot, Space, Tooltip, Triangle } from 'Vendor/components';
-import { SidebarListListsSkeleton } from './SidebarListListsSkeleton';
+import { AnimateHeight, DotsVertical, Fade, NotificationDot, Space, Tooltip } from 'Vendor/components';
 
-import './SidebarListLists.less';
+import './SidebarLeftLists.less';
 
 interface Props {
-  title: string;
   lists: ListState[];
   loading?: boolean;
-  href?: string;
-  className?: string;
   listsShown?: boolean;
-  onListTitleClick?: () => void;
 }
 
-const SidebarListLists: React.FC<Props> = ({
-  lists,
-  loading,
-  title,
-  href,
-  className,
-  listsShown = true,
-  onListTitleClick = () => {},
-}) => {
+const SidebarLeftLists: React.FC<Props> = ({ lists, loading, listsShown = true }) => {
   const currentRouteParams = useSelector(selectCurrentRouteParams);
   const currentListId = Number(currentRouteParams?.listId);
   const session = useSelector(selectSession);
@@ -42,37 +27,25 @@ const SidebarListLists: React.FC<Props> = ({
   if (!lists?.length && !loading) return null;
 
   return (
-    <div className={'SidebarListLists' + (!!className ? ' ' + className : '')}>
-      <div className="SidebarListLists-header">
-        <List className="SidebarListLists-icon" />
-        <A href={href} frontend styled={!!href} disabled={!href} underlined onClick={onListTitleClick}>
-          {title}
-        </A>
-        <Space />
-        <Triangle
-          className={'SidebarListLists-triangle' + (listsShown ? ' SidebarListLists-triangle--show' : '')}
-          size="pico"
-        />
-      </div>
-      <AnimateHeight
-        className="SidebarListLists-grid"
-        mounted={listsShown}
-        speed="fastest"
-        ease={[1, 0.02, 0.83, 1.15]}
-      >
-        {!!loading && <SidebarListListsSkeleton />}
-        {!loading &&
-          lists?.map((item, index) => {
+    <div className="SidebarLeftLists">
+      <Fade mounted={listsShown} appear speed="normal">
+        <AnimateHeight
+          className="SidebarLeftLists-grid"
+          mounted={listsShown}
+          speed="fastest"
+          ease={[1, 0.02, 0.83, 1.15]}
+        >
+          {lists?.map((item, index) => {
             const sessionListMembership = item?.members?.find((item) => item?.id === session?.id);
             const listHasNotifications = listsWithNotificationsIds.includes(item?.id);
 
             return (
               <React.Fragment key={`${item?.id}-${index}`}>
-                <div className="SidebarListLists-itemHeader">
+                <div className="SidebarLeftLists-itemHeader">
                   <DotsVertical size="nano" />
                   <Space />
                   <A
-                    className="SidebarListLists-name"
+                    className="SidebarLeftLists-name"
                     href={`lists/${item?.id}`}
                     frontend
                     underlined
@@ -80,55 +53,50 @@ const SidebarListLists: React.FC<Props> = ({
                   >
                     {item?.name}
                     <NotificationDot
-                      type="alert"
+                      type="success"
                       size="small"
                       className={
-                        'SidebarListLists-notificationDot' +
+                        'SidebarLeftLists-notificationDot' +
                         (sessionListMembership?.userListStatus === 'pending'
-                          ? ' SidebarListLists-notificationDot--pending'
+                          ? ' SidebarLeftLists-notificationDot--pending'
                           : '') +
-                        (!!listHasNotifications ? ' SidebarListLists-notificationDot--pending' : '')
+                        (!!listHasNotifications ? ' SidebarLeftLists-notificationDot--pending' : '')
                       }
                     />
                   </A>
                 </div>
                 <RenderInPortal>
                   <Tooltip
-                    parentElementId={`${stringToDashCase(title)}-members-${item?.id}`}
+                    parentElementId={`SidebarLeftLists-members-${item?.id}`}
                     content="Users in this list"
                     delay={0.5}
                   />
                 </RenderInPortal>
-                <span
-                  id={`${stringToDashCase(title)}-members-${item?.id}`}
-                  className="SidebarListLists-descriptionItem"
-                >
+                <span id={`SidebarLeftLists-members-${item?.id}`} className="SidebarLeftLists-descriptionItem">
                   {/* Lists has at least the owned, plus the members */}
                   {!!(item?.members?.length + 1) && <span>{item?.members?.length + 1}@</span>}
                 </span>
                 <RenderInPortal>
                   <Tooltip
-                    parentElementId={`${stringToDashCase(title)}-bookmarks-${item?.id}`}
+                    parentElementId={`SidebarLeftLists-bookmarks-${item?.id}`}
                     content="Bookmarks in this list"
                     delay={0.5}
                   />
                 </RenderInPortal>
-                <span
-                  id={`${stringToDashCase(title)}-bookmarks-${item?.id}`}
-                  className="SidebarListLists-descriptionItem"
-                >
+                <span id={`SidebarLeftLists-bookmarks-${item?.id}`} className="SidebarLeftLists-descriptionItem">
                   {!!item?.bookmarksIds?.length && (
                     <>
                       <span>{item?.bookmarksIds?.length}</span>
-                      <Bookmark className="SidebarListLists-bookmarkIcon" />
+                      <Bookmark className="SidebarLeftLists-bookmarkIcon" />
                     </>
                   )}
                 </span>
               </React.Fragment>
             );
           })}
-      </AnimateHeight>
+        </AnimateHeight>
+      </Fade>{' '}
     </div>
   );
 };
-export default SidebarListLists;
+export default SidebarLeftLists;

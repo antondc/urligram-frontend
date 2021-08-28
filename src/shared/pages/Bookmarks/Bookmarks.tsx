@@ -112,7 +112,12 @@ export const Bookmarks: React.FC<Props> = ({
           bookmarks={myRecentBookmarks}
         />
       )}
-      <SidebarListTags title="Most Followed Tags" loading={mostUsedTagsLoading} tags={mostUsedTags} />
+      <SidebarListTags
+        title="Most Followed Tags"
+        loading={mostUsedTagsLoading}
+        tags={mostUsedTags}
+        tagsPathname="/bookmarks"
+      />
       <SidebarListLists
         title="Popular lists"
         lists={popularLists}
