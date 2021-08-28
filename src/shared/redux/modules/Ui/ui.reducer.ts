@@ -19,6 +19,8 @@ import {
   UI_SCREEN_MOBILE_LOCK,
   UI_SCREEN_MOBILE_UNLOCK,
   UI_SCREEN_TYPE_SET,
+  UI_SIDEBAR_LEFT_CLOSE,
+  UI_SIDEBAR_LEFT_OPEN,
   UI_SWITCH_BOOKMARK_ICONS_MOUNTED,
   UI_SWITCH_BOOKMARK_ICONS_UNMOUNTED,
   UiActions,
@@ -93,6 +95,9 @@ export const initialState: UiState = {
     mounted: false,
     bookmarkId: undefined,
   },
+  sidebarLeftState: {
+    closed: false,
+  },
 };
 
 export const Ui = (state = initialState, action: UiActions): UiState => {
@@ -121,6 +126,8 @@ export const Ui = (state = initialState, action: UiActions): UiState => {
     case SWITCH_LIST_ADD_USER_MODAL:
     case UI_SWITCH_BOOKMARK_ICONS_MOUNTED:
     case UI_SWITCH_BOOKMARK_ICONS_UNMOUNTED:
+    case UI_SIDEBAR_LEFT_CLOSE:
+    case UI_SIDEBAR_LEFT_OPEN:
       return Object.assign({}, state, action.payload);
 
     default:

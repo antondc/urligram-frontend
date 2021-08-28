@@ -1,12 +1,12 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 
-import HeaderSecond from 'Components/HeaderSecond';
 import SidebarLeft from 'Components/SidebarLeft';
 import { selectPathWithoutLanguageParam } from 'Modules/Routes/selectors/selectPathWithoutLanguageParam';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
+import { selectUiSidebarleftState } from 'Modules/Ui/selectors/selectUiSidebarleftState';
 import Bookmarks from 'Pages/Bookmarks';
 import Followers from 'Pages/Followers';
 import Following from 'Pages/Following';
@@ -31,31 +31,35 @@ interface Props {
 }
 
 // Fades are commented out to mark the correct place to render them if needed
-const Content: React.FC<Props> = ({ location, pathWithoutLanguageParam }) => (
-  <div className="Content">
-    {/* INTENDED => <Fade classname="Content-sidebarLeft" mounted speed="fastest" delayIn={250} appear> */}
-    <div className="Content-sidebarMain">
-      <SidebarLeft />
+const Content: React.FC<Props> = ({ location, pathWithoutLanguageParam }) => {
+  const sidebarLeftClosed = useSelector(selectUiSidebarleftState);
+
+  return (
+    <div className={'Content' + (sidebarLeftClosed ? ' Content--sidebarLeftClosed' : '')}>
+      {/* INTENDED => <Fade classname="Content-sidebarLeft" mounted speed="fastest" delayIn={250} appear> */}
+      <div className="Content-sidebarMain">
+        <SidebarLeft />
+      </div>
+      {/* INTENDED => </Fade> */}
+      {/* INTENDED =><FadeInOut valueToUpdate={pathWithoutLanguageParam} speed="fastest" appear> */}
+      <Switch location={{ ...location, pathname: pathWithoutLanguageParam }}>
+        <Route exact={Routes.UserBookmarks.exact} path={Routes.UserBookmarks.path} component={UserBookmarks} />
+        <Route exact={Routes.User.exact} path={Routes.User.path} component={User} />
+        <Route exact={Routes.Users.exact} path={Routes.Users.path} component={Users} />
+        <Route exact={Routes.List.exact} path={Routes.List.path} component={List} />
+        <Route exact={Routes.Lists.exact} path={Routes.Lists.path} component={Lists} />
+        <Route exact={Routes.Bookmarks.exact} path={Routes.Bookmarks.path} component={Bookmarks} />
+        <Route exact={Routes.Home.exact} path={Routes.Home.path} component={Home} />
+        <Route exact={Routes.Followers.exact} path={Routes.Followers.path} component={Followers} />
+        <Route exact={Routes.Following.exact} path={Routes.Following.path} component={Following} />
+        <Route exact={Routes.UserLists.exact} path={Routes.UserLists.path} component={UserLists} />
+        <Route exact={Routes.UserTags.exact} path={Routes.UserTags.path} component={UserTags} />
+        <Route exact={Routes.Tags.exact} path={Routes.Tags.path} component={Tags} />
+      </Switch>
+      {/* INTENDED => </FadeInOut> */}
     </div>
-    {/* INTENDED => </Fade> */}
-    {/* INTENDED =><FadeInOut valueToUpdate={pathWithoutLanguageParam} speed="fastest" appear> */}
-    <Switch location={{ ...location, pathname: pathWithoutLanguageParam }}>
-      <Route exact={Routes.UserBookmarks.exact} path={Routes.UserBookmarks.path} component={UserBookmarks} />
-      <Route exact={Routes.User.exact} path={Routes.User.path} component={User} />
-      <Route exact={Routes.Users.exact} path={Routes.Users.path} component={Users} />
-      <Route exact={Routes.List.exact} path={Routes.List.path} component={List} />
-      <Route exact={Routes.Lists.exact} path={Routes.Lists.path} component={Lists} />
-      <Route exact={Routes.Bookmarks.exact} path={Routes.Bookmarks.path} component={Bookmarks} />
-      <Route exact={Routes.Home.exact} path={Routes.Home.path} component={Home} />
-      <Route exact={Routes.Followers.exact} path={Routes.Followers.path} component={Followers} />
-      <Route exact={Routes.Following.exact} path={Routes.Following.path} component={Following} />
-      <Route exact={Routes.UserLists.exact} path={Routes.UserLists.path} component={UserLists} />
-      <Route exact={Routes.UserTags.exact} path={Routes.UserTags.path} component={UserTags} />
-      <Route exact={Routes.Tags.exact} path={Routes.Tags.path} component={Tags} />
-    </Switch>
-    {/* INTENDED => </FadeInOut> */}
-  </div>
-);
+  );
+};
 
 const mapStateToProps = createStructuredSelector({
   loggedIn: selectSessionLoggedIn,

@@ -8,7 +8,7 @@ import { ListState } from 'Modules/Lists/lists.types';
 import { selectListWithNotificationsIds } from 'Modules/Lists/selectors/selectListWithNotificationsIds';
 import { selectCurrentRouteParams } from 'Modules/Routes/selectors/selectCurrentRouteParams';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
-import { AnimateHeight, DotsVertical, Fade, NotificationDot, Space, Tooltip } from 'Vendor/components';
+import { AnimateHeight, Fade, NotificationDot, Tooltip } from 'Vendor/components';
 
 import './SidebarLeftLists.less';
 
@@ -42,8 +42,6 @@ const SidebarLeftLists: React.FC<Props> = ({ lists, loading, listsShown = true }
             return (
               <React.Fragment key={`${item?.id}-${index}`}>
                 <div className="SidebarLeftLists-itemHeader">
-                  <DotsVertical size="nano" />
-                  <Space />
                   <A
                     className="SidebarLeftLists-name"
                     href={`lists/${item?.id}`}

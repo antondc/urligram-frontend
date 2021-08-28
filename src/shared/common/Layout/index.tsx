@@ -139,36 +139,38 @@ const Layout: React.FC<Props> = ({ location }) => {
         <CookiesBanner />
         <Router />
         <Footer />
-        <UserModal />
       </div>
-      <Fade mounted={loginModalMounted} speed="fastest" position="fixed" appear>
-        <LoginModal />
-      </Fade>
-      <Fade mounted={signUpModalMounted} speed="fastest" position="fixed" appear>
-        <SignUpModal />
-      </Fade>
-      <Fade mounted={welcomeModalMounted} speed="fastest" position="fixed" appear>
-        <WelcomeModal />
-      </Fade>
-      <Fade mounted={forgotPasswordModalMounted} speed="fastest" position="fixed" appear>
-        <ForgotPasswordModal />
-      </Fade>
-      <Fade mounted={resetPasswordModalMounted} speed="fastest" position="fixed" appear>
-        <ResetPasswordModal />
-      </Fade>
-      <BookmarkCreateModalOrSheet />
-      <BookmarkUpdateModalOrSheet />
-      <Fade mounted={listModalMounted} speed="fastest" position="fixed" appear>
-        <ListModal />
-      </Fade>
-      <Notifications />
-      <Fade mounted={renderLoader} speed="fastest" position="fixed" appear>
-        <div className="Layout-loader">
-          <SpinnerPie className="Layout-loaderIcon" size="huge" />
-        </div>
-      </Fade>
-      <div id="Tooltips" />
-      <div id="Portals" />
+      <div className="Layout-modalsAndPortals">
+        <UserModal />
+        <Fade mounted={loginModalMounted} speed="fastest" position="fixed" appear>
+          <LoginModal />
+        </Fade>
+        <Fade mounted={signUpModalMounted} speed="fastest" position="fixed" appear>
+          <SignUpModal />
+        </Fade>
+        <Fade mounted={welcomeModalMounted} speed="fastest" position="fixed" appear>
+          <WelcomeModal />
+        </Fade>
+        <Fade mounted={forgotPasswordModalMounted} speed="fastest" position="fixed" appear>
+          <ForgotPasswordModal />
+        </Fade>
+        <Fade mounted={resetPasswordModalMounted} speed="fastest" position="fixed" appear>
+          <ResetPasswordModal />
+        </Fade>
+        <BookmarkCreateModalOrSheet />
+        <BookmarkUpdateModalOrSheet />
+        <Fade mounted={listModalMounted} speed="fastest" position="fixed" appear>
+          <ListModal />
+        </Fade>
+        <Notifications />
+        <Fade mounted={renderLoader} speed="fastest" position="fixed" appear>
+          <div className="Layout-loader">
+            <SpinnerPie className="Layout-loaderIcon" size="huge" />
+          </div>
+        </Fade>
+        <div id="Tooltips" />
+        <div id="Portals" />
+      </div>
     </div>
   );
 };

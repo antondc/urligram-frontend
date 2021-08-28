@@ -6,12 +6,13 @@
   display: grid;
   align-items: flex-start;
   flex: 1;
-  grid-template: 'sidebarMain sidebarMain main main main main main main main main sidebarSecond sidebarSecond' auto;
-  grid-template-columns: repeat(12, 1fr);
+  grid-template: 'sidebarMain main sidebarSecond' auto;
+  grid-template-columns: 250px auto 300px;
+  transition: grid-template-columns @td-fast @ease;
 
   @media @br-desktopSmall {
-    grid-template: 'sidebarMain sidebarMain main main main main main main main sidebarSecond sidebarSecond sidebarSecond' auto;
-    grid-template-columns: repeat(12, 1fr);
+    grid-template-columns: 200px auto 200px;
+    transition: grid-template-columns @td-fast @ease;
   }
 
   @media @br-tablet {
@@ -19,6 +20,10 @@
       'sidebarMain sidebarMain main main main main main main main main main main' auto
       'sidebarSecond sidebarSecond main main main main main main main main main main' auto;
     grid-template-columns: repeat(12, 1fr);
+  }
+
+  &--sidebarLeftClosed {
+    grid-template-columns: 45px auto 300px;
   }
 
   @media @br-mobile {

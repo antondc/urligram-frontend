@@ -22,6 +22,8 @@ export const UI_NOTIFICATION_PUSH = 'UI_NOTIFICATION_PUSH';
 export const UI_CLOSE_ALL_MODALS = 'UI_CLOSE_ALL_MODALS';
 export const UI_SWITCH_BOOKMARK_ICONS_MOUNTED = 'UI_SWITCH_BOOKMARK_ICONS_MOUNTED';
 export const UI_SWITCH_BOOKMARK_ICONS_UNMOUNTED = 'UI_SWITCH_BOOKMARK_ICONS_UNMOUNTED';
+export const UI_SIDEBAR_LEFT_OPEN = 'UI_SIDEBAR_LEFT_OPEN';
+export const UI_SIDEBAR_LEFT_CLOSE = 'UI_SIDEBAR_LEFT_CLOSE';
 
 export type UiBaseModal = {
   type?: 'modal' | 'popup' | 'slider';
@@ -86,6 +88,9 @@ export type UiState = {
   bookmarkListsModal: BookmarkListsModal;
   bookmarkSendModals: BookmarkSendModals;
   notifications?: NotificationState[];
+  sidebarLeftState: {
+    closed: boolean;
+  };
 };
 
 interface UiScreenTypeSet {
@@ -208,6 +213,16 @@ interface SwitchBookmarkActionsButtonUnmounted {
   payload: Partial<UiState>;
 }
 
+interface sidebarLeftOpen {
+  type: typeof UI_SIDEBAR_LEFT_OPEN;
+  payload: Partial<UiState>;
+}
+
+interface sidebarLeftClose {
+  type: typeof UI_SIDEBAR_LEFT_CLOSE;
+  payload: Partial<UiState>;
+}
+
 export type UiActions =
   | UiScreenTypeSet
   | UiScreenLock
@@ -232,4 +247,6 @@ export type UiActions =
   | UiCloseAllModals
   | SwitchListAddUserModal
   | SwitchBookmarkActionsButtonMounted
-  | SwitchBookmarkActionsButtonUnmounted;
+  | SwitchBookmarkActionsButtonUnmounted
+  | sidebarLeftOpen
+  | sidebarLeftClose;

@@ -4,10 +4,8 @@
 
 @{c} {
   width: 100%;
-  padding: 15px;
   font-size: @fs-medium;
   font-weight: @fw-extraBold;
-  overflow: hidden;
   border-bottom: 1px solid @c-accentLight-hard;
 
   @media @br-tablet {
@@ -17,15 +15,70 @@
     border-right: 2px solid @c-base;
   }
 
-  &-item {
-    display: flex;
+  &-grid {
+    display: grid;
+    position: relative;
     align-items: center;
+    grid-template-columns: 15px auto;
+    padding: 15px;
+    gap: 10px;
+  }
+
+  &-openCloseIcon {
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    height: 17px;
+    width: 17px;
+    top: 50%;
+    bottom: 50%;
+    right: -9px;
+    padding-left: 1px;
+    background: @c-background;
+    border: 1px solid @c-accentLight-hard;
+    transform: rotate(180deg);
+    transition: border @td-fast @ease, transform @td-fast @ease;
+    border-radius: 50%;
+    z-index: 1;
+
+    svg {
+      height: 7px;
+      width: 7px;
+      fill: @c-accentLight-hard;
+      transition: fill @td-fast @ease;
+    }
+
+    &:hover {
+      border: 1px solid @c-accentLight;
+      cursor: pointer;
+
+      svg {
+        fill: @c-accentLight;
+      }
+    }
+
+    &--closed {
+      transform: rotate(0deg);
+    }
   }
 
   &-icon  {
+    position: relative;
     height: 15px;
     width: 15px;
     margin-right: 5px;
+    fill: @c-base;
+    transition: fill @td-fast @ease;
+
+    &:hover {
+      fill: @gradientColors[red-3];
+      cursor: pointer;
+    }
+
+    &--active {
+      fill: @gradientColors[red-2];
+    }
   }
 
   &-iconLists {
@@ -35,10 +88,15 @@
   }
 
   &-link {
-    line-height: @fh-big;
+    white-space: nowrap;
+    transition: opacity @td-fast @ease;
 
     &:hover {
       cursor: pointer;
+    }
+
+    &--hidden {
+      opacity: 0;
     }
   }
 
