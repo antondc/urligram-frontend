@@ -1,4 +1,5 @@
 import React from 'react';
+import Helmet from 'react-helmet';
 
 import Bookmark from 'Assets/svg/bookmarkRounded.svg';
 import Title from 'Assets/svg/sortTitle.svg';
@@ -8,6 +9,7 @@ import { SidebarListTagsSkeleton } from 'Components/SidebarListTags/SidebarListT
 import SidebarListUsers from 'Components/SidebarListUsers';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
+import { SITE_TITLE } from 'Root/src/shared/constants';
 import { Hr, SortBy, Space, Tag } from 'Vendor/components';
 
 import './UserTags.less';
@@ -21,6 +23,7 @@ interface Props {
   newUsersLoading: boolean;
   url: string;
   sort: string;
+  user: UserState;
 }
 
 export const UserTags: React.FC<Props> = ({
@@ -32,8 +35,10 @@ export const UserTags: React.FC<Props> = ({
   newUsersLoading,
   url,
   sort,
+  user,
 }) => (
   <>
+    <Helmet title={`${SITE_TITLE} · User Tags`} />
     <div className="UserTags">
       <div className="UserTags-header">
         <SortBy

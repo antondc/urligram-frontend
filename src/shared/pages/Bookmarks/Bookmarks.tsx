@@ -1,4 +1,5 @@
 import React from 'react';
+import Helmet from 'react-helmet';
 
 import Rating from 'Assets/svg/rating.svg';
 import Clock from 'Assets/svg/spinner6.svg';
@@ -13,7 +14,7 @@ import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
 import { ListState } from 'Modules/Lists/lists.types';
 import { SessionState } from 'Modules/Session/session.types';
 import { TagState } from 'Modules/Tags/tags.types';
-import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
+import { DEFAULT_PAGE_SIZE, SITE_TITLE } from 'Root/src/shared/constants';
 import { Select, SelectValue, SortBy } from 'Vendor/components';
 
 import './Bookmarks.less';
@@ -66,6 +67,7 @@ export const Bookmarks: React.FC<Props> = ({
   popularListsLoading,
 }) => (
   <>
+    <Helmet title={`${SITE_TITLE} · Bookmarks`} />
     <div className="Bookmarks">
       <div className="Bookmarks-header">
         <Select

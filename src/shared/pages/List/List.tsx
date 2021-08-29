@@ -1,4 +1,5 @@
 import React, { memo } from 'react';
+import Helmet from 'react-helmet';
 
 import Bookmark from 'Assets/svg/bookmarkFilled.svg';
 import Rating from 'Assets/svg/rating.svg';
@@ -15,7 +16,7 @@ import SidebarListUsers from 'Components/SidebarListUsers';
 import { ListState, ListUser } from 'Modules/Lists/lists.types';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
-import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
+import { DEFAULT_PAGE_SIZE, SITE_TITLE } from 'Root/src/shared/constants';
 import {
   AnimateHeight,
   Check,
@@ -97,6 +98,7 @@ export const List: React.FC<Props> = ({
   onChange,
 }) => (
   <>
+    <Helmet title={`${SITE_TITLE} · ${list?.name}`} />
     <div className="List">
       <div className="List-header List-headerTitle">
         <div className="List-headerTitleText">

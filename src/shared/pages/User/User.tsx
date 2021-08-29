@@ -1,4 +1,5 @@
 import React from 'react';
+import Helmet from 'react-helmet';
 
 import A from 'Components/A';
 import BookmarkRow from 'Components/BookmarkRow';
@@ -9,6 +10,7 @@ import Sidebar from 'Components/Sidebar';
 import SidebarListUsers from 'Components/SidebarListUsers';
 import UserForm from 'Components/UserForm';
 import { UserState } from 'Modules/Users/users.types';
+import { SITE_TITLE } from 'Root/src/shared/constants';
 import { AIcon, Hr, Space, Tag } from 'Vendor/components';
 
 import './User.less';
@@ -43,6 +45,7 @@ export const User: React.FC<Props> = ({
   followersUsersLoading,
 }) => (
   <>
+    <Helmet title={`${SITE_TITLE} · User`} />
     <div className="User">
       {userIdIsSessionId && (
         <div className="User-form">

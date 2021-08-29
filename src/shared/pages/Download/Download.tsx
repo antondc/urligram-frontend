@@ -1,4 +1,7 @@
 import React from 'react';
+import Helmet from 'react-helmet';
+
+import { SITE_TITLE } from 'Root/src/shared/constants';
 
 import './Download.less';
 
@@ -13,10 +16,13 @@ interface Props {
 }
 
 export const Download: React.FC<Props> = ({ data, currentSlug }) => (
-  <div className="Download">
-    <div className="Download-content">
-      <h1 className="Download-title">{data[currentSlug]?.title}</h1>
-      <div className="Download-text">{data[currentSlug]?.content}</div>
+  <>
+    <Helmet title={`${SITE_TITLE} · Download`} />
+    <div className="Download">
+      <div className="Download-content">
+        <h1 className="Download-title">{data[currentSlug]?.title}</h1>
+        <div className="Download-text">{data[currentSlug]?.content}</div>
+      </div>
     </div>
-  </div>
+  </>
 );

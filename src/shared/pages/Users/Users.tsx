@@ -1,4 +1,5 @@
 import React from 'react';
+import Helmet from 'react-helmet';
 
 import Clock from 'Assets/svg/spinner6.svg';
 import Pagination from 'Components/Pagination';
@@ -8,8 +9,8 @@ import UserRow from 'Components/UserRow';
 import { UserRowSkeletonGroup } from 'Components/UserRow/UserRowSkeletonGroup';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
-import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
-import { Hr, Select, SelectValue, SortBy } from 'Vendor/components';
+import { DEFAULT_PAGE_SIZE, SITE_TITLE } from 'Root/src/shared/constants';
+import { Select, SelectValue, SortBy } from 'Vendor/components';
 
 import './Users.less';
 
@@ -55,6 +56,7 @@ export const Users: React.FC<Props> = ({
   onChange,
 }) => (
   <>
+    <Helmet title={`${SITE_TITLE} · All Users`} />
     <div className="Users">
       <div className="Users-header">
         <Select

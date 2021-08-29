@@ -1,8 +1,10 @@
 import React from 'react';
+import Helmet from 'react-helmet';
 import { useSelector } from 'react-redux';
 
 import A from 'Components/A';
 import { selectCurrentGlossary } from 'Modules/Languages/selectors/selectCurrentGlossary';
+import { SITE_TITLE } from 'Root/src/shared/constants';
 import { Routes } from 'Router/routes';
 import { H1, Hr, P, Span } from 'Vendor/components';
 
@@ -13,6 +15,7 @@ const NotFound: React.FC = () => {
 
   return (
     <>
+      <Helmet title={`${SITE_TITLE} · Not Found`} />
       <div className="NotFound">
         <H1 className="NotFound-h1">{currentGlossary?.notFound} 😵</H1>
         <Hr spacer />

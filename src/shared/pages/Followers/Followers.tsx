@@ -1,4 +1,5 @@
 import React from 'react';
+import Helmet from 'react-helmet';
 
 import Bookmark from 'Assets/svg/bookmarkFilled.svg';
 import Title from 'Assets/svg/sortTitle.svg';
@@ -11,7 +12,7 @@ import UserRow from 'Components/UserRow';
 import { UserRowSkeletonGroup } from 'Components/UserRow/UserRowSkeletonGroup';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
-import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
+import { DEFAULT_PAGE_SIZE, SITE_TITLE } from 'Root/src/shared/constants';
 import { Hr, Select, SelectValue, SortBy, Space } from 'Vendor/components';
 
 import './Followers.less';
@@ -62,6 +63,7 @@ export const Followers: React.FC<Props> = ({
   onChange,
 }) => (
   <>
+    <Helmet title={`${SITE_TITLE} · Followers`} />
     <div className="Followers">
       <div className="Followers-header Followers-headerTitle">
         Followers of

@@ -1,4 +1,5 @@
 import React from 'react';
+import Helmet from 'react-helmet';
 
 import Bookmark from 'Assets/svg/bookmarkRounded.svg';
 import Clock from 'Assets/svg/spinner6.svg';
@@ -11,7 +12,7 @@ import Sidebar from 'Components/Sidebar';
 import SidebarListTags from 'Components/SidebarListTags';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
-import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
+import { DEFAULT_PAGE_SIZE, SITE_TITLE } from 'Root/src/shared/constants';
 import { Hr, Select, SelectValue, SortBy, Space } from 'Vendor/components';
 
 import './UserLists.less';
@@ -62,6 +63,7 @@ export const UserLists: React.FC<Props> = ({
   onChange,
 }) => (
   <>
+    <Helmet title={`${SITE_TITLE} · User Lists`} />
     <div className="UserLists">
       <div className="UserLists-header UserLists-headerTitle">
         Lists of <Space />

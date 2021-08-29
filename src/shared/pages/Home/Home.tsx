@@ -1,4 +1,5 @@
 import React from 'react';
+import Helmet from 'react-helmet';
 
 import BookmarkRow from 'Components/BookmarkRow';
 import { BookmarkRowSkeletonGroup } from 'Components/BookmarkRow/BookmarkRowSkeletonGroup';
@@ -9,7 +10,7 @@ import SidebarListUsers from 'Components/SidebarListUsers';
 import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
 import { SessionState } from 'Modules/Session/session.types';
 import { UserState } from 'Modules/Users/users.types';
-import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
+import { DEFAULT_PAGE_SIZE, SITE_TITLE } from 'Root/src/shared/constants';
 
 import './Home.less';
 
@@ -46,6 +47,7 @@ export const Home: React.FC<Props> = ({
   url,
 }) => (
   <>
+    <Helmet title={`${SITE_TITLE} · Home`} />
     <div className="Home">
       <div className="Home-headerTitle">Home</div>
       <div className="Home-bookmarks">

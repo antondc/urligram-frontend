@@ -1,4 +1,5 @@
 import React from 'react';
+import Helmet from 'react-helmet';
 
 import Bookmark from 'Assets/svg/bookmarkRounded.svg';
 import Cross from 'Assets/svg/cross.svg';
@@ -14,7 +15,7 @@ import SidebarListUsers from 'Components/SidebarListUsers';
 import { BookmarksByKey } from 'Modules/Bookmarks/bookmarks.types';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
-import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
+import { DEFAULT_PAGE_SIZE, SITE_TITLE } from 'Root/src/shared/constants';
 import { FadeInOut, Hr, Select, SelectValue, SortBy, Space, Tooltip } from 'Vendor/components';
 
 import './UserBookmarks.less';
@@ -69,6 +70,7 @@ export const UserBookmarks: React.FC<Props> = ({
   currentQueryParamFilterTags,
 }) => (
   <>
+    <Helmet title={`${SITE_TITLE} · User Bookmarks`} />
     <div className="UserBookmarks">
       <div className="UserBookmarks-header UserBookmarks-headerTitle">
         Bookmarks of

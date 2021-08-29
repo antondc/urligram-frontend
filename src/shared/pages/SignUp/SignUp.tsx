@@ -1,6 +1,8 @@
 import React from 'react';
+import Helmet from 'react-helmet';
 
 import A from 'Components/A';
+import { SITE_TITLE } from 'Root/src/shared/constants';
 import { Button, FadeInOut, H1, Input, Span } from 'Vendor/components';
 
 import './SignUp.less';
@@ -45,6 +47,7 @@ export const SignUp: React.FC<Props> = ({
   onSubmit,
 }) => (
   <>
+    <Helmet title={`${SITE_TITLE} · Sign Up`} />
     <div className="SignUp">
       <div className="SignUp-content">
         <H1 className="SignUp-h1">Sign up</H1>

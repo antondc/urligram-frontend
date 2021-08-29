@@ -1,6 +1,8 @@
 import React from 'react';
+import Helmet from 'react-helmet';
 
 import A from 'Components/A';
+import { SITE_TITLE } from 'Root/src/shared/constants';
 import { Button, FadeInOut, H1, Input, Span } from 'Vendor/components';
 
 import './ResetPassword.less';
@@ -33,6 +35,7 @@ export const ResetPassword: React.FC<Props> = ({
   onSubmit,
 }) => (
   <>
+    <Helmet title={`${SITE_TITLE} · Reset Password`} />
     <div className="ResetPassword">
       <div className="ResetPassword-content">
         <H1 className="ResetPassword-h1">Password forgotten</H1>

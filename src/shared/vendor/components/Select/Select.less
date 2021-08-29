@@ -24,18 +24,11 @@
     padding: 0;
     background: @c-background;
     border: none;
-    // border: 1.5px solid @c-base;
-    // border-radius: 3px;
     border-radius: 0;
     box-shadow: none;
-
-    &:hover {
-      // border: 1.5px solid @c-base;
-    }
   }
 
   &__control--menu-is-open:not(.noClass) {
-    // border-radius: 4px 4px 0 0;
     border-radius: 0;
   }
 
@@ -53,7 +46,11 @@
     transform: translate(-4px, 0) scale(1);
     transition: transform @td-fast @ease, opacity @td-fastest @ease-out;
     will-change: transform;
-    // pointer-events: none;
+    pointer-events: none;
+
+    &:hover {
+      color: @c-accentLight;
+    }
   }
 
   &__label-background {
@@ -126,7 +123,6 @@
     font-size: @fs-small;
     overflow-x: scroll;
     overflow-y: hidden;
-    // cursor: text;
 
     .hideScrollbar();
   }
@@ -157,10 +153,6 @@
     &:first-letter {
       text-transform: capitalize;
     }
-  }
-
-  &__multi-value__label-custom:not(.noClass) {
-    color: @c-base;
   }
 
   &__multi-value__remove:not(.noClass) {
