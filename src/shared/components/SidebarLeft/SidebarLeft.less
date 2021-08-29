@@ -31,7 +31,7 @@
     align-items: center;
     height: 17px;
     width: 17px;
-    top: 50%;
+    top: 114px;
     bottom: 50%;
     right: -9px;
     padding-left: 1px;
@@ -100,60 +100,26 @@
     }
   }
 
-  &-listsGrid {
-    display: grid;
-    grid-template-columns: 4fr auto auto auto;
-    column-gap: 5px;
-  }
+  &-triangle {
+    padding-right: 10px;
 
-  &-spacer {
-    display: grid;
-    grid-column-start: 1;
-    grid-column-end: 5;
-  }
+    svg {
+      height: 12px;
+      width: 12px;
+      transform: rotate(90deg);
+      transition: transform @td-fast @ease-outQuint, fill @td-fast @ease-outQuint;
+      stroke-width: 10px;
+    }
 
-  &-descriptionItem {
-    text-align: right;
-
-    .hoverTransition;
-  }
-
-  &-listName {
-    //
-  }
-
-  &-listDescription {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    &--open {
+      svg {
+        transform: rotate(180deg);
+      }
+    }
 
     &:hover {
-      cursor: default;
-    }
-  }
-
-  &-listsTriangle {
-    height: 6px;
-    width: 6px;
-    stroke: @c-base;
-    transform: rotate(90deg);
-    transition: transform @td-fast @ease-outQuint;
-    stroke-width: 10px;
-
-    &--show {
-      transform: rotate(180deg);
-    }
-  }
-
-  &-sidebarListBookmarksReceived {
-    padding: 0;
-    padding-top: 10px;
-    font-size: @fs-normal;
-    overflow: hidden;
-    border: none;
-
-    @media @br-tabletHorizontal {
-      font-size: @fs-medium;
-      font-weight: @fw-extraBold;
+      fill: @c-accent;
+      cursor: pointer;
     }
   }
 }

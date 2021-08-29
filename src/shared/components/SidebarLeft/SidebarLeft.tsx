@@ -7,7 +7,7 @@ import FlagRight from 'Assets/svg/flagRight.svg';
 import List from 'Assets/svg/list.svg';
 import PlusCircle from 'Assets/svg/plusCircle.svg';
 import Tag from 'Assets/svg/tag.svg';
-import Triangle from 'Assets/svg/triangle.svg';
+import TriangleRounded from 'Assets/svg/triangleRounded.svg';
 import UserFill from 'Assets/svg/userFill.svg';
 import A from 'Components/A';
 import { GlossaryState } from 'Modules/Languages/languages.types';
@@ -49,7 +49,7 @@ export const SidebarLeft: React.FC<Props> = ({
     <div className="SidebarLeft-grid">
       <div
         className={'SidebarLeft-openCloseIcon' + (sidebarLeftClosed ? ' SidebarLeft-openCloseIcon--closed' : '')}
-        onClick={onSidebarCloseClick}
+        onMouseDown={onSidebarCloseClick}
       >
         <ArrowRight />
       </div>
@@ -72,7 +72,6 @@ export const SidebarLeft: React.FC<Props> = ({
           >
             {glossary.myBookmarks}
           </A>
-
           <A href={`users/${sessionId}/tags`} frontend styled={false}>
             <Tag
               className={
@@ -100,7 +99,6 @@ export const SidebarLeft: React.FC<Props> = ({
           >
             Add bookmark
           </A>
-
           <A href={`users/${sessionId}/followers`} frontend styled={false}>
             <FlagRight
               className={
@@ -151,7 +149,6 @@ export const SidebarLeft: React.FC<Props> = ({
                 'SidebarLeft-icon SidebarLeft-iconLists' +
                 (routeName === 'UserLists' ? ' SidebarLeft-icon--active' : '')
               }
-              onClick={onListTitleClick}
             />
           </A>
           <span>
@@ -161,16 +158,17 @@ export const SidebarLeft: React.FC<Props> = ({
                 frontend
                 underlined
                 active={routeName === 'UserLists'}
-                onClick={onListTitleClick}
               >
                 My Lists
               </A>
-              <Space />
-              <Triangle
-                className={'SidebarLeft-listsTriangle' + (listsShown ? ' SidebarLeft-listsTriangle--show' : '')}
-              />
+              <span
+                className={'SidebarLeft-triangle' + (listsShown ? ' SidebarLeft-triangle--open' : '')}
+                onClick={onListTitleClick}
+              >
+                <TriangleRounded />
+              </span>
             </span>
-            <div onClick={onSidebarCloseClick}>
+            <div>
               <SidebarLeftLists lists={lists} loading={false} listsShown={listsShown} />
             </div>
           </span>
