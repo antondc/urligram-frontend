@@ -55,22 +55,24 @@ export const SidebarLeft: React.FC<Props> = ({
       </div>
       {isLoggedIn && (
         <>
-          <A href={`users/${sessionId}`} frontend styled={false}>
-            <UserFill
+          <A href={`users/${sessionId}/bookmarks`} frontend styled={false}>
+            <BookmarkFilled
               className={
-                'SidebarLeft-icon SidebarLeft-iconUser' + (routeName === 'User' ? ' SidebarLeft-icon--active' : '')
+                'SidebarLeft-icon SidebarLeft-iconBookmarkFilled' +
+                (routeName === 'UserBookmarks' ? ' SidebarLeft-icon--active' : '')
               }
             />
           </A>
           <A
             className={'SidebarLeft-link' + (sidebarLeftClosed ? ' SidebarLeft-link--hidden' : '')}
-            href={`users/${sessionId}`}
+            href={`users/${sessionId}/bookmarks`}
             frontend
             underlined
-            active={routeName === 'User'}
+            active={routeName === 'UserBookmarks'}
           >
-            {glossary.myUser}
+            {glossary.myBookmarks}
           </A>
+
           <A href={`users/${sessionId}/tags`} frontend styled={false}>
             <Tag
               className={
@@ -98,23 +100,7 @@ export const SidebarLeft: React.FC<Props> = ({
           >
             Add bookmark
           </A>
-          <A href={`users/${sessionId}/bookmarks`} frontend styled={false}>
-            <BookmarkFilled
-              className={
-                'SidebarLeft-icon SidebarLeft-iconBookmarkFilled' +
-                (routeName === 'UserBookmarks' ? ' SidebarLeft-icon--active' : '')
-              }
-            />
-          </A>
-          <A
-            className={'SidebarLeft-link' + (sidebarLeftClosed ? ' SidebarLeft-link--hidden' : '')}
-            href={`users/${sessionId}/bookmarks`}
-            frontend
-            underlined
-            active={routeName === 'UserBookmarks'}
-          >
-            {glossary.myBookmarks}
-          </A>
+
           <A href={`users/${sessionId}/followers`} frontend styled={false}>
             <FlagRight
               className={
@@ -168,20 +154,25 @@ export const SidebarLeft: React.FC<Props> = ({
               onClick={onListTitleClick}
             />
           </A>
-          <span className={'SidebarLeft-link' + (sidebarLeftClosed ? ' SidebarLeft-link--hidden' : '')}>
-            <A
-              href={`users/${sessionId}/lists?sort=-createdAt`}
-              frontend
-              underlined
-              active={routeName === 'UserLists'}
-              onClick={onListTitleClick}
-            >
-              My Lists
-            </A>
-            <Space />
-            <Triangle
-              className={'SidebarLeft-listsTriangle' + (listsShown ? ' SidebarLeft-listsTriangle--show' : '')}
-            />
+          <span>
+            <span className={'SidebarLeft-link' + (sidebarLeftClosed ? ' SidebarLeft-link--hidden' : '')}>
+              <A
+                href={`users/${sessionId}/lists?sort=-createdAt`}
+                frontend
+                underlined
+                active={routeName === 'UserLists'}
+                onClick={onListTitleClick}
+              >
+                My Lists
+              </A>
+              <Space />
+              <Triangle
+                className={'SidebarLeft-listsTriangle' + (listsShown ? ' SidebarLeft-listsTriangle--show' : '')}
+              />
+            </span>
+            <div onClick={onSidebarCloseClick}>
+              <SidebarLeftLists lists={lists} loading={false} listsShown={listsShown} />
+            </div>
           </span>
         </>
       )}
@@ -234,11 +225,26 @@ export const SidebarLeft: React.FC<Props> = ({
           </A>
         </>
       )}
+      {!!isLoggedIn && (
+        <>
+          <A href={`users/${sessionId}`} frontend styled={false}>
+            <UserFill
+              className={
+                'SidebarLeft-icon SidebarLeft-iconUser' + (routeName === 'User' ? ' SidebarLeft-icon--active' : '')
+              }
+            />
+          </A>
+          <A
+            className={'SidebarLeft-link' + (sidebarLeftClosed ? ' SidebarLeft-link--hidden' : '')}
+            href={`users/${sessionId}`}
+            frontend
+            underlined
+            active={routeName === 'User'}
+          >
+            {glossary.myUser}
+          </A>
+        </>
+      )}
     </div>
-    {!!isLoggedIn && (
-      <div onClick={onSidebarCloseClick}>
-        <SidebarLeftLists lists={lists} loading={false} listsShown={listsShown} />
-      </div>
-    )}
   </div>
 );

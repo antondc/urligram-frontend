@@ -18,7 +18,7 @@
   &-grid {
     display: grid;
     position: relative;
-    align-items: center;
+    align-items: flex-start;
     grid-template-columns: 15px auto;
     padding: 15px;
     gap: 10px;
@@ -39,8 +39,8 @@
     border: 1px solid @c-accentLight-hard;
     transform: rotate(180deg);
     transition: border @td-fast @ease, transform @td-fast @ease;
-    border-radius: 50%;
     z-index: 1;
+    border-radius: 50%;
 
     svg {
       height: 7px;
