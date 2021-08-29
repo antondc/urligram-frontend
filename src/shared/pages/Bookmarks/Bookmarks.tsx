@@ -1,7 +1,6 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 
-import Rating from 'Assets/svg/rating.svg';
 import Clock from 'Assets/svg/spinner6.svg';
 import BookmarkRow from 'Components/BookmarkRow';
 import { BookmarkRowSkeletonGroup } from 'Components/BookmarkRow/BookmarkRowSkeletonGroup';
@@ -86,10 +85,7 @@ export const Bookmarks: React.FC<Props> = ({
         />
         <SortBy
           className="Bookmarks-sortBy"
-          options={[
-            { label: 'Created at', field: 'createdAt', icon: Clock },
-            { label: 'Rating', field: 'vote', icon: Rating },
-          ]}
+          options={[{ label: 'Created at', field: 'createdAt', icon: Clock }]}
           href={url}
           currentSort={sort}
           loading={loading}

@@ -2,7 +2,6 @@ import React, { memo } from 'react';
 import Helmet from 'react-helmet';
 
 import Bookmark from 'Assets/svg/bookmarkFilled.svg';
-import Rating from 'Assets/svg/rating.svg';
 import Clock from 'Assets/svg/spinner6.svg';
 import A from 'Components/A';
 import BookmarkRow from 'Components/BookmarkRow';
@@ -216,7 +215,6 @@ export const List: React.FC<Props> = ({
         />
         <SortBy
           options={[
-            { label: 'Rating', field: 'vote', icon: Rating },
             { label: 'Bookmarks', field: 'timesbookmarked', icon: Bookmark },
             { label: 'Date', field: 'updatedAt', icon: Clock },
           ]}

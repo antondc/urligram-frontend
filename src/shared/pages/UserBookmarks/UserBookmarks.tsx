@@ -3,7 +3,6 @@ import Helmet from 'react-helmet';
 
 import Bookmark from 'Assets/svg/bookmarkRounded.svg';
 import Cross from 'Assets/svg/cross.svg';
-import Rating from 'Assets/svg/rating.svg';
 import Clock from 'Assets/svg/spinner6.svg';
 import A from 'Components/A';
 import BookmarkRow from 'Components/BookmarkRow';
@@ -102,7 +101,6 @@ export const UserBookmarks: React.FC<Props> = ({
         <SortBy
           className="UserBookmarks-sortBy"
           options={[
-            { label: 'Rating', field: 'vote', icon: Rating },
             { label: 'Bookmarked', field: 'timesbookmarked', icon: Bookmark },
             { label: 'Created', field: 'createdAt', icon: Clock },
           ]}
