@@ -213,10 +213,11 @@ export const List: React.FC<Props> = ({
           grow
           hideLabelOnFill
         />
+
         <SortBy
           options={[
-            { label: 'Bookmarks', field: 'timesbookmarked', icon: Bookmark },
-            { label: 'Date', field: 'updatedAt', icon: Clock },
+            { label: 'Bookmarked', field: 'timesbookmarked', icon: Bookmark },
+            { label: 'Date', field: 'createdAt', icon: Clock },
           ]}
           href={url}
           currentSort={sort}

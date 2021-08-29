@@ -26,10 +26,18 @@
     border: none;
     border-radius: 0;
     box-shadow: none;
+
+    &:hover {
+      cursor: text;
+    }
   }
 
   &__control--menu-is-open:not(.noClass) {
     border-radius: 0;
+
+    &:hover {
+      cursor: inherit;
+    }
   }
 
   &__label:not(.noClass) {
@@ -47,10 +55,6 @@
     transition: transform @td-fast @ease, opacity @td-fastest @ease-out;
     will-change: transform;
     pointer-events: none;
-
-    &:hover {
-      color: @c-accentLight;
-    }
   }
 
   &__label-background {
