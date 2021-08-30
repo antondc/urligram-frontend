@@ -3,25 +3,22 @@
 @c: .SidebarLeft;
 
 @{c} {
-  width: 100%;
-  font-size: @fs-medium;
-  font-weight: @fw-semibold;
-  border-bottom: 1px solid @c-accentLight-hard;
+  position: relative;
+
+  &:after {
+    content: ' ';
+    position: absolute;
+    bottom: 0;
+    left: 15px;
+    right: 15px;
+    border-bottom: 1px solid @c-accentLight-hard;
+  }
 
   @media @br-tablet {
     font-size: @fs-normal;
     font-weight: @fw-semibold;
     line-height: @fh-normal;
     border-right: 2px solid @c-base;
-  }
-
-  &-grid {
-    display: grid;
-    position: relative;
-    align-items: flex-start;
-    grid-template-columns: 15px auto;
-    padding: 15px;
-    gap: 10px;
   }
 
   &-openCloseIcon {
@@ -63,41 +60,78 @@
     }
   }
 
-  &-icon  {
+  &-items {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 10px 15px 15px;
+    font-size: @fs-medium;
+    font-weight: @fw-medium;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  &-item {
+    display: flex;
+    align-items: center;
+    margin-top: 8px;
+    color: @c-accentLight;
+    transition: color @td-fast @ease;
+
+    @{c}-itemIcon {
+      fill: @c-accentLight;
+    }
+
+    &:hover {
+      color: @c-base;
+      cursor: pointer;
+
+      @{c}-itemIcon {
+        fill: @c-base;
+      }
+
+      @{c}-triangleIcon {
+        fill: @c-base;
+      }
+    }
+
+    &--active,
+    &--active:hover {
+      color: @c-base;
+
+      @{c}-itemIcon {
+        fill: @c-success;
+      }
+
+      @{c}-triangleIcon {
+        fill: @c-base;
+      }
+    }
+  }
+
+  &-itemDescription {
+    opacity: 1;
+    transition: opacity @td-fast @ease @td-normal;
+  }
+
+  &-itemIcon  {
     position: relative;
+    flex-shrink: 0;
     height: 15px;
     width: 15px;
-    margin-right: 5px;
-    fill: @c-base;
-    transition: fill @td-fast @ease;
-
-    &:hover {
-      fill: @gradientColors[red-3];
-      cursor: pointer;
-    }
-
-    &--active {
-      fill: @gradientColors[red-2];
-    }
+    margin-right: 10px;
+    transition: fill @td-slow @ease;
   }
 
-  &-iconLists {
+  &-itemIconList {
     height: 12px;
     width: 12px;
-    padding: 2px;
+    margin-left: 1.5px;
+    margin-right: 11.5px;
   }
 
-  &-link {
-    white-space: nowrap;
-    transition: opacity @td-fast @ease;
-
-    &:hover {
-      cursor: pointer;
-    }
-
-    &--hidden {
-      opacity: 0;
-    }
+  &-itemLists {
+    margin-left: 25px;
   }
 
   &-triangle {
@@ -106,6 +140,7 @@
     svg {
       height: 12px;
       width: 12px;
+      fill: @c-accentLight;
       transform: rotate(90deg);
       transition: transform @td-fast @ease-outQuint, fill @td-fast @ease-outQuint;
       stroke-width: 10px;
@@ -118,8 +153,18 @@
     }
 
     &:hover {
-      fill: @c-accent;
+      svg {
+        fill: @c-base;
+      }
+
       cursor: pointer;
+    }
+  }
+
+  &--closed {
+    @{c}-itemDescription {
+      opacity: 0;
+      transition: opacity @td-fast @ease @td-fast;
     }
   }
 }

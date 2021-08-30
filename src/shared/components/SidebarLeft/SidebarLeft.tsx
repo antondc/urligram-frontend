@@ -12,7 +12,6 @@ import UserFill from 'Assets/svg/userFill.svg';
 import A from 'Components/A';
 import { GlossaryState } from 'Modules/Languages/languages.types';
 import { ListState } from 'Modules/Lists/lists.types';
-import { Space } from 'Vendor/components';
 import SidebarLeftLists from './SidebarLeftLists';
 
 import './SidebarLeft.less';
@@ -28,8 +27,8 @@ interface Props {
   sidebarLeftClosed: boolean;
   onListTitleClick: () => void;
   onSidebarCloseClick: () => void;
-  switchUiBookmarkModal: (e: React.MouseEvent<HTMLAnchorElement> | React.MouseEvent<SVGElement>) => void;
-  switchUiListModal: (e: React.MouseEvent<HTMLAnchorElement> | React.MouseEvent<SVGElement>) => void;
+  switchUiBookmarkModal: (e: React.MouseEvent<HTMLDivElement>) => void;
+  switchUiListModal: (e: React.MouseEvent<HTMLDivElement>) => void;
 }
 
 export const SidebarLeft: React.FC<Props> = ({
@@ -45,203 +44,132 @@ export const SidebarLeft: React.FC<Props> = ({
   switchUiBookmarkModal,
   switchUiListModal,
 }) => (
-  <div className="SidebarLeft" data-test-id="SidebarLeft">
-    <div className="SidebarLeft-grid">
-      <div
-        className={'SidebarLeft-openCloseIcon' + (sidebarLeftClosed ? ' SidebarLeft-openCloseIcon--closed' : '')}
-        onMouseDown={onSidebarCloseClick}
-      >
-        <ArrowRight />
-      </div>
+  <div className={'SidebarLeft' + (sidebarLeftClosed ? ' SidebarLeft--closed' : '')} data-test-id="SidebarLeft">
+    <div
+      className={'SidebarLeft-openCloseIcon' + (sidebarLeftClosed ? ' SidebarLeft-openCloseIcon--closed' : '')}
+      onMouseDown={onSidebarCloseClick}
+    >
+      <ArrowRight />
+    </div>
+    <div className="SidebarLeft-items">
       {isLoggedIn && (
         <>
-          <A href={`users/${sessionId}/bookmarks`} frontend styled={false}>
-            <BookmarkFilled
-              className={
-                'SidebarLeft-icon SidebarLeft-iconBookmarkFilled' +
-                (routeName === 'UserBookmarks' ? ' SidebarLeft-icon--active' : '')
-              }
-            />
-          </A>
           <A
-            className={'SidebarLeft-link' + (sidebarLeftClosed ? ' SidebarLeft-link--hidden' : '')}
+            className={'SidebarLeft-item' + (routeName === 'UserBookmarks' ? ' SidebarLeft-item--active' : '')}
             href={`users/${sessionId}/bookmarks`}
+            styled={false}
             frontend
-            underlined
-            active={routeName === 'UserBookmarks'}
           >
-            {glossary.myBookmarks}
-          </A>
-          <A href={`users/${sessionId}/tags`} frontend styled={false}>
-            <Tag
-              className={
-                'SidebarLeft-icon SidebarLeft-iconUserTags' +
-                (routeName === 'UserTags' ? ' SidebarLeft-icon--active' : '')
-              }
-            />
+            <BookmarkFilled className="SidebarLeft-itemIcon" />
+            <span className="SidebarLeft-itemDescription">{glossary.myBookmarks}</span>
           </A>
           <A
-            className={'SidebarLeft-link' + (sidebarLeftClosed ? ' SidebarLeft-link--hidden' : '')}
+            className={'SidebarLeft-item' + (routeName === 'UserTags' ? ' SidebarLeft-item--active' : '')}
             href={`users/${sessionId}/tags`}
+            styled={false}
             frontend
-            underlined
-            active={routeName === 'UserTags'}
           >
-            My Tags
+            <Tag className="SidebarLeft-itemIcon" />
+            <span className="SidebarLeft-itemDescription">My Tags</span>
           </A>
-          <PlusCircle className="SidebarLeft-icon SidebarLeft-iconPlusCircle" onClick={switchUiBookmarkModal} />
+          <div className="SidebarLeft-item" onClick={switchUiBookmarkModal}>
+            <PlusCircle className="SidebarLeft-itemIcon" />
+            <span className="SidebarLeft-itemDescription">Add bookmark</span>
+          </div>
           <A
-            className={'SidebarLeft-link' + (sidebarLeftClosed ? ' SidebarLeft-link--hidden' : '')}
-            href=""
-            frontend
-            underlined
-            onClick={switchUiBookmarkModal}
-          >
-            Add bookmark
-          </A>
-          <A href={`users/${sessionId}/followers`} frontend styled={false}>
-            <FlagRight
-              className={
-                'SidebarLeft-icon SidebarLeft-iconFlagRight' +
-                (routeName === 'Followers' ? ' SidebarLeft-icon--active' : '')
-              }
-            />
-          </A>
-          <A
-            className={'SidebarLeft-link' + (sidebarLeftClosed ? ' SidebarLeft-link--hidden' : '')}
+            className={'SidebarLeft-item' + (routeName === 'Followers' ? ' SidebarLeft-item--active' : '')}
             href={`users/${sessionId}/followers`}
+            styled={false}
             frontend
-            underlined
-            active={routeName === 'Followers'}
           >
-            Followers
-          </A>
-          <A href={`users/${sessionId}/following`} frontend styled={false}>
-            <FlagLeft
-              className={
-                'SidebarLeft-icon SidebarLeft-iconFlagLeft' +
-                (routeName === 'Following' ? ' SidebarLeft-icon--active' : '')
-              }
-            />
+            <FlagRight className="SidebarLeft-itemIcon" />
+            <span className="SidebarLeft-itemDescription">Followers</span>
           </A>
           <A
-            className={'SidebarLeft-link' + (sidebarLeftClosed ? ' SidebarLeft-link--hidden' : '')}
+            className={'SidebarLeft-item' + (routeName === 'Following' ? ' SidebarLeft-item--active' : '')}
             href={`users/${sessionId}/following`}
+            styled={false}
             frontend
-            underlined
-            active={routeName === 'Following'}
           >
-            Following
+            <FlagLeft className="SidebarLeft-itemIcon" />
+            <span className="SidebarLeft-itemDescription">Following</span>
           </A>
-          <PlusCircle className="SidebarLeft-icon SidebarLeft-iconPlusCircle" onClick={switchUiListModal} />
+          <div className="SidebarLeft-item" onClick={switchUiListModal}>
+            <PlusCircle className="SidebarLeft-itemIcon" />
+            <span className="SidebarLeft-itemDescription">Create list</span>
+          </div>
           <A
-            className={'SidebarLeft-link' + (sidebarLeftClosed ? ' SidebarLeft-link--hidden' : '')}
-            href=""
+            className={'SidebarLeft-item' + (routeName === 'UserLists' ? ' SidebarLeft-item--active' : '')}
+            href={`users/${sessionId}/lists?sort=-createdAt`}
+            styled={false}
             frontend
-            underlined
-            onClick={switchUiListModal}
           >
-            Create list
-          </A>
-          <A href={`users/${sessionId}/lists?sort=-createdAt`} frontend styled={false}>
-            <List
-              className={
-                'SidebarLeft-icon SidebarLeft-iconLists' +
-                (routeName === 'UserLists' ? ' SidebarLeft-icon--active' : '')
-              }
-            />
-          </A>
-          <span>
-            <span className={'SidebarLeft-link' + (sidebarLeftClosed ? ' SidebarLeft-link--hidden' : '')}>
-              <A
-                href={`users/${sessionId}/lists?sort=-createdAt`}
-                frontend
-                underlined
-                active={routeName === 'UserLists'}
-              >
-                My Lists
-              </A>
+            <List className="SidebarLeft-itemIcon SidebarLeft-itemIconList" />
+            <span className="SidebarLeft-itemDescription">
+              <span>My Lists </span>
               <span
                 className={'SidebarLeft-triangle' + (listsShown ? ' SidebarLeft-triangle--open' : '')}
                 onClick={onListTitleClick}
               >
-                <TriangleRounded />
+                <TriangleRounded className="SidebarLeft-triangleIcon" />
               </span>
             </span>
-            <div>
-              <SidebarLeftLists lists={lists} loading={false} listsShown={listsShown} />
-            </div>
-          </span>
+          </A>
+          <div className="SidebarLeft-itemLists">
+            <SidebarLeftLists lists={lists} loading={false} listsShown={listsShown} />
+          </div>
         </>
       )}
       {!isLoggedIn && (
         <>
-          <span />
           <A
-            className={'SidebarLeft-link' + (sidebarLeftClosed ? ' SidebarLeft-link--hidden' : '')}
-            href=""
+            className={'SidebarLeft-item' + (routeName === 'SOME_ROUTE' ? ' SidebarLeft-item--active' : '')}
+            href={`not-found`}
+            styled={false}
             frontend
-            underlined
           >
-            Dont
+            <FlagLeft className="SidebarLeft-itemIcon" />
+            <span className="SidebarLeft-itemDescription">Placeholder</span>
           </A>
-          <span />
           <A
-            className={'SidebarLeft-link' + (sidebarLeftClosed ? ' SidebarLeft-link--hidden' : '')}
-            href=""
+            className={'SidebarLeft-item' + (routeName === 'SOME_ROUTE' ? ' SidebarLeft-item--active' : '')}
+            href={`not-found`}
+            styled={false}
             frontend
-            underlined
           >
-            Know
+            <FlagLeft className="SidebarLeft-itemIcon" />
+            <span className="SidebarLeft-itemDescription">Placeholder</span>
           </A>
-          <span />
           <A
-            className={'SidebarLeft-link' + (sidebarLeftClosed ? ' SidebarLeft-link--hidden' : '')}
-            href=""
+            className={'SidebarLeft-item' + (routeName === 'SOME_ROUTE' ? ' SidebarLeft-item--active' : '')}
+            href={`not-found`}
+            styled={false}
             frontend
-            underlined
           >
-            What
+            <FlagLeft className="SidebarLeft-itemIcon" />
+            <span className="SidebarLeft-itemDescription">Placeholder</span>
           </A>
-          <span />
           <A
-            className={'SidebarLeft-link' + (sidebarLeftClosed ? ' SidebarLeft-link--hidden' : '')}
-            href=""
+            className={'SidebarLeft-item' + (routeName === 'SOME_ROUTE' ? ' SidebarLeft-item--active' : '')}
+            href={`not-found`}
+            styled={false}
             frontend
-            underlined
           >
-            Goes
-          </A>
-          <span />
-          <A
-            className={'SidebarLeft-link' + (sidebarLeftClosed ? ' SidebarLeft-link--hidden' : '')}
-            href=""
-            frontend
-            underlined
-          >
-            Here
+            <FlagLeft className="SidebarLeft-itemIcon" />
+            <span className="SidebarLeft-itemDescription">Placeholder</span>
           </A>
         </>
       )}
       {!!isLoggedIn && (
-        <>
-          <A href={`users/${sessionId}`} frontend styled={false}>
-            <UserFill
-              className={
-                'SidebarLeft-icon SidebarLeft-iconUser' + (routeName === 'User' ? ' SidebarLeft-icon--active' : '')
-              }
-            />
-          </A>
-          <A
-            className={'SidebarLeft-link' + (sidebarLeftClosed ? ' SidebarLeft-link--hidden' : '')}
-            href={`users/${sessionId}`}
-            frontend
-            underlined
-            active={routeName === 'User'}
-          >
-            {glossary.myUser}
-          </A>
-        </>
+        <A
+          className={'SidebarLeft-item' + (routeName === 'User' ? ' SidebarLeft-item--active' : '')}
+          href={`users/${sessionId}`}
+          styled={false}
+          frontend
+        >
+          <UserFill className="SidebarLeft-itemIcon" />
+          <span className="SidebarLeft-itemDescription">{glossary.myUser}</span>
+        </A>
       )}
     </div>
   </div>

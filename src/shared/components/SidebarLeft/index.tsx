@@ -40,12 +40,12 @@ export const SidebarLeft: React.FC = () => {
   const timeMsInFourHours = Date.now() + 4 * 60 * 60 * 1000;
   const sidebarLeftClosed = useSelector(selectUiSidebarleftState);
 
-  const switchUiBookmarkModal = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  const switchUiBookmarkModal = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
     dispatch(switchBookmarkCreateModal(true));
   };
 
-  const switchUiListModal = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  const switchUiListModal = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
     dispatch(switchListModal({ mounted: true }));
   };

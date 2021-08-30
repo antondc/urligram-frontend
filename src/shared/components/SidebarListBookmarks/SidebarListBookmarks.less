@@ -3,10 +3,19 @@
 @c: .SidebarListBookmarks;
 
 @{c} {
+  position: relative;
   padding: 20px;
   overflow: hidden;
   background: @c-background;
-  border-bottom: 1px solid @c-accentLight-hard;
+
+  &:after {
+    content: ' ';
+    position: absolute;
+    bottom: 0;
+    left: 20px;
+    right: 20px;
+    border-bottom: 1px solid @c-accentLight-hard;
+  }
 
   @media @br-tablet {
     border-right: 2px solid @c-base;
