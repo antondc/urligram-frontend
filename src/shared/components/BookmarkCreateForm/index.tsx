@@ -2,13 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { bookmarkCreate } from 'Modules/Bookmarks/actions/bookmarkCreate';
+import { bookmarksLoadByUserId } from 'Modules/Bookmarks/actions/bookmarksLoadByUserId';
 import { selectBookmarksErrorLast } from 'Modules/Bookmarks/selectors/selectBookmarksErrorLast';
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
+import { selectCurrentRoute } from 'Modules/Routes/selectors/selectCurrentRoute';
 import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUserId';
 import { tagsSearchLoad } from 'Modules/Tags/actions/tagsSearchLoad';
 import { selectTagsAll } from 'Modules/Tags/selectors/selectAllTags';
 import { selectTagsSearch } from 'Modules/Tags/selectors/selectTagsSearch';
 import { DEFAULT_PROTOCOL, DELAY_SLOW_MS } from 'Root/src/shared/constants';
+import { Routes } from 'Router/routes';
 import history from 'Services/History';
 import HttpClient from 'Services/HttpClient';
 import { testStringIsValidUrl } from 'Tools/utils/url/testStringIsValidUrl';
@@ -35,6 +38,8 @@ const BookmarkCreateForm: React.FC<Props> = ({ closeModal, setLocked }) => {
   const tagsSearch = useSelector(selectTagsSearch);
   const tagsSearchFormatted = tagsSearch?.map((item) => ({ label: item.name, value: item.name })) || [];
   const currentLanguageSlug = useSelector(selectCurrentLanguageSlug);
+  const currentRoute = useSelector(selectCurrentRoute);
+  const currentRouteName = currentRoute.name;
   const sessionId = useSelector(selectSessionUserId);
   const [urlSubmitted, setUrlSubmitted] = useState<boolean>(false);
   const [urlLoading, setUrlLoading] = useState<boolean>(false);
@@ -164,7 +169,12 @@ const BookmarkCreateForm: React.FC<Props> = ({ closeModal, setLocked }) => {
       setSubmitSuccess(true);
 
       setTimeout(() => {
-        history.push(`/${currentLanguageSlug}/users/${sessionId}/bookmarks?sort=-createdAt`);
+        if (currentRouteName === Routes.UserBookmarks.name) {
+          dispatch(bookmarksLoadByUserId(sessionId));
+        } else {
+          history.push(`/${currentLanguageSlug}/users/${sessionId}/bookmarks?sort=-createdAt`);
+        }
+
         closeModal();
       }, DELAY_SLOW_MS);
 
