@@ -59,12 +59,7 @@ export const BookmarkLists: React.FC<Props> = ({
               {item?.name}
             </A>
             {itemsLoading?.includes(item?.id) ? (
-              <SpinnerPie
-                className={
-                  'BookmarkLists-listsItemLoader' +
-                  (isBookmarkInList ? ' BookmarkLists-listsItemLoaderRemove' : ' BookmarkLists-listsItemLoaderAdd')
-                }
-              />
+              <SpinnerPie className="BookmarkLists-listsItemLoader" />
             ) : (
               <PlusCircleWithBackground
                 className={'BookmarkLists-listsItemIcon'}
