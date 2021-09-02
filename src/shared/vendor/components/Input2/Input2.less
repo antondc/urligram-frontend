@@ -1,0 +1,88 @@
+@import '../../../css/imports.less';
+
+@c: .Input2;
+
+@{c} {
+  display: inline-flex;
+  position: relative;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 80px;
+  font-family: @ff-sans;
+  text-align: left;
+
+  &-label {
+    display: flex;
+    height: 20px;
+    font-size: @fs-small;
+    font-weight: @fw-bold;
+    white-space: nowrap;
+    color: @gradientColors[black-3];
+    overflow: hidden;
+    background: @c-transparent;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  &-input {
+    height: 40px;
+    width: 100%;
+    padding-left: 12px;
+    padding-right: 12px;
+    font-size: @fs-normal;
+    font-weight: @fw-semibold;
+    color: @gradientColors[black-2];
+    background: @gradientColors[black-5];
+    border: 0;
+    outline: 2px solid transparent;
+    transition: color @td-fast @ease;
+    box-shadow: none;
+    border-radius: 8px;
+
+    &::placeholder {
+      font-weight: @fw-regular;
+    }
+
+    &:focus::placeholder {
+      color: transparent;
+    }
+
+    &[type='date']::-webkit-inner-spin-button,
+    &[type='date']::-webkit-calendar-picker-indicator,
+    &[type='date']::-webkit-input-placeholder {
+      display: none;
+      visibility: hidden !important;
+      -webkit-appearance: none;
+    }
+
+    &:read-only {
+      user-select: none;
+    }
+
+    @{c}--disabled &,
+    @{c}--readOnly & {
+      color: @c-accentLight;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    @{c}--success & {
+      outline: 2px solid @gradientColors[blue-2];
+    }
+
+    @{c}--error & {
+      outline: 2px solid @c-errorAccent;
+    }
+  }
+
+  &-errorContent {
+    margin-top: 5px;
+    padding-left: 12px;
+    font-size: @fs-small;
+    color: @c-errorAccent;
+  }
+
+  &--grow {
+    width: 100%;
+  }
+}
