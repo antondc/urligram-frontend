@@ -1,15 +1,13 @@
 @import '../../../css/imports.less';
 
-@c: .Input2;
+@c: .TextArea2;
 
 @{c} {
   display: inline-flex;
   position: relative;
   flex-direction: column;
   justify-content: flex-start;
-  height: 80px;
   font-family: @ff-sans;
-  text-align: left;
 
   &-label {
     display: flex;
@@ -24,52 +22,25 @@
     user-select: none;
   }
 
-  &-input {
-    height: 40px;
-    width: 100%;
-    padding-left: 12px;
-    padding-right: 12px;
+  &-textArea {
+    padding: 20px;
+    font-family: @ff-sans;
     font-size: @fs-normal;
     font-weight: @fw-semibold;
+    line-height: @fh-normal;
     color: @gradientColors[black-2];
+    overflow: auto;
     background: @gradientColors[black-5];
-    border: 0;
+    border: none;
     outline: 2px solid transparent;
     transition: color @td-fast @ease, box-shadow @td-fast @ease;
+    resize: none;
     box-shadow: 0 0 0 0 @c-shadow;
     border-radius: 8px;
-
-    &::placeholder {
-      font-weight: @fw-regular;
-    }
-
-    &:focus::placeholder {
-      color: transparent;
-    }
 
     &:focus,
     &:not(:placeholder-shown) {
       box-shadow: 4px 4px 0 0 @c-shadow;
-    }
-
-    &[type='date']::-webkit-inner-spin-button,
-    &[type='date']::-webkit-calendar-picker-indicator,
-    &[type='date']::-webkit-input-placeholder {
-      display: none;
-      visibility: hidden !important;
-      -webkit-appearance: none;
-    }
-
-    &:read-only {
-      user-select: none;
-    }
-
-    @{c}--disabled &,
-    @{c}--readOnly & {
-      color: @c-accentLight;
-      box-shadow: 0 0 0 0 @c-shadow;
-      pointer-events: none;
-      user-select: none;
     }
 
     @{c}--success & {
@@ -81,13 +52,14 @@
       outline: 2px solid @c-errorAccent;
       box-shadow: 0 0 0 0 @c-shadow;
     }
-  }
 
-  &-errorContent {
-    margin-top: 5px;
-    padding-left: 12px;
-    font-size: @fs-small;
-    color: @c-errorAccent;
+    @{c}--disabled &,
+    @{c}--readOnly & {
+      color: @c-accentLight;
+      box-shadow: 0 0 0 0 @c-shadow;
+      pointer-events: none;
+      user-select: none;
+    }
   }
 
   &--grow {

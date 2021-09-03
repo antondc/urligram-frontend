@@ -35,7 +35,7 @@ export const Input2: React.FC<Props> = ({
   autoFocus,
   pattern,
   type,
-  placeholder,
+  placeholder = '',
   ...props
 }) => (
   <div
