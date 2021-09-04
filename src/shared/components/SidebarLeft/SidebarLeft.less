@@ -4,50 +4,36 @@
 
 @{c} {
   position: relative;
+  padding: 26px;
+  background: @c-background;
+  border-radius: 8px;
 
-  &:after {
-    content: ' ';
-    position: absolute;
-    bottom: 0;
-    left: 15px;
-    right: 15px;
-    border-bottom: 1px solid @c-accentLight-hard;
-  }
-
-  @media @br-tablet {
-    font-size: @fs-normal;
-    font-weight: @fw-semibold;
-    line-height: @fh-normal;
-    border-right: 2px solid @c-base;
-  }
+  .boxShadow;
 
   &-openCloseIcon {
     display: flex;
     position: absolute;
     justify-content: center;
     align-items: center;
-    height: 17px;
-    width: 17px;
-    top: 114px;
-    bottom: 50%;
-    right: -9px;
+    height: 25px;
+    width: 25px;
+    top: 8px;
+    right: 10px;
     padding-left: 1px;
-    background: @c-background;
-    border: 1px solid @c-accentLight-hard;
+    background: @gradientColors[black-5];
     transform: rotate(180deg);
     transition: border @td-fast @ease, transform @td-fast @ease;
     z-index: 1;
     border-radius: 50%;
 
     svg {
-      height: 7px;
-      width: 7px;
-      fill: @c-accentLight-hard;
+      height: 13.5px;
+      width: 13.5px;
+      fill: @gradientColors[black-4];
       transition: fill @td-fast @ease;
     }
 
     &:hover {
-      border: 1px solid @c-accentLight;
       cursor: pointer;
 
       svg {
@@ -64,9 +50,9 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding: 10px 15px 15px;
+    padding: 0;
     font-size: @fs-medium;
-    font-weight: @fw-medium;
+    font-weight: @fw-bold;
     white-space: nowrap;
     overflow: hidden;
   }
@@ -74,37 +60,25 @@
   &-item {
     display: flex;
     align-items: center;
-    margin-top: 8px;
+    padding: 14px;
     color: @c-accentLight;
     transition: color @td-fast @ease;
 
-    @{c}-itemIcon {
-      fill: @c-accentLight;
-    }
-
-    &:hover {
-      color: @c-base;
-      cursor: pointer;
-
-      @{c}-itemIcon {
-        fill: @c-base;
-      }
-
-      @{c}-triangleIcon {
-        fill: @c-base;
-      }
+    &:first-child {
+      margin-top: 0;
     }
 
     &--active,
-    &--active:hover {
-      color: @c-base;
+    &:hover {
+      color: @gradientColors[blue-1];
+      cursor: pointer;
 
       @{c}-itemIcon {
-        fill: @c-success;
+        fill: @gradientColors[blue-1];
       }
 
       @{c}-triangleIcon {
-        fill: @c-base;
+        fill: @gradientColors[blue-1];
       }
     }
   }
@@ -117,17 +91,18 @@
   &-itemIcon  {
     position: relative;
     flex-shrink: 0;
-    height: 15px;
-    width: 15px;
-    margin-right: 10px;
-    transition: fill @td-slow @ease;
+    height: 20px;
+    width: 20px;
+    margin-right: 16px;
+    fill: @c-accentLight;
+    transition: fill @td-fast @ease;
   }
 
   &-itemIconList {
-    height: 12px;
-    width: 12px;
-    margin-left: 1.5px;
-    margin-right: 11.5px;
+    height: 14px;
+    width: 14px;
+    margin-left: 2px;
+    margin-right: 20px;
   }
 
   &-itemLists {
