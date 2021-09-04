@@ -26,7 +26,7 @@
     flex: 1;
   }
 
-  &-link:not(.noClass) {
+  &-link {
     display: flex;
     align-items: center;
     font-size: @fs-big;
@@ -34,7 +34,8 @@
     color: @gradientColors[black-3];
     transition: color @td-fast @ease, text-decoration-color @td-fast @ease;
 
-    &:hover:not(.noClass) {
+    &:hover:not(.noClass),
+    &--active:not(.noClass) {
       text-decoration-color: @gradientColors[blue-1];
       color: @gradientColors[blue-1];
     }

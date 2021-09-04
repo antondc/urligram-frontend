@@ -7,6 +7,7 @@ import FlagLeft from 'Assets/svg/flagLeft.svg';
 import FlagRight from 'Assets/svg/flagRight.svg';
 import List from 'Assets/svg/list.svg';
 import LogOut from 'Assets/svg/logOut.svg';
+import Private from 'Assets/svg/private.svg';
 import Tag from 'Assets/svg/tag.svg';
 import User from 'Assets/svg/user.svg';
 import UserFill from 'Assets/svg/userFill.svg';
@@ -41,7 +42,7 @@ export const UserModal: React.FC<Props> = ({
     </div>
     {!session?.id && <User className="UserModal-userLogo" onClick={switchMessageModal} />}
     <ul className="UserModal-list">
-      <li className={'UserModal-item' + (routeName === 'UserTags' && isUserPage ? ' UserModal-item--active' : '')}>
+      <li className={'UserModal-item' + (routeName === 'User' && isUserPage ? ' UserModal-item--active' : '')}>
         <A className="UserModal-link" href={`users/${session?.id}`} frontend underlined styled={false}>
           <UserFill className="UserModal-icon" />
           <span className="UserModal-label">My profile</span>
@@ -85,7 +86,7 @@ export const UserModal: React.FC<Props> = ({
       </li>
       <li className={'UserModal-item' + (routeName === 'ForgotPassword' ? ' UserModal-item--active' : '')}>
         <A className="UserModal-link" href="/forgot-password" frontend underlined styled={false}>
-          <FlagRight className="UserModal-icon" />
+          <Private className="UserModal-icon" />
           <span className="UserModal-label">Change Password </span>
           <ArrowRight className="UserModal-iconArrow" />
         </A>
