@@ -1,6 +1,5 @@
 import React from 'react';
 
-import Bookmark from 'Assets/svg/bookmark.svg';
 import Cross from 'Assets/svg/cross.svg';
 import DotsVertical from 'Assets/svg/dotsVertical.svg';
 import EditCircle from 'Assets/svg/editCircle.svg';
@@ -8,10 +7,10 @@ import List from 'Assets/svg/list.svg';
 import Private from 'Assets/svg/private.svg';
 import BookmarkActions from 'Components/BookmarkActions';
 import BookmarkListsPopOverOrSheet from 'Components/BookmarkListsPopOverOrSheet';
+import { RenderInPortal } from 'Components/Portal';
 import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
 import { TagState } from 'Modules/Tags/tags.types';
 import { Fade, Tooltip } from 'Vendor/components';
-import { RenderInPortal } from '../Portal';
 
 import './BookmarkRowIcons.less';
 
@@ -65,6 +64,9 @@ export const BookmarkRowIcons: React.FC<Partial<BookmarkRowIcons>> = ({
         appear
         disabled={!uiScreenTypeIsMobile}
       >
+        {!uiScreenTypeIsMobile && !!bookmark?.isPrivate && (
+          <Private className="BookmarkRowIcons-icon BookmarkRowIcons-iconPrivate" />
+        )}
         {!!sessionUserBookmarkedLink && (
           <EditCircle className="BookmarkRowIcons-icon BookmarkRowIcons-iconEdit" onClick={onEdit} />
         )}
@@ -74,12 +76,6 @@ export const BookmarkRowIcons: React.FC<Partial<BookmarkRowIcons>> = ({
             <BookmarkListsPopOverOrSheet bookmarkId={bookmark?.id} />
           </div>
         )}
-        {!uiScreenTypeIsMobile && !!bookmark?.isPrivate && (
-          <Private className="BookmarkRowIcons-icon BookmarkRowIcons-iconPrivate" />
-        )}
-        <div className="BookmarkRowIcons-timesBookmarked" id={`BookmarkRowIcons-timesBookmarked--${bookmark?.id}`}>
-          {bookmark?.statistics?.timesBookmarked}
-        </div>
         <RenderInPortal>
           <Tooltip
             parentElementId={`BookmarkRowIcons-timesBookmarked--${bookmark?.id}`}

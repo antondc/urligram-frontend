@@ -54,8 +54,8 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
     key={bookmark?.id}
   >
     <div className="BookmarkRow-title">
-      <img className="BookmarkRow-favicon" src={bookmark?.favicon} />
-      <A className="BookmarkRow-link" href={bookmark?.url} onClick={bookmarkViewed} targetBlank underlined>
+      <A href={bookmark?.url} onClick={bookmarkViewed} targetBlank underlined styled={false}>
+        <img className="BookmarkRow-favicon" src={bookmark?.favicon} />
         {bookmark?.title}
       </A>
     </div>
@@ -67,7 +67,7 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
           {bookmark?.statistics?.timesBookmarked}
           <Space />
           user
-          <span>{bookmark?.statistics?.timesBookmarked !== 1 ? 's' : ''}</span>
+          <span>{bookmark?.statistics?.timesBookmarked > 1 ? 's' : ''}</span>
         </>
       )}
       {!!bookmark?.statistics?.timesBookmarked && !!bookmark?.statistics?.absoluteVote && (
@@ -84,6 +84,9 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
       )}
       <Space />·<Space />
       Created at {createdAtFormatted}
+      <Space />·<Space />
+      Bookmarked {bookmark.statistics?.timesBookmarked} time
+      <span>{bookmark?.statistics?.timesBookmarked > 1 ? 's' : ''}</span>
     </div>
     <div className="BookmarkRow-tags">
       {tags?.map((item) => (

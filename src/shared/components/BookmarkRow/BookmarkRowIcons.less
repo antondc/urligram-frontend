@@ -40,14 +40,9 @@
   }
 
   &-actionsIcons {
-    display: grid;
+    display: flex;
     justify-content: flex-end;
-    grid-template:
-      'iconEdit iconLists iconBookmark' auto
-      'iconPrivate timesBookmarked timesBookmarked' auto
-      / 1fr 1fr 1fr;
-    justify-items: flex-end;
-    gap: 0 6px;
+    align-items: center;
     height: 100%;
 
     @media @br-mobile {
@@ -100,8 +95,16 @@
   }
 
   &-icon {
-    height: 14px;
-    width: 14px;
+    height: 18px;
+    width: 18px;
+    margin-right: 23px;
+    fill: @gradientColors[blue-1];
+    transition: fill @td-fast @ease;
+
+    &:hover {
+      fill: @gradientColors[blue-2];
+      cursor: pointer;
+    }
 
     @media @br-mobile {
       height: 10px;
@@ -111,7 +114,7 @@
 
   &-iconEdit {
     grid-area: iconEdit;
-    margin-top: -1px;
+    margin-top: 0;
     justify-self: flex-start;
 
     &:hover {
@@ -119,25 +122,23 @@
     }
 
     @media @br-mobile {
-      justify-self: unset;
       grid-area: unset;
       height: 20px;
       width: 20px;
       margin-top: 0;
       margin-right: 0;
+      justify-self: unset;
     }
   }
 
   &-iconLists {
     display: flex;
-    grid-area: iconLists;
-    height: 12px;
-    width: 12px;
     justify-self: center;
+    padding-top: 2px;
 
     svg {
-      height: 12px;
-      width: 12px;
+      height: 15px;
+      width: 15px;
     }
 
     &:hover {
@@ -158,9 +159,8 @@
   }
 
   &-iconBookmark {
-    grid-area: iconBookmark;
-    height: 15px;
-    width: 15px;
+    height: 18px;
+    width: 18px;
     transform: translateX(2px);
 
     @media @br-mobile {
@@ -172,48 +172,14 @@
   }
 
   &-iconPrivate {
-    align-self: flex-end;
-    grid-area: iconPrivate;
-
-    @media @br-mobile {
-      align-self: unset;
-      height: 10px;
-      width: 10px;
-    }
-  }
-
-  &-timesBookmarked {
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
-    grid-area: timesBookmarked;
-    font-size: @fs-small;
-    font-weight: @fw-semibold;
-    line-height: @fh-nano;
-
     &:hover {
-      cursor: default;
+      pointer-events: none;
     }
 
     @media @br-mobile {
-      display: none;
       align-self: unset;
       height: 10px;
       width: 10px;
-    }
-  }
-
-  &-iconAverageVote {
-    align-self: flex-end;
-    grid-area: iconAverageVote;
-    margin-right: 2px;
-    font-size: 10px;
-    font-weight: 600;
-    line-height: 8px;
-    color: @c-base;
-
-    @media @br-mobile {
-      justify-self: unset;
     }
   }
 }
