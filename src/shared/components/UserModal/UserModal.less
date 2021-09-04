@@ -1,17 +1,19 @@
 @import '../../css/imports.less';
+
 @c: .UserModal;
 
 @{c} {
   position: fixed;
-  top: 45px;
+  width: 293px;
+  top: 35px;
   right: 40px;
-  padding: 60px 30px 30px;
+  padding: 42px 38px 38px 38px;
   opacity: 0;
   background: @c-background;
-  border: 2px solid @c-base;
   transition: transform @td-fast @ease, opacity @td-fast @ease;
   pointer-events: none;
-  border-radius: 4px;
+  border-radius: 8px;
+  box-shadow: 5px 5px 50px 0 @gradientColors[black-4];
 
   @media @br-mobile {
     position: fixed;
@@ -38,15 +40,40 @@
   }
 
   &-cross {
+    display: flex;
     position: absolute;
-    height: 15px;
-    width: 15px;
-    top: 10px;
-    right: 10px;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    width: 30px;
+    top: 25px;
+    right: 25px;
+    background: @gradientColors[black-5];
+    fill: @gradientColors[black-3];
+    transition: fill @td-fast @ease;
+    border-radius: 50%;
 
     &:hover {
       cursor: pointer;
+
+      @{c}-crossIcon {
+        fill: @gradientColors[black-3];
+      }
     }
+
+    @media @br-mobile {
+      height: 25px;
+      width: 25px;
+      top: 27px;
+      right: 27px;
+    }
+  }
+
+  &-crossIcon {
+    height: 13px;
+    width: 13px;
+    fill: @gradientColors[black-4];
+    transition: fill @td-fast @ease;
 
     @media @br-mobile {
       height: 25px;
@@ -95,10 +122,31 @@
   }
 
   &-item {
-    padding: 5px 0;
+    padding: 13px 0;
     font-size: @fs-medium;
-    font-weight: @fw-extraBold;
+    font-weight: @fw-semibold;
     user-select: none;
+
+    &:first-child {
+      padding-top: 0;
+    }
+
+    &:last-child {
+      padding-bottom: 0;
+    }
+
+    &:hover,
+    &--active {
+      cursor: pointer;
+
+      @{c}-label {
+        color: @gradientColors[blue-2];
+      }
+
+      @{c}-icon {
+        fill: @gradientColors[blue-2];
+      }
+    }
 
     @media @br-mobile {
       display: flex;
@@ -114,6 +162,8 @@
 
   &-label {
     flex: 1;
+    color: @gradientColors[black-3];
+    transition: color @td-fast @ease;
   }
 
   &-link {
@@ -130,9 +180,11 @@
     }
   }
 
-  &-iconMobile {
-    display: none;
-    fill: @c-base;
+  &-icon {
+    width: 22px;
+    margin-right: 16px;
+    fill: @gradientColors[black-3];
+    transition: fill @td-fast @ease;
 
     @media @br-mobile {
       display: inline;
@@ -142,6 +194,9 @@
   }
 
   &-iconLists {
+    width: 18px;
+    margin: 0 18px 0 2px;
+
     @media @br-mobile {
       width: 22px;
     }

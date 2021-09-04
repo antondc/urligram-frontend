@@ -58,6 +58,20 @@ export const SidebarLeft: React.FC = () => {
     }
   };
 
+  const onSidebarMouseEnter = () => {
+    if (sidebarLeftClosed) return;
+
+    const nextValue = !listsShown;
+    setListsShown(nextValue);
+  };
+
+  const onSidebarMouseLeave = () => {
+    if (sidebarLeftClosed) return;
+
+    const nextValue = !listsShown;
+    setListsShown(false);
+  };
+
   useEffect(() => {
     dispatch(listsLoadByUserId({ userId: sessionId, rawData: true }));
   }, [sessionId]);

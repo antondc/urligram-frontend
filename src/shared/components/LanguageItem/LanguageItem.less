@@ -10,9 +10,10 @@
   width: 35px;
   margin-bottom: 10px;
   padding-bottom: 3px;
+  color: @gradientColors[black-3];
   background: @c-background;
   border: 2px solid;
-  border-color: @c-base;
+  border-color: @gradientColors[black-3];
   transition: border-color @td-fast @ease;
   user-select: none;
   border-radius: 50%;
@@ -23,11 +24,11 @@
   }
 
   &:hover:not(@{c}--active) {
-    border-color: @c-accent;
+    border-color: @gradientColors[blue-2];
     cursor: pointer;
 
     @{c}-text {
-      color: @c-accent;
+      color: @gradientColors[blue-2];
     }
   }
 
@@ -36,10 +37,10 @@
   }
 
   &--active {
-    border-color: @c-success;
+    border-color: @gradientColors[blue-1];
 
     @{c}-text {
-      color: @c-success;
+      color: @gradientColors[blue-1];
     }
   }
 }

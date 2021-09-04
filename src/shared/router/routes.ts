@@ -168,6 +168,7 @@ export const Routes: RoutesInterface = {
     initialDataLoadersSession: [],
     layout: 'fullPage',
   },
+
   Download: {
     name: 'Download',
     path: '/:lang([a-z]{2})?/download',

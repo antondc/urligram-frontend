@@ -48,62 +48,47 @@ export const SidebarLeft: React.FC<Props> = ({
       <ArrowRight />
     </div>
     <div className="SidebarLeft-items">
-      {isLoggedIn && (
+      <>
+        <A
+          className={'SidebarLeft-item' + (routeName === 'Home' ? ' SidebarLeft-item--active' : '')}
+          href="/"
+          styled={false}
+          frontend
+        >
+          <Circle className="SidebarLeft-itemIcon" />
+          <span className="SidebarLeft-itemDescription">{glossary.home}</span>
+        </A>
+        <A
+          className={'SidebarLeft-item' + (routeName === 'Tags' ? ' SidebarLeft-item--active' : '')}
+          href="/tags"
+          styled={false}
+          frontend
+        >
+          <Tag className="SidebarLeft-itemIcon" />
+          <span className="SidebarLeft-itemDescription">All Tags</span>
+        </A>
+        <A
+          className={'SidebarLeft-item' + (routeName === 'Lists' ? ' SidebarLeft-item--active' : '')}
+          href="/lists"
+          styled={false}
+          frontend
+        >
+          <List className="SidebarLeft-itemIcon SidebarLeft-itemIconList" />
+          <span className="SidebarLeft-itemDescription">All Lists</span>
+        </A>
+        <A
+          className={'SidebarLeft-item' + (routeName === 'Bookmarks' ? ' SidebarLeft-item--active' : '')}
+          href="/bookmarks"
+          styled={false}
+          frontend
+        >
+          <BookmarkFilled className="SidebarLeft-itemIcon" />
+          <span className="SidebarLeft-itemDescription">{glossary.allBookmarks}</span>
+        </A>
+      </>
+      {!!isLoggedIn && (
         <>
-          <A
-            className={'SidebarLeft-item' + (routeName === 'Home' ? ' SidebarLeft-item--active' : '')}
-            href="/"
-            styled={false}
-            frontend
-          >
-            <Circle className="SidebarLeft-itemIcon" />
-            <span className="SidebarLeft-itemDescription">{glossary.home}</span>
-          </A>
-          <A
-            className={'SidebarLeft-item' + (routeName === 'Tags' ? ' SidebarLeft-item--active' : '')}
-            href="/tags"
-            styled={false}
-            frontend
-          >
-            <Tag className="SidebarLeft-itemIcon" />
-            <span className="SidebarLeft-itemDescription">All Tags</span>
-          </A>
-          <A
-            className={'SidebarLeft-item' + (routeName === 'Lists' ? ' SidebarLeft-item--active' : '')}
-            href="/lists"
-            styled={false}
-            frontend
-          >
-            <List className="SidebarLeft-itemIcon SidebarLeft-itemIconList" />
-            <span className="SidebarLeft-itemDescription">All Lists</span>
-          </A>
-          <A
-            className={'SidebarLeft-item' + (routeName === 'Bookmarks' ? ' SidebarLeft-item--active' : '')}
-            href="/bookmarks"
-            styled={false}
-            frontend
-          >
-            <BookmarkFilled className="SidebarLeft-itemIcon" />
-            <span className="SidebarLeft-itemDescription">{glossary.allBookmarks}</span>
-          </A>
-          <A
-            className={'SidebarLeft-item' + (routeName === 'UserBookmarks' ? ' SidebarLeft-item--active' : '')}
-            href={`users/${sessionId}/bookmarks`}
-            styled={false}
-            frontend
-          >
-            <BookmarkFilled className="SidebarLeft-itemIcon" />
-            <span className="SidebarLeft-itemDescription">{glossary.myBookmarks}</span>
-          </A>
-          <A
-            className={'SidebarLeft-item' + (routeName === 'Users' ? ' SidebarLeft-item--active' : '')}
-            href={`users`}
-            styled={false}
-            frontend
-          >
-            <UserFill className="SidebarLeft-itemIcon" />
-            <span className="SidebarLeft-itemDescription">All Users</span>
-          </A>
+          <div className="SidebarLeft-divider" />
           <A
             className={'SidebarLeft-item' + (routeName === 'UserTags' ? ' SidebarLeft-item--active' : '')}
             href={`users/${sessionId}/tags`}
@@ -151,58 +136,25 @@ export const SidebarLeft: React.FC<Props> = ({
           <div className="SidebarLeft-itemLists">
             <SidebarLeftLists lists={lists} loading={false} listsShown={listsShown} />
           </div>
-        </>
-      )}
-      {!isLoggedIn && (
-        <>
           <A
-            className={'SidebarLeft-item' + (routeName === 'SOME_ROUTE' ? ' SidebarLeft-item--active' : '')}
-            href={`not-found`}
+            className={'SidebarLeft-item' + (routeName === 'UserBookmarks' ? ' SidebarLeft-item--active' : '')}
+            href={`users/${sessionId}/bookmarks`}
             styled={false}
             frontend
           >
-            <FlagLeft className="SidebarLeft-itemIcon" />
-            <span className="SidebarLeft-itemDescription">Placeholder</span>
+            <BookmarkFilled className="SidebarLeft-itemIcon" />
+            <span className="SidebarLeft-itemDescription">{glossary.myBookmarks}</span>
           </A>
           <A
-            className={'SidebarLeft-item' + (routeName === 'SOME_ROUTE' ? ' SidebarLeft-item--active' : '')}
-            href={`not-found`}
+            className={'SidebarLeft-item' + (routeName === 'User' ? ' SidebarLeft-item--active' : '')}
+            href={`users/${sessionId}`}
             styled={false}
             frontend
           >
-            <FlagLeft className="SidebarLeft-itemIcon" />
-            <span className="SidebarLeft-itemDescription">Placeholder</span>
-          </A>
-          <A
-            className={'SidebarLeft-item' + (routeName === 'SOME_ROUTE' ? ' SidebarLeft-item--active' : '')}
-            href={`not-found`}
-            styled={false}
-            frontend
-          >
-            <FlagLeft className="SidebarLeft-itemIcon" />
-            <span className="SidebarLeft-itemDescription">Placeholder</span>
-          </A>
-          <A
-            className={'SidebarLeft-item' + (routeName === 'SOME_ROUTE' ? ' SidebarLeft-item--active' : '')}
-            href={`not-found`}
-            styled={false}
-            frontend
-          >
-            <FlagLeft className="SidebarLeft-itemIcon" />
-            <span className="SidebarLeft-itemDescription">Placeholder</span>
+            <UserFill className="SidebarLeft-itemIcon" />
+            <span className="SidebarLeft-itemDescription">{glossary.myUser}</span>
           </A>
         </>
-      )}
-      {!!isLoggedIn && (
-        <A
-          className={'SidebarLeft-item' + (routeName === 'User' ? ' SidebarLeft-item--active' : '')}
-          href={`users/${sessionId}`}
-          styled={false}
-          frontend
-        >
-          <UserFill className="SidebarLeft-itemIcon" />
-          <span className="SidebarLeft-itemDescription">{glossary.myUser}</span>
-        </A>
       )}
     </div>
   </div>

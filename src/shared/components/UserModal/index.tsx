@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { selectCurrentRoute } from 'Modules/Routes/selectors/selectCurrentRoute';
 import { sessionLogOut } from 'Modules/Session/actions/sessionLogOut';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { switchMessageModal } from 'Modules/Ui/actions/switchMessageModal';
@@ -15,6 +16,12 @@ const UserModal: React.FC = () => {
   const dispatch = useDispatch();
   const session = useSelector(selectSession);
   const userModalMounted = useSelector(selectUiUserModalMounted);
+  const route = useSelector(selectCurrentRoute);
+  const isUserPage = route.params?.userId === session?.id;
+  console.log('=======');
+  console.log('route.params:');
+  console.log(JSON.stringify(route.params, null, 4));
+  console.log('=======');
 
   const logOutDispatched = () => {
     dispatch(sessionLogOut());
@@ -37,6 +44,8 @@ const UserModal: React.FC = () => {
 
   return (
     <UserModalUi
+      isUserPage={isUserPage}
+      routeName={route?.name}
       userModalMounted={userModalMounted}
       session={session}
       sessionLogOut={logOutDispatched}

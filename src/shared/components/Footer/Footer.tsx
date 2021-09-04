@@ -28,31 +28,32 @@ export const Footer: React.FC<Props> = ({
   onLanguageItemClick,
 }) => (
   <div className="Footer">
-    {!session ? (
-      <A className="Footer-link" href="sign-up" frontend underlined active={currentRoute?.name === Routes.Tags.name}>
-        Sign up
-      </A>
-    ) : (
+    <div className="Footer-left">
+      {!session ? (
+        <A className="Footer-link" href="sign-up" frontend underlined active={currentRoute?.name === Routes.Tags.name}>
+          Sign up
+        </A>
+      ) : (
+        <A
+          className="Footer-link"
+          href={Routes.ForgotPassword.route}
+          frontend
+          underlined
+          active={currentRoute?.name === Routes.ForgotPassword.name}
+        >
+          Forgot password?
+        </A>
+      )}
       <A
         className="Footer-link"
-        href={Routes.ForgotPassword.route}
+        href={Routes.FAQ.route}
         frontend
         underlined
-        active={currentRoute?.name === Routes.ForgotPassword.name}
+        active={currentRoute?.name === Routes.FAQ.name}
       >
-        Forgot password?
+        FAQ
       </A>
-    )}
-    <A
-      className="Footer-link"
-      href={Routes.FAQ.route}
-      frontend
-      underlined
-      active={currentRoute?.name === Routes.FAQ.name}
-    >
-      FAQ
-    </A>
-    {/*
+      {/*
     <div className="Footer-section">
         <A
           className="Footer-link"
@@ -65,15 +66,16 @@ export const Footer: React.FC<Props> = ({
         </A>
     </div>
     */}
-    <A
-      className="Footer-link"
-      href={Routes.Disclaimer.route}
-      frontend
-      underlined
-      active={currentRoute?.name === Routes.Disclaimer.name}
-    >
-      Disclaimer
-    </A>
+      <A
+        className="Footer-link"
+        href={Routes.Disclaimer.route}
+        frontend
+        underlined
+        active={currentRoute?.name === Routes.Disclaimer.name}
+      >
+        Disclaimer
+      </A>
+    </div>
     <div className="Footer-section Footer-lastSection">
       <Fade mounted={uiLanguagesModalMounted}>
         <LanguagesSwitch />
