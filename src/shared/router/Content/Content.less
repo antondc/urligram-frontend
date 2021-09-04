@@ -7,34 +7,14 @@
   align-items: flex-start;
   flex: 1;
   gap: 0 10px;
-  grid-template: 'sidebarMain main sidebarSecond' auto;
-  grid-template-columns: 270px auto 300px;
+  grid-template: 'sidebarMain main' auto;
+  grid-template-columns: 270px auto;
   padding-top: 20px;
   overflow: hidden;
   transition: grid-template-columns @td-fast @ease;
 
-  .boxShadow;
-
-  @media @br-desktopSmall {
-    grid-template-columns: 200px auto 200px;
-    transition: grid-template-columns @td-fast @ease;
-  }
-
-  @media @br-tablet {
-    grid-template:
-      'sidebarMain sidebarMain main main main main main main main main main main' auto
-      'sidebarSecond sidebarSecond main main main main main main main main main main' auto;
-    grid-template-columns: repeat(12, 1fr);
-  }
-
   &--sidebarLeftClosed {
     grid-template-columns: 45px auto 300px;
-  }
-
-  @media @br-mobile {
-    grid-template:
-      'main' auto
-      'sidebarSecond' auto;
   }
 
   &-sidebarMain {

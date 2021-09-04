@@ -55,6 +55,15 @@ export const SidebarLeft: React.FC<Props> = ({
       {isLoggedIn && (
         <>
           <A
+            className={'SidebarLeft-item' + (routeName === 'Home' ? ' SidebarLeft-item--active' : '')}
+            href={``}
+            styled={false}
+            frontend
+          >
+            <BookmarkFilled className="SidebarLeft-itemIcon" />
+            <span className="SidebarLeft-itemDescription">{glossary.allBookmarks}</span>
+          </A>
+          <A
             className={'SidebarLeft-item' + (routeName === 'UserBookmarks' ? ' SidebarLeft-item--active' : '')}
             href={`users/${sessionId}/bookmarks`}
             styled={false}

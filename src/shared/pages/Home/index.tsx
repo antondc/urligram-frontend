@@ -12,12 +12,6 @@ import { selectCurrentRouteQueryParamPage } from 'Modules/Routes/selectors/selec
 import { sectionsMostFollowedUsersLoad } from 'Modules/Sections/actions/sectionsMostFollowedUsersLoad';
 import { sectionsMyRecentBookmarksLoad } from 'Modules/Sections/actions/sectionsMyRecentBookmarksLoad';
 import { sectionsNewUsersLoad } from 'Modules/Sections/actions/sectionsNewUsersLoad';
-import { selectMostFollowedUsers } from 'Modules/Sections/selectors/selectMostFollowedUsers';
-import { selectMostFollowedUsersLoading } from 'Modules/Sections/selectors/selectMostFollowedUsersLoading';
-import { selectMyRecentBookmarks } from 'Modules/Sections/selectors/selectMyRecentBookmarks';
-import { selectMyRecentBookmarksLoading } from 'Modules/Sections/selectors/selectMyRecentBookmarksLoading';
-import { selectNewUsers } from 'Modules/Sections/selectors/selectNewUsers';
-import { selectNewUsersLoading } from 'Modules/Sections/selectors/selectNewUsersLoading';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { tagsLoad } from 'Modules/Tags/actions/tagsLoad';
 import { Home as HomeUI } from './Home';
@@ -27,12 +21,6 @@ const Home: React.FC = () => {
   const session = useSelector(selectSession);
   const bookmarksCurrentIds = useSelector(selectBookmarksCurrentIds);
   const bookmarksCurrentIdsLoading = useSelector(selectBookmarksLoading);
-  const myRecentBookmarks = useSelector(selectMyRecentBookmarks);
-  const myRecentBookmarksLoading = useSelector(selectMyRecentBookmarksLoading);
-  const mostFollowedUsers = useSelector(selectMostFollowedUsers);
-  const mostFollowedUsersLoading = useSelector(selectMostFollowedUsersLoading);
-  const newUsers = useSelector(selectNewUsers);
-  const newUsersLoading = useSelector(selectNewUsersLoading);
   const page = useSelector(selectCurrentRouteQueryParamPage);
   const totalItems = useSelector(selectBookmarksTotalItems);
   const url = useSelector(selectCurrentFullUrl);
@@ -56,15 +44,8 @@ const Home: React.FC = () => {
 
   return (
     <HomeUI
-      session={session}
       bookmarksIds={bookmarksCurrentIds}
       bookmarksIdsLoading={bookmarksCurrentIdsLoading}
-      mostFollowedUsers={mostFollowedUsers}
-      mostFollowedUsersLoading={mostFollowedUsersLoading}
-      newUsers={newUsers}
-      newUsersLoading={newUsersLoading}
-      myRecentBookmarks={myRecentBookmarks}
-      myRecentBookmarksLoading={myRecentBookmarksLoading}
       page={page}
       totalItems={totalItems}
       url={url}
