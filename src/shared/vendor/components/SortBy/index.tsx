@@ -1,8 +1,8 @@
 import React from 'react';
 
+import Sort from 'Assets/svg/sort.svg';
 import { URLWrapper } from 'Services/URLWrapper';
 import { A } from '../A';
-import { Sort } from '../Svg';
 
 import './SortBy.less';
 
@@ -41,9 +41,8 @@ export const SortBy: React.FC<Props> = ({ className, href, options, currentSort,
               <span className="SortBy-label">{item.label}</span>
               {item?.icon && <Icon className="SortBy-icon" />}
               <Sort
-                size="micro"
                 className={
-                  'SortBy-listItemIcon' + (currentSortIsAsc && isActiveItem ? ' SortBy-listItemIcon--asc' : '')
+                  'SortBy-sortIcon' + (currentSortIsAsc && isActiveItem ? ' SortBy-sortIcon--asc' : '')
                 }
               />
             </A>

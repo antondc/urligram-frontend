@@ -49,10 +49,10 @@ export const Bookmarks: React.FC<Props> = ({
 }) => (
   <Main className="Bookmarks">
     <Helmet title={`${SITE_TITLE} · Bookmarks`} />
-    <div className="Bookmarks-header">
+    <CardItem className="Bookmarks-header">
       <Select
         className="Bookmarks-select"
-        label="Select tags"
+        placeholder="Select tags"
         value={currentQueryParamFilterTags}
         defaultOptions={allTags.map((item) => ({ label: item.name, value: item.name }))}
         options={[...tagsSearchFormatted, ...allTags.map((item) => ({ label: item.name, value: item.name }))].filter(
@@ -64,6 +64,7 @@ export const Bookmarks: React.FC<Props> = ({
         grow
         hideLabelOnFill
       />
+      <div className="Bookmarks-separator" />
       <SortBy
         className="Bookmarks-sortBy"
         options={[{ label: 'Created at', field: 'createdAt', icon: Clock }]}
@@ -71,7 +72,7 @@ export const Bookmarks: React.FC<Props> = ({
         currentSort={sort}
         loading={loading}
       />
-    </div>
+    </CardItem>
     <div className="Bookmarks-bookmarks">
       {loading ? (
         <BookmarkRowSkeletonGroup length={bookmarksIds?.length || DEFAULT_PAGE_SIZE} />

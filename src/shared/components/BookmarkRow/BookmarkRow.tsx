@@ -94,9 +94,7 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
           styled={false}
           frontend
         >
-          <Tag size="nano" variant="simple">
-            {item.name}
-          </Tag>
+          <Tag>{item.name}</Tag>
         </A>
       ))}
     </div>

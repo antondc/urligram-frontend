@@ -22,7 +22,7 @@ export const Default: React.FC = () => {
       <Hr spacer />
       <div style={{ width: '500px' }}>
         <Select
-          label="Select tags"
+          placeholder="Select tags"
           value={value}
           defaultOptions={[]}
           options={[

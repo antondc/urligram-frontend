@@ -4,7 +4,6 @@ import Helmet from 'react-helmet';
 import Bookmark from 'Assets/svg/bookmarkFilled.svg';
 import Title from 'Assets/svg/sortTitle.svg';
 import Clock from 'Assets/svg/spinner6.svg';
-import A from 'Components/A';
 import CardItem from 'Components/CardItem';
 import Main from 'Components/Main';
 import NoResults from 'Components/NoResults';
@@ -12,15 +11,12 @@ import Pagination from 'Components/Pagination';
 import UserRow from 'Components/UserRow';
 import { UserRowSkeletonGroup } from 'Components/UserRow/UserRowSkeletonGroup';
 import { TagState } from 'Modules/Tags/tags.types';
-import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE, SITE_TITLE } from 'Root/src/shared/constants';
-import { Select, SelectValue, SortBy, Space } from 'Vendor/components';
+import { Select, SelectValue, SortBy } from 'Vendor/components';
 
 import './Followers.less';
 
 export interface Props {
-  user: UserState;
-  userId: string;
   usersCurrentIds: string[];
   usersLoading: boolean;
   url: string;
@@ -41,8 +37,6 @@ export interface Props {
 }
 
 export const Followers: React.FC<Props> = ({
-  userId,
-  user,
   usersCurrentIds,
   usersLoading,
   page,
@@ -57,17 +51,10 @@ export const Followers: React.FC<Props> = ({
 }) => (
   <Main className="Followers">
     <Helmet title={`${SITE_TITLE} · Followers`} />
-    <div className="Followers-header Followers-headerTitle">
-      Followers of
-      <Space />
-      <A href={`/users/${userId}/followers`} underlined frontend>
-        @{user?.name}
-      </A>
-    </div>
-    <div className="Followers-header">
+    <CardItem className="Followers-header">
       <Select
         className="Bookmarks-select"
-        label="Select tags"
+        placeholder="Select tags"
         value={currentQueryParamFilterTags}
         defaultOptions={allTags.map((item) => ({ label: item.name, value: item.name }))}
         options={[...tagsSearchFormatted, ...allTags.map((item) => ({ label: item.name, value: item.name }))].filter(
@@ -79,6 +66,7 @@ export const Followers: React.FC<Props> = ({
         grow
         hideLabelOnFill
       />
+      <div className="Bookmarks-separator" />
       <SortBy
         options={[
           { label: 'Bookmarks', field: 'bookmarks', icon: Bookmark },
@@ -89,7 +77,7 @@ export const Followers: React.FC<Props> = ({
         currentSort={sort}
         loading={usersLoading}
       />
-    </div>
+    </CardItem>
     <div className="Followers-followers">
       {usersLoading ? (
         <UserRowSkeletonGroup length={usersCurrentIds?.length || DEFAULT_PAGE_SIZE} />

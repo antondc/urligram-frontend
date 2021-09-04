@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Cross from 'Assets/svg/cross.svg';
-import { Fade } from '../../vendor/components';
+import { Fade } from 'Vendor/components';
 
 import './BaseModal2.less';
 

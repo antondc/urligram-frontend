@@ -120,9 +120,7 @@ export const User: React.FC<Props> = ({
             frontend
             underlined
           >
-            <Tag variant="simple" size="small">
-              {item.name}
-            </Tag>
+            <Tag>{item.name}</Tag>
           </A>
         ))}
       </div>

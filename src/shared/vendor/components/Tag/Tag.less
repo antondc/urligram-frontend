@@ -3,75 +3,24 @@
 @c: .Tag;
 
 @{c} {
+  display: flex;
   position: relative;
+  justify-content: center;
+  align-items: center;
+  height: 20px;
+  padding: 0 15px;
   font-family: @ff-sans;
+  font-size: @fs-micro;
+  font-weight: @fw-bold;
   text-transform: capitalize;
-
-  &-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: calc(100% - 4px);
-    padding: 4px 12px 4px 12px;
-    border-radius: 4px;
-    white-space: nowrap;
-    color: @c-base;
-    background: @c-background;
-    border: 1px solid @c-base;
-    transition: all @td-fast @ease-custom;
-    box-shadow: 2px 2px 0 0 @c-base;
-    // border-radius: 3px;
-  }
+  color: @gradientColors[blue-1];
+  border: 2px solid @gradientColors[blue-1];
+  border-radius: 15.5px;
+  transition: color @td-fast @ease, border @td-fast @ease;
 
   &:hover {
-    @{c}-content {
-      color: @c-accent;
-      border-color: @c-accent;
-      cursor: pointer;
-    }
-  }
-
-  &-notification {
-    position: absolute;
-    top: -3px;
-    right: -3px;
-  }
-
-  &--simple {
-    transition: background @td-fast @ease, box-shadow @td-fast @ease, color @td-fast @ease, border-color @td-fast @ease;
-
-    @{c}-content {
-      color: @c-base;
-      border: 1px solid @c-base;
-      box-shadow: none;
-      // border-radius: 4px;
-    }
-
-    &@{c}--nano {
-      @{c}-content {
-        padding: 1px 4px;
-        border: 1px solid @c-base;
-      }
-    }
-
-    &@{c}--small {
-      @{c}-content {
-        padding: 1px 4px;
-      }
-    }
-
-    &@{c}--medium {
-      @{c}-content {
-        padding: 2px 8px;
-      }
-    }
-
-    &:hover {
-      @{c}-content {
-        color: @c-accent;
-        border-color: @c-accent;
-        box-shadow: 2px 2px 0 1px @c-traslucid--light;
-      }
-    }
+    color: @gradientColors[blue-2];
+    border-color: @gradientColors[blue-2];
+    cursor: pointer;
   }
 }

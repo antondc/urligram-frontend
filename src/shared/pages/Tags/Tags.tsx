@@ -4,6 +4,7 @@ import Helmet from 'react-helmet';
 import Bookmark from 'Assets/svg/bookmarkRounded.svg';
 import Title from 'Assets/svg/sortTitle.svg';
 import A from 'Components/A';
+import CardItem from 'Components/CardItem';
 import Main from 'Components/Main';
 import { SidebarListTagsSkeleton } from 'Components/SidebarListTags/SidebarListTagsSkeleton';
 import { TagState } from 'Modules/Tags/tags.types';
@@ -22,7 +23,7 @@ interface Props {
 export const Tags: React.FC<Props> = ({ tags, tagsLoading, url, sort }) => (
   <Main className="Tags">
     <Helmet title={`${SITE_TITLE} · Tags`} />
-    <div className="Tags-header">
+    <CardItem className="Tags-header">
       <SortBy
         options={[
           { label: 'Bookmarks', field: 'count', icon: Bookmark },
@@ -32,15 +33,17 @@ export const Tags: React.FC<Props> = ({ tags, tagsLoading, url, sort }) => (
         currentSort={sort}
         loading={tagsLoading}
       />
-    </div>
+    </CardItem>
     <div className="Tags-tags">
       {tagsLoading ? (
         <SidebarListTagsSkeleton length={tags?.length || 70} />
       ) : (
         tags?.map((item) => (
           <A className="Tags-tag" href={`/bookmarks?filter[tags][]=${item.name}`} key={item.id} styled={false} frontend>
-            <Tag size="medium">
+            <Tag>
               {item?.name}
+              <Space />
+              <Space />
               <Space />
               {item?.count}
             </Tag>

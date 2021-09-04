@@ -2,15 +2,15 @@ import React from 'react';
 import Helmet from 'react-helmet';
 
 import Clock from 'Assets/svg/spinner6.svg';
+import CardItem from 'Components/CardItem';
+import Main from 'Components/Main';
+import NoResults from 'Components/NoResults';
 import Pagination from 'Components/Pagination';
 import UserRow from 'Components/UserRow';
 import { UserRowSkeletonGroup } from 'Components/UserRow/UserRowSkeletonGroup';
 import { TagState } from 'Modules/Tags/tags.types';
 import { DEFAULT_PAGE_SIZE, SITE_TITLE } from 'Root/src/shared/constants';
 import { Select, SelectValue, SortBy } from 'Vendor/components';
-import CardItem from 'Components/CardItem';
-import Main from 'Components/Main';
-import NoResults from 'Components/NoResults';
 
 import './Users.less';
 
@@ -49,10 +49,10 @@ export const Users: React.FC<Props> = ({
 }) => (
   <Main className="Users">
     <Helmet title={`${SITE_TITLE} · All Users`} />
-    <div className="Users-header">
+    <CardItem className="Users-header">
       <Select
         className="Bookmarks-select"
-        label="Select tags"
+        placeholder="Select tags"
         value={currentQueryParamFilterTags}
         defaultOptions={allTags.map((item) => ({ label: item.name, value: item.name }))}
         options={[...tagsSearchFormatted, ...allTags.map((item) => ({ label: item.name, value: item.name }))].filter(
@@ -64,13 +64,14 @@ export const Users: React.FC<Props> = ({
         grow
         hideLabelOnFill
       />
+      <div className="Bookmarks-separator" />
       <SortBy
         options={[{ label: 'Created at', field: 'createdAt', icon: Clock }]}
         href={url}
         currentSort={sort}
         loading={usersLoading}
       />
-    </div>
+    </CardItem>
     <div className="Users-users">
       {usersLoading ? (
         <UserRowSkeletonGroup length={usersCurrentIds?.length || DEFAULT_PAGE_SIZE} />

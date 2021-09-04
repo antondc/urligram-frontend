@@ -107,9 +107,7 @@ export const UserRow: React.FC<UserRow> = ({
           styled={false}
           frontend
         >
-          <Tag variant="simple" size="nano">
-            {item.name}
-          </Tag>
+          <Tag>{item.name}</Tag>
         </A>
       ))}
     </div>

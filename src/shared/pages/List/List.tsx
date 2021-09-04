@@ -92,18 +92,41 @@ export const List: React.FC<Props> = ({
 }) => (
   <Main className="List">
     <Helmet title={`${SITE_TITLE} · ${list?.name}`} />
-    <div className="List-header List-headerTitle">
-      <div className="List-headerTitleText">
-        Bookmarks in
-        <Space />
-        <A href={`/lists/${list?.id}`} underlined frontend>
-          {list?.name}
-        </A>
-      </div>
+    <AnimateHeight className="List-notification" mounted={showBanner} speed="fastest" ease={[1, 0.02, 0.83, 1.15]}>
+      <CardItem className="List-notificationContent">
+        <div className="List-notificationText">You were invited to this list as {listInvitationRole}: join it?</div>
+        {acceptLoading ? (
+          <SpinnerPie />
+        ) : (
+          <Check className="List-notificationIcon List-notificationIconCheck" onClick={onInviteAccept} />
+        )}
+        {rejectLoading ? (
+          <SpinnerPie />
+        ) : (
+          <Cross className="List-notificationIcon List-notificationIconCross" onClick={onInviteReject} />
+        )}
+      </CardItem>
+    </AnimateHeight>
+    <CardItem className="List-header">
+      <Select
+        className="Bookmarks-select"
+        placeholder="Select tags"
+        value={currentQueryParamFilterTags}
+        defaultOptions={allTags.map((item) => ({ label: item.name, value: item.name }))}
+        options={[...tagsSearchFormatted, ...allTags.map((item) => ({ label: item.name, value: item.name }))].filter(
+          (v, i, a) => a.findIndex((t) => t.value === v.value) === i
+        )}
+        onInputChange={onInputChange}
+        onChange={onChange}
+        maxItems={4}
+        grow
+        hideLabelOnFill
+      />
+      <div className="List-separator" />
       <div className="List-headerImages">
         <React.Fragment>
           <RenderInPortal>
-            <Tooltip parentElementId="List-tooltipUserImage" content={`@${listUserOwner?.name}`} delay={0.5} />
+            <Tooltip parentElementId="List-tooltipUserImage" content={`@${listUserOwner?.name}`} delay={2} />
           </RenderInPortal>
           <A
             className="List-headerImagesItem List-headerImagesItemOwner"
@@ -123,7 +146,7 @@ export const List: React.FC<Props> = ({
         {usersInThisList?.map((item) => (
           <React.Fragment key={item?.id}>
             <RenderInPortal>
-              <Tooltip parentElementId={`List-${item?.id}}`} content={`@${item?.name}`} delay={0.5} />
+              <Tooltip parentElementId={`List-${item?.id}}`} content={`@${item?.name}`} delay={2} />
             </RenderInPortal>
             <A
               className={
@@ -145,7 +168,7 @@ export const List: React.FC<Props> = ({
         {sessionUserOwnsList && (
           <>
             <RenderInPortal>
-              <Tooltip parentElementId="List-tooltipAddUser" content="Add user" delay={0.5} />
+              <Tooltip parentElementId="List-tooltipAddUser" content="Add user" delay={2} />
             </RenderInPortal>
             <div className="List-headerPlusIcon" id="List-tooltipAddUser">
               <ListAddUser listId={list?.id} />
@@ -171,41 +194,13 @@ export const List: React.FC<Props> = ({
         {sessionUserListRole === 'admin' && (
           <>
             <RenderInPortal>
-              <Tooltip parentElementId="List-tooltipAdmin" content="Edit list" delay={1} />
+              <Tooltip parentElementId="List-tooltipAdmin" content="Edit list" delay={2} />
             </RenderInPortal>
             <EditCircle className="List-iconRole List-iconAdmin" id="List-tooltipAdmin" onClick={onEditClick} />
           </>
         )}
       </div>
-    </div>
-    <AnimateHeight className="List-notification" mounted={showBanner} speed="fastest" ease={[1, 0.02, 0.83, 1.15]}>
-      <div className="List-notificationText">You were invited to this list as {listInvitationRole}: join it?</div>
-      {acceptLoading ? (
-        <SpinnerPie />
-      ) : (
-        <Check className="List-notificationIcon List-notificationIconCheck" onClick={onInviteAccept} />
-      )}
-      {rejectLoading ? (
-        <SpinnerPie />
-      ) : (
-        <Cross className="List-notificationIcon List-notificationIconCross" onClick={onInviteReject} />
-      )}
-    </AnimateHeight>
-    <div className="List-header">
-      <Select
-        className="Bookmarks-select"
-        label="Select tags"
-        value={currentQueryParamFilterTags}
-        defaultOptions={allTags.map((item) => ({ label: item.name, value: item.name }))}
-        options={[...tagsSearchFormatted, ...allTags.map((item) => ({ label: item.name, value: item.name }))].filter(
-          (v, i, a) => a.findIndex((t) => t.value === v.value) === i
-        )}
-        onInputChange={onInputChange}
-        onChange={onChange}
-        maxItems={4}
-        grow
-        hideLabelOnFill
-      />
+      <div className="List-separator" />
       <SortBy
         options={[
           { label: 'Bookmarked', field: 'timesbookmarked', icon: Bookmark },
@@ -215,7 +210,7 @@ export const List: React.FC<Props> = ({
         currentSort={sort}
         loading={bookmarksLoading}
       />
-    </div>
+    </CardItem>
     <div className="List-bookmarks">
       {bookmarksLoading ? (
         <BookmarkRowSkeletonGroup length={bookmarksIds?.length ?? DEFAULT_PAGE_SIZE} />

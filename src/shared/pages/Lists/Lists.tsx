@@ -4,6 +4,7 @@ import Helmet from 'react-helmet';
 import Clock from 'Assets/svg/spinner6.svg';
 import Updated from 'Assets/svg/updated.svg';
 import User from 'Assets/svg/userFill.svg';
+import CardItem from 'Components/CardItem';
 import ListRow from 'Components/ListRow';
 import { ListRowSkeletonGroup } from 'Components/ListRow/ListSkeletonGroup';
 import Main from 'Components/Main';
@@ -12,7 +13,6 @@ import Pagination from 'Components/Pagination';
 import { TagState } from 'Modules/Tags/tags.types';
 import { DEFAULT_PAGE_SIZE, SITE_TITLE } from 'Root/src/shared/constants';
 import { Select, SelectValue, SortBy } from 'Vendor/components';
-import CardItem from 'Components/CardItem';
 
 import './Lists.less';
 
@@ -51,10 +51,10 @@ export const Lists: React.FC<Props> = ({
 }) => (
   <Main className="Lists">
     <Helmet title={`${SITE_TITLE} · All Lists`} />
-    <div className="Lists-header">
+    <CardItem className="Lists-header">
       <Select
         className="Bookmarks-select"
-        label="Select tags"
+        placeholder="Select tags"
         value={currentQueryParamFilterTags}
         defaultOptions={allTags.map((item) => ({ label: item.name, value: item.name }))}
         options={[...tagsSearchFormatted, ...allTags.map((item) => ({ label: item.name, value: item.name }))].filter(
@@ -66,6 +66,7 @@ export const Lists: React.FC<Props> = ({
         grow
         hideLabelOnFill
       />
+      <div className="Lists-separator" />
       <SortBy
         options={[
           { label: 'Date', field: 'createdAt', icon: Clock },
@@ -76,7 +77,7 @@ export const Lists: React.FC<Props> = ({
         currentSort={sort}
         loading={listsIdsLoading}
       />
-    </div>
+    </CardItem>
     <div className="Lists-lists">
       {listsIdsLoading ? (
         <ListRowSkeletonGroup length={listsIds?.length || DEFAULT_PAGE_SIZE} />

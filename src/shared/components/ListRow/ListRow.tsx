@@ -34,9 +34,7 @@ export const ListRow: React.FC<Props> = ({ id, name, tags, description, isPrivat
           styled={false}
           frontend
         >
-          <Tag size="nano" variant="simple">
-            {item.name}
-          </Tag>
+          <Tag>{item.name}</Tag>
         </A>
       ))}
     </div>

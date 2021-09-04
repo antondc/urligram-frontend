@@ -6,6 +6,7 @@ import Clock from 'Assets/svg/spinner6.svg';
 import User from 'Assets/svg/userFill.svg';
 import A from 'Components/A';
 import { BookmarkRowSkeletonGroup } from 'Components/BookmarkRow/BookmarkRowSkeletonGroup';
+import CardItem from 'Components/CardItem';
 import ListRow from 'Components/ListRow';
 import Main from 'Components/Main';
 import NoResults from 'Components/NoResults';
@@ -14,7 +15,6 @@ import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE, SITE_TITLE } from 'Root/src/shared/constants';
 import { Select, SelectValue, SortBy, Space } from 'Vendor/components';
-import CardItem from 'Components/CardItem';
 
 import './UserLists.less';
 
@@ -59,16 +59,10 @@ export const UserLists: React.FC<Props> = ({
 }) => (
   <Main className="UserLists">
     <Helmet title={`${SITE_TITLE} · User Lists`} />
-    <div className="UserLists-header UserLists-headerTitle">
-      Lists of <Space />
-      <A href={`/users/${userId}`} underlined frontend>
-        @{user?.name}
-      </A>
-    </div>
-    <div className="UserLists-header">
+    <CardItem className="UserLists-header">
       <Select
         className="Bookmarks-select"
-        label="Select tags"
+        placeholder="Select tags"
         value={currentQueryParamFilterTags}
         defaultOptions={allTags.map((item) => ({ label: item.name, value: item.name }))}
         options={[...tagsSearchFormatted, ...allTags.map((item) => ({ label: item.name, value: item.name }))].filter(
@@ -80,6 +74,7 @@ export const UserLists: React.FC<Props> = ({
         grow
         hideLabelOnFill
       />
+      <div className="UserLists-separator" />
       <SortBy
         options={[
           { label: 'Created at', field: 'createdAt', icon: Clock },
@@ -90,7 +85,7 @@ export const UserLists: React.FC<Props> = ({
         currentSort={sort}
         loading={listsLoading}
       />
-    </div>
+    </CardItem>
     <div className="UserLists-lists">
       {listsLoading ? (
         <BookmarkRowSkeletonGroup length={listsIds?.length || DEFAULT_PAGE_SIZE} />

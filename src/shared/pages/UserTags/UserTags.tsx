@@ -4,11 +4,12 @@ import Helmet from 'react-helmet';
 import Bookmark from 'Assets/svg/bookmarkRounded.svg';
 import Title from 'Assets/svg/sortTitle.svg';
 import A from 'Components/A';
+import Main from 'Components/Main';
 import { SidebarListTagsSkeleton } from 'Components/SidebarListTags/SidebarListTagsSkeleton';
 import { TagState } from 'Modules/Tags/tags.types';
 import { SITE_TITLE } from 'Root/src/shared/constants';
 import { SortBy, Space, Tag } from 'Vendor/components';
-import Main from 'Components/Main';
+import CardItem from 'Components/CardItem';
 
 import './UserTags.less';
 
@@ -22,7 +23,7 @@ interface Props {
 export const UserTags: React.FC<Props> = ({ tags, tagsLoading, url, sort }) => (
   <Main className="UserTags">
     <Helmet title={`${SITE_TITLE} · User Tags`} />
-    <div className="UserTags-header">
+    <CardItem className="UserTags-header">
       <SortBy
         options={[
           { label: 'Bookmarks', field: 'count', icon: Bookmark },
@@ -32,7 +33,7 @@ export const UserTags: React.FC<Props> = ({ tags, tagsLoading, url, sort }) => (
         currentSort={sort}
         loading={tagsLoading}
       />
-    </div>
+    </CardItem>
     <div className="UserTags-tags">
       {tagsLoading ? (
         <SidebarListTagsSkeleton />
@@ -45,8 +46,10 @@ export const UserTags: React.FC<Props> = ({ tags, tagsLoading, url, sort }) => (
             styled={false}
             frontend
           >
-            <Tag size="medium">
+            <Tag>
               {item?.name}
+              <Space />
+              <Space />
               <Space />
               {item?.count}
             </Tag>

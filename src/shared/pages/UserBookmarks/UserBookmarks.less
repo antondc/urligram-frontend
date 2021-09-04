@@ -5,51 +5,19 @@
 @{c} {
   &-header {
     display: flex;
-    width: 100%;
-    padding: 5px;
-    background: @c-background;
-    border-bottom: 1px solid @c-accentLight-hard;
-  }
-
-  &-headerTitle {
-    display: flex;
-    justify-content: space-between;
     align-items: center;
-    height: 40px;
+    height: 50px;
     width: 100%;
-    padding: 5px 10px;
-    font-weight: @fw-extraBold;
+    padding: 8px 30px 8px 15px;
     background: @c-background;
-    border-bottom: 1px solid @c-accentLight-hard;
-
-    @media @br-mobile {
-      margin-bottom: 5px;
-      padding: 5px 5px 5px 15px;
-    }
   }
 
-  &-select {
-    flex: 1;
-
-    @media @br-mobile {
-      padding-right: 8px;
-    }
-  }
-
-  &-sortBy {
-    @media @br-mobile {
-      padding-left: 16px;
-
-      &:before {
-        content: ' ';
-        position: absolute;
-        width: 2px;
-        top: 4px;
-        bottom: 4px;
-        left: 0;
-        background: @c-traslucid;
-      }
-    }
+  &-separator {
+    height: 100%;
+    width: 2px;
+    margin: 0 24px;
+    background: @gradientColors[black-4];
+    border-radius: 2px;
   }
 
   &-bookmarks {

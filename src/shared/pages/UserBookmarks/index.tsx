@@ -8,7 +8,6 @@ import { selectBookmarksLoading } from 'Modules/Bookmarks/selectors/selectBookma
 import { selectBookmarksMetaSort } from 'Modules/Bookmarks/selectors/selectBookmarksMetaSort';
 import { selectBookmarksTotalItems } from 'Modules/Bookmarks/selectors/selectBookmarkTotalItems';
 import { listsLoadByUserId } from 'Modules/Lists/actions/listsLoadByUserId';
-import { RootState } from 'Modules/rootType';
 import { selectCurrentFullUrl } from 'Modules/Routes/selectors/selectCurrentFullUrl';
 import { selectCurrentRouteParamUserId } from 'Modules/Routes/selectors/selectCurrentRouteParamUserId';
 import { selectCurrentRouteQueryParamFilter } from 'Modules/Routes/selectors/selectCurrentRouteQueryParamFilter';
@@ -21,7 +20,6 @@ import { selectTagsAll } from 'Modules/Tags/selectors/selectAllTags';
 import { selectTagsSearch } from 'Modules/Tags/selectors/selectTagsSearch';
 import { switchBookmarkCreateModal } from 'Modules/Ui/actions/switchBookmarkCreateModal';
 import { userLoad } from 'Modules/Users/actions/userLoad';
-import { selectUserById } from 'Modules/Users/selectors/selectUserById';
 import history from 'Services/History';
 import { URLWrapper } from 'Services/URLWrapper';
 import { UserBookmarks as UserBookmarksUi } from './UserBookmarks';
@@ -31,7 +29,6 @@ const UserBookmarks: React.FC = () => {
 
   const session = useSelector(selectSession);
   const userId = useSelector(selectCurrentRouteParamUserId);
-  const user = useSelector((state: RootState) => selectUserById(state, { id: userId }));
   const bookmarksIds = useSelector(selectBookmarksCurrentIds);
   const bookmarksByKey = useSelector(selectBookmarksByKey);
   const bookmarksLoading = useSelector(selectBookmarksLoading);
@@ -85,8 +82,6 @@ const UserBookmarks: React.FC = () => {
 
   return (
     <UserBookmarksUi
-      userId={userId}
-      user={user}
       bookmarksByKey={bookmarksByKey}
       bookmarksIds={bookmarksIds}
       bookmarksLoading={bookmarksLoading}

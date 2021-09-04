@@ -3,7 +3,6 @@ import Helmet from 'react-helmet';
 
 import Bookmark from 'Assets/svg/bookmarkRounded.svg';
 import Clock from 'Assets/svg/spinner6.svg';
-import A from 'Components/A';
 import BookmarkRow from 'Components/BookmarkRow';
 import { BookmarkRowSkeletonGroup } from 'Components/BookmarkRow/BookmarkRowSkeletonGroup';
 import CardItem from 'Components/CardItem';
@@ -12,15 +11,12 @@ import NoResults from 'Components/NoResults';
 import Pagination from 'Components/Pagination';
 import { BookmarksByKey } from 'Modules/Bookmarks/bookmarks.types';
 import { TagState } from 'Modules/Tags/tags.types';
-import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE, SITE_TITLE } from 'Root/src/shared/constants';
-import { FadeInOut, Select, SelectValue, SortBy, Space } from 'Vendor/components';
+import { FadeInOut, Select, SelectValue, SortBy } from 'Vendor/components';
 
 import './UserBookmarks.less';
 
 interface Props {
-  userId: string;
-  user: UserState;
   bookmarksByKey: BookmarksByKey;
   bookmarksIds: number[];
   bookmarksLoading: boolean;
@@ -43,8 +39,6 @@ interface Props {
 }
 
 export const UserBookmarks: React.FC<Props> = ({
-  userId,
-  user,
   bookmarksByKey,
   bookmarksIds,
   bookmarksLoading,
@@ -60,17 +54,10 @@ export const UserBookmarks: React.FC<Props> = ({
 }) => (
   <Main className="UserBookmarks">
     <Helmet title={`${SITE_TITLE} · User Bookmarks`} />
-    <div className="UserBookmarks-header UserBookmarks-headerTitle">
-      Bookmarks of
-      <Space />
-      <A href={`/users/${userId}`} underlined frontend>
-        @{user?.name}
-      </A>
-    </div>
-    <div className="UserBookmarks-header">
+    <CardItem className="UserBookmarks-header">
       <Select
         className="UserBookmarks-select"
-        label="Select tags"
+        placeholder="Select tags"
         value={currentQueryParamFilterTags}
         defaultOptions={allTags.map((item) => ({ label: item.name, value: item.name }))}
         options={[...tagsSearchFormatted, ...allTags.map((item) => ({ label: item.name, value: item.name }))].filter(
@@ -80,7 +67,9 @@ export const UserBookmarks: React.FC<Props> = ({
         onChange={onChange}
         maxItems={4}
         hideLabelOnFill
+        grow
       />
+      <div className="UserBookmarks-separator" />
       <SortBy
         className="UserBookmarks-sortBy"
         options={[
@@ -91,7 +80,7 @@ export const UserBookmarks: React.FC<Props> = ({
         currentSort={sort}
         loading={bookmarksLoading}
       />
-    </div>
+    </CardItem>
     <div className="UserBookmarks-bookmarks">
       {bookmarksLoading ? (
         <BookmarkRowSkeletonGroup length={bookmarksIds?.length || DEFAULT_PAGE_SIZE} />

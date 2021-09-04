@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { RootState } from 'Modules/rootType';
 import { selectCurrentFullUrl } from 'Modules/Routes/selectors/selectCurrentFullUrl';
 import { selectCurrentRouteParamUserId } from 'Modules/Routes/selectors/selectCurrentRouteParamUserId';
 import { selectCurrentRouteQueryParamFilter } from 'Modules/Routes/selectors/selectCurrentRouteQueryParamFilter';
@@ -13,7 +12,6 @@ import { selectTagsAll } from 'Modules/Tags/selectors/selectAllTags';
 import { selectTagsSearch } from 'Modules/Tags/selectors/selectTagsSearch';
 import { userFollowersLoad } from 'Modules/Users/actions/userFollowersLoad';
 import { userLoad } from 'Modules/Users/actions/userLoad';
-import { selectUserById } from 'Modules/Users/selectors/selectUserById';
 import { selectUsersCurrentIds } from 'Modules/Users/selectors/selectUsersCurrentIds';
 import { selectUsersLoading } from 'Modules/Users/selectors/selectUsersLoading';
 import { selectUsersMetaSort } from 'Modules/Users/selectors/selectUsersMetaSort';
@@ -25,7 +23,6 @@ import { Followers as FollowersUI } from './Followers';
 const Followers: React.FC = () => {
   const dispatch = useDispatch();
   const userId = useSelector(selectCurrentRouteParamUserId);
-  const user = useSelector((state: RootState) => selectUserById(state, { id: userId }));
   const usersCurrentIds = useSelector(selectUsersCurrentIds);
   const usersLoading = useSelector(selectUsersLoading);
 
@@ -70,8 +67,6 @@ const Followers: React.FC = () => {
 
   return (
     <FollowersUI
-      user={user}
-      userId={userId}
       usersCurrentIds={usersCurrentIds}
       usersLoading={usersLoading}
       page={page}
