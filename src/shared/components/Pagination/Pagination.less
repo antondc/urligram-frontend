@@ -9,13 +9,27 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px;
+    padding: 20px;
     background: @c-background;
-    border-top: 1px solid @c-accentLight-hard;
+    border-radius: 8px;
+
+    .boxShadow;
   }
 
   &-item {
     margin: 0 10px;
     font-weight: @fw-extraBold;
+    color: @gradientColors[blue-1];
+    transition: opacity @td-fast @ease, text-decoration-color @td-fast @ease;
+
+    &--active {
+      text-decoration-color: @gradientColors[blue-1];
+    }
+
+    &:hover:not(.noClass) {
+      text-decoration-color: @gradientColors[blue-1];
+      color: @gradientColors[blue-1];
+      opacity: 0.8;
+    }
   }
 }

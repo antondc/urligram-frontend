@@ -36,9 +36,13 @@ export const A: React.FC<Props> = ({
     (styled ? 'A' : 'A--default') +
     (className ? ' ' + className : '') +
     (styled && disabled ? ' A--disabled' : '') +
+    (styled && disabled && className ? ` ${className}--disabled` : '') +
     (!styled && disabled ? ' A--noEvents' : '') +
+    (!styled && disabled && className ? ` ${className}--noEvents` : '') +
     (styled && active ? ' ' + 'A--active' : '') +
-    (styled && underlined ? ' ' + 'A--underlined' : '');
+    (styled && active && className ? ` ${className}--active` : '') +
+    (styled && underlined ? ' ' + 'A--underlined' : '') +
+    (styled && underlined && className ? ` ${className}--underlined` : '');
 
   const target = targetBlank ? '_blank' : '_self';
 
