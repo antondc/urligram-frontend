@@ -26,6 +26,9 @@ app.use(serveGzip);
 app.use(express.static('dist'));
 app.use(express.static('media/docs'));
 app.use(express.static('media/images'));
+app.use('/favicons', express.static('src/shared/assets/favicons'));
+app.use('/images', express.static('src/shared/assets/images'));
+app.use('/files', express.static('src/shared/assets/files'));
 app.use('/media', express.static('media'));
 // - - - - - - - - - - - - - - - - - - - -
 

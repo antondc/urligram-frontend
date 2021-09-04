@@ -31,11 +31,9 @@
 
       @{c}-sortIcon {
         fill: @gradientColors[blue-2];
-        transform: scaleY(-1);
 
         &@{c}-sortIcon--asc {
           fill: @gradientColors[blue-2];
-          transform: scaleY(1);
         }
       }
     }
@@ -94,6 +92,16 @@
 
     @{c}-sortIcon--asc {
       transform: scaleY(-1);
+    }
+
+    &:hover {
+      @{c}-sortIcon {
+        transform: scaleY(-1);
+
+        &@{c}-sortIcon--asc {
+          transform: scaleY(1);
+        }
+      }
     }
   }
 
