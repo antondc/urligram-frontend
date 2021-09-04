@@ -3,8 +3,11 @@ import Helmet from 'react-helmet';
 
 import BookmarkRow from 'Components/BookmarkRow';
 import { BookmarkRowSkeletonGroup } from 'Components/BookmarkRow/BookmarkRowSkeletonGroup';
+import Main from 'Components/Main';
+import NoResults from 'Components/NoResults';
 import Pagination from 'Components/Pagination';
 import { DEFAULT_PAGE_SIZE, SITE_TITLE } from 'Root/src/shared/constants';
+import CardItem from 'Components/CardItem';
 
 import './Home.less';
 
@@ -20,22 +23,22 @@ export interface Props {
 }
 
 export const Home: React.FC<Props> = ({ bookmarksIds, bookmarksIdsLoading, page, totalItems, url }) => (
-  <div className="Home">
+  <Main className="Home">
     <Helmet title={`${SITE_TITLE} · Home`} />
     <div className="Home-bookmarks">
       {bookmarksIdsLoading ? (
         <BookmarkRowSkeletonGroup length={bookmarksIds?.length || DEFAULT_PAGE_SIZE} />
       ) : (
         bookmarksIds?.map((id) => (
-          <div className="Home-bookmarksItem" key={id}>
+          <CardItem key={id}>
             <BookmarkRow id={id} />
-          </div>
+          </CardItem>
         ))
       )}
       {!bookmarksIdsLoading && !bookmarksIds?.length && (
-        <div className="Home-noResults">ⵁ Start following users to receive recommended bookmarks.</div>
+        <NoResults content="ⵁ Start following users to receive recommended bookmarks." />
       )}
     </div>
     <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
-  </div>
+  </Main>
 );

@@ -13,12 +13,6 @@ import { selectCurrentRouteQueryParamPage } from 'Modules/Routes/selectors/selec
 import { sectionsMostUsedTagsLoad } from 'Modules/Sections/actions/sectionsMostUsedTagsLoad';
 import { sectionsMyRecentBookmarksLoad } from 'Modules/Sections/actions/sectionsMyRecentBookmarksLoad';
 import { sectionsPopularListsLoad } from 'Modules/Sections/actions/sectionsPopularListsLoad';
-import { selectMostUsedTags } from 'Modules/Sections/selectors/selectMostUsedTags';
-import { selectMostUsedTagsLoading } from 'Modules/Sections/selectors/selectMostUsedTagsLoading';
-import { selectMyRecentBookmarks } from 'Modules/Sections/selectors/selectMyRecentBookmarks';
-import { selectMyRecentBookmarksLoading } from 'Modules/Sections/selectors/selectMyRecentBookmarksLoading';
-import { selectPopularLists } from 'Modules/Sections/selectors/selectPopularLists';
-import { selectPopularListsLoading } from 'Modules/Sections/selectors/selectPopularListsLoading';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { tagsSearchLoad } from 'Modules/Tags/actions/tagsSearchLoad';
 import { selectTagsAll } from 'Modules/Tags/selectors/selectAllTags';
@@ -31,16 +25,12 @@ const Home: React.FC = () => {
   const dispatch = useDispatch();
 
   const session = useSelector(selectSession);
-  const myRecentBookmarks = useSelector(selectMyRecentBookmarks);
-  const myRecentBookmarksLoading = useSelector(selectMyRecentBookmarksLoading);
+
   const bookmarksIds = useSelector(selectBookmarksCurrentIds);
   const loading = useSelector(selectBookmarksLoading);
   const page = useSelector(selectCurrentRouteQueryParamPage);
   const totalItems = useSelector(selectBookmarksTotalItems);
-  const mostUsedTags = useSelector(selectMostUsedTags);
-  const mostUsedTagsLoading = useSelector(selectMostUsedTagsLoading);
-  const popularLists = useSelector(selectPopularLists);
-  const popularListsLoading = useSelector(selectPopularListsLoading);
+
   const url = useSelector(selectCurrentFullUrl);
   const sort = useSelector(selectBookmarksMetaSort);
   const tagsSearch = useSelector(selectTagsSearch);
@@ -85,7 +75,6 @@ const Home: React.FC = () => {
 
   return (
     <BookmarksUi
-      session={session}
       bookmarksIds={bookmarksIds}
       loading={loading}
       page={page}
@@ -97,12 +86,6 @@ const Home: React.FC = () => {
       onInputChange={onInputChange}
       currentQueryParamFilterTags={currentQueryParamFilterTags}
       onChange={onChange}
-      mostUsedTags={mostUsedTags}
-      mostUsedTagsLoading={mostUsedTagsLoading}
-      myRecentBookmarks={myRecentBookmarks}
-      myRecentBookmarksLoading={myRecentBookmarksLoading}
-      popularLists={popularLists}
-      popularListsLoading={popularListsLoading}
     />
   );
 };

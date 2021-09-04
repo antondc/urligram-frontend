@@ -3,24 +3,20 @@ import Helmet from 'react-helmet';
 
 import Clock from 'Assets/svg/spinner6.svg';
 import Pagination from 'Components/Pagination';
-import Sidebar from 'Components/Sidebar';
-import SidebarListUsers from 'Components/SidebarListUsers';
 import UserRow from 'Components/UserRow';
 import { UserRowSkeletonGroup } from 'Components/UserRow/UserRowSkeletonGroup';
 import { TagState } from 'Modules/Tags/tags.types';
-import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE, SITE_TITLE } from 'Root/src/shared/constants';
 import { Select, SelectValue, SortBy } from 'Vendor/components';
+import CardItem from 'Components/CardItem';
+import Main from 'Components/Main';
+import NoResults from 'Components/NoResults';
 
 import './Users.less';
 
 export interface Props {
   usersCurrentIds: string[];
   usersLoading: boolean;
-  mostFollowedUsers: UserState[];
-  mostFollowedUsersLoading: boolean;
-  newUsers: UserState[];
-  newUsersLoading: boolean;
   url: string;
   page: {
     size: number;
@@ -41,10 +37,6 @@ export interface Props {
 export const Users: React.FC<Props> = ({
   usersCurrentIds,
   usersLoading,
-  mostFollowedUsers,
-  mostFollowedUsersLoading,
-  newUsers,
-  newUsersLoading,
   page,
   totalItems,
   url,
@@ -55,57 +47,42 @@ export const Users: React.FC<Props> = ({
   onInputChange,
   onChange,
 }) => (
-  <>
+  <Main className="Users">
     <Helmet title={`${SITE_TITLE} · All Users`} />
-    <div className="Users">
-      <div className="Users-header">
-        <Select
-          className="Bookmarks-select"
-          label="Select tags"
-          value={currentQueryParamFilterTags}
-          defaultOptions={allTags.map((item) => ({ label: item.name, value: item.name }))}
-          options={[...tagsSearchFormatted, ...allTags.map((item) => ({ label: item.name, value: item.name }))].filter(
-            (v, i, a) => a.findIndex((t) => t.value === v.value) === i
-          )}
-          onInputChange={onInputChange}
-          onChange={onChange}
-          maxItems={4}
-          grow
-          hideLabelOnFill
-        />
-        <SortBy
-          options={[{ label: 'Created at', field: 'createdAt', icon: Clock }]}
-          href={url}
-          currentSort={sort}
-          loading={usersLoading}
-        />
-      </div>
-      <div className="Users-users">
-        {usersLoading ? (
-          <UserRowSkeletonGroup length={usersCurrentIds?.length || DEFAULT_PAGE_SIZE} />
-        ) : (
-          usersCurrentIds?.map((id) => <UserRow id={id} key={id} />)
+    <div className="Users-header">
+      <Select
+        className="Bookmarks-select"
+        label="Select tags"
+        value={currentQueryParamFilterTags}
+        defaultOptions={allTags.map((item) => ({ label: item.name, value: item.name }))}
+        options={[...tagsSearchFormatted, ...allTags.map((item) => ({ label: item.name, value: item.name }))].filter(
+          (v, i, a) => a.findIndex((t) => t.value === v.value) === i
         )}
-        {!usersLoading && !usersCurrentIds?.length && (
-          <div className="Bookmarks-noResults">ⵁ We didn find any user.</div>
-        )}
-      </div>
-      <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
+        onInputChange={onInputChange}
+        onChange={onChange}
+        maxItems={4}
+        grow
+        hideLabelOnFill
+      />
+      <SortBy
+        options={[{ label: 'Created at', field: 'createdAt', icon: Clock }]}
+        href={url}
+        currentSort={sort}
+        loading={usersLoading}
+      />
     </div>
-    <Sidebar>
-      <SidebarListUsers
-        className="Users-sidebarListUsersFirst"
-        title="Most Followed Users"
-        href="users?sort=-followers&page[size]=10"
-        loading={mostFollowedUsersLoading}
-        users={mostFollowedUsers}
-      />
-      <SidebarListUsers
-        title="New Users"
-        href="users?sort=createdAt&page[size]=10"
-        loading={newUsersLoading}
-        users={newUsers}
-      />
-    </Sidebar>
-  </>
+    <div className="Users-users">
+      {usersLoading ? (
+        <UserRowSkeletonGroup length={usersCurrentIds?.length || DEFAULT_PAGE_SIZE} />
+      ) : (
+        usersCurrentIds?.map((id) => (
+          <CardItem key={id}>
+            <UserRow id={id} />
+          </CardItem>
+        ))
+      )}
+      {!usersLoading && !usersCurrentIds?.length && <NoResults content="ⵁ We didn find any user." />}
+    </div>
+    <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
+  </Main>
 );

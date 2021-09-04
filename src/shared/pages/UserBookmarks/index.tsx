@@ -15,9 +15,6 @@ import { selectCurrentRouteQueryParamFilter } from 'Modules/Routes/selectors/sel
 import { selectCurrentRouteQueryParamPage } from 'Modules/Routes/selectors/selectCurrentRouteQueryParamPage';
 import { sectionsFollowersUsersLoad } from 'Modules/Sections/actions/sectionsFollowersUsersLoad';
 import { sectionsFollowingUsersLoad } from 'Modules/Sections/actions/sectionsFollowingUsersLoad';
-import { selectFollowersUsers } from 'Modules/Sections/selectors/selectFollowersUsers';
-import { selectFollowingUsers } from 'Modules/Sections/selectors/selectFollowingUsers';
-import { selectFollowingUsersLoading } from 'Modules/Sections/selectors/selectFollowingUsersLoading';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { tagsSearchLoad } from 'Modules/Tags/actions/tagsSearchLoad';
 import { selectTagsAll } from 'Modules/Tags/selectors/selectAllTags';
@@ -38,10 +35,6 @@ const UserBookmarks: React.FC = () => {
   const bookmarksIds = useSelector(selectBookmarksCurrentIds);
   const bookmarksByKey = useSelector(selectBookmarksByKey);
   const bookmarksLoading = useSelector(selectBookmarksLoading);
-  const followingUsers = useSelector(selectFollowingUsers);
-  const followingUsersLoading = useSelector(selectFollowingUsersLoading);
-  const followersUsers = useSelector(selectFollowersUsers);
-  const followersUsersLoading = useSelector(selectFollowingUsersLoading);
   const page = useSelector(selectCurrentRouteQueryParamPage);
   const totalItems = useSelector(selectBookmarksTotalItems);
   const url = useSelector(selectCurrentFullUrl);
@@ -97,10 +90,6 @@ const UserBookmarks: React.FC = () => {
       bookmarksByKey={bookmarksByKey}
       bookmarksIds={bookmarksIds}
       bookmarksLoading={bookmarksLoading}
-      followingUsers={followingUsers}
-      followingUsersLoading={followingUsersLoading}
-      followersUsers={followersUsers}
-      followersUsersLoading={followersUsersLoading}
       page={page}
       totalItems={totalItems}
       url={url}

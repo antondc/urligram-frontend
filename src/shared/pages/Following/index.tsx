@@ -8,10 +8,6 @@ import { selectCurrentRouteQueryParamFilter } from 'Modules/Routes/selectors/sel
 import { selectCurrentRouteQueryParamPage } from 'Modules/Routes/selectors/selectCurrentRouteQueryParamPage';
 import { sectionsMostUsedTagsLoad } from 'Modules/Sections/actions/sectionsMostUsedTagsLoad';
 import { sectionsUserMostUsedTagsLoad } from 'Modules/Sections/actions/sectionsUserMostFollowedTagsLoad';
-import { selectMostUsedTags } from 'Modules/Sections/selectors/selectMostUsedTags';
-import { selectMostUsedTagsLoading } from 'Modules/Sections/selectors/selectMostUsedTagsLoading';
-import { selectUserMostUsedTags } from 'Modules/Sections/selectors/selectUserMostUsedTags';
-import { selectUserMostUsedTagsLoading } from 'Modules/Sections/selectors/selectUserMostUsedTagsLoading';
 import { tagsSearchLoad } from 'Modules/Tags/actions/tagsSearchLoad';
 import { selectTagsAll } from 'Modules/Tags/selectors/selectAllTags';
 import { selectTagsSearch } from 'Modules/Tags/selectors/selectTagsSearch';
@@ -32,10 +28,7 @@ const Following: React.FC = () => {
   const user = useSelector((state: RootState) => selectUserById(state, { id: userId }));
   const usersCurrentIds = useSelector(selectUsersCurrentIds);
   const usersLoading = useSelector(selectUsersLoading);
-  const mostUsedTags = useSelector(selectMostUsedTags);
-  const mostUsedTagsLoading = useSelector(selectMostUsedTagsLoading);
-  const userMostUsedTags = useSelector(selectUserMostUsedTags);
-  const userMostUsedTagsLoading = useSelector(selectUserMostUsedTagsLoading);
+
   const page = useSelector(selectCurrentRouteQueryParamPage);
   const totalItems = useSelector(selectUsersTotalItems);
   const url = useSelector(selectCurrentFullUrl);
@@ -81,10 +74,6 @@ const Following: React.FC = () => {
       userId={userId}
       usersCurrentIds={usersCurrentIds}
       usersLoading={usersLoading}
-      mostUsedTags={mostUsedTags}
-      mostUsedTagsLoading={mostUsedTagsLoading}
-      userMostUsedTags={userMostUsedTags}
-      userMostUsedTagsLoading={userMostUsedTagsLoading}
       page={page}
       totalItems={totalItems}
       url={url}

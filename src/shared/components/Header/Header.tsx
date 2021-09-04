@@ -12,19 +12,21 @@ import './Header.less';
 
 interface Props {
   session: SessionState;
+  sessionLoading: boolean;
   currentGlossary: GlossaryState;
   logoLoadingHeartBeat: boolean;
   logoLoadingColors: boolean;
-  sessionLoading: boolean;
   onUserClick: () => void;
+  switchUiBookmarkModal: (e: React.MouseEvent<HTMLDivElement>) => void;
 }
 
 export const Header: React.FC<Props> = ({
-  onUserClick,
+  session,
   logoLoadingHeartBeat,
   logoLoadingColors,
   sessionLoading,
-  session,
+  onUserClick,
+  switchUiBookmarkModal,
 }) => (
   <header className="Header">
     <Logo className="Header-logo" loadingBeat={logoLoadingHeartBeat} loadingColors={logoLoadingColors} />
@@ -34,7 +36,7 @@ export const Header: React.FC<Props> = ({
       <Loupe className="Header-mockSearchIcon" />
     </div>
     <div className="Header-separator" />
-    <div className="Header-addBoookmark">
+    <div className="Header-addBoookmark" onClick={switchUiBookmarkModal}>
       <Cross className="Header-addBoookmarkIcon" />
       <span className="Header-addBoookmarkText">Add Bookmark</span>
     </div>

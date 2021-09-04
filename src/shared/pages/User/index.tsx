@@ -13,10 +13,6 @@ import { RootState } from 'Modules/rootType';
 import { selectCurrentRouteParamUserId } from 'Modules/Routes/selectors/selectCurrentRouteParamUserId';
 import { sectionsFollowersUsersLoad } from 'Modules/Sections/actions/sectionsFollowersUsersLoad';
 import { sectionsFollowingUsersLoad } from 'Modules/Sections/actions/sectionsFollowingUsersLoad';
-import { selectFollowersUsers } from 'Modules/Sections/selectors/selectFollowersUsers';
-import { selectFollowersUsersLoading } from 'Modules/Sections/selectors/selectFollowersUsersLoading';
-import { selectFollowingUsers } from 'Modules/Sections/selectors/selectFollowingUsers';
-import { selectFollowingUsersLoading } from 'Modules/Sections/selectors/selectFollowingUsersLoading';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { userLoad } from 'Modules/Users/actions/userLoad';
 import { selectUserById } from 'Modules/Users/selectors/selectUserById';
@@ -39,10 +35,6 @@ const User: React.FC<Props> = () => {
   const listsIds = useSelector(selectListsAllIds);
   const bookmarksLoading = useSelector(selectBookmarksLoading);
   const bookmarksIds = useSelector(selectBookmarksCurrentIds);
-  const followingUsers = useSelector(selectFollowingUsers);
-  const followingUsersLoading = useSelector(selectFollowingUsersLoading);
-  const followersUsers = useSelector(selectFollowersUsers);
-  const followersUsersLoading = useSelector(selectFollowersUsersLoading);
   const currentLanguageSlug = useSelector(selectCurrentLanguageSlug);
   const date = new LocaleFormattedDate({ unixTime: user?.createdAt, locale: currentLanguageSlug });
   const createdAtFormatted = date.getLocaleFormattedDate();
@@ -65,10 +57,6 @@ const User: React.FC<Props> = () => {
       createdAtFormatted={createdAtFormatted}
       bookmarksIds={bookmarksIds}
       bookmarksLoading={bookmarksLoading}
-      followingUsers={followingUsers}
-      followingUsersLoading={followingUsersLoading}
-      followersUsers={followersUsers}
-      followersUsersLoading={followersUsersLoading}
     />
   );
 };

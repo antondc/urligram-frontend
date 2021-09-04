@@ -2,6 +2,7 @@ import React from 'react';
 
 import { ListRowSkeleton } from 'Components/ListRow/ListRowSkeleton';
 import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
+import CardItem from '../CardItem';
 
 interface Props {
   length?: number;
@@ -13,7 +14,9 @@ export const ListRowSkeletonGroup: React.FC<Props> = ({ length }) => {
   return (
     <>
       {Array.from({ length: lengthNoZero }, (_, index) => (
-        <ListRowSkeleton id={index} key={index} />
+        <CardItem key={index}>
+          <ListRowSkeleton id={index} />
+        </CardItem>
       ))}
     </>
   );

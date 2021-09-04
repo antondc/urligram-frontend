@@ -9,8 +9,6 @@ import { RootState } from 'Modules/rootType';
 import { selectCurrentRoute } from 'Modules/Routes/selectors/selectCurrentRoute';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUserId';
-import { switchBookmarkCreateModal } from 'Modules/Ui/actions/switchBookmarkCreateModal';
-import { switchListModal } from 'Modules/Ui/actions/switchListModal';
 import { uiSidebarLeftClose } from 'Modules/Ui/actions/uiSidebarLeftClose';
 import { uiSidebarLeftOpen } from 'Modules/Ui/actions/uiSidebarLeftOpen';
 import { selectUiSidebarleftState } from 'Modules/Ui/selectors/selectUiSidebarleftState';
@@ -29,7 +27,6 @@ type LocalStorageSidebarOpen = {
 export const SidebarLeft: React.FC = () => {
   const dispatch = useDispatch();
   const localStorageWrapper = new LocalStorageWrapper();
-
   const isLoggedIn = useSelector(selectSessionLoggedIn);
   const sessionId = useSelector(selectSessionUserId);
   const glossary = useSelector(selectCurrentGlossary);
@@ -39,16 +36,6 @@ export const SidebarLeft: React.FC = () => {
   const [listsShown, setListsShown] = useState<boolean>(true);
   const timeMsInFourHours = Date.now() + 4 * 60 * 60 * 1000;
   const sidebarLeftClosed = useSelector(selectUiSidebarleftState);
-
-  const switchUiBookmarkModal = (e: React.MouseEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    dispatch(switchBookmarkCreateModal(true));
-  };
-
-  const switchUiListModal = (e: React.MouseEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    dispatch(switchListModal({ mounted: true }));
-  };
 
   const onListTitleClick = () => {
     if (sidebarLeftClosed) return;
@@ -101,8 +88,6 @@ export const SidebarLeft: React.FC = () => {
       isLoggedIn={isLoggedIn}
       sessionId={sessionId}
       glossary={glossary}
-      switchUiBookmarkModal={switchUiBookmarkModal}
-      switchUiListModal={switchUiListModal}
       lists={lists}
       listsLoading={listsLoading}
       listsShown={listsShown && !sidebarLeftClosed} // If sidebar is closed, don't display lists

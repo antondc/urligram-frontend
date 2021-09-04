@@ -13,10 +13,6 @@ import { selectCurrentRouteQueryParamFilter } from 'Modules/Routes/selectors/sel
 import { selectCurrentRouteQueryParamPage } from 'Modules/Routes/selectors/selectCurrentRouteQueryParamPage';
 import { sectionsMostUsedTagsLoad } from 'Modules/Sections/actions/sectionsMostUsedTagsLoad';
 import { sectionsUserMostUsedTagsLoad } from 'Modules/Sections/actions/sectionsUserMostFollowedTagsLoad';
-import { selectMostUsedTags } from 'Modules/Sections/selectors/selectMostUsedTags';
-import { selectMostUsedTagsLoading } from 'Modules/Sections/selectors/selectMostUsedTagsLoading';
-import { selectUserMostUsedTags } from 'Modules/Sections/selectors/selectUserMostUsedTags';
-import { selectUserMostUsedTagsLoading } from 'Modules/Sections/selectors/selectUserMostUsedTagsLoading';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { tagsSearchLoad } from 'Modules/Tags/actions/tagsSearchLoad';
 import { selectTagsAll } from 'Modules/Tags/selectors/selectAllTags';
@@ -35,10 +31,7 @@ const UserLists: React.FC = () => {
   const user = useSelector((state: RootState) => selectUserById(state, { id: userId }));
   const listsIds = useSelector(selectListsAllIds);
   const listsLoading = useSelector(selectListsLoading);
-  const userMostUsedTags = useSelector(selectUserMostUsedTags);
-  const userMostUsedTagsLoading = useSelector(selectUserMostUsedTagsLoading);
-  const mostFollowedTags = useSelector(selectMostUsedTags);
-  const mostFollowedTagsLoading = useSelector(selectMostUsedTagsLoading);
+
   const page = useSelector(selectCurrentRouteQueryParamPage);
   const totalItems = useSelector(selectListsTotalItems);
   const url = useSelector(selectCurrentFullUrl);
@@ -84,10 +77,6 @@ const UserLists: React.FC = () => {
       user={user}
       listsIds={listsIds}
       listsLoading={listsLoading}
-      userMostUsedTags={userMostUsedTags}
-      userMostUsedTagsLoading={userMostUsedTagsLoading}
-      mostFollowedTags={mostFollowedTags}
-      mostFollowedTagsLoading={mostFollowedTagsLoading}
       page={page}
       totalItems={totalItems}
       url={url}

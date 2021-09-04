@@ -3,33 +3,6 @@
 @c: .Users;
 
 @{c} {
-  display: flex;
-  position: relative;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  grid-area: main;
-  height: 100%;
-  padding: 10px;
-
-  &:after,
-  &:before {
-    content: ' ';
-    position: absolute;
-    top: 5px;
-    bottom: 5px;
-  }
-
-  &:after {
-    left: 0;
-    border-left: 1px solid @c-accentLight-hard;
-  }
-
-  &:before {
-    right: 0;
-    border-right: 1px solid @c-accentLight-hard;
-  }
-
   &-header {
     display: flex;
     justify-content: flex-end;
@@ -42,18 +15,5 @@
   &-users {
     height: 100%;
     width: 100%;
-  }
-
-  &-noResults {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    padding: 10px;
-    font-weight: @fw-semibold;
-    background: @c-background;
-  }
-
-  &-sidebarListUsersFirst {
-    // padding: 0 20px 20px;
   }
 }

@@ -19,11 +19,8 @@ import { selectCurrentRouteQueryParamFilter } from 'Modules/Routes/selectors/sel
 import { selectCurrentRouteQueryParamPage } from 'Modules/Routes/selectors/selectCurrentRouteQueryParamPage';
 import { sectionsTagsInThisListLoad } from 'Modules/Sections/actions/sectionsTagsInThisListLoad';
 import { sectionsUsersInThisListLoad } from 'Modules/Sections/actions/sectionsUsersInThisListLoad';
-import { selectTagsInThisList } from 'Modules/Sections/selectors/selectTagsInThisList';
-import { selectTagsInThisListLoading } from 'Modules/Sections/selectors/selectTagsInThisListLoading';
 import { selectUsersInThisList } from 'Modules/Sections/selectors/selectUsersInThisList';
 import { selectUsersInThisListIds } from 'Modules/Sections/selectors/selectUsersInThisListIds';
-import { selectUsersInThisListLoading } from 'Modules/Sections/selectors/selectUsersInThisListLoading';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { tagsSearchLoad } from 'Modules/Tags/actions/tagsSearchLoad';
 import { selectTagsAll } from 'Modules/Tags/selectors/selectAllTags';
@@ -50,9 +47,6 @@ const List: React.FC = () => {
   const bookmarksLoading = useSelector(selectBookmarksLoading);
   const usersInThisListIds = useSelector((state: RootState) => selectUsersInThisListIds(state, { listId }));
   const usersInThisList = useSelector((state: RootState) => selectUsersInThisList(state, { listId }));
-  const usersInThisListLoading = useSelector(selectUsersInThisListLoading);
-  const tagsInThisList = useSelector(selectTagsInThisList);
-  const tagsInThisListLoading = useSelector(selectTagsInThisListLoading);
   const page = useSelector(selectCurrentRouteQueryParamPage);
   const totalItems = useSelector(selectBookmarksTotalItems);
   const url = useSelector(selectCurrentFullUrl);
@@ -153,9 +147,6 @@ const List: React.FC = () => {
       bookmarksIds={bookmarksIds}
       bookmarksLoading={bookmarksLoading}
       usersInThisList={usersInThisList}
-      usersInThisListLoading={usersInThisListLoading}
-      tagsInThisList={tagsInThisList}
-      tagsInThisListLoading={tagsInThisListLoading}
       page={page}
       totalItems={totalItems}
       url={url}

@@ -9,6 +9,7 @@ import { selectLinksVoteLoading } from 'Modules/Links/selectors/selectLinksVoteL
 import { selectListsLoading } from 'Modules/Lists/selectors/selectListsLoading';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { selectSessionLoading } from 'Modules/Session/selectors/selectSessionLoading';
+import { switchBookmarkCreateModal } from 'Modules/Ui/actions/switchBookmarkCreateModal';
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
 import { userModalMount } from 'Modules/Ui/actions/userModalMount';
 import { selectUsersLoading } from 'Modules/Users/selectors/selectUsersLoading';
@@ -32,6 +33,11 @@ const Header: React.FC = () => {
     bookmarksLoading || linksLoading || linksVoteLoading || bookmarksVoteLoading || usersLoading || listsLoading;
   const logoLoadingColors = sessionLoading;
 
+  const switchUiBookmarkModal = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    dispatch(switchBookmarkCreateModal(true));
+  };
+
   const onUserClick = () => {
     if (session?.id) {
       dispatch(userModalMount());
@@ -49,6 +55,7 @@ const Header: React.FC = () => {
       logoLoadingHeartBeat={logoLoadingHeartBeat}
       logoLoadingColors={logoLoadingColors}
       sessionLoading={sessionLoading}
+      switchUiBookmarkModal={switchUiBookmarkModal}
     />
   );
 };

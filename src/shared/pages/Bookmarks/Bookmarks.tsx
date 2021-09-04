@@ -4,14 +4,10 @@ import Helmet from 'react-helmet';
 import Clock from 'Assets/svg/spinner6.svg';
 import BookmarkRow from 'Components/BookmarkRow';
 import { BookmarkRowSkeletonGroup } from 'Components/BookmarkRow/BookmarkRowSkeletonGroup';
+import CardItem from 'Components/CardItem';
+import Main from 'Components/Main';
+import NoResults from 'Components/NoResults';
 import Pagination from 'Components/Pagination';
-import Sidebar from 'Components/Sidebar';
-import SidebarListBookmarks from 'Components/SidebarListBookmarks';
-import SidebarListLists from 'Components/SidebarListLists';
-import SidebarListTags from 'Components/SidebarListTags';
-import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
-import { ListState } from 'Modules/Lists/lists.types';
-import { SessionState } from 'Modules/Session/session.types';
 import { TagState } from 'Modules/Tags/tags.types';
 import { DEFAULT_PAGE_SIZE, SITE_TITLE } from 'Root/src/shared/constants';
 import { Select, SelectValue, SortBy } from 'Vendor/components';
@@ -19,16 +15,9 @@ import { Select, SelectValue, SortBy } from 'Vendor/components';
 import './Bookmarks.less';
 
 interface Props {
-  session: SessionState;
   url: string;
   bookmarksIds: number[];
   loading: boolean;
-  mostUsedTags: TagState[];
-  mostUsedTagsLoading: boolean;
-  myRecentBookmarks: BookmarkState[];
-  myRecentBookmarksLoading: boolean;
-  popularLists: ListState[];
-  popularListsLoading: boolean;
   page: {
     size: number;
     offset: number;
@@ -46,14 +35,9 @@ interface Props {
 }
 
 export const Bookmarks: React.FC<Props> = ({
-  session,
   url,
   bookmarksIds,
   loading,
-  mostUsedTags,
-  mostUsedTagsLoading,
-  myRecentBookmarks,
-  myRecentBookmarksLoading,
   page,
   totalItems,
   sort,
@@ -62,66 +46,44 @@ export const Bookmarks: React.FC<Props> = ({
   allTags,
   currentQueryParamFilterTags,
   onChange,
-  popularLists,
-  popularListsLoading,
 }) => (
-  <>
+  <Main className="Bookmarks">
     <Helmet title={`${SITE_TITLE} · Bookmarks`} />
-    <div className="Bookmarks">
-      <div className="Bookmarks-header">
-        <Select
-          className="Bookmarks-select"
-          label="Select tags"
-          value={currentQueryParamFilterTags}
-          defaultOptions={allTags.map((item) => ({ label: item.name, value: item.name }))}
-          options={[...tagsSearchFormatted, ...allTags.map((item) => ({ label: item.name, value: item.name }))].filter(
-            (v, i, a) => a.findIndex((t) => t.value === v.value) === i
-          )}
-          onInputChange={onInputChange}
-          onChange={onChange}
-          maxItems={4}
-          grow
-          hideLabelOnFill
-        />
-        <SortBy
-          className="Bookmarks-sortBy"
-          options={[{ label: 'Created at', field: 'createdAt', icon: Clock }]}
-          href={url}
-          currentSort={sort}
-          loading={loading}
-        />
-      </div>
-      <div className="Bookmarks-bookmarks">
-        {loading ? (
-          <BookmarkRowSkeletonGroup length={bookmarksIds?.length || DEFAULT_PAGE_SIZE} />
-        ) : (
-          bookmarksIds?.map((id) => <BookmarkRow id={id} key={id} />)
+    <div className="Bookmarks-header">
+      <Select
+        className="Bookmarks-select"
+        label="Select tags"
+        value={currentQueryParamFilterTags}
+        defaultOptions={allTags.map((item) => ({ label: item.name, value: item.name }))}
+        options={[...tagsSearchFormatted, ...allTags.map((item) => ({ label: item.name, value: item.name }))].filter(
+          (v, i, a) => a.findIndex((t) => t.value === v.value) === i
         )}
-        {!loading && !bookmarksIds?.length && <div className="Bookmarks-noResults">ⵁ We didnt find any bookmark.</div>}
-      </div>
-      <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
+        onInputChange={onInputChange}
+        onChange={onChange}
+        maxItems={4}
+        grow
+        hideLabelOnFill
+      />
+      <SortBy
+        className="Bookmarks-sortBy"
+        options={[{ label: 'Created at', field: 'createdAt', icon: Clock }]}
+        href={url}
+        currentSort={sort}
+        loading={loading}
+      />
     </div>
-    <Sidebar>
-      {!!session?.id && (
-        <SidebarListBookmarks
-          className="Bookmarks-myRecentBookmarks"
-          title="My recent bookmarks"
-          loading={myRecentBookmarksLoading}
-          bookmarks={myRecentBookmarks}
-        />
+    <div className="Bookmarks-bookmarks">
+      {loading ? (
+        <BookmarkRowSkeletonGroup length={bookmarksIds?.length || DEFAULT_PAGE_SIZE} />
+      ) : (
+        bookmarksIds?.map((id) => (
+          <CardItem key={id}>
+            <BookmarkRow id={id} />
+          </CardItem>
+        ))
       )}
-      <SidebarListTags
-        title="Most Followed Tags"
-        loading={mostUsedTagsLoading}
-        tags={mostUsedTags}
-        tagsPathname="/bookmarks"
-      />
-      <SidebarListLists
-        title="Popular lists"
-        lists={popularLists}
-        loading={popularListsLoading}
-        href="/lists?sort=-members"
-      />
-    </Sidebar>
-  </>
+      {!loading && !bookmarksIds?.length && <NoResults content="ⵁ We didnt find any bookmark." />}
+    </div>
+    <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
+  </Main>
 );

@@ -7,10 +7,6 @@ import { selectCurrentRouteQueryParamFilter } from 'Modules/Routes/selectors/sel
 import { selectCurrentRouteQueryParamPage } from 'Modules/Routes/selectors/selectCurrentRouteQueryParamPage';
 import { sectionsMostFollowedUsersLoad } from 'Modules/Sections/actions/sectionsMostFollowedUsersLoad';
 import { sectionsNewUsersLoad } from 'Modules/Sections/actions/sectionsNewUsersLoad';
-import { selectMostFollowedUsers } from 'Modules/Sections/selectors/selectMostFollowedUsers';
-import { selectMostFollowedUsersLoading } from 'Modules/Sections/selectors/selectMostFollowedUsersLoading';
-import { selectNewUsers } from 'Modules/Sections/selectors/selectNewUsers';
-import { selectNewUsersLoading } from 'Modules/Sections/selectors/selectNewUsersLoading';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { tagsSearchLoad } from 'Modules/Tags/actions/tagsSearchLoad';
 import { selectTagsAll } from 'Modules/Tags/selectors/selectAllTags';
@@ -28,10 +24,6 @@ const Users: React.FC = () => {
   const dispatch = useDispatch();
 
   const session = useSelector(selectSession);
-  const mostFollowedUsers = useSelector(selectMostFollowedUsers);
-  const mostFollowedUsersLoading = useSelector(selectMostFollowedUsersLoading);
-  const newUsers = useSelector(selectNewUsers);
-  const newUsersLoading = useSelector(selectNewUsersLoading);
   const usersCurrentIds = useSelector(selectUsersCurrentIds);
   const usersLoading = useSelector(selectUsersLoading);
   const page = useSelector(selectCurrentRouteQueryParamPage);
@@ -75,10 +67,6 @@ const Users: React.FC = () => {
 
   return (
     <UsersUI
-      mostFollowedUsers={mostFollowedUsers}
-      mostFollowedUsersLoading={mostFollowedUsersLoading}
-      newUsers={newUsers}
-      newUsersLoading={newUsersLoading}
       usersCurrentIds={usersCurrentIds}
       usersLoading={usersLoading}
       page={page}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Bookmark from 'Assets/svg/bookmark.svg';
 import { RenderInPortal } from 'Components/Portal';
@@ -7,6 +7,7 @@ import { ListState } from 'Modules/Lists/lists.types';
 import { selectListWithNotificationsIds } from 'Modules/Lists/selectors/selectListWithNotificationsIds';
 import { selectCurrentRouteParams } from 'Modules/Routes/selectors/selectCurrentRouteParams';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
+import { switchListModal } from 'Modules/Ui/actions/switchListModal';
 import history from 'Services/History';
 import { AnimateHeight, Fade, NotificationDot, Tooltip } from 'Vendor/components';
 
@@ -19,10 +20,17 @@ interface Props {
 }
 
 const SidebarLeftLists: React.FC<Props> = ({ lists, loading, listsShown = true }) => {
+  const dispatch = useDispatch();
+
   const currentRouteParams = useSelector(selectCurrentRouteParams);
   const currentListId = Number(currentRouteParams?.listId);
   const session = useSelector(selectSession);
   const listsWithNotificationsIds = useSelector(selectListWithNotificationsIds);
+
+  const switchUiListModal = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    dispatch(switchListModal({ mounted: true }));
+  };
 
   const onListClick = (listId: number) => {
     history.push(`/lists/${listId}`);
@@ -92,6 +100,17 @@ const SidebarLeftLists: React.FC<Props> = ({ lists, loading, listsShown = true }
                   </tr>
                 );
               })}
+              <tr className="SidebarLeftLists-item SidebarLeftLists-addList" onClick={switchUiListModal}>
+                <td className="SidebarLeftLists-nameCell">
+                  <span className="SidebarLeftLists-nameContent">New list</span>
+                </td>
+                <td>
+                  <span className="SidebarLeftLists-detailContent SidebarLeftLists-detailContent--hidden">spacer</span>
+                </td>
+                <td>
+                  <span className="SidebarLeftLists-detailContent SidebarLeftLists-detailContent--hidden">spacer</span>
+                </td>
+              </tr>
             </tbody>
           </table>
         </AnimateHeight>

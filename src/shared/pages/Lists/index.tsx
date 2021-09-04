@@ -11,10 +11,6 @@ import { selectCurrentRouteQueryParamFilter } from 'Modules/Routes/selectors/sel
 import { selectCurrentRouteQueryParamPage } from 'Modules/Routes/selectors/selectCurrentRouteQueryParamPage';
 import { sectionsMostUsedTagsLoad } from 'Modules/Sections/actions/sectionsMostUsedTagsLoad';
 import { sectionsNewUsersLoad } from 'Modules/Sections/actions/sectionsNewUsersLoad';
-import { selectMostUsedTags } from 'Modules/Sections/selectors/selectMostUsedTags';
-import { selectMostUsedTagsLoading } from 'Modules/Sections/selectors/selectMostUsedTagsLoading';
-import { selectNewUsers } from 'Modules/Sections/selectors/selectNewUsers';
-import { selectNewUsersLoading } from 'Modules/Sections/selectors/selectNewUsersLoading';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { tagsSearchLoad } from 'Modules/Tags/actions/tagsSearchLoad';
 import { selectTagsAll } from 'Modules/Tags/selectors/selectAllTags';
@@ -29,10 +25,7 @@ const Lists: React.FC = () => {
   const session = useSelector(selectSession);
   const listsIds = useSelector(selectListsAllIds);
   const listsIdsLoading = useSelector(selectListsLoading);
-  const mostUsedTags = useSelector(selectMostUsedTags);
-  const mostUsedTagsLoading = useSelector(selectMostUsedTagsLoading);
-  const newUsers = useSelector(selectNewUsers);
-  const newUsersLoading = useSelector(selectNewUsersLoading);
+
   const page = useSelector(selectCurrentRouteQueryParamPage);
   const totalItems = useSelector(selectListsTotalItems);
   const url = useSelector(selectCurrentFullUrl);
@@ -75,10 +68,6 @@ const Lists: React.FC = () => {
     <ListsUI
       listsIds={listsIds}
       listsIdsLoading={listsIdsLoading}
-      mostUsedTags={mostUsedTags}
-      mostUsedTagsLoading={mostUsedTagsLoading}
-      newUsers={newUsers}
-      newUsersLoading={newUsersLoading}
       page={page}
       totalItems={totalItems}
       url={url}

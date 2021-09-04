@@ -5,7 +5,7 @@ import BookmarkFilled from 'Assets/svg/bookmarkFilled.svg';
 import FlagLeft from 'Assets/svg/flagLeft.svg';
 import FlagRight from 'Assets/svg/flagRight.svg';
 import List from 'Assets/svg/list.svg';
-import PlusCircle from 'Assets/svg/plusCircle.svg';
+import Circle from 'Assets/svg/logoCircleEmpty.svg';
 import Tag from 'Assets/svg/tag.svg';
 import TriangleRounded from 'Assets/svg/triangleRounded.svg';
 import UserFill from 'Assets/svg/userFill.svg';
@@ -27,8 +27,6 @@ interface Props {
   sidebarLeftClosed: boolean;
   onListTitleClick: () => void;
   onSidebarCloseClick: () => void;
-  switchUiBookmarkModal: (e: React.MouseEvent<HTMLDivElement>) => void;
-  switchUiListModal: (e: React.MouseEvent<HTMLDivElement>) => void;
 }
 
 export const SidebarLeft: React.FC<Props> = ({
@@ -41,8 +39,6 @@ export const SidebarLeft: React.FC<Props> = ({
   sidebarLeftClosed,
   onListTitleClick,
   onSidebarCloseClick,
-  switchUiBookmarkModal,
-  switchUiListModal,
 }) => (
   <div className={'SidebarLeft' + (sidebarLeftClosed ? ' SidebarLeft--closed' : '')} data-test-id="SidebarLeft">
     <div
@@ -56,7 +52,34 @@ export const SidebarLeft: React.FC<Props> = ({
         <>
           <A
             className={'SidebarLeft-item' + (routeName === 'Home' ? ' SidebarLeft-item--active' : '')}
-            href={``}
+            href="/"
+            styled={false}
+            frontend
+          >
+            <Circle className="SidebarLeft-itemIcon" />
+            <span className="SidebarLeft-itemDescription">{glossary.home}</span>
+          </A>
+          <A
+            className={'SidebarLeft-item' + (routeName === 'Tags' ? ' SidebarLeft-item--active' : '')}
+            href="/tags"
+            styled={false}
+            frontend
+          >
+            <Tag className="SidebarLeft-itemIcon" />
+            <span className="SidebarLeft-itemDescription">All Tags</span>
+          </A>
+          <A
+            className={'SidebarLeft-item' + (routeName === 'Lists' ? ' SidebarLeft-item--active' : '')}
+            href="/lists"
+            styled={false}
+            frontend
+          >
+            <List className="SidebarLeft-itemIcon SidebarLeft-itemIconList" />
+            <span className="SidebarLeft-itemDescription">All Lists</span>
+          </A>
+          <A
+            className={'SidebarLeft-item' + (routeName === 'Bookmarks' ? ' SidebarLeft-item--active' : '')}
+            href="/bookmarks"
             styled={false}
             frontend
           >
@@ -73,6 +96,15 @@ export const SidebarLeft: React.FC<Props> = ({
             <span className="SidebarLeft-itemDescription">{glossary.myBookmarks}</span>
           </A>
           <A
+            className={'SidebarLeft-item' + (routeName === 'Users' ? ' SidebarLeft-item--active' : '')}
+            href={`users`}
+            styled={false}
+            frontend
+          >
+            <UserFill className="SidebarLeft-itemIcon" />
+            <span className="SidebarLeft-itemDescription">All Users</span>
+          </A>
+          <A
             className={'SidebarLeft-item' + (routeName === 'UserTags' ? ' SidebarLeft-item--active' : '')}
             href={`users/${sessionId}/tags`}
             styled={false}
@@ -81,10 +113,6 @@ export const SidebarLeft: React.FC<Props> = ({
             <Tag className="SidebarLeft-itemIcon" />
             <span className="SidebarLeft-itemDescription">My Tags</span>
           </A>
-          <div className="SidebarLeft-item" onClick={switchUiBookmarkModal}>
-            <PlusCircle className="SidebarLeft-itemIcon" />
-            <span className="SidebarLeft-itemDescription">Add bookmark</span>
-          </div>
           <A
             className={'SidebarLeft-item' + (routeName === 'Followers' ? ' SidebarLeft-item--active' : '')}
             href={`users/${sessionId}/followers`}
@@ -103,10 +131,6 @@ export const SidebarLeft: React.FC<Props> = ({
             <FlagLeft className="SidebarLeft-itemIcon" />
             <span className="SidebarLeft-itemDescription">Following</span>
           </A>
-          <div className="SidebarLeft-item" onClick={switchUiListModal}>
-            <PlusCircle className="SidebarLeft-itemIcon" />
-            <span className="SidebarLeft-itemDescription">Create list</span>
-          </div>
           <A
             className={'SidebarLeft-item' + (routeName === 'UserLists' ? ' SidebarLeft-item--active' : '')}
             href={`users/${sessionId}/lists?sort=-createdAt`}

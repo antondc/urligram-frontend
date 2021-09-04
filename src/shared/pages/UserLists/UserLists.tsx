@@ -7,13 +7,14 @@ import User from 'Assets/svg/userFill.svg';
 import A from 'Components/A';
 import { BookmarkRowSkeletonGroup } from 'Components/BookmarkRow/BookmarkRowSkeletonGroup';
 import ListRow from 'Components/ListRow';
+import Main from 'Components/Main';
+import NoResults from 'Components/NoResults';
 import Pagination from 'Components/Pagination';
-import Sidebar from 'Components/Sidebar';
-import SidebarListTags from 'Components/SidebarListTags';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE, SITE_TITLE } from 'Root/src/shared/constants';
-import { Hr, Select, SelectValue, SortBy, Space } from 'Vendor/components';
+import { Select, SelectValue, SortBy, Space } from 'Vendor/components';
+import CardItem from 'Components/CardItem';
 
 import './UserLists.less';
 
@@ -22,10 +23,7 @@ interface Props {
   user: UserState;
   listsIds: number[];
   listsLoading: boolean;
-  userMostUsedTags: TagState[];
-  userMostUsedTagsLoading: boolean;
-  mostFollowedTags: TagState[];
-  mostFollowedTagsLoading: boolean;
+
   url: string;
   page: {
     size: number;
@@ -48,10 +46,7 @@ export const UserLists: React.FC<Props> = ({
   user,
   listsIds,
   listsLoading,
-  userMostUsedTags,
-  userMostUsedTagsLoading,
-  mostFollowedTags,
-  mostFollowedTagsLoading,
+
   url,
   page,
   totalItems,
@@ -62,68 +57,52 @@ export const UserLists: React.FC<Props> = ({
   onInputChange,
   onChange,
 }) => (
-  <>
+  <Main className="UserLists">
     <Helmet title={`${SITE_TITLE} · User Lists`} />
-    <div className="UserLists">
-      <div className="UserLists-header UserLists-headerTitle">
-        Lists of <Space />
-        <A href={`/users/${userId}`} underlined frontend>
-          @{user?.name}
-        </A>
-      </div>
-      <div className="UserLists-header">
-        <Select
-          className="Bookmarks-select"
-          label="Select tags"
-          value={currentQueryParamFilterTags}
-          defaultOptions={allTags.map((item) => ({ label: item.name, value: item.name }))}
-          options={[...tagsSearchFormatted, ...allTags.map((item) => ({ label: item.name, value: item.name }))].filter(
-            (v, i, a) => a.findIndex((t) => t.value === v.value) === i
-          )}
-          onInputChange={onInputChange}
-          onChange={onChange}
-          maxItems={4}
-          grow
-          hideLabelOnFill
-        />
-        <SortBy
-          options={[
-            { label: 'Created at', field: 'createdAt', icon: Clock },
-            { label: 'Members', field: 'members', icon: User },
-            { label: 'Bookmarks', field: 'bookmarks', icon: Bookmark },
-          ]}
-          href={url}
-          currentSort={sort}
-          loading={listsLoading}
-        />
-      </div>
-      <div className="UserLists-lists">
-        {listsLoading ? (
-          <BookmarkRowSkeletonGroup length={listsIds?.length || DEFAULT_PAGE_SIZE} />
-        ) : (
-          listsIds?.map((id) => <ListRow id={id} key={id} />)
-        )}
-        {!listsLoading && !listsIds?.length && <div className="UserLists-noResults">ⵁ We didn find any list.</div>}
-      </div>
-      <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
-      <Hr spacer size="normal" />
+    <div className="UserLists-header UserLists-headerTitle">
+      Lists of <Space />
+      <A href={`/users/${userId}`} underlined frontend>
+        @{user?.name}
+      </A>
     </div>
-    <Sidebar>
-      <SidebarListTags
-        className="UserLists-sidebarListTagsFirst"
-        title="My Tags"
-        titleHref={`/users/${userId}/tags`}
-        tagsPathname={`/users/${userId}/bookmarks`}
-        loading={userMostUsedTagsLoading}
-        tags={userMostUsedTags}
+    <div className="UserLists-header">
+      <Select
+        className="Bookmarks-select"
+        label="Select tags"
+        value={currentQueryParamFilterTags}
+        defaultOptions={allTags.map((item) => ({ label: item.name, value: item.name }))}
+        options={[...tagsSearchFormatted, ...allTags.map((item) => ({ label: item.name, value: item.name }))].filter(
+          (v, i, a) => a.findIndex((t) => t.value === v.value) === i
+        )}
+        onInputChange={onInputChange}
+        onChange={onChange}
+        maxItems={4}
+        grow
+        hideLabelOnFill
       />
-      <SidebarListTags
-        title="Most Used Tags"
-        titleHref={`/bookmarks`}
-        tagsPathname={`/bookmarks`}
-        loading={mostFollowedTagsLoading}
-        tags={mostFollowedTags}
+      <SortBy
+        options={[
+          { label: 'Created at', field: 'createdAt', icon: Clock },
+          { label: 'Members', field: 'members', icon: User },
+          { label: 'Bookmarks', field: 'bookmarks', icon: Bookmark },
+        ]}
+        href={url}
+        currentSort={sort}
+        loading={listsLoading}
       />
-    </Sidebar>
-  </>
+    </div>
+    <div className="UserLists-lists">
+      {listsLoading ? (
+        <BookmarkRowSkeletonGroup length={listsIds?.length || DEFAULT_PAGE_SIZE} />
+      ) : (
+        listsIds?.map((id) => (
+          <CardItem key={id}>
+            <ListRow id={id} />
+          </CardItem>
+        ))
+      )}
+      {!listsLoading && !listsIds?.length && <NoResults content="ⵁ We didn find any list." />}
+    </div>
+    <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
+  </Main>
 );
