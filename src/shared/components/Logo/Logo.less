@@ -3,8 +3,27 @@
 @c: .Logo;
 
 @{c} {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: @fs-big;
+  text-decoration: none;
+  color: @c-brand;
   fill: @c-brand;
-  transition: fill @td-fast @ease;
+  transition: opacity @td-fast @ease;
+
+  &:hover:not(.noClass) {
+    text-decoration: none;
+    color: @c-brand;
+    opacity: 0.8;
+    fill: @c-brand;
+  }
+
+  &-icon {
+    height: 35px;
+    margin-right: 15px;
+    transition: fill @td-fast @ease;
+  }
 
   // path[data-id='red'] {
   //   fill: @gradientColors[red-2];
@@ -23,158 +42,163 @@
   // }
 
   &--loadingBeat {
-    animation: hearthBeat 2s ease infinite;
+    @-icon {
+      animation: hearthBeat 2s ease infinite;
 
-    @media @br-mobile {
-      animation: none;
+      @media @br-mobile {
+        animation: none;
+      }
     }
   }
 
   &--loadingColors {
-    path[data-id='red'] {
-      animation: colorsBeatRed 2s linear infinite;
-    }
+    @{c}-icon {
+      path[data-id='red'] {
+        animation: colorsBeatRed 2s linear infinite;
+      }
 
-    path[data-id='green'] {
-      animation: colorsBeatGreen 1.7s linear infinite;
-    }
+      path[data-id='green'] {
+        animation: colorsBeatGreen 1.7s linear infinite;
+      }
 
-    path[data-id='blue'] {
-      animation: colorsBeatBlue 2.1s linear infinite;
-    }
+      path[data-id='blue'] {
+        animation: colorsBeatBlue 2.1s linear infinite;
+      }
 
-    path[data-id='yellow'] {
-      animation: colorsBeatYellow 1.8s linear infinite;
+      path[data-id='yellow'] {
+        animation: colorsBeatYellow 1.8s linear infinite;
+      }
     }
   }
+}
 
-  @keyframes hearthBeat {
-    0% {
-      transform: scale(1);
-    }
-
-    5% {
-      transform: scale(1.05);
-    }
-
-    10% {
-      transform: scale(1);
-    }
-
-    15% {
-      transform: scale(1.1);
-    }
-
-    50% {
-      transform: scale(1);
-    }
-
-    100% {
-      transform: scale(1);
-    }
+@keyframes hearthBeat {
+  0% {
+    transform: scale(1);
   }
 
-  @keyframes colorsBeatRed {
-    0% {
-      fill: @gradientColors[red-2];
-    }
-
-    20% {
-      fill: @gradientColors[green-2];
-    }
-
-    40% {
-      fill: @gradientColors[red-2];
-    }
-
-    60% {
-      fill: @gradientColors[blue-2];
-    }
-
-    80% {
-      fill: @gradientColors[yellow-2];
-    }
-
-    100% {
-      fill: @gradientColors[red-2];
-    }
+  5% {
+    transform: scale(1.05);
   }
 
-  @keyframes colorsBeatGreen {
-    0% {
-      fill: @gradientColors[green-2];
-    }
-
-    20% {
-      fill: @gradientColors[blue-2];
-    }
-
-    40% {
-      fill: @gradientColors[green-2];
-    }
-
-    60% {
-      fill: @gradientColors[green-2];
-    }
-
-    80% {
-      fill: @gradientColors[red-2];
-    }
-
-    100% {
-      fill: @gradientColors[red-2];
-    }
+  10% {
+    transform: scale(1);
   }
 
-  @keyframes colorsBeatBlue {
-    0% {
-      fill: @gradientColors[blue-2];
-    }
-
-    20% {
-      fill: @gradientColors[yellow-2];
-    }
-
-    40% {
-      fill: @gradientColors[yellow-2];
-    }
-
-    60% {
-      fill: @gradientColors[red-2];
-    }
-
-    80% {
-      fill: @gradientColors[green-2];
-    }
-
-    100% {
-      fill: @gradientColors[blue-2];
-    }
+  15% {
+    transform: scale(1.1);
   }
 
-  @keyframes colorsBeatYellow {
-    0% {
-      fill: @gradientColors[yellow-2];
-    }
+  50% {
+    transform: scale(1);
+  }
 
-    20% {
-      fill: @gradientColors[red-2];
-    }
+  100% {
+    transform: scale(1);
+  }
+}
 
-    40% {
-      fill: @gradientColors[blue-2];
-    }
+// Keyframes ----
+@keyframes colorsBeatRed {
+  0% {
+    fill: @gradientColors[red-2];
+  }
 
-    60% {
-      fill: @gradientColors[yellow-2];
-    }
+  20% {
+    fill: @gradientColors[green-2];
+  }
 
-    80% {
-      fill: @gradientColors[blue-2];
-    }
+  40% {
+    fill: @gradientColors[red-2];
+  }
 
-    100% {
-      fill: @gradientColors[yellow-2];
-    }
+  60% {
+    fill: @gradientColors[blue-2];
+  }
+
+  80% {
+    fill: @gradientColors[yellow-2];
+  }
+
+  100% {
+    fill: @gradientColors[red-2];
+  }
+}
+
+@keyframes colorsBeatGreen {
+  0% {
+    fill: @gradientColors[green-2];
+  }
+
+  20% {
+    fill: @gradientColors[blue-2];
+  }
+
+  40% {
+    fill: @gradientColors[green-2];
+  }
+
+  60% {
+    fill: @gradientColors[green-2];
+  }
+
+  80% {
+    fill: @gradientColors[red-2];
+  }
+
+  100% {
+    fill: @gradientColors[red-2];
+  }
+}
+
+@keyframes colorsBeatBlue {
+  0% {
+    fill: @gradientColors[blue-2];
+  }
+
+  20% {
+    fill: @gradientColors[yellow-2];
+  }
+
+  40% {
+    fill: @gradientColors[yellow-2];
+  }
+
+  60% {
+    fill: @gradientColors[red-2];
+  }
+
+  80% {
+    fill: @gradientColors[green-2];
+  }
+
+  100% {
+    fill: @gradientColors[blue-2];
+  }
+}
+
+@keyframes colorsBeatYellow {
+  0% {
+    fill: @gradientColors[yellow-2];
+  }
+
+  20% {
+    fill: @gradientColors[red-2];
+  }
+
+  40% {
+    fill: @gradientColors[blue-2];
+  }
+
+  60% {
+    fill: @gradientColors[yellow-2];
+  }
+
+  80% {
+    fill: @gradientColors[blue-2];
+  }
+
+  100% {
+    fill: @gradientColors[yellow-2];
   }
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 
 import LogoSvg from 'Assets/svg/logo.svg';
+import A from 'Components/A';
 
 import './Logo.less';
 
@@ -10,18 +11,24 @@ interface Props {
   loadingColors?: boolean;
 }
 
-const Logo: React.FC<Props> = ({ loadingBeat, loadingColors, className }) => {
+const Logo: React.FC<Props> = ({ className, loadingBeat, loadingColors }) => {
   const loadingBeatIfNotLoadingColors = !!loadingBeat && !loadingColors;
 
   return (
-    <LogoSvg
+    <A
       className={
         'Logo' +
         (loadingBeatIfNotLoadingColors ? ' Logo--loadingBeat ' : '') +
         (loadingColors ? ' Logo--loadingColors ' : '') +
         (className ? ' ' + className : '')
       }
-    />
+      href={'/'}
+      frontend
+      underlined
+    >
+      <LogoSvg className="Logo-icon" />
+      <h3 className="Logo-text">Linking</h3>
+    </A>
   );
 };
 

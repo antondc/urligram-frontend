@@ -7,7 +7,6 @@ import { selectCurrentGlossary } from 'Modules/Languages/selectors/selectCurrent
 import { selectLinksLoading } from 'Modules/Links/selectors/selectLinksLoading';
 import { selectLinksVoteLoading } from 'Modules/Links/selectors/selectLinksVoteLoading';
 import { selectListsLoading } from 'Modules/Lists/selectors/selectListsLoading';
-import { selectCurrentRoute } from 'Modules/Routes/selectors/selectCurrentRoute';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { selectSessionLoading } from 'Modules/Session/selectors/selectSessionLoading';
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
@@ -19,7 +18,6 @@ import './Header.less';
 
 const Header: React.FC = () => {
   const dispatch = useDispatch();
-  const route = useSelector(selectCurrentRoute);
   const session = useSelector(selectSession);
   const currentGlossary = useSelector(selectCurrentGlossary);
   const bookmarksLoading = useSelector(selectBookmarksLoading);
@@ -45,7 +43,6 @@ const Header: React.FC = () => {
 
   return (
     <HeaderUi
-      routeName={route?.name}
       session={session}
       currentGlossary={currentGlossary}
       onUserClick={onUserClick}

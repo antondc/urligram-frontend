@@ -3,216 +3,107 @@
 @c: .Header;
 
 @{c} {
-  display: grid;
+  display: flex;
   justify-content: space-between;
-  align-items: stretch;
-  flex-shrink: 0;
-  grid-template:
-    'brand navigation user' auto
-    / 0fr 1fr 0fr;
+  align-items: center;
   height: 80px;
-  margin: 10px;
-  // border-top: 1px solid @c-accentLight-hard;
-  // border-bottom: 1px solid @c-accentLight-hard;
-  border-radius: 4px;
+  padding-left: 20px;
+  padding-right: 40px;
   background: @c-background;
-  // .boxinsetshadowlight;;
+  border-radius: 4px;
 
   .boxShadow;
-
-  @media @br-tablet {
-    height: auto;
-    border: none;
-  }
-
-  @media @br-mobile {
-    padding: 10px;
-    background: @gradientColors[blue-2];
-  }
 
   &-brand {
     display: flex;
     justify-content: center;
     align-items: center;
-    grid-area: brand;
-    padding: 0 90px 0 20px;
     font-size: @fs-big;
+    text-decoration-color: transparent;
     text-decoration-thickness: 3px;
+    transition: text-decoration-color @td-fast @ease-outCustom1;
 
-    &:hover {
-      text-decoration-thickness: 3px;
-    }
-
-    @media @br-tabletHorizontal {
-      padding: 0 20px 0 20px;
-      font-size: @fs-mediumBig;
-    }
-
-    @media @br-tablet {
-      padding: 10px;
-    }
-
-    @media @br-mobile {
-      height: 30px;
-      width: 30px;
-      margin-right: 20px;
-      padding: 5px;
-      background: @c-background;
-      border-radius: 50%;
+    &:hover:not(.noClass) {
+      text-decoration-color: @c-brand;
     }
   }
 
-  &-logo {
-    height: 35px;
-    margin-right: 15px;
-
-    @media @br-tabletHorizontal {
-      height: 30px;
-      margin-right: 10px;
-    }
-
-    @media @br-tablet {
-      margin-right: 0;
-    }
-
-    @media @br-mobile {
-      height: 25px;
-      margin: 0;
-      opacity: 0.85;
-      fill: @c-error;
-    }
-  }
-
-  &-title {
-    @media @br-mobile {
-      display: none;
-    }
-  }
-
-  &-navigation {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: stretch;
+  &-spacer {
     flex: 1;
-    grid-area: navigation;
   }
 
-  &-item {
+  &-separator {
+    height: 40%;
+    width: 2px;
+    margin: 0 24px;
+    background: @gradientColors[black-4];
+    border-radius: 2px;
+  }
+
+  &-mockSearch {
+    position: relative;
+    height: 50px;
+    min-width: 460px;
+    background: @gradientColors[black-5];
+    border-radius: 20px;
+  }
+
+  &-mockSearchIcon {
+    position: absolute;
+    height: 26px;
+    width: 26px;
+    top: 12px;
+    right: 20px;
+    fill: @gradientColors[black-4];
+  }
+
+  &-addBoookmark {
     display: flex;
-    justify-content: center;
     align-items: center;
-    flex: 1;
-    grid-area: item;
-    padding: 20px;
-    font-size: @fs-big;
-    font-weight: @fw-black;
-    text-decoration-thickness: 3px;
-    white-space: nowrap;
 
     &:hover {
-      text-decoration-thickness: 3px;
-    }
+      cursor: pointer;
 
-    @media @br-tabletHorizontal {
-      font-size: @fs-mediumBig;
-      text-decoration-thickness: 2px;
+      @{c}-addBoookmarkIcon {
+        fill: @gradientColors[blue-2];
+      }
 
-      &:hover {
-        text-decoration-thickness: 2px;
+      @{c}-addBoookmarkText {
+        color: @gradientColors[blue-2];
       }
     }
-
-    @media @br-tablet {
-      padding: 10px;
-      font-size: @fs-normal;
-    }
-
-    @media @br-mobile {
-      padding: 0;
-      opacity: 0.85;
-      transition: opacity @td-fast @ease;
-    }
   }
 
-  &-item--active {
-    @media @br-mobile {
-      opacity: 1;
-    }
-  }
-
-  &-text {
-    @media @br-mobile {
-      display: none;
-    }
-  }
-
-  &-icon {
-    display: none;
-    align-self: center;
-    fill: @c-background;
-
-    @media @br-mobile {
-      display: block;
-    }
-  }
-
-  &-iconBookmark {
+  &-addBoookmarkIcon {
     height: 20px;
     width: 20px;
+    margin-right: 25px;
+    fill: @gradientColors[black-4];
+    transform: rotate(45deg);
+    transition: fill @td-fast @ease;
   }
 
-  &-iconTag {
-    height: 20px;
-    width: 20px;
-  }
-
-  &-iconUser {
-    height: 20px;
-    width: 20px;
-  }
-
-  &-iconList {
-    height: 18px;
-    width: 18px;
+  &-addBoookmarkText {
+    font-size: @fs-big;
+    font-weight: @fw-bold;
+    color: @gradientColors[black-4];
+    transition: color @td-fast @ease;
   }
 
   &-user {
     display: flex;
     justify-content: center;
     align-items: center;
-    grid-area: user;
-    width: 80px;
-    padding: 5px;
-
-    @media @br-tablet {
-      width: auto;
-    }
-
-    @media @br-mobile {
-      margin-left: 20px;
-      padding: 0;
-    }
   }
 
   &-userLogo,
   &-userImage {
     position: relative;
-    height: 50px;
-    width: 50px;
+    height: 40px;
+    width: 40px;
     object-fit: cover;
     object-position: center;
     border-radius: 50%;
-
-    @media @br-tablet {
-      height: 35px;
-      width: 35px;
-    }
-
-    @media @br-mobile {
-      height: 30px;
-      width: 30px;
-      fill: @c-background;
-    }
 
     &:hover {
       cursor: pointer;
@@ -220,12 +111,15 @@
   }
 
   &-userImage {
+    box-shadow: 0 0 0 2pt @c-transparent;
+    transition: box-shadow @td-fast @ease;
+
     &:hover {
       cursor: pointer;
-      box-shadow: 0 0 0 2pt @c-base;
+      box-shadow: 0 0 0 2pt @gradientColors[blue-2];
 
       @media @br-tabletHorizontal {
-        box-shadow: 0 0 0 1.5pt @c-base;
+        box-shadow: 0 0 0 1.5pt @gradientColors[blue-2];
       }
 
       @media @br-mobile {
