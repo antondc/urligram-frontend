@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { selectCurrentRoute } from 'Modules/Routes/selectors/selectCurrentRoute';
@@ -18,10 +18,6 @@ const UserModal: React.FC = () => {
   const userModalMounted = useSelector(selectUiUserModalMounted);
   const route = useSelector(selectCurrentRoute);
   const isUserPage = route.params?.userId === session?.id;
-  console.log('=======');
-  console.log('route.params:');
-  console.log(JSON.stringify(route.params, null, 4));
-  console.log('=======');
 
   const logOutDispatched = () => {
     dispatch(sessionLogOut());

@@ -26,14 +26,14 @@ export const BookmarkActions: React.FC<Props> = ({
   <div className={'BookmarkActions' + (className ? ' ' + className : '')}>
     {!loading && !isOwnBookmark && !userBookmarkedLink && (
       <BookmarkWithBackground
-        className={'BookmarkActions-bookmark BookmarkActions-bookmarkEmpty'}
+        className={'BookmarkActions-bookmark BookmarkActions-bookmark--empty'}
         onClick={onBookmarkGrab}
       />
     )}
     {!loading && (userBookmarkedLink || isOwnBookmark) && (
       <>
-        <BookmarkWithBackground className="BookmarkActions-bookmarked" />
-        <PlusCircleWithBackground className="BookmarkActions-bookmarkRemove" onClick={onBookmarkDelete} />
+        <BookmarkWithBackground className="BookmarkActions-bookmark BookmarkActions-bookmark--filled" />
+        <PlusCircleWithBackground className="BookmarkActions-remove" onClick={onBookmarkDelete} />
       </>
     )}
     {loading && <SpinnerPie className="BookmarkActions-loader" />}

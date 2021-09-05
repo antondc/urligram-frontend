@@ -13,6 +13,12 @@
   overflow: hidden;
   transition: grid-template-columns @td-fast @ease;
 
+  @media @br-mobile {
+    grid-template:
+      'main' auto
+      'sidebarSecond' auto;
+  }
+
   &--sidebarLeftClosed {
     grid-template-columns: 100px auto;
   }
