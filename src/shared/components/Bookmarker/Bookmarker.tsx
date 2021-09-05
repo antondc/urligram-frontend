@@ -4,7 +4,7 @@ import BookmarkWithBackground from 'Assets/svg/bookmarkWithBackground.svg';
 import PlusCircleWithBackground from 'Assets/svg/plusCircleWithBackground.svg';
 import { SpinnerPie } from 'Vendor/components';
 
-import './BookmarkActions.less';
+import './Bookmarker.less';
 
 interface Props {
   className?: string;
@@ -15,7 +15,7 @@ interface Props {
   onBookmarkDelete: () => void;
 }
 
-export const BookmarkActions: React.FC<Props> = ({
+export const Bookmarker: React.FC<Props> = ({
   className,
   isOwnBookmark,
   userBookmarkedLink,
@@ -23,21 +23,18 @@ export const BookmarkActions: React.FC<Props> = ({
   onBookmarkGrab,
   onBookmarkDelete,
 }) => (
-  <div className={'BookmarkActions' + (className ? ' ' + className : '')}>
+  <div className={'Bookmarker' + (className ? ' ' + className : '')}>
     {!loading && !isOwnBookmark && !userBookmarkedLink && (
-      <BookmarkWithBackground
-        className={'BookmarkActions-bookmark BookmarkActions-bookmark--empty'}
-        onClick={onBookmarkGrab}
-      />
+      <BookmarkWithBackground className={'Bookmarker-bookmark Bookmarker-bookmark--empty'} onClick={onBookmarkGrab} />
     )}
     {!loading && (userBookmarkedLink || isOwnBookmark) && (
       <>
-        <BookmarkWithBackground className="BookmarkActions-bookmark BookmarkActions-bookmark--filled" />
-        <PlusCircleWithBackground className="BookmarkActions-remove" onClick={onBookmarkDelete} />
+        <BookmarkWithBackground className="Bookmarker-bookmark Bookmarker-bookmark--filled" />
+        <PlusCircleWithBackground className="Bookmarker-remove" onClick={onBookmarkDelete} />
       </>
     )}
-    {loading && <SpinnerPie className="BookmarkActions-loader" />}
+    {loading && <SpinnerPie className="Bookmarker-loader" />}
   </div>
 );
 
-export default BookmarkActions;
+export default Bookmarker;

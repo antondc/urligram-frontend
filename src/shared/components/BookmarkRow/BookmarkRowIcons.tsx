@@ -5,7 +5,7 @@ import DotsVertical from 'Assets/svg/dotsVertical.svg';
 import EditCircle from 'Assets/svg/editCircle.svg';
 import List from 'Assets/svg/list.svg';
 import Private from 'Assets/svg/private.svg';
-import BookmarkActions from 'Components/BookmarkActions';
+import Bookmarker from 'Components/Bookmarker';
 import BookmarkListsPopOverOrSheet from 'Components/BookmarkListsPopOverOrSheet';
 import { RenderInPortal } from 'Components/Portal';
 import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
@@ -83,7 +83,7 @@ export const BookmarkRowIcons: React.FC<Partial<BookmarkRowIcons>> = ({
             delay={1.5}
           />
         </RenderInPortal>
-        <BookmarkActions
+        <Bookmarker
           className="BookmarkRowIcons-iconBookmark"
           linkId={bookmark?.linkId}
           bookmarkId={bookmark?.id}

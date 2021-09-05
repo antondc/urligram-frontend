@@ -11,9 +11,9 @@ import { listBookmarkCreate } from 'Modules/Lists/actions/listBookmarkCreate';
 import { RootState } from 'Modules/rootType';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
-import { BookmarkActions as BookmarkActionsUi } from './BookmarkActions';
+import { Bookmarker as BookmarkerUi } from './Bookmarker';
 
-import './BookmarkActions.less';
+import './Bookmarker.less';
 
 interface Props {
   className?: string;
@@ -23,7 +23,7 @@ interface Props {
   onBookmarked?: () => void;
 }
 
-export const BookmarkActions: React.FC<Props> = ({ className, linkId, listId, bookmarkId, onBookmarked }) => {
+export const Bookmarker: React.FC<Props> = ({ className, linkId, listId, bookmarkId, onBookmarked }) => {
   const dispatch = useDispatch();
   const session = useSelector(selectSession);
   const link = useSelector((state: RootState) => selectLinkById(state, { id: linkId }));
@@ -56,7 +56,7 @@ export const BookmarkActions: React.FC<Props> = ({ className, linkId, listId, bo
       if (!!listId) await dispatch(listBookmarkCreate({ listId, bookmarkId: newBookmarkId }));
       onBookmarked && onBookmarked();
     } catch (error) {
-      console.log('BookmarkActions.onBookmarkGrab.catch: ', error);
+      console.log('Bookmarker.onBookmarkGrab.catch: ', error);
     } finally {
       setLoading(false);
     }
@@ -76,14 +76,14 @@ export const BookmarkActions: React.FC<Props> = ({ className, linkId, listId, bo
       );
       if (!!listId) await dispatch(bookmarksLoadByListId(listId));
     } catch (error) {
-      console.log('BookmarkActions.onBookmarkDelete.catch: ', error);
+      console.log('Bookmarker.onBookmarkDelete.catch: ', error);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <BookmarkActionsUi
+    <BookmarkerUi
       className={className}
       loading={loading}
       isOwnBookmark={isOwnBookmark}
@@ -94,4 +94,4 @@ export const BookmarkActions: React.FC<Props> = ({ className, linkId, listId, bo
   );
 };
 
-export default BookmarkActions;
+export default Bookmarker;
