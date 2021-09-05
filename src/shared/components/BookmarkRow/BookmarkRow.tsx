@@ -85,7 +85,7 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
       <Space />·<Space />
       Created at {createdAtFormatted}
       <Space />·<Space />
-      Bookmarked {bookmark.statistics?.timesBookmarked} time
+      Bookmarked {bookmark?.statistics?.timesBookmarked} time
       <span>{bookmark?.statistics?.timesBookmarked > 1 ? 's' : ''}</span>
     </div>
     <div className="BookmarkRow-tags">
