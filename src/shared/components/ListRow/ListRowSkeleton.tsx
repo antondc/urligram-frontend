@@ -10,18 +10,21 @@ interface ListRowSkeleton {
 
 export const ListRowSkeleton: React.FC<ListRowSkeleton> = ({ id }) => (
   <div className="ListRowSkeleton" data-test-id="ListRowSkeleton" key={id}>
-    <div className="ListRowSkeleton-main">
-      <SkeletonItem className="ListRowSkeleton-skeletonItem ListRowSkeleton-title" />
-      <SkeletonItem className="ListRowSkeleton-skeletonItem ListRowSkeleton-description" />
+    <div className="ListRowSkeleton-title">
+      <SkeletonItem className="ListRowSkeleton-favicon" />
+      <SkeletonItem className="ListRowSkeleton-titleText" />
     </div>
+    <SkeletonItem className="ListRowSkeleton-details" />
     <div className="ListRowSkeleton-tags">
-      <SkeletonItem className="ListRowSkeleton-skeletonItem ListRowSkeleton-tag" />
-      <SkeletonItem className="ListRowSkeleton-skeletonItem ListRowSkeleton-tag" />
-      <SkeletonItem className="ListRowSkeleton-skeletonItem ListRowSkeleton-tag" />
+      <SkeletonItem className="ListRowSkeleton-tag" />
+      <SkeletonItem className="ListRowSkeleton-tag" />
+      <SkeletonItem className="ListRowSkeleton-tag" />
+      <SkeletonItem className="ListRowSkeleton-tag" />
     </div>
     <div className="ListRowSkeleton-icons">
-      <SkeletonItem className="ListRowSkeleton-skeletonItem ListRowSkeleton-icon" />
-      <SkeletonItem className="ListRowSkeleton-skeletonItem ListRowSkeleton-icon ListRowSkeleton-iconLarge" />
+      <SkeletonItem className="ListRowSkeleton-icon" />
+      <SkeletonItem className="ListRowSkeleton-icon" />
+      <SkeletonItem className="ListRowSkeleton-icon" />
     </div>
   </div>
 );

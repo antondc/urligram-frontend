@@ -55,11 +55,11 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
   >
     <div className="BookmarkRow-title">
       <A href={bookmark?.url} onClick={bookmarkViewed} targetBlank underlined styled={false}>
-        <img className="BookmarkRow-favicon" src={bookmark?.favicon} />
+        <img className="BookmarkRow-titleIcon" src={bookmark?.favicon} />
         {bookmark?.title}
       </A>
     </div>
-    <div className="BookmarkRow-details">
+    <div className="BookmarkRow-description">
       {!!bookmark?.statistics?.timesBookmarked && (
         <>
           Shared by

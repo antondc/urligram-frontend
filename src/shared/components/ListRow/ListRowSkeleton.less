@@ -3,107 +3,91 @@
 @c: .ListRowSkeleton;
 
 @{c} {
+  .default();
+
   display: grid;
   position: relative;
-  flex-wrap: wrap;
   justify-content: space-between;
   grid-template:
-    'main icons' auto
-    'main tags' auto
-    / 4fr 2fr 0fr;
-  height: 45px;
+    'title tags icons' auto
+    'details tags icons' auto
+    / 5fr 6fr auto;
+  height: 90px;
   width: 100%;
-  padding: 8px 13px 7px;
-  column-gap: 10px;
+  padding: 30px 45px 17px 30px;
   background: @c-background;
+  column-gap: 30px;
   border-bottom: 1px solid @c-accentLight-hardest;
+  transition: background @td-normal @ease;
 
   @media @br-mobile {
     grid-template:
-      'main icons' auto
-      'main tags' auto
-      / 4fr 2fr 0fr;
-  }
-
-  &-main {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    grid-area: main;
-    padding-top: 3px;
-    overflow: hidden;
-  }
-
-  &-favicon {
-    height: 10px;
-    width: 10px;
-    margin-right: 5px;
+      'title title icons' auto
+      'details details icons' auto
+      'tags tags icons' auto
+      / 1fr 1fr auto;
+    height: 70px;
   }
 
   &-title {
-    margin-bottom: 1px;
-    padding-bottom: 2px;
-    line-height: 19px;
-    line-height: 12px;
-    white-space: nowrap;
-    overflow-x: scroll;
-    overflow-y: hidden;
-    text-overflow: ellipsis;
-
-    .hideScrollbar;
-    .hoverTransition(0.8);
+    display: flex;
+    grid-area: title;
+    height: 20px;
+    width: 100%;
   }
 
-  &-description {
-    position: relative;
-    white-space: nowrap;
-    overflow: hidden;
-    overflow-x: scroll;
-    overflow-y: hidden;
-    text-overflow: ellipsis;
+  &-favicon {
+    flex-shrink: 0;
+    height: 13px;
+    width: 13px;
+    max-height: unset;
+    max-width: unset;
+    min-height: unset;
+    min-width: unset;
+    margin-right: 13px;
+    border-radius: 50%;
+  }
 
-    .hideScrollbar;
+  &-titleText {
+    height: 15px;
+    width: 100%;
+  }
+
+  &-details {
+    grid-area: details;
+    height: 10px;
+    width: 80%;
+    margin-left: 26px;
   }
 
   &-tags {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     grid-area: tags;
-    overflow-x: scroll;
-    overflow-y: visible;
-    direction: rtl;
-
-    .hideScrollbar;
+    min-width: 50px;
+    padding-bottom: 6px;
+    padding-left: 30px;
+    overflow: hidden;
   }
 
   &-tag {
-    margin-right: 5px;
+    height: 20px;
+    width: 50px;
+    margin-right: 8px;
   }
 
   &-icons {
     display: flex;
-    flex-wrap: nowrap;
     justify-content: flex-end;
-    align-items: flex-start;
+    align-items: center;
     grid-area: icons;
+    height: 100%;
+    padding-bottom: 6px;
   }
 
   &-icon {
-    height: 10px;
-    width: 10px;
-    min-height: 10px;
-    min-width: 10px;
-    margin-right: 3px;
-  }
-
-  &-iconText {
-    display: flex;
-    justify-content: flex-end;
-    align-items: baseline;
-    margin-right: 2px;
-    font-size: @fs-micro;
-    line-height: 7px;
-    text-align: end;
-    white-space: nowrap;
+    height: 16px;
+    width: 16px;
+    margin-left: 23px;
   }
 }

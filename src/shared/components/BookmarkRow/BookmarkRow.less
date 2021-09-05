@@ -10,7 +10,7 @@
   justify-content: space-between;
   grid-template:
     'title tags icons' auto
-    'details tags icons' auto
+    'description tags icons' auto
     / 5fr 6fr 1fr;
   height: 90px;
   width: 100%;
@@ -23,7 +23,7 @@
   @media @br-mobile {
     grid-template:
       'title title icons' auto
-      'details details icons' auto
+      'description description icons' auto
       'tags tags icons' auto
       / 1fr 1fr auto;
     height: 70px;
@@ -36,13 +36,6 @@
     &:hover {
       background: @gradientColors[black-6];
     }
-  }
-
-  &-favicon {
-    align-self: center;
-    height: 15px;
-    width: 15px;
-    margin-right: 10px;
   }
 
   &-title {
@@ -74,10 +67,17 @@
     }
   }
 
-  &-details {
+  &-titleIcon {
+    align-self: center;
+    height: 15px;
+    width: 15px;
+    margin-right: 10px;
+  }
+
+  &-description {
     display: flex;
     align-items: flex-end;
-    grid-area: details;
+    grid-area: description;
     padding-bottom: 6px;
     padding-left: 25px;
     font-size: @fs-small;

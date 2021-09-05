@@ -1,9 +1,10 @@
 import React from 'react';
 
+import List from 'Assets/svg/list.svg';
 import A from 'Components/A';
 import { ListState } from 'Modules/Lists/lists.types';
 import { SessionState } from 'Modules/Session/session.types';
-import { Private, Space, Span, Tag } from 'Vendor/components';
+import { Private, Tag } from 'Vendor/components';
 
 import './ListRow.less';
 
@@ -14,17 +15,13 @@ interface Props extends Partial<ListState> {
 
 export const ListRow: React.FC<Props> = ({ id, name, tags, description, isPrivate, currentPathname }) => (
   <div className="ListRow" data-test-id="ListRow" key={id}>
-    <div className="ListRow-main">
-      <Span size="normal" weight="semiBold" className="ListRow-title">
-        <A href={`/lists/${id}`} frontend styled={false}>
-          {name}
-        </A>
-      </Span>
-      <Span className="ListRow-description" size="nano">
-        {description}
-        <Space />
-      </Span>
+    <div className="BookmarkRow-title">
+      <A href={`/lists/${id}`} frontend styled={false}>
+        <List className="ListRow-titleIcon" />
+        {name}
+      </A>
     </div>
+    <div className="ListRow-description">{description}</div>
     <div className="ListRow-tags">
       {tags?.map((item) => (
         <A
