@@ -59,13 +59,13 @@ export const SidebarLeft: React.FC<Props> = ({
           <span className="SidebarLeft-itemDescription">{glossary.home}</span>
         </A>
         <A
-          className={'SidebarLeft-item' + (routeName === 'Tags' ? ' SidebarLeft-item--active' : '')}
-          href="/tags"
+          className={'SidebarLeft-item' + (routeName === 'Bookmarks' ? ' SidebarLeft-item--active' : '')}
+          href="/bookmarks"
           styled={false}
           frontend
         >
-          <Tag className="SidebarLeft-itemIcon" />
-          <span className="SidebarLeft-itemDescription">All Tags</span>
+          <BookmarkFilled className="SidebarLeft-itemIcon" />
+          <span className="SidebarLeft-itemDescription">Bookmarks</span>
         </A>
         <A
           className={'SidebarLeft-item' + (routeName === 'Lists' ? ' SidebarLeft-item--active' : '')}
@@ -74,16 +74,25 @@ export const SidebarLeft: React.FC<Props> = ({
           frontend
         >
           <List className="SidebarLeft-itemIcon SidebarLeft-itemIconList" />
-          <span className="SidebarLeft-itemDescription">All Lists</span>
+          <span className="SidebarLeft-itemDescription">Lists</span>
         </A>
         <A
-          className={'SidebarLeft-item' + (routeName === 'Bookmarks' ? ' SidebarLeft-item--active' : '')}
-          href="/bookmarks"
+          className={'SidebarLeft-item' + (routeName === 'Users' ? ' SidebarLeft-item--active' : '')}
+          href={`users`}
           styled={false}
           frontend
         >
-          <BookmarkFilled className="SidebarLeft-itemIcon" />
-          <span className="SidebarLeft-itemDescription">{glossary.allBookmarks}</span>
+          <UserFill className="SidebarLeft-itemIcon" />
+          <span className="SidebarLeft-itemDescription">Users</span>
+        </A>
+        <A
+          className={'SidebarLeft-item' + (routeName === 'Tags' ? ' SidebarLeft-item--active' : '')}
+          href="/tags"
+          styled={false}
+          frontend
+        >
+          <Tag className="SidebarLeft-itemIcon" />
+          <span className="SidebarLeft-itemDescription">Tags</span>
         </A>
       </>
       {!!isLoggedIn && (
