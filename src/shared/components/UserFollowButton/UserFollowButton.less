@@ -5,10 +5,8 @@
 @{c} {
   position: relative;
 
-  &-userLogo,
-  &-listEdit,
-  &-listFollowed,
-  &-listNotFollowed,
+  &-followed,
+  &-notFollowed,
   &-loader {
     position: absolute;
     height: 100%;
@@ -21,22 +19,8 @@
     }
   }
 
-  &-userLogo {
-    border-radius: 50%;
-  }
-
-  &-listEdit {
-    opacity: 0;
-    background: @c-background;
-    border-radius: 50%;
-  }
-
   &:hover {
     cursor: pointer;
-
-    @{c}-listEdit {
-      opacity: 1;
-    }
 
     @{c}-userLogo {
       opacity: 0;
@@ -44,14 +28,14 @@
   }
 
   &-loader {
-    outline-color: @gradientColors[yellow-1];
+    outline-color: @gradientColors[blue-1];
 
     span {
-      background: @gradientColors[yellow-1];
+      background: @gradientColors[blue-1];
     }
   }
 
-  &-listNotFollowed {
+  &-notFollowed {
     fill: @c-accentLight;
 
     &:hover {
@@ -65,7 +49,7 @@
     }
   }
 
-  &-listFollowed {
+  &-followed {
     fill: @c-success;
 
     &:hover {

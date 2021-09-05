@@ -4,7 +4,6 @@ import Helmet from 'react-helmet';
 import Bookmark from 'Assets/svg/bookmarkRounded.svg';
 import Clock from 'Assets/svg/spinner6.svg';
 import User from 'Assets/svg/userFill.svg';
-import A from 'Components/A';
 import { BookmarkRowSkeletonGroup } from 'Components/BookmarkRow/BookmarkRowSkeletonGroup';
 import CardItem from 'Components/CardItem';
 import ListRow from 'Components/ListRow';
@@ -14,7 +13,7 @@ import Pagination from 'Components/Pagination';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE, SITE_TITLE } from 'Root/src/shared/constants';
-import { Select, SelectValue, SortBy, Space } from 'Vendor/components';
+import { Select, SelectValue, SortBy } from 'Vendor/components';
 
 import './UserLists.less';
 

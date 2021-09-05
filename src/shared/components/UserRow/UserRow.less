@@ -3,82 +3,149 @@
 @c: .UserRow;
 
 @{c} {
+  .default();
+
   display: grid;
   position: relative;
-  grid-template: 'main tags image' auto / 3fr 2fr 0fr;
-  height: 45px;
+  justify-content: space-between;
+  grid-template:
+    'title tags icons' auto
+    'description tags icons' auto
+    / 5fr 6fr 1fr;
+  height: 90px;
   width: 100%;
-  padding: 8px 13px 7px;
-  column-gap: 10px;
+  padding: 27px 45px 17px 30px;
   background: @c-background;
+  column-gap: 30px;
   border-bottom: 1px solid @c-accentLight-hardest;
+  transition: background @td-normal @ease;
 
   @media @br-mobile {
     grid-template:
-      'main image' auto
-      '. .' 5px
-      'tags tags' auto
-      'tags tags' auto
-      / 1fr 0fr;
-    height: unset;
+      'title title icons' auto
+      'description description icons' auto
+      'tags tags icons' auto
+      / 1fr 1fr auto;
+    height: 70px;
   }
 
-  &-main {
+  &-title {
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    grid-area: main;
-    overflow: hidden;
-  }
-
-  &-details {
-    display: flex;
-    align-items: flex-end;
+    position: relative;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-content: space-between;
+    grid-area: title;
+    font-size: @fs-medium;
+    font-weight: @fw-bold;
+    line-height: initial;
+    text-decoration: underline;
+    text-decoration-color: @c-transparent;
+    text-decoration-thickness: 2px;
     white-space: nowrap;
+    color: @gradientColors[blue-1];
+    overflow: hidden;
     overflow-x: scroll;
     overflow-y: hidden;
+    transition: text-decoration-color @td-fast @ease;
+    text-overflow: ellipsis;
 
     .hideScrollbar;
+
+    &:hover {
+      text-decoration-color: @gradientColors[blue-1];
+      cursor: pointer;
+    }
   }
 
-  &-since {
-    text-transform: capitalize;
+  &-titleIcon {
+    align-self: center;
+    height: 15px;
+    width: 15px;
+    margin-right: 10px;
+    fill: @gradientColors[blue-1];
+  }
+
+  &-description {
+    display: flex;
+    align-items: flex-end;
+    grid-area: description;
+    padding-bottom: 6px;
+    padding-left: 25px;
+    font-size: @fs-small;
+    font-weight: @fw-light;
+    line-height: 10px;
+    white-space: nowrap;
+    color: @gradientColors[black-3];
+    overflow-x: scroll;
+    overflow-y: hidden;
+    text-overflow: ellipsis;
+
+    .hideScrollbar;
+
+    @media @br-mobile {
+      line-height: @fh-nano;
+    }
   }
 
   &-tags {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     grid-area: tags;
+    min-width: 50px;
+    padding-bottom: 6px;
+    padding-left: 30px;
     overflow-x: scroll;
     overflow-y: visible;
+    direction: ltr;
 
     .hideScrollbar;
+
+    @media @br-mobile {
+      direction: ltr;
+    }
   }
 
   &-tag {
-    margin-right: 5px;
+    margin-left: 5px;
+
+    @media @br-mobile {
+      margin-left: 0;
+      margin-right: 5px;
+    }
   }
 
-  &-imageContainer {
+  &-icons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
     flex-shrink: 0;
-    grid-area: image;
+    grid-area: icons;
+    padding-bottom: 6px;
+  }
+
+  &-userImage {
+    position: relative;
+    height: 38px;
+    width: 38px;
   }
 
   &-image {
-    height: 30px;
-    width: 30px;
+    border-radius: 50%;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
     object-fit: cover;
     object-position: center;
-    border-radius: 50%;
   }
 
   &-followButton {
     position: absolute;
-    height: 12px;
-    width: 12px;
-    top: 6px;
-    right: 9px;
-    outline: 1px solid @c-background;
+    height: 14px;
+    width: 14px;
+    top: -2px;
+    right: -2px;
+    outline: 2px solid @c-background;
     border-radius: 50%;
   }
 }

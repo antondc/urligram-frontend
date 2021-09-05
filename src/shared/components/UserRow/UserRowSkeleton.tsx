@@ -10,16 +10,18 @@ interface UserRowSkeleton {
 
 export const UserRowSkeleton: React.FC<UserRowSkeleton> = ({ id }) => (
   <div className="UserRowSkeleton" data-test-id="UserRowSkeleton" key={id}>
-    <div className="UserRowSkeleton-main">
-      <SkeletonItem className="UserRowSkeleton-name" />
-      <SkeletonItem className="UserRowSkeleton-details" />
+    <div className="UserRowSkeleton-title">
+      <SkeletonItem className="UserRowSkeleton-favicon" />
+      <SkeletonItem className="UserRowSkeleton-titleText" />
     </div>
+    <SkeletonItem className="UserRowSkeleton-details" />
     <div className="UserRowSkeleton-tags">
       <SkeletonItem className="UserRowSkeleton-tag" />
       <SkeletonItem className="UserRowSkeleton-tag" />
       <SkeletonItem className="UserRowSkeleton-tag" />
+      <SkeletonItem className="UserRowSkeleton-tag" />
     </div>
-    <div className="UserRowSkeleton-imageContainer">
+    <div className="UserRowSkeleton-icons">
       <SkeletonItem className="UserRowSkeleton-image" />
     </div>
   </div>

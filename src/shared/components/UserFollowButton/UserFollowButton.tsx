@@ -27,7 +27,7 @@ export const UserFollowButton: React.FC<Props> = ({
     {sessionUserFollowsUser && (
       <PlusCircleWithBackground
         className={
-          'UserFollowButton-listFollowed ' + (recentlyChanged ? ' UserFollowButton-listFollowed--recentlyChanged' : '')
+          'UserFollowButton-followed ' + (recentlyChanged ? ' UserFollowButton-followed--recentlyChanged' : '')
         }
         size="micro"
         onClick={onUnfollow}
@@ -36,8 +36,7 @@ export const UserFollowButton: React.FC<Props> = ({
     {!sessionUserFollowsUser && (
       <PlusCircleWithBackground
         className={
-          'UserFollowButton-listNotFollowed' +
-          (recentlyChanged ? ' UserFollowButton-listNotFollowed--recentlyChanged' : '')
+          'UserFollowButton-notFollowed' + (recentlyChanged ? ' UserFollowButton-notFollowed--recentlyChanged' : '')
         }
         size="micro"
         onClick={onFollow}
