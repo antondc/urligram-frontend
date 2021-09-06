@@ -7,10 +7,9 @@ import List from 'Assets/svg/list.svg';
 import Private from 'Assets/svg/private.svg';
 import Bookmarker from 'Components/Bookmarker';
 import BookmarkListsPopOverOrSheet from 'Components/BookmarkListsPopOverOrSheet';
-import { RenderInPortal } from 'Components/Portal';
 import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
 import { TagState } from 'Modules/Tags/tags.types';
-import { Fade, Tooltip } from 'Vendor/components';
+import { Fade } from 'Vendor/components';
 
 import './BookmarkRowIcons.less';
 
@@ -76,13 +75,6 @@ export const BookmarkRowIcons: React.FC<Partial<BookmarkRowIcons>> = ({
             <BookmarkListsPopOverOrSheet bookmarkId={bookmark?.id} />
           </div>
         )}
-        <RenderInPortal>
-          <Tooltip
-            parentElementId={`BookmarkRowIcons-timesBookmarked--${bookmark?.id}`}
-            content="Times bookmarked"
-            delay={1.5}
-          />
-        </RenderInPortal>
         <Bookmarker
           className="BookmarkRowIcons-iconBookmark"
           linkId={bookmark?.linkId}
