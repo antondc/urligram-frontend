@@ -6,14 +6,9 @@ import { bookmarksRecommended } from 'Modules/Bookmarks/actions/bookmarksRecomme
 import { selectBookmarksCurrentIds } from 'Modules/Bookmarks/selectors/selectBookmarksCurrentIds';
 import { selectBookmarksLoading } from 'Modules/Bookmarks/selectors/selectBookmarksLoading';
 import { selectBookmarksTotalItems } from 'Modules/Bookmarks/selectors/selectBookmarkTotalItems';
-import { listsLoadByUserId } from 'Modules/Lists/actions/listsLoadByUserId';
 import { selectCurrentFullUrl } from 'Modules/Routes/selectors/selectCurrentFullUrl';
 import { selectCurrentRouteQueryParamPage } from 'Modules/Routes/selectors/selectCurrentRouteQueryParamPage';
-import { sectionsMostFollowedUsersLoad } from 'Modules/Sections/actions/sectionsMostFollowedUsersLoad';
-import { sectionsMyRecentBookmarksLoad } from 'Modules/Sections/actions/sectionsMyRecentBookmarksLoad';
-import { sectionsNewUsersLoad } from 'Modules/Sections/actions/sectionsNewUsersLoad';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
-import { tagsLoad } from 'Modules/Tags/actions/tagsLoad';
 import { Home as HomeUI } from './Home';
 
 const Home: React.FC = () => {
@@ -24,14 +19,6 @@ const Home: React.FC = () => {
   const page = useSelector(selectCurrentRouteQueryParamPage);
   const totalItems = useSelector(selectBookmarksTotalItems);
   const url = useSelector(selectCurrentFullUrl);
-
-  useEffect(() => {
-    dispatch(sectionsMostFollowedUsersLoad());
-    dispatch(sectionsNewUsersLoad());
-    dispatch(tagsLoad());
-    dispatch(listsLoadByUserId({ userId: session?.id }));
-    dispatch(sectionsMyRecentBookmarksLoad(session?.id));
-  }, [session?.id]);
 
   useEffect(() => {
     if (!!session?.id) {

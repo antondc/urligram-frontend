@@ -2,6 +2,7 @@ import React, { memo } from 'react';
 import Helmet from 'react-helmet';
 
 import Bookmark from 'Assets/svg/bookmarkFilled.svg';
+import ListIcon from 'Assets/svg/list.svg';
 import Clock from 'Assets/svg/spinner6.svg';
 import A from 'Components/A';
 import BookmarkRow from 'Components/BookmarkRow';
@@ -26,7 +27,6 @@ import {
   Select,
   SelectValue,
   SortBy,
-  Space,
   SpinnerPie,
   Tooltip,
 } from 'Vendor/components';
@@ -108,8 +108,13 @@ export const List: React.FC<Props> = ({
       </CardItem>
     </AnimateHeight>
     <CardItem className="List-header">
+      <div className="List-headerTitle">
+        <ListIcon />
+        {list?.name}
+      </div>
+      <div className="List-separator" />
       <Select
-        className="Bookmarks-select"
+        className="List-select"
         placeholder="Select tags"
         value={currentQueryParamFilterTags}
         defaultOptions={allTags.map((item) => ({ label: item.name, value: item.name }))}

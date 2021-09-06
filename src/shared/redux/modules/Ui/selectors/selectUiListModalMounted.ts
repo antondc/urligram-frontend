@@ -1,9 +1,3 @@
-import { createSelector } from 'reselect';
-import get from 'lodash/get';
+import { RootState } from '../../rootType';
 
-import { UiBaseModal } from '../ui.types';
-import { selectUiListModal } from './selectUiListModal';
-
-export const selectUiListModalMounted = createSelector(selectUiListModal, (uiListModal: UiBaseModal): boolean =>
-  get(uiListModal, 'mounted', false)
-);
+export const selectUiListModalMounted = (state: RootState): boolean => state.Ui['listModal']?.mounted;

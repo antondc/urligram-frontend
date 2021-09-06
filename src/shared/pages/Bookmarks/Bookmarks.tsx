@@ -1,6 +1,7 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 
+import Bookmark from 'Assets/svg/bookmark.svg';
 import Clock from 'Assets/svg/spinner6.svg';
 import BookmarkRow from 'Components/BookmarkRow';
 import { BookmarkRowSkeletonGroup } from 'Components/BookmarkRow/BookmarkRowSkeletonGroup';
@@ -50,6 +51,11 @@ export const Bookmarks: React.FC<Props> = ({
   <Main className="Bookmarks">
     <Helmet title={`${SITE_TITLE} · Bookmarks`} />
     <CardItem className="Bookmarks-header">
+      <div className="Bookmarks-headerTitle">
+        <Bookmark />
+        All Bookmarks
+      </div>
+      <div className="Bookmarks-separator" />
       <Select
         className="Bookmarks-select"
         placeholder="Select tags"

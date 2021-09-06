@@ -5,14 +5,11 @@ import { bookmarksLoadByUserId } from 'Modules/Bookmarks/actions/bookmarksLoadBy
 import { selectBookmarksCurrentIds } from 'Modules/Bookmarks/selectors/selectBookmarksCurrentIds';
 import { selectBookmarksLoading } from 'Modules/Bookmarks/selectors/selectBookmarksLoading';
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
-import { listsLoadByUserId } from 'Modules/Lists/actions/listsLoadByUserId';
 import { ListState } from 'Modules/Lists/lists.types';
 import { selectListsAllIds } from 'Modules/Lists/selectors/selectListsAllIds';
 import { selectListsLoading } from 'Modules/Lists/selectors/selectListsLoading';
 import { RootState } from 'Modules/rootType';
 import { selectCurrentRouteParamUserId } from 'Modules/Routes/selectors/selectCurrentRouteParamUserId';
-import { sectionsFollowersUsersLoad } from 'Modules/Sections/actions/sectionsFollowersUsersLoad';
-import { sectionsFollowingUsersLoad } from 'Modules/Sections/actions/sectionsFollowingUsersLoad';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { userLoad } from 'Modules/Users/actions/userLoad';
 import { selectUserById } from 'Modules/Users/selectors/selectUserById';
@@ -42,9 +39,6 @@ const User: React.FC<Props> = () => {
   useEffect(() => {
     dispatch(bookmarksLoadByUserId(userId, 5));
     dispatch(userLoad(userId));
-    dispatch(sectionsFollowingUsersLoad(userId));
-    dispatch(sectionsFollowersUsersLoad(userId));
-    dispatch(listsLoadByUserId({ userId }));
   }, [session?.id]);
 
   return (

@@ -2,8 +2,6 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { selectCurrentFullUrl } from 'Modules/Routes/selectors/selectCurrentFullUrl';
-import { sectionsMostFollowedUsersLoad } from 'Modules/Sections/actions/sectionsMostFollowedUsersLoad';
-import { sectionsNewUsersLoad } from 'Modules/Sections/actions/sectionsNewUsersLoad';
 import { tagsLoad } from 'Modules/Tags/actions/tagsLoad';
 import { selectTagsLoading } from 'Modules/Tags/selectors/selectAllTagsLoading';
 import { selectTagsCurrent } from 'Modules/Tags/selectors/selectTagsCurrent';
@@ -21,11 +19,6 @@ const Tags: React.FC = () => {
   useEffect(() => {
     dispatch(tagsLoad());
   }, [url]);
-
-  useEffect(() => {
-    dispatch(sectionsMostFollowedUsersLoad());
-    dispatch(sectionsNewUsersLoad());
-  }, []);
 
   return <TagsUi tags={tags} tagsLoading={tagsLoading} url={url} sort={sort} />;
 };

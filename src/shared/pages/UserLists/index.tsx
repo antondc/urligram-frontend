@@ -11,8 +11,6 @@ import { selectCurrentFullUrl } from 'Modules/Routes/selectors/selectCurrentFull
 import { selectCurrentRouteParamUserId } from 'Modules/Routes/selectors/selectCurrentRouteParamUserId';
 import { selectCurrentRouteQueryParamFilter } from 'Modules/Routes/selectors/selectCurrentRouteQueryParamFilter';
 import { selectCurrentRouteQueryParamPage } from 'Modules/Routes/selectors/selectCurrentRouteQueryParamPage';
-import { sectionsMostUsedTagsLoad } from 'Modules/Sections/actions/sectionsMostUsedTagsLoad';
-import { sectionsUserMostUsedTagsLoad } from 'Modules/Sections/actions/sectionsUserMostFollowedTagsLoad';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { tagsSearchLoad } from 'Modules/Tags/actions/tagsSearchLoad';
 import { selectTagsAll } from 'Modules/Tags/selectors/selectAllTags';
@@ -31,7 +29,6 @@ const UserLists: React.FC = () => {
   const user = useSelector((state: RootState) => selectUserById(state, { id: userId }));
   const listsIds = useSelector(selectListsAllIds);
   const listsLoading = useSelector(selectListsLoading);
-
   const page = useSelector(selectCurrentRouteQueryParamPage);
   const totalItems = useSelector(selectListsTotalItems);
   const url = useSelector(selectCurrentFullUrl);
@@ -63,8 +60,6 @@ const UserLists: React.FC = () => {
 
   useEffect(() => {
     dispatch(userLoad(userId));
-    dispatch(sectionsUserMostUsedTagsLoad(userId));
-    dispatch(sectionsMostUsedTagsLoad());
   }, [session?.id]);
 
   useEffect(() => {
@@ -73,7 +68,6 @@ const UserLists: React.FC = () => {
 
   return (
     <UserListsUi
-      userId={userId}
       user={user}
       listsIds={listsIds}
       listsLoading={listsLoading}

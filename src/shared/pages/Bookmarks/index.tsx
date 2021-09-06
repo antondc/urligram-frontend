@@ -6,13 +6,9 @@ import { selectBookmarksCurrentIds } from 'Modules/Bookmarks/selectors/selectBoo
 import { selectBookmarksLoading } from 'Modules/Bookmarks/selectors/selectBookmarksLoading';
 import { selectBookmarksMetaSort } from 'Modules/Bookmarks/selectors/selectBookmarksMetaSort';
 import { selectBookmarksTotalItems } from 'Modules/Bookmarks/selectors/selectBookmarkTotalItems';
-import { listsLoadByUserId } from 'Modules/Lists/actions/listsLoadByUserId';
 import { selectCurrentFullUrl } from 'Modules/Routes/selectors/selectCurrentFullUrl';
 import { selectCurrentRouteQueryParamFilter } from 'Modules/Routes/selectors/selectCurrentRouteQueryParamFilter';
 import { selectCurrentRouteQueryParamPage } from 'Modules/Routes/selectors/selectCurrentRouteQueryParamPage';
-import { sectionsMostUsedTagsLoad } from 'Modules/Sections/actions/sectionsMostUsedTagsLoad';
-import { sectionsMyRecentBookmarksLoad } from 'Modules/Sections/actions/sectionsMyRecentBookmarksLoad';
-import { sectionsPopularListsLoad } from 'Modules/Sections/actions/sectionsPopularListsLoad';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { tagsSearchLoad } from 'Modules/Tags/actions/tagsSearchLoad';
 import { selectTagsAll } from 'Modules/Tags/selectors/selectAllTags';
@@ -43,21 +39,6 @@ const Home: React.FC = () => {
       value: item,
     })) || [];
 
-  useEffect(() => {
-    dispatch(sectionsMostUsedTagsLoad());
-    dispatch(sectionsPopularListsLoad());
-  }, []);
-
-  useEffect(() => {
-    dispatch(sectionsMyRecentBookmarksLoad(session?.id));
-    dispatch(listsLoadByUserId({ userId: session?.id }));
-  }, [session?.id]);
-
-  useEffect(() => {
-    dispatch(bookmarksLoad());
-    dispatch(tagsSearchLoad());
-  }, [url, session?.id]);
-
   const onInputChange = (string: string) => {
     !!string && dispatch(tagsSearchLoad(string));
   };
@@ -72,6 +53,10 @@ const Home: React.FC = () => {
 
     history.push(redirectPath);
   };
+
+  useEffect(() => {
+    dispatch(bookmarksLoad());
+  }, [url, session?.id]);
 
   return (
     <BookmarksUi

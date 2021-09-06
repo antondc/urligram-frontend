@@ -2,21 +2,6 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Location } from 'history';
 
-import LayoutHelperGrid from 'Common/LayoutHelperGrid';
-import BookmarkCreateModalOrSheet from 'Components/BookmarkCreateModalOrSheet';
-import BookmarkUpdateModalOrSheet from 'Components/BookmarkUpdateModalOrSheet';
-import CookiesBanner from 'Components/CookiesBanner';
-import Footer from 'Components/Footer';
-import ForgotPasswordModal from 'Components/ForgotPasswordModal';
-import Header from 'Components/Header';
-import ListModal from 'Components/ListModal';
-import LoginModal from 'Components/LoginModal';
-import Notifications from 'Components/Notifications';
-import ResetPasswordModal from 'Components/ResetPasswordModal';
-import ScreenSizePixel from 'Components/ScreenSizePixel';
-import SignUpModal from 'Components/SignUpModal';
-import UserModal from 'Components/UserModal';
-import WelcomeModal from 'Components/WelcomeModal';
 import { selectLanguageLoading } from 'Modules/Languages/selectors/selectLanguageLoading';
 import { listsLoadByUserId } from 'Modules/Lists/actions/listsLoadByUserId';
 import { listNotificationsLoad } from 'Modules/Notifications/actions/listNotificationsLoad';
@@ -35,11 +20,10 @@ import { selectUiSignUpModalMounted } from 'Modules/Ui/selectors/selectUiSignUpM
 import { selectUiWelcomeModalMounted } from 'Modules/Ui/selectors/selectUiWelcomeModalMounted';
 import { userFollowingLoad } from 'Modules/Users/actions/userFollowingLoad';
 import { userLoad } from 'Modules/Users/actions/userLoad';
-import Router from 'Router/index';
 import { routesList, routesWithoutOmmitedValues } from 'Router/routes';
 import enhanceRouteWithParams from 'Tools/utils/url/enhanceRouteWithParams';
 import findActiveRouteKey from 'Tools/utils/url/findActiveRouteKey';
-import { Fade, SpinnerPie } from 'Vendor/components';
+import { Layout as LayoutUi } from './Layout';
 
 import './Layout.less';
 
@@ -129,49 +113,37 @@ const Layout: React.FC<Props> = ({ location }) => {
     session?.id && dispatch(listNotificationsLoad());
   }, [session?.id]);
 
+  console.log('=======');
+  console.log('Rerender:');
+  console.log(JSON.stringify(new Date(), null, 4));
+  console.log('=======');
+
   return (
-    <div className="Layout">
-      <ScreenSizePixel />
-      <div className="Layout-background" />
-      <div className="Layout-content">
-        <LayoutHelperGrid />
-        <Header />
-        <CookiesBanner />
-        <Router />
-        <Footer />
-      </div>
-      <div className="Layout-modalsAndPortals">
-        <UserModal />
-        <Fade mounted={loginModalMounted} speed="fastest" position="fixed" appear>
-          <LoginModal />
-        </Fade>
-        <Fade mounted={signUpModalMounted} speed="fastest" position="fixed" appear>
-          <SignUpModal />
-        </Fade>
-        <Fade mounted={welcomeModalMounted} speed="fastest" position="fixed" appear>
-          <WelcomeModal />
-        </Fade>
-        <Fade mounted={forgotPasswordModalMounted} speed="fastest" position="fixed" appear>
-          <ForgotPasswordModal />
-        </Fade>
-        <Fade mounted={resetPasswordModalMounted} speed="fastest" position="fixed" appear>
-          <ResetPasswordModal />
-        </Fade>
-        <BookmarkCreateModalOrSheet />
-        <BookmarkUpdateModalOrSheet />
-        <Fade mounted={listModalMounted} speed="fastest" position="fixed" appear>
-          <ListModal />
-        </Fade>
-        <Notifications />
-        <Fade mounted={renderLoader} speed="fastest" position="fixed" appear>
-          <div className="Layout-loader">
-            <SpinnerPie className="Layout-loaderIcon" size="huge" />
-          </div>
-        </Fade>
-        <div id="Tooltips" />
-        <div id="Portals" />
-      </div>
-    </div>
+    // <div>
+    //   loginModalMounted: {JSON.stringify(loginModalMounted)}
+    //   <br />
+    //   signUpModalMounted: {JSON.stringify(signUpModalMounted)}
+    //   <br />
+    //   welcomeModalMounted: {JSON.stringify(welcomeModalMounted)}
+    //   <br />
+    //   forgotPasswordModalMounted: {JSON.stringify(forgotPasswordModalMounted)}
+    //   <br />
+    //   resetPasswordModalMounted: {JSON.stringify(resetPasswordModalMounted)}
+    //   <br />
+    //   listModalMounted: {JSON.stringify(listModalMounted)}
+    //   <br />
+    //   renderLoader: {JSON.stringify(renderLoader)}
+    //   <br />
+    // </div>
+    <LayoutUi
+      loginModalMounted={loginModalMounted}
+      signUpModalMounted={signUpModalMounted}
+      welcomeModalMounted={welcomeModalMounted}
+      forgotPasswordModalMounted={forgotPasswordModalMounted}
+      resetPasswordModalMounted={resetPasswordModalMounted}
+      listModalMounted={listModalMounted}
+      renderLoader={renderLoader}
+    />
   );
 };
 

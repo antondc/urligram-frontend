@@ -5,12 +5,32 @@
 @{c} {
   &-header {
     display: flex;
+    justify-content: space-between;
     align-items: center;
+    flex-shrink: 0;
     height: 50px;
     width: 100%;
     margin-bottom: 20px;
     padding: 8px 30px 8px 15px;
+    font-weight: @fw-bold;
+    white-space: nowrap;
+    color: @gradientColors[black-3];
     background: @c-background;
+  }
+
+  &-headerTitle {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    padding-left: 15px;
+
+    svg {
+      flex-shrink: 0;
+      height: 14px;
+      width: 14px;
+      margin-right: 12px;
+      fill: @gradientColors[black-3];
+    }
   }
 
   &-separator {
@@ -60,18 +80,6 @@
 
   &-notificationIconCheck {
     fill: @c-success;
-  }
-
-  &-headerTitle {
-    display: flex;
-    width: 100%;
-    padding: 10px;
-    font-weight: @fw-extraBold;
-    background: @c-background;
-  }
-
-  &-headerTitleText {
-    flex: 1;
   }
 
   &-headerImages {
@@ -170,8 +178,11 @@
   }
 
   &-select {
-    width: 100%;
-    border-right: 2px solid @c-base;
+    flex: 10;
+
+    @media @br-mobile {
+      padding-right: 8px;
+    }
   }
 
   &-bookmarks {

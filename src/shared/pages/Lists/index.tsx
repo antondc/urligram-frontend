@@ -9,8 +9,6 @@ import { selectListsTotalItems } from 'Modules/Lists/selectors/selectListsTotalI
 import { selectCurrentFullUrl } from 'Modules/Routes/selectors/selectCurrentFullUrl';
 import { selectCurrentRouteQueryParamFilter } from 'Modules/Routes/selectors/selectCurrentRouteQueryParamFilter';
 import { selectCurrentRouteQueryParamPage } from 'Modules/Routes/selectors/selectCurrentRouteQueryParamPage';
-import { sectionsMostUsedTagsLoad } from 'Modules/Sections/actions/sectionsMostUsedTagsLoad';
-import { sectionsNewUsersLoad } from 'Modules/Sections/actions/sectionsNewUsersLoad';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { tagsSearchLoad } from 'Modules/Tags/actions/tagsSearchLoad';
 import { selectTagsAll } from 'Modules/Tags/selectors/selectAllTags';
@@ -21,11 +19,9 @@ import { Lists as ListsUI } from './Lists';
 
 const Lists: React.FC = () => {
   const dispatch = useDispatch();
-
   const session = useSelector(selectSession);
   const listsIds = useSelector(selectListsAllIds);
   const listsIdsLoading = useSelector(selectListsLoading);
-
   const page = useSelector(selectCurrentRouteQueryParamPage);
   const totalItems = useSelector(selectListsTotalItems);
   const url = useSelector(selectCurrentFullUrl);
@@ -54,11 +50,6 @@ const Lists: React.FC = () => {
 
     history.push(redirectPath);
   };
-
-  useEffect(() => {
-    dispatch(sectionsMostUsedTagsLoad());
-    dispatch(sectionsNewUsersLoad());
-  }, [session?.id]);
 
   useEffect(() => {
     dispatch(listsLoad());

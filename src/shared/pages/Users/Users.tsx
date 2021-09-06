@@ -2,6 +2,7 @@ import React from 'react';
 import Helmet from 'react-helmet';
 
 import Clock from 'Assets/svg/spinner6.svg';
+import User from 'Assets/svg/user.svg';
 import CardItem from 'Components/CardItem';
 import Main from 'Components/Main';
 import NoResults from 'Components/NoResults';
@@ -50,8 +51,13 @@ export const Users: React.FC<Props> = ({
   <Main className="Users">
     <Helmet title={`${SITE_TITLE} · All Users`} />
     <CardItem className="Users-header">
+      <div className="Users-headerTitle">
+        <User />
+        All Users
+      </div>
+      <div className="Users-separator" />
       <Select
-        className="Bookmarks-select"
+        className="Users-select"
         placeholder="Select tags"
         value={currentQueryParamFilterTags}
         defaultOptions={allTags.map((item) => ({ label: item.name, value: item.name }))}
@@ -64,7 +70,7 @@ export const Users: React.FC<Props> = ({
         grow
         hideLabelOnFill
       />
-      <div className="Bookmarks-separator" />
+      <div className="Users-separator" />
       <SortBy
         options={[{ label: 'Created at', field: 'createdAt', icon: Clock }]}
         href={url}

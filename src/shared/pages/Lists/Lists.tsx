@@ -1,6 +1,7 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 
+import ListIcon from 'Assets/svg/list.svg';
 import Clock from 'Assets/svg/spinner6.svg';
 import Updated from 'Assets/svg/updated.svg';
 import User from 'Assets/svg/userFill.svg';
@@ -52,8 +53,13 @@ export const Lists: React.FC<Props> = ({
   <Main className="Lists">
     <Helmet title={`${SITE_TITLE} · All Lists`} />
     <CardItem className="Lists-header">
+      <div className="Lists-headerTitle">
+        <ListIcon />
+        All Lists
+      </div>
+      <div className="Lists-separator" />
       <Select
-        className="Bookmarks-select"
+        className="Lists-select"
         placeholder="Select tags"
         value={currentQueryParamFilterTags}
         defaultOptions={allTags.map((item) => ({ label: item.name, value: item.name }))}

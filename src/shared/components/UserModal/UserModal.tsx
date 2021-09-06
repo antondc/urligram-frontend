@@ -1,14 +1,9 @@
 import React from 'react';
 
 import ArrowRight from 'Assets/svg/arrowRight.svg';
-import Bookmark from 'Assets/svg/bookmarkRounded.svg';
 import Cross from 'Assets/svg/cross.svg';
-import FlagLeft from 'Assets/svg/flagLeft.svg';
-import FlagRight from 'Assets/svg/flagRight.svg';
-import List from 'Assets/svg/list.svg';
 import LogOut from 'Assets/svg/logOut.svg';
 import Private from 'Assets/svg/private.svg';
-import Tag from 'Assets/svg/tag.svg';
 import User from 'Assets/svg/user.svg';
 import UserFill from 'Assets/svg/userFill.svg';
 import A from 'Components/A';
@@ -46,41 +41,6 @@ export const UserModal: React.FC<Props> = ({
         <A className="UserModal-link" href={`users/${session?.id}`} frontend underlined styled={false}>
           <UserFill className="UserModal-icon" />
           <span className="UserModal-label">My profile</span>
-          <ArrowRight className="UserModal-iconArrow" />
-        </A>
-      </li>
-      <li className={'UserModal-item' + (routeName === 'Followers' && isUserPage ? ' UserModal-item--active' : '')}>
-        <A className="UserModal-link" href={`users/${session?.id}/followers`} frontend underlined styled={false}>
-          <FlagRight className="UserModal-icon" />
-          <span className="UserModal-label">Followers </span>
-          <ArrowRight className="UserModal-iconArrow" />
-        </A>
-      </li>
-      <li className={'UserModal-item' + (routeName === 'Following' && isUserPage ? ' UserModal-item--active' : '')}>
-        <A className="UserModal-link" href={`users/${session?.id}/following`} frontend underlined styled={false}>
-          <FlagLeft className="UserModal-icon" />
-          <span className="UserModal-label">Following</span>
-          <ArrowRight className="UserModal-iconArrow" />
-        </A>
-      </li>
-      <li className={'UserModal-item' + (routeName === 'UserBookmarks' && isUserPage ? ' UserModal-item--active' : '')}>
-        <A className="UserModal-link" href={`users/${session?.id}/bookmarks`} frontend underlined styled={false}>
-          <Bookmark className="UserModal-icon" />
-          <span className="UserModal-label">My bookmarks</span>
-          <ArrowRight className="UserModal-iconArrow" />
-        </A>
-      </li>
-      <li className={'UserModal-item' + (routeName === 'UserLists' && isUserPage ? ' UserModal-item--active' : '')}>
-        <A className="UserModal-link" href={`users/${session?.id}/lists`} frontend underlined styled={false}>
-          <List className="UserModal-icon UserModal-iconLists" />
-          <span className="UserModal-label">My lists </span>
-          <ArrowRight className="UserModal-iconArrow" />
-        </A>
-      </li>
-      <li className={'UserModal-item' + (routeName === 'UserTags' && isUserPage ? ' UserModal-item--active' : '')}>
-        <A className="UserModal-link" href={`users/${session?.id}/tags`} frontend underlined styled={false}>
-          <Tag className="UserModal-icon" />
-          <span className="UserModal-label">My tags </span>
           <ArrowRight className="UserModal-iconArrow" />
         </A>
       </li>

@@ -1,12 +1,9 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { bookmarksLoadBySize } from 'Modules/Bookmarks/actions/bookmarksLoadBySize';
 import { selectCurrentFullUrl } from 'Modules/Routes/selectors/selectCurrentFullUrl';
 import { selectCurrentRouteQueryParamFilter } from 'Modules/Routes/selectors/selectCurrentRouteQueryParamFilter';
 import { selectCurrentRouteQueryParamPage } from 'Modules/Routes/selectors/selectCurrentRouteQueryParamPage';
-import { sectionsMostFollowedUsersLoad } from 'Modules/Sections/actions/sectionsMostFollowedUsersLoad';
-import { sectionsNewUsersLoad } from 'Modules/Sections/actions/sectionsNewUsersLoad';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { tagsSearchLoad } from 'Modules/Tags/actions/tagsSearchLoad';
 import { selectTagsAll } from 'Modules/Tags/selectors/selectAllTags';
@@ -54,12 +51,6 @@ const Users: React.FC = () => {
 
     history.push(redirectPath);
   };
-
-  useEffect(() => {
-    dispatch(sectionsMostFollowedUsersLoad());
-    dispatch(sectionsNewUsersLoad());
-    dispatch(bookmarksLoadBySize(5));
-  }, [session?.id]);
 
   useEffect(() => {
     dispatch(usersLoad());

@@ -3,11 +3,11 @@ import Helmet from 'react-helmet';
 
 import BookmarkRow from 'Components/BookmarkRow';
 import { BookmarkRowSkeletonGroup } from 'Components/BookmarkRow/BookmarkRowSkeletonGroup';
+import CardItem from 'Components/CardItem';
 import Main from 'Components/Main';
 import NoResults from 'Components/NoResults';
 import Pagination from 'Components/Pagination';
 import { DEFAULT_PAGE_SIZE, SITE_TITLE } from 'Root/src/shared/constants';
-import CardItem from 'Components/CardItem';
 
 import './Home.less';
 

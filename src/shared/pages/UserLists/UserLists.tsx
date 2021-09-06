@@ -2,6 +2,7 @@ import React from 'react';
 import Helmet from 'react-helmet';
 
 import Bookmark from 'Assets/svg/bookmarkRounded.svg';
+import ListIcon from 'Assets/svg/list.svg';
 import Clock from 'Assets/svg/spinner6.svg';
 import User from 'Assets/svg/userFill.svg';
 import { BookmarkRowSkeletonGroup } from 'Components/BookmarkRow/BookmarkRowSkeletonGroup';
@@ -18,11 +19,9 @@ import { Select, SelectValue, SortBy } from 'Vendor/components';
 import './UserLists.less';
 
 interface Props {
-  userId: string;
   user: UserState;
   listsIds: number[];
   listsLoading: boolean;
-
   url: string;
   page: {
     size: number;
@@ -41,11 +40,9 @@ interface Props {
 }
 
 export const UserLists: React.FC<Props> = ({
-  userId,
   user,
   listsIds,
   listsLoading,
-
   url,
   page,
   totalItems,
@@ -59,8 +56,13 @@ export const UserLists: React.FC<Props> = ({
   <Main className="UserLists">
     <Helmet title={`${SITE_TITLE} · User Lists`} />
     <CardItem className="UserLists-header">
+      <div className="UserLists-headerTitle">
+        <ListIcon />
+        {user?.name && `${user?.name}'s lists`}
+      </div>
+      <div className="UserLists-separator" />
       <Select
-        className="Bookmarks-select"
+        className="UserLists-select"
         placeholder="Select tags"
         value={currentQueryParamFilterTags}
         defaultOptions={allTags.map((item) => ({ label: item.name, value: item.name }))}

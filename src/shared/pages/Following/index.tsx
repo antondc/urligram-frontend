@@ -1,17 +1,17 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { RootState } from 'Modules/rootType';
 import { selectCurrentFullUrl } from 'Modules/Routes/selectors/selectCurrentFullUrl';
 import { selectCurrentRouteParamUserId } from 'Modules/Routes/selectors/selectCurrentRouteParamUserId';
 import { selectCurrentRouteQueryParamFilter } from 'Modules/Routes/selectors/selectCurrentRouteQueryParamFilter';
 import { selectCurrentRouteQueryParamPage } from 'Modules/Routes/selectors/selectCurrentRouteQueryParamPage';
-import { sectionsMostUsedTagsLoad } from 'Modules/Sections/actions/sectionsMostUsedTagsLoad';
-import { sectionsUserMostUsedTagsLoad } from 'Modules/Sections/actions/sectionsUserMostFollowedTagsLoad';
 import { tagsSearchLoad } from 'Modules/Tags/actions/tagsSearchLoad';
 import { selectTagsAll } from 'Modules/Tags/selectors/selectAllTags';
 import { selectTagsSearch } from 'Modules/Tags/selectors/selectTagsSearch';
 import { userFollowingLoad } from 'Modules/Users/actions/userFollowingLoad';
 import { userLoad } from 'Modules/Users/actions/userLoad';
+import { selectUserById } from 'Modules/Users/selectors/selectUserById';
 import { selectUsersCurrentIds } from 'Modules/Users/selectors/selectUsersCurrentIds';
 import { selectUsersLoading } from 'Modules/Users/selectors/selectUsersLoading';
 import { selectUsersMetaSort } from 'Modules/Users/selectors/selectUsersMetaSort';
@@ -25,7 +25,7 @@ const Following: React.FC = () => {
   const userId = useSelector(selectCurrentRouteParamUserId);
   const usersCurrentIds = useSelector(selectUsersCurrentIds);
   const usersLoading = useSelector(selectUsersLoading);
-
+  const user = useSelector((state: RootState) => selectUserById(state, { id: userId }));
   const page = useSelector(selectCurrentRouteQueryParamPage);
   const totalItems = useSelector(selectUsersTotalItems);
   const url = useSelector(selectCurrentFullUrl);
@@ -57,8 +57,6 @@ const Following: React.FC = () => {
 
   useEffect(() => {
     dispatch(userLoad(userId));
-    dispatch(sectionsMostUsedTagsLoad());
-    dispatch(sectionsUserMostUsedTagsLoad(userId));
   }, []);
 
   useEffect(() => {
@@ -67,6 +65,7 @@ const Following: React.FC = () => {
 
   return (
     <FollowingUI
+      user={user}
       usersCurrentIds={usersCurrentIds}
       usersLoading={usersLoading}
       page={page}

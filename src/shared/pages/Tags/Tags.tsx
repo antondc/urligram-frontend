@@ -3,6 +3,7 @@ import Helmet from 'react-helmet';
 
 import Bookmark from 'Assets/svg/bookmarkRounded.svg';
 import Title from 'Assets/svg/sortTitle.svg';
+import TagIcon from 'Assets/svg/tag.svg';
 import A from 'Components/A';
 import CardItem from 'Components/CardItem';
 import Main from 'Components/Main';
@@ -24,6 +25,11 @@ export const Tags: React.FC<Props> = ({ tags, tagsLoading, url, sort }) => (
   <Main className="Tags">
     <Helmet title={`${SITE_TITLE} · Tags`} />
     <CardItem className="Tags-header">
+      <div className="Tags-headerTitle">
+        <TagIcon />
+        All Tags
+      </div>
+      <div className="Tags-separator" />
       <SortBy
         options={[
           { label: 'Bookmarks', field: 'count', icon: Bookmark },

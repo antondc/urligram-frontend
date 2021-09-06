@@ -100,17 +100,14 @@ const List: React.FC = () => {
     if (!listId) return;
 
     await dispatch(switchListModal({ mounted: true, listId }));
-    // loadMainContent();
   };
 
   useEffect(() => {
     dispatch(listLoadById(listId));
-    dispatch(listsLoadByUserId({ userId: session?.id }));
   }, [session?.id]);
 
   useEffect(() => {
     !!listId && dispatch(bookmarksLoadByListId(listId));
-    dispatch(sectionsTagsInThisListLoad(listId));
   }, [url, session?.id]);
 
   useEffect(() => {

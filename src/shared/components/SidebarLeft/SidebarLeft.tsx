@@ -99,6 +99,15 @@ export const SidebarLeft: React.FC<Props> = ({
         <>
           <div className="SidebarLeft-divider" />
           <A
+            className={'SidebarLeft-item' + (routeName === 'UserBookmarks' ? ' SidebarLeft-item--active' : '')}
+            href={`users/${sessionId}/bookmarks`}
+            styled={false}
+            frontend
+          >
+            <BookmarkFilled className="SidebarLeft-itemIcon" />
+            <span className="SidebarLeft-itemDescription">{glossary.myBookmarks}</span>
+          </A>
+          <A
             className={'SidebarLeft-item' + (routeName === 'UserTags' ? ' SidebarLeft-item--active' : '')}
             href={`users/${sessionId}/tags`}
             styled={false}
@@ -145,15 +154,7 @@ export const SidebarLeft: React.FC<Props> = ({
           <div className="SidebarLeft-itemLists">
             <SidebarLeftLists lists={lists} loading={false} listsShown={listsShown} />
           </div>
-          <A
-            className={'SidebarLeft-item' + (routeName === 'UserBookmarks' ? ' SidebarLeft-item--active' : '')}
-            href={`users/${sessionId}/bookmarks`}
-            styled={false}
-            frontend
-          >
-            <BookmarkFilled className="SidebarLeft-itemIcon" />
-            <span className="SidebarLeft-itemDescription">{glossary.myBookmarks}</span>
-          </A>
+
           <A
             className={'SidebarLeft-item' + (routeName === 'User' ? ' SidebarLeft-item--active' : '')}
             href={`users/${sessionId}`}

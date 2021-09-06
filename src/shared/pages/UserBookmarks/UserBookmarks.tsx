@@ -1,7 +1,7 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 
-import Bookmark from 'Assets/svg/bookmarkRounded.svg';
+import Bookmark from 'Assets/svg/bookmark.svg';
 import Clock from 'Assets/svg/spinner6.svg';
 import BookmarkRow from 'Components/BookmarkRow';
 import { BookmarkRowSkeletonGroup } from 'Components/BookmarkRow/BookmarkRowSkeletonGroup';
@@ -11,12 +11,14 @@ import NoResults from 'Components/NoResults';
 import Pagination from 'Components/Pagination';
 import { BookmarksByKey } from 'Modules/Bookmarks/bookmarks.types';
 import { TagState } from 'Modules/Tags/tags.types';
+import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE, SITE_TITLE } from 'Root/src/shared/constants';
 import { FadeInOut, Select, SelectValue, SortBy } from 'Vendor/components';
 
 import './UserBookmarks.less';
 
 interface Props {
+  user: UserState;
   bookmarksByKey: BookmarksByKey;
   bookmarksIds: number[];
   bookmarksLoading: boolean;
@@ -39,6 +41,7 @@ interface Props {
 }
 
 export const UserBookmarks: React.FC<Props> = ({
+  user,
   bookmarksByKey,
   bookmarksIds,
   bookmarksLoading,
@@ -55,6 +58,11 @@ export const UserBookmarks: React.FC<Props> = ({
   <Main className="UserBookmarks">
     <Helmet title={`${SITE_TITLE} · User Bookmarks`} />
     <CardItem className="UserBookmarks-header">
+      <div className="UserBookmarks-headerTitle">
+        <Bookmark />
+        {user?.name && `${user?.name}'s bookmarks`}
+      </div>
+      <div className="UserBookmarks-separator" />
       <Select
         className="UserBookmarks-select"
         placeholder="Select tags"

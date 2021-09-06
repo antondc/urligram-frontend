@@ -4,6 +4,7 @@ import Helmet from 'react-helmet';
 import Bookmark from 'Assets/svg/bookmarkFilled.svg';
 import Title from 'Assets/svg/sortTitle.svg';
 import Clock from 'Assets/svg/spinner6.svg';
+import UserFill from 'Assets/svg/userFill.svg';
 import CardItem from 'Components/CardItem';
 import Main from 'Components/Main';
 import NoResults from 'Components/NoResults';
@@ -11,12 +12,14 @@ import Pagination from 'Components/Pagination';
 import UserRow from 'Components/UserRow';
 import { UserRowSkeletonGroup } from 'Components/UserRow/UserRowSkeletonGroup';
 import { TagState } from 'Modules/Tags/tags.types';
+import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE, SITE_TITLE } from 'Root/src/shared/constants';
 import { Select, SelectValue, SortBy } from 'Vendor/components';
 
 import './Following.less';
 
 export interface Props {
+  user: UserState;
   usersCurrentIds: string[];
   usersLoading: boolean;
   url: string;
@@ -37,13 +40,13 @@ export interface Props {
 }
 
 export const Following: React.FC<Props> = ({
+  user,
   usersCurrentIds,
   usersLoading,
   page,
   totalItems,
   url,
   sort,
-
   allTags,
   currentQueryParamFilterTags,
   tagsSearchFormatted,
@@ -53,8 +56,13 @@ export const Following: React.FC<Props> = ({
   <Main className="Following">
     <Helmet title={`${SITE_TITLE} · Following`} />
     <CardItem className="Following-header">
+      <div className="Followers-headerTitle">
+        <UserFill />
+        {user?.name && `${user?.name}'s following users`}
+      </div>
+      <div className="Following-separator" />
       <Select
-        className="Bookmarks-select"
+        className="Following-select"
         placeholder="Select tags"
         value={currentQueryParamFilterTags}
         defaultOptions={allTags.map((item) => ({ label: item.name, value: item.name }))}
@@ -67,7 +75,7 @@ export const Following: React.FC<Props> = ({
         grow
         hideLabelOnFill
       />
-      <div className="Bookmarks-separator" />
+      <div className="Following-separator" />
       <SortBy
         options={[
           { label: 'Name', field: 'name', icon: Title },
