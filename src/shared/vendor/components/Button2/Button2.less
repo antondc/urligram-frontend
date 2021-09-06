@@ -1,0 +1,81 @@
+@import '../../../css/imports.less';
+
+@c: .Button2;
+
+@{c} {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  padding: 0 3px 3px 0;
+  font-family: @ff-sans;
+  color: @c-background;
+  background: @gradientColors[blue-1];
+  border-radius: 4px;
+  transition: color @td-fast @ease, background @td-fast @ease;
+  box-shadow: 5px 5px 20px 0 @gradientColors[black-4];
+
+  &:hover:not(@{c}--success):not(@{c}--error):not(@{c}--disabled):not(@{c}--loading) {
+    background: @gradientColors[blue-2];
+    cursor: pointer;
+
+    @{c}-arrow {
+      transform: translateX(1px);
+    }
+  }
+
+  &-text {
+    font-size: @fs-normal;
+    font-weight: @fw-semibold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    user-select: none;
+  }
+
+  &--grow {
+    width: 100%;
+  }
+
+  &--disabled {
+    color: @gradientColors[black-5];
+    background: @gradientColors[black-4];
+    pointer-events: none;
+  }
+
+  &--success {
+    background: @gradientColors[blue-3];
+  }
+
+  &--error {
+    background: @gradientColors[red-3];
+  }
+
+  &-loader {
+    display: flex;
+    align-items: center;
+    max-width: 0;
+    margin-left: 0;
+    overflow: hidden;
+  }
+
+  &--loading {
+    @{c}-loader {
+      max-width: 16px;
+      margin-left: 8px;
+      outline-color: @gradientColors[yellow-6];
+      background: @gradientColors[blue-1];
+
+      span {
+        background: @gradientColors[yellow-6];
+      }
+    }
+  }
+
+  @{c}-arrow {
+    max-width: 14px;
+    margin-left: 8px;
+    fill: @gradientColors[black-6];
+    transition: transform @td-fast @ease;
+  }
+}

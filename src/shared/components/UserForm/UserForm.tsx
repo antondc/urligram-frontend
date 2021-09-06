@@ -1,9 +1,8 @@
 import React from 'react';
 
-import { Button, FadeInOut, ImageField, Span, TextArea } from 'Vendor/components';
+import { Button2, FadeInOut, ImageField, Span, TextArea2 } from 'Vendor/components';
 
 interface Props {
-  name: string;
   statement: string;
   statementError: string;
   image: string;
@@ -17,7 +16,6 @@ interface Props {
 }
 
 export const UserForm: React.FC<Props> = ({
-  name,
   statement,
   statementError,
   onChangeStatement,
@@ -30,24 +28,17 @@ export const UserForm: React.FC<Props> = ({
   onSubmit,
 }) => (
   <form className="UserForm" onSubmit={onSubmit}>
-    <Span className="UserForm-title" weight="extraBold">
-      @{name}
-    </Span>
-    <TextArea
+    <TextArea2
       className="UserForm-statement"
       name="statement"
       type="text"
-      label="Statement"
+      label="About me"
       onChange={onChangeStatement}
       value={statement}
       grow
       maxLength={200}
+      error={!!statementError}
     />
-    <FadeInOut valueToUpdate={!!statementError} speed="fast">
-      <Span className="UserForm-statementError" size="small">
-        {statementError}
-      </Span>
-    </FadeInOut>
     <ImageField
       className="UserForm-image"
       label="My file"
@@ -64,16 +55,6 @@ export const UserForm: React.FC<Props> = ({
         {imageError}
       </Span>
     </FadeInOut>
-    <Button
-      className="UserForm-submitButton"
-      text="Save"
-      type="submit"
-      onClick={onSubmit}
-      loading={submitting}
-      // error={!!submitError}
-      // success={submitSuccess}
-      // disabled={submitDisabled}
-      grow
-    />
+    <Button2 className="UserForm-submitButton" text="Save" type="submit" onClick={onSubmit} loading={submitting} grow />
   </form>
 );

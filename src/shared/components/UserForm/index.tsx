@@ -83,7 +83,6 @@ const UserForm: React.FC = () => {
 
   return (
     <UserFormUi
-      name={user?.name}
       statement={statement}
       onChangeStatement={onChangeStatement}
       statementError={statementError}

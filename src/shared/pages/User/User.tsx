@@ -38,11 +38,11 @@ export const User: React.FC<Props> = ({
   <div className="User">
     <Helmet title={`${SITE_TITLE} · User`} />
     {userIdIsSessionId && (
-      <div className="User-form">
-        <UserForm />{' '}
-      </div>
+      <CardItem className="User-form">
+        <UserForm />
+      </CardItem>
     )}
-    <div className="User-top">
+    <CardItem className="User-top">
       <div className="User-details">
         <div>
           <div className="User-detailsItem">
@@ -72,43 +72,41 @@ export const User: React.FC<Props> = ({
       </div>
       <Hr spacer />
       <div className="User-lineDetails">
-        <A href={`users/${userId}/bookmarks`} frontend underlined>
+        <A className="User-lineDetailsLink" href={`users/${userId}/bookmarks`} frontend underlined styled={false}>
           Bookmarks:
+          <Space />
+          {user?.bookmarksIds?.length}
         </A>
         <Space />
-        {user?.bookmarksIds?.length}
-        <Space />
         <Space />·<Space />
-        <A href={`users/${userId}/following`} frontend underlined>
+        <A className="User-lineDetailsLink" href={`users/${userId}/following`} frontend underlined styled={false}>
           Following:
+          <Space />
+          {user?.following?.length}
         </A>
         <Space />
-        {user?.following?.length}
-        <Space />
         <Space />·<Space />
-        <A href={`users/${userId}/followers`} frontend underlined>
+        <A className="User-lineDetailsLink" href={`users/${userId}/followers`} frontend underlined styled={false}>
           Followers:
           <Space />
+          {user?.followers?.length}
+          <Space />
         </A>
-        {user?.followers?.length}
-        <Space />
         <Space />·<Space />
-        <A href={`users/${userId}/followers`} frontend underlined>
+        <A className="User-lineDetailsLink" href={`users/${userId}/followers`} frontend underlined styled={false}>
           Tags:
+          <Space />
+          {user?.tags?.length}
         </A>
-        <Space />
-        {user?.tags?.length}
         <Space />
         <Space />·<Space />
-        <A href={`users/${userId}/lists`} frontend underlined>
+        <A className="User-lineDetailsLink" href={`users/${userId}/lists`} frontend underlined styled={false}>
           Lists:
+          <Space />
+          {user?.lists?.length}
         </A>
-        <Space />
-        {user?.lists?.length}
       </div>
       <Hr spacer />
-      Tags:
-      <Hr spacer size="small" />
       <div className="User-tags">
         {user?.tags?.map((item) => (
           <A
@@ -123,28 +121,32 @@ export const User: React.FC<Props> = ({
           </A>
         ))}
       </div>
-    </div>
-    <div className="User-bookmarksHeader">
+    </CardItem>
+    <CardItem className="User-bookmarksHeader">
       Bookmarks
-      <A href={`users/${userId}/bookmarks`} frontend underlined>
+      <A href={`users/${userId}/bookmarks`} frontend underlined styled={false}>
         <AIcon size="small">See more</AIcon>
       </A>
-    </div>
-    <div className="User-bookmarks">
+    </CardItem>
+    <CardItem className="User-bookmarks">
       {!!bookmarksLoading ? (
         <BookmarkRowSkeletonGroup length={5} />
       ) : (
-        bookmarksIds?.map((id) => <BookmarkRow id={id} key={id} tagHrefPath={`/users/${userId}/bookmarks`} />)
+        bookmarksIds?.map((id) => (
+          <CardItem key={id}>
+            <BookmarkRow id={id} tagHrefPath={`/users/${userId}/bookmarks`} />
+          </CardItem>
+        ))
       )}
       {!bookmarksLoading && !bookmarksIds?.length && <NoResults content="ⵁ This user has no bookmarks yet" />}
-    </div>
-    <div className="User-listsHeader">
+    </CardItem>
+    <CardItem className="User-listsHeader">
       Lists
-      <A href={`users/${userId}/lists`} frontend underlined>
+      <A className="User-subHeaderLink" href={`users/${userId}/lists`} frontend underlined styled={false}>
         <AIcon size="small">See more</AIcon>
       </A>
-    </div>
-    <div className="User-lists">
+    </CardItem>
+    <CardItem className="User-lists">
       {listsLoading ? (
         <BookmarkRowSkeletonGroup length={5} />
       ) : (
@@ -155,6 +157,6 @@ export const User: React.FC<Props> = ({
         ))
       )}
       {!listsLoading && !listsIds?.length && <NoResults content="ⵁ We didn find any list." />}
-    </div>
+    </CardItem>
   </div>
 );
