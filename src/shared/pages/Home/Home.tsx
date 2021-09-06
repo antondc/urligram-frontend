@@ -1,32 +1,85 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 
+import Bookmark from 'Assets/svg/bookmark.svg';
+import Clock from 'Assets/svg/spinner6.svg';
 import BookmarkRow from 'Components/BookmarkRow';
 import { BookmarkRowSkeletonGroup } from 'Components/BookmarkRow/BookmarkRowSkeletonGroup';
 import CardItem from 'Components/CardItem';
-import Main from 'Components/Main';
 import NoResults from 'Components/NoResults';
 import Pagination from 'Components/Pagination';
+import { TagState } from 'Modules/Tags/tags.types';
 import { DEFAULT_PAGE_SIZE, SITE_TITLE } from 'Root/src/shared/constants';
+import { Select, SelectValue, SortBy } from 'Vendor/components';
 
 import './Home.less';
 
-export interface Props {
+interface Props {
+  url: string;
   bookmarksIds: number[];
-  bookmarksIdsLoading: boolean;
+  loading: boolean;
   page: {
     size: number;
     offset: number;
   };
   totalItems: number;
-  url: string;
+  sort: string;
+  onInputChange: (string: string) => void;
+  onChange: (string: SelectValue[]) => void;
+  allTags: TagState[];
+  currentQueryParamFilterTags: SelectValue[];
+  tagsSearchFormatted: {
+    label: string;
+    value: string;
+  }[];
 }
 
-export const Home: React.FC<Props> = ({ bookmarksIds, bookmarksIdsLoading, page, totalItems, url }) => (
-  <Main className="Home">
+export const Home: React.FC<Props> = ({
+  url,
+  bookmarksIds,
+  loading,
+  page,
+  totalItems,
+  sort,
+  tagsSearchFormatted,
+  onInputChange,
+  allTags,
+  currentQueryParamFilterTags,
+  onChange,
+}) => (
+  <div className="Home">
     <Helmet title={`${SITE_TITLE} · Home`} />
+    <CardItem className="Home-header">
+      <div className="Home-headerTitle">
+        <Bookmark />
+        All Bookmarks
+      </div>
+      <div className="Home-separator" />
+      <Select
+        className="Home-select"
+        placeholder="Select tags"
+        value={currentQueryParamFilterTags}
+        defaultOptions={allTags.map((item) => ({ label: item.name, value: item.name }))}
+        options={[...tagsSearchFormatted, ...allTags.map((item) => ({ label: item.name, value: item.name }))].filter(
+          (v, i, a) => a.findIndex((t) => t.value === v.value) === i
+        )}
+        onInputChange={onInputChange}
+        onChange={onChange}
+        maxItems={4}
+        grow
+        hideLabelOnFill
+      />
+      <div className="Home-separator" />
+      <SortBy
+        className="Home-sortBy"
+        options={[{ label: 'Created at', field: 'createdAt', icon: Clock }]}
+        href={url}
+        currentSort={sort}
+        loading={loading}
+      />
+    </CardItem>
     <div className="Home-bookmarks">
-      {bookmarksIdsLoading ? (
+      {loading ? (
         <BookmarkRowSkeletonGroup length={bookmarksIds?.length || DEFAULT_PAGE_SIZE} />
       ) : (
         bookmarksIds?.map((id) => (
@@ -35,10 +88,8 @@ export const Home: React.FC<Props> = ({ bookmarksIds, bookmarksIdsLoading, page,
           </CardItem>
         ))
       )}
-      {!bookmarksIdsLoading && !bookmarksIds?.length && (
-        <NoResults content="ⵁ Start following users to receive recommended bookmarks." />
-      )}
+      {!loading && !bookmarksIds?.length && <NoResults content="ⵁ We didnt find any bookmark." />}
     </div>
     <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
-  </Main>
+  </div>
 );

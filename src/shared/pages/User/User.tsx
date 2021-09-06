@@ -6,7 +6,6 @@ import BookmarkRow from 'Components/BookmarkRow';
 import { BookmarkRowSkeletonGroup } from 'Components/BookmarkRow/BookmarkRowSkeletonGroup';
 import CardItem from 'Components/CardItem';
 import ListRow from 'Components/ListRow';
-import Main from 'Components/Main';
 import NoResults from 'Components/NoResults';
 import UserForm from 'Components/UserForm';
 import { UserState } from 'Modules/Users/users.types';
@@ -36,7 +35,7 @@ export const User: React.FC<Props> = ({
   bookmarksIds,
   bookmarksLoading,
 }) => (
-  <Main className="User">
+  <div className="User">
     <Helmet title={`${SITE_TITLE} · User`} />
     {userIdIsSessionId && (
       <div className="User-form">
@@ -114,7 +113,7 @@ export const User: React.FC<Props> = ({
         {user?.tags?.map((item) => (
           <A
             className="User-tag"
-            href={`/bookmarks?filter[tags][]=${item.name}`}
+            href={`users/${userId}/bookmarks?filter[tags][]=${item.name}`}
             key={item.id}
             styled={false}
             frontend
@@ -135,7 +134,7 @@ export const User: React.FC<Props> = ({
       {!!bookmarksLoading ? (
         <BookmarkRowSkeletonGroup length={5} />
       ) : (
-        bookmarksIds?.map((id) => <BookmarkRow id={id} key={id} />)
+        bookmarksIds?.map((id) => <BookmarkRow id={id} key={id} tagHrefPath={`/users/${userId}/bookmarks`} />)
       )}
       {!bookmarksLoading && !bookmarksIds?.length && <NoResults content="ⵁ This user has no bookmarks yet" />}
     </div>
@@ -157,5 +156,5 @@ export const User: React.FC<Props> = ({
       )}
       {!listsLoading && !listsIds?.length && <NoResults content="ⵁ We didn find any list." />}
     </div>
-  </Main>
+  </div>
 );

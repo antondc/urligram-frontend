@@ -9,7 +9,6 @@ import BookmarkRow from 'Components/BookmarkRow';
 import { BookmarkRowSkeletonGroup } from 'Components/BookmarkRow/BookmarkRowSkeletonGroup';
 import CardItem from 'Components/CardItem';
 import ListAddUser from 'Components/ListAddUser';
-import Main from 'Components/Main';
 import NoResults from 'Components/NoResults';
 import Pagination from 'Components/Pagination';
 import { RenderInPortal } from 'Components/Portal';
@@ -90,7 +89,7 @@ export const List: React.FC<Props> = ({
   onInputChange,
   onChange,
 }) => (
-  <Main className="List">
+  <div className="List">
     <Helmet title={`${SITE_TITLE} · ${list?.name}`} />
     <AnimateHeight className="List-notification" mounted={showBanner} speed="fastest" ease={[1, 0.02, 0.83, 1.15]}>
       <CardItem className="List-notificationContent">
@@ -230,7 +229,7 @@ export const List: React.FC<Props> = ({
     </div>
     <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
     <Hr spacer size="normal" />
-  </Main>
+  </div>
 );
 
 export const ListWithMemo = memo(List);

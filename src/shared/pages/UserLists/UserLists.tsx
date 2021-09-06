@@ -5,16 +5,17 @@ import Bookmark from 'Assets/svg/bookmarkRounded.svg';
 import ListIcon from 'Assets/svg/list.svg';
 import Clock from 'Assets/svg/spinner6.svg';
 import User from 'Assets/svg/userFill.svg';
+import A from 'Components/A';
 import { BookmarkRowSkeletonGroup } from 'Components/BookmarkRow/BookmarkRowSkeletonGroup';
 import CardItem from 'Components/CardItem';
 import ListRow from 'Components/ListRow';
-import Main from 'Components/Main';
 import NoResults from 'Components/NoResults';
 import Pagination from 'Components/Pagination';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE, SITE_TITLE } from 'Root/src/shared/constants';
-import { Select, SelectValue, SortBy } from 'Vendor/components';
+import { Select, SelectValue, SortBy, Space } from 'Vendor/components';
+import { SubHeader } from '../../components/SubHeader';
 
 import './UserLists.less';
 
@@ -53,12 +54,21 @@ export const UserLists: React.FC<Props> = ({
   onInputChange,
   onChange,
 }) => (
-  <Main className="UserLists">
+  <div className="UserLists">
     <Helmet title={`${SITE_TITLE} · User Lists`} />
     <CardItem className="UserLists-header">
       <div className="UserLists-headerTitle">
         <ListIcon />
-        {user?.name && `${user?.name}'s lists`}
+        {user?.name && (
+          <>
+            <A className="UserLists-headerLink" href={`/users/${user?.id}`} frontend>
+              {`${user?.name}`}
+            </A>
+            ’s
+            <Space />
+            lists
+          </>
+        )}
       </div>
       <div className="UserLists-separator" />
       <Select
@@ -100,5 +110,5 @@ export const UserLists: React.FC<Props> = ({
       {!listsLoading && !listsIds?.length && <NoResults content="ⵁ We didn find any list." />}
     </div>
     <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
-  </Main>
+  </div>
 );

@@ -33,6 +33,18 @@
     }
   }
 
+  &-headerLink {
+    text-decoration-color: @c-transparent;
+    text-decoration-thickness: 2px;
+    color: @gradientColors[black-3];
+    transition: text-decoration-color @td-fast @ease;
+
+    &:hover {
+      text-decoration-color: @gradientColors[blue-1];
+      color: @gradientColors[blue-1];
+    }
+  }
+
   &-separator {
     height: 100%;
     width: 2px;

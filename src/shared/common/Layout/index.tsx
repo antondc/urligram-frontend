@@ -23,6 +23,7 @@ import { userLoad } from 'Modules/Users/actions/userLoad';
 import { routesList, routesWithoutOmmitedValues } from 'Router/routes';
 import enhanceRouteWithParams from 'Tools/utils/url/enhanceRouteWithParams';
 import findActiveRouteKey from 'Tools/utils/url/findActiveRouteKey';
+import { tagsSearchLoad } from '../../redux/modules/Tags/actions/tagsSearchLoad';
 import { Layout as LayoutUi } from './Layout';
 
 import './Layout.less';
@@ -111,6 +112,10 @@ const Layout: React.FC<Props> = ({ location }) => {
 
   useEffect(() => {
     session?.id && dispatch(listNotificationsLoad());
+  }, [session?.id]);
+
+  useEffect(() => {
+    dispatch(tagsSearchLoad());
   }, [session?.id]);
 
   console.log('=======');

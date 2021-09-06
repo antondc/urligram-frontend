@@ -18,7 +18,7 @@ export interface Route {
 
 export interface RoutesInterface {
   Tags: Route;
-  Bookmarks: Route;
+  Home: Route;
   UserBookmarks: Route;
   UserLists: Route;
   Following: Route;
@@ -30,7 +30,6 @@ export interface RoutesInterface {
   Lists: Route;
   Login: Route;
   SignUp: Route;
-  Home: Route;
   About: Route;
   ForgotPassword: Route;
   ResetPassword: Route;
@@ -48,17 +47,6 @@ export const Routes: RoutesInterface = {
     name: 'Tags',
     path: '/:lang([a-z]{2})?/tags',
     route: '/tags',
-    exact: true,
-    auth: false,
-    initialDataLoadersVisitor: [],
-    initialDataLoadersSession: [],
-    layout: 'withLeftSidebar',
-  },
-
-  Bookmarks: {
-    name: 'Bookmarks',
-    path: '/:lang([a-z]{2})?/bookmarks',
-    route: '/bookmarks',
     exact: true,
     auth: false,
     initialDataLoadersVisitor: [],
@@ -219,19 +207,8 @@ export const Routes: RoutesInterface = {
     route: '/',
     exact: true,
     auth: false,
-    initialDataLoadersVisitor: [
-      // tagsAllInitialLoader,
-      // mostFollowedUsersInitialLoader,
-      // popularListsInitialLoader,
-      // newListsInitialLoader,
-      // newUsersInitialLoader,
-    ],
-    initialDataLoadersSession: [
-      // myListsInitialLoader,
-      // followingListsInitialLoader,
-      // myTagsInitialLoader,
-      // followingUsersInitialLoader,
-    ],
+    initialDataLoadersVisitor: [],
+    initialDataLoadersSession: [],
     layout: 'withLeftSidebar',
   },
 

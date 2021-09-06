@@ -8,7 +8,6 @@ import User from 'Assets/svg/userFill.svg';
 import CardItem from 'Components/CardItem';
 import ListRow from 'Components/ListRow';
 import { ListRowSkeletonGroup } from 'Components/ListRow/ListSkeletonGroup';
-import Main from 'Components/Main';
 import NoResults from 'Components/NoResults';
 import Pagination from 'Components/Pagination';
 import { TagState } from 'Modules/Tags/tags.types';
@@ -50,7 +49,7 @@ export const Lists: React.FC<Props> = ({
   onInputChange,
   onChange,
 }) => (
-  <Main className="Lists">
+  <div className="Lists">
     <Helmet title={`${SITE_TITLE} · All Lists`} />
     <CardItem className="Lists-header">
       <div className="Lists-headerTitle">
@@ -97,5 +96,5 @@ export const Lists: React.FC<Props> = ({
       {!listsIdsLoading && !listsIds?.length && <NoResults content="ⵁ We didnt find any list." />}
     </div>
     <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
-  </Main>
+  </div>
 );

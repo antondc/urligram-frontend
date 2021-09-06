@@ -6,7 +6,6 @@ import Title from 'Assets/svg/sortTitle.svg';
 import TagIcon from 'Assets/svg/tag.svg';
 import A from 'Components/A';
 import CardItem from 'Components/CardItem';
-import Main from 'Components/Main';
 import { SidebarListTagsSkeleton } from 'Components/SidebarListTags/SidebarListTagsSkeleton';
 import { TagState } from 'Modules/Tags/tags.types';
 import { SITE_TITLE } from 'Root/src/shared/constants';
@@ -22,7 +21,7 @@ interface Props {
 }
 
 export const Tags: React.FC<Props> = ({ tags, tagsLoading, url, sort }) => (
-  <Main className="Tags">
+  <div className="Tags">
     <Helmet title={`${SITE_TITLE} · Tags`} />
     <CardItem className="Tags-header">
       <div className="Tags-headerTitle">
@@ -45,7 +44,7 @@ export const Tags: React.FC<Props> = ({ tags, tagsLoading, url, sort }) => (
         <SidebarListTagsSkeleton length={tags?.length || 70} />
       ) : (
         tags?.map((item) => (
-          <A className="Tags-tag" href={`/bookmarks?filter[tags][]=${item.name}`} key={item.id} styled={false} frontend>
+          <A className="Tags-tag" href={`?filter[tags][]=${item.name}`} key={item.id} styled={false} frontend>
             <Tag>
               {item?.name}
               <Space />
@@ -57,5 +56,5 @@ export const Tags: React.FC<Props> = ({ tags, tagsLoading, url, sort }) => (
         ))
       )}
     </div>
-  </Main>
+  </div>
 );

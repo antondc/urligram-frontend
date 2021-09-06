@@ -36,6 +36,7 @@ export const SidebarLeft: React.FC = () => {
   const [listsShown, setListsShown] = useState<boolean>(true);
   const timeMsInFourHours = Date.now() + 4 * 60 * 60 * 1000;
   const sidebarLeftClosed = useSelector(selectUiSidebarleftState);
+  const isUserPage = route.params?.userId === sessionId;
 
   const onListTitleClick = () => {
     if (sidebarLeftClosed) return;
@@ -98,6 +99,7 @@ export const SidebarLeft: React.FC = () => {
 
   return (
     <SidebarLeftUi
+    isUserPage={isUserPage}
       routeName={route?.name}
       isLoggedIn={isLoggedIn}
       sessionId={sessionId}

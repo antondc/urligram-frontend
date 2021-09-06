@@ -6,28 +6,30 @@
   display: grid;
   align-items: flex-start;
   flex: 1;
-  gap: 0 34px;
-  grid-template: 'sidebarMain main' auto;
+  grid-template: 'sidebar main' auto;
   grid-template-columns: 270px auto;
-  padding-top: 20px;
+  padding: 20px 0 20px;
   overflow: hidden;
   transition: grid-template-columns @td-fast @ease;
+  gap: 0 34px;
 
   @media @br-mobile {
-    grid-template:
-      'main' auto
-      'sidebarSecond' auto;
+    grid-template: 'main' auto;
   }
 
   &--sidebarLeftClosed {
     grid-template-columns: 100px auto;
   }
 
-  &-sidebarMain {
-    grid-area: sidebarMain;
+  &-sidebar {
+    grid-area: sidebar;
 
     @media @br-mobile {
       display: none;
     }
+  }
+
+  &-main {
+    //
   }
 }

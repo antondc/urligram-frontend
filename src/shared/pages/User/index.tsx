@@ -5,6 +5,7 @@ import { bookmarksLoadByUserId } from 'Modules/Bookmarks/actions/bookmarksLoadBy
 import { selectBookmarksCurrentIds } from 'Modules/Bookmarks/selectors/selectBookmarksCurrentIds';
 import { selectBookmarksLoading } from 'Modules/Bookmarks/selectors/selectBookmarksLoading';
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
+import { listsLoadByUserId } from 'Modules/Lists/actions/listsLoadByUserId';
 import { ListState } from 'Modules/Lists/lists.types';
 import { selectListsAllIds } from 'Modules/Lists/selectors/selectListsAllIds';
 import { selectListsLoading } from 'Modules/Lists/selectors/selectListsLoading';
@@ -39,6 +40,7 @@ const User: React.FC<Props> = () => {
   useEffect(() => {
     dispatch(bookmarksLoadByUserId(userId, 5));
     dispatch(userLoad(userId));
+    dispatch(listsLoadByUserId({ userId }));
   }, [session?.id]);
 
   return (

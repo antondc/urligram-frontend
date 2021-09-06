@@ -6,7 +6,6 @@ import Title from 'Assets/svg/sortTitle.svg';
 import TagIcon from 'Assets/svg/tag.svg';
 import A from 'Components/A';
 import CardItem from 'Components/CardItem';
-import Main from 'Components/Main';
 import { SidebarListTagsSkeleton } from 'Components/SidebarListTags/SidebarListTagsSkeleton';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
@@ -24,14 +23,23 @@ interface Props {
 }
 
 export const UserTags: React.FC<Props> = ({ user, tags, tagsLoading, url, sort }) => (
-  <Main className="UserTags">
+  <div className="UserTags">
     <Helmet title={`${SITE_TITLE} · User Tags`} />
     <CardItem className="UserTags-header">
-      <div className="UserLists-headerTitle">
-        <TagIcon className="List-headerIcon" />
-        {user?.name && `${user?.name}'s tags`}
+      <div className="UserTags-headerTitle">
+        <TagIcon />
+        {user?.name && (
+          <>
+            <A className="UserTags-headerLink" href={`/users/${user?.id}`} frontend>
+              {`${user?.name}`}
+            </A>
+            ’s
+            <Space />
+            tags
+          </>
+        )}
       </div>
-      <div className="UserLists-separator" />
+      <div className="UserTags-separator" />
       <SortBy
         options={[
           { label: 'Bookmarks', field: 'count', icon: Bookmark },
@@ -49,7 +57,7 @@ export const UserTags: React.FC<Props> = ({ user, tags, tagsLoading, url, sort }
         tags?.map((item) => (
           <A
             className="UserTags-tag"
-            href={`/bookmarks?filter[tags][]=${item?.name}`}
+            href={`/users/${user?.id}/bookmarks?filter[tags][]=${item?.name}`}
             key={item?.id}
             styled={false}
             frontend
@@ -65,5 +73,5 @@ export const UserTags: React.FC<Props> = ({ user, tags, tagsLoading, url, sort }
         ))
       )}
     </div>
-  </Main>
+  </div>
 );

@@ -4,7 +4,6 @@ import Helmet from 'react-helmet';
 import Clock from 'Assets/svg/spinner6.svg';
 import User from 'Assets/svg/user.svg';
 import CardItem from 'Components/CardItem';
-import Main from 'Components/Main';
 import NoResults from 'Components/NoResults';
 import Pagination from 'Components/Pagination';
 import UserRow from 'Components/UserRow';
@@ -48,7 +47,7 @@ export const Users: React.FC<Props> = ({
   onInputChange,
   onChange,
 }) => (
-  <Main className="Users">
+  <div className="Users">
     <Helmet title={`${SITE_TITLE} · All Users`} />
     <CardItem className="Users-header">
       <div className="Users-headerTitle">
@@ -91,5 +90,5 @@ export const Users: React.FC<Props> = ({
       {!usersLoading && !usersCurrentIds?.length && <NoResults content="ⵁ We didn find any user." />}
     </div>
     <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
-  </Main>
+  </div>
 );

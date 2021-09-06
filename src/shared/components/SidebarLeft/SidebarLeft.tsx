@@ -25,6 +25,7 @@ interface Props {
   listsLoading: boolean;
   listsShown: boolean;
   sidebarLeftClosed: boolean;
+  isUserPage: boolean;
   onListTitleClick: () => void;
   onSidebarCloseClick: () => void;
 }
@@ -37,6 +38,7 @@ export const SidebarLeft: React.FC<Props> = ({
   lists,
   listsShown,
   sidebarLeftClosed,
+  isUserPage,
   onListTitleClick,
   onSidebarCloseClick,
 }) => (
@@ -58,15 +60,7 @@ export const SidebarLeft: React.FC<Props> = ({
           <Circle className="SidebarLeft-itemIcon" />
           <span className="SidebarLeft-itemDescription">{glossary.home}</span>
         </A>
-        <A
-          className={'SidebarLeft-item' + (routeName === 'Bookmarks' ? ' SidebarLeft-item--active' : '')}
-          href="/bookmarks"
-          styled={false}
-          frontend
-        >
-          <BookmarkFilled className="SidebarLeft-itemIcon" />
-          <span className="SidebarLeft-itemDescription">Bookmarks</span>
-        </A>
+
         <A
           className={'SidebarLeft-item' + (routeName === 'Lists' ? ' SidebarLeft-item--active' : '')}
           href="/lists"
@@ -99,7 +93,9 @@ export const SidebarLeft: React.FC<Props> = ({
         <>
           <div className="SidebarLeft-divider" />
           <A
-            className={'SidebarLeft-item' + (routeName === 'UserBookmarks' ? ' SidebarLeft-item--active' : '')}
+            className={
+              'SidebarLeft-item' + (routeName === 'UserBookmarks' && isUserPage ? ' SidebarLeft-item--active' : '')
+            }
             href={`users/${sessionId}/bookmarks`}
             styled={false}
             frontend
@@ -108,7 +104,7 @@ export const SidebarLeft: React.FC<Props> = ({
             <span className="SidebarLeft-itemDescription">{glossary.myBookmarks}</span>
           </A>
           <A
-            className={'SidebarLeft-item' + (routeName === 'UserTags' ? ' SidebarLeft-item--active' : '')}
+            className={'SidebarLeft-item' + (routeName === 'UserTags' && isUserPage ? ' SidebarLeft-item--active' : '')}
             href={`users/${sessionId}/tags`}
             styled={false}
             frontend
@@ -117,7 +113,9 @@ export const SidebarLeft: React.FC<Props> = ({
             <span className="SidebarLeft-itemDescription">My Tags</span>
           </A>
           <A
-            className={'SidebarLeft-item' + (routeName === 'Followers' ? ' SidebarLeft-item--active' : '')}
+            className={
+              'SidebarLeft-item' + (routeName === 'Followers' && isUserPage ? ' SidebarLeft-item--active' : '')
+            }
             href={`users/${sessionId}/followers`}
             styled={false}
             frontend
@@ -126,7 +124,9 @@ export const SidebarLeft: React.FC<Props> = ({
             <span className="SidebarLeft-itemDescription">Followers</span>
           </A>
           <A
-            className={'SidebarLeft-item' + (routeName === 'Following' ? ' SidebarLeft-item--active' : '')}
+            className={
+              'SidebarLeft-item' + (routeName === 'Following' && isUserPage ? ' SidebarLeft-item--active' : '')
+            }
             href={`users/${sessionId}/following`}
             styled={false}
             frontend
@@ -135,7 +135,9 @@ export const SidebarLeft: React.FC<Props> = ({
             <span className="SidebarLeft-itemDescription">Following</span>
           </A>
           <A
-            className={'SidebarLeft-item' + (routeName === 'UserLists' ? ' SidebarLeft-item--active' : '')}
+            className={
+              'SidebarLeft-item' + (routeName === 'UserLists' && isUserPage ? ' SidebarLeft-item--active' : '')
+            }
             href={`users/${sessionId}/lists?sort=-createdAt`}
             styled={false}
             frontend
@@ -154,9 +156,8 @@ export const SidebarLeft: React.FC<Props> = ({
           <div className="SidebarLeft-itemLists">
             <SidebarLeftLists lists={lists} loading={false} listsShown={listsShown} />
           </div>
-
           <A
-            className={'SidebarLeft-item' + (routeName === 'User' ? ' SidebarLeft-item--active' : '')}
+            className={'SidebarLeft-item' + (routeName === 'User' && isUserPage ? ' SidebarLeft-item--active' : '')}
             href={`users/${sessionId}`}
             styled={false}
             frontend

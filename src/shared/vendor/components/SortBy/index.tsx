@@ -6,14 +6,16 @@ import { A } from '../A';
 
 import './SortBy.less';
 
+export type SortByOption = {
+  label: string;
+  field: string;
+  icon?: React.ElementType;
+};
+
 interface Props {
   className?: string;
   href: string;
-  options: {
-    label: string;
-    field: string;
-    icon?: React.ElementType;
-  }[];
+  options: SortByOption[];
   currentSort: string;
   loading?: boolean;
 }
@@ -40,11 +42,7 @@ export const SortBy: React.FC<Props> = ({ className, href, options, currentSort,
             <A href={displayedUrl} styled={false} frontend className="SortBy-listItemLink">
               <span className="SortBy-label">{item.label}</span>
               {item?.icon && <Icon className="SortBy-icon" />}
-              <Sort
-                className={
-                  'SortBy-sortIcon' + (currentSortIsAsc && isActiveItem ? ' SortBy-sortIcon--asc' : '')
-                }
-              />
+              <Sort className={'SortBy-sortIcon' + (currentSortIsAsc && isActiveItem ? ' SortBy-sortIcon--asc' : '')} />
             </A>
           </li>
         );

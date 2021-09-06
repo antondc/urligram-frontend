@@ -5,8 +5,8 @@ import Bookmark from 'Assets/svg/bookmarkFilled.svg';
 import Title from 'Assets/svg/sortTitle.svg';
 import Clock from 'Assets/svg/spinner6.svg';
 import UserFill from 'Assets/svg/userFill.svg';
+import A from 'Components/A';
 import CardItem from 'Components/CardItem';
-import Main from 'Components/Main';
 import NoResults from 'Components/NoResults';
 import Pagination from 'Components/Pagination';
 import UserRow from 'Components/UserRow';
@@ -14,7 +14,7 @@ import { UserRowSkeletonGroup } from 'Components/UserRow/UserRowSkeletonGroup';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE, SITE_TITLE } from 'Root/src/shared/constants';
-import { Select, SelectValue, SortBy } from 'Vendor/components';
+import { Select, SelectValue, SortBy, Space } from 'Vendor/components';
 
 import './Following.less';
 
@@ -53,12 +53,20 @@ export const Following: React.FC<Props> = ({
   onInputChange,
   onChange,
 }) => (
-  <Main className="Following">
+  <div className="Following">
     <Helmet title={`${SITE_TITLE} · Following`} />
     <CardItem className="Following-header">
-      <div className="Followers-headerTitle">
+      <div className="Following-headerTitle">
         <UserFill />
-        {user?.name && `${user?.name}'s following users`}
+        {user?.name && (
+          <>
+            Users followed by
+            <Space />
+            <A className="Following-headerLink" href={`/users/${user?.id}`} frontend>
+              {`${user?.name}`}
+            </A>
+          </>
+        )}
       </div>
       <div className="Following-separator" />
       <Select
@@ -100,5 +108,5 @@ export const Following: React.FC<Props> = ({
       {!usersLoading && !usersCurrentIds?.length && <NoResults content="ⵁ We didnt find any user." />}
     </div>
     <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
-  </Main>
+  </div>
 );

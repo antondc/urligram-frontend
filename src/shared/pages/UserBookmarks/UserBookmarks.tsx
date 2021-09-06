@@ -3,17 +3,17 @@ import Helmet from 'react-helmet';
 
 import Bookmark from 'Assets/svg/bookmark.svg';
 import Clock from 'Assets/svg/spinner6.svg';
+import A from 'Components/A';
 import BookmarkRow from 'Components/BookmarkRow';
 import { BookmarkRowSkeletonGroup } from 'Components/BookmarkRow/BookmarkRowSkeletonGroup';
 import CardItem from 'Components/CardItem';
-import Main from 'Components/Main';
 import NoResults from 'Components/NoResults';
 import Pagination from 'Components/Pagination';
 import { BookmarksByKey } from 'Modules/Bookmarks/bookmarks.types';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE, SITE_TITLE } from 'Root/src/shared/constants';
-import { FadeInOut, Select, SelectValue, SortBy } from 'Vendor/components';
+import { FadeInOut, Select, SelectValue, SortBy, Space } from 'Vendor/components';
 
 import './UserBookmarks.less';
 
@@ -55,12 +55,21 @@ export const UserBookmarks: React.FC<Props> = ({
   allTags,
   currentQueryParamFilterTags,
 }) => (
-  <Main className="UserBookmarks">
+  <div className="UserBookmarks">
     <Helmet title={`${SITE_TITLE} · User Bookmarks`} />
     <CardItem className="UserBookmarks-header">
       <div className="UserBookmarks-headerTitle">
         <Bookmark />
-        {user?.name && `${user?.name}'s bookmarks`}
+        {user?.name && (
+          <>
+            <A className="UserBookmarks-headerLink" href={`/users/${user?.id}`} frontend>
+              {`${user?.name}`}
+            </A>
+            ’s
+            <Space />
+            bookmarks
+          </>
+        )}
       </div>
       <div className="UserBookmarks-separator" />
       <Select
@@ -106,5 +115,5 @@ export const UserBookmarks: React.FC<Props> = ({
       {!bookmarksLoading && !bookmarksIds?.length && <NoResults content="ⵁ We didnt find any bookmark." />}
     </div>
     <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
-  </Main>
+  </div>
 );

@@ -68,6 +68,7 @@ const UserBookmarks: React.FC = () => {
   useEffect(() => {
     dispatch(userLoad(userId));
   }, [session?.id]);
+
   useEffect(() => {
     dispatch(bookmarksLoadByUserId(userId));
   }, [url, session?.id]);
