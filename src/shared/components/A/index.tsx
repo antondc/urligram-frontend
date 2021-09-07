@@ -36,7 +36,14 @@ const A: React.FC<Props> = ({ href, targetBlank, scrollBeforeNavigate = true, ..
     if (!scrollBeforeNavigate) return;
 
     e.preventDefault();
-    setTimeout(() => history.push(url), 120);
+
+    setTimeout(() => {
+      if (targetBlank) {
+        window.open(url);
+      } else {
+        history.push(url);
+      }
+    }, 120);
 
     scroll.scrollToTop({
       duration: 120,
