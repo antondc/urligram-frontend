@@ -26,14 +26,6 @@ export const SortBy: React.FC<Props> = ({ className, href, options, currentSort,
   const currentSortIsAsc = !currentSort?.startsWith('-');
   const currentSortIsDesc = currentSort?.startsWith('-');
 
-  const scrollToTop = (e) => {
-    e.preventDefault();
-
-    window.scrollTo({
-      top: 0,
-    });
-  };
-
   return (
     <ul className={'SortBy' + (className ? ' ' + className : '') + (loading ? ' SortBy--loading' : '')}>
       {options.map((item, index) => {
@@ -46,11 +38,7 @@ export const SortBy: React.FC<Props> = ({ className, href, options, currentSort,
         const Icon = item?.icon;
 
         return (
-          <li
-            className={'SortBy-listItem' + (isActiveItem ? ' SortBy-listItem--active' : '')}
-            key={index}
-            onClick={scrollToTop}
-          >
+          <li className={'SortBy-listItem' + (isActiveItem ? ' SortBy-listItem--active' : '')} key={index}>
             <A href={displayedUrl} styled={false} frontend className="SortBy-listItemLink">
               <span className="SortBy-label">{item.label}</span>
               {item?.icon && <Icon className="SortBy-icon" />}

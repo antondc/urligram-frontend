@@ -1,7 +1,9 @@
 import React, { HTMLProps } from 'react';
 import { useSelector } from 'react-redux';
+import { animateScroll as scroll, Events } from 'react-scroll';
 
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
+import history from 'Services/History';
 import { A as ComponentsA } from 'Vendor/components';
 
 interface Props extends HTMLProps<HTMLAnchorElement> {
@@ -16,10 +18,11 @@ interface Props extends HTMLProps<HTMLAnchorElement> {
   disabled?: boolean;
   title?: string;
   underlined?: boolean;
+  scrollBeforeNavigate?: boolean;
   onClick?: (any) => void;
 }
 
-const A: React.FC<Props> = ({ href, targetBlank, ...props }) => {
+const A: React.FC<Props> = ({ href, targetBlank, scrollBeforeNavigate = true, ...props }) => {
   const currentLanguageSlug = useSelector(selectCurrentLanguageSlug);
   const hrefWithoutLeadingSlash = href?.replace(/^\//, '');
   const hrefAlreadyHasSlug = hrefWithoutLeadingSlash?.startsWith(currentLanguageSlug);
@@ -29,7 +32,26 @@ const A: React.FC<Props> = ({ href, targetBlank, ...props }) => {
       ? `/${currentLanguageSlug}/${hrefWithoutLeadingSlash}`
       : href;
 
-  return <ComponentsA {...props} href={hrefWithCurrentSlug} targetBlank={targetBlank} />;
+  const onLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, url: string) => {
+    if (!scrollBeforeNavigate) return;
+
+    e.preventDefault();
+    setTimeout(() => history.push(url), 120);
+
+    scroll.scrollToTop({
+      duration: 120,
+      smooth: 'easeOutQuart',
+    });
+  };
+
+  return (
+    <ComponentsA
+      {...props}
+      href={hrefWithCurrentSlug}
+      onClick={(e) => onLinkClick(e, hrefWithCurrentSlug)}
+      targetBlank={targetBlank}
+    />
+  );
 };
 
 export default A;

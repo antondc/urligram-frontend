@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { animateScroll as scroll } from 'react-scroll';
 
 import A from 'Components/A';
-import history from 'Services/History';
-import { URLWrapper } from 'Services/URLWrapper';
 import { Fade } from 'Vendor/components';
 import { calculatePages } from './calculatePages';
 
@@ -21,20 +18,6 @@ const Pagination: React.FC<Props> = ({ totalItems = 0, itemsPerPage = 10, offset
   const [pages, setPages] = useState<Array<any>>([]);
   const [mounted, setMounted] = useState<boolean>(false);
 
-  const scrollToTop = (e) => {
-    e.preventDefault();
-    const { href } = e.target;
-    const url = new URLWrapper(href);
-    const pathAndSearch = url.getPathAndSearch();
-
-    setTimeout(() => history.push(pathAndSearch), 120);
-
-    scroll.scrollToTop({
-      duration: 120,
-      smooth: 'easeOutQuart',
-    });
-  };
-
   useEffect(() => {
     const pages = calculatePages({ totalItems, itemsPerPage, path, offset, pageNeighbours });
     const mounted = !!totalItems && pages?.length > 1;
@@ -49,15 +32,7 @@ const Pagination: React.FC<Props> = ({ totalItems = 0, itemsPerPage = 10, offset
         <div className="Pagination-wrapper">
           {pages.map((item, index) =>
             !!item ? (
-              <A
-                className="Pagination-item"
-                key={index}
-                href={item.path}
-                underlined
-                active={item?.current}
-                frontend
-                onClick={scrollToTop}
-              >
+              <A className="Pagination-item" key={index} href={item.path} underlined active={item?.current} frontend>
                 {item.page}
               </A>
             ) : (
