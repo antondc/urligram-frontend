@@ -24,11 +24,10 @@ import { routesList, routesWithoutOmmitedValues } from 'Router/routes';
 import enhanceRouteWithParams from 'Tools/utils/url/enhanceRouteWithParams';
 import findActiveRouteKey from 'Tools/utils/url/findActiveRouteKey';
 import { tagsSearchLoad } from '../../redux/modules/Tags/actions/tagsSearchLoad';
+import { KEY_CODE } from './constants';
 import { Layout as LayoutUi } from './Layout';
 
 import './Layout.less';
-
-const KEY_CODE = 'Escape';
 
 interface Props {
   location: Location;
@@ -118,28 +117,7 @@ const Layout: React.FC<Props> = ({ location }) => {
     dispatch(tagsSearchLoad());
   }, [session?.id]);
 
-  console.log('=======');
-  console.log('Rerender:');
-  console.log(JSON.stringify(new Date(), null, 4));
-  console.log('=======');
-
   return (
-    // <div>
-    //   loginModalMounted: {JSON.stringify(loginModalMounted)}
-    //   <br />
-    //   signUpModalMounted: {JSON.stringify(signUpModalMounted)}
-    //   <br />
-    //   welcomeModalMounted: {JSON.stringify(welcomeModalMounted)}
-    //   <br />
-    //   forgotPasswordModalMounted: {JSON.stringify(forgotPasswordModalMounted)}
-    //   <br />
-    //   resetPasswordModalMounted: {JSON.stringify(resetPasswordModalMounted)}
-    //   <br />
-    //   listModalMounted: {JSON.stringify(listModalMounted)}
-    //   <br />
-    //   renderLoader: {JSON.stringify(renderLoader)}
-    //   <br />
-    // </div>
     <LayoutUi
       loginModalMounted={loginModalMounted}
       signUpModalMounted={signUpModalMounted}

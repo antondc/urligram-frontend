@@ -8,8 +8,8 @@
   flex: 1;
   grid-template: 'sidebar main' auto;
   grid-template-columns: 270px auto;
-  padding: 20px 0 20px;
-  overflow: hidden;
+  max-width: @lay-maxWidth;
+  padding: 0 0 20px;
   transition: grid-template-columns @td-fast @ease;
   gap: 0 34px;
 
@@ -22,7 +22,9 @@
   }
 
   &-sidebar {
+    position: sticky;
     grid-area: sidebar;
+    top: 120px;
 
     @media @br-mobile {
       display: none;

@@ -29,24 +29,26 @@ export const Header: React.FC<Props> = ({
   switchUiBookmarkModal,
 }) => (
   <header className="Header">
-    <Logo className="Header-logo" loadingBeat={logoLoadingHeartBeat} loadingColors={logoLoadingColors} />
+    <div className="Header-content">
+      <Logo className="Header-logo" loadingBeat={logoLoadingHeartBeat} loadingColors={logoLoadingColors} />
 
-    <div className="Header-spacer" />
-    <div className="Header-mockSearch">
-      <Loupe className="Header-mockSearchIcon" />
-    </div>
-    <div className="Header-separator" />
-    <div className="Header-addBoookmark" onClick={switchUiBookmarkModal}>
-      <Cross className="Header-addBoookmarkIcon" />
-      <span className="Header-addBoookmarkText">Add Bookmark</span>
-    </div>
-    <div className="Header-separator" />
-    <div className="Header-user">
-      {!sessionLoading && session?.id && (
-        <img className="Header-userImage" src={session?.image?.original} onClick={onUserClick} />
-      )}
-      {!sessionLoading && !session?.id && <User name="User" className={'Header-userLogo'} onClick={onUserClick} />}
-      {sessionLoading && <SpinnerPie className="Header-loader" size="big" />}
+      <div className="Header-spacer" />
+      <div className="Header-mockSearch">
+        <Loupe className="Header-mockSearchIcon" />
+      </div>
+      <div className="Header-separator" />
+      <div className="Header-addBoookmark" onClick={switchUiBookmarkModal}>
+        <Cross className="Header-addBoookmarkIcon" />
+        <span className="Header-addBoookmarkText">Add Bookmark</span>
+      </div>
+      <div className="Header-separator" />
+      <div className="Header-user">
+        {!sessionLoading && session?.id && (
+          <img className="Header-userImage" src={session?.image?.original} onClick={onUserClick} />
+        )}
+        {!sessionLoading && !session?.id && <User name="User" className={'Header-userLogo'} onClick={onUserClick} />}
+        {sessionLoading && <SpinnerPie className="Header-loader" size="big" />}
+      </div>
     </div>
   </header>
 );
