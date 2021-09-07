@@ -48,7 +48,7 @@ Hot module reloading with `webpack-hot-middleware` and `webpack-dev-middleware.
 
 ## Generate ssl certificates with Subject Alt Names on OSX
 
-https://gist.github.com/croxton/ebfb5f3ac143cd86542788f972434c96
+<https://gist.github.com/croxton/ebfb5f3ac143cd86542788f972434c96>
 
 #### Create `ssl.conf` file
 
@@ -80,7 +80,7 @@ https://gist.github.com/croxton/ebfb5f3ac143cd86542788f972434c96
 Create a directory ./ssl for your project close to server, and place ssl.conf.
 Open this folder.
 
-#### Generate a private key:
+#### Generate a private key
 
     openssl genrsa -out private.key 4096
 
@@ -93,7 +93,7 @@ Open this folder.
 
 (You will be asked a series of questions about your certificate. Answer however you like, but for 'Common name' enter the name of your project, e.g. `my_project`)
 
-#### Now check the CSR:
+#### Now check the CSR
 
     openssl req -text -noout -in private.csr
 
@@ -113,7 +113,7 @@ You should see this:
         -extensions req_ext \
         -extfile ssl.conf
 
-#### Add the certificate to Mac keychain and trust it:
+#### Add the certificate to Mac keychain and trust it
 
     sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain private.crt
 
@@ -134,7 +134,7 @@ Add to package.json
 
 Cookies are accessed from backend only thanks to HttpOnly.
 
-Cookie-parser: https://github.com/expressjs/cookie-parser, official `Express` parser to access cookies.
+Cookie-parser: <https://github.com/expressjs/cookie-parser>, official `Express` parser to access cookies.
 
 Cookies options are set checking if the APP referer is recognized by the API. If so, «domain» will be set with prepending «.» to allow any subdomain. If is not recognised, «domain» will be null; servers will be allowed.
 
@@ -193,11 +193,11 @@ We use Axios, wrapped within an HttpClient singleton.
 
 ### Globals
 
-Globals are set in globals.d.ts, see https://stackoverflow.com/questions/12709074/how-do-you-explicitly-set-a-new-property-on-window-in-typescript/45352250#45352250.
+Globals are set in globals.d.ts, see <https://stackoverflow.com/questions/12709074/how-do-you-explicitly-set-a-new-property-on-window-in-typescript/45352250#45352250>.
 
 ### Enzyme
 
-Enzyme needs adapter for React 16, see: https://github.com/Microsoft/TypeScript-React-Starter/issues/131
+Enzyme needs adapter for React 16, see: <https://github.com/Microsoft/TypeScript-React-Starter/issues/131>
 
 ### React-router `<Switch />` and `location`
 
@@ -228,3 +228,7 @@ See src/server/routes/allRoutes.tsx:27 and src/server/routes/allRoutes.tsx:32
 The MIT License (MIT)
 
 Copyright (c) 2020 Antonio Díaz
+
+## Rebuild
+
+.
