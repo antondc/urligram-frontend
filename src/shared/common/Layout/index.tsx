@@ -9,6 +9,7 @@ import { pushNewRoute } from 'Modules/Routes/actions/pushNewRoute';
 import { RouteState } from 'Modules/Routes/routes.types';
 import { selectCurrentPathAndQuery } from 'Modules/Routes/selectors/selectCurrentPathAndQuery';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
+import { tagsSearchLoad } from 'Modules/Tags/actions/tagsSearchLoad';
 import { uiResetState } from 'Modules/Ui/actions/uiResetState';
 import { selectUiForgotPasswordModalMounted } from 'Modules/Ui/selectors/selectUiForgotPasswordModalMounted';
 import { selectUiListModalMounted } from 'Modules/Ui/selectors/selectUiListModalMounted';
@@ -18,12 +19,12 @@ import { selectUiScreenLocked } from 'Modules/Ui/selectors/selectUiScreenLocked'
 import { selectUiScreenMobileLocked } from 'Modules/Ui/selectors/selectUiScreenMobileLocked';
 import { selectUiSignUpModalMounted } from 'Modules/Ui/selectors/selectUiSignUpModalMounted';
 import { selectUiWelcomeModalMounted } from 'Modules/Ui/selectors/selectUiWelcomeModalMounted';
+import { userFollowersLoad } from 'Modules/Users/actions/userFollowersLoad';
 import { userFollowingLoad } from 'Modules/Users/actions/userFollowingLoad';
 import { userLoad } from 'Modules/Users/actions/userLoad';
 import { routesList, routesWithoutOmmitedValues } from 'Router/routes';
 import enhanceRouteWithParams from 'Tools/utils/url/enhanceRouteWithParams';
 import findActiveRouteKey from 'Tools/utils/url/findActiveRouteKey';
-import { tagsSearchLoad } from '../../redux/modules/Tags/actions/tagsSearchLoad';
 import { KEY_CODE } from './constants';
 import { Layout as LayoutUi } from './Layout';
 
@@ -106,6 +107,7 @@ const Layout: React.FC<Props> = ({ location }) => {
   useEffect(() => {
     dispatch(userLoad(session?.id));
     dispatch(userFollowingLoad(session?.id));
+    dispatch(userFollowersLoad(session?.id));
     dispatch(listsLoadByUserId({ userId: session?.id, rawData: true }));
   }, [session?.id]);
 

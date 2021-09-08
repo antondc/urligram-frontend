@@ -12,6 +12,8 @@ import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUser
 import { uiSidebarLeftClose } from 'Modules/Ui/actions/uiSidebarLeftClose';
 import { uiSidebarLeftOpen } from 'Modules/Ui/actions/uiSidebarLeftOpen';
 import { selectUiSidebarleftState } from 'Modules/Ui/selectors/selectUiSidebarleftState';
+import { selectUserFollowers } from 'Modules/Users/selectors/selectUserFollowers';
+import { selectUserFollowing } from 'Modules/Users/selectors/selectUserFollowing';
 import { LocalStorageWrapper } from 'Services/LocalStorageWrapper';
 import { SidebarLeft as SidebarLeftUi } from './SidebarLeft';
 
@@ -33,18 +35,46 @@ export const SidebarLeft: React.FC = () => {
   const route = useSelector(selectCurrentRoute);
   const lists = useSelector((state: RootState) => selectListsByUserIdAll(state, { userId: sessionId }));
   const listsLoading = useSelector(selectListsLoading);
+  const followers = useSelector(selectUserFollowers);
+  const following = useSelector(selectUserFollowing);
   const [listsShown, setListsShown] = useState<boolean>(true);
+  const [followersShown, setFollowersShown] = useState<boolean>(false);
+  const [followingShown, setFollowingShown] = useState<boolean>(false);
   const timeMsInFourHours = Date.now() + 4 * 60 * 60 * 1000;
   const sidebarLeftClosed = useSelector(selectUiSidebarleftState);
   const isUserPage = route.params?.userId === sessionId;
 
-  const onListTitleClick = () => {
-    if (sidebarLeftClosed) return;
+  const listsClose = () => {
+    setListsShown(false);
+    localStorageWrapper.setValue('listsShown', { mounted: false }, timeMsInFourHours);
+  };
 
-    const nextValue = !listsShown;
-    const nextValueLocalStorage = !!nextValue ? true : false;
-    setListsShown(nextValue);
-    localStorageWrapper.setValue('listsShown', { mounted: nextValueLocalStorage }, timeMsInFourHours);
+  const listsOpen = () => {
+    setListsShown(true);
+    localStorageWrapper.setValue('listsShown', { mounted: true }, timeMsInFourHours);
+  };
+
+  const onFollowersTriangleClick = () => {
+    setFollowersShown(!followersShown);
+    setFollowingShown(false);
+    listsClose();
+  };
+
+  const onFollowingTriangleClick = () => {
+    setFollowingShown(!followingShown);
+    setFollowersShown(false);
+    listsClose();
+  };
+
+  const onListsTriangleClick = () => {
+    setFollowingShown(false);
+    setFollowersShown(false);
+
+    if (listsShown) {
+      listsClose();
+    } else {
+      listsOpen();
+    }
   };
 
   const onSidebarCloseClick = () => {
@@ -54,23 +84,11 @@ export const SidebarLeft: React.FC = () => {
     } else {
       dispatch(uiSidebarLeftClose());
       setListsShown(false);
+      setFollowersShown(false);
+      setFollowingShown(false);
       localStorageWrapper.setValue('listsShown', { mounted: false }, timeMsInFourHours);
       localStorageWrapper.setValue('sidebarLeftState', { closed: true }, timeMsInFourHours);
     }
-  };
-
-  const onSidebarMouseEnter = () => {
-    if (sidebarLeftClosed) return;
-
-    const nextValue = !listsShown;
-    setListsShown(nextValue);
-  };
-
-  const onSidebarMouseLeave = () => {
-    if (sidebarLeftClosed) return;
-
-    const nextValue = !listsShown;
-    setListsShown(false);
   };
 
   useEffect(() => {
@@ -81,8 +99,9 @@ export const SidebarLeft: React.FC = () => {
     const sidebarLeftListsShown = localStorageWrapper.getValue<LocalStorageListsShown>('listsShown');
     const sidebarLeftState = localStorageWrapper.getValue<LocalStorageSidebarOpen>('sidebarLeftState');
 
-    const sidebarLeftListsShownAndSidebarOpen = sidebarLeftListsShown?.mounted && !sidebarLeftState?.closed;
-    setListsShown(Boolean(sidebarLeftListsShownAndSidebarOpen));
+    if (sidebarLeftListsShown && !sidebarLeftState?.closed) {
+      listsOpen();
+    }
   }, []);
 
   useEffect(() => {
@@ -90,8 +109,7 @@ export const SidebarLeft: React.FC = () => {
 
     if (sidebarLeftState?.closed) {
       dispatch(uiSidebarLeftClose());
-      setListsShown(false);
-      localStorageWrapper.setValue('sidebarLeftState', { closed: false }, timeMsInFourHours);
+      listsClose();
     } else {
       dispatch(uiSidebarLeftOpen());
     }
@@ -99,16 +117,22 @@ export const SidebarLeft: React.FC = () => {
 
   return (
     <SidebarLeftUi
-    isUserPage={isUserPage}
+      isUserPage={isUserPage}
       routeName={route?.name}
       isLoggedIn={isLoggedIn}
       sessionId={sessionId}
       glossary={glossary}
       lists={lists}
       listsLoading={listsLoading}
-      listsShown={listsShown && !sidebarLeftClosed} // If sidebar is closed, don't display lists
+      listsShown={listsShown}
+      followers={followers}
+      followersShown={followersShown}
+      onFollowersTriangleClick={onFollowersTriangleClick}
+      following={following}
+      followingShown={followingShown}
+      onFollowingTriangleClick={onFollowingTriangleClick}
       sidebarLeftClosed={sidebarLeftClosed}
-      onListTitleClick={onListTitleClick}
+      onListsTriangleClick={onListsTriangleClick}
       onSidebarCloseClick={onSidebarCloseClick}
     />
   );

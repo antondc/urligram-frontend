@@ -1,0 +1,30 @@
+@import '../../css/imports.less';
+
+@c: .SidebarLeftUsers;
+
+@{c} {
+  margin-bottom: 5px;
+
+  &-follower {
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+    height: 25px;
+    font-size: @fs-normal;
+    font-weight: @fw-semibold;
+    white-space: nowrap;
+    color: @gradientColors[black-4];
+    overflow-x: scroll;
+    overflow-y: hidden;
+    transition: color @td-fast @ease;
+    text-overflow: ellipsis;
+
+    .hideScrollbar;
+
+    &:hover,
+    &--active {
+      color: @gradientColors[blue-1];
+      cursor: pointer;
+    }
+  }
+}

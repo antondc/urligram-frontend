@@ -12,7 +12,9 @@ import UserFill from 'Assets/svg/userFill.svg';
 import A from 'Components/A';
 import { GlossaryState } from 'Modules/Languages/languages.types';
 import { ListState } from 'Modules/Lists/lists.types';
+import { UserState } from 'Modules/Users/users.types';
 import SidebarLeftLists from './SidebarLeftLists';
+import SidebarLeftUsers from './SidebarLeftUsers';
 
 import './SidebarLeft.less';
 
@@ -24,9 +26,15 @@ interface Props {
   lists: ListState[];
   listsLoading: boolean;
   listsShown: boolean;
+  followersShown: boolean;
+  followers: UserState[];
+  onFollowersTriangleClick: () => void;
+  followingShown: boolean;
+  following: UserState[];
+  onFollowingTriangleClick: () => void;
   sidebarLeftClosed: boolean;
   isUserPage: boolean;
-  onListTitleClick: () => void;
+  onListsTriangleClick: () => void;
   onSidebarCloseClick: () => void;
 }
 
@@ -37,9 +45,15 @@ export const SidebarLeft: React.FC<Props> = ({
   glossary,
   lists,
   listsShown,
+  followersShown,
+  followers,
+  onFollowersTriangleClick,
+  followingShown,
+  following,
+  onFollowingTriangleClick,
   sidebarLeftClosed,
   isUserPage,
-  onListTitleClick,
+  onListsTriangleClick,
   onSidebarCloseClick,
 }) => (
   <div className={'SidebarLeft' + (sidebarLeftClosed ? ' SidebarLeft--closed' : '')} data-test-id="SidebarLeft">
@@ -122,38 +136,54 @@ export const SidebarLeft: React.FC<Props> = ({
           >
             <FlagRight className="SidebarLeft-itemIcon" />
             <span className="SidebarLeft-itemDescription">Followers</span>
+            <span
+              className={'SidebarLeft-triangle' + (followersShown ? ' SidebarLeft-triangle--open' : '')}
+              onClick={onFollowersTriangleClick}
+            >
+              <TriangleRounded className="SidebarLeft-triangleIcon" />
+            </span>
           </A>
-          <A
+          <div className="SidebarLeft-users">
+            <SidebarLeftUsers users={followers} usersShown={followersShown} />
+          </div>
+          <div
             className={
               'SidebarLeft-item' + (routeName === 'Following' && isUserPage ? ' SidebarLeft-item--active' : '')
             }
-            href={`users/${sessionId}/following`}
-            styled={false}
-            frontend
           >
-            <FlagLeft className="SidebarLeft-itemIcon" />
-            <span className="SidebarLeft-itemDescription">Following</span>
-          </A>
-          <A
+            <A href={`users/${sessionId}/following`} styled={false} frontend>
+              <FlagLeft className="SidebarLeft-itemIcon" />
+              <span className="SidebarLeft-itemDescription">Following</span>
+            </A>
+            <span
+              className={'SidebarLeft-triangle' + (followingShown ? ' SidebarLeft-triangle--open' : '')}
+              onClick={onFollowingTriangleClick}
+            >
+              <TriangleRounded className="SidebarLeft-triangleIcon" />
+            </span>
+          </div>
+          <div className="SidebarLeft-users">
+            <SidebarLeftUsers users={following} usersShown={followingShown} />
+          </div>
+          <div
             className={
               'SidebarLeft-item' + (routeName === 'UserLists' && isUserPage ? ' SidebarLeft-item--active' : '')
             }
-            href={`users/${sessionId}/lists?sort=-createdAt`}
-            styled={false}
-            frontend
           >
-            <List className="SidebarLeft-itemIcon SidebarLeft-itemIconList" />
-            <span className="SidebarLeft-itemDescription">
-              <span>My Lists </span>
-              <span
-                className={'SidebarLeft-triangle' + (listsShown ? ' SidebarLeft-triangle--open' : '')}
-                onClick={onListTitleClick}
-              >
-                <TriangleRounded className="SidebarLeft-triangleIcon" />
+            <A href={`users/${sessionId}/lists?sort=-createdAt`} styled={false} frontend>
+              <List className="SidebarLeft-itemIcon SidebarLeft-itemIconList" />
+              <span className="SidebarLeft-itemDescription">
+                <span>My Lists </span>
               </span>
+            </A>
+            <span
+              className={'SidebarLeft-triangle' + (listsShown ? ' SidebarLeft-triangle--open' : '')}
+              onClick={onListsTriangleClick}
+            >
+              <TriangleRounded className="SidebarLeft-triangleIcon" />
             </span>
-          </A>
-          <div className="SidebarLeft-itemLists">
+          </div>
+          <div className="SidebarLeft-lists">
             <SidebarLeftLists lists={lists} loading={false} listsShown={listsShown} />
           </div>
           <A

@@ -58,6 +58,7 @@
 
   &-item {
     display: flex;
+    justify-content: space-between;
     align-items: center;
     padding: 14px;
     color: @c-accentLight;
@@ -82,11 +83,6 @@
     }
   }
 
-  &-itemDescription {
-    opacity: 1;
-    transition: opacity @td-fast @ease @td-normal;
-  }
-
   &-itemIcon  {
     position: relative;
     flex-shrink: 0;
@@ -104,22 +100,23 @@
     margin-right: 20px;
   }
 
-  &-itemLists {
+  &-lists,
+  &-users {
     margin-top: -5px;
     margin-left: 50px;
     padding-right: 10px;
   }
 
   &-triangle {
+    margin-right: 45px;
     padding-right: 10px;
 
     svg {
-      height: 12px;
-      width: 12px;
+      height: 14px;
+      width: 14px;
       fill: @c-accentLight;
       transform: rotate(90deg);
       transition: transform @td-fast @ease-outQuint, fill @td-fast @ease-outQuint;
-      stroke-width: 10px;
     }
 
     &--open {
@@ -137,17 +134,28 @@
     }
   }
 
+  &-itemDescription {
+    flex: 1;
+  }
+
+  &-itemDescription,
+  &-triangle {
+    opacity: 1;
+    transition: opacity @td-fast @ease @td-normal;
+  }
+
   &--closed {
-    @{c}-itemDescription {
+    @{c}-itemDescription,
+    @{c}-triangle {
       opacity: 0;
-      transition: opacity @td-fast @ease @td-fast;
+      transition: opacity @td-fast @ease;
     }
   }
 
   &-divider {
     height: 2px;
     width: 100%;
-    margin: 20px 10px;
+    margin: 20px 0;
     background: @gradientColors[black-5];
   }
 }

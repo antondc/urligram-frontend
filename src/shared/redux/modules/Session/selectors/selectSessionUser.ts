@@ -8,5 +8,6 @@ import { selectSession } from './selectSession';
 export const selectSessionUser = createSelector(
   selectSession,
   selectUsersAll,
-  (Session: SessionState, Users: UserState[]): any => Users.find((item) => item.id === Session.id) || {}
+  (Session: SessionState, Users: UserState[]): SessionState | Record<string, any> =>
+    Users.find((item) => item.id === Session.id) || {}
 );
