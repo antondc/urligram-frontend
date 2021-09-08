@@ -90,7 +90,7 @@ export const UserLists: React.FC<Props> = ({
       <div className="UserLists-separator" />
       <div className="UserLists-addList" onClick={onAddListClick}>
         <Cross className="UserLists-addListIcon" />
-        <span className="UserLists-addListText">New List</span>
+        <span className="UserLists-addListText">Add List</span>
       </div>
       <div className="UserLists-separator" />
       <SortBy
