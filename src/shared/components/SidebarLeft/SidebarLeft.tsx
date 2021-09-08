@@ -117,15 +117,27 @@ export const SidebarLeft: React.FC<Props> = ({
             <BookmarkFilled className="SidebarLeft-itemIcon" />
             <span className="SidebarLeft-itemDescription">{glossary.myBookmarks}</span>
           </A>
-          <A
-            className={'SidebarLeft-item' + (routeName === 'UserTags' && isUserPage ? ' SidebarLeft-item--active' : '')}
-            href={`users/${sessionId}/tags`}
-            styled={false}
-            frontend
+          <div
+            className={
+              'SidebarLeft-item' + (routeName === 'UserLists' && isUserPage ? ' SidebarLeft-item--active' : '')
+            }
           >
-            <Tag className="SidebarLeft-itemIcon" />
-            <span className="SidebarLeft-itemDescription">My Tags</span>
-          </A>
+            <A href={`users/${sessionId}/lists?sort=-createdAt`} styled={false} frontend>
+              <List className="SidebarLeft-itemIcon SidebarLeft-itemIconList" />
+              <span className="SidebarLeft-itemDescription">
+                <span>My Lists </span>
+              </span>
+            </A>
+            <span
+              className={'SidebarLeft-triangle' + (listsShown ? ' SidebarLeft-triangle--open' : '')}
+              onClick={onListsTriangleClick}
+            >
+              <TriangleRounded className="SidebarLeft-triangleIcon" />
+            </span>
+          </div>
+          <div className="SidebarLeft-lists">
+            <SidebarLeftLists lists={lists} loading={false} listsShown={listsShown} />
+          </div>
           <A
             className={
               'SidebarLeft-item' + (routeName === 'Followers' && isUserPage ? ' SidebarLeft-item--active' : '')
@@ -165,35 +177,14 @@ export const SidebarLeft: React.FC<Props> = ({
           <div className="SidebarLeft-users">
             <SidebarLeftUsers users={following} usersShown={followingShown} />
           </div>
-          <div
-            className={
-              'SidebarLeft-item' + (routeName === 'UserLists' && isUserPage ? ' SidebarLeft-item--active' : '')
-            }
-          >
-            <A href={`users/${sessionId}/lists?sort=-createdAt`} styled={false} frontend>
-              <List className="SidebarLeft-itemIcon SidebarLeft-itemIconList" />
-              <span className="SidebarLeft-itemDescription">
-                <span>My Lists </span>
-              </span>
-            </A>
-            <span
-              className={'SidebarLeft-triangle' + (listsShown ? ' SidebarLeft-triangle--open' : '')}
-              onClick={onListsTriangleClick}
-            >
-              <TriangleRounded className="SidebarLeft-triangleIcon" />
-            </span>
-          </div>
-          <div className="SidebarLeft-lists">
-            <SidebarLeftLists lists={lists} loading={false} listsShown={listsShown} />
-          </div>
           <A
-            className={'SidebarLeft-item' + (routeName === 'User' && isUserPage ? ' SidebarLeft-item--active' : '')}
-            href={`users/${sessionId}`}
+            className={'SidebarLeft-item' + (routeName === 'UserTags' && isUserPage ? ' SidebarLeft-item--active' : '')}
+            href={`users/${sessionId}/tags`}
             styled={false}
             frontend
           >
-            <UserFill className="SidebarLeft-itemIcon" />
-            <span className="SidebarLeft-itemDescription">{glossary.myUser}</span>
+            <Tag className="SidebarLeft-itemIcon" />
+            <span className="SidebarLeft-itemDescription">My Tags</span>
           </A>
         </>
       )}
