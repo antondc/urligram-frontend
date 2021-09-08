@@ -2,6 +2,7 @@ import React from 'react';
 import Helmet from 'react-helmet';
 
 import Bookmark from 'Assets/svg/bookmarkRounded.svg';
+import Cross from 'Assets/svg/cross.svg';
 import ListIcon from 'Assets/svg/list.svg';
 import Clock from 'Assets/svg/spinner6.svg';
 import User from 'Assets/svg/userFill.svg';
@@ -15,7 +16,6 @@ import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE, SITE_TITLE } from 'Root/src/shared/constants';
 import { Select, SelectValue, SortBy, Space } from 'Vendor/components';
-import { SubHeader } from '../../components/SubHeader';
 
 import './UserLists.less';
 
@@ -38,6 +38,7 @@ interface Props {
   }[];
   onInputChange: (string: string) => void;
   onChange: (string: SelectValue[]) => void;
+  onAddListClick: () => void;
 }
 
 export const UserLists: React.FC<Props> = ({
@@ -53,6 +54,7 @@ export const UserLists: React.FC<Props> = ({
   tagsSearchFormatted,
   onInputChange,
   onChange,
+  onAddListClick,
 }) => (
   <div className="UserLists">
     <Helmet title={`${SITE_TITLE} · User Lists`} />
@@ -85,6 +87,11 @@ export const UserLists: React.FC<Props> = ({
         grow
         hideLabelOnFill
       />
+      <div className="UserLists-separator" />
+      <div className="UserLists-addList" onClick={onAddListClick}>
+        <Cross className="UserLists-addListIcon" />
+        <span className="UserLists-addListText">New List</span>
+      </div>
       <div className="UserLists-separator" />
       <SortBy
         options={[

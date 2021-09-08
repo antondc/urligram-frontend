@@ -15,6 +15,7 @@ import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { tagsSearchLoad } from 'Modules/Tags/actions/tagsSearchLoad';
 import { selectTagsAll } from 'Modules/Tags/selectors/selectAllTags';
 import { selectTagsSearch } from 'Modules/Tags/selectors/selectTagsSearch';
+import { switchListModal } from 'Modules/Ui/actions/switchListModal';
 import { userLoad } from 'Modules/Users/actions/userLoad';
 import { selectUserById } from 'Modules/Users/selectors/selectUserById';
 import history from 'Services/History';
@@ -58,6 +59,10 @@ const UserLists: React.FC = () => {
     history.push(redirectPath);
   };
 
+  const onAddListClick = () => {
+    dispatch(switchListModal({ mounted: true }));
+  };
+
   useEffect(() => {
     dispatch(userLoad(userId));
   }, [session?.id]);
@@ -80,6 +85,7 @@ const UserLists: React.FC = () => {
       allTags={allTags}
       onChange={onChange}
       onInputChange={onInputChange}
+      onAddListClick={onAddListClick}
     />
   );
 };
