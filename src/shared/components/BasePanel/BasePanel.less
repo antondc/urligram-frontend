@@ -1,0 +1,39 @@
+@import '../../css/imports.less';
+
+@c: .BasePanel;
+
+@{c} {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  grid-template-columns: repeat(24, 1fr);
+  padding-top: 100px;
+
+  @media @br-mobile {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+  }
+
+  &-content {
+    align-items: center;
+    grid-column: 9 / span 8;
+    margin-bottom: 20px;
+    padding: 70px 80px;
+    background: @c-background;
+    border-radius: 8px;
+    box-shadow: 5px 5px 50px 0 @gradientColors[black-5];
+
+    @media @br-desktopMedium {
+      grid-column: 8 / span 10;
+      padding: 70px 60px;
+    }
+
+    @media @br-mobile {
+      display: block;
+      flex: 1;
+      width: 100%;
+      margin-top: 0;
+    }
+  }
+}

@@ -3,6 +3,7 @@ import Helmet from 'react-helmet';
 
 import BaseForm, { BaseFormError, BaseFormField, BaseFormSubmit } from 'Components/BaseForm';
 import { BaseModalFooter, BaseModalFooterLink, BaseModalTitle } from 'Components/BaseModal';
+import BasePanel from 'Components/BasePanel';
 import { SITE_TITLE } from 'Root/src/shared/constants';
 import { Button2, FadeInOut, Input2, Space } from 'Vendor/components';
 
@@ -33,52 +34,50 @@ export const ForgotPassword: React.FC<Props> = ({
 }) => (
   <>
     <Helmet title={`${SITE_TITLE} · Forgot Password`} />
-    <div className="ForgotPassword">
-      <div className="ForgotPassword-content">
-        <BaseForm className="ForgotPassword-form">
-          <BaseModalTitle>Password forgotten</BaseModalTitle>
-          <BaseFormField>
-            <Input2
-              name="nameOrEmail"
-              type="text"
-              label="Name or email"
-              onChange={onChangeNameOrEmail}
-              onBlur={onBlurNameOrEmail}
-              value={nameOrEmailValue}
-              error={nameOrEmailError}
-              grow
-            />
-          </BaseFormField>
-          <BaseFormSubmit>
-            <Button2
-              className="ForgotPassword-submit"
-              text="Submit"
-              type="submit"
-              onClick={onSubmit}
-              error={!!submitError}
-              success={submitSuccess}
-              disabled={submitDisabled}
-              loading={submitting}
-              grow
-            />
-            <FadeInOut valueToUpdate={!!submitError} speed="fast">
-              <BaseFormError className="ForgotPassword-error">{submitError}</BaseFormError>
-            </FadeInOut>
-          </BaseFormSubmit>
-          <BaseModalFooter>
-            <div>
-              Remember it?:
-              <Space />
-              <BaseModalFooterLink href="login">log in</BaseModalFooterLink>
-            </div>
-            <div>
-              Dont have an account?:
-              <Space />
-              <BaseModalFooterLink href="sign-up">sign up</BaseModalFooterLink>
-            </div>
-          </BaseModalFooter>
-        </BaseForm>
-      </div>
-    </div>
+    <BasePanel>
+      <BaseForm className="ForgotPassword-form">
+        <BaseModalTitle>Password forgotten</BaseModalTitle>
+        <BaseFormField>
+          <Input2
+            name="nameOrEmail"
+            type="text"
+            label="Name or email"
+            onChange={onChangeNameOrEmail}
+            onBlur={onBlurNameOrEmail}
+            value={nameOrEmailValue}
+            error={nameOrEmailError}
+            grow
+          />
+        </BaseFormField>
+        <BaseFormSubmit>
+          <Button2
+            className="ForgotPassword-submit"
+            text="Submit"
+            type="submit"
+            onClick={onSubmit}
+            error={!!submitError}
+            success={submitSuccess}
+            disabled={submitDisabled}
+            loading={submitting}
+            grow
+          />
+          <FadeInOut valueToUpdate={!!submitError} speed="fast">
+            <BaseFormError className="ForgotPassword-error">{submitError}</BaseFormError>
+          </FadeInOut>
+        </BaseFormSubmit>
+        <BaseModalFooter>
+          <div>
+            Remember it?:
+            <Space />
+            <BaseModalFooterLink href="login">log in</BaseModalFooterLink>
+          </div>
+          <div>
+            Dont have an account?:
+            <Space />
+            <BaseModalFooterLink href="sign-up">sign up</BaseModalFooterLink>
+          </div>
+        </BaseModalFooter>
+      </BaseForm>
+    </BasePanel>
   </>
 );

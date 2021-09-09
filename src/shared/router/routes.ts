@@ -33,7 +33,6 @@ export interface RoutesInterface {
   About: Route;
   ForgotPassword: Route;
   ResetPassword: Route;
-  SignUpConfirmation: Route;
   Control: Route;
   FAQ: Route;
   Download: Route;
@@ -239,18 +238,6 @@ export const Routes: RoutesInterface = {
     name: 'ResetPassword',
     path: '/:lang([a-z]{2})?/reset-password',
     route: '/reset-password',
-    exact: true,
-    auth: false,
-    header: false,
-    initialDataLoadersVisitor: [],
-    initialDataLoadersSession: [],
-    layout: 'fullPage',
-  },
-
-  SignUpConfirmation: {
-    name: 'SignUpConfirmation',
-    path: '/:lang([a-z]{2})?/sign-up-confirmation',
-    route: '/sign-up-confirmation',
     exact: true,
     auth: false,
     header: false,

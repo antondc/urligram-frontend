@@ -5,11 +5,6 @@ import Cross from 'Assets/svg/cross.svg';
 import { uiScreenMobileLock } from 'Modules/Ui/actions/uiScreenMobileLock';
 import { uiScreenMobileUnLock } from 'Modules/Ui/actions/uiScreenMobileUnLock';
 
-export { BaseModalFooterLink } from './BaseModalFooterLink';
-export { BaseModalText } from './BaseModalText';
-export { BaseModalFooter } from './BaseModalFooter';
-export { BaseModalTitle } from './BaseModalTitle';
-
 import './BaseModal.less';
 
 interface Props {
@@ -20,6 +15,7 @@ interface Props {
 
 const BaseModal: React.FC<Props> = ({ onCloseClick: onCloseClickCallback, children, className }) => {
   const dispatch = useDispatch();
+  // State available on children to avoid closing the modal on different situations
   const [locked, setLocked] = useState<boolean>(false);
 
   const onCloseClick = () => {

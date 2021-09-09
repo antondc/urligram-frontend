@@ -3,6 +3,7 @@ import Helmet from 'react-helmet';
 
 import BaseForm, { BaseFormError, BaseFormField, BaseFormSubmit } from 'Components/BaseForm';
 import { BaseModalFooter, BaseModalFooterLink, BaseModalTitle } from 'Components/BaseModal';
+import BasePanel from 'Components/BasePanel';
 import { SITE_TITLE } from 'Root/src/shared/constants';
 import { Button2, FadeInOut, Input2, Space } from 'Vendor/components';
 
@@ -49,87 +50,85 @@ export const SignUp: React.FC<Props> = ({
 }) => (
   <>
     <Helmet title={`${SITE_TITLE} · Sign Up`} />
-    <div className="SignUp">
-      <div className="SignUp-content">
-        <BaseModalTitle>Sign up</BaseModalTitle>
-        <BaseForm className="SignUp-form">
-          <BaseFormField>
-            <Input2
-              name="name"
-              type="text"
-              label="Name"
-              onChange={onChangeName}
-              onBlur={onChangeName}
-              value={nameValue}
-              error={nameError}
-              grow
-            />
-          </BaseFormField>
-          <BaseFormField>
-            <Input2
-              name="email"
-              type="email"
-              label="Email"
-              onChange={onChangeEmail}
-              onBlur={onChangeEmail}
-              value={emailValue}
-              error={emailError}
-              grow
-            />
-          </BaseFormField>
-          <BaseFormField>
-            <Input2
-              name="password"
-              type="password"
-              label="Password"
-              onChange={onChangePassword}
-              onBlur={onChangePassword}
-              value={passwordValue}
-              error={passwordError}
-              grow
-            />
-          </BaseFormField>
-          <BaseFormField>
-            <Input2
-              name="password_repeated"
-              type="password"
-              label="Repeat password"
-              onChange={onChangePasswordRepeated}
-              onBlur={onChangePasswordRepeated}
-              value={passwordRepeatedValue}
-              error={passwordRepeatedError}
-              grow
-            />
-          </BaseFormField>
-          <BaseFormSubmit>
-            <Button2
-              text="Submit"
-              type="submit"
-              onClick={onSubmit}
-              error={!!submitError}
-              success={submitSuccess}
-              disabled={submitDisabled}
-              loading={submitting}
-              grow
-            />
-            <FadeInOut valueToUpdate={!!submitError} speed="fast">
-              <BaseFormError>{submitError}</BaseFormError>
-            </FadeInOut>
-          </BaseFormSubmit>
-        </BaseForm>
-        <BaseModalFooter className="ResetPassword-footer">
-          <div>
-            Forgot password?:
-            <Space />
-            <BaseModalFooterLink href="forgot-password">log in</BaseModalFooterLink>
-          </div>
-          <div>
-            Already have an account?:
-            <Space />
-            <BaseModalFooterLink href="login">sign up</BaseModalFooterLink>
-          </div>
-        </BaseModalFooter>
-      </div>
-    </div>
+    <BasePanel>
+      <BaseModalTitle>Sign up</BaseModalTitle>
+      <BaseForm className="SignUp-form">
+        <BaseFormField>
+          <Input2
+            name="name"
+            type="text"
+            label="Name"
+            onChange={onChangeName}
+            onBlur={onChangeName}
+            value={nameValue}
+            error={nameError}
+            grow
+          />
+        </BaseFormField>
+        <BaseFormField>
+          <Input2
+            name="email"
+            type="email"
+            label="Email"
+            onChange={onChangeEmail}
+            onBlur={onChangeEmail}
+            value={emailValue}
+            error={emailError}
+            grow
+          />
+        </BaseFormField>
+        <BaseFormField>
+          <Input2
+            name="password"
+            type="password"
+            label="Password"
+            onChange={onChangePassword}
+            onBlur={onChangePassword}
+            value={passwordValue}
+            error={passwordError}
+            grow
+          />
+        </BaseFormField>
+        <BaseFormField>
+          <Input2
+            name="password_repeated"
+            type="password"
+            label="Repeat password"
+            onChange={onChangePasswordRepeated}
+            onBlur={onChangePasswordRepeated}
+            value={passwordRepeatedValue}
+            error={passwordRepeatedError}
+            grow
+          />
+        </BaseFormField>
+        <BaseFormSubmit>
+          <Button2
+            text="Submit"
+            type="submit"
+            onClick={onSubmit}
+            error={!!submitError}
+            success={submitSuccess}
+            disabled={submitDisabled}
+            loading={submitting}
+            grow
+          />
+          <FadeInOut valueToUpdate={!!submitError} speed="fast">
+            <BaseFormError>{submitError}</BaseFormError>
+          </FadeInOut>
+        </BaseFormSubmit>
+      </BaseForm>
+      <BaseModalFooter className="ResetPassword-footer">
+        <div>
+          Forgot password?:
+          <Space />
+          <BaseModalFooterLink href="forgot-password">log in</BaseModalFooterLink>
+        </div>
+        <div>
+          Already have an account?:
+          <Space />
+          <BaseModalFooterLink href="login">sign up</BaseModalFooterLink>
+        </div>
+      </BaseModalFooter>
+    </BasePanel>
   </>
 );
