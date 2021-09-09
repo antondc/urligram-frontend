@@ -35,7 +35,13 @@ export class HttpClient {
 
         return response.data;
       },
-      (err) => Promise.reject(err)
+      (error: any) => {
+        const errorInData = error?.response?.data?.error;
+
+        // Returns the data body contained by the response error object instead of the custom native error retrieved by the Error code
+        // Requires backend returning `{ error: Record<string, any> }` object
+        return Promise.reject(errorInData);
+      }
     );
 
     HttpClient.staticInstance = axiosInstance;

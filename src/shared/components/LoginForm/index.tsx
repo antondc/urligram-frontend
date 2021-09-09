@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { sessionLogIn } from 'Modules/Session/actions/sessionLogIn';
+import { sessionResetErrors } from 'Modules/Session/actions/sessionResetErrors';
 import { selectSessionErrorLast } from 'Modules/Session/selectors/selectSessionErrorLast';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import { validateEmailAddress } from 'Tools/utils/string/validateEmailAddress';
@@ -82,6 +83,8 @@ const LoginForm: React.FC<Props> = ({ setLocked }) => {
       setPasswordError(undefined);
       setNameOrEmailError(undefined);
       setSubmitting(undefined);
+      dispatch(sessionResetErrors());
+
       if (setLocked) setLocked(undefined);
     };
   }, []);

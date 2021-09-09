@@ -8,6 +8,7 @@ import {
   SESSION_LOG_OUT_FAILURE,
   SESSION_LOG_OUT_REQUEST,
   SESSION_LOG_OUT_SUCCESS,
+  SESSION_RESET_ERRORS,
   SESSION_RESET_PASSWORD_FAILURE,
   SESSION_RESET_PASSWORD_REQUEST,
   SESSION_RESET_PASSWORD_SUCCESS,
@@ -45,6 +46,7 @@ export const Session = (state = initialState, action: SessionActions): SessionSt
     case SESSION_UPDATE_DETAILS_REQUEST:
     case SESSION_UPDATE_DETAILS_SUCCESS:
     case SESSION_UPDATE_DETAILS_FAILURE:
+    case SESSION_RESET_ERRORS:
       return Object.assign({}, state, action.payload);
 
     default:

@@ -12,43 +12,48 @@ import {
 } from '../session.types';
 
 // Request a cookie from api server using the base api
-export const sessionLogIn = ({
-  nameOrEmail,
-  password,
-}: SessionLogInApiRequest): AppThunk<Promise<void>, SessionActions> => async (dispatch, getState): Promise<void> => {
-  try {
-    const { Session: sessionBeforeRequest } = getState();
-    await dispatch({
-      type: SESSION_LOG_IN_REQUEST,
-      payload: {
-        ...sessionBeforeRequest,
-        loading: true,
-      },
-    });
+export const sessionLogIn =
+  ({ nameOrEmail, password }: SessionLogInApiRequest): AppThunk<Promise<void>, SessionActions> =>
+  async (dispatch, getState): Promise<void> => {
+    try {
+      const { Session: sessionBeforeRequest } = getState();
+      await dispatch({
+        type: SESSION_LOG_IN_REQUEST,
+        payload: {
+          ...sessionBeforeRequest,
+          loading: true,
+        },
+      });
 
-    const { data }: SessionLogInApiResponse = await HttpClient.post('/login', { nameOrEmail, password });
+      const { data }: SessionLogInApiResponse = await HttpClient.post('/login', { nameOrEmail, password });
 
-    await dispatch(userLoad(data?.attributes?.id));
-    await dispatch(switchLoginModal(false));
+      await dispatch(userLoad(data?.attributes?.id));
+      await dispatch(switchLoginModal(false));
 
-    await dispatch({
-      type: SESSION_LOG_IN_SUCCESS,
-      payload: {
-        ...data.attributes,
-        loading: false,
-      },
-    });
-  } catch (error) {
-    const { Session: sessionOnError } = getState();
+      await dispatch({
+        type: SESSION_LOG_IN_SUCCESS,
+        payload: {
+          ...data.attributes,
+          loading: false,
+        },
+      });
+    } catch (error) {
+      console.log('========================================================');
+      console.log('ACTION ON ERROR:');
+      console.log(JSON.stringify(error, null, 4));
+      console.log('========================================================');
+      console.log('========================================================');
 
-    await dispatch({
-      type: SESSION_LOG_IN_FAILURE,
-      payload: {
-        ...sessionOnError,
-        errors: [...sessionOnError.errors, error],
-        loading: false,
-      },
-    });
-    throw error;
-  }
-};
+      const { Session: sessionOnError } = getState();
+
+      await dispatch({
+        type: SESSION_LOG_IN_FAILURE,
+        payload: {
+          ...sessionOnError,
+          errors: [...sessionOnError.errors, error],
+          loading: false,
+        },
+      });
+      throw error;
+    }
+  };

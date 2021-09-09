@@ -16,6 +16,7 @@ export const SESSION_RESET_PASSWORD_FAILURE = 'SESSION_RESET_PASSWORD_FAILURE';
 export const SESSION_UPDATE_DETAILS_REQUEST = 'SESSION_UPDATE_DETAILS_REQUEST';
 export const SESSION_UPDATE_DETAILS_SUCCESS = 'SESSION_UPDATE_DETAILS_SUCCESS';
 export const SESSION_UPDATE_DETAILS_FAILURE = 'SESSION_UPDATE_DETAILS_FAILURE';
+export const SESSION_RESET_ERRORS = 'SESSION_RESET_ERRORS';
 
 export const SESSION_STATUS_ACTIVE = 'active';
 export const SESSION_STATUS_INACTIVE = 'inactive';
@@ -68,6 +69,7 @@ export interface SessionLogInApiRequest {
 export interface SessionLogInApiResponse {
   data: {
     attributes: SessionState;
+    error: any;
   };
 }
 
@@ -209,6 +211,11 @@ interface SessionUpdateDetailsFailureAction {
   payload: SessionState;
 }
 
+interface SessionResetErrorsAction {
+  type: typeof SESSION_RESET_ERRORS;
+  payload: SessionState;
+}
+
 export type SessionActions =
   | LogInFailureAction
   | LogInSuccessAction
@@ -227,4 +234,5 @@ export type SessionActions =
   | ResetPasswordFailureAction
   | SessionUpdateDetailsRequestAction
   | SessionUpdateDetailSuccessAction
-  | SessionUpdateDetailsFailureAction;
+  | SessionUpdateDetailsFailureAction
+  | SessionResetErrorsAction;
