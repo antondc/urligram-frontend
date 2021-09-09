@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { Button2, FadeInOut, ImageField, Span, TextArea2 } from 'Vendor/components';
+import BaseForm, { BaseFormError, BaseFormField, BaseFormSubmit } from 'Components/BaseForm';
+import { Button2, FadeInOut, ImageField, TextArea2 } from 'Vendor/components';
 
 interface Props {
   statement: string;
@@ -27,18 +28,19 @@ export const UserForm: React.FC<Props> = ({
   removeFilesFromServer,
   onSubmit,
 }) => (
-  <form className="UserForm" onSubmit={onSubmit}>
-    <TextArea2
-      className="UserForm-statement"
-      name="statement"
-      type="text"
-      label="About me"
-      onChange={onChangeStatement}
-      value={statement}
-      grow
-      maxLength={200}
-      error={!!statementError}
-    />
+  <BaseForm className="UserForm" onSubmit={onSubmit}>
+    <BaseFormField className="UserForm-statement">
+      <TextArea2
+        name="statement"
+        type="text"
+        label="About me"
+        onChange={onChangeStatement}
+        value={statement}
+        grow
+        maxLength={200}
+        error={!!statementError}
+      />
+    </BaseFormField>
     <ImageField
       className="UserForm-image"
       label="My file"
@@ -51,10 +53,10 @@ export const UserForm: React.FC<Props> = ({
       accept=".jpg,.jpeg,.png"
     />
     <FadeInOut valueToUpdate={!!imageError} speed="fast">
-      <Span className="UserForm-imageError" size="small">
-        {imageError}
-      </Span>
+      <BaseFormError className="UserForm-imageError">{imageError}</BaseFormError>
     </FadeInOut>
-    <Button2 className="UserForm-submitButton" text="Save" type="submit" onClick={onSubmit} loading={submitting} grow />
-  </form>
+    <BaseFormSubmit className="UserForm-submitButton">
+      <Button2 text="Save" type="submit" onClick={onSubmit} loading={submitting} grow />
+    </BaseFormSubmit>
+  </BaseForm>
 );

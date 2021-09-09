@@ -3,11 +3,14 @@
 @c: .BaseModalFooterLink;
 
 @{c} {
+  text-decoration: underline;
   text-decoration-color: @c-transparent;
+  text-decoration-thickness: 2px;
   color: @gradientColors[blue-1];
 
   &:hover:not(.noClass) {
     text-decoration-color: @gradientColors[blue-1];
     color: @gradientColors[blue-1];
+    cursor: pointer;
   }
 }

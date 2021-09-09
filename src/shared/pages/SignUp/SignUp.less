@@ -16,10 +16,8 @@
   }
 
   &-content {
-    display: grid;
     align-items: center;
     grid-column: 8 / span 10;
-    grid-template-columns: repeat(8, 1fr);
     margin-bottom: 20px;
     padding: 70px 40px;
     background: @c-background;
@@ -29,54 +27,5 @@
     @media @br-mobile {
       margin-top: 0;
     }
-  }
-
-  &-h1 {
-    grid-column: 1 / span 8;
-    font-size: @fs-huge;
-    font-weight: @fw-extraBold;
-    line-height: @fh-huge;
-    text-align: center;
-    color: @gradientColors[black-3];
-  }
-
-  &-form {
-    display: flex;
-    flex-direction: column;
-    grid-column: 2 / span 6;
-    padding-top: 50px;
-  }
-
-  &-section {
-    font-size: @fs-normal;
-    font-weight: @fw-semibold;
-    text-align: center;
-  }
-
-  &-link {
-    text-decoration-color: @c-transparent;
-    color: @gradientColors[blue-1];
-
-    &:hover:not(.noClass) {
-      text-decoration-color: @gradientColors[blue-1];
-      color: @gradientColors[blue-1];
-    }
-  }
-
-  &-inputField {
-    margin-bottom: 20px;
-  }
-
-  &-submit {
-    margin: 50px 0;
-  }
-
-  &-footer {
-    grid-column: 2 / span 6;
-    margin-top: 20px;
-  }
-
-  &-error {
-    color: @c-error;
   }
 }

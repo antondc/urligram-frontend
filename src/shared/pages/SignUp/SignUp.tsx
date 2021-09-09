@@ -1,9 +1,10 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 
-import A from 'Components/A';
+import BaseForm, { BaseFormError, BaseFormField, BaseFormSubmit } from 'Components/BaseForm';
+import { BaseModalFooter, BaseModalFooterLink, BaseModalTitle } from 'Components/BaseModal';
 import { SITE_TITLE } from 'Root/src/shared/constants';
-import { Button2, FadeInOut, Input2 } from 'Vendor/components';
+import { Button2, FadeInOut, Input2, Space } from 'Vendor/components';
 
 import './SignUp.less';
 
@@ -50,9 +51,9 @@ export const SignUp: React.FC<Props> = ({
     <Helmet title={`${SITE_TITLE} · Sign Up`} />
     <div className="SignUp">
       <div className="SignUp-content">
-        <h1 className="SignUp-h1">Sign up</h1>
-        <form className="SignUp-form">
-          <div className="SignUp-inputField">
+        <BaseModalTitle>Sign up</BaseModalTitle>
+        <BaseForm className="SignUp-form">
+          <BaseFormField>
             <Input2
               name="name"
               type="text"
@@ -63,8 +64,8 @@ export const SignUp: React.FC<Props> = ({
               error={nameError}
               grow
             />
-          </div>
-          <div className="SignUp-inputField">
+          </BaseFormField>
+          <BaseFormField>
             <Input2
               name="email"
               type="email"
@@ -75,8 +76,8 @@ export const SignUp: React.FC<Props> = ({
               error={emailError}
               grow
             />
-          </div>
-          <div className="SignUp-inputField">
+          </BaseFormField>
+          <BaseFormField>
             <Input2
               name="password"
               type="password"
@@ -87,8 +88,8 @@ export const SignUp: React.FC<Props> = ({
               error={passwordError}
               grow
             />
-          </div>
-          <div className="SignUp-inputField">
+          </BaseFormField>
+          <BaseFormField>
             <Input2
               name="password_repeated"
               type="password"
@@ -99,8 +100,8 @@ export const SignUp: React.FC<Props> = ({
               error={passwordRepeatedError}
               grow
             />
-          </div>
-          <div className="SignUp-submit">
+          </BaseFormField>
+          <BaseFormSubmit>
             <Button2
               text="Submit"
               type="submit"
@@ -112,24 +113,22 @@ export const SignUp: React.FC<Props> = ({
               grow
             />
             <FadeInOut valueToUpdate={!!submitError} speed="fast">
-              <span className="SignUp-error">{submitError}</span>
+              <BaseFormError>{submitError}</BaseFormError>
             </FadeInOut>
+          </BaseFormSubmit>
+        </BaseForm>
+        <BaseModalFooter className="ResetPassword-footer">
+          <div>
+            Forgot password?:
+            <Space />
+            <BaseModalFooterLink href="forgot-password">log in</BaseModalFooterLink>
           </div>
-        </form>
-        <div className="SignUp-footer">
-          <div className="SignUp-section">
-            <span>Forgot password?: </span>
-            <A className="SignUp-link" href="forgot-password" styled underlined frontend>
-              <span>reset it</span>
-            </A>
+          <div>
+            Already have an account?:
+            <Space />
+            <BaseModalFooterLink href="login">sign up</BaseModalFooterLink>
           </div>
-          <div className="SignUp-section">
-            <span>Already have an account?: </span>
-            <A className="SignUp-link" href="login" styled underlined frontend>
-              <span>login</span>
-            </A>
-          </div>
-        </div>
+        </BaseModalFooter>
       </div>
     </div>
   </>

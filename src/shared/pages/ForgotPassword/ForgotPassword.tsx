@@ -1,9 +1,10 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 
-import A from 'Components/A';
+import BaseForm, { BaseFormError, BaseFormField, BaseFormSubmit } from 'Components/BaseForm';
+import { BaseModalFooter, BaseModalFooterLink, BaseModalTitle } from 'Components/BaseModal';
 import { SITE_TITLE } from 'Root/src/shared/constants';
-import { Button2, FadeInOut, Input2 } from 'Vendor/components';
+import { Button2, FadeInOut, Input2, Space } from 'Vendor/components';
 
 import './ForgotPassword.less';
 
@@ -34,47 +35,49 @@ export const ForgotPassword: React.FC<Props> = ({
     <Helmet title={`${SITE_TITLE} · Forgot Password`} />
     <div className="ForgotPassword">
       <div className="ForgotPassword-content">
-        <div className="ForgotPassword-h1">Password forgotten</div>
-        <form className="ForgotPassword-form">
-          <Input2
-            name="nameOrEmail"
-            type="text"
-            label="Name or email"
-            onChange={onChangeNameOrEmail}
-            onBlur={onBlurNameOrEmail}
-            value={nameOrEmailValue}
-            error={nameOrEmailError}
-            grow
-          />
-          <Button2
-            className="ForgotPassword-submit"
-            text="Submit"
-            type="submit"
-            onClick={onSubmit}
-            error={!!submitError}
-            success={submitSuccess}
-            disabled={submitDisabled}
-            loading={submitting}
-            grow
-          />
-          <FadeInOut valueToUpdate={!!submitError} speed="fast">
-            <span className="ForgotPassword-error">{submitError}</span>
-          </FadeInOut>
-        </form>
-        <div className="ForgotPassword-footer">
-          <div className="ForgotPassword-section">
-            <span>Remember it?: </span>
-            <A className="ForgotPassword-link" href="login" styled underlined frontend>
-              <span>log in</span>
-            </A>
-          </div>
-          <div className="ForgotPassword-section">
-            <span>Dont have an account?: </span>
-            <A className="ForgotPassword-link" href="sign-up" styled underlined frontend>
-              <span>sign up</span>
-            </A>
-          </div>
-        </div>
+        <BaseForm className="ForgotPassword-form">
+          <BaseModalTitle>Password forgotten</BaseModalTitle>
+          <BaseFormField>
+            <Input2
+              name="nameOrEmail"
+              type="text"
+              label="Name or email"
+              onChange={onChangeNameOrEmail}
+              onBlur={onBlurNameOrEmail}
+              value={nameOrEmailValue}
+              error={nameOrEmailError}
+              grow
+            />
+          </BaseFormField>
+          <BaseFormSubmit>
+            <Button2
+              className="ForgotPassword-submit"
+              text="Submit"
+              type="submit"
+              onClick={onSubmit}
+              error={!!submitError}
+              success={submitSuccess}
+              disabled={submitDisabled}
+              loading={submitting}
+              grow
+            />
+            <FadeInOut valueToUpdate={!!submitError} speed="fast">
+              <BaseFormError className="ForgotPassword-error">{submitError}</BaseFormError>
+            </FadeInOut>
+          </BaseFormSubmit>
+          <BaseModalFooter>
+            <div>
+              Remember it?:
+              <Space />
+              <BaseModalFooterLink href="login">log in</BaseModalFooterLink>
+            </div>
+            <div>
+              Dont have an account?:
+              <Space />
+              <BaseModalFooterLink href="sign-up">sign up</BaseModalFooterLink>
+            </div>
+          </BaseModalFooter>
+        </BaseForm>
       </div>
     </div>
   </>

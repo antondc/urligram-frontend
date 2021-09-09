@@ -1,8 +1,6 @@
 import React from 'react';
 
-import BaseForm, { BaseFormField } from 'Components/BaseForm';
-import { BaseFormError } from 'Components/BaseForm/BaseFormError';
-import { BaseFormSubmit } from 'Components/BaseForm/BaseFormSubmit';
+import BaseForm, { BaseFormError, BaseFormField, BaseFormSubmit } from 'Components/BaseForm';
 import { Button2, FadeInOut, Input2 } from 'Vendor/components';
 
 import './LoginForm.less';

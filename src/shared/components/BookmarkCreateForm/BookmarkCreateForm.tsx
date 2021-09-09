@@ -1,5 +1,7 @@
 import React from 'react';
 
+import BaseForm, { BaseFormError, BaseFormField, BaseFormLabel, BaseFormSubmit } from 'Components/BaseForm';
+import { BaseModalTitle } from 'Components/BaseModal';
 import { TagState } from 'Modules/Tags/tags.types';
 import { ArrowRight, Button2, FadeInOut, Input2, Select, SelectValue, SpinnerPie, Switch } from 'Vendor/components';
 import { TagValue } from '.';
@@ -53,9 +55,9 @@ export const BookmarkCreateForm: React.FC<Props> = ({
   submitError,
   onSubmit,
 }) => (
-  <form className="BookmarkCreateForm" onSubmit={onSubmit}>
-    <h2 className="BookmarkCreateForm-title">Add a Bookmark</h2>
-    <div className="BookmarkCreateForm-url">
+  <BaseForm className="BookmarkCreateForm" onSubmit={onSubmit}>
+    <BaseModalTitle>Add a Bookmark</BaseModalTitle>
+    <BaseFormField className="BookmarkCreateForm-url">
       <Input2
         className="BookmarkCreateForm"
         name="url"
@@ -74,11 +76,11 @@ export const BookmarkCreateForm: React.FC<Props> = ({
         )}
         {urlLoading && <SpinnerPie className="BookmarkCreateForm-loader" size="medium" />}
       </FadeInOut>
-    </div>
+    </BaseFormField>
     <FadeInOut valueToUpdate={urlSubmitted}>
       {urlSubmitted && (
         <>
-          <div className="BookmarkCreateForm-inputField">
+          <BaseFormField>
             <Input2
               name="title"
               type="text"
@@ -89,8 +91,8 @@ export const BookmarkCreateForm: React.FC<Props> = ({
               error={titleError}
               grow
             />
-          </div>
-          <div className="BookmarkCreateForm-inputField">
+          </BaseFormField>
+          <BaseFormField>
             <Select
               className="BookmarkCreateForm-tags"
               placeholder="Select tags"
@@ -106,12 +108,12 @@ export const BookmarkCreateForm: React.FC<Props> = ({
               grow
               // isCreatable
             />
-          </div>
-          <div className="BookmarkCreateForm-inputField">
-            <div className="BookmarkCreateForm-private">Is Private</div>
+          </BaseFormField>
+          <BaseFormField>
+            <BaseFormLabel>Is Private</BaseFormLabel>
             <Switch name="isPrivate" checked={isPrivateValue} onChange={onChangeIsPrivate} />
-          </div>
-          <div className="BookmarkCreateForm-submit">
+          </BaseFormField>
+          <BaseFormSubmit>
             <Button2
               text="Save"
               type="submit"
@@ -123,11 +125,11 @@ export const BookmarkCreateForm: React.FC<Props> = ({
               grow
             />
             <FadeInOut valueToUpdate={!!submitError} speed="fast">
-              <span className="BookmarkCreateForm-error">{submitError}</span>
+              <BaseFormError>{submitError}</BaseFormError>
             </FadeInOut>
-          </div>
+          </BaseFormSubmit>
         </>
       )}
     </FadeInOut>
-  </form>
+  </BaseForm>
 );

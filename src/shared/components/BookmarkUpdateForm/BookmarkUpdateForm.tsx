@@ -1,5 +1,7 @@
 import React from 'react';
 
+import BaseForm, { BaseFormError, BaseFormField, BaseFormLabel, BaseFormSubmit } from 'Components/BaseForm';
+import { BaseModalTitle } from 'Components/BaseModal';
 import { TagState } from 'Modules/Tags/tags.types';
 import { Button2, FadeInOut, Input2, Select, SelectValue, Switch } from 'Vendor/components';
 import { TagValue } from '.';
@@ -41,9 +43,9 @@ export const BookmarkUpdateForm: React.FC<Props> = ({
   submitError,
   onSubmit,
 }) => (
-  <form className="BookmarkUpdateForm" onSubmit={onSubmit}>
-    <h2 className="BookmarkUpdateForm-title">Update Bookmark</h2>
-    <div className="BookmarkUpdateForm-inputField">
+  <BaseForm className="BookmarkUpdateForm" onSubmit={onSubmit}>
+    <BaseModalTitle>Update Bookmark</BaseModalTitle>
+    <BaseFormField>
       <Input2
         name="title"
         type="text"
@@ -54,8 +56,8 @@ export const BookmarkUpdateForm: React.FC<Props> = ({
         error={titleError}
         grow
       />
-    </div>
-    <div className="BookmarkUpdateForm-inputField">
+    </BaseFormField>
+    <BaseFormField>
       <Select
         className="BookmarkUpdateForm-tags"
         placeholder="Select tags"
@@ -70,24 +72,25 @@ export const BookmarkUpdateForm: React.FC<Props> = ({
         grow
         isCreatable
       />
-    </div>
-    <div className="BookmarkUpdateForm-inputField">
-      <div className="BookmarkUpdateForm-private">Is Private</div>
+    </BaseFormField>
+    <BaseFormField>
+      <BaseFormLabel>Is Private</BaseFormLabel>
       <Switch name="isPrivate" checked={isPrivateValue} onChange={onChangeIsPrivate} />
-    </div>
-
-    <Button2
-      text="Save"
-      type="submit"
-      onClick={onSubmit}
-      error={!!submitError}
-      success={submitSuccess}
-      disabled={submitDisabled}
-      loading={submitting}
-      grow
-    />
-    <FadeInOut valueToUpdate={!!submitError} speed="fast">
-      <div className="BookmarkUpdateForm-error">{submitError}</div>
-    </FadeInOut>
-  </form>
+    </BaseFormField>
+    <BaseFormSubmit>
+      <Button2
+        text="Save"
+        type="submit"
+        onClick={onSubmit}
+        error={!!submitError}
+        success={submitSuccess}
+        disabled={submitDisabled}
+        loading={submitting}
+        grow
+      />
+      <FadeInOut valueToUpdate={!!submitError} speed="fast">
+        <BaseFormError>{submitError}</BaseFormError>
+      </FadeInOut>
+    </BaseFormSubmit>
+  </BaseForm>
 );

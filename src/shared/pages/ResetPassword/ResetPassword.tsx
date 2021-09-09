@@ -1,9 +1,10 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 
-import A from 'Components/A';
+import BaseForm, { BaseFormError, BaseFormField, BaseFormSubmit } from 'Components/BaseForm';
+import { BaseModalFooter, BaseModalFooterLink, BaseModalTitle } from 'Components/BaseModal';
 import { SITE_TITLE } from 'Root/src/shared/constants';
-import { Button2, FadeInOut, Input2 } from 'Vendor/components';
+import { Button2, FadeInOut, Input2, Space } from 'Vendor/components';
 
 import './ResetPassword.less';
 
@@ -38,9 +39,9 @@ export const ResetPassword: React.FC<Props> = ({
     <Helmet title={`${SITE_TITLE} · Reset Password`} />
     <div className="ResetPassword">
       <div className="ResetPassword-content">
-        <div className="ResetPassword-h1">Reset Password</div>
-        <form className="ResetPassword-form">
-          <div className="ResetPassword-inputField">
+        <BaseModalTitle>Reset Password</BaseModalTitle>
+        <BaseForm className="ResetPassword-form">
+          <BaseFormField>
             <Input2
               name="password"
               type="password"
@@ -51,8 +52,8 @@ export const ResetPassword: React.FC<Props> = ({
               error={passwordError}
               grow
             />
-          </div>
-          <div className="ResetPassword-inputField">
+          </BaseFormField>
+          <BaseFormField>
             <Input2
               name="password_repeated"
               type="password"
@@ -63,8 +64,8 @@ export const ResetPassword: React.FC<Props> = ({
               error={passwordRepeatedError}
               grow
             />
-          </div>
-          <div className="ResetPassword-submit">
+          </BaseFormField>
+          <BaseFormSubmit>
             <Button2
               text="Submit"
               type="submit"
@@ -76,24 +77,22 @@ export const ResetPassword: React.FC<Props> = ({
               grow
             />
             <FadeInOut valueToUpdate={!!submitError} speed="fast">
-              <span className="ResetPassword-error">{submitError}</span>
+              <BaseFormError>{submitError}</BaseFormError>
             </FadeInOut>
-          </div>
-        </form>
-        <div className="ResetPassword-footer">
-          <div className="ResetPassword-section">
-            <span>Remember it?: </span>
-            <A href="login" styled underlined frontend>
-              <span>log in</span>
-            </A>
-          </div>
-          <div className="ResetPassword-section">
-            <span>Dont have an account?: </span>
-            <A href="sign-up" styled underlined frontend>
-              <span>sign up</span>
-            </A>
-          </div>
-        </div>
+          </BaseFormSubmit>
+          <BaseModalFooter className="ResetPassword-footer">
+            <div>
+              Remember it?:
+              <Space />
+              <BaseModalFooterLink href="login">log in</BaseModalFooterLink>
+            </div>
+            <div>
+              Dont have an account?:
+              <Space />
+              <BaseModalFooterLink href="sign-up">sign up</BaseModalFooterLink>
+            </div>
+          </BaseModalFooter>
+        </BaseForm>
       </div>
     </div>
   </>
