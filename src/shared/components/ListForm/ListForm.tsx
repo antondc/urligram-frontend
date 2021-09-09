@@ -1,5 +1,9 @@
 import React from 'react';
 
+import BaseForm, { BaseFormField } from 'Components/BaseForm';
+import { BaseFormError } from 'Components/BaseForm/BaseFormError';
+import { BaseFormLabel } from 'Components/BaseForm/BaseFormLabel';
+import { BaseFormSubmit } from 'Components/BaseForm/BaseFormSubmit';
 import { Button2, FadeInOut, Input2, Switch } from 'Vendor/components';
 
 import './ListForm.less';
@@ -45,8 +49,8 @@ export const ListForm: React.FC<Props> = ({
   onBlurDescription,
   onRemove,
 }) => (
-  <form className="ListForm" onSubmit={onSubmit}>
-    <div className="ListForm-inputField">
+  <BaseForm className="ListForm" onSubmit={onSubmit}>
+    <BaseFormField>
       <Input2
         name="name"
         type="text"
@@ -58,8 +62,8 @@ export const ListForm: React.FC<Props> = ({
         grow
         autoFocus
       />
-    </div>
-    <div className="ListForm-inputField">
+    </BaseFormField>
+    <BaseFormField>
       <Input2
         name="description"
         type="text"
@@ -70,12 +74,12 @@ export const ListForm: React.FC<Props> = ({
         onBlur={onBlurDescription}
         grow
       />
-    </div>
-    <div className="ListForm-inputField">
-      <div className="ListForm-privateTitle">Is Private</div>
+    </BaseFormField>
+    <BaseFormField>
+      <BaseFormLabel>Is Private</BaseFormLabel>
       <Switch name="isPrivate" checked={isPrivateValue} onChange={onChangeIsPrivate} />
-    </div>
-    <div className="ListForm-submit">
+    </BaseFormField>
+    <BaseFormSubmit>
       <Button2
         text="Save"
         type="submit"
@@ -86,9 +90,6 @@ export const ListForm: React.FC<Props> = ({
         disabled={submitDisabled}
         grow
       />
-      <FadeInOut valueToUpdate={!!submitError} speed="fast">
-        <span className="ListForm-error">{submitError}</span>
-      </FadeInOut>
       {!!isUpdate && (
         <Button2
           text="Remove list"
@@ -100,6 +101,9 @@ export const ListForm: React.FC<Props> = ({
           grow
         />
       )}
-    </div>
-  </form>
+      <FadeInOut valueToUpdate={!!submitError} speed="fast">
+        <BaseFormError>{submitError}</BaseFormError>
+      </FadeInOut>
+    </BaseFormSubmit>
+  </BaseForm>
 );
