@@ -87,8 +87,11 @@ export const ListForm: React.FC<Props> = ({
         disabled={submitDisabled}
         grow
       />
-      {!!isUpdate && (
+    </BaseFormSubmit>
+    {!!isUpdate && (
+      <BaseFormSubmit>
         <Button2
+          className="ListForm-delete"
           text="Remove list"
           type="submit"
           onClick={onRemove}
@@ -97,10 +100,10 @@ export const ListForm: React.FC<Props> = ({
           loading={removing}
           grow
         />
-      )}
-      <FadeInOut valueToUpdate={!!submitError} speed="fast">
-        <BaseFormError>{submitError}</BaseFormError>
-      </FadeInOut>
-    </BaseFormSubmit>
+      </BaseFormSubmit>
+    )}
+    <FadeInOut valueToUpdate={!!submitError} speed="fast">
+      <BaseFormError>{submitError}</BaseFormError>
+    </FadeInOut>
   </BaseForm>
 );
