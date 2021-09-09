@@ -1,5 +1,8 @@
 import React from 'react';
 
+import BaseForm, { BaseFormField } from 'Components/BaseForm';
+import { BaseFormError } from 'Components/BaseForm/BaseFormError';
+import { BaseFormSubmit } from 'Components/BaseForm/BaseFormSubmit';
 import { Button2, FadeInOut, Input2 } from 'Vendor/components';
 
 import './LoginForm.less';
@@ -31,8 +34,8 @@ export const LoginForm: React.FC<Props> = ({
   submitting,
   onSubmit,
 }) => (
-  <form className="LoginForm">
-    <div className="LoginForm-inputField">
+  <BaseForm className="LoginForm">
+    <BaseFormField>
       <Input2
         name="nameOrEmail"
         type="text"
@@ -43,8 +46,8 @@ export const LoginForm: React.FC<Props> = ({
         error={nameOrEmailError}
         grow
       />
-    </div>
-    <div className="LoginForm-inputField">
+    </BaseFormField>
+    <BaseFormField>
       <Input2
         name="password"
         type="password"
@@ -55,8 +58,8 @@ export const LoginForm: React.FC<Props> = ({
         error={passwordError}
         grow
       />
-    </div>
-    <div className="LoginForm-submit">
+    </BaseFormField>
+    <BaseFormSubmit>
       <Button2
         text="Submit"
         type="submit"
@@ -67,9 +70,9 @@ export const LoginForm: React.FC<Props> = ({
         loading={submitting}
         grow
       />
-    </div>
+    </BaseFormSubmit>
     <FadeInOut valueToUpdate={!!submitError} speed="fast">
-      <span className="LoginForm-error">{submitError}</span>
+      <BaseFormError className="LoginForm-error">{submitError}</BaseFormError>
     </FadeInOut>
-  </form>
+  </BaseForm>
 );
