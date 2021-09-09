@@ -1,5 +1,5 @@
 export { default } from './BaseModal';
 export { BaseModalFooterLink } from './BaseModalFooterLink';
 export { BaseModalText } from './BaseModalText';
-export { BaseModalSection } from './BaseModalSection';
+export { BaseModalFooter } from './BaseModalFooter';
 export { BaseModalTitle } from './BaseModalTitle';

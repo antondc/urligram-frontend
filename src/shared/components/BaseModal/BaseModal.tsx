@@ -7,7 +7,7 @@ import { uiScreenMobileUnLock } from 'Modules/Ui/actions/uiScreenMobileUnLock';
 
 export { BaseModalFooterLink } from './BaseModalFooterLink';
 export { BaseModalText } from './BaseModalText';
-export { BaseModalSection } from './BaseModalSection';
+export { BaseModalFooter } from './BaseModalFooter';
 export { BaseModalTitle } from './BaseModalTitle';
 
 import './BaseModal.less';
