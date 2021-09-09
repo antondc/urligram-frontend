@@ -1,12 +1,10 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
-import Cross from 'Assets/svg/cross.svg';
-import BaseModal from 'Components/BaseModal';
+import BaseModal2, { BaseModalText, BaseModalTitle } from 'Components/BaseModal2';
 import { switchForgotPasswordModal } from 'Modules/Ui/actions/switchForgotPasswordModal';
 import { Routes } from 'Router/routes';
 import history from 'Services/History';
-import { Flex, H4, Hr, P, Span } from 'Vendor/components';
 
 import './ForgotPasswordModal.less';
 
@@ -19,26 +17,11 @@ const ForgotPasswordModal: React.FC = () => {
   };
 
   return (
-    <BaseModal onClick={closeForgotPasswordModal}>
-      <div className="ForgotPasswordModal">
-        <Cross className="ForgotPasswordModal-cross" onClick={closeForgotPasswordModal} />
-        <Flex horizontal="center">
-          <H4>We received your request</H4>
-          <Hr size="normal" spacer />
-          <P>
-            <Span size="normal" weight="semiBold">
-              Please check your email
-            </Span>
-          </P>
-          <Hr size="zero" spacer />
-          <P>
-            <Span size="normal" weight="semiBold">
-              ✉️&nbsp;&nbsp;&nbsp;🚀
-            </Span>
-          </P>
-        </Flex>
-      </div>
-    </BaseModal>
+    <BaseModal2 className="ForgotPasswordModal" onCloseClick={closeForgotPasswordModal}>
+      <BaseModalTitle>We received your request</BaseModalTitle>
+      <BaseModalText>Please check your email</BaseModalText>
+      <BaseModalText>✉️&nbsp;&nbsp;&nbsp;🚀</BaseModalText>
+    </BaseModal2>
   );
 };
 

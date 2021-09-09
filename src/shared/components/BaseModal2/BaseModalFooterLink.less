@@ -1,0 +1,13 @@
+@import '../../css/imports.less';
+
+@c: .BaseModalFooterLink;
+
+@{c} {
+  text-decoration-color: @c-transparent;
+  color: @gradientColors[blue-1];
+
+  &:hover:not(.noClass) {
+    text-decoration-color: @gradientColors[blue-1];
+    color: @gradientColors[blue-1];
+  }
+}

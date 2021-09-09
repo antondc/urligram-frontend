@@ -9,6 +9,7 @@ import { uiScreenMobileLock } from 'Modules/Ui/actions/uiScreenMobileLock';
 import { uiScreenMobileUnLock } from 'Modules/Ui/actions/uiScreenMobileUnLock';
 import { selectUiBookmarkUpdateModalMounted } from 'Modules/Ui/selectors/selectUiBookmarkUpdateModalMounted';
 import { selectUiScreenTypeIsMobile } from 'Modules/Ui/selectors/selectUiScreenTypeIsMobile';
+import { Fade } from 'Vendor/components';
 
 export const BookmarkUpdateModalOrSheet: React.FC = () => {
   const dispatch = useDispatch();
@@ -33,9 +34,11 @@ export const BookmarkUpdateModalOrSheet: React.FC = () => {
   }
 
   return (
-    <BaseModal2 mounted={bookmarkUpdateModalMounted} onCloseClick={onClose}>
-      <BookmarkUpdateForm closeModal={onClose} />
-    </BaseModal2>
+    <Fade mounted={bookmarkUpdateModalMounted} speed="fastest" position="fixed" appear>
+      <BaseModal2 onCloseClick={onClose}>
+        <BookmarkUpdateForm closeModal={onClose} />
+      </BaseModal2>
+    </Fade>
   );
 };
 

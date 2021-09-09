@@ -1,36 +1,31 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
+import { useDispatch } from 'react-redux';
 
-import Cross from 'Assets/svg/cross.svg';
-import BaseModal from 'Components/BaseModal';
+import BaseModal2, { BaseModalText, BaseModalTitle } from 'Components/BaseModal2';
 import { switchMessageModal } from 'Modules/Ui/actions/switchMessageModal';
-import { Button, Flex, Hr, Span } from 'Vendor/components';
+import { Button2 } from 'Vendor/components';
 
 import './ModalMessage.less';
 
 interface Props {
-  message: string;
-  switchMessageModal: () => void;
+  children: React.ReactNode | React.ReactNode[];
+  title: string;
 }
 
-const ModalMessage: React.FC<Props> = ({ message, switchMessageModal }) => (
-  <BaseModal onClick={switchMessageModal}>
-    <div className="ModalMessage">
-      <Cross className="ModalMessage-cross" onClick={switchMessageModal} />
-      <Span className="ModalMessage-message" weight="semiBold">
-        {message}
-      </Span>
-      <Hr spacer size="big" />
-      <Flex horizontal="center">
-        <Button text="Submit" onClick={switchMessageModal} />
-      </Flex>
-    </div>
-  </BaseModal>
-);
+const ModalMessage: React.FC<Props> = ({ children, title }) => {
+  const dispatch = useDispatch();
 
-const mapStateToProps = createStructuredSelector({});
+  const onCloseOrSubmitClick = () => {
+    dispatch(switchMessageModal());
+  };
 
-export default connect(mapStateToProps, {
-  switchMessageModal,
-})(ModalMessage);
+  return (
+    <BaseModal2 className="ModalMessage" onCloseClick={onCloseOrSubmitClick}>
+      <BaseModalTitle>{title}</BaseModalTitle>
+      <BaseModalText>{children}</BaseModalText>
+      <Button2 className="ModalMessage-submit" text="Submit" onClick={onCloseOrSubmitClick} grow />
+    </BaseModal2>
+  );
+};
+
+export default ModalMessage;

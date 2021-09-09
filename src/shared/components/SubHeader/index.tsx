@@ -4,7 +4,7 @@ import ListIcon from 'Assets/svg/list.svg';
 import A from 'Components/A';
 import { UserState } from 'Modules/Users/users.types';
 import { Select, SelectValue, SortBy, Space } from 'Vendor/components';
-import { SortByOption } from '../../vendor/components/SortBy';
+import { SortByOption } from 'Vendor/components/SortBy';
 
 import './SubHeader.less';
 

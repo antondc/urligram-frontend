@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import Cross from 'Assets/svg/cross.svg';
-import BaseModal from 'Components/BaseModal';
+import BaseModal2, { BaseModalTitle } from 'Components/BaseModal2';
 import ListForm from 'Components/ListForm';
 import { switchListModal } from 'Modules/Ui/actions/switchListModal';
 import { selectUiListModal } from 'Modules/Ui/selectors/selectUiListModal';
@@ -21,13 +20,10 @@ const ListModal: React.FC = () => {
   };
 
   return (
-    <BaseModal>
-      <div className="ListModal">
-        <Cross className="ListModal-cross" onClick={closeModal} />
-        <h3 className="ListModal-title">{!!isUpdate ? 'Update List' : 'Create List'}</h3>
-        <ListForm closeModal={closeModal} setLocked={setLocked} />
-      </div>
-    </BaseModal>
+    <BaseModal2 className="ListModal" onCloseClick={closeModal}>
+      <BaseModalTitle>{!!isUpdate ? 'Update List' : 'Create List'}</BaseModalTitle>
+      <ListForm closeModal={closeModal} setLocked={setLocked} />
+    </BaseModal2>
   );
 };
 

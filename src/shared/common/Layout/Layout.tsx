@@ -17,6 +17,7 @@ import UserModal from 'Components/UserModal';
 import WelcomeModal from 'Components/WelcomeModal';
 import Router from 'Router/index';
 import { Fade, SpinnerPie } from 'Vendor/components';
+import ModalMessage from '../../components/ModalMessage';
 
 import './Layout.less';
 

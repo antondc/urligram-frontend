@@ -1,11 +1,9 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import Cross from 'Assets/svg/cross.svg';
-import BaseModal from 'Components/BaseModal';
+import BaseModal2, { BaseModalText, BaseModalTitle } from 'Components/BaseModal2';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { switchSignUpModal } from 'Modules/Ui/actions/switchSignUpModal';
-import { Flex, H3, Hr, P, Span } from 'Vendor/components';
 
 import './SignUpModal.less';
 
@@ -18,25 +16,13 @@ const SignUpModal: React.FC = () => {
   };
 
   return (
-    <BaseModal onClick={closeSignUpModal}>
-      <div className="SignUpModal">
-        <Cross className="SignUpModal-cross" onClick={closeSignUpModal} />
-        <Flex horizontal="center">
-          <H3>Thanks @{name}!</H3>
-          <Hr size="big" spacer />
-          <P>
-            <Span size="normal" weight="semiBold">
-              Your account has been created and is on stand by. Please check your email to activate it!
-            </Span>
-          </P>
-          <P>
-            <Span size="normal" weight="semiBold">
-              ✉️&nbsp;&nbsp;&nbsp;🚀
-            </Span>
-          </P>
-        </Flex>
-      </div>
-    </BaseModal>
+    <BaseModal2 className="SignUpModal" onCloseClick={closeSignUpModal}>
+      <BaseModalTitle>Thanks @{name}!</BaseModalTitle>
+      <BaseModalText>
+        Your account has been created and is on stand by. Please check your email to activate it!
+      </BaseModalText>
+      <BaseModalText>✉️&nbsp;&nbsp;&nbsp;🚀</BaseModalText>
+    </BaseModal2>
   );
 };
 

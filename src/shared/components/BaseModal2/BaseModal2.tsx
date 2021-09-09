@@ -1,25 +1,41 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 
-import Cross from 'Assets/svg/cross.svg';
-import { Fade } from 'Vendor/components';
+import { uiScreenMobileLock } from 'Modules/Ui/actions/uiScreenMobileLock';
+import { uiScreenMobileUnLock } from 'Modules/Ui/actions/uiScreenMobileUnLock';
+import { BaseModal2 as BaseModal2Ui } from './BaseModal2.ui';
 
-import './BaseModal2.less';
+export { BaseModalFooterLink } from './BaseModalFooterLink';
+export { BaseModalText } from './BaseModalText';
+export { BaseModalSection } from './BaseModalSection';
+export { BaseModalTitle } from './BaseModalTitle';
 
 interface Props {
-  mounted: boolean;
+  children: React.ReactNode | React.ReactNode[];
+  className?: string;
   onCloseClick: () => void;
 }
 
-export const BaseModal2: React.FC<Props> = ({ children, mounted, onCloseClick }) => (
-  <Fade mounted={mounted} speed="fastest" position="fixed" appear>
-    <div className="BaseModal2">
-      <div className="BaseModal2-container">
-        <div className="BaseModal2-background" onClick={onCloseClick} />
-        <div className="BaseModal2-content">
-          <Cross className="BaseModal2-cross" onClick={onCloseClick} />
-          {children}
-        </div>
-      </div>
-    </div>
-  </Fade>
-);
+const BaseModal2: React.FC<Props> = ({ onCloseClick: onCloseClickCallback, children, className }) => {
+  const dispatch = useDispatch();
+  const [locked, setLocked] = useState<boolean>(false);
+
+  const onCloseClick = () => {
+    if (locked) return;
+
+    dispatch(uiScreenMobileUnLock());
+    onCloseClickCallback();
+  };
+
+  useEffect(() => {
+    dispatch(uiScreenMobileLock());
+  }, []);
+
+  return (
+    <BaseModal2Ui className={className} onCloseClick={onCloseClick}>
+      {React.cloneElement(<>{children}</>, { setLocked })}
+    </BaseModal2Ui>
+  );
+};
+
+export default BaseModal2;
