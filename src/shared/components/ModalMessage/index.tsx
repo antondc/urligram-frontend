@@ -21,9 +21,11 @@ const ModalMessage: React.FC<Props> = ({ children, title }) => {
 
   return (
     <BaseModal className="ModalMessage" onCloseClick={onCloseOrSubmitClick}>
-      <BaseModalTitle>{title}</BaseModalTitle>
-      <BaseModalText>{children}</BaseModalText>
-      <Button2 className="ModalMessage-submit" text="Submit" onClick={onCloseOrSubmitClick} grow />
+      <>
+        <BaseModalTitle>{title}</BaseModalTitle>
+        <BaseModalText>{children}</BaseModalText>
+        <Button2 className="ModalMessage-submit" text="Submit" onClick={onCloseOrSubmitClick} grow />
+      </>
     </BaseModal>
   );
 };

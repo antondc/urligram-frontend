@@ -18,9 +18,11 @@ const ResetPasswordModal: React.FC = () => {
 
   return (
     <BaseModal className="ResetPasswordModal" onCloseClick={closeResetPasswordModal}>
-      <BaseModalTitle>Password reset success!</BaseModalTitle>
-      <BaseModalText>Save it in a safe place</BaseModalText>
-      <BaseModalText>🎉&nbsp;&nbsp;&nbsp;🥳</BaseModalText>
+      <>
+        <BaseModalTitle>Password reset success!</BaseModalTitle>
+        <BaseModalText>Save it in a safe place</BaseModalText>
+        <BaseModalText>🎉&nbsp;&nbsp;&nbsp;🥳</BaseModalText>
+      </>
     </BaseModal>
   );
 };

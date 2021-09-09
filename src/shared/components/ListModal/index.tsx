@@ -21,8 +21,10 @@ const ListModal: React.FC = () => {
 
   return (
     <BaseModal className="ListModal" onCloseClick={closeModal}>
-      <BaseModalTitle>{!!isUpdate ? 'Update List' : 'Create List'}</BaseModalTitle>
-      <ListForm closeModal={closeModal} setLocked={setLocked} />
+      <>
+        <BaseModalTitle>{!!isUpdate ? 'Update List' : 'Create List'}</BaseModalTitle>
+        <ListForm closeModal={closeModal} setLocked={setLocked} />
+      </>
     </BaseModal>
   );
 };

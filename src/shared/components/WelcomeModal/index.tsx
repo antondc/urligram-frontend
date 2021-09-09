@@ -17,9 +17,11 @@ const WelcomeModal: React.FC = () => {
 
   return (
     <BaseModal className="WelcomeModal" onCloseClick={closeWelcomeModal}>
-      <BaseModalTitle>Welcome @{name}!</BaseModalTitle>
-      <BaseModalText>Your account is active now</BaseModalText>
-      <BaseModalText>🎉&nbsp;&nbsp;&nbsp;🥳</BaseModalText>
+      <>
+        <BaseModalTitle>Welcome @{name}!</BaseModalTitle>
+        <BaseModalText>Your account is active now</BaseModalText>
+        <BaseModalText>🎉&nbsp;&nbsp;&nbsp;🥳</BaseModalText>
+      </>
     </BaseModal>
   );
 };

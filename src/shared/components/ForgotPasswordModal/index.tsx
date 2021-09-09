@@ -18,9 +18,11 @@ const ForgotPasswordModal: React.FC = () => {
 
   return (
     <BaseModal className="ForgotPasswordModal" onCloseClick={closeForgotPasswordModal}>
-      <BaseModalTitle>We received your request</BaseModalTitle>
-      <BaseModalText>Please check your email</BaseModalText>
-      <BaseModalText>✉️&nbsp;&nbsp;&nbsp;🚀</BaseModalText>
+      <>
+        <BaseModalTitle>We received your request</BaseModalTitle>
+        <BaseModalText>Please check your email</BaseModalText>
+        <BaseModalText>✉️&nbsp;&nbsp;&nbsp;🚀</BaseModalText>
+      </>
     </BaseModal>
   );
 };

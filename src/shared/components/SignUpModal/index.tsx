@@ -17,11 +17,13 @@ const SignUpModal: React.FC = () => {
 
   return (
     <BaseModal className="SignUpModal" onCloseClick={closeSignUpModal}>
-      <BaseModalTitle>Thanks @{name}!</BaseModalTitle>
-      <BaseModalText>
-        Your account has been created and is on stand by. Please check your email to activate it!
-      </BaseModalText>
-      <BaseModalText>✉️&nbsp;&nbsp;&nbsp;🚀</BaseModalText>
+      <>
+        <BaseModalTitle>Thanks @{name}!</BaseModalTitle>
+        <BaseModalText>
+          Your account has been created and is on stand by. Please check your email to activate it!
+        </BaseModalText>
+        <BaseModalText>✉️&nbsp;&nbsp;&nbsp;🚀</BaseModalText>
+      </>
     </BaseModal>
   );
 };

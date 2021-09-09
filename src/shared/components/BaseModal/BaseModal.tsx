@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
+import Cross from 'Assets/svg/cross.svg';
 import { uiScreenMobileLock } from 'Modules/Ui/actions/uiScreenMobileLock';
 import { uiScreenMobileUnLock } from 'Modules/Ui/actions/uiScreenMobileUnLock';
-import { BaseModal as BaseModalUi } from './BaseModal.ui';
 
 export { BaseModalFooterLink } from './BaseModalFooterLink';
 export { BaseModalText } from './BaseModalText';
 export { BaseModalSection } from './BaseModalSection';
 export { BaseModalTitle } from './BaseModalTitle';
 
+import './BaseModal.less';
+
 interface Props {
-  children: React.ReactNode | React.ReactNode[];
+  children: React.ReactElement;
   className?: string;
   onCloseClick: () => void;
 }
@@ -32,9 +34,15 @@ const BaseModal: React.FC<Props> = ({ onCloseClick: onCloseClickCallback, childr
   }, []);
 
   return (
-    <BaseModalUi className={className} onCloseClick={onCloseClick}>
-      {React.cloneElement(<>{children}</>, { setLocked })}
-    </BaseModalUi>
+    <div className={'BaseModal' + (className ? ' ' + className : '')}>
+      <div className="BaseModal-container">
+        <div className="BaseModal-background" onClick={onCloseClick} />
+        <div className="BaseModal-content">
+          <Cross className="BaseModal-cross" onClick={onCloseClick} />
+          {React.cloneElement(children, { setLocked })}
+        </div>
+      </div>
+    </div>
   );
 };
 

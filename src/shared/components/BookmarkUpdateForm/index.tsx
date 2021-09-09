@@ -10,7 +10,6 @@ import { selectTagsAll } from 'Modules/Tags/selectors/selectAllTags';
 import { selectTagsSearch } from 'Modules/Tags/selectors/selectTagsSearch';
 import { selectUiBookmarkUpdateModal } from 'Modules/Ui/selectors/selectUiBookmarkUpdateModal';
 import { DELAY_SLOW_MS } from 'Root/src/shared/constants';
-import { noop } from 'Tools/utils/general/noop';
 import { BookmarkUpdateForm as BookmarkFormUi } from './BookmarkUpdateForm';
 
 import './BookmarkUpdateForm.less';
@@ -25,7 +24,7 @@ interface Props {
   setLocked?: (value: boolean) => void;
 }
 
-const BookmarkUpdateForm: React.FC<Props> = ({ closeModal, setLocked = noop }) => {
+const BookmarkUpdateForm: React.FC<Props> = ({ closeModal, setLocked }) => {
   const dispatch = useDispatch();
   const bookmarkError = useSelector(selectBookmarksErrorLast);
   const allTags = useSelector(selectTagsAll);
