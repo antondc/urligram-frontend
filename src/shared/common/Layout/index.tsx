@@ -119,6 +119,10 @@ const Layout: React.FC<Props> = ({ location }) => {
     dispatch(tagsSearchLoad());
   }, [session?.id]);
 
+  useEffect(() => {
+    dispatch(uiResetState());
+  }, [locationPathAndSearchQuery]);
+
   return (
     <LayoutUi
       loginModalMounted={loginModalMounted}

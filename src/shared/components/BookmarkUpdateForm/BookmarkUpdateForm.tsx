@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { TagState } from 'Modules/Tags/tags.types';
-import { Button, FadeInOut, Frame, Hr, Input, Select, SelectValue, Span, Switch } from 'Vendor/components';
+import { Button2, FadeInOut, Input2, Select, SelectValue, Switch } from 'Vendor/components';
 import { TagValue } from '.';
 
 import './BookmarkUpdateForm.less';
@@ -43,27 +43,22 @@ export const BookmarkUpdateForm: React.FC<Props> = ({
 }) => (
   <form className="BookmarkUpdateForm" onSubmit={onSubmit}>
     <h2 className="BookmarkUpdateForm-title">Update Bookmark</h2>
-    <Input
-      name="title"
-      type="text"
-      label="Title"
-      onChange={onChangeTitle}
-      onBlur={onChangeTitle}
-      value={titleValue}
-      error={titleError}
-      grow
-    />
-    <Hr size="nano" spacer />
-    <FadeInOut valueToUpdate={!!titleError} speed="fast">
-      <Span className="BookmarkUpdateForm-error" size="small">
-        {titleError}
-      </Span>
-    </FadeInOut>
-    <Hr spacer />
-    <Frame padding="none" grow>
+    <div className="BookmarkUpdateForm-inputField">
+      <Input2
+        name="title"
+        type="text"
+        label="Title"
+        onChange={onChangeTitle}
+        onBlur={onChangeTitle}
+        value={titleValue}
+        error={titleError}
+        grow
+      />
+    </div>
+    <div className="BookmarkUpdateForm-inputField">
       <Select
         className="BookmarkUpdateForm-tags"
-        label="Select tags"
+        placeholder="Select tags"
         value={tagsValue}
         defaultOptions={[]}
         options={[...tagsSearchFormatted, ...allTags.map((item) => ({ label: item.name, value: item.name }))].filter(
@@ -75,16 +70,13 @@ export const BookmarkUpdateForm: React.FC<Props> = ({
         grow
         isCreatable
       />
-    </Frame>
-    <Hr spacer />
-    <Span size="small" className="BookmarkUpdateForm-private">
-      Is Private
-    </Span>
-    <Hr size="micro" spacer />
-    <Switch name="isPrivate" checked={isPrivateValue} onChange={onChangeIsPrivate} />
-    <Hr spacer />
-    <Hr size="big" spacer />
-    <Button
+    </div>
+    <div className="BookmarkUpdateForm-inputField">
+      <div className="BookmarkUpdateForm-private">Is Private</div>
+      <Switch name="isPrivate" checked={isPrivateValue} onChange={onChangeIsPrivate} />
+    </div>
+
+    <Button2
       text="Save"
       type="submit"
       onClick={onSubmit}
@@ -95,9 +87,7 @@ export const BookmarkUpdateForm: React.FC<Props> = ({
       grow
     />
     <FadeInOut valueToUpdate={!!submitError} speed="fast">
-      <Span className="BookmarkUpdateForm-error" size="small">
-        {submitError}
-      </Span>
+      <div className="BookmarkUpdateForm-error">{submitError}</div>
     </FadeInOut>
   </form>
 );

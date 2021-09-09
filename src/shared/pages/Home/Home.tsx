@@ -68,6 +68,7 @@ export const Home: React.FC<Props> = ({
         maxItems={4}
         grow
         hideLabelOnFill
+        height="small"
       />
       <div className="Home-separator" />
       <SortBy

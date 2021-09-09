@@ -19,6 +19,7 @@ interface Props {
   grow?: boolean;
   maxItems?: number;
   hideLabelOnFill?: boolean;
+  height?: 'small' | 'medium';
   onChange?: (params: SelectValue[]) => void;
   onInputChange?: (params: unknown) => void;
 }
@@ -37,6 +38,7 @@ export const Select: React.FC<Props> = ({
   grow,
   onChange,
   maxItems,
+  height = 'medium',
 }) => {
   const [focus, setFocus] = useState(false);
   const focusOrContent = (!!value?.length && value[0] !== null) || focus;
@@ -68,6 +70,7 @@ export const Select: React.FC<Props> = ({
       onFocus={() => setFocus(true)}
       onBlur={() => setFocus(false)}
       maxItems={maxItems}
+      height={height}
     />
   );
 };

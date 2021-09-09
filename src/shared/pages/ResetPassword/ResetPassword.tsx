@@ -3,7 +3,7 @@ import Helmet from 'react-helmet';
 
 import A from 'Components/A';
 import { SITE_TITLE } from 'Root/src/shared/constants';
-import { Button, FadeInOut, H1, Input, Span } from 'Vendor/components';
+import { Button2, FadeInOut, Input2 } from 'Vendor/components';
 
 import './ResetPassword.less';
 
@@ -38,63 +38,59 @@ export const ResetPassword: React.FC<Props> = ({
     <Helmet title={`${SITE_TITLE} · Reset Password`} />
     <div className="ResetPassword">
       <div className="ResetPassword-content">
-        <H1 className="ResetPassword-h1">Password forgotten</H1>
+        <div className="ResetPassword-h1">Reset Password</div>
         <form className="ResetPassword-form">
-          <Input
-            name="password"
-            type="password"
-            label="Password"
-            onChange={onChangePassword}
-            onBlur={onChangePassword}
-            value={passwordValue}
-            error={passwordError}
-          />
-          <FadeInOut valueToUpdate={!!passwordError} speed="fast">
-            <Span className="SignUp-error" size="small">
-              {passwordError}
-            </Span>
-          </FadeInOut>
-          <Input
-            name="password_repeated"
-            type="password"
-            label="Repeat password"
-            onChange={onChangePasswordRepeated}
-            onBlur={onChangePasswordRepeated}
-            value={passwordRepeatedValue}
-            error={passwordRepeatedError}
-          />
-          <FadeInOut valueToUpdate={!!passwordRepeatedError} speed="fast">
-            <Span className="SignUp-error" size="small">
-              {passwordRepeatedError}
-            </Span>
-          </FadeInOut>
-          <Button
-            className="ResetPassword-submit"
-            text="Submit"
-            type="submit"
-            onClick={onSubmit}
-            error={!!submitError}
-            success={submitSuccess}
-            disabled={submitDisabled}
-            loading={sessionLoading}
-          />
-          <FadeInOut valueToUpdate={!!submitError} speed="fast">
-            <Span className="SignUp-error" size="small">
-              {submitError}
-            </Span>
-          </FadeInOut>
+          <div className="ResetPassword-inputField">
+            <Input2
+              name="password"
+              type="password"
+              label="Password"
+              onChange={onChangePassword}
+              onBlur={onChangePassword}
+              value={passwordValue}
+              error={passwordError}
+              grow
+            />
+          </div>
+          <div className="ResetPassword-inputField">
+            <Input2
+              name="password_repeated"
+              type="password"
+              label="Repeat password"
+              onChange={onChangePasswordRepeated}
+              onBlur={onChangePasswordRepeated}
+              value={passwordRepeatedValue}
+              error={passwordRepeatedError}
+              grow
+            />
+          </div>
+          <div className="ResetPassword-submit">
+            <Button2
+              text="Submit"
+              type="submit"
+              onClick={onSubmit}
+              error={!!submitError}
+              success={submitSuccess}
+              disabled={submitDisabled}
+              loading={sessionLoading}
+              grow
+            />
+            <FadeInOut valueToUpdate={!!submitError} speed="fast">
+              <span className="ResetPassword-error">{submitError}</span>
+            </FadeInOut>
+          </div>
         </form>
         <div className="ResetPassword-footer">
           <div className="ResetPassword-section">
-            <Span weight="semiBold">Remember it?: </Span>
+            <span>Remember it?: </span>
             <A href="login" styled underlined frontend>
-              <Span weight="semiBold">log in</Span>
+              <span>log in</span>
             </A>
           </div>
           <div className="ResetPassword-section">
-            <Span weight="semiBold">Dont have an account?: </Span>
+            <span>Dont have an account?: </span>
             <A href="sign-up" styled underlined frontend>
-              <Span weight="semiBold">sign up</Span>
+              <span>sign up</span>
             </A>
           </div>
         </div>

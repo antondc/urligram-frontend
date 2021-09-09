@@ -70,6 +70,7 @@ export const Lists: React.FC<Props> = ({
         maxItems={4}
         grow
         hideLabelOnFill
+        height="small"
       />
       <div className="Lists-separator" />
       <SortBy

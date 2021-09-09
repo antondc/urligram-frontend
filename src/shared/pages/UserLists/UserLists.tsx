@@ -86,6 +86,7 @@ export const UserLists: React.FC<Props> = ({
         maxItems={4}
         grow
         hideLabelOnFill
+        height="small"
       />
       <div className="UserLists-separator" />
       <div className="UserLists-addList" onClick={onAddListClick}>

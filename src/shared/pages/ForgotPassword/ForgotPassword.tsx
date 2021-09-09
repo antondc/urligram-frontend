@@ -3,7 +3,7 @@ import Helmet from 'react-helmet';
 
 import A from 'Components/A';
 import { SITE_TITLE } from 'Root/src/shared/constants';
-import { Button, FadeInOut, H1, Input, Span } from 'Vendor/components';
+import { Button2, FadeInOut, Input2 } from 'Vendor/components';
 
 import './ForgotPassword.less';
 
@@ -34,9 +34,9 @@ export const ForgotPassword: React.FC<Props> = ({
     <Helmet title={`${SITE_TITLE} · Forgot Password`} />
     <div className="ForgotPassword">
       <div className="ForgotPassword-content">
-        <H1 className="ForgotPassword-h1">Password forgotten</H1>
+        <div className="ForgotPassword-h1">Password forgotten</div>
         <form className="ForgotPassword-form">
-          <Input
+          <Input2
             name="nameOrEmail"
             type="text"
             label="Name or email"
@@ -44,13 +44,9 @@ export const ForgotPassword: React.FC<Props> = ({
             onBlur={onBlurNameOrEmail}
             value={nameOrEmailValue}
             error={nameOrEmailError}
+            grow
           />
-          <FadeInOut valueToUpdate={!!nameOrEmailError} speed="fast">
-            <Span className="ForgotPassword-error" size="small">
-              {nameOrEmailError}
-            </Span>
-          </FadeInOut>
-          <Button
+          <Button2
             className="ForgotPassword-submit"
             text="Submit"
             type="submit"
@@ -59,24 +55,23 @@ export const ForgotPassword: React.FC<Props> = ({
             success={submitSuccess}
             disabled={submitDisabled}
             loading={submitting}
+            grow
           />
           <FadeInOut valueToUpdate={!!submitError} speed="fast">
-            <Span className="ForgotPassword-error" size="small">
-              {submitError}
-            </Span>
+            <span className="ForgotPassword-error">{submitError}</span>
           </FadeInOut>
         </form>
         <div className="ForgotPassword-footer">
           <div className="ForgotPassword-section">
-            <Span weight="semiBold">Remember it?: </Span>
+            <span>Remember it?: </span>
             <A className="ForgotPassword-link" href="login" styled underlined frontend>
-              <Span weight="semiBold">log in</Span>
+              <span>log in</span>
             </A>
           </div>
           <div className="ForgotPassword-section">
-            <Span weight="semiBold">Dont have an account?: </Span>
+            <span>Dont have an account?: </span>
             <A className="ForgotPassword-link" href="sign-up" styled underlined frontend>
-              <Span weight="semiBold">sign up</Span>
+              <span>sign up</span>
             </A>
           </div>
         </div>

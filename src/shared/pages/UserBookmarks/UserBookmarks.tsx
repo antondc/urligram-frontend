@@ -85,6 +85,7 @@ export const UserBookmarks: React.FC<Props> = ({
         maxItems={4}
         hideLabelOnFill
         grow
+        height="small"
       />
       <div className="UserBookmarks-separator" />
       <SortBy

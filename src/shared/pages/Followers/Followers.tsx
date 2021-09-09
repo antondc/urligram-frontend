@@ -83,6 +83,7 @@ export const Followers: React.FC<Props> = ({
         maxItems={4}
         grow
         hideLabelOnFill
+        height="small"
       />
       <div className="Followers-separator" />
       <SortBy

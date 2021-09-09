@@ -6,7 +6,7 @@
   position: relative;
   padding: 60px 150px 40px;
   background: @c-background;
-  border-radius: 4px;
+  border-radius: 8px;
 
   .boxShadow;
 
@@ -30,9 +30,28 @@
     }
   }
 
+  &-title {
+    margin-bottom: 50px;
+    font-size: @fs-huge;
+    font-weight: @fw-extraBold;
+    line-height: @fh-huge;
+    text-align: center;
+    color: @gradientColors[black-2];
+  }
+
+  &-section {
+    font-size: @fs-normal;
+    font-weight: @fw-semibold;
+    text-align: center;
+  }
+
   &-link {
-    @media @br-mobile {
-      text-decoration-color: @c-base;
+    text-decoration-color: @c-transparent;
+    color: @gradientColors[blue-1];
+
+    &:hover:not(.noClass) {
+      text-decoration-color: @gradientColors[blue-1];
+      color: @gradientColors[blue-1];
     }
   }
 }

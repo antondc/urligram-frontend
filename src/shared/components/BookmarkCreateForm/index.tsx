@@ -48,7 +48,6 @@ const BookmarkCreateForm: React.FC<Props> = ({ closeModal, setLocked }) => {
   const [titleValue, setTitleValue] = useState<string>(undefined);
   const [titleError, setTitleError] = useState<string>(undefined);
   const [isPrivateValue, setIsPrivateValue] = useState<boolean>(false);
-  const [isPrivateError, setIsPrivateError] = useState<string>(undefined);
   const [tagsValue, setTagsValue] = useState<TagValue[]>([]);
   const [submitInProcess, setSubmitInProcess] = useState<boolean>(undefined);
   const [submitSuccess, setSubmitSuccess] = useState<boolean>(undefined);
@@ -126,7 +125,6 @@ const BookmarkCreateForm: React.FC<Props> = ({ closeModal, setLocked }) => {
 
     setIsPrivateValue(checked);
     setSubmitSuccess(undefined);
-    setIsPrivateError(undefined);
     setSubmitError(undefined);
   };
 
@@ -209,7 +207,6 @@ const BookmarkCreateForm: React.FC<Props> = ({ closeModal, setLocked }) => {
       titleError={titleError}
       onChangeTitle={onChangeTitle}
       isPrivateValue={isPrivateValue}
-      isPrivateError={isPrivateError}
       onChangeIsPrivate={onChangeIsPrivate}
       urlLoading={urlLoading}
       urlValue={urlValue}

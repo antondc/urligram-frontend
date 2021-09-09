@@ -5,8 +5,6 @@
 @{c} {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  padding-top: 40px;
-  padding-bottom: 40px;
 
   @media @br-mobile {
     display: flex;
@@ -16,12 +14,20 @@
 
   &-content {
     grid-column: 4 / span 6;
+    margin-bottom: 20px;
+    padding: 70px;
+    background: @c-background;
+    border-radius: 8px;
+    box-shadow: 5px 5px 50px 0 @gradientColors[black-5];
   }
 
   &-title {
-    padding: 20px 20px 0 20px;
-    font-size: @fs-big;
-    font-weight: @fw-bold;
+    padding-bottom: 50px;
+    font-size: @fs-huge;
+    font-weight: @fw-extraBold;
+    line-height: @fh-huge;
+    text-align: center;
+    color: @gradientColors[black-2];
     background: @c-background;
 
     @media @br-mobile {
@@ -30,7 +36,7 @@
   }
 
   &-part {
-    padding: 20px;
+    padding-bottom: 20px;
     background: @c-background;
   }
 

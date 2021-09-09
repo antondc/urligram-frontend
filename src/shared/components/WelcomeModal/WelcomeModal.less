@@ -5,8 +5,9 @@
 @{c} {
   position: relative;
   padding: 60px 150px 40px;
+  text-align: center;
   background: @c-background;
-  border-radius: 4px;
+  border-radius: 8px;
 
   .boxShadow;
 
@@ -20,5 +21,18 @@
     &:hover {
       cursor: pointer;
     }
+  }
+
+  &-title {
+    margin-bottom: 10px;
+    font-size: @fs-medium;
+    font-weight: @fw-extraBold;
+    line-height: @fh-medium;
+  }
+
+  &-text {
+    margin-bottom: 10px;
+    font-size: @fs-normal;
+    font-weight: @fw-semibold;
   }
 }

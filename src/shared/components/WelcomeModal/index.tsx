@@ -5,7 +5,6 @@ import Cross from 'Assets/svg/cross.svg';
 import BaseModal from 'Components/BaseModal';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { switchWelcomeModal } from 'Modules/Ui/actions/switchWelcomeModal';
-import { Flex, H4, Hr, P, Span } from 'Vendor/components';
 
 import './WelcomeModal.less';
 
@@ -21,21 +20,9 @@ const WelcomeModal: React.FC = () => {
     <BaseModal onClick={closeWelcomeModal}>
       <div className="WelcomeModal">
         <Cross className="WelcomeModal-cross" onClick={closeWelcomeModal} />
-        <Flex horizontal="center">
-          <H4>Welcome @{name}!</H4>
-          <Hr size="normal" spacer />
-          <P>
-            <Span size="normal" weight="semiBold">
-              Your account is active now
-            </Span>
-          </P>
-          <Hr size="zero" spacer />
-          <P>
-            <Span size="normal" weight="semiBold">
-              🎉&nbsp;&nbsp;&nbsp;🥳
-            </Span>
-          </P>
-        </Flex>
+        <h4 className="WelcomeModal-title">Welcome @{name}!</h4>
+        <p className="WelcomeModal-text"> Your account is active now</p>
+        <p className="WelcomeModal-text">🎉&nbsp;&nbsp;&nbsp;🥳</p>
       </div>
     </BaseModal>
   );

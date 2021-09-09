@@ -1,19 +1,7 @@
 import React from 'react';
 
 import { TagState } from 'Modules/Tags/tags.types';
-import {
-  ArrowRight,
-  Button,
-  FadeInOut,
-  Frame,
-  Hr,
-  Input,
-  Select,
-  SelectValue,
-  Span,
-  SpinnerPie,
-  Switch,
-} from 'Vendor/components';
+import { ArrowRight, Button2, FadeInOut, Input2, Select, SelectValue, SpinnerPie, Switch } from 'Vendor/components';
 import { TagValue } from '.';
 
 import './BookmarkCreateForm.less';
@@ -23,7 +11,6 @@ interface Props {
   titleError: string;
   onChangeTitle: (e: React.FormEvent<HTMLInputElement>) => void;
   isPrivateValue: boolean;
-  isPrivateError: string;
   onChangeIsPrivate: (e: React.FormEvent<HTMLInputElement>) => void;
   urlSubmitted: boolean;
   urlLoading: boolean;
@@ -48,7 +35,6 @@ export const BookmarkCreateForm: React.FC<Props> = ({
   titleError,
   onChangeTitle,
   isPrivateValue,
-  isPrivateError,
   onChangeIsPrivate,
   urlSubmitted,
   urlLoading,
@@ -70,7 +56,7 @@ export const BookmarkCreateForm: React.FC<Props> = ({
   <form className="BookmarkCreateForm" onSubmit={onSubmit}>
     <h2 className="BookmarkCreateForm-title">Add a Bookmark</h2>
     <div className="BookmarkCreateForm-url">
-      <Input
+      <Input2
         className="BookmarkCreateForm"
         name="url"
         type="text"
@@ -89,37 +75,25 @@ export const BookmarkCreateForm: React.FC<Props> = ({
         {urlLoading && <SpinnerPie className="BookmarkCreateForm-loader" size="medium" />}
       </FadeInOut>
     </div>
-    <Hr size="nano" spacer />
-    <FadeInOut valueToUpdate={!!urlError} speed="fast">
-      <Span className="BookmarkCreateForm-error" size="small">
-        {urlError}
-      </Span>
-    </FadeInOut>
-    <Hr spacer />
     <FadeInOut valueToUpdate={urlSubmitted}>
       {urlSubmitted && (
         <>
-          <Input
-            name="title"
-            type="text"
-            label="Title"
-            onChange={onChangeTitle}
-            onBlur={onChangeTitle}
-            value={titleValue}
-            error={titleError}
-            grow
-          />
-          <Hr size="nano" spacer />
-          <FadeInOut valueToUpdate={!!titleError} speed="fast">
-            <Span className="BookmarkCreateForm-error" size="small">
-              {titleError}
-            </Span>
-          </FadeInOut>
-          <Hr spacer />
-          <Frame padding="none" grow>
+          <div className="BookmarkCreateForm-inputField">
+            <Input2
+              name="title"
+              type="text"
+              label="Title"
+              onChange={onChangeTitle}
+              onBlur={onChangeTitle}
+              value={titleValue}
+              error={titleError}
+              grow
+            />
+          </div>
+          <div className="BookmarkCreateForm-inputField">
             <Select
               className="BookmarkCreateForm-tags"
-              label="Select tags"
+              placeholder="Select tags"
               value={tagsValue}
               defaultOptions={[]}
               options={[
@@ -130,39 +104,28 @@ export const BookmarkCreateForm: React.FC<Props> = ({
               onChange={onChangeTags}
               maxItems={4}
               grow
-              isCreatable
+              // isCreatable
             />
-          </Frame>
-          <Hr spacer />
-          <Span size="small" className="BookmarkCreateForm-private">
-            Is Private
-          </Span>
-          <Hr size="micro" spacer />
-          <Switch name="isPrivate" checked={isPrivateValue} onChange={onChangeIsPrivate} />
-          <Hr size="nano" spacer />
-          <FadeInOut valueToUpdate={!!isPrivateError} speed="fast">
-            <Span className="BookmarkCreateForm-error" size="small">
-              {isPrivateError}
-            </Span>
-          </FadeInOut>
-          <Hr spacer />
-          <Hr size="big" spacer />
-          <Button
-            text="Save"
-            type="submit"
-            onClick={onSubmit}
-            error={!!submitError}
-            success={submitSuccess}
-            disabled={submitDisabled}
-            loading={urlLoading || submitInProcess}
-            grow
-          />
-          <Hr size="nano" spacer />
-          <FadeInOut valueToUpdate={!!submitError} speed="fast">
-            <Span className="BookmarkCreateForm-error" size="small">
-              {submitError}
-            </Span>
-          </FadeInOut>
+          </div>
+          <div className="BookmarkCreateForm-inputField">
+            <div className="BookmarkCreateForm-private">Is Private</div>
+            <Switch name="isPrivate" checked={isPrivateValue} onChange={onChangeIsPrivate} />
+          </div>
+          <div className="BookmarkCreateForm-submit">
+            <Button2
+              text="Save"
+              type="submit"
+              onClick={onSubmit}
+              error={!!submitError}
+              success={submitSuccess}
+              disabled={submitDisabled}
+              loading={urlLoading || submitInProcess}
+              grow
+            />
+            <FadeInOut valueToUpdate={!!submitError} speed="fast">
+              <span className="BookmarkCreateForm-error">{submitError}</span>
+            </FadeInOut>
+          </div>
         </>
       )}
     </FadeInOut>

@@ -35,6 +35,11 @@ const Header: React.FC = () => {
 
   const switchUiBookmarkModal = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
+    if (!session?.id) {
+      dispatch(switchLoginModal(true));
+
+      return;
+    }
     dispatch(switchBookmarkCreateModal(true));
   };
 

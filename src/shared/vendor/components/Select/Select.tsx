@@ -27,6 +27,7 @@ interface Props {
   defaultOptions: SelectValue[];
   grow?: boolean;
   maxItems?: number;
+  height?: 'small' | 'medium';
   onChange?: (params: SelectValue[]) => void;
   onInputChange: (params: unknown) => void;
   onFocus: () => void;
@@ -96,8 +97,9 @@ export const SelectUi: React.FC<Props> = ({
   onFocus,
   onBlur,
   maxItems,
+  height,
 }) => (
-  <div className={'Select ' + (className ? className : ' ') + (grow ? ' Select--grow' : ' ')}>
+  <div className={'Select ' + (className ? className : ' ') + (grow ? ' Select--grow' : ' ') + (' Select--' + height)}>
     <SelectComponent
       isCreatable={isCreatable}
       className="Select__container"

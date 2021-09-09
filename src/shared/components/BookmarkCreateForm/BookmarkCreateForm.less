@@ -7,10 +7,20 @@
   flex-direction: column;
 
   &-title {
-    margin-bottom: 30px;
+    margin-bottom: 40px;
     font-size: @fs-big;
-    font-weight: @fw-bold;
+    font-weight: @fw-semibold;
     text-align: center;
+    color: @gradientColors[blue-1];
+    user-select: none;
+  }
+
+  &-inputField {
+    margin-bottom: 30px;
+  }
+
+  &-submit {
+    margin: 20px 0;
   }
 
   &-error {
@@ -18,13 +28,15 @@
   }
 
   &-private {
+    font-size: @fs-small;
+    font-weight: @fw-bold;
     color: @c-traslucid--hardest;
   }
 
   &-url {
     display: flex;
     flex-wrap: nowrap;
-    align-items: baseline;
+    align-items: center;
 
     @media @br-mobile {
       padding-top: 30px;
@@ -32,7 +44,6 @@
   }
 
   &-urlArrow {
-    padding-bottom: 9px;
     padding-left: 10px;
     transition: transform @td-fast @ease;
 
@@ -43,6 +54,6 @@
   }
 
   &-loader {
-    margin-left: 5px;
+    margin-left: 15px;
   }
 }

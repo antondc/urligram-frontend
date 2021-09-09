@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Button, FadeInOut, Hr, Input, Span } from 'Vendor/components';
+import { Button2, FadeInOut, Input2 } from 'Vendor/components';
 
 import './LoginForm.less';
 
@@ -32,55 +32,44 @@ export const LoginForm: React.FC<Props> = ({
   onSubmit,
 }) => (
   <form className="LoginForm">
-    <Hr size="normal" spacer />
-    <Input
-      name="nameOrEmail"
-      type="text"
-      label="Name or Email"
-      onChange={onChangeNameOrEmail}
-      onBlur={onChangeNameOrEmail}
-      value={nameOrEmailValue}
-      error={nameOrEmailError}
-      grow
-    />
-    <FadeInOut valueToUpdate={!!nameOrEmailError} speed="fast">
-      <Span className="LoginForm-error" size="small">
-        {nameOrEmailError}
-      </Span>
-    </FadeInOut>
-    <Hr size="nano" spacer />
-    <Input
-      name="password"
-      type="password"
-      label="Password"
-      onChange={onChangePassword}
-      onBlur={onChangePassword}
-      value={passwordValue}
-      error={passwordError}
-      grow
-    />
-    <Hr size="nano" spacer />
-    <FadeInOut valueToUpdate={!!passwordError} speed="fast">
-      <Span className="LoginForm-error" size="small">
-        {passwordError}
-      </Span>
-    </FadeInOut>
-    <Hr size="big" spacer />
-    <Button
-      text="Submit"
-      type="submit"
-      onClick={onSubmit}
-      error={!!submitError}
-      success={submitSuccess}
-      disabled={submitDisabled}
-      loading={submitting}
-      grow
-    />
-    <Hr size="nano" spacer />
+    <div className="LoginForm-inputField">
+      <Input2
+        name="nameOrEmail"
+        type="text"
+        label="Name or Email"
+        onChange={onChangeNameOrEmail}
+        onBlur={onChangeNameOrEmail}
+        value={nameOrEmailValue}
+        error={nameOrEmailError}
+        grow
+      />
+    </div>
+    <div className="LoginForm-inputField">
+      <Input2
+        name="password"
+        type="password"
+        label="Password"
+        onChange={onChangePassword}
+        onBlur={onChangePassword}
+        value={passwordValue}
+        error={passwordError}
+        grow
+      />
+    </div>
+    <div className="LoginForm-submit">
+      <Button2
+        text="Submit"
+        type="submit"
+        onClick={onSubmit}
+        error={!!submitError}
+        success={submitSuccess}
+        disabled={submitDisabled}
+        loading={submitting}
+        grow
+      />
+    </div>
     <FadeInOut valueToUpdate={!!submitError} speed="fast">
-      <Span className="LoginForm-error" size="small">
-        {submitError}
-      </Span>
+      <span className="LoginForm-error">{submitError}</span>
     </FadeInOut>
   </form>
 );

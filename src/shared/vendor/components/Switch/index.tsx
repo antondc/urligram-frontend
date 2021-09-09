@@ -1,6 +1,7 @@
 import React, { HTMLProps } from 'react';
 
-import { Check, Cross } from '../Svg';
+import Check from 'Assets/svg/check.svg';
+import Cross from 'Assets/svg/cross.svg';
 
 import './Switch.less';
 
@@ -22,10 +23,10 @@ export const Switch: React.FC<Props> = ({ name, checked = false, ...props }) => 
     <span className="Switch-slider " />
     <span className="Switch-icons">
       <span className="Switch-icon Switch-true">
-        <Check size="small" />
+        <Check />
       </span>
       <span className="Switch-icon Switch-false">
-        <Cross size="small" />
+        <Cross />
       </span>
     </span>
   </label>

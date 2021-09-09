@@ -125,6 +125,7 @@ export const List: React.FC<Props> = ({
         maxItems={4}
         grow
         hideLabelOnFill
+        height="small"
       />
       <div className="List-separator" />
       <div className="List-headerImages">

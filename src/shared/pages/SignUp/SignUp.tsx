@@ -3,7 +3,7 @@ import Helmet from 'react-helmet';
 
 import A from 'Components/A';
 import { SITE_TITLE } from 'Root/src/shared/constants';
-import { Button, FadeInOut, H1, Input, Span } from 'Vendor/components';
+import { Button2, FadeInOut, Input2 } from 'Vendor/components';
 
 import './SignUp.less';
 
@@ -50,91 +50,83 @@ export const SignUp: React.FC<Props> = ({
     <Helmet title={`${SITE_TITLE} · Sign Up`} />
     <div className="SignUp">
       <div className="SignUp-content">
-        <H1 className="SignUp-h1">Sign up</H1>
+        <h1 className="SignUp-h1">Sign up</h1>
         <form className="SignUp-form">
-          <Input
-            name="name"
-            type="text"
-            label="Name"
-            onChange={onChangeName}
-            onBlur={onChangeName}
-            value={nameValue}
-            error={nameError}
-          />
-          <FadeInOut valueToUpdate={!!nameError} speed="fast">
-            <Span className="SignUp-error" size="small">
-              {nameError}
-            </Span>
-          </FadeInOut>
-          <Input
-            name="email"
-            type="email"
-            label="Email"
-            onChange={onChangeEmail}
-            onBlur={onChangeEmail}
-            value={emailValue}
-            error={emailError}
-          />
-          <FadeInOut valueToUpdate={!!emailError} speed="fast">
-            <Span className="SignUp-error" size="small">
-              {emailError}
-            </Span>
-          </FadeInOut>
-          <Input
-            name="password"
-            type="password"
-            label="Password"
-            onChange={onChangePassword}
-            onBlur={onChangePassword}
-            value={passwordValue}
-            error={passwordError}
-          />
-          <FadeInOut valueToUpdate={!!passwordError} speed="fast">
-            <Span className="SignUp-error" size="small">
-              {passwordError}
-            </Span>
-          </FadeInOut>
-          <Input
-            name="password_repeated"
-            type="password"
-            label="Repeat password"
-            onChange={onChangePasswordRepeated}
-            onBlur={onChangePasswordRepeated}
-            value={passwordRepeatedValue}
-            error={passwordRepeatedError}
-          />
-          <FadeInOut valueToUpdate={!!passwordRepeatedError} speed="fast">
-            <Span className="SignUp-error" size="small">
-              {passwordRepeatedError}
-            </Span>
-          </FadeInOut>
-          <Button
-            className="SignUp-submit"
-            text="Submit"
-            type="submit"
-            onClick={onSubmit}
-            error={!!submitError}
-            success={submitSuccess}
-            disabled={submitDisabled}
-            loading={submitting}
-          />
-          <FadeInOut valueToUpdate={!!submitError} speed="fast">
-            <Span className="SignUp-error" size="small">
-              {submitError}
-            </Span>
-          </FadeInOut>
+          <div className="SignUp-inputField">
+            <Input2
+              name="name"
+              type="text"
+              label="Name"
+              onChange={onChangeName}
+              onBlur={onChangeName}
+              value={nameValue}
+              error={nameError}
+              grow
+            />
+          </div>
+          <div className="SignUp-inputField">
+            <Input2
+              name="email"
+              type="email"
+              label="Email"
+              onChange={onChangeEmail}
+              onBlur={onChangeEmail}
+              value={emailValue}
+              error={emailError}
+              grow
+            />
+          </div>
+          <div className="SignUp-inputField">
+            <Input2
+              name="password"
+              type="password"
+              label="Password"
+              onChange={onChangePassword}
+              onBlur={onChangePassword}
+              value={passwordValue}
+              error={passwordError}
+              grow
+            />
+          </div>
+          <div className="SignUp-inputField">
+            <Input2
+              name="password_repeated"
+              type="password"
+              label="Repeat password"
+              onChange={onChangePasswordRepeated}
+              onBlur={onChangePasswordRepeated}
+              value={passwordRepeatedValue}
+              error={passwordRepeatedError}
+              grow
+            />
+          </div>
+          <div className="SignUp-submit">
+            <Button2
+              text="Submit"
+              type="submit"
+              onClick={onSubmit}
+              error={!!submitError}
+              success={submitSuccess}
+              disabled={submitDisabled}
+              loading={submitting}
+              grow
+            />
+            <FadeInOut valueToUpdate={!!submitError} speed="fast">
+              <span className="SignUp-error">{submitError}</span>
+            </FadeInOut>
+          </div>
         </form>
         <div className="SignUp-footer">
           <div className="SignUp-section">
-            <Span weight="semiBold">Forgot password?: </Span>
+            <span>Forgot password?: </span>
             <A className="SignUp-link" href="forgot-password" styled underlined frontend>
-              <Span weight="semiBold">reset it</Span>
+              <span>reset it</span>
             </A>
           </div>
           <div className="SignUp-section">
-            <Span weight="semiBold">Already have an account?: </Span>
+            <span>Already have an account?: </span>
             <A className="SignUp-link" href="login" styled underlined frontend>
-              <Span weight="semiBold">login</Span>
+              <span>login</span>
             </A>
           </div>
         </div>

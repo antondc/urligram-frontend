@@ -16,14 +16,19 @@
 
   &-content {
     grid-column: 4 / span 6;
+    margin-bottom: 20px;
   }
 
   &-title {
     margin-bottom: 10px;
-    padding: 20px;
-    font-size: @fs-big;
-    font-weight: @fw-bold;
+    padding: 40px 20px;
+    font-size: @fh-biggest;
+    font-weight: @fw-extraBold;
+    line-height: @fh-huge;
+    text-align: center;
+    color: @gradientColors[black-2];
     background: @c-background;
+    user-select: none;
 
     @media @br-mobile {
       line-height: @fh-big;
@@ -32,7 +37,7 @@
 
   &-item {
     margin-bottom: 10px;
-    padding: 20px 20px 0 20px;
+    padding: 40px;
     background: @c-background;
     user-select: none;
   }

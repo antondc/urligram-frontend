@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Button, FadeInOut, Flex, Hr, Input, Span, Switch } from 'Vendor/components';
+import { Button2, FadeInOut, Input2, Switch } from 'Vendor/components';
 
 import './ListForm.less';
 
@@ -48,8 +48,8 @@ export const ListForm: React.FC<Props> = ({
   onRemove,
 }) => (
   <form className="ListForm" onSubmit={onSubmit}>
-    <Flex growVertical={false} horizontal="left" vertical="bottom" noWrap>
-      <Input
+    <div className="ListForm-inputField">
+      <Input2
         name="name"
         type="text"
         label="List name"
@@ -60,71 +60,48 @@ export const ListForm: React.FC<Props> = ({
         grow
         autoFocus
       />
-    </Flex>
-    <Hr size="nano" spacer />
-    <FadeInOut valueToUpdate={!!nameError} speed="fast">
-      <Span className="ListForm-error" size="small">
-        {nameError}
-      </Span>
-    </FadeInOut>
-    <Hr spacer />
-    <Input
-      name="description"
-      type="text"
-      label="List description"
-      onChange={onChangeDescription}
-      value={descriptionValue}
-      error={descriptionError}
-      onBlur={onBlurDescription}
-      grow
-    />
-    <Hr size="nano" spacer />
-    <FadeInOut valueToUpdate={!!descriptionError} speed="fast">
-      <Span className="ListForm-error" size="small">
-        {descriptionError}
-      </Span>
-    </FadeInOut>
-    <Hr spacer />
-    <Span size="small" className="ListForm-private">
-      Is Private
-    </Span>
-    <Hr size="micro" spacer />
-    <Switch name="isPrivate" checked={isPrivateValue} onChange={onChangeIsPrivate} />
-    <Hr size="nano" spacer />
-    <FadeInOut valueToUpdate={!!isPrivateError} speed="fast">
-      <Span className="ListForm-error" size="small">
-        {isPrivateError}
-      </Span>
-    </FadeInOut>
-    <Hr size="big" spacer />
-    <Button
-      text="Save"
-      type="submit"
-      onClick={onSubmit}
-      error={!!submitError}
-      success={submitSuccess}
-      loading={submitting}
-      disabled={submitDisabled}
-      grow
-    />
-    <Hr size="nano" spacer />
-    <FadeInOut valueToUpdate={!!submitError} speed="fast">
-      <Span className="ListForm-error" size="small">
-        {submitError}
-      </Span>
-    </FadeInOut>
-    <Hr spacer />
-    {!!isUpdate && (
-      <Button
-        text="Remove list"
-        type="submit"
-        variant="delete"
-        onClick={onRemove}
-        error={!!submitError}
-        success={submitSuccess}
-        loading={removing}
+    </div>
+    <div className="ListForm-inputField">
+      <Input2
+        name="description"
+        type="text"
+        label="List description"
+        onChange={onChangeDescription}
+        value={descriptionValue}
+        error={descriptionError}
+        onBlur={onBlurDescription}
         grow
       />
-    )}
+    </div>
+    <div className="ListForm-inputField">
+      <div className="ListForm-privateTitle">Is Private</div>
+      <Switch name="isPrivate" checked={isPrivateValue} onChange={onChangeIsPrivate} />
+    </div>
+    <div className="ListForm-submit">
+      <Button2
+        text="Save"
+        type="submit"
+        onClick={onSubmit}
+        error={!!submitError}
+        success={submitSuccess}
+        loading={submitting}
+        disabled={submitDisabled}
+        grow
+      />
+      <FadeInOut valueToUpdate={!!submitError} speed="fast">
+        <span className="ListForm-error">{submitError}</span>
+      </FadeInOut>
+      {!!isUpdate && (
+        <Button2
+          text="Remove list"
+          type="submit"
+          onClick={onRemove}
+          error={!!submitError}
+          success={submitSuccess}
+          loading={removing}
+          grow
+        />
+      )}
+    </div>
   </form>
 );

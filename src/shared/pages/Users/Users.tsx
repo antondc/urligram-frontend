@@ -68,6 +68,7 @@ export const Users: React.FC<Props> = ({
         maxItems={4}
         grow
         hideLabelOnFill
+        height="small"
       />
       <div className="Users-separator" />
       <SortBy
