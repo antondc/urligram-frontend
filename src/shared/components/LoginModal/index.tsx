@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import BaseModal2, { BaseModalFooterLink, BaseModalSection, BaseModalTitle } from 'Components/BaseModal2';
+import BaseModal, { BaseModalFooterLink, BaseModalSection, BaseModalTitle } from 'Components/BaseModal';
 import LoginForm from 'Components/LoginForm';
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
 import { Space } from 'Vendor/components';
@@ -18,7 +18,7 @@ const LoginModal: React.FC = () => {
   };
 
   return (
-    <BaseModal2 className="LoginModal" onCloseClick={closeModal}>
+    <BaseModal className="LoginModal" onCloseClick={closeModal}>
       <BaseModalTitle>Log In</BaseModalTitle>
       <LoginForm setLocked={setLocked} />
       <BaseModalSection>
@@ -31,7 +31,7 @@ const LoginModal: React.FC = () => {
         <Space />
         <BaseModalFooterLink href="sign-up">sign up</BaseModalFooterLink>
       </BaseModalSection>
-    </BaseModal2>
+    </BaseModal>
   );
 };
 

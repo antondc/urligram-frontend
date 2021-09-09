@@ -5,6 +5,7 @@ import { sessionLogIn } from 'Modules/Session/actions/sessionLogIn';
 import { sessionResetErrors } from 'Modules/Session/actions/sessionResetErrors';
 import { selectSessionErrorLast } from 'Modules/Session/selectors/selectSessionErrorLast';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
+import { noop } from 'Tools/utils/general/noop';
 import { validateEmailAddress } from 'Tools/utils/string/validateEmailAddress';
 import { LoginForm as LoginFormUi } from './LoginForm';
 
@@ -14,7 +15,7 @@ interface Props {
   setLocked?: (locked: boolean) => void;
 }
 
-const LoginForm: React.FC<Props> = ({ setLocked }) => {
+const LoginForm: React.FC<Props> = ({ setLocked = noop }) => {
   const dispatch = useDispatch();
   const sessionError = useSelector(selectSessionErrorLast);
   const isLoggedIn = useSelector(selectSessionLoggedIn);

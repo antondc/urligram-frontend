@@ -40,7 +40,6 @@ const ListForm: React.FC<Props> = ({ closeModal, setLocked }) => {
   const [descriptionValue, setDescriptionValue] = useState<string>(list?.description);
   const [descriptionError, setDescriptionError] = useState<string>(undefined);
   const [isPrivateValue, setIsPrivateValue] = useState<boolean>(list?.isPrivate);
-  const [isPrivateError, setIsPrivateError] = useState<string>(undefined);
   const [submitting, setSubmitting] = useState<boolean>(undefined);
   const [removing, setRemoving] = useState<boolean>(undefined);
   const [submitSuccess, setSubmitSuccess] = useState<boolean>(undefined);
@@ -71,7 +70,6 @@ const ListForm: React.FC<Props> = ({ closeModal, setLocked }) => {
 
     setIsPrivateValue(checked);
     setSubmitSuccess(undefined);
-    setIsPrivateError(undefined);
     setSubmitError(undefined);
   };
 
@@ -178,7 +176,6 @@ const ListForm: React.FC<Props> = ({ closeModal, setLocked }) => {
       descriptionError={descriptionError}
       onChangeDescription={onChangeDescription}
       isPrivateValue={isPrivateValue}
-      isPrivateError={isPrivateError}
       onChangeIsPrivate={onChangeIsPrivate}
       onSubmit={onSubmit}
       submitDisabled={submitDisabled}

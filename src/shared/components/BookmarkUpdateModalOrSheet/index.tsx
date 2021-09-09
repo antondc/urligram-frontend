@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import BaseModal2 from 'Components/BaseModal2';
+import BaseModal from 'Components/BaseModal';
 import BaseSheet from 'Components/BaseSheet';
 import BookmarkUpdateForm from 'Components/BookmarkUpdateForm';
 import { switchBookmarkUpdateModal } from 'Modules/Ui/actions/switchBookmarkUpdateModal';
@@ -35,9 +35,9 @@ export const BookmarkUpdateModalOrSheet: React.FC = () => {
 
   return (
     <Fade mounted={bookmarkUpdateModalMounted} speed="fastest" position="fixed" appear>
-      <BaseModal2 onCloseClick={onClose}>
+      <BaseModal onCloseClick={onClose}>
         <BookmarkUpdateForm closeModal={onClose} />
-      </BaseModal2>
+      </BaseModal>
     </Fade>
   );
 };

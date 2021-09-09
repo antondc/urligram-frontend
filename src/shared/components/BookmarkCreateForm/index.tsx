@@ -14,6 +14,7 @@ import { DEFAULT_PROTOCOL, DELAY_SLOW_MS } from 'Root/src/shared/constants';
 import { Routes } from 'Router/routes';
 import history from 'Services/History';
 import HttpClient from 'Services/HttpClient';
+import { noop } from 'Tools/utils/general/noop';
 import { testStringIsValidUrl } from 'Tools/utils/url/testStringIsValidUrl';
 import { testUrlHasProtocol } from 'Tools/utils/url/testUrlHasProtocol';
 import { urlRemoveLeadingCharacters } from 'Tools/utils/url/urlRemoveLeadingCharacters';
@@ -31,7 +32,7 @@ interface Props {
   setLocked?: (value: boolean) => void;
 }
 
-const BookmarkCreateForm: React.FC<Props> = ({ closeModal, setLocked }) => {
+const BookmarkCreateForm: React.FC<Props> = ({ closeModal, setLocked = noop }) => {
   const dispatch = useDispatch();
   const bookmarkError = useSelector(selectBookmarksErrorLast);
   const allTags = useSelector(selectTagsAll);

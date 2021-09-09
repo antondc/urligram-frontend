@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import BaseModal2, { BaseModalTitle } from 'Components/BaseModal2';
+import BaseModal, { BaseModalTitle } from 'Components/BaseModal';
 import ListForm from 'Components/ListForm';
 import { switchListModal } from 'Modules/Ui/actions/switchListModal';
 import { selectUiListModal } from 'Modules/Ui/selectors/selectUiListModal';
@@ -20,10 +20,10 @@ const ListModal: React.FC = () => {
   };
 
   return (
-    <BaseModal2 className="ListModal" onCloseClick={closeModal}>
+    <BaseModal className="ListModal" onCloseClick={closeModal}>
       <BaseModalTitle>{!!isUpdate ? 'Update List' : 'Create List'}</BaseModalTitle>
       <ListForm closeModal={closeModal} setLocked={setLocked} />
-    </BaseModal2>
+    </BaseModal>
   );
 };
 

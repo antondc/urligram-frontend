@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
-import BaseModal2, { BaseModalText, BaseModalTitle } from 'Components/BaseModal2';
+import BaseModal, { BaseModalText, BaseModalTitle } from 'Components/BaseModal';
 import { switchForgotPasswordModal } from 'Modules/Ui/actions/switchForgotPasswordModal';
 import { Routes } from 'Router/routes';
 import history from 'Services/History';
@@ -17,11 +17,11 @@ const ForgotPasswordModal: React.FC = () => {
   };
 
   return (
-    <BaseModal2 className="ForgotPasswordModal" onCloseClick={closeForgotPasswordModal}>
+    <BaseModal className="ForgotPasswordModal" onCloseClick={closeForgotPasswordModal}>
       <BaseModalTitle>We received your request</BaseModalTitle>
       <BaseModalText>Please check your email</BaseModalText>
       <BaseModalText>✉️&nbsp;&nbsp;&nbsp;🚀</BaseModalText>
-    </BaseModal2>
+    </BaseModal>
   );
 };
 

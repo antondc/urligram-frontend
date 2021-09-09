@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import { uiScreenMobileLock } from 'Modules/Ui/actions/uiScreenMobileLock';
 import { uiScreenMobileUnLock } from 'Modules/Ui/actions/uiScreenMobileUnLock';
-import { BaseModal2 as BaseModal2Ui } from './BaseModal2.ui';
+import { BaseModal as BaseModalUi } from './BaseModal.ui';
 
 export { BaseModalFooterLink } from './BaseModalFooterLink';
 export { BaseModalText } from './BaseModalText';
@@ -16,7 +16,7 @@ interface Props {
   onCloseClick: () => void;
 }
 
-const BaseModal2: React.FC<Props> = ({ onCloseClick: onCloseClickCallback, children, className }) => {
+const BaseModal: React.FC<Props> = ({ onCloseClick: onCloseClickCallback, children, className }) => {
   const dispatch = useDispatch();
   const [locked, setLocked] = useState<boolean>(false);
 
@@ -32,10 +32,10 @@ const BaseModal2: React.FC<Props> = ({ onCloseClick: onCloseClickCallback, child
   }, []);
 
   return (
-    <BaseModal2Ui className={className} onCloseClick={onCloseClick}>
+    <BaseModalUi className={className} onCloseClick={onCloseClick}>
       {React.cloneElement(<>{children}</>, { setLocked })}
-    </BaseModal2Ui>
+    </BaseModalUi>
   );
 };
 
-export default BaseModal2;
+export default BaseModal;

@@ -7,66 +7,66 @@ import { listCreateFailure } from './listCreateFailure';
 import { listCreateRequest } from './listCreateRequest';
 import { listCreateSuccess } from './listCreateSuccess';
 
-export const listCreate = ({
-  listName,
-  listDescription,
-  listIsPrivate,
-}: ListCreateApiRequest): AppThunk<Promise<ListState>, ListsActions | UsersActions> => async (
-  dispatch,
-  getState
-): Promise<ListState> => {
-  const { Lists: listsBeforeRequest } = getState();
-  try {
-    dispatch(listCreateRequest({ ...listsBeforeRequest }));
+export const listCreate =
+  ({
+    listName,
+    listDescription,
+    listIsPrivate,
+  }: ListCreateApiRequest): AppThunk<Promise<ListState>, ListsActions | UsersActions> =>
+  async (dispatch, getState): Promise<ListState> => {
+    const { Lists: listsBeforeRequest } = getState();
+    try {
+      dispatch(listCreateRequest({ ...listsBeforeRequest }));
 
-    const { data } = await HttpClient.post<void, ListCreateApiResponse>('/lists', {
-      listName,
-      listDescription,
-      listIsPrivate,
-    });
-    const { Lists: listsAfterResponse, Users: usersAfterResponse, Session: sessionAfterResponse } = getState();
+      const { data } = await HttpClient.post<void, ListCreateApiResponse>('/lists', {
+        listName,
+        listDescription,
+        listIsPrivate,
+      });
+      const { Lists: listsAfterResponse, Users: usersAfterResponse, Session: sessionAfterResponse } = getState();
 
-    await dispatch(
-      listCreateSuccess({
-        ...listsAfterResponse,
-        byKey: {
-          ...listsAfterResponse.byKey,
-          [data.attributes.id]: data.attributes,
-        },
-      })
-    );
-
-    // Add list to user
-    dispatch(
-      usersReceive({
-        ...usersAfterResponse,
-        byKey: {
-          ...usersAfterResponse.byKey,
-          [sessionAfterResponse?.id]: {
-            ...usersAfterResponse.byKey[sessionAfterResponse?.id],
-            lists: [
-              ...(usersAfterResponse.byKey[sessionAfterResponse?.id]?.lists || []),
-              {
-                id: data.attributes.id,
-                userRole: 'admin',
-              },
-            ],
+      await dispatch(
+        listCreateSuccess({
+          ...listsAfterResponse,
+          byKey: {
+            ...listsAfterResponse.byKey,
+            [data.attributes.id]: data.attributes,
           },
-        },
-      })
-    );
+          currentIds: [data.attributes?.id, ...(listsAfterResponse?.currentIds || [])],
+        })
+      );
 
-    return data?.attributes;
-  } catch (error) {
-    const { Lists: listsOnError } = getState();
+      // Add list to user
+      dispatch(
+        usersReceive({
+          ...usersAfterResponse,
+          byKey: {
+            ...usersAfterResponse.byKey,
+            [sessionAfterResponse?.id]: {
+              ...usersAfterResponse.byKey[sessionAfterResponse?.id],
+              lists: [
+                ...(usersAfterResponse.byKey[sessionAfterResponse?.id]?.lists || []),
+                {
+                  id: data.attributes.id,
+                  userRole: 'admin',
+                },
+              ],
+            },
+          },
+        })
+      );
 
-    await dispatch(
-      listCreateFailure({
-        ...listsOnError,
-        errors: [...(listsOnError?.errors || []), error],
-      })
-    );
+      return data?.attributes;
+    } catch (error) {
+      const { Lists: listsOnError } = getState();
 
-    throw error;
-  }
-};
+      await dispatch(
+        listCreateFailure({
+          ...listsOnError,
+          errors: [...(listsOnError?.errors || []), error],
+        })
+      );
+
+      throw error;
+    }
+  };

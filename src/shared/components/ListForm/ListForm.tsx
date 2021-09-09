@@ -13,7 +13,6 @@ interface Props {
   descriptionError: string;
   onChangeDescription: (e: React.FormEvent<HTMLInputElement>) => void;
   isPrivateValue: boolean;
-  isPrivateError: string;
   onChangeIsPrivate: (e: React.FormEvent<HTMLInputElement>) => void;
   submitDisabled: boolean;
   submitting: boolean;
@@ -35,7 +34,6 @@ export const ListForm: React.FC<Props> = ({
   descriptionError,
   onChangeDescription,
   isPrivateValue,
-  isPrivateError,
   onChangeIsPrivate,
   submitDisabled,
   submitting,

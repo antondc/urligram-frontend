@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
-import BaseModal2, { BaseModalText, BaseModalTitle } from 'Components/BaseModal2';
+import BaseModal, { BaseModalText, BaseModalTitle } from 'Components/BaseModal';
 import { switchMessageModal } from 'Modules/Ui/actions/switchMessageModal';
 import { Button2 } from 'Vendor/components';
 
@@ -20,11 +20,11 @@ const ModalMessage: React.FC<Props> = ({ children, title }) => {
   };
 
   return (
-    <BaseModal2 className="ModalMessage" onCloseClick={onCloseOrSubmitClick}>
+    <BaseModal className="ModalMessage" onCloseClick={onCloseOrSubmitClick}>
       <BaseModalTitle>{title}</BaseModalTitle>
       <BaseModalText>{children}</BaseModalText>
       <Button2 className="ModalMessage-submit" text="Submit" onClick={onCloseOrSubmitClick} grow />
-    </BaseModal2>
+    </BaseModal>
   );
 };
 
