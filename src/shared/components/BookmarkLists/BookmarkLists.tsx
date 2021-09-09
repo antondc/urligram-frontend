@@ -1,8 +1,10 @@
 import React from 'react';
 
+import PlusCircle from 'Assets/svg/plusCircle.svg';
 import A from 'Components/A';
+import BaseForm, { BaseFormError, BaseFormSubmit } from 'Components/BaseForm';
 import { ListState } from 'Modules/Lists/lists.types';
-import { Button, FadeInOut, Input, PlusCircleWithBackground, SpinnerPie } from 'Vendor/components';
+import { Button2, FadeInOut, Input2, SpinnerPie } from 'Vendor/components';
 
 import './BookmarkLists.less';
 
@@ -49,20 +51,20 @@ export const BookmarkLists: React.FC<Props> = ({
         return (
           <li
             className={
-              'BookmarkLists-listsItem' +
-              (isBookmarkInList ? ' BookmarkLists-listsItem--included' : '') +
-              (wasRecentlyUpdated ? ' BookmarkLists-listsItem--recentlyUpdated' : '')
+              'BookmarkLists-list' +
+              (isBookmarkInList ? ' BookmarkLists-list--included' : '') +
+              (wasRecentlyUpdated ? ' BookmarkLists-list--recentlyUpdated' : '')
             }
             key={item?.id}
           >
-            <A className="BookmarkLists-listsItemText" href={`lists/${item?.id}?sort=-updatedAt`} frontend>
+            <A className="BookmarkLists-listText" href={`lists/${item?.id}?sort=-updatedAt`} frontend styled={false}>
               {item?.name}
             </A>
             {itemsLoading?.includes(item?.id) ? (
-              <SpinnerPie className="BookmarkLists-listsItemLoader" />
+              <SpinnerPie className="BookmarkLists-loader" />
             ) : (
-              <PlusCircleWithBackground
-                className={'BookmarkLists-listsItemIcon'}
+              <PlusCircle
+                className="BookmarkLists-icon"
                 onClick={() => (!!isBookmarkInList ? onListDeleteBookmark(item?.id) : onListAddBookmark(item?.id))}
                 onMouseLeave={() => onIconLeave(item?.id)}
               />
@@ -73,37 +75,33 @@ export const BookmarkLists: React.FC<Props> = ({
     </ul>
     <FadeInOut className="BookmarkLists-bottom" valueToUpdate={showCreateList} appear>
       {showCreateList ? (
-        <form onMouseLeave={onShowCreateList} onSubmit={onCreateListSubmit}>
-          <Input
-            className="BookmarkLists-listNameInput"
+        <BaseForm onMouseLeave={onShowCreateList} onSubmit={onCreateListSubmit}>
+          <Input2
+            className="BookmarkLists-input"
             name="listName"
             value={listInputName}
             onChange={onListTitleInputChange}
             autoFocus
             grow
           />
-          <Button
-            className="BookmarkLists-button"
-            text="Create"
-            type="submit"
-            onClick={onCreateListSubmit}
-            error={!!submitError}
-            grow
-          />
-          <FadeInOut valueToUpdate={!!submitError} speed="fast">
-            <span className="BookmarkLists-error">{submitError}</span>
-          </FadeInOut>
-        </form>
+          <BaseFormSubmit className="BookmarkLists-submit">
+            <Button2 text="Create" type="submit" onClick={onCreateListSubmit} error={!!submitError} grow size="small" />
+            <FadeInOut valueToUpdate={!!submitError} speed="fast">
+              <BaseFormError>{submitError}</BaseFormError>
+            </FadeInOut>
+          </BaseFormSubmit>
+        </BaseForm>
       ) : (
-        <Button
-          className="BookmarkLists-button"
-          text="New list"
-          type="button"
-          size="small"
-          loading={createListSubmitting}
-          grow
-          onClick={onShowCreateList}
-        />
+        <BaseFormSubmit className="BookmarkLists-submit">
+          <Button2
+            text="New list"
+            type="button"
+            loading={createListSubmitting}
+            grow
+            onClick={onShowCreateList}
+            size="small"
+          />
+        </BaseFormSubmit>
       )}
     </FadeInOut>
   </div>

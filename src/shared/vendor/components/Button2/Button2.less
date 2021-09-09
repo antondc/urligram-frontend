@@ -7,8 +7,6 @@
   position: relative;
   justify-content: center;
   align-items: center;
-  height: 50px;
-  min-width: 200px;
   padding: 0 3px 3px 0;
   font-family: @ff-sans;
   color: @c-background;
@@ -27,8 +25,6 @@
   }
 
   &-text {
-    font-size: @fs-normal;
-    font-weight: @fw-semibold;
     letter-spacing: 1px;
     text-transform: uppercase;
     user-select: none;
@@ -78,5 +74,26 @@
     margin-left: 8px;
     fill: @gradientColors[black-6];
     transition: transform @td-fast @ease;
+  }
+
+  &--small {
+    height: 30px;
+    min-width: 120px;
+    padding: 0 30px;
+
+    @{c}-text {
+      font-size: @fs-small;
+      font-weight: @fw-semibold;
+    }
+  }
+
+  &--normal {
+    min-width: 200px;
+    padding: 10px 20px;
+
+    @{c}-text {
+      font-size: @fs-normal;
+      font-weight: @fw-semibold;
+    }
   }
 }

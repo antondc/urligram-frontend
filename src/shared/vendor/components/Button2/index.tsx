@@ -15,6 +15,7 @@ interface Props extends Omit<HTMLProps<HTMLButtonElement>, 'size'> {
   arrow?: boolean;
   grow?: boolean;
   type?: 'button' | 'submit' | 'reset';
+  size?: 'normal' | 'small';
 }
 
 export const Button2: React.FC<Props> = ({
@@ -27,12 +28,14 @@ export const Button2: React.FC<Props> = ({
   arrow,
   grow,
   type = 'button',
+  size = 'normal',
   ...props
 }): JSX.Element => (
   <button
     className={
       'Button2' +
       (className ? ' ' + className : '') +
+      (size ? ' Button2--' + size : '') +
       (grow ? ' Button2--grow' : '') +
       (!disabled && !error && success ? ' Button2--success' : '') +
       (!disabled && !error && loading ? ' Button2--loading' : '') +
