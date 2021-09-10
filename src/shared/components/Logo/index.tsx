@@ -1,6 +1,6 @@
 import React from 'react';
 
-import LogoSvg from 'Assets/svg/logo.svg';
+import LogoCircle from 'Assets/svg/logoCircle.svg';
 import A from 'Components/A';
 
 import './Logo.less';
@@ -26,7 +26,9 @@ const Logo: React.FC<Props> = ({ className, loadingBeat, loadingColors }) => {
       frontend
       underlined
     >
-      <LogoSvg className="Logo-icon" />
+      <div className="Logo-icon">
+        <LogoCircle />
+      </div>
       <h3 className="Logo-text">Linking</h3>
     </A>
   );

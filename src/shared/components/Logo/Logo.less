@@ -20,9 +20,28 @@
   }
 
   &-icon {
-    height: 35px;
+    height: 50px;
     margin-right: 15px;
-    transition: fill @td-fast @ease;
+    overflow: hidden;
+    border-radius: 50%;
+
+    svg {
+      height: 100%;
+      transition: fill @td-fast @ease;
+
+      path[data-id='background'] {
+        fill: @gradientColors[black-5];
+      }
+
+      path[data-id='shadow'] {
+        opacity: 0.7;
+        fill: @gradientColors[black-4];
+      }
+
+      path[data-id='logo'] {
+        fill: @gradientColors[blue-1];
+      }
+    }
   }
 
   &-text {
@@ -46,30 +65,33 @@
   // }
 
   &--loadingBeat {
-    @-icon {
-      animation: hearthBeat 2s ease infinite;
+    @{c}-icon {
+      svg {
+        transform-origin: 50% 50%;
+        animation: hearthBeat 2s ease infinite;
 
-      @media @br-mobile {
-        animation: none;
+        @media @br-mobile {
+          animation: none;
+        }
       }
     }
   }
 
   &--loadingColors {
     @{c}-icon {
-      path[data-id='red'] {
+      path[data-id-logo='red'] {
         animation: colorsBeatRed 2s linear infinite;
       }
 
-      path[data-id='green'] {
+      path[data-id-logo='green'] {
         animation: colorsBeatGreen 1.7s linear infinite;
       }
 
-      path[data-id='blue'] {
+      path[data-id-logo='blue'] {
         animation: colorsBeatBlue 2.1s linear infinite;
       }
 
-      path[data-id='yellow'] {
+      path[data-id-logo='yellow'] {
         animation: colorsBeatYellow 1.8s linear infinite;
       }
     }
@@ -82,7 +104,7 @@
   }
 
   5% {
-    transform: scale(1.05);
+    transform: scale(1);
   }
 
   10% {
@@ -90,7 +112,7 @@
   }
 
   15% {
-    transform: scale(1.1);
+    transform: scale(1);
   }
 
   50% {
