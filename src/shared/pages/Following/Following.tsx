@@ -4,17 +4,16 @@ import Helmet from 'react-helmet';
 import Bookmark from 'Assets/svg/bookmarkFilled.svg';
 import Title from 'Assets/svg/sortTitle.svg';
 import Clock from 'Assets/svg/spinner6.svg';
-import UserFill from 'Assets/svg/userFill.svg';
-import A from 'Components/A';
 import CardItem from 'Components/CardItem';
 import NoResults from 'Components/NoResults';
 import Pagination from 'Components/Pagination';
+import SubHeader from 'Components/SubHeader';
 import UserRow from 'Components/UserRow';
 import { UserRowSkeletonGroup } from 'Components/UserRow/UserRowSkeletonGroup';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE, SITE_TITLE } from 'Root/src/shared/constants';
-import { Select, SelectValue, SortBy, Space } from 'Vendor/components';
+import { SelectValue } from 'Vendor/components';
 
 import './Following.less';
 
@@ -55,47 +54,32 @@ export const Following: React.FC<Props> = ({
 }) => (
   <div className="Following">
     <Helmet title={`${SITE_TITLE} · Following`} />
-    <CardItem className="Following-header">
-      <div className="Following-headerTitle">
-        <UserFill />
-        {user?.name && (
-          <>
-            Users followed by
-            <Space />
-            <A className="Following-headerLink" href={`/users/${user?.id}`} frontend>
-              {`${user?.name}`}
-            </A>
-          </>
-        )}
-      </div>
-      <div className="Following-separator" />
-      <Select
-        className="Following-select"
-        placeholder="Select tags"
-        value={currentQueryParamFilterTags}
-        defaultOptions={allTags.map((item) => ({ label: item.name, value: item.name }))}
-        options={[...tagsSearchFormatted, ...allTags.map((item) => ({ label: item.name, value: item.name }))].filter(
-          (v, i, a) => a.findIndex((t) => t.value === v.value) === i
-        )}
-        onInputChange={onInputChange}
-        onChange={onChange}
-        maxItems={4}
-        grow
-        hideLabelOnFill
-        height="small"
-      />
-      <div className="Following-separator" />
-      <SortBy
-        options={[
-          { label: 'Name', field: 'name', icon: Title },
-          { label: 'Login', field: 'login', icon: Clock },
-          { label: 'Bookmarks', field: 'bookmarks', icon: Bookmark },
-        ]}
-        href={url}
-        currentSort={sort}
-        loading={usersLoading}
-      />
-    </CardItem>
+    <SubHeader
+      // title props
+      title={user?.name}
+      titleHref={`/users/${user?.id}`}
+      prependTitle="Users followed by "
+      leftIcon={<Bookmark />}
+      // select props
+      selectPlaceholder="Select tags"
+      currentQueryParamFilterTags={currentQueryParamFilterTags}
+      selectDefaultOptions={allTags.map((item) => ({ label: item.name, value: item.name }))}
+      selectOptions={[
+        ...tagsSearchFormatted,
+        ...allTags.map((item) => ({ label: item.name, value: item.name })),
+      ].filter((v, i, a) => a.findIndex((t) => t.value === v.value) === i)}
+      onSelectInputChange={onInputChange}
+      onSelectChange={onChange}
+      // sort props
+      sortLoading={usersLoading}
+      sortByOptions={[
+        { label: 'Name', field: 'name', icon: Title },
+        { label: 'Login', field: 'login', icon: Clock },
+        { label: 'Bookmarks', field: 'bookmarks', icon: Bookmark },
+      ]}
+      url={url}
+      currentSort={sort}
+    />
     <div className="Following-following">
       {usersLoading ? (
         <UserRowSkeletonGroup length={usersCurrentIds?.length || DEFAULT_PAGE_SIZE} />

@@ -8,9 +8,10 @@ import { BookmarkRowSkeletonGroup } from 'Components/BookmarkRow/BookmarkRowSkel
 import CardItem from 'Components/CardItem';
 import NoResults from 'Components/NoResults';
 import Pagination from 'Components/Pagination';
+import SubHeader from 'Components/SubHeader';
 import { TagState } from 'Modules/Tags/tags.types';
 import { DEFAULT_PAGE_SIZE, SITE_TITLE } from 'Root/src/shared/constants';
-import { Select, SelectValue, SortBy } from 'Vendor/components';
+import { SelectValue } from 'Vendor/components';
 
 import './Home.less';
 
@@ -49,36 +50,26 @@ export const Home: React.FC<Props> = ({
 }) => (
   <div className="Home">
     <Helmet title={`${SITE_TITLE} · Home`} />
-    <CardItem className="Home-header">
-      <div className="Home-headerTitle">
-        <Bookmark />
-        All Bookmarks
-      </div>
-      <div className="Home-separator" />
-      <Select
-        className="Home-select"
-        placeholder="Select tags"
-        value={currentQueryParamFilterTags}
-        defaultOptions={allTags.map((item) => ({ label: item.name, value: item.name }))}
-        options={[...tagsSearchFormatted, ...allTags.map((item) => ({ label: item.name, value: item.name }))].filter(
-          (v, i, a) => a.findIndex((t) => t.value === v.value) === i
-        )}
-        onInputChange={onInputChange}
-        onChange={onChange}
-        maxItems={4}
-        grow
-        hideLabelOnFill
-        height="small"
-      />
-      <div className="Home-separator" />
-      <SortBy
-        className="Home-sortBy"
-        options={[{ label: 'Created at', field: 'createdAt', icon: Clock }]}
-        href={url}
-        currentSort={sort}
-        loading={loading}
-      />
-    </CardItem>
+    <SubHeader
+      // title props
+      title="All Bookmarks"
+      leftIcon={<Bookmark />}
+      // select props
+      selectPlaceholder="Select tags"
+      currentQueryParamFilterTags={currentQueryParamFilterTags}
+      selectDefaultOptions={allTags.map((item) => ({ label: item.name, value: item.name }))}
+      selectOptions={[
+        ...tagsSearchFormatted,
+        ...allTags.map((item) => ({ label: item.name, value: item.name })),
+      ].filter((v, i, a) => a.findIndex((t) => t.value === v.value) === i)}
+      onSelectInputChange={onInputChange}
+      onSelectChange={onChange}
+      // sort props
+      sortLoading={loading}
+      sortByOptions={[{ label: 'Created at', field: 'createdAt', icon: Clock }]}
+      url={url}
+      currentSort={sort}
+    />
     <div className="Home-bookmarks">
       {loading ? (
         <BookmarkRowSkeletonGroup length={bookmarksIds?.length || DEFAULT_PAGE_SIZE} />

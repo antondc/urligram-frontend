@@ -3,17 +3,17 @@ import Helmet from 'react-helmet';
 
 import Bookmark from 'Assets/svg/bookmark.svg';
 import Clock from 'Assets/svg/spinner6.svg';
-import A from 'Components/A';
 import BookmarkRow from 'Components/BookmarkRow';
 import { BookmarkRowSkeletonGroup } from 'Components/BookmarkRow/BookmarkRowSkeletonGroup';
 import CardItem from 'Components/CardItem';
 import NoResults from 'Components/NoResults';
 import Pagination from 'Components/Pagination';
+import SubHeader from 'Components/SubHeader';
 import { BookmarksByKey } from 'Modules/Bookmarks/bookmarks.types';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE, SITE_TITLE } from 'Root/src/shared/constants';
-import { FadeInOut, Select, SelectValue, SortBy, Space } from 'Vendor/components';
+import { FadeInOut, SelectValue } from 'Vendor/components';
 
 import './UserBookmarks.less';
 
@@ -57,48 +57,31 @@ export const UserBookmarks: React.FC<Props> = ({
 }) => (
   <div className="UserBookmarks">
     <Helmet title={`${SITE_TITLE} · User Bookmarks`} />
-    <CardItem className="UserBookmarks-header">
-      <div className="UserBookmarks-headerTitle">
-        <Bookmark />
-        {user?.name && (
-          <>
-            <A className="UserBookmarks-headerLink" href={`/users/${user?.id}`} frontend>
-              {`${user?.name}`}
-            </A>
-            ’s
-            <Space />
-            bookmarks
-          </>
-        )}
-      </div>
-      <div className="UserBookmarks-separator" />
-      <Select
-        className="UserBookmarks-select"
-        placeholder="Select tags"
-        value={currentQueryParamFilterTags}
-        defaultOptions={allTags.map((item) => ({ label: item.name, value: item.name }))}
-        options={[...tagsSearchFormatted, ...allTags.map((item) => ({ label: item.name, value: item.name }))].filter(
-          (v, i, a) => a.findIndex((t) => t.value === v.value) === i
-        )}
-        onInputChange={onInputChange}
-        onChange={onChange}
-        maxItems={4}
-        hideLabelOnFill
-        grow
-        height="small"
-      />
-      <div className="UserBookmarks-separator" />
-      <SortBy
-        className="UserBookmarks-sortBy"
-        options={[
-          { label: 'Bookmarked', field: 'timesbookmarked', icon: Bookmark },
-          { label: 'Created', field: 'createdAt', icon: Clock },
-        ]}
-        href={url}
-        currentSort={sort}
-        loading={bookmarksLoading}
-      />
-    </CardItem>
+    <SubHeader
+      // title props
+      title={user?.name}
+      titleHref={`/users/${user?.id}`}
+      appendTitle="’s bookmarks"
+      leftIcon={<Bookmark />}
+      // select props
+      selectPlaceholder="Select tags"
+      currentQueryParamFilterTags={currentQueryParamFilterTags}
+      selectDefaultOptions={allTags.map((item) => ({ label: item.name, value: item.name }))}
+      selectOptions={[
+        ...tagsSearchFormatted,
+        ...allTags.map((item) => ({ label: item.name, value: item.name })),
+      ].filter((v, i, a) => a.findIndex((t) => t.value === v.value) === i)}
+      onSelectInputChange={onInputChange}
+      onSelectChange={onChange}
+      // sort props
+      sortLoading={bookmarksLoading}
+      sortByOptions={[
+        { label: 'Bookmarked', field: 'timesbookmarked', icon: Bookmark },
+        { label: 'Created', field: 'createdAt', icon: Clock },
+      ]}
+      url={url}
+      currentSort={sort}
+    />
     <div className="UserBookmarks-bookmarks">
       {bookmarksLoading ? (
         <BookmarkRowSkeletonGroup length={bookmarksIds?.length || DEFAULT_PAGE_SIZE} />

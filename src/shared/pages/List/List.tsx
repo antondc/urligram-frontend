@@ -12,23 +12,12 @@ import ListAddUser from 'Components/ListAddUser';
 import NoResults from 'Components/NoResults';
 import Pagination from 'Components/Pagination';
 import { RenderInPortal } from 'Components/Portal';
+import SubHeader, { SubHeaderSeparator } from 'Components/SubHeader';
 import { ListState, ListUser } from 'Modules/Lists/lists.types';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE, SITE_TITLE } from 'Root/src/shared/constants';
-import {
-  AnimateHeight,
-  Check,
-  Cross,
-  EditCircle,
-  Eye,
-  Hr,
-  Select,
-  SelectValue,
-  SortBy,
-  SpinnerPie,
-  Tooltip,
-} from 'Vendor/components';
+import { AnimateHeight, Check, Cross, EditCircle, Eye, SelectValue, SpinnerPie, Tooltip } from 'Vendor/components';
 
 import './List.less';
 
@@ -106,28 +95,30 @@ export const List: React.FC<Props> = ({
         )}
       </CardItem>
     </AnimateHeight>
-    <CardItem className="List-header">
-      <div className="List-headerTitle">
-        <ListIcon />
-        {list?.name}
-      </div>
-      <div className="List-separator" />
-      <Select
-        className="List-select"
-        placeholder="Select tags"
-        value={currentQueryParamFilterTags}
-        defaultOptions={allTags.map((item) => ({ label: item.name, value: item.name }))}
-        options={[...tagsSearchFormatted, ...allTags.map((item) => ({ label: item.name, value: item.name }))].filter(
-          (v, i, a) => a.findIndex((t) => t.value === v.value) === i
-        )}
-        onInputChange={onInputChange}
-        onChange={onChange}
-        maxItems={4}
-        grow
-        hideLabelOnFill
-        height="small"
-      />
-      <div className="List-separator" />
+    <SubHeader
+      // title props
+      title={list?.name}
+      leftIcon={<ListIcon />}
+      // select props
+      selectPlaceholder="Select tags"
+      currentQueryParamFilterTags={currentQueryParamFilterTags}
+      selectDefaultOptions={allTags.map((item) => ({ label: item.name, value: item.name }))}
+      selectOptions={[
+        ...tagsSearchFormatted,
+        ...allTags.map((item) => ({ label: item.name, value: item.name })),
+      ].filter((v, i, a) => a.findIndex((t) => t.value === v.value) === i)}
+      onSelectInputChange={onInputChange}
+      onSelectChange={onChange}
+      // sort props
+      sortLoading={bookmarksLoading}
+      sortByOptions={[
+        { label: 'Bookmarked', field: 'timesbookmarked', icon: Bookmark },
+        { label: 'Date', field: 'createdAt', icon: Clock },
+      ]}
+      url={url}
+      currentSort={sort}
+    >
+      <SubHeaderSeparator />
       <div className="List-headerImages">
         <React.Fragment>
           <RenderInPortal>
@@ -205,17 +196,7 @@ export const List: React.FC<Props> = ({
           </>
         )}
       </div>
-      <div className="List-separator" />
-      <SortBy
-        options={[
-          { label: 'Bookmarked', field: 'timesbookmarked', icon: Bookmark },
-          { label: 'Date', field: 'createdAt', icon: Clock },
-        ]}
-        href={url}
-        currentSort={sort}
-        loading={bookmarksLoading}
-      />
-    </CardItem>
+    </SubHeader>
     <div className="List-bookmarks">
       {bookmarksLoading ? (
         <BookmarkRowSkeletonGroup length={bookmarksIds?.length ?? DEFAULT_PAGE_SIZE} />
@@ -229,7 +210,6 @@ export const List: React.FC<Props> = ({
       {!bookmarksLoading && !bookmarksIds?.length && <NoResults content="ⵁ We didnt find any bookmark." />}
     </div>
     <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
-    <Hr spacer size="normal" />
   </div>
 );
 

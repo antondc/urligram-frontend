@@ -21,7 +21,7 @@ export class URLWrapper {
       this.origin = url.origin;
       this.host = url.hostname;
       this.path = url.pathname;
-      this.search = this.url.search;
+      this.search = this.url?.search;
     } catch (err) {
       console.error('Un-parsable URL', err);
     }
@@ -32,13 +32,13 @@ export class URLWrapper {
   }
 
   getPathName(): string | undefined {
-    return this.url.pathname;
+    return this.url?.pathname;
   }
 
   getFilename(): string | undefined {
-    if (!this.url.pathname.includes('.')) return undefined;
+    if (!this.url?.pathname.includes('.')) return undefined;
 
-    const filename = this.url.pathname.substring(this.url.pathname.lastIndexOf('/') + 1);
+    const filename = this.url?.pathname.substring(this.url?.pathname.lastIndexOf('/') + 1);
 
     return filename;
   }
@@ -56,7 +56,7 @@ export class URLWrapper {
   }
 
   getDomainWithoutSubdomain(): string {
-    return psl.get(this.url.hostname);
+    return psl.get(this.url?.hostname);
   }
 
   getSearchString(): string | undefined {
@@ -68,7 +68,7 @@ export class URLWrapper {
   }
 
   upsertSearchParams(params: Record<string, unknown>): string {
-    const updatedQueryString = QueryStringWrapper.upsertSearchParams(this.url.search, params);
+    const updatedQueryString = QueryStringWrapper.upsertSearchParams(this.url?.search, params);
     const hrefWithoutSearchParams = this.getHref().split('?')[0];
     const updatedURL = `${hrefWithoutSearchParams}?${updatedQueryString}`;
 
@@ -78,17 +78,17 @@ export class URLWrapper {
   }
 
   getSearchParamOne(path: string): any {
-    const param = QueryStringWrapper.getOneSearchParam(this.url.search, path);
+    const param = QueryStringWrapper.getOneSearchParam(this.url?.search, path);
 
     return param;
   }
 
   getSearchParamAll(): Record<string, unknown> {
-    return QueryStringWrapper.parseQueryString(this.url.search);
+    return QueryStringWrapper.parseQueryString(this.url?.search);
   }
 
   deleteSearchParam(path: string): string {
-    const updatedQueryString = QueryStringWrapper.deleteSearchParam(this.url.search, path);
+    const updatedQueryString = QueryStringWrapper.deleteSearchParam(this.url?.search, path);
     const hrefWithoutSearchParams = this.getHref().split('?')[0];
     const updatedURL = `${hrefWithoutSearchParams}?${updatedQueryString}`;
 

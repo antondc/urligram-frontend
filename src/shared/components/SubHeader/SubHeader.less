@@ -4,17 +4,42 @@
 
 @{c} {
   display: flex;
+  position: sticky;
   justify-content: space-between;
   align-items: center;
   flex-shrink: 0;
   height: 50px;
   width: 100%;
+  top: 120px;
   margin-bottom: 20px;
   padding: 8px 30px 8px 15px;
   font-weight: @fw-bold;
   white-space: nowrap;
   color: @gradientColors[black-3];
+  overflow: unset;
   background: @c-background;
+  z-index: @z-index-1;
+
+  &:before {
+    content: ' ';
+    position: absolute;
+    height: 10px;
+    bottom: -10px;
+    left: 0;
+    right: 0;
+    background: @gradientColors[blue-6];
+    z-index: 1;
+  }
+
+  @media @br-mobile {
+    position: relative;
+    flex-wrap: wrap;
+    align-items: stretch;
+    height: 100px;
+    top: unset;
+    margin-bottom: 10px;
+    padding: 20px 15px 15px 15px;
+  }
 
   &-headerTitle {
     display: flex;
@@ -28,6 +53,11 @@
       width: 14px;
       margin-right: 12px;
       fill: @gradientColors[black-3];
+    }
+
+    @media @br-mobile {
+      padding-bottom: 12px;
+      font-size: @fs-medium;
     }
   }
 
@@ -49,5 +79,169 @@
     margin: 0 24px;
     background: @gradientColors[black-4];
     border-radius: 2px;
+
+    @media @br-mobile {
+      display: none;
+    }
+  }
+
+  &-notification {
+    overflow: unset;
+  }
+
+  &-notificationContent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    width: 100%;
+    padding: 20px;
+    background: @c-alert;
+  }
+
+  &-notificationText {
+    flex: 1;
+    font-weight: @fw-bold;
+  }
+
+  &-notificationIcon {
+    height: 16px;
+    width: 16px;
+    min-height: 16px;
+    min-width: 16px;
+    margin-left: 10px;
+
+    .hoverTransition;
+  }
+
+  &-notificationIconCross {
+    height: 14px;
+    width: 14px;
+    min-height: 14px;
+    min-width: 14px;
+    fill: @c-error;
+  }
+
+  &-notificationIconCheck {
+    fill: @c-success;
+  }
+
+  &-headerImages {
+    display: flex;
+    position: relative;
+    align-items: center;
+    height: 20px;
+
+    @media @br-mobile {
+      display: none;
+    }
+  }
+
+  &-headerImagesItem {
+    position: relative;
+    height: 20px;
+    width: 20px;
+    overflow: hidden;
+    background: @c-background;
+    border: 2px solid @gradientColors[black-3];
+    transition: border @td-fast @ease-outCustom1;
+    border-radius: 50%;
+
+    &:hover {
+      border: 2px solid @gradientColors[blue-2];
+      cursor: pointer;
+    }
+  }
+
+  &-headerImagesItemOwner {
+    margin-right: 10px;
+  }
+
+  &-headerImagesItemJoined {
+    margin-right: -5px;
+
+    &:last-of-type {
+      margin: 0;
+    }
+
+    &--pending {
+      border: 2px solid @c-alert;
+    }
+
+    &--active {
+      border: 2px solid @gradientColors[black-2];
+    }
+  }
+
+  &-headerImagesItemImage {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  &-headerPlusIcon {
+    height: 20px;
+    width: 20px;
+    overflow: hidden;
+    background: @c-background;
+    outline: 1.5px solid @c-background;
+    transform: rotate(0deg);
+    transition: fill @td-fast @ease;
+    box-shadow: 0 0 0 0 @c-base;
+    border-radius: 50%;
+  }
+
+  &-joinList {
+    height: 20px;
+    width: 20px;
+    margin-left: 8px;
+  }
+
+  &-iconRole {
+    height: 20px;
+    width: 20px;
+    margin-left: 5px;
+    fill: @gradientColors[black-3];
+    transition: fill @td-fast @ease;
+  }
+
+  &-iconReader,
+  &-iconEditor {
+    fill: @gradientColors[black-3];
+    pointer-events: none;
+  }
+
+  &-iconAdmin {
+    &:hover {
+      fill: @gradientColors[blue-2];
+    }
+
+    .hoverTransition;
+  }
+
+  &-sort {
+    @media @br-mobile {
+      align-items: flex-start;
+    }
+  }
+
+  &-select {
+    flex: 10;
+
+    @media @br-mobile {
+      order: 3;
+      width: 100%;
+    }
+  }
+
+  &-bookmarks {
+    height: 100%;
+    width: 100%;
   }
 }

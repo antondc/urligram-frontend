@@ -6,16 +6,16 @@ import Cross from 'Assets/svg/cross.svg';
 import ListIcon from 'Assets/svg/list.svg';
 import Clock from 'Assets/svg/spinner6.svg';
 import User from 'Assets/svg/userFill.svg';
-import A from 'Components/A';
 import { BookmarkRowSkeletonGroup } from 'Components/BookmarkRow/BookmarkRowSkeletonGroup';
 import CardItem from 'Components/CardItem';
 import ListRow from 'Components/ListRow';
 import NoResults from 'Components/NoResults';
 import Pagination from 'Components/Pagination';
+import SubHeader, { SubHeaderSeparator } from 'Components/SubHeader';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE, SITE_TITLE } from 'Root/src/shared/constants';
-import { Select, SelectValue, SortBy, Space } from 'Vendor/components';
+import { SelectValue } from 'Vendor/components';
 
 import './UserLists.less';
 
@@ -58,53 +58,38 @@ export const UserLists: React.FC<Props> = ({
 }) => (
   <div className="UserLists">
     <Helmet title={`${SITE_TITLE} · User Lists`} />
-    <CardItem className="UserLists-header">
-      <div className="UserLists-headerTitle">
-        <ListIcon />
-        {user?.name && (
-          <>
-            <A className="UserLists-headerLink" href={`/users/${user?.id}`} frontend>
-              {`${user?.name}`}
-            </A>
-            ’s
-            <Space />
-            lists
-          </>
-        )}
-      </div>
-      <div className="UserLists-separator" />
-      <Select
-        className="UserLists-select"
-        placeholder="Select tags"
-        value={currentQueryParamFilterTags}
-        defaultOptions={allTags.map((item) => ({ label: item.name, value: item.name }))}
-        options={[...tagsSearchFormatted, ...allTags.map((item) => ({ label: item.name, value: item.name }))].filter(
-          (v, i, a) => a.findIndex((t) => t.value === v.value) === i
-        )}
-        onInputChange={onInputChange}
-        onChange={onChange}
-        maxItems={4}
-        grow
-        hideLabelOnFill
-        height="small"
-      />
-      <div className="UserLists-separator" />
+    <SubHeader
+      // title props
+      title={user?.name}
+      titleHref={`/users/${user?.id}`}
+      appendTitle="’s lists"
+      leftIcon={<ListIcon />}
+      // select props
+      selectPlaceholder="Select tags"
+      currentQueryParamFilterTags={currentQueryParamFilterTags}
+      selectDefaultOptions={allTags.map((item) => ({ label: item.name, value: item.name }))}
+      selectOptions={[
+        ...tagsSearchFormatted,
+        ...allTags.map((item) => ({ label: item.name, value: item.name })),
+      ].filter((v, i, a) => a.findIndex((t) => t.value === v.value) === i)}
+      onSelectInputChange={onInputChange}
+      onSelectChange={onChange}
+      // sort props
+      sortLoading={listsLoading}
+      sortByOptions={[
+        { label: 'Created at', field: 'createdAt', icon: Clock },
+        { label: 'Members', field: 'members', icon: User },
+        { label: 'Bookmarks', field: 'bookmarks', icon: Bookmark },
+      ]}
+      url={url}
+      currentSort={sort}
+    >
+      <SubHeaderSeparator />
       <div className="UserLists-addList" onClick={onAddListClick}>
         <Cross className="UserLists-addListIcon" />
         <span className="UserLists-addListText">Add List</span>
       </div>
-      <div className="UserLists-separator" />
-      <SortBy
-        options={[
-          { label: 'Created at', field: 'createdAt', icon: Clock },
-          { label: 'Members', field: 'members', icon: User },
-          { label: 'Bookmarks', field: 'bookmarks', icon: Bookmark },
-        ]}
-        href={url}
-        currentSort={sort}
-        loading={listsLoading}
-      />
-    </CardItem>
+    </SubHeader>
     <div className="UserLists-lists">
       {listsLoading ? (
         <BookmarkRowSkeletonGroup length={listsIds?.length || DEFAULT_PAGE_SIZE} />

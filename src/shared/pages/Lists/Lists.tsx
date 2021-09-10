@@ -10,9 +10,10 @@ import ListRow from 'Components/ListRow';
 import { ListRowSkeletonGroup } from 'Components/ListRow/ListSkeletonGroup';
 import NoResults from 'Components/NoResults';
 import Pagination from 'Components/Pagination';
+import SubHeader from 'Components/SubHeader';
 import { TagState } from 'Modules/Tags/tags.types';
 import { DEFAULT_PAGE_SIZE, SITE_TITLE } from 'Root/src/shared/constants';
-import { Select, SelectValue, SortBy } from 'Vendor/components';
+import { SelectValue } from 'Vendor/components';
 
 import './Lists.less';
 
@@ -51,39 +52,30 @@ export const Lists: React.FC<Props> = ({
 }) => (
   <div className="Lists">
     <Helmet title={`${SITE_TITLE} · All Lists`} />
-    <CardItem className="Lists-header">
-      <div className="Lists-headerTitle">
-        <ListIcon />
-        All Lists
-      </div>
-      <div className="Lists-separator" />
-      <Select
-        className="Lists-select"
-        placeholder="Select tags"
-        value={currentQueryParamFilterTags}
-        defaultOptions={allTags.map((item) => ({ label: item.name, value: item.name }))}
-        options={[...tagsSearchFormatted, ...allTags.map((item) => ({ label: item.name, value: item.name }))].filter(
-          (v, i, a) => a.findIndex((t) => t.value === v.value) === i
-        )}
-        onInputChange={onInputChange}
-        onChange={onChange}
-        maxItems={4}
-        grow
-        hideLabelOnFill
-        height="small"
-      />
-      <div className="Lists-separator" />
-      <SortBy
-        options={[
-          { label: 'Date', field: 'createdAt', icon: Clock },
-          { label: 'Updated', field: 'updatedAt', icon: Updated },
-          { label: 'Members', field: 'members', icon: User },
-        ]}
-        href={url}
-        currentSort={sort}
-        loading={listsIdsLoading}
-      />
-    </CardItem>
+    <SubHeader
+      // title props
+      title="All Lists"
+      leftIcon={<ListIcon />}
+      // select props
+      selectPlaceholder="Select tags"
+      currentQueryParamFilterTags={currentQueryParamFilterTags}
+      selectDefaultOptions={allTags.map((item) => ({ label: item.name, value: item.name }))}
+      selectOptions={[
+        ...tagsSearchFormatted,
+        ...allTags.map((item) => ({ label: item.name, value: item.name })),
+      ].filter((v, i, a) => a.findIndex((t) => t.value === v.value) === i)}
+      onSelectInputChange={onInputChange}
+      onSelectChange={onChange}
+      // sort props
+      sortLoading={listsIdsLoading}
+      sortByOptions={[
+        { label: 'Date', field: 'createdAt', icon: Clock },
+        { label: 'Updated', field: 'updatedAt', icon: Updated },
+        { label: 'Members', field: 'members', icon: User },
+      ]}
+      url={url}
+      currentSort={sort}
+    />
     <div className="Lists-lists">
       {listsIdsLoading ? (
         <ListRowSkeletonGroup length={listsIds?.length || DEFAULT_PAGE_SIZE} />
