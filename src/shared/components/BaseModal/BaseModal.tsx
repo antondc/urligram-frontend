@@ -19,7 +19,9 @@ const BaseModal: React.FC<Props> = ({ onCloseClick: onCloseClickCallback, childr
   const [locked, setLocked] = useState<boolean>(false);
 
   const onCloseClick = () => {
-    if (locked) return;
+    // TODO: Temporarily deactivated
+    console.log(locked);
+    // if (locked) return;
 
     dispatch(uiScreenMobileUnLock());
   };
