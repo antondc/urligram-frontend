@@ -14,7 +14,7 @@ export const BookmarkRowSkeleton: React.FC<BookmarkRowSkeleton> = ({ id }) => (
       <SkeletonItem className="BookmarkRowSkeleton-favicon" />
       <SkeletonItem className="BookmarkRowSkeleton-titleText" />
     </div>
-    <SkeletonItem className="BookmarkRowSkeleton-details" />
+    <SkeletonItem className="BookmarkRowSkeleton-description" />
     <div className="BookmarkRowSkeleton-tags">
       <SkeletonItem className="BookmarkRowSkeleton-tag" />
       <SkeletonItem className="BookmarkRowSkeleton-tag" />
@@ -26,6 +26,9 @@ export const BookmarkRowSkeleton: React.FC<BookmarkRowSkeleton> = ({ id }) => (
       <SkeletonItem className="BookmarkRowSkeleton-icon" />
       <SkeletonItem className="BookmarkRowSkeleton-icon" />
     </div>
+
+    <SkeletonItem className="BookmarkRowSkeleton-bookmarker" />
+    <SkeletonItem className="BookmarkRowSkeleton-actions" />
   </div>
 );
 

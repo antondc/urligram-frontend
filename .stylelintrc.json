@@ -26,6 +26,7 @@
       "flex-wrap",
       "flex-direction",
       "justify-content",
+      "justify-self",
       "align-items",
       "align-content",
       "flex-grow",

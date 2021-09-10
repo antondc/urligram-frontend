@@ -1,7 +1,6 @@
 import React from 'react';
 
 import Cross from 'Assets/svg/cross.svg';
-import DotsVertical from 'Assets/svg/dotsVertical.svg';
 import EditCircle from 'Assets/svg/editCircle.svg';
 import List from 'Assets/svg/list.svg';
 import Private from 'Assets/svg/private.svg';
@@ -24,7 +23,6 @@ interface BookmarkRowIcons extends BookmarkState {
   uiScreenTypeIsMobile: boolean;
   onEdit: () => void;
   onListsClick: () => void;
-  onMobileBookmarkActionsIconClick: () => void;
   onMobileBookmarkActionsBackgroundClick: () => void;
 }
 
@@ -36,11 +34,9 @@ export const BookmarkRowIcons: React.FC<Partial<BookmarkRowIcons>> = ({
   uiScreenTypeIsMobile,
   onEdit,
   onListsClick,
-  onMobileBookmarkActionsIconClick,
   onMobileBookmarkActionsBackgroundClick,
 }) => (
   <div className="BookmarkRowIcons" data-test-id="BookmarkRowIcons">
-    <DotsVertical className="BookmarkRowIcons-actionsIcon" onClick={onMobileBookmarkActionsIconClick} />
     <div
       className={
         'BookmarkRowIcons-actionsIconsWrapper' +
@@ -75,13 +71,13 @@ export const BookmarkRowIcons: React.FC<Partial<BookmarkRowIcons>> = ({
             <BookmarkListsPopOverOrSheet bookmarkId={bookmark?.id} />
           </div>
         )}
-        <Bookmarker
-          className="BookmarkRowIcons-iconBookmark"
-          linkId={bookmark?.linkId}
-          bookmarkId={bookmark?.id}
-          listId={listId}
-        />
       </Fade>
+      <Bookmarker
+        className="BookmarkRowIcons-iconBookmark"
+        linkId={bookmark?.linkId}
+        bookmarkId={bookmark?.id}
+        listId={listId}
+      />
     </div>
   </div>
 );

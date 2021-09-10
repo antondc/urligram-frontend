@@ -5,21 +5,9 @@
 @{c} {
   height: 100%;
 
-  &-actionsIcon {
-    display: none;
-
-    @media @br-mobile {
-      display: block;
-      height: 15px;
-      width: 15px;
-      padding: 4px;
-      border: 2px solid @c-accent;
-      fill: @c-accent;
-      border-radius: 50%;
-    }
-  }
-
   &-actionsIconsWrapper {
+    display: flex;
+    align-items: center;
     grid-area: icons;
     height: 100%;
 
@@ -77,7 +65,7 @@
       bottom: 0;
       left: 0;
       right: 0;
-      background: @c-traslucid--light;
+      background: @c-traslucid;
     }
   }
 
@@ -97,7 +85,7 @@
   &-icon {
     height: 18px;
     width: 18px;
-    margin-right: 23px;
+    margin-left: 23px;
     fill: @gradientColors[blue-1];
     transition: fill @td-fast @ease;
 
@@ -113,21 +101,21 @@
   }
 
   &-iconEdit {
+    justify-self: flex-start;
     grid-area: iconEdit;
     margin-top: 0;
-    justify-self: flex-start;
 
     &:hover {
       cursor: pointer;
     }
 
     @media @br-mobile {
+      justify-self: unset;
       grid-area: unset;
       height: 20px;
       width: 20px;
       margin-top: 0;
       margin-right: 0;
-      justify-self: unset;
     }
   }
 
@@ -146,28 +134,15 @@
     }
 
     @media @br-mobile {
+      justify-self: center;
       grid-area: unset;
       height: 18px;
       width: 18px;
-      justify-self: center;
 
       svg {
         height: 18px;
         width: 18px;
       }
-    }
-  }
-
-  &-iconBookmark {
-    height: 18px;
-    width: 18px;
-    transform: translateX(2px);
-
-    @media @br-mobile {
-      grid-area: unset;
-      height: 20px;
-      width: 20px;
-      margin-top: 0;
     }
   }
 

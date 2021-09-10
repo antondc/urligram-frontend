@@ -1,10 +1,11 @@
 import React from 'react';
 
-import BookmarkWithBackground from 'Assets/svg/bookmarkWithBackground.svg';
+import DotsVertical from 'Assets/svg/dotsVertical.svg';
 import A from 'Components/A';
+import Bookmarker from 'Components/Bookmarker';
 import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
 import { TagState } from 'Modules/Tags/tags.types';
-import { Fade, Space, Tag } from 'Vendor/components';
+import { Space, Tag } from 'Vendor/components';
 import { BookmarkRowIcons } from './BookmarkRowIcons';
 
 import './BookmarkRow.less';
@@ -101,15 +102,14 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
         </A>
       ))}
     </div>
+    <Bookmarker
+      className="BookmarkRow-bookmarker"
+      linkId={bookmark?.linkId}
+      bookmarkId={bookmark?.id}
+      listId={listId}
+    />
+    <DotsVertical className="BookmarkRow-actions" onClick={onMobileBookmarkActionsIconClick} />
     <div className="BookmarkRow-icons" onClick={bookmarkViewed}>
-      <Fade
-        mounted={uiScreenTypeIsMobile && sessionUserBookmarkedLink && !bookmarkActionIconsMounted}
-        position="absolute"
-        className="BookmarkRow-iconBookmarkMobile"
-        appear
-      >
-        <BookmarkWithBackground className="BookmarkRow-iconBookmarkMobileSvg" />
-      </Fade>
       <BookmarkRowIcons
         bookmark={bookmark}
         listId={listId}
@@ -118,7 +118,6 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
         uiScreenTypeIsMobile={uiScreenTypeIsMobile}
         onEdit={onEdit}
         onListsClick={onListsClick}
-        onMobileBookmarkActionsIconClick={onMobileBookmarkActionsIconClick}
         onMobileBookmarkActionsBackgroundClick={onMobileBookmarkActionsBackgroundClick}
       />
     </div>
