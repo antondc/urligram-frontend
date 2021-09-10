@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import debounce from 'lodash/debounce';
 
 import { sessionSignUp } from 'Modules/Session/actions/sessionSignUp';
 import { selectSessionErrorLast } from 'Modules/Session/selectors/selectSessionErrorLast';
 import { selectSessionLoading } from 'Modules/Session/selectors/selectSessionLoading';
 import { selectSessionStatus } from 'Modules/Session/selectors/selectSessionStatus';
 import { SESSION_STATUS_INACTIVE } from 'Modules/Session/session.types';
+import { DELAY_SLOW_MS } from 'Root/src/shared/constants';
 import { testStringHasWhiteSpaces } from 'Tools/utils/string/testStringHasWhiteSpaces';
 import { validateEmailAddress } from 'Tools/utils/string/validateEmailAddress';
 import { validatePassword } from 'Tools/utils/string/validatePassword';
@@ -21,15 +23,18 @@ const SignUp: React.FC = () => {
   const sessionLoading = useSelector(selectSessionLoading);
   const [emailValue, setEmailValue] = useState<string>(undefined);
   const [emailError, setEmailError] = useState<string>(undefined);
+  const debouncedSetEmailError = useCallback(debounce(setEmailError, DELAY_SLOW_MS), []);
   const [nameValue, setNameValue] = useState<string>(undefined);
   const [nameError, setNameError] = useState<string>(undefined);
+  const debouncedSetNameError = useCallback(debounce(setNameError, DELAY_SLOW_MS), []);
   const [passwordValue, setPasswordValue] = useState<string>(undefined);
   const [passwordError, setPasswordError] = useState<string>(undefined);
+  const debouncedSetPasswordError = useCallback(debounce(setPasswordError, DELAY_SLOW_MS), []);
   const [passwordRepeatedValue, setPasswordRepeatedValue] = useState<string>(undefined);
   const [passwordRepeatedError, setPasswordRepeatedError] = useState<string>(undefined);
+  const debouncedSetPasswordRepeatedError = useCallback(debounce(setPasswordRepeatedError, DELAY_SLOW_MS), []);
   const [submitSuccess, setSubmitSuccess] = useState<boolean>(false);
   const [submitError, setSubmitError] = useState<string>(undefined);
-
   const submitDisabled =
     !emailValue ||
     !!emailError ||
@@ -44,11 +49,17 @@ const SignUp: React.FC = () => {
     const { value } = e.currentTarget;
     setNameValue(value);
     setSubmitError(undefined);
+    setNameError(undefined);
+
+    if (!value) {
+      setNameError('Name required');
+
+      return;
+    }
 
     const stringHasWhiteSpaces = testStringHasWhiteSpaces(value);
-
     if (stringHasWhiteSpaces) {
-      setNameError('Name can not contain spaces');
+      debouncedSetNameError('Name can not contain spaces');
 
       return;
     }
@@ -56,59 +67,70 @@ const SignUp: React.FC = () => {
     const isNameLengthValid = value.length > 5;
 
     if (!isNameLengthValid) {
-      setNameError('Name too short');
+      debouncedSetNameError('Name too short');
 
       return;
     }
-
-    setNameError(undefined);
   };
 
   const onChangeEmail = (e: React.FormEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
     setEmailValue(value);
     setSubmitError(undefined);
+    setEmailError(undefined);
 
-    const isValidEmail = validateEmailAddress(value);
-
-    if (!isValidEmail) {
-      setEmailError('Email not valid');
+    if (!value) {
+      setEmailError('Email required');
 
       return;
     }
 
-    setEmailError(undefined);
+    const isValidEmail = validateEmailAddress(value);
+    if (!isValidEmail) {
+      debouncedSetEmailError('Email not valid');
+
+      return;
+    }
   };
 
   const onChangePassword = (e: React.FormEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
     setPasswordValue(value);
     setSubmitError(undefined);
+    setPasswordError(undefined);
 
-    const isValidPassword = validatePassword(value);
-
-    if (!isValidPassword) {
-      setPasswordError('6-10 chars., one digit and uppercase');
+    if (!value) {
+      setPasswordError('Password required');
 
       return;
     }
 
-    setPasswordError(undefined);
+    const isValidPassword = validatePassword(value);
+    if (!isValidPassword) {
+      debouncedSetPasswordError('6-10 chars., one digit and uppercase');
+
+      return;
+    }
   };
 
   const onChangePasswordRepeated = (e: React.FormEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
     setPasswordRepeatedValue(value);
     setSubmitError(undefined);
+    setPasswordRepeatedError(undefined);
 
-    const isSamePassword = value === passwordValue;
-    if (!isSamePassword) {
-      setPasswordRepeatedError('Passwords are not equal');
+    if (!value) {
+      setPasswordRepeatedError('Password required');
 
       return;
     }
 
-    setPasswordRepeatedError(undefined);
+    const isSamePassword = value === passwordValue;
+    if (!isSamePassword) {
+      debouncedSetPasswordRepeatedError('Passwords are not equal');
+
+      return;
+    }
   };
 
   const onSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {

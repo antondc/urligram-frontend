@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import { boolean, text, withKnobs } from '@storybook/addon-knobs';
+import { Hr } from '..';
 import { Input2 } from '.';
 
 export default {
@@ -41,6 +42,7 @@ export const Empty: React.FC = () => {
         grow={knobs.grow()}
         onChange={(e): void => setValue2(e.currentTarget.value)}
       />
+      <Hr spacer />
       <Input2
         name="password_example"
         label="Password"
@@ -54,6 +56,7 @@ export const Empty: React.FC = () => {
         grow={knobs.grow()}
         onChange={(e): void => setValue3(e.currentTarget.value)}
       />
+      <Hr spacer />
       <Input2
         name="name_example"
         label="Name"

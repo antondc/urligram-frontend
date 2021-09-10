@@ -1,5 +1,7 @@
 import React, { HTMLProps } from 'react';
 
+import { Space } from '..';
+
 import './Input2.less';
 
 interface Props extends Omit<HTMLProps<HTMLInputElement>, 'autoComplete'> {
@@ -42,7 +44,7 @@ export const Input2: React.FC<Props> = ({
     className={
       'Input2 ' +
       (className ? className : '') +
-      (error ? ' Input2--error' : '') +
+      (!!error ? ' Input2--error' : '') +
       (success ? ' Input2--success' : '') +
       (disabled ? ' Input2--disabled' : '') +
       (readOnly ? ' Input2--readOnly' : '') +
@@ -72,6 +74,10 @@ export const Input2: React.FC<Props> = ({
       results={2}
       {...props}
     />
-    {!!error && typeof error === 'string' && <div className="Input2-errorContent">{error}</div>}
+    <div className="Input2-errorContent">
+      {error}
+      {/* Space to force height when there is no error present */}
+      <Space />
+    </div>
   </div>
 );

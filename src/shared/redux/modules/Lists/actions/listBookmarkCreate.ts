@@ -28,7 +28,16 @@ export const listBookmarkCreate =
 
       await dispatch({
         type: LIST_BOOKMARK_CREATE_SUCCESS,
-        payload: listsAfterResponse,
+        payload: {
+          ...listsAfterResponse,
+          byKey: {
+            ...listsAfterResponse.byKey,
+            [listId]: {
+              ...listsAfterResponse.byKey[listId],
+              bookmarksIds: [...(listsAfterResponse?.byKey[listId]?.bookmarksIds || []), bookmarkId],
+            },
+          },
+        },
       });
       await dispatch(listLoadById(listId));
 

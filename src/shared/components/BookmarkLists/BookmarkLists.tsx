@@ -45,7 +45,7 @@ export const BookmarkLists: React.FC<Props> = ({
   <div className="BookmarkLists">
     <ul className="BookmarkLists-lists">
       {lists?.map((item) => {
-        const isBookmarkInList = !!item?.bookmarksIds?.includes(bookmarkId);
+        const isBookmarkInList = !!bookmarkId && !!item?.bookmarksIds?.includes(bookmarkId);
         const wasRecentlyUpdated = recentlyUpdated?.includes(item?.id);
 
         return (
@@ -83,7 +83,6 @@ export const BookmarkLists: React.FC<Props> = ({
             onChange={onListTitleInputChange}
             autoFocus
             grow
-            error="This is an error"
           />
           <BaseFormSubmit className="BookmarkLists-submit">
             <Button2 text="Create" type="submit" onClick={onCreateListSubmit} error={!!submitError} grow size="small" />
