@@ -21,6 +21,14 @@
         transform: scale(1.1);
         transform-origin: 50% 50%;
       }
+
+      @media @br-mobile {
+        fill: @gradientColors[black-4];
+
+        path[data-id='background'] {
+          fill: @c-transparent;
+        }
+      }
     }
 
     @{c}-remove {
@@ -48,7 +56,11 @@
     }
 
     &--empty {
-      fill: @gradientColors[blue-1];
+      fill: @gradientColors[blue-4];
+
+      @media @br-mobile {
+        fill: @gradientColors[black-4];
+      }
 
       path[data-id='background'] {
         fill: @c-transparent;

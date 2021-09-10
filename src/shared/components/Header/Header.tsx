@@ -1,7 +1,6 @@
 import React from 'react';
 
 import Cross from 'Assets/svg/cross.svg';
-import List from 'Assets/svg/list.svg';
 import Loupe from 'Assets/svg/loupe.svg';
 import User from 'Assets/svg/user.svg';
 import Logo from 'Components/Logo';
@@ -48,7 +47,7 @@ export const Header: React.FC<Props> = ({
         {!sessionLoading && session?.id && (
           <img className="Header-userImage" src={session?.image?.original} onClick={onUserClick} />
         )}
-        {!sessionLoading && !session?.id && <User name="User" className={'Header-userLogo'} onClick={onUserClick} />}
+        {!sessionLoading && !session?.id && <User name="User" className="Header-userLogo" onClick={onUserClick} />}
         {sessionLoading && <SpinnerPie className="Header-loader" size="big" />}
       </div>
     </div>

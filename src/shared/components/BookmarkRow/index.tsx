@@ -60,6 +60,7 @@ const BookmarkRow: React.FC<Props> = ({ id, listId, tagHrefPath = '' }) => {
   const viewPending = !!bookmarkListNotification?.viewPending;
 
   const onMobileBookmarkActionsIconClick = () => {
+    if (!session?.id) return dispatch(switchLoginModal(true));
     dispatch(switchBookmarkActionButtonsMounted({ bookmarkId: id }));
   };
 

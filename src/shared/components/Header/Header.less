@@ -104,7 +104,7 @@
     height: 30px;
     width: 30px;
     margin-right: 25px;
-    border: 2.5px solid @gradientColors[black-4];
+    border: 2px solid @gradientColors[black-4];
     transform: rotate(45deg);
     transition: border @td-fast @ease;
     border-radius: 50%;
@@ -129,7 +129,7 @@
       cursor: pointer;
 
       @{c}-addBoookmarkIcon {
-        border: 2.5px solid @gradientColors[blue-1];
+        border: 2px solid @gradientColors[blue-1];
 
         svg {
           fill: @gradientColors[blue-2];
@@ -157,6 +157,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  &-userLogo {
+    fill: @gradientColors[black-4];
   }
 
   &-userLogo,
