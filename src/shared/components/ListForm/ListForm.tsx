@@ -1,7 +1,7 @@
 import React from 'react';
 
 import BaseForm, { BaseFormError, BaseFormField, BaseFormLabel, BaseFormSubmit } from 'Components/BaseForm';
-import { Button2, FadeInOut, Input, Switch } from 'Vendor/components';
+import { Button, FadeInOut, Input, Switch } from 'Vendor/components';
 
 import './ListForm.less';
 
@@ -77,7 +77,7 @@ export const ListForm: React.FC<Props> = ({
       <Switch name="isPrivate" checked={isPrivateValue} onChange={onChangeIsPrivate} />
     </BaseFormField>
     <BaseFormSubmit>
-      <Button2
+      <Button
         text="Save"
         type="submit"
         onClick={onSubmit}
@@ -90,7 +90,7 @@ export const ListForm: React.FC<Props> = ({
     </BaseFormSubmit>
     {!!isUpdate && (
       <BaseFormSubmit>
-        <Button2
+        <Button
           className="ListForm-delete"
           text="Remove list"
           type="submit"

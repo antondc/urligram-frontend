@@ -3,7 +3,7 @@ import React from 'react';
 import BaseForm, { BaseFormError, BaseFormField, BaseFormLabel, BaseFormSubmit } from 'Components/BaseForm';
 import { BaseModalTitle } from 'Components/BaseModal';
 import { TagState } from 'Modules/Tags/tags.types';
-import { ArrowRight, Button2, FadeInOut, Input, Select, SelectValue, SpinnerPie, Switch } from 'Vendor/components';
+import { ArrowRight, Button, FadeInOut, Input, Select, SelectValue, SpinnerPie, Switch } from 'Vendor/components';
 import { TagValue } from '.';
 
 import './BookmarkCreateForm.less';
@@ -114,7 +114,7 @@ export const BookmarkCreateForm: React.FC<Props> = ({
             <Switch name="isPrivate" checked={isPrivateValue} onChange={onChangeIsPrivate} />
           </BaseFormField>
           <BaseFormSubmit>
-            <Button2
+            <Button
               text="Save"
               type="submit"
               onClick={onSubmit}

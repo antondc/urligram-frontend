@@ -4,7 +4,7 @@ import PlusCircle from 'Assets/svg/plusCircle.svg';
 import A from 'Components/A';
 import BaseForm, { BaseFormError, BaseFormSubmit } from 'Components/BaseForm';
 import { ListState } from 'Modules/Lists/lists.types';
-import { Button2, FadeInOut, Input, SpinnerPie } from 'Vendor/components';
+import { Button, FadeInOut, Input, SpinnerPie } from 'Vendor/components';
 
 import './BookmarkLists.less';
 
@@ -85,7 +85,7 @@ export const BookmarkLists: React.FC<Props> = ({
             grow
           />
           <BaseFormSubmit className="BookmarkLists-submit">
-            <Button2 text="Create" type="submit" onClick={onCreateListSubmit} error={!!submitError} grow size="small" />
+            <Button text="Create" type="submit" onClick={onCreateListSubmit} error={!!submitError} grow size="small" />
             <FadeInOut valueToUpdate={!!submitError} speed="fast">
               <BaseFormError>{submitError}</BaseFormError>
             </FadeInOut>
@@ -93,7 +93,7 @@ export const BookmarkLists: React.FC<Props> = ({
         </BaseForm>
       ) : (
         <BaseFormSubmit className="BookmarkLists-submit">
-          <Button2
+          <Button
             text="New list"
             type="button"
             loading={createListSubmitting}

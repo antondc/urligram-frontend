@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import BaseModal, { BaseModalText, BaseModalTitle } from 'Components/BaseModal';
 import { switchMessageModal } from 'Modules/Ui/actions/switchMessageModal';
-import { Button2 } from 'Vendor/components';
+import { Button } from 'Vendor/components';
 
 import './ModalMessage.less';
 
@@ -24,7 +24,7 @@ const ModalMessage: React.FC<Props> = ({ children, title }) => {
       <>
         <BaseModalTitle>{title}</BaseModalTitle>
         <BaseModalText>{children}</BaseModalText>
-        <Button2 className="ModalMessage-submit" text="Submit" onClick={onCloseOrSubmitClick} grow />
+        <Button className="ModalMessage-submit" text="Submit" onClick={onCloseOrSubmitClick} grow />
       </>
     </BaseModal>
   );

@@ -4,11 +4,11 @@ import { boolean, text, withKnobs } from '@storybook/addon-knobs';
 import { H1 } from '../H1';
 import { Hr } from '../Hr';
 import { Input } from '../Input';
-import { TextArea2 } from '.';
+import { TextArea } from '.';
 
 export default {
-  component: TextArea2,
-  title: 'TextArea2',
+  component: TextArea,
+  title: 'TextArea',
   decorators: [withKnobs],
 };
 
@@ -34,10 +34,10 @@ export const Empty: React.ReactNode = () => {
 
   return (
     <div>
-      <H1>TextArea2</H1>
+      <H1>TextArea</H1>
       <Hr size="micro" />
       <Hr spacer size="big" />
-      <TextArea2
+      <TextArea
         name={knobs.name()}
         label="My textarea"
         value={value}

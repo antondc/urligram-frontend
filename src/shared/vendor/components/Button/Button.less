@@ -3,176 +3,49 @@
 @c: .Button;
 
 @{c} {
-  .default();
-
-  display: inline-block;
+  display: flex;
   position: relative;
-  height: 50px;
+  justify-content: center;
+  align-items: center;
   padding: 0 3px 3px 0;
-  color: @c-base;
-  user-select: none;
+  font-family: @ff-sans;
+  color: @c-background;
+  background: @gradientColors[blue-1];
+  transition: color @td-fast @ease, background @td-fast @ease;
+  border-radius: 4px;
+  box-shadow: 5px 5px 20px 0 @gradientColors[black-4];
 
-  &-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    padding: 1px 30px 0;
-    background: @c-background;
-    border: 2px solid @c-base;
-    border-radius: 4px;
-    transition: transform @td-fast @ease, border @td-fast @ease, color @td-fast @ease, background @td-fast @ease;
-    // border-radius: 4px;
-    will-change: transform;
-
-    @{c}-svg {
-      height: 15px;
-      margin-left: 5px;
-      padding-bottom: 1px;
-      transition: fill @td-fast @ease, width @td-fast @ease, margin @td-fast @ease;
-    }
-
-    &:active {
-      @{c}:not(@{c}--success)& {
-        transform: translate(3px, 3px);
-        box-shadow: 2px 2px 0 0 @c-accent;
-      }
-    }
-  }
-
-  &-shadow {
-    content: ' ';
-    position: absolute;
-    border-radius: 4px;
-    top: 0;
-    bottom: 4px;
-    left: 0;
-    right: 4px;
-    box-shadow: 4px 4px 0 0 @c-base;
-    // border-radius: 4px;
-    transition: box-shadow @td-fast @ease;
-  }
-
-  &:hover:not(@{c}--success),
-  &--loading {
+  &:hover:not(@{c}--success):not(@{c}--error):not(@{c}--disabled):not(@{c}--loading) {
+    background: @gradientColors[blue-2];
     cursor: pointer;
 
-    @{c}-content {
-      transform: translate(1px, 1px);
+    @{c}-arrow {
+      transform: translateX(1px);
     }
   }
 
-  &:active:not(@{c}--success) {
-    @{c}-content {
-      transform: translate(2px, 2px);
-    }
+  &-text {
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    user-select: none;
   }
 
   &--grow {
     width: 100%;
   }
 
-  &-variant {
-    &--alternate {
-      @{c}-content {
-        // Styles pending
-      }
-    }
-
-    &--delete {
-      @{c}-content {
-        color: @c-accentLight;
-        background: @c-background;
-        border-color: @c-accentLight;
-
-        @{c}-svg {
-          width: 0;
-          min-width: 0;
-          margin: 0;
-          fill: @c-error;
-        }
-      }
-
-      @{c}-shadow {
-        box-shadow: 4px 4px 0 0 @c-accentLight;
-      }
-
-      &:hover {
-        @{c}-content {
-          color: @c-error;
-          border-color: @c-error;
-        }
-
-        @{c}-shadow {
-          box-shadow: 4px 4px 0 0 @c-error;
-        }
-      }
-    }
-  }
-
-  &--loading {
-    pointer-events: none;
-  }
-
   &--disabled {
+    color: @gradientColors[black-5];
+    background: @gradientColors[black-4];
     pointer-events: none;
-
-    @{c}-content {
-      color: @c-disabled;
-      background: @c-background;
-      border-color: @c-disabled;
-
-      @{c}-svg {
-        width: 0;
-        min-width: 0;
-        margin: 0;
-        fill: @c-disabled;
-      }
-    }
-
-    @{c}-shadow {
-      box-shadow: 4px 4px 0 0 @c-disabled;
-    }
   }
 
   &--success {
-    @{c}-content {
-      color: @c-success;
-      background: @c-background;
-      border-color: @c-success;
-      transform: translate(1px, 1px);
-      pointer-events: none;
-
-      @{c}-svg {
-        width: 0;
-        min-width: 0;
-        margin: 0;
-        fill: @c-background;
-      }
-    }
-
-    @{c}-shadow {
-      box-shadow: 4px 4px 0 0 @c-success;
-    }
+    background: @gradientColors[blue-3];
   }
 
   &--error {
-    @{c}-content {
-      color: @c-error;
-      background: @c-background;
-      border-color: @c-error;
-
-      @{c}-svg {
-        width: 0;
-        min-width: 0;
-        margin: 0;
-        fill: @c-error;
-      }
-    }
-
-    @{c}-shadow {
-      box-shadow: 4px 4px 0 0 @c-error;
-    }
+    background: @gradientColors[red-3];
   }
 
   &-loader {
@@ -181,10 +54,46 @@
     max-width: 0;
     margin-left: 0;
     overflow: hidden;
+  }
 
-    @{c}--loading && {
+  &--loading {
+    @{c}-loader {
       max-width: 16px;
-      margin-left: 5px;
+      margin-left: 8px;
+      background: @gradientColors[blue-1];
+      outline-color: @gradientColors[yellow-6];
+
+      span {
+        background: @gradientColors[yellow-6];
+      }
+    }
+  }
+
+  @{c}-arrow {
+    max-width: 14px;
+    margin-left: 8px;
+    fill: @gradientColors[black-6];
+    transition: transform @td-fast @ease;
+  }
+
+  &--small {
+    height: 30px;
+    min-width: 120px;
+    padding: 0 30px;
+
+    @{c}-text {
+      font-size: @fs-small;
+      font-weight: @fw-semibold;
+    }
+  }
+
+  &--normal {
+    min-width: 200px;
+    padding: 10px 20px;
+
+    @{c}-text {
+      font-size: @fs-normal;
+      font-weight: @fw-semibold;
     }
   }
 }

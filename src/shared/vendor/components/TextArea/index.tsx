@@ -47,6 +47,11 @@ export const TextArea: React.FC<Props> = ({
         (grow ? ' TextArea--grow' : '')
       }
     >
+      {label && (
+        <label className="TextArea-label" htmlFor={'Input-' + id}>
+          {label}
+        </label>
+      )}
       <TextareaAutosize
         id={'Input-' + id}
         name={name}
@@ -57,11 +62,6 @@ export const TextArea: React.FC<Props> = ({
         spellCheck={spellCheck}
         maxLength={maxLength}
       />
-      {label && (
-        <label className="TextArea-label" htmlFor={'Input-' + id}>
-          {label}
-        </label>
-      )}
     </div>
   );
 };

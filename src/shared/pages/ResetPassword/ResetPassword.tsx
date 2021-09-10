@@ -5,7 +5,7 @@ import BaseForm, { BaseFormError, BaseFormField, BaseFormSubmit } from 'Componen
 import { BaseModalFooter, BaseModalFooterLink, BaseModalFooterSection, BaseModalTitle } from 'Components/BaseModal';
 import BasePanel from 'Root/src/shared/components/BasePanel/BasePanel';
 import { SITE_TITLE } from 'Root/src/shared/constants';
-import { Button2, FadeInOut, Input, Space } from 'Vendor/components';
+import { Button, FadeInOut, Input, Space } from 'Vendor/components';
 
 import './ResetPassword.less';
 
@@ -66,7 +66,7 @@ export const ResetPassword: React.FC<Props> = ({
           />
         </BaseFormField>
         <BaseFormSubmit>
-          <Button2
+          <Button
             text="Submit"
             type="submit"
             onClick={onSubmit}

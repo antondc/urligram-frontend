@@ -5,7 +5,7 @@ import BaseForm, { BaseFormError, BaseFormField, BaseFormSubmit } from 'Componen
 import { BaseModalFooter, BaseModalFooterLink, BaseModalFooterSection, BaseModalTitle } from 'Components/BaseModal';
 import BasePanel from 'Components/BasePanel';
 import { SITE_TITLE } from 'Root/src/shared/constants';
-import { Button2, FadeInOut, Input, Space } from 'Vendor/components';
+import { Button, FadeInOut, Input, Space } from 'Vendor/components';
 
 import './ForgotPassword.less';
 
@@ -50,7 +50,7 @@ export const ForgotPassword: React.FC<Props> = ({
           />
         </BaseFormField>
         <BaseFormSubmit>
-          <Button2
+          <Button
             className="ForgotPassword-submit"
             text="Submit"
             type="submit"

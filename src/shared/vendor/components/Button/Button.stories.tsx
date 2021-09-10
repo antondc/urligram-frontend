@@ -10,53 +10,43 @@ export default {
   decorators: [withKnobs],
 };
 
-const knobs = {
-  text: (): string => text('Button', 'Click me!'),
-  grow: (): boolean => boolean('Grow', true),
-  disabled: (): boolean => boolean('Disabled', false),
-  success: (): boolean => boolean('Success', false),
-  error: (): boolean => boolean('Error', false),
-  loading: (): boolean => boolean('Loading', false),
-  variant: (): 'alternate' | 'delete' => select('Variant', [undefined, 'alternate', 'delete'], undefined),
-};
-
 export const Default: React.FC = () => (
-  <>
+  <div style={{ display: 'grid', gap: '10px 10px', gridTemplateColumns: '1fr 1fr', alignItems: 'flex-end' }}>
     <div style={{ width: '200px', outline: '2px solid rgba(255, 0, 255, .0)' }}>
-      <Button
-        text={knobs.text()}
-        grow={knobs.grow()}
-        disabled={knobs.disabled()}
-        error={knobs.error()}
-        success={knobs.success()}
-        variant={knobs.variant()}
-        loading={knobs.loading()}
-      />
+      <Button text="Click me!" grow />
     </div>
-    <Hr spacer />
     <div style={{ width: '200px', outline: '2px solid rgba(255, 0, 255, .0)' }}>
-      <Button
-        text={knobs.text()}
-        grow={knobs.grow()}
-        disabled={knobs.disabled()}
-        error={knobs.error()}
-        success={knobs.success()}
-        variant={knobs.variant()}
-        loading={knobs.loading()}
-        icon="ArrowRight"
-      />
+      <Button text="Click me!" grow size="small" />
     </div>
-    <Hr spacer />
     <div style={{ width: '200px', outline: '2px solid rgba(255, 0, 255, .0)' }}>
-      <Button
-        text={knobs.text()}
-        grow={knobs.grow()}
-        disabled={knobs.disabled()}
-        error={knobs.error()}
-        success={knobs.success()}
-        variant={knobs.variant()}
-        loading={knobs.loading()}
-      />
+      <Button text="Click me!" grow success />
+    </div>{' '}
+    <div style={{ width: '200px', outline: '2px solid rgba(255, 0, 255, .0)' }}>
+      <Button text="Click me!" grow success size="small" />
     </div>
-  </>
+    <div style={{ width: '200px', outline: '2px solid rgba(255, 0, 255, .0)' }}>
+      <Button text="Click me!" grow disabled />
+    </div>
+    <div style={{ width: '200px', outline: '2px solid rgba(255, 0, 255, .0)' }}>
+      <Button text="Click me!" grow disabled size="small" />
+    </div>
+    <div style={{ width: '200px', outline: '2px solid rgba(255, 0, 255, .0)' }}>
+      <Button text="Click me!" grow error />
+    </div>
+    <div style={{ width: '200px', outline: '2px solid rgba(255, 0, 255, .0)' }}>
+      <Button text="Click me!" grow error size="small" />
+    </div>
+    <div style={{ width: '200px', outline: '2px solid rgba(255, 0, 255, .0)' }}>
+      <Button text="Click me!" grow loading />
+    </div>
+    <div style={{ width: '200px', outline: '2px solid rgba(255, 0, 255, .0)' }}>
+      <Button text="Click me!" grow loading size="small" />
+    </div>
+    <div style={{ width: '200px', outline: '2px solid rgba(255, 0, 255, .0)' }}>
+      <Button text="Click me!" grow arrow />
+    </div>
+    <div style={{ width: '200px', outline: '2px solid rgba(255, 0, 255, .0)' }}>
+      <Button text="Click me!" grow arrow size="small" />
+    </div>
+  </div>
 );

@@ -1,7 +1,6 @@
 export { A } from './A';
 export { Frame } from './Frame';
 export { Button } from './Button';
-export { Button2 } from './Button2';
 export { Checkbox } from './Checkbox';
 export { DatePicker } from './DatePicker';
 export { Fade } from './Fade';
@@ -68,7 +67,6 @@ export {
 export { Switch } from './Switch';
 export { Tag } from './Tag';
 export { TextArea } from './TextArea';
-export { TextArea2 } from './TextArea2';
 export { TextButton } from './TextButton';
 export { PopOver } from './PopOver';
 export { Tooltip } from './Tooltip';

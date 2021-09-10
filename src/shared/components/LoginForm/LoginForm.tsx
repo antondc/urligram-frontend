@@ -1,7 +1,7 @@
 import React from 'react';
 
 import BaseForm, { BaseFormError, BaseFormField, BaseFormSubmit } from 'Components/BaseForm';
-import { Button2, FadeInOut, Input } from 'Vendor/components';
+import { Button, FadeInOut, Input } from 'Vendor/components';
 
 import './LoginForm.less';
 
@@ -58,7 +58,7 @@ export const LoginForm: React.FC<Props> = ({
       />
     </BaseFormField>
     <BaseFormSubmit>
-      <Button2
+      <Button
         text="Submit"
         type="submit"
         onClick={onSubmit}

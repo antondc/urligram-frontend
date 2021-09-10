@@ -31,14 +31,7 @@ export const CookiesBanner: React.FC<Props> = ({ onAccept, accepted, show }) => 
         </Span>
       </div>
       <div className="CookiesBanner-buttons">
-        <Button
-          className="CookiesBanner-accept"
-          text="Accept"
-          variant="alternate"
-          onClick={onAccept}
-          size="small"
-          success={accepted}
-        />
+        <Button className="CookiesBanner-accept" text="Accept" onClick={onAccept} success={accepted} />
       </div>
     </div>
   </AnimateHeight>

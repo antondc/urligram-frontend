@@ -1,7 +1,7 @@
 import React from 'react';
 
 import BaseForm, { BaseFormError, BaseFormField, BaseFormSubmit } from 'Components/BaseForm';
-import { Button2, FadeInOut, ImageField, TextArea2 } from 'Vendor/components';
+import { Button, FadeInOut, ImageField, TextArea } from 'Vendor/components';
 
 interface Props {
   statement: string;
@@ -30,7 +30,7 @@ export const UserForm: React.FC<Props> = ({
 }) => (
   <BaseForm className="UserForm" onSubmit={onSubmit}>
     <BaseFormField className="UserForm-statement">
-      <TextArea2
+      <TextArea
         name="statement"
         type="text"
         label="About me"
@@ -56,7 +56,7 @@ export const UserForm: React.FC<Props> = ({
       <BaseFormError className="UserForm-imageError">{imageError}</BaseFormError>
     </FadeInOut>
     <BaseFormSubmit className="UserForm-submitButton">
-      <Button2 text="Save" type="submit" onClick={onSubmit} loading={submitting} grow />
+      <Button text="Save" type="submit" onClick={onSubmit} loading={submitting} grow />
     </BaseFormSubmit>
   </BaseForm>
 );

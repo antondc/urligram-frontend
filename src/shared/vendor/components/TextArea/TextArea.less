@@ -7,73 +7,62 @@
   position: relative;
   flex-direction: column;
   justify-content: flex-start;
-  padding: 6px;
-  text-align: left;
-  border: 2px solid @c-base;
-  transition: border @td-fast @ease;
-
-  .default();
-
-  &-textArea {
-    font-weight: @fw-bold;
-    line-height: @fh-normal;
-    overflow: auto;
-    background: @c-background;
-    border: none;
-    outline: none;
-    transition: color @td-fast @ease;
-    resize: none;
-    box-shadow: none;
-
-    .default();
-
-    &:focus,
-    &:not(:placeholder-shown) {
-      & + label {
-        padding: 0 7px 0 6px;
-        transform: translate(2px, -18px) scale(0.8);
-      }
-    }
-  }
+  font-family: @ff-sans;
 
   &-label {
     display: flex;
-    position: absolute;
-    justify-content: flex-start;
-    align-items: center;
     height: 20px;
-    top: 9px;
-    left: 0;
-    padding: 0 8px;
+    font-size: @fs-small;
+    font-weight: @fw-bold;
     white-space: nowrap;
-    color: @c-disabled;
+    color: @gradientColors[black-3];
     overflow: hidden;
-    background: @c-background;
-    transform-origin: left top;
-    transition: all @td-fast @ease;
+    background: @c-transparent;
+    pointer-events: none;
     user-select: none;
+  }
+
+  &-textArea {
+    padding: 20px;
+    font-family: @ff-sans;
+    font-size: @fs-normal;
+    font-weight: @fw-semibold;
+    line-height: @fh-normal;
+    color: @gradientColors[black-2];
+    overflow: auto;
+    background: @gradientColors[black-5];
+    border: none;
+    outline: 2px solid transparent;
+    transition: color @td-fast @ease, box-shadow @td-fast @ease;
+    resize: none;
+    box-shadow: 0 0 0 0 @c-shadow;
+    border-radius: 8px;
+
+    &:focus,
+    &:not(:placeholder-shown) {
+      box-shadow: 4px 4px 0 0 @c-shadow;
+    }
+
+    @{c}--success & {
+      outline: 2px solid @gradientColors[blue-2];
+      box-shadow: 0 0 0 0 @c-shadow;
+    }
+
+    @{c}--error & {
+      outline: 2px solid @c-errorAccent;
+      box-shadow: 0 0 0 0 @c-shadow;
+    }
+
+    @{c}--disabled &,
+    @{c}--readOnly & {
+      color: @c-accentLight;
+      box-shadow: 0 0 0 0 @c-shadow;
+      pointer-events: none;
+      user-select: none;
+    }
   }
 
   &--grow {
     width: 100%;
-  }
-
-  &--success {
-    border: 2px solid @c-success;
-  }
-
-  &--error {
-    border: 2px solid @c-error;
-  }
-
-  &--disabled,
-  &--readOnly {
-    border: 2px solid @c-disabled;
-
-    @{c}-textArea {
-      color: @c-disabled;
-      pointer-events: none;
-      user-select: none;
-    }
   }
 }
