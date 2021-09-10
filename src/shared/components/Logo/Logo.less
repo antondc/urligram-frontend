@@ -25,6 +25,10 @@
     overflow: hidden;
     border-radius: 50%;
 
+    @media @br-mobile {
+      height: 30px;
+    }
+
     svg {
       height: 100%;
       transition: fill @td-fast @ease;
@@ -46,6 +50,10 @@
 
   &-text {
     transform: translateY(-1px);
+
+    @media @br-mobile {
+      display: none;
+    }
   }
 
   // path[data-id='red'] {

@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Cross from 'Assets/svg/cross.svg';
+import List from 'Assets/svg/list.svg';
 import Loupe from 'Assets/svg/loupe.svg';
 import User from 'Assets/svg/user.svg';
 import Logo from 'Components/Logo';
@@ -31,14 +32,15 @@ export const Header: React.FC<Props> = ({
   <header className="Header">
     <div className="Header-content">
       <Logo className="Header-logo" loadingBeat={logoLoadingHeartBeat} loadingColors={logoLoadingColors} />
-
       <div className="Header-spacer" />
       <div className="Header-mockSearch">
         <Loupe className="Header-mockSearchIcon" />
       </div>
-      <div className="Header-separator" />
+      <div className="Header-separator Header-separatorDesktop" />
       <div className="Header-addBoookmark" onClick={switchUiBookmarkModal}>
-        <Cross className="Header-addBoookmarkIcon" />
+        <div className="Header-addBoookmarkIcon">
+          <Cross />
+        </div>
         <span className="Header-addBoookmarkText">Add Bookmark</span>
       </div>
       <div className="Header-separator" />

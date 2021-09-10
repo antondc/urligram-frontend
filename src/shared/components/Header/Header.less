@@ -10,6 +10,11 @@
   background: @gradientColors[blue-6];
   z-index: @z-index-1;
 
+  @media @br-mobile {
+    height: 90px;
+    padding: 10px 0;
+  }
+
   &-content {
     display: flex;
     justify-content: space-between;
@@ -20,6 +25,13 @@
     background: @c-background;
     z-index: @z-index-1;
     border-radius: 4px;
+
+    @media @br-mobile {
+      height: 50px;
+      padding: 6px 14px 6px 12px;
+      border: 2px solid @gradientColors[blue-1];
+      border-radius: 8px;
+    }
 
     .boxShadow;
   }
@@ -48,6 +60,19 @@
     margin: 0 24px;
     background: @gradientColors[black-4];
     border-radius: 2px;
+
+    @media @br-mobile {
+      height: 100%;
+      margin: 0 15px;
+    }
+  }
+
+  &-separatorDesktop {
+    display: block;
+
+    @media @br-mobile {
+      display: none;
+    }
   }
 
   &-mockSearch {
@@ -56,6 +81,10 @@
     min-width: 460px;
     background: @gradientColors[black-5];
     border-radius: 20px;
+
+    @media @br-mobile {
+      display: none;
+    }
   }
 
   &-mockSearchIcon {
@@ -67,6 +96,30 @@
     fill: @gradientColors[black-4];
   }
 
+  &-addBoookmarkIcon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    width: 30px;
+    margin-right: 25px;
+    border: 2.5px solid @gradientColors[black-4];
+    transform: rotate(45deg);
+    transition: border @td-fast @ease;
+    border-radius: 50%;
+
+    svg {
+      height: 12px;
+      width: 12px;
+      fill: @gradientColors[black-4];
+      transition: fill @td-fast @ease;
+    }
+
+    @media @br-mobile {
+      margin-right: 0;
+    }
+  }
+
   &-addBoookmark {
     display: flex;
     align-items: center;
@@ -75,7 +128,11 @@
       cursor: pointer;
 
       @{c}-addBoookmarkIcon {
-        fill: @gradientColors[blue-2];
+        border: 2.5px solid @gradientColors[blue-1];
+
+        svg {
+          fill: @gradientColors[blue-2];
+        }
       }
 
       @{c}-addBoookmarkText {
@@ -84,20 +141,15 @@
     }
   }
 
-  &-addBoookmarkIcon {
-    height: 20px;
-    width: 20px;
-    margin-right: 25px;
-    fill: @gradientColors[black-4];
-    transform: rotate(45deg);
-    transition: fill @td-fast @ease;
-  }
-
   &-addBoookmarkText {
     font-size: @fs-big;
     font-weight: @fw-bold;
     color: @gradientColors[black-4];
     transition: color @td-fast @ease;
+
+    @media @br-mobile {
+      display: none;
+    }
   }
 
   &-user {
@@ -114,6 +166,11 @@
     object-fit: cover;
     object-position: center;
     border-radius: 50%;
+
+    @media @br-mobile {
+      height: 30px;
+      width: 30px;
+    }
 
     &:hover {
       cursor: pointer;
