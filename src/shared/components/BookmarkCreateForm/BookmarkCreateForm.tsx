@@ -3,7 +3,7 @@ import React from 'react';
 import BaseForm, { BaseFormError, BaseFormField, BaseFormLabel, BaseFormSubmit } from 'Components/BaseForm';
 import { BaseModalTitle } from 'Components/BaseModal';
 import { TagState } from 'Modules/Tags/tags.types';
-import { ArrowRight, Button2, FadeInOut, Input2, Select, SelectValue, SpinnerPie, Switch } from 'Vendor/components';
+import { ArrowRight, Button2, FadeInOut, Input, Select, SelectValue, SpinnerPie, Switch } from 'Vendor/components';
 import { TagValue } from '.';
 
 import './BookmarkCreateForm.less';
@@ -58,7 +58,7 @@ export const BookmarkCreateForm: React.FC<Props> = ({
   <BaseForm className="BookmarkCreateForm" onSubmit={onSubmit}>
     <BaseModalTitle>Add a Bookmark</BaseModalTitle>
     <BaseFormField className="BookmarkCreateForm-url">
-      <Input2
+      <Input
         className="BookmarkCreateForm"
         name="url"
         type="text"
@@ -81,7 +81,7 @@ export const BookmarkCreateForm: React.FC<Props> = ({
       {urlSubmitted && (
         <>
           <BaseFormField>
-            <Input2
+            <Input
               name="title"
               type="text"
               label="Title"

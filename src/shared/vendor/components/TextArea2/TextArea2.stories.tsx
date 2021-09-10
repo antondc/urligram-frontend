@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { boolean, text, withKnobs } from '@storybook/addon-knobs';
 import { H1 } from '../H1';
 import { Hr } from '../Hr';
-import { Input2 } from '../Input2';
+import { Input } from '../Input';
 import { TextArea2 } from '.';
 
 export default {
@@ -50,7 +50,7 @@ export const Empty: React.ReactNode = () => {
       />
       <Hr spacer />
       <Hr size="zero" />
-      <Input2
+      <Input
         name={knobs.name()}
         label="My data"
         value={value2}

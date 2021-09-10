@@ -1,7 +1,7 @@
 import React from 'react';
 
 import BaseForm, { BaseFormError, BaseFormField, BaseFormLabel, BaseFormSubmit } from 'Components/BaseForm';
-import { Button2, FadeInOut, Input2, Switch } from 'Vendor/components';
+import { Button2, FadeInOut, Input, Switch } from 'Vendor/components';
 
 import './ListForm.less';
 
@@ -48,7 +48,7 @@ export const ListForm: React.FC<Props> = ({
 }) => (
   <BaseForm className="ListForm" onSubmit={onSubmit}>
     <BaseFormField>
-      <Input2
+      <Input
         name="name"
         type="text"
         label="List name"
@@ -61,7 +61,7 @@ export const ListForm: React.FC<Props> = ({
       />
     </BaseFormField>
     <BaseFormField>
-      <Input2
+      <Input
         name="description"
         type="text"
         label="List description"

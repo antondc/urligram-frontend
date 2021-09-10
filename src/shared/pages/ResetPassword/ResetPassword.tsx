@@ -5,7 +5,7 @@ import BaseForm, { BaseFormError, BaseFormField, BaseFormSubmit } from 'Componen
 import { BaseModalFooter, BaseModalFooterLink, BaseModalFooterSection, BaseModalTitle } from 'Components/BaseModal';
 import BasePanel from 'Root/src/shared/components/BasePanel/BasePanel';
 import { SITE_TITLE } from 'Root/src/shared/constants';
-import { Button2, FadeInOut, Input2, Space } from 'Vendor/components';
+import { Button2, FadeInOut, Input, Space } from 'Vendor/components';
 
 import './ResetPassword.less';
 
@@ -42,7 +42,7 @@ export const ResetPassword: React.FC<Props> = ({
       <BaseModalTitle>Reset Password</BaseModalTitle>
       <BaseForm className="ResetPassword-form">
         <BaseFormField>
-          <Input2
+          <Input
             name="password"
             type="password"
             label="Password"
@@ -54,7 +54,7 @@ export const ResetPassword: React.FC<Props> = ({
           />
         </BaseFormField>
         <BaseFormField>
-          <Input2
+          <Input
             name="password_repeated"
             type="password"
             label="Repeat password"

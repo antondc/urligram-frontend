@@ -1,7 +1,7 @@
 import React from 'react';
 
 import BaseForm, { BaseFormError, BaseFormField, BaseFormSubmit } from 'Components/BaseForm';
-import { Button2, FadeInOut, Input2 } from 'Vendor/components';
+import { Button2, FadeInOut, Input } from 'Vendor/components';
 
 import './LoginForm.less';
 
@@ -34,7 +34,7 @@ export const LoginForm: React.FC<Props> = ({
 }) => (
   <BaseForm className="LoginForm">
     <BaseFormField>
-      <Input2
+      <Input
         name="nameOrEmail"
         type="text"
         label="Name or Email"
@@ -46,7 +46,7 @@ export const LoginForm: React.FC<Props> = ({
       />
     </BaseFormField>
     <BaseFormField>
-      <Input2
+      <Input
         name="password"
         type="password"
         label="Password"

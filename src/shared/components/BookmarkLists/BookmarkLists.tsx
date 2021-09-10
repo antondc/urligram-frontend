@@ -4,7 +4,7 @@ import PlusCircle from 'Assets/svg/plusCircle.svg';
 import A from 'Components/A';
 import BaseForm, { BaseFormError, BaseFormSubmit } from 'Components/BaseForm';
 import { ListState } from 'Modules/Lists/lists.types';
-import { Button2, FadeInOut, Input2, SpinnerPie } from 'Vendor/components';
+import { Button2, FadeInOut, Input, SpinnerPie } from 'Vendor/components';
 
 import './BookmarkLists.less';
 
@@ -76,7 +76,7 @@ export const BookmarkLists: React.FC<Props> = ({
     <FadeInOut className="BookmarkLists-bottom" valueToUpdate={showCreateList} appear>
       {showCreateList ? (
         <BaseForm onMouseLeave={onShowCreateList} onSubmit={onCreateListSubmit}>
-          <Input2
+          <Input
             className="BookmarkLists-input"
             name="listName"
             value={listInputName}
