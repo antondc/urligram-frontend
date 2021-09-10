@@ -1,7 +1,7 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 
-import { BaseModalFooter, BaseModalFooterLink, BaseModalTitle } from 'Components/BaseModal';
+import { BaseModalFooter, BaseModalFooterLink, BaseModalFooterSection, BaseModalTitle } from 'Components/BaseModal';
 import BasePanel from 'Components/BasePanel';
 import LoginForm from 'Components/LoginForm';
 import { SITE_TITLE } from 'Root/src/shared/constants';
@@ -16,16 +16,16 @@ export const Login: React.FC = () => (
       <BaseModalTitle>Login</BaseModalTitle>
       <LoginForm />
       <BaseModalFooter className="ResetPassword-footer">
-        <div>
+        <BaseModalFooterSection>
           Forgot password?:
           <Space />
           <BaseModalFooterLink href="login">reset it</BaseModalFooterLink>
-        </div>
-        <div>
+        </BaseModalFooterSection>
+        <BaseModalFooterSection>
           Dont have an account?:
           <Space />
           <BaseModalFooterLink href="sign-up">sign up</BaseModalFooterLink>
-        </div>
+        </BaseModalFooterSection>
       </BaseModalFooter>
     </BasePanel>
   </>

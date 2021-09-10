@@ -83,6 +83,7 @@ export const BookmarkLists: React.FC<Props> = ({
             onChange={onListTitleInputChange}
             autoFocus
             grow
+            error="This is an error"
           />
           <BaseFormSubmit className="BookmarkLists-submit">
             <Button2 text="Create" type="submit" onClick={onCreateListSubmit} error={!!submitError} grow size="small" />

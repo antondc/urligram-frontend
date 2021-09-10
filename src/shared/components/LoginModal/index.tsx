@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import BaseModal, { BaseModalFooter, BaseModalFooterLink, BaseModalTitle } from 'Components/BaseModal';
+import BaseModal, {
+  BaseModalFooter,
+  BaseModalFooterLink,
+  BaseModalFooterSection,
+  BaseModalTitle,
+} from 'Components/BaseModal';
 import LoginForm from 'Components/LoginForm';
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
 import { Space } from 'Vendor/components';
@@ -23,14 +28,16 @@ const LoginModal: React.FC = () => {
         <BaseModalTitle>Log In</BaseModalTitle>
         <LoginForm setLocked={setLocked} />
         <BaseModalFooter>
-          Forgot password?:
-          <Space />
-          <BaseModalFooterLink href="forgot-password">reset it</BaseModalFooterLink>
-        </BaseModalFooter>
-        <BaseModalFooter>
-          Dont have an account?:
-          <Space />
-          <BaseModalFooterLink href="sign-up">sign up</BaseModalFooterLink>
+          <BaseModalFooterSection>
+            Forgot password?:
+            <Space />
+            <BaseModalFooterLink href="forgot-password">reset it</BaseModalFooterLink>
+          </BaseModalFooterSection>
+          <BaseModalFooterSection>
+            Dont have an account?:
+            <Space />
+            <BaseModalFooterLink href="sign-up">sign up</BaseModalFooterLink>
+          </BaseModalFooterSection>
         </BaseModalFooter>
       </>
     </BaseModal>

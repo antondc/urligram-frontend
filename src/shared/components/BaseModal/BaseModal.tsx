@@ -22,11 +22,12 @@ const BaseModal: React.FC<Props> = ({ onCloseClick: onCloseClickCallback, childr
     if (locked) return;
 
     dispatch(uiScreenMobileUnLock());
-    onCloseClickCallback();
   };
 
   useEffect(() => {
     dispatch(uiScreenMobileLock());
+
+    return () => onCloseClickCallback();
   }, []);
 
   return (

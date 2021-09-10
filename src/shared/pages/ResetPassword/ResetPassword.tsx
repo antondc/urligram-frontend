@@ -2,7 +2,7 @@ import React from 'react';
 import Helmet from 'react-helmet';
 
 import BaseForm, { BaseFormError, BaseFormField, BaseFormSubmit } from 'Components/BaseForm';
-import { BaseModalFooter, BaseModalFooterLink, BaseModalTitle } from 'Components/BaseModal';
+import { BaseModalFooter, BaseModalFooterLink, BaseModalFooterSection, BaseModalTitle } from 'Components/BaseModal';
 import BasePanel from 'Root/src/shared/components/BasePanel/BasePanel';
 import { SITE_TITLE } from 'Root/src/shared/constants';
 import { Button2, FadeInOut, Input2, Space } from 'Vendor/components';
@@ -81,16 +81,16 @@ export const ResetPassword: React.FC<Props> = ({
           </FadeInOut>
         </BaseFormSubmit>
         <BaseModalFooter className="ResetPassword-footer">
-          <div>
+          <BaseModalFooterSection>
             Remember it?:
             <Space />
             <BaseModalFooterLink href="login">log in</BaseModalFooterLink>
-          </div>
-          <div>
+          </BaseModalFooterSection>
+          <BaseModalFooterSection>
             Dont have an account?:
             <Space />
             <BaseModalFooterLink href="sign-up">sign up</BaseModalFooterLink>
-          </div>
+          </BaseModalFooterSection>
         </BaseModalFooter>
       </BaseForm>
     </BasePanel>
