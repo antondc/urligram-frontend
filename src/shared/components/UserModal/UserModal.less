@@ -53,6 +53,7 @@
     fill: @gradientColors[black-3];
     transition: fill @td-fast @ease;
     border-radius: 50%;
+    z-index: 1;
 
     &:hover {
       cursor: pointer;
@@ -63,11 +64,13 @@
     }
 
     @media @br-mobile {
-      height: 25px;
-      width: 25px;
-      top: 27px;
-      right: 27px;
-      background: @c-transparent;
+      height: 100px;
+      width: 100%;
+      top: 0;
+      right: 0;
+      background: @c-background;
+      border-bottom: 2px solid @c-base;
+      border-radius: 0;
     }
   }
 
@@ -78,9 +81,10 @@
     transition: fill @td-fast @ease;
 
     @media @br-mobile {
+      position: absolute;
       height: 25px;
       width: 25px;
-      top: 27px;
+      top: 37px;
       right: 27px;
     }
   }
@@ -114,7 +118,7 @@
       bottom: 0;
       left: 0;
       right: 0;
-      margin-top: 80px;
+      padding-top: 100px;
       overflow-y: scroll;
       border-top: 2px solid @c-base;
       scrollbar-width: none;
@@ -201,6 +205,7 @@
 
   &-icon {
     width: 22px;
+    max-height: 30px;
     margin-right: 16px;
     fill: @gradientColors[black-3];
     transition: fill @td-fast @ease;
@@ -224,6 +229,7 @@
 
   &-iconArrow {
     display: none;
+    max-height: 30px;
     fill: @c-base;
 
     @media @br-mobile {

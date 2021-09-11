@@ -47,7 +47,7 @@ export const UserModal: React.FC<Props> = ({
       >
         <A className="UserModal-link" href={`users/${session?.id}`} frontend underlined styled={false}>
           <UserFill className="UserModal-icon" />
-          <span className="UserModal-label">My profile</span>
+          <div className="UserModal-label">My profile</div>
           <ArrowRight className="UserModal-iconArrow" />
         </A>
       </li>
@@ -60,7 +60,7 @@ export const UserModal: React.FC<Props> = ({
       >
         <A className="UserModal-link" href={`users/${session?.id}/tags`} frontend underlined styled={false}>
           <Bookmark className="UserModal-icon" />
-          <span className="UserModal-label">Tags</span>
+          <div className="UserModal-label">Tags</div>
           <ArrowRight className="UserModal-iconArrow" />
         </A>
       </li>
@@ -73,7 +73,7 @@ export const UserModal: React.FC<Props> = ({
       >
         <A className="UserModal-link" href={`users/${session?.id}/bookmarks`} frontend underlined styled={false}>
           <Bookmark className="UserModal-icon" />
-          <span className="UserModal-label">Bookmarks</span>
+          <div className="UserModal-label">Bookmarks</div>
           <ArrowRight className="UserModal-iconArrow" />
         </A>
       </li>
@@ -86,20 +86,20 @@ export const UserModal: React.FC<Props> = ({
       >
         <A className="UserModal-link" href={`users/${session?.id}/lists`} frontend underlined styled={false}>
           <Private className="UserModal-icon" />
-          <span className="UserModal-label">Lists</span>
+          <div className="UserModal-label">Lists</div>
           <ArrowRight className="UserModal-iconArrow" />
         </A>
       </li>
       <li className={'UserModal-item' + (routeName === 'ForgotPassword' ? ' UserModal-item--active' : '')}>
         <A className="UserModal-link" href="/forgot-password" frontend underlined styled={false}>
           <Private className="UserModal-icon" />
-          <span className="UserModal-label">Password</span>
+          <div className="UserModal-label">Password</div>
           <ArrowRight className="UserModal-iconArrow" />
         </A>
       </li>
       <li className="UserModal-item UserModal-logOut" onClick={sessionLogOut}>
         <LogOut className="UserModal-icon" />
-        <span className="UserModal-label">Log out </span>
+        <div className="UserModal-label">Log out </div>
         <ArrowRight className="UserModal-iconArrow" />
       </li>
     </ul>
