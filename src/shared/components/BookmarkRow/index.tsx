@@ -61,6 +61,7 @@ const BookmarkRow: React.FC<Props> = ({ id, listId, tagHrefPath = '' }) => {
 
   const onMobileBookmarkActionsIconClick = () => {
     if (!session?.id) return dispatch(switchLoginModal(true));
+    if (!sessionUserBookmarkedLink) return;
     dispatch(switchBookmarkActionButtonsMounted({ bookmarkId: id }));
   };
 

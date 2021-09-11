@@ -177,6 +177,13 @@
       fill: @gradientColors[black-4];
       transform: rotate(90deg);
       border-radius: 50px;
+      pointer-events: none;
+
+      &--active {
+        border: 2px solid @gradientColors[blue-1];
+        fill: @gradientColors[blue-1];
+        pointer-events: unset;
+      }
     }
   }
 }

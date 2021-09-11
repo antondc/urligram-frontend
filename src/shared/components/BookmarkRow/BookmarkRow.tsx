@@ -13,6 +13,7 @@ import './BookmarkRow.less';
 interface BookmarkRow extends BookmarkState {
   bookmark: Partial<BookmarkState>;
   listId?: number;
+  loggedIn: boolean;
   tags: TagState[];
   bookmarkActionIconsMounted: boolean;
   recentlyCreated: boolean;
@@ -31,6 +32,7 @@ interface BookmarkRow extends BookmarkState {
 export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
   bookmark,
   listId,
+  loggedIn,
   tags,
   bookmarkActionIconsMounted,
   sessionUserBookmarkedLink,
@@ -108,7 +110,10 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
       bookmarkId={bookmark?.id}
       listId={listId}
     />
-    <DotsVertical className="BookmarkRow-actions" onClick={onMobileBookmarkActionsIconClick} />
+    <DotsVertical
+      className={'BookmarkRow-actions' + (sessionUserBookmarkedLink ? ' BookmarkRow-actions--active' : '')}
+      onClick={onMobileBookmarkActionsIconClick}
+    />
     <div className="BookmarkRow-icons" onClick={bookmarkViewed}>
       <BookmarkRowIcons
         bookmark={bookmark}
