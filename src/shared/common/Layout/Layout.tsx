@@ -47,7 +47,7 @@ export const Layout: React.FC<Props> = ({
       <Header />
       <CookiesBanner />
       <Router />
-      {/* <Footer /> */}
+      <Footer />
     </div>
     <div className="Layout-modalsAndPortals">
       <UserModal />
