@@ -17,6 +17,7 @@
 
   @media @br-mobile {
     position: fixed;
+    width: 100vw;
     top: 0;
     bottom: 0;
     left: 0;
@@ -66,6 +67,7 @@
       width: 25px;
       top: 27px;
       right: 27px;
+      background: @c-transparent;
     }
   }
 
@@ -152,11 +154,19 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 30px 15px;
+      padding: 30px 25px 30px 15px;
       font-size: @fs-biggest;
       font-weight: @fw-extraBold;
       white-space: nowrap;
       border-bottom: 2px solid @c-base;
+
+      &:first-child {
+        padding-top: 30px;
+      }
+
+      &:last-child {
+        padding-bottom: 30px;
+      }
     }
   }
 
@@ -164,19 +174,27 @@
     flex: 1;
     color: @gradientColors[black-3];
     transition: color @td-fast @ease;
+
+    @media @br-mobile {
+      flex: 1;
+      text-decoration: underline;
+      text-decoration-color: @gradientColors[blue-1];
+      text-decoration-thickness: 4px;
+      color: @gradientColors[blue-1];
+    }
   }
 
   &-link {
     @media @br-mobile {
-      text-decoration-thickness: 4px;
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
     }
   }
 
   &-logOut {
     @media @br-mobile {
-      text-decoration: underline;
-      text-decoration-color: @c-base;
-      text-decoration-thickness: 4px;
+      //
     }
   }
 
@@ -190,6 +208,7 @@
       display: inline;
       width: 25px;
       margin-right: 10px;
+      fill: @gradientColors[blue-1];
     }
   }
 
@@ -209,6 +228,7 @@
     @media @br-mobile {
       display: inline;
       width: 30px;
+      fill: @gradientColors[blue-1];
     }
   }
 }

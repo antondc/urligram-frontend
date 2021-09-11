@@ -1,6 +1,7 @@
 import React from 'react';
 
 import ArrowRight from 'Assets/svg/arrowRight.svg';
+import Bookmark from 'Assets/svg/bookmark.svg';
 import Cross from 'Assets/svg/cross.svg';
 import LogOut from 'Assets/svg/logOut.svg';
 import Private from 'Assets/svg/private.svg';
@@ -37,17 +38,62 @@ export const UserModal: React.FC<Props> = ({
     </div>
     {!session?.id && <User className="UserModal-userLogo" onClick={switchMessageModal} />}
     <ul className="UserModal-list">
-      <li className={'UserModal-item' + (routeName === 'User' && isUserPage ? ' UserModal-item--active' : '')}>
+      <li
+        className={
+          'UserModal-item' +
+          (routeName === 'User' && isUserPage ? ' UserModal-item--active' : '') +
+          ' UserModal--mobile'
+        }
+      >
         <A className="UserModal-link" href={`users/${session?.id}`} frontend underlined styled={false}>
           <UserFill className="UserModal-icon" />
           <span className="UserModal-label">My profile</span>
           <ArrowRight className="UserModal-iconArrow" />
         </A>
       </li>
+      <li
+        className={
+          'UserModal-item' +
+          (routeName === 'UserTags' && isUserPage ? ' UserModal-item--active' : '') +
+          ' UserModal--mobile'
+        }
+      >
+        <A className="UserModal-link" href={`users/${session?.id}/tags`} frontend underlined styled={false}>
+          <Bookmark className="UserModal-icon" />
+          <span className="UserModal-label">Tags</span>
+          <ArrowRight className="UserModal-iconArrow" />
+        </A>
+      </li>
+      <li
+        className={
+          'UserModal-item' +
+          (routeName === 'UserBookmarks' && isUserPage ? ' UserModal-item--active' : '') +
+          ' UserModal--mobile'
+        }
+      >
+        <A className="UserModal-link" href={`users/${session?.id}/bookmarks`} frontend underlined styled={false}>
+          <Bookmark className="UserModal-icon" />
+          <span className="UserModal-label">Bookmarks</span>
+          <ArrowRight className="UserModal-iconArrow" />
+        </A>
+      </li>
+      <li
+        className={
+          'UserModal-item' +
+          (routeName === 'UserLists' && isUserPage ? ' UserModal-item--active' : '') +
+          ' UserModal--mobile'
+        }
+      >
+        <A className="UserModal-link" href={`users/${session?.id}/lists`} frontend underlined styled={false}>
+          <Private className="UserModal-icon" />
+          <span className="UserModal-label">Lists</span>
+          <ArrowRight className="UserModal-iconArrow" />
+        </A>
+      </li>
       <li className={'UserModal-item' + (routeName === 'ForgotPassword' ? ' UserModal-item--active' : '')}>
         <A className="UserModal-link" href="/forgot-password" frontend underlined styled={false}>
           <Private className="UserModal-icon" />
-          <span className="UserModal-label">Change Password </span>
+          <span className="UserModal-label">Password</span>
           <ArrowRight className="UserModal-iconArrow" />
         </A>
       </li>
