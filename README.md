@@ -2,10 +2,6 @@
 
 Starter kit for frontend projects.
 
-### Prerequisites
-
-- TypeScript
-
 ## Install
 
 Install packages
@@ -13,14 +9,6 @@ Install packages
     nvm use
     npm ci
     npm run prod
-
-Local server will run in port `4000`, production conf in `config.test.json`.
-
-## Debug
-
-Add the local api of the machine running the app to config.test.json
-
-    "API_URL": "https://192.168.88.193:3000/api/v1/"
 
 ## Development
 
@@ -30,23 +18,14 @@ Add the local api of the machine running the app to config.test.json
 
 Hot module reloading with `webpack-hot-middleware` and `webpack-dev-middleware.
 
-## Stack
-
-- React
-- Redux
-- Express
-- Reselect
-- Less
-- TypeScript
-- Webpack
-- Gitlab CI/CD
-- Jest & Enzyme
+API endpoint points to staging: `https://linking-api-staging.woprs.com/api/v1/`. For API development with both API and client dev set it temporarily to `https://dev.linking.me:3000/api/v1/`.
+A different option is to add local IP to clients allowed on API config.test.json, and access frontend from this ip.
 
 ## Docs
 
 ### Create certificate
 
-## Generate ssl certificates with Subject Alt Names on OSX
+#### Generate ssl certificates with Subject Alt Names on OSX
 
 <https://gist.github.com/croxton/ebfb5f3ac143cd86542788f972434c96>
 
@@ -203,17 +182,17 @@ Enzyme needs adapter for React 16, see: <https://github.com/Microsoft/TypeScript
 
 In previous implementation `<Swith />` and `<StaticRouter />` were receiving `location`
 
-```
-<Switch location={location}></Switch>
-```
+    ```jsx
+    <Switch location={location}></Switch>
+    ```
 
 and
 
-```
-<StaticRouter location={req.url} context={context}>
-  <Route path="/" render={(props): React.ReactNode => <Layout {...props} />} />
-</StaticRouter>
-```
+    ```jsx
+    <StaticRouter location={req.url} context={context}>
+      <Route path="/" render={(props): React.ReactNode => <Layout {...props} />} />
+    </StaticRouter>
+    ```
 
 This prop was removed, as it seems unnecessary
 
@@ -228,7 +207,3 @@ See src/server/routes/allRoutes.tsx:27 and src/server/routes/allRoutes.tsx:32
 The MIT License (MIT)
 
 Copyright (c) 2020 Antonio Díaz
-
-## Rebuild
-
-.
