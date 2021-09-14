@@ -117,7 +117,10 @@
 
   &-loader {
     margin-left: 30px;
-    outline-color: @gradientColors[blue-1];
+
+    &:after {
+      border-color: @gradientColors[blue-1];
+    }
 
     span {
       background: @gradientColors[blue-1];

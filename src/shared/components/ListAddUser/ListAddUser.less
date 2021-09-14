@@ -137,7 +137,9 @@
   }
 
   &-usersItemLoaderRemove {
-    outline-color: @c-error;
+    &:after {
+      border-color: @c-error;
+    }
 
     span {
       background: @c-error;
