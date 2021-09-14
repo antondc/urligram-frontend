@@ -72,7 +72,7 @@ export const Layout: React.FC<Props> = ({
         <ListModal />
       </Fade>
       <Notifications />
-      <Fade mounted={true} speed="fastest" position="fixed" appear>
+      <Fade mounted={renderLoader} speed="fastest" position="fixed" appear>
         <div className="Layout-loader">
           <SpinnerPie className="Layout-loaderIcon" size="huge" />
         </div>
