@@ -14,9 +14,9 @@ export const SpinnerPie: React.FC<Props> = ({ speed = 'normal', className, size 
   <div
     className={
       'SpinnerPie' +
-      (speed ? ' SpinnerPie-' + speed : '') +
+      (speed ? ' SpinnerPie-speed--' + speed : '') +
       (className ? ' ' + className : '') +
-      (size ? ' SpinnerPie--' + size : '')
+      (size ? ' SpinnerPie-size--' + size : '')
     }
   >
     <div className="SpinnerPie-side SpinnerPie-sideLeft">
