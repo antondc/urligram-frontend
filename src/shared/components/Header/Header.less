@@ -53,6 +53,7 @@
 
   &-spacer {
     flex: 1;
+    min-width: 60px;
   }
 
   &-separator {
@@ -136,15 +137,16 @@
         }
       }
 
-      @{c}-addBoookmarkText {
+      @{c}-addBookmarkText {
         color: @gradientColors[blue-2];
       }
     }
   }
 
-  &-addBoookmarkText {
+  &-addBookmarkText {
     font-size: @fs-big;
     font-weight: @fw-bold;
+    white-space: nowrap;
     color: @gradientColors[black-4];
     transition: color @td-fast @ease;
 

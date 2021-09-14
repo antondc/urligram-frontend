@@ -40,7 +40,7 @@ export const Header: React.FC<Props> = ({
         <div className="Header-addBoookmarkIcon">
           <Cross />
         </div>
-        <span className="Header-addBoookmarkText">Add Bookmark</span>
+        <span className="Header-addBookmarkText">Add Bookmark</span>
       </div>
       <div className="Header-separator" />
       <div className="Header-user">
