@@ -31,6 +31,11 @@
       background: @gradientColors[blue-6];
       z-index: 1;
     }
+
+    @media @br-mobile {
+      top: 70px;
+      margin-bottom: 10px;
+    }
   }
 
   &-headerTitle {
@@ -77,6 +82,10 @@
     width: 100%;
     padding: 50px;
     background: @c-background;
+
+    @media @br-mobile {
+      padding: 20px;
+    }
   }
 
   &-tag {
