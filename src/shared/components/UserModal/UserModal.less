@@ -23,12 +23,15 @@
     left: 0;
     right: 0;
     padding: 0;
-    padding-top: 80px;
+    overflow-y: scroll;
     opacity: 1;
     border: none;
     transform: translateX(100vw);
     pointer-events: unset;
+    scrollbar-width: none;
     border-radius: 0;
+
+    .hideScrollbar;
   }
 
   &--mounted {
@@ -64,13 +67,22 @@
     }
 
     @media @br-mobile {
-      height: 100px;
+      position: sticky;
+      height: 70px;
       width: 100%;
       top: 0;
       right: 0;
       background: @c-background;
-      border-bottom: 2px solid @c-base;
+      border-bottom: 2px solid @gradientColors[blue-2];
       border-radius: 0;
+
+      &:hover {
+        cursor: pointer;
+
+        @{c}-crossIcon {
+          fill: @gradientColors[blue-2];
+        }
+      }
     }
   }
 
@@ -84,8 +96,9 @@
       position: absolute;
       height: 25px;
       width: 25px;
-      top: 37px;
+      top: 23px;
       right: 27px;
+      fill: @gradientColors[blue-1];
     }
   }
 
@@ -112,18 +125,7 @@
 
   &-list {
     @media @br-mobile {
-      content: ' ';
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      padding-top: 100px;
-      overflow-y: scroll;
-      border-top: 2px solid @c-base;
-      scrollbar-width: none;
-
-      .hideScrollbar;
+      position: relative;
     }
   }
 
@@ -146,6 +148,7 @@
       cursor: pointer;
 
       @{c}-label {
+        text-decoration-color: @gradientColors[blue-2];
         color: @gradientColors[blue-2];
       }
 
@@ -156,6 +159,7 @@
 
     @media @br-mobile {
       display: flex;
+      position: relative;
       justify-content: space-between;
       align-items: center;
       height: 100px;
@@ -163,7 +167,16 @@
       font-size: @fs-biggest;
       font-weight: @fw-extraBold;
       white-space: nowrap;
-      border-bottom: 2px solid @c-base;
+
+      &:before {
+        content: '';
+        position: absolute;
+        height: 2px;
+        bottom: 0;
+        left: 10px;
+        right: 10px;
+        background: @gradientColors[blue-5];
+      }
 
       &:first-child {
         padding-top: 0;
@@ -171,6 +184,10 @@
 
       &:last-child {
         padding-bottom: 0;
+
+        &:before {
+          display: none;
+        }
       }
     }
   }
