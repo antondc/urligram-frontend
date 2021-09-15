@@ -21,12 +21,17 @@
   transition: background @td-normal @ease;
 
   @media @br-mobile {
-    grid-template:
-      'title title icons' auto
-      'description description icons' auto
-      'tags tags icons' auto
-      / 1fr 1fr auto;
-    height: 70px;
+    grid-template: unset;
+    grid-template-areas:
+      'title title icons'
+      'description description .'
+      'tags tags tags';
+    grid-template-columns: 1fr 1fr 60px;
+    grid-template-rows: 25px 2fr 1fr;
+    height: 100px;
+    padding: 10px 10px 15px 13px;
+    column-gap: 0;
+    row-gap: 0;
   }
 
   &-title {
@@ -84,6 +89,8 @@
     .hideScrollbar;
 
     @media @br-mobile {
+      align-self: flex-start;
+      padding: 5px 0 0 24px;
       line-height: @fh-nano;
     }
   }
@@ -102,7 +109,9 @@
     .hideScrollbar;
 
     @media @br-mobile {
-      direction: ltr;
+      align-self: flex-end;
+      padding: 0 0 0 24px;
+      overflow: hidden;
     }
   }
 
@@ -122,12 +131,23 @@
     flex-shrink: 0;
     grid-area: icons;
     padding-bottom: 6px;
+
+    @media @br-mobile {
+      padding: 5px 5px 0 0;
+    }
   }
 
   &-userImage {
     position: relative;
     height: 38px;
     width: 38px;
+
+    @media @br-mobile {
+      height: 30px;
+      width: 30px;
+      top: 0;
+      right: 0;
+    }
   }
 
   &-image {

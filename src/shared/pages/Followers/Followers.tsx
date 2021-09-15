@@ -59,7 +59,7 @@ export const Followers: React.FC<Props> = ({
       // title props
       title={user?.name}
       titleHref={`/users/${user?.id}`}
-      appendTitle="’s followers"
+      // appendTitle="’s followers"
       leftIcon={<UserFill />}
       // select props
       selectPlaceholder="Select tags"

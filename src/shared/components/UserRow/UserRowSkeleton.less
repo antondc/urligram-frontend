@@ -10,7 +10,7 @@
   justify-content: space-between;
   grid-template:
     'title tags icons' auto
-    'details tags icons' auto
+    'description tags icons' auto
     / 5fr 6fr auto;
   height: 90px;
   width: 100%;
@@ -21,12 +21,17 @@
   transition: background @td-normal @ease;
 
   @media @br-mobile {
-    grid-template:
-      'title title icons' auto
-      'details details icons' auto
-      'tags tags icons' auto
-      / 1fr 1fr auto;
-    height: 70px;
+    grid-template: unset;
+    grid-template-areas:
+      'title title icons'
+      'description description .'
+      'tags tags tags';
+    grid-template-columns: 1fr 1fr 60px;
+    grid-template-rows: 25px 2fr 1fr;
+    height: 100px;
+    padding: 15px 10px 15px 13px;
+    column-gap: 0;
+    row-gap: 0;
   }
 
   &-title {
@@ -53,11 +58,17 @@
     width: 100%;
   }
 
-  &-details {
-    grid-area: details;
+  &-description {
+    grid-area: description;
     height: 10px;
     width: 80%;
     margin-left: 26px;
+
+    @media @br-mobile {
+      align-self: flex-start;
+      padding: 5px 0 0 24px;
+      line-height: @fh-nano;
+    }
   }
 
   &-tags {
@@ -68,6 +79,12 @@
     padding-bottom: 6px;
     padding-left: 30px;
     overflow: hidden;
+
+    @media @br-mobile {
+      align-self: flex-end;
+      padding: 0 0 0 24px;
+      overflow: hidden;
+    }
   }
 
   &-tag {

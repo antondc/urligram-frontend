@@ -14,7 +14,7 @@ export const UserRowSkeleton: React.FC<UserRowSkeleton> = ({ id }) => (
       <SkeletonItem className="UserRowSkeleton-favicon" />
       <SkeletonItem className="UserRowSkeleton-titleText" />
     </div>
-    <SkeletonItem className="UserRowSkeleton-details" />
+    <SkeletonItem className="UserRowSkeleton-description" />
     <div className="UserRowSkeleton-tags">
       <SkeletonItem className="UserRowSkeleton-tag" />
       <SkeletonItem className="UserRowSkeleton-tag" />
