@@ -2,6 +2,7 @@ import React from 'react';
 import Helmet from 'react-helmet';
 
 import Bookmark from 'Assets/svg/bookmarkFilled.svg';
+import FlagLeft from 'Assets/svg/flagLeft.svg';
 import Title from 'Assets/svg/sortTitle.svg';
 import Clock from 'Assets/svg/spinner6.svg';
 import CardItem from 'Components/CardItem';
@@ -58,8 +59,7 @@ export const Following: React.FC<Props> = ({
       // title props
       title={user?.name}
       titleHref={`/users/${user?.id}`}
-      prependTitle="Users followed by "
-      leftIcon={<Bookmark />}
+      leftIcon={<FlagLeft />}
       // select props
       selectPlaceholder="Select tags"
       currentQueryParamFilterTags={currentQueryParamFilterTags}

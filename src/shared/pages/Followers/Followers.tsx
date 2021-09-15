@@ -2,9 +2,9 @@ import React from 'react';
 import Helmet from 'react-helmet';
 
 import Bookmark from 'Assets/svg/bookmarkFilled.svg';
+import FlagRight from 'Assets/svg/flagRight.svg';
 import Title from 'Assets/svg/sortTitle.svg';
 import Clock from 'Assets/svg/spinner6.svg';
-import UserFill from 'Assets/svg/userFill.svg';
 import CardItem from 'Components/CardItem';
 import NoResults from 'Components/NoResults';
 import Pagination from 'Components/Pagination';
@@ -59,8 +59,7 @@ export const Followers: React.FC<Props> = ({
       // title props
       title={user?.name}
       titleHref={`/users/${user?.id}`}
-      // appendTitle="’s followers"
-      leftIcon={<UserFill />}
+      leftIcon={<FlagRight />}
       // select props
       selectPlaceholder="Select tags"
       currentQueryParamFilterTags={currentQueryParamFilterTags}

@@ -17,7 +17,6 @@ interface Props {
   selectOptions: SelectValue[];
   sortByOptions: SortByOption[];
   title: string;
-  prependTitle?: string;
   appendTitle?: string;
   titleHref?: string;
   leftIcon?: React.ReactElement;
@@ -36,7 +35,6 @@ const SubHeader: React.FC<Props> = ({
   onSelectChange,
   selectDefaultOptions,
   title,
-  prependTitle,
   appendTitle,
   titleHref,
   leftIcon,
@@ -47,7 +45,6 @@ const SubHeader: React.FC<Props> = ({
   <CardItem className="SubHeader">
     <div className="SubHeader-headerTitle">
       {leftIcon}
-      {prependTitle}
       {titleHref ? (
         <A className="SubHeader-headerLink" href={titleHref} frontend styled={false}>
           {title}
