@@ -78,19 +78,28 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    padding: 10px 20px;
+    padding: 10px 30px 10px 20px;
+    font-size: @fs-medium;
     font-weight: @fw-extraBold;
-    color: @gradientColors[black-3];
+    color: @gradientColors[black-4];
     background: @c-background;
+
+    @media @br-mobile {
+      padding: 10px 15px 10px 15px;
+    }
   }
 
   &-subHeaderLink {
-    color: @gradientColors[black-2];
+    font-size: @fs-small;
     transition: color @td-fast @ease;
 
     &:hover {
       color: @gradientColors[blue-1];
       cursor: pointer;
+    }
+
+    @media @br-mobile {
+      color: @gradientColors[blue-1];
     }
   }
 

@@ -124,8 +124,8 @@ export const User: React.FC<Props> = ({
     </CardItem>
     <CardItem className="User-bookmarksHeader">
       Bookmarks
-      <A href={`users/${userId}/bookmarks`} frontend underlined styled={false}>
-        <AIcon size="small">See more</AIcon>
+      <A className="User-subHeaderLink" href={`users/${userId}/bookmarks`} frontend underlined styled={false}>
+        See more
       </A>
     </CardItem>
     <CardItem className="User-bookmarks">
@@ -143,7 +143,7 @@ export const User: React.FC<Props> = ({
     <CardItem className="User-listsHeader">
       Lists
       <A className="User-subHeaderLink" href={`users/${userId}/lists`} frontend underlined styled={false}>
-        <AIcon size="small">See more</AIcon>
+        See more
       </A>
     </CardItem>
     <CardItem className="User-lists">
