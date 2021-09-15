@@ -21,12 +21,17 @@
   transition: background @td-normal @ease;
 
   @media @br-mobile {
-    grid-template:
-      'title title icons' auto
-      'description description icons' auto
-      'tags tags icons' auto
-      / 1fr 1fr auto;
-    height: 70px;
+    grid-template: unset;
+    grid-template-areas:
+      'title title title'
+      'description description .'
+      'tags tags icons';
+    grid-template-columns: 1fr 1fr 30px;
+    grid-template-rows: 25px 2fr 1fr;
+    height: 100px;
+    padding: 10px 10px 15px 13px;
+    column-gap: 10px;
+    row-gap: 0;
   }
 
   &-title {
@@ -64,6 +69,13 @@
     width: 15px;
     margin-right: 10px;
     fill: @gradientColors[blue-1];
+
+    @media @br-mobile {
+      align-self: flex-start;
+      height: 12px;
+      width: 12px;
+      transform: translateY(-1px);
+    }
   }
 
   &-description {
@@ -84,6 +96,8 @@
     .hideScrollbar;
 
     @media @br-mobile {
+      align-self: flex-start;
+      padding: 5px 0 0 24px;
       line-height: @fh-nano;
     }
   }
@@ -102,7 +116,9 @@
     .hideScrollbar;
 
     @media @br-mobile {
-      direction: ltr;
+      align-self: flex-end;
+      padding: 0 0 0 24px;
+      overflow: hidden;
     }
   }
 
@@ -121,9 +137,20 @@
     align-items: center;
     grid-area: icons;
     padding-bottom: 6px;
+
+    @media @br-mobile {
+      justify-content: center;
+      align-items: center;
+      padding-bottom: 0;
+    }
   }
 
   &-icon {
     fill: @gradientColors[blue-1];
+
+    @media @br-mobile {
+      height: 20px;
+      width: 20px;
+    }
   }
 }
