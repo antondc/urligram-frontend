@@ -7,7 +7,6 @@ import { createStructuredSelector } from 'reselect';
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
 import { selectPathWithoutLanguageParam } from 'Modules/Routes/selectors/selectPathWithoutLanguageParam';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
-import About from 'Pages/About';
 import Control from 'Pages/Control';
 import Disclaimer from 'Pages/Disclaimer';
 import Download from 'Pages/Download';
@@ -41,7 +40,6 @@ const FullPage: React.FC<Props> = ({ loggedIn, location, defaultCurrentSlug, pat
         {!loggedIn && <Redirect from={Routes.Control.path} to={'/' + defaultCurrentSlug + '/login'} />}
 
         {/* General */}
-        <Route exact={Routes.About.exact} path={Routes.About.path} component={About} />
         <Route exact={Routes.Control.exact} path={Routes.Control.path} component={Control} />
         <Route exact={Routes.Login.exact} path={Routes.Login.path} component={Login} />
         <Route exact={Routes.SignUp.exact} path={Routes.SignUp.path} component={SignUp} />

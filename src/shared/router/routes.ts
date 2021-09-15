@@ -30,7 +30,6 @@ export interface RoutesInterface {
   Lists: Route;
   Login: Route;
   SignUp: Route;
-  About: Route;
   ForgotPassword: Route;
   ResetPassword: Route;
   Control: Route;
@@ -209,17 +208,6 @@ export const Routes: RoutesInterface = {
     initialDataLoadersVisitor: [],
     initialDataLoadersSession: [],
     layout: 'withLeftSidebar',
-  },
-
-  About: {
-    name: 'About',
-    path: '/:lang([a-z]{2})?/about',
-    route: '/about',
-    exact: true,
-    auth: true,
-    initialDataLoadersVisitor: [],
-    initialDataLoadersSession: [],
-    layout: 'fullPage',
   },
 
   ForgotPassword: {
