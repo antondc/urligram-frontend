@@ -22,10 +22,17 @@
   }
 
   &-title {
-    padding-bottom: 30px;
+    padding-bottom: 50px;
     font-size: @fs-huge;
-    font-weight: @fw-bold;
-    line-height: @fs-huge;
+    font-weight: @fw-extraBold;
+    line-height: @fh-huge;
+    text-align: center;
+    color: @gradientColors[black-2];
+    background: @c-background;
+
+    @media @br-mobile {
+      line-height: @fh-biggest;
+    }
   }
 
   &-item {
