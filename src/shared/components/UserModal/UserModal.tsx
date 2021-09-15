@@ -42,26 +42,14 @@ export const UserModal: React.FC<Props> = ({
     </div>
     {!session?.id && <User className="UserModal-userLogo" onClick={switchMessageModal} />}
     <ul className="UserModal-list">
-      <li
-        className={
-          'UserModal-item' +
-          (routeName === 'User' && isUserPage ? ' UserModal-item--active' : '') +
-          ' UserModal--mobile'
-        }
-      >
+      <li className={'UserModal-item' + (routeName === 'User' && isUserPage ? ' UserModal-item--active' : '')}>
         <A className="UserModal-link" href={`users/${session?.id}`} frontend underlined styled={false}>
           <UserFill className="UserModal-icon" />
           <div className="UserModal-label">My profile</div>
           <ArrowRight className="UserModal-iconArrow" />
         </A>
       </li>
-      <li
-        className={
-          'UserModal-item' +
-          (routeName === 'UserTags' && isUserPage ? ' UserModal-item--active' : '') +
-          ' UserModal--mobile'
-        }
-      >
+      <li className={'UserModal-item' + (routeName === 'UserTags' && isUserPage ? ' UserModal-item--active' : '')}>
         <A className="UserModal-link" href={`users/${session?.id}/tags`} frontend underlined styled={false}>
           <Tag className="UserModal-icon" />
           <div className="UserModal-label">Tags</div>
@@ -72,7 +60,7 @@ export const UserModal: React.FC<Props> = ({
         className={
           'UserModal-item' +
           (routeName === 'UserBookmarks' && isUserPage ? ' UserModal-item--active' : '') +
-          ' UserModal--mobile'
+          ' UserModal-item--mobile'
         }
       >
         <A className="UserModal-link" href={`users/${session?.id}/bookmarks`} frontend underlined styled={false}>
@@ -85,7 +73,7 @@ export const UserModal: React.FC<Props> = ({
         className={
           'UserModal-item' +
           (routeName === 'UserLists' && isUserPage ? ' UserModal-item--active' : '') +
-          ' UserModal--mobile'
+          ' UserModal-item--mobile'
         }
       >
         <A className="UserModal-link" href={`users/${session?.id}/lists`} frontend underlined styled={false}>
@@ -98,7 +86,7 @@ export const UserModal: React.FC<Props> = ({
         className={
           'UserModal-item' +
           (routeName === 'Followers' && isUserPage ? ' UserModal-item--active' : '') +
-          ' UserModal--mobile'
+          ' UserModal-item--mobile'
         }
       >
         <A className="UserModal-link" href={`users/${session?.id}/followers`} frontend underlined styled={false}>
@@ -111,7 +99,7 @@ export const UserModal: React.FC<Props> = ({
         className={
           'UserModal-item' +
           (routeName === 'Following' && isUserPage ? ' UserModal-item--active' : '') +
-          ' UserModal--mobile'
+          ' UserModal-item--mobile'
         }
       >
         <A className="UserModal-link" href={`users/${session?.id}/following`} frontend underlined styled={false}>

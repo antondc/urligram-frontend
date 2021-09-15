@@ -157,6 +157,10 @@
       }
     }
 
+    &--mobile {
+      display: none;
+    }
+
     @media @br-mobile {
       display: flex;
       position: relative;
@@ -173,9 +177,9 @@
         position: absolute;
         height: 2px;
         bottom: 0;
-        left: 10px;
-        right: 10px;
-        background: @gradientColors[blue-5];
+        left: 20px;
+        right: 20px;
+        background: @gradientColors[blue-6];
       }
 
       &:first-child {
@@ -188,6 +192,10 @@
         &:before {
           display: none;
         }
+      }
+
+      &--mobile {
+        display: flex;
       }
     }
   }
