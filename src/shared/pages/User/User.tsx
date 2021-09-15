@@ -128,7 +128,7 @@ export const User: React.FC<Props> = ({
         See more
       </A>
     </CardItem>
-    <CardItem className="User-bookmarks">
+    <div className="User-bookmarks">
       {!!bookmarksLoading ? (
         <BookmarkRowSkeletonGroup length={5} />
       ) : (
@@ -139,14 +139,14 @@ export const User: React.FC<Props> = ({
         ))
       )}
       {!bookmarksLoading && !bookmarksIds?.length && <NoResults content="ⵁ This user has no bookmarks yet" />}
-    </CardItem>
+    </div>
     <CardItem className="User-listsHeader">
       Lists
       <A className="User-subHeaderLink" href={`users/${userId}/lists`} frontend underlined styled={false}>
         See more
       </A>
     </CardItem>
-    <CardItem className="User-lists">
+    <div className="User-lists">
       {listsLoading ? (
         <BookmarkRowSkeletonGroup length={5} />
       ) : (
@@ -157,6 +157,6 @@ export const User: React.FC<Props> = ({
         ))
       )}
       {!listsLoading && !listsIds?.length && <NoResults content="ⵁ We didn find any list." />}
-    </CardItem>
+    </div>
   </div>
 );
