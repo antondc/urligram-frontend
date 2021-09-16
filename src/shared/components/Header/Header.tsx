@@ -6,7 +6,7 @@ import User from 'Assets/svg/user.svg';
 import Logo from 'Components/Logo';
 import { GlossaryState } from 'Modules/Languages/languages.types';
 import { SessionState } from 'Modules/Session/session.types';
-import { SpinnerPie } from 'Vendor/components';
+import { Input, SpinnerPie } from 'Vendor/components';
 
 import './Header.less';
 
@@ -18,6 +18,8 @@ interface Props {
   logoLoadingColors: boolean;
   onUserClick: () => void;
   switchUiBookmarkModal: (e: React.MouseEvent<HTMLDivElement>) => void;
+  searchValue: string;
+  onSearchInputChange: (e: React.FormEvent<HTMLInputElement>) => void;
 }
 
 export const Header: React.FC<Props> = ({
@@ -27,13 +29,16 @@ export const Header: React.FC<Props> = ({
   sessionLoading,
   onUserClick,
   switchUiBookmarkModal,
+  searchValue,
+  onSearchInputChange,
 }) => (
   <header className="Header">
     <div className="Header-content">
       <Logo className="Header-logo" loadingBeat={logoLoadingHeartBeat} loadingColors={logoLoadingColors} />
       <div className="Header-spacer" />
       <div className="Header-mockSearch">
-        <Loupe className="Header-mockSearchIcon" />
+        {/* <Loupe className="Header-mockSearchIcon" /> */}
+        <Input className="Header-input" name="listName" value={searchValue} onChange={onSearchInputChange} grow />
       </div>
       <div className="Header-separator Header-separatorDesktop" />
       <div className="Header-addBoookmark" onClick={switchUiBookmarkModal}>

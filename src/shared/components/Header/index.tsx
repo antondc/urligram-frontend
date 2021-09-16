@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import debounce from 'lodash/debounce';
 
 import { selectBookmarksLoading } from 'Modules/Bookmarks/selectors/selectBookmarksLoading';
 import { selectBookmarksVoteLoading } from 'Modules/Bookmarks/selectors/selectBookmarksVoteLoading';
@@ -13,6 +14,8 @@ import { switchBookmarkCreateModal } from 'Modules/Ui/actions/switchBookmarkCrea
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
 import { userModalMount } from 'Modules/Ui/actions/userModalMount';
 import { selectUsersLoading } from 'Modules/Users/selectors/selectUsersLoading';
+import { DELAY_MEDIUM_MS } from 'Root/src/shared/constants';
+import HttpClient from 'Services/HttpClient';
 import { Header as HeaderUi } from './Header';
 
 import './Header.less';
@@ -28,7 +31,7 @@ const Header: React.FC = () => {
   const usersLoading = useSelector(selectUsersLoading);
   const listsLoading = useSelector(selectListsLoading);
   const sessionLoading = useSelector(selectSessionLoading);
-
+  const [searchValue, setSearchValue] = useState<string>('');
   const logoLoadingHeartBeat =
     bookmarksLoading || linksLoading || linksVoteLoading || bookmarksVoteLoading || usersLoading || listsLoading;
   const logoLoadingColors = sessionLoading;
@@ -41,6 +44,31 @@ const Header: React.FC = () => {
       return;
     }
     dispatch(switchBookmarkCreateModal(true));
+  };
+
+  const searchAndNavigate = useCallback(
+    debounce(async (text: string) => {
+      console.log('=======');
+      console.log('searchAndNavigate:');
+      console.log(JSON.stringify(text, null, 4));
+      console.log('=======');
+
+      await HttpClient.get(`bookmarks?filter[text]=${text}`);
+    }, DELAY_MEDIUM_MS),
+    []
+  );
+
+  const onSearchInputChange = (e: React.FormEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    const { value } = e.currentTarget;
+
+    console.log('=======');
+    console.log('value:');
+    console.log(JSON.stringify(value, null, 4));
+    console.log('=======');
+
+    setSearchValue(value);
+    searchAndNavigate(value);
   };
 
   const onUserClick = () => {
@@ -61,6 +89,8 @@ const Header: React.FC = () => {
       logoLoadingColors={logoLoadingColors}
       sessionLoading={sessionLoading}
       switchUiBookmarkModal={switchUiBookmarkModal}
+      searchValue={searchValue}
+      onSearchInputChange={onSearchInputChange}
     />
   );
 };
