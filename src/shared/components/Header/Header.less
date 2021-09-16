@@ -31,29 +31,18 @@
     @media @br-mobile {
       height: 50px;
       padding: 6px 14px 6px 12px;
+      box-shadow: none;
       border: 2px solid @gradientColors[blue-1];
       border-radius: 8px;
-      box-shadow: none;
     }
   }
 
-  &-brand {
+  &-logo {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    font-size: @fs-big;
-    text-decoration-color: transparent;
-    text-decoration-thickness: 3px;
-    transition: text-decoration-color @td-fast @ease-outCustom1;
-
-    &:hover:not(.noClass) {
-      text-decoration-color: @c-brand;
-    }
-  }
-
-  &-spacer {
-    flex: 1;
-    min-width: 60px;
+    width: 250px;
+    margin-right: 34px;
   }
 
   &-separator {
@@ -77,25 +66,93 @@
     }
   }
 
-  &-mockSearch {
+  &-search {
+    display: flex;
     position: relative;
+    justify-content: flex-end;
+    flex: 1;
     height: 50px;
     min-width: 460px;
-    background: @gradientColors[black-5];
-    border-radius: 20px;
 
     @media @br-mobile {
       display: none;
     }
   }
 
-  &-mockSearchIcon {
+  &-input {
+    display: flex;
+    align-items: flex-end;
+    height: 50px;
+    width: 100%;
+
+    input {
+      height: 50px;
+      width: 0%;
+      min-width: 300px;
+      padding: 0 90px 0 30px;
+      color: @gradientColors[black-3];
+      box-sizing: border-box;
+      box-shadow: none;
+      transition: width @td-normal @ease-outQuint;
+
+      &::placeholder {
+        font-weight: @fw-semibold;
+        color: fade(@gradientColors[black-3], 60%);
+      }
+
+      &:focus,
+      &:not(:placeholder-shown) {
+        width: 100%;
+        box-shadow: none;
+      }
+    }
+
+    label,
+    div {
+      display: none;
+    }
+  }
+
+  &-searchLoupe {
     position: absolute;
     height: 26px;
     width: 26px;
     top: 12px;
     right: 20px;
     fill: @gradientColors[black-4];
+    transition: opacity @td-normal @ease, fill @td-fast @ease;
+    pointer-events: none;
+
+    @{c}-search--withValue & {
+      pointer-events: all;
+
+      &:hover {
+        fill: @gradientColors[blue-3];
+        cursor: pointer;
+      }
+    }
+  }
+
+  &-searchCross {
+    position: absolute;
+    height: 22px;
+    width: 22px;
+    top: 14px;
+    right: 58px;
+    opacity: 0;
+    fill: @gradientColors[black-4];
+    transition: opacity @td-normal @ease, fill @td-fast @ease;
+    pointer-events: none;
+
+    &:hover {
+      fill: @gradientColors[red-4];
+      cursor: pointer;
+    }
+
+    @{c}-search--withValue & {
+      opacity: 1;
+      pointer-events: all;
+    }
   }
 
   &-addBoookmarkIcon {
@@ -185,12 +242,12 @@
   }
 
   &-userImage {
-    transition: box-shadow @td-fast @ease;
     box-shadow: 0 0 0 2pt @c-transparent;
+    transition: box-shadow @td-fast @ease;
 
     &:hover {
-      cursor: pointer;
       box-shadow: 0 0 0 2pt @gradientColors[blue-2];
+      cursor: pointer;
 
       @media @br-tabletHorizontal {
         box-shadow: 0 0 0 1.5pt @gradientColors[blue-2];

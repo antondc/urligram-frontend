@@ -96,7 +96,7 @@ const Layout: React.FC<Props> = ({ location }) => {
         route: routesWithoutOmmitedValues[activeRouteKey],
         location,
       }),
-      domain: `${window.location.protocol}://${window.location.hostname}`,
+      domain: `${window.location.protocol}//${window.location.hostname}`,
       href: window.location.href,
       pathAndQuery: `${window.location.pathname}${window.location.search}`,
     };

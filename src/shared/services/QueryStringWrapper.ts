@@ -6,6 +6,8 @@ import { omit } from '../tools/utils/object/omit';
 
 export class QueryStringWrapper {
   static extractQueryString(string: string): string {
+    if (!string) return '';
+
     if (string.includes('?')) return string.split('?')[1];
     if (string.includes('=')) return string; // Every query string must have "="
 

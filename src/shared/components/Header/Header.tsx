@@ -20,6 +20,8 @@ interface Props {
   switchUiBookmarkModal: (e: React.MouseEvent<HTMLDivElement>) => void;
   searchValue: string;
   onSearchInputChange: (e: React.FormEvent<HTMLInputElement>) => void;
+  onSearchCrossClick: () => void;
+  onSearchSubmit: (e: React.FormEvent<HTMLElement> | React.MouseEvent<SVGElement>) => void;
 }
 
 export const Header: React.FC<Props> = ({
@@ -31,15 +33,24 @@ export const Header: React.FC<Props> = ({
   switchUiBookmarkModal,
   searchValue,
   onSearchInputChange,
+  onSearchCrossClick,
+  onSearchSubmit,
 }) => (
   <header className="Header">
     <div className="Header-content">
       <Logo className="Header-logo" loadingBeat={logoLoadingHeartBeat} loadingColors={logoLoadingColors} />
-      <div className="Header-spacer" />
-      <div className="Header-mockSearch">
-        {/* <Loupe className="Header-mockSearchIcon" /> */}
-        <Input className="Header-input" name="listName" value={searchValue} onChange={onSearchInputChange} grow />
-      </div>
+      <form className={'Header-search' + (searchValue ? ' Header-search--withValue' : '')} onSubmit={onSearchSubmit}>
+        <Input
+          className="Header-input"
+          placeholder="Search…"
+          name="search"
+          value={searchValue}
+          onChange={onSearchInputChange}
+          grow
+        />
+        <Cross className="Header-searchCross" onClick={onSearchCrossClick} />
+        <Loupe className="Header-searchLoupe" onClick={onSearchSubmit} />
+      </form>
       <div className="Header-separator Header-separatorDesktop" />
       <div className="Header-addBoookmark" onClick={switchUiBookmarkModal}>
         <div className="Header-addBoookmarkIcon">
