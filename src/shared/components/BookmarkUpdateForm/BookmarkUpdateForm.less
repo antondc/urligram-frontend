@@ -6,6 +6,22 @@
   display: flex;
   flex-direction: column;
 
+  &-url {
+    input:not(.noClass) {
+      text-decoration: underline;
+      text-decoration-color: fade(@gradientColors[black-3], 50%);
+      text-decoration-thickness: 2px;
+      color: fade(@gradientColors[black-3], 50%);
+      transition: color @td-fast @ease, text-decoration-color @td-fast @ease;
+
+      &:hover {
+        text-decoration-color: @gradientColors[blue-2];
+        color: @gradientColors[blue-2];
+        cursor: pointer;
+      }
+    }
+  }
+
   &-urlArrow {
     padding-bottom: 9px;
     padding-left: 10px;

@@ -31,11 +31,11 @@
     font-weight: @fw-semibold;
     color: @gradientColors[black-2];
     background: @gradientColors[black-5];
+    box-shadow: 0 0 0 0 @c-shadow;
     border: 0;
-    outline-offset: -2px;
     outline: 2px solid @c-transparent;
     transition: color @td-fast @ease, box-shadow @td-fast @ease, outline-color @td-fast @ease;
-    box-shadow: 0 0 0 0 @c-shadow;
+    outline-offset: -2px;
     border-radius: 8px;
 
     &::placeholder {
@@ -48,8 +48,8 @@
 
     &:focus,
     &:not(:placeholder-shown) {
-      outline: 2px solid @c-transparent;
       box-shadow: 4px 4px 0 0 @c-shadow;
+      outline: 2px solid @c-transparent;
     }
 
     &[type='date']::-webkit-inner-spin-button,
@@ -60,26 +60,25 @@
       -webkit-appearance: none;
     }
 
-    &:read-only {
-      user-select: none;
-    }
-
     @{c}--disabled &,
     @{c}--readOnly & {
       color: @c-accentLight;
       box-shadow: 0 0 0 0 @c-shadow;
+    }
+
+    @{c}--disabled & {
       pointer-events: none;
       user-select: none;
     }
 
     @{c}--success:not(.noClass) & {
-      outline: 2px solid @gradientColors[blue-2];
       box-shadow: 0 0 0 0 @c-shadow;
+      outline: 2px solid @gradientColors[blue-2];
     }
 
     @{c}--error:not(.noClass) & {
-      outline: 2px solid @c-errorAccent;
       box-shadow: 0 0 0 0 @c-shadow;
+      outline: 2px solid @c-errorAccent;
     }
   }
 

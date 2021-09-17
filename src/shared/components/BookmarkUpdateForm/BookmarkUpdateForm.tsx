@@ -9,6 +9,7 @@ import { TagValue } from '.';
 import './BookmarkUpdateForm.less';
 
 interface Props {
+  urlValue: string;
   titleValue: string;
   titleError: string;
   onChangeTitle: (e: React.FormEvent<HTMLInputElement>) => void;
@@ -24,9 +25,11 @@ interface Props {
   submitSuccess: boolean;
   submitError: string;
   onSubmit: (e: React.FormEvent<HTMLElement>) => void;
+  onUrlInputClick: (e: React.FormEvent<HTMLInputElement>) => void;
 }
 
 export const BookmarkUpdateForm: React.FC<Props> = ({
+  urlValue,
   titleValue,
   titleError,
   onChangeTitle,
@@ -42,9 +45,22 @@ export const BookmarkUpdateForm: React.FC<Props> = ({
   submitSuccess,
   submitError,
   onSubmit,
+  onUrlInputClick,
 }) => (
   <BaseForm className="BookmarkUpdateForm" onSubmit={onSubmit}>
     <BaseModalTitle>Update Bookmark</BaseModalTitle>
+    <BaseFormField>
+      <Input
+        className="BookmarkUpdateForm-url"
+        name="url"
+        label="Url"
+        type="text"
+        value={urlValue}
+        onClick={onUrlInputClick}
+        grow
+        readOnly
+      />
+    </BaseFormField>
     <BaseFormField>
       <Input
         name="title"

@@ -68,6 +68,12 @@ const BookmarkUpdateForm: React.FC<Props> = ({ closeModal, setLocked }) => {
     setTagsValue(tags || []);
   };
 
+  const onUrlInputClick = (e: React.FormEvent<HTMLInputElement>) => {
+    e.preventDefault();
+
+    window?.open(bookmark?.url);
+  };
+
   const onSubmit = async (e: React.FormEvent<HTMLElement>) => {
     e.preventDefault();
 
@@ -121,6 +127,7 @@ const BookmarkUpdateForm: React.FC<Props> = ({ closeModal, setLocked }) => {
 
   return (
     <BookmarkFormUi
+      urlValue={bookmark?.url}
       titleValue={titleValue}
       titleError={titleError}
       onChangeTitle={onChangeTitle}
@@ -136,6 +143,7 @@ const BookmarkUpdateForm: React.FC<Props> = ({ closeModal, setLocked }) => {
       submitting={submitting}
       submitSuccess={submitSuccess}
       submitError={submitError}
+      onUrlInputClick={onUrlInputClick}
     />
   );
 };
