@@ -46,6 +46,7 @@ export const Header: React.FC<Props> = ({
           name="search"
           value={searchValue}
           onChange={onSearchInputChange}
+          success={!!searchValue}
           grow
         />
         <Cross className="Header-searchCross" onClick={onSearchCrossClick} />

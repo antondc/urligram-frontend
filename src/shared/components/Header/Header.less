@@ -72,7 +72,6 @@
     justify-content: flex-end;
     flex: 1;
     height: 50px;
-    min-width: 460px;
 
     @media @br-mobile {
       display: none;
@@ -87,21 +86,20 @@
 
     input {
       height: 50px;
-      width: 0%;
-      min-width: 300px;
+      width: 50%;
       padding: 0 90px 0 30px;
       color: @gradientColors[black-3];
       box-sizing: border-box;
       box-shadow: none;
-      transition: width @td-normal @ease-outQuint;
+      transition: width @td-normal @ease-outCubic, outline-color @td-normal @ease-outCubic;
 
       &::placeholder {
         font-weight: @fw-semibold;
         color: fade(@gradientColors[black-3], 60%);
       }
 
-      &:focus,
-      &:not(:placeholder-shown) {
+      &:focus:not(.noClass),
+      &:not(:placeholder-shown):not(.noClass) {
         width: 100%;
         box-shadow: none;
       }
