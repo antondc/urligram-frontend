@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { uiNotificationViewed } from 'Modules/Ui/actions/uiNotificationViewed';
 import { NotificationState } from 'Modules/Ui/ui.types';
 import { DELAY_THREE_SEC } from 'Root/src/shared/constants';
-import { Hr, Notification } from 'Vendor/components';
+import { Notification } from 'Vendor/components';
 import BookmarkDeleted from './BookmarkDeleted';
 import BookmarkGrabbed from './BookmarkGrabbed';
 import LinkVoted from './LinkVoted';
@@ -29,15 +29,12 @@ const BaseNotification: React.FC<Props> = ({ notification }) => {
   };
 
   return (
-    <div>
-      <Hr spacer size="small" />
-      <div className="BaseNotification" id={'BaseNotification--' + notification.id}>
-        <Notification onCloseClick={onCloseClick} type={notification.style}>
-          {notification?.type === 'bookmark-grabbed' && <BookmarkGrabbed notification={notification} />}
-          {notification?.type === 'bookmark-deleted' && <BookmarkDeleted notification={notification} />}
-          {notification?.type === 'link-voted' && <LinkVoted notification={notification} />}
-        </Notification>
-      </div>
+    <div className="BaseNotification" id={'BaseNotification--' + notification.id}>
+      <Notification onCloseClick={onCloseClick} type={notification.style}>
+        {notification?.type === 'bookmark-grabbed' && <BookmarkGrabbed notification={notification} />}
+        {notification?.type === 'bookmark-deleted' && <BookmarkDeleted notification={notification} />}
+        {notification?.type === 'link-voted' && <LinkVoted notification={notification} />}
+      </Notification>
     </div>
   );
 };
