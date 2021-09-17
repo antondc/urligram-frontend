@@ -10,7 +10,7 @@ import NoResults from 'Components/NoResults';
 import UserForm from 'Components/UserForm';
 import { UserState } from 'Modules/Users/users.types';
 import { SITE_TITLE } from 'Root/src/shared/constants';
-import { AIcon, Hr, Space, Tag } from 'Vendor/components';
+import { Space, Tag } from 'Vendor/components';
 
 import './User.less';
 
@@ -45,32 +45,17 @@ export const User: React.FC<Props> = ({
     <CardItem className="User-top">
       <div className="User-details">
         <div>
-          <div className="User-detailsItem">
-            Name: <Space />
-            <span className="User-detailsItemData">@{user?.name}</span>
-          </div>
-          <Hr spacer size="zero" />
-          <Hr spacer size="micro" />
-          <div className="User-detailsItem">
-            Location: <Space />
-            <span className="User-detailsItemData">{user?.location}</span>
-          </div>
-          <Hr spacer size="zero" />
-          <Hr spacer size="micro" />
-          <div className="User-detailsItem">
-            Statement: <Space />
-            <span className="User-detailsItemData">{user?.statement}</span>
-          </div>
-          <Hr spacer size="zero" />
-          <Hr spacer size="micro" />
-          <div className="User-detailsItem">
-            Created at: <Space />
-            <span className="User-detailsItemData">{createdAtFormatted}</span>
-          </div>
+          <div className="User-detailsItem">Name:</div>
+          <div className="User-detailsItemData">{user?.name}</div>
+          <div className="User-detailsItem">Location:</div>
+          <div className="User-detailsItemData">{user?.location}</div>
+          <div className="User-detailsItem">Statement:</div>
+          <div className="User-detailsItemData">{user?.statement}</div>
+          <div className="User-detailsItem">Created at:</div>
+          <div className="User-detailsItemData">{createdAtFormatted}</div>
         </div>
         <img className="User-image" src={user?.image?.original} />
       </div>
-      <Hr spacer />
       <div className="User-lineDetails">
         <A className="User-lineDetailsLink" href={`users/${userId}/bookmarks`} frontend underlined styled={false}>
           Bookmarks:
@@ -106,7 +91,6 @@ export const User: React.FC<Props> = ({
           {user?.lists?.length}
         </A>
       </div>
-      <Hr spacer />
       <div className="User-tags">
         {user?.tags?.map((item) => (
           <A

@@ -21,6 +21,7 @@
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-between;
+    margin-bottom: 10px;
     color: @gradientColors[black-2];
   }
 
@@ -37,7 +38,16 @@
   &-detailsItem {
     display: flex;
     align-items: bottom;
+    margin-bottom: 2px;
     font-weight: @fw-semibold;
+    color: @gradientColors[black-4];
+  }
+
+  &-detailsItemData {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+    color: @gradientColors[black-3];
   }
 
   &-image {
@@ -49,14 +59,9 @@
     object-position: center;
   }
 
-  &-detailsItemData {
-    display: flex;
-    flex-wrap: wrap;
-    font-size: @fs-small;
-  }
-
   &-lineDetails {
     display: flex;
+    margin-bottom: 10px;
     font-size: @fs-small;
     font-weight: @fw-semibold;
     white-space: nowrap;
