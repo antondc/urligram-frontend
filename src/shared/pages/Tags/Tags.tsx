@@ -6,10 +6,9 @@ import Title from 'Assets/svg/sortTitle.svg';
 import TagIcon from 'Assets/svg/tag.svg';
 import A from 'Components/A';
 import CardItem from 'Components/CardItem';
-import { SidebarListTagsSkeleton } from 'Components/SidebarListTags/SidebarListTagsSkeleton';
 import { TagState } from 'Modules/Tags/tags.types';
 import { SITE_TITLE } from 'Root/src/shared/constants';
-import { SortBy, Space, Tag } from 'Vendor/components';
+import { SortBy, Space, Tag, TagsSkeleton } from 'Vendor/components';
 
 import './Tags.less';
 
@@ -41,7 +40,7 @@ export const Tags: React.FC<Props> = ({ tags, tagsLoading, url, sort }) => (
     </CardItem>
     <div className="Tags-tags">
       {tagsLoading ? (
-        <SidebarListTagsSkeleton length={tags?.length || 70} />
+        <TagsSkeleton length={tags?.length || 70} />
       ) : (
         tags?.map((item) => (
           <A className="Tags-tag" href={`?filter[tags][]=${item.name}`} key={item.id} styled={false} frontend>

@@ -6,11 +6,10 @@ import Title from 'Assets/svg/sortTitle.svg';
 import TagIcon from 'Assets/svg/tag.svg';
 import A from 'Components/A';
 import CardItem from 'Components/CardItem';
-import { SidebarListTagsSkeleton } from 'Components/SidebarListTags/SidebarListTagsSkeleton';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { SITE_TITLE } from 'Root/src/shared/constants';
-import { SortBy, Space, Tag } from 'Vendor/components';
+import { SortBy, Space, Tag, TagsSkeleton } from 'Vendor/components';
 
 import './UserTags.less';
 
@@ -52,7 +51,7 @@ export const UserTags: React.FC<Props> = ({ user, tags, tagsLoading, url, sort }
     </CardItem>
     <div className="UserTags-tags">
       {tagsLoading ? (
-        <SidebarListTagsSkeleton />
+        <TagsSkeleton />
       ) : (
         tags?.map((item) => (
           <A

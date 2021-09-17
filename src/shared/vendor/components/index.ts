@@ -66,6 +66,7 @@ export {
 } from './Svg';
 export { Switch } from './Switch';
 export { Tag } from './Tag';
+export { TagsSkeleton } from './Tag/TagsSkeleton';
 export { TextArea } from './TextArea';
 export { TextButton } from './TextButton';
 export { PopOver } from './PopOver';
