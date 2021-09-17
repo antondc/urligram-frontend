@@ -8,7 +8,7 @@ import A from 'Components/A';
 import CardItem from 'Components/CardItem';
 import { TagState } from 'Modules/Tags/tags.types';
 import { SITE_TITLE } from 'Root/src/shared/constants';
-import { SortBy, Space, Tag, TagsSkeleton } from 'Vendor/components';
+import { SortBy, Space, Tag, TagsSkeleton } from '@antoniodcorrea/components';
 
 import './Tags.less';
 

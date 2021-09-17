@@ -7,7 +7,7 @@ import CardItem from 'Components/CardItem';
 import { selectCurrentGlossary } from 'Modules/Languages/selectors/selectCurrentGlossary';
 import { SITE_TITLE } from 'Root/src/shared/constants';
 import { Routes } from 'Router/routes';
-import { Space } from 'Vendor/components';
+import { Space } from '@antoniodcorrea/components';
 
 import './NotFound.less';
 

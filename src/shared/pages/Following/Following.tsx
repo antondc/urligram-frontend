@@ -14,7 +14,7 @@ import { UserRowSkeletonGroup } from 'Components/UserRow/UserRowSkeletonGroup';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE, SITE_TITLE } from 'Root/src/shared/constants';
-import { SelectValue } from 'Vendor/components';
+import { SelectValue } from '@antoniodcorrea/components';
 
 import './Following.less';
 

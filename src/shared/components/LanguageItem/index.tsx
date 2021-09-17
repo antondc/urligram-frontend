@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { A } from 'Vendor/components';
+import { A } from '@antoniodcorrea/components';
 
 import './LanguageItem.less';
 

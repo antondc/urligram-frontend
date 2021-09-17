@@ -2,7 +2,7 @@ import React from 'react';
 
 import Cross from 'Assets/svg/cross.svg';
 import { RenderInPortal } from 'Components/Portal';
-import { AnimateSheet } from 'Vendor/components';
+import { AnimateSheet } from '@antoniodcorrea/components';
 
 import './BaseSheet.less';
 

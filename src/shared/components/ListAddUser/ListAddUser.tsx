@@ -4,7 +4,15 @@ import A from 'Components/A';
 import { RenderInPortal } from 'Components/Portal';
 import { ListState } from 'Modules/Lists/lists.types';
 import { UserState } from 'Modules/Users/users.types';
-import { EditCircle, Eye, Fade, PlusCircle, PlusCircleWithBackground, PopOver, SpinnerPie } from 'Vendor/components';
+import {
+  EditCircle,
+  Eye,
+  Fade,
+  PlusCircle,
+  PlusCircleWithBackground,
+  PopOver,
+  Spinner,
+} from '@antoniodcorrea/components';
 
 import './ListAddUser.less';
 
@@ -89,7 +97,7 @@ export const ListAddUser: React.FC<Props> = ({
                     @{item?.name}
                   </A>
                   {itemsLoadingReader?.includes(item?.id) ? (
-                    <SpinnerPie className="ListAddUser-usersItemLoader" />
+                    <Spinner className="ListAddUser-usersItemLoader" />
                   ) : (
                     <Eye
                       className="ListAddUser-usersItemIcon ListAddUser-usersItemIconReader"
@@ -101,7 +109,7 @@ export const ListAddUser: React.FC<Props> = ({
                     />
                   )}
                   {itemsLoadingEditor?.includes(item?.id) ? (
-                    <SpinnerPie className="ListAddUser-usersItemLoader" />
+                    <Spinner className="ListAddUser-usersItemLoader" />
                   ) : (
                     <EditCircle
                       className="ListAddUser-usersItemIcon ListAddUser-usersItemIconEditor"
@@ -113,7 +121,7 @@ export const ListAddUser: React.FC<Props> = ({
                     />
                   )}
                   {itemsLoadingRemove?.includes(item?.id) ? (
-                    <SpinnerPie className="ListAddUser-usersItemLoader ListAddUser-usersItemLoaderRemove" />
+                    <Spinner className="ListAddUser-usersItemLoader ListAddUser-usersItemLoaderRemove" />
                   ) : (
                     <PlusCircleWithBackground
                       className={

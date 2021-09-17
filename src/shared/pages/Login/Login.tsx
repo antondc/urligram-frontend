@@ -5,7 +5,7 @@ import { BaseModalFooter, BaseModalFooterLink, BaseModalFooterSection, BaseModal
 import BasePanel from 'Components/BasePanel';
 import LoginForm from 'Components/LoginForm';
 import { SITE_TITLE } from 'Root/src/shared/constants';
-import { Space } from 'Vendor/components';
+import { Space } from '@antoniodcorrea/components';
 
 import './Login.less';
 

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import BaseForm, { BaseFormError, BaseFormField, BaseFormSubmit } from 'Components/BaseForm';
-import { Button, FadeInOut, ImageField, TextArea } from 'Vendor/components';
+import { Button, FadeInOut, ImageField, TextArea } from '@antoniodcorrea/components';
 
 interface Props {
   statement: string;

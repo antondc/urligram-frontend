@@ -5,7 +5,7 @@ import A from 'Components/A';
 import Bookmarker from 'Components/Bookmarker';
 import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
 import { TagState } from 'Modules/Tags/tags.types';
-import { Space, Tag } from 'Vendor/components';
+import { Space, Tag } from '@antoniodcorrea/components';
 import { BookmarkRowIcons } from './BookmarkRowIcons';
 
 import './BookmarkRow.less';

@@ -7,7 +7,7 @@ import { selectListWithNotificationsIds } from 'Modules/Lists/selectors/selectLi
 import { selectCurrentRouteParams } from 'Modules/Routes/selectors/selectCurrentRouteParams';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import history from 'Services/History';
-import { NotificationDot } from 'Vendor/components';
+import { NotificationDot } from '@antoniodcorrea/components';
 import { SidebarLeftSubItemsAnimation } from './SidebarLeftSubItemsAnimation';
 
 import './SidebarLeftLists.less';

@@ -6,7 +6,7 @@ import LanguagesSwitch from 'Components/LanguagesSwitch';
 import { RouteState } from 'Modules/Routes/routes.types';
 import { SessionState } from 'Modules/Session/session.types';
 import { Routes } from 'Router/routes';
-import { Fade } from 'Vendor/components';
+import { Fade } from '@antoniodcorrea/components';
 
 import './Footer.less';
 

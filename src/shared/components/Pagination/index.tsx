@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import A from 'Components/A';
-import { Fade } from 'Vendor/components';
+import { Fade } from '@antoniodcorrea/components';
 import { calculatePages } from './calculatePages';
 
 import './Pagination.less';

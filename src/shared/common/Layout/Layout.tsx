@@ -16,7 +16,7 @@ import SignUpModal from 'Components/SignUpModal';
 import UserModal from 'Components/UserModal';
 import WelcomeModal from 'Components/WelcomeModal';
 import Router from 'Router/index';
-import { Fade, SpinnerPie } from 'Vendor/components';
+import { Fade, Spinner } from '@antoniodcorrea/components';
 
 import './Layout.less';
 
@@ -74,7 +74,7 @@ export const Layout: React.FC<Props> = ({
       <Notifications />
       <Fade mounted={renderLoader} speed="fastest" position="fixed" appear>
         <div className="Layout-loader">
-          <SpinnerPie className="Layout-loaderIcon" size="huge" />
+          <Spinner className="Layout-loaderIcon" size="huge" />
         </div>
       </Fade>
       <div id="Tooltips" />

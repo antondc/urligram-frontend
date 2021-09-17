@@ -8,7 +8,7 @@ import Bookmarker from 'Components/Bookmarker';
 import BookmarkListsPopOverOrSheet from 'Components/BookmarkListsPopOverOrSheet';
 import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
 import { TagState } from 'Modules/Tags/tags.types';
-import { Fade } from 'Vendor/components';
+import { Fade } from '@antoniodcorrea/components';
 
 import './BookmarkRowIcons.less';
 

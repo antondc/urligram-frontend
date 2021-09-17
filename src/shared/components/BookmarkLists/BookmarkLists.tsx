@@ -4,7 +4,7 @@ import PlusCircle from 'Assets/svg/plusCircle.svg';
 import A from 'Components/A';
 import BaseForm, { BaseFormError, BaseFormSubmit } from 'Components/BaseForm';
 import { ListState } from 'Modules/Lists/lists.types';
-import { Button, FadeInOut, Input, SpinnerPie } from 'Vendor/components';
+import { Button, FadeInOut, Input, Spinner } from '@antoniodcorrea/components';
 
 import './BookmarkLists.less';
 
@@ -61,7 +61,7 @@ export const BookmarkLists: React.FC<Props> = ({
               {item?.name}
             </A>
             {itemsLoading?.includes(item?.id) ? (
-              <SpinnerPie className="BookmarkLists-loader" />
+              <Spinner className="BookmarkLists-loader" />
             ) : (
               <PlusCircle
                 className="BookmarkLists-icon"

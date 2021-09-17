@@ -9,7 +9,7 @@ import CardItem from 'Components/CardItem';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { SITE_TITLE } from 'Root/src/shared/constants';
-import { SortBy, Space, Tag, TagsSkeleton } from 'Vendor/components';
+import { SortBy, Space, Tag, TagsSkeleton } from '@antoniodcorrea/components';
 
 import './UserTags.less';
 

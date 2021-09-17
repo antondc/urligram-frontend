@@ -2,7 +2,7 @@ import React from 'react';
 
 import BookmarkLists from 'Components/BookmarkLists';
 import { RenderInPortal } from 'Components/Portal';
-import { Fade, PopOver } from 'Vendor/components';
+import { Fade, PopOver } from '@antoniodcorrea/components';
 
 import './BookmarkListsPopOver.less';
 

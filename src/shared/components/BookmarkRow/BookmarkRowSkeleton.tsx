@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { SkeletonItem } from 'Vendor/components';
+import { SkeletonItem } from '@antoniodcorrea/components';
 
 import './BookmarkRowSkeleton.less';
 

@@ -19,7 +19,7 @@ import ServerError from 'Pages/ServerError';
 import SignUp from 'Pages/SignUp';
 import { Routes } from 'Router/routes';
 import { Location } from 'Services/History';
-import { FadeInOut } from 'Vendor/components';
+import { FadeInOut } from '@antoniodcorrea/components';
 
 import './FullPage.less';
 

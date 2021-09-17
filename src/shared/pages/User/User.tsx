@@ -10,7 +10,7 @@ import NoResults from 'Components/NoResults';
 import UserForm from 'Components/UserForm';
 import { UserState } from 'Modules/Users/users.types';
 import { SITE_TITLE } from 'Root/src/shared/constants';
-import { Space, Tag } from 'Vendor/components';
+import { Space, Tag } from '@antoniodcorrea/components';
 
 import './User.less';
 

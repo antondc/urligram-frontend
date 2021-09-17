@@ -13,7 +13,7 @@ import Pagination from 'Components/Pagination';
 import SubHeader from 'Components/SubHeader';
 import { TagState } from 'Modules/Tags/tags.types';
 import { DEFAULT_PAGE_SIZE, SITE_TITLE } from 'Root/src/shared/constants';
-import { SelectValue } from 'Vendor/components';
+import { SelectValue } from '@antoniodcorrea/components';
 
 import './Lists.less';
 

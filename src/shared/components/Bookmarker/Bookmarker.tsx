@@ -2,7 +2,7 @@ import React from 'react';
 
 import BookmarkWithBackground from 'Assets/svg/bookmarkWithBackground.svg';
 import PlusCircleWithBackground from 'Assets/svg/plusCircleWithBackground.svg';
-import { SpinnerPie } from 'Vendor/components';
+import { Spinner } from '@antoniodcorrea/components';
 
 import './Bookmarker.less';
 
@@ -33,6 +33,6 @@ export const Bookmarker: React.FC<Props> = ({
         <PlusCircleWithBackground className="Bookmarker-remove" onClick={onBookmarkDelete} />
       </>
     )}
-    {loading && <SpinnerPie className="Bookmarker-loader" />}
+    {loading && <Spinner className="Bookmarker-loader" />}
   </div>
 );

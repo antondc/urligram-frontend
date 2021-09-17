@@ -2,8 +2,8 @@ import React from 'react';
 
 import A from 'Components/A';
 import CardItem from 'Components/CardItem';
-import { Select, SelectValue, SortBy } from 'Vendor/components';
-import { SortByOption } from 'Vendor/components/SortBy';
+import { Select, SelectValue, SortBy } from '@antoniodcorrea/components';
+import { SortByOption } from '@antoniodcorrea/components/SortBy';
 
 import './SubHeader.less';
 

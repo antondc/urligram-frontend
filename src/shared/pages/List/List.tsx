@@ -17,7 +17,16 @@ import { ListState, ListUser } from 'Modules/Lists/lists.types';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE, SITE_TITLE } from 'Root/src/shared/constants';
-import { AnimateHeight, Check, Cross, EditCircle, Eye, SelectValue, SpinnerPie, Tooltip } from 'Vendor/components';
+import {
+  AnimateHeight,
+  Check,
+  Cross,
+  EditCircle,
+  Eye,
+  SelectValue,
+  Spinner,
+  Tooltip,
+} from '@antoniodcorrea/components';
 
 import './List.less';
 
@@ -84,12 +93,12 @@ const List: React.FC<Props> = ({
       <CardItem className="List-notificationContent">
         <div className="List-notificationText">You were invited to this list as {listInvitationRole}: join it?</div>
         {acceptLoading ? (
-          <SpinnerPie />
+          <Spinner />
         ) : (
           <Check className="List-notificationIcon List-notificationIconCheck" onClick={onInviteAccept} />
         )}
         {rejectLoading ? (
-          <SpinnerPie />
+          <Spinner />
         ) : (
           <Cross className="List-notificationIcon List-notificationIconCross" onClick={onInviteReject} />
         )}

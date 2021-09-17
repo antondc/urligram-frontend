@@ -5,7 +5,7 @@ import BaseForm, { BaseFormError, BaseFormField, BaseFormSubmit } from 'Componen
 import { BaseModalFooter, BaseModalFooterLink, BaseModalFooterSection, BaseModalTitle } from 'Components/BaseModal';
 import BasePanel from 'Root/src/shared/components/BasePanel/BasePanel';
 import { SITE_TITLE } from 'Root/src/shared/constants';
-import { Button, FadeInOut, Input, Space } from 'Vendor/components';
+import { Button, FadeInOut, Input, Space } from '@antoniodcorrea/components';
 
 import './ResetPassword.less';
 

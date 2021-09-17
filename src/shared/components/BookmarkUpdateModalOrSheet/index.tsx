@@ -9,7 +9,7 @@ import { uiScreenMobileLock } from 'Modules/Ui/actions/uiScreenMobileLock';
 import { uiScreenMobileUnLock } from 'Modules/Ui/actions/uiScreenMobileUnLock';
 import { selectUiBookmarkUpdateModalMounted } from 'Modules/Ui/selectors/selectUiBookmarkUpdateModalMounted';
 import { selectUiScreenTypeIsMobile } from 'Modules/Ui/selectors/selectUiScreenTypeIsMobile';
-import { Fade } from 'Vendor/components';
+import { Fade } from '@antoniodcorrea/components';
 
 const BookmarkUpdateModalOrSheet: React.FC = () => {
   const dispatch = useDispatch();

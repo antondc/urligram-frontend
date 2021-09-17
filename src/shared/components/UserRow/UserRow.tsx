@@ -4,7 +4,7 @@ import User from 'Assets/svg/userFill.svg';
 import A from 'Components/A';
 import UserFollowButton from 'Components/UserFollowButton';
 import { UserState } from 'Modules/Users/users.types';
-import { Space, Tag } from 'Vendor/components';
+import { Space, Tag } from '@antoniodcorrea/components';
 
 import './UserRow.less';
 

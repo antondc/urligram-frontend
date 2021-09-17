@@ -3,7 +3,7 @@ import React from 'react';
 import BaseForm, { BaseFormError, BaseFormField, BaseFormLabel, BaseFormSubmit } from 'Components/BaseForm';
 import { BaseModalTitle } from 'Components/BaseModal';
 import { TagState } from 'Modules/Tags/tags.types';
-import { ArrowRight, Button, FadeInOut, Input, Select, SelectValue, SpinnerPie, Switch } from 'Vendor/components';
+import { ArrowRight, Button, FadeInOut, Input, Select, SelectValue, Spinner, Switch } from '@antoniodcorrea/components';
 import { TagValue } from '.';
 
 import './BookmarkCreateForm.less';
@@ -74,7 +74,7 @@ export const BookmarkCreateForm: React.FC<Props> = ({
         {urlValue && !urlError && !urlSubmitted && !urlLoading && (
           <ArrowRight className="BookmarkCreateForm-urlArrow" size="small" />
         )}
-        {urlLoading && <SpinnerPie className="BookmarkCreateForm-loader" size="medium" />}
+        {urlLoading && <Spinner className="BookmarkCreateForm-loader" size="medium" />}
       </FadeInOut>
     </BaseFormField>
     <FadeInOut valueToUpdate={urlSubmitted}>

@@ -13,7 +13,7 @@ import { BookmarksByKey } from 'Modules/Bookmarks/bookmarks.types';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE, SITE_TITLE } from 'Root/src/shared/constants';
-import { FadeInOut, SelectValue } from 'Vendor/components';
+import { FadeInOut, SelectValue } from '@antoniodcorrea/components';
 
 import './UserBookmarks.less';
 

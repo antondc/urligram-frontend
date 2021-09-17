@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { uiNotificationViewed } from 'Modules/Ui/actions/uiNotificationViewed';
 import { NotificationState } from 'Modules/Ui/ui.types';
 import { DELAY_THREE_SEC } from 'Root/src/shared/constants';
-import { Notification } from 'Vendor/components';
+import { Notification } from '@antoniodcorrea/components';
 import BookmarkDeleted from './BookmarkDeleted';
 import BookmarkGrabbed from './BookmarkGrabbed';
 import LinkVoted from './LinkVoted';

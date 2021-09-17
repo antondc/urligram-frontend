@@ -9,7 +9,7 @@ import BaseModal, {
 } from 'Components/BaseModal';
 import LoginForm from 'Components/LoginForm';
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
-import { Space } from 'Vendor/components';
+import { Space } from '@antoniodcorrea/components';
 
 import './LoginModal.less';
 

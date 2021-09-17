@@ -4,7 +4,7 @@ import { animateScroll as scroll, Events } from 'react-scroll';
 
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
 import history from 'Services/History';
-import { A as ComponentsA } from 'Vendor/components';
+import { A as ComponentsA } from '@antoniodcorrea/components';
 
 interface Props extends HTMLProps<HTMLAnchorElement> {
   children: React.ReactNode;

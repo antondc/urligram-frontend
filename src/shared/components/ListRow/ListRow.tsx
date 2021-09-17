@@ -4,7 +4,7 @@ import List from 'Assets/svg/list.svg';
 import A from 'Components/A';
 import { ListState } from 'Modules/Lists/lists.types';
 import { SessionState } from 'Modules/Session/session.types';
-import { Private, Tag } from 'Vendor/components';
+import { Private, Tag } from '@antoniodcorrea/components';
 
 import './ListRow.less';
 

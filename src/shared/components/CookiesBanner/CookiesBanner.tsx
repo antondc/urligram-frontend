@@ -1,7 +1,7 @@
 import React from 'react';
 
 import A from 'Components/A';
-import { AnimateHeight, Button, Space } from 'Vendor/components';
+import { AnimateHeight, Button, Space } from '@antoniodcorrea/components';
 
 import './CookiesBanner.less';
 

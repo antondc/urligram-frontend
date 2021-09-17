@@ -3,7 +3,7 @@ import React from 'react';
 import BaseForm, { BaseFormError, BaseFormField, BaseFormLabel, BaseFormSubmit } from 'Components/BaseForm';
 import { BaseModalTitle } from 'Components/BaseModal';
 import { TagState } from 'Modules/Tags/tags.types';
-import { Button, FadeInOut, Input, Select, SelectValue, Switch } from 'Vendor/components';
+import { Button, FadeInOut, Input, Select, SelectValue, Switch } from '@antoniodcorrea/components';
 import { TagValue } from '.';
 
 import './BookmarkUpdateForm.less';
