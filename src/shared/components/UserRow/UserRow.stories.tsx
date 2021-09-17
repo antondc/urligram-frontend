@@ -116,28 +116,8 @@ const knobs = {
 
 export const Default: React.ReactNode = () => (
   <ProviderWrapper>
-    <Frame weight="none">
-      <Frame>
-        <FadeInOut valueToUpdate={knobs.skeleton()} speed="fastest" appear>
-          {!knobs.skeleton() ? (
-            <>
-              <UserRow {...props} />
-              <UserRow {...props} />
-              <UserRow {...props} />
-              <UserRow {...props} />
-              <UserRow {...props} />
-            </>
-          ) : (
-            <>
-              <UserRowSkeleton {...props} />
-              <UserRowSkeleton {...props} />
-              <UserRowSkeleton {...props} />
-              <UserRowSkeleton {...props} />
-              <UserRowSkeleton {...props} />
-            </>
-          )}
-        </FadeInOut>
-      </Frame>
-    </Frame>
+    <FadeInOut valueToUpdate={knobs.skeleton()} speed="fastest" appear>
+      {!knobs.skeleton() ? <UserRow {...props} /> : <UserRowSkeleton {...props} />}
+    </FadeInOut>
   </ProviderWrapper>
 );

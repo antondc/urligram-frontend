@@ -8,7 +8,7 @@ export default create({
 
   // UI
   appBg: '#efefef',
-  appContentBg: '#ffffff',
+  appContentBg: 'lightgray',
   appBorderColor: 'lightgray',
   appBorderRadius: 4,
 
