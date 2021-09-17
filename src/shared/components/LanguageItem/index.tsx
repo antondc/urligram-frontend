@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { A, Span } from 'Vendor/components';
+import { A } from 'Vendor/components';
 
 import './LanguageItem.less';
 
@@ -20,9 +20,7 @@ const LanguageItem: React.FC<Props> = ({ lang, href, isCurrent, onClick }) => (
     disabled={isCurrent}
     onClick={onClick}
   >
-    <Span weight="extraBold" className="LanguageItem-text">
-      {lang}
-    </Span>
+    <span className="LanguageItem-text">{lang}</span>
   </A>
 );
 

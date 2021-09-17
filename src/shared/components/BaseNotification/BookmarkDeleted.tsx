@@ -1,16 +1,11 @@
 import React from 'react';
 
 import { NotificationState } from 'Modules/Ui/ui.types';
-import { Span } from 'Vendor/components';
 
 interface Props {
   notification: NotificationState;
 }
 
-const BookmarkDeleted: React.FC<Props> = () => (
-  <Span size="normal" weight="semiBold">
-    Your bookmark was successfully deleted
-  </Span>
-);
+const BookmarkDeleted: React.FC<Props> = () => <span className="BookmarkDeleted">Your bookmark was successfully deleted</span>;
 
 export default BookmarkDeleted;
