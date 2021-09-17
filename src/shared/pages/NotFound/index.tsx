@@ -3,10 +3,11 @@ import Helmet from 'react-helmet';
 import { useSelector } from 'react-redux';
 
 import A from 'Components/A';
+import CardItem from 'Components/CardItem';
 import { selectCurrentGlossary } from 'Modules/Languages/selectors/selectCurrentGlossary';
 import { SITE_TITLE } from 'Root/src/shared/constants';
 import { Routes } from 'Router/routes';
-import { H1, Hr, P, Span } from 'Vendor/components';
+import { Space } from 'Vendor/components';
 
 import './NotFound.less';
 
@@ -16,30 +17,28 @@ const NotFound: React.FC = () => {
   return (
     <>
       <Helmet title={`${SITE_TITLE} · Not Found`} />
-      <div className="NotFound">
-        <H1 className="NotFound-h1">{currentGlossary?.notFound} 😵</H1>
-        <Hr spacer />
-        <P>
-          <Span weight="semiBold">We couldnt find what you were looking for.</Span>
-        </P>
-        <P>
-          <Span weight="semiBold">
-            But you can continue searching for{' '}
-            <A className="NotFound-link" href={Routes.Home.route} frontend underlined>
-              bookmarks
-            </A>
-            ,{' '}
-            <A className="NotFound-link" href={Routes.Lists.route} frontend underlined>
-              lists
-            </A>{' '}
-            or{' '}
-            <A className="NotFound-link" href={Routes.Users.route} frontend underlined>
-              users
-            </A>{' '}
-            .
-          </Span>
-        </P>
-      </div>
+      <CardItem className="NotFound">
+        <h1 className="NotFound-title">{currentGlossary?.notFound} 😵</h1>
+        <p className="NotFound-text">We couldnt find what you were looking for.</p>
+        <p className="NotFound-text">
+          But you can continue searching for
+          <Space />
+          <A className="NotFound-link" href={Routes.Home.route} frontend underlined>
+            bookmarks
+          </A>
+          ,<Space />
+          <A className="NotFound-link" href={Routes.Lists.route} frontend underlined>
+            lists
+          </A>
+          <Space />
+          or
+          <Space />
+          <A className="NotFound-link" href={Routes.Users.route} frontend underlined>
+            users
+          </A>
+          .
+        </p>
+      </CardItem>
     </>
   );
 };
