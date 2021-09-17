@@ -1,7 +1,6 @@
 import React from 'react';
 
-import { boolean, select, text, withKnobs } from '@storybook/addon-knobs';
-import { Hr } from '../Hr';
+import { withKnobs } from '@storybook/addon-knobs';
 import { Button } from '.';
 
 export default {

@@ -13,7 +13,6 @@ import './BookmarkRow.less';
 interface BookmarkRow extends BookmarkState {
   bookmark: Partial<BookmarkState>;
   listId?: number;
-  loggedIn: boolean;
   tags: TagState[];
   bookmarkActionIconsMounted: boolean;
   recentlyCreated: boolean;
@@ -32,7 +31,6 @@ interface BookmarkRow extends BookmarkState {
 export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
   bookmark,
   listId,
-  loggedIn,
   tags,
   bookmarkActionIconsMounted,
   sessionUserBookmarkedLink,
