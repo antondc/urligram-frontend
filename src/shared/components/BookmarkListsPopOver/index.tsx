@@ -11,7 +11,7 @@ interface Props {
   bookmarkId: number;
 }
 
-export const BookmarkListsPopOver: React.FC<Props> = ({ bookmarkId }) => {
+const BookmarkListsPopOver: React.FC<Props> = ({ bookmarkId }) => {
   const dispatch = useDispatch();
   const bookmarkListsModal = useSelector(selectBookmarkListsModal);
   const bookmarkListsModalMounted = bookmarkListsModal?.bookmarkId === bookmarkId && !!bookmarkListsModal?.mounted;

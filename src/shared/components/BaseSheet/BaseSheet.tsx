@@ -21,5 +21,3 @@ export const BaseSheet: React.FC<Props> = ({ children, onCloseClick, mounted }) 
     </AnimateSheet>
   </RenderInPortal>
 );
-
-export default BaseSheet;

@@ -38,5 +38,3 @@ export const ListRow: React.FC<Props> = ({ id, name, tags, description, isPrivat
     <div className="ListRow-icons">{isPrivate && <Private className="ListRow-icon" />}</div>
   </div>
 );
-
-export default ListRow;

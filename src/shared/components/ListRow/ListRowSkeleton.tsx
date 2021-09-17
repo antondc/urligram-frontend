@@ -28,5 +28,3 @@ export const ListRowSkeleton: React.FC<ListRowSkeleton> = ({ id }) => (
     </div>
   </div>
 );
-
-export default ListRowSkeleton;

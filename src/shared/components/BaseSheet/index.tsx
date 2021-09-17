@@ -11,7 +11,7 @@ interface Props {
   onCloseClick: () => void;
 }
 
-export const BaseSheet: React.FC<Props> = ({ children, mounted, onCloseClick: onCloseClickCallback }) => {
+const BaseSheet: React.FC<Props> = ({ children, mounted, onCloseClick: onCloseClickCallback }) => {
   const dispatch = useDispatch();
   const [locked, setLocked] = useState<boolean>(false);
 

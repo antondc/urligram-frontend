@@ -17,7 +17,7 @@ interface Props {
   className?: string;
 }
 
-export const UserFollowButton: React.FC<Props> = ({ userId, className }) => {
+const UserFollowButton: React.FC<Props> = ({ userId, className }) => {
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => selectUserById(state, { id: userId }));
   const session = useSelector(selectSession);

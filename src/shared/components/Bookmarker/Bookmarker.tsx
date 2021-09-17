@@ -36,5 +36,3 @@ export const Bookmarker: React.FC<Props> = ({
     {loading && <SpinnerPie className="Bookmarker-loader" />}
   </div>
 );
-
-export default Bookmarker;

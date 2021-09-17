@@ -26,7 +26,7 @@ type LocalStorageSidebarOpen = {
   expires: number;
 };
 
-export const SidebarLeft: React.FC = () => {
+const SidebarLeft: React.FC = () => {
   const dispatch = useDispatch();
   const localStorageWrapper = new LocalStorageWrapper();
   const isLoggedIn = useSelector(selectSessionLoggedIn);

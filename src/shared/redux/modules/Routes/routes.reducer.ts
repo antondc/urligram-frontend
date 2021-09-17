@@ -1,6 +1,6 @@
 import { ROUTES_NEW_ROUTE_PUSH, RoutesActions, RoutesState } from './routes.types';
 
-export const initialState: RoutesState = {
+const initialState: RoutesState = {
   routes: [],
   history: [],
   currentRoute: undefined,

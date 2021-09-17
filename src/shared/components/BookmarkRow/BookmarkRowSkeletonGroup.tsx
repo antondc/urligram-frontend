@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { BookmarkRowSkeleton } from 'Components/BookmarkRow/BookmarkRowSkeleton';
 import CardItem from '../CardItem';
+import { BookmarkRowSkeleton } from './BookmarkRowSkeleton';
 
 interface Props {
   length?: number;

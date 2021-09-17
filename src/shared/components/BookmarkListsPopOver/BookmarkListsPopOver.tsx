@@ -27,5 +27,3 @@ export const BookmarkListsPopOver: React.FC<Props> = ({ mounted, bookmarkId, onL
     </RenderInPortal>
   </span>
 );
-
-export default BookmarkListsPopOver;

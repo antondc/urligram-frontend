@@ -23,7 +23,7 @@ interface Props {
   onBookmarked?: () => void;
 }
 
-export const Bookmarker: React.FC<Props> = ({ className, linkId, listId, bookmarkId, onBookmarked }) => {
+const Bookmarker: React.FC<Props> = ({ className, linkId, listId, bookmarkId, onBookmarked }) => {
   const dispatch = useDispatch();
   const session = useSelector(selectSession);
   const link = useSelector((state: RootState) => selectLinkById(state, { id: linkId }));

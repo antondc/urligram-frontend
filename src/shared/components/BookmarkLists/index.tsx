@@ -16,7 +16,7 @@ interface Props {
   bookmarkId: number;
 }
 
-export const BookmarkLists: React.FC<Props> = ({ bookmarkId }) => {
+const BookmarkLists: React.FC<Props> = ({ bookmarkId }) => {
   const dispatch = useDispatch();
 
   const session = useSelector(selectSession);

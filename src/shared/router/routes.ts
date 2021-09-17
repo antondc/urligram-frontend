@@ -16,7 +16,7 @@ export interface Route {
   layout?: Layout;
 }
 
-export interface RoutesInterface {
+interface RoutesInterface {
   Tags: Route;
   Home: Route;
   UserBookmarks: Route;

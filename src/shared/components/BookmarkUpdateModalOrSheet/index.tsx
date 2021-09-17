@@ -11,7 +11,7 @@ import { selectUiBookmarkUpdateModalMounted } from 'Modules/Ui/selectors/selectU
 import { selectUiScreenTypeIsMobile } from 'Modules/Ui/selectors/selectUiScreenTypeIsMobile';
 import { Fade } from 'Vendor/components';
 
-export const BookmarkUpdateModalOrSheet: React.FC = () => {
+const BookmarkUpdateModalOrSheet: React.FC = () => {
   const dispatch = useDispatch();
   const uiScreenTypeIsMobile = useSelector(selectUiScreenTypeIsMobile);
   const bookmarkUpdateModalMounted = useSelector(selectUiBookmarkUpdateModalMounted);

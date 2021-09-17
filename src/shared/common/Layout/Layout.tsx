@@ -82,5 +82,3 @@ export const Layout: React.FC<Props> = ({
     </div>
   </div>
 );
-
-export default Layout;

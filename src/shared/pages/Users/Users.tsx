@@ -15,7 +15,7 @@ import { SelectValue } from 'Vendor/components';
 
 import './Users.less';
 
-export interface Props {
+interface Props {
   usersCurrentIds: string[];
   usersLoading: boolean;
   url: string;

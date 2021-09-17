@@ -45,5 +45,3 @@ export const UserFollowButton: React.FC<Props> = ({
     {loading && <SpinnerPie className="UserFollowButton-loader" />}
   </div>
 );
-
-export default UserFollowButton;

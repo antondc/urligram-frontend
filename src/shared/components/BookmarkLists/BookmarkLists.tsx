@@ -106,5 +106,3 @@ export const BookmarkLists: React.FC<Props> = ({
     </FadeInOut>
   </div>
 );
-
-export default BookmarkLists;

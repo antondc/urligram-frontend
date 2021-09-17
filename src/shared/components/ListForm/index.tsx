@@ -18,11 +18,6 @@ import { ListForm as ListFormUi } from './ListForm';
 
 import './ListForm.less';
 
-export type TagValue = {
-  label: string;
-  value: string;
-};
-
 interface Props {
   closeModal: () => void;
   setLocked: (locked: boolean) => void;

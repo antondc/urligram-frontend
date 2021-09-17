@@ -31,5 +31,3 @@ export const BookmarkRowSkeleton: React.FC<BookmarkRowSkeleton> = ({ id }) => (
     <SkeletonItem className="BookmarkRowSkeleton-actions" />
   </div>
 );
-
-export default BookmarkRowSkeleton;

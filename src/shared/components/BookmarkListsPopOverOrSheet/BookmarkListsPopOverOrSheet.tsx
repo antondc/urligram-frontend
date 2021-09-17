@@ -32,5 +32,3 @@ export const BookmarkListsPopOverOrSheet: React.FC<Props> = ({
 
   return <BookmarkListsPopOver bookmarkId={bookmarkId} />;
 };
-
-export default BookmarkListsPopOverOrSheet;

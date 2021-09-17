@@ -53,7 +53,7 @@ interface Props {
   onChange: (string: SelectValue[]) => void;
 }
 
-export const List: React.FC<Props> = ({
+const List: React.FC<Props> = ({
   listInvitationRole,
   sessionUserListRole,
   list,

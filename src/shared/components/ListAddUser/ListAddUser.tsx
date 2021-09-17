@@ -137,5 +137,3 @@ export const ListAddUser: React.FC<Props> = ({
     </RenderInPortal>
   </div>
 );
-
-export default ListAddUser;

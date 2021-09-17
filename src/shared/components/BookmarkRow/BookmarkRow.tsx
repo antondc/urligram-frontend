@@ -126,5 +126,3 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
     </div>
   </div>
 );
-
-export default BookmarkRow;

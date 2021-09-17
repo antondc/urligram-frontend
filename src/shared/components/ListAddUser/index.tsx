@@ -18,7 +18,7 @@ interface Props {
   listId: number;
 }
 
-export const ListAddUser: React.FC<Props> = ({ listId }) => {
+const ListAddUser: React.FC<Props> = ({ listId }) => {
   const dispatch = useDispatch();
 
   const session = useSelector(selectSession);

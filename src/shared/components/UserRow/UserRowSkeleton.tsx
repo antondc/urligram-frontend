@@ -26,5 +26,3 @@ export const UserRowSkeleton: React.FC<UserRowSkeleton> = ({ id }) => (
     </div>
   </div>
 );
-
-export default UserRowSkeleton;

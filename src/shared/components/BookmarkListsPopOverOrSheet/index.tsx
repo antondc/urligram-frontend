@@ -12,7 +12,7 @@ interface Props {
   bookmarkId: number;
 }
 
-export const BookmarkListsPopOverOrSheet: React.FC<Props> = ({ bookmarkId }) => {
+const BookmarkListsPopOverOrSheet: React.FC<Props> = ({ bookmarkId }) => {
   const dispatch = useDispatch();
   const uiScreenTypeIsMobile = useSelector(selectUiScreenTypeIsMobile);
   const bookmarkListsModal = useSelector(selectBookmarkListsModal);

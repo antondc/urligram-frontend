@@ -107,5 +107,3 @@ export const UserRow: React.FC<UserRow> = ({
     </div>
   </div>
 );
-
-export default UserRow;

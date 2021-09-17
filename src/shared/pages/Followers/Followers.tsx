@@ -18,7 +18,7 @@ import { SelectValue } from 'Vendor/components';
 
 import './Followers.less';
 
-export interface Props {
+interface Props {
   user: UserState;
   usersCurrentIds: string[];
   usersLoading: boolean;
