@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { ProviderWrapper } from 'Tools/storybook/provider';
-import { H1, Hr } from 'Vendor/components';
 import { number, text, withKnobs } from '@storybook/addon-knobs';
 import Pagination from './index';
 
@@ -21,8 +20,6 @@ const knobs = {
 
 export const Default: React.FC = () => (
   <ProviderWrapper>
-    <H1>Pagination</H1>
-    <Hr spacer />
     <Pagination
       totalItems={knobs.totalItems()}
       itemsPerPage={knobs.itemsPerPage()}
