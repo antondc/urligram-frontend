@@ -24,7 +24,9 @@
     "build:server:stage": "webpack --config ./webpack/webpack.server.stage.ts",
     "build:client:stage": "webpack --config ./webpack/webpack.client.stage.ts",
     "run:server": "node --inspect=9228 ./dist/server.js",
+    "check": "npm run lint && npm run unused-exports",
     "lint": "eslint src --ext .ts,.tsx,.js,.jsx",
+    "unused-exports": "ts-unused-exports tsconfig.json --excludePathsFromReport='vendor;stories;tools'",
     "test": "jest --no-cache",
     "test:watch": "jest --watch --no-cache",
     "test:precommit": "jest --no-cache",
@@ -153,6 +155,7 @@
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
     "serialize-javascript": "^3.0.0",
+    "ts-unused-exports": "^7.0.3",
     "uuid": "^8.3.2"
   },
   "license": "ISC"
