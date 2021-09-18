@@ -1,8 +1,6 @@
 export const BOOKMARKS_LOAD_REQUEST = 'BOOKMARKS_LOAD_REQUEST';
 export const BOOKMARKS_LOAD_SUCCESS = 'BOOKMARKS_LOAD_SUCCESS';
 export const BOOKMARKS_LOAD_FAILURE = 'BOOKMARKS_LOAD_FAILURE';
-export const BOOKMARK_UPDATE_VOTE_SUCCESS = 'BOOKMARK_UPDATE_VOTE_SUCCESS';
-export const BOOKMARK_UPDATE_VOTE_REQUEST = 'BOOKMARK_UPDATE_VOTE_REQUEST';
 export const BOOKMARK_CREATE_REQUEST = 'BOOKMARK_CREATE_REQUEST';
 export const BOOKMARK_CREATE_SUCCESS = 'BOOKMARK_CREATE_SUCCESS';
 export const BOOKMARK_CREATE_FAILURE = 'BOOKMARK_CREATE_FAILURE';
@@ -32,7 +30,7 @@ export type BookmarkRelated = {
   userId: string;
 };
 
-export interface LinkStatistics {
+interface BookmarkStatistics {
   absoluteVote: number | null;
   timesVoted: number;
   averageVote: number | null;
@@ -59,7 +57,7 @@ export interface BookmarkState {
     id: number;
     name: string;
   }[];
-  statistics: LinkStatistics;
+  statistics: BookmarkStatistics;
   deleting?: boolean;
   loading?: boolean;
   bookmarkReceivedFrom: {
@@ -174,16 +172,6 @@ interface BookmarksLoadFailureAction {
   payload: BookmarksState;
 }
 
-interface BookmarkVoteRequestAction {
-  type: typeof BOOKMARK_UPDATE_VOTE_REQUEST;
-  payload: BookmarksState;
-}
-
-interface BookmarkVoteSuccessAction {
-  type: typeof BOOKMARK_UPDATE_VOTE_SUCCESS;
-  payload: BookmarksState;
-}
-
 interface BookmarkCreateApiRequestAction {
   type: typeof BOOKMARK_CREATE_REQUEST;
   payload: BookmarksState;
@@ -278,8 +266,6 @@ export type BookmarksActions =
   | BookmarksLoadRequestAction
   | BookmarksLoadSuccessAction
   | BookmarksLoadFailureAction
-  | BookmarkVoteRequestAction
-  | BookmarkVoteSuccessAction
   | BookmarkCreateApiRequestAction
   | BookmarkCreateSuccessAction
   | BookmarkCreateFailureAction
