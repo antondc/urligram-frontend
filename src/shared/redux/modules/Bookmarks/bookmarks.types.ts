@@ -174,102 +174,102 @@ interface BookmarksLoadFailureAction {
   payload: BookmarksState;
 }
 
-export interface BookmarkVoteRequestAction {
+interface BookmarkVoteRequestAction {
   type: typeof BOOKMARK_UPDATE_VOTE_REQUEST;
   payload: BookmarksState;
 }
 
-export interface BookmarkVoteSuccessAction {
+interface BookmarkVoteSuccessAction {
   type: typeof BOOKMARK_UPDATE_VOTE_SUCCESS;
   payload: BookmarksState;
 }
 
-export interface BookmarkCreateApiRequestAction {
+interface BookmarkCreateApiRequestAction {
   type: typeof BOOKMARK_CREATE_REQUEST;
   payload: BookmarksState;
 }
 
-export interface BookmarkCreateSuccessAction {
+interface BookmarkCreateSuccessAction {
   type: typeof BOOKMARK_CREATE_SUCCESS;
   payload: BookmarksState;
 }
 
-export interface BookmarkCreateFailureAction {
+interface BookmarkCreateFailureAction {
   type: typeof BOOKMARK_CREATE_FAILURE;
   payload: BookmarksState;
 }
 
-export interface BookmarkUpdateRequestAction {
+interface BookmarkUpdateRequestAction {
   type: typeof BOOKMARK_UPDATE_REQUEST;
   payload: BookmarksState;
 }
 
-export interface BookmarkUpdateSuccessAction {
+interface BookmarkUpdateSuccessAction {
   type: typeof BOOKMARK_UPDATE_SUCCESS;
   payload: BookmarksState;
 }
 
-export interface BookmarkUpdateFailureAction {
+interface BookmarkUpdateFailureAction {
   type: typeof BOOKMARK_UPDATE_FAILURE;
   payload: BookmarksState;
 }
 
-export interface BookmarkDeleteRequestAction {
+interface BookmarkDeleteRequestAction {
   type: typeof BOOKMARK_DELETE_REQUEST;
   payload: BookmarksState;
 }
 
-export interface BookmarkDeleteSuccessAction {
+interface BookmarkDeleteSuccessAction {
   type: typeof BOOKMARK_DELETE_SUCCESS;
   payload: BookmarksState;
 }
 
-export interface BookmarkDeleteFailureAction {
+interface BookmarkDeleteFailureAction {
   type: typeof BOOKMARK_DELETE_FAILURE;
   payload: BookmarksState;
 }
 
-export interface BookmarkRecommendedRequestAction {
+interface BookmarkRecommendedRequestAction {
   type: typeof BOOKMARKS_RECOMMENDED_REQUEST;
   payload: BookmarksState;
 }
 
-export interface BookmarkRecommendedSuccessAction {
+interface BookmarkRecommendedSuccessAction {
   type: typeof BOOKMARKS_RECOMMENDED_SUCCESS;
   payload: BookmarksState;
 }
 
-export interface BookmarkRecommendedFailureAction {
+interface BookmarkRecommendedFailureAction {
   type: typeof BOOKMARKS_RECOMMENDED_FAILURE;
   payload: BookmarksState;
 }
 
-export interface BookmarkLoadByIdRequestAction {
+interface BookmarkLoadByIdRequestAction {
   type: typeof BOOKMARK_LOAD_BY_ID_REQUEST;
   payload: BookmarksState;
 }
 
-export interface BookmarkLoadByIdSuccessAction {
+interface BookmarkLoadByIdSuccessAction {
   type: typeof BOOKMARK_LOAD_BY_ID_SUCCESS;
   payload: BookmarksState;
 }
 
-export interface BookmarkLoadByIdFailureAction {
+interface BookmarkLoadByIdFailureAction {
   type: typeof BOOKMARK_LOAD_BY_ID_FAILURE;
   payload: BookmarksState;
 }
 
-export interface BookmarksLoadByIdsRequestAction {
+interface BookmarksLoadByIdsRequestAction {
   type: typeof BOOKMARKS_LOAD_BY_IDS_REQUEST;
   payload: BookmarksState;
 }
 
-export interface BookmarksLoadByIdsSuccessAction {
+interface BookmarksLoadByIdsSuccessAction {
   type: typeof BOOKMARKS_LOAD_BY_IDS_SUCCESS;
   payload: BookmarksState;
 }
 
-export interface BookmarksLoadByIdsFailureAction {
+interface BookmarksLoadByIdsFailureAction {
   type: typeof BOOKMARKS_LOAD_BY_IDS_FAILURE;
   payload: BookmarksState;
 }

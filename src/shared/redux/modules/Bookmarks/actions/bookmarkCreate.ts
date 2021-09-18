@@ -1,5 +1,6 @@
-import { bookmarkCreateFailure } from 'Modules/Bookmarks/actions/bookmarkCreateFailure';
 import {
+  BOOKMARK_CREATE_FAILURE,
+  BOOKMARK_CREATE_REQUEST,
   BOOKMARK_CREATE_SUCCESS,
   BookmarkCreateApiRequest,
   BookmarkCreateApiResponse,
@@ -12,7 +13,6 @@ import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
 import { AppThunk } from '../../../index';
 import { LISTS_LOAD_SUCCESS, ListsActions } from '../../Lists/lists.types';
-import { bookmarkCreateRequest } from './bookmarkCreateRequest';
 
 export const bookmarkCreate =
   ({
@@ -28,7 +28,10 @@ export const bookmarkCreate =
     const { Bookmarks: bookmarksBeforeRequest } = getState();
 
     try {
-      dispatch(bookmarkCreateRequest(bookmarksBeforeRequest));
+      dispatch({
+        type: BOOKMARK_CREATE_REQUEST,
+        payload: bookmarksBeforeRequest,
+      });
 
       const { data: bookmarkData } = await HttpClient.post<void, BookmarkCreateApiResponse>('/users/me/bookmarks', {
         title,
@@ -107,12 +110,14 @@ export const bookmarkCreate =
       return bookmarkData?.attributes;
     } catch (error) {
       const { Bookmarks: bookmarksOnError } = getState();
-      dispatch(
-        bookmarkCreateFailure({
+
+      dispatch({
+        type: BOOKMARK_CREATE_FAILURE,
+        payload: {
           ...bookmarksOnError,
           errors: [...(bookmarksOnError.errors || []), error],
-        })
-      );
+        },
+      });
 
       throw error;
     }

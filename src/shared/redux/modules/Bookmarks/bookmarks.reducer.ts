@@ -24,7 +24,7 @@ import {
   BookmarksState,
 } from './bookmarks.types';
 
-export const initialState: BookmarksState = {
+const initialState: BookmarksState = {
   byKey: {},
   errors: [],
 };
