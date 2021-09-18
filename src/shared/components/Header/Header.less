@@ -122,6 +122,7 @@
     pointer-events: none;
 
     @{c}-search--withValue & {
+      fill: @gradientColors[blue-4];
       pointer-events: all;
 
       &:hover {
@@ -142,14 +143,15 @@
     transition: opacity @td-normal @ease, fill @td-fast @ease;
     pointer-events: none;
 
-    &:hover {
-      fill: @gradientColors[red-4];
-      cursor: pointer;
-    }
-
     @{c}-search--withValue & {
       opacity: 1;
+      fill: @gradientColors[red-5];
       pointer-events: all;
+
+      &:hover {
+        fill: @gradientColors[red-4];
+        cursor: pointer;
+      }
     }
   }
 
