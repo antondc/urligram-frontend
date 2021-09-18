@@ -6,7 +6,6 @@ import { bookmarkDelete } from 'Modules/Bookmarks/actions/bookmarkDelete';
 import { bookmarksLoadByListId } from 'Modules/Bookmarks/actions/bookmarksLoadByListId';
 import { BookmarkRelated } from 'Modules/Bookmarks/bookmarks.types';
 import { selectBookmarksById } from 'Modules/Bookmarks/selectors/selectBookmarkById';
-import { selectLinkById } from 'Modules/Links/selectors/selectLinkById';
 import { listBookmarkCreate } from 'Modules/Lists/actions/listBookmarkCreate';
 import { RootState } from 'Modules/rootType';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
@@ -17,25 +16,21 @@ import './Bookmarker.less';
 
 interface Props {
   className?: string;
-  linkId: number;
   listId?: number;
   bookmarkId?: number;
   onBookmarked?: () => void;
 }
 
-const Bookmarker: React.FC<Props> = ({ className, linkId, listId, bookmarkId, onBookmarked }) => {
+const Bookmarker: React.FC<Props> = ({ className, listId, bookmarkId, onBookmarked }) => {
   const dispatch = useDispatch();
   const session = useSelector(selectSession);
-  const link = useSelector((state: RootState) => selectLinkById(state, { id: linkId }));
   const [loading, setLoading] = useState<boolean>(false);
   const parentBookmark = useSelector((state: RootState) => selectBookmarksById(state, { bookmarkId }));
   const bookmarksSessionBookmark: BookmarkRelated = parentBookmark?.bookmarksRelated?.find(
     (item) => item.userId === session?.id
   );
-  const linksSessionBookmark: BookmarkRelated = link?.bookmarksRelated?.find((item) => item.userId === session?.id);
   const isOwnBookmark = session?.id === parentBookmark?.userId;
-  const userBookmarkedLink =
-    parentBookmark?.bookmarksRelated?.some((item) => item.userId === session?.id) || !!linksSessionBookmark?.id;
+  const userBookmarkedLink = parentBookmark?.bookmarksRelated?.some((item) => item.userId === session?.id);
 
   const onBookmarkGrab = async () => {
     if (!session?.id) return dispatch(switchLoginModal(true));
@@ -43,13 +38,12 @@ const Bookmarker: React.FC<Props> = ({ className, linkId, listId, bookmarkId, on
 
     setLoading(true);
     const bookmarkTags = parentBookmark?.tags?.map((item) => ({ tag: item.name }));
-    const linkTags = link?.tags?.map((item) => ({ tag: item.name }));
 
     const data = {
-      title: parentBookmark?.title || link?.title,
-      url: parentBookmark?.url || link?.url,
+      title: parentBookmark?.title,
+      url: parentBookmark?.url,
       isPrivate: parentBookmark?.isPrivate || false,
-      tags: bookmarkTags || linkTags,
+      tags: bookmarkTags,
     };
     try {
       const { id: newBookmarkId } = await dispatch(bookmarkCreate(data));
@@ -70,8 +64,8 @@ const Bookmarker: React.FC<Props> = ({ className, linkId, listId, bookmarkId, on
     try {
       await dispatch(
         bookmarkDelete({
-          bookmarkId: linksSessionBookmark?.id || bookmarksSessionBookmark?.id,
-          linkId: link?.id || parentBookmark?.linkId,
+          bookmarkId: bookmarksSessionBookmark?.id,
+          linkId: parentBookmark?.linkId,
         })
       );
       if (!!listId) await dispatch(bookmarksLoadByListId(listId));

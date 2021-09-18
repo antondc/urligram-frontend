@@ -1,6 +1,5 @@
 import { Bookmarks } from './modules/Bookmarks/bookmarks.reducer';
 import { Languages } from './modules/Languages/languages.reducer';
-import { Links } from './modules/Links/links.reducer';
 import { Lists } from './modules/Lists/lists.reducer';
 import { Notifications } from './modules/Notifications/notifications.reducer';
 import { Routes } from './modules/Routes/routes.reducer';
@@ -17,7 +16,6 @@ export const RootReducers = {
   Session,
   Ui,
   Bookmarks,
-  Links,
   Sections,
   Lists,
   Tags,

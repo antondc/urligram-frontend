@@ -7,7 +7,6 @@ import {
   BookmarksActions,
   BookmarkState,
 } from 'Modules/Bookmarks/bookmarks.types';
-import { LinksActions } from 'Modules/Links/links.types';
 import { USERS_LOAD_SUCCEED, UsersActions } from 'Modules/Users/users.types';
 import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
@@ -20,10 +19,7 @@ export const bookmarkCreate =
     url,
     isPrivate,
     tags,
-  }: BookmarkCreateApiRequest): AppThunk<
-    Promise<BookmarkState>,
-    BookmarksActions | LinksActions | UsersActions | ListsActions
-  > =>
+  }: BookmarkCreateApiRequest): AppThunk<Promise<BookmarkState>, BookmarksActions | UsersActions | ListsActions> =>
   async (dispatch, getState) => {
     const { Bookmarks: bookmarksBeforeRequest } = getState();
 

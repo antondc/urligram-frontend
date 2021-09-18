@@ -1,11 +1,8 @@
 import { BookmarkDeleteApiResponse, BookmarksActions, BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
-import { LinksActions } from 'Modules/Links/links.types';
 import { uiNotificationPush } from 'Modules/Ui/actions/uiNotificationPush';
 import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
 import { AppThunk } from '../../../index';
-import { linkLoadByIdRequest } from '../../Links/actions/linkLoadByIdRequest';
-import { linkLoadByIdSuccess } from '../../Links/actions/linkLoadByIdSuccess';
 import { bookmarkDeleteFailure } from './bookmarkDeleteFailure';
 import { bookmarkDeleteRequest } from './bookmarkDeleteRequest';
 import { bookmarkDeleteSuccess } from './bookmarkDeleteSuccess';
@@ -16,44 +13,19 @@ type BookmarkDelete = {
 };
 
 export const bookmarkDelete =
-  ({
-    bookmarkId,
-    linkId,
-  }: BookmarkDelete): AppThunk<Promise<Partial<BookmarkState>>, BookmarksActions | LinksActions> =>
+  ({ bookmarkId, linkId }: BookmarkDelete): AppThunk<Promise<Partial<BookmarkState>>, BookmarksActions> =>
   async (dispatch, getState) => {
-    const { Bookmarks: bookmarksBeforeRequest, Links: linksBeforeRequest } = getState();
+    const { Bookmarks: bookmarksBeforeRequest } = getState();
 
     try {
-      dispatch(linkLoadByIdRequest(linksBeforeRequest));
       dispatch(bookmarkDeleteRequest(bookmarksBeforeRequest));
 
       const { data: bookmarkData } = await HttpClient.delete<void, BookmarkDeleteApiResponse>(
         `/users/me/bookmarks/${bookmarkId}`
       );
 
-      const { Bookmarks: bookmarksAfterResponse, Links: linksAfterResponse } = getState();
+      const { Bookmarks: bookmarksAfterResponse } = getState();
 
-      const filteredBookmarksRelated = linksAfterResponse?.byKey?.[linkId]?.bookmarksRelated?.filter(
-        (item) => item.id !== bookmarkId
-      );
-      const linkWithBookmarksRelatedUpdated = {
-        ...linksAfterResponse.byKey[linkId],
-        bookmarksRelated: filteredBookmarksRelated,
-      };
-      const filteredAllIds = linksAfterResponse?.allIds?.filter((item) => item !== linkId);
-      const updatedLink = !!filteredBookmarksRelated?.length ? linkWithBookmarksRelatedUpdated : undefined;
-      const updatedAllLinksIds = !!filteredBookmarksRelated?.length ? linksAfterResponse?.allIds : filteredAllIds;
-
-      await dispatch(
-        linkLoadByIdSuccess({
-          ...linksAfterResponse,
-          byKey: {
-            ...linksAfterResponse?.byKey,
-            [linkId]: updatedLink,
-          },
-          allIds: updatedAllLinksIds,
-        })
-      );
       const bookmarksToUpdate = Object.values(bookmarksAfterResponse.byKey).filter((item) => item?.linkId === linkId);
 
       const filteredBookmarks = bookmarksToUpdate.map((item) => ({

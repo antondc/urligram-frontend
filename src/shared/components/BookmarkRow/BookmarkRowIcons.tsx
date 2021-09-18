@@ -72,12 +72,7 @@ export const BookmarkRowIcons: React.FC<Partial<BookmarkRowIcons>> = ({
           </div>
         )}
       </Fade>
-      <Bookmarker
-        className="BookmarkRowIcons-iconBookmark"
-        linkId={bookmark?.linkId}
-        bookmarkId={bookmark?.id}
-        listId={listId}
-      />
+      <Bookmarker className="BookmarkRowIcons-iconBookmark" bookmarkId={bookmark?.id} listId={listId} />
     </div>
   </div>
 );

@@ -4,8 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectBookmarksLoading } from 'Modules/Bookmarks/selectors/selectBookmarksLoading';
 import { selectBookmarksVoteLoading } from 'Modules/Bookmarks/selectors/selectBookmarksVoteLoading';
 import { selectCurrentGlossary } from 'Modules/Languages/selectors/selectCurrentGlossary';
-import { selectLinksLoading } from 'Modules/Links/selectors/selectLinksLoading';
-import { selectLinksVoteLoading } from 'Modules/Links/selectors/selectLinksVoteLoading';
 import { selectListsLoading } from 'Modules/Lists/selectors/selectListsLoading';
 import { selectCurrentRoute } from 'Modules/Routes/selectors/selectCurrentRoute';
 import { selectCurrentRouteParamLanguage } from 'Modules/Routes/selectors/selectCurrentRouteParamLanguage';
@@ -31,15 +29,12 @@ const Header: React.FC = () => {
   const currentRouteQueryParamFilter = useSelector(selectCurrentRouteQueryParamFilter);
   const currentGlossary = useSelector(selectCurrentGlossary);
   const bookmarksLoading = useSelector(selectBookmarksLoading);
-  const linksLoading = useSelector(selectLinksLoading);
-  const linksVoteLoading = useSelector(selectLinksVoteLoading);
   const bookmarksVoteLoading = useSelector(selectBookmarksVoteLoading);
   const usersLoading = useSelector(selectUsersLoading);
   const listsLoading = useSelector(selectListsLoading);
   const sessionLoading = useSelector(selectSessionLoading);
   const [searchValue, setSearchValue] = useState<string>(undefined);
-  const logoLoadingHeartBeat =
-    bookmarksLoading || linksLoading || linksVoteLoading || bookmarksVoteLoading || usersLoading || listsLoading;
+  const logoLoadingHeartBeat = bookmarksLoading || bookmarksVoteLoading || usersLoading || listsLoading;
   const logoLoadingColors = sessionLoading;
   const routeName = currentRoute?.name;
   const isHomePage = Routes.Home.name === routeName;
