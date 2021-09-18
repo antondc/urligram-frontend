@@ -7,7 +7,7 @@ import {
   LanguagesState,
 } from './languages.types';
 
-export const initialState: LanguagesState = {
+const initialState: LanguagesState = {
   byKey: {},
   currentLanguage: {
     id: 0,

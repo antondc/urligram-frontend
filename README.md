@@ -23,6 +23,10 @@ A different option is to add local IP to clients allowed on API config.test.json
 
 ## Docs
 
+### Data Loading
+
+- Languages data is loaded only from server via `initialLanguagesLoader`. There are no methods to load them from frontend.
+
 ### Create certificate
 
 #### Generate ssl certificates with Subject Alt Names on OSX

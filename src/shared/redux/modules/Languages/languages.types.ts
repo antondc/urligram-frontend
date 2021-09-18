@@ -1,6 +1,5 @@
 export const LANGUAGES_LOAD_REQUEST = 'LANGUAGES_LOAD_REQUEST';
 export const LANGUAGES_LOAD_SUCCESS = 'LANGUAGES_LOAD_SUCCESS';
-export const LANGUAGES_SWITCH_CURRENT = 'LANGUAGES_SWITCH_CURRENT';
 export const LANGUAGES_SWITCH_CURRENT_SUCCESS = 'LANGUAGES_SWITCH_CURRENT_SUCCESS';
 export const LANGUAGES_SWITCH_CURRENT_REQUEST = 'LANGUAGES_SWITCH_CURRENT_REQUEST';
 
@@ -66,11 +65,6 @@ interface LanguagesLoadSuccessAction {
   payload: Partial<LanguagesState>;
 }
 
-interface LanguagesSwitchCurrentAction {
-  type: typeof LANGUAGES_SWITCH_CURRENT;
-  payload: Partial<LanguagesState>;
-}
-
 interface LanguagesSwitchCurrentRequestAction {
   type: typeof LANGUAGES_SWITCH_CURRENT_REQUEST;
   payload: Partial<LanguagesState>;
@@ -84,6 +78,5 @@ interface LanguagesSwitchCurrentSuccessAction {
 export type LanguagesActions =
   | LanguagesLoadRequestAction
   | LanguagesLoadSuccessAction
-  | LanguagesSwitchCurrentAction
   | LanguagesSwitchCurrentRequestAction
   | LanguagesSwitchCurrentSuccessAction;
