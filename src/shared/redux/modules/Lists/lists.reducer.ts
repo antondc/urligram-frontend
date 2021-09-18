@@ -12,9 +12,6 @@ import {
   LIST_DELETE_FAILURE,
   LIST_DELETE_REQUEST,
   LIST_DELETE_SUCCESS,
-  LIST_FOLLOW_FAILURE,
-  LIST_FOLLOW_REQUEST,
-  LIST_FOLLOW_SUCCESS,
   LIST_UNFOLLOW_FAILURE,
   LIST_UNFOLLOW_REQUEST,
   LIST_UNFOLLOW_SUCCESS,
@@ -33,7 +30,7 @@ import {
   ListsState,
 } from './lists.types';
 
-export const initialState: ListsState = {
+const initialState: ListsState = {
   byKey: {},
   currentIds: [],
 };
@@ -49,9 +46,6 @@ export const Lists = (state = initialState, action: ListsActions): ListsState =>
     case LIST_UPDATE_SUCCESS:
     case LIST_UPDATE_FAILURE:
     case LIST_CREATE_RESET:
-    case LIST_FOLLOW_REQUEST:
-    case LIST_FOLLOW_SUCCESS:
-    case LIST_FOLLOW_FAILURE:
     case LIST_UNFOLLOW_REQUEST:
     case LIST_UNFOLLOW_SUCCESS:
     case LIST_UNFOLLOW_FAILURE:

@@ -1,6 +1,7 @@
 import omit from 'lodash/omit';
 
 import { initialBookmarksLoader } from 'Modules/Bookmarks/bookmarks.loader';
+import { initialListsLoader } from 'Modules/Lists/lists.loader';
 import { RequestParameters } from 'Root/src/server/routes/allRoutes';
 
 type Layout = 'withLeftSidebar' | 'fullPage';
@@ -140,8 +141,8 @@ export const Routes: RoutesInterface = {
     route: '/lists',
     exact: true,
     auth: false,
-    initialDataLoadersVisitor: [],
-    initialDataLoadersSession: [],
+    initialDataLoadersVisitor: [initialListsLoader],
+    initialDataLoadersSession: [initialListsLoader],
     layout: 'withLeftSidebar',
   },
 

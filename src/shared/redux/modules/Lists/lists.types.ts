@@ -3,8 +3,6 @@ import { UserState } from '../Users/users.types';
 
 export const LISTS_LOAD_REQUEST = 'LISTS_LOAD_REQUEST';
 export const LISTS_LOAD_SUCCESS = 'LISTS_LOAD_SUCCESS';
-export const LIST_LOAD_REQUEST = 'LIST_LOAD_REQUEST';
-export const LIST_LOAD_SUCCESS = 'LIST_LOAD_SUCCESS';
 export const LIST_CREATE_REQUEST = 'LIST_CREATE_REQUEST';
 export const LIST_CREATE_SUCCESS = 'LIST_CREATE_SUCCESS';
 export const LIST_CREATE_FAILURE = 'LIST_CREATE_FAILURE';
@@ -12,9 +10,6 @@ export const LIST_UPDATE_REQUEST = 'LIST_UPDATE_REQUEST';
 export const LIST_UPDATE_SUCCESS = 'LIST_UPDATE_SUCCESS';
 export const LIST_UPDATE_FAILURE = 'LIST_UPDATE_FAILURE';
 export const LIST_CREATE_RESET = 'LIST_CREATE_RESET';
-export const LIST_FOLLOW_REQUEST = 'LIST_FOLLOW_REQUEST';
-export const LIST_FOLLOW_SUCCESS = 'LIST_FOLLOW_SUCCESS';
-export const LIST_FOLLOW_FAILURE = 'LIST_FOLLOW_FAILURE';
 export const LIST_UNFOLLOW_REQUEST = 'LIST_UNFOLLOW_REQUEST';
 export const LIST_UNFOLLOW_SUCCESS = 'LIST_UNFOLLOW_SUCCESS';
 export const LIST_UNFOLLOW_FAILURE = 'LIST_UNFOLLOW_FAILURE';
@@ -84,7 +79,7 @@ export interface ListApiResponseItem {
   attributes: ListState;
 }
 
-export interface ListApiUserResponseItem {
+interface ListApiUserResponseItem {
   type: 'list';
   id: number;
   attributes: ListUser;
@@ -121,20 +116,6 @@ export interface ListBookmarkCreateApiResponse {
   data: BookmarkGetItemResponse;
 }
 
-export interface ListBookmarkDeleteApiRequest {
-  listId: number;
-  bookmarkId: number;
-}
-
-export interface ListBookmarkDeleteApiResponse {
-  data: {
-    attributes: {
-      listId: number;
-      bookmarkId: number;
-    };
-  };
-}
-
 export interface ListDeleteApiRequest {
   listId: number;
 }
@@ -152,15 +133,6 @@ export interface ListUpdateApiRequest {
   listIsPrivate: boolean;
 }
 
-export interface ListFollowApiRequest {
-  userId: string;
-  listId: number;
-}
-
-export interface ListFollowApiResponse {
-  data: ListApiUserResponseItem;
-}
-
 export interface ListUpdateApiResponse {
   data: ListApiResponseItem;
 }
@@ -172,16 +144,6 @@ interface ListsLoadRequestAction {
 
 interface ListsLoadSuccessAction {
   type: typeof LISTS_LOAD_SUCCESS;
-  payload: Partial<ListsState>;
-}
-
-interface ListLoadRequestAction {
-  type: typeof LIST_LOAD_REQUEST;
-  payload: Partial<ListsState>;
-}
-
-interface ListLoadSuccessAction {
-  type: typeof LIST_LOAD_SUCCESS;
   payload: Partial<ListsState>;
 }
 
@@ -217,19 +179,6 @@ interface ListUpdateSuccessAction {
 
 interface ListUpdateFailureAction {
   type: typeof LIST_UPDATE_FAILURE;
-  payload: Partial<ListsState>;
-}
-
-interface ListFollowRequestAction {
-  type: typeof LIST_FOLLOW_REQUEST;
-  payload: Partial<ListsState>;
-}
-interface ListFollowSuccessAction {
-  type: typeof LIST_FOLLOW_SUCCESS;
-  payload: Partial<ListsState>;
-}
-interface ListFollowFailureAction {
-  type: typeof LIST_FOLLOW_FAILURE;
   payload: Partial<ListsState>;
 }
 
@@ -326,8 +275,6 @@ interface ListUserDeleteFailureAction {
 export type ListsActions =
   | ListsLoadRequestAction
   | ListsLoadSuccessAction
-  | ListLoadRequestAction
-  | ListLoadSuccessAction
   | ListCreateRequestAction
   | ListCreateSuccessAction
   | ListCreateFailureAction
@@ -335,9 +282,6 @@ export type ListsActions =
   | ListUpdateSuccessAction
   | ListUpdateFailureAction
   | ListCreateResetAction
-  | ListFollowRequestAction
-  | ListFollowSuccessAction
-  | ListFollowFailureAction
   | ListUnfollowRequestAction
   | ListUnfollowSuccessAction
   | ListUnfollowFailureAction
