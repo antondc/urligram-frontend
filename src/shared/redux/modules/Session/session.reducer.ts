@@ -22,7 +22,7 @@ import {
   SessionState,
 } from './session.types';
 
-export const initialState: SessionState = {
+const initialState: SessionState = {
   errors: [],
 };
 

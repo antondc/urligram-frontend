@@ -20,8 +20,8 @@ export const SESSION_RESET_ERRORS = 'SESSION_RESET_ERRORS';
 
 export const SESSION_STATUS_ACTIVE = 'active';
 export const SESSION_STATUS_INACTIVE = 'inactive';
-export const SESSION_STATUS_DISABLED = 'disabled';
-export const SESSION_STATUS_REMOVED = 'removed';
+const SESSION_STATUS_DISABLED = 'disabled';
+const SESSION_STATUS_REMOVED = 'removed';
 
 export type SessionStatus =
   | typeof SESSION_STATUS_ACTIVE
@@ -29,7 +29,7 @@ export type SessionStatus =
   | typeof SESSION_STATUS_DISABLED
   | typeof SESSION_STATUS_REMOVED;
 
-export type SessionLevel = 'admin' | 'user';
+type SessionLevel = 'admin' | 'user';
 
 export interface SessionError extends Error {
   field: string;
@@ -95,13 +95,6 @@ export interface SessionSignUpConfirmationApiRequest {
 
 export interface SessionForgotPasswordApiRequest {
   nameOrEmail: string;
-}
-
-export interface SessionForgotPasswordApiResponse {
-  data: {
-    success: boolean;
-    error?: SessionError;
-  };
 }
 
 export interface SessionResetPasswordApiRequest {

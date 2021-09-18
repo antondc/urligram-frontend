@@ -30,7 +30,7 @@ export type UiBaseModal = {
   mounted: boolean;
 };
 
-export type NotificationTypeState =
+type NotificationTypeState =
   | 'bookmark-creation'
   | 'bookmark-grabbed'
   | 'bookmark-deleted'
@@ -54,12 +54,11 @@ export type BookmarkListsModal = {
   loading?: boolean;
 } & UiBaseModal;
 
-export type BookmarkSendModal = {
+type BookmarkSendModal = {
   bookmarkId?: number;
 } & UiBaseModal;
 
-export type BookmarkListsModals = Array<BookmarkListsModal>;
-export type BookmarkSendModals = Array<BookmarkSendModal>;
+type BookmarkSendModals = Array<BookmarkSendModal>;
 export type ScreenType = 'desktop' | 'tablet' | 'mobile';
 
 export type UiState = {

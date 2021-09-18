@@ -2,6 +2,8 @@ import omit from 'lodash/omit';
 
 import { initialBookmarksLoader } from 'Modules/Bookmarks/bookmarks.loader';
 import { initialListsLoader } from 'Modules/Lists/lists.loader';
+import { tagsAllInitialLoader } from 'Modules/Tags/initialLoaders/tagsAllInitialLoader';
+import { initialUserLoader } from 'Modules/Users/user.loader';
 import { RequestParameters } from 'Root/src/server/routes/allRoutes';
 
 type Layout = 'withLeftSidebar' | 'fullPage';
@@ -50,8 +52,8 @@ export const Routes: RoutesInterface = {
     route: '/tags',
     exact: true,
     auth: false,
-    initialDataLoadersVisitor: [],
-    initialDataLoadersSession: [],
+    initialDataLoadersVisitor: [tagsAllInitialLoader],
+    initialDataLoadersSession: [tagsAllInitialLoader],
     layout: 'withLeftSidebar',
   },
 
@@ -100,8 +102,8 @@ export const Routes: RoutesInterface = {
     path: '/:lang([a-z]{2})?/users/:userId',
     exact: true,
     auth: false,
-    initialDataLoadersVisitor: [],
-    initialDataLoadersSession: [],
+    initialDataLoadersVisitor: [initialUserLoader],
+    initialDataLoadersSession: [initialUserLoader],
     layout: 'withLeftSidebar',
   },
 

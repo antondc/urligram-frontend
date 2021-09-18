@@ -8,7 +8,7 @@ import {
   TagsState,
 } from './tags.types';
 
-export const initialState: TagsState = {
+const initialState: TagsState = {
   byKey: {},
   currentIds: [],
   searchIds: [],
