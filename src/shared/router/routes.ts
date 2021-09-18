@@ -32,6 +32,7 @@ interface RoutesInterface {
   Lists: Route;
   Login: Route;
   SignUp: Route;
+  SignUpConfirmation: Route;
   ForgotPassword: Route;
   ResetPassword: Route;
   Control: Route;
@@ -185,6 +186,18 @@ export const Routes: RoutesInterface = {
     route: '/login',
     exact: true,
     auth: false,
+    initialDataLoadersVisitor: [],
+    initialDataLoadersSession: [],
+    layout: 'fullPage',
+  },
+
+  SignUpConfirmation: {
+    name: 'SignUpConfirmation',
+    path: '/:lang([a-z]{2})?/sign-up-confirmation',
+    route: '/sign-up-confirmation',
+    exact: true,
+    auth: false,
+    header: false,
     initialDataLoadersVisitor: [],
     initialDataLoadersSession: [],
     layout: 'fullPage',

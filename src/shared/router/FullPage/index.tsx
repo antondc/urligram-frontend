@@ -17,6 +17,7 @@ import NotFound from 'Pages/NotFound';
 import ResetPassword from 'Pages/ResetPassword';
 import ServerError from 'Pages/ServerError';
 import SignUp from 'Pages/SignUp';
+import SignUpConfirmation from 'Pages/SignUpConfirmation';
 import { Routes } from 'Router/routes';
 import { Location } from 'Services/History';
 import { FadeInOut } from '@antoniodcorrea/components';
@@ -35,6 +36,7 @@ const FullPage: React.FC<Props> = ({ loggedIn, location, defaultCurrentSlug, pat
     <FadeInOut className="FullPage-content" valueToUpdate={pathWithoutLanguageParam} speed="fastest" appear>
       <Switch location={{ ...location, pathname: pathWithoutLanguageParam }}>
         {/* Redirects */}
+        {/* {loggedIn && <Redirect from={Routes.SignUpConfirmation.path} to={'/' + defaultCurrentSlug + '/'} />} */}
         {loggedIn && <Redirect from={Routes.SignUp.path} to={'/' + defaultCurrentSlug + '/'} />}
         {loggedIn && <Redirect from={Routes.Login.path} to={'/' + defaultCurrentSlug + '/'} />}
         {!loggedIn && <Redirect from={Routes.Control.path} to={'/' + defaultCurrentSlug + '/login'} />}
@@ -48,7 +50,11 @@ const FullPage: React.FC<Props> = ({ loggedIn, location, defaultCurrentSlug, pat
         <Route exact={Routes.FAQ.exact} path={Routes.FAQ.path} component={FAQ} />
         <Route exact={Routes.Download.exact} path={Routes.Download.path} component={Download} />
         <Route exact={Routes.Disclaimer.exact} path={Routes.Disclaimer.path} component={Disclaimer} />
-
+        <Route
+          exact={Routes.SignUpConfirmation.exact}
+          path={Routes.SignUpConfirmation.path}
+          component={SignUpConfirmation}
+        />
         {/* Guards */}
         <Route exact={Routes.ServerError.exact} path={Routes.ServerError.path} component={ServerError} />
         <Route exact={Routes.NotFound.exact} path={Routes.NotFound.path} component={NotFound} />
