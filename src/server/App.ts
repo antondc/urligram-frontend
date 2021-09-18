@@ -115,9 +115,6 @@ app.use((err: any, req: any, res: any, next: any) => {
   }
 });
 
-// Launching app
-export default app;
-
 /* - - - - - - - - - - - Server - - - - - - - - - - - - - -*/
 
 try {
