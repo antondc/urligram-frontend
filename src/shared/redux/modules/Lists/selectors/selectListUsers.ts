@@ -1,7 +1,7 @@
 import { RootState } from 'Modules/rootType';
-import { ListUser } from '../../Lists/lists.types';
+import { ListUser } from '../lists.types';
 
-export const selectUsersInThisList = (state: RootState, { listId }: { listId: number }): ListUser[] =>
+export const selectListUsers = (state: RootState, { listId }: { listId: number }): ListUser[] =>
   state.Lists.byKey[listId]?.members
     ?.map((item) => ({
       userRole: item.userRole,

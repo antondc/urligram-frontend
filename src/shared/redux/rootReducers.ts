@@ -3,7 +3,6 @@ import { Languages } from './modules/Languages/languages.reducer';
 import { Lists } from './modules/Lists/lists.reducer';
 import { Notifications } from './modules/Notifications/notifications.reducer';
 import { Routes } from './modules/Routes/routes.reducer';
-import { Sections } from './modules/Sections/sections.reducer';
 import { Session } from './modules/Session/session.reducer';
 import { Tags } from './modules/Tags/tags.reducer';
 import { Ui } from './modules/Ui/ui.reducer';
@@ -16,7 +15,6 @@ export const RootReducers = {
   Session,
   Ui,
   Bookmarks,
-  Sections,
   Lists,
   Tags,
   Notifications,

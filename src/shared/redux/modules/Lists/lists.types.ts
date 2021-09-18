@@ -79,12 +79,6 @@ export interface ListApiResponseItem {
   attributes: ListState;
 }
 
-interface ListApiUserResponseItem {
-  type: 'list';
-  id: number;
-  attributes: ListUser;
-}
-
 export interface ListLoadApiResponse {
   data: ListApiResponseItem;
 }

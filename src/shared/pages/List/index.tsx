@@ -11,14 +11,12 @@ import { listLoadById } from 'Modules/Lists/actions/listLoadById';
 import { listUserDelete } from 'Modules/Lists/actions/listUserDelete';
 import { listUserUpsert } from 'Modules/Lists/actions/listUserUpsert';
 import { selectListById } from 'Modules/Lists/selectors/selectListById';
+import { selectListUsersIds } from 'Modules/Lists/selectors/selectListUsersIds';
 import { RootState } from 'Modules/rootType';
 import { selectCurrentFullUrl } from 'Modules/Routes/selectors/selectCurrentFullUrl';
 import { selectCurrentRouteParamListId } from 'Modules/Routes/selectors/selectCurrentRouteParamListId';
 import { selectCurrentRouteQueryParamFilter } from 'Modules/Routes/selectors/selectCurrentRouteQueryParamFilter';
 import { selectCurrentRouteQueryParamPage } from 'Modules/Routes/selectors/selectCurrentRouteQueryParamPage';
-import { sectionsUsersInThisListLoad } from 'Modules/Sections/actions/sectionsUsersInThisListLoad';
-import { selectUsersInThisList } from 'Modules/Sections/selectors/selectUsersInThisList';
-import { selectUsersInThisListIds } from 'Modules/Sections/selectors/selectUsersInThisListIds';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { tagsSearchLoad } from 'Modules/Tags/actions/tagsSearchLoad';
 import { selectTagsAll } from 'Modules/Tags/selectors/selectAllTags';
@@ -26,11 +24,12 @@ import { selectTagsSearch } from 'Modules/Tags/selectors/selectTagsSearch';
 import { switchListModal } from 'Modules/Ui/actions/switchListModal';
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
 import { userLoad } from 'Modules/Users/actions/userLoad';
+import { usersLoadByIds } from 'Modules/Users/actions/usersLoadByIds';
 import { selectUserById } from 'Modules/Users/selectors/selectUserById';
 import { DELAY_FAST_MS } from 'Root/src/shared/constants';
+import { selectListUsers } from 'Root/src/shared/redux/modules/Lists/selectors/selectListUsers';
 import history from 'Services/History';
 import { URLWrapper } from 'Services/URLWrapper';
-import { isDomAvailable } from 'Tools/utils/dom/isDomAvailable';
 import { ListWithMemo as ListUI } from './List';
 
 const List: React.FC = () => {
@@ -43,9 +42,9 @@ const List: React.FC = () => {
   const listId = useSelector(selectCurrentRouteParamListId);
   const list = useSelector((state: RootState) => selectListById(state, { id: listId }));
   const bookmarksIds = useSelector(selectBookmarksCurrentIds);
-  const bookmarksLoading = useSelector(selectBookmarksLoading) && isDomAvailable;
-  const usersInThisListIds = useSelector((state: RootState) => selectUsersInThisListIds(state, { listId }));
-  const usersInThisList = useSelector((state: RootState) => selectUsersInThisList(state, { listId }));
+  const bookmarksLoading = useSelector(selectBookmarksLoading);
+  const usersInThisListIds = useSelector((state: RootState) => selectListUsersIds(state, { listId }));
+  const usersInThisList = useSelector((state: RootState) => selectListUsers(state, { listId }));
   const page = useSelector(selectCurrentRouteQueryParamPage);
   const totalItems = useSelector(selectBookmarksTotalItems);
   const url = useSelector(selectCurrentFullUrl);
@@ -110,7 +109,7 @@ const List: React.FC = () => {
   }, [url, session?.id]);
 
   useEffect(() => {
-    usersInThisListIds?.length && dispatch(sectionsUsersInThisListLoad(usersInThisListIds));
+    usersInThisListIds?.length && dispatch(usersLoadByIds(usersInThisListIds));
   }, [JSON.stringify(usersInThisListIds), session?.id]);
 
   useEffect(() => {
