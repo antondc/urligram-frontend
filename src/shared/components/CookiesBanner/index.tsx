@@ -9,9 +9,8 @@ import { CookiesBanner as CookiesBannerUi } from './CookiesBanner';
 const CookiesBanner: React.FC = () => {
   const session = useSelector(selectSession);
   const cookiesWrapper = new CookiesWrapper();
-  const acceptedCookiesPolicy = cookiesWrapper.getCookie(COOKIE_POLICY_COOKIE);
   const [accepted, setAccepted] = useState<boolean>(false);
-  const [show, setShow] = useState<boolean>(!session?.id && !acceptedCookiesPolicy);
+  const [show, setShow] = useState<boolean>(!session?.id);
 
   const onAccept = () => {
     const cookiesWrapper = new CookiesWrapper();
@@ -24,7 +23,8 @@ const CookiesBanner: React.FC = () => {
   };
 
   useEffect(() => {
-    if (session?.id) setShow(false);
+    const acceptedCookiesPolicy = cookiesWrapper.getCookie(COOKIE_POLICY_COOKIE);
+    if (session?.id || acceptedCookiesPolicy) setShow(false);
     if (!session?.id && !acceptedCookiesPolicy) setShow(true);
   }, [session]);
 

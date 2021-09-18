@@ -13,9 +13,7 @@ import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFr
 export const initialBookmarksLoader = async ({ query }: RequestParameters = {}): Promise<{
   Bookmarks: BookmarksState;
 }> => {
-  const APIBaseEndpoint = '/bookmarks';
-
-  const { data }: BookmarksGetApiResponse = await HttpClient.get(APIBaseEndpoint + '?' + stringify(query));
+  const { data }: BookmarksGetApiResponse = await HttpClient.get(`/bookmarks?${stringify(query)}`);
 
   const result = {
     Bookmarks: {

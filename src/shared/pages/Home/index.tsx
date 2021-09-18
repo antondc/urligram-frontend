@@ -15,18 +15,17 @@ import { selectTagsAll } from 'Modules/Tags/selectors/selectAllTags';
 import { selectTagsSearch } from 'Modules/Tags/selectors/selectTagsSearch';
 import history from 'Services/History';
 import { URLWrapper } from 'Services/URLWrapper';
+import { isDomAvailable } from 'Tools/utils/dom/isDomAvailable';
 import { Home as HomeUi } from './Home';
 
 const Home: React.FC = () => {
   const dispatch = useDispatch();
 
   const session = useSelector(selectSession);
-
   const bookmarksIds = useSelector(selectBookmarksCurrentIds);
-  const loading = useSelector(selectBookmarksLoading);
+  const loading = useSelector(selectBookmarksLoading) && isDomAvailable;
   const page = useSelector(selectCurrentRouteQueryParamPage);
   const totalItems = useSelector(selectBookmarksTotalItems);
-
   const url = useSelector(selectCurrentFullUrl);
   const sort = useSelector(selectBookmarksMetaSort);
   const tagsSearch = useSelector(selectTagsSearch);

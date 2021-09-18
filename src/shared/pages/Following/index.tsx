@@ -18,13 +18,14 @@ import { selectUsersMetaSort } from 'Modules/Users/selectors/selectUsersMetaSort
 import { selectUsersTotalItems } from 'Modules/Users/selectors/selectUsersTotalItems';
 import history from 'Services/History';
 import { URLWrapper } from 'Services/URLWrapper';
+import { isDomAvailable } from 'Tools/utils/dom/isDomAvailable';
 import { Following as FollowingUI } from './Following';
 
 const Following: React.FC = () => {
   const dispatch = useDispatch();
   const userId = useSelector(selectCurrentRouteParamUserId);
   const usersCurrentIds = useSelector(selectUsersCurrentIds);
-  const usersLoading = useSelector(selectUsersLoading);
+  const usersLoading = useSelector(selectUsersLoading) && isDomAvailable;
   const user = useSelector((state: RootState) => selectUserById(state, { id: userId }));
   const page = useSelector(selectCurrentRouteQueryParamPage);
   const totalItems = useSelector(selectUsersTotalItems);

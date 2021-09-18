@@ -1,5 +1,6 @@
 import omit from 'lodash/omit';
 
+import { initialBookmarksLoader } from 'Modules/Bookmarks/bookmarks.loader';
 import { RequestParameters } from 'Root/src/server/routes/allRoutes';
 
 type Layout = 'withLeftSidebar' | 'fullPage';
@@ -205,8 +206,8 @@ export const Routes: RoutesInterface = {
     route: '/',
     exact: true,
     auth: false,
-    initialDataLoadersVisitor: [],
-    initialDataLoadersSession: [],
+    initialDataLoadersVisitor: [initialBookmarksLoader],
+    initialDataLoadersSession: [initialBookmarksLoader],
     layout: 'withLeftSidebar',
   },
 

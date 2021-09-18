@@ -21,6 +21,7 @@ import { userLoad } from 'Modules/Users/actions/userLoad';
 import { selectUserById } from 'Modules/Users/selectors/selectUserById';
 import history from 'Services/History';
 import { URLWrapper } from 'Services/URLWrapper';
+import { isDomAvailable } from 'Tools/utils/dom/isDomAvailable';
 import { UserBookmarks as UserBookmarksUi } from './UserBookmarks';
 
 const UserBookmarks: React.FC = () => {
@@ -31,7 +32,7 @@ const UserBookmarks: React.FC = () => {
   const user = useSelector((state: RootState) => selectUserById(state, { id: userId }));
   const bookmarksIds = useSelector(selectBookmarksCurrentIds);
   const bookmarksByKey = useSelector(selectBookmarksByKey);
-  const bookmarksLoading = useSelector(selectBookmarksLoading);
+  const bookmarksLoading = useSelector(selectBookmarksLoading) && isDomAvailable;
   const page = useSelector(selectCurrentRouteQueryParamPage);
   const totalItems = useSelector(selectBookmarksTotalItems);
   const url = useSelector(selectCurrentFullUrl);

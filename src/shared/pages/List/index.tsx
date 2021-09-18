@@ -30,6 +30,7 @@ import { selectUserById } from 'Modules/Users/selectors/selectUserById';
 import { DELAY_FAST_MS } from 'Root/src/shared/constants';
 import history from 'Services/History';
 import { URLWrapper } from 'Services/URLWrapper';
+import { isDomAvailable } from 'Tools/utils/dom/isDomAvailable';
 import { ListWithMemo as ListUI } from './List';
 
 const List: React.FC = () => {
@@ -42,7 +43,7 @@ const List: React.FC = () => {
   const listId = useSelector(selectCurrentRouteParamListId);
   const list = useSelector((state: RootState) => selectListById(state, { id: listId }));
   const bookmarksIds = useSelector(selectBookmarksCurrentIds);
-  const bookmarksLoading = useSelector(selectBookmarksLoading);
+  const bookmarksLoading = useSelector(selectBookmarksLoading) && isDomAvailable;
   const usersInThisListIds = useSelector((state: RootState) => selectUsersInThisListIds(state, { listId }));
   const usersInThisList = useSelector((state: RootState) => selectUsersInThisList(state, { listId }));
   const page = useSelector(selectCurrentRouteQueryParamPage);

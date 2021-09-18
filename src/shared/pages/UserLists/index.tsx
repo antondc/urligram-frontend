@@ -20,6 +20,7 @@ import { userLoad } from 'Modules/Users/actions/userLoad';
 import { selectUserById } from 'Modules/Users/selectors/selectUserById';
 import history from 'Services/History';
 import { URLWrapper } from 'Services/URLWrapper';
+import { isDomAvailable } from 'Tools/utils/dom/isDomAvailable';
 import { UserLists as UserListsUi } from './UserLists';
 
 const UserLists: React.FC = () => {
@@ -29,7 +30,7 @@ const UserLists: React.FC = () => {
   const userId = useSelector(selectCurrentRouteParamUserId);
   const user = useSelector((state: RootState) => selectUserById(state, { id: userId }));
   const listsIds = useSelector(selectListsAllIds);
-  const listsLoading = useSelector(selectListsLoading);
+  const listsLoading = useSelector(selectListsLoading) && isDomAvailable;
   const page = useSelector(selectCurrentRouteQueryParamPage);
   const totalItems = useSelector(selectListsTotalItems);
   const url = useSelector(selectCurrentFullUrl);

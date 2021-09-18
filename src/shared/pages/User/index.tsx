@@ -15,6 +15,7 @@ import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { userLoad } from 'Modules/Users/actions/userLoad';
 import { selectUserById } from 'Modules/Users/selectors/selectUserById';
 import { LocaleFormattedDate } from 'Tools/utils/Date/localeFormattedDate';
+import { isDomAvailable } from 'Tools/utils/dom/isDomAvailable';
 import { User as UserUi } from './User';
 
 interface Props {
@@ -29,7 +30,7 @@ const User: React.FC<Props> = () => {
   const userId = useSelector(selectCurrentRouteParamUserId);
   const user = useSelector((state: RootState) => selectUserById(state, { id: userId }));
   const userIdIsSessionId = userId === session?.id;
-  const listsLoading = useSelector(selectListsLoading);
+  const listsLoading = useSelector(selectListsLoading) && isDomAvailable;
   const listsIds = useSelector(selectListsAllIds);
   const bookmarksLoading = useSelector(selectBookmarksLoading);
   const bookmarksIds = useSelector(selectBookmarksCurrentIds);

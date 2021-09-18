@@ -4,8 +4,6 @@ import { isDomAvailable } from 'Tools/utils/dom/isDomAvailable';
 
 export { Location } from 'history';
 
-const domAvailable = isDomAvailable();
-
-const history: History = domAvailable ? createBrowserHistory() : createMemoryHistory();
+const history: History = isDomAvailable ? createBrowserHistory() : createMemoryHistory();
 
 export default history;

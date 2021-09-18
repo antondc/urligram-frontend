@@ -15,13 +15,14 @@ import { selectTagsAll } from 'Modules/Tags/selectors/selectAllTags';
 import { selectTagsSearch } from 'Modules/Tags/selectors/selectTagsSearch';
 import history from 'Services/History';
 import { URLWrapper } from 'Services/URLWrapper';
+import { isDomAvailable } from 'Tools/utils/dom/isDomAvailable';
 import { Lists as ListsUI } from './Lists';
 
 const Lists: React.FC = () => {
   const dispatch = useDispatch();
   const session = useSelector(selectSession);
   const listsIds = useSelector(selectListsAllIds);
-  const listsIdsLoading = useSelector(selectListsLoading);
+  const listsIdsLoading = useSelector(selectListsLoading) && isDomAvailable;
   const page = useSelector(selectCurrentRouteQueryParamPage);
   const totalItems = useSelector(selectListsTotalItems);
   const url = useSelector(selectCurrentFullUrl);

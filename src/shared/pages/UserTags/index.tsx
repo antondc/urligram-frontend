@@ -11,6 +11,7 @@ import { selectTagsCurrent } from 'Modules/Tags/selectors/selectTagsCurrent';
 import { selectTagsMetaSort } from 'Modules/Tags/selectors/selectTagsMetaSort';
 import { userLoad } from 'Modules/Users/actions/userLoad';
 import { selectUserById } from 'Modules/Users/selectors/selectUserById';
+import { isDomAvailable } from 'Tools/utils/dom/isDomAvailable';
 import { UserTags as TagsUi } from './UserTags';
 
 const UserTags: React.FC = () => {
@@ -20,7 +21,7 @@ const UserTags: React.FC = () => {
   const user = useSelector((state: RootState) => selectUserById(state, { id: userId }));
 
   const tags = useSelector(selectTagsCurrent);
-  const tagsLoading = useSelector(selectTagsLoading);
+  const tagsLoading = useSelector(selectTagsLoading) && isDomAvailable;
 
   const url = useSelector(selectCurrentFullUrl);
   const sort = useSelector(selectTagsMetaSort);

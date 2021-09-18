@@ -6,12 +6,13 @@ import { tagsLoad } from 'Modules/Tags/actions/tagsLoad';
 import { selectTagsLoading } from 'Modules/Tags/selectors/selectAllTagsLoading';
 import { selectTagsCurrent } from 'Modules/Tags/selectors/selectTagsCurrent';
 import { selectTagsMetaSort } from 'Modules/Tags/selectors/selectTagsMetaSort';
+import { isDomAvailable } from 'Tools/utils/dom/isDomAvailable';
 import { Tags as TagsUi } from './Tags';
 
 const Tags: React.FC = () => {
   const dispatch = useDispatch();
   const tags = useSelector(selectTagsCurrent);
-  const tagsLoading = useSelector(selectTagsLoading);
+  const tagsLoading = useSelector(selectTagsLoading) && isDomAvailable;
 
   const url = useSelector(selectCurrentFullUrl);
   const sort = useSelector(selectTagsMetaSort);

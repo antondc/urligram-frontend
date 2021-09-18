@@ -15,7 +15,7 @@
     "API_URL": "https://linking-api-production.woprs.com/api/v1/"
   },
   "SECRET": "superSecret",
-  "ENABLE_ISOMORPHISM": false,
+  "ENABLE_ISOMORPHISM": true,
   "MEDIA": "media",
   "MEDIA_FOLDER": "media",
   "MEDIA_IMAGES": "media/images",

@@ -50,20 +50,6 @@ const Layout: React.FC<Props> = ({ location }) => {
   const listModalMounted = useSelector(selectUiListModalMounted);
   const renderLoader = !!languageLoading; /* || otherVariables */
 
-  // Lock screen
-  if (uiScreenLocked) {
-    document.body.classList.add('scrollLocked');
-  } else {
-    document.body.classList.remove('scrollLocked');
-  }
-
-  // Lock mobile screen
-  if (uiScreenMobileLocked) {
-    document.body.classList.add('scrollMobileLocked');
-  } else {
-    document.body.classList.remove('scrollMobileLocked');
-  }
-
   const addBodyClasses = () => {
     document.body.classList.remove('preload'); // Preventing animations on load
     document.body.classList.add('isLoaded'); // Showing page on load
@@ -82,6 +68,22 @@ const Layout: React.FC<Props> = ({ location }) => {
       document.removeEventListener('keydown', testKeyDown);
     };
   }, []);
+
+  useEffect(() => {
+    if (uiScreenLocked) {
+      document.body.classList.add('scrollLocked');
+    } else {
+      document.body.classList.remove('scrollLocked');
+    }
+  }, [uiScreenLocked]);
+
+  useEffect(() => {
+    if (uiScreenMobileLocked) {
+      document.body.classList.add('scrollMobileLocked');
+    } else {
+      document.body.classList.remove('scrollMobileLocked');
+    }
+  }, [uiScreenMobileLocked]);
 
   useEffect(() => {
     if (currentPathAndQuery === locationPathAndSearchQuery) return; // For first render: if the route coming from server is the same as the one rendered by client, return

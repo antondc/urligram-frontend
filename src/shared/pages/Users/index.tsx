@@ -15,6 +15,7 @@ import { selectUsersMetaSort } from 'Modules/Users/selectors/selectUsersMetaSort
 import { selectUsersTotalItems } from 'Modules/Users/selectors/selectUsersTotalItems';
 import history from 'Services/History';
 import { URLWrapper } from 'Services/URLWrapper';
+import { isDomAvailable } from 'Tools/utils/dom/isDomAvailable';
 import { Users as UsersUI } from './Users';
 
 const Users: React.FC = () => {
@@ -22,7 +23,7 @@ const Users: React.FC = () => {
 
   const session = useSelector(selectSession);
   const usersCurrentIds = useSelector(selectUsersCurrentIds);
-  const usersLoading = useSelector(selectUsersLoading);
+  const usersLoading = useSelector(selectUsersLoading) && isDomAvailable;
   const page = useSelector(selectCurrentRouteQueryParamPage);
   const totalItems = useSelector(selectUsersTotalItems);
   const url = useSelector(selectCurrentFullUrl);
