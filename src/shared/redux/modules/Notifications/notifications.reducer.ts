@@ -9,7 +9,7 @@ import {
   NotificationsState,
 } from './notifications.types';
 
-export const initialState: NotificationsState = {
+const initialState: NotificationsState = {
   lists: [],
 };
 
