@@ -15,7 +15,7 @@ import ScreenSizePixel from 'Components/ScreenSizePixel';
 import SignUpModal from 'Components/SignUpModal';
 import UserModal from 'Components/UserModal';
 import WelcomeModal from 'Components/WelcomeModal';
-import Router from 'Router/index';
+import Router from 'Router/.';
 import { Fade, Spinner } from '@antoniodcorrea/components';
 
 import './Layout.less';

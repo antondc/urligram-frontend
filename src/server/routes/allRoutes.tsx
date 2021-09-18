@@ -12,7 +12,7 @@ import Layout from 'Common/Layout';
 import { initialLanguagesLoader } from 'Modules/Languages/languages.loader';
 import { RouteState } from 'Modules/Routes/routes.types';
 import { SessionState } from 'Modules/Session/session.types';
-import storeFactory from 'Redux/index';
+import storeFactory from 'Redux/.';
 import config from 'Root/config.test.json';
 import { RecursiveObject } from 'Root/src/shared/typescript/recursiveObject';
 import { Routes, routesList, routesPathsList, routesWithoutOmmitedValues } from 'Router/routes';

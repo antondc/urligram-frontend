@@ -14,7 +14,7 @@ import {
   UsersState,
 } from './users.types';
 
-export const initialState: UsersState = {
+const initialState: UsersState = {
   byKey: {},
 };
 

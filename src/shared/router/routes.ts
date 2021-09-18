@@ -4,6 +4,7 @@ import { initialBookmarksLoader } from 'Modules/Bookmarks/bookmarks.loader';
 import { initialListsLoader } from 'Modules/Lists/lists.loader';
 import { tagsAllInitialLoader } from 'Modules/Tags/initialLoaders/tagsAllInitialLoader';
 import { initialUserLoader } from 'Modules/Users/user.loader';
+import { initialUsersLoader } from 'Modules/Users/users.loader';
 import { RequestParameters } from 'Root/src/server/routes/allRoutes';
 
 type Layout = 'withLeftSidebar' | 'fullPage';
@@ -123,8 +124,8 @@ export const Routes: RoutesInterface = {
     route: '/users',
     exact: true,
     auth: false,
-    initialDataLoadersVisitor: [],
-    initialDataLoadersSession: [],
+    initialDataLoadersVisitor: [initialUsersLoader],
+    initialDataLoadersSession: [initialUsersLoader],
     layout: 'withLeftSidebar',
   },
 

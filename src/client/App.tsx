@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { Route, Router } from 'react-router-dom';
 
 import Layout from 'Common/Layout';
-import storeFactory from 'Redux/index';
+import storeFactory from 'Redux/.';
 import config from 'Root/config.test.json';
 import history from 'Services/History';
 

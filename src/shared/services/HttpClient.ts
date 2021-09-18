@@ -9,7 +9,7 @@ interface Options {
   contentType?: string;
 }
 
-export class HttpClient {
+class HttpClient {
   private static staticInstance: AxiosInstance;
   public publicInstance: AxiosInstance;
 

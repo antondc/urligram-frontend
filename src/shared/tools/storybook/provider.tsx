@@ -1,7 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 
-import storeFactory from 'Redux/index';
+import storeFactory from 'Redux/.';
 
 const store = storeFactory({});
 
