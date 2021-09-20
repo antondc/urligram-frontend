@@ -25,7 +25,7 @@ cache:
 install:
   stage: install
   script:
-    - npm i
+    - npm ci
   artifacts:
     paths:
       - node_modules/
