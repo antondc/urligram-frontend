@@ -25,12 +25,6 @@ cache:
 install:
   stage: install
   script:
-    - npm -v
-    - echo "------------------------"
-    - echo "------------------------"
-    - node -v
-    - echo "------------------------"
-    - echo "------------------------"
     - npm i
   artifacts:
     paths:
