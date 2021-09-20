@@ -100,7 +100,7 @@
     "webpack-node-externals": "^1.7.2"
   },
   "dependencies": {
-    "@antoniodcorrea/components": "^0.7.7",
+    "@antoniodcorrea/components": "^0.7.8",
     "@types/jest": "^27.0.1",
     "@types/qs": "^6.9.5",
     "axios": "^0.19.2",
