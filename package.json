@@ -118,7 +118,7 @@
     "webpack-node-externals": "^1.7.2"
   },
   "dependencies": {
-    "@antoniodcorrea/components": "^0.7.7",
+    "@antoniodcorrea/components": "^0.7.0",
     "@popperjs/core": "^2.9.2",
     "@types/qs": "^6.9.5",
     "@types/react-datepicker": "^3.1.8",
