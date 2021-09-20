@@ -139,5 +139,8 @@
     "ts-unused-exports": "^7.0.3",
     "uuid": "^8.3.2"
   },
+  "optionalDependencies": {
+    "fsevents": "*"
+  },
   "license": "ISC"
 }
