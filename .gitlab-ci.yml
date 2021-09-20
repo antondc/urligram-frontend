@@ -11,10 +11,10 @@ before_script:
   - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
 
 stages:
-  - install
-  - test
-  - build_staging
-  - build_production
+  # - install
+  # - test
+  # - build_staging
+  # - build_production
   - deploy_staging
   - deploy_production
 
