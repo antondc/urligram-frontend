@@ -212,7 +212,6 @@ The MIT License (MIT)
 
 Copyright (c) 2020 Antonio Díaz
 
-
 ## Rebuild
 
-[1]
+[1][2]
