@@ -2,7 +2,9 @@ import React, { memo } from 'react';
 import Helmet from 'react-helmet';
 
 import Bookmark from 'Assets/svg/bookmarkFilled.svg';
+import Cross from 'Assets/svg/cross.svg';
 import ListIcon from 'Assets/svg/list.svg';
+import PlusCircle from 'Assets/svg/plusCircle.svg';
 import Clock from 'Assets/svg/spinner6.svg';
 import A from 'Components/A';
 import BookmarkRow from 'Components/BookmarkRow';
@@ -17,16 +19,7 @@ import { ListState, ListUser } from 'Modules/Lists/lists.types';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE, SITE_TITLE } from 'Root/src/shared/constants';
-import {
-  AnimateHeight,
-  Check,
-  Cross,
-  EditCircle,
-  Eye,
-  SelectValue,
-  Spinner,
-  Tooltip,
-} from '@antoniodcorrea/components';
+import { AnimateHeight, Check, EditCircle, Eye, SelectValue, Spinner, Tooltip } from '@antoniodcorrea/components';
 
 import './List.less';
 
@@ -60,6 +53,8 @@ interface Props {
   }[];
   onInputChange: (string: string) => void;
   onChange: (string: SelectValue[]) => void;
+  onLeaveList: () => void;
+  leaveListLoading: boolean;
 }
 
 const List: React.FC<Props> = ({
@@ -86,6 +81,8 @@ const List: React.FC<Props> = ({
   tagsSearchFormatted,
   onInputChange,
   onChange,
+  onLeaveList,
+  leaveListLoading,
 }) => (
   <div className="List">
     <Helmet title={`${SITE_TITLE} · ${list?.name}`} />
@@ -134,7 +131,7 @@ const List: React.FC<Props> = ({
             <Tooltip parentElementId="List-tooltipUserImage" content={`@${listUserOwner?.name}`} delay={2} />
           </RenderInPortal>
           <A
-            className="List-headerImagesItem List-headerImagesItemOwner"
+            className="List-headerImagesItem"
             href={`/users/${listUserOwner?.id}`}
             styled={false}
             frontend
@@ -148,28 +145,32 @@ const List: React.FC<Props> = ({
             />
           </A>
         </React.Fragment>
-        {usersInThisList?.map((item) => (
-          <React.Fragment key={item?.id}>
-            <RenderInPortal>
-              <Tooltip parentElementId={`List-${item?.id}}`} content={`@${item?.name}`} delay={2} />
-            </RenderInPortal>
-            <A
-              className={
-                'List-headerImagesItem List-headerImagesItemJoined' +
-                (item?.userStatus === 'pending'
-                  ? ' List-headerImagesItemJoined--pending'
-                  : ' List-headerImagesItemJoined--active')
-              }
-              id={`List-${item?.id}}`}
-              href={`/users/${item?.id}`}
-              styled={false}
-              key={item?.id}
-              frontend
-            >
-              <img className="List-headerImagesItemImage" src={item.image?.w200h200} alt={item.name} />
-            </A>
-          </React.Fragment>
-        ))}
+        {!!usersInThisList.length && (
+          <div className="List-headerImagesJoined">
+            {usersInThisList?.map((item) => (
+              <React.Fragment key={item?.id}>
+                <RenderInPortal>
+                  <Tooltip parentElementId={`List-${item?.id}}`} content={`@${item?.name}`} delay={2} />
+                </RenderInPortal>
+                <A
+                  className={
+                    'List-headerImagesItem List-headerImagesItemJoined' +
+                    (item?.userStatus === 'pending'
+                      ? ' List-headerImagesItemJoined--pending'
+                      : ' List-headerImagesItemJoined--active')
+                  }
+                  id={`List-${item?.id}}`}
+                  href={`/users/${item?.id}`}
+                  styled={false}
+                  key={item?.id}
+                  frontend
+                >
+                  <img className="List-headerImagesItemImage" src={item.image?.w200h200} alt={item.name} />
+                </A>
+              </React.Fragment>
+            ))}
+          </div>
+        )}
         {sessionUserOwnsList && (
           <>
             <RenderInPortal>
@@ -188,20 +189,28 @@ const List: React.FC<Props> = ({
             <Eye className="List-iconRole List-iconReader" id="List-tooltipReader" />
           </>
         )}
-        {sessionUserListRole === 'editor' && (
-          <>
-            <RenderInPortal>
-              <Tooltip parentElementId="List-tooltipEditor" content="Editor" delay={2} />
-            </RenderInPortal>
-            <EditCircle className="List-iconRole List-iconEditor" id="List-tooltipEditor" />
-          </>
-        )}
         {sessionUserListRole === 'admin' && (
           <>
             <RenderInPortal>
               <Tooltip parentElementId="List-tooltipAdmin" content="Edit list" delay={2} />
             </RenderInPortal>
             <EditCircle className="List-iconRole List-iconAdmin" id="List-tooltipAdmin" onClick={onEditClick} />
+          </>
+        )}
+        {sessionUserListRole && sessionUserListRole !== 'admin' && (
+          <>
+            <RenderInPortal>
+              <Tooltip parentElementId="List-tooltipLeaveList" content="Leave list" delay={1} />
+            </RenderInPortal>
+            {leaveListLoading ? (
+              <Spinner className="List-iconLeaveListLoader" />
+            ) : (
+              <PlusCircle
+                className="List-iconRole List-iconLeaveList"
+                id="List-tooltipLeaveList"
+                onClick={onLeaveList}
+              />
+            )}
           </>
         )}
       </div>

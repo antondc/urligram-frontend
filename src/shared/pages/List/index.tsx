@@ -37,6 +37,7 @@ const List: React.FC = () => {
 
   const [acceptLoading, setAcceptLoading] = useState<boolean>(false);
   const [rejectLoading, setRejectLoading] = useState<boolean>(false);
+  const [leaveListLoading, setLeaveListLoading] = useState<boolean>(false);
   const [showBanner, setShowBanner] = useState<boolean>(false);
   const session = useSelector(selectSession);
   const listId = useSelector(selectCurrentRouteParamListId);
@@ -100,6 +101,12 @@ const List: React.FC = () => {
     await dispatch(switchListModal({ mounted: true, listId }));
   };
 
+  const onLeaveList = async () => {
+    setLeaveListLoading(true);
+    await dispatch(listUserDelete({ listId: list?.id, userId: session?.id }));
+    setLeaveListLoading(false);
+  };
+
   useEffect(() => {
     dispatch(listLoadById(listId));
   }, [session?.id]);
@@ -152,6 +159,8 @@ const List: React.FC = () => {
       allTags={allTags}
       onChange={onChange}
       onInputChange={onInputChange}
+      onLeaveList={onLeaveList}
+      leaveListLoading={leaveListLoading}
     />
   );
 };
