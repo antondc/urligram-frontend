@@ -44,6 +44,7 @@ export const bookmarkLoadByIds =
             ...bookmarksAfterResponse.byKey,
             ...serializerFromArrayToByKey<BookmarkState, BookmarkState>({ data: bookmarksArray }),
           },
+          currentIds: ids,
         },
       });
 
