@@ -2,7 +2,7 @@ import { AppThunk } from '../../../index';
 import { initialState } from '../ui.reducer';
 import { UI_CLOSE_ALL_MODALS, UiActions } from '../ui.types';
 
-export const uiResetState =
+export const uiResetModalsState =
   (): AppThunk<void, UiActions> =>
   async (dispatch, getState): Promise<void> => {
     const { Ui } = getState();
@@ -17,6 +17,8 @@ export const uiResetState =
       type: UI_CLOSE_ALL_MODALS,
       payload: {
         ...Ui,
+        screenMobileLocked: false,
+        screenLocked: false,
         ...uiInitialStateOnlyModals,
       },
     });

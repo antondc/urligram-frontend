@@ -10,7 +10,7 @@ import { RouteState } from 'Modules/Routes/routes.types';
 import { selectCurrentPathAndQuery } from 'Modules/Routes/selectors/selectCurrentPathAndQuery';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { tagsSearchLoad } from 'Modules/Tags/actions/tagsSearchLoad';
-import { uiResetState } from 'Modules/Ui/actions/uiResetState';
+import { uiResetModalsState } from 'Modules/Ui/actions/uiResetModalsState';
 import { selectUiForgotPasswordModalMounted } from 'Modules/Ui/selectors/selectUiForgotPasswordModalMounted';
 import { selectUiListModalMounted } from 'Modules/Ui/selectors/selectUiListModalMounted';
 import { selectUiLoginModalMounted } from 'Modules/Ui/selectors/selectUiLoginModalMounted';
@@ -25,7 +25,7 @@ import { userLoad } from 'Modules/Users/actions/userLoad';
 import { routesList, routesWithoutOmmitedValues } from 'Router/routes';
 import enhanceRouteWithParams from 'Tools/utils/url/enhanceRouteWithParams';
 import findActiveRouteKey from 'Tools/utils/url/findActiveRouteKey';
-import { KEY_CODE } from './constants';
+import { ESCAPE_KEY_CODE } from './constants';
 import { Layout as LayoutUi } from './Layout';
 
 import './Layout.less';
@@ -56,7 +56,7 @@ const Layout: React.FC<Props> = ({ location }) => {
   };
 
   const testKeyDown = (e: KeyboardEvent): void => {
-    if (e.key === KEY_CODE) dispatch(uiResetState());
+    if (e.key === ESCAPE_KEY_CODE) dispatch(uiResetModalsState());
   };
 
   useEffect(() => {
@@ -122,7 +122,7 @@ const Layout: React.FC<Props> = ({ location }) => {
   }, [session?.id]);
 
   useEffect(() => {
-    dispatch(uiResetState());
+    dispatch(uiResetModalsState());
   }, [locationPathAndSearchQuery]);
 
   return (

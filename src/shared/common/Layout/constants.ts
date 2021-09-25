@@ -1,1 +1,1 @@
-export const KEY_CODE = 'Escape';
+export const ESCAPE_KEY_CODE = 'Escape';
