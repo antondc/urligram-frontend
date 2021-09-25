@@ -19,6 +19,7 @@ export const BOOKMARK_LOAD_BY_ID_FAILURE = 'BOOKMARK_LOAD_BY_ID_FAILURE';
 export const BOOKMARKS_LOAD_BY_IDS_REQUEST = 'BOOKMARKS_LOAD_BY_IDS_REQUEST';
 export const BOOKMARKS_LOAD_BY_IDS_SUCCESS = 'BOOKMARKS_LOAD_BY_IDS_SUCCESS';
 export const BOOKMARKS_LOAD_BY_IDS_FAILURE = 'BOOKMARKS_LOAD_BY_IDS_FAILURE';
+export const BOOKMARKS_ERRORS_CLEAR = 'BOOKMARKS_ERRORS_CLEAR';
 
 export interface BookmarkError extends Error {
   field: string;
@@ -262,6 +263,11 @@ interface BookmarksLoadByIdsFailureAction {
   payload: BookmarksState;
 }
 
+interface BookmarksErrorsClearAction {
+  type: typeof BOOKMARKS_ERRORS_CLEAR;
+  payload: Partial<BookmarksState>;
+}
+
 export type BookmarksActions =
   | BookmarksLoadRequestAction
   | BookmarksLoadSuccessAction
@@ -283,4 +289,5 @@ export type BookmarksActions =
   | BookmarkLoadByIdFailureAction
   | BookmarksLoadByIdsRequestAction
   | BookmarksLoadByIdsSuccessAction
-  | BookmarksLoadByIdsFailureAction;
+  | BookmarksLoadByIdsFailureAction
+  | BookmarksErrorsClearAction;

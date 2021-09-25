@@ -10,6 +10,7 @@ import {
   BOOKMARK_UPDATE_FAILURE,
   BOOKMARK_UPDATE_REQUEST,
   BOOKMARK_UPDATE_SUCCESS,
+  BOOKMARKS_ERRORS_CLEAR,
   BOOKMARKS_LOAD_BY_IDS_FAILURE,
   BOOKMARKS_LOAD_BY_IDS_REQUEST,
   BOOKMARKS_LOAD_BY_IDS_SUCCESS,
@@ -48,6 +49,7 @@ export const Bookmarks = (state = initialState, action: BookmarksActions): Bookm
     case BOOKMARKS_LOAD_BY_IDS_REQUEST:
     case BOOKMARKS_LOAD_BY_IDS_SUCCESS:
     case BOOKMARKS_LOAD_BY_IDS_FAILURE:
+    case BOOKMARKS_ERRORS_CLEAR:
       return Object.assign({}, state, action.payload);
     default:
       return Object.assign({}, state);
