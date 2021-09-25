@@ -35,6 +35,7 @@ export const bookmarkLoadByIds =
       );
       const { Bookmarks: bookmarksAfterResponse } = getState();
       const bookmarksArray = bookmarksData?.map((item) => item.attributes);
+      const bookmarksArrayIds = bookmarksData?.map((item) => item.attributes).map((item) => item.id);
 
       dispatch({
         type: BOOKMARKS_LOAD_BY_IDS_SUCCESS,
@@ -44,7 +45,7 @@ export const bookmarkLoadByIds =
             ...bookmarksAfterResponse.byKey,
             ...serializerFromArrayToByKey<BookmarkState, BookmarkState>({ data: bookmarksArray }),
           },
-          currentIds: ids,
+          currentIds: bookmarksArrayIds,
         },
       });
 
