@@ -32,7 +32,15 @@ const Pagination: React.FC<Props> = ({ totalItems = 0, itemsPerPage = 10, offset
         <div className="Pagination-wrapper">
           {pages.map((item, index) =>
             !!item ? (
-              <A className="Pagination-item" key={index} href={item.path} underlined active={item?.current} frontend>
+              <A
+                className="Pagination-item"
+                key={index}
+                href={item.path}
+                underlined
+                active={item?.current}
+                frontend
+                scrollBeforeNavigate
+              >
                 {item.page}
               </A>
             ) : (

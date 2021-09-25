@@ -19,30 +19,40 @@ interface Props extends HTMLProps<HTMLAnchorElement> {
   title?: string;
   underlined?: boolean;
   scrollBeforeNavigate?: boolean;
-  onClick?: (any) => void;
+  onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void;
 }
 
-const A: React.FC<Props> = ({ href, targetBlank, scrollBeforeNavigate = true, ...props }) => {
+const A: React.FC<Props> = ({ href, targetBlank, scrollBeforeNavigate = false, onClick, ...props }) => {
   const currentLanguageSlug = useSelector(selectCurrentLanguageSlug);
   const hrefWithoutLeadingSlash = href?.replace(/^\//, '');
   const hrefAlreadyHasSlug = hrefWithoutLeadingSlash?.startsWith(currentLanguageSlug);
-
   const hrefWithCurrentSlug =
     !!currentLanguageSlug && !targetBlank && !hrefAlreadyHasSlug
       ? `/${currentLanguageSlug}/${hrefWithoutLeadingSlash}`
       : href;
 
-  const onLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, url: string) => {
-    if (!scrollBeforeNavigate) return;
+  const navigateToHref = () => {
+    if (targetBlank) {
+      window.open(hrefWithCurrentSlug);
 
+      return;
+    }
+
+    history.push(hrefWithCurrentSlug);
+  };
+
+  const onLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
+    onClick && onClick(e);
+
+    if (!scrollBeforeNavigate) {
+      navigateToHref();
+
+      return;
+    }
 
     Events.scrollEvent.register('end', () => {
-      if (targetBlank) {
-        window.open(url);
-      } else {
-        history.push(url);
-      }
+      navigateToHref();
       Events.scrollEvent.remove('end');
     });
 
@@ -52,14 +62,7 @@ const A: React.FC<Props> = ({ href, targetBlank, scrollBeforeNavigate = true, ..
     });
   };
 
-  return (
-    <ComponentsA
-      {...props}
-      href={hrefWithCurrentSlug}
-      onClick={(e) => onLinkClick(e, hrefWithCurrentSlug)}
-      targetBlank={targetBlank}
-    />
-  );
+  return <ComponentsA {...props} href={hrefWithCurrentSlug} onClick={onLinkClick} targetBlank={targetBlank} />;
 };
 
 export default A;

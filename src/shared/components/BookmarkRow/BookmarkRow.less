@@ -18,7 +18,8 @@
   background: @c-background;
   column-gap: 27px;
   border-bottom: 1px solid @c-accentLight-hardest;
-  transition: background @td-normal @ease;
+  transition: background @td-normal @ease, border @td-normal @ease;
+  border-radius: 8px;
 
   @media @br-mobile {
     grid-template: unset;
@@ -36,10 +37,10 @@
 
   &--recentlyCreated,
   &--viewPending {
-    background: @c-accentLight-hardest;
+    border: 2px solid @gradientColors[blue-3];
 
     &:hover {
-      background: @gradientColors[black-6];
+      border: 2px solid @gradientColors[blue-5];
     }
   }
 
