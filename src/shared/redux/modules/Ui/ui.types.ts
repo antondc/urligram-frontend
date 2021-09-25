@@ -7,6 +7,7 @@ export const SWITCH_MESSAGE_MODAL = 'SWITCH_MESSAGE_MODAL';
 export const SWITCH_LOGIN_MODAL = 'SWITCH_LOGIN_MODAL';
 export const SWITCH_LANGUAGES_MODAL = 'SWITCH_LANGUAGES_MODAL';
 export const SWITCH_WELCOME_MODAL = 'SWITCH_WELCOME_MODAL';
+export const SWITCH_WELCOME_MODAL_ERROR = 'SWITCH_WELCOME_MODAL_ERROR';
 export const SWITCH_SIGN_UP_MODAL = 'SWITCH_SIGN_UP_MODAL';
 export const SWITCH_FORGOT_PASSWORD_MODAL = 'SWITCH_FORGOT_PASSWORD_MODAL';
 export const SWITCH_RESET_PASSWORD_MODAL = 'SWITCH_RESET_PASSWORD_MODAL';
@@ -70,6 +71,7 @@ export type UiState = {
   messageModal: UiBaseModal;
   loginModal: UiBaseModal;
   welcomeModal: UiBaseModal;
+  welcomeModalError: UiBaseModal;
   signUpModal: UiBaseModal;
   forgotPasswordModal: UiBaseModal;
   resetPasswordModal: UiBaseModal;
@@ -134,6 +136,11 @@ interface SwitchLoginModal {
 
 interface SwitchWelcomeModal {
   type: typeof SWITCH_WELCOME_MODAL;
+  payload: Partial<UiState>;
+}
+
+interface SwitchWelcomeModalErrorAction {
+  type: typeof SWITCH_WELCOME_MODAL_ERROR;
   payload: Partial<UiState>;
 }
 
@@ -232,6 +239,7 @@ export type UiActions =
   | SwitchMessageModal
   | SwitchLoginModal
   | SwitchWelcomeModal
+  | SwitchWelcomeModalErrorAction
   | SwitchSignUpModal
   | SwitchForgotPasswordModal
   | SwitchResetPasswordModal

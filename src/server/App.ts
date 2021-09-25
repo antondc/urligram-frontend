@@ -16,6 +16,7 @@ import webpackHotMiddleware from 'webpack-hot-middleware';
 import { WEBPACK_ROOT } from '../../webpack/constants';
 import webpackConfig from '../../webpack/webpack.client.dev';
 import allRoutes from './routes/allRoutes';
+import signUpConfirmation from './routes/signUpConfirmation';
 import serveGzip from './tools/serveGzip';
 
 const compiler = webpack(webpackConfig);
@@ -79,6 +80,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // API - - - - - - - - - - - - - - - - -
+app.use('/', signUpConfirmation);
 app.use('/', allRoutes);
 // - - - - - - - - - - - - - - - - - - - -
 

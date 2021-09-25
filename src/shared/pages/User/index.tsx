@@ -39,6 +39,8 @@ const User: React.FC<Props> = () => {
   const createdAtFormatted = date.getLocaleFormattedDate();
 
   useEffect(() => {
+    if (!userId) return;
+
     dispatch(bookmarksLoadByUserId(userId, 5));
     dispatch(userLoad(userId));
     dispatch(listsLoadByUserId({ userId }));

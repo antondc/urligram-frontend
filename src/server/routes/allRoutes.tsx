@@ -67,8 +67,11 @@ router.get(routesPathsList, (req: any, res: any, next: any) => {
     .then((response: any) => {
       const data = merge(...response); // Use Lodash to merge the result objects of the promises; otherwise we will get only the last result
 
+      // If we are receiving cookies with session, use them; otherwise try to use use the session object
+      const sessionData = session?.id ? session : data?.Session || {};
+
       data.Session = {
-        ...session,
+        ...sessionData,
       };
 
       // Load routes data

@@ -10,6 +10,7 @@ import {
   SWITCH_RESET_PASSWORD_MODAL,
   SWITCH_SIGN_UP_MODAL,
   SWITCH_WELCOME_MODAL,
+  SWITCH_WELCOME_MODAL_ERROR,
   UI_BOOKMARK_LISTS_MODALS_LOADING,
   UI_BOOKMARK_LISTS_MODALS_MOUNT,
   UI_BOOKMARK_LISTS_MODALS_UNMOUNT,
@@ -50,6 +51,10 @@ export const initialState: UiState = {
     mounted: false,
   },
   welcomeModal: {
+    type: 'popup',
+    mounted: false,
+  },
+  welcomeModalError: {
     type: 'popup',
     mounted: false,
   },
@@ -111,6 +116,7 @@ export const Ui = (state = initialState, action: UiActions): UiState => {
     case SWITCH_MESSAGE_MODAL:
     case SWITCH_LOGIN_MODAL:
     case SWITCH_WELCOME_MODAL:
+    case SWITCH_WELCOME_MODAL_ERROR:
     case SWITCH_SIGN_UP_MODAL:
     case SWITCH_FORGOT_PASSWORD_MODAL:
     case SWITCH_RESET_PASSWORD_MODAL:

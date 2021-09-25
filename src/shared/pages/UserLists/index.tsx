@@ -65,10 +65,12 @@ const UserLists: React.FC = () => {
   };
 
   useEffect(() => {
+    if (!userId) return;
     dispatch(userLoad(userId));
   }, [session?.id]);
 
   useEffect(() => {
+    if (!userId) return;
     dispatch(listsLoadByUserId({ userId }));
   }, [page, session?.id]);
 

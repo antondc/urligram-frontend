@@ -18,6 +18,7 @@ import { selectUiResetPasswordModalMounted } from 'Modules/Ui/selectors/selectUi
 import { selectUiScreenLocked } from 'Modules/Ui/selectors/selectUiScreenLocked';
 import { selectUiScreenMobileLocked } from 'Modules/Ui/selectors/selectUiScreenMobileLocked';
 import { selectUiSignUpModalMounted } from 'Modules/Ui/selectors/selectUiSignUpModalMounted';
+import { selectUiWelcomeModalErrorMounted } from 'Modules/Ui/selectors/selectUiWelcomeModalErrorMounted';
 import { selectUiWelcomeModalMounted } from 'Modules/Ui/selectors/selectUiWelcomeModalMounted';
 import { userFollowersLoad } from 'Modules/Users/actions/userFollowersLoad';
 import { userFollowingLoad } from 'Modules/Users/actions/userFollowingLoad';
@@ -44,6 +45,7 @@ const Layout: React.FC<Props> = ({ location }) => {
   const uiScreenMobileLocked = useSelector(selectUiScreenMobileLocked);
   const loginModalMounted = useSelector(selectUiLoginModalMounted);
   const welcomeModalMounted = useSelector(selectUiWelcomeModalMounted);
+  const welcomeModalErrorMounted = useSelector(selectUiWelcomeModalErrorMounted);
   const signUpModalMounted = useSelector(selectUiSignUpModalMounted);
   const forgotPasswordModalMounted = useSelector(selectUiForgotPasswordModalMounted);
   const resetPasswordModalMounted = useSelector(selectUiResetPasswordModalMounted);
@@ -107,6 +109,7 @@ const Layout: React.FC<Props> = ({ location }) => {
   }, [locationPathAndSearchQuery]); // Update by props, not by state, as this useEffect aims to update the state
 
   useEffect(() => {
+    if (!session?.id) return;
     dispatch(userLoad(session?.id));
     dispatch(userFollowingLoad(session?.id));
     dispatch(userFollowersLoad(session?.id));
@@ -114,22 +117,21 @@ const Layout: React.FC<Props> = ({ location }) => {
   }, [session?.id]);
 
   useEffect(() => {
-    session?.id && dispatch(listNotificationsLoad());
+    if (!session?.id) return;
+
+    dispatch(listNotificationsLoad());
   }, [session?.id]);
 
   useEffect(() => {
     dispatch(tagsSearchLoad());
   }, [session?.id]);
 
-  useEffect(() => {
-    dispatch(uiResetModalsState());
-  }, [locationPathAndSearchQuery]);
-
   return (
     <LayoutUi
       loginModalMounted={loginModalMounted}
       signUpModalMounted={signUpModalMounted}
       welcomeModalMounted={welcomeModalMounted}
+      welcomeModalErrorMounted={welcomeModalErrorMounted}
       forgotPasswordModalMounted={forgotPasswordModalMounted}
       resetPasswordModalMounted={resetPasswordModalMounted}
       listModalMounted={listModalMounted}

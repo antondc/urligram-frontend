@@ -15,6 +15,7 @@ import ScreenSizePixel from 'Components/ScreenSizePixel';
 import SignUpModal from 'Components/SignUpModal';
 import UserModal from 'Components/UserModal';
 import WelcomeModal from 'Components/WelcomeModal';
+import WelcomeModalError from 'Components/WelcomeModalError';
 import Router from 'Router/.';
 import { Fade, Spinner } from '@antoniodcorrea/components';
 
@@ -24,6 +25,7 @@ interface Props {
   loginModalMounted: boolean;
   signUpModalMounted: boolean;
   welcomeModalMounted: boolean;
+  welcomeModalErrorMounted: boolean;
   forgotPasswordModalMounted: boolean;
   resetPasswordModalMounted: boolean;
   listModalMounted: boolean;
@@ -34,6 +36,7 @@ export const Layout: React.FC<Props> = ({
   loginModalMounted,
   signUpModalMounted,
   welcomeModalMounted,
+  welcomeModalErrorMounted,
   forgotPasswordModalMounted,
   resetPasswordModalMounted,
   listModalMounted,
@@ -59,6 +62,9 @@ export const Layout: React.FC<Props> = ({
       </Fade>
       <Fade mounted={welcomeModalMounted} speed="fastest" position="fixed" appear>
         <WelcomeModal />
+      </Fade>
+      <Fade mounted={welcomeModalErrorMounted} speed="fastest" position="fixed" appear>
+        <WelcomeModalError />
       </Fade>
       <Fade mounted={forgotPasswordModalMounted} speed="fastest" position="fixed" appear>
         <ForgotPasswordModal />

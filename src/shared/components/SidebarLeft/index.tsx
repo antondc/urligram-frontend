@@ -92,6 +92,7 @@ const SidebarLeft: React.FC = () => {
   };
 
   useEffect(() => {
+    if (!sessionId) return;
     dispatch(listsLoadByUserId({ userId: sessionId, rawData: true }));
   }, [sessionId]);
 
