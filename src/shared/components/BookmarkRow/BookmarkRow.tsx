@@ -119,5 +119,6 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
         onMobileBookmarkActionsBackgroundClick={onMobileBookmarkActionsBackgroundClick}
       />
     </div>
+    <div className="BookmarkRow-notification" />
   </div>
 );

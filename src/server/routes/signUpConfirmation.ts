@@ -33,16 +33,17 @@ router.get(ROUTE_REGEX, async (req: any, res: any) => {
     const tokenService = new TokenService();
     const token = await tokenService.createToken(data?.attributes);
     const urlWrapper = await new URLWrapper(`${req.protocol}://${req.hostname}`);
-    const domainForCookie = '.' + urlWrapper.getDomainWithoutSubdomain(); // We need to prepend «.» to enable any subdomain
+    const domain = urlWrapper.getDomainWithoutSubdomain(); // We need to prepend «.» to enable any subdomain
+    const domainWithDot = `.${domain}`;
 
     await res
       .cookie('sessionToken', token, {
         maxAge: 24 * 60 * 60 * 1000 * 30, // One month
         httpOnly: true,
         path: '/',
-        domain: domainForCookie,
+        domain: domainWithDot,
       })
-      .redirect('/sign-up-confirmation?success=true&domain=' + domainForCookie);
+      .redirect(`/sign-up-confirmation?success=true&domain=${domainWithDot}&prot=${req.protocol}&host=${req.hostname}`);
   } catch {
     await res.redirect('/sign-up-confirmation?failure=true');
   }

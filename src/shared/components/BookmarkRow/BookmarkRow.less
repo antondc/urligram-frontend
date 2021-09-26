@@ -37,10 +37,14 @@
 
   &--recentlyCreated,
   &--viewPending {
-    border: 2px solid @gradientColors[blue-3];
+    @{c}-notification {
+      opacity: 1;
+    }
 
     &:hover {
-      border: 2px solid @gradientColors[blue-5];
+      @{c}-notification {
+        opacity: 0.8;
+      }
     }
   }
 
@@ -186,5 +190,17 @@
         pointer-events: unset;
       }
     }
+  }
+
+  &-notification {
+    position: absolute;
+    height: 10px;
+    width: 10px;
+    top: 10px;
+    right: 10px;
+    opacity: 0;
+    background: @gradientColors[yellow-2];
+    transition: opacity @td-normal @ease;
+    border-radius: 50%;
   }
 }
