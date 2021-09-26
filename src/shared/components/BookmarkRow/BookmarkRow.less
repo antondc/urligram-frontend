@@ -39,6 +39,7 @@
   &--viewPending {
     @{c}-notification {
       opacity: 1;
+      pointer-events: unset;
     }
 
     &:hover {
@@ -194,13 +195,26 @@
 
   &-notification {
     position: absolute;
-    height: 10px;
-    width: 10px;
-    top: 10px;
-    right: 10px;
+    height: 20px;
+    width: 20px;
+    top: 0;
+    right: 0;
     opacity: 0;
-    background: @gradientColors[yellow-2];
     transition: opacity @td-normal @ease;
-    border-radius: 50%;
+    pointer-events: none;
+
+    span {
+      position: absolute;
+      height: 10px;
+      width: 10px;
+      bottom: 0;
+      left: 0;
+      background: @gradientColors[yellow-2];
+      border-radius: 50%;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 }
