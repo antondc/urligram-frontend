@@ -1,6 +1,5 @@
 import express from 'express';
 
-import { DOMAIN } from 'Root/src/server/env';
 import HttpClient from 'Root/src/shared/services/HttpClient';
 import { TokenService } from 'Root/src/shared/services/TokenService';
 
@@ -38,7 +37,7 @@ router.get(ROUTE_REGEX, async (req: any, res: any) => {
         maxAge: 24 * 60 * 60 * 1000 * 30, // One month
         httpOnly: true,
         path: '/',
-        domain: `.${DOMAIN}`,
+        domain: `.${process.env.DOMAIN}`,
       })
       .redirect(`/sign-up-confirmation?success=true`);
   } catch {

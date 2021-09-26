@@ -1,12 +1,10 @@
 import jwt from 'jsonwebtoken';
 
-import config from 'Root/config.test.json';
-
 class Authentication {
   verifyToken = (token: string): unknown => {
     if (!token) return null;
     try {
-      const tokenContent = jwt.verify(token, config.SECRET);
+      const tokenContent = jwt.verify(token, process.env.SECRET);
 
       return tokenContent;
     } catch (err) {

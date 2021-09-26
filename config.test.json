@@ -20,7 +20,6 @@
     "SECRET": "superSecret",
     "DOMAIN": "woprs.com"
   },
-  "SECRET": "superSecret",
   "ENABLE_ISOMORPHISM": true,
   "MEDIA": "media",
   "MEDIA_FOLDER": "media",
