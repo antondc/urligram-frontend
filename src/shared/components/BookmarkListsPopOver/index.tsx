@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { selectBookmarksById } from 'Modules/Bookmarks/selectors/selectBookmarkById';
+import { selectBookmarksWithSimilarLinkId } from 'Modules/Bookmarks/selectors/selectBookmarksWithSimilarLinkId';
+import { RootState } from 'Modules/rootType';
 import { bookmarkListsModalUnmount } from 'Modules/Ui/actions/bookmarkListsModalUnmount';
 import { selectBookmarkListsModal } from 'Modules/Ui/selectors/selectBookmarkListsModal';
 import { selectUiScreenTypeIsMobile } from 'Modules/Ui/selectors/selectUiScreenTypeIsMobile';
@@ -13,8 +16,18 @@ interface Props {
 
 const BookmarkListsPopOver: React.FC<Props> = ({ bookmarkId }) => {
   const dispatch = useDispatch();
+  const bookmark = useSelector((state: RootState) => selectBookmarksById(state, { bookmarkId }));
   const bookmarkListsModal = useSelector(selectBookmarkListsModal);
-  const bookmarkListsModalMounted = bookmarkListsModal?.bookmarkId === bookmarkId && !!bookmarkListsModal?.mounted;
+  // We need to allow mounting this modal to all bookmarks sharing same linkId.
+  // 1. Retrieve all bookmarks with same link id
+  // 2. Check if the mounted bookmark is in the list of all bookmarks sharing this link id
+  // 2. Mount accordingly
+  const bookmarksWithSimilarLinkId = useSelector((state: RootState) =>
+    selectBookmarksWithSimilarLinkId(state, { linkId: bookmark?.linkId })
+  );
+  const bookmarksWithSimilarLinkIdIds = bookmarksWithSimilarLinkId.map((item) => item.id);
+  const bookmarkListsModalIdIsInBookmarks = bookmarksWithSimilarLinkIdIds?.includes(bookmarkListsModal?.bookmarkId);
+  const bookmarkListsModalMounted = bookmarkListsModalIdIsInBookmarks && !!bookmarkListsModal?.mounted;
   const [inList, setInList] = useState<boolean>(false);
   const uiScreenTypeIsMobile = useSelector(selectUiScreenTypeIsMobile);
 
