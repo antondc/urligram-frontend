@@ -17,6 +17,8 @@ import {
   UI_CLOSE_ALL_MODALS,
   UI_NOTIFICATION_PUSH,
   UI_NOTIFICATION_VIEWED,
+  UI_SCREEN_DESKTOP_LOCK,
+  UI_SCREEN_DESKTOP_UNLOCK,
   UI_SCREEN_MOBILE_LOCK,
   UI_SCREEN_MOBILE_UNLOCK,
   UI_SCREEN_TYPE_SET,
@@ -108,6 +110,8 @@ export const initialState: UiState = {
 export const Ui = (state = initialState, action: UiActions): UiState => {
   switch (action.type) {
     case UI_SCREEN_TYPE_SET:
+    case UI_SCREEN_DESKTOP_LOCK:
+    case UI_SCREEN_DESKTOP_UNLOCK:
     case UI_SCREEN_MOBILE_LOCK:
     case UI_SCREEN_MOBILE_UNLOCK:
     case USER_MODAL_MOUNT:

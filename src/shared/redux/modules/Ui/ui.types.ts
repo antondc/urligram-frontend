@@ -1,4 +1,6 @@
 export const UI_SCREEN_TYPE_SET = 'UI_SCREEN_TYPE_SET';
+export const UI_SCREEN_DESKTOP_LOCK = 'UI_SCREEN_DESKTOP_LOCK';
+export const UI_SCREEN_DESKTOP_UNLOCK = 'UI_SCREEN_DESKTOP_UNLOCK';
 export const UI_SCREEN_MOBILE_LOCK = 'UI_SCREEN_MOBILE_LOCK';
 export const UI_SCREEN_MOBILE_UNLOCK = 'UI_SCREEN_MOBILE_UNLOCK';
 export const USER_MODAL_MOUNT = 'USER_MODAL_MOUNT';
@@ -100,11 +102,21 @@ interface UiScreenTypeSet {
 }
 
 interface UiScreenLock {
-  type: typeof UI_SCREEN_MOBILE_LOCK;
+  type: typeof UI_SCREEN_DESKTOP_LOCK;
   payload: Partial<UiState>;
 }
 
 interface UiScreenUnLock {
+  type: typeof UI_SCREEN_DESKTOP_UNLOCK;
+  payload: Partial<UiState>;
+}
+
+interface UiScreenMobileLock {
+  type: typeof UI_SCREEN_MOBILE_LOCK;
+  payload: Partial<UiState>;
+}
+
+interface UiScreenMobileUnLock {
   type: typeof UI_SCREEN_MOBILE_UNLOCK;
   payload: Partial<UiState>;
 }
@@ -233,6 +245,8 @@ export type UiActions =
   | UiScreenTypeSet
   | UiScreenLock
   | UiScreenUnLock
+  | UiScreenMobileLock
+  | UiScreenMobileUnLock
   | UserModalMount
   | UserModalUnmount
   | SwitchLanguagesModal

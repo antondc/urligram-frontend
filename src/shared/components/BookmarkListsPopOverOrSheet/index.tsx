@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { bookmarkListsModalUnmount } from 'Modules/Ui/actions/bookmarkListsModalUnmount';
+import { uiScreenDesktopLock } from 'Modules/Ui/actions/uiScreenDesktopLock';
+import { uiScreenDesktopUnlock } from 'Modules/Ui/actions/uiScreenDesktopUnlock';
 import { uiScreenMobileLock } from 'Modules/Ui/actions/uiScreenMobileLock';
 import { uiScreenMobileUnLock } from 'Modules/Ui/actions/uiScreenMobileUnLock';
 import { selectBookmarkListsModal } from 'Modules/Ui/selectors/selectBookmarkListsModal';
@@ -19,12 +21,19 @@ const BookmarkListsPopOverOrSheet: React.FC<Props> = ({ bookmarkId }) => {
   const shouldMount = bookmarkListsModal?.mounted && bookmarkListsModal?.bookmarkId === bookmarkId;
 
   const onCloseClick = () => {
-    dispatch(uiScreenMobileUnLock());
     dispatch(bookmarkListsModalUnmount());
   };
 
   useEffect(() => {
-    shouldMount && dispatch(uiScreenMobileLock());
+    if (shouldMount) {
+      dispatch(uiScreenDesktopLock());
+      dispatch(uiScreenMobileLock());
+
+      return;
+    }
+
+    dispatch(uiScreenDesktopUnlock());
+    dispatch(uiScreenMobileUnLock());
   }, [shouldMount]);
 
   return (
