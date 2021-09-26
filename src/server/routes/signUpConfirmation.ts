@@ -42,7 +42,7 @@ router.get(ROUTE_REGEX, async (req: any, res: any) => {
         path: '/',
         domain: domainForCookie,
       })
-      .redirect('/sign-up-confirmation?success=true');
+      .redirect('/sign-up-confirmation?success=true&domain=' + domainForCookie);
   } catch {
     await res.redirect('/sign-up-confirmation?failure=true');
   }
