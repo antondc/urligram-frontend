@@ -3,19 +3,22 @@
     "PORT_HTTP": 80,
     "PORT_HTTPS": 443,
     "API_URL": "https://dev.linking.me:3000/api/v1/",
-    "SECRET": "superSecret"
+    "SECRET": "superSecret",
+    "DOMAIN": "linking.me"
   },
   "staging": {
     "PORT_HTTP": 4000,
     "PORT_HTTPS": 0,
     "API_URL": "https://linking-api-staging.woprs.com/api/v1/",
-    "SECRET": "superSecret"
+    "SECRET": "superSecret",
+    "DOMAIN": "woprs.com"
   },
   "production": {
     "PORT_HTTP": 4001,
     "PORT_HTTPS": 0,
     "API_URL": "https://linking-api-production.woprs.com/api/v1/",
-    "SECRET": "superSecret"
+    "SECRET": "superSecret",
+    "DOMAIN": "woprs.com"
   },
   "SECRET": "superSecret",
   "ENABLE_ISOMORPHISM": true,

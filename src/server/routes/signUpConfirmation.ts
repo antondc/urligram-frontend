@@ -1,8 +1,8 @@
 import express from 'express';
 
+import { DOMAIN } from 'Root/src/server/env';
 import HttpClient from 'Root/src/shared/services/HttpClient';
 import { TokenService } from 'Root/src/shared/services/TokenService';
-import { URLWrapper } from 'Root/src/shared/services/URLWrapper';
 
 const ROUTE_REGEX = '/:lang([a-z]{2})?/sign-up-confirmation/check';
 
@@ -32,18 +32,15 @@ router.get(ROUTE_REGEX, async (req: any, res: any) => {
 
     const tokenService = new TokenService();
     const token = await tokenService.createToken(data?.attributes);
-    const urlWrapper = await new URLWrapper(`${req.protocol}://${req.hostname}`);
-    const domain = urlWrapper.getDomainWithoutSubdomain(); // We need to prepend «.» to enable any subdomain
-    const domainWithDot = `.${domain}`;
 
     await res
       .cookie('sessionToken', token, {
         maxAge: 24 * 60 * 60 * 1000 * 30, // One month
         httpOnly: true,
         path: '/',
-        domain: domainWithDot,
+        domain: `.${DOMAIN}`,
       })
-      .redirect(`/sign-up-confirmation?success=true&domain=${domainWithDot}&prot=${req.protocol}&host=${req.hostname}`);
+      .redirect(`/sign-up-confirmation?success=true`);
   } catch {
     await res.redirect('/sign-up-confirmation?failure=true');
   }
