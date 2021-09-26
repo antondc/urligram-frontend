@@ -61,32 +61,13 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
       </A>
     </div>
     <div className="BookmarkRow-description">
-      {!!bookmark?.statistics?.timesBookmarked && (
-        <>
-          Shared by
-          <Space />
-          {bookmark?.statistics?.timesBookmarked}
-          <Space />
-          user
-          <span>{bookmark?.statistics?.timesBookmarked > 1 ? 's' : ''}</span>
-        </>
-      )}
-      {!!bookmark?.statistics?.timesBookmarked && !!bookmark?.statistics?.absoluteVote && (
-        <>
-          <Space />·<Space />
-        </>
-      )}
-      {!!bookmark?.statistics?.absoluteVote && (
-        <>
-          Total votes
-          <Space />
-          {bookmark?.statistics?.absoluteVote}
-        </>
-      )}
-      <Space />·<Space />
       Created at {createdAtFormatted}
       <Space />·<Space />
-      Bookmarked {bookmark?.statistics?.timesBookmarked} time
+      Bookmarked
+      <Space />
+      {bookmark?.statistics?.timesBookmarked}
+      <Space />
+      time
       <span>{bookmark?.statistics?.timesBookmarked > 1 ? 's' : ''}</span>
     </div>
     <div className="BookmarkRow-tags">
