@@ -65,17 +65,9 @@ router.get(routesPathsList, (req: any, res: any, next: any) => {
 
   Promise.all([initialLanguagesLoader(req.params.lang), ...initialDataLoadersPromises]) // We have to execute the Languages thunk, as well as the async function within it
     .then((response: any) => {
-      const data = merge(...response); // Use Lodash to merge the result objects of the promises; otherwise we will get only the last result
+      const mergedResponse = merge(...response); // Use Lodash to merge the result objects of the promises; otherwise we will get only the last result
 
-      // If we are receiving cookies with session, use them; otherwise try to use use the session object
-      const sessionData = session?.id ? session : data?.Session || {};
-
-      data.Session = {
-        ...sessionData,
-      };
-
-      // Load routes data
-      const enhancedRoute: RouteState = {
+      const initialRoute: RouteState = {
         ...enhanceRouteWithParams({
           route: routesWithoutOmmitedValues[activeRouteKey],
           location: location,
@@ -85,15 +77,19 @@ router.get(routesPathsList, (req: any, res: any, next: any) => {
         pathAndQuery: req.originalUrl,
       };
 
-      data.Routes = {
-        routes: routesWithoutOmmitedValues,
-        history: [enhancedRoute],
-        currentRoute: enhancedRoute,
+      const initialState = {
+        ...mergedResponse,
+        Session: session?.id ? session : mergedResponse?.Session || {}, // If we are receiving cookies with session, use them; otherwise try to use use the session object
+        Routes: {
+          routes: routesWithoutOmmitedValues,
+          history: [initialRoute],
+          currentRoute: initialRoute,
+        },
       };
 
       // Send the Router with Route component; App component sent within render method; backend data passed via context
-      const context: any = { data }; // TODO: Check this type
-      const store = storeFactory(data);
+      const context: any = { initialState }; // TODO: Check this type
+      const store = storeFactory(initialState);
       /* eslint-disable indent */
       const appComponentAsString = config.ENABLE_ISOMORPHISM
         ? renderToString(
@@ -106,7 +102,7 @@ router.get(routesPathsList, (req: any, res: any, next: any) => {
         : '';
       /* eslint-enable indent */
       const helmet = Helmet.renderStatic();
-      const dataForTemplate = serialize(data); // Serializing for security reasons: https://redux.js.org/recipes/server-rendering#security-considerations
+      const dataForTemplate = serialize(initialState); // Serializing for security reasons: https://redux.js.org/recipes/server-rendering#security-considerations
 
       // Render template with component; frontend data passed via .ejs template
       res.render('index', {

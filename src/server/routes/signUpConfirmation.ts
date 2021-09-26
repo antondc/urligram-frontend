@@ -4,6 +4,8 @@ import HttpClient from 'Root/src/shared/services/HttpClient';
 import { TokenService } from 'Root/src/shared/services/TokenService';
 import { URLWrapper } from 'Root/src/shared/services/URLWrapper';
 
+const ROUTE_REGEX = '/:lang([a-z]{2})?/sign-up-confirmation/check';
+
 type SignUpConfirmationResponse = {
   data: {
     attributes: {
@@ -17,7 +19,7 @@ const router = express.Router();
 
 // Route not rendered
 // On user creation name and token will be validated, session will be embedded in the cookie, and user will be routed accordingly
-router.get('/:lang([a-z]{2})?/sign-up-confirmation/check', async (req: any, res: any) => {
+router.get(ROUTE_REGEX, async (req: any, res: any) => {
   const queryParams = {
     name: req.query.name,
     token: req.query.token,
@@ -31,14 +33,14 @@ router.get('/:lang([a-z]{2})?/sign-up-confirmation/check', async (req: any, res:
     const tokenService = new TokenService();
     const token = await tokenService.createToken(data?.attributes);
     const urlWrapper = await new URLWrapper(`${req.protocol}://${req.hostname}`);
-    const domainForCookie = await urlWrapper.getDomainWithoutSubdomain(); // Return domain only for recognized clients
+    const domainForCookie = '.' + urlWrapper.getDomainWithoutSubdomain(); // We need to prepend «.» to enable any subdomain
 
     await res
       .cookie('sessionToken', token, {
         maxAge: 24 * 60 * 60 * 1000 * 30, // One month
         httpOnly: true,
         path: '/',
-        domain: domainForCookie, // We need to prepend «.» to enable any subdomain
+        domain: domainForCookie,
       })
       .redirect('/sign-up-confirmation?success=true');
   } catch {
