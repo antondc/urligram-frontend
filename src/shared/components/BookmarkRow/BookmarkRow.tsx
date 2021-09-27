@@ -78,6 +78,7 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
           key={item.id}
           styled={false}
           frontend
+          scrollBeforeNavigate
         >
           <Tag>{item.name}</Tag>
         </A>
