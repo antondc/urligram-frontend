@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { bookmarkLoadByIds } from 'Modules/Bookmarks/actions/bookmarksLoadByIds';
 import { bookmarksLoadByListId } from 'Modules/Bookmarks/actions/bookmarksLoadByListId';
 import { selectBookmarksCurrentIds } from 'Modules/Bookmarks/selectors/selectBookmarksCurrentIds';
 import { selectBookmarksLoading } from 'Modules/Bookmarks/selectors/selectBookmarksLoading';
@@ -122,10 +121,6 @@ const List: React.FC = () => {
   useEffect(() => {
     !listUserOwner?.id && dispatch(userLoad(list?.userId));
   }, [list?.id]);
-
-  useEffect(() => {
-    dispatch(bookmarkLoadByIds({ ids: list?.bookmarksIds }));
-  }, [JSON.stringify(list?.bookmarksIds)]);
 
   useEffect(() => {
     // If the session member of this list is pending, display banner
