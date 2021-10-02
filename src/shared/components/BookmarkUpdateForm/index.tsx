@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { bookmarkErrorsClear } from 'Modules/Bookmarks/actions/bookmarkErrorsClear';
 import { bookmarksLoad } from 'Modules/Bookmarks/actions/bookmarksLoad';
 import { bookmarkUpdate } from 'Modules/Bookmarks/actions/bookmarkUpdate';
 import { selectBookmarksById } from 'Modules/Bookmarks/selectors/selectBookmarkById';
@@ -11,7 +12,6 @@ import { selectTagsAll } from 'Modules/Tags/selectors/selectAllTags';
 import { selectTagsSearch } from 'Modules/Tags/selectors/selectTagsSearch';
 import { selectUiBookmarkUpdateModal } from 'Modules/Ui/selectors/selectUiBookmarkUpdateModal';
 import { DELAY_SLOW_MS } from 'Root/src/shared/constants';
-import { bookmarkErrorsClear } from '../../redux/modules/Bookmarks/actions/bookmarkErrorsClear';
 import { BookmarkUpdateForm as BookmarkFormUi } from './BookmarkUpdateForm';
 
 import './BookmarkUpdateForm.less';

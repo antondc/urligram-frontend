@@ -25,7 +25,7 @@ const BookmarkListsPopOver: React.FC<Props> = ({ bookmarkId }) => {
   const bookmarksWithSimilarLinkId = useSelector((state: RootState) =>
     selectBookmarksWithSimilarLinkId(state, { linkId: bookmark?.linkId })
   );
-  const bookmarksWithSimilarLinkIdIds = bookmarksWithSimilarLinkId.map((item) => item.id);
+  const bookmarksWithSimilarLinkIdIds = bookmarksWithSimilarLinkId?.map((item) => item?.id);
   const bookmarkListsModalIdIsInBookmarks = bookmarksWithSimilarLinkIdIds?.includes(bookmarkListsModal?.bookmarkId);
   const bookmarkListsModalMounted = bookmarkListsModalIdIsInBookmarks && !!bookmarkListsModal?.mounted;
   const [inList, setInList] = useState<boolean>(false);

@@ -26,6 +26,7 @@ interface BookmarkRow extends BookmarkState {
   onMobileBookmarkActionsIconClick: () => void;
   onMobileBookmarkActionsBackgroundClick: () => void;
   bookmarkViewed: () => void;
+  bookmarkIdInAnyOfMyLists: boolean;
 }
 
 export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
@@ -44,6 +45,7 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
   onMobileBookmarkActionsIconClick,
   onMobileBookmarkActionsBackgroundClick,
   bookmarkViewed,
+  bookmarkIdInAnyOfMyLists,
 }) => (
   <div
     className={
@@ -95,6 +97,7 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
         listId={listId}
         bookmarkActionIconsMounted={bookmarkActionIconsMounted}
         sessionUserBookmarkedLink={sessionUserBookmarkedLink}
+        bookmarkIdInAnyOfMyLists={bookmarkIdInAnyOfMyLists}
         uiScreenTypeIsMobile={uiScreenTypeIsMobile}
         onEdit={onEdit}
         onListsClick={onListsClick}

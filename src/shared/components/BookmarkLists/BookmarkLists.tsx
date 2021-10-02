@@ -8,13 +8,17 @@ import { Button, FadeInOut, Input, Spinner } from '@antoniodcorrea/components';
 
 import './BookmarkLists.less';
 
+type ListStateExtended = ListState & {
+  isActive: boolean;
+  wasRecentlyUpdated: boolean;
+};
+
 interface Props {
   sessionId: string;
-  bookmarkId: number;
   listInputName: string;
   submitError: string;
   itemsLoading: number[];
-  lists: ListState[];
+  lists: ListStateExtended[];
   onListAddBookmark: (listId?: number) => void;
   onListDeleteBookmark: (listId?: number) => void;
   onCreateListSubmit: (e: React.FormEvent<HTMLElement>) => void;
@@ -22,12 +26,10 @@ interface Props {
   showCreateList: boolean;
   createListSubmitting: boolean;
   onShowCreateList: (e: React.MouseEvent<HTMLElement>) => void;
-  recentlyUpdated: number[];
   onIconLeave: (listId: number) => void;
 }
 
 export const BookmarkLists: React.FC<Props> = ({
-  bookmarkId,
   lists,
   onListAddBookmark,
   onListDeleteBookmark,
@@ -39,39 +41,33 @@ export const BookmarkLists: React.FC<Props> = ({
   createListSubmitting,
   onShowCreateList,
   onListTitleInputChange,
-  recentlyUpdated,
   onIconLeave,
 }) => (
   <div className="BookmarkLists">
     <ul className="BookmarkLists-lists">
-      {lists?.map((item) => {
-        const isBookmarkInList = !!bookmarkId && !!item?.bookmarksIds?.includes(bookmarkId);
-        const wasRecentlyUpdated = recentlyUpdated?.includes(item?.id);
-
-        return (
-          <li
-            className={
-              'BookmarkLists-list' +
-              (isBookmarkInList ? ' BookmarkLists-list--included' : '') +
-              (wasRecentlyUpdated ? ' BookmarkLists-list--recentlyUpdated' : '')
-            }
-            key={item?.id}
-          >
-            <A className="BookmarkLists-listText" href={`lists/${item?.id}?sort=-updatedAt`} frontend styled={false}>
-              {item?.name}
-            </A>
-            {itemsLoading?.includes(item?.id) ? (
-              <Spinner className="BookmarkLists-loader" />
-            ) : (
-              <PlusCircle
-                className="BookmarkLists-icon"
-                onClick={() => (!!isBookmarkInList ? onListDeleteBookmark(item?.id) : onListAddBookmark(item?.id))}
-                onMouseLeave={() => onIconLeave(item?.id)}
-              />
-            )}
-          </li>
-        );
-      })}
+      {lists?.map((item) => (
+        <li
+          className={
+            'BookmarkLists-list' +
+            (item?.isActive ? ' BookmarkLists-list--included' : '') +
+            (item?.wasRecentlyUpdated ? ' BookmarkLists-list--recentlyUpdated' : '')
+          }
+          key={item?.id}
+        >
+          <A className="BookmarkLists-listText" href={`lists/${item?.id}?sort=-updatedAt`} frontend styled={false}>
+            {item?.name}
+          </A>
+          {itemsLoading?.includes(item?.id) ? (
+            <Spinner className="BookmarkLists-loader" />
+          ) : (
+            <PlusCircle
+              className="BookmarkLists-icon"
+              onClick={() => (!!item?.isActive ? onListDeleteBookmark(item?.id) : onListAddBookmark(item?.id))}
+              onMouseLeave={() => onIconLeave(item?.id)}
+            />
+          )}
+        </li>
+      ))}
     </ul>
     <FadeInOut className="BookmarkLists-bottom" valueToUpdate={showCreateList} appear>
       {showCreateList ? (

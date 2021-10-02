@@ -18,6 +18,7 @@ interface BookmarkRowIcons extends BookmarkState {
   tags: TagState[];
   bookmarkActionIconsMounted: boolean;
   sessionUserBookmarkedLink: boolean;
+  bookmarkIdInAnyOfMyLists: boolean;
   createdAtFormatted: string;
   pathForTagLink: string;
   uiScreenTypeIsMobile: boolean;
@@ -31,6 +32,7 @@ export const BookmarkRowIcons: React.FC<Partial<BookmarkRowIcons>> = ({
   listId,
   bookmarkActionIconsMounted,
   sessionUserBookmarkedLink,
+  bookmarkIdInAnyOfMyLists,
   uiScreenTypeIsMobile,
   onEdit,
   onListsClick,
@@ -65,7 +67,7 @@ export const BookmarkRowIcons: React.FC<Partial<BookmarkRowIcons>> = ({
         {!!sessionUserBookmarkedLink && (
           <EditCircle className="BookmarkRowIcons-icon BookmarkRowIcons-iconEdit" onClick={onEdit} />
         )}
-        {!!sessionUserBookmarkedLink && (
+        {(!!sessionUserBookmarkedLink || bookmarkIdInAnyOfMyLists) && (
           <div className="BookmarkRowIcons-icon BookmarkRowIcons-iconLists">
             <List id={`BookmarkRowIcons-${bookmark?.id}`} onClick={onListsClick} />
             <BookmarkListsPopOverOrSheet bookmarkId={bookmark?.id} />

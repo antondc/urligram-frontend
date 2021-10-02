@@ -5,11 +5,13 @@ import { bookmarkLoadById } from 'Modules/Bookmarks/actions/bookmarkLoadById';
 import { selectBookmarksById } from 'Modules/Bookmarks/selectors/selectBookmarkById';
 import { selectBookmarkTagsByLinkIdAndListId } from 'Modules/Bookmarks/selectors/selectBookmarkTagsByLinkIdAndListId';
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
+import { selectListsByUserIdAll } from 'Modules/Lists/selectors/selectListsByUserIdAll';
 import { listNotificationViewed } from 'Modules/Notifications/actions/listNotificationViewed';
 import { selectNotificationByBookmarkIdAndListId } from 'Modules/Notifications/selectors/selectNotificationByBookmarkIdAndListId';
 import { RootState } from 'Modules/rootType';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { bookmarkListsModalMount } from 'Modules/Ui/actions/bookmarkListsModalMount';
+import { bookmarkListsModalUnmount } from 'Modules/Ui/actions/bookmarkListsModalUnmount';
 import { switchBookmarkActionButtonsMounted } from 'Modules/Ui/actions/switchBookmarkActionButtonsMounted';
 import { switchBookmarkActionButtonsUnmounted } from 'Modules/Ui/actions/switchBookmarkActionButtonsUnmounted';
 import { switchBookmarkUpdateModal } from 'Modules/Ui/actions/switchBookmarkUpdateModal';
@@ -58,6 +60,11 @@ const BookmarkRow: React.FC<Props> = ({ id, listId, tagHrefPath = '' }) => {
     listId &&
     useSelector((state: RootState) => selectNotificationByBookmarkIdAndListId(state, { listId, bookmarkId: id }));
   const viewPending = !!bookmarkListNotification?.viewPending;
+  // If the bookmark is in one of my lists as admin or editor, render the lists modal
+  const userLists = useSelector((state: RootState) => selectListsByUserIdAll(state, { userId: session?.id }));
+  // BookmarkIds of all bookmarks in any of my lists
+  const bookmarksIdsOfMyLists = new Set(userLists?.map((item) => item?.bookmarksIds).flat());
+  const bookmarkIdInAnyOfMyLists = bookmarksIdsOfMyLists.has(id);
 
   const onMobileBookmarkActionsIconClick = () => {
     if (!session?.id) return dispatch(switchLoginModal(true));
@@ -76,8 +83,9 @@ const BookmarkRow: React.FC<Props> = ({ id, listId, tagHrefPath = '' }) => {
   };
 
   const onListsClick = () => {
-    if (bookmarkListsModalMounted) return;
+    // if (bookmarkListsModalMounted) return;
 
+    dispatch(bookmarkListsModalUnmount());
     dispatch(bookmarkListsModalMount({ bookmarkId: bookmark?.id }));
   };
 
@@ -123,6 +131,7 @@ const BookmarkRow: React.FC<Props> = ({ id, listId, tagHrefPath = '' }) => {
       onMobileBookmarkActionsIconClick={onMobileBookmarkActionsIconClick}
       onMobileBookmarkActionsBackgroundClick={onMobileBookmarkActionsBackgroundClick}
       bookmarkViewed={bookmarkViewed}
+      bookmarkIdInAnyOfMyLists={bookmarkIdInAnyOfMyLists}
     />
   );
 };
