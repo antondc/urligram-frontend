@@ -46,6 +46,7 @@ export interface ListState {
   userId: string;
   image: string;
   bookmarksIds: number[];
+  linkIds: number[];
   loading?: boolean;
   members: {
     id: string;

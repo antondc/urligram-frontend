@@ -17,7 +17,6 @@ import { switchBookmarkActionButtonsUnmounted } from 'Modules/Ui/actions/switchB
 import { switchBookmarkUpdateModal } from 'Modules/Ui/actions/switchBookmarkUpdateModal';
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
 import { selectBookmarkActionsIcons } from 'Modules/Ui/selectors/selectBookmarkActionsIcons';
-import { selectBookmarkListsModalMounted } from 'Modules/Ui/selectors/selectBookmarkListsModalMounted';
 import { selectUiScreenTypeIsDesktop } from 'Modules/Ui/selectors/selectUiScreenTypeIsDesktop';
 import { selectUiScreenTypeIsMobile } from 'Modules/Ui/selectors/selectUiScreenTypeIsMobile';
 import { TIME_RECENTLY_CREATED_BOOKMARK } from 'Root/src/shared/constants';
@@ -40,12 +39,7 @@ const BookmarkRow: React.FC<Props> = ({ id, listId, tagHrefPath = '' }) => {
   const recentlyCreated = timePassed < TIME_RECENTLY_CREATED_BOOKMARK;
   const date = new LocaleFormattedDate({ unixTime: bookmark?.createdAt, locale: slug });
   const createdAtFormatted = date.getLocaleFormattedDate();
-  const sessionUserBookmarkId = bookmark?.bookmarksRelated?.find((item) => item?.userId === session?.id)?.id;
-  const sessionUserBookmarkedLink = !!sessionUserBookmarkId;
-  const sessionUserBookmark = useSelector((state: RootState) =>
-    selectBookmarksById(state, { bookmarkId: sessionUserBookmarkId })
-  );
-  const bookmarkListsModalMounted = useSelector(selectBookmarkListsModalMounted);
+  const sessionUserBookmarkedLink = bookmark?.userId === session?.id;
 
   // If the bookmark is part of a list, display all tags from bookmarks sharing its linkId, when bookmark.userId is within list
   const tagsIfInList = useSelector((state: RootState) =>
@@ -79,12 +73,10 @@ const BookmarkRow: React.FC<Props> = ({ id, listId, tagHrefPath = '' }) => {
   const onEdit = async () => {
     if (!session?.id) return dispatch(switchLoginModal(true));
     if (!sessionUserBookmarkedLink) return;
-    await dispatch(switchBookmarkUpdateModal({ mounted: true, bookmarkId: sessionUserBookmarkId }));
+    await dispatch(switchBookmarkUpdateModal({ mounted: true, bookmarkId: id }));
   };
 
   const onListsClick = () => {
-    // if (bookmarkListsModalMounted) return;
-
     dispatch(bookmarkListsModalUnmount());
     dispatch(bookmarkListsModalMount({ bookmarkId: bookmark?.id }));
   };
@@ -94,12 +86,6 @@ const BookmarkRow: React.FC<Props> = ({ id, listId, tagHrefPath = '' }) => {
 
     dispatch(listNotificationViewed({ bookmarkId: bookmark?.id, listId }));
   };
-
-  useEffect(() => {
-    // If user has bookmarked this link, but it hasnt been retrieved yet from API, retrieve it
-    if (!!sessionUserBookmarkedLink && !sessionUserBookmark?.id)
-      dispatch(bookmarkLoadById({ bookmarkId: sessionUserBookmarkId }));
-  }, [sessionUserBookmarkedLink]);
 
   useEffect(() => {
     // If we are on desktop, hide icons by default
@@ -117,7 +103,7 @@ const BookmarkRow: React.FC<Props> = ({ id, listId, tagHrefPath = '' }) => {
     <BookmarkRowUi
       id={id}
       listId={listId}
-      bookmark={sessionUserBookmarkedLink ? sessionUserBookmark : bookmark}
+      bookmark={bookmark}
       bookmarkActionIconsMounted={bookmarkActionIconsMounted}
       tags={tags}
       createdAtFormatted={createdAtFormatted}

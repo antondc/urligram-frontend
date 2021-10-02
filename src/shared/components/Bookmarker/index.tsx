@@ -29,8 +29,7 @@ const Bookmarker: React.FC<Props> = ({ className, listId, bookmarkId, onBookmark
   const bookmarksSessionBookmark: BookmarkRelated = parentBookmark?.bookmarksRelated?.find(
     (item) => item.userId === session?.id
   );
-  const isOwnBookmark = session?.id === parentBookmark?.userId;
-  const userBookmarkedLink = parentBookmark?.bookmarksRelated?.some((item) => item.userId === session?.id);
+  const userBookmarkedLink = session?.id === parentBookmark?.userId;
 
   const onBookmarkGrab = async () => {
     if (!session?.id) return dispatch(switchLoginModal(true));
@@ -80,7 +79,6 @@ const Bookmarker: React.FC<Props> = ({ className, listId, bookmarkId, onBookmark
     <BookmarkerUi
       className={className}
       loading={loading}
-      isOwnBookmark={isOwnBookmark}
       userBookmarkedLink={userBookmarkedLink}
       onBookmarkGrab={onBookmarkGrab}
       onBookmarkDelete={onBookmarkDelete}

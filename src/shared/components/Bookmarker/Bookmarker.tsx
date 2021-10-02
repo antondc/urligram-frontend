@@ -9,7 +9,6 @@ import './Bookmarker.less';
 interface Props {
   className?: string;
   loading: boolean;
-  isOwnBookmark: boolean;
   userBookmarkedLink: boolean;
   onBookmarkGrab: () => void;
   onBookmarkDelete: () => void;
@@ -17,17 +16,16 @@ interface Props {
 
 export const Bookmarker: React.FC<Props> = ({
   className,
-  isOwnBookmark,
   userBookmarkedLink,
   loading,
   onBookmarkGrab,
   onBookmarkDelete,
 }) => (
   <div className={'Bookmarker' + (className ? ' ' + className : '')}>
-    {!loading && !isOwnBookmark && !userBookmarkedLink && (
+    {!loading && !userBookmarkedLink && (
       <BookmarkWithBackground className={'Bookmarker-bookmark Bookmarker-bookmark--empty'} onClick={onBookmarkGrab} />
     )}
-    {!loading && (userBookmarkedLink || isOwnBookmark) && (
+    {!loading && userBookmarkedLink && (
       <>
         <BookmarkWithBackground className="Bookmarker-bookmark Bookmarker-bookmark--filled" />
         <PlusCircleWithBackground className="Bookmarker-remove" onClick={onBookmarkDelete} />

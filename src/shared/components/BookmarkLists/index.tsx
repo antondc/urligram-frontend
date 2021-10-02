@@ -10,7 +10,7 @@ import { selectListsErrorLast } from 'Modules/Lists/selectors/selectListsErrorLa
 import { RootState } from 'Modules/rootType';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { bookmarkListsModalUnmount } from 'Modules/Ui/actions/bookmarkListsModalUnmount';
-import { selectBookmarks } from 'Modules/Bookmarks/selectors/selectBookmarks';
+import { selectBookmarksById } from '../../redux/modules/Bookmarks/selectors/selectBookmarkById';
 import { BookmarkLists as BookmarkListsUi } from './BookmarkLists';
 
 interface Props {
@@ -31,41 +31,12 @@ const BookmarkLists: React.FC<Props> = ({ bookmarkId }) => {
   const listsEditable = useSelector((state: RootState) =>
     selectListsByUserIdAdminOrEditor(state, { userId: session?.id })
   );
-  const bookmarks = useSelector(selectBookmarks);
-
-  const lists = listsEditable.map((list) => {
-    // Select all related bookmarks of the user to compare it agains the bookmark ids of the list
-    const sessionUserBookmarksRelated = bookmarks
-      .filter((item) => item.userId === session.id)
-      .map((item) => item.bookmarksRelated)
-      .map((item) => item.map((item) => item.id));
-
-    // Add the related bookmarks from the session user bookmarks into the list.bookmarksIds
-    const sharedLinkIds = list?.bookmarksIds
-      .reduce(
-        (acc, curr) =>
-          acc.concat(
-            sessionUserBookmarksRelated.filter((sessionUserBookmarksRelatedIds) =>
-              sessionUserBookmarksRelatedIds.includes(curr)
-            )
-          ),
-        [list?.bookmarksIds]
-      )
-      .flat();
-
-    console.clear();
-    console.log('=======');
-    console.log('sessionUserBookmarksRelated:', JSON.stringify(sessionUserBookmarksRelated));
-    console.log('list.bookmarksIds: ', JSON.stringify(list.bookmarksIds));
-    console.log('sharedLinkIds:', JSON.stringify(sharedLinkIds));
-    console.log('=======');
-
-    return {
-      ...list,
-      isActive: sharedLinkIds?.includes(bookmarkId),
-      wasRecentlyUpdated: recentlyUpdated?.includes(list?.id),
-    };
-  });
+  const bookmark = useSelector((state: RootState) => selectBookmarksById(state, { bookmarkId }));
+  const lists = listsEditable.map((list) => ({
+    ...list,
+    isActive: list.linkIds?.includes(bookmark.linkId),
+    wasRecentlyUpdated: recentlyUpdated?.includes(list?.id),
+  }));
 
   const onListAddBookmark = async (listId: number) => {
     setItemsLoading([...itemsLoading, listId]);
