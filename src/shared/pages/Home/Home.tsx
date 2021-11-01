@@ -70,6 +70,7 @@ export const Home: React.FC<Props> = ({
       url={url}
       currentSort={sort}
     />
+    <div />
     <div className="Home-bookmarks">
       {loading ? (
         <BookmarkRowSkeletonGroup length={bookmarksIds?.length || DEFAULT_PAGE_SIZE} />
