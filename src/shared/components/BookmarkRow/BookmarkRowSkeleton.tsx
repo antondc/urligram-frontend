@@ -9,25 +9,24 @@ interface BookmarkRowSkeleton {
 }
 
 export const BookmarkRowSkeleton: React.FC<BookmarkRowSkeleton> = ({ id }) => (
-  <div className="BookmarkRowSkeleton" data-test-id="BookmarkRowSkeleton" key={id}>
-    <div className="BookmarkRowSkeleton-title">
+  <span className="BookmarkRowSkeleton" data-test-id="BookmarkRowSkeleton" key={id}>
+    <span className="BookmarkRowSkeleton-title">
       <SkeletonItem className="BookmarkRowSkeleton-favicon" />
       <SkeletonItem className="BookmarkRowSkeleton-titleText" />
-    </div>
+    </span>
     <SkeletonItem className="BookmarkRowSkeleton-description" />
-    <div className="BookmarkRowSkeleton-tags">
+    <span className="BookmarkRowSkeleton-tags">
       <SkeletonItem className="BookmarkRowSkeleton-tag" />
       <SkeletonItem className="BookmarkRowSkeleton-tag" />
       <SkeletonItem className="BookmarkRowSkeleton-tag" />
       <SkeletonItem className="BookmarkRowSkeleton-tag" />
-    </div>
-    <div className="BookmarkRowSkeleton-icons">
+    </span>
+    <span className="BookmarkRowSkeleton-icons">
       <SkeletonItem className="BookmarkRowSkeleton-icon" />
       <SkeletonItem className="BookmarkRowSkeleton-icon" />
       <SkeletonItem className="BookmarkRowSkeleton-icon" />
-    </div>
-
+    </span>
     <SkeletonItem className="BookmarkRowSkeleton-bookmarker" />
     <SkeletonItem className="BookmarkRowSkeleton-actions" />
-  </div>
+  </span>
 );
