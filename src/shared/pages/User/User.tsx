@@ -38,7 +38,7 @@ export const User: React.FC<Props> = ({
   <div className="User">
     <Helmet title={`${SITE_TITLE} · User`} />
     {userIdIsSessionId && (
-      <CardItem className="User-form">
+      <CardItem className="User-sectionUpdate">
         <UserForm />
       </CardItem>
     )}
@@ -142,5 +142,12 @@ export const User: React.FC<Props> = ({
       )}
       {!listsLoading && !listsIds?.length && <NoResults content="ⵁ We didn find any list." />}
     </div>
+    {userIdIsSessionId && (
+      <CardItem className="User-sectionUpdate">
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nostrum, labore error. Iste in corrupti nulla
+        cupiditate expedita, repellat quia deleniti perspiciatis numquam aperiam? Dolorum nisi at est vel voluptate
+        quas.
+      </CardItem>
+    )}
   </div>
 );
