@@ -82,32 +82,35 @@ const BookmarkUpdateForm: React.FC<Props> = ({ closeModal, setLocked }) => {
     setSubmitting(true);
     setLocked(true);
 
-    const transformedTags = tagsValue.map((item) => ({ tag: item.value }));
+    try {
+      const transformedTags = tagsValue.map((item) => ({ tag: item.value }));
 
-    const data = {
-      bookmarkId: bookmarkId,
-      title: titleValue,
-      isPrivate: isPrivateValue,
-      order: 1,
-      tags: transformedTags,
-    };
+      const data = {
+        bookmarkId: bookmarkId,
+        title: titleValue,
+        isPrivate: isPrivateValue,
+        order: 1,
+        tags: transformedTags,
+      };
 
-    const bookmark = await dispatch(bookmarkUpdate(data));
-    dispatch(bookmarksLoad());
+      const bookmark = await dispatch(bookmarkUpdate(data));
+      dispatch(bookmarksLoad());
 
-    if (!!bookmark?.id) {
+      if (!!bookmark?.id) {
+        setSubmitting(false);
+        setLocked(false);
+        setSubmitSuccess(true);
+
+        setTimeout(() => {
+          closeModal();
+        }, DELAY_SLOW_MS);
+
+        return;
+      }
+    } finally {
       setSubmitting(false);
       setLocked(false);
-      setSubmitSuccess(true);
-
-      setTimeout(() => {
-        closeModal();
-      }, DELAY_SLOW_MS);
-
-      return;
     }
-    setSubmitting(false);
-    setLocked(false);
   };
 
   useEffect(() => {

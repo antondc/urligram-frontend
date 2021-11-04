@@ -65,14 +65,17 @@ const LoginForm: React.FC<Props> = ({ setLocked }) => {
     setSubmitting(true);
     if (setLocked) setLocked(true);
 
-    const data = {
-      nameOrEmail: nameOrEmailValue,
-      password: passwordValue,
-    };
+    try {
+      const data = {
+        nameOrEmail: nameOrEmailValue,
+        password: passwordValue,
+      };
 
-    await dispatch(sessionLogIn(data));
-    setSubmitting(false);
-    if (setLocked) setLocked(false);
+      await dispatch(sessionLogIn(data));
+    } finally {
+      setSubmitting(false);
+      if (setLocked) setLocked(false);
+    }
   };
 
   useEffect(() => {
