@@ -1,6 +1,7 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 
+import Cross from 'Assets/svg/cross.svg';
 import ListIcon from 'Assets/svg/list.svg';
 import Clock from 'Assets/svg/spinner6.svg';
 import Updated from 'Assets/svg/updated.svg';
@@ -10,7 +11,7 @@ import ListRow from 'Components/ListRow';
 import { ListRowSkeletonGroup } from 'Components/ListRow/ListSkeletonGroup';
 import NoResults from 'Components/NoResults';
 import Pagination from 'Components/Pagination';
-import SubHeader from 'Components/SubHeader';
+import SubHeader, { SubHeaderSeparator } from 'Components/SubHeader';
 import { TagState } from 'Modules/Tags/tags.types';
 import { DEFAULT_PAGE_SIZE, SITE_TITLE } from 'Root/src/shared/constants';
 import { SelectValue } from '@antoniodcorrea/components';
@@ -35,6 +36,7 @@ interface Props {
   }[];
   onInputChange: (string: string) => void;
   onChange: (string: SelectValue[]) => void;
+  onAddListClick: () => void;
 }
 
 export const Lists: React.FC<Props> = ({
@@ -49,6 +51,7 @@ export const Lists: React.FC<Props> = ({
   tagsSearchFormatted,
   onInputChange,
   onChange,
+  onAddListClick,
 }) => (
   <div className="Lists">
     <Helmet title={`${SITE_TITLE} · All Lists`} />
@@ -75,7 +78,13 @@ export const Lists: React.FC<Props> = ({
       ]}
       url={url}
       currentSort={sort}
-    />
+    >
+      <SubHeaderSeparator />
+      <div className="Lists-addList" onClick={onAddListClick}>
+        <Cross className="Lists-addListIcon" />
+        <span className="Lists-addListText">Add List</span>
+      </div>
+    </SubHeader>
     <div className="Lists-lists">
       {listsIdsLoading ? (
         <ListRowSkeletonGroup length={listsIds?.length || DEFAULT_PAGE_SIZE} />

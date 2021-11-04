@@ -3,6 +3,43 @@
 @c: .Lists;
 
 @{c} {
+  &-addList {
+    display: flex;
+    align-items: center;
+
+    @media @br-mobile {
+      display: none;
+    }
+
+    &:hover {
+      cursor: pointer;
+
+      @{c}-addListIcon {
+        fill: @gradientColors[blue-2];
+      }
+
+      @{c}-addListText {
+        color: @gradientColors[blue-2];
+      }
+    }
+  }
+
+  &-addListIcon {
+    height: 14px;
+    width: 14px;
+    margin-right: 15px;
+    fill: @gradientColors[black-4];
+    transform: rotate(45deg);
+    transition: fill @td-fast @ease;
+  }
+
+  &-addListText {
+    font-size: @fs-medium;
+    font-weight: @fw-bold;
+    color: @gradientColors[black-4];
+    transition: color @td-fast @ease;
+  }
+
   &-lists {
     height: 100%;
     width: 100%;

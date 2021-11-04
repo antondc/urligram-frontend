@@ -13,6 +13,7 @@ import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { tagsSearchLoad } from 'Modules/Tags/actions/tagsSearchLoad';
 import { selectTagsAll } from 'Modules/Tags/selectors/selectAllTags';
 import { selectTagsSearch } from 'Modules/Tags/selectors/selectTagsSearch';
+import { switchListModal } from 'Modules/Ui/actions/switchListModal';
 import history from 'Services/History';
 import { URLWrapper } from 'Services/URLWrapper';
 import { isDomAvailable } from 'Tools/utils/dom/isDomAvailable';
@@ -52,6 +53,10 @@ const Lists: React.FC = () => {
     history.push(redirectPath);
   };
 
+  const onAddListClick = () => {
+    dispatch(switchListModal({ mounted: true }));
+  };
+
   useEffect(() => {
     dispatch(listsLoad());
   }, [page, session?.id]);
@@ -69,6 +74,7 @@ const Lists: React.FC = () => {
       allTags={allTags}
       onChange={onChange}
       onInputChange={onInputChange}
+      onAddListClick={onAddListClick}
     />
   );
 };
