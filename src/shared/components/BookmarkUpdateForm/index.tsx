@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { bookmarkErrorsClear } from 'Modules/Bookmarks/actions/bookmarkErrorsClear';
-import { bookmarksLoad } from 'Modules/Bookmarks/actions/bookmarksLoad';
+import { bookmarkLoadById } from 'Modules/Bookmarks/actions/bookmarkLoadById';
 import { bookmarkUpdate } from 'Modules/Bookmarks/actions/bookmarkUpdate';
 import { selectBookmarksById } from 'Modules/Bookmarks/selectors/selectBookmarkById';
 import { selectBookmarksErrorLast } from 'Modules/Bookmarks/selectors/selectBookmarksErrorLast';
@@ -94,7 +94,7 @@ const BookmarkUpdateForm: React.FC<Props> = ({ closeModal, setLocked }) => {
       };
 
       const bookmark = await dispatch(bookmarkUpdate(data));
-      dispatch(bookmarksLoad());
+      dispatch(bookmarkLoadById({ bookmarkId }));
 
       if (!!bookmark?.id) {
         setSubmitting(false);
