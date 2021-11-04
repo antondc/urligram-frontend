@@ -90,12 +90,12 @@ const List: React.FC<Props> = ({
       <CardItem className="List-notificationContent">
         <div className="List-notificationText">You were invited to this list as {listInvitationRole}: join it?</div>
         {acceptLoading ? (
-          <Spinner />
+          <Spinner className="List-notificationLoader" />
         ) : (
           <Check className="List-notificationIcon List-notificationIconCheck" onClick={onInviteAccept} />
         )}
         {rejectLoading ? (
-          <Spinner />
+          <Spinner className="List-notificationLoader" />
         ) : (
           <Cross className="List-notificationIcon List-notificationIconCross" onClick={onInviteReject} />
         )}
