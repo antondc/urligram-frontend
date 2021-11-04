@@ -11,11 +11,17 @@ import { selectListsAllIds } from 'Modules/Lists/selectors/selectListsAllIds';
 import { selectListsLoading } from 'Modules/Lists/selectors/selectListsLoading';
 import { RootState } from 'Modules/rootType';
 import { selectCurrentRouteParamUserId } from 'Modules/Routes/selectors/selectCurrentRouteParamUserId';
+import { sessionLogOut } from 'Modules/Session/actions/sessionLogOut';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
+import { userDelete } from 'Modules/Users/actions/userDelete';
 import { userLoad } from 'Modules/Users/actions/userLoad';
 import { selectUserById } from 'Modules/Users/selectors/selectUserById';
+import { Routes } from 'Router/routes';
+import { CookiesWrapper } from 'Services/CookiesWrapper';
+import history from 'Services/History';
 import { LocaleFormattedDate } from 'Tools/utils/Date/localeFormattedDate';
 import { isDomAvailable } from 'Tools/utils/dom/isDomAvailable';
+import { DELETE_CONFIRM_MESSSAGE } from './constants';
 import { User as UserUi } from './User';
 
 interface Props {
@@ -25,6 +31,7 @@ interface Props {
 
 const User: React.FC<Props> = () => {
   const dispatch = useDispatch();
+  const cookiesWrapper = new CookiesWrapper();
 
   const session = useSelector(selectSession);
   const userId = useSelector(selectCurrentRouteParamUserId);
@@ -37,6 +44,23 @@ const User: React.FC<Props> = () => {
   const currentLanguageSlug = useSelector(selectCurrentLanguageSlug);
   const date = new LocaleFormattedDate({ unixTime: user?.createdAt, locale: currentLanguageSlug });
   const createdAtFormatted = date.getLocaleFormattedDate();
+
+  const onUserDelete = async (e: React.FormEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    const confirmed = confirm(DELETE_CONFIRM_MESSSAGE);
+
+    if (confirmed) {
+      await dispatch(userDelete());
+      await dispatch(sessionLogOut());
+
+      history.push(Routes.Home.route);
+
+      return;
+    }
+
+    return;
+  };
 
   useEffect(() => {
     if (!userId) return;
@@ -56,6 +80,7 @@ const User: React.FC<Props> = () => {
       createdAtFormatted={createdAtFormatted}
       bookmarksIds={bookmarksIds}
       bookmarksLoading={bookmarksLoading}
+      onUserDelete={onUserDelete}
     />
   );
 };

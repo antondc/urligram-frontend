@@ -10,42 +10,41 @@ import {
   SessionSignUpApiResponse,
 } from '../session.types';
 
-export const sessionSignUp = (userData: SessionSignUpApiRequest): AppThunk<Promise<void>, SessionActions> => async (
-  dispatch,
-  getState
-): Promise<void> => {
-  try {
-    const { Session: sessionBeforeRequest } = getState();
-    await dispatch({
-      type: SESSION_SIGN_UP_REQUEST,
-      payload: {
-        ...sessionBeforeRequest,
-        loading: true,
-      },
-    });
+export const sessionSignUp =
+  (userData: SessionSignUpApiRequest): AppThunk<Promise<void>, SessionActions> =>
+  async (dispatch, getState): Promise<void> => {
+    try {
+      const { Session: sessionBeforeRequest } = getState();
+      await dispatch({
+        type: SESSION_SIGN_UP_REQUEST,
+        payload: {
+          ...sessionBeforeRequest,
+          loading: true,
+        },
+      });
 
-    const { data }: SessionSignUpApiResponse = await HttpClient.post('/users', userData);
+      const { data }: SessionSignUpApiResponse = await HttpClient.post('/users', userData);
 
-    await dispatch(switchSignUpModal(true));
-    await dispatch({
-      type: SESSION_SIGN_UP_SUCCESS,
-      payload: {
-        ...data.attributes,
-        loading: false,
-      },
-    });
-  } catch (error) {
-    const { Session: sessionOnError } = getState();
+      await dispatch(switchSignUpModal(true));
+      await dispatch({
+        type: SESSION_SIGN_UP_SUCCESS,
+        payload: {
+          ...data.attributes,
+          loading: false,
+        },
+      });
+    } catch (error) {
+      const { Session: sessionOnError } = getState();
 
-    await dispatch({
-      type: SESSION_SIGN_UP_FAILURE,
-      payload: {
-        ...sessionOnError,
-        errors: [...sessionOnError.errors, error],
-        loading: false,
-      },
-    });
+      await dispatch({
+        type: SESSION_SIGN_UP_FAILURE,
+        payload: {
+          ...sessionOnError,
+          errors: [...(sessionOnError.errors || []), error],
+          loading: false,
+        },
+      });
 
-    throw error;
-  }
-};
+      throw error;
+    }
+  };

@@ -3,7 +3,7 @@
 @c: .User;
 
 @{c} {
-  &-sectionUpdate {
+  &-sectionUserForm {
     width: 100%;
     padding: 20px;
     background: @c-background;
@@ -115,5 +115,56 @@
 
   &-tag {
     margin: 0 8px 8px 0;
+  }
+
+  &-sectionUserDelete {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 20px;
+    background: @c-background;
+    border: 2px dashed @gradientColors[black-4];
+    transition: border @td-fast @ease;
+
+    &:hover {
+      border: 2px dashed @c-errorAccent;
+
+      @{c}-sectionUserDeleteTitle,
+      @{c}-sectionUserDeleteDescription {
+        color: @c-errorAccent;
+      }
+
+      @{c}-sectionUserDeleteButton {
+        background: @c-errorAccent;
+        pointer-events: all;
+
+        &:hover:not(.noClass):not(.noClass) {
+          background: @gradientColors[red-1];
+        }
+      }
+    }
+  }
+
+  &-sectionUserDeleteLeft {
+    padding-right: 40px;
+  }
+
+  &-sectionUserDeleteTitle {
+    font-size: @fs-medium;
+    font-weight: @fw-semibold;
+    color: @gradientColors[black-4];
+    transition: color @td-fast @ease;
+  }
+
+  &-sectionUserDeleteDescription {
+    font-size: @fs-small;
+    color: @gradientColors[black-4];
+    transition: color @td-fast @ease;
+  }
+
+  &-sectionUserDeleteButton {
+    font-weight: @fw-semibold;
+    background: @gradientColors[black-4];
+    pointer-events: none;
   }
 }

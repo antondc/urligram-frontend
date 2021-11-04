@@ -57,7 +57,7 @@ export const bookmarkCreate =
       }));
 
       // If any of the currentIds has same linkId as the newly created bookmark, then replace it for the new bookmark id
-      const currentIdsWithNewItemReplaced = bookmarksAfterResponse?.currentIds.map((item) => {
+      const currentIdsWithNewItemReplaced = bookmarksAfterResponse?.currentIds?.map((item) => {
         if (bookmarksToUpdate.map((item) => item?.id).includes(item)) return bookmarkData?.attributes?.id;
 
         return item;

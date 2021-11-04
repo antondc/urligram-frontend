@@ -1,3 +1,5 @@
+import { SessionState } from 'Modules/Session/session.types';
+
 export const USERS_LOAD_REQUEST = 'USERS_LOAD_REQUEST';
 export const USERS_LOAD_SUCCEED = 'USERS_LOAD_SUCCEED';
 export const USER_LOAD_REQUEST = 'USER_LOAD_REQUEST';
@@ -8,8 +10,10 @@ export const USER_FOLLOW_CREATE_FAILURE = 'USER_FOLLOW_CREATE_FAILURE';
 export const USER_FOLLOW_DELETE_REQUEST = 'USER_FOLLOW_DELETE_REQUEST';
 export const USER_FOLLOW_DELETE_SUCCEED = 'USER_FOLLOW_DELETE_SUCCEED';
 export const USER_FOLLOW_DELETE_FAILURE = 'USER_FOLLOW_DELETE_FAILURE';
+export const USER_DELETE_REQUEST = 'USER_DELETE_REQUEST';
+export const USER_DELETE_SUCCEED = 'USER_DELETE_SUCCEED';
+export const USER_DELETE_FAILURE = 'USER_DELETE_FAILURE';
 export const USER_UPDATE_DETAILS = 'USER_UPDATE_DETAILS';
-
 export interface UserState {
   id: string;
   name: string;
@@ -81,6 +85,12 @@ export interface UserFollowDeleteApiResponse {
   };
 }
 
+export interface UserDeleteApiResponse {
+  data: {
+    success: boolean;
+  };
+}
+
 interface UsersLoadRequestAction {
   type: typeof USERS_LOAD_REQUEST;
   payload: Partial<UsersState>;
@@ -136,6 +146,21 @@ interface UserUpdateDetailsAction {
   payload: Partial<UsersState>;
 }
 
+interface UserDeleteRequestAction {
+  type: typeof USER_DELETE_REQUEST;
+  payload: Partial<UsersState>;
+}
+
+interface UserDeleteSuccessAction {
+  type: typeof USER_DELETE_SUCCEED;
+  payload: Partial<UsersState>;
+}
+
+interface UserDeleteFailureAction {
+  type: typeof USER_DELETE_FAILURE;
+  payload: Partial<SessionState>;
+}
+
 export type UsersActions =
   | UsersLoadRequestAction
   | UsersLoadSuccessAction
@@ -147,4 +172,7 @@ export type UsersActions =
   | UserFollowDeleteRequestAction
   | UserFollowDeleteSuccessAction
   | UserFollowDeleteFailureAction
-  | UserUpdateDetailsAction;
+  | UserUpdateDetailsAction
+  | UserDeleteRequestAction
+  | UserDeleteSuccessAction
+  | UserDeleteFailureAction;

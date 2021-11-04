@@ -10,7 +10,7 @@ import NoResults from 'Components/NoResults';
 import UserForm from 'Components/UserForm';
 import { UserState } from 'Modules/Users/users.types';
 import { SITE_TITLE } from 'Root/src/shared/constants';
-import { Space, Tag } from '@antoniodcorrea/components';
+import { Button, Space, Tag } from '@antoniodcorrea/components';
 
 import './User.less';
 
@@ -23,6 +23,7 @@ interface Props {
   createdAtFormatted: string;
   bookmarksIds: number[];
   bookmarksLoading: boolean;
+  onUserDelete: (e: React.FormEvent<HTMLButtonElement>) => void;
 }
 
 export const User: React.FC<Props> = ({
@@ -34,11 +35,12 @@ export const User: React.FC<Props> = ({
   createdAtFormatted,
   bookmarksIds,
   bookmarksLoading,
+  onUserDelete,
 }) => (
   <div className="User">
     <Helmet title={`${SITE_TITLE} · User`} />
     {userIdIsSessionId && (
-      <CardItem className="User-sectionUpdate">
+      <CardItem className="User-sectionUserForm">
         <UserForm />
       </CardItem>
     )}
@@ -143,10 +145,14 @@ export const User: React.FC<Props> = ({
       {!listsLoading && !listsIds?.length && <NoResults content="ⵁ We didn find any list." />}
     </div>
     {userIdIsSessionId && (
-      <CardItem className="User-sectionUpdate">
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nostrum, labore error. Iste in corrupti nulla
-        cupiditate expedita, repellat quia deleniti perspiciatis numquam aperiam? Dolorum nisi at est vel voluptate
-        quas.
+      <CardItem className="User-sectionUserDelete">
+        <div className="User-sectionUserDeleteLeft">
+          <div className="User-sectionUserDeleteTitle">Delete user</div>
+          <div className="User-sectionUserDeleteDescription">This action can not be undone.</div>
+        </div>
+        <div className="User-sectionUserDeleteRight">
+          <Button className="User-sectionUserDeleteButton" text="Delete" onClick={onUserDelete} />
+        </div>
       </CardItem>
     )}
   </div>

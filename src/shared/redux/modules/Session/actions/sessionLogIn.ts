@@ -37,20 +37,16 @@ export const sessionLogIn =
           loading: false,
         },
       });
-    } catch (error) {
-      console.log('========================================================');
-      console.log('ACTION ON ERROR:');
-      console.log(JSON.stringify(error, null, 4));
-      console.log('========================================================');
-      console.log('========================================================');
 
+      return;
+    } catch (error) {
       const { Session: sessionOnError } = getState();
 
       await dispatch({
         type: SESSION_LOG_IN_FAILURE,
         payload: {
           ...sessionOnError,
-          errors: [...sessionOnError.errors, error],
+          errors: [...(sessionOnError.errors || []), error],
           loading: false,
         },
       });

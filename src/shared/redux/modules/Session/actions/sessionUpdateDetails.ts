@@ -9,52 +9,48 @@ import {
   SessionActions,
 } from '../session.types';
 
-export const sessionUpdateDetails = ({
-  name,
-  email,
-  statement,
-  location,
-  image,
-}: Partial<SessionState>): AppThunk<Promise<void>, SessionActions> => async (dispatch, getState): Promise<void> => {
-  try {
-    const { Session: sessionBeforeRequest } = getState();
-    await dispatch({
-      type: SESSION_UPDATE_DETAILS_REQUEST,
-      payload: {
-        ...sessionBeforeRequest,
-        loading: true,
-      },
-    });
+export const sessionUpdateDetails =
+  ({ name, email, statement, location, image }: Partial<SessionState>): AppThunk<Promise<void>, SessionActions> =>
+  async (dispatch, getState): Promise<void> => {
+    try {
+      const { Session: sessionBeforeRequest } = getState();
+      await dispatch({
+        type: SESSION_UPDATE_DETAILS_REQUEST,
+        payload: {
+          ...sessionBeforeRequest,
+          loading: true,
+        },
+      });
 
-    const { data: userData } = await HttpClient.put('/users/me', {
-      name,
-      email,
-      statement,
-      location,
-      image: image?.original,
-    });
-    const { Session: sessionAfterResponse } = getState();
+      const { data: userData } = await HttpClient.put('/users/me', {
+        name,
+        email,
+        statement,
+        location,
+        image: image?.original,
+      });
+      const { Session: sessionAfterResponse } = getState();
 
-    await dispatch({
-      type: SESSION_UPDATE_DETAILS_SUCCESS,
-      payload: {
-        ...sessionAfterResponse,
-        ...userData?.attributes,
-        loading: false,
-      },
-    });
-    dispatch(userUpdateDetails(userData?.attributes));
-  } catch (error) {
-    const { Session: sessionOnError } = getState();
+      await dispatch({
+        type: SESSION_UPDATE_DETAILS_SUCCESS,
+        payload: {
+          ...sessionAfterResponse,
+          ...userData?.attributes,
+          loading: false,
+        },
+      });
+      dispatch(userUpdateDetails(userData?.attributes));
+    } catch (error) {
+      const { Session: sessionOnError } = getState();
 
-    await dispatch({
-      type: SESSION_UPDATE_DETAILS_FAILURE,
-      payload: {
-        ...sessionOnError,
-        loading: false,
-        errors: [...sessionOnError.errors, error],
-      },
-    });
-    throw error;
-  }
-};
+      await dispatch({
+        type: SESSION_UPDATE_DETAILS_FAILURE,
+        payload: {
+          ...sessionOnError,
+          loading: false,
+          errors: [...(sessionOnError.errors || []), error],
+        },
+      });
+      throw error;
+    }
+  };
