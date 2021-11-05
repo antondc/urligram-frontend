@@ -7,7 +7,7 @@ import { initialUserLoader } from 'Modules/Users/user.loader';
 import { initialUsersLoader } from 'Modules/Users/users.loader';
 import { RequestParameters } from 'Root/src/server/routes/allRoutes';
 
-type Layout = 'withLeftSidebar' | 'fullPage';
+type Layout = 'withLeftSidebar' | 'fullPage' | 'noHeader';
 
 export interface Route {
   name: string;
@@ -22,6 +22,7 @@ export interface Route {
 }
 
 interface RoutesInterface {
+  Docs: Route;
   Tags: Route;
   Home: Route;
   UserBookmarks: Route;
@@ -47,6 +48,16 @@ interface RoutesInterface {
 }
 
 export const Routes: RoutesInterface = {
+  Docs: {
+    name: 'Docs',
+    path: '/:lang([a-z]{2})?/docs',
+    route: '/docs',
+    exact: true,
+    auth: false,
+    initialDataLoadersVisitor: [],
+    initialDataLoadersSession: [],
+    layout: 'noHeader',
+  },
   Tags: {
     name: 'Tags',
     path: '/:lang([a-z]{2})?/tags',

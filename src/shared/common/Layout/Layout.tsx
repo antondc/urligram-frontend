@@ -6,7 +6,6 @@ import BookmarkUpdateModalOrSheet from 'Components/BookmarkUpdateModalOrSheet';
 import CookiesBanner from 'Components/CookiesBanner';
 import Footer from 'Components/Footer';
 import ForgotPasswordModal from 'Components/ForgotPasswordModal';
-import Header from 'Components/Header';
 import ListModal from 'Components/ListModal';
 import LoginModal from 'Components/LoginModal';
 import Notifications from 'Components/Notifications';
@@ -47,10 +46,8 @@ export const Layout: React.FC<Props> = ({
     <div className="Layout-background" />
     <div className="Layout-content">
       <LayoutHelperGrid />
-      <Header />
       <CookiesBanner />
       <Router />
-      <Footer />
     </div>
     <div className="Layout-modalsAndPortals">
       <UserModal />

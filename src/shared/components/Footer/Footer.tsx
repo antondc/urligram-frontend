@@ -75,6 +75,15 @@ export const Footer: React.FC<Props> = ({
       >
         Disclaimer
       </A>
+      <A
+        className="Footer-link"
+        href={Routes.Docs.route}
+        frontend
+        underlined
+        active={currentRoute?.name === Routes.Docs.name}
+      >
+        Docs
+      </A>
     </div>
     <div className="Footer-section Footer-lastSection">
       <Fade mounted={uiLanguagesModalMounted}>
