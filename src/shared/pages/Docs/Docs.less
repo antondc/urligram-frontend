@@ -28,8 +28,11 @@
 
   &-link  {
     color: @gradientColors[blue-1];
+    opacity: 1;
+    transition: opacity @td-fast @ease;
 
     &:hover {
+      opacity: 0.85;
       cursor: pointer;
     }
   }
@@ -40,12 +43,12 @@
   }
 
   &-h2 {
-    margin-top: 50px;
-    margin-bottom: 20px;
-    font-size: @fs-big;
+    margin-top: 80px;
+    margin-bottom: 40px;
+    font-size: @fs-biggest;
 
     &:first-of-type {
-      margin-top: 45px;
+      margin-top: 0;
     }
 
     @media @br-mobile {
@@ -60,18 +63,17 @@
   &-h3 {
     margin-top: 40px;
     margin-bottom: 20px;
-    font-size: @fs-mediumBig;
+    font-size: @fs-big;
   }
 
   &-h4 {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    font-size: @fs-normal;
+    margin-top: 40px;
+    margin-bottom: 8px;
+    font-size: @fs-big;
     font-weight: @fw-semibold;
   }
 
   &-paragraph {
-    margin-bottom: 10px;
     font-size: @fs-normal;
     line-height: @fh-medium;
   }
@@ -79,7 +81,7 @@
   &-ul {
     list-style: disc;
     list-style-type: disc;
-    margin: 20px 10px 15px 10px;
+    margin: 15px 10px;
   }
 
   &-li {
