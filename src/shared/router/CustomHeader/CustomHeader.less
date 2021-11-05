@@ -3,8 +3,13 @@
 @c: .CustomHeader;
 
 @{c} {
-  // max-width: 1200px;
-  // margin: 0 auto;
+  max-width: 2000px;
+  margin: 0 auto;
+
+  @media @br-mobile {
+    max-width: unset;
+    margin: unset;
+  }
 
   &-customHeaderBackground {
     position: fixed;
