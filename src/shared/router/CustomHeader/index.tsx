@@ -21,6 +21,7 @@ interface Props {
 
 const CustomHeader: React.FC<Props> = ({ location, pathWithoutLanguageParam }) => (
   <div className="CustomHeader">
+    <div className="CustomHeader-customHeaderBackground" />
     <HeaderSmall />
     <FadeInOut valueToUpdate={pathWithoutLanguageParam} speed="fastest" appear>
       <Switch location={{ ...location, pathname: pathWithoutLanguageParam }}>

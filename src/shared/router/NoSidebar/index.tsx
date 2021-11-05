@@ -35,7 +35,9 @@ interface Props {
 
 const NoSidebar: React.FC<Props> = ({ loggedIn, location, defaultCurrentSlug, pathWithoutLanguageParam }) => (
   <div className="NoSidebar">
+    <div className="NoSidebar-noSidebarBackground" />
     <Header />
+
     <div className="NoSidebar">
       <FadeInOut className="NoSidebar-content-content" valueToUpdate={pathWithoutLanguageParam} speed="fastest" appear>
         <Switch location={{ ...location, pathname: pathWithoutLanguageParam }}>

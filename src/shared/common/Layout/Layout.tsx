@@ -44,7 +44,7 @@ export const Layout: React.FC<Props> = ({
 }) => (
   <div className="Layout">
     <ScreenSizePixel />
-    <div className="Layout-background" />
+    <div className="Layout-generalBackground" />
     <LayoutHelperGrid />
     <Router location={location} />
     <div className="Layout-modalsAndPortals">

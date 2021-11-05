@@ -16,6 +16,18 @@
     padding: 0 10px 10px;
   }
 
+  &-noSidebarBackground {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: @gradientColors[blue-6];
+    z-index: -1;
+    pointer-events: none;
+    user-select: none;
+  }
+
   &-content {
     display: flex;
     flex-direction: column;

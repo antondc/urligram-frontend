@@ -38,6 +38,7 @@ const Content: React.FC<Props> = ({ location, pathWithoutLanguageParam }) => {
 
   return (
     <div className="Content">
+      <div className="Content-contentBackground" />
       <Header />
       <CookiesBanner />
       <div className={'Content-content' + (sidebarLeftClosed ? ' Content-content--sidebarLeftClosed' : '')}>

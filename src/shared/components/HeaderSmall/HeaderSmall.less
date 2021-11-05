@@ -4,10 +4,11 @@
 
 @{c} {
   display: flex;
-  position: fixed;
+  position: sticky;
   justify-content: space-between;
   align-items: center;
   height: 60px;
+  width: 100%;
   top: 0;
   left: 0;
   right: 0;
@@ -20,9 +21,6 @@
   @media @br-mobile {
     height: 50px;
     padding: 6px 14px 6px 12px;
-    box-shadow: none;
-    border: 2px solid @gradientColors[blue-1];
-    border-radius: 8px;
   }
 
   &-logo {
