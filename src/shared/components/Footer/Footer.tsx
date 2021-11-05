@@ -46,34 +46,12 @@ export const Footer: React.FC<Props> = ({
       )}
       <A
         className="Footer-link"
-        href={Routes.FAQ.route}
+        href={Routes.Download.route}
         frontend
         underlined
-        active={currentRoute?.name === Routes.FAQ.name}
+        active={currentRoute?.name === Routes.Download.name}
       >
-        FAQ
-      </A>
-      {/*
-    <div className="Footer-section">
-        <A
-          className="Footer-link"
-          href={Routes.Download.route}
-          frontend
-          underlined
-          active={currentRoute?.name === Routes.Download.name}
-        >
-          Download
-        </A>
-    </div>
-    */}
-      <A
-        className="Footer-link"
-        href={Routes.Disclaimer.route}
-        frontend
-        underlined
-        active={currentRoute?.name === Routes.Disclaimer.name}
-      >
-        Disclaimer
+        Download
       </A>
       <A
         className="Footer-link"

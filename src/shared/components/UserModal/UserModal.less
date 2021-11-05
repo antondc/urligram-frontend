@@ -10,10 +10,10 @@
   padding: 42px 38px 38px 38px;
   opacity: 0;
   background: @c-background;
+  box-shadow: 5px 5px 50px 0 @gradientColors[black-4];
   transition: transform @td-fast @ease, opacity @td-fast @ease;
   pointer-events: none;
   border-radius: 8px;
-  box-shadow: 5px 5px 50px 0 @gradientColors[black-4];
 
   @media @br-mobile {
     position: fixed;
@@ -55,8 +55,8 @@
     background: @gradientColors[black-5];
     fill: @gradientColors[black-3];
     transition: fill @td-fast @ease;
-    border-radius: 50%;
     z-index: 1;
+    border-radius: 50%;
 
     &:hover {
       cursor: pointer;
@@ -108,10 +108,10 @@
     width: 36px;
     top: 10px;
     left: 10px;
+    box-shadow: 0 0 0 2pt @c-base;
     object-fit: cover;
     object-position: center;
     border-radius: 50%;
-    box-shadow: 0 0 0 2pt @c-base;
 
     &:hover {
       cursor: pointer;

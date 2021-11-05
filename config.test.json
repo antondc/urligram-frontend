@@ -25,5 +25,7 @@
   "MEDIA_FOLDER": "media",
   "MEDIA_IMAGES": "media/images",
   "TEMP_FILES": "media/temp_files",
-  "DEFAULT_IMAGE": "/img/default-image.png"
+  "DEFAULT_IMAGE": "/img/default-image.png",
+  "CONTACT_EMAIL": "info@example.com",
+  "APP_NAME": "My Fantastic App"
 }

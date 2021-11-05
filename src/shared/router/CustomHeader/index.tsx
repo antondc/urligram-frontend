@@ -4,11 +4,10 @@ import { Route, Switch } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 
 import HeaderSmall from 'Components/HeaderSmall';
-import SidebarLeft from 'Components/SidebarLeft';
 import { selectPathWithoutLanguageParam } from 'Modules/Routes/selectors/selectPathWithoutLanguageParam';
-import Docs from 'Pages/Docs';
 import NotFound from 'Pages/NotFound';
 import ServerError from 'Pages/ServerError';
+import Docs from 'Root/src/shared/pages/Docs';
 import { Routes } from 'Router/routes';
 import { Location } from 'Services/History';
 import { FadeInOut } from '@antoniodcorrea/components';

@@ -14,11 +14,13 @@ import UserModal from 'Components/UserModal';
 import WelcomeModal from 'Components/WelcomeModal';
 import WelcomeModalError from 'Components/WelcomeModalError';
 import Router from 'Router/.';
+import { Location } from 'Services/History';
 import { Fade, Spinner } from '@antoniodcorrea/components';
 
 import './Layout.less';
 
 interface Props {
+  location: Location;
   loginModalMounted: boolean;
   signUpModalMounted: boolean;
   welcomeModalMounted: boolean;
@@ -30,6 +32,7 @@ interface Props {
 }
 
 export const Layout: React.FC<Props> = ({
+  location,
   loginModalMounted,
   signUpModalMounted,
   welcomeModalMounted,
@@ -43,7 +46,7 @@ export const Layout: React.FC<Props> = ({
     <ScreenSizePixel />
     <div className="Layout-background" />
     <LayoutHelperGrid />
-    <Router />
+    <Router location={location} />
     <div className="Layout-modalsAndPortals">
       <UserModal />
       <Fade mounted={loginModalMounted} speed="fastest" position="fixed" appear>

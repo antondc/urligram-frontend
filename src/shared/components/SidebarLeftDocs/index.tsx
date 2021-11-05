@@ -1,38 +1,41 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
-import { selectCurrentGlossary } from 'Modules/Languages/selectors/selectCurrentGlossary';
-import { selectCurrentRoute } from 'Modules/Routes/selectors/selectCurrentRoute';
 import { selectUiSidebarleftState } from 'Modules/Ui/selectors/selectUiSidebarleftState';
 import { SidebarLeftDocs as SidebarLeftDocsUi } from './SidebarLeftDocs';
 
 const SidebarLeftDocs: React.FC = () => {
-  const glossary = useSelector(selectCurrentGlossary);
-  const route = useSelector(selectCurrentRoute);
+  const [hash, setHash] = useState<string>(undefined);
 
   const sidebarLeftClosed = useSelector(selectUiSidebarleftState);
 
-  const onAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
-    e.preventDefault();
-
-    const element = document.getElementById(id);
+  const navigateToSection = (hash: string) => {
+    const element = document.getElementById(hash);
 
     if (!element) return;
 
-    const yOffset = -30;
+    const yOffset = -90;
     const yDistance = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
 
     window.scrollTo({ top: yDistance, behavior: 'smooth' });
   };
 
-  return (
-    <SidebarLeftDocsUi
-      routeName={route?.name}
-      glossary={glossary}
-      sidebarLeftClosed={sidebarLeftClosed}
-      onAnchorClick={onAnchorClick}
-    />
-  );
+  const onAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, hash: string) => {
+    e.preventDefault();
+    navigateToSection(hash);
+  };
+
+  useEffect(() => {
+    const hash = window.location?.hash;
+    if (!hash) return;
+
+    const cleanedHash = hash?.replace('#', '');
+
+    setHash(cleanedHash);
+    navigateToSection(cleanedHash);
+  });
+
+  return <SidebarLeftDocsUi hash={hash} sidebarLeftClosed={sidebarLeftClosed} onAnchorClick={onAnchorClick} />;
 };
 
 export default SidebarLeftDocs;

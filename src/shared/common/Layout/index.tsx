@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Location } from 'history';
 
 import { selectLanguageLoading } from 'Modules/Languages/selectors/selectLanguageLoading';
 import { listsLoadByUserId } from 'Modules/Lists/actions/listsLoadByUserId';
@@ -24,6 +23,7 @@ import { userFollowersLoad } from 'Modules/Users/actions/userFollowersLoad';
 import { userFollowingLoad } from 'Modules/Users/actions/userFollowingLoad';
 import { userLoad } from 'Modules/Users/actions/userLoad';
 import { routesList, routesWithoutOmmitedValues } from 'Router/routes';
+import { Location } from 'Services/History';
 import enhanceRouteWithParams from 'Tools/utils/url/enhanceRouteWithParams';
 import findActiveRouteKey from 'Tools/utils/url/findActiveRouteKey';
 import { ESCAPE_KEY_CODE } from './constants';
@@ -140,6 +140,7 @@ const Layout: React.FC<Props> = ({ location }) => {
       resetPasswordModalMounted={resetPasswordModalMounted}
       listModalMounted={listModalMounted}
       renderLoader={renderLoader}
+      location={location}
     />
   );
 };

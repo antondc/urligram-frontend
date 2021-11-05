@@ -6,7 +6,7 @@
   position: relative;
   position: sticky;
   height: 100vh;
-  top: 0;
+  top: 60px;
   padding: 26px;
   background: @c-background;
 
@@ -15,8 +15,6 @@
     flex-direction: column;
     width: 100%;
     padding: 0;
-    font-size: @fs-normal;
-    font-weight: @fw-semibold;
     white-space: nowrap;
   }
 
@@ -25,6 +23,9 @@
     justify-content: space-between;
     align-items: center;
     padding: 14px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-weight: @fw-bold;
     color: @c-accentLight;
     transition: color @td-fast @ease;
 
@@ -45,6 +46,24 @@
         fill: @gradientColors[blue-1];
       }
     }
+  }
+
+  &-subItems {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height @td-slow @ease, opacity @td-normal @ease;
+
+    &--opened  {
+      max-height: 1000px;
+      opacity: 1;
+      transition: max-height @td-slow @ease, opacity @td-normal @ease;
+    }
+  }
+
+  &-subItem {
+    padding-left: 45px;
+    font-weight: @fw-semibold;
   }
 
   &-itemIcon  {
