@@ -3,6 +3,7 @@ import { connect, useSelector } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 
+import CookiesBanner from 'Components/CookiesBanner';
 import Footer from 'Components/Footer';
 import Header from 'Components/Header';
 import SidebarLeft from 'Components/SidebarLeft';
@@ -36,9 +37,10 @@ const Content: React.FC<Props> = ({ location, pathWithoutLanguageParam }) => {
   const sidebarLeftClosed = useSelector(selectUiSidebarleftState);
 
   return (
-    <>
+    <div className="Content">
       <Header />
-      <div className={'Content' + (sidebarLeftClosed ? ' Content--sidebarLeftClosed' : '')}>
+      <CookiesBanner />
+      <div className={'Content-content' + (sidebarLeftClosed ? ' Content-content--sidebarLeftClosed' : '')}>
         {/* INTENDED => <Fade classname="Content-sidebarLeft" mounted speed="fastest" delayIn={250} appear> */}
         <div className="Content-sidebar">
           <SidebarLeft />
@@ -63,7 +65,7 @@ const Content: React.FC<Props> = ({ location, pathWithoutLanguageParam }) => {
         {/* INTENDED => </FadeInOut> */}
       </div>
       <Footer />
-    </>
+    </div>
   );
 };
 

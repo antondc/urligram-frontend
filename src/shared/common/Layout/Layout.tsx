@@ -3,8 +3,6 @@ import React from 'react';
 import LayoutHelperGrid from 'Common/LayoutHelperGrid';
 import BookmarkCreateModalOrSheet from 'Components/BookmarkCreateModalOrSheet';
 import BookmarkUpdateModalOrSheet from 'Components/BookmarkUpdateModalOrSheet';
-import CookiesBanner from 'Components/CookiesBanner';
-import Footer from 'Components/Footer';
 import ForgotPasswordModal from 'Components/ForgotPasswordModal';
 import ListModal from 'Components/ListModal';
 import LoginModal from 'Components/LoginModal';
@@ -44,11 +42,8 @@ export const Layout: React.FC<Props> = ({
   <div className="Layout">
     <ScreenSizePixel />
     <div className="Layout-background" />
-    <div className="Layout-content">
-      <LayoutHelperGrid />
-      <CookiesBanner />
-      <Router />
-    </div>
+    <LayoutHelperGrid />
+    <Router />
     <div className="Layout-modalsAndPortals">
       <UserModal />
       <Fade mounted={loginModalMounted} speed="fastest" position="fixed" appear>

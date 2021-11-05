@@ -34,10 +34,10 @@ interface Props {
 }
 
 const NoSidebar: React.FC<Props> = ({ loggedIn, location, defaultCurrentSlug, pathWithoutLanguageParam }) => (
-  <>
+  <div className="NoSidebar">
     <Header />
     <div className="NoSidebar">
-      <FadeInOut className="NoSidebar-content" valueToUpdate={pathWithoutLanguageParam} speed="fastest" appear>
+      <FadeInOut className="NoSidebar-content-content" valueToUpdate={pathWithoutLanguageParam} speed="fastest" appear>
         <Switch location={{ ...location, pathname: pathWithoutLanguageParam }}>
           {/* Redirects */}
           {/* {loggedIn && <Redirect from={Routes.SignUpConfirmation.path} to={'/' + defaultCurrentSlug + '/'} />} */}
@@ -66,7 +66,7 @@ const NoSidebar: React.FC<Props> = ({ loggedIn, location, defaultCurrentSlug, pa
       </FadeInOut>
     </div>
     <Footer />
-  </>
+  </div>
 );
 
 const mapStateToProps = createStructuredSelector({

@@ -1,0 +1,107 @@
+@import '../../css/imports.less';
+
+@c: .HeaderSmall;
+
+@{c} {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+  padding-left: 20px;
+  padding-right: 40px;
+  background: @c-background;
+  z-index: @z-index-2;
+
+  @media @br-mobile {
+    height: 50px;
+    padding: 6px 14px 6px 12px;
+    box-shadow: none;
+    border: 2px solid @gradientColors[blue-1];
+    border-radius: 8px;
+  }
+
+  &-logo {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 250px;
+    margin-right: 34px;
+    font-size: @fs-mediumBig;
+
+    .Logo-icon  {
+      height: 35px;
+    }
+  }
+
+  &-separator {
+    height: 40%;
+    width: 2px;
+    margin: 0 24px;
+    background: @gradientColors[black-4];
+    border-radius: 2px;
+
+    @media @br-mobile {
+      height: 100%;
+      margin: 0 15px;
+    }
+  }
+
+  &-separatorDesktop {
+    display: block;
+
+    @media @br-mobile {
+      display: none;
+    }
+  }
+
+  &-user {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &-userLogo {
+    fill: @gradientColors[black-4];
+  }
+
+  &-userLogo,
+  &-userImage {
+    position: relative;
+    height: 35px;
+    width: 35px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
+
+    @media @br-mobile {
+      height: 30px;
+      width: 30px;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &-userImage {
+    box-shadow: 0 0 0 2pt @c-transparent;
+    transition: box-shadow @td-fast @ease;
+
+    &:hover {
+      box-shadow: 0 0 0 2pt @gradientColors[blue-2];
+      cursor: pointer;
+
+      @media @br-tabletHorizontal {
+        box-shadow: 0 0 0 1.5pt @gradientColors[blue-2];
+      }
+
+      @media @br-mobile {
+        box-shadow: none;
+      }
+    }
+  }
+
+  &-loader {
+    margin: 5px;
+  }
+}

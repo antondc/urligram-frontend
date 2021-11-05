@@ -1,0 +1,63 @@
+@import '../../css/imports.less';
+
+@c: .SidebarLeftDocs;
+
+@{c} {
+  position: relative;
+  position: sticky;
+  height: 100vh;
+  top: 0;
+  padding: 26px;
+  background: @c-background;
+
+  &-items {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0;
+    font-size: @fs-normal;
+    font-weight: @fw-semibold;
+    white-space: nowrap;
+  }
+
+  &-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px;
+    color: @c-accentLight;
+    transition: color @td-fast @ease;
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+    &--active,
+    &:hover {
+      color: @gradientColors[blue-1];
+      cursor: pointer;
+
+      @{c}-itemIcon {
+        fill: @gradientColors[blue-1];
+      }
+
+      @{c}-triangleIcon {
+        fill: @gradientColors[blue-1];
+      }
+    }
+  }
+
+  &-itemIcon  {
+    position: relative;
+    flex-shrink: 0;
+    height: 15px;
+    width: 15px;
+    margin-right: 16px;
+    fill: @c-accentLight;
+    transition: fill @td-fast @ease;
+  }
+
+  &-itemDescription {
+    flex: 1;
+  }
+}
