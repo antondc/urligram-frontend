@@ -15,7 +15,7 @@ interface Props {
 }
 
 export const Docs: React.FC<Props> = ({ domain, contactEmail, appName }) => (
-  <div className="Docs">
+  <div className="Docs" id="docs">
     <div className="Docs-sidebar">
       <SidebarLeftDocs />
     </div>

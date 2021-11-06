@@ -24,7 +24,7 @@ export const SidebarLeftDocs: React.FC<Props> = ({ hash, sidebarLeftClosed, onAn
         const Icon = item?.icon;
 
         return (
-          <>
+          <React.Fragment key={item.hash}>
             <A
               href={`/docs#${item.hash}`}
               className={'SidebarLeftDocs-item' + (isActive ? ' SidebarLeftDocs-item--active' : '')}
@@ -57,7 +57,7 @@ export const SidebarLeftDocs: React.FC<Props> = ({ hash, sidebarLeftClosed, onAn
                 })}
               </div>
             )}
-          </>
+          </React.Fragment>
         );
       })}
     </div>

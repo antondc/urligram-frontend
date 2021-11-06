@@ -66,11 +66,6 @@ export const listItems: ListItem[] = [
         hashActive: 'user',
       },
       {
-        text: 'User',
-        hash: 'user',
-        hashActive: 'user',
-      },
-      {
         text: 'Link',
         hash: 'link',
         hashActive: 'link',
