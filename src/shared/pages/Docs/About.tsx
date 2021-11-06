@@ -9,10 +9,8 @@ interface Props {
 }
 
 export const About: React.FC<Props> = ({ domain, contactEmail, appName }) => (
-  <>
-    <h2 className="Docs-h2" id="about">
-      About
-    </h2>
+  <div className="Docs-section" id="about">
+    <h2 className="Docs-h2">About</h2>
     <p className="Docs-paragraph">
       We are a small team of enthusiasts with different backgrounds and from different countries. Being familiar with IT
       landscape and the amount of information growing every day we like the basic and single use tools for basic
@@ -50,5 +48,5 @@ export const About: React.FC<Props> = ({ domain, contactEmail, appName }) => (
         {domain}
       </A>
     </p>
-  </>
+  </div>
 );

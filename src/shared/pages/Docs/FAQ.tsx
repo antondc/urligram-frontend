@@ -1,10 +1,8 @@
 import React from 'react';
 
 export const FAQ: React.FC = () => (
-  <>
-    <h2 className="Docs-h2" id="faq">
-      Frequently Asked Questions
-    </h2>
+  <div className="Docs-section" id="faq">
+    <h2 className="Docs-h2">Frequently Asked Questions</h2>
     <h4 className="Docs-h4">What is Linking?</h4>
     <p className="Docs-paragraph">
       Linking is an online platform that allows users to store, share and manage URL resources. The goal is to provide a
@@ -79,5 +77,5 @@ export const FAQ: React.FC = () => (
       distributed data centers. If failure happens, there is an option to restore to any time in the previous 24h,
       thanks to continuous backup of the database.
     </p>
-  </>
+  </div>
 );

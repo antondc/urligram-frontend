@@ -3,10 +3,8 @@ import React from 'react';
 import './Docs.less';
 
 export const Glossary: React.FC = () => (
-  <>
-    <h2 className="Docs-h2" id="glossary">
-      Glossary
-    </h2>
+  <div className="Docs-section" id="glossary">
+    <h2 className="Docs-h2">Glossary</h2>
     <h4 className="Docs-h4" id="visitor">
       Visitor
     </h4>
@@ -105,5 +103,5 @@ export const Glossary: React.FC = () => (
       <li className="Docs-li">The extension can be added to Chrome, Mozilla, Edge.</li>
       <li className="Docs-li">The extension opens as a form to be filled within the browser tab.</li>
     </ul>
-  </>
+  </div>
 );

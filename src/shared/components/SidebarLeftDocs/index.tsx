@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { selectUiSidebarleftState } from 'Modules/Ui/selectors/selectUiSidebarleftState';
+import { listItems } from './listItems';
 import { SidebarLeftDocs as SidebarLeftDocsUi } from './SidebarLeftDocs';
 
 const SidebarLeftDocs: React.FC = () => {
@@ -35,7 +36,14 @@ const SidebarLeftDocs: React.FC = () => {
     navigateToSection(cleanedHash);
   });
 
-  return <SidebarLeftDocsUi hash={hash} sidebarLeftClosed={sidebarLeftClosed} onAnchorClick={onAnchorClick} />;
+  return (
+    <SidebarLeftDocsUi
+      hash={hash}
+      sidebarLeftClosed={sidebarLeftClosed}
+      onAnchorClick={onAnchorClick}
+      listItems={listItems}
+    />
+  );
 };
 
 export default SidebarLeftDocs;

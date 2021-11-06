@@ -10,10 +10,8 @@ interface Props {
 }
 
 export const Legal: React.FC<Props> = ({ domain, contactEmail, appName }) => (
-  <>
-    <h2 className="Docs-h2" id="legal">
-      Legal
-    </h2>
+  <div className="Docs-section" id="legal">
+    <h2 className="Docs-h2">Legal</h2>
     <h3 className="Docs-h3" id="disclaimer">
       Disclaimer
     </h3>
@@ -182,5 +180,5 @@ export const Legal: React.FC<Props> = ({ domain, contactEmail, appName }) => (
       </A>
       <Space />
     </p>
-  </>
+  </div>
 );
