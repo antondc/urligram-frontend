@@ -16,7 +16,7 @@
   "production": {
     "PORT_HTTP": 4001,
     "PORT_HTTPS": 0,
-    "API_URL": "https://staging.urligram.com/api/v1/",
+    "API_URL": "https://api.urligram.com/api/v1/",
     "SECRET": "superSecret",
     "DOMAIN": "urligram.com"
   },
