@@ -38,6 +38,9 @@ const SidebarLeftDocs: React.FC = () => {
 
     const hashesInViewport = allHashes.filter((item) => {
       const element = window.document.getElementById(item);
+
+      if (!element) return;
+
       const rect = element.getBoundingClientRect();
       const isOutAboveScreen = rect.bottom < 0; // Item bottom is above top of the screen
       const isOutBelowScreen = rect.top > screenHeight; // Item top is greater than screen height, is out
