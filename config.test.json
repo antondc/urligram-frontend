@@ -2,23 +2,23 @@
   "development": {
     "PORT_HTTP": 80,
     "PORT_HTTPS": 443,
-    "API_URL": "https://dev.linking.me:3000/api/v1/",
+    "API_URL": "https://dev.urligram.com:3000/api/v1/",
     "SECRET": "superSecret",
-    "DOMAIN": "linking.me"
+    "DOMAIN": "dev.urligram.com"
   },
   "staging": {
     "PORT_HTTP": 4000,
     "PORT_HTTPS": 0,
-    "API_URL": "https://linking-api-staging.woprs.com/api/v1/",
+    "API_URL": "https://api-staging.urligram.com/api/v1/",
     "SECRET": "superSecret",
-    "DOMAIN": "woprs.com"
+    "DOMAIN": "staging.urligram.com"
   },
   "production": {
     "PORT_HTTP": 4001,
     "PORT_HTTPS": 0,
-    "API_URL": "https://linking-api-production.woprs.com/api/v1/",
+    "API_URL": "https://staging.urligram.com/api/v1/",
     "SECRET": "superSecret",
-    "DOMAIN": "woprs.com"
+    "DOMAIN": "urligram.com"
   },
   "ENABLE_ISOMORPHISM": true,
   "MEDIA": "media",
