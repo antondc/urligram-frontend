@@ -3,21 +3,18 @@
     "PORT_HTTP": 80,
     "PORT_HTTPS": 443,
     "API_URL": "https://dev.urligram.com:3000/api/v1/",
-    "SECRET": "superSecret",
     "DOMAIN": "dev.urligram.com"
   },
   "staging": {
     "PORT_HTTP": 4001,
     "PORT_HTTPS": 4002,
     "API_URL": "https://api-staging.urligram.com/api/v1/",
-    "SECRET": "superSecret",
     "DOMAIN": "staging.urligram.com"
   },
   "production": {
     "PORT_HTTP": 4003,
     "PORT_HTTPS": 4004,
     "API_URL": "https://api.urligram.com/api/v1/",
-    "SECRET": "superSecret",
     "DOMAIN": "urligram.com"
   },
   "ENABLE_ISOMORPHISM": true,

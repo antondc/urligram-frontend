@@ -29,7 +29,6 @@ const webpackClientProdConfig = {
     ...webpackClientCommonConfig.plugins,
     new webpack.DefinePlugin({
       'process.env': {
-        SECRET: JSON.stringify(production.SECRET),
         DOMAIN: JSON.stringify(production.DOMAIN),
         ENDPOINT_API: JSON.stringify(production.API_URL),
         ENVIRONMENT: JSON.stringify(ENVIRONMENT_PRODUCTION),

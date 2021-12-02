@@ -29,7 +29,6 @@ const webpackClientDevConfig = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
-        SECRET: JSON.stringify(development.SECRET),
         DOMAIN: JSON.stringify(development.DOMAIN),
         ENDPOINT_API: JSON.stringify(development.API_URL),
         ENVIRONMENT: JSON.stringify(ENVIRONMENT_DEV),

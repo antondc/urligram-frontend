@@ -15,7 +15,6 @@ const webpackServerProdConfig = {
     // Setting a variable to identify browser from server
     new webpack.DefinePlugin({
       'process.env': {
-        SECRET: JSON.stringify(staging.SECRET),
         DOMAIN: JSON.stringify(staging.DOMAIN),
         SERVER_PORT_HTTP: staging.PORT_HTTP,
         SERVER_PORT_HTTPS: staging.PORT_HTTPS,
