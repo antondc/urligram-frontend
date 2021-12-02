@@ -10,66 +10,66 @@ before_script:
   - mkdir -p ~/.ssh
   - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
 
-# stages:
-#   - install
-#   - test
-#   - build_staging
-#   - build_production
-#   - deploy_staging
-#   - deploy_production
+stages:
+  - install
+  - test
+  - build_staging
+  - build_production
+  - deploy_staging
+  - deploy_production
 
-# cache:
-#   paths:
-#     - node_modules/
+cache:
+  paths:
+    - node_modules/
 
-# install:
-#   stage: install
-#   script:
-#     - npm install --verbose -f
-#   artifacts:
-#     paths:
-#       - node_modules/
+install:
+  stage: install
+  script:
+    - npm install --verbose -f
+  artifacts:
+    paths:
+      - node_modules/
 
-# test:
-#   stage: test
-#   script:
-#     - npm test
-#   artifacts:
-#     paths:
-#       - node_modules/
+test:
+  stage: test
+  script:
+    - npm test
+  artifacts:
+    paths:
+      - node_modules/
 
-# build_staging:
-#   stage: build_staging
-#   only:
-#     - staging
-#   script:
-#     - npm run stage
+build_staging:
+  stage: build_staging
+  only:
+    - staging
+  script:
+    - npm run stage
 
-# build_prod:
-#   stage: build_production
-#   only:
-#     - master
-#   script:
-#     - npm run prod
+build_prod:
+  stage: build_production
+  only:
+    - master
+  script:
+    - npm run prod
 
-# deploy_staging:
-#   stage: deploy_staging
-#   only:
-#     - staging
-#   script:
-#     - ssh xum35s@ec2-3-120-27-57.eu-central-1.compute.amazonaws.com "cd /var/www/html/linking_frontend_staging && rm -rf node_modules dist/* tmp"
-#     - ssh xum35s@ec2-3-120-27-57.eu-central-1.compute.amazonaws.com "cd /var/www/html/linking_frontend_staging && git pull origin staging"
-#     - ssh xum35s@ec2-3-120-27-57.eu-central-1.compute.amazonaws.com "source ~/.bash_profile && export NPM_TOKEN=${NPM_TOKEN} && cd /var/www/html/linking_frontend_staging && nvm use --delete-prefix && git checkout staging && npm ci --verbose && npm run stage"
-#     - ssh xum35s@ec2-3-120-27-57.eu-central-1.compute.amazonaws.com "cd /var/www/html/linking_frontend_staging && pm2 stop ./dist/server.js"
-#     - ssh xum35s@ec2-3-120-27-57.eu-central-1.compute.amazonaws.com "cd /var/www/html/linking_frontend_staging && NODE_ENV=staging pm2 start ./dist/server.js"
+deploy_staging:
+  stage: deploy_staging
+  only:
+    - staging
+  script:
+    - ssh xum35s@ec2-3-120-27-57.eu-central-1.compute.amazonaws.com "cd /var/www/html/urligram/staging.urligram.com && rm -rf node_modules dist/* tmp"
+    - ssh xum35s@ec2-3-120-27-57.eu-central-1.compute.amazonaws.com "cd /var/www/html/urligram/staging.urligram.com && git pull origin staging"
+    - ssh xum35s@ec2-3-120-27-57.eu-central-1.compute.amazonaws.com "source ~/.bash_profile && export NPM_TOKEN=${NPM_TOKEN} && cd /var/www/html/urligram/staging.urligram.com && nvm use --delete-prefix && git checkout staging && npm ci --verbose && npm run stage"
+    - ssh xum35s@ec2-3-120-27-57.eu-central-1.compute.amazonaws.com "cd /var/www/html/urligram/staging.urligram.com && pm2 stop ./dist/server.js"
+    - ssh xum35s@ec2-3-120-27-57.eu-central-1.compute.amazonaws.com "cd /var/www/html/urligram/staging.urligram.com && NODE_ENV=staging pm2 start ./dist/server.js"
 
-# deploy_production:
-#   stage: deploy_production
-#   only:
-#     - master
-#   script:
-#     - ssh xum35s@ec2-3-120-27-57.eu-central-1.compute.amazonaws.com "cd /var/www/html/linking_frontend_production && rm -rf node_modules dist/* tmp"
-#     - ssh xum35s@ec2-3-120-27-57.eu-central-1.compute.amazonaws.com "cd /var/www/html/linking_frontend_production && git pull origin master"
-#     - ssh xum35s@ec2-3-120-27-57.eu-central-1.compute.amazonaws.com "source ~/.bash_profile && export NPM_TOKEN=${NPM_TOKEN} && cd /var/www/html/linking_frontend_production && nvm use --delete-prefix && git checkout master && npm ci --verbose && npm run prod"
-#     - ssh xum35s@ec2-3-120-27-57.eu-central-1.compute.amazonaws.com "cd /var/www/html/linking_frontend_production && pm2 stop ./dist/server.js"
-#     - ssh xum35s@ec2-3-120-27-57.eu-central-1.compute.amazonaws.com "cd /var/www/html/linking_frontend_production && NODE_ENV=production pm2 start ./dist/server.js"
+deploy_production:
+  stage: deploy_production
+  only:
+    - master
+  script:
+    - ssh xum35s@ec2-3-120-27-57.eu-central-1.compute.amazonaws.com "cd /var/www/html/urligram/uligram.com && rm -rf node_modules dist/* tmp"
+    - ssh xum35s@ec2-3-120-27-57.eu-central-1.compute.amazonaws.com "cd /var/www/html/urligram/uligram.com && git pull origin master"
+    - ssh xum35s@ec2-3-120-27-57.eu-central-1.compute.amazonaws.com "source ~/.bash_profile && export NPM_TOKEN=${NPM_TOKEN} && cd /var/www/html/urligram/uligram.com && nvm use --delete-prefix && git checkout master && npm ci --verbose && npm run prod"
+    - ssh xum35s@ec2-3-120-27-57.eu-central-1.compute.amazonaws.com "cd /var/www/html/urligram/uligram.com && pm2 stop ./dist/server.js"
+    - ssh xum35s@ec2-3-120-27-57.eu-central-1.compute.amazonaws.com "cd /var/www/html/urligram/uligram.com && NODE_ENV=production pm2 start ./dist/server.js"
