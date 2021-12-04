@@ -210,7 +210,7 @@ See src/server/routes/allRoutes.tsx:27 and src/server/routes/allRoutes.tsx:32
 
 The MIT License (MIT)
 
-Copyright (c) 2020 Antonio Díaz
+Copyright (c) 2020 Urligram
 
 ## Rebuild
 
