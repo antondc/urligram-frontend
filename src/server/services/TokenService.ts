@@ -2,6 +2,8 @@ import jwt, { JwtPayload } from 'jsonwebtoken';
 
 export class TokenService {
   createToken(string: unknown): string | JwtPayload {
+    console.log('process.env.SECRET: ', process.env.SECRET);
+
     const token = jwt.sign(JSON.stringify(string), process.env.SECRET);
 
     return token;

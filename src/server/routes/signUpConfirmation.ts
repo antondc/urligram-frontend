@@ -27,6 +27,7 @@ router.get(ROUTE_REGEX, async (req: any, res: any) => {
     name: req.query.name,
     token: req.query.token,
   };
+  console.log('=======');
   try {
     const { data } = await HttpClient.post<void, SignUpConfirmationResponse>(
       '/users/sign-up-confirmation',
@@ -37,9 +38,14 @@ router.get(ROUTE_REGEX, async (req: any, res: any) => {
     const tokenService = new TokenService();
     const sessionToken = await tokenService.createToken(data?.attributes);
 
+    console.log('sessionToken: ', sessionToken);
+
     const urlWrapper = new URLWrapper(`${req.protocol}://${req.hostname}`);
     const domainWithoutSubdomain = urlWrapper.getDomainWithoutSubdomain();
     const domainForCookie = `.${domainWithoutSubdomain}`; // Return domain only for recognized clients
+
+    console.log('domainWithoutSubdomain: ', domainWithoutSubdomain);
+    console.log('domainForCookie: ', domainForCookie);
 
     await res
       .cookie('sessionData', JSON.stringify(sessionData), {
@@ -56,6 +62,10 @@ router.get(ROUTE_REGEX, async (req: any, res: any) => {
       })
       .redirect(`/sign-up-confirmation?success=true`);
   } catch (err) {
+    console.log('err:');
+    console.log(err);
+    console.log('=======');
+
     await res.redirect('/sign-up-confirmation?failure=true');
   }
 });
