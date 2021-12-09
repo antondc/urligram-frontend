@@ -13,11 +13,11 @@ import { RootState } from 'Modules/rootType';
 import { selectCurrentRouteParamUserId } from 'Modules/Routes/selectors/selectCurrentRouteParamUserId';
 import { sessionLogOut } from 'Modules/Session/actions/sessionLogOut';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
+import { uiResetModalsState } from 'Modules/Ui/actions/uiResetModalsState';
 import { userDelete } from 'Modules/Users/actions/userDelete';
 import { userLoad } from 'Modules/Users/actions/userLoad';
 import { selectUserById } from 'Modules/Users/selectors/selectUserById';
 import { Routes } from 'Router/routes';
-import { CookiesWrapper } from 'Services/CookiesWrapper';
 import history from 'Services/History';
 import { LocaleFormattedDate } from 'Tools/utils/Date/localeFormattedDate';
 import { isDomAvailable } from 'Tools/utils/dom/isDomAvailable';
@@ -31,7 +31,6 @@ interface Props {
 
 const User: React.FC<Props> = () => {
   const dispatch = useDispatch();
-  const cookiesWrapper = new CookiesWrapper();
 
   const session = useSelector(selectSession);
   const userId = useSelector(selectCurrentRouteParamUserId);
@@ -69,6 +68,8 @@ const User: React.FC<Props> = () => {
     dispatch(userLoad(userId));
     dispatch(listsLoadByUserId({ userId }));
   }, [session?.id]);
+
+  useEffect(() => () => dispatch(uiResetModalsState()), []);
 
   return (
     <UserUi

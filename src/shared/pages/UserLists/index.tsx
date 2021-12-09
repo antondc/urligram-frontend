@@ -16,6 +16,7 @@ import { tagsSearchLoad } from 'Modules/Tags/actions/tagsSearchLoad';
 import { selectTagsAll } from 'Modules/Tags/selectors/selectAllTags';
 import { selectTagsSearch } from 'Modules/Tags/selectors/selectTagsSearch';
 import { switchListModal } from 'Modules/Ui/actions/switchListModal';
+import { uiResetModalsState } from 'Modules/Ui/actions/uiResetModalsState';
 import { userLoad } from 'Modules/Users/actions/userLoad';
 import { selectUserById } from 'Modules/Users/selectors/selectUserById';
 import history from 'Services/History';
@@ -73,6 +74,8 @@ const UserLists: React.FC = () => {
     if (!userId) return;
     dispatch(listsLoadByUserId({ userId }));
   }, [page, session?.id]);
+
+  useEffect(() => () => dispatch(uiResetModalsState()), []);
 
   return (
     <UserListsUi

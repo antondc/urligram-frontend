@@ -1,7 +1,8 @@
 import express from 'express';
 
-import HttpClient from 'Root/src/shared/services/HttpClient';
-import { TokenService } from 'Root/src/shared/services/TokenService';
+import HttpClient from 'Services/HttpClient';
+import { URLWrapper } from 'Services/URLWrapper';
+import { TokenService } from '../services/TokenService';
 
 const ROUTE_REGEX = '/:lang([a-z]{2})?/sign-up-confirmation/check';
 
@@ -16,8 +17,11 @@ type SignUpConfirmationResponse = {
 
 const router = express.Router();
 
-// Route not rendered
-// On user creation name and token will be validated, session will be embedded in the cookie, and user will be routed accordingly
+// Route not rendered, only redirects
+// 1. Received token is validated against API endpoint /users/sign-up-confirmation
+// 2. If request succeeded, we create new token using user data and redirect redirect with failure=true with two cookies: sessionData and sessionToken.
+// 3. If request failed, we redirect with failure=true
+
 router.get(ROUTE_REGEX, async (req: any, res: any) => {
   const queryParams = {
     name: req.query.name,
@@ -29,18 +33,29 @@ router.get(ROUTE_REGEX, async (req: any, res: any) => {
       queryParams
     );
 
+    const sessionData = data?.attributes;
     const tokenService = new TokenService();
-    const token = await tokenService.createToken(data?.attributes);
+    const sessionToken = await tokenService.createToken(data?.attributes);
+
+    const urlWrapper = new URLWrapper(`${req.protocol}://${req.hostname}`);
+    const domainWithoutSubdomain = urlWrapper.getDomainWithoutSubdomain();
+    const domainForCookie = `.${domainWithoutSubdomain}`; // Return domain only for recognized clients
 
     await res
-      .cookie('sessionToken', token, {
+      .cookie('sessionData', JSON.stringify(sessionData), {
         maxAge: 24 * 60 * 60 * 1000 * 30, // One month
         httpOnly: true,
         path: '/',
-        domain: `.${process.env.DOMAIN}`,
+        domain: domainForCookie,
+      })
+      .cookie('sessionToken', sessionToken, {
+        maxAge: 24 * 60 * 60 * 1000 * 30, // One month
+        httpOnly: true,
+        path: '/',
+        domain: domainForCookie,
       })
       .redirect(`/sign-up-confirmation?success=true`);
-  } catch {
+  } catch (err) {
     await res.redirect('/sign-up-confirmation?failure=true');
   }
 });

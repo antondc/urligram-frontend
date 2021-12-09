@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectCurrentRouteQueryParams } from 'Modules/Routes/selectors/selectCurrentRouteQueryParams';
 import { switchWelcomeModal } from 'Modules/Ui/actions/switchWelcomeModal';
 import { switchWelcomeModalError } from 'Modules/Ui/actions/switchWelcomeModalError';
+import { uiResetModalsState } from 'Modules/Ui/actions/uiResetModalsState';
 
 const SignUpConfirmation: React.FC = () => {
   const dispatch = useDispatch();
@@ -18,6 +19,8 @@ const SignUpConfirmation: React.FC = () => {
 
     dispatch(switchWelcomeModalError(true));
   }, []);
+
+  useEffect(() => () => dispatch(uiResetModalsState()), []);
 
   return <></>;
 };

@@ -9,6 +9,7 @@ import { selectCurrentRouteQueryParamPage } from 'Modules/Routes/selectors/selec
 import { tagsSearchLoad } from 'Modules/Tags/actions/tagsSearchLoad';
 import { selectTagsAll } from 'Modules/Tags/selectors/selectAllTags';
 import { selectTagsSearch } from 'Modules/Tags/selectors/selectTagsSearch';
+import { uiResetModalsState } from 'Modules/Ui/actions/uiResetModalsState';
 import { userFollowingLoad } from 'Modules/Users/actions/userFollowingLoad';
 import { userLoad } from 'Modules/Users/actions/userLoad';
 import { selectUserById } from 'Modules/Users/selectors/selectUserById';
@@ -63,6 +64,8 @@ const Following: React.FC = () => {
   useEffect(() => {
     dispatch(userFollowingLoad(userId));
   }, [page]);
+
+  useEffect(() => () => dispatch(uiResetModalsState()), []);
 
   return (
     <FollowingUI

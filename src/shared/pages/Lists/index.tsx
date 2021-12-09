@@ -14,6 +14,7 @@ import { tagsSearchLoad } from 'Modules/Tags/actions/tagsSearchLoad';
 import { selectTagsAll } from 'Modules/Tags/selectors/selectAllTags';
 import { selectTagsSearch } from 'Modules/Tags/selectors/selectTagsSearch';
 import { switchListModal } from 'Modules/Ui/actions/switchListModal';
+import { uiResetModalsState } from 'Modules/Ui/actions/uiResetModalsState';
 import history from 'Services/History';
 import { URLWrapper } from 'Services/URLWrapper';
 import { isDomAvailable } from 'Tools/utils/dom/isDomAvailable';
@@ -60,6 +61,8 @@ const Lists: React.FC = () => {
   useEffect(() => {
     dispatch(listsLoad());
   }, [page, session?.id]);
+
+  useEffect(() => () => dispatch(uiResetModalsState()), []);
 
   return (
     <ListsUI

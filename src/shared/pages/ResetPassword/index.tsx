@@ -6,6 +6,7 @@ import { sessionResetPassword } from 'Modules/Session/actions/sessionResetPasswo
 import { selectSessionErrorLast } from 'Modules/Session/selectors/selectSessionErrorLast';
 import { selectSessionLoading } from 'Modules/Session/selectors/selectSessionLoading';
 import { selectSessionPasswordRequested } from 'Modules/Session/selectors/selectSessionPasswordRequested';
+import { uiResetModalsState } from 'Modules/Ui/actions/uiResetModalsState';
 import { validatePassword } from 'Tools/utils/string/validatePassword';
 import { ResetPassword as ResetPasswordUi } from './ResetPassword';
 
@@ -100,6 +101,8 @@ const ResetPassword: React.FC = () => {
 
     if (sessionError?.message) setSubmitError(sessionError?.message);
   }, [sessionError]);
+
+  useEffect(() => () => dispatch(uiResetModalsState()), []);
 
   return (
     <ResetPasswordUi

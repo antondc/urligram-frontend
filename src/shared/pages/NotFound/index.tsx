@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Helmet from 'react-helmet';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import A from 'Components/A';
 import CardItem from 'Components/CardItem';
 import { selectCurrentGlossary } from 'Modules/Languages/selectors/selectCurrentGlossary';
+import { uiResetModalsState } from 'Modules/Ui/actions/uiResetModalsState';
 import { SITE_TITLE } from 'Root/src/shared/constants';
 import { Routes } from 'Router/routes';
 import { Space } from '@antoniodcorrea/components';
@@ -12,7 +13,10 @@ import { Space } from '@antoniodcorrea/components';
 import './NotFound.less';
 
 const NotFound: React.FC = () => {
+  const dispatch = useDispatch();
   const currentGlossary = useSelector(selectCurrentGlossary);
+
+  useEffect(() => () => dispatch(uiResetModalsState()), []);
 
   return (
     <>

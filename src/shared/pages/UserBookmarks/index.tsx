@@ -17,6 +17,7 @@ import { tagsSearchLoad } from 'Modules/Tags/actions/tagsSearchLoad';
 import { selectTagsAll } from 'Modules/Tags/selectors/selectAllTags';
 import { selectTagsSearch } from 'Modules/Tags/selectors/selectTagsSearch';
 import { switchBookmarkCreateModal } from 'Modules/Ui/actions/switchBookmarkCreateModal';
+import { uiResetModalsState } from 'Modules/Ui/actions/uiResetModalsState';
 import { userLoad } from 'Modules/Users/actions/userLoad';
 import { selectUserById } from 'Modules/Users/selectors/selectUserById';
 import history from 'Services/History';
@@ -73,6 +74,8 @@ const UserBookmarks: React.FC = () => {
   useEffect(() => {
     dispatch(bookmarksLoadByUserId(userId));
   }, [url, session?.id]);
+
+  useEffect(() => () => dispatch(uiResetModalsState()), []);
 
   return (
     <UserBookmarksUi

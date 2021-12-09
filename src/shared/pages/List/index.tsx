@@ -23,6 +23,7 @@ import { selectTagsAll } from 'Modules/Tags/selectors/selectAllTags';
 import { selectTagsSearch } from 'Modules/Tags/selectors/selectTagsSearch';
 import { switchListModal } from 'Modules/Ui/actions/switchListModal';
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
+import { uiResetModalsState } from 'Modules/Ui/actions/uiResetModalsState';
 import { userLoad } from 'Modules/Users/actions/userLoad';
 import { usersLoadByIds } from 'Modules/Users/actions/usersLoadByIds';
 import { selectUserById } from 'Modules/Users/selectors/selectUserById';
@@ -126,6 +127,8 @@ const List: React.FC = () => {
     // If the session member of this list is pending, display banner
     if (sessionUserInThisList?.userStatus === 'pending') setShowBanner(true);
   }, [sessionUserInThisList?.userStatus]);
+
+  useEffect(() => () => dispatch(uiResetModalsState()), []);
 
   if (!list) return null;
 

@@ -8,6 +8,7 @@ import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { tagsSearchLoad } from 'Modules/Tags/actions/tagsSearchLoad';
 import { selectTagsAll } from 'Modules/Tags/selectors/selectAllTags';
 import { selectTagsSearch } from 'Modules/Tags/selectors/selectTagsSearch';
+import { uiResetModalsState } from 'Modules/Ui/actions/uiResetModalsState';
 import { usersLoad } from 'Modules/Users/actions/usersLoad';
 import { selectUsersCurrentIds } from 'Modules/Users/selectors/selectUsersCurrentIds';
 import { selectUsersLoading } from 'Modules/Users/selectors/selectUsersLoading';
@@ -56,6 +57,8 @@ const Users: React.FC = () => {
   useEffect(() => {
     dispatch(usersLoad());
   }, [page, session?.id]);
+
+  useEffect(() => () => dispatch(uiResetModalsState()), []);
 
   return (
     <UsersUI

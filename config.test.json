@@ -24,6 +24,5 @@
   "TEMP_FILES": "media/temp_files",
   "DEFAULT_IMAGE": "/img/default-image.png",
   "CONTACT_EMAIL": "info@example.com",
-  "SECRET": "superSecret",
   "APP_NAME": "Urligram"
 }

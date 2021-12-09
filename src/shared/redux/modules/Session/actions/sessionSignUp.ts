@@ -23,13 +23,12 @@ export const sessionSignUp =
         },
       });
 
-      const { data }: SessionSignUpApiResponse = await HttpClient.post('/users', userData);
+      await HttpClient.post('/users', userData);
 
       await dispatch(switchSignUpModal(true));
       await dispatch({
         type: SESSION_SIGN_UP_SUCCESS,
         payload: {
-          ...data.attributes,
           loading: false,
         },
       });

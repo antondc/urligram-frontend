@@ -7,6 +7,7 @@ import { selectSessionErrorLast } from 'Modules/Session/selectors/selectSessionE
 import { selectSessionLoading } from 'Modules/Session/selectors/selectSessionLoading';
 import { selectSessionStatus } from 'Modules/Session/selectors/selectSessionStatus';
 import { SESSION_STATUS_INACTIVE } from 'Modules/Session/session.types';
+import { uiResetModalsState } from 'Modules/Ui/actions/uiResetModalsState';
 import { DELAY_SLOW_MS } from 'Root/src/shared/constants';
 import { testStringHasWhiteSpaces } from 'Tools/utils/string/testStringHasWhiteSpaces';
 import { validateEmailAddress } from 'Tools/utils/string/validateEmailAddress';
@@ -176,6 +177,8 @@ const SignUp: React.FC = () => {
     }
     if (sessionError?.message) setSubmitError(sessionError?.message);
   }, [sessionError]);
+
+  useEffect(() => () => dispatch(uiResetModalsState()), []);
 
   return (
     <SignUpUi

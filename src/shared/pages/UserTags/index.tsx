@@ -9,6 +9,7 @@ import { tagsLoadByUserId } from 'Modules/Tags/actions/tagsLoadByUserId';
 import { selectTagsLoading } from 'Modules/Tags/selectors/selectAllTagsLoading';
 import { selectTagsCurrent } from 'Modules/Tags/selectors/selectTagsCurrent';
 import { selectTagsMetaSort } from 'Modules/Tags/selectors/selectTagsMetaSort';
+import { uiResetModalsState } from 'Modules/Ui/actions/uiResetModalsState';
 import { userLoad } from 'Modules/Users/actions/userLoad';
 import { selectUserById } from 'Modules/Users/selectors/selectUserById';
 import { isDomAvailable } from 'Tools/utils/dom/isDomAvailable';
@@ -33,6 +34,8 @@ const UserTags: React.FC = () => {
   useEffect(() => {
     dispatch(tagsLoadByUserId(userId));
   }, [url, session?.id]);
+
+  useEffect(() => () => dispatch(uiResetModalsState()), []);
 
   return <TagsUi user={user} tags={tags} tagsLoading={tagsLoading} url={url} sort={sort} />;
 };

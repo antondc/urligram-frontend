@@ -6,6 +6,7 @@ import { sessionForgotPassword } from 'Modules/Session/actions/sessionForgotPass
 import { selectSessionErrorLast } from 'Modules/Session/selectors/selectSessionErrorLast';
 import { selectSessionLoading } from 'Modules/Session/selectors/selectSessionLoading';
 import { selectSessionPasswordRequested } from 'Modules/Session/selectors/selectSessionPasswordRequested';
+import { uiResetModalsState } from 'Modules/Ui/actions/uiResetModalsState';
 import { DELAY_MEDIUM_MS } from 'Root/src/shared/constants';
 import { testStringHasWhiteSpaces } from 'Tools/utils/string/testStringHasWhiteSpaces';
 import { validateEmailAddress } from 'Tools/utils/string/validateEmailAddress';
@@ -97,6 +98,8 @@ const ForgotPassword: React.FC = () => {
 
     if (sessionError?.message) setSubmitError(sessionError?.message);
   }, [sessionError]);
+
+  useEffect(() => () => dispatch(uiResetModalsState()), []);
 
   return (
     <ForgotPasswordUi

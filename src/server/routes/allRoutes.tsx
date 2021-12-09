@@ -16,10 +16,10 @@ import storeFactory from 'Redux/.';
 import config from 'Root/config.test.json';
 import { RecursiveObject } from 'Root/src/shared/typescript/recursiveObject';
 import { Routes, routesList, routesPathsList, routesWithoutOmmitedValues } from 'Router/routes';
-import Authentication from 'Services/Authentication';
 import history from 'Services/History';
 import enhanceRouteWithParams from 'Tools/utils/url/enhanceRouteWithParams';
 import findActiveRouteKey from 'Tools/utils/url/findActiveRouteKey';
+import { TokenService } from '../services/TokenService';
 
 export type RequestParameters = {
   hostname?: string;
@@ -28,32 +28,27 @@ export type RequestParameters = {
   query?: RecursiveObject;
 };
 
-const authentication = new Authentication();
 const router = express.Router();
 
-router.get(routesPathsList, (req: any, res: any, next: any) => {
+router.get(routesPathsList, async (req: any, res: any, next: any) => {
   // Get active route key
   const activeRouteKey = findActiveRouteKey({ urlPath: req.path, routes: routesList });
 
-  // Validate session data from token
-  let session;
-  try {
-    session = authentication.verifyToken(req.cookies.sessionToken) as SessionState;
-  } catch {
-    session = {};
-  }
+  // Decode token
+  const tokenService = new TokenService();
+  const sessionData: SessionState = await tokenService.decodeToken<SessionState>(req.cookies?.sessionToken);
 
   const requestParameters: RequestParameters = {
     hostname: req.hostname,
     originalUrl: req.originalUrl,
     params: {
       ...req.params,
-      sessionId: session?.id,
+      sessionId: sessionData?.id,
     },
     query: req.query,
   };
 
-  const initialDataLoaders = !!session?.id
+  const initialDataLoaders = !!sessionData?.id
     ? Routes[activeRouteKey].initialDataLoadersSession
     : Routes[activeRouteKey].initialDataLoadersVisitor;
 
@@ -79,7 +74,7 @@ router.get(routesPathsList, (req: any, res: any, next: any) => {
 
       const initialState = {
         ...mergedResponse,
-        Session: session?.id ? session : mergedResponse?.Session || {}, // If we are receiving cookies with session, use them; otherwise try to use use the session object
+        Session: sessionData?.id ? sessionData : mergedResponse?.Session || {}, // If we are receiving cookies with session, use them; otherwise try to use use the session object
         Routes: {
           routes: routesWithoutOmmitedValues,
           history: [initialRoute],

@@ -9,6 +9,7 @@ import { selectCurrentRouteQueryParamPage } from 'Modules/Routes/selectors/selec
 import { tagsSearchLoad } from 'Modules/Tags/actions/tagsSearchLoad';
 import { selectTagsAll } from 'Modules/Tags/selectors/selectAllTags';
 import { selectTagsSearch } from 'Modules/Tags/selectors/selectTagsSearch';
+import { uiResetModalsState } from 'Modules/Ui/actions/uiResetModalsState';
 import { userFollowersLoad } from 'Modules/Users/actions/userFollowersLoad';
 import { userLoad } from 'Modules/Users/actions/userLoad';
 import { selectUserById } from 'Modules/Users/selectors/selectUserById';
@@ -63,6 +64,8 @@ const Followers: React.FC = () => {
   useEffect(() => {
     dispatch(userFollowersLoad(userId));
   }, [page]);
+
+  useEffect(() => () => dispatch(uiResetModalsState()), []);
 
   return (
     <FollowersUI
