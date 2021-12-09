@@ -28,11 +28,16 @@ router.get(ROUTE_REGEX, async (req: any, res: any) => {
     token: req.query.token,
   };
   console.log('=======');
+
+  console.log('queryParams: ', queryParams);
+
   try {
     const { data } = await HttpClient.post<void, SignUpConfirmationResponse>(
       '/users/sign-up-confirmation',
       queryParams
     );
+
+    console.log('data: ', data);
 
     const sessionData = data?.attributes;
     const tokenService = new TokenService();
@@ -47,7 +52,7 @@ router.get(ROUTE_REGEX, async (req: any, res: any) => {
     console.log('domainWithoutSubdomain: ', domainWithoutSubdomain);
     console.log('domainForCookie: ', domainForCookie);
 
-    await res
+    res
       .cookie('sessionData', JSON.stringify(sessionData), {
         maxAge: 24 * 60 * 60 * 1000 * 30, // One month
         httpOnly: true,
