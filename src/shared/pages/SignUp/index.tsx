@@ -24,16 +24,12 @@ const SignUp: React.FC = () => {
   const sessionLoading = useSelector(selectSessionLoading);
   const [emailValue, setEmailValue] = useState<string>(undefined);
   const [emailError, setEmailError] = useState<string>(undefined);
-  const debouncedSetEmailError = useCallback(debounce(setEmailError, DELAY_SLOW_MS), []);
   const [nameValue, setNameValue] = useState<string>(undefined);
   const [nameError, setNameError] = useState<string>(undefined);
-  const debouncedSetNameError = useCallback(debounce(setNameError, DELAY_SLOW_MS), []);
   const [passwordValue, setPasswordValue] = useState<string>(undefined);
   const [passwordError, setPasswordError] = useState<string>(undefined);
-  const debouncedSetPasswordError = useCallback(debounce(setPasswordError, DELAY_SLOW_MS), []);
   const [passwordRepeatedValue, setPasswordRepeatedValue] = useState<string>(undefined);
   const [passwordRepeatedError, setPasswordRepeatedError] = useState<string>(undefined);
-  const debouncedSetPasswordRepeatedError = useCallback(debounce(setPasswordRepeatedError, DELAY_SLOW_MS), []);
   const [submitSuccess, setSubmitSuccess] = useState<boolean>(false);
   const [submitError, setSubmitError] = useState<string>(undefined);
   const submitDisabled =
@@ -45,6 +41,26 @@ const SignUp: React.FC = () => {
     !!passwordError ||
     !passwordRepeatedValue ||
     !!passwordRepeatedError;
+
+  const onNameValidate = (value: string) => {
+    const stringHasWhiteSpaces = testStringHasWhiteSpaces(value);
+    if (stringHasWhiteSpaces) {
+      setNameError('Name can not contain spaces');
+
+      return;
+    }
+
+    const isNameLengthValid = value.length > 5;
+
+    if (!isNameLengthValid) {
+      setNameError('Name too short');
+
+      return;
+    }
+  };
+
+  // To debounce the validation we need to memoize it as well
+  const onNameValidateDebounced = useCallback(debounce(onNameValidate, DELAY_SLOW_MS), []);
 
   const onChangeName = async (e: React.FormEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
@@ -58,21 +74,33 @@ const SignUp: React.FC = () => {
       return;
     }
 
+    onNameValidateDebounced(value);
+  };
+
+  const onEmailValidate = (value: string) => {
+    setSubmitError(undefined);
+    setSubmitSuccess(undefined);
+
+    const isEmail = value?.includes('@');
+    const isValidEmail = validateEmailAddress(value);
+
+    if (isEmail && !isValidEmail) {
+      setEmailError('Email not valid');
+
+      return;
+    }
+
     const stringHasWhiteSpaces = testStringHasWhiteSpaces(value);
     if (stringHasWhiteSpaces) {
-      debouncedSetNameError('Name can not contain spaces');
+      setEmailError('Name can not contain spaces');
 
       return;
     }
-
-    const isNameLengthValid = value.length > 5;
-
-    if (!isNameLengthValid) {
-      debouncedSetNameError('Name too short');
-
-      return;
-    }
+    setEmailError(undefined);
   };
+
+  // To debounce the validation we need to memoize it as well
+  const onEmailValidateDebounced = useCallback(debounce(onEmailValidate, DELAY_SLOW_MS), []);
 
   const onChangeEmail = (e: React.FormEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
@@ -86,13 +114,20 @@ const SignUp: React.FC = () => {
       return;
     }
 
-    const isValidEmail = validateEmailAddress(value);
-    if (!isValidEmail) {
-      debouncedSetEmailError('Email not valid');
+    onEmailValidateDebounced(value);
+  };
+
+  const onPasswordValidate = (value: string) => {
+    const isValidPassword = validatePassword(value);
+    if (!isValidPassword) {
+      setPasswordError('6-10 chars., digits, low and uppercase');
 
       return;
     }
   };
+
+  // To debounce the validation we need to memoize it as well
+  const onPasswordValidateDebounced = useCallback(debounce(onPasswordValidate, DELAY_SLOW_MS), []);
 
   const onChangePassword = (e: React.FormEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
@@ -106,13 +141,20 @@ const SignUp: React.FC = () => {
       return;
     }
 
-    const isValidPassword = validatePassword(value);
-    if (!isValidPassword) {
-      debouncedSetPasswordError('6-10 chars., digits, low and uppercase');
+    onPasswordValidateDebounced(value);
+  };
+
+  const onPasswordRepeatedValidate = (value: string) => {
+    const isSamePassword = value === passwordValue;
+    if (!isSamePassword) {
+      setPasswordRepeatedError('Passwords are not equal');
 
       return;
     }
   };
+
+  // To debounce the validation we need to memoize it as well
+  const onPasswordRepeatedValidateDebounced = useCallback(debounce(onPasswordRepeatedValidate, DELAY_SLOW_MS), []);
 
   const onChangePasswordRepeated = (e: React.FormEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
@@ -126,12 +168,7 @@ const SignUp: React.FC = () => {
       return;
     }
 
-    const isSamePassword = value === passwordValue;
-    if (!isSamePassword) {
-      debouncedSetPasswordRepeatedError('Passwords are not equal');
-
-      return;
-    }
+    onPasswordRepeatedValidateDebounced(value);
   };
 
   const onSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
