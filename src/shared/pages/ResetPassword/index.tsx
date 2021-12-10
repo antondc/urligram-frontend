@@ -39,7 +39,7 @@ const ResetPassword: React.FC = () => {
     const isValidPassword = validatePassword(value);
 
     if (!isValidPassword) {
-      setPasswordError('6-10 chars., one digit and uppercase');
+      setPasswordError('6-10 chars., digits, low and uppercase');
 
       return;
     }

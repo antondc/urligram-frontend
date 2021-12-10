@@ -108,7 +108,7 @@ const SignUp: React.FC = () => {
 
     const isValidPassword = validatePassword(value);
     if (!isValidPassword) {
-      debouncedSetPasswordError('6-10 chars., one digit and uppercase');
+      debouncedSetPasswordError('6-10 chars., digits, low and uppercase');
 
       return;
     }
