@@ -17,7 +17,7 @@
     "API_URL": "https://api.urligram.com/api/v1/",
     "DOMAIN": "urligram.com"
   },
-  "ENABLE_ISOMORPHISM": true,
+  "ENABLE_ISOMORPHISM": false,
   "MEDIA": "media",
   "MEDIA_FOLDER": "media",
   "MEDIA_IMAGES": "media/images",

@@ -41,6 +41,9 @@ router.get(ROUTE_REGEX, async (req: any, res: any) => {
     const domainWithoutSubdomain = urlWrapper.getDomainWithoutSubdomain();
     const domainForCookie = `.${domainWithoutSubdomain}`; // Return domain only for recognized clients
 
+    // Disallow robots —crawlers, spiders, etc.—
+    res.set({ 'X-Robots-Tag': 'noindex' });
+
     res
       .cookie('sessionData', JSON.stringify(sessionData), {
         maxAge: 24 * 60 * 60 * 1000 * 30, // One month

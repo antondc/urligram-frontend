@@ -39,7 +39,7 @@ const BookmarkCreateForm: React.FC<Props> = ({ closeModal, setLocked }) => {
   const tagsSearchFormatted = tagsSearch?.map((item) => ({ label: item.name, value: item.name })) || [];
   const currentLanguageSlug = useSelector(selectCurrentLanguageSlug);
   const currentRoute = useSelector(selectCurrentRoute);
-  const currentRouteName = currentRoute.name;
+  const currentRouteName = currentRoute?.name;
   const sessionId = useSelector(selectSessionUserId);
   const [urlSubmitted, setUrlSubmitted] = useState<boolean>(false);
   const [urlLoading, setUrlLoading] = useState<boolean>(false);

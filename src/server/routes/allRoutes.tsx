@@ -34,7 +34,7 @@ router.get(routesPathsList, async (req: any, res: any, next: any) => {
   // Get active route key
   const activeRouteKey = findActiveRouteKey({ urlPath: req.path, routes: routesList });
 
-  // Decode token
+  // Decode token, only on server side.
   const tokenService = new TokenService();
   const sessionData: SessionState = await tokenService.decodeToken<SessionState>(req.cookies?.sessionToken);
 
@@ -48,12 +48,17 @@ router.get(routesPathsList, async (req: any, res: any, next: any) => {
     query: req.query,
   };
 
-  const initialDataLoaders = !!sessionData?.id
+  // Set data loaders for logged user or visitor
+  const dataLoaders = !!sessionData?.id
     ? Routes[activeRouteKey].initialDataLoadersSession
     : Routes[activeRouteKey].initialDataLoadersVisitor;
 
+  // Use data loaders only if we want SSR: `config.ENABLE_ISOMORPHISM`
+  const initialDataLoaders = config.ENABLE_ISOMORPHISM ? dataLoaders : [];
+
   // Retrieve initial data from loaders passing req.params.
-  const initialDataLoadersPromises = initialDataLoaders.map((item: any) => item(requestParameters)); // We have to execute the thunk, as well as the async function within it
+  // We have to execute the thunk, as well as the async function within it
+  const initialDataLoadersPromises = initialDataLoaders.map((item: any) => item(requestParameters));
 
   // Add curent path to history.location
   const location = { ...history.location, pathname: req.path, search: qs.stringify(req.query) };
@@ -85,7 +90,9 @@ router.get(routesPathsList, async (req: any, res: any, next: any) => {
       // Send the Router with Route component; App component sent within render method; backend data passed via context
       const context: any = { initialState }; // TODO: Check this type
       const store = storeFactory(initialState);
+
       /* eslint-disable indent */
+      // Create context with data only if we want SSR
       const appComponentAsString = config.ENABLE_ISOMORPHISM
         ? renderToString(
             <Provider store={store}>
@@ -96,15 +103,18 @@ router.get(routesPathsList, async (req: any, res: any, next: any) => {
           )
         : '';
       /* eslint-enable indent */
+
       const helmet = Helmet.renderStatic();
       const dataForTemplate = serialize(initialState); // Serializing for security reasons: https://redux.js.org/recipes/server-rendering#security-considerations
+
+      res.set({ 'X-Robots-Tag': 'noindex' }); // Disallow robots —crawlers, spiders, etc.—
 
       // Render template with component; frontend data passed via .ejs template
       res.render('index', {
         toHtml: helmet.htmlAttributes.toString(),
         toHead: helmet.title.toString() + helmet.meta.toString() + helmet.link.toString(),
         body: appComponentAsString,
-        data: dataForTemplate,
+        data: dataForTemplate, // Send data only if we want SSR
         isDesktop: req.useragent.isDesktop,
         isMobile: req.useragent.isMobile,
         isTablet: req.useragent.isTablet,

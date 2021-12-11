@@ -105,7 +105,7 @@ const HeaderSmall: React.FC = () => {
 
     // If we are not at Home page, clean local state
     setSearchValue(undefined);
-  }, [currentRoute.name]);
+  }, [currentRoute?.name]);
 
   useEffect(() => {
     // If the url contains query param `filter[text]=SOME_TEXT`, update the local state with it
@@ -113,7 +113,7 @@ const HeaderSmall: React.FC = () => {
 
     const stringifiedParam = currentRouteQueryParamFilter?.text?.toString();
     setSearchValue(stringifiedParam);
-  }, [currentRoute.name]);
+  }, [currentRoute?.name]);
 
   return (
     <HeaderSmallUi

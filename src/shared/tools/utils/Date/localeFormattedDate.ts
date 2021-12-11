@@ -16,6 +16,8 @@ export class LocaleFormattedDate {
   }
 
   getLocaleFormattedDate(options?: { [key: string]: string }): string {
+    if (!this.locale || this.locale === '') return;
+
     const defaultLocaleOptions = {
       year: 'numeric',
       month: 'long',

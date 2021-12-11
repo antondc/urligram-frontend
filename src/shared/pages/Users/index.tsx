@@ -24,6 +24,12 @@ const Users: React.FC = () => {
 
   const session = useSelector(selectSession);
   const usersCurrentIds = useSelector(selectUsersCurrentIds);
+
+  console.log('=======');
+  console.log('usersCurrentIds:');
+  console.log(JSON.stringify(usersCurrentIds, null, 4));
+  console.log('=======');
+
   const usersLoading = useSelector(selectUsersLoading) && isDomAvailable;
   const page = useSelector(selectCurrentRouteQueryParamPage);
   const totalItems = useSelector(selectUsersTotalItems);
