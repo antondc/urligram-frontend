@@ -62,7 +62,7 @@ const Followers: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    dispatch(userFollowersLoad(userId));
+    dispatch(userFollowersLoad({ userId }));
   }, [page]);
 
   useEffect(() => () => dispatch(uiResetModalsState()), []);

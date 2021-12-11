@@ -62,7 +62,7 @@ const Following: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    dispatch(userFollowingLoad(userId));
+    dispatch(userFollowingLoad({ userId }));
   }, [page]);
 
   useEffect(() => () => dispatch(uiResetModalsState()), []);

@@ -111,8 +111,8 @@ const Layout: React.FC<Props> = ({ location }) => {
   useEffect(() => {
     if (!session?.id) return;
     dispatch(userLoad(session?.id));
-    dispatch(userFollowingLoad(session?.id));
-    dispatch(userFollowersLoad(session?.id));
+    dispatch(userFollowingLoad({ userId: session?.id, rawData: true }));
+    dispatch(userFollowersLoad({ userId: session?.id, rawData: true }));
     dispatch(listsLoadByUserId({ userId: session?.id, rawData: true }));
   }, [session?.id]);
 
