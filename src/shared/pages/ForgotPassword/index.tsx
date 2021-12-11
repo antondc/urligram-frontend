@@ -7,7 +7,7 @@ import { selectSessionErrorLast } from 'Modules/Session/selectors/selectSessionE
 import { selectSessionLoading } from 'Modules/Session/selectors/selectSessionLoading';
 import { selectSessionPasswordRequested } from 'Modules/Session/selectors/selectSessionPasswordRequested';
 import { uiResetModalsState } from 'Modules/Ui/actions/uiResetModalsState';
-import { DELAY_MEDIUM_MS } from 'Root/src/shared/constants';
+import { DELAY_MEDIUM_MS, EVENT_BLUR } from 'Root/src/shared/constants';
 import { testStringHasWhiteSpaces } from 'Tools/utils/string/testStringHasWhiteSpaces';
 import { validateEmailAddress } from 'Tools/utils/string/validateEmailAddress';
 import { ForgotPassword as ForgotPasswordUi } from './ForgotPassword';
@@ -59,6 +59,9 @@ const ForgotPassword: React.FC = () => {
 
   const onChangeNameOrEmail = async (e: React.FormEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
+
+    if (e.type === EVENT_BLUR) return;
+
     setNameOrEmailError(undefined);
     setNameOrEmailValue(value);
     onNameOrEmailValidateDebounced(value);

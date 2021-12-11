@@ -7,6 +7,7 @@ import { selectSessionErrorLast } from 'Modules/Session/selectors/selectSessionE
 import { selectSessionLoading } from 'Modules/Session/selectors/selectSessionLoading';
 import { selectSessionPasswordRequested } from 'Modules/Session/selectors/selectSessionPasswordRequested';
 import { uiResetModalsState } from 'Modules/Ui/actions/uiResetModalsState';
+import { EVENT_BLUR } from 'Root/src/shared/constants';
 import { validatePassword } from 'Tools/utils/string/validatePassword';
 import { ResetPassword as ResetPasswordUi } from './ResetPassword';
 
@@ -33,6 +34,9 @@ const ResetPassword: React.FC = () => {
 
   const onChangePassword = (e: React.FormEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
+
+    if (e.type === EVENT_BLUR) return;
+
     setPasswordValue(value);
     setSubmitError(undefined);
 
@@ -49,6 +53,9 @@ const ResetPassword: React.FC = () => {
 
   const onChangePasswordRepeated = (e: React.FormEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
+
+    if (e.type === EVENT_BLUR) return;
+
     setPasswordRepeatedValue(value);
     setSubmitError(undefined);
 

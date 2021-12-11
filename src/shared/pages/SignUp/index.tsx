@@ -8,7 +8,7 @@ import { selectSessionLoading } from 'Modules/Session/selectors/selectSessionLoa
 import { selectSessionStatus } from 'Modules/Session/selectors/selectSessionStatus';
 import { SESSION_STATUS_INACTIVE } from 'Modules/Session/session.types';
 import { uiResetModalsState } from 'Modules/Ui/actions/uiResetModalsState';
-import { DELAY_MEDIUM_MS } from 'Root/src/shared/constants';
+import { DELAY_MEDIUM_MS, EVENT_BLUR } from 'Root/src/shared/constants';
 import { testStringHasWhiteSpaces } from 'Tools/utils/string/testStringHasWhiteSpaces';
 import { validateEmailAddress } from 'Tools/utils/string/validateEmailAddress';
 import { validatePassword } from 'Tools/utils/string/validatePassword';
@@ -64,6 +64,9 @@ const SignUp: React.FC = () => {
 
   const onChangeName = async (e: React.FormEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
+
+    if (e.type === EVENT_BLUR) return;
+
     setNameValue(value);
     setSubmitError(undefined);
     setNameError(undefined);
@@ -97,6 +100,9 @@ const SignUp: React.FC = () => {
 
   const onChangeEmail = (e: React.FormEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
+
+    if (e.type === EVENT_BLUR) return;
+
     setEmailValue(value);
     setSubmitError(undefined);
     setEmailError(undefined);
@@ -124,6 +130,8 @@ const SignUp: React.FC = () => {
 
   const onChangePassword = (e: React.FormEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
+
+    if (e.type === EVENT_BLUR) return;
 
     setPasswordValue(value);
 
@@ -153,6 +161,9 @@ const SignUp: React.FC = () => {
 
   const onChangePasswordRepeated = (e: React.FormEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
+
+    if (e.type === EVENT_BLUR) return;
+
     setPasswordRepeatedValue(value);
     setSubmitError(undefined);
     setPasswordRepeatedError(undefined);

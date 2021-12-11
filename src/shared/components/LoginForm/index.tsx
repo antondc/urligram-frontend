@@ -5,6 +5,7 @@ import { sessionLogIn } from 'Modules/Session/actions/sessionLogIn';
 import { sessionResetErrors } from 'Modules/Session/actions/sessionResetErrors';
 import { selectSessionErrorLast } from 'Modules/Session/selectors/selectSessionErrorLast';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
+import { EVENT_BLUR } from 'Root/src/shared/constants';
 import { validateEmailAddress } from 'Tools/utils/string/validateEmailAddress';
 import { LoginForm as LoginFormUi } from './LoginForm';
 
@@ -28,6 +29,9 @@ const LoginForm: React.FC<Props> = ({ setLocked }) => {
 
   const onChangeNameOrEmail = async (e: React.FormEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
+
+    if (e.type === EVENT_BLUR) return;
+
     setNameValue(value);
     setSubmitError(undefined);
 
@@ -53,6 +57,9 @@ const LoginForm: React.FC<Props> = ({ setLocked }) => {
 
   const onChangePassword = (e: React.FormEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
+
+    if (e.type === EVENT_BLUR) return;
+
     setPasswordValue(value);
 
     setPasswordError(undefined);
