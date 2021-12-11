@@ -121,12 +121,12 @@ export const SignUp: React.FC<Props> = ({
         <BaseModalFooterSection>
           Forgot password?:
           <Space />
-          <BaseModalFooterLink href="forgot-password">log in</BaseModalFooterLink>
+          <BaseModalFooterLink href="forgot-password">reset it</BaseModalFooterLink>
         </BaseModalFooterSection>
         <BaseModalFooterSection>
           Already have an account?:
           <Space />
-          <BaseModalFooterLink href="login">sign up</BaseModalFooterLink>
+          <BaseModalFooterLink href="login">log in</BaseModalFooterLink>
         </BaseModalFooterSection>
       </BaseModalFooter>
     </BasePanel>
