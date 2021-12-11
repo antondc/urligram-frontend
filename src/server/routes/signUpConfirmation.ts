@@ -33,7 +33,6 @@ router.get(ROUTE_REGEX, async (req: any, res: any) => {
       queryParams
     );
 
-    const sessionData = data?.attributes;
     const tokenService = new TokenService();
     const sessionToken = await tokenService.createToken(data?.attributes);
 
@@ -45,12 +44,6 @@ router.get(ROUTE_REGEX, async (req: any, res: any) => {
     res.set({ 'X-Robots-Tag': 'noindex' });
 
     res
-      .cookie('sessionData', JSON.stringify(sessionData), {
-        maxAge: 24 * 60 * 60 * 1000 * 30, // One month
-        httpOnly: true,
-        path: '/',
-        domain: domainForCookie,
-      })
       .cookie('sessionToken', sessionToken, {
         maxAge: 24 * 60 * 60 * 1000 * 30, // One month
         httpOnly: true,
