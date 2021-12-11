@@ -21,8 +21,8 @@ export const Legal: React.FC<Props> = ({ domain, contactEmail, appName }) => (
           {domain}
         </A>
         <Space />
-        website —«Website»—, «{appName}» mobile application —«Mobile Application»— and any of their related products and
-        services —collectively, «Services»—.
+        website, {appName} mobile application —«Mobile Application»— and any of their related products and services
+        —collectively, «Services»—.
       </p>
       <p className="Docs-paragraph">
         This Disclaimer is a legally binding agreement between you —«User», «you» or «your»— and this Website operator
@@ -104,7 +104,7 @@ export const Legal: React.FC<Props> = ({ domain, contactEmail, appName }) => (
         </A>
         .
       </p>
-      <p className="Docs-paragraph">This document was last updated on September 25, 2021</p>
+      <p className="Docs-paragraph">This document was last updated on December 11, 2021</p>
     </div>
     <div id="privacy-policy">
       <h3 className="Docs-h3">Privacy Policy</h3>
@@ -172,7 +172,7 @@ export const Legal: React.FC<Props> = ({ domain, contactEmail, appName }) => (
         Urligram keeps its privacy policy under regular review and places any updates on this web page.
       </p>
       <p className="Docs-paragraph">
-        If you have any questions about Urligram privacy policy please contact us at
+        If you have any questions regarding {appName} privacy policy please contact
         <Space />
         <A className="Docs-link" href={`mailto:${contactEmail}`} styled={false}>
           {contactEmail}

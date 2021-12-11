@@ -23,6 +23,6 @@
   "MEDIA_IMAGES": "media/images",
   "TEMP_FILES": "media/temp_files",
   "DEFAULT_IMAGE": "/img/default-image.png",
-  "CONTACT_EMAIL": "info@example.com",
+  "CONTACT_EMAIL": "hello@urligram.com",
   "APP_NAME": "Urligram"
 }
