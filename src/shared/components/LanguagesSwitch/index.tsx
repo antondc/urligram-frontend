@@ -34,7 +34,7 @@ const LanguagesSwitch: React.FC<Props> = ({
 }) => {
   const addLinkToLanguage = (language) => {
     const link = !!currentRouteParamLanguage
-      ? currentPathname.replace('/' + currentRouteParamLanguage, '/' + language.slug)
+      ? currentPathname?.replace('/' + currentRouteParamLanguage, '/' + language.slug)
       : '/' + language.slug + currentPathname;
 
     return { ...language, link };

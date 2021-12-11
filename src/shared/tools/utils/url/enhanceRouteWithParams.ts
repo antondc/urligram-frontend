@@ -14,7 +14,7 @@ import { QueryStringWrapper } from 'Services/QueryStringWrapper';
 type EnhanceRouteWithParams = (options: { route: Route; location: Location }) => RouteState;
 
 const enhanceRouteWithParams: EnhanceRouteWithParams = ({ route, location }) => {
-  const regexp = match(route.path, { decode: decodeURIComponent }); // Create a regexp with the route's path
+  const regexp = match(route?.path, { decode: decodeURIComponent }); // Create a regexp with the route's path
   const parsedPath = regexp(location.pathname); // Parse the url and match it
   const finalParams = parsedPath ? parsedPath.params : undefined; // Extract the params
 

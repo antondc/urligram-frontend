@@ -17,7 +17,7 @@ const UserModal: React.FC = () => {
   const session = useSelector(selectSession);
   const userModalMounted = useSelector(selectUiUserModalMounted);
   const route = useSelector(selectCurrentRoute);
-  const isUserPage = route.params?.userId === session?.id;
+  const isUserPage = route?.params?.userId === session?.id;
 
   const logOutDispatched = () => {
     dispatch(sessionLogOut());

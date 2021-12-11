@@ -8,7 +8,7 @@ export const selectPathWithoutLanguageParam = createSelector(
   selectLanguagesSlugList,
   (currentPathname: string, languagesSlugList: string[]): string => {
     const regex = new RegExp(`/[${languagesSlugList}]{2}/`);
-    const pathWithoutLanguageSlug = currentPathname.replace(regex, '/');
+    const pathWithoutLanguageSlug = currentPathname?.replace(regex, '/');
 
     return pathWithoutLanguageSlug;
   }
