@@ -14,9 +14,9 @@ stages:
   - install
   - test
   - build_staging
-  # it co- build_production
+  # - build_production
   - deploy_staging
-  # it co- deploy_production
+  # - deploy_production
 
 cache:
   paths:
