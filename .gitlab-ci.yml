@@ -14,9 +14,9 @@ stages:
   - install
   - test
   - build_staging
-  # - build_production
+  - build_production
   - deploy_staging
-  # - deploy_production
+  - deploy_production
 
 cache:
   paths:
@@ -45,12 +45,12 @@ build_staging:
   script:
     - npm run stage
 
-# build_prod:
-#   stage: build_production
-#   only:
-#     - master
-#   script:
-#     - npm run prod
+build_prod:
+  stage: build_production
+  only:
+    - master
+  script:
+    - npm run prod
 
 deploy_staging:
   stage: deploy_staging
@@ -61,12 +61,13 @@ deploy_staging:
     - ssh xum35s@ec2-35-158-133-68.eu-central-1.compute.amazonaws.com "cd /var/www/html/urligram/staging.urligram.com && git pull origin staging"
     - ssh xum35s@ec2-35-158-133-68.eu-central-1.compute.amazonaws.com "source ~/.bash_profile && export NPM_TOKEN=${NPM_TOKEN} && export SECRET=${SECRET} && cd /var/www/html/urligram/staging.urligram.com && nvm use --delete-prefix && git checkout staging && npm ci --verbose && npm run stage"
     - ssh xum35s@ec2-35-158-133-68.eu-central-1.compute.amazonaws.com "cd /var/www/html/urligram/staging.urligram.com && export SECRET=${SECRET} && NODE_ENV=staging pm2 restart ./dist/server.js --name staging.urligram.com --update-env"
-# deploy_production:
-#   stage: deploy_production
-#   only:
-#     - master
-#   script:
-#     - ssh xum35s@ec2-35-158-133-68.eu-central-1.compute.amazonaws.com "cd /var/www/html/urligram/urligram.com && rm -rf node_modules dist/* tmp"
-#     - ssh xum35s@ec2-35-158-133-68.eu-central-1.compute.amazonaws.com "cd /var/www/html/urligram/urligram.com && git pull origin master"
-#     - ssh xum35s@ec2-35-158-133-68.eu-central-1.compute.amazonaws.com "source ~/.bash_profile && export NPM_TOKEN=${NPM_TOKEN} && export SECRET=${SECRET} && cd /var/www/html/urligram/urligram.com && nvm use --delete-prefix && git checkout master && npm ci --verbose && npm run prod"
-#     - ssh xum35s@ec2-35-158-133-68.eu-central-1.compute.amazonaws.com "cd /var/www/html/urligram/urligram.com && export SECRET=${SECRET} && NODE_ENV=production pm2 restart ./dist/server.js --name urligram.com --update-env"
+    
+deploy_production:
+  stage: deploy_production
+  only:
+    - master
+  script:
+    - ssh xum35s@ec2-35-158-133-68.eu-central-1.compute.amazonaws.com "cd /var/www/html/urligram/urligram.com && rm -rf node_modules dist/* tmp"
+    - ssh xum35s@ec2-35-158-133-68.eu-central-1.compute.amazonaws.com "cd /var/www/html/urligram/urligram.com && git pull origin master"
+    - ssh xum35s@ec2-35-158-133-68.eu-central-1.compute.amazonaws.com "source ~/.bash_profile && export NPM_TOKEN=${NPM_TOKEN} && export SECRET=${SECRET} && cd /var/www/html/urligram/urligram.com && nvm use --delete-prefix && git checkout master && npm ci --verbose && npm run prod"
+    - ssh xum35s@ec2-35-158-133-68.eu-central-1.compute.amazonaws.com "cd /var/www/html/urligram/urligram.com && export SECRET=${SECRET} && NODE_ENV=production pm2 restart ./dist/server.js --name urligram.com --update-env"
