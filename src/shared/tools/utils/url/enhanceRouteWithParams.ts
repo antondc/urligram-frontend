@@ -4,7 +4,7 @@ import { match } from 'path-to-regexp';
 import { RouteState } from 'Modules/Routes/routes.types';
 import { Route } from 'Router/routes';
 import { Location } from 'Services/History';
-import { QueryStringWrapper } from 'Services/QueryStringWrapper';
+import { QueryStringWrapper } from '@antoniodcorrea/utils';
 /**
  * Receives a route object and a react-router-dom-ish location object; extracts the params and query params to enhance the route with them.
  * @param {*} { route, queryParams, location }
@@ -22,6 +22,8 @@ const enhanceRouteWithParams: EnhanceRouteWithParams = ({ route, location }) => 
   const queryParams = QueryStringWrapper.parseQueryString(location.search);
 
   const enhancedRoute: RouteState = Object.assign(cloneDeep(route), {
+    href: '',
+    pathAndQuery: '',
     ...location,
     params: finalParams,
     queryParams,

@@ -10,7 +10,16 @@ export interface RoutesState {
 }
 
 export interface ParamsState {
-  [key: string]: string | number;
+  lang?: string;
+  filter?: string;
+  sort?: string;
+  offset?: string;
+  articleId?: string;
+  name?: string;
+  token?: string;
+  userId?: string;
+  success?: string;
+  listId?: string;
 }
 
 export interface RouteState extends Route, Location {

@@ -6,5 +6,5 @@ import { selectCurrentRoute } from './selectCurrentRoute';
 
 export const selectCurrentRouteParams = createSelector(
   selectCurrentRoute,
-  (currentRoute: RouteState): ParamsState => get(currentRoute, 'params', '')
+  (currentRoute: RouteState): ParamsState => get(currentRoute, 'params', {})
 );

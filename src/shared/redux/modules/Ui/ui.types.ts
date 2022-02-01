@@ -30,7 +30,7 @@ export const UI_SIDEBAR_LEFT_CLOSE = 'UI_SIDEBAR_LEFT_CLOSE';
 
 export type UiBaseModal = {
   type?: 'modal' | 'popup' | 'slider';
-  mounted: boolean;
+  mounted?: boolean;
 };
 
 type NotificationTypeState =
@@ -79,7 +79,7 @@ export type UiState = {
   resetPasswordModal: UiBaseModal;
   bookmarkCreateModal: UiBaseModal;
   bookmarkUpdateModal: {
-    bookmarkId: number;
+    bookmarkId?: number;
   } & UiBaseModal;
   bookmarkActionsIcons: {
     bookmarkId: number;
