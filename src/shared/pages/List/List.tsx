@@ -140,7 +140,7 @@ const List: React.FC<Props> = ({
           >
             <img
               className="List-headerImagesItemImage"
-              src={listUserOwner?.image?.w200h200}
+              src={listUserOwner?.image?.['200w']}
               alt={listUserOwner?.name}
             />
           </A>
@@ -165,7 +165,7 @@ const List: React.FC<Props> = ({
                   key={item?.id}
                   frontend
                 >
-                  <img className="List-headerImagesItemImage" src={item.image?.w200h200} alt={item.name} />
+                  <img className="List-headerImagesItemImage" src={item.image?.['200w']} alt={item.name} />
                 </A>
               </React.Fragment>
             ))}
