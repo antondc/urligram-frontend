@@ -117,11 +117,6 @@ app.use((err: any, req: any, res: any, next: any) => {
   }
 });
 
-console.log('=======');
-console.log('process.env:');
-console.log(JSON.stringify(process.env, null, 4));
-console.log('=======');
-
 /* - - - - - - - - - - - Server - - - - - - - - - - - - - -*/
 
 try {
