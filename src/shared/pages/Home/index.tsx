@@ -39,11 +39,6 @@ const Home: React.FC = () => {
       value: item,
     })) || [];
 
-  console.log('=======');
-  console.log('process.env:');
-  console.log(JSON.stringify(process.env, null, 4));
-  console.log('=======');
-
   const onInputChange = (string: string) => {
     !!string && dispatch(tagsSearchLoad(string));
   };

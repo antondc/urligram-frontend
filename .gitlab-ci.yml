@@ -61,7 +61,7 @@ deploy_staging:
     - ssh xum35s@ec2-35-158-133-68.eu-central-1.compute.amazonaws.com "cd /var/www/html/urligram/staging.urligram.com && git pull origin staging"
     - ssh xum35s@ec2-35-158-133-68.eu-central-1.compute.amazonaws.com "source ~/.bash_profile && export NPM_TOKEN=${NPM_TOKEN} && export SECRET=${SECRET} && cd /var/www/html/urligram/staging.urligram.com && nvm use --delete-prefix && git checkout staging && npm ci --verbose && npm run stage"
     - ssh xum35s@ec2-35-158-133-68.eu-central-1.compute.amazonaws.com "cd /var/www/html/urligram/staging.urligram.com && export SECRET=${SECRET} && NODE_ENV=staging pm2 restart ./dist/server.js --name staging.urligram.com --update-env"
-    
+
 deploy_production:
   stage: deploy_production
   only:
