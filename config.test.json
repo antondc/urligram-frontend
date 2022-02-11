@@ -2,14 +2,14 @@
   "development": {
     "PORT_HTTP": 80,
     "PORT_HTTPS": 443,
-    "API_URL": "https://www.dev.urligram.com:3000/api/v1/",
-    "DOMAIN": "dev.urligram.com"
+    "API_URL": "https://www.dev.woprs.com:3000/api/v1/",
+    "DOMAIN": "dev.woprs.com"
   },
   "staging": {
     "PORT_HTTP": 4001,
     "PORT_HTTPS": 4002,
-    "API_URL": "https://www.api-staging.urligram.com/api/v1/",
-    "DOMAIN": "staging.urligram.com"
+    "API_URL": "https://www.api-staging.woprs.com/api/v1/",
+    "DOMAIN": "staging.woprs.com"
   },
   "production": {
     "PORT_HTTP": 4003,
@@ -23,6 +23,6 @@
   "MEDIA_IMAGES": "media/images",
   "TEMP_FILES": "media/temp_files",
   "DEFAULT_IMAGE": "/img/default-image.png",
-  "CONTACT_EMAIL": "hello@urligram.com",
+  "CONTACT_EMAIL": "hello@woprs.com",
   "APP_NAME": "Woprs"
 }

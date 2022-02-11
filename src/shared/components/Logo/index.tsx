@@ -29,7 +29,7 @@ const Logo: React.FC<Props> = ({ className, loadingBeat, loadingColors }) => {
       <div className="Logo-icon">
         <LogoCircle />
       </div>
-      <h3 className="Logo-text">Urligram</h3>
+      <h3 className="Logo-text">Woprs</h3>
     </A>
   );
 };

@@ -1,5 +1,5 @@
 // General
-export const SITE_TITLE = 'Urligram';
+export const SITE_TITLE = 'Woprs';
 export const DEFAULT_PAGE_SIZE = 20;
 export const COOKIE_POLICY_COOKIE = 'cookiePolicyCookie';
 

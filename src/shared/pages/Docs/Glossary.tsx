@@ -96,8 +96,8 @@ export const Glossary: React.FC = () => (
       <h4 className="Docs-h4">Extension</h4>
       <ul className="Docs-ul">
         <li className="Docs-li">
-          An extension is a special feature to be added to your browser so that the user can add the bookmark to
-          urligram through this feature.
+          An extension is a special feature to be added to your browser so that the user can add the bookmark to woprs
+          through this feature.
         </li>
         <li className="Docs-li">The extension can be added to Chrome, Mozilla, Edge.</li>
         <li className="Docs-li">The extension opens as a form to be filled within the browser tab.</li>

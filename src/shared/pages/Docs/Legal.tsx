@@ -109,17 +109,17 @@ export const Legal: React.FC<Props> = ({ domain, contactEmail, appName }) => (
     <div id="privacy-policy">
       <h3 className="Docs-h3">Privacy Policy</h3>
       <p className="Docs-paragraph">
-        This Policy will explain how Urligram collects, uses and disclosure the personal data we collect from you when
-        you use our website.
+        This Policy will explain how Woprs collects, uses and disclosure the personal data we collect from you when you
+        use our website.
       </p>
       <p className="Docs-paragraph">
         We use your Personal Information for providing and improving the Services. By using the Service, you agree to
         the collection and use of information in accordance with this policy.
       </p>
       <p className="Docs-paragraph">
-        You are able to use Urligram anonymously, the only data we collect is the working email address. Your email
-        address is used for the following purposes: to send you information about updates of our services or to send you
-        the password reset link in case of password lost.
+        You are able to use Woprs anonymously, the only data we collect is the working email address. Your email address
+        is used for the following purposes: to send you information about updates of our services or to send you the
+        password reset link in case of password lost.
       </p>
       <p className="Docs-paragraph">
         You can permanently delete your personal information from the database by deleting your account on the Account
@@ -150,26 +150,26 @@ export const Legal: React.FC<Props> = ({ domain, contactEmail, appName }) => (
         site you visit. We have no control over, and assume no responsibility for the content, privacy policies or
         practices of any third party sites or services.
       </p>
-      <p className="Docs-paragraph">Urligram is not sharing user data with third parties.</p>
+      <p className="Docs-paragraph">Woprs is not sharing user data with third parties.</p>
       <p className="Docs-paragraph">We would like to be sure you are aware of the data protection rights:</p>
       <ul className="Docs-ul">
         <li className="Docs-li">
-          You have the right to request to Urligram the copies of your personal data and the right to correct any
+          You have the right to request to Woprs the copies of your personal data and the right to correct any
           information you believe is inaccurate.
         </li>
         <li className="Docs-li">
-          You have the right to request that Urligram erase your personal data, under certain conditions.
+          You have the right to request that Woprs erase your personal data, under certain conditions.
         </li>
         <li className="Docs-li">
           You have the right to object and restrict the processing of your personal data, under certain conditions.
         </li>
         <li className="Docs-li">
-          You have the right to request that Urligram transfer the data that we have collected to another organization
-          or directly to you.
+          You have the right to request that Woprs transfer the data that we have collected to another organization or
+          directly to you.
         </li>
       </ul>
       <p className="Docs-paragraph">
-        Urligram keeps its privacy policy under regular review and places any updates on this web page.
+        Woprs keeps its privacy policy under regular review and places any updates on this web page.
       </p>
       <p className="Docs-paragraph">
         If you have any questions regarding {appName} privacy policy please contact

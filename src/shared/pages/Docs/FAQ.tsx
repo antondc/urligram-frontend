@@ -3,9 +3,9 @@ import React from 'react';
 export const FAQ: React.FC = () => (
   <div className="Docs-section" id="faq">
     <h2 className="Docs-h2">Frequently Asked Questions</h2>
-    <h4 className="Docs-h4">What is Urligram?</h4>
+    <h4 className="Docs-h4">What is Woprs?</h4>
     <p className="Docs-paragraph">
-      Urligram is an online platform that allows users to store, share and manage URL resources. The goal is to provide
+      Woprs is an online platform that allows users to store, share and manage URL resources. The goal is to provide
       a resource of knowledge in form of links, as well as a tool to manage them.
     </p>
     <p className="Docs-paragraph">
@@ -13,16 +13,16 @@ export const FAQ: React.FC = () => (
     </p>
     <h4 className="Docs-h4">How does it work?</h4>
     <p className="Docs-paragraph">
-      There are two ways to use Urligram. You can be a visitor so that you can see the bookmarks of others or you can be
+      There are two ways to use Woprs. You can be a visitor so that you can see the bookmarks of others or you can be
       a user and this allows you to benefit from the whole functionality.
     </p>
     <p className="Docs-paragraph">
-      Urligram works as a separate web page and there is an extension to enjoy Urligram functionality without opening
+      Woprs works as a separate web page and there is an extension to enjoy Woprs functionality without opening
       the page in your desktop or mobile.
     </p>
     <h4 className="Docs-h4">Why shall I use it?</h4>
     <p className="Docs-paragraph">
-      Urligram is a social bookmarking tool. We consider the main benefits of Urligram to be:
+      Woprs is a social bookmarking tool. We consider the main benefits of Woprs to be:
     </p>
     <ul className="Docs-ul">
       <li className="Docs-li">You can store the links from all the browsers and devices.</li>
@@ -30,7 +30,7 @@ export const FAQ: React.FC = () => (
       <li className="Docs-li">You can share your content with others.</li>
     </ul>
     <p className="Docs-paragraph">
-      With Urligram you will never loose the article you came across while browsing and your friends are going to be
+      With Woprs you will never loose the article you came across while browsing and your friends are going to be
       able to open your wish list to be prepared for your birthday.
     </p>
     <h4 className="Docs-h4">How to sign up?</h4>
@@ -52,9 +52,9 @@ export const FAQ: React.FC = () => (
     </p>
     <h4 className="Docs-h4">How to bookmark a page?</h4>
     <p className="Docs-paragraph">
-      Urligram gives you several instruments to manage and share your bookmarks. You can make your bookmarks public and
+      Woprs gives you several instruments to manage and share your bookmarks. You can make your bookmarks public and
       private, you can add tags to find bookmarks per topic —tags section—. You can also create lists to group some
-      bookmarks —list section—. As Urligram is a social bookmarking tool you can follow other users and share your
+      bookmarks —list section—. As Woprs is a social bookmarking tool you can follow other users and share your
       bookmarks and lists with them.
     </p>
     <h4 className="Docs-h4">How to download a plugin?</h4>
@@ -62,18 +62,18 @@ export const FAQ: React.FC = () => (
       To download the plugin you will need to got to download section. There are available version for Chrome, Mozilla
       and Edge.
     </p>
-    <h4 className="Docs-h4">Shall I pay to use Urligram?</h4>
-    <p className="Docs-paragraph">Urligram is a free to use platform so far.</p>
-    <h4 className="Docs-h4">How does privacy work in Urligram?</h4>
+    <h4 className="Docs-h4">Shall I pay to use Woprs?</h4>
+    <p className="Docs-paragraph">Woprs is a free to use platform so far.</p>
+    <h4 className="Docs-h4">How does privacy work in Woprs?</h4>
     <p className="Docs-paragraph">Yo are able to have completely private accounts.</p>
     <p className="Docs-paragraph">
       Bookmarks can be public or private. Private bookmarks are only visible to you, and don’t appear on any of the
       pages.
     </p>
-    <p className="Docs-paragraph">All the users are able to choose the level of their social activity in Urligram.</p>
-    <h4 className="Docs-h4">What about the data security in Urligram?</h4>
+    <p className="Docs-paragraph">All the users are able to choose the level of their social activity in Woprs.</p>
+    <h4 className="Docs-h4">What about the data security in Woprs?</h4>
     <p className="Docs-paragraph">
-      The safety of your data is crucial for Urligram. At any given time, there are one copy of your data in globally
+      The safety of your data is crucial for Woprs. At any given time, there are one copy of your data in globally
       distributed data centers. If failure happens, there is an option to restore to any time in the previous 24h,
       thanks to continuous backup of the database.
     </p>

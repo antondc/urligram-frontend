@@ -1,7 +1,7 @@
 {
-  "name": "urligram",
+  "name": "woprs",
   "version": "0.0.1",
-  "author": "Urligram.com",
+  "author": "Woprs.com",
   "description": "Starter kit for universal sites using react, redux and typescript",
   "main": "dist/server.js",
   "keywords": [

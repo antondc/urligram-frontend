@@ -20,16 +20,16 @@ export const About: React.FC<Props> = ({ domain, contactEmail, appName }) => (
       <p className="Docs-paragraph">
         We spend much time in the internet getting in touch with great content. We may want to save and share this
         content but there is always a challenge how to make it and not loose the interesting link with the amount of
-        data we see and exchange. Then we decided to create Urligram, an online platform that allows users to store,
-        share and manage URL resources.
+        data we see and exchange. Then we decided to create Woprs, an online platform that allows users to store, share
+        and manage URL resources.
       </p>
       <p className="Docs-paragraph">
-        Urligram provides a resource of knowledge in form of links, as well as a tool to manage them. The main elements
-        of the platform are the users, the links, the tags and the lists. The intended interaction rely on browsing
-        versus keyword search. So urligram allows you to store the links and set the level of privacy you would like to,
-        you can personalize the links putting your tags and comments and collecting the lists of bookmarks you would
-        like to have together. As a social bookmarking tool urligram enables your friends to share bookmarks with you
-        and co-own the lists.
+        Woprs provides a resource of knowledge in form of links, as well as a tool to manage them. The main elements of
+        the platform are the users, the links, the tags and the lists. The intended interaction rely on browsing versus
+        keyword search. So woprs allows you to store the links and set the level of privacy you would like to, you can
+        personalize the links putting your tags and comments and collecting the lists of bookmarks you would like to
+        have together. As a social bookmarking tool woprs enables your friends to share bookmarks with you and co-own
+        the lists.
       </p>
       <p className="Docs-paragraph">
         Our mission is to enable you to enjoy the content you would like to at any moment with any device!

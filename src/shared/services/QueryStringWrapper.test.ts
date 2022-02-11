@@ -103,7 +103,7 @@ describe('QueryStringWrapper', () => {
 
   test('it should return all params', () => {
     const urlString =
-      'https://dev.urligram.com/en/bookmarks?field1=value1&field2[field21][]=value211&field2[field21][]=value212';
+      'https://dev.woprs.com/en/bookmarks?field1=value1&field2[field21][]=value211&field2[field21][]=value212';
     const queryString = QueryStringWrapper.extractQueryString(urlString);
     const params = QueryStringWrapper.parseQueryString(queryString);
     const output = {
@@ -118,7 +118,7 @@ describe('QueryStringWrapper', () => {
 
   test('it should upsert params', () => {
     const urlString =
-      'https://dev.urligram.com/en/bookmarks?field1=value1&field2[field21][]=value211&field2[field21][]=value212';
+      'https://dev.woprs.com/en/bookmarks?field1=value1&field2[field21][]=value211&field2[field21][]=value212';
     const queryString = QueryStringWrapper.extractQueryString(urlString);
     const newParams = {
       field3: 'value3',
@@ -134,7 +134,7 @@ describe('QueryStringWrapper', () => {
 
   test('it should delete all occurence of one param at a field', () => {
     const urlString =
-      'https://dev.urligram.com/en/bookmarks?field1=value1&field2[field21][]=value211&field2[field21][]=value212&field2[field22][]=value221&field2[field22][]=value222';
+      'https://dev.woprs.com/en/bookmarks?field1=value1&field2[field21][]=value211&field2[field21][]=value212&field2[field22][]=value221&field2[field22][]=value222';
     const queryString = QueryStringWrapper.extractQueryString(urlString);
 
     const originalParams = QueryStringWrapper.parseQueryString(queryString);
@@ -162,14 +162,14 @@ describe('QueryStringWrapper', () => {
 
   test('it should delete all occurence of one param at a field', () => {
     const urlString =
-      'https://dev.urligram.com/en/bookmarks?field1=value1&field2[field21][]=value211&field2[field21][]=value212&field2[field22][]=value221&field2[field22][]=value222';
+      'https://dev.woprs.com/en/bookmarks?field1=value1&field2[field21][]=value211&field2[field21][]=value212&field2[field22][]=value221&field2[field22][]=value222';
     const queryString = QueryStringWrapper.extractQueryString(urlString);
     const param = QueryStringWrapper.getOneSearchParam(queryString, 'field2.field21');
     expect(param).toEqual(['value211', 'value212']);
   });
 
   test('it should overwrite existing params', () => {
-    const urlString = 'https://dev.urligram.com/en/bookmarks?field1[field12]=value121';
+    const urlString = 'https://dev.woprs.com/en/bookmarks?field1[field12]=value121';
     const queryString = QueryStringWrapper.extractQueryString(urlString);
     const updatedQueryString = QueryStringWrapper.upsertSearchParams(queryString, {
       field1: { field12: 'value_modified' },
@@ -179,7 +179,7 @@ describe('QueryStringWrapper', () => {
   });
 
   test('it should overwrite existing params', () => {
-    const urlString = 'https://dev.urligram.com/en/bookmarks?a[]=1&a[]=2&b[c][]=1&b[c][]=2&b[d]=1';
+    const urlString = 'https://dev.woprs.com/en/bookmarks?a[]=1&a[]=2&b[c][]=1&b[c][]=2&b[d]=1';
     const queryString = QueryStringWrapper.extractQueryString(urlString);
     const queryStringUpdated = QueryStringWrapper.upsertSearchParams(queryString, { b: { c: [312] } });
 
@@ -188,7 +188,7 @@ describe('QueryStringWrapper', () => {
 
   test('it should add params without overwriting them', () => {
     const urlString =
-      'https://dev.urligram.com/en/bookmarks?field1=value1&field2[field21][]=value211&field2[field21][]=value212';
+      'https://dev.woprs.com/en/bookmarks?field1=value1&field2[field21][]=value211&field2[field21][]=value212';
     const queryString = QueryStringWrapper.extractQueryString(urlString);
     const newParams = {
       field1: 'new-value',
