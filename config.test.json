@@ -14,8 +14,8 @@
   "production": {
     "PORT_HTTP": 4003,
     "PORT_HTTPS": 4004,
-    "API_URL": "https://api.urligram.com/api/v1/",
-    "DOMAIN": "urligram.com"
+    "API_URL": "https://api-service.woprs.com/api/v1/",
+    "DOMAIN": "woprs.com"
   },
   "ENABLE_ISOMORPHISM": false,
   "MEDIA": "media",
@@ -24,5 +24,5 @@
   "TEMP_FILES": "media/temp_files",
   "DEFAULT_IMAGE": "/img/default-image.png",
   "CONTACT_EMAIL": "hello@urligram.com",
-  "APP_NAME": "Urligram"
+  "APP_NAME": "Woprs"
 }
