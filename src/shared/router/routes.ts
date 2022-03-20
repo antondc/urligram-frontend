@@ -41,7 +41,7 @@ interface RoutesInterface {
   ResetPassword: Route;
   Control: Route;
   FAQ: Route;
-  Download: Route;
+  Extension: Route;
   ServerError: Route;
   NotFound: Route;
 }
@@ -160,10 +160,10 @@ export const Routes: RoutesInterface = {
     layout: 'withLeftSidebar',
   },
 
-  Download: {
-    name: 'Download',
-    path: '/:lang([a-z]{2})?/download',
-    route: '/download',
+  Extension: {
+    name: 'Extension',
+    path: '/:lang([a-z]{2})?/extension',
+    route: '/extension',
     exact: true,
     auth: false,
     initialDataLoadersVisitor: [],

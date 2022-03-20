@@ -61,7 +61,7 @@ const SidebarLeftDocs: React.FC = () => {
   useEffect(() => {
     window.addEventListener('scroll', onScroll);
 
-    () => window.removeEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   useEffect(() => {

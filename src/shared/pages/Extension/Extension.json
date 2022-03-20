@@ -1,0 +1,12 @@
+{
+  "data": {
+    "en": {
+      "title": "Install extension",
+      "content": "Currently we have a browser extension available for Firefox 🦊, you can install it by clicking the button below."
+    },
+    "es": {
+      "title": "Instalar extensión",
+      "content": "Actualmente tenemos disponible una extensión para Firefox 🦊, puedes instalarla haciendo click aquí."
+    }
+  }
+}

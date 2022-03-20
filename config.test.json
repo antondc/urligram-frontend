@@ -17,6 +17,7 @@
     "API_URL": "https://www.api-service.woprs.com/api/v1/",
     "DOMAIN": "woprs.com"
   },
+  "FIREFOX_EXTENSION_URL": "https://www.api-service.woprs.com/media/docs/woprs_browser_extension-1.0-fx.xpi",
   "ENABLE_ISOMORPHISM": false,
   "MEDIA": "media",
   "MEDIA_FOLDER": "media",

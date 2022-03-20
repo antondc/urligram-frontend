@@ -1,12 +1,8 @@
 @import '../../css/imports.less';
 
-@c: .Download;
+@c: .Extension;
 
 @{c} {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  padding-top: 40px;
-
   @media @br-mobile {
     display: flex;
     flex-direction: column;
@@ -17,30 +13,23 @@
     .boxShadow;
   }
 
-  &-content {
-    grid-column: 4 / span 6;
-  }
-
   &-title {
-    padding-bottom: 50px;
+    padding-bottom: 20px;
     font-size: @fs-huge;
     font-weight: @fw-extraBold;
     line-height: @fh-huge;
     text-align: center;
-    color: @gradientColors[black-2];
-    background: @c-background;
 
     @media @br-mobile {
       line-height: @fh-biggest;
     }
   }
 
-  &-item {
+  &-text {
     padding-bottom: 20px;
-    user-select: none;
   }
 
-  &-text {
-    //
+  &-button {
+    margin: 0 auto;
   }
 }

@@ -46,12 +46,12 @@ export const Footer: React.FC<Props> = ({
       )}
       <A
         className="Footer-link"
-        href={Routes.Download.route}
+        href={Routes.Extension.route}
         frontend
         underlined
-        active={currentRoute?.name === Routes.Download.name}
+        active={currentRoute?.name === Routes.Extension.name}
       >
-        Download
+        Extension
       </A>
       <A
         className="Footer-link"
