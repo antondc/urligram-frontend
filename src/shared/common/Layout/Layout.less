@@ -6,6 +6,11 @@
   .default();
 
   position: relative;
+  min-width: 910px;
+
+  @media @br-mobile {
+    min-width: unset;
+  }
 
   &-generalBackground {
     position: fixed;
