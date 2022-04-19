@@ -8,6 +8,7 @@ import { selectCurrentRouteParams } from 'Modules/Routes/selectors/selectCurrent
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import history from 'Services/History';
 import { NotificationDot } from '@antoniodcorrea/components';
+import { useScrollBeforeCallback } from '../../hooks/useScrollBeforeCallback';
 import { SidebarLeftSubItemsAnimation } from './SidebarLeftSubItemsAnimation';
 
 import './SidebarLeftLists.less';
@@ -23,9 +24,10 @@ const SidebarLeftLists: React.FC<Props> = ({ lists, loading, listsShown = true }
   const currentListId = Number(currentRouteParams?.listId);
   const session = useSelector(selectSession);
   const listsWithNotificationsIds = useSelector(selectListWithNotificationsIds);
+  const { scrollBeforeCallback } = useScrollBeforeCallback();
 
   const onListClick = (listId: number) => {
-    history.push(`/lists/${listId}`);
+    scrollBeforeCallback(() => history.push(`/lists/${listId}`));
   };
 
   if (!lists?.length && !loading) return null;

@@ -26,6 +26,7 @@
       "Services/*": ["./src/shared/services/*"],
       "Ui/*": ["./src/shared/ui/*"],
       "Pages/*": ["./src/shared/pages/*"],
+      "Hooks/*": ["./src/shared/hooks/*"],
     }
   },
   "include": ["./src/**/*", "./*"]

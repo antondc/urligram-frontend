@@ -19,6 +19,7 @@ module.exports = {
     '^Services(.*)$': ['<rootDir>/src/shared/services$1'],
     '^Ui(.*)$': ['<rootDir>/src/shared/ui$1'],
     '^Pages(.*)$': ['<rootDir>/src/shared/pages$1'],
+    '^Hooks(.*)$': ['<rootDir>/src/shared/hooks$1'],
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
 };

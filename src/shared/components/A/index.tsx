@@ -1,7 +1,7 @@
 import React, { HTMLProps } from 'react';
 import { useSelector } from 'react-redux';
-import { animateScroll as scroll, Events } from 'react-scroll';
 
+import { useScrollBeforeCallback } from 'Hooks/useScrollBeforeCallback';
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
 import history from 'Services/History';
 import { A as ComponentsA } from '@antoniodcorrea/components';
@@ -30,6 +30,7 @@ const A: React.FC<Props> = ({ href, targetBlank, scrollBeforeNavigate = false, o
     !!currentLanguageSlug && !targetBlank && !hrefAlreadyHasSlug
       ? `/${currentLanguageSlug}/${hrefWithoutLeadingSlash}`
       : href;
+  const { scrollBeforeCallback } = useScrollBeforeCallback();
 
   const navigateToHref = () => {
     if (targetBlank) {
@@ -51,15 +52,7 @@ const A: React.FC<Props> = ({ href, targetBlank, scrollBeforeNavigate = false, o
       return;
     }
 
-    Events.scrollEvent.register('end', () => {
-      navigateToHref();
-      Events.scrollEvent.remove('end');
-    });
-
-    scroll.scrollToTop({
-      duration: 120,
-      smooth: 'easeOutQuart',
-    });
+    scrollBeforeCallback(() => navigateToHref());
   };
 
   return <ComponentsA {...props} href={hrefWithCurrentSlug} onClick={onLinkClick} targetBlank={targetBlank} />;

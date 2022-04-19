@@ -27,7 +27,7 @@ export const FAQ: React.FC = () => (
     <p className="Docs-paragraph">
       Woprs works as a website, but there is also an extension to save bookmarks without having Woprs site open: this is
       very convenient to save bookmarks while browsing. Currently we have official extensions for{' '}
-      <a className="Docs-link" target="_blank" href={FIREFOX_EXTENSION_URL} rel="noreferrer">
+      <a className="Docs-link" href={FIREFOX_EXTENSION_URL} rel="noreferrer">
         Firefox
       </a>{' '}
       <Firefox className="Docs-iconFirefox" /> and{' '}
@@ -77,7 +77,7 @@ export const FAQ: React.FC = () => (
     <h4 className="Docs-h4">How to download the extension?</h4>
     <p className="Docs-paragraph">
       Currently we have official extensions for{' '}
-      <a className="Docs-link" target="_blank" href={FIREFOX_EXTENSION_URL} rel="noreferrer">
+      <a className="Docs-link" href={FIREFOX_EXTENSION_URL} rel="noreferrer">
         Firefox
       </a>{' '}
       <Firefox className="Docs-iconFirefox" /> and{' '}

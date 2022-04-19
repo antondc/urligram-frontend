@@ -91,6 +91,10 @@ const SidebarLeft: React.FC = () => {
     }
   };
 
+  const itemClick = () => {
+
+  }
+
   useEffect(() => {
     if (!sessionId) return;
     dispatch(listsLoadByUserId({ userId: sessionId, rawData: true }));
@@ -135,6 +139,7 @@ const SidebarLeft: React.FC = () => {
       sidebarLeftClosed={sidebarLeftClosed}
       onListsTriangleClick={onListsTriangleClick}
       onSidebarCloseClick={onSidebarCloseClick}
+      itemClick={itemClick}
     />
   );
 };
