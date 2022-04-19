@@ -1,7 +1,9 @@
 import React from 'react';
 
+import Chrome from 'Assets/svg/browserChrome.svg';
+import Firefox from 'Assets/svg/browserFirefox.svg';
 import A from 'Components/A';
-import { FIREFOX_EXTENSION_URL } from 'Root/config.test.json';
+import { CHROME_EXTENSION_URL, FIREFOX_EXTENSION_URL } from 'Root/config.test.json';
 import { Routes } from 'Router/routes';
 import { Space } from '@antoniodcorrea/components';
 
@@ -24,12 +26,16 @@ export const FAQ: React.FC = () => (
     </p>
     <p className="Docs-paragraph">
       Woprs works as a website, but there is also an extension to save bookmarks without having Woprs site open: this is
-      very convenient to save bookmarks while browsing. We currently have a version for Firefox 🦊, you can install it
-      <Space />
+      very convenient to save bookmarks while browsing. Currently we have official extensions for{' '}
       <a className="Docs-link" target="_blank" href={FIREFOX_EXTENSION_URL} rel="noreferrer">
-        here
-      </a>
-      .
+        Firefox
+      </a>{' '}
+      <Firefox className="Docs-iconFirefox" /> and{' '}
+      <a className="Docs-link" target="_blank" href={CHROME_EXTENSION_URL} rel="noreferrer">
+        Chrome
+      </a>{' '}
+      <Chrome className="Docs-iconChrome" />. Just click and you will be redirected to the store of your browser, where
+      you can install it.
     </p>
     <h4 className="Docs-h4">Why shall I use it?</h4>
     <p className="Docs-paragraph">Woprs is a social bookmarking tool. We consider the main benefits of Woprs to be:</p>
@@ -70,12 +76,16 @@ export const FAQ: React.FC = () => (
     </p>
     <h4 className="Docs-h4">How to download the extension?</h4>
     <p className="Docs-paragraph">
-      Currently we have the extension for Firefox 🦊: to install it please click
-      <Space />
+      Currently we have official extensions for{' '}
       <a className="Docs-link" target="_blank" href={FIREFOX_EXTENSION_URL} rel="noreferrer">
-        here
-      </a>
-      . We are currently working on versions for Chrome and Edge, which we will release in the near future.
+        Firefox
+      </a>{' '}
+      <Firefox className="Docs-iconFirefox" /> and{' '}
+      <a className="Docs-link" target="_blank" href={FIREFOX_EXTENSION_URL} rel="noreferrer">
+        Chrome
+      </a>{' '}
+      <Chrome className="Docs-iconChrome" />. Just click and you will be redirected to the store of your browser, where
+      you can install it.
     </p>
     <h4 className="Docs-h4">Shall I pay to use Woprs?</h4>
     <p className="Docs-paragraph">Woprs is a free to use platform so far.</p>

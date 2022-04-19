@@ -1,12 +1,22 @@
 {
   "data": {
     "en": {
-      "title": "Install extension",
-      "content": "Currently we have a browser extension available for Firefox 🦊, you can install it by clicking the button below."
+      "title": "Install Extension",
+      "titleFirefox": "Firefox",
+      "textFirefox": "We will redirect you to our official extension: just follow the steps, and don't forget to log in into the website!",
+      "buttonTextFirefox": "Install for Firefox",
+      "titleChrome": "Chrome",
+      "textChrome": "We will redirect you to the official chrome store: just follow the steps, and don't forget to log in into the website!",
+      "buttonTextChrome": "Install for Chrome"
     },
     "es": {
-      "title": "Instalar extensión",
-      "content": "Actualmente tenemos disponible una extensión para Firefox 🦊, puedes instalarla haciendo click aquí."
+      "title": "Install Extension",
+      "titleFirefox": "Firefox",
+      "textFirefox": "We will redirect you to our official extension: just follow the steps, and don't forget to log in into the website!",
+      "buttonTextFirefox": "Install for Firefox",
+      "titleChrome": "Chrome",
+      "textChrome": "We will redirect you to the official chrome store: just follow the steps, and don't forget to log in into the website!",
+      "buttonTextChrome": "Install for Chrome"
     }
   }
 }

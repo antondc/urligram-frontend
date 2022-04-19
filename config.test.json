@@ -18,6 +18,7 @@
     "DOMAIN": "woprs.com"
   },
   "FIREFOX_EXTENSION_URL": "https://www.api-service.woprs.com/media/docs/woprs_browser_extension-1.0-fx.xpi",
+  "CHROME_EXTENSION_URL": "https://chrome.google.com/webstore/detail/woprs-browser-extension/bjpciihjkgaojmpglmbhncmahdiihhln",
   "ENABLE_ISOMORPHISM": false,
   "MEDIA": "media",
   "MEDIA_FOLDER": "media",

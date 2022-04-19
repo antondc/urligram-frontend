@@ -37,7 +37,7 @@ const NoSidebar: React.FC<Props> = ({ loggedIn, location, defaultCurrentSlug, pa
     <div className="NoSidebar-noSidebarBackground" />
     <Header />
 
-    <div className="NoSidebar">
+    <div className="NoSidebar-content">
       <FadeInOut className="NoSidebar-content-content" valueToUpdate={pathWithoutLanguageParam} speed="fastest" appear>
         <Switch location={{ ...location, pathname: pathWithoutLanguageParam }}>
           {/* Redirects */}
