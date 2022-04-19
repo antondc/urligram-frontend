@@ -2,6 +2,8 @@ import React from 'react';
 
 import A from 'Components/A';
 import CardItem from 'Components/CardItem';
+import { useScrollBeforeCallback } from 'Hooks/useScrollBeforeCallback';
+import history from 'Services/History';
 import { Select, SelectValue, SortBy } from '@antoniodcorrea/components';
 import { SortByOption } from '@antoniodcorrea/components/SortBy';
 
@@ -41,43 +43,52 @@ const SubHeader: React.FC<Props> = ({
   selectOptions,
   sortByOptions,
   children,
-}) => (
-  <CardItem className="SubHeader">
-    <div className="SubHeader-headerTitle">
-      {leftIcon}
-      {titleHref ? (
-        <A className="SubHeader-headerLink" href={titleHref} frontend styled={false}>
-          {title}
-        </A>
-      ) : (
-        title
-      )}
-      {appendTitle}
-    </div>
-    <div className="SubHeader-separator" />
-    <Select
-      className="SubHeader-select"
-      placeholder={selectPlaceholder}
-      value={currentQueryParamFilterTags}
-      defaultOptions={selectDefaultOptions}
-      options={selectOptions}
-      onInputChange={onSelectInputChange}
-      onChange={onSelectChange}
-      maxItems={4}
-      grow
-      hideLabelOnFill
-      height="small"
-    />
-    {children}
-    <div className="SubHeader-separator" />
-    <SortBy
-      className="SubHeader-sort"
-      options={sortByOptions}
-      href={url}
-      currentSort={currentSort}
-      loading={sortLoading}
-    />
-  </CardItem>
-);
+}) => {
+  const { scrollBeforeCallback } = useScrollBeforeCallback();
+
+  const onItemClick = (href) => {
+    scrollBeforeCallback(() => history.push(href));
+  };
+
+  return (
+    <CardItem className="SubHeader">
+      <div className="SubHeader-headerTitle">
+        {leftIcon}
+        {titleHref ? (
+          <A className="SubHeader-headerLink" href={titleHref} frontend styled={false}>
+            {title}
+          </A>
+        ) : (
+          title
+        )}
+        {appendTitle}
+      </div>
+      <div className="SubHeader-separator" />
+      <Select
+        className="SubHeader-select"
+        placeholder={selectPlaceholder}
+        value={currentQueryParamFilterTags}
+        defaultOptions={selectDefaultOptions}
+        options={selectOptions}
+        onInputChange={onSelectInputChange}
+        onChange={onSelectChange}
+        maxItems={4}
+        grow
+        hideLabelOnFill
+        height="small"
+      />
+      {children}
+      <div className="SubHeader-separator" />
+      <SortBy
+        className="SubHeader-sort"
+        options={sortByOptions}
+        href={url}
+        currentSort={currentSort}
+        loading={sortLoading}
+        onItemClick={onItemClick}
+      />
+    </CardItem>
+  );
+};
 
 export default SubHeader;
