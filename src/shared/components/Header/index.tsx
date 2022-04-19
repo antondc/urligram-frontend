@@ -17,6 +17,7 @@ import { selectUsersLoading } from 'Modules/Users/selectors/selectUsersLoading';
 import { Routes } from 'Router/routes';
 import history from 'Services/History';
 import { URLWrapper } from 'Services/URLWrapper';
+import { useScrollBeforeCallback } from 'Hooks/useScrollBeforeCallback';
 import { Header as HeaderUi } from './Header';
 
 import './Header.less';
@@ -38,6 +39,7 @@ const Header: React.FC = () => {
   const logoLoadingColors = sessionLoading;
   const routeName = currentRoute?.name;
   const isHomePage = Routes.Home.name === routeName;
+  const { scrollBeforeCallback } = useScrollBeforeCallback();
 
   const switchUiBookmarkModal = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -73,7 +75,7 @@ const Header: React.FC = () => {
 
     const updatedUrlToRedirect = urlToRedirect.getPathAndSearch();
 
-    history.push(updatedUrlToRedirect);
+    scrollBeforeCallback(() => history.push(updatedUrlToRedirect));
   };
 
   const onSearchCrossClick = () => {
@@ -88,7 +90,8 @@ const Header: React.FC = () => {
 
     const updatedUrlToRedirect = urlToRedirect.getPathAndSearch();
     setSearchValue(undefined);
-    history.push(updatedUrlToRedirect);
+
+    scrollBeforeCallback(() => history.push(updatedUrlToRedirect));
   };
 
   const onUserClick = () => {

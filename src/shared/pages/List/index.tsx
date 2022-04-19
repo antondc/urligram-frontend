@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { useScrollBeforeCallback } from 'Hooks/useScrollBeforeCallback';
 import { bookmarksLoadByListId } from 'Modules/Bookmarks/actions/bookmarksLoadByListId';
 import { selectBookmarksCurrentIds } from 'Modules/Bookmarks/selectors/selectBookmarksCurrentIds';
 import { selectBookmarksLoading } from 'Modules/Bookmarks/selectors/selectBookmarksLoading';
@@ -34,7 +35,7 @@ import { ListWithMemo as ListUI } from './List';
 
 const List: React.FC = () => {
   const dispatch = useDispatch();
-
+  const { scrollBeforeCallback } = useScrollBeforeCallback();
   const [acceptLoading, setAcceptLoading] = useState<boolean>(false);
   const [rejectLoading, setRejectLoading] = useState<boolean>(false);
   const [leaveListLoading, setLeaveListLoading] = useState<boolean>(false);
@@ -77,7 +78,7 @@ const List: React.FC = () => {
     myUrl.deleteSearchParam('page[offset]'); // Restart page on new search
     const redirectPath = myUrl.getPathAndSearch();
 
-    history.push(redirectPath);
+    scrollBeforeCallback(() => history.push(redirectPath));
   };
 
   const onInviteAccept = async () => {

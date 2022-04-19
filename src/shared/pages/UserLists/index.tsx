@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { useScrollBeforeCallback } from 'Hooks/useScrollBeforeCallback';
 import { listsLoadByUserId } from 'Modules/Lists/actions/listsLoadByUserId';
 import { selectListsMetaSort } from 'Modules/Lists/selectors/selectListMetaSort';
 import { selectListsAllIds } from 'Modules/Lists/selectors/selectListsAllIds';
@@ -26,7 +27,7 @@ import { UserLists as UserListsUi } from './UserLists';
 
 const UserLists: React.FC = () => {
   const dispatch = useDispatch();
-
+  const { scrollBeforeCallback } = useScrollBeforeCallback();
   const session = useSelector(selectSession);
   const userId = useSelector(selectCurrentRouteParamUserId);
   const user = useSelector((state: RootState) => selectUserById(state, { id: userId }));
@@ -58,7 +59,7 @@ const UserLists: React.FC = () => {
     myUrl.deleteSearchParam('page[offset]'); // Restart page on new search
     const redirectPath = myUrl.getPathAndSearch();
 
-    history.push(redirectPath);
+    scrollBeforeCallback(() => history.push(redirectPath));
   };
 
   const onAddListClick = () => {

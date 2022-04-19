@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { useScrollBeforeCallback } from 'Hooks/useScrollBeforeCallback';
 import { RootState } from 'Modules/rootType';
 import { selectCurrentFullUrl } from 'Modules/Routes/selectors/selectCurrentFullUrl';
 import { selectCurrentRouteParamUserId } from 'Modules/Routes/selectors/selectCurrentRouteParamUserId';
@@ -24,6 +25,7 @@ import { Following as FollowingUI } from './Following';
 
 const Following: React.FC = () => {
   const dispatch = useDispatch();
+  const { scrollBeforeCallback } = useScrollBeforeCallback();
   const userId = useSelector(selectCurrentRouteParamUserId);
   const usersCurrentIds = useSelector(selectUsersCurrentIds);
   const usersLoading = useSelector(selectUsersLoading) && isDomAvailable;
@@ -54,7 +56,7 @@ const Following: React.FC = () => {
     myUrl.deleteSearchParam('page[offset]'); // Restart page on new search
     const redirectPath = myUrl.getPathAndSearch();
 
-    history.push(redirectPath);
+    scrollBeforeCallback(() => history.push(redirectPath));
   };
 
   useEffect(() => {

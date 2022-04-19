@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { useScrollBeforeCallback } from 'Hooks/useScrollBeforeCallback';
 import { bookmarksLoad } from 'Modules/Bookmarks/actions/bookmarksLoad';
 import { selectBookmarksCurrentIds } from 'Modules/Bookmarks/selectors/selectBookmarksCurrentIds';
 import { selectBookmarksLoading } from 'Modules/Bookmarks/selectors/selectBookmarksLoading';
@@ -38,6 +39,7 @@ const Home: React.FC = () => {
       label: item.toString(),
       value: item,
     })) || [];
+  const { scrollBeforeCallback } = useScrollBeforeCallback();
 
   const onInputChange = (string: string) => {
     !!string && dispatch(tagsSearchLoad(string));
@@ -51,7 +53,7 @@ const Home: React.FC = () => {
     myUrl.deleteSearchParam('page[offset]'); // Restart page on new search
     const redirectPath = myUrl.getPathAndSearch();
 
-    history.push(redirectPath);
+    scrollBeforeCallback(() => history.push(redirectPath));
   };
 
   useEffect(() => {

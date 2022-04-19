@@ -8,7 +8,7 @@ import { selectCurrentRouteParams } from 'Modules/Routes/selectors/selectCurrent
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import history from 'Services/History';
 import { NotificationDot } from '@antoniodcorrea/components';
-import { useScrollBeforeCallback } from '../../hooks/useScrollBeforeCallback';
+import { useScrollBeforeCallback } from 'Hooks/useScrollBeforeCallback';
 import { SidebarLeftSubItemsAnimation } from './SidebarLeftSubItemsAnimation';
 
 import './SidebarLeftLists.less';
