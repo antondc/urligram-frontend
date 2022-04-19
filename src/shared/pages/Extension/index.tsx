@@ -12,7 +12,7 @@ const Extension: React.FC = () => {
   const currentSlug = useSelector(selectCurrentLanguageSlug);
 
   const installFirefoxExtension = () => {
-    window.open(FIREFOX_EXTENSION_URL, '_blank');
+    window.location.href = FIREFOX_EXTENSION_URL;
   };
 
   const installChromeExtension = () => {
