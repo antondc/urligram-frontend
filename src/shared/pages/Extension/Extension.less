@@ -3,42 +3,47 @@
 @c: .Extension;
 
 @{c} {
+  display: grid;
+  grid-template:
+    'title title' auto
+    'firefox chrome' auto
+    / 1fr 1fr;
+  max-width: 750px;
+  margin: 50px auto;
+  gap: 20px;
+
   @media @br-tablet {
-    display: flex;
-    flex-direction: column;
+    grid-template:
+      'title' auto
+      'firefox' auto
+      'chrome' auto
+      / 1fr;
+    margin: 0;
     padding-top: 0;
   }
 
   &-title {
-    margin: 30px 0;
-    font-size: @fs-huge;
-    font-weight: @fw-extraBold;
+    grid-area: title;
+    margin: 0;
+    padding: 20px;
+    font-size: @fs-biggest;
+    font-weight: @fw-bold;
     line-height: @fh-huge;
     text-align: center;
+    background: @c-background;
+    border-radius: 4px;
 
-    @media @br-mobile {
-      margin: 0 0 20px 0;
-      padding: 20px 0;
-      font-size: @fs-biggest;
-      font-weight: @fw-bold;
-      line-height: @fh-biggest;
-      background: @c-background;
-      border-radius: 4px;
-
-      .boxShadow;
-    }
-  }
-
-  &-extensions {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    margin-bottom: 20px;
-    padding-top: 30px;
-    gap: 40px;
+    .boxShadow;
 
     @media @br-tablet {
-      display: block;
-      padding-top: 0;
+      font-size: @fs-bigger;
+      font-weight: @fw-bold;
+      line-height: @fh-biggest;
+    }
+
+    @media @br-mobile {
+      padding: 10px;
+      font-size: @fs-big;
     }
   }
 
@@ -48,24 +53,36 @@
     max-width: 400px;
     padding: 60px;
     background: @c-background;
-    border-radius: 8px;
     box-shadow: 5px 5px 50px 0 @gradientColors[black-5];
+    border-radius: 8px;
 
     &:first-child {
       margin-left: auto;
     }
 
     @media @br-tablet {
-      margin: 0 auto 20px;
-      padding: 40px 30px;
+      max-width: unset;
+      padding: 40px 80px;
 
       .boxShadow;
     }
+
+    @media @br-mobile {
+      padding: 40px 30px;
+    }
+  }
+
+  &-extensionFirefox {
+    grid-area: firefox;
+  }
+
+  &-extensionChrome {
+    grid-area: chrome;
   }
 
   &-subTitle {
     padding-bottom: 20px;
-    font-size: @fs-biggest;
+    font-size: @fs-bigger;
     text-align: center;
 
     @media @br-mobile {
@@ -73,21 +90,10 @@
     }
   }
 
-  &-iconFirefox {
+  &-icon {
     display: inline;
-    height: @fs-biggest;
-    width: @fs-biggest;
-
-    @media @br-mobile {
-      height: @fs-big;
-      width: @fs-big;
-    }
-  }
-
-  &-iconChrome {
-    display: inline;
-    height: @fs-biggest;
-    width: @fs-biggest;
+    height: @fs-bigger;
+    width: @fs-bigger;
 
     @media @br-mobile {
       height: @fs-big;
