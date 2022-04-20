@@ -11,8 +11,8 @@ import { AddressInfo } from 'net';
 import path from 'path';
 import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
+import webpackHotMiddleware from 'webpack-hot-middleware';
 
-// import webpackHotMiddleware from 'webpack-hot-middleware';
 import { WEBPACK_ROOT } from '../../webpack/constants';
 import webpackConfig from '../../webpack/webpack.client.dev';
 import allRoutes from './routes/allRoutes';
@@ -70,13 +70,13 @@ if (process.env.NODE_ENV === 'development') {
     })
   );
 
-  // app.use(
-  //   webpackHotMiddleware(compiler, {
-  //     log: console.log,
-  //     path: '/__webpack_hmr',
-  //     heartbeat: 10 * 1000,
-  //   })
-  // );
+  app.use(
+    webpackHotMiddleware(compiler, {
+      log: console.log,
+      path: '/__webpack_hmr',
+      heartbeat: 10 * 1000,
+    })
+  );
 }
 
 // API - - - - - - - - - - - - - - - - -
