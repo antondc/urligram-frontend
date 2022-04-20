@@ -11,12 +11,15 @@
 
   .boxShadow;
 
+  @media @br-tabletHorizontal {
+    padding: 30px;
+  }
+
   @media @br-mobile {
     display: flex;
     position: relative;
     flex-direction: column;
     justify-content: center;
-    padding: 30px;
     align-item: center;
   }
 
@@ -42,6 +45,11 @@
     &--active:not(.noClass) {
       text-decoration-color: @gradientColors[blue-1];
       color: @gradientColors[blue-1];
+    }
+
+    @media @br-tabletHorizontal {
+      font-size: @fs-medium;
+      font-weight: @fw-bold;
     }
 
     @media @br-mobile {

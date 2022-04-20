@@ -3,13 +3,14 @@
 @c: .SubHeaderSeparator;
 
 @{c} {
+  flex-shrink: 0;
   height: 100%;
-  width: 2px;
-  margin: 0 24px;
+  width: 1px;
+  margin: 0 auto;
   background: @gradientColors[black-4];
   border-radius: 2px;
 
-  @media @br-mobile {
-    display: none;
+  @media @br-tabletHorizontal {
+    visibility: hidden;
   }
 }

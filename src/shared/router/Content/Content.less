@@ -39,6 +39,14 @@
     transition: grid-template-columns @td-fast @ease;
     gap: 0 34px;
 
+    @media @br-desktopSmall {
+      gap: 0 16px;
+    }
+
+    @media @br-tabletHorizontal {
+      grid-template-columns: 240px auto;
+    }
+
     @media @br-mobile {
       display: block;
     }

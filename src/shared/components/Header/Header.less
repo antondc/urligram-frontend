@@ -43,6 +43,14 @@
     align-items: center;
     width: 250px;
     margin-right: 34px;
+
+    @media @br-tabletHorizontal {
+      width: unset;
+    }
+
+    @media @br-mobile {
+      width: 250px;
+    }
   }
 
   &-separator {
@@ -155,7 +163,7 @@
     }
   }
 
-  &-addBoookmarkIcon {
+  &-addBookmarkIcon {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -174,7 +182,7 @@
       transition: fill @td-fast @ease;
     }
 
-    @media @br-mobile {
+    @media @br-tabletHorizontal {
       margin-right: 0;
     }
   }
@@ -186,7 +194,7 @@
     &:hover {
       cursor: pointer;
 
-      @{c}-addBoookmarkIcon {
+      @{c}-addBookmarkIcon {
         border: 2px solid @gradientColors[blue-1];
 
         svg {
@@ -207,7 +215,7 @@
     color: @gradientColors[black-4];
     transition: color @td-fast @ease;
 
-    @media @br-mobile {
+    @media @br-tabletHorizontal {
       display: none;
     }
   }

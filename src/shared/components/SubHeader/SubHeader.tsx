@@ -6,6 +6,7 @@ import { useScrollBeforeCallback } from 'Hooks/useScrollBeforeCallback';
 import history from 'Services/History';
 import { Select, SelectValue, SortBy } from '@antoniodcorrea/components';
 import { SortByOption } from '@antoniodcorrea/components/SortBy';
+import { SubHeaderSeparator } from './SubHeaderSeparator';
 
 import './SubHeader.less';
 
@@ -51,19 +52,18 @@ const SubHeader: React.FC<Props> = ({
   };
 
   return (
-    <CardItem className="SubHeader">
+    <CardItem className={'SubHeader' + (!!children ? ' SubHeader--withChildren' : '')}>
       <div className="SubHeader-headerTitle">
         {leftIcon}
         {titleHref ? (
-          <A className="SubHeader-headerLink" href={titleHref} frontend styled={false}>
+          <A className="SubHeader-headerLink SubHeader-headerTitleText" href={titleHref} frontend styled={false}>
             {title}
           </A>
         ) : (
-          title
+          <span className="SubHeader-headerTitleText">{title}</span>
         )}
-        {appendTitle}
+        <span className="SubHeader-headerTitleText">{appendTitle}</span>
       </div>
-      <div className="SubHeader-separator" />
       <Select
         className="SubHeader-select"
         placeholder={selectPlaceholder}
@@ -77,8 +77,7 @@ const SubHeader: React.FC<Props> = ({
         hideLabelOnFill
         height="small"
       />
-      {children}
-      <div className="SubHeader-separator" />
+      <div className="SubHeader-children">{children}</div>
       <SortBy
         className="SubHeader-sort"
         options={sortByOptions}

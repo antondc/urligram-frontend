@@ -54,7 +54,7 @@ export const Header: React.FC<Props> = ({
       </form>
       <div className="Header-separator Header-separatorDesktop" />
       <div className="Header-addBoookmark" onClick={switchUiBookmarkModal}>
-        <div className="Header-addBoookmarkIcon">
+        <div className="Header-addBookmarkIcon">
           <Cross />
         </div>
         <span className="Header-addBookmarkText">Add Bookmark</span>
