@@ -7,6 +7,7 @@ import { selectSessionErrorLast } from 'Modules/Session/selectors/selectSessionE
 import { selectSessionLoading } from 'Modules/Session/selectors/selectSessionLoading';
 import { selectSessionStatus } from 'Modules/Session/selectors/selectSessionStatus';
 import { SESSION_STATUS_INACTIVE } from 'Modules/Session/session.types';
+import { switchSignUpDisabledModal } from 'Modules/Ui/actions/switchSignUpDisabledModal';
 import { uiResetModalsState } from 'Modules/Ui/actions/uiResetModalsState';
 import { DELAY_MEDIUM_MS, EVENT_BLUR } from 'Root/src/shared/constants';
 import { testStringHasWhiteSpaces } from 'Tools/utils/string/testStringHasWhiteSpaces';
@@ -221,7 +222,16 @@ const SignUp: React.FC = () => {
     if (sessionError?.message) setSubmitError(sessionError?.message);
   }, [sessionError]);
 
-  useEffect(() => () => dispatch(uiResetModalsState()), []);
+  useEffect(() => {
+    console.log('=======');
+    console.log('1:');
+    console.log(JSON.stringify(1, null, 4));
+    console.log('=======');
+
+    dispatch(switchSignUpDisabledModal(true));
+
+    () => dispatch(uiResetModalsState());
+  }, []);
 
   return (
     <SignUpUi

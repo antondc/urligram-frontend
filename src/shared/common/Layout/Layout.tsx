@@ -9,6 +9,7 @@ import LoginModal from 'Components/LoginModal';
 import Notifications from 'Components/Notifications';
 import ResetPasswordModal from 'Components/ResetPasswordModal';
 import ScreenSizePixel from 'Components/ScreenSizePixel';
+import SignUpDisabledModal from 'Components/SignUpDisabledModal';
 import SignUpModal from 'Components/SignUpModal';
 import UserModal from 'Components/UserModal';
 import WelcomeModal from 'Components/WelcomeModal';
@@ -25,6 +26,7 @@ interface Props {
   signUpModalMounted: boolean;
   welcomeModalMounted: boolean;
   welcomeModalErrorMounted: boolean;
+  signUpDisabledModalMounted: boolean;
   forgotPasswordModalMounted: boolean;
   resetPasswordModalMounted: boolean;
   listModalMounted: boolean;
@@ -37,6 +39,7 @@ export const Layout: React.FC<Props> = ({
   signUpModalMounted,
   welcomeModalMounted,
   welcomeModalErrorMounted,
+  signUpDisabledModalMounted,
   forgotPasswordModalMounted,
   resetPasswordModalMounted,
   listModalMounted,
@@ -66,6 +69,9 @@ export const Layout: React.FC<Props> = ({
       </Fade>
       <Fade mounted={resetPasswordModalMounted} speed="fastest" position="fixed" appear>
         <ResetPasswordModal />
+      </Fade>
+      <Fade mounted={signUpDisabledModalMounted} speed="fastest" position="fixed" appear>
+        <SignUpDisabledModal />
       </Fade>
       <BookmarkCreateModalOrSheet />
       <BookmarkUpdateModalOrSheet />

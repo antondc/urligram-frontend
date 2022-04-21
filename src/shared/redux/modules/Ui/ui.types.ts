@@ -15,6 +15,7 @@ export const SWITCH_FORGOT_PASSWORD_MODAL = 'SWITCH_FORGOT_PASSWORD_MODAL';
 export const SWITCH_RESET_PASSWORD_MODAL = 'SWITCH_RESET_PASSWORD_MODAL';
 export const SWITCH_BOOKMARK_CREATE_MODAL = 'SWITCH_BOOKMARK_CREATE_MODAL';
 export const SWITCH_BOOKMARK_UPDATE_MODAL = 'SWITCH_BOOKMARK_UPDATE_MODAL';
+export const SWITCH_SIGN_UP_DISABLED_MODAL = 'SWITCH_SIGN_UP_DISABLED_MODAL';
 export const SWITCH_LIST_ADD_USER_MODAL = 'SWITCH_LIST_ADD_USER_MODAL';
 export const UI_BOOKMARK_LISTS_MODALS_MOUNT = 'UI_BOOKMARK_LISTS_MODALS_MOUNT';
 export const UI_BOOKMARK_LISTS_MODALS_UNMOUNT = 'UI_BOOKMARK_LISTS_MODALS_UNMOUNT';
@@ -88,6 +89,7 @@ export type UiState = {
     listId?: number;
   } & UiBaseModal;
   listAddUserModal: UiBaseModal;
+  signUpDisabledModal: UiBaseModal;
   bookmarkListsModal: BookmarkListsModal;
   bookmarkSendModals: BookmarkSendModals;
   notifications?: NotificationState[];
@@ -221,6 +223,11 @@ interface SwitchListAddUserModal {
   payload: UiState;
 }
 
+interface SwitchSignUpDisabledModal {
+  type: typeof SWITCH_SIGN_UP_DISABLED_MODAL;
+  payload: UiState;
+}
+
 interface SwitchBookmarkActionsButtonMounted {
   type: typeof UI_SWITCH_BOOKMARK_ICONS_MOUNTED;
   payload: Partial<UiState>;
@@ -260,6 +267,7 @@ export type UiActions =
   | SwitchBookmarkCreateModal
   | SwitchBookmarkUpdateModal
   | SwitchListModal
+  | SwitchSignUpDisabledModal
   | BookmarkListModalsMount
   | BookmarkListModalsUnmount
   | BookmarkListModalsLoading

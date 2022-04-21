@@ -16,6 +16,7 @@ import { selectUiLoginModalMounted } from 'Modules/Ui/selectors/selectUiLoginMod
 import { selectUiResetPasswordModalMounted } from 'Modules/Ui/selectors/selectUiResetPasswordModalMounted';
 import { selectUiScreenLocked } from 'Modules/Ui/selectors/selectUiScreenLocked';
 import { selectUiScreenMobileLocked } from 'Modules/Ui/selectors/selectUiScreenMobileLocked';
+import { selectUiSignUpDisabledModalMounted } from 'Modules/Ui/selectors/selectUiSignUpDisabledModalMounted';
 import { selectUiSignUpModalMounted } from 'Modules/Ui/selectors/selectUiSignUpModalMounted';
 import { selectUiWelcomeModalErrorMounted } from 'Modules/Ui/selectors/selectUiWelcomeModalErrorMounted';
 import { selectUiWelcomeModalMounted } from 'Modules/Ui/selectors/selectUiWelcomeModalMounted';
@@ -47,6 +48,7 @@ const Layout: React.FC<Props> = ({ location }) => {
   const welcomeModalMounted = useSelector(selectUiWelcomeModalMounted);
   const welcomeModalErrorMounted = useSelector(selectUiWelcomeModalErrorMounted);
   const signUpModalMounted = useSelector(selectUiSignUpModalMounted);
+  const signUpDisabledModalMounted = useSelector(selectUiSignUpDisabledModalMounted);
   const forgotPasswordModalMounted = useSelector(selectUiForgotPasswordModalMounted);
   const resetPasswordModalMounted = useSelector(selectUiResetPasswordModalMounted);
   const listModalMounted = useSelector(selectUiListModalMounted);
@@ -132,6 +134,7 @@ const Layout: React.FC<Props> = ({ location }) => {
       signUpModalMounted={signUpModalMounted}
       welcomeModalMounted={welcomeModalMounted}
       welcomeModalErrorMounted={welcomeModalErrorMounted}
+      signUpDisabledModalMounted={signUpDisabledModalMounted}
       forgotPasswordModalMounted={forgotPasswordModalMounted}
       resetPasswordModalMounted={resetPasswordModalMounted}
       listModalMounted={listModalMounted}
