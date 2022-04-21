@@ -29,7 +29,7 @@ export const Footer: React.FC<Props> = ({
 }) => (
   <div className="Footer">
     <div className="Footer-left">
-      {!session ? (
+      {!session?.id ? (
         <A className="Footer-link" href="sign-up" frontend underlined active={currentRoute?.name === Routes.Tags.name}>
           Sign up
         </A>

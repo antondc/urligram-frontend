@@ -63,6 +63,7 @@ export const SignUp: React.FC<Props> = ({
             value={nameValue}
             error={nameError}
             grow
+            disabled // Disabled
           />
         </BaseFormField>
         <BaseFormField>
@@ -75,6 +76,7 @@ export const SignUp: React.FC<Props> = ({
             value={emailValue}
             error={emailError}
             grow
+            disabled // Disabled
           />
         </BaseFormField>
         <BaseFormField>
@@ -87,6 +89,7 @@ export const SignUp: React.FC<Props> = ({
             value={passwordValue}
             error={passwordError}
             grow
+            disabled // Disabled
           />
         </BaseFormField>
         <BaseFormField>
@@ -99,6 +102,7 @@ export const SignUp: React.FC<Props> = ({
             value={passwordRepeatedValue}
             error={passwordRepeatedError}
             grow
+            disabled // Disabled
           />
         </BaseFormField>
         <BaseFormSubmit>
@@ -108,7 +112,7 @@ export const SignUp: React.FC<Props> = ({
             onClick={onSubmit}
             error={!!submitError}
             success={submitSuccess}
-            disabled={submitDisabled}
+            disabled={submitDisabled || true} // Disabled
             loading={submitting}
             grow
           />
