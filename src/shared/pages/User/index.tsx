@@ -65,7 +65,7 @@ const User: React.FC<Props> = () => {
     if (!userId) return;
 
     dispatch(bookmarksLoadByUserId(userId, 5));
-    dispatch(userLoad(userId));
+    dispatch(userLoad(userId, true));
     dispatch(listsLoadByUserId({ userId }));
   }, [session?.id]);
 
