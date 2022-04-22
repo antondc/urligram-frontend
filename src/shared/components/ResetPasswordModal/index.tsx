@@ -20,7 +20,7 @@ const ResetPasswordModal: React.FC = () => {
     <BaseModal className="ResetPasswordModal" onCloseClick={closeResetPasswordModal}>
       <>
         <BaseModalTitle>Password reset success!</BaseModalTitle>
-        <BaseModalText>Save it in a safe place</BaseModalText>
+        <BaseModalText>Keep it in a safe place</BaseModalText>
         <BaseModalText>🎉&nbsp;&nbsp;&nbsp;🥳</BaseModalText>
       </>
     </BaseModal>
