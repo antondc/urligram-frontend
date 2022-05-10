@@ -60,8 +60,7 @@ deploy_staging:
     - ssh xum35s@ec2-35-158-133-68.eu-central-1.compute.amazonaws.com "cd /var/www/html/urligram/staging.urligram.com && rm -rf node_modules dist/* tmp"
     - ssh xum35s@ec2-35-158-133-68.eu-central-1.compute.amazonaws.com "cd /var/www/html/urligram/staging.urligram.com && git pull origin staging"
     - ssh xum35s@ec2-35-158-133-68.eu-central-1.compute.amazonaws.com "source ~/.bash_profile && export NPM_TOKEN=${NPM_TOKEN} && export SECRET=${SECRET} && cd /var/www/html/urligram/staging.urligram.com && nvm use --delete-prefix && git checkout staging && npm ci --verbose && npm run stage"
-    # `pm2 delete 2> /dev/null || true`: delete, but send errors to /dev/null instead of stderr
-    - ssh xum35s@ec2-35-158-133-68.eu-central-1.compute.amazonaws.com "cd /var/www/html/urligram/staging.urligram.com && pm2 delete 2> /dev/null || true staging.urligram.com"
+    - ssh xum35s@ec2-35-158-133-68.eu-central-1.compute.amazonaws.com "cd /var/www/html/urligram/staging.urligram.com && pm2 delete staging.urligram.com"
     - ssh xum35s@ec2-35-158-133-68.eu-central-1.compute.amazonaws.com "cd /var/www/html/urligram/staging.urligram.com && export SECRET=${SECRET} && NODE_ENV=staging pm2 start ./dist/server.js --name staging.urligram.com --update-env"
 
 deploy_production:
@@ -72,6 +71,5 @@ deploy_production:
     - ssh xum35s@ec2-35-158-133-68.eu-central-1.compute.amazonaws.com "cd /var/www/html/urligram/urligram.com && rm -rf node_modules dist/* tmp"
     - ssh xum35s@ec2-35-158-133-68.eu-central-1.compute.amazonaws.com "cd /var/www/html/urligram/urligram.com && git pull origin master"
     - ssh xum35s@ec2-35-158-133-68.eu-central-1.compute.amazonaws.com "source ~/.bash_profile && export NPM_TOKEN=${NPM_TOKEN} && export SECRET=${SECRET} && cd /var/www/html/urligram/urligram.com && nvm use --delete-prefix && git checkout master && npm ci --verbose && npm run prod"
-    # `pm2 delete 2> /dev/null || true`: delete, but send errors to /dev/null instead of stderr
-    - ssh xum35s@ec2-35-158-133-68.eu-central-1.compute.amazonaws.com "cd /var/www/html/urligram/staging.urligram.com && pm2 delete 2> /dev/null || true urligram.com"
-    - ssh xum35s@ec2-35-158-133-68.eu-central-1.compute.amazonaws.com "cd /var/www/html/urligram/staging.urligram.com && export SECRET=${SECRET} && NODE_ENV=production pm2 start ./dist/server.js --name urligram.com --update-env"
+    - ssh xum35s@ec2-35-158-133-68.eu-central-1.compute.amazonaws.com "cd /var/www/html/urligram/urligram.com && pm2 delete urligram.com"
+    - ssh xum35s@ec2-35-158-133-68.eu-central-1.compute.amazonaws.com "cd /var/www/html/urligram/urligram.com && export SECRET=${SECRET} && NODE_ENV=production pm2 start ./dist/server.js --name urligram.com --update-env"
