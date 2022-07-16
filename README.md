@@ -18,7 +18,7 @@ Install packages
 
 Hot module reloading with `webpack-hot-middleware` and `webpack-dev-middleware.
 
-API endpoint points to staging: `https://linking-api-staging.woprs.com/api/v1/`. For API development with both API and client dev set it temporarily to `https://dev.woprs.com:3000/api/v1/`.
+API endpoint points to staging: `https://api-staging.urligram.com/api/v1/`. For API development with both API and client dev set it temporarily to `https://dev.urligram.com:3000/api/v1/`.
 A different option is to add local IP to clients allowed on API config.test.json, and access frontend from this ip.
 
 ## Docs
@@ -47,9 +47,9 @@ A different option is to add local IP to clients allowed on API config.test.json
       stateOrProvinceName_default = MA
       localityName                = MA
       localityName_default        = MA
-      organizationName            = Woprs
-      organizationName_default    = Woprs
-      commonName                  = woprs.com
+      organizationName            = Urligram
+      organizationName_default    = Urligram
+      commonName                  = urligram.com
       commonName_max              = 64
       commonName_default          = localhost
 
@@ -57,8 +57,8 @@ A different option is to add local IP to clients allowed on API config.test.json
       subjectAltName = @alt_names
 
       [alt_names]
-      DNS.1   = woprs.com
-      DNS.2   = dev.woprs.com
+      DNS.1   = urligram.com
+      DNS.2   = dev.urligram.com
 
 Create a directory ./ssl for your project close to server, and place ssl.conf.
 Open this folder.
@@ -210,7 +210,7 @@ See src/server/routes/allRoutes.tsx:27 and src/server/routes/allRoutes.tsx:32
 
 The MIT License (MIT)
 
-Copyright (c) 2020 Woprs
+Copyright (c) 2020 Urligram
 
 ## Rebuild
 

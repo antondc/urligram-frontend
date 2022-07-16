@@ -26,7 +26,7 @@ const SignUpDisabledModal: React.FC = () => {
     <BaseModal className="SignUpDisabledModal" onCloseClick={closeSignUpDisabledModal}>
       <>
         <BaseModalTitle>Sign up disabled</BaseModalTitle>
-        <BaseModalText>Currently woprs is in a beta phase, but we will enable new sign ups soon.</BaseModalText>
+        <BaseModalText>Currently Urligram is in a beta phase, but we will enable new sign ups soon.</BaseModalText>
         <BaseModalText>
           If you want information contact us at{' '}
           <A className="Docs-link" href={`mailto:${contactEmail}`} styled={false}>
