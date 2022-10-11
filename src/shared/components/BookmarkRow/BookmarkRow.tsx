@@ -86,6 +86,7 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
         </A>
       ))}
     </div>
+    <span className="BookmarkRow-users">{bookmark?.users?.length}</span>
     <Bookmarker className="BookmarkRow-bookmarker" bookmarkId={bookmark?.id} listId={listId} />
     <DotsVertical
       className={'BookmarkRow-actions' + (sessionUserBookmarkedLink ? ' BookmarkRow-actions--active' : '')}
