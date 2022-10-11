@@ -9,9 +9,9 @@
   position: relative;
   justify-content: space-between;
   grid-template:
-    'title tags icons bookmarker' auto
-    'description tags icons bookmarker' auto
-    / 5fr 6fr 1fr auto;
+    'title tags icons bookmarker users' auto
+    'description tags icons bookmarker users' auto
+    / 5fr 6fr auto auto 30px;
   height: 90px;
   width: 100%;
   padding: 27px 45px 17px 30px;
@@ -194,14 +194,21 @@
   }
 
   &-users {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    padding: 1px 8px 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    grid-area: users;
+    padding-bottom: 3px;
+    overflow: visible;
+  }
+
+  &-usersContent {
+    padding: 0 10px 0;
     font-size: @fs-nano;
-    line-height: @fh-small;
     text-align: center;
-    color: @c-brand;
+    color: @c-background;
+    background: @c-brand;
+    border-radius: 4px;
   }
 
   &-notification {

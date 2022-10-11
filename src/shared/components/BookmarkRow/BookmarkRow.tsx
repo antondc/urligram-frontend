@@ -86,7 +86,6 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
         </A>
       ))}
     </div>
-    <span className="BookmarkRow-users">{bookmark?.users?.length}</span>
     <Bookmarker className="BookmarkRow-bookmarker" bookmarkId={bookmark?.id} listId={listId} />
     <DotsVertical
       className={'BookmarkRow-actions' + (sessionUserBookmarkedLink ? ' BookmarkRow-actions--active' : '')}
@@ -107,6 +106,9 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
     </div>
     <div className="BookmarkRow-notification" onClick={bookmarkViewed}>
       <span />
+    </div>
+    <div className="BookmarkRow-users">
+      <span className="BookmarkRow-usersContent">{bookmark?.users?.length}</span>
     </div>
   </div>
 );
