@@ -1,4 +1,9 @@
-import { BookmarkDeleteApiResponse, BookmarksActions, BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
+import {
+  BookmarkDeleteApiResponse,
+  BookmarkGetApiResponse,
+  BookmarksActions,
+  BookmarkState,
+} from 'Modules/Bookmarks/bookmarks.types';
 import { uiNotificationPush } from 'Modules/Ui/actions/uiNotificationPush';
 import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
@@ -20,32 +25,72 @@ export const bookmarkDelete =
     try {
       dispatch(bookmarkDeleteRequest(bookmarksBeforeRequest));
 
-      const { data: bookmarkData } = await HttpClient.delete<void, BookmarkDeleteApiResponse>(
+      const { data: deletedBookmarkData } = await HttpClient.delete<void, BookmarkDeleteApiResponse>(
         `/users/me/bookmarks/${bookmarkId}`
       );
 
-      const { Bookmarks: bookmarksAfterResponse } = getState();
+      /*
+        As we are deleting a bookmark, we need to know if there are more bookmarks for this link
+        Thus, we try to retrieve it with /bookmarks/link/:linkid/user/me endpoint
+        This endpoint will return the user's bookmark for this link, or the latest bookmark for this link
+        If users's bookmark was the only one, endpoint will return Error 404.
+        We branch this logic with a try/catch
+      */
+      try {
+        const { data: defaultBookmarkData } = await HttpClient.get<any, BookmarkGetApiResponse>(
+          `/bookmarks/link/${linkId}/user/me`
+        );
+        const finalBookmarkData = defaultBookmarkData?.attributes;
+        const { Bookmarks: bookmarksAfterResponse } = getState();
 
-      const bookmarksToUpdate = Object.values(bookmarksAfterResponse.byKey).filter((item) => item?.linkId === linkId);
+        const bookmarksToUpdate = Object.values(bookmarksAfterResponse.byKey).filter((item) => item?.linkId === linkId);
+        const bookmarksUpdated = bookmarksToUpdate
+          .map((item) => ({
+            ...item,
+            bookmarksRelated: item.bookmarksRelated.filter((item) => item?.id !== bookmarkId),
+          }))
+          .map((item) => (item?.id === bookmarkId ? finalBookmarkData : item));
+        const filteredCurrentIds = bookmarksAfterResponse?.currentIds?.map((item) =>
+          item === bookmarkId ? finalBookmarkData.id : item
+        );
 
-      const filteredBookmarks = bookmarksToUpdate.map((item) => ({
-        ...item,
-        bookmarksRelated: item.bookmarksRelated.filter((item) => item?.id !== bookmarkId),
-      }));
+        await dispatch(
+          bookmarkDeleteSuccess({
+            ...bookmarksAfterResponse,
+            byKey: {
+              ...bookmarksAfterResponse.byKey,
+              ...serializerFromArrayToByKey<BookmarkState, BookmarkState>({ data: bookmarksUpdated }),
+              [bookmarkId]: undefined,
+            },
+            currentIds: filteredCurrentIds,
+          })
+        );
+      } catch {
+        /*
+          Mentioned case of /bookmarks/link/:linkid/user/me returning Error 404
+          Remove bookmark from store
+        */
+        const { Bookmarks: bookmarksAfterResponse } = getState();
 
-      const filteredCurrentIds = bookmarksAfterResponse?.currentIds?.filter((item) => item !== bookmarkId);
+        const bookmarksToUpdate = Object.values(bookmarksAfterResponse.byKey).filter((item) => item?.linkId === linkId);
+        const filteredBookmarks = bookmarksToUpdate.map((item) => ({
+          ...item,
+          bookmarksRelated: item.bookmarksRelated.filter((item) => item?.id !== bookmarkId),
+        }));
+        const filteredCurrentIds = bookmarksAfterResponse?.currentIds?.filter((item) => item !== bookmarkId);
 
-      await dispatch(
-        bookmarkDeleteSuccess({
-          ...bookmarksAfterResponse,
-          byKey: {
-            ...bookmarksAfterResponse.byKey,
-            ...serializerFromArrayToByKey<BookmarkState, BookmarkState>({ data: filteredBookmarks }),
-            [bookmarkId]: undefined,
-          },
-          currentIds: filteredCurrentIds,
-        })
-      );
+        await dispatch(
+          bookmarkDeleteSuccess({
+            ...bookmarksAfterResponse,
+            byKey: {
+              ...bookmarksAfterResponse.byKey,
+              ...serializerFromArrayToByKey<BookmarkState, BookmarkState>({ data: filteredBookmarks }),
+              [bookmarkId]: undefined,
+            },
+            currentIds: filteredCurrentIds,
+          })
+        );
+      }
 
       await dispatch(
         uiNotificationPush({
@@ -56,7 +101,7 @@ export const bookmarkDelete =
         })
       );
 
-      return bookmarkData?.attributes;
+      return deletedBookmarkData?.attributes;
     } catch (error) {
       const { Bookmarks: bookmarksOnError } = getState();
       await dispatch(

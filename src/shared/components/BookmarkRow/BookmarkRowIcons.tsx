@@ -63,7 +63,7 @@ export const BookmarkRowIcons: React.FC<Partial<BookmarkRowIcons>> = ({
         appear
         disabled={!uiScreenTypeIsMobile}
       >
-        <A href={`bookmark/${bookmark?.id}`} styled={false} scrollBeforeNavigate>
+        <A href={`link/${bookmark?.linkId}`} styled={false} scrollBeforeNavigate>
           <Info className="BookmarkRowIcons-icon BookmarkRowIcons-iconInfo" />
         </A>
         {!uiScreenTypeIsMobile && !!bookmark?.isPrivate && (

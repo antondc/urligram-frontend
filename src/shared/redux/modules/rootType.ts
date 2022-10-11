@@ -1,5 +1,6 @@
 import { BookmarksState } from './Bookmarks/bookmarks.types';
 import { LanguagesState } from './Languages/languages.types';
+import { LinksState } from './Links/links.types';
 import { ListsState } from './Lists/lists.types';
 import { NotesState } from './Notes/notes.types';
 import { NotificationsState } from './Notifications/notifications.types';
@@ -17,6 +18,7 @@ export type RootState = {
   Ui: UiState;
   Session: SessionState;
   Lists: ListsState;
+  Links: LinksState;
   Tags: TagsState;
   Notes: NotesState;
   Notifications: NotificationsState;

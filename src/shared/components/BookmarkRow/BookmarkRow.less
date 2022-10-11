@@ -200,6 +200,11 @@
     grid-area: users;
     padding-bottom: 3px;
     overflow: visible;
+
+    @media @br-mobile {
+      display: none;
+      grid-area: unset;
+    }
   }
 
   &-usersContent {

@@ -45,7 +45,7 @@ const BookmarkRow: React.FC<Props> = ({ id, listId, tagHrefPath = '' }) => {
   const tagsIfInList = useSelector((state: RootState) =>
     selectBookmarkTagsByLinkIdAndListId(state, { linkId: bookmark?.linkId, listId })
   );
-  const tags = !!listId ? tagsIfInList : bookmark.tags;
+  const tags = !!listId ? tagsIfInList : bookmark?.tags;
   const uiScreenTypeIsMobile = useSelector(selectUiScreenTypeIsMobile);
   const uiScreenTypeIsDesktop = useSelector(selectUiScreenTypeIsDesktop);
   const bookmarkActionIcons = useSelector(selectBookmarkActionsIcons);

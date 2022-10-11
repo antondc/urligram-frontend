@@ -20,7 +20,7 @@ export interface ParamsState {
   userId?: string;
   success?: string;
   listId?: string;
-  bookmarkId?: string;
+  linkId?: string;
 }
 
 export interface RouteState extends Route, Location {

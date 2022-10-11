@@ -7,6 +7,7 @@ import { bookmarksLoadByListId } from 'Modules/Bookmarks/actions/bookmarksLoadBy
 import { BookmarkRelated } from 'Modules/Bookmarks/bookmarks.types';
 import { selectBookmarksById } from 'Modules/Bookmarks/selectors/selectBookmarkById';
 import { listBookmarkCreate } from 'Modules/Lists/actions/listBookmarkCreate';
+import { listsLoadByUserId } from 'Modules/Lists/actions/listsLoadByUserId';
 import { RootState } from 'Modules/rootType';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
@@ -30,7 +31,6 @@ const Bookmarker: React.FC<Props> = ({ className, listId, bookmarkId, onBookmark
     (item) => item.userId === session?.id
   );
   const userBookmarkedLink = session?.id === parentBookmark?.userId;
-
   const onBookmarkGrab = async () => {
     if (!session?.id) return dispatch(switchLoginModal(true));
     if (userBookmarkedLink) return;
@@ -67,6 +67,7 @@ const Bookmarker: React.FC<Props> = ({ className, listId, bookmarkId, onBookmark
           linkId: parentBookmark?.linkId,
         })
       );
+      dispatch(listsLoadByUserId({ userId: parentBookmark?.userId, rawData: true }));
       if (!!listId) await dispatch(bookmarksLoadByListId(listId));
     } catch (error) {
       console.log('Bookmarker.onBookmarkDelete.catch: ', error);

@@ -137,6 +137,7 @@ export interface BookmarkDeleteApiResponse {
   data: {
     attributes: {
       id: number;
+      linkId: number;
     };
   };
 }

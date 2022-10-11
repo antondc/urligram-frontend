@@ -25,7 +25,7 @@ interface RoutesInterface {
   Docs: Route;
   Tags: Route;
   Home: Route;
-  Bookmark: Route;
+  Link: Route;
   UserBookmarks: Route;
   UserLists: Route;
   Following: Route;
@@ -70,9 +70,9 @@ export const Routes: RoutesInterface = {
     layout: 'withLeftSidebar',
   },
 
-  Bookmark: {
-    name: 'Bookmark',
-    path: '/:lang([a-z]{2})?/bookmark/:bookmarkId',
+  Link: {
+    name: 'Link',
+    path: '/:lang([a-z]{2})?/link/:linkId',
     exact: true,
     auth: false,
     initialDataLoadersVisitor: [],

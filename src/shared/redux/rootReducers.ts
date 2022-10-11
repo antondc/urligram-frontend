@@ -1,5 +1,6 @@
 import { Bookmarks } from './modules/Bookmarks/bookmarks.reducer';
 import { Languages } from './modules/Languages/languages.reducer';
+import { Links } from './modules/Links/links.reducer';
 import { Lists } from './modules/Lists/lists.reducer';
 import { Notes } from './modules/Notes/notes.reducer';
 import { Notifications } from './modules/Notifications/notifications.reducer';
@@ -20,4 +21,5 @@ export const RootReducers = {
   Tags,
   Notes,
   Notifications,
+  Links,
 };
