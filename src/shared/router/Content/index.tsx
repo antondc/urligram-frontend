@@ -10,6 +10,7 @@ import SidebarLeft from 'Components/SidebarLeft';
 import { selectPathWithoutLanguageParam } from 'Modules/Routes/selectors/selectPathWithoutLanguageParam';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import { selectUiSidebarleftState } from 'Modules/Ui/selectors/selectUiSidebarleftState';
+import Bookmark from 'Pages/Bookmark';
 import Followers from 'Pages/Followers';
 import Following from 'Pages/Following';
 import Home from 'Pages/Home';
@@ -61,6 +62,7 @@ const Content: React.FC<Props> = ({ location, pathWithoutLanguageParam }) => {
             <Route exact={Routes.UserLists.exact} path={Routes.UserLists.path} component={UserLists} />
             <Route exact={Routes.UserTags.exact} path={Routes.UserTags.path} component={UserTags} />
             <Route exact={Routes.Tags.exact} path={Routes.Tags.path} component={Tags} />
+            <Route exact={Routes.Bookmark.exact} path={Routes.Bookmark.path} component={Bookmark} />
           </Switch>
         </div>
         {/* INTENDED => </FadeInOut> */}

@@ -25,6 +25,7 @@ interface RoutesInterface {
   Docs: Route;
   Tags: Route;
   Home: Route;
+  Bookmark: Route;
   UserBookmarks: Route;
   UserLists: Route;
   Following: Route;
@@ -65,6 +66,16 @@ export const Routes: RoutesInterface = {
     auth: false,
     initialDataLoadersVisitor: [tagsAllInitialLoader],
     initialDataLoadersSession: [tagsAllInitialLoader],
+    layout: 'withLeftSidebar',
+  },
+
+  Bookmark: {
+    name: 'Bookmark',
+    path: '/:lang([a-z]{2})?/bookmark/:bookmarkId',
+    exact: true,
+    auth: false,
+    initialDataLoadersVisitor: [],
+    initialDataLoadersSession: [],
     layout: 'withLeftSidebar',
   },
 
