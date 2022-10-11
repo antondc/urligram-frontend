@@ -2,29 +2,29 @@
   "development": {
     "PORT_HTTP": 80,
     "PORT_HTTPS": 443,
-    "API_URL": "https://www.dev.woprs.com:3000/api/v1/",
-    "DOMAIN": "dev.woprs.com"
+    "API_URL": "https://www.dev.urligram.com:3000/api/v1/",
+    "DOMAIN": "dev.urligram.com"
   },
   "staging": {
     "PORT_HTTP": 4001,
     "PORT_HTTPS": 4002,
-    "API_URL": "https://www.api-staging.woprs.com/api/v1/",
-    "DOMAIN": "staging.woprs.com"
+    "API_URL": "https://www.api-staging.urligram.com/api/v1/",
+    "DOMAIN": "staging.urligram.com"
   },
   "production": {
     "PORT_HTTP": 4003,
     "PORT_HTTPS": 4004,
-    "API_URL": "https://www.api-service.woprs.com/api/v1/",
-    "DOMAIN": "woprs.com"
+    "API_URL": "https://www.api.urligram.com/api/v1/",
+    "DOMAIN": "urligram.com"
   },
-  "FIREFOX_EXTENSION_URL": "https://www.api-service.woprs.com/media/docs/woprs_browser_extension-1.0-fx.xpi",
-  "CHROME_EXTENSION_URL": "https://chrome.google.com/webstore/detail/woprs-browser-extension/bjpciihjkgaojmpglmbhncmahdiihhln",
+  "FIREFOX_EXTENSION_URL": "https://www.api.urligram.com/media/docs/urligram_browser_extension-1.0-fx.xpi",
+  "CHROME_EXTENSION_URL": "https://chrome.google.com/webstore/detail/urligram-browser-extension/bjpciihjkgaojmpglmbhncmahdiihhln",
   "ENABLE_ISOMORPHISM": false,
   "MEDIA": "media",
   "MEDIA_FOLDER": "media",
   "MEDIA_IMAGES": "media/images",
   "TEMP_FILES": "media/temp_files",
   "DEFAULT_IMAGE": "/img/default-image.png",
-  "CONTACT_EMAIL": "hello@woprs.com",
-  "APP_NAME": "Woprs"
+  "CONTACT_EMAIL": "hello@urligram.com",
+  "APP_NAME": "urligram"
 }

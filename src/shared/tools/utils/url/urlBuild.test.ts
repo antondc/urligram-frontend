@@ -40,10 +40,10 @@ describe('urlBuild', () => {
   test('it should return a full url', () => {
     const input = {
       protocol: 'http',
-      host: 'woprs.com',
+      host: 'urligram.com',
       port: 19079,
     };
-    const output = 'http://woprs.com:19079';
+    const output = 'http://urligram.com:19079';
     expect(urlBuild(input)).toEqual(output);
   });
 });
