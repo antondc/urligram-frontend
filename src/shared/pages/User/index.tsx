@@ -24,12 +24,7 @@ import { isDomAvailable } from 'Tools/utils/dom/isDomAvailable';
 import { DELETE_CONFIRM_MESSSAGE } from './constants';
 import { User as UserUi } from './User';
 
-interface Props {
-  popularLists: ListState[];
-  userId: string;
-}
-
-const User: React.FC<Props> = () => {
+const User: React.FC = () => {
   const dispatch = useDispatch();
 
   const session = useSelector(selectSession);
