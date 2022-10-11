@@ -2,8 +2,10 @@ import { SessionState } from 'Modules/Session/session.types';
 
 export const USERS_LOAD_REQUEST = 'USERS_LOAD_REQUEST';
 export const USERS_LOAD_SUCCEED = 'USERS_LOAD_SUCCEED';
+export const USERS_LOAD_FAILURE = 'USERS_LOAD_FAILURE';
 export const USER_LOAD_REQUEST = 'USER_LOAD_REQUEST';
 export const USER_LOAD_SUCCEED = 'USER_LOAD_SUCCEED';
+export const USER_LOAD_FAILURE = 'USER_LOAD_FAILURE';
 export const USER_FOLLOW_CREATE_REQUEST = 'USER_FOLLOW_CREATE_REQUEST';
 export const USER_FOLLOW_CREATE_SUCCEED = 'USER_FOLLOW_CREATE_SUCCEED';
 export const USER_FOLLOW_CREATE_FAILURE = 'USER_FOLLOW_CREATE_FAILURE';
@@ -14,6 +16,7 @@ export const USER_DELETE_REQUEST = 'USER_DELETE_REQUEST';
 export const USER_DELETE_SUCCEED = 'USER_DELETE_SUCCEED';
 export const USER_DELETE_FAILURE = 'USER_DELETE_FAILURE';
 export const USER_UPDATE_DETAILS = 'USER_UPDATE_DETAILS';
+
 export interface UserState {
   id: string;
   name: string;
@@ -101,6 +104,11 @@ interface UsersLoadSuccessAction {
   payload: Partial<UsersState>;
 }
 
+interface UsersLoadFailureAction {
+  type: typeof USERS_LOAD_FAILURE;
+  payload: Partial<UsersState>;
+}
+
 interface UserLoadRequestAction {
   type: typeof USER_LOAD_REQUEST;
   payload: Partial<UsersState>;
@@ -108,6 +116,11 @@ interface UserLoadRequestAction {
 
 interface UserLoadSuccessAction {
   type: typeof USER_LOAD_SUCCEED;
+  payload: Partial<UsersState>;
+}
+
+interface UserLoadFailureAction {
+  type: typeof USER_LOAD_FAILURE;
   payload: Partial<UsersState>;
 }
 
@@ -164,8 +177,10 @@ interface UserDeleteFailureAction {
 export type UsersActions =
   | UsersLoadRequestAction
   | UsersLoadSuccessAction
+  | UsersLoadFailureAction
   | UserLoadRequestAction
   | UserLoadSuccessAction
+  | UserLoadFailureAction
   | UserFollowCreateRequestAction
   | UserFollowCreateSuccessAction
   | UserFollowCreateFailureAction

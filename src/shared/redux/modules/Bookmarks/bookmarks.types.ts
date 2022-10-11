@@ -45,6 +45,7 @@ export interface BookmarkState {
   order?: number;
   userId: string;
   title: string;
+  notes: string;
   url: string;
   img: string;
   favicon: string;

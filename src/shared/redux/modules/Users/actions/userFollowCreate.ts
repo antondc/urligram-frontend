@@ -14,51 +14,51 @@ type Params = {
   targetUserId: string;
 };
 
-export const userFollowCreate = ({
-  originUserId,
-  targetUserId,
-}: Params): AppThunk<Promise<UserState>, UsersActions> => async (dispatch, getState): Promise<UserState> => {
-  const { Users: usersBeforeRequest } = getState();
+export const userFollowCreate =
+  ({ originUserId, targetUserId }: Params): AppThunk<Promise<UserState>, UsersActions> =>
+  async (dispatch, getState): Promise<UserState> => {
+    const { Users: usersBeforeRequest } = getState();
 
-  try {
-    dispatch({
-      type: USER_FOLLOW_CREATE_REQUEST,
-      payload: usersBeforeRequest,
-    });
+    try {
+      dispatch({
+        type: USER_FOLLOW_CREATE_REQUEST,
+        payload: usersBeforeRequest,
+      });
 
-    const { data } = await HttpClient.post<void, UserFollowCreateApiResponse>('/users/me/following/' + targetUserId);
+      const { data } = await HttpClient.post<void, UserFollowCreateApiResponse>('/users/me/following/' + targetUserId);
 
-    const { Users: UsersAfterResponse } = getState();
-    dispatch({
-      type: USER_FOLLOW_CREATE_SUCCEED,
-      payload: {
-        ...UsersAfterResponse,
-        byKey: {
-          ...UsersAfterResponse?.byKey,
-          [targetUserId]: {
-            ...UsersAfterResponse?.byKey[targetUserId],
-            followers: [...(UsersAfterResponse?.byKey[targetUserId]?.followers || []), originUserId],
-          },
-          [originUserId]: {
-            ...UsersAfterResponse?.byKey[originUserId],
-            following: [...(UsersAfterResponse?.byKey[originUserId]?.following || []), targetUserId],
+      const { Users: UsersAfterResponse } = getState();
+      dispatch({
+        type: USER_FOLLOW_CREATE_SUCCEED,
+        payload: {
+          ...UsersAfterResponse,
+          byKey: {
+            ...UsersAfterResponse?.byKey,
+            [targetUserId]: {
+              ...UsersAfterResponse?.byKey[targetUserId],
+              followers: [...(UsersAfterResponse?.byKey[targetUserId]?.followers || []), originUserId],
+            },
+            [originUserId]: {
+              ...UsersAfterResponse?.byKey[originUserId],
+              following: [...(UsersAfterResponse?.byKey[originUserId]?.following || []), targetUserId],
+            },
           },
         },
-      },
-    });
+      });
 
-    return data.attributes;
-  } catch (error) {
-    const { Users: UsersOnError } = getState();
+      return data.attributes;
+    } catch (error) {
+      const { Users: UsersOnError } = getState();
 
-    dispatch({
-      type: USER_FOLLOW_CREATE_FAILURE,
-      payload: {
-        ...UsersOnError,
-        errors: [...(UsersOnError?.errors || []), error],
-      },
-    });
+      dispatch({
+        type: USER_FOLLOW_CREATE_FAILURE,
+        payload: {
+          ...UsersOnError,
+          loading: false,
+          errors: [...(UsersOnError?.errors || []), error],
+        },
+      });
 
-    return error;
-  }
-};
+      return error;
+    }
+  };

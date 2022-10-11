@@ -1,6 +1,7 @@
 import { BookmarksState } from './Bookmarks/bookmarks.types';
 import { LanguagesState } from './Languages/languages.types';
 import { ListsState } from './Lists/lists.types';
+import { NotesState } from './Notes/notes.types';
 import { NotificationsState } from './Notifications/notifications.types';
 import { RoutesState } from './Routes/routes.types';
 import { SessionState } from './Session/session.types';
@@ -17,5 +18,6 @@ export type RootState = {
   Session: SessionState;
   Lists: ListsState;
   Tags: TagsState;
+  Notes: NotesState;
   Notifications: NotificationsState;
 };

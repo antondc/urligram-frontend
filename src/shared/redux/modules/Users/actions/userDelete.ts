@@ -35,6 +35,7 @@ export const userDelete =
         type: USER_DELETE_FAILURE,
         payload: {
           ...UsersOnError,
+          loading: false,
           errors: [...(UsersOnError?.errors || []), error],
         },
       });
