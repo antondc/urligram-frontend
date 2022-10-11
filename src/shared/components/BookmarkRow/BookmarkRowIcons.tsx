@@ -2,8 +2,10 @@ import React from 'react';
 
 import Cross from 'Assets/svg/cross.svg';
 import EditCircle from 'Assets/svg/editCircle.svg';
+import Info from 'Assets/svg/info.svg';
 import List from 'Assets/svg/list.svg';
 import Private from 'Assets/svg/private.svg';
+import A from 'Components/A';
 import Bookmarker from 'Components/Bookmarker';
 import BookmarkListsPopOverOrSheet from 'Components/BookmarkListsPopOverOrSheet';
 import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
@@ -61,6 +63,9 @@ export const BookmarkRowIcons: React.FC<Partial<BookmarkRowIcons>> = ({
         appear
         disabled={!uiScreenTypeIsMobile}
       >
+        <A href={`bookmark/${bookmark?.id}`} styled={false} scrollBeforeNavigate>
+          <Info className="BookmarkRowIcons-icon BookmarkRowIcons-iconInfo" />
+        </A>
         {!uiScreenTypeIsMobile && !!bookmark?.isPrivate && (
           <Private className="BookmarkRowIcons-icon BookmarkRowIcons-iconPrivate" />
         )}
