@@ -6,11 +6,13 @@ import { bookmarkLoadById } from 'Modules/Bookmarks/actions/bookmarkLoadById';
 import { bookmarkUpdate } from 'Modules/Bookmarks/actions/bookmarkUpdate';
 import { selectBookmarksById } from 'Modules/Bookmarks/selectors/selectBookmarkById';
 import { selectBookmarksErrorLast } from 'Modules/Bookmarks/selectors/selectBookmarksErrorLast';
+import { notesLoadByLinkId } from 'Modules/Notes/actions/notesLoadByLinkId';
 import { RootState } from 'Modules/rootType';
 import { tagsSearchLoad } from 'Modules/Tags/actions/tagsSearchLoad';
 import { selectTagsAll } from 'Modules/Tags/selectors/selectAllTags';
 import { selectTagsSearch } from 'Modules/Tags/selectors/selectTagsSearch';
 import { selectUiBookmarkUpdateModal } from 'Modules/Ui/selectors/selectUiBookmarkUpdateModal';
+import { usersLoadByLinkId } from 'Modules/Users/actions/usersLoadByLinkId';
 import { DELAY_SLOW_MS } from 'Root/src/shared/constants';
 import { BookmarkUpdateForm as BookmarkFormUi } from './BookmarkUpdateForm';
 
@@ -112,6 +114,8 @@ const BookmarkUpdateForm: React.FC<Props> = ({ closeModal, setLocked }) => {
         setSubmitting(false);
         setLocked(false);
         setSubmitSuccess(true);
+        dispatch(notesLoadByLinkId(bookmark.linkId));
+        dispatch(usersLoadByLinkId(bookmark.linkId));
 
         setTimeout(() => {
           closeModal();

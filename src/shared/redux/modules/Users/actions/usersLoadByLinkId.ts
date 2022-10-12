@@ -23,9 +23,10 @@ export const usersLoadByLinkId =
         },
       });
 
-      const { data } = await HttpClient.get<void, UsersLoadApiResponse>(
-        `/links/${linkId}/users?${window.location.search}`
-      );
+      const {
+        data,
+        meta: { totalItems, sort },
+      } = await HttpClient.get<void, UsersLoadApiResponse>(`/links/${linkId}/users${window.location.search}`);
 
       const { Users: usersAfterResponse } = getState();
       const usersArray = data?.map((item) => item.attributes);
@@ -40,6 +41,7 @@ export const usersLoadByLinkId =
           },
           currentIds: data?.map((item) => item.id),
           loading: false,
+          meta: { totalItems, sort },
         },
       });
 

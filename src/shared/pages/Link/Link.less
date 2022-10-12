@@ -3,5 +3,33 @@
 @c: .Link;
 
 @{c} {
-  //
+  &-subHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 10px 30px 10px 20px;
+    font-size: @fs-medium;
+    font-weight: @fw-extraBold;
+    color: @gradientColors[black-4];
+    background: @c-background;
+
+    @media @br-mobile {
+      padding: 10px 15px 10px 15px;
+    }
+  }
+
+  &-content {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 10px;
+
+    @media @br-tabletHorizontal {
+      display: unset;
+      grid-template-columns: unset;
+      gap: unset;
+
+      .u-errorBars;
+    }
+  }
 }

@@ -4,7 +4,8 @@ export const NOTES_LOAD_BY_LINK_ID_FAILURE = 'NOTES_LOAD_BY_LINK_ID_FAILURE';
 
 export interface NoteState {
   notes: string;
-  linkId: number;
+  userId: string;
+  userName: string;
   bookmarkId: number;
 }
 
