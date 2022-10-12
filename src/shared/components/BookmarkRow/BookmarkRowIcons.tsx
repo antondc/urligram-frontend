@@ -17,6 +17,7 @@ import './BookmarkRowIcons.less';
 interface BookmarkRowIcons extends BookmarkState {
   bookmark: Partial<BookmarkState>;
   listId?: number;
+  withInfoButton: boolean;
   tags: TagState[];
   bookmarkActionIconsMounted: boolean;
   sessionUserBookmarkedLink: boolean;
@@ -32,6 +33,7 @@ interface BookmarkRowIcons extends BookmarkState {
 export const BookmarkRowIcons: React.FC<Partial<BookmarkRowIcons>> = ({
   bookmark,
   listId,
+  withInfoButton,
   bookmarkActionIconsMounted,
   sessionUserBookmarkedLink,
   bookmarkIdInAnyOfMyLists,
@@ -63,9 +65,11 @@ export const BookmarkRowIcons: React.FC<Partial<BookmarkRowIcons>> = ({
         appear
         disabled={!uiScreenTypeIsMobile}
       >
-        <A href={`link/${bookmark?.linkId}`} styled={false} scrollBeforeNavigate>
-          <Info className="BookmarkRowIcons-icon BookmarkRowIcons-iconInfo" />
-        </A>
+        {withInfoButton && (
+          <A href={`link/${bookmark?.linkId}`} styled={false} scrollBeforeNavigate>
+            <Info className="BookmarkRowIcons-icon BookmarkRowIcons-iconInfo" />
+          </A>
+        )}
         {!uiScreenTypeIsMobile && !!bookmark?.isPrivate && (
           <Private className="BookmarkRowIcons-icon BookmarkRowIcons-iconPrivate" />
         )}

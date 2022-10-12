@@ -17,7 +17,7 @@ interface Props {
 
 export const Link: React.FC<Props> = ({ link, notes, users, bookmark }) => (
   <div className="Link">
-    <BookmarkRow id={bookmark?.id} />
+    <BookmarkRow id={bookmark?.id} withInfoButton={false} />
     <hr />
     <div>linkid: {link?.id}</div>
     <div>notes: {notes.length}</div>

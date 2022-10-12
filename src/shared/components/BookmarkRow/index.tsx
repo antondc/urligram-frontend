@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { bookmarkLoadById } from 'Modules/Bookmarks/actions/bookmarkLoadById';
 import { selectBookmarksById } from 'Modules/Bookmarks/selectors/selectBookmarkById';
 import { selectBookmarkTagsByLinkIdAndListId } from 'Modules/Bookmarks/selectors/selectBookmarkTagsByLinkIdAndListId';
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
@@ -28,9 +27,10 @@ interface Props {
   id: number;
   listId?: number;
   tagHrefPath?: string;
+  withInfoButton?: boolean;
 }
 
-const BookmarkRow: React.FC<Props> = ({ id, listId, tagHrefPath = '' }) => {
+const BookmarkRow: React.FC<Props> = ({ id, listId, tagHrefPath = '', withInfoButton = true }) => {
   const dispatch = useDispatch();
   const slug = useSelector(selectCurrentLanguageSlug);
   const session = useSelector(selectSession);
@@ -103,6 +103,7 @@ const BookmarkRow: React.FC<Props> = ({ id, listId, tagHrefPath = '' }) => {
     <BookmarkRowUi
       id={id}
       listId={listId}
+      withInfoButton={withInfoButton}
       bookmark={bookmark}
       bookmarkActionIconsMounted={bookmarkActionIconsMounted}
       tags={tags}
