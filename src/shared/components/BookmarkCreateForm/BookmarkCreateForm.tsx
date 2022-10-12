@@ -3,7 +3,7 @@ import React from 'react';
 import BaseForm, { BaseFormError, BaseFormField, BaseFormLabel, BaseFormSubmit } from 'Components/BaseForm';
 import { BaseModalTitle } from 'Components/BaseModal';
 import { TagState } from 'Modules/Tags/tags.types';
-import { ArrowRight, Button, FadeInOut, Input, Select, SelectValue, Spinner, Switch } from '@antoniodcorrea/components';
+import { ArrowRight, Button, FadeInOut, Input, Select, SelectValue, Spinner, Switch, TextArea } from '@antoniodcorrea/components';
 import { TagValue } from '.';
 
 import './BookmarkCreateForm.less';
@@ -25,6 +25,9 @@ interface Props {
   tagsValue: TagValue[];
   onChangeTagsInput: (string: string) => void;
   onChangeTags: (string: SelectValue[]) => void;
+  notesValue: string;
+  notesError: string;
+  onChangeNotes: (e: React.FormEvent<HTMLTextAreaElement>) => void;
   submitDisabled: boolean;
   submitInProcess: boolean;
   submitSuccess: boolean;
@@ -49,6 +52,9 @@ export const BookmarkCreateForm: React.FC<Props> = ({
   tagsValue,
   onChangeTagsInput,
   onChangeTags,
+  notesValue,
+  notesError,
+  onChangeNotes,
   submitDisabled,
   submitInProcess,
   submitSuccess,
@@ -109,6 +115,10 @@ export const BookmarkCreateForm: React.FC<Props> = ({
               isCreatable
             />
           </BaseFormField>
+          <BaseFormField>
+      <BaseFormLabel>Notes</BaseFormLabel>
+      <TextArea name="notes" value={notesValue} error={!!notesError} grow onChange={onChangeNotes} />
+    </BaseFormField>
           <BaseFormField>
             <BaseFormLabel>Is Private</BaseFormLabel>
             <Switch name="isPrivate" checked={isPrivateValue} onChange={onChangeIsPrivate} />

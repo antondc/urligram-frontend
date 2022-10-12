@@ -2,8 +2,6 @@ import {
   BOOKMARK_CREATE_FAILURE,
   BOOKMARK_CREATE_REQUEST,
   BOOKMARK_CREATE_SUCCESS,
-  BookmarkCreateApiRequest,
-  BookmarkCreateApiResponse,
   BookmarksActions,
   BookmarkState,
 } from 'Modules/Bookmarks/bookmarks.types';
@@ -13,12 +11,30 @@ import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFr
 import { AppThunk } from '../../../index';
 import { LISTS_LOAD_SUCCESS, ListsActions } from '../../Lists/lists.types';
 
+export interface BookmarkCreateApiRequest {
+  bookmarkId?: number;
+  title?: string;
+  url?: string;
+  isPrivate?: boolean;
+  tags?: {
+    tag: string;
+  }[];
+  notes: string;
+}
+
+export interface BookmarkCreateApiResponse {
+  data: {
+    attributes: BookmarkState;
+  };
+}
+
 export const bookmarkCreate =
   ({
     title,
     url,
     isPrivate,
     tags,
+    notes,
   }: BookmarkCreateApiRequest): AppThunk<Promise<BookmarkState>, BookmarksActions | UsersActions | ListsActions> =>
   async (dispatch, getState) => {
     const { Bookmarks: bookmarksBeforeRequest } = getState();
@@ -34,6 +50,7 @@ export const bookmarkCreate =
         url,
         isPrivate,
         tags,
+        notes,
       });
 
       const { Bookmarks: bookmarksAfterResponse, Users: usersAfterResponse, Lists: listsAfterResponse } = getState();

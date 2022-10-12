@@ -1,9 +1,4 @@
-import {
-  BookmarkDeleteApiResponse,
-  BookmarkGetApiResponse,
-  BookmarksActions,
-  BookmarkState,
-} from 'Modules/Bookmarks/bookmarks.types';
+import { BookmarkGetApiResponse, BookmarksActions, BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
 import { uiNotificationPush } from 'Modules/Ui/actions/uiNotificationPush';
 import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
@@ -16,6 +11,15 @@ type BookmarkDelete = {
   bookmarkId: number;
   linkId: number;
 };
+
+export interface BookmarkDeleteApiResponse {
+  data: {
+    attributes: {
+      id: number;
+      linkId: number;
+    };
+  };
+}
 
 export const bookmarkDelete =
   ({ bookmarkId, linkId }: BookmarkDelete): AppThunk<Promise<Partial<BookmarkState>>, BookmarksActions> =>

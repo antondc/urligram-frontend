@@ -3,7 +3,7 @@ import React from 'react';
 import BaseForm, { BaseFormError, BaseFormField, BaseFormLabel, BaseFormSubmit } from 'Components/BaseForm';
 import { BaseModalTitle } from 'Components/BaseModal';
 import { TagState } from 'Modules/Tags/tags.types';
-import { Button, FadeInOut, Input, Select, SelectValue, Switch } from '@antoniodcorrea/components';
+import { Button, FadeInOut, Input, Select, SelectValue, Switch, TextArea } from '@antoniodcorrea/components';
 import { TagValue } from '.';
 
 import './BookmarkUpdateForm.less';
@@ -20,6 +20,9 @@ interface Props {
   tagsValue: TagValue[];
   onChangeTagsInput: (string: string) => void;
   onChangeTags: (string: SelectValue[]) => void;
+  notesValue: string;
+  notesError: string;
+  onChangeNotes: (e: React.FormEvent<HTMLTextAreaElement>) => void;
   submitDisabled: boolean;
   submitting: boolean;
   submitSuccess: boolean;
@@ -40,6 +43,9 @@ export const BookmarkUpdateForm: React.FC<Props> = ({
   tagsValue,
   onChangeTagsInput,
   onChangeTags,
+  notesValue,
+  notesError,
+  onChangeNotes,
   submitDisabled,
   submitting,
   submitSuccess,
@@ -88,6 +94,10 @@ export const BookmarkUpdateForm: React.FC<Props> = ({
         grow
         isCreatable
       />
+    </BaseFormField>
+    <BaseFormField>
+      <BaseFormLabel>Notes</BaseFormLabel>
+      <TextArea name="notes" value={notesValue} error={!!notesError} grow onChange={onChangeNotes} />
     </BaseFormField>
     <BaseFormField>
       <BaseFormLabel>Is Private</BaseFormLabel>

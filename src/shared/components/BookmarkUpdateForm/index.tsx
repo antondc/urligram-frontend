@@ -38,6 +38,8 @@ const BookmarkUpdateForm: React.FC<Props> = ({ closeModal, setLocked }) => {
   const [titleError, setTitleError] = useState<string>(undefined);
   const [isPrivateValue, setIsPrivateValue] = useState<boolean>(false);
   const [tagsValue, setTagsValue] = useState<TagValue[]>([]);
+  const [notesValue, setNotesValue] = useState<string>(undefined);
+  const [notesError, setNotesError] = useState<string>(undefined);
   const [submitting, setSubmitting] = useState<boolean>(undefined);
   const [submitSuccess, setSubmitSuccess] = useState<boolean>(undefined);
   const [submitError, setSubmitError] = useState<string>(undefined);
@@ -63,6 +65,15 @@ const BookmarkUpdateForm: React.FC<Props> = ({ closeModal, setLocked }) => {
     setSubmitSuccess(undefined);
 
     !!string && dispatch(tagsSearchLoad(string));
+  };
+
+  const onChangeNotes = (e: React.FormEvent<HTMLTextAreaElement>) => {
+    const { value } = e.currentTarget;
+    setNotesError(undefined);
+    setSubmitSuccess(undefined);
+    setSubmitError(undefined);
+
+    setNotesValue(value);
   };
 
   const onChangeTags = (values) => {
@@ -91,6 +102,7 @@ const BookmarkUpdateForm: React.FC<Props> = ({ closeModal, setLocked }) => {
         isPrivate: isPrivateValue,
         order: 1,
         tags: transformedTags,
+        notes: notesValue,
       };
 
       const bookmark = await dispatch(bookmarkUpdate(data));
@@ -119,6 +131,7 @@ const BookmarkUpdateForm: React.FC<Props> = ({ closeModal, setLocked }) => {
     setTitleValue(bookmark?.title);
     setIsPrivateValue(bookmark?.isPrivate);
     setTagsValue(bookmark?.tags?.map((item) => ({ label: item.name, value: item.name })));
+    setNotesValue(bookmark?.notes);
   }, []);
 
   useEffect(() => {
@@ -148,6 +161,9 @@ const BookmarkUpdateForm: React.FC<Props> = ({ closeModal, setLocked }) => {
       tagsValue={tagsValue}
       onChangeTags={onChangeTags}
       onChangeTagsInput={onChangeTagsInput}
+      notesValue={notesValue}
+      notesError={notesError}
+      onChangeNotes={onChangeNotes}
       onSubmit={onSubmit}
       submitDisabled={submitDisabled}
       submitting={submitting}

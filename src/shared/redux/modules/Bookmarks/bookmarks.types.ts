@@ -117,47 +117,6 @@ export interface BookmarksGetApiResponse {
   };
 }
 
-export interface BookmarkCreateApiRequest {
-  bookmarkId?: number;
-  title?: string;
-  url?: string;
-  isPrivate?: boolean;
-  tags?: {
-    tag: string;
-  }[];
-}
-
-export interface BookmarkCreateApiResponse {
-  data: {
-    attributes: BookmarkState;
-  };
-}
-
-export interface BookmarkDeleteApiResponse {
-  data: {
-    attributes: {
-      id: number;
-      linkId: number;
-    };
-  };
-}
-
-export interface BookmarkUpdateApiRequest {
-  bookmarkId: number;
-  order: number;
-  title: string;
-  isPrivate: boolean;
-  tags: {
-    tag: string;
-  }[];
-}
-
-export interface BookmarkUpdateApiResponse {
-  data: {
-    attributes: BookmarkState;
-  };
-}
-
 // Actions -----
 
 interface BookmarksLoadRequestAction {

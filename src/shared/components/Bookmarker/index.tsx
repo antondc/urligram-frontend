@@ -43,6 +43,7 @@ const Bookmarker: React.FC<Props> = ({ className, listId, bookmarkId, onBookmark
       url: parentBookmark?.url,
       isPrivate: parentBookmark?.isPrivate || false,
       tags: bookmarkTags,
+      notes: null,
     };
     try {
       const { id: newBookmarkId } = await dispatch(bookmarkCreate(data));

@@ -49,6 +49,8 @@ const BookmarkCreateForm: React.FC<Props> = ({ closeModal, setLocked }) => {
   const [titleError, setTitleError] = useState<string>(undefined);
   const [isPrivateValue, setIsPrivateValue] = useState<boolean>(false);
   const [tagsValue, setTagsValue] = useState<TagValue[]>([]);
+  const [notesValue, setNotesValue] = useState<string>(undefined);
+  const [notesError, setNotesError] = useState<string>(undefined);
   const [submitInProcess, setSubmitInProcess] = useState<boolean>(undefined);
   const [submitSuccess, setSubmitSuccess] = useState<boolean>(undefined);
   const [submitError, setSubmitError] = useState<string>(undefined);
@@ -120,6 +122,15 @@ const BookmarkCreateForm: React.FC<Props> = ({ closeModal, setLocked }) => {
     setSubmitError(undefined);
   };
 
+  const onChangeNotes = (e: React.FormEvent<HTMLTextAreaElement>) => {
+    const { value } = e.currentTarget;
+    setNotesError(undefined);
+    setSubmitSuccess(undefined);
+    setSubmitError(undefined);
+
+    setNotesValue(value);
+  };
+
   const onChangeIsPrivate = (e: React.FormEvent<HTMLInputElement>) => {
     const { checked } = e.currentTarget;
 
@@ -157,6 +168,7 @@ const BookmarkCreateForm: React.FC<Props> = ({ closeModal, setLocked }) => {
       isPrivate: isPrivateValue,
       url: urlValue,
       tags: transformedTags,
+      notes: notesValue,
     };
 
     const response = await dispatch(bookmarkCreate(data));
@@ -218,6 +230,9 @@ const BookmarkCreateForm: React.FC<Props> = ({ closeModal, setLocked }) => {
       tagsValue={tagsValue}
       onChangeTags={onChangeTags}
       onChangeTagsInput={onChangeTagsInput}
+      notesValue={notesValue}
+      notesError={notesError}
+      onChangeNotes={onChangeNotes}
       onSubmit={onSubmit}
       submitDisabled={submitDisabled}
       submitInProcess={submitInProcess}
