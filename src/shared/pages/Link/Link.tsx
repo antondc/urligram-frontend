@@ -18,10 +18,22 @@ interface Props {
   users: UserState[];
   bookmark: BookmarkState;
   url: string;
-  sort: string;
+  sortNotes: string;
+  sortUsers: string;
+  onSortNotes: (url: string) => void;
+  onSortUsers: (url: string) => void;
 }
 
-export const Link: React.FC<Props> = ({ notes, users, bookmark, url, sort }) => (
+export const Link: React.FC<Props> = ({
+  notes,
+  users,
+  bookmark,
+  url,
+  sortNotes,
+  sortUsers,
+  onSortNotes,
+  onSortUsers,
+}) => (
   <div className="Link">
     <CardItem>
       <BookmarkRow id={bookmark?.id} withInfoButton={false} />
@@ -36,8 +48,9 @@ export const Link: React.FC<Props> = ({ notes, users, bookmark, url, sort }) => 
               { label: 'Updated', field: 'updatedAt', icon: Updated },
             ]}
             href={url}
-            currentSort={sort}
+            currentSort={sortUsers}
             loading={false}
+            onItemClick={onSortUsers}
           />
         </CardItem>
         {users?.map((item) => (
@@ -55,8 +68,9 @@ export const Link: React.FC<Props> = ({ notes, users, bookmark, url, sort }) => 
               { label: 'Updated', field: 'updatedAt', icon: Updated },
             ]}
             href={url}
-            currentSort={sort}
+            currentSort={sortNotes}
             loading={false}
+            onItemClick={onSortNotes}
           />
         </CardItem>
         {notes?.map((item) => (

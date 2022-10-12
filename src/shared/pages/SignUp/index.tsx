@@ -223,11 +223,6 @@ const SignUp: React.FC = () => {
   }, [sessionError]);
 
   useEffect(() => {
-    console.log('=======');
-    console.log('1:');
-    console.log(JSON.stringify(1, null, 4));
-    console.log('=======');
-
     dispatch(switchSignUpDisabledModal(true));
 
     () => dispatch(uiResetModalsState());

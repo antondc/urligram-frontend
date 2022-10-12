@@ -51,8 +51,8 @@ const Bookmarker: React.FC<Props> = ({ className, listId, bookmarkId, onBookmark
       const { id: newBookmarkId } = await dispatch(bookmarkCreate(data));
       if (!!listId) await dispatch(listBookmarkCreate({ listId, bookmarkId: newBookmarkId }));
       onBookmarked && onBookmarked();
-      dispatch(notesLoadByLinkId(parentBookmark.linkId));
-      dispatch(usersLoadByLinkId(parentBookmark.linkId));
+      dispatch(notesLoadByLinkId({ linkId: parentBookmark.linkId }));
+      dispatch(usersLoadByLinkId({ linkId: parentBookmark.linkId }));
     } catch (error) {
       console.log('Bookmarker.onBookmarkGrab.catch: ', error);
     } finally {
@@ -73,8 +73,8 @@ const Bookmarker: React.FC<Props> = ({ className, listId, bookmarkId, onBookmark
         })
       );
       dispatch(listsLoadByUserId({ userId: parentBookmark?.userId, rawData: true }));
-      dispatch(notesLoadByLinkId(parentBookmark.linkId));
-      dispatch(usersLoadByLinkId(parentBookmark.linkId));
+      dispatch(notesLoadByLinkId({ linkId: parentBookmark.linkId }));
+      dispatch(usersLoadByLinkId({ linkId: parentBookmark.linkId }));
       if (!!listId) await dispatch(bookmarksLoadByListId(listId));
     } catch (error) {
       console.log('Bookmarker.onBookmarkDelete.catch: ', error);

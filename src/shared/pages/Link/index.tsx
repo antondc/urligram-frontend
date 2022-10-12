@@ -11,9 +11,10 @@ import { selectCurrentFullUrl } from 'Modules/Routes/selectors/selectCurrentFull
 import { selectCurrentRouteParamLinkId } from 'Modules/Routes/selectors/selectCurrentRouteParamLinkId';
 import { usersLoadByLinkId } from 'Modules/Users/actions/usersLoadByLinkId';
 import { selectUsersCurrent } from 'Modules/Users/selectors/selectUsersCurrent';
-import { selectCurrentRouteQueryParamSort } from 'Root/src/shared/redux/modules/Routes/selectors/selectCurrentRouteQueryParamSort';
+import { selectUsersMetaSort } from 'Modules/Users/selectors/selectUsersMetaSort';
 import { Routes } from 'Router/routes';
 import history from 'Services/History';
+import { QueryStringWrapper } from '@antoniodcorrea/utils';
 import { Link as LinkUi } from './Link';
 
 const Link: React.FC = () => {
@@ -26,8 +27,18 @@ const Link: React.FC = () => {
   const users = useSelector(selectUsersCurrent);
   const currentLanguageSlug = useSelector(selectCurrentLanguageSlug);
   const url = useSelector(selectCurrentFullUrl);
-  const sort = useSelector(selectCurrentRouteQueryParamSort);
   const sortNotes = useSelector(selectNotesMetaSort);
+  const sortUsers = useSelector(selectUsersMetaSort);
+
+  const onSortUsers = (url: string) => {
+    const sort = QueryStringWrapper.getOneSearchParam(url, 'sort');
+    dispatch(usersLoadByLinkId({ linkId, sortParam: sort }));
+  };
+
+  const onSortNotes = (url: string) => {
+    const sort = QueryStringWrapper.getOneSearchParam(url, 'sort');
+    dispatch(notesLoadByLinkId({ linkId, sortParam: sort }));
+  };
 
   useEffect(() => {
     if (!linkId) return;
@@ -62,11 +73,25 @@ const Link: React.FC = () => {
   }, [bookmark?.id]);
 
   useEffect(() => {
-    dispatch(notesLoadByLinkId(linkId));
-    dispatch(usersLoadByLinkId(linkId));
-  }, [sort]);
+    dispatch(notesLoadByLinkId({ linkId }));
+  }, []);
 
-  return <LinkUi notes={notes} users={users} bookmark={bookmark} url={url} sort={sort || sortNotes} />;
+  useEffect(() => {
+    dispatch(usersLoadByLinkId({ linkId }));
+  }, []);
+
+  return (
+    <LinkUi
+      notes={notes}
+      users={users}
+      bookmark={bookmark}
+      url={url}
+      sortNotes={sortNotes}
+      sortUsers={sortUsers}
+      onSortNotes={onSortNotes}
+      onSortUsers={onSortUsers}
+    />
+  );
 };
 
 export default Link;

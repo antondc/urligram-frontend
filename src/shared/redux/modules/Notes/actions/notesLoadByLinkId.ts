@@ -7,10 +7,16 @@ import {
   NoteState,
 } from 'Modules/Notes/notes.types';
 import HttpClient from 'Services/HttpClient';
+import { QueryStringWrapper } from '@antoniodcorrea/utils';
 import { AppThunk } from '../../..';
 
+interface Params {
+  linkId: number;
+  sortParam?: string;
+}
+
 export const notesLoadByLinkId =
-  (linkId: number): AppThunk<Promise<NoteState[]>, NotesActions> =>
+  ({ linkId, sortParam }: Params): AppThunk<Promise<NoteState[]>, NotesActions> =>
   async (dispatch, getState): Promise<NoteState[]> => {
     if (!linkId) return;
 
@@ -24,10 +30,10 @@ export const notesLoadByLinkId =
       },
     });
 
+    const queryString = QueryStringWrapper.stringifyQueryParams({ sort: sortParam });
+
     try {
-      const { meta, data } = await HttpClient.get<void, NotesLoadApiResponse>(
-        `/links/${linkId}/notes${window.location.search}`
-      );
+      const { meta, data } = await HttpClient.get<void, NotesLoadApiResponse>(`/links/${linkId}/notes?${queryString}`);
 
       const notesArray = data?.map((item) => item.attributes);
 
