@@ -4,7 +4,6 @@ import { renderToString } from 'react-dom/server';
 import Helmet from 'react-helmet';
 import { Provider } from 'react-redux';
 import { Route, StaticRouter } from 'react-router-dom';
-import merge from 'lodash/merge';
 import qs from 'qs';
 import serialize from 'serialize-javascript';
 
@@ -14,12 +13,13 @@ import { RouteState } from 'Modules/Routes/routes.types';
 import { SessionState } from 'Modules/Session/session.types';
 import storeFactory from 'Redux/.';
 import config from 'Root/config.test.json';
+import { Redirect } from 'Root/src/shared/types/Redirect';
 import { RecursiveObject } from 'Root/src/shared/typescript/recursiveObject';
 import { Routes, routesList, routesPathsList, routesWithoutOmmitedValues } from 'Router/routes';
 import history from 'Services/History';
 import enhanceRouteWithParams from 'Tools/utils/url/enhanceRouteWithParams';
 import findActiveRouteKey from 'Tools/utils/url/findActiveRouteKey';
-import { TokenService } from '../services/TokenService';
+import { TokenJWT } from '@antoniodcorrea/utils';
 
 export type RequestParameters = {
   hostname?: string;
@@ -35,8 +35,11 @@ router.get(routesPathsList, async (req: any, res: any, next: any) => {
   const activeRouteKey = findActiveRouteKey({ urlPath: req.path, routes: routesList });
 
   // Decode token, only on server side.
-  const tokenService = new TokenService();
-  const sessionData: SessionState = await tokenService.decodeToken<SessionState>(req.cookies?.sessionToken);
+  const tokenJwt = new TokenJWT(process.env.JWT_SECRET);
+
+  // The API in this case returns the session cookie as `{ content: SessionState }`
+  // instead of `SessionState` directly. We need to extract and cast it
+  const sessionData: SessionState = await tokenJwt.decodeToken<SessionState>(req.cookies?.sessionToken);
 
   const requestParameters: RequestParameters = {
     hostname: req.hostname,
@@ -64,7 +67,15 @@ router.get(routesPathsList, async (req: any, res: any, next: any) => {
   const location = { ...history.location, pathname: req.path, search: qs.stringify(req.query) };
 
   Promise.all([initialLanguagesLoader(req.params.lang), ...initialDataLoadersPromises]) // We have to execute the Languages thunk, as well as the async function within it
-    .then((response: any) => {
+    .then((response: Array<any | Redirect>) => {
+      const redirect = response.find((item) => !!item.redirectToNotFound);
+
+      if (!!redirect?.redirectToNotFound) {
+        res.status(404).redirect(Routes.NotFound.route);
+
+        return;
+      }
+
       const mergedResponse = Object.assign({}, ...response); // Merge the results array into an object
 
       const initialRoute: RouteState = {
@@ -107,7 +118,7 @@ router.get(routesPathsList, async (req: any, res: any, next: any) => {
       const helmet = Helmet.renderStatic();
       const dataForTemplate = serialize(initialState); // Serializing for security reasons: https://redux.js.org/recipes/server-rendering#security-considerations
 
-      res.set({ 'X-Robots-Tag': 'noindex' }); // Disallow robots —crawlers, spiders, etc.—
+      res.set({ 'X-Robots-Tag': 'all' }); // Allow robots —crawlers, spiders, etc.—
 
       // Render template with component; frontend data passed via .ejs template
       res.render('index', {
