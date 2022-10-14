@@ -1,0 +1,230 @@
+@import '../../css/imports.less';
+
+@c: .WelcomeUrligram;
+
+@{c} {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  padding-top: 20px;
+  padding-bottom: 200px;
+
+  @media @br-mobile {
+    display: block;
+    padding-top: 0;
+    padding-bottom: 50px;
+  }
+
+  &-shape {
+    position: absolute;
+    height: 850px;
+    width: 200%;
+    top: -300px;
+    left: -200px;
+    right: -200px;
+    background-image: radial-gradient(circle, @c-traslucid--hard 0.8px, @c-transparent 0.8px);
+    background-size: 15px 15px;
+    z-index: -1;
+
+    @media @br-tabletHorizontal {
+      height: 720px;
+    }
+
+    @media @br-tablet {
+      height: 700px;
+    }
+
+    @media @br-mobile {
+      display: none;
+      height: 750px;
+    }
+  }
+
+  &-first {
+    display: grid;
+    grid-column: 2 / span 6;
+    grid-template-columns: repeat(6, 1fr);
+    transition: opacity @td-normal @ease;
+
+    @media @br-tablet {
+      grid-column: 1 / span 8;
+      grid-template-columns: repeat(8, 1fr);
+    }
+
+    @media @br-mobile {
+      display: flex;
+      position: relative;
+      flex-direction: column;
+    }
+  }
+
+  &-firstText {
+    display: flex;
+    align-items: center;
+    grid-column: 1 / span 2;
+    font-size: @fs-huge;
+    font-weight: @fw-bold;
+    line-height: @fh-huge;
+
+    @media @br-tabletHorizontal {
+      font-size: @fs-biggest;
+      line-height: @fh-biggest;
+    }
+
+    @media @br-tablet {
+      grid-column: 2 / span 2;
+      font-size: @fs-biggest;
+      line-height: @fh-biggest;
+    }
+
+    @media @br-mobileHorizontal {
+      grid-column: 1 / span 2;
+      font-size: @fs-big;
+      line-height: @fh-mediumBig;
+    }
+
+    @media @br-mobile {
+      display: block;
+      order: 1;
+    }
+  }
+
+  &-firstImage {
+    grid-column: 3 / span 4;
+    height: 500px;
+    width: 100%;
+
+    @media @br-tabletHorizontal {
+      height: 300px;
+      padding-left: 50px;
+    }
+
+    @media @br-tablet {
+      grid-column: 4 / span 5;
+      height: 300px;
+      padding-left: 0;
+    }
+
+    @media @br-mobile {
+      display: block;
+      height: unset;
+      height: 200px;
+      width: 100%;
+    }
+  }
+
+  &-second,
+  &-fourth {
+    display: grid;
+    grid-column: 2 / span 6;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    padding-top: 100px;
+    transition: opacity @td-normal @ease;
+    gap: 40px;
+
+    @media @br-tablet {
+      display: block;
+    }
+
+    @media @br-mobile {
+      display: block;
+      padding-top: 50px;
+    }
+  }
+
+  &-secondTitle {
+    grid-column: 1 / span 2;
+    font-family: @ff-sans;
+    font-size: @fs-hugest;
+    font-weight: @fw-bold;
+    text-transform: uppercase;
+
+    @media @br-tablet {
+      margin-bottom: 20px;
+    }
+
+    @media @br-mobile {
+      margin-bottom: 5px;
+      font-size: @fs-big;
+      line-height: @fh-big;
+    }
+  }
+
+  &-secondText {
+    grid-column: 3 / span 4;
+    font-size: @fs-big;
+    line-height: @fh-big;
+
+    @media @br-mobile {
+      font-size: @fs-medium;
+      line-height: @fh-mediumBig;
+    }
+
+    p {
+      margin-bottom: 10px;
+    }
+  }
+
+  &-third {
+    grid-column: 2 / span 6;
+    min-height: 300px;
+    margin: 150px 0 0;
+    opacity: 0;
+    transition: opacity @td-normal @ease;
+
+    @media @br-tablet {
+      padding-top: 50px;
+    }
+
+    @media @br-mobile {
+      display: block;
+      min-height: 100px;
+      margin: 0 0;
+      padding-top: 50px;
+    }
+  }
+
+  &-backgroundImages,
+  &-wavesBackground {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-image: linear-gradient(fade(@c-success, 20%) 2px, transparent 2px), linear-gradient(90deg, fade(@c-success, 20%) 2px, transparent 2px);
+    background-size: 300px 300px, 300px 300px, 20px 20px, 20px 20px;
+    z-index: -2;
+    pointer-events: none;
+
+    @media @br-mobile {
+      background-image: linear-gradient(fade(@c-success, 20%) 1px, transparent 1px), linear-gradient(90deg, fade(@c-success, 20%) 1px, transparent 1px);
+      background-size: 50px 50px, 50px 50px, 20px 20px, 20px 20px;
+    }
+  }
+
+  &-wavesBackground {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-image: radial-gradient(circle, @c-traslucid 0.8px, @c-transparent 0.8px);
+    background-size: 40px 40px;
+  }
+
+  &-fourth {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+    opacity: 0;
+
+    @media @br-mobile {
+      margin: 0 0;
+    }
+  }
+
+  &-waves {
+    height: 100px;
+    margin: 0 auto;
+  }
+}

@@ -40,6 +40,7 @@ interface RoutesInterface {
   SignUpConfirmation: Route;
   ForgotPassword: Route;
   ResetPassword: Route;
+  WelcomeUrligram: Route;
   Control: Route;
   FAQ: Route;
   Extension: Route;
@@ -261,6 +262,18 @@ export const Routes: RoutesInterface = {
     initialDataLoadersVisitor: [],
     initialDataLoadersSession: [],
     layout: 'fullPage',
+  },
+
+  WelcomeUrligram: {
+    name: 'WelcomeUrligram',
+    path: '/:lang([a-z]{2})?/welcome-urligram',
+    route: '/welcome-urligram',
+    exact: true,
+    auth: false,
+    header: false,
+    initialDataLoadersVisitor: [],
+    initialDataLoadersSession: [],
+    layout: 'noHeader',
   },
 
   Control: {

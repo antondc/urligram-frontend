@@ -7,6 +7,7 @@ import HeaderSmall from 'Components/HeaderSmall';
 import { selectPathWithoutLanguageParam } from 'Modules/Routes/selectors/selectPathWithoutLanguageParam';
 import NotFound from 'Pages/NotFound';
 import ServerError from 'Pages/ServerError';
+import WelcomeUrligram from 'Pages/WelcomeUrligram';
 import Docs from 'Root/src/shared/pages/Docs';
 import { Routes } from 'Router/routes';
 import { Location } from 'Services/History';
@@ -29,6 +30,7 @@ const CustomHeader: React.FC<Props> = ({ location, pathWithoutLanguageParam }) =
 
         {/* General */}
         <Route exact={Routes.Docs.exact} path={Routes.Docs.path} component={Docs} />
+        <Route exact={Routes.WelcomeUrligram.exact} path={Routes.WelcomeUrligram.path} component={WelcomeUrligram} />
 
         {/* Guards */}
         <Route exact={Routes.ServerError.exact} path={Routes.ServerError.path} component={ServerError} />
