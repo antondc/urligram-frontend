@@ -2,12 +2,12 @@ import { stringify } from 'qs';
 
 import { UserLoadApiResponse, UsersState } from 'Modules/Users/users.types';
 import { RequestParameters } from 'Root/src/server/routes/allRoutes';
-import { LoaderResult } from 'Root/src/shared/types/LoaderResult';
+import { NotFoundError } from 'Root/src/shared/types/error/NotFoundError';
 import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
 import { BookmarkGetItemResponse, BookmarksGetApiResponse, BookmarkState } from '../Bookmarks/bookmarks.types';
 
-export const initialUserLoader = async ({ query, params }: RequestParameters = {}): LoaderResult<{
+export const initialUserLoader = async ({ query, params }: RequestParameters = {}): Promise<{
   Users: UsersState;
 }> => {
   try {
@@ -43,8 +43,6 @@ export const initialUserLoader = async ({ query, params }: RequestParameters = {
 
     return result;
   } catch (error) {
-    return {
-      redirectToNotFound: true,
-    };
+    throw new NotFoundError('Not Found');
   }
 };

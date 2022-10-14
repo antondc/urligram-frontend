@@ -13,7 +13,6 @@ import { RouteState } from 'Modules/Routes/routes.types';
 import { SessionState } from 'Modules/Session/session.types';
 import storeFactory from 'Redux/.';
 import config from 'Root/config.test.json';
-import { Redirect } from 'Root/src/shared/types/Redirect';
 import { RecursiveObject } from 'Root/src/shared/typescript/recursiveObject';
 import { Routes, routesList, routesPathsList, routesWithoutOmmitedValues } from 'Router/routes';
 import history from 'Services/History';
@@ -67,15 +66,7 @@ router.get(routesPathsList, async (req: any, res: any, next: any) => {
   const location = { ...history.location, pathname: req.path, search: qs.stringify(req.query) };
 
   Promise.all([initialLanguagesLoader(req.params.lang), ...initialDataLoadersPromises]) // We have to execute the Languages thunk, as well as the async function within it
-    .then((response: Array<any | Redirect>) => {
-      const redirect = response.find((item) => !!item.redirectToNotFound);
-
-      if (!!redirect?.redirectToNotFound) {
-        res.status(404).redirect(Routes.NotFound.route);
-
-        return;
-      }
-
+    .then((response: Array<any>) => {
       const mergedResponse = Object.assign({}, ...response); // Merge the results array into an object
 
       const initialRoute: RouteState = {

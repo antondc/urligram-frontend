@@ -96,6 +96,7 @@ app.use((err: any, req: any, res: any, next: any) => {
 
   const isServerErrorPage = req.path.includes('/500-server-error'); // Check if its server error to break the redirect loop
   const isUnauthorizedError = err.name === 'UnauthorizedError';
+  const isNotFoundError = err.status === 404;
   const isDevelopment = process.env.NODE_ENV === 'development';
 
   if (err && isUnauthorizedError) {
@@ -106,6 +107,8 @@ app.use((err: any, req: any, res: any, next: any) => {
       stack: err.stack,
       status: err.status || 500,
     });
+  } else if (err && isNotFoundError) {
+    res.render('notFound');
   } else if (err && !isServerErrorPage) {
     return res.redirect('/500-server-error');
   } else if (err) {

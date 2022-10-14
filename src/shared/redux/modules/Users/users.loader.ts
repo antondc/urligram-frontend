@@ -1,22 +1,27 @@
+import { NotFoundError } from 'Root/src/shared/types/error/NotFoundError';
 import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
 import { UsersLoadApiItemResponse, UsersLoadApiResponse, UsersState, UserState } from './users.types';
 
 export const initialUsersLoader = async (): Promise<{ Users: UsersState }> => {
-  const { data }: UsersLoadApiResponse = await HttpClient.get('/users');
+  try {
+    const { data }: UsersLoadApiResponse = await HttpClient.get('/users');
 
-  const usersByKey = serializerFromArrayToByKey<UsersLoadApiItemResponse, UserState>({
-    data,
-    contentPath: 'attributes',
-  });
+    const usersByKey = serializerFromArrayToByKey<UsersLoadApiItemResponse, UserState>({
+      data,
+      contentPath: 'attributes',
+    });
 
-  const result = {
-    Users: {
-      byKey: usersByKey,
-      allIds: data?.map((item) => item.id),
-      loading: true,
-    },
-  };
+    const result = {
+      Users: {
+        byKey: usersByKey,
+        allIds: data?.map((item) => item.id),
+        loading: true,
+      },
+    };
 
-  return result;
+    return result;
+  } catch (error) {
+    throw new NotFoundError('Not Found');
+  }
 };

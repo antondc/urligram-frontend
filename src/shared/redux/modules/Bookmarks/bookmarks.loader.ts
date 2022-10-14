@@ -7,11 +7,10 @@ import {
   BookmarkState,
 } from 'Modules/Bookmarks/bookmarks.types';
 import { RequestParameters } from 'Root/src/server/routes/allRoutes';
-import { LoaderResult } from 'Root/src/shared/types/LoaderResult';
 import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
 
-export const initialBookmarksLoader = async ({ query }: RequestParameters = {}): LoaderResult<{
+export const initialBookmarksLoader = async ({ query }: RequestParameters = {}): Promise<{
   Bookmarks: BookmarksState;
 }> => {
   try {

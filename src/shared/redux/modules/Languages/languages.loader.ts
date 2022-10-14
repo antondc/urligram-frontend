@@ -4,12 +4,12 @@ import {
   LanguagesState,
   LanguageState,
 } from 'Modules/Languages/languages.types';
-import { LoaderResult } from 'Root/src/shared/types/LoaderResult';
+import { NotFoundError } from 'Root/src/shared/types/error/NotFoundError';
 import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
 import { getCurrentOrDefaultLanguage } from './utils/getCurrentOrDefaultLanguage';
 
-export const initialLanguagesLoader = async (lang: string): LoaderResult<{ Languages: LanguagesState }> => {
+export const initialLanguagesLoader = async (lang: string): Promise<{ Languages: LanguagesState }> => {
   try {
     const { data }: LanguagesApiResponse = await HttpClient.get('/languages');
 
@@ -32,6 +32,6 @@ export const initialLanguagesLoader = async (lang: string): LoaderResult<{ Langu
 
     return result;
   } catch (error) {
-    console.log(error);
+    throw new NotFoundError('Not Found');
   }
 };

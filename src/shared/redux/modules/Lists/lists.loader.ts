@@ -2,11 +2,10 @@ import { stringify } from 'qs';
 
 import { ListApiResponseItem, ListsLoadApiResponse, ListsState, ListState } from 'Modules/Lists/lists.types';
 import { RequestParameters } from 'Root/src/server/routes/allRoutes';
-import { LoaderResult } from 'Root/src/shared/types/LoaderResult';
 import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
 
-export const initialListsLoader = async ({ query }: RequestParameters = {}): LoaderResult<{
+export const initialListsLoader = async ({ query }: RequestParameters = {}): Promise<{
   Lists: ListsState;
 }> => {
   try {
