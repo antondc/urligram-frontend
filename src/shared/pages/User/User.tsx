@@ -120,7 +120,7 @@ export const User: React.FC<Props> = ({
       ) : (
         bookmarksIds?.map((id) => (
           <CardItem key={id}>
-            <BookmarkRow id={id} tagHrefPath={`/users/${userId}/bookmarks`} />
+            <BookmarkRow id={id} tagsHref={`/users/${userId}/bookmarks`} />
           </CardItem>
         ))
       )}

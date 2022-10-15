@@ -20,7 +20,7 @@ interface BookmarkRow extends BookmarkState {
   viewPending: boolean;
   sessionUserBookmarkedLink: boolean;
   createdAtFormatted: string;
-  pathForTagLink: string;
+  tagsHref: string;
   uiScreenTypeIsMobile: boolean;
   onEdit: () => void;
   onListsClick: () => void;
@@ -38,7 +38,7 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
   bookmarkActionIconsMounted,
   sessionUserBookmarkedLink,
   createdAtFormatted,
-  pathForTagLink,
+  tagsHref,
   recentlyCreated,
   viewPending,
   uiScreenTypeIsMobile,
@@ -78,7 +78,7 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
       {tags?.map((item) => (
         <A
           className="BookmarkRow-tag"
-          href={`${pathForTagLink}?filter[tags][]=${item.name}`}
+          href={`${tagsHref}?filter[tags][]=${item.name}`}
           key={item.id}
           styled={false}
           frontend

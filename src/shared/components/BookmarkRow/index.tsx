@@ -26,11 +26,11 @@ import { BookmarkRow as BookmarkRowUi } from './BookmarkRow';
 interface Props {
   id: number;
   listId?: number;
-  tagHrefPath?: string;
+  tagsHref?: string;
   withInfoButton?: boolean;
 }
 
-const BookmarkRow: React.FC<Props> = ({ id, listId, tagHrefPath = '', withInfoButton = true }) => {
+const BookmarkRow: React.FC<Props> = ({ id, listId, tagsHref = '', withInfoButton = true }) => {
   const dispatch = useDispatch();
   const slug = useSelector(selectCurrentLanguageSlug);
   const session = useSelector(selectSession);
@@ -111,7 +111,7 @@ const BookmarkRow: React.FC<Props> = ({ id, listId, tagHrefPath = '', withInfoBu
       recentlyCreated={recentlyCreated}
       viewPending={viewPending}
       sessionUserBookmarkedLink={sessionUserBookmarkedLink}
-      pathForTagLink={tagHrefPath}
+      tagsHref={tagsHref}
       uiScreenTypeIsMobile={uiScreenTypeIsMobile}
       onEdit={onEdit}
       onListsClick={onListsClick}

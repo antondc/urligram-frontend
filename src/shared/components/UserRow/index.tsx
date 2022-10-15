@@ -1,11 +1,10 @@
 import React from 'react';
-import { connect, useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 import { GlossaryState } from 'Modules/Languages/languages.types';
 import { selectCurrentGlossary } from 'Modules/Languages/selectors/selectCurrentGlossary';
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
-import { selectCurrentPathname } from 'Modules/Routes/selectors/selectCurrentPathname';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUserId';
 import { selectUserById } from 'Modules/Users/selectors/selectUserById';
@@ -51,7 +50,6 @@ const UserRow: React.FC<Props> = ({
   const connections = followers?.length || 0 + following?.length || 0;
   const ammountLists = lists?.length || 0;
   const ammountBookmarks = bookmarksIds?.length || 0;
-  const currentPathName = useSelector(selectCurrentPathname);
 
   return (
     <UserRowUi
@@ -63,7 +61,6 @@ const UserRow: React.FC<Props> = ({
       status={status}
       statement={statement}
       location={location}
-      currentPathName={currentPathName}
       order={order}
       tags={tags}
       connections={connections}
