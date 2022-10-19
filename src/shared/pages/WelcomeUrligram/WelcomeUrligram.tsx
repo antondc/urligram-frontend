@@ -12,6 +12,7 @@ import './WelcomeUrligram.less';
 interface Props {
   currentSlug: string;
 }
+
 export const WelcomeUrligram: React.FC<Props> = ({ currentSlug }) => (
   <>
     <Helmet title={`${SITE_TITLE} · WelcomeUrligram`} />

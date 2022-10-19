@@ -2,11 +2,11 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 
+import { selectCurrentRoute } from 'Modules/Routes/selectors/selectCurrentRoute';
 import { selectPathWithoutLanguageParam } from 'Modules/Routes/selectors/selectPathWithoutLanguageParam';
 import { pathsByLayout } from 'Router/routes';
 import { Location } from 'Services/History';
 import { FadeInOut } from '@antoniodcorrea/components';
-import { selectCurrentRoute } from '../redux/modules/Routes/selectors/selectCurrentRoute';
 import Content from './Content';
 import CustomHeader from './CustomHeader';
 import NoSidebar from './NoSidebar';
