@@ -58,7 +58,7 @@ const WelcomeUrligram: React.FC = () => {
 
     observer(0.1).observe(firstElement);
     observer(0.1).observe(whoElement);
-    observer(0.3).observe(thirdElement);
+    observer(0.1).observe(thirdElement);
     observer(1).observe(wavesElement);
     observer(0.1).observe(whatElement);
   };
