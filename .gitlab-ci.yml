@@ -70,5 +70,5 @@ deploy_production:
     - ssh ${SERVER_USER}@${SERVER_ADDRESS} "cd ${SERVER_PATH_PRODUCTION} && rm -rf node_modules dist/* tmp"
     - ssh ${SERVER_USER}@${SERVER_ADDRESS} "cd ${SERVER_PATH_PRODUCTION} && git pull origin master"
     - ssh ${SERVER_USER}@${SERVER_ADDRESS} "source ~/.bash_profile && export NPM_TOKEN=${NPM_TOKEN} && export JWT_SECRET=${JWT_SECRET} && cd ${SERVER_PATH_PRODUCTION} && nvm use --delete-prefix && git checkout master && npm ci --verbose && npm run prod"
-    - ssh ${SERVER_USER}@${SERVER_ADDRESS} "cd ${SERVER_PATH_PRODUCTION} && pm2 delete urligram.com 2> /dev/null"
+    - ssh ${SERVER_USER}@${SERVER_ADDRESS} "cd ${SERVER_PATH_PRODUCTION} && pm2 delete urligram.com"
     - ssh ${SERVER_USER}@${SERVER_ADDRESS} "cd ${SERVER_PATH_PRODUCTION} && export JWT_SECRET=${JWT_SECRET} && NODE_ENV=production pm2 start ./dist/server.js --name urligram.com --update-env"
