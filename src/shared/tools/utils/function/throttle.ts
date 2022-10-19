@@ -1,4 +1,4 @@
-export const DEFAULT_THROTTLE_VALUE = 10;
+export const DEFAULT_THROTTLE_VALUE = 50;
 
 export const throttle = (functionParameter, delayParameter: number) => {
   let prev = 0;

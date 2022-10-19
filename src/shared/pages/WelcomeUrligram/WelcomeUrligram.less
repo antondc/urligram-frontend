@@ -18,11 +18,12 @@
     position: absolute;
     height: 850px;
     width: 200%;
-    top: -300px;
+    top: -200px;
     left: -200px;
     right: -200px;
     background-image: radial-gradient(circle, @c-traslucid--hard 0.8px, @c-transparent 0.8px);
     background-size: 15px 15px;
+    transform: rotate(3deg);
     z-index: -1;
 
     @media @br-tabletHorizontal {
@@ -165,9 +166,11 @@
   }
 
   &-third {
+    display: flex;
+    justify-content: center;
     grid-column: 2 / span 6;
     min-height: 300px;
-    margin: 150px 0 0;
+    margin: 150px 0 100px;
     opacity: 0;
     transition: opacity @td-normal @ease;
 
@@ -176,11 +179,15 @@
     }
 
     @media @br-mobile {
-      display: block;
+      display: flex;
       min-height: 100px;
       margin: 0 0;
       padding-top: 50px;
     }
+  }
+
+  &-thirdIllustration {
+    width: 80%;
   }
 
   &-backgroundImages,
@@ -213,18 +220,50 @@
 
   &-fourth {
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
     margin-top: 100px;
     opacity: 0;
 
     @media @br-mobile {
+      justify-content: center;
       margin: 0 0;
     }
   }
 
   &-waves {
     height: 100px;
-    margin: 0 auto;
+  }
+
+  &-logo {
+    height: 80px;
+    width: 80px;
+    transition: fill @td-fast @ease;
+
+    path[data-id='background'] {
+      fill: @gradientColors[black-5];
+    }
+
+    path[data-id='shadow'] {
+      opacity: 0.7;
+      fill: @gradientColors[black-4];
+    }
+
+    path[data-id='logo'] {
+      fill: @gradientColors[blue-1];
+    }
+  }
+
+  &-footer {
+    background: @c-transparent;
+    box-shadow: none;
+
+    @media @br-mobile {
+      padding: 30px 0 0 0;
+
+      div:last-of-type {
+        display: none;
+      }
+    }
   }
 }

@@ -1,9 +1,11 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 
+import ThirdIllustration from 'Assets/svg/bookmark_illustration.svg';
 import HeroIllustration from 'Assets/svg/devices.svg';
-import Shape from 'Assets/svg/shape-two.svg';
+import LogoCircle from 'Assets/svg/logoCircle.svg';
 import Waves from 'Assets/svg/waves.svg';
+import Footer from 'Components/Footer';
 import { SITE_TITLE } from 'Root/src/shared/constants';
 import { translations } from './translations';
 
@@ -46,8 +48,8 @@ export const WelcomeUrligram: React.FC<Props> = ({ currentSlug }) => (
           }}
         />
       </div>
-      <div className="WelcomeUrligram-third" id="images">
-        <Shape className="WelcomeUrligram-thirdShape" />
+      <div className="WelcomeUrligram-third" id="thirdElement">
+        <ThirdIllustration className="WelcomeUrligram-thirdIllustration" />
         <div className="WelcomeUrligram-backgroundImages" />
       </div>
       <div className="WelcomeUrligram-second" id="what">
@@ -60,10 +62,11 @@ export const WelcomeUrligram: React.FC<Props> = ({ currentSlug }) => (
         />
       </div>
       <div className="WelcomeUrligram-fourth" id="waves">
+        <LogoCircle className="WelcomeUrligram-logo" />
         <Waves className="WelcomeUrligram-waves" />
         <div className="WelcomeUrligram-wavesBackground" />
       </div>
     </div>
-    {/* <Footer /> */}
+    <Footer className="WelcomeUrligram-footer" />
   </>
 );

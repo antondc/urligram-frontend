@@ -11,7 +11,11 @@ import { Footer as FooterUi } from './Footer';
 
 import './Footer.less';
 
-const Footer: React.FC = () => {
+interface Props {
+  className?: string;
+}
+
+const Footer: React.FC<Props> = ({ className }) => {
   const dispatch = useDispatch();
   const session = useSelector(selectSession);
   const currentLanguageSlug = useSelector(selectCurrentLanguageSlug);
@@ -25,6 +29,7 @@ const Footer: React.FC = () => {
 
   return (
     <FooterUi
+      className={className}
       session={session}
       onLanguageItemClick={onLanguageItemClick}
       currentLanguageSlug={currentLanguageSlug}

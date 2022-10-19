@@ -11,6 +11,7 @@ import { Fade } from '@antoniodcorrea/components';
 import './Footer.less';
 
 interface Props {
+  className?: string;
   session: SessionState;
   currentRoute: RouteState;
   currentLanguageSlug: string;
@@ -20,6 +21,7 @@ interface Props {
 }
 
 export const Footer: React.FC<Props> = ({
+  className,
   session,
   currentRoute,
   currentLanguageSlug,
@@ -27,7 +29,7 @@ export const Footer: React.FC<Props> = ({
   currentPathName,
   onLanguageItemClick,
 }) => (
-  <div className="Footer">
+  <div className={'Footer' + (className ? ` ${className}` : '')}>
     <div className="Footer-left">
       {!session?.id ? (
         <A className="Footer-link" href="sign-up" frontend underlined active={currentRoute?.name === Routes.Tags.name}>

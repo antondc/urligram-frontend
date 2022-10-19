@@ -2,14 +2,6 @@ type Translation = {
   hero: string;
   whoTitle: string;
   whoText: string;
-  image1: string;
-  image1Text: string;
-  image2: string;
-  image2Text: string;
-  image3: string;
-  image3Text: string;
-  image4: string;
-  image4Text: string;
   whatTitle: string;
   whatText: string;
   contact: string;
@@ -21,80 +13,88 @@ type Translations = {
 
 export const translations: Translations = {
   en: {
-    hero: 'You brief. We create. It works.',
+    hero: 'Search. Save. Share.',
     whoTitle: 'Who',
     whoText: `
         <p>
-          Urligram was born to build reliable, efficient and maintainable systems that empowers its users.
+          Welcome to Urligram.
         </p>
         <p>
-          To open questions about the limits and opportunities of software from a social perspective Urligram promotes the work of authors focused on the technological and social developments of digital industries.
+          Urligram is a non-algorithmic and privacy respectful platform for bookmarking the internet.
         </p>
         <p>
-          Technology, culture and society interact as parts of the same system. The goal of Urligram is to achieve positive impact through these three perspectives.
+          Urligram is the platform we all were missing. There are so much interesting things we find every day exploring the internet: an article you want to read later, a paper you want to discuss with your colleages, this documentary found in the last website of the web.
+        </p>
+        <p>
+          Urligram is a tool to save the links to all these things.
         </p>
       `,
-    image1: 'Rational',
-    image1Text: 'Systems should be as rational and comprehensible as possible.',
-    image2: 'Emotional',
-    image2Text: 'Systems that embraces values and communicate them to the end user.',
-    image3: 'Ethical',
-    image3Text: 'Code should inform and empower its end users to decide what or what not to do.',
-    image4: 'Aesthetical',
-    image4Text: 'Applications should express its funcionality via its aesthetics.',
     whatTitle: 'What',
     whatText: `
       <p>
-        Urligram develop and offer solutions for projects on different formats and media.
+        There are only three short steps to start to use Urligram.
       </p>
       <p>
-        Its key areas of expertise are software development with a main focus on web technologies, as well as graphic design both for digital and printed supports.
+        register with your email, activate your account, and that’s it! Now you can save your links.
       </p>
       <p>
-        Urligram work along several partners and clients, providing support on operating and maintaining their systems, as well as developing new features.
+        We have developed browser extensions for Chrome and for Firefox, so you can save links while you navigate.
       </p>
       <p>
-        Urligram offers to the public several publications aimed to open questions related to the social impact of digital technologies.
+        Urligram allows you to save, browse and share bookmarks while staying private.
+        <br/>
+        We don’t exchange data with any other company.
+        <br/>
+        The feeds are sorted by criteria set by the user.
+        <br/>
+        The feeds don’t provide recommendations, third party ads or algorithmic based results: the data you request on any page is the data you receive.
+      </p>
+      <p>
+        Some say the web is broken. We too; but the solution is easy: lets rebuild it.
+      </p>
+      <p>
+        Stay curious.
       </p>
   `,
     contact: 'Contact',
   },
   es: {
-    hero: 'You brief. We create. It works.',
+    hero: 'Busca. Guarda. Comparte.',
     whoTitle: 'Quién',
     whoText: `
     <p>
-      Urligram surgió para producir programas eficientes, confiables y mantenibles que empoderen a sus usuarios.
+      Bienvenido a Urligram.
     </p>
     <p>
-      Con la finalidad de abrir un debate acerca de los límites y oportunidades del software desde una perspectiva social, Urligram da soporte y promueve el trabajo de autores centrados en la evolucion de las industrias digitales desde un punto de vista social y tecnológico.
+      Urligram es una plataforma para guardar, buscar y compartir bookmarks no algorítmica y respetuosa con la privacidad de los usuarios.
     </p>
     <p>
-      Cultura, tecnología y sociedad interactúan como partes de un mismo sistema. El objetivo de Urligram es producir valor desde estas tres perspectivas.
+      Urligram es la plataforma que llevamos tanto echando de menos en la red. Encontramos una infinidad de contenidos fascinantes cada día, hora y minuto que navegamos: un artículo que quieres leer más tarde, un documento que quieres discutir con tus colegas, un documental encontrado en la última página de internet.
+    </p>
+    <p>
+      Urligram es una herramienta para recordar y compartir todas estas cosas.
     </p>
   `,
-    image1: 'Racionalidad',
-    image1Text: 'Nuestro objetivo es construir sistemas racionales y comprensibles.',
-    image2: 'Emoción',
-    image2Text: 'El software debe comunicar sus valores al usuario final.',
-    image3: 'Ética',
-    image3Text: 'Código que informa y empodera a sus usuarios.',
-    image4: 'Estética',
-    image4Text: 'Aplicaciones que expresan funcionalidad a través de la forma.',
     whatTitle: 'Qué',
     whatText: `
     <p>
-      Urligram desarrolla y ofrece soluciones para proyectos en diferentes formatos y medios.
-    </p>
-    <p>
-      Las areas clave de experiencia que domina son el desarrollo de sofware, con las tecnologías web como principal foco de atención, así como el diseño gráfico para medios impresos y digitales.
-    </p>
-    <p>
-      Urligram trabaja conjuntamente con diversos socios y clientes, proveyendo soporte en la operación y mantenimiento de sus sistemas así como desarrollando nuevas funcionalidades.
-    </p>
-    <p>
-      Urligram ofrece al público diversas publicaciones destinadas a abrir cuestiones relacionadas con el impacto social de las tecnologías digitales.
-    </p>
+        Sólo hacen falta dos pasos para darse de alta en Urligram: registrarse con el correo y activar la cuenta. Eso es todo.
+      </p>
+      <p>
+        Hemos desarrollado extensiones para Chrome y Firefox, de modo que puedas guardar páginas mientras navegas.
+      </p>
+      <p>
+        Urligram te posibilita guardar, buscar y compartir bookmarks al tiempo que mantienes tu privacidad.
+        <br/>
+        No compartimos datos con ninguna empresa.
+        <br/>
+        El contenido que buscas es el que mostramos. Ni más, ni menos.
+        <br/>
+        Urligram no muestra recomendaciones, anuncios de otras empresas o resultados procesados por algoritmos: los datos que se buscan son los que se muestran, sin más.
+      </p>
+      <p>
+        Hay quien dice que internet está roto. Nosotros también lo pensamos. La buena noticia es que la solución es fácil: construyamos el internet que queremos.
+      </p>
   `,
     contact: 'Contacto',
   },

@@ -2,11 +2,15 @@ import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
+import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
+import { Routes } from 'Router/routes';
+import history from 'Services/History';
 import { DEFAULT_THROTTLE_VALUE, throttle } from 'Tools/utils/function/throttle';
 import { WelcomeUrligram as WelcomeUrligramUi } from './WelcomeUrligram';
 
 const WelcomeUrligram: React.FC = () => {
   const currentSlug = useSelector(selectCurrentLanguageSlug);
+  const userIsLoggedIn = useSelector(selectSessionLoggedIn);
 
   useEffect(() => {
     window.addEventListener('scroll', throttle(fadeOnScroll, DEFAULT_THROTTLE_VALUE));
@@ -18,6 +22,12 @@ const WelcomeUrligram: React.FC = () => {
     };
   }, []);
 
+  useEffect(() => {
+    if (!userIsLoggedIn) return;
+
+    history.push(`/${currentSlug}${Routes.Home.route}`);
+  }, [userIsLoggedIn]);
+
   const heroOnScroll = () => {
     const shapeElement = document.getElementById('shape');
     const firstElement = document.getElementById('first');
@@ -25,14 +35,14 @@ const WelcomeUrligram: React.FC = () => {
     const translateShapeElementY = -(scrollPosition / 4);
     const translateFirstElementY = -(scrollPosition / 3);
 
-    shapeElement.style.transform = `translateY(${translateShapeElementY}px)`;
+    shapeElement.style.transform = `rotate(3deg) translateY(${translateShapeElementY}px)`;
     firstElement.style.transform = `translateY(${translateFirstElementY}px)`;
   };
 
   const fadeOnScroll = () => {
     const firstElement = document.getElementById('first');
     const wavesElement = document.getElementById('waves');
-    const imagesElement = document.getElementById('images');
+    const thirdElement = document.getElementById('thirdElement');
     const whoElement = document.getElementById('who');
     const whatElement = document.getElementById('what');
 
@@ -48,7 +58,7 @@ const WelcomeUrligram: React.FC = () => {
 
     observer(0.1).observe(firstElement);
     observer(0.1).observe(whoElement);
-    observer(1).observe(imagesElement);
+    observer(0.7).observe(thirdElement);
     observer(1).observe(wavesElement);
     observer(0.1).observe(whatElement);
   };
