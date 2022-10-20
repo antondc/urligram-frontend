@@ -32,7 +32,7 @@ install:
 test:
   stage: test
   script:
-    - npm test --passWithNoTests
+    - npm test
   artifacts:
     paths:
       - node_modules/

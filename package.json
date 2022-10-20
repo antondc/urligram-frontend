@@ -27,9 +27,9 @@
     "check": "npm run lint && npm run unused-exports",
     "lint": "eslint src --ext .ts,.tsx,.js,.jsx",
     "unused-exports": "ts-unused-exports tsconfig.json --excludePathsFromReport='vendor;stories;tools'",
-    "test": "jest --no-cache",
-    "test:watch": "jest --watch --no-cache",
-    "test:precommit": "jest --no-cache",
+    "test": "jest --no-cache --passWithNoTests",
+    "test:watch": "jest --watch --no-cache --passWithNoTests",
+    "test:precommit": "jest --no-cache --passWithNoTests",
     "storybook": "start-storybook -s -p 6006 watch-css"
   },
   "devDependencies": {
