@@ -1,11 +1,13 @@
 import omit from 'lodash/omit';
 
 import { initialBookmarksLoader } from 'Modules/Bookmarks/bookmarks.loader';
+import { initialLinkLoader } from 'Modules/Links/link.loader';
 import { initialListsLoader } from 'Modules/Lists/lists.loader';
 import { tagsAllInitialLoader } from 'Modules/Tags/tags.loader';
 import { initialUserLoader } from 'Modules/Users/user.loader';
 import { initialUsersLoader } from 'Modules/Users/users.loader';
 import { RequestParameters } from 'Root/src/server/routes/allRoutes';
+import { initialListLoader } from 'Modules/Lists/list.loader';
 
 type Layout = 'withLeftSidebar' | 'fullPage' | 'noHeader';
 
@@ -76,8 +78,8 @@ export const Routes: RoutesInterface = {
     path: '/:lang([a-z]{2})?/link/:linkId',
     exact: true,
     auth: false,
-    initialDataLoadersVisitor: [],
-    initialDataLoadersSession: [],
+    initialDataLoadersVisitor: [initialLinkLoader],
+    initialDataLoadersSession: [initialLinkLoader],
     layout: 'withLeftSidebar',
   },
 
@@ -157,8 +159,8 @@ export const Routes: RoutesInterface = {
     path: '/:lang([a-z]{2})?/lists/:listId',
     exact: true,
     auth: false,
-    initialDataLoadersVisitor: [],
-    initialDataLoadersSession: [],
+    initialDataLoadersVisitor: [initialListLoader],
+    initialDataLoadersSession: [initialListLoader],
     layout: 'withLeftSidebar',
   },
 

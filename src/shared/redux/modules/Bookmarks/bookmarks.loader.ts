@@ -1,5 +1,3 @@
-import { stringify } from 'qs';
-
 import {
   BookmarkGetItemResponse,
   BookmarksGetApiResponse,
@@ -7,14 +5,17 @@ import {
   BookmarkState,
 } from 'Modules/Bookmarks/bookmarks.types';
 import { RequestParameters } from 'Root/src/server/routes/allRoutes';
+import { NetworkError } from 'Root/src/shared/types/error/NetworkError';
 import HttpClient from 'Services/HttpClient';
-import { serializerFromArrayToByKey } from '@antoniodcorrea/utils';
+import { QueryStringWrapper, serializerFromArrayToByKey } from '@antoniodcorrea/utils';
 
 export const initialBookmarksLoader = async ({ query }: RequestParameters = {}): Promise<{
   Bookmarks: BookmarksState;
 }> => {
   try {
-    const { data }: BookmarksGetApiResponse = await HttpClient.get(`/bookmarks?${stringify(query)}`);
+    const { data }: BookmarksGetApiResponse = await HttpClient.get(
+      `/bookmarks?${QueryStringWrapper.stringifyQueryParams(query)}`
+    );
 
     const result = {
       Bookmarks: {
@@ -23,12 +24,12 @@ export const initialBookmarksLoader = async ({ query }: RequestParameters = {}):
           contentPath: 'attributes',
         }),
         currentIds: data?.map((item) => item.id),
-        loading: true,
+        loading: false,
       },
     };
 
     return result;
   } catch (error) {
-    console.log(error);
+    throw new NetworkError('Error when loading bookmarks');
   }
 };

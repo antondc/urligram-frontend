@@ -1,4 +1,4 @@
-import { NotFoundError } from 'Root/src/shared/types/error/NotFoundError';
+import { NetworkError } from 'Root/src/shared/types/error/NetworkError';
 import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from '@antoniodcorrea/utils';
 import { UsersLoadApiItemResponse, UsersLoadApiResponse, UsersState, UserState } from './users.types';
@@ -16,12 +16,12 @@ export const initialUsersLoader = async (): Promise<{ Users: UsersState }> => {
       Users: {
         byKey: usersByKey,
         allIds: data?.map((item) => item.id),
-        loading: true,
+        loading: false,
       },
     };
 
     return result;
   } catch (error) {
-    throw new NotFoundError('Not Found');
+    throw new NetworkError('Error when loading lusersists');
   }
 };

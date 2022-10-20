@@ -1,10 +1,8 @@
-import { stringify } from 'qs';
-
 import { UserLoadApiResponse, UsersState } from 'Modules/Users/users.types';
 import { RequestParameters } from 'Root/src/server/routes/allRoutes';
-import { NotFoundError } from 'Root/src/shared/types/error/NotFoundError';
+import { NetworkError } from 'Root/src/shared/types/error/NetworkError';
 import HttpClient from 'Services/HttpClient';
-import { serializerFromArrayToByKey } from '@antoniodcorrea/utils';
+import { QueryStringWrapper, serializerFromArrayToByKey } from '@antoniodcorrea/utils';
 import { BookmarkGetItemResponse, BookmarksGetApiResponse, BookmarkState } from '../Bookmarks/bookmarks.types';
 
 export const initialUserLoader = async ({ query, params }: RequestParameters = {}): Promise<{
@@ -12,11 +10,11 @@ export const initialUserLoader = async ({ query, params }: RequestParameters = {
 }> => {
   try {
     const { data: userData }: UserLoadApiResponse = await HttpClient.get(
-      '/users/' + params?.userId + '?' + stringify(query)
+      '/users/' + params?.userId + '?' + QueryStringWrapper.stringifyQueryParams(query)
     );
 
     const { data: bookmarksData }: BookmarksGetApiResponse = await HttpClient.get(
-      '/users/' + params?.userId + '/bookmarks' + '?' + stringify(query)
+      '/users/' + params?.userId + '/bookmarks' + '?' + QueryStringWrapper.stringifyQueryParams(query)
     );
 
     const serializedBookmarks = serializerFromArrayToByKey<BookmarkGetItemResponse, BookmarkState>({
@@ -32,17 +30,17 @@ export const initialUserLoader = async ({ query, params }: RequestParameters = {
           },
         },
         currentIds: [userData?.attributes?.id],
-        loading: true,
+        loading: false,
       },
       Bookmarks: {
         byKey: serializedBookmarks,
         currentIds: bookmarksData.map((item) => item.id),
-        loading: true,
+        loading: false,
       },
     };
 
     return result;
   } catch (error) {
-    throw new NotFoundError('Not Found');
+    throw new NetworkError('Error when loading user');
   }
 };

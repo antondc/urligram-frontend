@@ -4,7 +4,6 @@ import { renderToString } from 'react-dom/server';
 import Helmet from 'react-helmet';
 import { Provider } from 'react-redux';
 import { Route, StaticRouter } from 'react-router-dom';
-import qs from 'qs';
 import serialize from 'serialize-javascript';
 
 import Layout from 'Common/Layout';
@@ -18,7 +17,7 @@ import { Routes, routesList, routesPathsList, routesWithoutOmmitedValues } from 
 import history from 'Services/History';
 import enhanceRouteWithParams from 'Tools/utils/url/enhanceRouteWithParams';
 import findActiveRouteKey from 'Tools/utils/url/findActiveRouteKey';
-import { TokenJWT } from '@antoniodcorrea/utils';
+import { QueryStringWrapper, TokenJWT } from '@antoniodcorrea/utils';
 
 export type RequestParameters = {
   hostname?: string;
@@ -63,7 +62,11 @@ router.get(routesPathsList, async (req: any, res: any, next: any) => {
   const initialDataLoadersPromises = initialDataLoaders.map((item: any) => item(requestParameters));
 
   // Add curent path to history.location
-  const location = { ...history.location, pathname: req.path, search: qs.stringify(req.query) };
+  const location = {
+    ...history.location,
+    pathname: req.path,
+    search: QueryStringWrapper.stringifyQueryParams(req.query),
+  };
 
   Promise.all([initialLanguagesLoader(req.params.lang), ...initialDataLoadersPromises]) // We have to execute the Languages thunk, as well as the async function within it
     .then((response: Array<any>) => {
