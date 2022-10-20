@@ -19,6 +19,7 @@ interface Props {
   notes: NoteState[];
   users: UserState[];
   bookmark: BookmarkState;
+  bookmarkOrLinkTitle: string;
   url: string;
   sortNotes: string;
   sortUsers: string;
@@ -30,6 +31,7 @@ export const Link: React.FC<Props> = ({
   notes,
   users,
   bookmark,
+  bookmarkOrLinkTitle,
   url,
   sortNotes,
   sortUsers,
@@ -38,10 +40,10 @@ export const Link: React.FC<Props> = ({
 }) => (
   <>
     <Helmet>
-      <title>{`${SITE_TITLE} · ${bookmark?.title}`}</title>
-      <meta property="og:title" content={`${SITE_TITLE} · ${bookmark?.title}`} />
+      <title>{`${SITE_TITLE} · ${bookmarkOrLinkTitle}`}</title>
+      <meta property="og:title" content={`${SITE_TITLE} · ${bookmarkOrLinkTitle}`} />
       <meta property="og:url" content={url} />
-      <meta property="twitter:title" content={`${SITE_TITLE} · ${bookmark?.title}`} />
+      <meta property="twitter:title" content={`${SITE_TITLE} · ${bookmarkOrLinkTitle}`} />
       <meta property="twitter:url" content={url} />
     </Helmet>
     <div className="Link">

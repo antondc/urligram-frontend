@@ -4,9 +4,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { bookmarkLoadByLinkSession } from 'Modules/Bookmarks/actions/bookmarkLoadByLinkSession';
 import { selectBookmarksCurrent } from 'Modules/Bookmarks/selectors/selectBookmarksCurrent';
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
+import { selectLinkById } from 'Modules/Links/selectors/selectLinkById';
 import { notesLoadByLinkId } from 'Modules/Notes/actions/notesLoadByLinkId';
 import { selectNotes } from 'Modules/Notes/selectors/selectNotes';
 import { selectNotesMetaSort } from 'Modules/Notes/selectors/selectNotesMetaSort';
+import { RootState } from 'Modules/rootType';
 import { selectCurrentFullUrl } from 'Modules/Routes/selectors/selectCurrentFullUrl';
 import { selectCurrentRouteParamLinkId } from 'Modules/Routes/selectors/selectCurrentRouteParamLinkId';
 import { usersLoadByLinkId } from 'Modules/Users/actions/usersLoadByLinkId';
@@ -23,6 +25,8 @@ const Link: React.FC = () => {
   const bookmarks = useSelector(selectBookmarksCurrent);
   const bookmark = bookmarks?.length ? bookmarks[0] : null;
   const linkId = useSelector(selectCurrentRouteParamLinkId);
+  const link = useSelector((state: RootState) => selectLinkById(state, { id: linkId }));
+  const bookmarkOrLinkTitle = bookmark?.title || link?.title || '';
   const notes = useSelector(selectNotes);
   const users = useSelector(selectUsersCurrent);
   const currentLanguageSlug = useSelector(selectCurrentLanguageSlug);
@@ -84,6 +88,7 @@ const Link: React.FC = () => {
     <LinkUi
       notes={notes}
       users={users}
+      bookmarkOrLinkTitle={bookmarkOrLinkTitle}
       bookmark={bookmark}
       url={url}
       sortNotes={sortNotes}
