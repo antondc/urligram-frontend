@@ -3,13 +3,21 @@ import https from 'https';
 
 import { QueryStringWrapper } from './QueryStringWrapper';
 
+type ResponseError = {
+  response: {
+    data: {
+      error: Error;
+    };
+  };
+};
+
 interface Options {
   timeout?: number;
   credentials?: boolean;
   contentType?: string;
 }
 
-class HttpClient {
+export class HttpClient {
   private static staticInstance: AxiosInstance;
   public publicInstance: AxiosInstance;
 
@@ -35,12 +43,12 @@ class HttpClient {
 
         return response.data;
       },
-      (error: any) => {
-        const errorInData = error?.response?.data?.error;
+      (error: ResponseError) => {
+        const errorContent = error?.response?.data?.error;
 
         // Returns the data body contained by the response error object instead of the custom native error retrieved by the Error code
-        // Requires backend returning `{ error: Record<string, any> }` object
-        return Promise.reject(errorInData);
+        // Requires backend returning ResponseError object
+        return Promise.reject(errorContent);
       }
     );
 
@@ -57,4 +65,5 @@ class HttpClient {
   private paramsSerializer = (params) => QueryStringWrapper.stringifyQueryParams(params);
 }
 
+// Export singleton
 export default HttpClient.getInstance();
