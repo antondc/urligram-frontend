@@ -2,12 +2,12 @@ import omit from 'lodash/omit';
 
 import { initialBookmarksLoader } from 'Modules/Bookmarks/bookmarks.loader';
 import { initialLinkLoader } from 'Modules/Links/link.loader';
+import { initialListLoader } from 'Modules/Lists/list.loader';
 import { initialListsLoader } from 'Modules/Lists/lists.loader';
 import { tagsAllInitialLoader } from 'Modules/Tags/tags.loader';
 import { initialUserLoader } from 'Modules/Users/user.loader';
 import { initialUsersLoader } from 'Modules/Users/users.loader';
 import { RequestParameters } from 'Root/src/server/routes/allRoutes';
-import { initialListLoader } from 'Modules/Lists/list.loader';
 
 type Layout = 'withLeftSidebar' | 'fullPage' | 'noHeader';
 
@@ -43,7 +43,6 @@ interface RoutesInterface {
   ForgotPassword: Route;
   ResetPassword: Route;
   WelcomeUrligram: Route;
-  Control: Route;
   FAQ: Route;
   Extension: Route;
   ServerError: Route;
@@ -276,17 +275,6 @@ export const Routes: RoutesInterface = {
     initialDataLoadersVisitor: [],
     initialDataLoadersSession: [],
     layout: 'noHeader',
-  },
-
-  Control: {
-    name: 'Control',
-    path: '/:lang([a-z]{2})?/control',
-    route: '/control',
-    exact: true,
-    auth: true,
-    initialDataLoadersVisitor: [],
-    initialDataLoadersSession: [],
-    layout: 'fullPage',
   },
 
   ServerError: {
