@@ -8,7 +8,7 @@ import {
 } from 'Modules/Bookmarks/bookmarks.types';
 import { RequestParameters } from 'Root/src/server/routes/allRoutes';
 import HttpClient from 'Services/HttpClient';
-import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
+import { serializerFromArrayToByKey } from '@antoniodcorrea/utils';
 
 export const initialBookmarksLoader = async ({ query }: RequestParameters = {}): Promise<{
   Bookmarks: BookmarksState;

@@ -30,7 +30,7 @@ import { usersLoadByIds } from 'Modules/Users/actions/usersLoadByIds';
 import { selectUserById } from 'Modules/Users/selectors/selectUserById';
 import { DELAY_FAST_MS } from 'Root/src/shared/constants';
 import history from 'Services/History';
-import { URLWrapper } from 'Services/URLWrapper';
+import { URLWrapper } from '@antoniodcorrea/utils';
 import { ListWithMemo as ListUI } from './List';
 
 const List: React.FC = () => {

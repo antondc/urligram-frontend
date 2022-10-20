@@ -19,8 +19,7 @@ import { selectBookmarkActionsIcons } from 'Modules/Ui/selectors/selectBookmarkA
 import { selectUiScreenTypeIsDesktop } from 'Modules/Ui/selectors/selectUiScreenTypeIsDesktop';
 import { selectUiScreenTypeIsMobile } from 'Modules/Ui/selectors/selectUiScreenTypeIsMobile';
 import { TIME_RECENTLY_CREATED_BOOKMARK } from 'Root/src/shared/constants';
-import { LocaleFormattedDate } from 'Tools/utils/Date/localeFormattedDate';
-import { unixTimeElapsed } from 'Tools/utils/Date/unixTimeElapsed';
+import { LocaleFormattedDate, unixTimeElapsed } from '@antoniodcorrea/utils';
 import { BookmarkRow as BookmarkRowUi } from './BookmarkRow';
 
 interface Props {

@@ -8,7 +8,7 @@ import { selectSessionLoading } from 'Modules/Session/selectors/selectSessionLoa
 import { selectSessionPasswordRequested } from 'Modules/Session/selectors/selectSessionPasswordRequested';
 import { uiResetModalsState } from 'Modules/Ui/actions/uiResetModalsState';
 import { EVENT_BLUR } from 'Root/src/shared/constants';
-import { validatePassword } from 'Tools/utils/string/validatePassword';
+import { validatePassword } from '@antoniodcorrea/utils';
 import { ResetPassword as ResetPasswordUi } from './ResetPassword';
 
 import './ResetPassword.less';

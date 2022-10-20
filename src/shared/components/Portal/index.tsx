@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 
-import { isDomAvailable } from 'Tools/utils/dom/isDomAvailable';
+import { isDomAvailable } from '@antoniodcorrea/utils';
 
 interface Props {
   children: React.ReactNode | React.ReactNode[];

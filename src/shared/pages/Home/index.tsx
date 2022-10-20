@@ -16,8 +16,7 @@ import { selectTagsAll } from 'Modules/Tags/selectors/selectAllTags';
 import { selectTagsSearch } from 'Modules/Tags/selectors/selectTagsSearch';
 import { uiResetModalsState } from 'Modules/Ui/actions/uiResetModalsState';
 import history from 'Services/History';
-import { URLWrapper } from 'Services/URLWrapper';
-import { isDomAvailable } from 'Tools/utils/dom/isDomAvailable';
+import { isDomAvailable, URLWrapper } from '@antoniodcorrea/utils';
 import { Home as HomeUi } from './Home';
 
 const Home: React.FC = () => {

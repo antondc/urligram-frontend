@@ -1,7 +1,7 @@
 import { BookmarkGetApiResponse, BookmarksActions, BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
 import { uiNotificationPush } from 'Modules/Ui/actions/uiNotificationPush';
 import HttpClient from 'Services/HttpClient';
-import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
+import { serializerFromArrayToByKey } from '@antoniodcorrea/utils';
 import { AppThunk } from '../../../index';
 import { bookmarkDeleteFailure } from './bookmarkDeleteFailure';
 import { bookmarkDeleteRequest } from './bookmarkDeleteRequest';

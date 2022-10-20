@@ -5,7 +5,7 @@ import {
   BookmarkState,
 } from 'Modules/Bookmarks/bookmarks.types';
 import HttpClient from 'Services/HttpClient';
-import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
+import { serializerFromArrayToByKey } from '@antoniodcorrea/utils';
 import { AppThunk } from '../../..';
 import { bookmarksLoadRequest } from './bookmarksLoadRequest';
 import { bookmarksLoadSuccess } from './bookmarksLoadSuccess';

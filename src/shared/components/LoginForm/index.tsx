@@ -10,7 +10,7 @@ import { uiScreenDesktopUnlock } from 'Modules/Ui/actions/uiScreenDesktopUnlock'
 import { uiScreenMobileUnLock } from 'Modules/Ui/actions/uiScreenMobileUnLock';
 import { COOKIE_POLICY_COOKIE, COOKIE_POLICY_TEXT, EVENT_BLUR } from 'Root/src/shared/constants';
 import { CookiesWrapper } from 'Services/CookiesWrapper';
-import { validateEmailAddress } from 'Tools/utils/string/validateEmailAddress';
+import { validateEmailAddress } from '@antoniodcorrea/utils';
 import { LoginForm as LoginFormUi } from './LoginForm';
 
 import './LoginForm.less';

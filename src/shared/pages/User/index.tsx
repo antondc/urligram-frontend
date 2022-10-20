@@ -19,8 +19,7 @@ import { userLoad } from 'Modules/Users/actions/userLoad';
 import { selectUserById } from 'Modules/Users/selectors/selectUserById';
 import { Routes } from 'Router/routes';
 import history from 'Services/History';
-import { LocaleFormattedDate } from 'Tools/utils/Date/localeFormattedDate';
-import { isDomAvailable } from 'Tools/utils/dom/isDomAvailable';
+import { isDomAvailable, LocaleFormattedDate } from '@antoniodcorrea/utils';
 import { DELETE_CONFIRM_MESSSAGE } from './constants';
 import { User as UserUi } from './User';
 

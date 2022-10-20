@@ -8,8 +8,7 @@ import { selectSessionLoading } from 'Modules/Session/selectors/selectSessionLoa
 import { selectSessionPasswordRequested } from 'Modules/Session/selectors/selectSessionPasswordRequested';
 import { uiResetModalsState } from 'Modules/Ui/actions/uiResetModalsState';
 import { DELAY_MEDIUM_MS, EVENT_BLUR } from 'Root/src/shared/constants';
-import { testStringHasWhiteSpaces } from 'Tools/utils/string/testStringHasWhiteSpaces';
-import { validateEmailAddress } from 'Tools/utils/string/validateEmailAddress';
+import { testStringHasWhiteSpaces, validateEmailAddress } from '@antoniodcorrea/utils';
 import { ForgotPassword as ForgotPasswordUi } from './ForgotPassword';
 
 import './ForgotPassword.less';

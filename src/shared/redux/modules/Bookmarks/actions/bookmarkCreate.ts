@@ -7,7 +7,7 @@ import {
 } from 'Modules/Bookmarks/bookmarks.types';
 import { USERS_LOAD_SUCCEED, UsersActions } from 'Modules/Users/users.types';
 import HttpClient from 'Services/HttpClient';
-import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
+import { serializerFromArrayToByKey } from '@antoniodcorrea/utils';
 import { AppThunk } from '../../../index';
 import { LISTS_LOAD_SUCCESS, ListsActions } from '../../Lists/lists.types';
 

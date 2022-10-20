@@ -13,7 +13,7 @@ import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUser
 import { selectUiListModal } from 'Modules/Ui/selectors/selectUiListModal';
 import { DELAY_SLOW_MS } from 'Root/src/shared/constants';
 import history from 'Services/History';
-import { urlRemoveLeadingCharacters } from 'Tools/utils/url/urlRemoveLeadingCharacters';
+import { urlRemoveLeadingCharacters } from '@antoniodcorrea/utils';
 import { ListForm as ListFormUi } from './ListForm';
 
 import './ListForm.less';

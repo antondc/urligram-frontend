@@ -1,7 +1,6 @@
 import { TagsActions, TagsLoadApiResponse, TagState } from 'Modules/Tags/tags.types';
 import HttpClient from 'Services/HttpClient';
-import { QueryStringWrapper } from 'Services/QueryStringWrapper';
-import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
+import { QueryStringWrapper, serializerFromArrayToByKey } from '@antoniodcorrea/utils';
 import { AppThunk } from '../../..';
 import { tagsLoadRequest } from './tagsLoadRequest';
 import { tagsLoadSuccess } from './tagsLoadSuccess';

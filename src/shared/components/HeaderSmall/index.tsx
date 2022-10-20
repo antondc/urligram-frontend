@@ -16,7 +16,7 @@ import { userModalMount } from 'Modules/Ui/actions/userModalMount';
 import { selectUsersLoading } from 'Modules/Users/selectors/selectUsersLoading';
 import { Routes } from 'Router/routes';
 import history from 'Services/History';
-import { URLWrapper } from 'Services/URLWrapper';
+import { URLWrapper } from '@antoniodcorrea/utils';
 import { HeaderSmall as HeaderSmallUi } from './HeaderSmall';
 
 import './HeaderSmall.less';

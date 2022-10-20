@@ -7,8 +7,7 @@ import {
   UserState,
 } from 'Modules/Users/users.types';
 import HttpClient from 'Services/HttpClient';
-import { QueryStringWrapper } from 'Services/QueryStringWrapper';
-import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
+import { QueryStringWrapper, serializerFromArrayToByKey } from '@antoniodcorrea/utils';
 import { AppThunk } from '../../..';
 
 export const usersLoadByIds =

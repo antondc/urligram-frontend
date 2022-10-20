@@ -2,7 +2,7 @@
 // Has to be called before static middleware
 import { NextFunction, Request, Response } from 'express';
 
-import getExtension from 'Tools/utils/file/getExtension';
+import { getExtension } from '@antoniodcorrea/utils';
 
 const serveGzip = function (req: Request, res: Response, next: NextFunction): void {
   // No need to compress woff2 fonts

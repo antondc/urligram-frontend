@@ -14,9 +14,7 @@ import { DEFAULT_PROTOCOL, DELAY_SLOW_MS } from 'Root/src/shared/constants';
 import { Routes } from 'Router/routes';
 import history from 'Services/History';
 import HttpClient from 'Services/HttpClient';
-import { testStringIsValidUrl } from 'Tools/utils/url/testStringIsValidUrl';
-import { testUrlHasProtocol } from 'Tools/utils/url/testUrlHasProtocol';
-import { urlRemoveLeadingCharacters } from 'Tools/utils/url/urlRemoveLeadingCharacters';
+import { testStringIsValidUrl, testUrlHasProtocol, urlRemoveLeadingCharacters } from '@antoniodcorrea/utils';
 import { BookmarkCreateForm as BookmarkFormUi } from './BookmarkCreateForm';
 
 import './BookmarkCreateForm.less';

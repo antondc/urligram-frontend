@@ -12,7 +12,7 @@ import { selectTagsMetaSort } from 'Modules/Tags/selectors/selectTagsMetaSort';
 import { uiResetModalsState } from 'Modules/Ui/actions/uiResetModalsState';
 import { userLoad } from 'Modules/Users/actions/userLoad';
 import { selectUserById } from 'Modules/Users/selectors/selectUserById';
-import { isDomAvailable } from 'Tools/utils/dom/isDomAvailable';
+import { isDomAvailable } from '@antoniodcorrea/utils';
 import { UserTags as TagsUi } from './UserTags';
 
 const UserTags: React.FC = () => {

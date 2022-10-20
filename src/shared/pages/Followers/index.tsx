@@ -19,8 +19,7 @@ import { selectUsersLoading } from 'Modules/Users/selectors/selectUsersLoading';
 import { selectUsersMetaSort } from 'Modules/Users/selectors/selectUsersMetaSort';
 import { selectUsersTotalItems } from 'Modules/Users/selectors/selectUsersTotalItems';
 import history from 'Services/History';
-import { URLWrapper } from 'Services/URLWrapper';
-import { isDomAvailable } from 'Tools/utils/dom/isDomAvailable';
+import { isDomAvailable, URLWrapper } from '@antoniodcorrea/utils';
 import { Followers as FollowersUI } from './Followers';
 
 const Followers: React.FC = () => {

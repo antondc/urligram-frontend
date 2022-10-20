@@ -1,4 +1,4 @@
-import { URLWrapper } from 'Services/URLWrapper';
+import { URLWrapper } from '@antoniodcorrea/utils';
 
 type CalculatePagesParams = {
   totalItems: number;

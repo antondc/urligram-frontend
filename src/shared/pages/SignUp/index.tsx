@@ -10,9 +10,7 @@ import { SESSION_STATUS_INACTIVE } from 'Modules/Session/session.types';
 import { switchSignUpDisabledModal } from 'Modules/Ui/actions/switchSignUpDisabledModal';
 import { uiResetModalsState } from 'Modules/Ui/actions/uiResetModalsState';
 import { DELAY_MEDIUM_MS, EVENT_BLUR } from 'Root/src/shared/constants';
-import { testStringHasWhiteSpaces } from 'Tools/utils/string/testStringHasWhiteSpaces';
-import { validateEmailAddress } from 'Tools/utils/string/validateEmailAddress';
-import { validatePassword } from 'Tools/utils/string/validatePassword';
+import { testStringHasWhiteSpaces, validateEmailAddress, validatePassword } from '@antoniodcorrea/utils';
 import { SignUp as SignUpUi } from './SignUp';
 
 import './SignUp.less';

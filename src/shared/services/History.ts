@@ -1,6 +1,6 @@
 import { createBrowserHistory, createMemoryHistory, History } from 'history';
 
-import { isDomAvailable } from 'Tools/utils/dom/isDomAvailable';
+import { isDomAvailable } from '@antoniodcorrea/utils';
 
 export { Location } from 'history';
 

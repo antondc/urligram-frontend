@@ -6,8 +6,7 @@ import {
   UserState,
 } from 'Modules/Users/users.types';
 import HttpClient from 'Services/HttpClient';
-import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
-import { QueryStringWrapper } from '@antoniodcorrea/utils';
+import { QueryStringWrapper, serializerFromArrayToByKey } from '@antoniodcorrea/utils';
 import { AppThunk } from '../../..';
 
 interface Params {

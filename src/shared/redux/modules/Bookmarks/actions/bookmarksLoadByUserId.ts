@@ -1,7 +1,6 @@
 import { BookmarksActions, BookmarksGetApiResponse, BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
 import HttpClient from 'Services/HttpClient';
-import { QueryStringWrapper } from 'Services/QueryStringWrapper';
-import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
+import { QueryStringWrapper, serializerFromArrayToByKey } from '@antoniodcorrea/utils';
 import { AppThunk } from '../../..';
 import { bookmarksLoadFailure } from './bookmarksLoadFailure';
 import { bookmarksLoadRequest } from './bookmarksLoadRequest';

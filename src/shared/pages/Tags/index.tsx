@@ -7,7 +7,7 @@ import { selectTagsLoading } from 'Modules/Tags/selectors/selectAllTagsLoading';
 import { selectTagsCurrent } from 'Modules/Tags/selectors/selectTagsCurrent';
 import { selectTagsMetaSort } from 'Modules/Tags/selectors/selectTagsMetaSort';
 import { uiResetModalsState } from 'Modules/Ui/actions/uiResetModalsState';
-import { isDomAvailable } from 'Tools/utils/dom/isDomAvailable';
+import { isDomAvailable } from '@antoniodcorrea/utils';
 import { Tags as TagsUi } from './Tags';
 
 const Tags: React.FC = () => {

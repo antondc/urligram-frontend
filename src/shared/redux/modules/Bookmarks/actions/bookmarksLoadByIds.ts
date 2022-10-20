@@ -6,9 +6,8 @@ import {
   BookmarksGetApiResponse,
   BookmarkState,
 } from 'Modules/Bookmarks/bookmarks.types';
-import { serializerFromArrayToByKey } from 'Root/src/shared/tools/utils/serializers/serializerFromArrayToByKey';
 import HttpClient from 'Services/HttpClient';
-import { QueryStringWrapper } from 'Services/QueryStringWrapper';
+import { QueryStringWrapper, serializerFromArrayToByKey } from '@antoniodcorrea/utils';
 import { AppThunk } from '../../..';
 
 interface Params {

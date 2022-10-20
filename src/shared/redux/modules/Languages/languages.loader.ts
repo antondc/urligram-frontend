@@ -6,7 +6,7 @@ import {
 } from 'Modules/Languages/languages.types';
 import { NotFoundError } from 'Root/src/shared/types/error/NotFoundError';
 import HttpClient from 'Services/HttpClient';
-import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
+import { serializerFromArrayToByKey } from '@antoniodcorrea/utils';
 import { getCurrentOrDefaultLanguage } from './utils/getCurrentOrDefaultLanguage';
 
 export const initialLanguagesLoader = async (lang: string): Promise<{ Languages: LanguagesState }> => {

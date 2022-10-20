@@ -5,7 +5,7 @@ import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCur
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import { Routes } from 'Router/routes';
 import history from 'Services/History';
-import { DEFAULT_THROTTLE_VALUE, throttle } from 'Tools/utils/function/throttle';
+import { throttle } from '@antoniodcorrea/utils';
 import { WelcomeUrligram as WelcomeUrligramUi } from './WelcomeUrligram';
 
 const WelcomeUrligram: React.FC = () => {
@@ -13,12 +13,12 @@ const WelcomeUrligram: React.FC = () => {
   const userIsLoggedIn = useSelector(selectSessionLoggedIn);
 
   useEffect(() => {
-    window.addEventListener('scroll', throttle(fadeOnScroll, DEFAULT_THROTTLE_VALUE));
-    window.addEventListener('scroll', throttle(heroOnScroll, DEFAULT_THROTTLE_VALUE));
+    window.addEventListener('scroll', throttle(fadeOnScroll));
+    window.addEventListener('scroll', throttle(heroOnScroll));
 
     return () => {
-      window.removeEventListener('scroll', throttle(fadeOnScroll, DEFAULT_THROTTLE_VALUE));
-      window.removeEventListener('scroll', throttle(heroOnScroll, DEFAULT_THROTTLE_VALUE));
+      window.removeEventListener('scroll', throttle(fadeOnScroll));
+      window.removeEventListener('scroll', throttle(heroOnScroll));
     };
   }, []);
 

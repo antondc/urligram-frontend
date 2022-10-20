@@ -1,6 +1,6 @@
 import { ListsActions, ListsLoadApiResponse, ListState } from 'Modules/Lists/lists.types';
 import HttpClient from 'Services/HttpClient';
-import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
+import { serializerFromArrayToByKey } from '@antoniodcorrea/utils';
 import { AppThunk } from '../../..';
 import { listsLoadReceive } from './listsLoadReceive';
 import { listsLoadRequest } from './listsLoadRequest';

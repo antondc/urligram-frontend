@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { useScrollBeforeCallback } from 'Hooks/useScrollBeforeCallback';
 import { selectBookmarksLoading } from 'Modules/Bookmarks/selectors/selectBookmarksLoading';
 import { selectBookmarksVoteLoading } from 'Modules/Bookmarks/selectors/selectBookmarksVoteLoading';
 import { selectCurrentGlossary } from 'Modules/Languages/selectors/selectCurrentGlossary';
@@ -16,8 +17,7 @@ import { userModalMount } from 'Modules/Ui/actions/userModalMount';
 import { selectUsersLoading } from 'Modules/Users/selectors/selectUsersLoading';
 import { Routes } from 'Router/routes';
 import history from 'Services/History';
-import { URLWrapper } from 'Services/URLWrapper';
-import { useScrollBeforeCallback } from 'Hooks/useScrollBeforeCallback';
+import { URLWrapper } from '@antoniodcorrea/utils';
 import { Header as HeaderUi } from './Header';
 
 import './Header.less';

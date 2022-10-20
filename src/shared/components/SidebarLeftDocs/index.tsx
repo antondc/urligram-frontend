@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import throttle from 'lodash/throttle';
 
 import { selectUiSidebarleftState } from 'Modules/Ui/selectors/selectUiSidebarleftState';
 import { DELAY_MEDIUM_MS } from 'Root/src/shared/constants';
 import history from 'Services/History';
+import { throttle } from '@antoniodcorrea/utils';
 import { listItems } from './listItems';
 import { SidebarLeftDocs as SidebarLeftDocsUi } from './SidebarLeftDocs';
 

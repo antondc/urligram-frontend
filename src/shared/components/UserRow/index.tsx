@@ -9,7 +9,7 @@ import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLo
 import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUserId';
 import { selectUserById } from 'Modules/Users/selectors/selectUserById';
 import { UserState } from 'Modules/Users/users.types';
-import { LocaleFormattedDate } from 'Tools/utils/Date/localeFormattedDate';
+import { LocaleFormattedDate } from '@antoniodcorrea/utils';
 import { UserRow as UserRowUi } from './UserRow';
 
 import './UserRow.less';

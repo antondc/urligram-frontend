@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import Cross from 'Assets/svg/cross.svg';
 import { uiScreenMobileLock } from 'Modules/Ui/actions/uiScreenMobileLock';
 import { uiScreenMobileUnLock } from 'Modules/Ui/actions/uiScreenMobileUnLock';
-import { noop } from 'Tools/utils/general/noop';
+import { noop } from '@antoniodcorrea/utils';
 
 import './BaseModal.less';
 

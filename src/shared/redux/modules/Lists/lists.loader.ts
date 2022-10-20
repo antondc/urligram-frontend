@@ -3,7 +3,7 @@ import { stringify } from 'qs';
 import { ListApiResponseItem, ListsLoadApiResponse, ListsState, ListState } from 'Modules/Lists/lists.types';
 import { RequestParameters } from 'Root/src/server/routes/allRoutes';
 import HttpClient from 'Services/HttpClient';
-import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
+import { serializerFromArrayToByKey } from '@antoniodcorrea/utils';
 
 export const initialListsLoader = async ({ query }: RequestParameters = {}): Promise<{
   Lists: ListsState;

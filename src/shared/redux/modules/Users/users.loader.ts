@@ -1,6 +1,6 @@
 import { NotFoundError } from 'Root/src/shared/types/error/NotFoundError';
 import HttpClient from 'Services/HttpClient';
-import { serializerFromArrayToByKey } from 'Tools/utils/serializers/serializerFromArrayToByKey';
+import { serializerFromArrayToByKey } from '@antoniodcorrea/utils';
 import { UsersLoadApiItemResponse, UsersLoadApiResponse, UsersState, UserState } from './users.types';
 
 export const initialUsersLoader = async (): Promise<{ Users: UsersState }> => {
