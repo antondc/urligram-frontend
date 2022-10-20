@@ -30,6 +30,7 @@ const Router: React.FC<Props> = ({ location }) => {
   return (
     <>
       <Helmet>
+        <title>{SITE_TITLE}</title>
         <meta name="description" content="Social bookmarking" />
         <meta name="author" content={SITE_TITLE} />
         <meta property="og:locale" content={`${currentSlug}-${currentSlug.toUpperCase()}`} />

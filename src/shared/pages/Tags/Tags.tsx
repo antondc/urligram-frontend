@@ -24,7 +24,7 @@ interface Props {
 export const Tags: React.FC<Props> = ({ tags, tagsLoading, url, sort, glossary }) => (
   <>
     <Helmet>
-      <meta property="title" content={`${SITE_TITLE} · ${glossary.tags}`} />
+      <title>{`${SITE_TITLE} · ${glossary.tags}`}</title>
       <meta property="og:title" content={`${SITE_TITLE} · ${glossary.tags}`} />
       <meta property="og:url" content={url} />
       <meta property="twitter:title" content={`${SITE_TITLE} · ${glossary.tags}`} />

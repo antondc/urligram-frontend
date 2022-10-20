@@ -58,7 +58,7 @@ export const Lists: React.FC<Props> = ({
 }) => (
   <div className="Lists">
     <Helmet>
-      <meta property="title" content={`${SITE_TITLE} · ${glossary.lists}`} />
+      <title>{`${SITE_TITLE} · ${glossary.lists}`}</title>
       <meta property="og:title" content={`${SITE_TITLE} · ${glossary.lists}`} />
       <meta property="og:url" content={url} />
       <meta property="twitter:title" content={`${SITE_TITLE} · ${glossary.lists}`} />

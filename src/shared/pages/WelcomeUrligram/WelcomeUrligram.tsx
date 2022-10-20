@@ -6,6 +6,7 @@ import HeroIllustration from 'Assets/svg/devices.svg';
 import LogoCircle from 'Assets/svg/logoCircle.svg';
 import Waves from 'Assets/svg/waves.svg';
 import Footer from 'Components/Footer';
+import { SITE_TITLE } from 'Root/src/shared/constants';
 import { translations } from './translations';
 
 import './WelcomeUrligram.less';
@@ -19,18 +20,7 @@ export const WelcomeUrligram: React.FC<Props> = ({ currentSlug }) => (
     <div className="WelcomeUrligram-shape" id="shape" />
     <div className="WelcomeUrligram">
       <Helmet>
-        <title>Urligram</title>
-        <meta name="description" content="Software and publishing projects" />
-        <meta name="author" content="Urligram" />
-        <meta property="og:locale" content="en-EN" />
-        <meta property="og:title" content="Urligram" />
-        <meta property="og:url" content="https://www.urligram.com" />
-        <meta property="og:site_name" content="Urligram" />
-        <meta property="og:type" content="website" />
-        <meta property="og:image" content="/images/logo.png" />
-        <meta property="twitter:url" content="https://www.urligram.com" />
-        <meta property="twitter:title" content="Urligram" />
-        <meta property="twitter:image" content="/images/logo.png" />
+        <title>{`${SITE_TITLE} · Welcome`}</title>
       </Helmet>
       <div className="WelcomeUrligram-first" id="first">
         <div className="WelcomeUrligram-firstText">{translations[currentSlug].hero}</div>

@@ -38,7 +38,7 @@ export const Link: React.FC<Props> = ({
 }) => (
   <>
     <Helmet>
-      <meta property="title" content={`${SITE_TITLE} · ${bookmark?.title}`} />
+      <title>{`${SITE_TITLE} · ${bookmark?.title}`}</title>
       <meta property="og:title" content={`${SITE_TITLE} · ${bookmark?.title}`} />
       <meta property="og:url" content={url} />
       <meta property="twitter:title" content={`${SITE_TITLE} · ${bookmark?.title}`} />
