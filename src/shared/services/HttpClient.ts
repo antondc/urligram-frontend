@@ -1,7 +1,7 @@
 import axios, { AxiosInstance } from 'axios';
 import https from 'https';
 
-import { QueryStringWrapper } from './QueryStringWrapper';
+import { QueryStringWrapper } from '@antoniodcorrea/utils';
 
 type ResponseError = {
   response: {
