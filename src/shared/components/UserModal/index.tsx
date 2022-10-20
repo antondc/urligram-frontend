@@ -45,7 +45,7 @@ const UserModal: React.FC = () => {
       userModalMounted={userModalMounted}
       session={session}
       sessionLogOut={logOutDispatched}
-      onCloseClick={switchUserModal}
+      switchUserModal={switchUserModal}
       switchMessageModal={switchMessageModalDispatched}
     />
   );

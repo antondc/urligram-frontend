@@ -23,7 +23,7 @@ interface Props {
   session: SessionState;
   sessionLogOut: () => void;
   switchMessageModal: () => void;
-  onCloseClick: () => void;
+  switchUserModal: () => void;
 }
 
 export const UserModal: React.FC<Props> = ({
@@ -31,11 +31,15 @@ export const UserModal: React.FC<Props> = ({
   isUserPage,
   session,
   sessionLogOut,
-  onCloseClick,
+  switchUserModal,
   switchMessageModal,
   routeName,
 }) => (
-  <div className={'UserModal' + (userModalMounted ? ' UserModal--mounted' : '')} onClick={onCloseClick}>
+  <div
+    className={'UserModal' + (userModalMounted ? ' UserModal--mounted' : '')}
+    onClick={switchUserModal}
+    onMouseLeave={switchUserModal}
+  >
     {/* <img className="UserModal-userLogo" src={session?.image?.original} /> */}
     <div className="UserModal-cross">
       <Cross className="UserModal-crossIcon" />
@@ -117,7 +121,7 @@ export const UserModal: React.FC<Props> = ({
       </li>
       <li className="UserModal-item UserModal-logOut" onClick={sessionLogOut}>
         <LogOut className="UserModal-icon" />
-        <div className="UserModal-label">Log out </div>
+        <div className="UserModal-label">Log out</div>
         <ArrowRight className="UserModal-iconArrow" />
       </li>
     </ul>
