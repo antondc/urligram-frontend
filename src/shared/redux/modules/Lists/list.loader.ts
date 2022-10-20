@@ -12,6 +12,12 @@ export const initialListLoader = async ({ query, params }: RequestParameters = {
     const { data: listData } = await HttpClient.get<void, ListLoadApiResponse>(
       `/lists/${params.listId}/?${QueryStringWrapper.stringifyQueryParams(query)}`
     );
+
+    console.log('=======');
+    console.log('listData:');
+    console.log(JSON.stringify(listData, null, 4));
+    console.log('=======');
+
     const {
       meta: { totalItems, sort },
       data: bookmarksData,
@@ -19,7 +25,17 @@ export const initialListLoader = async ({ query, params }: RequestParameters = {
       `/lists/${params?.listId}/bookmarks?${QueryStringWrapper.stringifyQueryParams(query)}`
     );
 
+    console.log('=======');
+    console.log('bookmarksData:');
+    console.log(JSON.stringify(bookmarksData, null, 4));
+    console.log('=======');
+
     const bookmarksArray = bookmarksData.map((item) => item.attributes);
+
+    console.log('=======');
+    console.log('bookmarksArray:');
+    console.log(JSON.stringify(bookmarksArray, null, 4));
+    console.log('=======');
 
     const result = {
       Lists: {
@@ -43,6 +59,11 @@ export const initialListLoader = async ({ query, params }: RequestParameters = {
         },
       },
     };
+
+    console.log('=======');
+    console.log('result:');
+    console.log(JSON.stringify(result, null, 4));
+    console.log('=======');
 
     return result;
   } catch (error) {
