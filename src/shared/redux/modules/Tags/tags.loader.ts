@@ -1,5 +1,4 @@
 import { TagsLoadApiResponse, TagsLoadApiResponseItem, TagsState, TagState } from 'Modules/Tags/tags.types';
-import { NetworkError } from 'Root/src/shared/types/error/NetworkError';
 import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from '@antoniodcorrea/utils';
 
@@ -22,6 +21,6 @@ export const tagsAllInitialLoader = async (): Promise<{ Tags: TagsState }> => {
 
     return result;
   } catch (error) {
-    throw new NetworkError('Error when loading tags');
+    console.log('Error when loading tags');
   }
 };

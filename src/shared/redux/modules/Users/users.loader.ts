@@ -1,4 +1,3 @@
-import { NetworkError } from 'Root/src/shared/types/error/NetworkError';
 import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from '@antoniodcorrea/utils';
 import { UsersLoadApiItemResponse, UsersLoadApiResponse, UsersState, UserState } from './users.types';
@@ -22,6 +21,6 @@ export const initialUsersLoader = async (): Promise<{ Users: UsersState }> => {
 
     return result;
   } catch (error) {
-    throw new NetworkError('Error when loading lusersists');
+    console.log('Error when loading lusersists');
   }
 };

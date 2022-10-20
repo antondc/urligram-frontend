@@ -5,7 +5,6 @@ import {
   BookmarkState,
 } from 'Modules/Bookmarks/bookmarks.types';
 import { RequestParameters } from 'Root/src/server/routes/allRoutes';
-import { NetworkError } from 'Root/src/shared/types/error/NetworkError';
 import HttpClient from 'Services/HttpClient';
 import { QueryStringWrapper, serializerFromArrayToByKey } from '@antoniodcorrea/utils';
 
@@ -30,6 +29,6 @@ export const initialBookmarksLoader = async ({ query }: RequestParameters = {}):
 
     return result;
   } catch (error) {
-    throw new NetworkError('Error when loading bookmarks');
+    console.log('Error when loading bookmarks');
   }
 };
