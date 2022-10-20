@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { useScrollBeforeCallback } from 'Hooks/useScrollBeforeCallback';
+import { selectCurrentGlossary } from 'Modules/Languages/selectors/selectCurrentGlossary';
 import { listsLoad } from 'Modules/Lists/actions/listsLoad';
 import { selectListsMetaSort } from 'Modules/Lists/selectors/selectListMetaSort';
 import { selectListsAllIds } from 'Modules/Lists/selectors/selectListsAllIds';
@@ -31,6 +32,7 @@ const Lists: React.FC = () => {
   const url = useSelector(selectCurrentFullUrl);
   const sort = useSelector(selectListsMetaSort);
   const allTags = useSelector(selectTagsAll);
+  const glossary = useSelector(selectCurrentGlossary);
   const currentQueryParamFilter = useSelector(selectCurrentRouteQueryParamFilter);
   const tagsSearch = useSelector(selectTagsSearch);
   const currentQueryParamFilterTags =
@@ -67,6 +69,7 @@ const Lists: React.FC = () => {
 
   return (
     <ListsUI
+      glossary={glossary}
       listsIds={listsIds}
       listsIdsLoading={listsIdsLoading}
       page={page}

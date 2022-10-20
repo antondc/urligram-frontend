@@ -1,5 +1,4 @@
 import React from 'react';
-import Helmet from 'react-helmet';
 
 import Bookmark from 'Assets/svg/bookmark.svg';
 import Clock from 'Assets/svg/spinner6.svg';
@@ -10,7 +9,7 @@ import NoResults from 'Components/NoResults';
 import Pagination from 'Components/Pagination';
 import SubHeader from 'Components/SubHeader';
 import { TagState } from 'Modules/Tags/tags.types';
-import { DEFAULT_PAGE_SIZE, SITE_TITLE } from 'Root/src/shared/constants';
+import { DEFAULT_PAGE_SIZE } from 'Root/src/shared/constants';
 import { SelectValue } from '@antoniodcorrea/components';
 
 import './Home.less';
@@ -49,7 +48,6 @@ export const Home: React.FC<Props> = ({
   onChange,
 }) => (
   <div className="Home">
-    <Helmet title={`${SITE_TITLE} · Home`} />
     <SubHeader
       // title props
       title="All Bookmarks"

@@ -6,7 +6,6 @@ import HeroIllustration from 'Assets/svg/devices.svg';
 import LogoCircle from 'Assets/svg/logoCircle.svg';
 import Waves from 'Assets/svg/waves.svg';
 import Footer from 'Components/Footer';
-import { SITE_TITLE } from 'Root/src/shared/constants';
 import { translations } from './translations';
 
 import './WelcomeUrligram.less';
@@ -17,9 +16,7 @@ interface Props {
 
 export const WelcomeUrligram: React.FC<Props> = ({ currentSlug }) => (
   <>
-    <Helmet title={`${SITE_TITLE} · WelcomeUrligram`} />
     <div className="WelcomeUrligram-shape" id="shape" />
-    {/* <Header currentSlug={currentSlug} /> */}
     <div className="WelcomeUrligram">
       <Helmet>
         <title>Urligram</title>

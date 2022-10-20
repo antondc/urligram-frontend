@@ -85,7 +85,15 @@ const List: React.FC<Props> = ({
   leaveListLoading,
 }) => (
   <div className="List">
-    <Helmet title={`${SITE_TITLE} · ${list?.name}`} />
+    <Helmet>
+      <Helmet>
+        <meta property="title" content={`${SITE_TITLE} · ${list?.name}`} />
+        <meta property="og:title" content={`${SITE_TITLE} · ${list?.name}`} />
+        <meta property="og:url" content={url} />
+        <meta property="twitter:title" content={`${SITE_TITLE} · ${list?.name}`} />
+        <meta property="twitter:url" content={url} />
+      </Helmet>
+    </Helmet>
     <AnimateHeight className="List-notification" mounted={showBanner} speed="fastest" ease={[1, 0.02, 0.83, 1.15]}>
       <CardItem className="List-notificationContent">
         <div className="List-notificationText">You were invited to this list as {listInvitationRole}: join it?</div>

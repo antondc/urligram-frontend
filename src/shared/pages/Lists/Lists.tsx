@@ -12,6 +12,7 @@ import { ListRowSkeletonGroup } from 'Components/ListRow/ListSkeletonGroup';
 import NoResults from 'Components/NoResults';
 import Pagination from 'Components/Pagination';
 import SubHeader, { SubHeaderSeparator } from 'Components/SubHeader';
+import { GlossaryState } from 'Modules/Languages/languages.types';
 import { TagState } from 'Modules/Tags/tags.types';
 import { DEFAULT_PAGE_SIZE, SITE_TITLE } from 'Root/src/shared/constants';
 import { SelectValue } from '@antoniodcorrea/components';
@@ -19,6 +20,7 @@ import { SelectValue } from '@antoniodcorrea/components';
 import './Lists.less';
 
 interface Props {
+  glossary: GlossaryState;
   listsIds: number[];
   listsIdsLoading: boolean;
   url: string;
@@ -40,6 +42,7 @@ interface Props {
 }
 
 export const Lists: React.FC<Props> = ({
+  glossary,
   listsIds,
   listsIdsLoading,
   url,
@@ -54,7 +57,13 @@ export const Lists: React.FC<Props> = ({
   onAddListClick,
 }) => (
   <div className="Lists">
-    <Helmet title={`${SITE_TITLE} · All Lists`} />
+    <Helmet>
+      <meta property="title" content={`${SITE_TITLE} · ${glossary.lists}`} />
+      <meta property="og:title" content={`${SITE_TITLE} · ${glossary.lists}`} />
+      <meta property="og:url" content={url} />
+      <meta property="twitter:title" content={`${SITE_TITLE} · ${glossary.lists}`} />
+      <meta property="twitter:url" content={url} />
+    </Helmet>
     <SubHeader
       // title props
       title="All Lists"

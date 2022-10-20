@@ -6,6 +6,7 @@ import Title from 'Assets/svg/sortTitle.svg';
 import TagIcon from 'Assets/svg/tag.svg';
 import A from 'Components/A';
 import CardItem from 'Components/CardItem';
+import { GlossaryState } from 'Modules/Languages/languages.types';
 import { TagState } from 'Modules/Tags/tags.types';
 import { SITE_TITLE } from 'Root/src/shared/constants';
 import { SortBy, Space, Tag, TagsSkeleton } from '@antoniodcorrea/components';
@@ -17,43 +18,53 @@ interface Props {
   tagsLoading: boolean;
   url: string;
   sort: string;
+  glossary: GlossaryState;
 }
 
-export const Tags: React.FC<Props> = ({ tags, tagsLoading, url, sort }) => (
-  <div className="Tags">
-    <Helmet title={`${SITE_TITLE} · Tags`} />
-    <CardItem className="Tags-header">
-      <div className="Tags-headerTitle">
-        <TagIcon />
-        All Tags
+export const Tags: React.FC<Props> = ({ tags, tagsLoading, url, sort, glossary }) => (
+  <>
+    <Helmet>
+      <meta property="title" content={`${SITE_TITLE} · ${glossary.tags}`} />
+      <meta property="og:title" content={`${SITE_TITLE} · ${glossary.tags}`} />
+      <meta property="og:url" content={url} />
+      <meta property="twitter:title" content={`${SITE_TITLE} · ${glossary.tags}`} />
+      <meta property="twitter:url" content={url} />
+    </Helmet>
+    <div className="Tags">
+      <Helmet title={`${SITE_TITLE} · Tags`} />
+      <CardItem className="Tags-header">
+        <div className="Tags-headerTitle">
+          <TagIcon />
+          All Tags
+        </div>
+        <div className="Tags-separator" />
+        <SortBy
+          options={[
+            { label: 'Bookmarks', field: 'count', icon: Bookmark },
+            { label: 'Name', field: 'name', icon: Title },
+          ]}
+          href={url}
+          currentSort={sort}
+          loading={tagsLoading}
+        />
+      </CardItem>
+      <div className="Tags-tags">
+        {tagsLoading ? (
+          <TagsSkeleton length={tags?.length || 70} />
+        ) : (
+          tags?.map((item) => (
+            <A className="Tags-tag" href={`?filter[tags][]=${item.name}`} key={item.id} styled={false} frontend>
+              <Tag>
+                {item?.name}
+                <Space />
+                <Space />
+                <Space />
+                {item?.count}
+              </Tag>
+            </A>
+          ))
+        )}
       </div>
-      <div className="Tags-separator" />
-      <SortBy
-        options={[
-          { label: 'Bookmarks', field: 'count', icon: Bookmark },
-          { label: 'Name', field: 'name', icon: Title },
-        ]}
-        href={url}
-        currentSort={sort}
-        loading={tagsLoading}
-      />
-    </CardItem>
-    <div className="Tags-tags">
-      {tagsLoading ? (
-        <TagsSkeleton length={tags?.length || 70} />
-      ) : (
-        tags?.map((item) => (
-          <A className="Tags-tag" href={`?filter[tags][]=${item.name}`} key={item.id} styled={false} frontend>
-            <Tag>
-              {item?.name}
-              <Space />
-              <Space />
-              <Space />
-              {item?.count}
-            </Tag>
-          </A>
-        ))
-      )}
     </div>
-  </div>
+  </>
 );

@@ -1,4 +1,5 @@
 import React from 'react';
+import Helmet from 'react-helmet';
 
 import Created from 'Assets/svg/plusCircle.svg';
 import Updated from 'Assets/svg/updated.svg';
@@ -9,6 +10,7 @@ import UserRow from 'Components/UserRow';
 import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
 import { NoteState } from 'Modules/Notes/notes.types';
 import { UserState } from 'Modules/Users/users.types';
+import { SITE_TITLE } from 'Root/src/shared/constants';
 import { SortBy } from '@antoniodcorrea/components';
 
 import './Link.less';
@@ -34,49 +36,58 @@ export const Link: React.FC<Props> = ({
   onSortNotes,
   onSortUsers,
 }) => (
-  <div className="Link">
-    <CardItem>
-      <BookmarkRow id={bookmark?.id} withInfoButton={false} />
-    </CardItem>
-    <div className="Link-content">
-      <div>
-        <CardItem className="Link-subHeader">
-          <span>Users</span>
-          <SortBy
-            options={[
-              { label: 'Created', field: 'createdAt', icon: Created },
-              { label: 'Updated', field: 'updatedAt', icon: Updated },
-            ]}
-            href={url}
-            currentSort={sortUsers}
-            loading={false}
-            onItemClick={onSortUsers}
-          />
-        </CardItem>
-        {users?.map((item) => (
-          <CardItem key={item.id}>
-            <UserRow id={item.id} />
+  <>
+    <Helmet>
+      <meta property="title" content={`${SITE_TITLE} · ${bookmark?.title}`} />
+      <meta property="og:title" content={`${SITE_TITLE} · ${bookmark?.title}`} />
+      <meta property="og:url" content={url} />
+      <meta property="twitter:title" content={`${SITE_TITLE} · ${bookmark?.title}`} />
+      <meta property="twitter:url" content={url} />
+    </Helmet>
+    <div className="Link">
+      <CardItem>
+        <BookmarkRow id={bookmark?.id} withInfoButton={false} />
+      </CardItem>
+      <div className="Link-content">
+        <div>
+          <CardItem className="Link-subHeader">
+            <span>Users</span>
+            <SortBy
+              options={[
+                { label: 'Created', field: 'createdAt', icon: Created },
+                { label: 'Updated', field: 'updatedAt', icon: Updated },
+              ]}
+              href={url}
+              currentSort={sortUsers}
+              loading={false}
+              onItemClick={onSortUsers}
+            />
           </CardItem>
-        ))}
-      </div>
-      <div>
-        <CardItem className="Link-subHeader">
-          <span>Notes</span>
-          <SortBy
-            options={[
-              { label: 'Created', field: 'createdAt', icon: Created },
-              { label: 'Updated', field: 'updatedAt', icon: Updated },
-            ]}
-            href={url}
-            currentSort={sortNotes}
-            loading={false}
-            onItemClick={onSortNotes}
-          />
-        </CardItem>
-        {notes?.map((item) => (
-          <Notes text={item.notes} userName={item.userName} userId={item.userId} key={item.notes} />
-        ))}
+          {users?.map((item) => (
+            <CardItem key={item.id}>
+              <UserRow id={item.id} />
+            </CardItem>
+          ))}
+        </div>
+        <div>
+          <CardItem className="Link-subHeader">
+            <span>Notes</span>
+            <SortBy
+              options={[
+                { label: 'Created', field: 'createdAt', icon: Created },
+                { label: 'Updated', field: 'updatedAt', icon: Updated },
+              ]}
+              href={url}
+              currentSort={sortNotes}
+              loading={false}
+              onItemClick={onSortNotes}
+            />
+          </CardItem>
+          {notes?.map((item) => (
+            <Notes text={item.notes} userName={item.userName} userId={item.userId} key={item.notes} />
+          ))}
+        </div>
       </div>
     </div>
-  </div>
+  </>
 );
