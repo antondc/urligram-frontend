@@ -46,6 +46,6 @@ export const initialListLoader = async ({ query, params }: RequestParameters = {
 
     return result;
   } catch (error) {
-    throw new NetworkError('Error when loading lists');
+    throw new NetworkError('Error when loading lists', error);
   }
 };
