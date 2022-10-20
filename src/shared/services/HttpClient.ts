@@ -4,9 +4,9 @@ import https from 'https';
 import { QueryStringWrapper } from '@antoniodcorrea/utils';
 
 type ResponseError = {
-  response: {
-    data: {
-      error: Error;
+  response?: {
+    data?: {
+      error?: Error;
     };
   };
 };
@@ -44,10 +44,9 @@ export class HttpClient {
         return response.data;
       },
       (error: ResponseError) => {
-        const errorContent = error?.response?.data?.error;
+        // Tries to return the data body contained by the response error object instead of the custom native error retrieved by the Error code
+        const errorContent = error?.response?.data?.error || error?.response?.data || error?.response || error;
 
-        // Returns the data body contained by the response error object instead of the custom native error retrieved by the Error code
-        // Requires backend returning ResponseError object
         return Promise.reject(errorContent);
       }
     );
