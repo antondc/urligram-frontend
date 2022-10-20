@@ -118,6 +118,7 @@
   },
   "dependencies": {
     "@antoniodcorrea/components": "^1.0.176",
+    "@antoniodcorrea/utils": "^0.0.18",
     "@popperjs/core": "^2.9.2",
     "@types/qs": "^6.9.5",
     "@types/react-datepicker": "^3.1.8",

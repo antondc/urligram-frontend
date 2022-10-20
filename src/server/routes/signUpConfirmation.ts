@@ -1,8 +1,9 @@
 import express from 'express';
 
+import { UserState } from 'Modules/Users/users.types';
 import HttpClient from 'Services/HttpClient';
 import { URLWrapper } from 'Services/URLWrapper';
-import { TokenService } from '../services/TokenService';
+import { TokenJWT } from '@antoniodcorrea/utils';
 
 const ROUTE_REGEX = '/:lang([a-z]{2})?/sign-up-confirmation/check';
 
@@ -33,15 +34,12 @@ router.get(ROUTE_REGEX, async (req: any, res: any) => {
       queryParams
     );
 
-    const tokenService = new TokenService();
-    const sessionToken = await tokenService.createToken(data?.attributes);
+    const tokenJwt = new TokenJWT(process.env.JWT_SECRET);
+    const sessionToken = await tokenJwt.createToken<Partial<UserState>>(data?.attributes);
 
     const urlWrapper = new URLWrapper(`${req.protocol}://${req.hostname}`);
     const domainWithoutSubdomain = urlWrapper.getDomainWithoutSubdomain();
     const domainForCookie = `.${domainWithoutSubdomain}`; // Return domain only for recognized clients
-
-    // Disallow robots —crawlers, spiders, etc.—
-    res.set({ 'X-Robots-Tag': 'noindex' });
 
     res
       .cookie('sessionToken', sessionToken, {
