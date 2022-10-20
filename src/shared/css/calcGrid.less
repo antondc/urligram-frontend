@@ -1,5 +1,6 @@
 /* stylelint-disable */
 @import './breakpoints.less';
+@import './layout.less';
 
 .calcgrid(@property: 'width'; @columns: 0; @parentColumns: 12; @addGutter: 0;  @hasParentPaddings: 0) {
   @totalPaddingWidth: @lay-outerPadding * 2 * @hasParentPaddings;
@@ -8,7 +9,7 @@
   @guttersWidth: @lay-gutter * (max(@columns - 1, 0));
   @appendedGutter: @lay-gutter * @addGutter;
 
-  @{property}: calc(((100% - @totalFixWidths) / @parentColumns * @columns) + @guttersWidth + @appendedGutter);
+    @{property}: calc(((100% - @totalFixWidths) / @parentColumns * @columns) + @guttersWidth + @appendedGutter);
 
   @media @br-desktopSmall {
     @lay-gutter: @lay-gutterSmall;
@@ -20,7 +21,7 @@
     @guttersWidth: @lay-gutter * (max(@columns - 1, 0));
     @appendedGutter: @lay-gutter * @addGutter;
 
-    @{property}: calc(((100% - @totalFixWidths) / @parentColumns * @columns) + @guttersWidth + @appendedGutter);
+      @{property}: calc(((100% - @totalFixWidths) / @parentColumns * @columns) + @guttersWidth + @appendedGutter);
   }
 
   @media @br-mobile {
@@ -33,6 +34,6 @@
     @guttersWidth: @lay-gutter * (max(@columns - 1, 0));
     @appendedGutter: @lay-gutter * @addGutter;
 
-    @{property}: calc(((100% - @totalFixWidths) / @parentColumns * @columns) + @guttersWidth + @appendedGutter);
+      @{property}: calc(((100% - @totalFixWidths) / @parentColumns * @columns) + @guttersWidth + @appendedGutter);
   }
 }
