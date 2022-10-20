@@ -2,6 +2,7 @@
 export const SITE_TITLE = 'Urligram';
 export const DEFAULT_PAGE_SIZE = 20;
 export const COOKIE_POLICY_COOKIE = 'cookiePolicyCookie';
+export const COOKIE_POLICY_TEXT = 'Acceptance of cookies policy is required for login';
 
 // Delays
 export const DELAY_FAST_MS = 300;

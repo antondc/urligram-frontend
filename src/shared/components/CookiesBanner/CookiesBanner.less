@@ -8,9 +8,10 @@
   align-items: stretch;
   margin-bottom: 20px;
   overflow: hidden;
+  background: @c-background;
+  border: 1px solid @gradientColors[blue-4];
+  user-select: none;
   border-radius: 4px;
-
-  .u-blackBars;
 
   @media @br-mobile {
     flex-direction: column;
@@ -34,7 +35,6 @@
 
   &-textSpan {
     font-size: @fs-small;
-    background: @c-background;
   }
 
   &-textSpanTitle {
@@ -56,9 +56,10 @@
   }
 
   &-buttons {
-    display: flex;
+    display: inline-flex;
     align-items: flex-end;
     padding: 20px;
+    gap: 5px;
 
     @media @br-mobile {
       display: flex;

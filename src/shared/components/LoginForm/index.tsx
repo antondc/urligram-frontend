@@ -5,7 +5,11 @@ import { sessionLogIn } from 'Modules/Session/actions/sessionLogIn';
 import { sessionResetErrors } from 'Modules/Session/actions/sessionResetErrors';
 import { selectSessionErrorLast } from 'Modules/Session/selectors/selectSessionErrorLast';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
-import { EVENT_BLUR } from 'Root/src/shared/constants';
+import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
+import { uiScreenDesktopUnlock } from 'Modules/Ui/actions/uiScreenDesktopUnlock';
+import { uiScreenMobileUnLock } from 'Modules/Ui/actions/uiScreenMobileUnLock';
+import { COOKIE_POLICY_COOKIE, COOKIE_POLICY_TEXT, EVENT_BLUR } from 'Root/src/shared/constants';
+import { CookiesWrapper } from 'Services/CookiesWrapper';
 import { validateEmailAddress } from 'Tools/utils/string/validateEmailAddress';
 import { LoginForm as LoginFormUi } from './LoginForm';
 
@@ -86,6 +90,21 @@ const LoginForm: React.FC<Props> = ({ setLocked }) => {
   };
 
   useEffect(() => {
+    const cookiesWrapper = new CookiesWrapper();
+    const cookiePolicyCookie = cookiesWrapper.getCookie(COOKIE_POLICY_COOKIE);
+
+    if (!cookiePolicyCookie || cookiePolicyCookie === '0') {
+      const confirmed = confirm(COOKIE_POLICY_TEXT);
+
+      if (confirmed) {
+        cookiesWrapper.removeCookie(COOKIE_POLICY_COOKIE);
+      }
+
+      dispatch(switchLoginModal(false));
+    }
+  }, []);
+
+  useEffect(() => {
     setSubmitError(undefined);
 
     return () => {
@@ -94,7 +113,8 @@ const LoginForm: React.FC<Props> = ({ setLocked }) => {
       setNameOrEmailError(undefined);
       setSubmitting(undefined);
       dispatch(sessionResetErrors());
-
+      dispatch(uiScreenMobileUnLock());
+      dispatch(uiScreenDesktopUnlock());
       if (setLocked) setLocked(undefined);
     };
   }, []);

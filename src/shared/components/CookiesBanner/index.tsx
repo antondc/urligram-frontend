@@ -11,11 +11,23 @@ const CookiesBanner: React.FC = () => {
   const cookiesWrapper = new CookiesWrapper();
   const [accepted, setAccepted] = useState<boolean>(false);
   const [show, setShow] = useState<boolean>(!session?.id);
+  const timeMsInNinetyDays = Date.now() + 1000 * 60 * 60 * 24 * 90;
 
   const onAccept = () => {
     const cookiesWrapper = new CookiesWrapper();
-    cookiesWrapper.setCookie(COOKIE_POLICY_COOKIE, '1');
+
+    cookiesWrapper.setCookie(COOKIE_POLICY_COOKIE, '1', timeMsInNinetyDays);
     setAccepted(true);
+
+    setTimeout(() => {
+      setShow(false);
+    }, DELAY_SLOW_MS);
+  };
+
+  const onReject = () => {
+    const cookiesWrapper = new CookiesWrapper();
+    cookiesWrapper.setCookie(COOKIE_POLICY_COOKIE, '0', timeMsInNinetyDays);
+    setAccepted(false);
 
     setTimeout(() => {
       setShow(false);
@@ -24,11 +36,16 @@ const CookiesBanner: React.FC = () => {
 
   useEffect(() => {
     const acceptedCookiesPolicy = cookiesWrapper.getCookie(COOKIE_POLICY_COOKIE);
-    if (session?.id || acceptedCookiesPolicy) setShow(false);
-    if (!session?.id && !acceptedCookiesPolicy) setShow(true);
+    if (session?.id || acceptedCookiesPolicy) {
+      setShow(false);
+      setAccepted(true);
+    } else {
+      setShow(true);
+      setAccepted(false);
+    }
   }, [session]);
 
-  return <CookiesBannerUi onAccept={onAccept} accepted={accepted} show={show} />;
+  return <CookiesBannerUi onAccept={onAccept} onReject={onReject} accepted={accepted} show={show} />;
 };
 
 export default CookiesBanner;

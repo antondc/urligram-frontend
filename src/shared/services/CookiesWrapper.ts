@@ -28,8 +28,7 @@ export class CookiesWrapper {
     if (!isDomAvailable) return;
 
     const stringifiedContent = content;
-    const date = new Date(0); // With 0 we set the date to the epoch
-    date.setUTCSeconds(expires);
+    const date = new Date(expires);
     const dateString = 'expires=' + date.toUTCString();
 
     const cookie = cookieName + '=' + stringifiedContent + ';' + dateString + '; path=/';
