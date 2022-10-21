@@ -23,7 +23,7 @@ interface Props {
   user: UserState;
   listsIds: number[];
   listsLoading: boolean;
-  url: string;
+  currentHref: string;
   page: {
     size: number;
     offset: number;
@@ -45,7 +45,7 @@ export const UserLists: React.FC<Props> = ({
   user,
   listsIds,
   listsLoading,
-  url,
+  currentHref,
   page,
   totalItems,
   sort,
@@ -81,7 +81,7 @@ export const UserLists: React.FC<Props> = ({
         { label: 'Members', field: 'members', icon: User },
         { label: 'Bookmarks', field: 'bookmarks', icon: Bookmark },
       ]}
-      url={url}
+      url={currentHref}
       currentSort={sort}
     >
       <SubHeaderSeparator />
@@ -102,6 +102,6 @@ export const UserLists: React.FC<Props> = ({
       )}
       {!listsLoading && !listsIds?.length && <NoResults content="ⵁ We didn find any list." />}
     </div>
-    <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
+    <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={currentHref} />
   </div>
 );

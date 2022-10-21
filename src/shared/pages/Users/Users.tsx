@@ -18,7 +18,7 @@ import './Users.less';
 interface Props {
   usersCurrentIds: string[];
   usersLoading: boolean;
-  url: string;
+  currentHref: string;
   page: {
     size: number;
     offset: number;
@@ -40,7 +40,7 @@ export const Users: React.FC<Props> = ({
   usersLoading,
   page,
   totalItems,
-  url,
+  currentHref,
   sort,
   allTags,
   currentQueryParamFilterTags,
@@ -67,7 +67,7 @@ export const Users: React.FC<Props> = ({
       // sort props
       sortLoading={usersLoading}
       sortByOptions={[{ label: 'Created at', field: 'createdAt', icon: Clock }]}
-      url={url}
+      url={currentHref}
       currentSort={sort}
     />
     <div className="Users-users">
@@ -82,6 +82,6 @@ export const Users: React.FC<Props> = ({
       )}
       {!usersLoading && !usersCurrentIds?.length && <NoResults content="ⵁ We didn find any user." />}
     </div>
-    <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
+    <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={currentHref} />
   </div>
 );

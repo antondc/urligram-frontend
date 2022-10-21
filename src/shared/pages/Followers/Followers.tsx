@@ -22,7 +22,7 @@ interface Props {
   user: UserState;
   usersCurrentIds: string[];
   usersLoading: boolean;
-  url: string;
+  currentHref: string;
   page: {
     size: number;
     offset: number;
@@ -45,7 +45,7 @@ export const Followers: React.FC<Props> = ({
   usersLoading,
   page,
   totalItems,
-  url,
+  currentHref,
   sort,
   allTags,
   currentQueryParamFilterTags,
@@ -77,7 +77,7 @@ export const Followers: React.FC<Props> = ({
         { label: 'Login', field: 'login', icon: Clock },
         { label: 'Name', field: 'name', icon: Title },
       ]}
-      url={url}
+      url={currentHref}
       currentSort={sort}
     />
     <div className="Followers-followers">
@@ -92,6 +92,6 @@ export const Followers: React.FC<Props> = ({
       )}
       {!usersLoading && !usersCurrentIds?.length && <NoResults content="ⵁ We didnt find any user." />}
     </div>
-    <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
+    <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={currentHref} />
   </div>
 );

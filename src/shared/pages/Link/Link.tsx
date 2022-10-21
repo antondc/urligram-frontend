@@ -10,7 +10,6 @@ import UserRow from 'Components/UserRow';
 import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
 import { NoteState } from 'Modules/Notes/notes.types';
 import { UserState } from 'Modules/Users/users.types';
-import { SITE_TITLE } from 'Root/src/shared/constants';
 import { SortBy } from '@antoniodcorrea/components';
 
 import './Link.less';
@@ -20,7 +19,7 @@ interface Props {
   users: UserState[];
   bookmark: BookmarkState;
   bookmarkOrLinkTitle: string;
-  url: string;
+  currentHref: string;
   sortNotes: string;
   sortUsers: string;
   onSortNotes: (url: string) => void;
@@ -32,7 +31,7 @@ export const Link: React.FC<Props> = ({
   users,
   bookmark,
   bookmarkOrLinkTitle,
-  url,
+  currentHref,
   sortNotes,
   sortUsers,
   onSortNotes,
@@ -40,11 +39,11 @@ export const Link: React.FC<Props> = ({
 }) => (
   <>
     <Helmet>
-      <title>{`${SITE_TITLE} · ${bookmarkOrLinkTitle}`}</title>
-      <meta property="og:title" content={`${SITE_TITLE} · ${bookmarkOrLinkTitle}`} />
-      <meta property="og:url" content={url} />
-      <meta property="twitter:title" content={`${SITE_TITLE} · ${bookmarkOrLinkTitle}`} />
-      <meta property="twitter:url" content={url} />
+      <title>{bookmarkOrLinkTitle}</title>
+      <meta property="og:title" content={bookmarkOrLinkTitle} />
+      <meta property="og:url" content={currentHref} />
+      <meta property="twitter:title" content={bookmarkOrLinkTitle} />
+      <meta property="twitter:url" content={currentHref} />
     </Helmet>
     <div className="Link">
       <CardItem>
@@ -59,7 +58,7 @@ export const Link: React.FC<Props> = ({
                 { label: 'Created', field: 'createdAt', icon: Created },
                 { label: 'Updated', field: 'updatedAt', icon: Updated },
               ]}
-              href={url}
+              href={currentHref}
               currentSort={sortUsers}
               loading={false}
               onItemClick={onSortUsers}
@@ -79,7 +78,7 @@ export const Link: React.FC<Props> = ({
                 { label: 'Created', field: 'createdAt', icon: Created },
                 { label: 'Updated', field: 'updatedAt', icon: Updated },
               ]}
-              href={url}
+              href={currentHref}
               currentSort={sortNotes}
               loading={false}
               onItemClick={onSortNotes}

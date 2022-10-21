@@ -22,7 +22,7 @@ interface Props {
   bookmarksByKey: BookmarksByKey;
   bookmarksIds: number[];
   bookmarksLoading: boolean;
-  url: string;
+  currentHref: string;
   page: {
     size: number;
     offset: number;
@@ -47,7 +47,7 @@ export const UserBookmarks: React.FC<Props> = ({
   bookmarksLoading,
   page,
   totalItems,
-  url,
+  currentHref,
   sort,
   tagsSearchFormatted,
   onInputChange,
@@ -79,7 +79,7 @@ export const UserBookmarks: React.FC<Props> = ({
         { label: 'Bookmarked', field: 'timesbookmarked', icon: Bookmark },
         { label: 'Created', field: 'createdAt', icon: Clock },
       ]}
-      url={url}
+      url={currentHref}
       currentSort={sort}
     />
     <div className="UserBookmarks-bookmarks">
@@ -98,6 +98,6 @@ export const UserBookmarks: React.FC<Props> = ({
       )}
       {!bookmarksLoading && !bookmarksIds?.length && <NoResults content="ⵁ We didnt find any bookmark." />}
     </div>
-    <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
+    <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={currentHref} />
   </div>
 );

@@ -16,16 +16,16 @@ const Tags: React.FC = () => {
   const tags = useSelector(selectTagsCurrent);
   const tagsLoading = useSelector(selectTagsLoading) && isDomAvailable;
   const glossary = useSelector(selectCurrentGlossary);
-  const url = useSelector(selectCurrentFullUrl);
+  const currentHref = useSelector(selectCurrentFullUrl);
   const sort = useSelector(selectTagsMetaSort);
 
   useEffect(() => {
     dispatch(tagsLoad());
-  }, [url]);
+  }, [currentHref]);
 
   useEffect(() => () => dispatch(uiResetModalsState()), []);
 
-  return <TagsUi tags={tags} tagsLoading={tagsLoading} url={url} sort={sort} glossary={glossary} />;
+  return <TagsUi tags={tags} tagsLoading={tagsLoading} currentHref={currentHref} sort={sort} glossary={glossary} />;
 };
 
 export default Tags;

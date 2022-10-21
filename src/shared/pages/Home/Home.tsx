@@ -16,7 +16,7 @@ import { SelectValue } from '@antoniodcorrea/components';
 import './Home.less';
 
 interface Props {
-  url: string;
+  currentHref: string;
   bookmarksIds: number[];
   loading: boolean;
   page: {
@@ -36,57 +36,57 @@ interface Props {
 }
 
 export const Home: React.FC<Props> = ({
-  url,
-  bookmarksIds,
-  loading,
-  page,
-  totalItems,
-  sort,
-  tagsSearchFormatted,
-  onInputChange,
-  allTags,
-  currentQueryParamFilterTags,
-  onChange,
-}) => (
-  <>
-    <Helmet>
-      <title>{`${SITE_TITLE}`} · Home</title>
-    </Helmet>
-    <div className="Home">
-      <SubHeader
-        // title props
-        title="All Bookmarks"
-        leftIcon={<Bookmark />}
-        // select props
-        selectPlaceholder="Select tags"
-        currentQueryParamFilterTags={currentQueryParamFilterTags}
-        selectDefaultOptions={allTags.map((item) => ({ label: item.name, value: item.name }))}
-        selectOptions={[
-          ...tagsSearchFormatted,
-          ...allTags.map((item) => ({ label: item.name, value: item.name })),
-        ].filter((v, i, a) => a.findIndex((t) => t.value === v.value) === i)}
-        onSelectInputChange={onInputChange}
-        onSelectChange={onChange}
-        // sort props
-        sortLoading={loading}
-        sortByOptions={[{ label: 'Created at', field: 'createdAt', icon: Clock }]}
-        url={url}
-        currentSort={sort}
-      />
-      <div />
-      <div className="Home-bookmarks">
-        {loading ? (
-          <BookmarkRowSkeletonGroup length={bookmarksIds?.length || DEFAULT_PAGE_SIZE} />
-        ) : (
-          bookmarksIds?.map((id) => (
-            <CardItem key={id}>
-              <BookmarkRow id={id} />
-            </CardItem>
-          ))
-        )}
-        {!loading && !bookmarksIds?.length && <NoResults content="ⵁ We didnt find any bookmark." />}
-      </div>
-      <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={url} />
-    </div>
-  </>
+                                          currentHref,
+                                          bookmarksIds,
+                                          loading,
+                                          page,
+                                          totalItems,
+                                          sort,
+                                          tagsSearchFormatted,
+                                          onInputChange,
+                                          allTags,
+                                          currentQueryParamFilterTags,
+                                          onChange,
+                                      }) => (
+    <>
+        <Helmet>
+            <title>{`${SITE_TITLE}`} · Home</title>
+        </Helmet>
+        <div className="Home">
+            <SubHeader
+                // title props
+                title="All Bookmarks"
+                leftIcon={<Bookmark/>}
+                // select props
+                selectPlaceholder="Select tags"
+                currentQueryParamFilterTags={currentQueryParamFilterTags}
+                selectDefaultOptions={allTags.map((item) => ({label: item.name, value: item.name}))}
+                selectOptions={[
+                    ...tagsSearchFormatted,
+                    ...allTags.map((item) => ({label: item.name, value: item.name})),
+                ].filter((v, i, a) => a.findIndex((t) => t.value === v.value) === i)}
+                onSelectInputChange={onInputChange}
+                onSelectChange={onChange}
+                // sort props
+                sortLoading={loading}
+                sortByOptions={[{label: 'Created at', field: 'createdAt', icon: Clock}]}
+                url={currentHref}
+                currentSort={sort}
+            />
+            <div/>
+            <div className="Home-bookmarks">
+                {loading ? (
+                    <BookmarkRowSkeletonGroup length={bookmarksIds?.length || DEFAULT_PAGE_SIZE}/>
+                ) : (
+                    bookmarksIds?.map((id) => (
+                        <CardItem key={id}>
+                            <BookmarkRow id={id}/>
+                        </CardItem>
+                    ))
+                )}
+                {!loading && !bookmarksIds?.length && <NoResults content="ⵁ We didnt find any bookmark."/>}
+            </div>
+            <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={currentHref}/>
+        </div>
+    </>
 );

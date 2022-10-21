@@ -29,7 +29,7 @@ const Lists: React.FC = () => {
   const listsIdsLoading = useSelector(selectListsLoading) && isDomAvailable;
   const page = useSelector(selectCurrentRouteQueryParamPage);
   const totalItems = useSelector(selectListsTotalItems);
-  const url = useSelector(selectCurrentFullUrl);
+  const currentHref = useSelector(selectCurrentFullUrl);
   const sort = useSelector(selectListsMetaSort);
   const allTags = useSelector(selectTagsAll);
   const glossary = useSelector(selectCurrentGlossary);
@@ -74,7 +74,7 @@ const Lists: React.FC = () => {
       listsIdsLoading={listsIdsLoading}
       page={page}
       totalItems={totalItems}
-      url={url}
+      currentHref={currentHref}
       sort={sort}
       currentQueryParamFilterTags={currentQueryParamFilterTags}
       tagsSearchFormatted={tagsSearchFormatted}

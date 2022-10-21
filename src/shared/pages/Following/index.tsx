@@ -31,7 +31,7 @@ const Following: React.FC = () => {
   const user = useSelector((state: RootState) => selectUserById(state, { id: userId }));
   const page = useSelector(selectCurrentRouteQueryParamPage);
   const totalItems = useSelector(selectUsersTotalItems);
-  const url = useSelector(selectCurrentFullUrl);
+  const currentHref = useSelector(selectCurrentFullUrl);
   const sort = useSelector(selectUsersMetaSort);
   const allTags = useSelector(selectTagsAll);
   const currentQueryParamFilter = useSelector(selectCurrentRouteQueryParamFilter);
@@ -75,7 +75,7 @@ const Following: React.FC = () => {
       usersLoading={usersLoading}
       page={page}
       totalItems={totalItems}
-      url={url}
+      currentHref={currentHref}
       sort={sort}
       currentQueryParamFilterTags={currentQueryParamFilterTags}
       tagsSearchFormatted={tagsSearchFormatted}

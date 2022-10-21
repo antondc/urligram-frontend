@@ -27,7 +27,7 @@ const Home: React.FC = () => {
   const loading = useSelector(selectBookmarksLoading) && isDomAvailable;
   const page = useSelector(selectCurrentRouteQueryParamPage);
   const totalItems = useSelector(selectBookmarksTotalItems);
-  const url = useSelector(selectCurrentFullUrl);
+  const currentHref = useSelector(selectCurrentFullUrl);
   const sort = useSelector(selectBookmarksMetaSort);
   const tagsSearch = useSelector(selectTagsSearch);
   const tagsSearchFormatted = tagsSearch?.map((item) => ({ label: item.name, value: item.name })) || [];
@@ -57,7 +57,7 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     dispatch(bookmarksLoad());
-  }, [url, session?.id]);
+  }, [currentHref, session?.id]);
 
   useEffect(() => () => dispatch(uiResetModalsState()), []);
 
@@ -67,7 +67,7 @@ const Home: React.FC = () => {
       loading={loading}
       page={page}
       totalItems={totalItems}
-      url={url}
+      currentHref={currentHref}
       sort={sort}
       tagsSearchFormatted={tagsSearchFormatted}
       allTags={allTags}

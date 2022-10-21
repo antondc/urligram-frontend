@@ -49,7 +49,7 @@ const List: React.FC = () => {
   const usersInThisList = useSelector((state: RootState) => selectListUsers(state, { listId }));
   const page = useSelector(selectCurrentRouteQueryParamPage);
   const totalItems = useSelector(selectBookmarksTotalItems);
-  const url = useSelector(selectCurrentFullUrl);
+  const currentHref = useSelector(selectCurrentFullUrl);
   const sort = useSelector(selectBookmarksMetaSort);
   const sessionUserOwnsList = session?.id === list?.userId;
   const listUserOwner = useSelector((state: RootState) => selectUserById(state, { id: list?.userId }));
@@ -114,7 +114,7 @@ const List: React.FC = () => {
 
   useEffect(() => {
     !!listId && dispatch(bookmarksLoadByListId(listId));
-  }, [url, session?.id]);
+  }, [currentHref, session?.id]);
 
   useEffect(() => {
     usersInThisListIds?.length && dispatch(usersLoadByIds(usersInThisListIds));
@@ -150,7 +150,7 @@ const List: React.FC = () => {
       usersInThisList={usersInThisList}
       page={page}
       totalItems={totalItems}
-      url={url}
+      currentHref={currentHref}
       sort={sort}
       onEditClick={onEditClick}
       currentQueryParamFilterTags={currentQueryParamFilterTags}

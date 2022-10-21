@@ -30,7 +30,7 @@ const Link: React.FC = () => {
   const notes = useSelector(selectNotes);
   const users = useSelector(selectUsersCurrent);
   const currentLanguageSlug = useSelector(selectCurrentLanguageSlug);
-  const url = useSelector(selectCurrentFullUrl);
+  const currentHref = useSelector(selectCurrentFullUrl);
   const sortNotes = useSelector(selectNotesMetaSort);
   const sortUsers = useSelector(selectUsersMetaSort);
 
@@ -58,10 +58,10 @@ const Link: React.FC = () => {
   }, [linkId]);
 
   /*
-    On bookmark removal, bookmark value will be updated
-    We try to retrieve the latest bookmark for this link
-    If it doesnt exist, return to Home
-  */
+        On bookmark removal, bookmark value will be updated
+        We try to retrieve the latest bookmark for this link
+        If it doesnt exist, return to Home
+      */
   useEffect(() => {
     if (!linkId) return;
 
@@ -90,7 +90,7 @@ const Link: React.FC = () => {
       users={users}
       bookmarkOrLinkTitle={bookmarkOrLinkTitle}
       bookmark={bookmark}
-      url={url}
+      currentHref={currentHref}
       sortNotes={sortNotes}
       sortUsers={sortUsers}
       onSortNotes={onSortNotes}

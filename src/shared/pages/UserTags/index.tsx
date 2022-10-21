@@ -24,7 +24,7 @@ const UserTags: React.FC = () => {
   const tags = useSelector(selectTagsCurrent);
   const tagsLoading = useSelector(selectTagsLoading) && isDomAvailable;
 
-  const url = useSelector(selectCurrentFullUrl);
+  const currentHref = useSelector(selectCurrentFullUrl);
   const sort = useSelector(selectTagsMetaSort);
 
   useEffect(() => {
@@ -33,11 +33,11 @@ const UserTags: React.FC = () => {
 
   useEffect(() => {
     dispatch(tagsLoadByUserId(userId));
-  }, [url, session?.id]);
+  }, [currentHref, session?.id]);
 
   useEffect(() => () => dispatch(uiResetModalsState()), []);
 
-  return <TagsUi user={user} tags={tags} tagsLoading={tagsLoading} url={url} sort={sort} />;
+  return <TagsUi user={user} tags={tags} tagsLoading={tagsLoading} currentHref={currentHref} sort={sort} />;
 };
 
 export default UserTags;
