@@ -48,6 +48,7 @@ export const BookmarkRowIcons: React.FC<Partial<BookmarkRowIcons>> = ({
         'BookmarkRowIcons-actionsIconsWrapper' +
         (bookmarkActionIconsMounted ? ' BookmarkRowIcons-actionsIconsWrapper--mounted' : '')
       }
+      onClick={onMobileBookmarkActionsBackgroundClick}
     >
       <Fade
         className="BookmarkRowIcons-actionsIconsBackground"

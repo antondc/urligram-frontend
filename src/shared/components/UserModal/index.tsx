@@ -7,6 +7,7 @@ import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { switchMessageModal } from 'Modules/Ui/actions/switchMessageModal';
 import { userModalMount } from 'Modules/Ui/actions/userModalMount';
 import { userModalUnmount } from 'Modules/Ui/actions/userModalUnmount';
+import { selectUiScreenTypeIsTablet } from 'Modules/Ui/selectors/selectUiScreenTypeIsTablet';
 import { selectUiUserModalMounted } from 'Modules/Ui/selectors/selectUiUserModalMounted';
 import { UserModal as UserModalUi } from './UserModal';
 
@@ -18,6 +19,7 @@ const UserModal: React.FC = () => {
   const userModalMounted = useSelector(selectUiUserModalMounted);
   const route = useSelector(selectCurrentRoute);
   const isUserPage = route?.params?.userId === session?.id;
+  const uiScreenTypeIsTablet = useSelector(selectUiScreenTypeIsTablet);
 
   const logOutDispatched = () => {
     dispatch(sessionLogOut());
@@ -29,6 +31,12 @@ const UserModal: React.FC = () => {
 
       return;
     }
+    dispatch(userModalUnmount());
+  };
+
+  const switchUserModalOnMouseLeave = () => {
+    if (!!uiScreenTypeIsTablet) return;
+
     dispatch(userModalUnmount());
   };
 
@@ -46,6 +54,7 @@ const UserModal: React.FC = () => {
       session={session}
       sessionLogOut={logOutDispatched}
       switchUserModal={switchUserModal}
+      switchUserModalOnMouseLeave={switchUserModalOnMouseLeave}
       switchMessageModal={switchMessageModalDispatched}
     />
   );

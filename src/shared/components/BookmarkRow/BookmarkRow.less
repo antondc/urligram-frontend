@@ -21,7 +21,7 @@
   transition: background @td-normal @ease, border @td-normal @ease;
   border-radius: 8px;
 
-  @media @br-mobile {
+  @media @br-tablet {
     grid-template: unset;
     grid-template-areas:
       'title title bookmarker'
@@ -102,7 +102,7 @@
 
     .hideScrollbar;
 
-    @media @br-mobile {
+    @media @br-tablet {
       align-self: center;
       padding: 0 0 9px 24px;
       line-height: @fh-nano;
@@ -122,7 +122,7 @@
 
     .hideScrollbar;
 
-    @media @br-mobile {
+    @media @br-tablet {
       align-self: flex-end;
       padding: 0 0 0 24px;
       overflow: hidden;
@@ -132,7 +132,7 @@
   &-tag {
     margin-left: 5px;
 
-    @media @br-mobile {
+    @media @br-tablet {
       margin-left: 0;
       margin-right: 5px;
     }
@@ -156,7 +156,7 @@
     width: 18px;
     padding-bottom: 4px;
 
-    @media @br-mobile {
+    @media @br-tablet {
       position: absolute;
       justify-self: flex-end;
       width: 17px;
@@ -169,7 +169,7 @@
   &-actions {
     display: none;
 
-    @media @br-mobile {
+    @media @br-tablet {
       display: unset;
       justify-self: center;
       align-self: flex-end;
@@ -184,6 +184,8 @@
       transform: rotate(90deg);
       border-radius: 50px;
       pointer-events: none;
+
+      .hoverTransition;
 
       &--active {
         border: 2px solid @gradientColors[blue-1];
@@ -201,7 +203,7 @@
     padding-bottom: 3px;
     overflow: visible;
 
-    @media @br-mobile {
+    @media @br-tablet {
       display: none;
       grid-area: unset;
     }

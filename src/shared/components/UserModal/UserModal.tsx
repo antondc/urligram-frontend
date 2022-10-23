@@ -24,6 +24,7 @@ interface Props {
   sessionLogOut: () => void;
   switchMessageModal: () => void;
   switchUserModal: () => void;
+  switchUserModalOnMouseLeave: () => void;
 }
 
 export const UserModal: React.FC<Props> = ({
@@ -34,11 +35,12 @@ export const UserModal: React.FC<Props> = ({
   switchUserModal,
   switchMessageModal,
   routeName,
+  switchUserModalOnMouseLeave,
 }) => (
   <div
     className={'UserModal' + (userModalMounted ? ' UserModal--mounted' : '')}
     onClick={switchUserModal}
-    onMouseLeave={switchUserModal}
+    onMouseLeave={switchUserModalOnMouseLeave}
   >
     {/* <img className="UserModal-userLogo" src={session?.image?.original} /> */}
     <div className="UserModal-cross">
