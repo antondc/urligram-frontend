@@ -5,7 +5,7 @@ import A from 'Components/A';
 import Bookmarker from 'Components/Bookmarker';
 import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
 import { TagState } from 'Modules/Tags/tags.types';
-import { Space, Tag } from '@antoniodcorrea/components';
+import { Img, Space, Tag } from '@antoniodcorrea/components';
 import { BookmarkRowIcons } from './BookmarkRowIcons';
 
 import './BookmarkRow.less';
@@ -60,7 +60,7 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
   >
     <div className="BookmarkRow-title">
       <A href={bookmark?.url} onClick={bookmarkViewed} targetBlank underlined styled={false}>
-        <img className="BookmarkRow-titleIcon" src={bookmark?.favicon} />
+        <Img className="BookmarkRow-titleIcon" src={bookmark?.favicon} alt={bookmark?.title} title={bookmark?.title} />
         {bookmark?.title}
       </A>
     </div>

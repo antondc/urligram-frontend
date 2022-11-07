@@ -10,7 +10,7 @@ import NoResults from 'Components/NoResults';
 import UserForm from 'Components/UserForm';
 import { UserState } from 'Modules/Users/users.types';
 import { SITE_TITLE } from 'Root/src/shared/constants';
-import { Button, Space, Tag } from '@antoniodcorrea/components';
+import { Button, Img, Space, Tag } from '@antoniodcorrea/components';
 
 import './User.less';
 
@@ -56,7 +56,7 @@ export const User: React.FC<Props> = ({
           <div className="User-detailsItem">Created at:</div>
           <div className="User-detailsItemData">{createdAtFormatted}</div>
         </div>
-        <img className="User-image" src={user?.image?.original} />
+        <Img className="User-image" src={user?.image?.original} title={user?.name} alt={user?.name} />
       </div>
       <div className="User-lineDetails">
         <A className="User-lineDetailsLink" href={`users/${userId}/bookmarks`} frontend underlined styled={false}>

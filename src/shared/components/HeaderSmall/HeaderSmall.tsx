@@ -6,7 +6,7 @@ import User from 'Assets/svg/user.svg';
 import Logo from 'Components/Logo';
 import { GlossaryState } from 'Modules/Languages/languages.types';
 import { SessionState } from 'Modules/Session/session.types';
-import { Input, Spinner } from '@antoniodcorrea/components';
+import { Img, Input, Spinner } from '@antoniodcorrea/components';
 
 import './HeaderSmall.less';
 
@@ -40,7 +40,13 @@ export const HeaderSmall: React.FC<Props> = ({
     <Logo className="HeaderSmall-logo" loadingBeat={logoLoadingHeartBeat} loadingColors={logoLoadingColors} />
     <div className="HeaderSmall-user">
       {!sessionLoading && session?.id && (
-        <img className="HeaderSmall-userImage" src={session?.image?.original} onClick={onUserClick} />
+        <Img
+          className="HeaderSmall-userImage"
+          src={session?.image?.original}
+          alt={session?.name}
+          title={session?.name}
+          onClick={onUserClick}
+        />
       )}
       {!sessionLoading && !session?.id && <User name="User" className="HeaderSmall-userLogo" onClick={onUserClick} />}
       {sessionLoading && <Spinner className="HeaderSmall-loader" size="big" />}

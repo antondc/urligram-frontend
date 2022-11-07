@@ -117,7 +117,7 @@
     "webpack-node-externals": "^1.7.2"
   },
   "dependencies": {
-    "@antoniodcorrea/components": "^1.0.176",
+    "@antoniodcorrea/components": "^1.0.196",
     "@antoniodcorrea/utils": "^0.0.21",
     "@popperjs/core": "^2.9.2",
     "@types/qs": "^6.9.5",

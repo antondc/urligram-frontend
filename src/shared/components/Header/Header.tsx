@@ -6,7 +6,7 @@ import User from 'Assets/svg/user.svg';
 import Logo from 'Components/Logo';
 import { GlossaryState } from 'Modules/Languages/languages.types';
 import { SessionState } from 'Modules/Session/session.types';
-import { Input, Spinner } from '@antoniodcorrea/components';
+import { Img, Input, Spinner } from '@antoniodcorrea/components';
 
 import './Header.less';
 
@@ -62,7 +62,13 @@ export const Header: React.FC<Props> = ({
       <div className="Header-separator" />
       <div className="Header-user">
         {!sessionLoading && session?.id && (
-          <img className="Header-userImage" src={session?.image?.original} onClick={onUserClick} />
+          <Img
+            className="Header-userImage"
+            src={session?.image?.original}
+            title={session?.name}
+            alt={session?.name}
+            onClick={onUserClick}
+          />
         )}
         {!sessionLoading && !session?.id && <User name="User" className="Header-userLogo" onClick={onUserClick} />}
         {sessionLoading && <Spinner className="Header-loader" size="big" />}
