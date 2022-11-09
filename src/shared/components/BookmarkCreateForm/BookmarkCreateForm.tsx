@@ -3,7 +3,18 @@ import React from 'react';
 import BaseForm, { BaseFormError, BaseFormField, BaseFormLabel, BaseFormSubmit } from 'Components/BaseForm';
 import { BaseModalTitle } from 'Components/BaseModal';
 import { TagState } from 'Modules/Tags/tags.types';
-import { ArrowRight, Button, FadeInOut, Input, Select, SelectValue, Spinner, Switch, TextArea } from '@antoniodcorrea/components';
+import {
+  ArrowRight,
+  Button,
+  Earth,
+  FadeInOut,
+  Input,
+  Select,
+  SelectValue,
+  Spinner,
+  Switch,
+  TextArea,
+} from '@antoniodcorrea/components';
 import { TagValue } from '.';
 
 import './BookmarkCreateForm.less';
@@ -12,8 +23,8 @@ interface Props {
   titleValue: string;
   titleError: string;
   onChangeTitle: (e: React.FormEvent<HTMLInputElement>) => void;
-  isPrivateValue: boolean;
-  onChangeIsPrivate: (e: React.FormEvent<HTMLInputElement>) => void;
+  isPublicValue: boolean;
+  onChangeIsPublic: (e: React.FormEvent<HTMLInputElement>) => void;
   urlSubmitted: boolean;
   urlLoading: boolean;
   urlValue: string;
@@ -39,8 +50,8 @@ export const BookmarkCreateForm: React.FC<Props> = ({
   titleValue,
   titleError,
   onChangeTitle,
-  isPrivateValue,
-  onChangeIsPrivate,
+  isPublicValue,
+  onChangeIsPublic,
   urlSubmitted,
   urlLoading,
   urlValue,
@@ -116,12 +127,20 @@ export const BookmarkCreateForm: React.FC<Props> = ({
             />
           </BaseFormField>
           <BaseFormField>
-      <BaseFormLabel>Notes</BaseFormLabel>
-      <TextArea name="notes" value={notesValue} error={!!notesError} grow onChange={onChangeNotes} />
-    </BaseFormField>
+            <BaseFormLabel>Notes</BaseFormLabel>
+            <TextArea name="notes" value={notesValue} error={!!notesError} grow onChange={onChangeNotes} />
+          </BaseFormField>
           <BaseFormField>
-            <BaseFormLabel>Is Private</BaseFormLabel>
-            <Switch name="isPrivate" checked={isPrivateValue} onChange={onChangeIsPrivate} />
+            <BaseFormLabel>Is Public</BaseFormLabel>
+            <div className="BookmarkCreateForm-public">
+              <Switch name="isPublic" checked={isPublicValue} onChange={onChangeIsPublic} />
+              <Earth
+                className={
+                  'BookmarkCreateForm-iconPublic' + (!!isPublicValue ? ' BookmarkCreateForm-iconPublic--active' : '')
+                }
+                size="medium"
+              />
+            </div>
           </BaseFormField>
           <BaseFormSubmit>
             <Button

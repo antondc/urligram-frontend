@@ -3,7 +3,7 @@ import React from 'react';
 import BaseForm, { BaseFormError, BaseFormField, BaseFormLabel, BaseFormSubmit } from 'Components/BaseForm';
 import { BaseModalTitle } from 'Components/BaseModal';
 import { TagState } from 'Modules/Tags/tags.types';
-import { Button, FadeInOut, Input, Select, SelectValue, Switch, TextArea } from '@antoniodcorrea/components';
+import { Button, Earth, FadeInOut, Input, Select, SelectValue, Switch, TextArea } from '@antoniodcorrea/components';
 import { TagValue } from '.';
 
 import './BookmarkUpdateForm.less';
@@ -13,8 +13,8 @@ interface Props {
   titleValue: string;
   titleError: string;
   onChangeTitle: (e: React.FormEvent<HTMLInputElement>) => void;
-  isPrivateValue: boolean;
-  onChangeIsPrivate: (e: React.FormEvent<HTMLInputElement>) => void;
+  isPublicValue: boolean;
+  onChangeIsPublic: (e: React.FormEvent<HTMLInputElement>) => void;
   allTags: TagState[];
   tagsSearchFormatted: TagValue[];
   tagsValue: TagValue[];
@@ -36,8 +36,8 @@ export const BookmarkUpdateForm: React.FC<Props> = ({
   titleValue,
   titleError,
   onChangeTitle,
-  isPrivateValue,
-  onChangeIsPrivate,
+  isPublicValue,
+  onChangeIsPublic,
   allTags,
   tagsSearchFormatted,
   tagsValue,
@@ -100,8 +100,16 @@ export const BookmarkUpdateForm: React.FC<Props> = ({
       <TextArea name="notes" value={notesValue} error={!!notesError} grow onChange={onChangeNotes} />
     </BaseFormField>
     <BaseFormField>
-      <BaseFormLabel>Is Private</BaseFormLabel>
-      <Switch name="isPrivate" checked={isPrivateValue} onChange={onChangeIsPrivate} />
+      <BaseFormLabel>Is Public</BaseFormLabel>
+      <div className="BookmarkUpdateForm-public">
+        <Switch name="isPublic" checked={isPublicValue} onChange={onChangeIsPublic} />
+        <Earth
+          className={
+            'BookmarkUpdateForm-iconPublic' + (!!isPublicValue ? ' BookmarkUpdateForm-iconPublic--active' : '')
+          }
+          size="medium"
+        />
+      </div>
     </BaseFormField>
     <BaseFormSubmit>
       <Button

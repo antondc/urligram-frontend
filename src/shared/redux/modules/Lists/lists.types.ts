@@ -42,7 +42,7 @@ export interface ListState {
   id: number;
   name: string;
   description: string;
-  isPrivate: boolean;
+  isPublic: boolean;
   userId: string;
   image: string;
   bookmarksIds: number[];
@@ -95,7 +95,7 @@ export interface ListsLoadApiResponse {
 export interface ListCreateApiRequest {
   listName: string;
   listDescription: string;
-  listIsPrivate: boolean;
+  listIsPublic: boolean;
 }
 
 export interface ListCreateApiResponse {
@@ -125,7 +125,7 @@ export interface ListUpdateApiRequest {
   listId: number;
   listName: string;
   listDescription: string;
-  listIsPrivate: boolean;
+  listIsPublic: boolean;
 }
 
 export interface ListUpdateApiResponse {

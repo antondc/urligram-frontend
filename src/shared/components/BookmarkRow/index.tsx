@@ -1,6 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { bookmarkLoadById } from 'Modules/Bookmarks/actions/bookmarkLoadById';
+import { bookmarkUpdate } from 'Modules/Bookmarks/actions/bookmarkUpdate';
 import { selectBookmarksById } from 'Modules/Bookmarks/selectors/selectBookmarkById';
 import { selectBookmarkTagsByLinkIdAndListId } from 'Modules/Bookmarks/selectors/selectBookmarkTagsByLinkIdAndListId';
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
@@ -31,6 +33,7 @@ interface Props {
 
 const BookmarkRow: React.FC<Props> = ({ id, listId, tagsHref = '', withInfoButton = true }) => {
   const dispatch = useDispatch();
+  const [publicLoading, setPublicLoading] = useState<boolean>(false);
   const slug = useSelector(selectCurrentLanguageSlug);
   const session = useSelector(selectSession);
   const bookmark = useSelector((state: RootState) => selectBookmarksById(state, { bookmarkId: id }));
@@ -80,6 +83,28 @@ const BookmarkRow: React.FC<Props> = ({ id, listId, tagsHref = '', withInfoButto
     dispatch(bookmarkListsModalMount({ bookmarkId: bookmark?.id }));
   };
 
+  const onPublicClick = async () => {
+    setPublicLoading(true);
+    const tagsFormatted = bookmark?.tags.map((item) => ({ tag: item.name }));
+    const isPublicReverted = !bookmark?.isPublic;
+
+    try {
+      const data = {
+        bookmarkId: bookmark?.id,
+        title: bookmark?.title,
+        isPublic: isPublicReverted,
+        order: bookmark?.order,
+        tags: tagsFormatted,
+        notes: bookmark?.notes,
+      };
+
+      await dispatch(bookmarkUpdate(data));
+    } finally {
+      setPublicLoading(false);
+      await bookmarkLoadById({ bookmarkId: bookmark?.id });
+    }
+  };
+
   const bookmarkViewed = () => {
     if (!viewPending) return;
 
@@ -118,6 +143,8 @@ const BookmarkRow: React.FC<Props> = ({ id, listId, tagsHref = '', withInfoButto
       onMobileBookmarkActionsBackgroundClick={onMobileBookmarkActionsBackgroundClick}
       bookmarkViewed={bookmarkViewed}
       bookmarkIdInAnyOfMyLists={bookmarkIdInAnyOfMyLists}
+      publicLoading={publicLoading}
+      onPublicClick={onPublicClick}
     />
   );
 };

@@ -15,7 +15,7 @@ export interface BookmarkCreateApiRequest {
   bookmarkId?: number;
   title?: string;
   url?: string;
-  isPrivate?: boolean;
+  isPublic?: boolean;
   tags?: {
     tag: string;
   }[];
@@ -32,7 +32,7 @@ export const bookmarkCreate =
   ({
     title,
     url,
-    isPrivate,
+    isPublic,
     tags,
     notes,
   }: BookmarkCreateApiRequest): AppThunk<Promise<BookmarkState>, BookmarksActions | UsersActions | ListsActions> =>
@@ -48,7 +48,7 @@ export const bookmarkCreate =
       const { data: bookmarkData } = await HttpClient.post<void, BookmarkCreateApiResponse>('/users/me/bookmarks', {
         title,
         url,
-        isPrivate,
+        isPublic,
         tags,
         notes,
       });

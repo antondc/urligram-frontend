@@ -1,7 +1,7 @@
 import React from 'react';
 
 import BaseForm, { BaseFormError, BaseFormField, BaseFormLabel, BaseFormSubmit } from 'Components/BaseForm';
-import { Button, FadeInOut, Input, Switch } from '@antoniodcorrea/components';
+import { Button, Earth, FadeInOut, Input, Switch } from '@antoniodcorrea/components';
 
 import './ListForm.less';
 
@@ -13,8 +13,8 @@ interface Props {
   descriptionValue: string;
   descriptionError: string;
   onChangeDescription: (e: React.FormEvent<HTMLInputElement>) => void;
-  isPrivateValue: boolean;
-  onChangeIsPrivate: (e: React.FormEvent<HTMLInputElement>) => void;
+  isPublicValue: boolean;
+  onChangeIsPublic: (e: React.FormEvent<HTMLInputElement>) => void;
   submitDisabled: boolean;
   submitting: boolean;
   submitSuccess: boolean;
@@ -34,8 +34,8 @@ export const ListForm: React.FC<Props> = ({
   descriptionValue,
   descriptionError,
   onChangeDescription,
-  isPrivateValue,
-  onChangeIsPrivate,
+  isPublicValue,
+  onChangeIsPublic,
   submitDisabled,
   submitting,
   submitSuccess,
@@ -73,8 +73,14 @@ export const ListForm: React.FC<Props> = ({
       />
     </BaseFormField>
     <BaseFormField>
-      <BaseFormLabel>Is Private</BaseFormLabel>
-      <Switch name="isPrivate" checked={isPrivateValue} onChange={onChangeIsPrivate} />
+      <BaseFormLabel>Is Public</BaseFormLabel>
+      <div className="ListForm-public">
+        <Switch name="isPublic" checked={isPublicValue} onChange={onChangeIsPublic} />
+        <Earth
+          className={'ListForm-iconPublic' + (!!isPublicValue ? ' ListForm-iconPublic--active' : '')}
+          size="medium"
+        />
+      </div>
     </BaseFormField>
     <BaseFormSubmit>
       <Button

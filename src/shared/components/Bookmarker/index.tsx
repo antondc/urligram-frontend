@@ -43,7 +43,7 @@ const Bookmarker: React.FC<Props> = ({ className, listId, bookmarkId, onBookmark
     const data = {
       title: parentBookmark?.title,
       url: parentBookmark?.url,
-      isPrivate: parentBookmark?.isPrivate || false,
+      isPublic: !!parentBookmark?.isPublic,
       tags: bookmarkTags,
       notes: null,
     };

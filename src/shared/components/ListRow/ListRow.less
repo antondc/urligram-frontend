@@ -146,11 +146,34 @@
   }
 
   &-icon {
-    fill: @gradientColors[blue-1];
+    fill: @gradientColors[blue-4];
+    transition: fill @td-fast @ease;
+
+    &:hover {
+      fill: @gradientColors[blue-1];
+    }
+
+    &--active {
+      fill: @gradientColors[blue-1];
+
+      &:hover {
+        fill: @gradientColors[blue-4];
+      }
+    }
 
     @media @br-mobile {
       height: 20px;
       width: 20px;
+    }
+  }
+
+  &-iconPublicLoader {
+    &:after {
+      border-color: @gradientColors[blue-1];
+    }
+
+    span {
+      background: @gradientColors[blue-1];
     }
   }
 }

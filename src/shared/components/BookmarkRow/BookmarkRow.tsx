@@ -28,6 +28,8 @@ interface BookmarkRow extends BookmarkState {
   onMobileBookmarkActionsBackgroundClick: () => void;
   bookmarkViewed: () => void;
   bookmarkIdInAnyOfMyLists: boolean;
+  publicLoading: boolean;
+  onPublicClick: () => void;
 }
 
 export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
@@ -48,6 +50,8 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
   onMobileBookmarkActionsBackgroundClick,
   bookmarkViewed,
   bookmarkIdInAnyOfMyLists,
+  publicLoading,
+  onPublicClick,
 }) => (
   <div
     className={
@@ -105,6 +109,8 @@ export const BookmarkRow: React.FC<Partial<BookmarkRow>> = ({
         onEdit={onEdit}
         onListsClick={onListsClick}
         onMobileBookmarkActionsBackgroundClick={onMobileBookmarkActionsBackgroundClick}
+        publicLoading={publicLoading}
+        onPublicClick={onPublicClick}
       />
     </div>
     <div className="BookmarkRow-notification" onClick={bookmarkViewed}>

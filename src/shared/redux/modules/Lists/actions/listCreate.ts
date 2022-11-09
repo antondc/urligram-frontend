@@ -11,7 +11,7 @@ export const listCreate =
   ({
     listName,
     listDescription,
-    listIsPrivate,
+    listIsPublic,
   }: ListCreateApiRequest): AppThunk<Promise<ListState>, ListsActions | UsersActions> =>
   async (dispatch, getState): Promise<ListState> => {
     const { Lists: listsBeforeRequest } = getState();
@@ -21,7 +21,7 @@ export const listCreate =
       const { data } = await HttpClient.post<void, ListCreateApiResponse>('/lists', {
         listName,
         listDescription,
-        listIsPrivate,
+        listIsPublic,
       });
       const { Lists: listsAfterResponse, Users: usersAfterResponse, Session: sessionAfterResponse } = getState();
 

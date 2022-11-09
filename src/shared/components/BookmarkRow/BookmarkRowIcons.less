@@ -101,7 +101,8 @@
   }
 
   &-iconEdit,
-  &-iconInfo {
+  &-iconInfo,
+  &-iconPublic {
     justify-self: flex-start;
     grid-area: iconEdit;
     margin-top: 0;
@@ -147,15 +148,34 @@
     }
   }
 
-  &-iconPrivate {
+  &-iconPublic {
+    fill: @gradientColors[blue-4];
+    transition: fill @td-fast @ease;
+
     &:hover {
-      pointer-events: none;
+      fill: @gradientColors[blue-1];
+    }
+
+    &--active {
+      fill: @gradientColors[blue-1];
+
+      &:hover {
+        fill: @gradientColors[blue-4];
+      }
     }
 
     @media @br-tablet {
       align-self: unset;
-      height: 10px;
-      width: 10px;
+    }
+  }
+
+  &-iconPublicLoader {
+    &:after {
+      border-color: @gradientColors[blue-1];
+    }
+
+    span {
+      background: @gradientColors[blue-1];
     }
   }
 }

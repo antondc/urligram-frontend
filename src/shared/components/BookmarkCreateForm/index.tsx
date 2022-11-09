@@ -45,7 +45,7 @@ const BookmarkCreateForm: React.FC<Props> = ({ closeModal, setLocked }) => {
   const [urlError, setUrlError] = useState<string>(undefined);
   const [titleValue, setTitleValue] = useState<string>(undefined);
   const [titleError, setTitleError] = useState<string>(undefined);
-  const [isPrivateValue, setIsPrivateValue] = useState<boolean>(false);
+  const [isPublicValue, setIsPublicValue] = useState<boolean>(false);
   const [tagsValue, setTagsValue] = useState<TagValue[]>([]);
   const [notesValue, setNotesValue] = useState<string>(undefined);
   const [notesError, setNotesError] = useState<string>(undefined);
@@ -64,7 +64,7 @@ const BookmarkCreateForm: React.FC<Props> = ({ closeModal, setLocked }) => {
     setTitleValue(undefined);
     setTitleError(undefined);
     setTagsValue([]);
-    setIsPrivateValue(false);
+    setIsPublicValue(false);
     setSubmitSuccess(undefined);
     setSubmitError(undefined);
   };
@@ -129,10 +129,10 @@ const BookmarkCreateForm: React.FC<Props> = ({ closeModal, setLocked }) => {
     setNotesValue(value);
   };
 
-  const onChangeIsPrivate = (e: React.FormEvent<HTMLInputElement>) => {
+  const onChangeIsPublic = (e: React.FormEvent<HTMLInputElement>) => {
     const { checked } = e.currentTarget;
 
-    setIsPrivateValue(checked);
+    setIsPublicValue(checked);
     setSubmitSuccess(undefined);
     setSubmitError(undefined);
   };
@@ -152,7 +152,7 @@ const BookmarkCreateForm: React.FC<Props> = ({ closeModal, setLocked }) => {
     e.preventDefault();
 
     if (!urlSubmitted) {
-      onBlurUrl();
+      await onBlurUrl();
 
       return;
     }
@@ -163,7 +163,7 @@ const BookmarkCreateForm: React.FC<Props> = ({ closeModal, setLocked }) => {
 
     const data = {
       title: titleValue,
-      isPrivate: isPrivateValue,
+      isPublic: isPublicValue,
       url: urlValue,
       tags: transformedTags,
       notes: notesValue,
@@ -216,8 +216,8 @@ const BookmarkCreateForm: React.FC<Props> = ({ closeModal, setLocked }) => {
       titleValue={titleValue}
       titleError={titleError}
       onChangeTitle={onChangeTitle}
-      isPrivateValue={isPrivateValue}
-      onChangeIsPrivate={onChangeIsPrivate}
+      isPublicValue={isPublicValue}
+      onChangeIsPublic={onChangeIsPublic}
       urlLoading={urlLoading}
       urlValue={urlValue}
       urlError={urlError}
