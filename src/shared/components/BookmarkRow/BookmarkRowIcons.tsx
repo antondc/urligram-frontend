@@ -1,16 +1,16 @@
 import React from 'react';
 
 import Cross from 'Assets/svg/cross.svg';
+import Public from 'Assets/svg/earth.svg';
 import EditCircle from 'Assets/svg/editCircle.svg';
 import Info from 'Assets/svg/info.svg';
 import List from 'Assets/svg/list.svg';
-import Private from 'Assets/svg/private.svg';
 import A from 'Components/A';
 import Bookmarker from 'Components/Bookmarker';
 import BookmarkListsPopOverOrSheet from 'Components/BookmarkListsPopOverOrSheet';
 import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
 import { TagState } from 'Modules/Tags/tags.types';
-import { Fade } from '@antoniodcorrea/components';
+import { Fade, FadeInOut, Spinner } from '@antoniodcorrea/components';
 
 import './BookmarkRowIcons.less';
 
@@ -28,6 +28,8 @@ interface BookmarkRowIcons extends BookmarkState {
   onEdit: () => void;
   onListsClick: () => void;
   onMobileBookmarkActionsBackgroundClick: () => void;
+  publicLoading: boolean;
+  onPublicClick: () => void;
 }
 
 export const BookmarkRowIcons: React.FC<Partial<BookmarkRowIcons>> = ({
@@ -41,6 +43,8 @@ export const BookmarkRowIcons: React.FC<Partial<BookmarkRowIcons>> = ({
   onEdit,
   onListsClick,
   onMobileBookmarkActionsBackgroundClick,
+  publicLoading,
+  onPublicClick,
 }) => (
   <div className="BookmarkRowIcons" data-test-id="BookmarkRowIcons">
     <div
@@ -71,8 +75,20 @@ export const BookmarkRowIcons: React.FC<Partial<BookmarkRowIcons>> = ({
             <Info className="BookmarkRowIcons-icon BookmarkRowIcons-iconInfo" />
           </A>
         )}
-        {!uiScreenTypeIsMobile && !!bookmark?.isPrivate && (
-          <Private className="BookmarkRowIcons-icon BookmarkRowIcons-iconPrivate" />
+        {sessionUserBookmarkedLink && (
+          <FadeInOut valueToUpdate={publicLoading} appear speed="fast">
+            {publicLoading ? (
+              <Spinner className="BookmarkRowIcons-icon BookmarkRowIcons-iconPublic BookmarkRowIcons-iconPublicLoader" />
+            ) : (
+              <Public
+                className={
+                  'BookmarkRowIcons-icon BookmarkRowIcons-iconPublic' +
+                  (!!bookmark?.isPublic ? ' BookmarkRowIcons-iconPublic--active' : '')
+                }
+                onClick={onPublicClick}
+              />
+            )}
+          </FadeInOut>
         )}
         {!!sessionUserBookmarkedLink && (
           <EditCircle className="BookmarkRowIcons-icon BookmarkRowIcons-iconEdit" onClick={onEdit} />

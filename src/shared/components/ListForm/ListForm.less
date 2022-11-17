@@ -10,4 +10,19 @@
       background: @gradientColors[blue-2];
     }
   }
+
+  &-public {
+    display: flex;
+    align-items: center;
+  }
+
+  &-iconPublic {
+    margin-left: 10px;
+    fill: @gradientColors[blue-4];
+    transition: fill @td-fast @ease;
+
+    &--active {
+      fill: @gradientColors[blue-1];
+    }
+  }
 }

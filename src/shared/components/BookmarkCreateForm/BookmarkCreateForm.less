@@ -26,4 +26,19 @@
   &-loader {
     margin-left: 15px;
   }
+
+  &-public {
+    display: flex;
+    align-items: center;
+  }
+
+  &-iconPublic {
+    margin-left: 10px;
+    fill: @gradientColors[blue-4];
+    transition: fill @td-fast @ease;
+
+    &--active {
+      fill: @gradientColors[blue-1];
+    }
+  }
 }

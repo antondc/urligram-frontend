@@ -34,7 +34,7 @@ const ListForm: React.FC<Props> = ({ closeModal, setLocked }) => {
   const [nameError, setNameError] = useState<string>(undefined);
   const [descriptionValue, setDescriptionValue] = useState<string>(list?.description);
   const [descriptionError, setDescriptionError] = useState<string>(undefined);
-  const [isPrivateValue, setIsPrivateValue] = useState<boolean>(list?.isPrivate);
+  const [isPublicValue, setIsPublicValue] = useState<boolean>(list?.isPublic);
   const [submitting, setSubmitting] = useState<boolean>(undefined);
   const [removing, setRemoving] = useState<boolean>(undefined);
   const [submitSuccess, setSubmitSuccess] = useState<boolean>(undefined);
@@ -60,10 +60,10 @@ const ListForm: React.FC<Props> = ({ closeModal, setLocked }) => {
     setSubmitError(undefined);
   };
 
-  const onChangeIsPrivate = (e: React.FormEvent<HTMLInputElement>) => {
+  const onChangeIsPublic = (e: React.FormEvent<HTMLInputElement>) => {
     const { checked } = e.currentTarget;
 
-    setIsPrivateValue(checked);
+    setIsPublicValue(checked);
     setSubmitSuccess(undefined);
     setSubmitError(undefined);
   };
@@ -96,7 +96,7 @@ const ListForm: React.FC<Props> = ({ closeModal, setLocked }) => {
         listId: list?.id,
         listName: nameValue,
         listDescription: descriptionValue,
-        listIsPrivate: isPrivateValue,
+        listIsPublic: isPublicValue,
       };
 
       const response = !!list?.id ? await dispatch(listUpdate(data)) : await dispatch(listCreate(data));
@@ -170,8 +170,8 @@ const ListForm: React.FC<Props> = ({ closeModal, setLocked }) => {
       descriptionValue={descriptionValue}
       descriptionError={descriptionError}
       onChangeDescription={onChangeDescription}
-      isPrivateValue={isPrivateValue}
-      onChangeIsPrivate={onChangeIsPrivate}
+      isPublicValue={isPublicValue}
+      onChangeIsPublic={onChangeIsPublic}
       onSubmit={onSubmit}
       submitDisabled={submitDisabled}
       submitting={submitting}

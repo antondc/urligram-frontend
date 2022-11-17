@@ -67,7 +67,7 @@ const BookmarkLists: React.FC<Props> = ({ bookmarkId }) => {
     const data = {
       listName: listInputName,
       listDescription: '',
-      listIsPrivate: false,
+      listIsPublic: false,
     };
 
     await dispatch(listCreate(data));

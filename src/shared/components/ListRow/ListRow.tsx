@@ -4,16 +4,29 @@ import List from 'Assets/svg/list.svg';
 import A from 'Components/A';
 import { ListState } from 'Modules/Lists/lists.types';
 import { SessionState } from 'Modules/Session/session.types';
-import { Private, Tag } from '@antoniodcorrea/components';
+import { Earth, FadeInOut, Spinner, Tag } from '@antoniodcorrea/components';
 
 import './ListRow.less';
 
 interface Props extends Partial<ListState> {
   session?: SessionState;
   currentPathname?: string;
+  renderIsPublic: boolean;
+  publicLoading: boolean;
+  onPublicClick: () => void;
 }
 
-export const ListRow: React.FC<Props> = ({ id, name, tags, description, isPrivate, currentPathname }) => (
+export const ListRow: React.FC<Props> = ({
+  id,
+  name,
+  tags,
+  description,
+  isPublic,
+  currentPathname,
+  renderIsPublic,
+  publicLoading,
+  onPublicClick,
+}) => (
   <div className="ListRow" data-test-id="ListRow" key={id}>
     <div className="ListRow-title">
       <A href={`/lists/${id}`} frontend styled={false}>
@@ -35,6 +48,16 @@ export const ListRow: React.FC<Props> = ({ id, name, tags, description, isPrivat
         </A>
       ))}
     </div>
-    <div className="ListRow-icons">{isPrivate && <Private className="ListRow-icon" />}</div>
+    <div className="ListRow-icons">
+      {renderIsPublic && (
+        <FadeInOut valueToUpdate={publicLoading} appear speed="fast">
+          {publicLoading ? (
+            <Spinner className="ListRow-icon ListRow-iconPublicLoader" />
+          ) : (
+            <Earth className={'ListRow-icon' + (!!isPublic ? ' ListRow-icon--active' : '')} onClick={onPublicClick} />
+          )}
+        </FadeInOut>
+      )}
+    </div>
   </div>
 );

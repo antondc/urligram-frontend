@@ -54,7 +54,7 @@ export interface BookmarkState {
   updatedAt: number;
   users: string[];
   bookmarksRelated?: BookmarkRelated[];
-  isPrivate: boolean;
+  isPublic: boolean;
   tags: {
     id: number;
     name: string;

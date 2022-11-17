@@ -30,6 +30,8 @@ const props = {
   onPrivateSwitch: () => {},
   onFollowList: () => {},
   onUnfollowList: () => {},
+  publicLoading: false,
+  onPublicClick: () => {},
   tags: [
     {
       id: 1,
@@ -105,6 +107,7 @@ const props = {
     },
   ],
   iconActionPending: true,
+  renderIsPublic: true,
 };
 
 const knobs = {

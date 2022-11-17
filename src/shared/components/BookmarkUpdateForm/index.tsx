@@ -38,7 +38,7 @@ const BookmarkUpdateForm: React.FC<Props> = ({ closeModal, setLocked }) => {
   const bookmark = useSelector((state: RootState) => selectBookmarksById(state, { bookmarkId }));
   const [titleValue, setTitleValue] = useState<string>(undefined);
   const [titleError, setTitleError] = useState<string>(undefined);
-  const [isPrivateValue, setIsPrivateValue] = useState<boolean>(false);
+  const [isPublicValue, setIsPublicValue] = useState<boolean>(false);
   const [tagsValue, setTagsValue] = useState<TagValue[]>([]);
   const [notesValue, setNotesValue] = useState<string>(undefined);
   const [notesError, setNotesError] = useState<string>(undefined);
@@ -56,9 +56,9 @@ const BookmarkUpdateForm: React.FC<Props> = ({ closeModal, setLocked }) => {
     setSubmitError(undefined);
   };
 
-  const onChangeIsPrivate = (e: React.FormEvent<HTMLInputElement>) => {
+  const onChangeIsPublic = (e: React.FormEvent<HTMLInputElement>) => {
     const { checked } = e.currentTarget;
-    setIsPrivateValue(checked);
+    setIsPublicValue(checked);
     setSubmitSuccess(undefined);
     setSubmitError(undefined);
   };
@@ -101,7 +101,7 @@ const BookmarkUpdateForm: React.FC<Props> = ({ closeModal, setLocked }) => {
       const data = {
         bookmarkId: bookmarkId,
         title: titleValue,
-        isPrivate: isPrivateValue,
+        isPublic: isPublicValue,
         order: 1,
         tags: transformedTags,
         notes: notesValue,
@@ -133,7 +133,7 @@ const BookmarkUpdateForm: React.FC<Props> = ({ closeModal, setLocked }) => {
     setSubmitError(undefined);
     setTitleError(undefined);
     setTitleValue(bookmark?.title);
-    setIsPrivateValue(bookmark?.isPrivate);
+    setIsPublicValue(bookmark?.isPublic);
     setTagsValue(bookmark?.tags?.map((item) => ({ label: item.name, value: item.name })));
     setNotesValue(bookmark?.notes);
   }, []);
@@ -158,8 +158,8 @@ const BookmarkUpdateForm: React.FC<Props> = ({ closeModal, setLocked }) => {
       titleValue={titleValue}
       titleError={titleError}
       onChangeTitle={onChangeTitle}
-      isPrivateValue={isPrivateValue}
-      onChangeIsPrivate={onChangeIsPrivate}
+      isPublicValue={isPublicValue}
+      onChangeIsPublic={onChangeIsPublic}
       allTags={allTags}
       tagsSearchFormatted={tagsSearchFormatted}
       tagsValue={tagsValue}

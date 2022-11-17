@@ -9,7 +9,7 @@ interface BookmarkUpdateApiRequest {
   bookmarkId: number;
   order: number;
   title: string;
-  isPrivate: boolean;
+  isPublic: boolean;
   tags: {
     tag: string;
   }[];
@@ -27,7 +27,7 @@ export const bookmarkUpdate =
     bookmarkId,
     order,
     title,
-    isPrivate,
+    isPublic,
     tags,
     notes,
   }: BookmarkUpdateApiRequest): AppThunk<Promise<BookmarkState>, BookmarksActions> =>
@@ -41,7 +41,7 @@ export const bookmarkUpdate =
         {
           order,
           title,
-          isPrivate,
+          isPublic,
           tags,
           notes,
         }
