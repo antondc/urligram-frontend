@@ -85,7 +85,7 @@ const BookmarkRow: React.FC<Props> = ({ id, listId, tagsHref = '', withInfoButto
 
   const onPublicClick = async () => {
     setPublicLoading(true);
-    const tagsFormatted = bookmark?.tags.map((item) => ({ tag: item.name }));
+    const tagsFormatted = bookmark?.tags?.map((item) => ({ tag: item.name })) || [];
     const isPublicReverted = !bookmark?.isPublic;
 
     try {
