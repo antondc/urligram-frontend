@@ -17,7 +17,7 @@
     "API_URL": "https://www.api.urligram.com/api/v1/",
     "DOMAIN": "urligram.com"
   },
-  "FIREFOX_EXTENSION_URL": "https://www.api.urligram.com/media/docs/urligram_browser_extension-1.0-fx.xpi",
+  "FIREFOX_EXTENSION_URL": "https://addons.mozilla.org/es/firefox/addon/urligram",
   "CHROME_EXTENSION_URL": "https://chrome.google.com/webstore/detail/urligram-browser-extensio/cgpejoiplmnopcicekfdhepaiihgcjed",
   "ENABLE_ISOMORPHISM": true,
   "MEDIA": "media",

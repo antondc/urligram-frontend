@@ -19,7 +19,7 @@ const Extension: React.FC = () => {
 
       return;
     }
-    window.location.href = FIREFOX_EXTENSION_URL;
+    window.open(FIREFOX_EXTENSION_URL, '_blank');
   };
 
   const installChromeExtension = () => {
