@@ -14,8 +14,8 @@ export const Extension: React.FC<Props> = ({ appName }) => (
     <h4 className="Docs-h4">Why do I need a browser extension?</h4>
     <p className="Docs-paragraph">
       You can access all functionalities of Urligram via its website. We offer as well a browser extension to save
-      bookmarks while browsing. By installing it you will be able to save a page without having to leave it in order to
-      save the in {appName}.
+      bookmarks while browsing. By installing it you will be able to save a page in your account on {appName} along with
+      tags and lists, without leaving the current page.
     </p>
     <h4 className="Docs-h4">How do I install the extension?</h4>
     <p>
