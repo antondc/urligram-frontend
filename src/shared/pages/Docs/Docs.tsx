@@ -27,7 +27,7 @@ export const Docs: React.FC<Props> = ({ domain, contactEmail, appName, navigateT
       </div>
       <div className="Docs-main">
         <FAQ navigateToSection={navigateToSection} />
-        <Extension />
+        <Extension appName={appName} />
         <Legal domain={domain} contactEmail={contactEmail} appName={appName} />
         <Glossary />
         <About domain={domain} contactEmail={contactEmail} appName={appName} />

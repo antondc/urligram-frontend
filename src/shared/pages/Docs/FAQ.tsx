@@ -26,11 +26,11 @@ export const FAQ: React.FC<Props> = ({ navigateToSection }) => (
       functionalities that you would benefit from, as private bookmarks or lists.
     </p>
     <p className="Docs-paragraph">
-      There is also an extension to save bookmarks while browsing. Please see{' '}
+      There is also an extension to save bookmarks while browsing. Please see the{' '}
       <span className="Docs-link" onClick={(e) => navigateToSection(e, 'extension')}>
         Extension
       </span>{' '}
-      section in this page .
+      section in this same page.
     </p>
     <h4 className="Docs-h4">Why shall I use it?</h4>
     <p className="Docs-paragraph">
@@ -76,8 +76,8 @@ export const FAQ: React.FC<Props> = ({ navigateToSection }) => (
     <h4 className="Docs-h4">How does privacy work in Urligram?</h4>
     <p className="Docs-paragraph">Yo are able to have completely private accounts.</p>
     <p className="Docs-paragraph">
-      Bookmarks can be public or private. Private bookmarks are only visible to you, and don’t appear on any of the
-      pages for other users.
+      Bookmarks are private by default. Private bookmarks are only visible to you, and don’t appear on any of the pages
+      for other users. Also you can make some bookmarks public so other users may find them.
     </p>
     <h4 className="Docs-h4">What about the data security in Urligram?</h4>
     <p className="Docs-paragraph">
