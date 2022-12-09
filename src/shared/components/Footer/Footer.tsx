@@ -48,7 +48,7 @@ export const Footer: React.FC<Props> = ({
       )}
       <A
         className="Footer-link"
-        href={Routes.Extension.route}
+        href={`${Routes.Docs.route}#extension`}
         frontend
         underlined
         active={currentRoute?.name === Routes.Extension.name}
@@ -57,7 +57,7 @@ export const Footer: React.FC<Props> = ({
       </A>
       <A
         className="Footer-link"
-        href={Routes.Docs.route}
+        href={`${Routes.Docs.route}#faq`}
         frontend
         underlined
         active={currentRoute?.name === Routes.Docs.name}

@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
+import { useScrollToSection } from 'Hooks/useScrollToSection';
 import { selectUiSidebarleftState } from 'Modules/Ui/selectors/selectUiSidebarleftState';
 import { DELAY_MEDIUM_MS } from 'Root/src/shared/constants';
+import { Routes } from 'Router/routes';
 import history from 'Services/History';
 import { throttle } from '@antoniodcorrea/utils';
 import { listItems } from './listItems';
@@ -10,23 +12,12 @@ import { SidebarLeftDocs as SidebarLeftDocsUi } from './SidebarLeftDocs';
 
 const SidebarLeftDocs: React.FC = () => {
   const [hash, setHash] = useState<string>(undefined);
-
+  const { scrollToSection } = useScrollToSection();
   const sidebarLeftClosed = useSelector(selectUiSidebarleftState);
-
-  const navigateToSection = (hash: string) => {
-    const element = document.getElementById(hash);
-
-    if (!element) return;
-
-    const yOffset = -90;
-    const yDistance = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-
-    window.scrollTo({ top: yDistance, behavior: 'smooth' });
-  };
 
   const onAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, hash: string) => {
     e.preventDefault();
-    navigateToSection(hash);
+    scrollToSection(hash);
   };
 
   // Throttle this function to avoid overhead on window
@@ -55,7 +46,7 @@ const SidebarLeftDocs: React.FC = () => {
     const lastHash = hashesInViewport[hashesInViewport.length - 1];
 
     setHash(lastHash);
-    history.push(`/docs#${lastHash}`);
+    history.push(`${Routes.Docs.route}#${lastHash}`);
   }, DELAY_MEDIUM_MS);
 
   useEffect(() => {
@@ -66,11 +57,11 @@ const SidebarLeftDocs: React.FC = () => {
 
   useEffect(() => {
     const cleanedHash = window.location?.hash?.replace('#', '');
+
     setHash(cleanedHash);
+    if (!cleanedHash) return;
 
-    if (!hash) return;
-
-    navigateToSection(cleanedHash);
+    scrollToSection(cleanedHash);
   }, []);
 
   return (

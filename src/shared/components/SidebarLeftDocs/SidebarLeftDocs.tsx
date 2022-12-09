@@ -1,6 +1,7 @@
 import React from 'react';
 
 import A from 'Components/A';
+import { Routes } from 'Router/routes';
 import { ListItem } from './listItems';
 
 import './SidebarLeftDocs.less';
@@ -26,7 +27,7 @@ export const SidebarLeftDocs: React.FC<Props> = ({ hash, sidebarLeftClosed, onAn
         return (
           <React.Fragment key={item.hash}>
             <A
-              href={`/docs#${item.hash}`}
+              href={`${Routes.Docs.route}#${item.hash}`}
               className={'SidebarLeftDocs-item' + (isActive ? ' SidebarLeftDocs-item--active' : '')}
               key={item.hash}
               onClick={(e) => onAnchorClick(e, item.hash)}
@@ -46,7 +47,7 @@ export const SidebarLeftDocs: React.FC<Props> = ({ hash, sidebarLeftClosed, onAn
                         'SidebarLeftDocs-item SidebarLeftDocs-subItem' +
                         (subItemIsActive ? ' SidebarLeftDocs-item--active' : '')
                       }
-                      href={`/docs#${subItem.hash}`}
+                      href={`${Routes.Docs.route}#${subItem.hash}`}
                       key={subItem.hash}
                       onClick={(e) => onAnchorClick(e, subItem.hash)}
                       frontend

@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Browser from 'Assets/svg/browser.svg';
 import FAQ from 'Assets/svg/faq.svg';
 import Glossary from 'Assets/svg/glossary.svg';
 import Info from 'Assets/svg/info.svg';
@@ -27,6 +28,14 @@ export const listItems: ListItem[] = [
     hashActive: ['faq'],
     hashOpened: [],
     icon: (props): React.ReactElement => <FAQ {...props} />,
+    subItems: [],
+  },
+  {
+    text: 'Extension',
+    hash: 'extension',
+    hashActive: ['extension'],
+    hashOpened: [],
+    icon: (props): React.ReactElement => <Browser {...props} />,
     subItems: [],
   },
   {
@@ -89,11 +98,6 @@ export const listItems: ListItem[] = [
         text: 'Follower',
         hash: 'follower',
         hashActive: 'follower',
-      },
-      {
-        text: 'Extension',
-        hash: 'extension',
-        hashActive: 'extension',
       },
     ],
   },
