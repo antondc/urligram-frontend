@@ -13,23 +13,22 @@ export const Extension: React.FC<Props> = ({ appName }) => (
     <h2 className="Docs-h2">Browser extension</h2>
     <h4 className="Docs-h4">Why do I need a browser extension?</h4>
     <p className="Docs-paragraph">
-      You can access all functionalities of Urligram via its website. We offer as well a browser extension to save
-      bookmarks while browsing. By installing it you will be able to save a page in your account on {appName} along with
-      tags and lists, without leaving the current page.
+      You can access all functionalities of Urligram via its website, but we offer as well a browser extension to save
+      links of websites while browsing. By installing it you will be able to save a page in your account on {appName}{' '}
+      along with tags and lists, all without leaving the current page.
     </p>
     <h4 className="Docs-h4">How do I install the extension?</h4>
     <p>
-      Currently we have official extensions for{' '}
+      First, visit the appropriate official store of your browser by clicking the link for{' '}
       <a className="Docs-link" href={FIREFOX_EXTENSION_URL} target="_blank" rel="noreferrer">
         Firefox
       </a>{' '}
-      <Firefox className="Docs-iconFirefox" /> and{' '}
+      <Firefox className="Docs-iconFirefox" /> or{' '}
       <a className="Docs-link" href={CHROME_EXTENSION_URL} target="_blank" rel="noreferrer">
         Chrome
       </a>{' '}
-      <Chrome className="Docs-iconChrome" />. Just click and you will be redirected to the official site of your
-      browser, where you can install it. Remember that you will need to be logged in in order to save bookmarks into
-      your account.
+      <Chrome className="Docs-iconChrome" />. There you will be able to install it following the store instructions.
+      Remember that you will need to be logged in in order to save bookmarks into your account.
     </p>
     <h4 className="Docs-h4">Does the extension share data with third parties?</h4>
     <p>No, {appName} does not share any data with other companies.</p>
