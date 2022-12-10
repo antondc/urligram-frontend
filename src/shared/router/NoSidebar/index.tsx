@@ -9,8 +9,6 @@ import Header from 'Components/Header';
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
 import { selectPathWithoutLanguageParam } from 'Modules/Routes/selectors/selectPathWithoutLanguageParam';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
-import Extension from 'Pages/Extension';
-import FAQ from 'Pages/FAQ';
 import ForgotPassword from 'Pages/ForgotPassword';
 import Login from 'Pages/Login';
 import NotFound from 'Pages/NotFound';
@@ -49,8 +47,6 @@ const NoSidebar: React.FC<Props> = ({ loggedIn, location, defaultCurrentSlug, pa
           <Route exact={Routes.SignUp.exact} path={Routes.SignUp.path} component={SignUp} />
           <Route exact={Routes.ForgotPassword.exact} path={Routes.ForgotPassword.path} component={ForgotPassword} />
           <Route exact={Routes.ResetPassword.exact} path={Routes.ResetPassword.path} component={ResetPassword} />
-          <Route exact={Routes.FAQ.exact} path={Routes.FAQ.path} component={FAQ} />
-          <Route exact={Routes.Extension.exact} path={Routes.Extension.path} component={Extension} />
           <Route
             exact={Routes.SignUpConfirmation.exact}
             path={Routes.SignUpConfirmation.path}

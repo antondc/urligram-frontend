@@ -51,7 +51,7 @@ export const Footer: React.FC<Props> = ({
         href={`${Routes.Docs.route}#extension`}
         frontend
         underlined
-        active={currentRoute?.name === Routes.Extension.name}
+        active={currentRoute?.name === `${Routes.Docs.route}#extension`}
       >
         Extension
       </A>

@@ -43,8 +43,6 @@ interface RoutesInterface {
   ForgotPassword: Route;
   ResetPassword: Route;
   WelcomeUrligram: Route;
-  FAQ: Route;
-  Extension: Route;
   ServerError: Route;
   NotFound: Route;
 }
@@ -172,28 +170,6 @@ export const Routes: RoutesInterface = {
     initialDataLoadersVisitor: [initialListsLoader],
     initialDataLoadersSession: [initialListsLoader],
     layout: 'withLeftSidebar',
-  },
-
-  Extension: {
-    name: 'Extension',
-    path: '/:lang([a-z]{2})?/extension',
-    route: '/extension',
-    exact: true,
-    auth: false,
-    initialDataLoadersVisitor: [],
-    initialDataLoadersSession: [],
-    layout: 'fullPage',
-  },
-
-  FAQ: {
-    name: 'FAQ',
-    path: '/:lang([a-z]{2})?/faq',
-    route: '/faq',
-    exact: true,
-    auth: false,
-    initialDataLoadersVisitor: [],
-    initialDataLoadersSession: [],
-    layout: 'fullPage',
   },
 
   Login: {

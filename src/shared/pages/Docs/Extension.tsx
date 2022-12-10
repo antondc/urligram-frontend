@@ -28,7 +28,8 @@ export const Extension: React.FC<Props> = ({ appName }) => (
         Chrome
       </a>{' '}
       <Chrome className="Docs-iconChrome" />. Just click and you will be redirected to the official site of your
-      browser, where you can install it.
+      browser, where you can install it. Remember that you will need to be logged in in order to save bookmarks into
+      your account.
     </p>
     <h4 className="Docs-h4">Does the extension share data with third parties?</h4>
     <p>No, {appName} does not share any data with other companies.</p>
