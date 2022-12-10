@@ -70,8 +70,32 @@ const LoginForm: React.FC<Props> = ({ setLocked }) => {
     setSubmitError(undefined);
   };
 
+  const didUserAcceptCookie = (): boolean => {
+    const cookiesWrapper = new CookiesWrapper();
+    const cookiePolicyCookie = cookiesWrapper.getCookie(COOKIE_POLICY_COOKIE);
+
+    if (!cookiePolicyCookie || cookiePolicyCookie === '0') {
+      const confirmed = confirm(COOKIE_POLICY_TEXT);
+
+      if (confirmed) {
+        cookiesWrapper.removeCookie(COOKIE_POLICY_COOKIE);
+      }
+
+      dispatch(switchLoginModal(false));
+
+      return false;
+    }
+
+    return true;
+  };
+
   const onSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
+
+    const userAcceptedCookie = didUserAcceptCookie();
+    if (!userAcceptedCookie) {
+      return;
+    }
 
     setSubmitting(true);
     if (setLocked) setLocked(true);
@@ -88,21 +112,6 @@ const LoginForm: React.FC<Props> = ({ setLocked }) => {
       if (setLocked) setLocked(false);
     }
   };
-
-  useEffect(() => {
-    const cookiesWrapper = new CookiesWrapper();
-    const cookiePolicyCookie = cookiesWrapper.getCookie(COOKIE_POLICY_COOKIE);
-
-    if (!cookiePolicyCookie || cookiePolicyCookie === '0') {
-      const confirmed = confirm(COOKIE_POLICY_TEXT);
-
-      if (confirmed) {
-        cookiesWrapper.removeCookie(COOKIE_POLICY_COOKIE);
-      }
-
-      dispatch(switchLoginModal(false));
-    }
-  }, []);
 
   useEffect(() => {
     setSubmitError(undefined);

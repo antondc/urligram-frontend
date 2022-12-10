@@ -4,6 +4,7 @@ import { Redirect } from 'react-router';
 import { Route, Switch } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 
+import CookiesBanner from 'Components/CookiesBanner';
 import Footer from 'Components/Footer';
 import Header from 'Components/Header';
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
@@ -33,6 +34,7 @@ const NoSidebar: React.FC<Props> = ({ loggedIn, location, defaultCurrentSlug, pa
   <div className="NoSidebar">
     <div className="NoSidebar-noSidebarBackground" />
     <Header />
+    <CookiesBanner />
 
     <div className="NoSidebar-content">
       <FadeInOut className="NoSidebar-content-content" valueToUpdate={pathWithoutLanguageParam} speed="fastest" appear>
