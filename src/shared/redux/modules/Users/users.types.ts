@@ -1,4 +1,5 @@
 import { SessionState } from 'Modules/Session/session.types';
+import { ListUserRole, ListUserStatus } from '../Lists/lists.types';
 
 export const USERS_LOAD_REQUEST = 'USERS_LOAD_REQUEST';
 export const USERS_LOAD_SUCCEED = 'USERS_LOAD_SUCCEED';
@@ -17,6 +18,23 @@ export const USER_DELETE_SUCCEED = 'USER_DELETE_SUCCEED';
 export const USER_DELETE_FAILURE = 'USER_DELETE_FAILURE';
 export const USER_UPDATE_DETAILS = 'USER_UPDATE_DETAILS';
 
+export enum UserAccountType {
+  Basic = 'basic',
+  Advanced = 'advanced',
+}
+
+export enum UserLevel {
+  Admin = 'admin',
+  User = 'user',
+}
+
+export const enum UserStatus {
+  Inactive = 'inactive',
+  Active = 'active',
+  Disabled = 'disabled',
+  Removed = 'removed',
+}
+
 export interface UserState {
   id: string;
   name: string;
@@ -25,9 +43,10 @@ export interface UserState {
     w200h200?: string;
     w500h500?: string;
   };
-  level: string;
+  accountType: UserAccountType;
+  level: UserLevel;
   email: string;
-  status: string;
+  status: UserStatus;
   statement: string;
   location: string;
   order: number;
@@ -37,8 +56,8 @@ export interface UserState {
   following?: string[];
   lists?: {
     id: number;
-    userRole: 'reader' | 'editor' | 'admin';
-    userListStatus?: 'pending' | 'active';
+    userRole: ListUserRole;
+    userListStatus?: ListUserStatus;
   }[];
   bookmarksIds?: number[];
   tags?: {

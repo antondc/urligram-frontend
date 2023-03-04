@@ -1,4 +1,10 @@
-import { ListCreateApiRequest, ListCreateApiResponse, ListsActions, ListState } from 'Modules/Lists/lists.types';
+import {
+  ListCreateApiRequest,
+  ListCreateApiResponse,
+  ListsActions,
+  ListState,
+  ListUserRole,
+} from 'Modules/Lists/lists.types';
 import HttpClient from 'Services/HttpClient';
 import { AppThunk } from '../../..';
 import { usersReceive } from '../../Users/actions/usersReceive';
@@ -48,7 +54,7 @@ export const listCreate =
                 ...(usersAfterResponse.byKey[sessionAfterResponse?.id]?.lists || []),
                 {
                   id: data.attributes.id,
-                  userRole: 'admin',
+                  userRole: ListUserRole.Admin,
                 },
               ],
             },

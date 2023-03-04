@@ -1,4 +1,4 @@
 import { RootState } from 'Modules/rootType';
-import { SessionStatus } from '../session.types';
+import { UserStatus } from '../../Users/users.types';
 
-export const selectSessionStatus = (state: RootState): SessionStatus => state.Session.status;
+export const selectSessionStatus = (state: RootState): UserStatus => state.Session.status;

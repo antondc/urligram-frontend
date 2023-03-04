@@ -6,7 +6,7 @@ import { sessionSignUp } from 'Modules/Session/actions/sessionSignUp';
 import { selectSessionErrorLast } from 'Modules/Session/selectors/selectSessionErrorLast';
 import { selectSessionLoading } from 'Modules/Session/selectors/selectSessionLoading';
 import { selectSessionStatus } from 'Modules/Session/selectors/selectSessionStatus';
-import { SESSION_STATUS_INACTIVE } from 'Modules/Session/session.types';
+import { UserStatus } from 'Modules/Users/users.types';
 import { DELAY_MEDIUM_MS, EVENT_BLUR } from 'Root/src/shared/constants';
 import { testStringHasWhiteSpaces, validateEmailAddress, validatePassword } from '@antoniodcorrea/utils';
 import { SignUp as SignUpUi } from './SignUp';
@@ -17,7 +17,7 @@ const SignUp: React.FC = () => {
   const dispatch = useDispatch();
   const sessionError = useSelector(selectSessionErrorLast);
   const sessionStatus = useSelector(selectSessionStatus);
-  const sessionStatusInactive = sessionStatus === SESSION_STATUS_INACTIVE;
+  const sessionStatusInactive = sessionStatus === UserStatus.Inactive;
   const sessionLoading = useSelector(selectSessionLoading);
   const [emailValue, setEmailValue] = useState<string>(undefined);
   const [emailError, setEmailError] = useState<string>(undefined);

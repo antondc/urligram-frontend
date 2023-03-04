@@ -1,5 +1,5 @@
 import HttpClient from 'Services/HttpClient';
-import { serializerFromArrayToByKey } from '@antoniodcorrea/utils';
+import { noop, serializerFromArrayToByKey } from '@antoniodcorrea/utils';
 import { UsersLoadApiItemResponse, UsersLoadApiResponse, UsersState, UserState } from './users.types';
 
 export const initialUsersLoader = async (): Promise<{ Users: UsersState }> => {
@@ -21,6 +21,6 @@ export const initialUsersLoader = async (): Promise<{ Users: UsersState }> => {
 
     return result;
   } catch (error) {
-    console.log('Error when loading lusersists');
+    noop();
   }
 };

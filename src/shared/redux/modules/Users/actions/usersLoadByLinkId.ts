@@ -30,20 +30,10 @@ export const usersLoadByLinkId =
 
       const queryString = QueryStringWrapper.stringifyQueryParams({ sort: sortParam });
 
-      console.log('=======');
-      console.log('sortParam:');
-      console.log(JSON.stringify(sortParam, null, 4));
-      console.log('queryString:');
-      console.log(JSON.stringify(queryString, null, 4));
-
       const {
         data,
         meta: { totalItems, sort },
       } = await HttpClient.get<void, UsersLoadApiResponse>(`/links/${linkId}/users?${queryString}`);
-
-      console.log('sort:');
-      console.log(JSON.stringify(sort, null, 4));
-      console.log('=======');
 
       const { Users: usersAfterResponse } = getState();
       const usersArray = data?.map((item) => item.attributes);

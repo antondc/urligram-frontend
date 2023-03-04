@@ -17,10 +17,5 @@ export const DEFAULT_PROTOCOL = 'https://';
 // Animations
 export const EASE_OUT_QUART_CUSTOM = [0.17, 0.84, 0.44, 1];
 
-// List roles
-export const LIST_ROLE_ADMIN = 'admin';
-export const LIST_ROLE_EDITOR = 'editor';
-export const LIST_ROLE_READER = 'reader';
-
 // Event types
 export const EVENT_BLUR = 'blur';

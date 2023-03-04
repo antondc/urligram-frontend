@@ -6,7 +6,7 @@ import {
 } from 'Modules/Bookmarks/bookmarks.types';
 import { RequestParameters } from 'Root/src/server/routes/allRoutes';
 import HttpClient from 'Services/HttpClient';
-import { QueryStringWrapper, serializerFromArrayToByKey } from '@antoniodcorrea/utils';
+import { noop, QueryStringWrapper, serializerFromArrayToByKey } from '@antoniodcorrea/utils';
 
 export const initialBookmarksLoader = async ({ query }: RequestParameters = {}): Promise<{
   Bookmarks: BookmarksState;
@@ -29,6 +29,6 @@ export const initialBookmarksLoader = async ({ query }: RequestParameters = {}):
 
     return result;
   } catch (error) {
-    console.log('Error when loading bookmarks');
+    noop();
   }
 };

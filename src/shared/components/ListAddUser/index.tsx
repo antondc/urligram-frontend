@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { listUserDelete } from 'Modules/Lists/actions/listUserDelete';
 import { listUserUpsert } from 'Modules/Lists/actions/listUserUpsert';
+import { ListUserRole } from 'Modules/Lists/lists.types';
 import { selectListById } from 'Modules/Lists/selectors/selectListById';
 import { RootState } from 'Modules/rootType';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
@@ -54,14 +55,14 @@ const ListAddUser: React.FC<Props> = ({ listId }) => {
 
   const onInviteAsReader = async (userId: string) => {
     setItemsLoadingReader([...itemsLoadingReader, userId]);
-    await dispatch(listUserUpsert({ listId: list?.id, userId, userRole: 'reader' }));
+    await dispatch(listUserUpsert({ listId: list?.id, userId, userRole: ListUserRole.Reader }));
     setItemsLoadingReader(itemsLoadingReader.filter((item) => item !== userId));
     setReaderRecentlyUpdated([...readerRecentlyUpdated, userId]);
   };
 
   const onInviteAsEditor = async (userId: string) => {
     setItemsLoadingEditor([...itemsLoadingEditor, userId]);
-    await dispatch(listUserUpsert({ listId: list?.id, userId, userRole: 'editor' }));
+    await dispatch(listUserUpsert({ listId: list?.id, userId, userRole: ListUserRole.Editor }));
     setItemsLoadingEditor(itemsLoadingEditor.filter((item) => item !== userId));
     setEditorRecentlyUpdated([...editorRecentlyUpdated, userId]);
   };

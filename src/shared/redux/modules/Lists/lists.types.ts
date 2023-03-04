@@ -33,9 +33,20 @@ export interface ListsError extends Error {
   field: string;
 }
 
+export enum ListUserRole {
+  Editor = 'editor',
+  Reader = 'reader',
+  Admin = 'admin',
+}
+
+export enum ListUserStatus {
+  Pending = 'pending',
+  Active = 'active',
+}
+
 export interface ListUser extends UserState {
-  userRole?: 'reader' | 'editor' | 'admin';
-  userStatus?: 'pending' | 'active';
+  userRole?: ListUserRole;
+  userStatus?: ListUserStatus;
 }
 
 export interface ListState {
@@ -50,8 +61,8 @@ export interface ListState {
   loading?: boolean;
   members: {
     id: string;
-    userRole: 'reader' | 'editor' | 'admin';
-    userListStatus: 'active' | 'pending';
+    userRole: ListUserRole;
+    userListStatus: ListUserStatus;
   }[];
   tags: {
     id: number;

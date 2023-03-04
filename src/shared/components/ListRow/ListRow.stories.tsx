@@ -25,7 +25,6 @@ const props = {
   isPrivateRequestPending: false,
   sessionUserFollowsList: false,
   sessionUserOwnsList: false,
-  sessionUserRole: 'editor',
   onEdit: () => {},
   onPrivateSwitch: () => {},
   onFollowList: () => {},

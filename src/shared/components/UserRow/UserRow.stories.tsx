@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { UserLevel, UserStatus } from 'Modules/Users/users.types';
 import { ProviderWrapper } from 'Tools/storybook/provider';
 import { FadeInOut } from '@antoniodcorrea/components';
 import { boolean, withKnobs } from '@storybook/addon-knobs';
@@ -20,9 +21,9 @@ const props = {
     w500h500: 'https://picsum.photos/300/300',
     w200h50: 'https://picsum.photos/300/300',
   },
-  level: 'admin',
+  level: UserLevel.Admin,
   email: 'hello@example.com',
-  status: 'active',
+  status: UserStatus.Active,
   statement: 'Some text',
   location: 'Some place',
   order: 1,

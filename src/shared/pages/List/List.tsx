@@ -15,7 +15,7 @@ import NoResults from 'Components/NoResults';
 import Pagination from 'Components/Pagination';
 import { RenderInPortal } from 'Components/Portal';
 import SubHeader, { SubHeaderSeparator } from 'Components/SubHeader';
-import { ListState, ListUser } from 'Modules/Lists/lists.types';
+import { ListState, ListUser, ListUserRole, ListUserStatus } from 'Modules/Lists/lists.types';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE, SITE_TITLE } from 'Root/src/shared/constants';
@@ -25,8 +25,8 @@ import './List.less';
 
 interface Props {
   showBanner: boolean;
-  listInvitationRole: 'reader' | 'editor' | 'admin';
-  sessionUserListRole: 'reader' | 'editor' | 'admin';
+  listInvitationRole: ListUserRole;
+  sessionUserListRole: ListUserRole;
   list: ListState;
   listUserOwner: UserState;
   sessionUserOwnsList: boolean;
@@ -162,7 +162,7 @@ const List: React.FC<Props> = ({
                 <A
                   className={
                     'List-headerImagesItem List-headerImagesItemJoined' +
-                    (item?.userStatus === 'pending'
+                    (item?.userStatus === ListUserStatus.Pending
                       ? ' List-headerImagesItemJoined--pending'
                       : ' List-headerImagesItemJoined--active')
                   }
@@ -193,7 +193,7 @@ const List: React.FC<Props> = ({
             </div>
           </>
         )}
-        {sessionUserListRole === 'reader' && (
+        {sessionUserListRole === ListUserRole.Reader && (
           <>
             <RenderInPortal>
               <Tooltip parentElementId="List-tooltipReader" content="Reader" delay={2} />
@@ -201,7 +201,7 @@ const List: React.FC<Props> = ({
             <Eye className="List-iconRole List-iconReader" id="List-tooltipReader" />
           </>
         )}
-        {sessionUserListRole === 'admin' && (
+        {sessionUserListRole === ListUserRole.Admin && (
           <>
             <RenderInPortal>
               <Tooltip parentElementId="List-tooltipAdmin" content="Edit list" delay={2} />
@@ -209,7 +209,7 @@ const List: React.FC<Props> = ({
             <EditCircle className="List-iconRole List-iconAdmin" id="List-tooltipAdmin" onClick={onEditClick} />
           </>
         )}
-        {sessionUserListRole && sessionUserListRole !== 'admin' && (
+        {sessionUserListRole && sessionUserListRole !== ListUserRole.Admin && (
           <>
             <RenderInPortal>
               <Tooltip parentElementId="List-tooltipLeaveList" content="Leave list" delay={1} />

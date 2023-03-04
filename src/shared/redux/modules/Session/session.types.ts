@@ -1,3 +1,5 @@
+import { UserLevel, UserStatus } from '../Users/users.types';
+
 export const SESSION_LOG_IN_REQUEST = 'SESSION_LOG_IN_REQUEST';
 export const SESSION_LOG_IN_SUCCESS = 'SESSION_LOG_IN_SUCCESS';
 export const SESSION_LOG_IN_FAILURE = 'SESSION_LOG_IN_FAILURE';
@@ -18,19 +20,6 @@ export const SESSION_UPDATE_DETAILS_SUCCESS = 'SESSION_UPDATE_DETAILS_SUCCESS';
 export const SESSION_UPDATE_DETAILS_FAILURE = 'SESSION_UPDATE_DETAILS_FAILURE';
 export const SESSION_RESET_ERRORS = 'SESSION_RESET_ERRORS';
 
-export const SESSION_STATUS_ACTIVE = 'active';
-export const SESSION_STATUS_INACTIVE = 'inactive';
-const SESSION_STATUS_DISABLED = 'disabled';
-const SESSION_STATUS_REMOVED = 'removed';
-
-export type SessionStatus =
-  | typeof SESSION_STATUS_ACTIVE
-  | typeof SESSION_STATUS_INACTIVE
-  | typeof SESSION_STATUS_DISABLED
-  | typeof SESSION_STATUS_REMOVED;
-
-type SessionLevel = 'admin' | 'user';
-
 export interface SessionError extends Error {
   field: string;
 }
@@ -41,9 +30,9 @@ export interface SessionState {
   order?: number;
   name?: string;
   email?: string;
-  status?: SessionStatus;
+  status?: UserStatus;
   statement?: string;
-  level?: SessionLevel;
+  level?: UserLevel;
   logged?: boolean;
   location?: string;
   followers?: string[];

@@ -1,6 +1,6 @@
 import { RequestParameters } from 'Root/src/server/routes/allRoutes';
 import HttpClient from 'Services/HttpClient';
-import { QueryStringWrapper, serializerFromArrayToByKey } from '@antoniodcorrea/utils';
+import { noop, QueryStringWrapper, serializerFromArrayToByKey } from '@antoniodcorrea/utils';
 import { BookmarksGetApiResponse, BookmarkState } from '../Bookmarks/bookmarks.types';
 import { ListLoadApiResponse, ListsState } from './lists.types';
 
@@ -46,6 +46,6 @@ export const initialListLoader = async ({ query, params }: RequestParameters = {
 
     return result;
   } catch (error) {
-    console.log('Error when loading lists', error);
+    noop();
   }
 };

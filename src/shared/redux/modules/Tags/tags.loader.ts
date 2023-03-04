@@ -1,6 +1,6 @@
 import { TagsLoadApiResponse, TagsLoadApiResponseItem, TagsState, TagState } from 'Modules/Tags/tags.types';
 import HttpClient from 'Services/HttpClient';
-import { serializerFromArrayToByKey } from '@antoniodcorrea/utils';
+import { noop, serializerFromArrayToByKey } from '@antoniodcorrea/utils';
 
 export const tagsAllInitialLoader = async (): Promise<{ Tags: TagsState }> => {
   try {
@@ -21,6 +21,6 @@ export const tagsAllInitialLoader = async (): Promise<{ Tags: TagsState }> => {
 
     return result;
   } catch (error) {
-    console.log('Error when loading tags');
+    noop();
   }
 };

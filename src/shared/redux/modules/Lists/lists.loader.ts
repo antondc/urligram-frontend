@@ -1,7 +1,7 @@
 import { ListApiResponseItem, ListsLoadApiResponse, ListsState, ListState } from 'Modules/Lists/lists.types';
 import { RequestParameters } from 'Root/src/server/routes/allRoutes';
 import HttpClient from 'Services/HttpClient';
-import { QueryStringWrapper, serializerFromArrayToByKey } from '@antoniodcorrea/utils';
+import { noop, QueryStringWrapper, serializerFromArrayToByKey } from '@antoniodcorrea/utils';
 
 export const initialListsLoader = async ({ query }: RequestParameters = {}): Promise<{
   Lists: ListsState;
@@ -24,6 +24,6 @@ export const initialListsLoader = async ({ query }: RequestParameters = {}): Pro
 
     return result;
   } catch (error) {
-    console.log('Error when loading lists');
+    noop();
   }
 };

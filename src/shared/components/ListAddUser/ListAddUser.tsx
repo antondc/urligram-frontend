@@ -2,7 +2,7 @@ import React from 'react';
 
 import A from 'Components/A';
 import { RenderInPortal } from 'Components/Portal';
-import { ListState } from 'Modules/Lists/lists.types';
+import { ListState, ListUserRole, ListUserStatus } from 'Modules/Lists/lists.types';
 import { UserState } from 'Modules/Users/users.types';
 import {
   EditCircle,
@@ -64,18 +64,22 @@ export const ListAddUser: React.FC<Props> = ({
           <ul className="ListAddUser-users" onMouseLeave={onListLeave} onMouseEnter={onListEnter}>
             {followingUsers?.map((item, index) => {
               const userIsReader = list?.members?.some(
-                (member) => member?.userRole === 'reader' && member?.id === item?.id
+                (member) => member?.userRole === ListUserRole.Reader && member?.id === item?.id
               );
               const userIsReaderPending = list?.members?.some(
                 (member) =>
-                  member?.userRole === 'reader' && member?.id === item?.id && member?.userListStatus === 'pending'
+                  member?.userRole === ListUserRole.Reader &&
+                  member?.id === item?.id &&
+                  member?.userListStatus === ListUserStatus.Pending
               );
               const userIsEditor = list?.members?.some(
-                (member) => member?.userRole === 'editor' && member?.id === item?.id
+                (member) => member?.userRole === ListUserRole.Editor && member?.id === item?.id
               );
               const userIsEditorPending = list?.members?.some(
                 (member) =>
-                  member?.userRole === 'editor' && member?.id === item?.id && member?.userListStatus === 'pending'
+                  member?.userRole === ListUserRole.Editor &&
+                  member?.id === item?.id &&
+                  member?.userListStatus === ListUserStatus.Pending
               );
 
               // const wasRecentlyUpdated = recentlyUpdated?.includes(item?.id);

@@ -2,13 +2,13 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 import Bookmark from 'Assets/svg/bookmark.svg';
-import { ListState } from 'Modules/Lists/lists.types';
+import { useScrollBeforeCallback } from 'Hooks/useScrollBeforeCallback';
+import { ListState, ListUserStatus } from 'Modules/Lists/lists.types';
 import { selectListWithNotificationsIds } from 'Modules/Lists/selectors/selectListWithNotificationsIds';
 import { selectCurrentRouteParams } from 'Modules/Routes/selectors/selectCurrentRouteParams';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import history from 'Services/History';
 import { NotificationDot } from '@antoniodcorrea/components';
-import { useScrollBeforeCallback } from 'Hooks/useScrollBeforeCallback';
 import { SidebarLeftSubItemsAnimation } from './SidebarLeftSubItemsAnimation';
 
 import './SidebarLeftLists.less';
@@ -55,7 +55,9 @@ const SidebarLeftLists: React.FC<Props> = ({ lists, loading, listsShown = true }
                     size="small"
                     className={
                       'SidebarLeftLists-dot' +
-                      (sessionListMembership?.userListStatus === 'pending' ? ' SidebarLeftLists-dot--pending' : '') +
+                      (sessionListMembership?.userListStatus === ListUserStatus.Pending
+                        ? ' SidebarLeftLists-dot--pending'
+                        : '') +
                       (!!listHasNotifications ? ' SidebarLeftLists-dot--pending' : '')
                     }
                   />

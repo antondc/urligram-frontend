@@ -10,6 +10,7 @@ import { selectBookmarksTotalItems } from 'Modules/Bookmarks/selectors/selectBoo
 import { listLoadById } from 'Modules/Lists/actions/listLoadById';
 import { listUserDelete } from 'Modules/Lists/actions/listUserDelete';
 import { listUserUpsert } from 'Modules/Lists/actions/listUserUpsert';
+import { ListUserRole, ListUserStatus } from 'Modules/Lists/lists.types';
 import { selectListById } from 'Modules/Lists/selectors/selectListById';
 import { selectListUsers } from 'Modules/Lists/selectors/selectListUsers';
 import { selectListUsersIds } from 'Modules/Lists/selectors/selectListUsersIds';
@@ -55,7 +56,7 @@ const List: React.FC = () => {
   const listUserOwner = useSelector((state: RootState) => selectUserById(state, { id: list?.userId }));
   const sessionUserInThisList = usersInThisList.find((item) => item.id === session?.id);
   const listInvitationRole = list?.members?.find((item) => item.id === session?.id)?.userRole;
-  const sessionUserListRole = list?.userId === session?.id ? 'admin' : sessionUserInThisList?.userRole;
+  const sessionUserListRole = list?.userId === session?.id ? ListUserRole.Admin : sessionUserInThisList?.userRole;
   const allTags = useSelector(selectTagsAll);
   const currentQueryParamFilter = useSelector(selectCurrentRouteQueryParamFilter);
   const tagsSearch = useSelector(selectTagsSearch);
@@ -126,7 +127,7 @@ const List: React.FC = () => {
 
   useEffect(() => {
     // If the session member of this list is pending, display banner
-    if (sessionUserInThisList?.userStatus === 'pending') setShowBanner(true);
+    if (sessionUserInThisList?.userStatus === ListUserStatus.Pending) setShowBanner(true);
   }, [sessionUserInThisList?.userStatus]);
 
   useEffect(() => () => dispatch(uiResetModalsState()), []);

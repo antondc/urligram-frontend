@@ -5,7 +5,7 @@ import {
   LanguageState,
 } from 'Modules/Languages/languages.types';
 import HttpClient from 'Services/HttpClient';
-import { serializerFromArrayToByKey } from '@antoniodcorrea/utils';
+import { noop, serializerFromArrayToByKey } from '@antoniodcorrea/utils';
 import { getCurrentOrDefaultLanguage } from './utils/getCurrentOrDefaultLanguage';
 
 export const initialLanguagesLoader = async (lang: string): Promise<{ Languages: LanguagesState }> => {
@@ -31,6 +31,6 @@ export const initialLanguagesLoader = async (lang: string): Promise<{ Languages:
 
     return result;
   } catch (error) {
-    console.log('Error when loading languages');
+    noop();
   }
 };

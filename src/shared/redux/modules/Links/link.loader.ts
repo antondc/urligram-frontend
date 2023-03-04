@@ -1,6 +1,6 @@
 import { RequestParameters } from 'Root/src/server/routes/allRoutes';
 import HttpClient from 'Services/HttpClient';
-import { QueryStringWrapper } from '@antoniodcorrea/utils';
+import { noop, QueryStringWrapper } from '@antoniodcorrea/utils';
 import { LinkGetApiResponse, LinksState } from './links.types';
 
 export const initialLinkLoader = async ({ query, params }: RequestParameters = {}): Promise<{
@@ -25,6 +25,6 @@ export const initialLinkLoader = async ({ query, params }: RequestParameters = {
 
     return result;
   } catch (error) {
-    console.log('Error when loading link');
+    noop();
   }
 };

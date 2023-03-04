@@ -13,6 +13,7 @@ import { RootState } from 'Modules/rootType';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
 import { usersLoadByLinkId } from 'Modules/Users/actions/usersLoadByLinkId';
+import { noop } from '@antoniodcorrea/utils';
 import { Bookmarker as BookmarkerUi } from './Bookmarker';
 
 import './Bookmarker.less';
@@ -54,7 +55,7 @@ const Bookmarker: React.FC<Props> = ({ className, listId, bookmarkId, onBookmark
       dispatch(notesLoadByLinkId({ linkId: parentBookmark.linkId }));
       dispatch(usersLoadByLinkId({ linkId: parentBookmark.linkId }));
     } catch (error) {
-      console.log('Bookmarker.onBookmarkGrab.catch: ', error);
+      noop();
     } finally {
       setLoading(false);
     }
@@ -77,7 +78,7 @@ const Bookmarker: React.FC<Props> = ({ className, listId, bookmarkId, onBookmark
       dispatch(usersLoadByLinkId({ linkId: parentBookmark.linkId }));
       if (!!listId) await dispatch(bookmarksLoadByListId(listId));
     } catch (error) {
-      console.log('Bookmarker.onBookmarkDelete.catch: ', error);
+      noop();
     } finally {
       setLoading(false);
     }

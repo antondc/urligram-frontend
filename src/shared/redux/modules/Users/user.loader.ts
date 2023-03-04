@@ -1,7 +1,7 @@
 import { UserLoadApiResponse, UsersState } from 'Modules/Users/users.types';
 import { RequestParameters } from 'Root/src/server/routes/allRoutes';
 import HttpClient from 'Services/HttpClient';
-import { QueryStringWrapper, serializerFromArrayToByKey } from '@antoniodcorrea/utils';
+import { noop, QueryStringWrapper, serializerFromArrayToByKey } from '@antoniodcorrea/utils';
 import { BookmarkGetItemResponse, BookmarksGetApiResponse, BookmarkState } from '../Bookmarks/bookmarks.types';
 
 export const initialUserLoader = async ({ query, params }: RequestParameters = {}): Promise<{
@@ -40,6 +40,6 @@ export const initialUserLoader = async ({ query, params }: RequestParameters = {
 
     return result;
   } catch (error) {
-    console.log('Error when loading user');
+    noop();
   }
 };

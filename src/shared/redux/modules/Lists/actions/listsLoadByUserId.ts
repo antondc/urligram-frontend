@@ -58,8 +58,6 @@ export const listsLoadByUserId =
         })
       );
     } catch (error) {
-      console.log('error: ', error);
-
       throw error;
     }
 
