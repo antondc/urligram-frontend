@@ -111,8 +111,6 @@ const BookmarkUpdateForm: React.FC<Props> = ({ closeModal, setLocked }) => {
       dispatch(bookmarkLoadById({ bookmarkId }));
 
       if (!!bookmark?.id) {
-        setSubmitting(false);
-        setLocked(false);
         setSubmitSuccess(true);
         dispatch(notesLoadByLinkId({ linkId: bookmark.linkId }));
         dispatch(usersLoadByLinkId({ linkId: bookmark.linkId }));

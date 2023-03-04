@@ -169,24 +169,27 @@ const BookmarkCreateForm: React.FC<Props> = ({ closeModal, setLocked }) => {
       notes: notesValue,
     };
 
-    const response = await dispatch(bookmarkCreate(data));
-    setSubmitInProcess(false);
-    setLocked(false);
+    try {
+      const response = await dispatch(bookmarkCreate(data));
 
-    if (response?.title) {
-      setSubmitSuccess(true);
+      if (response?.title) {
+        setSubmitSuccess(true);
 
-      setTimeout(() => {
-        if (currentRouteName === Routes.UserBookmarks.name) {
-          dispatch(bookmarksLoadByUserId(sessionId));
-        } else {
-          history.push(`/${currentLanguageSlug}/users/${sessionId}/bookmarks?sort=-createdAt`);
-        }
+        setTimeout(() => {
+          if (currentRouteName === Routes.UserBookmarks.name) {
+            dispatch(bookmarksLoadByUserId(sessionId));
+          } else {
+            history.push(`/${currentLanguageSlug}/users/${sessionId}/bookmarks?sort=-createdAt`);
+          }
 
-        closeModal();
-      }, DELAY_SLOW_MS);
+          closeModal();
+        }, DELAY_SLOW_MS);
 
-      return;
+        return;
+      }
+    } finally {
+      setSubmitInProcess(false);
+      setLocked(false);
     }
   };
 
