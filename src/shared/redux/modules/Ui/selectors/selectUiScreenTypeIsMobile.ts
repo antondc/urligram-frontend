@@ -5,5 +5,5 @@ import { selectUiScreenType } from './selectUiScreenType';
 
 export const selectUiScreenTypeIsMobile = createSelector(
   selectUiScreenType,
-  (uiScreenType: ScreenType): boolean => uiScreenType === 'mobile'
+  (uiScreenType: ScreenType): boolean => uiScreenType === ScreenType.Mobile
 );

@@ -5,5 +5,5 @@ import { selectUiScreenType } from './selectUiScreenType';
 
 export const selectUiScreenTypeIsTablet = createSelector(
   selectUiScreenType,
-  (uiScreenType: ScreenType): boolean => uiScreenType === 'tablet'
+  (uiScreenType: ScreenType): boolean => uiScreenType === ScreenType.Tablet
 );

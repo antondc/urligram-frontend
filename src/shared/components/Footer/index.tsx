@@ -7,6 +7,7 @@ import { selectCurrentRoute } from 'Modules/Routes/selectors/selectCurrentRoute'
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { switchLanguagesModal } from 'Modules/Ui/actions/switchLanguagesModal';
 import { selectUiLanguagesModalMounted } from 'Modules/Ui/selectors/selectUiLanguagesModalMounted';
+import { selectUiScreenTypeIsMobile } from '../../redux/modules/Ui/selectors/selectUiScreenTypeIsMobile';
 import { Footer as FooterUi } from './Footer';
 
 import './Footer.less';
@@ -22,6 +23,7 @@ const Footer: React.FC<Props> = ({ className }) => {
   const uiLanguagesModalMounted = useSelector(selectUiLanguagesModalMounted);
   const currentPathName = useSelector(selectCurrentPathname);
   const currentRoute = useSelector(selectCurrentRoute);
+  const isMobile = useSelector(selectUiScreenTypeIsMobile);
 
   const onLanguageItemClick = (): void => {
     dispatch(switchLanguagesModal());
@@ -36,6 +38,7 @@ const Footer: React.FC<Props> = ({ className }) => {
       uiLanguagesModalMounted={uiLanguagesModalMounted}
       currentPathName={currentPathName}
       currentRoute={currentRoute}
+      isMobile={isMobile}
     />
   );
 };
