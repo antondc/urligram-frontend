@@ -1,4 +1,4 @@
-import { UserLevel, UserStatus } from '../Users/users.types';
+import { UserAccountType, UserLevel, UserStatus } from '../Users/users.types';
 
 export const SESSION_LOG_IN_REQUEST = 'SESSION_LOG_IN_REQUEST';
 export const SESSION_LOG_IN_SUCCESS = 'SESSION_LOG_IN_SUCCESS';
@@ -26,6 +26,7 @@ export interface SessionError extends Error {
 
 export interface SessionState {
   loading?: boolean;
+  accountType?: UserAccountType;
   id?: string;
   order?: number;
   name?: string;
@@ -67,14 +68,6 @@ export interface SessionSignUpApiRequest {
   email: string;
   password: string;
   password_repeated: string;
-}
-
-export interface SessionSignUpApiResponse {
-  data: {
-    success: boolean;
-    error?: SessionError;
-    attributes?: SessionState;
-  };
 }
 
 export interface SessionSignUpConfirmationApiRequest {

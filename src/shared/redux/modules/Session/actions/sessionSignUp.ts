@@ -7,7 +7,6 @@ import {
   SESSION_SIGN_UP_SUCCESS,
   SessionActions,
   SessionSignUpApiRequest,
-  SessionSignUpApiResponse,
 } from '../session.types';
 
 export const sessionSignUp =
