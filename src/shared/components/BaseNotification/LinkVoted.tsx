@@ -2,6 +2,8 @@ import React from 'react';
 
 import { NotificationState } from 'Modules/Ui/ui.types';
 
+import './LinkVoted.less';
+
 interface Props {
   notification: NotificationState;
 }

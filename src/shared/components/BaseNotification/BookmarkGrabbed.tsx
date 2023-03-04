@@ -5,6 +5,8 @@ import A from 'Components/A';
 import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUserId';
 import { NotificationState } from 'Modules/Ui/ui.types';
 
+import './BookmarkGrabbed.less';
+
 interface Props {
   notification: NotificationState;
 }
@@ -20,7 +22,7 @@ const BookmarkGrabbed: React.FC<Props> = ({ notification }) => {
         <A href={`users/${sessionId}/bookmarks?sort=-updatedAt`} frontend underlined>
           here
         </A>{' '}
-        to see it{' '}
+        to see it.
       </div>
     </div>
   );

@@ -1,6 +1,8 @@
 import { bookmarkUpdateFailure } from 'Modules/Bookmarks/actions/bookmarkUpdateFailure';
 import { bookmarkUpdateSuccess } from 'Modules/Bookmarks/actions/bookmarkUpdateSuccess';
 import { BookmarksActions, BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
+import { uiNotificationPush } from 'Modules/Ui/actions/uiNotificationPush';
+import { NotificationStatus, NotificationStyle, NotificationType } from 'Modules/Ui/ui.types';
 import HttpClient from 'Services/HttpClient';
 import { AppThunk } from '../../..';
 import { bookmarkUpdateRequest } from './bookmarkUpdateRequest';
@@ -65,6 +67,15 @@ export const bookmarkUpdate =
         bookmarkUpdateFailure({
           ...bookmarksOnError,
           errors: [...(bookmarksOnError.errors || []), error],
+        })
+      );
+
+      await dispatch(
+        uiNotificationPush({
+          bookmarkId: bookmarkId,
+          type: NotificationType.BookmarkPrivateLimitReached,
+          style: NotificationStyle.Error,
+          status: NotificationStatus.Pending,
         })
       );
 

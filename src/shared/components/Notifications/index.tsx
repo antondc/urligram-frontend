@@ -14,7 +14,7 @@ const Notifications: React.FC = () => {
   return (
     <div className="Notifications">
       {notifications.map((item) => (
-        <FadeInOut valueToUpdate={item.status} key={item.id} appear>
+        <FadeInOut valueToUpdate={item.status} key={item.id} speed="normal" appear>
           {item.status === NotificationStatus.Pending && <BaseNotification notification={item} key={item.id} />}
         </FadeInOut>
       ))}

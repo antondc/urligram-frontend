@@ -35,6 +35,7 @@ export type UiBaseModal = {
 };
 
 export enum NotificationType {
+  BookmarkPrivateLimitReached = 'bookmark-pricate-limit-reached',
   BookmarkCreation = 'bookmark-creation',
   BookmarkGrabbed = 'bookmark-grabbed',
   BookmarkDeleted = 'bookmark-deleted',

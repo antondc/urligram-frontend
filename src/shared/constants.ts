@@ -9,6 +9,7 @@ export const DELAY_FAST_MS = 300;
 export const DELAY_MEDIUM_MS = 500;
 export const DELAY_SLOW_MS = 1000;
 export const DELAY_THREE_SEC = 3000;
+export const DELAY_FIVE_SEC = 5000;
 export const TIME_RECENTLY_CREATED_BOOKMARK = 7;
 
 // Url

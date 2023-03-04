@@ -3,10 +3,11 @@ import { useDispatch } from 'react-redux';
 
 import { uiNotificationViewed } from 'Modules/Ui/actions/uiNotificationViewed';
 import { NotificationState, NotificationType } from 'Modules/Ui/ui.types';
-import { DELAY_THREE_SEC } from 'Root/src/shared/constants';
+import { DELAY_FIVE_SEC } from 'Root/src/shared/constants';
 import { Notification } from '@antoniodcorrea/components';
 import BookmarkDeleted from './BookmarkDeleted';
 import BookmarkGrabbed from './BookmarkGrabbed';
+import BookmarkPrivateLimitReached from './BookmarkPrivateLimitReached';
 import LinkVoted from './LinkVoted';
 
 import './BaseNotification.less';
@@ -21,7 +22,7 @@ const BaseNotification: React.FC<Props> = ({ notification }) => {
   useEffect(() => {
     setTimeout(() => {
       dispatch(uiNotificationViewed(notification));
-    }, DELAY_THREE_SEC);
+    }, DELAY_FIVE_SEC);
   }, []);
 
   const onCloseClick = () => {
@@ -34,6 +35,9 @@ const BaseNotification: React.FC<Props> = ({ notification }) => {
         {notification?.type === NotificationType.BookmarkGrabbed && <BookmarkGrabbed notification={notification} />}
         {notification?.type === NotificationType.BookmarkDeleted && <BookmarkDeleted notification={notification} />}
         {notification?.type === NotificationType.LinkVoted && <LinkVoted notification={notification} />}
+        {notification?.type === NotificationType.BookmarkPrivateLimitReached && (
+          <BookmarkPrivateLimitReached notification={notification} />
+        )}
       </Notification>
     </div>
   );
