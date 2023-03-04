@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { uiScreenTypeSet } from 'Modules/Ui/actions/uiScreenTypeSet';
+import { ScreenType } from 'Modules/Ui/ui.types';
 
 import './ScreenSizePixel.less';
 
@@ -18,13 +19,16 @@ const ScreenSizePixel: React.FC = () => {
 
     switch (true) {
       case contentIsDesktop:
-        dispatch(uiScreenTypeSet('desktop'));
+        dispatch(uiScreenTypeSet(ScreenType.Desktop));
+
         break;
       case contentIsTablet:
-        dispatch(uiScreenTypeSet('tablet'));
+        dispatch(uiScreenTypeSet(ScreenType.Tablet));
+
         break;
       case contentIsMobile:
-        dispatch(uiScreenTypeSet('mobile'));
+        dispatch(uiScreenTypeSet(ScreenType.Mobile));
+
         break;
 
       default:
