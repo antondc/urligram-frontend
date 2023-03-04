@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { uiNotificationViewed } from 'Modules/Ui/actions/uiNotificationViewed';
-import { NotificationState } from 'Modules/Ui/ui.types';
+import { NotificationState, NotificationType } from 'Modules/Ui/ui.types';
 import { DELAY_THREE_SEC } from 'Root/src/shared/constants';
 import { Notification } from '@antoniodcorrea/components';
 import BookmarkDeleted from './BookmarkDeleted';
@@ -31,9 +31,9 @@ const BaseNotification: React.FC<Props> = ({ notification }) => {
   return (
     <div className="BaseNotification" id={'BaseNotification--' + notification.id}>
       <Notification onCloseClick={onCloseClick} type={notification.style}>
-        {notification?.type === 'bookmark-grabbed' && <BookmarkGrabbed notification={notification} />}
-        {notification?.type === 'bookmark-deleted' && <BookmarkDeleted notification={notification} />}
-        {notification?.type === 'link-voted' && <LinkVoted notification={notification} />}
+        {notification?.type === NotificationType.BookmarkGrabbed && <BookmarkGrabbed notification={notification} />}
+        {notification?.type === NotificationType.BookmarkDeleted && <BookmarkDeleted notification={notification} />}
+        {notification?.type === NotificationType.LinkVoted && <LinkVoted notification={notification} />}
       </Notification>
     </div>
   );

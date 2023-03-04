@@ -34,12 +34,24 @@ export type UiBaseModal = {
   mounted?: boolean;
 };
 
-type NotificationTypeState =
-  | 'bookmark-creation'
-  | 'bookmark-grabbed'
-  | 'bookmark-deleted'
-  | 'general-error'
-  | 'link-voted';
+export enum NotificationType {
+  BookmarkCreation = 'bookmark-creation',
+  BookmarkGrabbed = 'bookmark-grabbed',
+  BookmarkDeleted = 'bookmark-deleted',
+  GeneralError = 'general-error',
+  LinkVoted = 'link-voted',
+}
+
+export enum NotificationStyle {
+  Alert = 'alert',
+  Error = 'error',
+  Success = 'success',
+}
+
+export enum NotificationStatus {
+  Viewed = 'viewed',
+  Pending = 'pending',
+}
 
 export type NotificationState = {
   number?: number;
@@ -48,9 +60,9 @@ export type NotificationState = {
   listId?: number;
   bookmarkId?: number;
   linkId?: number;
-  type: NotificationTypeState;
-  style: 'alert' | 'error' | 'success';
-  status: 'viewed' | 'pending';
+  type: NotificationType;
+  style: NotificationStyle;
+  status: NotificationStatus;
 };
 
 export type BookmarkListsModal = {

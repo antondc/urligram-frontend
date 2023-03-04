@@ -1,5 +1,6 @@
 import { BookmarkGetApiResponse, BookmarksActions, BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
 import { uiNotificationPush } from 'Modules/Ui/actions/uiNotificationPush';
+import { NotificationStatus, NotificationStyle, NotificationType } from 'Modules/Ui/ui.types';
 import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from '@antoniodcorrea/utils';
 import { AppThunk } from '../../../index';
@@ -99,9 +100,9 @@ export const bookmarkDelete =
       await dispatch(
         uiNotificationPush({
           bookmarkId: bookmarkId,
-          type: 'bookmark-deleted',
-          style: 'alert',
-          status: 'pending',
+          type: NotificationType.BookmarkDeleted,
+          style: NotificationStyle.Alert,
+          status: NotificationStatus.Pending,
         })
       );
 
