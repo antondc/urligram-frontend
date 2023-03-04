@@ -17,6 +17,7 @@ interface Props {
   currentLanguageSlug: string;
   uiLanguagesModalMounted: boolean;
   currentPathName: string;
+  isMobile: boolean;
   onLanguageItemClick: () => void;
 }
 
@@ -27,6 +28,7 @@ export const Footer: React.FC<Props> = ({
   currentLanguageSlug,
   uiLanguagesModalMounted,
   currentPathName,
+  isMobile,
   onLanguageItemClick,
 }) => (
   <div className={'Footer' + (className ? ` ${className}` : '')}>
@@ -46,15 +48,17 @@ export const Footer: React.FC<Props> = ({
           Forgot password?
         </A>
       )}
-      <A
-        className="Footer-link"
-        href={`${Routes.Docs.route}#extension`}
-        frontend
-        underlined
-        active={currentRoute?.name === `${Routes.Docs.route}#extension`}
-      >
-        Extension
-      </A>
+      {!isMobile && (
+        <A
+          className="Footer-link"
+          href={`${Routes.Docs.route}#extension`}
+          frontend
+          underlined
+          active={currentRoute?.name === `${Routes.Docs.route}#extension`}
+        >
+          Extension
+        </A>
+      )}
       <A
         className="Footer-link"
         href={`${Routes.Docs.route}#faq`}

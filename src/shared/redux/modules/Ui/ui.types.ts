@@ -76,7 +76,12 @@ type BookmarkSendModal = {
 } & UiBaseModal;
 
 type BookmarkSendModals = Array<BookmarkSendModal>;
-export type ScreenType = 'desktop' | 'tablet' | 'mobile';
+
+export enum ScreenType {
+  Desktop = 'desktop',
+  Tablet = 'tablet',
+  Mobile = 'mobile',
+}
 
 export type UiState = {
   screenType: ScreenType;

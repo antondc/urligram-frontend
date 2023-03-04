@@ -5,5 +5,5 @@ import { selectUiScreenType } from './selectUiScreenType';
 
 export const selectUiScreenTypeIsDesktop = createSelector(
   selectUiScreenType,
-  (uiScreenType: ScreenType): boolean => uiScreenType === 'desktop'
+  (uiScreenType: ScreenType): boolean => uiScreenType === ScreenType.Desktop
 );

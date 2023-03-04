@@ -1,4 +1,5 @@
 import {
+  ScreenType,
   SWITCH_BOOKMARK_CREATE_MODAL,
   SWITCH_BOOKMARK_UPDATE_MODAL,
   SWITCH_FORGOT_PASSWORD_MODAL,
@@ -34,7 +35,7 @@ import {
 } from './ui.types';
 
 export const initialState: UiState = {
-  screenType: 'desktop',
+  screenType: ScreenType.Desktop,
   screenLocked: false,
   screenMobileLocked: false,
   userModal: {
