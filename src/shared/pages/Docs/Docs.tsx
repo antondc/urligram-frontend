@@ -15,10 +15,11 @@ interface Props {
   domain: string;
   contactEmail: string;
   appName: string;
+  uiScreenTypeIsMobile: boolean;
   navigateToSection: (e: React.MouseEvent<HTMLElement>, hash: string) => void;
 }
 
-export const Docs: React.FC<Props> = ({ domain, contactEmail, appName, navigateToSection }) => (
+export const Docs: React.FC<Props> = ({ domain, contactEmail, appName, uiScreenTypeIsMobile, navigateToSection }) => (
   <>
     <Helmet title={`${SITE_TITLE} · Docs`} />
     <div className="Docs" id="docs">
@@ -27,7 +28,7 @@ export const Docs: React.FC<Props> = ({ domain, contactEmail, appName, navigateT
       </div>
       <div className="Docs-main">
         <FAQ navigateToSection={navigateToSection} />
-        <Extension appName={appName} />
+        <Extension appName={appName} uiScreenTypeIsMobile={uiScreenTypeIsMobile}/>
         <Legal domain={domain} contactEmail={contactEmail} appName={appName} />
         <Glossary />
         <About domain={domain} contactEmail={contactEmail} appName={appName} />

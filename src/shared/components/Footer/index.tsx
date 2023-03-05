@@ -7,7 +7,7 @@ import { selectCurrentRoute } from 'Modules/Routes/selectors/selectCurrentRoute'
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { switchLanguagesModal } from 'Modules/Ui/actions/switchLanguagesModal';
 import { selectUiLanguagesModalMounted } from 'Modules/Ui/selectors/selectUiLanguagesModalMounted';
-import { selectUiScreenTypeIsMobile } from '../../redux/modules/Ui/selectors/selectUiScreenTypeIsMobile';
+import { selectUiScreenTypeIsMobile } from 'Modules/Ui/selectors/selectUiScreenTypeIsMobile';
 import { Footer as FooterUi } from './Footer';
 
 import './Footer.less';
