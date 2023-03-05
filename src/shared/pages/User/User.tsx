@@ -10,7 +10,7 @@ import NoResults from 'Components/NoResults';
 import UserForm from 'Components/UserForm';
 import { UserState } from 'Modules/Users/users.types';
 import { SITE_TITLE } from 'Root/src/shared/constants';
-import { Button, Img, Space, Tag } from '@antoniodcorrea/components';
+import { Button, Img, ProgressBar, Space, Tag } from '@antoniodcorrea/components';
 
 import './User.less';
 
@@ -18,6 +18,7 @@ interface Props {
   userIdIsSessionId: boolean;
   userId: string;
   user: UserState;
+  userPublicBookmarks: number;
   listsIds: number[];
   listsLoading: boolean;
   createdAtFormatted: string;
@@ -30,6 +31,7 @@ export const User: React.FC<Props> = ({
   userIdIsSessionId,
   userId,
   user,
+  userPublicBookmarks,
   listsIds,
   listsLoading,
   createdAtFormatted,
@@ -60,33 +62,65 @@ export const User: React.FC<Props> = ({
       </div>
       <div className="User-lineDetails">
         <A className="User-lineDetailsLink" href={`users/${userId}/bookmarks`} frontend underlined styled={false}>
-          Bookmarks:
+          Total bookmarks:
           <Space />
           {user?.bookmarksIds?.length}
         </A>
         <Space />
+        <Space />
         <Space />·<Space />
+        <Space />
+        <Space />
+        {userIdIsSessionId && (
+          <>
+            Private bookmarks:
+            <Space />
+            {user?.bookmarksPrivate}
+            <Space />
+            <Space />
+            <Space />·<Space />
+            <Space />
+            <Space />
+            Public bookmarks:
+            <Space />
+            {userPublicBookmarks}
+            <Space />
+            <Space />
+            <Space />·<Space />
+            <Space />
+            <Space />
+          </>
+        )}
         <A className="User-lineDetailsLink" href={`users/${userId}/following`} frontend underlined styled={false}>
           Following:
           <Space />
           {user?.following?.length}
         </A>
         <Space />
+        <Space />
         <Space />·<Space />
+        <Space />
+        <Space />
         <A className="User-lineDetailsLink" href={`users/${userId}/followers`} frontend underlined styled={false}>
           Followers:
           <Space />
           {user?.followers?.length}
           <Space />
         </A>
+        <Space />
         <Space />·<Space />
+        <Space />
+        <Space />
         <A className="User-lineDetailsLink" href={`users/${userId}/followers`} frontend underlined styled={false}>
           Tags:
           <Space />
           {user?.tags?.length}
         </A>
         <Space />
+        <Space />
         <Space />·<Space />
+        <Space />
+        <Space />
         <A className="User-lineDetailsLink" href={`users/${userId}/lists`} frontend underlined styled={false}>
           Lists:
           <Space />

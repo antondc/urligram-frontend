@@ -6,7 +6,6 @@ import { selectBookmarksCurrentIds } from 'Modules/Bookmarks/selectors/selectBoo
 import { selectBookmarksLoading } from 'Modules/Bookmarks/selectors/selectBookmarksLoading';
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
 import { listsLoadByUserId } from 'Modules/Lists/actions/listsLoadByUserId';
-import { ListState } from 'Modules/Lists/lists.types';
 import { selectListsAllIds } from 'Modules/Lists/selectors/selectListsAllIds';
 import { selectListsLoading } from 'Modules/Lists/selectors/selectListsLoading';
 import { RootState } from 'Modules/rootType';
@@ -37,6 +36,7 @@ const User: React.FC = () => {
   const currentLanguageSlug = useSelector(selectCurrentLanguageSlug);
   const date = new LocaleFormattedDate({ unixTime: user?.createdAt, locale: currentLanguageSlug });
   const createdAtFormatted = date.getLocaleFormattedDate();
+  const userPublicBookmarks = user?.bookmarksIds?.length - user.bookmarksPrivate;
 
   const onUserDelete = async (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -70,6 +70,7 @@ const User: React.FC = () => {
       userIdIsSessionId={userIdIsSessionId}
       userId={userId}
       user={user}
+      userPublicBookmarks={userPublicBookmarks}
       listsIds={listsIds}
       listsLoading={listsLoading}
       createdAtFormatted={createdAtFormatted}

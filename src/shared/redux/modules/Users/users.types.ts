@@ -60,6 +60,7 @@ export interface UserState {
     userListStatus?: ListUserStatus;
   }[];
   bookmarksIds?: number[];
+  bookmarksPrivate?: number;
   tags?: {
     id: number;
     name: string;
