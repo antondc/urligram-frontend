@@ -1,7 +1,7 @@
 import React from 'react';
 
-import BaseForm, { BaseFormError, BaseFormField, BaseFormSubmit } from 'Components/BaseForm';
-import { Button, FadeInOut, ImageField, TextArea } from '@antoniodcorrea/components';
+import BaseForm, { BaseFormError, BaseFormSubmit } from 'Components/BaseForm';
+import { Button, FadeInOut, ImageField } from '@antoniodcorrea/components';
 
 interface Props {
   statement: string;
@@ -17,9 +17,6 @@ interface Props {
 }
 
 export const UserForm: React.FC<Props> = ({
-  statement,
-  statementError,
-  onChangeStatement,
   image,
   imageError,
   percentCompleted,
@@ -29,18 +26,6 @@ export const UserForm: React.FC<Props> = ({
   onSubmit,
 }) => (
   <BaseForm className="UserForm" onSubmit={onSubmit}>
-    <BaseFormField className="UserForm-statement">
-      <TextArea
-        name="statement"
-        type="text"
-        label="About me"
-        onChange={onChangeStatement}
-        value={statement}
-        grow
-        maxLength={200}
-        error={!!statementError}
-      />
-    </BaseFormField>
     <ImageField
       className="UserForm-image"
       label="My file"

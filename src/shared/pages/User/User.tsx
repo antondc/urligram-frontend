@@ -51,10 +51,6 @@ export const User: React.FC<Props> = ({
         <div>
           <div className="User-detailsItem">Name:</div>
           <div className="User-detailsItemData">{user?.name}</div>
-          <div className="User-detailsItem">Location:</div>
-          <div className="User-detailsItemData">{user?.location}</div>
-          <div className="User-detailsItem">Statement:</div>
-          <div className="User-detailsItemData">{user?.statement}</div>
           <div className="User-detailsItem">Created at:</div>
           <div className="User-detailsItemData">{createdAtFormatted}</div>
         </div>

@@ -68,8 +68,8 @@ const UserForm: React.FC = () => {
     const data = {
       name: session?.name,
       email: session?.email,
-      statement: statement,
-      location: session?.location,
+      statement: null,
+      location: null,
       image: image,
     };
 

@@ -5,9 +5,9 @@
   display: grid;
   grid-template:
     'title title title' auto
-    'statement . image' 100px
-    'statement . .' auto
-    'statementError . imageError' auto
+    'image . .' 100px
+    'image . .' auto
+    'imageError . .' auto
     'submitButton . .' auto
     / 3fr 3fr 100px;
   column-gap: 10px;
@@ -16,8 +16,6 @@
   @media @br-mobile {
     grid-template:
       'title' auto
-      'statement' auto
-      'statementError' auto
       'image' auto
       'imageError' auto
       'submitButton' auto
