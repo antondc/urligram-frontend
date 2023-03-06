@@ -14,6 +14,7 @@ import { selectTagsSearch } from 'Modules/Tags/selectors/selectTagsSearch';
 import { selectUiBookmarkUpdateModal } from 'Modules/Ui/selectors/selectUiBookmarkUpdateModal';
 import { usersLoadByLinkId } from 'Modules/Users/actions/usersLoadByLinkId';
 import { DELAY_SLOW_MS } from 'Root/src/shared/constants';
+import { noop } from '@antoniodcorrea/utils';
 import { BookmarkUpdateForm as BookmarkFormUi } from './BookmarkUpdateForm';
 
 import './BookmarkUpdateForm.less';
@@ -121,6 +122,8 @@ const BookmarkUpdateForm: React.FC<Props> = ({ closeModal, setLocked }) => {
 
         return;
       }
+    } catch (error) {
+      noop();
     } finally {
       setSubmitting(false);
       setLocked(false);
@@ -132,7 +135,7 @@ const BookmarkUpdateForm: React.FC<Props> = ({ closeModal, setLocked }) => {
     setTitleError(undefined);
     setTitleValue(bookmark?.title);
     setIsPublicValue(bookmark?.isPublic);
-    setTagsValue(bookmark?.tags?.map((item) => ({ label: item.name, value: item.name })));
+    setTagsValue(bookmark?.tags?.map((item) => ({ label: item.name, value: item.name })) || []);
     setNotesValue(bookmark?.notes);
   }, []);
 
