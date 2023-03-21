@@ -32,9 +32,8 @@ declare global {
 // Configuration for Redux devtools
 // Exclude production version
 const reduxDevToolsWrapper =
-  (process.env.NODE_ENV !== 'production' &&
-    typeof window !== 'undefined' &&
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
+  /* process.env.NODE_ENV !== 'production' && */
+  (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
   compose;
 
 const storeFactory = (initialState = {}): any =>
