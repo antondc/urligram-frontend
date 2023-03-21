@@ -6,7 +6,6 @@ import { SITE_TITLE } from 'Root/src/shared/constants';
 import { About } from './About';
 import { Extension } from './Extension';
 import { FAQ } from './FAQ';
-import { Glossary } from './Glossary';
 import { Legal } from './Legal';
 
 import './Docs.less';
@@ -28,9 +27,8 @@ export const Docs: React.FC<Props> = ({ domain, contactEmail, appName, uiScreenT
       </div>
       <div className="Docs-main">
         <FAQ navigateToSection={navigateToSection} />
-        <Extension appName={appName} uiScreenTypeIsMobile={uiScreenTypeIsMobile}/>
+        <Extension appName={appName} uiScreenTypeIsMobile={uiScreenTypeIsMobile} />
         <Legal domain={domain} contactEmail={contactEmail} appName={appName} />
-        <Glossary />
         <About domain={domain} contactEmail={contactEmail} appName={appName} />
       </div>
     </div>
