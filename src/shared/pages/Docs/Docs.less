@@ -26,7 +26,14 @@
     }
   }
 
+  &-linkWithIcon {
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+  }
+
   &-link {
+    margin-right: 3px;
     color: @gradientColors[blue-1];
     opacity: 1;
     transition: opacity @td-fast @ease;
@@ -34,10 +41,6 @@
     &:hover {
       opacity: 0.85;
       cursor: pointer;
-    }
-
-    &--disabled {
-      pointer-events: none;
     }
   }
 
