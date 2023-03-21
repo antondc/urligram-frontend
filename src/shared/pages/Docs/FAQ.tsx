@@ -64,6 +64,13 @@ export const FAQ: React.FC<Props> = ({ navigateToSection }) => (
       introduce the URL, description and tags. In most of the cases the description will be added automatically, which
       of course you can edit. After saving the bookmark it will appear in your Home page.
     </p>
+    <h4 className="Docs-h4">How many private bookmarks may I have?</h4>
+    <p className="Docs-paragraph">
+      A bookmark can be private or public. With the current basic account its possible to have have any amount of
+      private bookmarks up to 100 total bookmarks. When the user has more than 100 bookmarks, one out of every five has
+      can be private. <br />
+      This limit will not apply with the advanced account we have in development.
+    </p>
     <h4 className="Docs-h4">How to share a bookmark?</h4>
     <p className="Docs-paragraph">
       Urligram gives you several instruments to manage and share your bookmarks. You can make your bookmarks public, so
@@ -72,7 +79,10 @@ export const FAQ: React.FC<Props> = ({ navigateToSection }) => (
       bookmarking tool you can follow other users and share your bookmarks and lists with them.
     </p>
     <h4 className="Docs-h4">Shall I pay to use Urligram?</h4>
-    <p className="Docs-paragraph">Urligram is a free to use platform so far.</p>
+    <p className="Docs-paragraph">
+      Currently Urligram offers a basic account. An advanced account model is on development, with benefits as unlimited
+      private bookmarks and lists with advanced features.
+    </p>
     <h4 className="Docs-h4">How does privacy work in Urligram?</h4>
     <p className="Docs-paragraph">Yo are able to have completely private accounts.</p>
     <p className="Docs-paragraph">
