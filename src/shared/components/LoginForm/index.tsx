@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { selectCurrentGlossary } from 'Modules/Languages/selectors/selectCurrentGlossary';
 import { sessionLogIn } from 'Modules/Session/actions/sessionLogIn';
 import { sessionResetErrors } from 'Modules/Session/actions/sessionResetErrors';
 import { selectSessionErrorLast } from 'Modules/Session/selectors/selectSessionErrorLast';
@@ -22,6 +23,7 @@ interface Props {
 const LoginForm: React.FC<Props> = ({ setLocked }) => {
   const dispatch = useDispatch();
   const sessionError = useSelector(selectSessionErrorLast);
+  const glossary = useSelector(selectCurrentGlossary);
   const isLoggedIn = useSelector(selectSessionLoggedIn);
   const [nameOrEmailValue, setNameValue] = useState<string>(undefined);
   const [nameOrEmailError, setNameOrEmailError] = useState<string>(undefined);
@@ -146,6 +148,7 @@ const LoginForm: React.FC<Props> = ({ setLocked }) => {
 
   return (
     <LoginFormUi
+      glossary={glossary}
       nameOrEmailValue={nameOrEmailValue}
       nameOrEmailError={nameOrEmailError}
       onChangeNameOrEmail={onChangeNameOrEmail}

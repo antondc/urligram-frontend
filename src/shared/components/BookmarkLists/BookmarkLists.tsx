@@ -5,6 +5,7 @@ import A from 'Components/A';
 import BaseForm, { BaseFormError, BaseFormSubmit } from 'Components/BaseForm';
 import { ListState } from 'Modules/Lists/lists.types';
 import { Button, FadeInOut, Input, Spinner } from '@antoniodcorrea/components';
+import { GlossaryState } from 'Modules/Languages/languages.types';
 
 import './BookmarkLists.less';
 
@@ -14,6 +15,7 @@ type ListStateExtended = ListState & {
 };
 
 interface Props {
+  glossary: GlossaryState;
   sessionId: string;
   listInputName: string;
   submitError: string;
@@ -30,6 +32,7 @@ interface Props {
 }
 
 export const BookmarkLists: React.FC<Props> = ({
+  glossary,
   lists,
   onListAddBookmark,
   onListDeleteBookmark,
@@ -81,7 +84,14 @@ export const BookmarkLists: React.FC<Props> = ({
             grow
           />
           <BaseFormSubmit className="BookmarkLists-submit">
-            <Button text="Create" type="submit" onClick={onCreateListSubmit} error={!!submitError} grow size="small" />
+            <Button
+              text={glossary.create}
+              type="submit"
+              onClick={onCreateListSubmit}
+              error={!!submitError}
+              grow
+              size="small"
+            />
             <FadeInOut valueToUpdate={!!submitError} speed="fast">
               <BaseFormError>{submitError}</BaseFormError>
             </FadeInOut>
@@ -90,7 +100,7 @@ export const BookmarkLists: React.FC<Props> = ({
       ) : (
         <BaseFormSubmit className="BookmarkLists-submit">
           <Button
-            text="New list"
+            text={glossary.newList}
             type="button"
             loading={createListSubmitting}
             grow

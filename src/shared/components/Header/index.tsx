@@ -24,6 +24,8 @@ import './Header.less';
 
 const Header: React.FC = () => {
   const dispatch = useDispatch();
+
+  const glossary = useSelector(selectCurrentGlossary);
   const session = useSelector(selectSession);
   const currentRoute = useSelector(selectCurrentRoute);
   const currentRouteParamLanguage = useSelector(selectCurrentRouteParamLanguage);
@@ -120,6 +122,7 @@ const Header: React.FC = () => {
 
   return (
     <HeaderUi
+      glossary={glossary}
       session={session}
       currentGlossary={currentGlossary}
       onUserClick={onUserClick}

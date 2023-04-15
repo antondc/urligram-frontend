@@ -12,11 +12,13 @@ import Tag from 'Assets/svg/tag.svg';
 import User from 'Assets/svg/user.svg';
 import UserFill from 'Assets/svg/userFill.svg';
 import A from 'Components/A';
+import { GlossaryState } from 'Modules/Languages/languages.types';
 import { SessionState } from 'Modules/Session/session.types';
 
 import './UserModal.less';
 
 interface Props {
+  glossary: GlossaryState;
   routeName: string;
   userModalMounted: boolean;
   isUserPage: boolean;
@@ -28,6 +30,7 @@ interface Props {
 }
 
 export const UserModal: React.FC<Props> = ({
+  glossary,
   userModalMounted,
   isUserPage,
   session,
@@ -51,14 +54,14 @@ export const UserModal: React.FC<Props> = ({
       <li className={'UserModal-item' + (routeName === 'User' && isUserPage ? ' UserModal-item--active' : '')}>
         <A className="UserModal-link" href={`users/${session?.id}`} frontend underlined styled={false}>
           <UserFill className="UserModal-icon" />
-          <div className="UserModal-label">My profile</div>
+          <div className="UserModal-label">{glossary.myProfile}</div>
           <ArrowRight className="UserModal-iconArrow" />
         </A>
       </li>
       <li className={'UserModal-item' + (routeName === 'UserTags' && isUserPage ? ' UserModal-item--active' : '')}>
         <A className="UserModal-link" href={`users/${session?.id}/tags`} frontend underlined styled={false}>
           <Tag className="UserModal-icon" />
-          <div className="UserModal-label">Tags</div>
+          <div className="UserModal-label">{glossary.tags}</div>
           <ArrowRight className="UserModal-iconArrow" />
         </A>
       </li>
@@ -71,7 +74,7 @@ export const UserModal: React.FC<Props> = ({
       >
         <A className="UserModal-link" href={`users/${session?.id}/bookmarks`} frontend underlined styled={false}>
           <Bookmark className="UserModal-icon" />
-          <div className="UserModal-label">Bookmarks</div>
+          <div className="UserModal-label">{glossary.bookmarks}</div>
           <ArrowRight className="UserModal-iconArrow" />
         </A>
       </li>
@@ -84,7 +87,7 @@ export const UserModal: React.FC<Props> = ({
       >
         <A className="UserModal-link" href={`users/${session?.id}/lists`} frontend underlined styled={false}>
           <List className="UserModal-icon" />
-          <div className="UserModal-label">Lists</div>
+          <div className="UserModal-label">{glossary.lists}</div>
           <ArrowRight className="UserModal-iconArrow" />
         </A>
       </li>
@@ -97,7 +100,7 @@ export const UserModal: React.FC<Props> = ({
       >
         <A className="UserModal-link" href={`users/${session?.id}/followers`} frontend underlined styled={false}>
           <FlagLeft className="UserModal-icon" />
-          <div className="UserModal-label">Followers</div>
+          <div className="UserModal-label">{glossary.followers}</div>
           <ArrowRight className="UserModal-iconArrow" />
         </A>
       </li>
@@ -110,20 +113,20 @@ export const UserModal: React.FC<Props> = ({
       >
         <A className="UserModal-link" href={`users/${session?.id}/following`} frontend underlined styled={false}>
           <FlagRight className="UserModal-icon" />
-          <div className="UserModal-label">Following</div>
+          <div className="UserModal-label">{glossary.following}</div>
           <ArrowRight className="UserModal-iconArrow" />
         </A>
       </li>
       <li className={'UserModal-item' + (routeName === 'ForgotPassword' ? ' UserModal-item--active' : '')}>
         <A className="UserModal-link" href="/forgot-password" frontend underlined styled={false}>
           <Private className="UserModal-icon" />
-          <div className="UserModal-label">Password</div>
+          <div className="UserModal-label">{glossary.password}</div>
           <ArrowRight className="UserModal-iconArrow" />
         </A>
       </li>
       <li className="UserModal-item UserModal-logOut" onClick={sessionLogOut}>
         <LogOut className="UserModal-icon" />
-        <div className="UserModal-label">Log out</div>
+        <div className="UserModal-label">{glossary.logout}</div>
         <ArrowRight className="UserModal-iconArrow" />
       </li>
     </ul>

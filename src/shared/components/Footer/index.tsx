@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { selectCurrentGlossary } from 'Modules/Languages/selectors/selectCurrentGlossary';
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
 import { selectCurrentPathname } from 'Modules/Routes/selectors/selectCurrentPathname';
 import { selectCurrentRoute } from 'Modules/Routes/selectors/selectCurrentRoute';
@@ -18,6 +19,7 @@ interface Props {
 
 const Footer: React.FC<Props> = ({ className }) => {
   const dispatch = useDispatch();
+  const glossary = useSelector(selectCurrentGlossary);
   const session = useSelector(selectSession);
   const currentLanguageSlug = useSelector(selectCurrentLanguageSlug);
   const uiLanguagesModalMounted = useSelector(selectUiLanguagesModalMounted);
@@ -31,6 +33,7 @@ const Footer: React.FC<Props> = ({ className }) => {
 
   return (
     <FooterUi
+      glossary={glossary}
       className={className}
       session={session}
       onLanguageItemClick={onLanguageItemClick}

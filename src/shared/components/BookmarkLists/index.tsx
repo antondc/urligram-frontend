@@ -11,6 +11,7 @@ import { selectListsErrorLast } from 'Modules/Lists/selectors/selectListsErrorLa
 import { RootState } from 'Modules/rootType';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { bookmarkListsModalUnmount } from 'Modules/Ui/actions/bookmarkListsModalUnmount';
+import { selectCurrentGlossary } from 'Modules/Languages/selectors/selectCurrentGlossary';
 import { BookmarkLists as BookmarkListsUi } from './BookmarkLists';
 
 interface Props {
@@ -20,6 +21,7 @@ interface Props {
 const BookmarkLists: React.FC<Props> = ({ bookmarkId }) => {
   const dispatch = useDispatch();
 
+  const glossary = useSelector(selectCurrentGlossary);
   const session = useSelector(selectSession);
   const [itemsLoading, setItemsLoading] = useState<number[]>([]);
   const [createListSubmitting, setCreateListSubmitting] = useState<boolean>(false);
@@ -93,6 +95,7 @@ const BookmarkLists: React.FC<Props> = ({ bookmarkId }) => {
 
   return (
     <BookmarkListsUi
+      glossary={glossary}
       sessionId={session?.id}
       onListAddBookmark={onListAddBookmark}
       onListDeleteBookmark={onListDeleteBookmark}

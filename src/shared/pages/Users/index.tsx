@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { useScrollBeforeCallback } from 'Hooks/useScrollBeforeCallback';
+import { selectCurrentGlossary } from 'Modules/Languages/selectors/selectCurrentGlossary';
 import { selectCurrentFullUrl } from 'Modules/Routes/selectors/selectCurrentFullUrl';
 import { selectCurrentRouteQueryParamFilter } from 'Modules/Routes/selectors/selectCurrentRouteQueryParamFilter';
 import { selectCurrentRouteQueryParamPage } from 'Modules/Routes/selectors/selectCurrentRouteQueryParamPage';
@@ -21,6 +22,7 @@ import { Users as UsersUI } from './Users';
 
 const Users: React.FC = () => {
   const dispatch = useDispatch();
+  const glossary = useSelector(selectCurrentGlossary);
   const { scrollBeforeCallback } = useScrollBeforeCallback();
   const session = useSelector(selectSession);
   const usersCurrentIds = useSelector(selectUsersCurrentIds);
@@ -62,6 +64,7 @@ const Users: React.FC = () => {
 
   return (
     <UsersUI
+      glossary={glossary}
       usersCurrentIds={usersCurrentIds}
       usersLoading={usersLoading}
       page={page}

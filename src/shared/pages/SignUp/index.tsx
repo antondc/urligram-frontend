@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import debounce from 'lodash/debounce';
 
+import { selectCurrentGlossary } from 'Modules/Languages/selectors/selectCurrentGlossary';
 import { sessionSignUp } from 'Modules/Session/actions/sessionSignUp';
 import { selectSessionErrorLast } from 'Modules/Session/selectors/selectSessionErrorLast';
 import { selectSessionLoading } from 'Modules/Session/selectors/selectSessionLoading';
@@ -15,6 +16,7 @@ import './SignUp.less';
 
 const SignUp: React.FC = () => {
   const dispatch = useDispatch();
+  const glossary = useSelector(selectCurrentGlossary);
   const sessionError = useSelector(selectSessionErrorLast);
   const sessionStatus = useSelector(selectSessionStatus);
   const sessionStatusInactive = sessionStatus === UserStatus.Inactive;
@@ -220,6 +222,7 @@ const SignUp: React.FC = () => {
 
   return (
     <SignUpUi
+      glossary={glossary}
       nameValue={nameValue}
       nameError={nameError}
       onChangeName={onChangeName}

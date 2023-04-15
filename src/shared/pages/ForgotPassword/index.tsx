@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import debounce from 'lodash/debounce';
 
+import { selectCurrentGlossary } from 'Modules/Languages/selectors/selectCurrentGlossary';
 import { sessionForgotPassword } from 'Modules/Session/actions/sessionForgotPassword';
 import { selectSessionErrorLast } from 'Modules/Session/selectors/selectSessionErrorLast';
 import { selectSessionLoading } from 'Modules/Session/selectors/selectSessionLoading';
@@ -15,6 +16,7 @@ import './ForgotPassword.less';
 
 const ForgotPassword: React.FC = () => {
   const dispatch = useDispatch();
+  const glossary = useSelector(selectCurrentGlossary);
   const sessionError = useSelector(selectSessionErrorLast);
   const sessionPasswordRequested = useSelector(selectSessionPasswordRequested);
   const sessionLoading = useSelector(selectSessionLoading);
@@ -105,6 +107,7 @@ const ForgotPassword: React.FC = () => {
 
   return (
     <ForgotPasswordUi
+      glossary={glossary}
       nameOrEmailValue={nameOrEmailValue}
       nameOrEmailError={nameOrEmailError}
       onChangeNameOrEmail={onChangeNameOrEmail}

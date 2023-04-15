@@ -3,6 +3,7 @@ import React from 'react';
 import A from 'Components/A';
 import LanguageItem from 'Components/LanguageItem';
 import LanguagesSwitch from 'Components/LanguagesSwitch';
+import { GlossaryState } from 'Modules/Languages/languages.types';
 import { RouteState } from 'Modules/Routes/routes.types';
 import { SessionState } from 'Modules/Session/session.types';
 import { Routes } from 'Router/routes';
@@ -11,6 +12,7 @@ import { Fade } from '@antoniodcorrea/components';
 import './Footer.less';
 
 interface Props {
+  glossary: GlossaryState;
   className?: string;
   session: SessionState;
   currentRoute: RouteState;
@@ -22,6 +24,7 @@ interface Props {
 }
 
 export const Footer: React.FC<Props> = ({
+  glossary,
   className,
   session,
   currentRoute,
@@ -35,7 +38,7 @@ export const Footer: React.FC<Props> = ({
     <div className="Footer-left">
       {!session?.id ? (
         <A className="Footer-link" href="sign-up" frontend underlined active={currentRoute?.name === Routes.Tags.name}>
-          Sign up
+          {glossary.signUp}
         </A>
       ) : (
         <A
@@ -45,7 +48,7 @@ export const Footer: React.FC<Props> = ({
           underlined
           active={currentRoute?.name === Routes.ForgotPassword.name}
         >
-          Forgot password?
+          {glossary.forgotPassword}
         </A>
       )}
       {!isMobile && (
@@ -56,7 +59,7 @@ export const Footer: React.FC<Props> = ({
           underlined
           active={currentRoute?.name === `${Routes.Docs.route}#extension`}
         >
-          Extension
+          {glossary.extension}
         </A>
       )}
       <A
@@ -66,7 +69,7 @@ export const Footer: React.FC<Props> = ({
         underlined
         active={currentRoute?.name === Routes.Docs.name}
       >
-        Docs
+        {glossary.docs}
       </A>
     </div>
     <div className="Footer-section Footer-lastSection">

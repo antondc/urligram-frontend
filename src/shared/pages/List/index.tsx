@@ -7,6 +7,7 @@ import { selectBookmarksCurrentIds } from 'Modules/Bookmarks/selectors/selectBoo
 import { selectBookmarksLoading } from 'Modules/Bookmarks/selectors/selectBookmarksLoading';
 import { selectBookmarksMetaSort } from 'Modules/Bookmarks/selectors/selectBookmarksMetaSort';
 import { selectBookmarksTotalItems } from 'Modules/Bookmarks/selectors/selectBookmarkTotalItems';
+import { selectCurrentGlossary } from 'Modules/Languages/selectors/selectCurrentGlossary';
 import { listLoadById } from 'Modules/Lists/actions/listLoadById';
 import { listUserDelete } from 'Modules/Lists/actions/listUserDelete';
 import { listUserUpsert } from 'Modules/Lists/actions/listUserUpsert';
@@ -36,6 +37,7 @@ import { ListWithMemo as ListUI } from './List';
 
 const List: React.FC = () => {
   const dispatch = useDispatch();
+  const glossary = useSelector(selectCurrentGlossary);
   const { scrollBeforeCallback } = useScrollBeforeCallback();
   const [acceptLoading, setAcceptLoading] = useState<boolean>(false);
   const [rejectLoading, setRejectLoading] = useState<boolean>(false);
@@ -136,6 +138,7 @@ const List: React.FC = () => {
 
   return (
     <ListUI
+      glossary={glossary}
       sessionUserListRole={sessionUserListRole}
       listInvitationRole={listInvitationRole}
       sessionUserOwnsList={sessionUserOwnsList}

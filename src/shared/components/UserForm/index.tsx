@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { selectCurrentGlossary } from 'Modules/Languages/selectors/selectCurrentGlossary';
 import { RootState } from 'Modules/rootType';
 import { selectCurrentRouteParamUserId } from 'Modules/Routes/selectors/selectCurrentRouteParamUserId';
 import { sessionUpdateDetails } from 'Modules/Session/actions/sessionUpdateDetails';
@@ -14,6 +15,7 @@ import './UserForm.less';
 
 const UserForm: React.FC = () => {
   const dispatch = useDispatch();
+  const glossary = useSelector(selectCurrentGlossary);
   const userId = useSelector(selectCurrentRouteParamUserId);
   const user = useSelector((state: RootState) => selectUserById(state, { id: userId }));
   const session = useSelector(selectSession);
@@ -85,6 +87,7 @@ const UserForm: React.FC = () => {
 
   return (
     <UserFormUi
+      glossary={glossary}
       statement={statement}
       onChangeStatement={onChangeStatement}
       statementError={statementError}

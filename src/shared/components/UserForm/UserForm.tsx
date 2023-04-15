@@ -1,9 +1,11 @@
 import React from 'react';
 
 import BaseForm, { BaseFormError, BaseFormSubmit } from 'Components/BaseForm';
+import { GlossaryState } from 'Modules/Languages/languages.types';
 import { Button, FadeInOut, ImageField } from '@antoniodcorrea/components';
 
 interface Props {
+  glossary: GlossaryState;
   statement: string;
   statementError: string;
   image: string;
@@ -17,6 +19,7 @@ interface Props {
 }
 
 export const UserForm: React.FC<Props> = ({
+  glossary,
   image,
   imageError,
   percentCompleted,
@@ -41,7 +44,7 @@ export const UserForm: React.FC<Props> = ({
       <BaseFormError className="UserForm-imageError">{imageError}</BaseFormError>
     </FadeInOut>
     <BaseFormSubmit className="UserForm-submitButton">
-      <Button text="Save" type="submit" onClick={onSubmit} loading={submitting} grow />
+      <Button text={glossary.save} type="submit" onClick={onSubmit} loading={submitting} grow />
     </BaseFormSubmit>
   </BaseForm>
 );

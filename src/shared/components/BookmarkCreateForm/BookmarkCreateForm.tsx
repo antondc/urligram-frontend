@@ -15,11 +15,13 @@ import {
   Switch,
   TextArea,
 } from '@antoniodcorrea/components';
+import { GlossaryState } from 'Modules/Languages/languages.types';
 import { TagValue } from '.';
 
 import './BookmarkCreateForm.less';
 
 interface Props {
+  glossary: GlossaryState;
   titleValue: string;
   titleError: string;
   onChangeTitle: (e: React.FormEvent<HTMLInputElement>) => void;
@@ -47,6 +49,7 @@ interface Props {
 }
 
 export const BookmarkCreateForm: React.FC<Props> = ({
+  glossary,
   titleValue,
   titleError,
   onChangeTitle,
@@ -73,7 +76,7 @@ export const BookmarkCreateForm: React.FC<Props> = ({
   onSubmit,
 }) => (
   <BaseForm className="BookmarkCreateForm" onSubmit={onSubmit}>
-    <BaseModalTitle>Add a Bookmark</BaseModalTitle>
+    <BaseModalTitle>{glossary.addBookmark}</BaseModalTitle>
     <BaseFormField className="BookmarkCreateForm-url">
       <Input
         className="BookmarkCreateForm"
@@ -101,7 +104,7 @@ export const BookmarkCreateForm: React.FC<Props> = ({
             <Input
               name="title"
               type="text"
-              label="Title"
+              label={glossary.title}
               onChange={onChangeTitle}
               onBlur={onChangeTitle}
               value={titleValue}
@@ -112,7 +115,7 @@ export const BookmarkCreateForm: React.FC<Props> = ({
           <BaseFormField>
             <Select
               className="BookmarkCreateForm-tags"
-              placeholder="Select tags"
+              placeholder={glossary.selectTags}
               value={tagsValue}
               defaultOptions={[]}
               options={[
@@ -127,11 +130,11 @@ export const BookmarkCreateForm: React.FC<Props> = ({
             />
           </BaseFormField>
           <BaseFormField>
-            <BaseFormLabel>Notes</BaseFormLabel>
+            <BaseFormLabel>{glossary.notes}</BaseFormLabel>
             <TextArea name="notes" value={notesValue} error={!!notesError} grow onChange={onChangeNotes} />
           </BaseFormField>
           <BaseFormField>
-            <BaseFormLabel>Is Public</BaseFormLabel>
+            <BaseFormLabel>{glossary.isPublic}</BaseFormLabel>
             <div className="BookmarkCreateForm-public">
               <Switch name="isPublic" checked={isPublicValue} onChange={onChangeIsPublic} />
               <Earth
@@ -144,7 +147,7 @@ export const BookmarkCreateForm: React.FC<Props> = ({
           </BaseFormField>
           <BaseFormSubmit>
             <Button
-              text="Save"
+              text={glossary.save}
               type="submit"
               onClick={onSubmit}
               error={!!submitError}

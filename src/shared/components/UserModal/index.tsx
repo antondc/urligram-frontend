@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { selectCurrentGlossary } from 'Modules/Languages/selectors/selectCurrentGlossary';
 import { selectCurrentRoute } from 'Modules/Routes/selectors/selectCurrentRoute';
 import { sessionLogOut } from 'Modules/Session/actions/sessionLogOut';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
@@ -15,6 +16,7 @@ import './UserModal.less';
 
 const UserModal: React.FC = () => {
   const dispatch = useDispatch();
+  const glossary = useSelector(selectCurrentGlossary);
   const session = useSelector(selectSession);
   const userModalMounted = useSelector(selectUiUserModalMounted);
   const route = useSelector(selectCurrentRoute);
@@ -48,6 +50,7 @@ const UserModal: React.FC = () => {
 
   return (
     <UserModalUi
+      glossary={glossary}
       isUserPage={isUserPage}
       routeName={route?.name}
       userModalMounted={userModalMounted}

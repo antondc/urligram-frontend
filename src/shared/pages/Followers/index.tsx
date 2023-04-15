@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { useScrollBeforeCallback } from 'Hooks/useScrollBeforeCallback';
+import { selectCurrentGlossary } from 'Modules/Languages/selectors/selectCurrentGlossary';
 import { RootState } from 'Modules/rootType';
 import { selectCurrentFullUrl } from 'Modules/Routes/selectors/selectCurrentFullUrl';
 import { selectCurrentRouteParamUserId } from 'Modules/Routes/selectors/selectCurrentRouteParamUserId';
@@ -24,6 +25,7 @@ import { Followers as FollowersUI } from './Followers';
 
 const Followers: React.FC = () => {
   const dispatch = useDispatch();
+  const glossary = useSelector(selectCurrentGlossary);
   const { scrollBeforeCallback } = useScrollBeforeCallback();
   const userId = useSelector(selectCurrentRouteParamUserId);
   const user = useSelector((state: RootState) => selectUserById(state, { id: userId }));
@@ -70,6 +72,7 @@ const Followers: React.FC = () => {
 
   return (
     <FollowersUI
+      glossary={glossary}
       user={user}
       usersCurrentIds={usersCurrentIds}
       usersLoading={usersLoading}

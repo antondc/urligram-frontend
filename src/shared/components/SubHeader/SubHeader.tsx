@@ -6,7 +6,6 @@ import { useScrollBeforeCallback } from 'Hooks/useScrollBeforeCallback';
 import history from 'Services/History';
 import { Select, SelectValue, SortBy } from '@antoniodcorrea/components';
 import { SortByOption } from '@antoniodcorrea/components/SortBy';
-import { SubHeaderSeparator } from './SubHeaderSeparator';
 
 import './SubHeader.less';
 

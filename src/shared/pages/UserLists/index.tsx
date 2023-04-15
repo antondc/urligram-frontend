@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { useScrollBeforeCallback } from 'Hooks/useScrollBeforeCallback';
+import { selectCurrentGlossary } from 'Modules/Languages/selectors/selectCurrentGlossary';
 import { listsLoadByUserId } from 'Modules/Lists/actions/listsLoadByUserId';
 import { selectListsMetaSort } from 'Modules/Lists/selectors/selectListMetaSort';
 import { selectListsAllIds } from 'Modules/Lists/selectors/selectListsAllIds';
@@ -26,6 +27,7 @@ import { UserLists as UserListsUi } from './UserLists';
 
 const UserLists: React.FC = () => {
   const dispatch = useDispatch();
+  const glossary = useSelector(selectCurrentGlossary);
   const { scrollBeforeCallback } = useScrollBeforeCallback();
   const session = useSelector(selectSession);
   const userId = useSelector(selectCurrentRouteParamUserId);
@@ -79,6 +81,7 @@ const UserLists: React.FC = () => {
 
   return (
     <UserListsUi
+      glossary={glossary}
       user={user}
       listsIds={listsIds}
       listsLoading={listsLoading}

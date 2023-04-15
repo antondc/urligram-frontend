@@ -4,12 +4,14 @@ import Helmet from 'react-helmet';
 import BaseForm, { BaseFormError, BaseFormField, BaseFormSubmit } from 'Components/BaseForm';
 import { BaseModalFooter, BaseModalFooterLink, BaseModalFooterSection, BaseModalTitle } from 'Components/BaseModal';
 import BasePanel from 'Components/BasePanel';
+import { GlossaryState } from 'Modules/Languages/languages.types';
 import { SITE_TITLE } from 'Root/src/shared/constants';
 import { Button, FadeInOut, Input, Space } from '@antoniodcorrea/components';
 
 import './SignUp.less';
 
 interface Props {
+  glossary: GlossaryState;
   nameValue: string;
   nameError: string;
   onChangeName: (e: React.FormEvent<HTMLInputElement>) => void;
@@ -30,6 +32,7 @@ interface Props {
 }
 
 export const SignUp: React.FC<Props> = ({
+  glossary,
   nameValue,
   nameError,
   onChangeName,
@@ -49,15 +52,15 @@ export const SignUp: React.FC<Props> = ({
   onSubmit,
 }) => (
   <>
-    <Helmet title={`${SITE_TITLE} · Sign Up`} />
+    <Helmet title={`${SITE_TITLE} · ${glossary.signUp}`} />
     <BasePanel>
-      <BaseModalTitle>Sign up</BaseModalTitle>
+      <BaseModalTitle>{glossary.signUp}</BaseModalTitle>
       <BaseForm className="SignUp-form">
         <BaseFormField>
           <Input
             name="name"
             type="text"
-            label="Name"
+            label={glossary.name}
             onChange={onChangeName}
             onBlur={onChangeName}
             value={nameValue}
@@ -69,7 +72,7 @@ export const SignUp: React.FC<Props> = ({
           <Input
             name="email"
             type="email"
-            label="Email"
+            label={glossary.email}
             onChange={onChangeEmail}
             onBlur={onChangeEmail}
             value={emailValue}
@@ -81,7 +84,7 @@ export const SignUp: React.FC<Props> = ({
           <Input
             name="password"
             type="password"
-            label="Password"
+            label={glossary.password}
             onChange={onChangePassword}
             onBlur={onChangePassword}
             value={passwordValue}
@@ -93,7 +96,7 @@ export const SignUp: React.FC<Props> = ({
           <Input
             name="password_repeated"
             type="password"
-            label="Repeat password"
+            label={glossary.repeatPassword}
             onChange={onChangePasswordRepeated}
             onBlur={onChangePasswordRepeated}
             value={passwordRepeatedValue}
@@ -103,7 +106,7 @@ export const SignUp: React.FC<Props> = ({
         </BaseFormField>
         <BaseFormSubmit>
           <Button
-            text="Submit"
+            text={glossary.accept}
             type="submit"
             onClick={onSubmit}
             error={!!submitError}
@@ -118,14 +121,14 @@ export const SignUp: React.FC<Props> = ({
       </BaseForm>
       <BaseModalFooter className="ResetPassword-footer">
         <BaseModalFooterSection>
-          Forgot password?:
+          {glossary.forgotPassword}:
           <Space />
-          <BaseModalFooterLink href="forgot-password">reset it</BaseModalFooterLink>
+          <BaseModalFooterLink href="forgot-password">{glossary.resetPassword}</BaseModalFooterLink>
         </BaseModalFooterSection>
         <BaseModalFooterSection>
-          Already have an account?:
+          {glossary.alreadyHaveAnAccount}:
           <Space />
-          <BaseModalFooterLink href="login">log in</BaseModalFooterLink>
+          <BaseModalFooterLink href="login">{glossary.login}</BaseModalFooterLink>
         </BaseModalFooterSection>
       </BaseModalFooter>
     </BasePanel>

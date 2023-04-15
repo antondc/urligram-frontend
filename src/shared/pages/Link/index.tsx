@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { bookmarkLoadByLinkSession } from 'Modules/Bookmarks/actions/bookmarkLoadByLinkSession';
 import { selectBookmarksCurrent } from 'Modules/Bookmarks/selectors/selectBookmarksCurrent';
+import { selectCurrentGlossary } from 'Modules/Languages/selectors/selectCurrentGlossary';
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
 import { selectLinkById } from 'Modules/Links/selectors/selectLinkById';
 import { notesLoadByLinkId } from 'Modules/Notes/actions/notesLoadByLinkId';
@@ -22,6 +23,7 @@ import { Link as LinkUi } from './Link';
 const Link: React.FC = () => {
   const dispatch = useDispatch();
 
+  const glossary = useSelector(selectCurrentGlossary);
   const bookmarks = useSelector(selectBookmarksCurrent);
   const bookmark = bookmarks?.length ? bookmarks[0] : null;
   const linkId = useSelector(selectCurrentRouteParamLinkId);
@@ -86,6 +88,7 @@ const Link: React.FC = () => {
 
   return (
     <LinkUi
+      glossary={glossary}
       notes={notes}
       users={users}
       bookmarkOrLinkTitle={bookmarkOrLinkTitle}

@@ -1,11 +1,13 @@
 import React from 'react';
 
 import BaseForm, { BaseFormError, BaseFormField, BaseFormSubmit } from 'Components/BaseForm';
+import { GlossaryState } from 'Modules/Languages/languages.types';
 import { Button, FadeInOut, Input } from '@antoniodcorrea/components';
 
 import './LoginForm.less';
 
 interface Props {
+  glossary: GlossaryState;
   nameOrEmailValue: string;
   nameOrEmailError: string;
   onChangeNameOrEmail: (e: React.FormEvent<HTMLInputElement>) => void;
@@ -20,6 +22,7 @@ interface Props {
 }
 
 export const LoginForm: React.FC<Props> = ({
+  glossary,
   nameOrEmailValue,
   nameOrEmailError,
   onChangeNameOrEmail,
@@ -37,7 +40,7 @@ export const LoginForm: React.FC<Props> = ({
       <Input
         name="nameOrEmail"
         type="text"
-        label="Name or Email"
+        label={glossary.nameOrEmail}
         onChange={onChangeNameOrEmail}
         onBlur={onChangeNameOrEmail}
         value={nameOrEmailValue}
@@ -49,7 +52,7 @@ export const LoginForm: React.FC<Props> = ({
       <Input
         name="password"
         type="password"
-        label="Password"
+        label={glossary.password}
         onChange={onChangePassword}
         onBlur={onChangePassword}
         value={passwordValue}
@@ -59,7 +62,7 @@ export const LoginForm: React.FC<Props> = ({
     </BaseFormField>
     <BaseFormSubmit>
       <Button
-        text="Submit"
+        text={glossary.enter}
         type="submit"
         onClick={onSubmit}
         error={!!submitError}

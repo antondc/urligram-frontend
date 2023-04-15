@@ -4,27 +4,32 @@ import Helmet from 'react-helmet';
 import { BaseModalFooter, BaseModalFooterLink, BaseModalFooterSection, BaseModalTitle } from 'Components/BaseModal';
 import BasePanel from 'Components/BasePanel';
 import LoginForm from 'Components/LoginForm';
+import { GlossaryState } from 'Modules/Languages/languages.types';
 import { SITE_TITLE } from 'Root/src/shared/constants';
 import { Space } from '@antoniodcorrea/components';
 
 import './Login.less';
 
-export const Login: React.FC = () => (
+interface Props {
+  glossary: GlossaryState;
+}
+
+export const Login: React.FC<Props> = ({ glossary }) => (
   <>
-    <Helmet title={`${SITE_TITLE} · Login`} />
+    <Helmet title={`${SITE_TITLE} · ${glossary.login}`} />
     <BasePanel>
-      <BaseModalTitle>Login</BaseModalTitle>
+      <BaseModalTitle>{glossary.login}</BaseModalTitle>
       <LoginForm />
       <BaseModalFooter className="ResetPassword-footer">
         <BaseModalFooterSection>
-          Forgot password?:
+          {glossary.forgotPassword}:
           <Space />
-          <BaseModalFooterLink href="login">reset it</BaseModalFooterLink>
+          <BaseModalFooterLink href="login">{glossary.resetPassword}</BaseModalFooterLink>
         </BaseModalFooterSection>
         <BaseModalFooterSection>
-          Dont have an account?:
+          {glossary.dontHaveAccount}:
           <Space />
-          <BaseModalFooterLink href="sign-up">sign up</BaseModalFooterLink>
+          <BaseModalFooterLink href="sign-up">{glossary.signUp}</BaseModalFooterLink>
         </BaseModalFooterSection>
       </BaseModalFooter>
     </BasePanel>

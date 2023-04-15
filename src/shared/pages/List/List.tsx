@@ -15,6 +15,7 @@ import NoResults from 'Components/NoResults';
 import Pagination from 'Components/Pagination';
 import { RenderInPortal } from 'Components/Portal';
 import SubHeader, { SubHeaderSeparator } from 'Components/SubHeader';
+import { GlossaryState } from 'Modules/Languages/languages.types';
 import { ListState, ListUser, ListUserRole, ListUserStatus } from 'Modules/Lists/lists.types';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
@@ -24,6 +25,7 @@ import { AnimateHeight, Check, EditCircle, Eye, Img, SelectValue, Spinner, Toolt
 import './List.less';
 
 interface Props {
+  glossary: GlossaryState;
   showBanner: boolean;
   listInvitationRole: ListUserRole;
   sessionUserListRole: ListUserRole;
@@ -58,6 +60,7 @@ interface Props {
 }
 
 const List: React.FC<Props> = ({
+  glossary,
   listInvitationRole,
   sessionUserListRole,
   list,
@@ -112,7 +115,7 @@ const List: React.FC<Props> = ({
       title={list?.name}
       leftIcon={<ListIcon />}
       // select props
-      selectPlaceholder="Select tags"
+      selectPlaceholder={glossary.selectTags}
       currentQueryParamFilterTags={currentQueryParamFilterTags}
       selectDefaultOptions={allTags.map((item) => ({ label: item.name, value: item.name }))}
       selectOptions={[
@@ -124,8 +127,8 @@ const List: React.FC<Props> = ({
       // sort props
       sortLoading={bookmarksLoading}
       sortByOptions={[
-        { label: 'Bookmarked', field: 'timesbookmarked', icon: Bookmark },
-        { label: 'Date', field: 'createdAt', icon: Clock },
+        { label: glossary.bookmarked, field: 'timesbookmarked', icon: Bookmark },
+        { label: glossary.created, field: 'createdAt', icon: Clock },
       ]}
       url={currentHref}
       currentSort={sort}
@@ -186,7 +189,7 @@ const List: React.FC<Props> = ({
         {sessionUserOwnsList && (
           <>
             <RenderInPortal>
-              <Tooltip parentElementId="List-tooltipAddUser" content="Add user" delay={2} />
+              <Tooltip parentElementId="List-tooltipAddUser" content={glossary.addUser} delay={2} />
             </RenderInPortal>
             <div className="List-headerPlusIcon" id="List-tooltipAddUser">
               <ListAddUser listId={list?.id} />
@@ -204,7 +207,7 @@ const List: React.FC<Props> = ({
         {sessionUserListRole === ListUserRole.Admin && (
           <>
             <RenderInPortal>
-              <Tooltip parentElementId="List-tooltipAdmin" content="Edit list" delay={2} />
+              <Tooltip parentElementId="List-tooltipAdmin" content={glossary.editList} delay={2} />
             </RenderInPortal>
             <EditCircle className="List-iconRole List-iconAdmin" id="List-tooltipAdmin" onClick={onEditClick} />
           </>
@@ -212,7 +215,7 @@ const List: React.FC<Props> = ({
         {sessionUserListRole && sessionUserListRole !== ListUserRole.Admin && (
           <>
             <RenderInPortal>
-              <Tooltip parentElementId="List-tooltipLeaveList" content="Leave list" delay={1} />
+              <Tooltip parentElementId="List-tooltipLeaveList" content={glossary.leaveList} delay={1} />
             </RenderInPortal>
             {leaveListLoading ? (
               <Spinner className="List-iconLeaveListLoader" />
@@ -237,7 +240,7 @@ const List: React.FC<Props> = ({
           </CardItem>
         ))
       )}
-      {!bookmarksLoading && !bookmarksIds?.length && <NoResults content="ⵁ We didnt find any bookmark." />}
+      {!bookmarksLoading && !bookmarksIds?.length && <NoResults content={`ⵁ ${glossary.weDidNotFindAnyBookmark}.`} />}
     </div>
     <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={currentHref} />
   </div>

@@ -14,15 +14,15 @@ import './NotFound.less';
 
 const NotFound: React.FC = () => {
   const dispatch = useDispatch();
-  const currentGlossary = useSelector(selectCurrentGlossary);
+  const glossary = useSelector(selectCurrentGlossary);
 
   useEffect(() => () => dispatch(uiResetModalsState()), []);
 
   return (
     <>
-      <Helmet title={`${SITE_TITLE} · Not Found`} />
+      <Helmet title={`${SITE_TITLE} · ${glossary.notFound}`} />
       <CardItem className="NotFound">
-        <h1 className="NotFound-title">{currentGlossary?.notFound} 😵</h1>
+        <h1 className="NotFound-title">{glossary?.notFound} 😵</h1>
         <p className="NotFound-text">We couldnt find what you were looking for.</p>
         <p className="NotFound-text">
           But you can continue searching for

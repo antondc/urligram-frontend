@@ -21,51 +21,50 @@ interface Props {
   glossary: GlossaryState;
 }
 
-export const Tags: React.FC<Props> = ({tags, tagsLoading, currentHref, sort, glossary}) => (
-    <>
-        <Helmet>
-            <title>{`${SITE_TITLE} · ${glossary.tags}`}</title>
-            <meta property="og:title" content={`${SITE_TITLE} · ${glossary.tags}`}/>
-            <meta property="og:url" content={currentHref}/>
-            <meta property="twitter:title" content={`${SITE_TITLE} · ${glossary.tags}`}/>
-            <meta property="twitter:url" content={currentHref}/>
-        </Helmet>
-        <div className="Tags">
-            <Helmet title={`${SITE_TITLE} · Tags`}/>
-            <CardItem className="Tags-header">
-                <div className="Tags-headerTitle">
-                    <TagIcon/>
-                    All Tags
-                </div>
-                <div className="Tags-separator"/>
-                <SortBy
-                    options={[
-                        {label: 'Bookmarks', field: 'count', icon: Bookmark},
-                        {label: 'Name', field: 'name', icon: Title},
-                    ]}
-                    href={currentHref}
-                    currentSort={sort}
-                    loading={tagsLoading}
-                />
-            </CardItem>
-            <div className="Tags-tags">
-                {tagsLoading ? (
-                    <TagsSkeleton length={tags?.length || 70}/>
-                ) : (
-                    tags?.map((item) => (
-                        <A className="Tags-tag" href={`?filter[tags][]=${item.name}`} key={item.id} styled={false}
-                           frontend>
-                            <Tag>
-                                {item?.name}
-                                <Space/>
-                                <Space/>
-                                <Space/>
-                                {item?.count}
-                            </Tag>
-                        </A>
-                    ))
-                )}
-            </div>
+export const Tags: React.FC<Props> = ({ tags, tagsLoading, currentHref, sort, glossary }) => (
+  <>
+    <Helmet>
+      <title>{`${SITE_TITLE} · ${glossary.tags}`}</title>
+      <meta property="og:title" content={`${SITE_TITLE} · ${glossary.tags}`} />
+      <meta property="og:url" content={currentHref} />
+      <meta property="twitter:title" content={`${SITE_TITLE} · ${glossary.tags}`} />
+      <meta property="twitter:url" content={currentHref} />
+    </Helmet>
+    <div className="Tags">
+      <Helmet title={`${SITE_TITLE} · ${glossary.tags}`} />
+      <CardItem className="Tags-header">
+        <div className="Tags-headerTitle">
+          <TagIcon />
+          {glossary.allTags}
         </div>
-    </>
+        <div className="Tags-separator" />
+        <SortBy
+          options={[
+            { label: glossary.bookmarks, field: 'count', icon: Bookmark },
+            { label: glossary.name, field: 'name', icon: Title },
+          ]}
+          href={currentHref}
+          currentSort={sort}
+          loading={tagsLoading}
+        />
+      </CardItem>
+      <div className="Tags-tags">
+        {tagsLoading ? (
+          <TagsSkeleton length={tags?.length || 70} />
+        ) : (
+          tags?.map((item) => (
+            <A className="Tags-tag" href={`?filter[tags][]=${item.name}`} key={item.id} styled={false} frontend>
+              <Tag>
+                {item?.name}
+                <Space />
+                <Space />
+                <Space />
+                {item?.count}
+              </Tag>
+            </A>
+          ))
+        )}
+      </div>
+    </div>
+  </>
 );

@@ -6,6 +6,7 @@ import { bookmarkLoadById } from 'Modules/Bookmarks/actions/bookmarkLoadById';
 import { bookmarkUpdate } from 'Modules/Bookmarks/actions/bookmarkUpdate';
 import { selectBookmarksById } from 'Modules/Bookmarks/selectors/selectBookmarkById';
 import { selectBookmarksErrorLast } from 'Modules/Bookmarks/selectors/selectBookmarksErrorLast';
+import { selectCurrentGlossary } from 'Modules/Languages/selectors/selectCurrentGlossary';
 import { notesLoadByLinkId } from 'Modules/Notes/actions/notesLoadByLinkId';
 import { RootState } from 'Modules/rootType';
 import { tagsSearchLoad } from 'Modules/Tags/actions/tagsSearchLoad';
@@ -31,6 +32,7 @@ interface Props {
 
 const BookmarkUpdateForm: React.FC<Props> = ({ closeModal, setLocked }) => {
   const dispatch = useDispatch();
+  const glossary = useSelector(selectCurrentGlossary);
   const bookmarkError = useSelector(selectBookmarksErrorLast);
   const allTags = useSelector(selectTagsAll);
   const tagsSearch = useSelector(selectTagsSearch);
@@ -155,6 +157,7 @@ const BookmarkUpdateForm: React.FC<Props> = ({ closeModal, setLocked }) => {
 
   return (
     <BookmarkFormUi
+      glossary={glossary}
       urlValue={bookmark?.url}
       titleValue={titleValue}
       titleError={titleError}

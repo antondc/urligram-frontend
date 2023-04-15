@@ -10,6 +10,7 @@ import NoResults from 'Components/NoResults';
 import Pagination from 'Components/Pagination';
 import SubHeader from 'Components/SubHeader';
 import { BookmarksByKey } from 'Modules/Bookmarks/bookmarks.types';
+import { GlossaryState } from 'Modules/Languages/languages.types';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE, SITE_TITLE } from 'Root/src/shared/constants';
@@ -18,6 +19,7 @@ import { FadeInOut, SelectValue } from '@antoniodcorrea/components';
 import './UserBookmarks.less';
 
 interface Props {
+  glossary: GlossaryState;
   user: UserState;
   bookmarksByKey: BookmarksByKey;
   bookmarksIds: number[];
@@ -41,6 +43,7 @@ interface Props {
 }
 
 export const UserBookmarks: React.FC<Props> = ({
+  glossary,
   user,
   bookmarksByKey,
   bookmarksIds,
@@ -56,15 +59,14 @@ export const UserBookmarks: React.FC<Props> = ({
   currentQueryParamFilterTags,
 }) => (
   <div className="UserBookmarks">
-    <Helmet title={`${SITE_TITLE} · User Bookmarks`} />
+    <Helmet title={`${SITE_TITLE} · ${glossary.userBookmarks}`} />
     <SubHeader
       // title props
-      title={user?.name}
+      title={`@${user?.name}`}
       titleHref={`/users/${user?.id}`}
-      appendTitle="’s bookmarks"
       leftIcon={<Bookmark />}
       // select props
-      selectPlaceholder="Select tags"
+      selectPlaceholder={glossary.selectTags}
       currentQueryParamFilterTags={currentQueryParamFilterTags}
       selectDefaultOptions={allTags.map((item) => ({ label: item.name, value: item.name }))}
       selectOptions={[
@@ -76,8 +78,8 @@ export const UserBookmarks: React.FC<Props> = ({
       // sort props
       sortLoading={bookmarksLoading}
       sortByOptions={[
-        { label: 'Bookmarked', field: 'timesbookmarked', icon: Bookmark },
-        { label: 'Created', field: 'createdAt', icon: Clock },
+        { label: glossary.bookmarked, field: 'timesbookmarked', icon: Bookmark },
+        { label: glossary.created, field: 'createdAt', icon: Clock },
       ]}
       url={currentHref}
       currentSort={sort}
@@ -96,7 +98,7 @@ export const UserBookmarks: React.FC<Props> = ({
           </FadeInOut>
         ))
       )}
-      {!bookmarksLoading && !bookmarksIds?.length && <NoResults content="ⵁ We didnt find any bookmark." />}
+      {!bookmarksLoading && !bookmarksIds?.length && <NoResults content={`ⵁ ${glossary.weDidNotFindAnyBookmark}.`} />}
     </div>
     <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={currentHref} />
   </div>

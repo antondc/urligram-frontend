@@ -11,6 +11,7 @@ import { Img, Input, Spinner } from '@antoniodcorrea/components';
 import './Header.less';
 
 interface Props {
+  glossary: GlossaryState;
   session: SessionState;
   sessionLoading: boolean;
   currentGlossary: GlossaryState;
@@ -25,6 +26,7 @@ interface Props {
 }
 
 export const Header: React.FC<Props> = ({
+  glossary,
   session,
   logoLoadingHeartBeat,
   logoLoadingColors,
@@ -42,7 +44,7 @@ export const Header: React.FC<Props> = ({
       <form className={'Header-search' + (searchValue ? ' Header-search--withValue' : '')} onSubmit={onSearchSubmit}>
         <Input
           className="Header-input"
-          placeholder="Search…"
+          placeholder={`${glossary.search}…`}
           name="search"
           value={searchValue}
           onChange={onSearchInputChange}
@@ -57,7 +59,7 @@ export const Header: React.FC<Props> = ({
         <div className="Header-addBookmarkIcon">
           <Cross />
         </div>
-        <span className="Header-addBookmarkText">Add Bookmark</span>
+        <span className="Header-addBookmarkText">{glossary.addBookmark}</span>
       </div>
       <div className="Header-separator" />
       <div className="Header-user">

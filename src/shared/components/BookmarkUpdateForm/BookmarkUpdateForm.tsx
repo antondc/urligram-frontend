@@ -2,6 +2,7 @@ import React from 'react';
 
 import BaseForm, { BaseFormError, BaseFormField, BaseFormLabel, BaseFormSubmit } from 'Components/BaseForm';
 import { BaseModalTitle } from 'Components/BaseModal';
+import { GlossaryState } from 'Modules/Languages/languages.types';
 import { TagState } from 'Modules/Tags/tags.types';
 import { Button, Earth, FadeInOut, Input, Select, SelectValue, Switch, TextArea } from '@antoniodcorrea/components';
 import { TagValue } from '.';
@@ -9,6 +10,7 @@ import { TagValue } from '.';
 import './BookmarkUpdateForm.less';
 
 interface Props {
+  glossary: GlossaryState;
   urlValue: string;
   titleValue: string;
   titleError: string;
@@ -32,6 +34,7 @@ interface Props {
 }
 
 export const BookmarkUpdateForm: React.FC<Props> = ({
+  glossary,
   urlValue,
   titleValue,
   titleError,
@@ -54,7 +57,7 @@ export const BookmarkUpdateForm: React.FC<Props> = ({
   onUrlInputClick,
 }) => (
   <BaseForm className="BookmarkUpdateForm" onSubmit={onSubmit}>
-    <BaseModalTitle>Update Bookmark</BaseModalTitle>
+    <BaseModalTitle>{glossary.updateBookmark}</BaseModalTitle>
     <BaseFormField>
       <Input
         className="BookmarkUpdateForm-url"
@@ -71,7 +74,7 @@ export const BookmarkUpdateForm: React.FC<Props> = ({
       <Input
         name="title"
         type="text"
-        label="Title"
+        label={glossary.title}
         onChange={onChangeTitle}
         onBlur={onChangeTitle}
         value={titleValue}
@@ -82,7 +85,7 @@ export const BookmarkUpdateForm: React.FC<Props> = ({
     <BaseFormField>
       <Select
         className="BookmarkUpdateForm-tags"
-        placeholder="Select tags"
+        placeholder={glossary.selectTags}
         value={tagsValue}
         defaultOptions={[]}
         options={[...tagsSearchFormatted, ...allTags.map((item) => ({ label: item.name, value: item.name }))].filter(
@@ -96,11 +99,11 @@ export const BookmarkUpdateForm: React.FC<Props> = ({
       />
     </BaseFormField>
     <BaseFormField>
-      <BaseFormLabel>Notes</BaseFormLabel>
-      <TextArea name="notes" value={notesValue} error={!!notesError} grow onChange={onChangeNotes} />
+      <BaseFormLabel>{glossary.notes}</BaseFormLabel>
+      <TextArea name={glossary.notes} value={notesValue} error={!!notesError} grow onChange={onChangeNotes} />
     </BaseFormField>
     <BaseFormField>
-      <BaseFormLabel>Is Public</BaseFormLabel>
+      <BaseFormLabel>{glossary.isPublic}</BaseFormLabel>
       <div className="BookmarkUpdateForm-public">
         <Switch name="isPublic" checked={isPublicValue} onChange={onChangeIsPublic} />
         <Earth
@@ -113,7 +116,7 @@ export const BookmarkUpdateForm: React.FC<Props> = ({
     </BaseFormField>
     <BaseFormSubmit>
       <Button
-        text="Save"
+        text={glossary.save}
         type="submit"
         onClick={onSubmit}
         error={!!submitError}

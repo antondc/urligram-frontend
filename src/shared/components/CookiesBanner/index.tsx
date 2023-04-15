@@ -4,10 +4,12 @@ import { useSelector } from 'react-redux';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { COOKIE_POLICY_COOKIE, DELAY_SLOW_MS } from 'Root/src/shared/constants';
 import { CookiesWrapper } from 'Services/CookiesWrapper';
+import { selectCurrentGlossary } from 'Modules/Languages/selectors/selectCurrentGlossary';
 import { CookiesBanner as CookiesBannerUi } from './CookiesBanner';
 
 const CookiesBanner: React.FC = () => {
   const session = useSelector(selectSession);
+  const glossary = useSelector(selectCurrentGlossary);
   const cookiesWrapper = new CookiesWrapper();
   const [accepted, setAccepted] = useState<boolean>(false);
   const [show, setShow] = useState<boolean>(!session?.id);
@@ -45,7 +47,9 @@ const CookiesBanner: React.FC = () => {
     }
   }, [session]);
 
-  return <CookiesBannerUi onAccept={onAccept} onReject={onReject} accepted={accepted} show={show} />;
+  return (
+    <CookiesBannerUi glossary={glossary} onAccept={onAccept} onReject={onReject} accepted={accepted} show={show} />
+  );
 };
 
 export default CookiesBanner;

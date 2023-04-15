@@ -8,6 +8,7 @@ import CardItem from 'Components/CardItem';
 import Notes from 'Components/Notes';
 import UserRow from 'Components/UserRow';
 import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
+import { GlossaryState } from 'Modules/Languages/languages.types';
 import { NoteState } from 'Modules/Notes/notes.types';
 import { UserState } from 'Modules/Users/users.types';
 import { SortBy } from '@antoniodcorrea/components';
@@ -15,6 +16,7 @@ import { SortBy } from '@antoniodcorrea/components';
 import './Link.less';
 
 interface Props {
+  glossary: GlossaryState;
   notes: NoteState[];
   users: UserState[];
   bookmark: BookmarkState;
@@ -27,6 +29,7 @@ interface Props {
 }
 
 export const Link: React.FC<Props> = ({
+  glossary,
   notes,
   users,
   bookmark,
@@ -52,11 +55,11 @@ export const Link: React.FC<Props> = ({
       <div className="Link-content">
         <div>
           <CardItem className="Link-subHeader">
-            <span>Users</span>
+            <span>{glossary.users}</span>
             <SortBy
               options={[
-                { label: 'Created', field: 'createdAt', icon: Created },
-                { label: 'Updated', field: 'updatedAt', icon: Updated },
+                { label: glossary.created, field: 'createdAt', icon: Created },
+                { label: glossary.updated, field: 'updatedAt', icon: Updated },
               ]}
               href={currentHref}
               currentSort={sortUsers}
@@ -75,8 +78,8 @@ export const Link: React.FC<Props> = ({
             <span>Notes</span>
             <SortBy
               options={[
-                { label: 'Created', field: 'createdAt', icon: Created },
-                { label: 'Updated', field: 'updatedAt', icon: Updated },
+                { label: glossary.created, field: 'createdAt', icon: Created },
+                { label: glossary.updated, field: 'updatedAt', icon: Updated },
               ]}
               href={currentHref}
               currentSort={sortNotes}

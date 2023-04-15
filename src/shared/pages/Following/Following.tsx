@@ -4,13 +4,13 @@ import Helmet from 'react-helmet';
 import Bookmark from 'Assets/svg/bookmarkFilled.svg';
 import FlagLeft from 'Assets/svg/flagLeft.svg';
 import Title from 'Assets/svg/sortTitle.svg';
-import Clock from 'Assets/svg/spinner6.svg';
 import CardItem from 'Components/CardItem';
 import NoResults from 'Components/NoResults';
 import Pagination from 'Components/Pagination';
 import SubHeader from 'Components/SubHeader';
 import UserRow from 'Components/UserRow';
 import { UserRowSkeletonGroup } from 'Components/UserRow/UserRowSkeletonGroup';
+import { GlossaryState } from 'Modules/Languages/languages.types';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE, SITE_TITLE } from 'Root/src/shared/constants';
@@ -19,6 +19,7 @@ import { SelectValue } from '@antoniodcorrea/components';
 import './Following.less';
 
 interface Props {
+  glossary: GlossaryState;
   user: UserState;
   usersCurrentIds: string[];
   usersLoading: boolean;
@@ -40,6 +41,7 @@ interface Props {
 }
 
 export const Following: React.FC<Props> = ({
+  glossary,
   user,
   usersCurrentIds,
   usersLoading,
@@ -54,14 +56,14 @@ export const Following: React.FC<Props> = ({
   onChange,
 }) => (
   <div className="Following">
-    <Helmet title={`${SITE_TITLE} · Following`} />
+    <Helmet title={`${SITE_TITLE} · ${glossary.following}`} />
     <SubHeader
       // title props
-      title={user?.name}
+      title={`@${user?.name}`}
       titleHref={`/users/${user?.id}`}
       leftIcon={<FlagLeft />}
       // select props
-      selectPlaceholder="Select tags"
+      selectPlaceholder={glossary.selectTags}
       currentQueryParamFilterTags={currentQueryParamFilterTags}
       selectDefaultOptions={allTags.map((item) => ({ label: item.name, value: item.name }))}
       selectOptions={[
@@ -73,9 +75,8 @@ export const Following: React.FC<Props> = ({
       // sort props
       sortLoading={usersLoading}
       sortByOptions={[
-        { label: 'Name', field: 'name', icon: Title },
-        { label: 'Login', field: 'login', icon: Clock },
-        { label: 'Bookmarks', field: 'bookmarks', icon: Bookmark },
+        { label: glossary.name, field: 'name', icon: Title },
+        { label: glossary.bookmarks, field: 'bookmarks', icon: Bookmark },
       ]}
       url={currentHref}
       currentSort={sort}
@@ -90,7 +91,7 @@ export const Following: React.FC<Props> = ({
           </CardItem>
         ))
       )}
-      {!usersLoading && !usersCurrentIds?.length && <NoResults content="ⵁ We didnt find any user." />}
+      {!usersLoading && !usersCurrentIds?.length && <NoResults content={`ⵁ ${glossary.weDidNotFindAnyUser}.`} />}
     </div>
     <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={currentHref} />
   </div>

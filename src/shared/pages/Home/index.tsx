@@ -7,6 +7,7 @@ import { selectBookmarksCurrentIds } from 'Modules/Bookmarks/selectors/selectBoo
 import { selectBookmarksLoading } from 'Modules/Bookmarks/selectors/selectBookmarksLoading';
 import { selectBookmarksMetaSort } from 'Modules/Bookmarks/selectors/selectBookmarksMetaSort';
 import { selectBookmarksTotalItems } from 'Modules/Bookmarks/selectors/selectBookmarkTotalItems';
+import { selectCurrentGlossary } from 'Modules/Languages/selectors/selectCurrentGlossary';
 import { selectCurrentFullUrl } from 'Modules/Routes/selectors/selectCurrentFullUrl';
 import { selectCurrentRouteQueryParamFilter } from 'Modules/Routes/selectors/selectCurrentRouteQueryParamFilter';
 import { selectCurrentRouteQueryParamPage } from 'Modules/Routes/selectors/selectCurrentRouteQueryParamPage';
@@ -21,8 +22,8 @@ import { Home as HomeUi } from './Home';
 
 const Home: React.FC = () => {
   const dispatch = useDispatch();
-
   const session = useSelector(selectSession);
+  const glossary = useSelector(selectCurrentGlossary);
   const bookmarksIds = useSelector(selectBookmarksCurrentIds);
   const loading = useSelector(selectBookmarksLoading) && isDomAvailable;
   const page = useSelector(selectCurrentRouteQueryParamPage);
@@ -63,6 +64,7 @@ const Home: React.FC = () => {
 
   return (
     <HomeUi
+      glossary={glossary}
       bookmarksIds={bookmarksIds}
       loading={loading}
       page={page}

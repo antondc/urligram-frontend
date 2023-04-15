@@ -8,6 +8,7 @@ import { selectBookmarksCurrentIds } from 'Modules/Bookmarks/selectors/selectBoo
 import { selectBookmarksLoading } from 'Modules/Bookmarks/selectors/selectBookmarksLoading';
 import { selectBookmarksMetaSort } from 'Modules/Bookmarks/selectors/selectBookmarksMetaSort';
 import { selectBookmarksTotalItems } from 'Modules/Bookmarks/selectors/selectBookmarkTotalItems';
+import { selectCurrentGlossary } from 'Modules/Languages/selectors/selectCurrentGlossary';
 import { RootState } from 'Modules/rootType';
 import { selectCurrentFullUrl } from 'Modules/Routes/selectors/selectCurrentFullUrl';
 import { selectCurrentRouteParamUserId } from 'Modules/Routes/selectors/selectCurrentRouteParamUserId';
@@ -27,6 +28,7 @@ import { UserBookmarks as UserBookmarksUi } from './UserBookmarks';
 
 const UserBookmarks: React.FC = () => {
   const dispatch = useDispatch();
+  const glossary = useSelector(selectCurrentGlossary);
   const { scrollBeforeCallback } = useScrollBeforeCallback();
   const session = useSelector(selectSession);
   const userId = useSelector(selectCurrentRouteParamUserId);
@@ -79,6 +81,7 @@ const UserBookmarks: React.FC = () => {
 
   return (
     <UserBookmarksUi
+      glossary={glossary}
       user={user}
       bookmarksByKey={bookmarksByKey}
       bookmarksIds={bookmarksIds}

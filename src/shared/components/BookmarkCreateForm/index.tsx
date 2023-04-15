@@ -15,6 +15,7 @@ import { Routes } from 'Router/routes';
 import history from 'Services/History';
 import HttpClient from 'Services/HttpClient';
 import { testStringIsValidUrl, testUrlHasProtocol, urlRemoveLeadingCharacters } from '@antoniodcorrea/utils';
+import { selectCurrentGlossary } from 'Modules/Languages/selectors/selectCurrentGlossary';
 import { BookmarkCreateForm as BookmarkFormUi } from './BookmarkCreateForm';
 
 import './BookmarkCreateForm.less';
@@ -31,6 +32,7 @@ interface Props {
 
 const BookmarkCreateForm: React.FC<Props> = ({ closeModal, setLocked }) => {
   const dispatch = useDispatch();
+  const glossary = useSelector(selectCurrentGlossary);
   const bookmarkError = useSelector(selectBookmarksErrorLast);
   const allTags = useSelector(selectTagsAll);
   const tagsSearch = useSelector(selectTagsSearch);
@@ -215,6 +217,7 @@ const BookmarkCreateForm: React.FC<Props> = ({ closeModal, setLocked }) => {
 
   return (
     <BookmarkFormUi
+      glossary={glossary}
       urlSubmitted={urlSubmitted}
       titleValue={titleValue}
       titleError={titleError}

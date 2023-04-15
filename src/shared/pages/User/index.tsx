@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { bookmarksLoadByUserId } from 'Modules/Bookmarks/actions/bookmarksLoadByUserId';
 import { selectBookmarksCurrentIds } from 'Modules/Bookmarks/selectors/selectBookmarksCurrentIds';
 import { selectBookmarksLoading } from 'Modules/Bookmarks/selectors/selectBookmarksLoading';
+import { selectCurrentGlossary } from 'Modules/Languages/selectors/selectCurrentGlossary';
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
 import { listsLoadByUserId } from 'Modules/Lists/actions/listsLoadByUserId';
 import { selectListsAllIds } from 'Modules/Lists/selectors/selectListsAllIds';
@@ -19,12 +20,12 @@ import { selectUserById } from 'Modules/Users/selectors/selectUserById';
 import { Routes } from 'Router/routes';
 import history from 'Services/History';
 import { isDomAvailable, LocaleFormattedDate } from '@antoniodcorrea/utils';
-import { DELETE_CONFIRM_MESSSAGE } from './constants';
 import { User as UserUi } from './User';
 
 const User: React.FC = () => {
   const dispatch = useDispatch();
 
+  const glossary = useSelector(selectCurrentGlossary);
   const session = useSelector(selectSession);
   const userId = useSelector(selectCurrentRouteParamUserId);
   const user = useSelector((state: RootState) => selectUserById(state, { id: userId }));
@@ -41,7 +42,7 @@ const User: React.FC = () => {
   const onUserDelete = async (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
-    const confirmed = confirm(DELETE_CONFIRM_MESSSAGE);
+    const confirmed = confirm(glossary.deleteConfirmMessage);
 
     if (confirmed) {
       await dispatch(userDelete());
@@ -67,6 +68,7 @@ const User: React.FC = () => {
 
   return (
     <UserUi
+      glossary={glossary}
       userIdIsSessionId={userIdIsSessionId}
       userId={userId}
       user={user}

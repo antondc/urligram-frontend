@@ -4,12 +4,14 @@ import Helmet from 'react-helmet';
 import BaseForm, { BaseFormError, BaseFormField, BaseFormSubmit } from 'Components/BaseForm';
 import { BaseModalFooter, BaseModalFooterLink, BaseModalFooterSection, BaseModalTitle } from 'Components/BaseModal';
 import BasePanel from 'Components/BasePanel';
+import { GlossaryState } from 'Modules/Languages/languages.types';
 import { SITE_TITLE } from 'Root/src/shared/constants';
 import { Button, FadeInOut, Input, Space } from '@antoniodcorrea/components';
 
 import './ForgotPassword.less';
 
 interface Props {
+  glossary: GlossaryState;
   nameOrEmailValue: string;
   nameOrEmailError: string;
   onChangeNameOrEmail: (e: React.FormEvent<HTMLInputElement>) => void;
@@ -22,6 +24,7 @@ interface Props {
 }
 
 export const ForgotPassword: React.FC<Props> = ({
+  glossary,
   nameOrEmailValue,
   nameOrEmailError,
   onChangeNameOrEmail,
@@ -33,15 +36,15 @@ export const ForgotPassword: React.FC<Props> = ({
   onSubmit,
 }) => (
   <>
-    <Helmet title={`${SITE_TITLE} · Forgot Password`} />
+    <Helmet title={`${SITE_TITLE} · ${glossary.forgotPassword}`} />
     <BasePanel>
       <BaseForm className="ForgotPassword-form">
-        <BaseModalTitle>Password forgotten</BaseModalTitle>
+        <BaseModalTitle>{glossary.passwordForgotten}</BaseModalTitle>
         <BaseFormField>
           <Input
             name="nameOrEmail"
             type="text"
-            label="Name or email"
+            label={glossary.nameOrEmail}
             onChange={onChangeNameOrEmail}
             onBlur={onBlurNameOrEmail}
             value={nameOrEmailValue}
@@ -52,7 +55,7 @@ export const ForgotPassword: React.FC<Props> = ({
         <BaseFormSubmit>
           <Button
             className="ForgotPassword-submit"
-            text="Submit"
+            text={glossary.accept}
             type="submit"
             onClick={onSubmit}
             error={!!submitError}
@@ -67,14 +70,14 @@ export const ForgotPassword: React.FC<Props> = ({
         </BaseFormSubmit>
         <BaseModalFooter>
           <BaseModalFooterSection>
-            Remember it?:
+            {glossary.rememberIt}:
             <Space />
-            <BaseModalFooterLink href="login">log in</BaseModalFooterLink>
+            <BaseModalFooterLink href="login">{glossary.login}</BaseModalFooterLink>
           </BaseModalFooterSection>
           <BaseModalFooterSection>
-            Dont have an account?:
+            {glossary.dontHaveAccount}:
             <Space />
-            <BaseModalFooterLink href="sign-up">sign up</BaseModalFooterLink>
+            <BaseModalFooterLink href="sign-up">{glossary.signUp}</BaseModalFooterLink>
           </BaseModalFooterSection>
         </BaseModalFooter>
       </BaseForm>

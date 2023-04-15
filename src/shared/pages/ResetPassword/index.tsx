@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { selectCurrentGlossary } from 'Modules/Languages/selectors/selectCurrentGlossary';
 import { selectCurrentRouteQueryParams } from 'Modules/Routes/selectors/selectCurrentRouteQueryParams';
 import { sessionResetPassword } from 'Modules/Session/actions/sessionResetPassword';
 import { selectSessionErrorLast } from 'Modules/Session/selectors/selectSessionErrorLast';
@@ -17,6 +18,7 @@ const ResetPassword: React.FC = () => {
   const dispatch = useDispatch();
   const { name, token } = useSelector(selectCurrentRouteQueryParams);
 
+  const glossary = useSelector(selectCurrentGlossary);
   const sessionError = useSelector(selectSessionErrorLast);
   const sessionPasswordRequested = useSelector(selectSessionPasswordRequested);
   const sessionLoading = useSelector(selectSessionLoading);
@@ -113,6 +115,7 @@ const ResetPassword: React.FC = () => {
 
   return (
     <ResetPasswordUi
+      glossary={glossary}
       passwordValue={passwordValue}
       passwordError={passwordError}
       onChangePassword={onChangePassword}

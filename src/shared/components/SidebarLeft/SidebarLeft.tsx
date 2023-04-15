@@ -87,7 +87,7 @@ export const SidebarLeft: React.FC<Props> = ({
           scrollBeforeNavigate
         >
           <List className="SidebarLeft-itemIcon SidebarLeft-itemIconList" />
-          <span className="SidebarLeft-itemDescription">Lists</span>
+          <span className="SidebarLeft-itemDescription">{glossary.lists}</span>
         </A>
         <A
           className={'SidebarLeft-item' + (routeName === 'Users' ? ' SidebarLeft-item--active' : '')}
@@ -97,7 +97,7 @@ export const SidebarLeft: React.FC<Props> = ({
           scrollBeforeNavigate
         >
           <UserFill className="SidebarLeft-itemIcon" />
-          <span className="SidebarLeft-itemDescription">Users</span>
+          <span className="SidebarLeft-itemDescription">{glossary.users}</span>
         </A>
         <A
           className={'SidebarLeft-item' + (routeName === 'Tags' ? ' SidebarLeft-item--active' : '')}
@@ -107,7 +107,7 @@ export const SidebarLeft: React.FC<Props> = ({
           scrollBeforeNavigate
         >
           <Tag className="SidebarLeft-itemIcon" />
-          <span className="SidebarLeft-itemDescription">Tags</span>
+          <span className="SidebarLeft-itemDescription">{glossary.tags}</span>
         </A>
       </>
       {!!isLoggedIn && (
@@ -133,7 +133,7 @@ export const SidebarLeft: React.FC<Props> = ({
             <A href={`users/${sessionId}/lists?sort=-createdAt`} styled={false} frontend scrollBeforeNavigate>
               <List className="SidebarLeft-itemIcon SidebarLeft-itemIconList" />
               <span className="SidebarLeft-itemDescription">
-                <span>My Lists </span>
+                <span>{glossary.myLists}</span>
               </span>
             </A>
             <span
@@ -156,7 +156,7 @@ export const SidebarLeft: React.FC<Props> = ({
             scrollBeforeNavigate
           >
             <FlagRight className="SidebarLeft-itemIcon" />
-            <span className="SidebarLeft-itemDescription">Followers</span>
+            <span className="SidebarLeft-itemDescription">{glossary.followers}</span>
             <span
               className={'SidebarLeft-triangle' + (followersShown ? ' SidebarLeft-triangle--open' : '')}
               onClick={onFollowersTriangleClick}
@@ -174,7 +174,7 @@ export const SidebarLeft: React.FC<Props> = ({
           >
             <A href={`users/${sessionId}/following`} styled={false} frontend scrollBeforeNavigate>
               <FlagLeft className="SidebarLeft-itemIcon" />
-              <span className="SidebarLeft-itemDescription">Following</span>
+              <span className="SidebarLeft-itemDescription">{glossary.following}</span>
             </A>
             <span
               className={'SidebarLeft-triangle' + (followingShown ? ' SidebarLeft-triangle--open' : '')}
@@ -194,7 +194,7 @@ export const SidebarLeft: React.FC<Props> = ({
             scrollBeforeNavigate
           >
             <Tag className="SidebarLeft-itemIcon" />
-            <span className="SidebarLeft-itemDescription">My Tags</span>
+            <span className="SidebarLeft-itemDescription">{glossary.myTags}</span>
           </A>
         </>
       )}

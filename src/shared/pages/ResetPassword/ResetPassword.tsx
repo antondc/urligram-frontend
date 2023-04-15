@@ -3,6 +3,7 @@ import Helmet from 'react-helmet';
 
 import BaseForm, { BaseFormError, BaseFormField, BaseFormSubmit } from 'Components/BaseForm';
 import { BaseModalFooter, BaseModalFooterLink, BaseModalFooterSection, BaseModalTitle } from 'Components/BaseModal';
+import { GlossaryState } from 'Modules/Languages/languages.types';
 import BasePanel from 'Root/src/shared/components/BasePanel/BasePanel';
 import { SITE_TITLE } from 'Root/src/shared/constants';
 import { Button, FadeInOut, Input, Space } from '@antoniodcorrea/components';
@@ -10,6 +11,7 @@ import { Button, FadeInOut, Input, Space } from '@antoniodcorrea/components';
 import './ResetPassword.less';
 
 interface Props {
+  glossary: GlossaryState;
   passwordValue: string;
   passwordError: string;
   onChangePassword: (e: React.FormEvent<HTMLInputElement>) => void;
@@ -24,6 +26,7 @@ interface Props {
 }
 
 export const ResetPassword: React.FC<Props> = ({
+  glossary,
   passwordValue,
   passwordError,
   onChangePassword,
@@ -37,15 +40,15 @@ export const ResetPassword: React.FC<Props> = ({
   onSubmit,
 }) => (
   <>
-    <Helmet title={`${SITE_TITLE} · Reset Password`} />
+    <Helmet title={`${SITE_TITLE} · ${glossary.resetPassword}`} />
     <BasePanel>
-      <BaseModalTitle>Reset Password</BaseModalTitle>
+      <BaseModalTitle>{glossary.resetPassword}</BaseModalTitle>
       <BaseForm className="ResetPassword-form">
         <BaseFormField>
           <Input
             name="password"
             type="password"
-            label="Password"
+            label={glossary.password}
             onChange={onChangePassword}
             onBlur={onChangePassword}
             value={passwordValue}
@@ -57,7 +60,7 @@ export const ResetPassword: React.FC<Props> = ({
           <Input
             name="password_repeated"
             type="password"
-            label="Repeat password"
+            label={glossary.repeatPassword}
             onChange={onChangePasswordRepeated}
             onBlur={onChangePasswordRepeated}
             value={passwordRepeatedValue}
@@ -67,7 +70,7 @@ export const ResetPassword: React.FC<Props> = ({
         </BaseFormField>
         <BaseFormSubmit>
           <Button
-            text="Submit"
+            text={glossary.save}
             type="submit"
             onClick={onSubmit}
             error={!!submitError}
@@ -82,14 +85,14 @@ export const ResetPassword: React.FC<Props> = ({
         </BaseFormSubmit>
         <BaseModalFooter className="ResetPassword-footer">
           <BaseModalFooterSection>
-            Remember it?:
+            {glossary.rememberIt}:
             <Space />
-            <BaseModalFooterLink href="login">log in</BaseModalFooterLink>
+            <BaseModalFooterLink href="login">{glossary.login}</BaseModalFooterLink>
           </BaseModalFooterSection>
           <BaseModalFooterSection>
-            Dont have an account?:
+            {glossary.dontHaveAccount}:
             <Space />
-            <BaseModalFooterLink href="sign-up">sign up</BaseModalFooterLink>
+            <BaseModalFooterLink href="sign-up">{glossary.signUp}</BaseModalFooterLink>
           </BaseModalFooterSection>
         </BaseModalFooter>
       </BaseForm>

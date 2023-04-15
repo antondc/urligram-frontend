@@ -8,13 +8,15 @@ import CardItem from 'Components/CardItem';
 import ListRow from 'Components/ListRow';
 import NoResults from 'Components/NoResults';
 import UserForm from 'Components/UserForm';
+import { GlossaryState } from 'Modules/Languages/languages.types';
 import { UserState } from 'Modules/Users/users.types';
 import { SITE_TITLE } from 'Root/src/shared/constants';
-import { Button, Img, ProgressBar, Space, Tag } from '@antoniodcorrea/components';
+import { Button, Img, Space, Tag } from '@antoniodcorrea/components';
 
 import './User.less';
 
 interface Props {
+  glossary: GlossaryState;
   userIdIsSessionId: boolean;
   userId: string;
   user: UserState;
@@ -28,6 +30,7 @@ interface Props {
 }
 
 export const User: React.FC<Props> = ({
+  glossary,
   userIdIsSessionId,
   userId,
   user,
@@ -40,7 +43,7 @@ export const User: React.FC<Props> = ({
   onUserDelete,
 }) => (
   <div className="User">
-    <Helmet title={`${SITE_TITLE} · User`} />
+    <Helmet title={`${SITE_TITLE} · @${user?.name}`} />
     {userIdIsSessionId && (
       <CardItem className="User-sectionUserForm">
         <UserForm />
@@ -49,16 +52,16 @@ export const User: React.FC<Props> = ({
     <CardItem className="User-top">
       <div className="User-details">
         <div>
-          <div className="User-detailsItem">Name:</div>
+          <div className="User-detailsItem">{glossary.name}:</div>
           <div className="User-detailsItemData">{user?.name}</div>
-          <div className="User-detailsItem">Created at:</div>
+          <div className="User-detailsItem">{glossary.created}:</div>
           <div className="User-detailsItemData">{createdAtFormatted}</div>
         </div>
         <Img className="User-image" src={user?.image?.original} title={user?.name} alt={user?.name} />
       </div>
       <div className="User-lineDetails">
         <A className="User-lineDetailsLink" href={`users/${userId}/bookmarks`} frontend underlined styled={false}>
-          Total bookmarks:
+          {glossary.totalBookmarks}:
           <Space />
           {user?.bookmarksIds?.length}
         </A>
@@ -69,7 +72,7 @@ export const User: React.FC<Props> = ({
         <Space />
         {userIdIsSessionId && (
           <>
-            Private bookmarks:
+            {glossary.privateBookmarks}:
             <Space />
             {user?.bookmarksPrivate}
             <Space />
@@ -77,7 +80,7 @@ export const User: React.FC<Props> = ({
             <Space />·<Space />
             <Space />
             <Space />
-            Public bookmarks:
+            {glossary.publicBookmarks}:
             <Space />
             {userPublicBookmarks}
             <Space />
@@ -88,7 +91,7 @@ export const User: React.FC<Props> = ({
           </>
         )}
         <A className="User-lineDetailsLink" href={`users/${userId}/following`} frontend underlined styled={false}>
-          Following:
+          {glossary.following}:
           <Space />
           {user?.following?.length}
         </A>
@@ -98,7 +101,7 @@ export const User: React.FC<Props> = ({
         <Space />
         <Space />
         <A className="User-lineDetailsLink" href={`users/${userId}/followers`} frontend underlined styled={false}>
-          Followers:
+          {glossary.followers}:
           <Space />
           {user?.followers?.length}
           <Space />
@@ -108,7 +111,7 @@ export const User: React.FC<Props> = ({
         <Space />
         <Space />
         <A className="User-lineDetailsLink" href={`users/${userId}/followers`} frontend underlined styled={false}>
-          Tags:
+          {glossary.tags}:
           <Space />
           {user?.tags?.length}
         </A>
@@ -118,7 +121,7 @@ export const User: React.FC<Props> = ({
         <Space />
         <Space />
         <A className="User-lineDetailsLink" href={`users/${userId}/lists`} frontend underlined styled={false}>
-          Lists:
+          {glossary.lists}:
           <Space />
           {user?.lists?.length}
         </A>
@@ -139,9 +142,9 @@ export const User: React.FC<Props> = ({
       </div>
     </CardItem>
     <CardItem className="User-bookmarksHeader">
-      Bookmarks
+      {glossary.bookmarks}
       <A className="User-subHeaderLink" href={`users/${userId}/bookmarks`} frontend underlined styled={false}>
-        See more
+        {glossary.seeMore}
       </A>
     </CardItem>
     <div className="User-bookmarks">
@@ -154,12 +157,12 @@ export const User: React.FC<Props> = ({
           </CardItem>
         ))
       )}
-      {!bookmarksLoading && !bookmarksIds?.length && <NoResults content="ⵁ This user has no bookmarks yet" />}
+      {!bookmarksLoading && !bookmarksIds?.length && <NoResults content={`ⵁ ${glossary.thisUserHasNoBookmarksYet}.`} />}
     </div>
     <CardItem className="User-listsHeader">
-      Lists
+      {glossary.lists}
       <A className="User-subHeaderLink" href={`users/${userId}/lists`} frontend underlined styled={false}>
-        See more
+        {glossary.seeMore}
       </A>
     </CardItem>
     <div className="User-lists">
@@ -172,16 +175,16 @@ export const User: React.FC<Props> = ({
           </CardItem>
         ))
       )}
-      {!listsLoading && !listsIds?.length && <NoResults content="ⵁ We didn find any list." />}
+      {!listsLoading && !listsIds?.length && <NoResults content={`ⵁ ${glossary.weDidNotFindAnyList}.`} />}
     </div>
     {userIdIsSessionId && (
       <CardItem className="User-sectionUserDelete">
         <div className="User-sectionUserDeleteLeft">
-          <div className="User-sectionUserDeleteTitle">Delete user</div>
-          <div className="User-sectionUserDeleteDescription">This action can not be undone.</div>
+          <div className="User-sectionUserDeleteTitle">{glossary.deleteUser}</div>
+          <div className="User-sectionUserDeleteDescription">{glossary.thisActionCanNotBeUndone}.</div>
         </div>
         <div className="User-sectionUserDeleteRight">
-          <Button className="User-sectionUserDeleteButton" text="Delete" onClick={onUserDelete} />
+          <Button className="User-sectionUserDeleteButton" text={glossary.delete} onClick={onUserDelete} />
         </div>
       </CardItem>
     )}

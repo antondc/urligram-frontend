@@ -12,6 +12,7 @@ import ListRow from 'Components/ListRow';
 import NoResults from 'Components/NoResults';
 import Pagination from 'Components/Pagination';
 import SubHeader, { SubHeaderSeparator } from 'Components/SubHeader';
+import { GlossaryState } from 'Modules/Languages/languages.types';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
 import { DEFAULT_PAGE_SIZE, SITE_TITLE } from 'Root/src/shared/constants';
@@ -20,6 +21,7 @@ import { SelectValue } from '@antoniodcorrea/components';
 import './UserLists.less';
 
 interface Props {
+  glossary: GlossaryState;
   user: UserState;
   listsIds: number[];
   listsLoading: boolean;
@@ -42,6 +44,7 @@ interface Props {
 }
 
 export const UserLists: React.FC<Props> = ({
+  glossary,
   user,
   listsIds,
   listsLoading,
@@ -57,15 +60,14 @@ export const UserLists: React.FC<Props> = ({
   onAddListClick,
 }) => (
   <div className="UserLists">
-    <Helmet title={`${SITE_TITLE} · User Lists`} />
+    <Helmet title={`${SITE_TITLE} · ${glossary.userLists}`} />
     <SubHeader
       // title props
-      title={user?.name}
+      title={`@${user?.name}`}
       titleHref={`/users/${user?.id}`}
-      appendTitle="’s lists"
       leftIcon={<ListIcon />}
       // select props
-      selectPlaceholder="Select tags"
+      selectPlaceholder={glossary.selectTags}
       currentQueryParamFilterTags={currentQueryParamFilterTags}
       selectDefaultOptions={allTags.map((item) => ({ label: item.name, value: item.name }))}
       selectOptions={[
@@ -77,9 +79,9 @@ export const UserLists: React.FC<Props> = ({
       // sort props
       sortLoading={listsLoading}
       sortByOptions={[
-        { label: 'Created at', field: 'createdAt', icon: Clock },
-        { label: 'Members', field: 'members', icon: User },
-        { label: 'Bookmarks', field: 'bookmarks', icon: Bookmark },
+        { label: glossary.created, field: 'createdAt', icon: Clock },
+        { label: glossary.members, field: 'members', icon: User },
+        { label: glossary.bookmarks, field: 'bookmarks', icon: Bookmark },
       ]}
       url={currentHref}
       currentSort={sort}
@@ -87,7 +89,7 @@ export const UserLists: React.FC<Props> = ({
       <SubHeaderSeparator />
       <div className="UserLists-addList" onClick={onAddListClick}>
         <Cross className="UserLists-addListIcon" />
-        <span className="UserLists-addListText">Add List</span>
+        <span className="UserLists-addListText">{glossary.addList}</span>
       </div>
     </SubHeader>
     <div className="UserLists-lists">
@@ -100,7 +102,7 @@ export const UserLists: React.FC<Props> = ({
           </CardItem>
         ))
       )}
-      {!listsLoading && !listsIds?.length && <NoResults content="ⵁ We didn find any list." />}
+      {!listsLoading && !listsIds?.length && <NoResults content={`ⵁ ${glossary.weDidNotFindAnyList}.`} />}
     </div>
     <Pagination totalItems={totalItems} itemsPerPage={page?.size} offset={page?.offset} path={currentHref} />
   </div>
