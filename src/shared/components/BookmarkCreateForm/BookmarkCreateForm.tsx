@@ -2,6 +2,7 @@ import React from 'react';
 
 import BaseForm, { BaseFormError, BaseFormField, BaseFormLabel, BaseFormSubmit } from 'Components/BaseForm';
 import { BaseModalTitle } from 'Components/BaseModal';
+import { GlossaryState } from 'Modules/Languages/languages.types';
 import { TagState } from 'Modules/Tags/tags.types';
 import {
   ArrowRight,
@@ -15,7 +16,6 @@ import {
   Switch,
   TextArea,
 } from '@antoniodcorrea/components';
-import { GlossaryState } from 'Modules/Languages/languages.types';
 import { TagValue } from '.';
 
 import './BookmarkCreateForm.less';
@@ -113,9 +113,10 @@ export const BookmarkCreateForm: React.FC<Props> = ({
             />
           </BaseFormField>
           <BaseFormField>
+            <BaseFormLabel>{glossary.selectTags}</BaseFormLabel>
             <Select
               className="BookmarkCreateForm-tags"
-              placeholder={glossary.selectTags}
+              placeholder={glossary.tags}
               value={tagsValue}
               defaultOptions={[]}
               options={[

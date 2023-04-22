@@ -5,6 +5,7 @@ import BaseModal, { BaseModalTitle } from 'Components/BaseModal';
 import ListForm from 'Components/ListForm';
 import { switchListModal } from 'Modules/Ui/actions/switchListModal';
 import { selectUiListModal } from 'Modules/Ui/selectors/selectUiListModal';
+import { selectCurrentGlossary } from '../../redux/modules/Languages/selectors/selectCurrentGlossary';
 
 import './ListModal.less';
 
@@ -13,6 +14,7 @@ const ListModal: React.FC = () => {
   const { listId } = useSelector(selectUiListModal);
   const [locked, setLocked] = useState<boolean>(false);
   const isUpdate = !!listId;
+  const glossary = useSelector(selectCurrentGlossary);
 
   const closeModal = () => {
     if (locked) return;
@@ -22,7 +24,7 @@ const ListModal: React.FC = () => {
   return (
     <BaseModal className="ListModal" onCloseClick={closeModal}>
       <>
-        <BaseModalTitle>{!!isUpdate ? 'Update List' : 'Create List'}</BaseModalTitle>
+        <BaseModalTitle>{!!isUpdate ? glossary.updateList : glossary.createList}</BaseModalTitle>
         <ListForm closeModal={closeModal} setLocked={setLocked} />
       </>
     </BaseModal>

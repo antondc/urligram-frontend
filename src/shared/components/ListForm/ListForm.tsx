@@ -1,11 +1,13 @@
 import React from 'react';
 
 import BaseForm, { BaseFormError, BaseFormField, BaseFormLabel, BaseFormSubmit } from 'Components/BaseForm';
-import { Button, Earth, FadeInOut, Input, Switch } from '@antoniodcorrea/components';
+import { GlossaryState } from 'Modules/Languages/languages.types';
+import { Button, Earth, FadeInOut, Hr, Input, Switch } from '@antoniodcorrea/components';
 
 import './ListForm.less';
 
 interface Props {
+  currentGlossary: GlossaryState;
   isUpdate: boolean;
   nameValue: string;
   nameError: string;
@@ -27,6 +29,7 @@ interface Props {
 }
 
 export const ListForm: React.FC<Props> = ({
+  currentGlossary,
   isUpdate,
   nameValue,
   nameError,
@@ -51,7 +54,7 @@ export const ListForm: React.FC<Props> = ({
       <Input
         name="name"
         type="text"
-        label="List name"
+        label={currentGlossary.listName}
         onChange={onChangeName}
         value={nameValue}
         error={nameError}
@@ -64,7 +67,7 @@ export const ListForm: React.FC<Props> = ({
       <Input
         name="description"
         type="text"
-        label="List description"
+        label={currentGlossary.listDescription}
         onChange={onChangeDescription}
         value={descriptionValue}
         error={descriptionError}
@@ -73,7 +76,7 @@ export const ListForm: React.FC<Props> = ({
       />
     </BaseFormField>
     <BaseFormField>
-      <BaseFormLabel>Is Public</BaseFormLabel>
+      <BaseFormLabel>{currentGlossary.isPublicFem}</BaseFormLabel>
       <div className="ListForm-public">
         <Switch name="isPublic" checked={isPublicValue} onChange={onChangeIsPublic} />
         <Earth
@@ -84,7 +87,8 @@ export const ListForm: React.FC<Props> = ({
     </BaseFormField>
     <BaseFormSubmit>
       <Button
-        text="Save"
+        className="ListForm-save"
+        text={currentGlossary.save}
         type="submit"
         onClick={onSubmit}
         error={!!submitError}
@@ -93,12 +97,10 @@ export const ListForm: React.FC<Props> = ({
         disabled={submitDisabled}
         grow
       />
-    </BaseFormSubmit>
-    {!!isUpdate && (
-      <BaseFormSubmit>
+      {!!isUpdate && (
         <Button
           className="ListForm-delete"
-          text="Remove list"
+          text={currentGlossary.removeList}
           type="submit"
           onClick={onRemove}
           error={!!submitError}
@@ -106,10 +108,10 @@ export const ListForm: React.FC<Props> = ({
           loading={removing}
           grow
         />
-      </BaseFormSubmit>
-    )}
-    <FadeInOut valueToUpdate={!!submitError} speed="fast">
-      <BaseFormError>{submitError}</BaseFormError>
-    </FadeInOut>
+      )}
+      <FadeInOut valueToUpdate={!!submitError} speed="fast">
+        <BaseFormError>{submitError}</BaseFormError>
+      </FadeInOut>
+    </BaseFormSubmit>
   </BaseForm>
 );

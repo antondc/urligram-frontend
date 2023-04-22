@@ -83,6 +83,7 @@ export const BookmarkUpdateForm: React.FC<Props> = ({
       />
     </BaseFormField>
     <BaseFormField>
+      <BaseFormLabel>{glossary.tags}</BaseFormLabel>
       <Select
         className="BookmarkUpdateForm-tags"
         placeholder={glossary.selectTags}

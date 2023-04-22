@@ -90,6 +90,9 @@ export interface GlossaryState {
   deleteConfirmMessage: string;
   connections: string;
   connection: string;
+  updateList: string;
+  createList: string;
+  isPublicFem: string;
 }
 
 export interface LanguageState {

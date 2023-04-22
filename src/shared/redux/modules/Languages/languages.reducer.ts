@@ -102,6 +102,9 @@ const initialState: LanguagesState = {
       deleteConfirmMessage: '',
       connections: '',
       connection: '',
+      updateList: '',
+      createList: '',
+      isPublicFem: '',
     },
   },
 };

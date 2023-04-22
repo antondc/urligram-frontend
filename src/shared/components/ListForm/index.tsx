@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { selectCurrentGlossary } from 'Modules/Languages/selectors/selectCurrentGlossary';
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
 import { listCreate } from 'Modules/Lists/actions/listCreate';
 import { listCreateReset } from 'Modules/Lists/actions/listCreateReset';
@@ -25,6 +26,7 @@ interface Props {
 
 const ListForm: React.FC<Props> = ({ closeModal, setLocked }) => {
   const dispatch = useDispatch();
+  const currentGlossary = useSelector(selectCurrentGlossary);
   const listError = useSelector(selectListsErrorLast);
   const currentLanguageSlug = useSelector(selectCurrentLanguageSlug);
   const sessionId = useSelector(selectSessionUserId);
@@ -163,6 +165,7 @@ const ListForm: React.FC<Props> = ({ closeModal, setLocked }) => {
 
   return (
     <ListFormUi
+      currentGlossary={currentGlossary}
       isUpdate={isUpdate}
       nameValue={nameValue}
       nameError={nameError}
