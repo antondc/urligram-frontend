@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { bookmarkLoadByLinkSession } from 'Modules/Bookmarks/actions/bookmarkLoadByLinkSession';
 import { selectBookmarksCurrent } from 'Modules/Bookmarks/selectors/selectBookmarksCurrent';
 import { selectCurrentGlossary } from 'Modules/Languages/selectors/selectCurrentGlossary';
-import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
 import { selectLinkById } from 'Modules/Links/selectors/selectLinkById';
 import { notesLoadByLinkId } from 'Modules/Notes/actions/notesLoadByLinkId';
 import { selectNotes } from 'Modules/Notes/selectors/selectNotes';
@@ -15,8 +14,6 @@ import { selectCurrentRouteParamLinkId } from 'Modules/Routes/selectors/selectCu
 import { usersLoadByLinkId } from 'Modules/Users/actions/usersLoadByLinkId';
 import { selectUsersCurrent } from 'Modules/Users/selectors/selectUsersCurrent';
 import { selectUsersMetaSort } from 'Modules/Users/selectors/selectUsersMetaSort';
-import { Routes } from 'Router/routes';
-import history from 'Services/History';
 import { QueryStringWrapper } from '@antoniodcorrea/utils';
 import { Link as LinkUi } from './Link';
 
@@ -31,7 +28,6 @@ const Link: React.FC = () => {
   const bookmarkOrLinkTitle = bookmark?.title || link?.title || '';
   const notes = useSelector(selectNotes);
   const users = useSelector(selectUsersCurrent);
-  const currentLanguageSlug = useSelector(selectCurrentLanguageSlug);
   const currentHref = useSelector(selectCurrentFullUrl);
   const sortNotes = useSelector(selectNotesMetaSort);
   const sortUsers = useSelector(selectUsersMetaSort);
@@ -49,33 +45,17 @@ const Link: React.FC = () => {
   useEffect(() => {
     if (!linkId) return;
 
-    const asyncFunction = async () => {
-      const bookmark = await dispatch(bookmarkLoadByLinkSession(linkId));
-      if (!bookmark?.id) {
-        history.push(`/${currentLanguageSlug}${Routes.Home.route}`);
-      }
-    };
-
-    asyncFunction();
+    dispatch(bookmarkLoadByLinkSession(linkId));
   }, [linkId]);
 
   /*
-        On bookmark removal, bookmark value will be updated
-        We try to retrieve the latest bookmark for this link
-        If it doesnt exist, return to Home
-      */
+    On bookmark removal, bookmark value will be updated
+    We try to retrieve the latest bookmark for this link
+  */
   useEffect(() => {
     if (!linkId) return;
 
-    const asyncFunction = async () => {
-      try {
-        await dispatch(bookmarkLoadByLinkSession(linkId));
-      } catch (error) {
-        history.push(`/${currentLanguageSlug}${Routes.Home.route}`);
-      }
-    };
-
-    asyncFunction();
+    dispatch(bookmarkLoadByLinkSession(linkId));
   }, [bookmark?.id]);
 
   useEffect(() => {
