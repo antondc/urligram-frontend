@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 import { GlossaryState } from 'Modules/Languages/languages.types';
@@ -50,6 +50,7 @@ const UserRow: React.FC<Props> = ({
   const connections = followers?.length || 0 + following?.length || 0;
   const ammountLists = lists?.length || 0;
   const ammountBookmarks = bookmarksIds?.length || 0;
+  const currentGlossary = useSelector(selectCurrentGlossary);
 
   return (
     <UserRowUi
@@ -63,6 +64,7 @@ const UserRow: React.FC<Props> = ({
       location={location}
       order={order}
       tags={tags}
+      currentGlossary={currentGlossary}
       connections={connections}
       ammountLists={ammountLists}
       ammountBookmarks={ammountBookmarks}

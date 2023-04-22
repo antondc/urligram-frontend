@@ -100,6 +100,8 @@ const initialState: LanguagesState = {
       userBookmarks: '',
       userTags: '',
       deleteConfirmMessage: '',
+      connections: '',
+      connection: '',
     },
   },
 };

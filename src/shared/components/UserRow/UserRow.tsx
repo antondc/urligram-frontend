@@ -3,6 +3,7 @@ import React from 'react';
 import User from 'Assets/svg/userFill.svg';
 import A from 'Components/A';
 import UserFollowButton from 'Components/UserFollowButton';
+import { GlossaryState } from 'Modules/Languages/languages.types';
 import { UserState } from 'Modules/Users/users.types';
 import { Img, Space, Tag } from '@antoniodcorrea/components';
 
@@ -15,6 +16,7 @@ interface UserRow extends Partial<UserState> {
   ammountBookmarks: number;
   sinceTranslation: string;
   createdAtFormatted: string;
+  currentGlossary: GlossaryState;
 }
 
 export const UserRow: React.FC<UserRow> = ({
@@ -27,6 +29,7 @@ export const UserRow: React.FC<UserRow> = ({
   ammountLists,
   ammountBookmarks,
   sinceTranslation,
+  currentGlossary,
 }) => (
   <div className="UserRow" data-test-id="UserRow" key={'UserRow-' + id}>
     <div className="UserRow-title">
@@ -41,7 +44,7 @@ export const UserRow: React.FC<UserRow> = ({
           {ammountLists}
           <Space />
           <A href={`users/${id}/lists`} frontend disabled={!ammountLists} underlined styled={false}>
-            lists
+            {currentGlossary.lists}
           </A>
           <Space />
           <Space />
@@ -55,7 +58,7 @@ export const UserRow: React.FC<UserRow> = ({
           {ammountBookmarks}
           <Space />
           <A href={`users/${id}/bookmarks`} frontend disabled={!ammountBookmarks} underlined styled={false}>
-            bookmarks
+            {currentGlossary.bookmarks}
           </A>
           <Space />
           <Space />
@@ -69,7 +72,7 @@ export const UserRow: React.FC<UserRow> = ({
           {connections}
           <Space />
           <A href={`users/${id}`} frontend disabled={!connections} underlined styled={false}>
-            connections
+            {connections === 1 ? currentGlossary.connection : currentGlossary.connections}
           </A>
           <Space />
           <Space />
@@ -79,7 +82,7 @@ export const UserRow: React.FC<UserRow> = ({
         </>
       )}
       <span className="UserRow-since">
-        {sinceTranslation?.toLocaleLowerCase()} {createdAtFormatted}
+        {sinceTranslation} {createdAtFormatted}
       </span>
     </div>
     <div className="UserRow-tags">

@@ -88,6 +88,8 @@ export interface GlossaryState {
   userBookmarks: string;
   userTags: string;
   deleteConfirmMessage: string;
+  connections: string;
+  connection: string;
 }
 
 export interface LanguageState {
