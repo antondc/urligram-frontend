@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import BaseModal, { BaseModalTitle } from 'Components/BaseModal';
 import ListForm from 'Components/ListForm';
+import { selectCurrentGlossary } from 'Modules/Languages/selectors/selectCurrentGlossary';
 import { switchListModal } from 'Modules/Ui/actions/switchListModal';
 import { selectUiListModal } from 'Modules/Ui/selectors/selectUiListModal';
-import { selectCurrentGlossary } from '../../redux/modules/Languages/selectors/selectCurrentGlossary';
 
 import './ListModal.less';
 
