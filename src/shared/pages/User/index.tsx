@@ -13,6 +13,7 @@ import { RootState } from 'Modules/rootType';
 import { selectCurrentRouteParamUserId } from 'Modules/Routes/selectors/selectCurrentRouteParamUserId';
 import { sessionLogOut } from 'Modules/Session/actions/sessionLogOut';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
+import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import { uiResetModalsState } from 'Modules/Ui/actions/uiResetModalsState';
 import { userDelete } from 'Modules/Users/actions/userDelete';
 import { userLoad } from 'Modules/Users/actions/userLoad';
@@ -25,6 +26,7 @@ import { User as UserUi } from './User';
 const User: React.FC = () => {
   const dispatch = useDispatch();
 
+  const isLoggedIn = useSelector(selectSessionLoggedIn);
   const glossary = useSelector(selectCurrentGlossary);
   const session = useSelector(selectSession);
   const userId = useSelector(selectCurrentRouteParamUserId);
@@ -68,6 +70,7 @@ const User: React.FC = () => {
 
   return (
     <UserUi
+      isLoggedIn={isLoggedIn}
       glossary={glossary}
       userIdIsSessionId={userIdIsSessionId}
       userId={userId}

@@ -12,6 +12,7 @@ import { selectCurrentFullUrl } from 'Modules/Routes/selectors/selectCurrentFull
 import { selectCurrentRouteQueryParamFilter } from 'Modules/Routes/selectors/selectCurrentRouteQueryParamFilter';
 import { selectCurrentRouteQueryParamPage } from 'Modules/Routes/selectors/selectCurrentRouteQueryParamPage';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
+import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import { tagsSearchLoad } from 'Modules/Tags/actions/tagsSearchLoad';
 import { selectTagsAll } from 'Modules/Tags/selectors/selectAllTags';
 import { selectTagsSearch } from 'Modules/Tags/selectors/selectTagsSearch';
@@ -23,6 +24,7 @@ import { Home as HomeUi } from './Home';
 const Home: React.FC = () => {
   const dispatch = useDispatch();
   const session = useSelector(selectSession);
+  const isLoggedIn = useSelector(selectSessionLoggedIn);
   const glossary = useSelector(selectCurrentGlossary);
   const bookmarksIds = useSelector(selectBookmarksCurrentIds);
   const loading = useSelector(selectBookmarksLoading) && isDomAvailable;
@@ -64,6 +66,7 @@ const Home: React.FC = () => {
 
   return (
     <HomeUi
+      isLoggedIn={isLoggedIn}
       glossary={glossary}
       bookmarksIds={bookmarksIds}
       loading={loading}

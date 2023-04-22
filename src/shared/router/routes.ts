@@ -74,7 +74,7 @@ export const Routes: RoutesInterface = {
     name: 'Link',
     path: '/:lang([a-z]{2})?/link/:linkId',
     exact: true,
-    auth: false,
+    auth: true,
     initialDataLoadersVisitor: [initialLinkLoader],
     initialDataLoadersSession: [initialLinkLoader],
     layout: 'withLeftSidebar',

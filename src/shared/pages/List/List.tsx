@@ -25,6 +25,7 @@ import { AnimateHeight, Check, EditCircle, Eye, Img, SelectValue, Spinner, Toolt
 import './List.less';
 
 interface Props {
+  isLoggedIn: boolean;
   glossary: GlossaryState;
   showBanner: boolean;
   listInvitationRole: ListUserRole;
@@ -61,6 +62,7 @@ interface Props {
 }
 
 const List: React.FC<Props> = ({
+  isLoggedIn,
   glossary,
   listInvitationRole,
   sessionUserListRole,
@@ -238,7 +240,7 @@ const List: React.FC<Props> = ({
       ) : (
         bookmarksIds?.map((id) => (
           <CardItem key={id}>
-            <BookmarkRow id={id} listId={list?.id} />
+            <BookmarkRow id={id} listId={list?.id} withInfoButton={isLoggedIn} />
           </CardItem>
         ))
       )}
