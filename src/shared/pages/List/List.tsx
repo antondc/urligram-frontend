@@ -57,6 +57,7 @@ interface Props {
   onChange: (string: SelectValue[]) => void;
   onLeaveList: () => void;
   leaveListLoading: boolean;
+  followingUsers: UserState[];
 }
 
 const List: React.FC<Props> = ({
@@ -86,6 +87,7 @@ const List: React.FC<Props> = ({
   onChange,
   onLeaveList,
   leaveListLoading,
+  followingUsers,
 }) => (
   <div className="List">
     <Helmet>
@@ -186,7 +188,7 @@ const List: React.FC<Props> = ({
             ))}
           </div>
         )}
-        {sessionUserOwnsList && (
+        {sessionUserOwnsList && !!followingUsers?.length && (
           <>
             <RenderInPortal>
               <Tooltip parentElementId="List-tooltipAddUser" content={glossary.addUser} delay={2} />

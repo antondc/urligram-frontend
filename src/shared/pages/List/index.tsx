@@ -30,6 +30,7 @@ import { uiResetModalsState } from 'Modules/Ui/actions/uiResetModalsState';
 import { userLoad } from 'Modules/Users/actions/userLoad';
 import { usersLoadByIds } from 'Modules/Users/actions/usersLoadByIds';
 import { selectUserById } from 'Modules/Users/selectors/selectUserById';
+import { selectUserFollowing } from 'Modules/Users/selectors/selectUserFollowing';
 import { DELAY_FAST_MS } from 'Root/src/shared/constants';
 import history from 'Services/History';
 import { URLWrapper } from '@antoniodcorrea/utils';
@@ -68,6 +69,7 @@ const List: React.FC = () => {
       value: item,
     })) || [];
   const tagsSearchFormatted = tagsSearch?.map((item) => ({ label: item.name, value: item.name })) || [];
+  const followingUsers = useSelector(selectUserFollowing);
 
   const onInputChange = (string: string) => {
     !!string && dispatch(tagsSearchLoad(string));
@@ -164,6 +166,7 @@ const List: React.FC = () => {
       onInputChange={onInputChange}
       onLeaveList={onLeaveList}
       leaveListLoading={leaveListLoading}
+      followingUsers={followingUsers}
     />
   );
 };
