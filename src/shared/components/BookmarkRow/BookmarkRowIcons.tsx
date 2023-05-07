@@ -93,7 +93,7 @@ export const BookmarkRowIcons: React.FC<Partial<BookmarkRowIcons>> = ({
         {!!sessionUserBookmarkedLink && (
           <EditCircle className="BookmarkRowIcons-icon BookmarkRowIcons-iconEdit" onClick={onEdit} />
         )}
-        {(!!sessionUserBookmarkedLink || bookmarkIdInAnyOfMyLists) && (
+        {!!sessionUserBookmarkedLink && (
           <div className="BookmarkRowIcons-icon BookmarkRowIcons-iconLists">
             <List id={`BookmarkRowIcons-${bookmark?.id}`} onClick={onListsClick} />
             <BookmarkListsPopOverOrSheet bookmarkId={bookmark?.id} />
