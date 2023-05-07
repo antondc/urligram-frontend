@@ -73,6 +73,14 @@
         }
       }
     }
+
+    &--disallowed {
+      cursor: not-allowed;
+
+      > * {
+        pointer-events: none;
+      }
+    }
   }
 
   &-listText {

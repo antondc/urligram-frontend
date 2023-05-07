@@ -3,9 +3,11 @@ import React from 'react';
 import PlusCircle from 'Assets/svg/plusCircle.svg';
 import A from 'Components/A';
 import BaseForm, { BaseFormError, BaseFormSubmit } from 'Components/BaseForm';
-import { ListState } from 'Modules/Lists/lists.types';
-import { Button, FadeInOut, Input, Spinner } from '@antoniodcorrea/components';
+import { RenderInPortal } from 'Components/Portal';
+import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
 import { GlossaryState } from 'Modules/Languages/languages.types';
+import { ListState } from 'Modules/Lists/lists.types';
+import { Button, FadeInOut, Input, Spinner, Tooltip } from '@antoniodcorrea/components';
 
 import './BookmarkLists.less';
 
@@ -15,6 +17,7 @@ type ListStateExtended = ListState & {
 };
 
 interface Props {
+  bookmark: BookmarkState;
   glossary: GlossaryState;
   sessionId: string;
   listInputName: string;
@@ -32,6 +35,7 @@ interface Props {
 }
 
 export const BookmarkLists: React.FC<Props> = ({
+  bookmark,
   glossary,
   lists,
   onListAddBookmark,
@@ -49,27 +53,38 @@ export const BookmarkLists: React.FC<Props> = ({
   <div className="BookmarkLists">
     <ul className="BookmarkLists-lists">
       {lists?.map((item) => (
-        <li
-          className={
-            'BookmarkLists-list' +
-            (item?.isActive ? ' BookmarkLists-list--included' : '') +
-            (item?.wasRecentlyUpdated ? ' BookmarkLists-list--recentlyUpdated' : '')
-          }
-          key={item?.id}
-        >
-          <A className="BookmarkLists-listText" href={`lists/${item?.id}?sort=-updatedAt`} frontend styled={false}>
-            {item?.name}
-          </A>
-          {itemsLoading?.includes(item?.id) ? (
-            <Spinner className="BookmarkLists-loader" />
-          ) : (
-            <PlusCircle
-              className="BookmarkLists-icon"
-              onClick={() => (!!item?.isActive ? onListDeleteBookmark(item?.id) : onListAddBookmark(item?.id))}
-              onMouseLeave={() => onIconLeave(item?.id)}
-            />
+        <React.Fragment key={item?.id}>
+          <li
+            className={
+              'BookmarkLists-list' +
+              (item?.isActive ? ' BookmarkLists-list--included' : '') +
+              (item?.wasRecentlyUpdated ? ' BookmarkLists-list--recentlyUpdated' : '') +
+              (!bookmark.isPublic && item.isPublic ? ' BookmarkLists-list--disallowed' : '')
+            }
+          >
+            <A className="BookmarkLists-listText" href={`lists/${item?.id}?sort=-updatedAt`} frontend styled={false}>
+              {item?.name}
+            </A>
+            {itemsLoading?.includes(item?.id) ? (
+              <Spinner className="BookmarkLists-loader" />
+            ) : (
+              <PlusCircle
+                className="BookmarkLists-icon"
+                onClick={() => (!!item?.isActive ? onListDeleteBookmark(item?.id) : onListAddBookmark(item?.id))}
+                onMouseLeave={() => onIconLeave(item?.id)}
+              />
+            )}
+          </li>
+          {!bookmark.isPublic && item.isPublic && (
+            <RenderInPortal>
+              <Tooltip
+                parentElementId={`BookmarkLists-list--${item.id}`}
+                content="You can not add private bookmarks to public lists"
+                delay={1}
+              />
+            </RenderInPortal>
           )}
-        </li>
+        </React.Fragment>
       ))}
     </ul>
     <FadeInOut className="BookmarkLists-bottom" valueToUpdate={showCreateList} appear>

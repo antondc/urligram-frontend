@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { selectBookmarksById } from 'Modules/Bookmarks/selectors/selectBookmarkById';
+import { selectCurrentGlossary } from 'Modules/Languages/selectors/selectCurrentGlossary';
 import { listBookmarkCreate } from 'Modules/Lists/actions/listBookmarkCreate';
 import { listBookmarkDelete } from 'Modules/Lists/actions/listBookmarkDelete';
 import { listCreate } from 'Modules/Lists/actions/listCreate';
@@ -11,7 +12,6 @@ import { selectListsErrorLast } from 'Modules/Lists/selectors/selectListsErrorLa
 import { RootState } from 'Modules/rootType';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { bookmarkListsModalUnmount } from 'Modules/Ui/actions/bookmarkListsModalUnmount';
-import { selectCurrentGlossary } from 'Modules/Languages/selectors/selectCurrentGlossary';
 import { BookmarkLists as BookmarkListsUi } from './BookmarkLists';
 
 interface Props {
@@ -95,6 +95,7 @@ const BookmarkLists: React.FC<Props> = ({ bookmarkId }) => {
 
   return (
     <BookmarkListsUi
+      bookmark={bookmark}
       glossary={glossary}
       sessionId={session?.id}
       onListAddBookmark={onListAddBookmark}
