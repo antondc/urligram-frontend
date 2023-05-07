@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { bookmarkCreate } from 'Modules/Bookmarks/actions/bookmarkCreate';
 import { bookmarkDelete } from 'Modules/Bookmarks/actions/bookmarkDelete';
+import { bookmarksLoad } from 'Modules/Bookmarks/actions/bookmarksLoad';
 import { bookmarksLoadByListId } from 'Modules/Bookmarks/actions/bookmarksLoadByListId';
 import { BookmarkRelated } from 'Modules/Bookmarks/bookmarks.types';
 import { selectBookmarksById } from 'Modules/Bookmarks/selectors/selectBookmarkById';
@@ -77,6 +78,7 @@ const Bookmarker: React.FC<Props> = ({ className, listId, bookmarkId, onBookmark
       dispatch(notesLoadByLinkId({ linkId: parentBookmark.linkId }));
       dispatch(usersLoadByLinkId({ linkId: parentBookmark.linkId }));
       if (!!listId) await dispatch(bookmarksLoadByListId(listId));
+      if (!listId) await dispatch(bookmarksLoad());
     } catch (error) {
       noop();
     } finally {
