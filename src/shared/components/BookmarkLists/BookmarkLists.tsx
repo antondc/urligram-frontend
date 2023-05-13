@@ -55,6 +55,7 @@ export const BookmarkLists: React.FC<Props> = ({
       {lists?.map((item) => (
         <React.Fragment key={item?.id}>
           <li
+            id={`BookmarkLists-list--${item.id}`}
             className={
               'BookmarkLists-list' +
               (item?.isActive ? ' BookmarkLists-list--included' : '') +
