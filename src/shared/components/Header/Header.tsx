@@ -67,8 +67,8 @@ export const Header: React.FC<Props> = ({
           <Img
             className="Header-userImage"
             src={session?.image?.original}
-            title={session?.name}
-            alt={session?.name}
+            title={`@${session?.name}`}
+            alt={`@${session?.name}`}
             onClick={onUserClick}
           />
         )}

@@ -56,7 +56,7 @@ export const UserFollowButton: React.FC<Props> = ({
       <Tooltip
         parentElementId={`UserFollowButton--${userId}`}
         content={!sessionUserFollowsUser ? `Follow @${userName}` : `Unfollow @${userName}`}
-        delay={2}
+        delay={1}
       />
     </RenderInPortal>
   </div>
