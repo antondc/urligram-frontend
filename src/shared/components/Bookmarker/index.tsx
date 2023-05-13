@@ -87,9 +87,12 @@ const Bookmarker: React.FC<Props> = ({ className, listId, bookmarkId, onBookmark
 
       if (currentRoute.name === Routes.List.name && listId) {
         await dispatch(bookmarksLoadByListId(listId));
-      } else if (currentRoute.name === Routes.UserBookmarks.name || currentRoute.name === Routes.Home.name) {
+      } else if (currentRoute.name === Routes.Home.name) {
         await dispatch(bookmarksLoad());
-      } else if (currentRoute.name === Routes.User.name && currentParams.userId) {
+      } else if (
+        (currentRoute.name === Routes.User.name || currentRoute.name === Routes.UserBookmarks.name) &&
+        currentParams.userId
+      ) {
         await dispatch(bookmarksLoadByUserId(currentParams.userId));
       }
     } catch (error) {
