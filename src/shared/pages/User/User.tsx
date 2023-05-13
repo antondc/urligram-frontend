@@ -10,7 +10,7 @@ import NoResults from 'Components/NoResults';
 import UserForm from 'Components/UserForm';
 import UserImageWithFollow from 'Components/UserImageWithFollow';
 import { GlossaryState } from 'Modules/Languages/languages.types';
-import { UserState } from 'Modules/Users/users.types';
+import { UserAccountType, UserState } from 'Modules/Users/users.types';
 import { SITE_TITLE } from 'Root/src/shared/constants';
 import { Button, Space, Tag } from '@antoniodcorrea/components';
 
@@ -57,6 +57,10 @@ export const User: React.FC<Props> = ({
         <div>
           <div className="User-detailsItem">{glossary.name}:</div>
           <div className="User-detailsItemData">{user?.name}</div>
+          <div className="User-detailsItem">{glossary.accountTypeTitle}:</div>
+          <div className="User-detailsItemData">
+            {user?.accountType === UserAccountType.Advanced ? glossary.accountTypeAdvanced : glossary.accountTypeBasic}
+          </div>
           <div className="User-detailsItem">{glossary.created}:</div>
           <div className="User-detailsItemData">{createdAtFormatted}</div>
         </div>

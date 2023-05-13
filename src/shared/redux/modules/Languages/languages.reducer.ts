@@ -105,6 +105,9 @@ const initialState: LanguagesState = {
       updateList: '',
       createList: '',
       isPublicFem: '',
+      accountTypeTitle: '',
+      accountTypeBasic: '',
+      accountTypeAdvanced: '',
     },
   },
 };

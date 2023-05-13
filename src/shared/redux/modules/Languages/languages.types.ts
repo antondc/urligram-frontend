@@ -93,6 +93,9 @@ export interface GlossaryState {
   updateList: string;
   createList: string;
   isPublicFem: string;
+  accountTypeTitle: string;
+  accountTypeBasic: string;
+  accountTypeAdvanced: string;
 }
 
 export interface LanguageState {
