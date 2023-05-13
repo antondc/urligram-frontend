@@ -63,6 +63,8 @@ const UserFollowButton: React.FC<Props> = ({ userId, className }) => {
   return (
     <UserFollowButtonUi
       className={className}
+      userId={userId}
+      userName={user?.name}
       loading={loading}
       recentlyChanged={recentlyChanged}
       sessionUserFollowsUser={sessionUserFollowsUser}

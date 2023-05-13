@@ -1,0 +1,37 @@
+@import '../../css/imports.less';
+
+@c: .UserImageWithFollow;
+
+@{c} {
+  position: relative;
+  height: 38px;
+  width: 38px;
+
+  @media @br-mobile {
+    height: 30px;
+    width: 30px;
+    top: 0;
+    right: 0;
+  }
+
+  &-image {
+    border-radius: 50%;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    object-fit: cover;
+    object-position: center;
+
+    .hoverTransition;
+  }
+
+  &-followButton {
+    position: absolute;
+    height: 14px;
+    width: 14px;
+    top: -2px;
+    right: -2px;
+    outline: 2px solid @c-background;
+    border-radius: 50%;
+  }
+}

@@ -2,10 +2,10 @@ import React from 'react';
 
 import User from 'Assets/svg/userFill.svg';
 import A from 'Components/A';
-import UserFollowButton from 'Components/UserFollowButton';
 import { GlossaryState } from 'Modules/Languages/languages.types';
 import { UserState } from 'Modules/Users/users.types';
 import { Img, Space, Tag } from '@antoniodcorrea/components';
+import UserImageWithFollow from '../UserImageWithFollow';
 
 import './UserRow.less';
 
@@ -99,12 +99,7 @@ export const UserRow: React.FC<UserRow> = ({
       ))}
     </div>
     <div className="UserRow-icons">
-      <div className="UserRow-userImage">
-        <A href={`users/${id}`} frontend styled={false}>
-          <Img className="UserRow-image" src={image?.original} title={name} alt={name} />
-        </A>
-        <UserFollowButton className="UserRow-followButton" userId={id} />
-      </div>
+      <UserImageWithFollow userId={id} userName={name} image={image?.original} />
     </div>
   </div>
 );

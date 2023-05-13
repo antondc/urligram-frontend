@@ -1,11 +1,14 @@
 import React from 'react';
 
-import { PlusCircleWithBackground, Spinner } from '@antoniodcorrea/components';
+import { PlusCircleWithBackground, Spinner, Tooltip } from '@antoniodcorrea/components';
+import { RenderInPortal } from '../Portal';
 
 import './UserFollowButton.less';
 
 interface Props {
   className?: string;
+  userId: string;
+  userName: string;
   loading?: boolean;
   recentlyChanged?: boolean;
   sessionUserFollowsUser?: boolean;
@@ -16,6 +19,8 @@ interface Props {
 
 export const UserFollowButton: React.FC<Props> = ({
   className,
+  userId,
+  userName,
   loading,
   recentlyChanged,
   sessionUserFollowsUser,
@@ -23,7 +28,11 @@ export const UserFollowButton: React.FC<Props> = ({
   onFollow,
   onUnfollow,
 }) => (
-  <div className={'UserFollowButton' + (className ? ' ' + className : '')} onMouseOut={onMouseOut}>
+  <div
+    id={`UserFollowButton--${userId}`}
+    className={'UserFollowButton' + (className ? ' ' + className : '')}
+    onMouseOut={onMouseOut}
+  >
     {sessionUserFollowsUser && (
       <PlusCircleWithBackground
         className={
@@ -43,5 +52,12 @@ export const UserFollowButton: React.FC<Props> = ({
       />
     )}
     {loading && <Spinner className="UserFollowButton-loader" />}
+    <RenderInPortal>
+      <Tooltip
+        parentElementId={`UserFollowButton--${userId}`}
+        content={!sessionUserFollowsUser ? `Follow @${userName}` : `Unfollow @${userName}`}
+        delay={2}
+      />
+    </RenderInPortal>
   </div>
 );
