@@ -3,11 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { selectCurrentGlossary } from 'Modules/Languages/selectors/selectCurrentGlossary';
 import { selectCurrentRouteQueryParams } from 'Modules/Routes/selectors/selectCurrentRouteQueryParams';
+import { sessionResetErrors } from 'Modules/Session/actions/sessionResetErrors';
 import { sessionResetPassword } from 'Modules/Session/actions/sessionResetPassword';
 import { selectSessionErrorLast } from 'Modules/Session/selectors/selectSessionErrorLast';
 import { selectSessionLoading } from 'Modules/Session/selectors/selectSessionLoading';
 import { selectSessionPasswordRequested } from 'Modules/Session/selectors/selectSessionPasswordRequested';
 import { uiResetModalsState } from 'Modules/Ui/actions/uiResetModalsState';
+import { uiScreenDesktopUnlock } from 'Modules/Ui/actions/uiScreenDesktopUnlock';
+import { uiScreenMobileUnLock } from 'Modules/Ui/actions/uiScreenMobileUnLock';
 import { EVENT_BLUR } from 'Root/src/shared/constants';
 import { validatePassword } from '@antoniodcorrea/utils';
 import { ResetPassword as ResetPasswordUi } from './ResetPassword';
@@ -111,7 +114,15 @@ const ResetPassword: React.FC = () => {
     if (sessionError?.message) setSubmitError(sessionError?.message);
   }, [sessionError]);
 
-  useEffect(() => () => dispatch(uiResetModalsState()), []);
+  useEffect(
+    () => () => {
+      dispatch(sessionResetErrors());
+      dispatch(uiScreenMobileUnLock());
+      dispatch(uiScreenDesktopUnlock());
+      dispatch(uiResetModalsState());
+    },
+    []
+  );
 
   return (
     <ResetPasswordUi

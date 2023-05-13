@@ -3,10 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import debounce from 'lodash/debounce';
 
 import { selectCurrentGlossary } from 'Modules/Languages/selectors/selectCurrentGlossary';
+import { sessionResetErrors } from 'Modules/Session/actions/sessionResetErrors';
 import { sessionSignUp } from 'Modules/Session/actions/sessionSignUp';
 import { selectSessionErrorLast } from 'Modules/Session/selectors/selectSessionErrorLast';
 import { selectSessionLoading } from 'Modules/Session/selectors/selectSessionLoading';
 import { selectSessionStatus } from 'Modules/Session/selectors/selectSessionStatus';
+import { uiResetModalsState } from 'Modules/Ui/actions/uiResetModalsState';
+import { uiScreenDesktopUnlock } from 'Modules/Ui/actions/uiScreenDesktopUnlock';
+import { uiScreenMobileUnLock } from 'Modules/Ui/actions/uiScreenMobileUnLock';
 import { UserStatus } from 'Modules/Users/users.types';
 import { DELAY_MEDIUM_MS, EVENT_BLUR } from 'Root/src/shared/constants';
 import {
@@ -223,6 +227,16 @@ const SignUp: React.FC = () => {
     }
     if (sessionError?.message) setSubmitError(sessionError?.message);
   }, [sessionError]);
+
+  useEffect(
+    () => () => {
+      dispatch(sessionResetErrors());
+      dispatch(uiScreenMobileUnLock());
+      dispatch(uiScreenDesktopUnlock());
+      dispatch(uiResetModalsState());
+    },
+    []
+  );
 
   return (
     <SignUpUi
