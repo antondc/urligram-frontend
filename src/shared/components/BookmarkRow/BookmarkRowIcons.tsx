@@ -69,6 +69,7 @@ export const BookmarkRowIcons: React.FC<Partial<BookmarkRowIcons>> = ({
         direction="right"
         appear
         disabled={!uiScreenTypeIsMobile}
+        unmountOnExit={false}
       >
         {withInfoButton && (
           <A href={`link/${bookmark?.linkId}`} styled={false} scrollBeforeNavigate>
