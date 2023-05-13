@@ -112,10 +112,9 @@ export const BookmarkCreateForm: React.FC<Props> = ({
               grow
             />
           </BaseFormField>
-          <BaseFormField>
+          <BaseFormField className="BookmarkCreateForm-tags">
             <BaseFormLabel>{glossary.selectTags}</BaseFormLabel>
             <Select
-              className="BookmarkCreateForm-tags"
               placeholder={glossary.tags}
               value={tagsValue}
               defaultOptions={[]}
@@ -130,7 +129,7 @@ export const BookmarkCreateForm: React.FC<Props> = ({
               isCreatable
             />
           </BaseFormField>
-          <BaseFormField>
+          <BaseFormField className="BookmarkCreateForm-notes">
             <BaseFormLabel>{glossary.notes}</BaseFormLabel>
             <TextArea name="notes" value={notesValue} error={!!notesError} grow onChange={onChangeNotes} />
           </BaseFormField>

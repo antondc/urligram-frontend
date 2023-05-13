@@ -82,10 +82,9 @@ export const BookmarkUpdateForm: React.FC<Props> = ({
         grow
       />
     </BaseFormField>
-    <BaseFormField>
+    <BaseFormField className="BookmarkUpdateForm-tags">
       <BaseFormLabel>{glossary.tags}</BaseFormLabel>
       <Select
-        className="BookmarkUpdateForm-tags"
         placeholder={glossary.selectTags}
         value={tagsValue}
         defaultOptions={[]}
@@ -99,7 +98,7 @@ export const BookmarkUpdateForm: React.FC<Props> = ({
         isCreatable
       />
     </BaseFormField>
-    <BaseFormField>
+    <BaseFormField className="BookmarkUpdateForm-notes">
       <BaseFormLabel>{glossary.notes}</BaseFormLabel>
       <TextArea name={glossary.notes} value={notesValue} error={!!notesError} grow onChange={onChangeNotes} />
     </BaseFormField>
