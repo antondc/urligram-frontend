@@ -9,7 +9,12 @@ import { selectSessionLoading } from 'Modules/Session/selectors/selectSessionLoa
 import { selectSessionStatus } from 'Modules/Session/selectors/selectSessionStatus';
 import { UserStatus } from 'Modules/Users/users.types';
 import { DELAY_MEDIUM_MS, EVENT_BLUR } from 'Root/src/shared/constants';
-import { testStringHasWhiteSpaces, validateEmailAddress, validatePassword } from '@antoniodcorrea/utils';
+import {
+  testStringHasWhiteSpaces,
+  validateEmailAddress,
+  validatePassword,
+  validateUserName,
+} from '@antoniodcorrea/utils';
 import { SignUp as SignUpUi } from './SignUp';
 
 import './SignUp.less';
@@ -49,10 +54,9 @@ const SignUp: React.FC = () => {
       return;
     }
 
-    const isNameLengthValid = value.length > 5;
-
-    if (!isNameLengthValid) {
-      setNameError('Name too short');
+    const userNameValid = validateUserName(value);
+    if (!userNameValid) {
+      setNameError('Invalid user name');
 
       return;
     }
