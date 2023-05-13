@@ -21,7 +21,7 @@ export const Extension: React.FC<Props> = ({ appName, uiScreenTypeIsMobile }) =>
     <h4 className="Docs-h4">How do I install the extension?</h4>
     {uiScreenTypeIsMobile ? (
       <p>
-        We have an extension available for Desktop browsers. As you are currently on mobile you wont be able to download
+        We have an extension available for Desktop browsers. As you are currently on mobile you won’t be able to download
         it. If you want to use it, please return in a desktop browser to this same page and follow the instructions to
         download it.
       </p>

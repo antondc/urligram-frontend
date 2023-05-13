@@ -21,7 +21,7 @@ export const Legal: React.FC<Props> = ({ domain, contactEmail, appName }) => (
           {domain}
         </A>
         <Space />
-        website, {appName} mobile application —«Mobile Application»— and any of their related products and services
+        website, {appName} browser extensions and any of their related products and services
         —collectively, «Services»—.
       </p>
       <p className="Docs-paragraph">

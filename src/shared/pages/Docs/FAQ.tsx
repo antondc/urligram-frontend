@@ -42,7 +42,7 @@ export const FAQ: React.FC<Props> = ({ navigateToSection }) => (
       <li className="Docs-li">Share your content with other users.</li>
     </ul>
     <p className="Docs-paragraph">
-      With Urligram you will never loose that article you came across while browsing, and your friends wont have any
+      With Urligram you will never loose that article you came across while browsing, and your friends won’t have any
       excuse for not being aware of your birthday wishlist ;)
     </p>
     <h4 className="Docs-h4">How to sign up?</h4>
@@ -54,8 +54,7 @@ export const FAQ: React.FC<Props> = ({ navigateToSection }) => (
       </A>
       <Space />
       page, click «Register» and introduce your data. We respect your privacy, and we do not link your email with other
-      platforms, so you may use any name you prefer. To register you will only need a working email. To see all the
-      benefits of being a user please go to User section.
+      platforms, so you may use any name you prefer. To register you will only need a working email.
     </p>
     <h4 className="Docs-h4">How to bookmark a page?</h4>
     <p className="Docs-paragraph">
@@ -66,9 +65,9 @@ export const FAQ: React.FC<Props> = ({ navigateToSection }) => (
     </p>
     <h4 className="Docs-h4">How many private bookmarks may I have?</h4>
     <p className="Docs-paragraph">
-      A bookmark can be private or public. With the current basic account its possible to have have any amount of
-      private bookmarks up to 100 total bookmarks. When the user has more than 100 bookmarks, one out of every five has
-      can be private. <br />
+      A bookmark can be private or public. With the current basic account its possible to have any amount of private
+      bookmarks up to 100 total bookmarks. When the user has more than 100 bookmarks, one out of every five has can be
+      private. <br />
       This limit will not apply with the advanced account we have in development.
     </p>
     <h4 className="Docs-h4">How to share a bookmark?</h4>
