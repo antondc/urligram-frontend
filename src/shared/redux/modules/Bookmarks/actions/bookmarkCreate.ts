@@ -5,6 +5,8 @@ import {
   BookmarksActions,
   BookmarkState,
 } from 'Modules/Bookmarks/bookmarks.types';
+import { uiNotificationPush } from 'Modules/Ui/actions/uiNotificationPush';
+import { NotificationStatus, NotificationStyle, NotificationType } from 'Modules/Ui/ui.types';
 import { USERS_LOAD_SUCCEED, UsersActions } from 'Modules/Users/users.types';
 import HttpClient from 'Services/HttpClient';
 import { serializerFromArrayToByKey } from '@antoniodcorrea/utils';
@@ -80,7 +82,7 @@ export const bookmarkCreate =
         return item;
       });
 
-      dispatch({
+      await dispatch({
         type: BOOKMARK_CREATE_SUCCESS,
         payload: {
           ...bookmarksAfterResponse,
@@ -93,7 +95,7 @@ export const bookmarkCreate =
         },
       });
 
-      dispatch({
+      await dispatch({
         type: LISTS_LOAD_SUCCESS,
         payload: {
           ...listsAfterResponse,
@@ -103,7 +105,7 @@ export const bookmarkCreate =
         },
       });
 
-      dispatch({
+      await dispatch({
         type: USERS_LOAD_SUCCEED,
         payload: {
           ...usersAfterResponse,
@@ -119,6 +121,14 @@ export const bookmarkCreate =
           },
         },
       });
+
+      await dispatch(
+        uiNotificationPush({
+          type: NotificationType.BookmarkCreation,
+          style: NotificationStyle.Success,
+          status: NotificationStatus.Pending,
+        })
+      );
 
       return bookmarkData?.attributes;
     } catch (error) {

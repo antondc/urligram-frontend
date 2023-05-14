@@ -10,7 +10,8 @@ export const switchSignUpDisabledModal =
       type: SWITCH_SIGN_UP_DISABLED_MODAL,
       payload: {
         ...Ui,
-        screenLocked: !Ui.screenLocked,
+        screenLocked: mounted,
+        screenMobileLocked: mounted,
         signUpDisabledModal: {
           ...Ui.signUpDisabledModal,
           mounted,

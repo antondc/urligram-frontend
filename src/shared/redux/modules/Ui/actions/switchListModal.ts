@@ -6,21 +6,21 @@ type Params = {
   listId?: number;
 };
 
-export const switchListModal = ({ mounted, listId }: Params): AppThunk<void, UiActions> => async (
-  dispatch,
-  getState
-): Promise<void> => {
-  const { Ui } = getState();
+export const switchListModal =
+  ({ mounted, listId }: Params): AppThunk<void, UiActions> =>
+  async (dispatch, getState): Promise<void> => {
+    const { Ui } = getState();
 
-  dispatch({
-    type: SWITCH_LIST_MODAL,
-    payload: {
-      screenLocked: !Ui.screenLocked,
-      listModal: {
-        ...Ui.listModal,
-        mounted,
-        listId,
+    dispatch({
+      type: SWITCH_LIST_MODAL,
+      payload: {
+        screenLocked: mounted,
+        screenMobileLocked: mounted,
+        listModal: {
+          ...Ui.listModal,
+          mounted,
+          listId,
+        },
       },
-    },
-  });
-};
+    });
+  };

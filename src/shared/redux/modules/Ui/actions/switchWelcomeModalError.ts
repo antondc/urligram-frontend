@@ -9,7 +9,8 @@ export const switchWelcomeModalError =
     dispatch({
       type: SWITCH_WELCOME_MODAL_ERROR,
       payload: {
-        screenLocked: !Ui.screenLocked,
+        screenLocked: mounted,
+        screenMobileLocked: mounted,
         welcomeModalError: {
           ...Ui.welcomeModalError,
           mounted,
