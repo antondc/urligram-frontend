@@ -12,7 +12,7 @@ import { uiResetModalsState } from 'Modules/Ui/actions/uiResetModalsState';
 import { uiScreenDesktopUnlock } from 'Modules/Ui/actions/uiScreenDesktopUnlock';
 import { uiScreenMobileUnLock } from 'Modules/Ui/actions/uiScreenMobileUnLock';
 import { DELAY_MEDIUM_MS, EVENT_BLUR } from 'Root/src/shared/constants';
-import { testStringHasWhiteSpaces, validateEmailAddress } from '@antoniodcorrea/utils';
+import { validateEmailAddress, validateUserName } from '@antoniodcorrea/utils';
 import { ForgotPassword as ForgotPasswordUi } from './ForgotPassword';
 
 import './ForgotPassword.less';
@@ -33,28 +33,21 @@ const ForgotPassword: React.FC = () => {
     setSubmitError(undefined);
     setSubmitSuccess(undefined);
 
-    const isNameOrEmailLengthValid = value?.length > 5;
-    if (!isNameOrEmailLengthValid) {
-      setNameOrEmailError('Name or Email too short');
-
-      return;
-    }
-
-    const isEmail = value?.includes('@');
+    const isEmail = value.includes('@');
     const isValidEmail = validateEmailAddress(value);
+    const isValidName = validateUserName(value);
 
     if (isEmail && !isValidEmail) {
       setNameOrEmailError('Email not valid');
 
       return;
     }
-
-    const stringHasWhiteSpaces = testStringHasWhiteSpaces(value);
-    if (stringHasWhiteSpaces) {
-      setNameOrEmailError('Name can not contain spaces');
+    if (!isEmail && !isValidName) {
+      setNameOrEmailError('Name not valid');
 
       return;
     }
+
     setNameOrEmailError(undefined);
   };
 
@@ -64,15 +57,22 @@ const ForgotPassword: React.FC = () => {
   const onChangeNameOrEmail = async (e: React.FormEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
 
-    if (e.type === EVENT_BLUR) return;
+    const nameOrEmailLowercase = value.toLowerCase();
 
+    setNameOrEmailValue(nameOrEmailLowercase);
+    setSubmitError(undefined);
     setNameOrEmailError(undefined);
-    setNameOrEmailValue(value);
-    onNameOrEmailValidateDebounced(value);
+    onNameOrEmailValidateDebounced(nameOrEmailLowercase);
   };
 
   const onBlurNameOrEmail = async (e: React.FormEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
+
+    if (!value) {
+      setNameOrEmailError('Name or email required');
+
+      return;
+    }
 
     onNameOrEmailValidate(value);
   };

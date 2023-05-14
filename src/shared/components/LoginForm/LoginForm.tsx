@@ -11,9 +11,11 @@ interface Props {
   nameOrEmailValue: string;
   nameOrEmailError: string;
   onChangeNameOrEmail: (e: React.FormEvent<HTMLInputElement>) => void;
+  onBlurNameOrEmail: (e: React.FormEvent<HTMLInputElement>) => void;
   passwordValue: string;
   passwordError: string;
   onChangePassword: (e: React.FormEvent<HTMLInputElement>) => void;
+  onBlurPassword: (e: React.FormEvent<HTMLInputElement>) => void;
   submitDisabled: boolean;
   submitSuccess: boolean;
   submitError: string;
@@ -26,9 +28,11 @@ export const LoginForm: React.FC<Props> = ({
   nameOrEmailValue,
   nameOrEmailError,
   onChangeNameOrEmail,
+  onBlurNameOrEmail,
   passwordValue,
   passwordError,
   onChangePassword,
+  onBlurPassword,
   submitDisabled,
   submitSuccess,
   submitError,
@@ -42,7 +46,7 @@ export const LoginForm: React.FC<Props> = ({
         type="text"
         label={glossary.nameOrEmail}
         onChange={onChangeNameOrEmail}
-        onBlur={onChangeNameOrEmail}
+        onBlur={onBlurNameOrEmail}
         value={nameOrEmailValue}
         error={nameOrEmailError}
         grow
@@ -54,7 +58,7 @@ export const LoginForm: React.FC<Props> = ({
         type="password"
         label={glossary.password}
         onChange={onChangePassword}
-        onBlur={onChangePassword}
+        onBlur={onBlurPassword}
         value={passwordValue}
         error={passwordError}
         grow

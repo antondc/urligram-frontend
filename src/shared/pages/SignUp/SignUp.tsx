@@ -15,15 +15,19 @@ interface Props {
   nameValue: string;
   nameError: string;
   onChangeName: (e: React.FormEvent<HTMLInputElement>) => void;
+  onBlurName: (e: React.FormEvent<HTMLInputElement>) => void;
   emailValue: string;
   emailError: string;
   onChangeEmail: (e: React.FormEvent<HTMLInputElement>) => void;
+  onBlurEmail: (e: React.FormEvent<HTMLInputElement>) => void;
   passwordValue: string;
   passwordError: string;
   onChangePassword: (e: React.FormEvent<HTMLInputElement>) => void;
+  onBlurPassword: (e: React.FormEvent<HTMLInputElement>) => void;
   passwordRepeatedValue: string;
   passwordRepeatedError: string;
   onChangePasswordRepeated: (e: React.FormEvent<HTMLInputElement>) => void;
+  onBlurPasswordRepeated: (e: React.FormEvent<HTMLInputElement>) => void;
   submitDisabled: boolean;
   submitSuccess: boolean;
   submitError: string;
@@ -36,15 +40,19 @@ export const SignUp: React.FC<Props> = ({
   nameValue,
   nameError,
   onChangeName,
+  onBlurName,
   emailValue,
   emailError,
   onChangeEmail,
+  onBlurEmail,
   passwordValue,
   passwordError,
   onChangePassword,
+  onBlurPassword,
   passwordRepeatedValue,
   passwordRepeatedError,
   onChangePasswordRepeated,
+  onBlurPasswordRepeated,
   submitDisabled,
   submitSuccess,
   submitError,
@@ -62,7 +70,7 @@ export const SignUp: React.FC<Props> = ({
             type="text"
             label={glossary.name}
             onChange={onChangeName}
-            onBlur={onChangeName}
+            onBlur={onBlurName}
             value={nameValue}
             error={nameError}
             grow
@@ -74,7 +82,7 @@ export const SignUp: React.FC<Props> = ({
             type="email"
             label={glossary.email}
             onChange={onChangeEmail}
-            onBlur={onChangeEmail}
+            onBlur={onBlurEmail}
             value={emailValue}
             error={emailError}
             grow
@@ -86,7 +94,7 @@ export const SignUp: React.FC<Props> = ({
             type="password"
             label={glossary.password}
             onChange={onChangePassword}
-            onBlur={onChangePassword}
+            onBlur={onBlurPassword}
             value={passwordValue}
             error={passwordError}
             grow
@@ -98,7 +106,7 @@ export const SignUp: React.FC<Props> = ({
             type="password"
             label={glossary.repeatPassword}
             onChange={onChangePasswordRepeated}
-            onBlur={onChangePasswordRepeated}
+            onBlur={onBlurPasswordRepeated}
             value={passwordRepeatedValue}
             error={passwordRepeatedError}
             grow

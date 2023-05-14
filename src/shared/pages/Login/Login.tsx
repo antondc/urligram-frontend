@@ -24,7 +24,7 @@ export const Login: React.FC<Props> = ({ glossary }) => (
         <BaseModalFooterSection>
           {glossary.forgotPassword}:
           <Space />
-          <BaseModalFooterLink href="login">{glossary.resetPassword}</BaseModalFooterLink>
+          <BaseModalFooterLink href="forgot-password">{glossary.resetPassword}</BaseModalFooterLink>
         </BaseModalFooterSection>
         <BaseModalFooterSection>
           {glossary.dontHaveAccount}:

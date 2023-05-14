@@ -72,9 +72,6 @@ const SignUp: React.FC = () => {
   const onChangeName = async (e: React.FormEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
 
-    if (e.type === EVENT_BLUR) return;
-
-    setNameValue(value);
     setSubmitError(undefined);
     setNameError(undefined);
 
@@ -84,7 +81,21 @@ const SignUp: React.FC = () => {
       return;
     }
 
+    const nameLowercase = value.toLowerCase();
+    setNameValue(nameLowercase);
     onNameValidateDebounced(value);
+  };
+
+  const onBlurName = async (e: React.FormEvent<HTMLInputElement>) => {
+    const { value } = e.currentTarget;
+
+    if (!value) {
+      setNameError('Name required');
+
+      return;
+    }
+
+    onNameValidate(value);
   };
 
   const onEmailValidate = (value: string) => {
@@ -123,6 +134,18 @@ const SignUp: React.FC = () => {
     onEmailValidateDebounced(value);
   };
 
+  const onBlurEmail = async (e: React.FormEvent<HTMLInputElement>) => {
+    const { value } = e.currentTarget;
+
+    if (!value) {
+      setEmailError('Email required');
+
+      return;
+    }
+
+    onEmailValidate(value);
+  };
+
   const onPasswordValidate = (value: string) => {
     const isValidPassword = validatePassword(value);
     if (!isValidPassword) {
@@ -154,6 +177,18 @@ const SignUp: React.FC = () => {
     onPasswordValidateDebounced(value);
   };
 
+  const onBlurPassword = async (e: React.FormEvent<HTMLInputElement>) => {
+    const { value } = e.currentTarget;
+
+    if (!value) {
+      setPasswordError('Password required');
+
+      return;
+    }
+
+    onPasswordValidate(value);
+  };
+
   const onPasswordRepeatedValidate = (value: string, passwordValue: string) => {
     const isSamePassword = value === passwordValue;
     if (!isSamePassword) {
@@ -182,6 +217,18 @@ const SignUp: React.FC = () => {
     }
 
     onPasswordRepeatedValidateDebounced(value, passwordValue);
+  };
+
+  const onBlurPasswordRepeated = async (e: React.FormEvent<HTMLInputElement>) => {
+    const { value } = e.currentTarget;
+
+    if (!value) {
+      setPasswordRepeatedError('Password required');
+
+      return;
+    }
+
+    onPasswordRepeatedValidate(value, passwordValue);
   };
 
   const onSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
@@ -244,15 +291,19 @@ const SignUp: React.FC = () => {
       nameValue={nameValue}
       nameError={nameError}
       onChangeName={onChangeName}
+      onBlurName={onBlurName}
       emailValue={emailValue}
       emailError={emailError}
       onChangeEmail={onChangeEmail}
+      onBlurEmail={onBlurEmail}
       passwordValue={passwordValue}
       passwordError={passwordError}
       onChangePassword={onChangePassword}
+      onBlurPassword={onBlurPassword}
       passwordRepeatedValue={passwordRepeatedValue}
       passwordRepeatedError={passwordRepeatedError}
       onChangePasswordRepeated={onChangePasswordRepeated}
+      onBlurPasswordRepeated={onBlurPasswordRepeated}
       onSubmit={onSubmit}
       submitDisabled={submitDisabled}
       submitSuccess={submitSuccess}

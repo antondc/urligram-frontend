@@ -15,9 +15,11 @@ interface Props {
   passwordValue: string;
   passwordError: string;
   onChangePassword: (e: React.FormEvent<HTMLInputElement>) => void;
+  onBlurPassword: (e: React.FormEvent<HTMLInputElement>) => void;
   passwordRepeatedValue: string;
   passwordRepeatedError: string;
   onChangePasswordRepeated: (e: React.FormEvent<HTMLInputElement>) => void;
+  onBlurPasswordRepeated: (e: React.FormEvent<HTMLInputElement>) => void;
   submitDisabled: boolean;
   submitSuccess: boolean;
   submitError: string;
@@ -30,9 +32,11 @@ export const ResetPassword: React.FC<Props> = ({
   passwordValue,
   passwordError,
   onChangePassword,
+  onBlurPassword,
   passwordRepeatedValue,
   passwordRepeatedError,
   onChangePasswordRepeated,
+  onBlurPasswordRepeated,
   submitDisabled,
   submitSuccess,
   submitError,
@@ -50,7 +54,7 @@ export const ResetPassword: React.FC<Props> = ({
             type="password"
             label={glossary.password}
             onChange={onChangePassword}
-            onBlur={onChangePassword}
+            onBlur={onBlurPassword}
             value={passwordValue}
             error={passwordError}
             grow
@@ -62,7 +66,7 @@ export const ResetPassword: React.FC<Props> = ({
             type="password"
             label={glossary.repeatPassword}
             onChange={onChangePasswordRepeated}
-            onBlur={onChangePasswordRepeated}
+            onBlur={onBlurPasswordRepeated}
             value={passwordRepeatedValue}
             error={passwordRepeatedError}
             grow

@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import debounce from 'lodash/debounce';
 
 import { selectCurrentGlossary } from 'Modules/Languages/selectors/selectCurrentGlossary';
 import { selectCurrentRouteQueryParams } from 'Modules/Routes/selectors/selectCurrentRouteQueryParams';
@@ -11,7 +12,7 @@ import { selectSessionPasswordRequested } from 'Modules/Session/selectors/select
 import { uiResetModalsState } from 'Modules/Ui/actions/uiResetModalsState';
 import { uiScreenDesktopUnlock } from 'Modules/Ui/actions/uiScreenDesktopUnlock';
 import { uiScreenMobileUnLock } from 'Modules/Ui/actions/uiScreenMobileUnLock';
-import { EVENT_BLUR } from 'Root/src/shared/constants';
+import { DELAY_MEDIUM_MS, EVENT_BLUR } from 'Root/src/shared/constants';
 import { validatePassword } from '@antoniodcorrea/utils';
 import { ResetPassword as ResetPasswordUi } from './ResetPassword';
 
@@ -37,12 +38,7 @@ const ResetPassword: React.FC = () => {
 
   const submitDisabled = !passwordValue || !!passwordError || !passwordRepeatedValue || !!passwordRepeatedError;
 
-  const onChangePassword = (e: React.FormEvent<HTMLInputElement>) => {
-    const { value } = e.currentTarget;
-
-    if (e.type === EVENT_BLUR) return;
-
-    setPasswordValue(value);
+  const onPasswordValidate = (value: string) => {
     setSubmitError(undefined);
 
     const isValidPassword = validatePassword(value);
@@ -56,13 +52,49 @@ const ResetPassword: React.FC = () => {
     setPasswordError(undefined);
   };
 
-  const onChangePasswordRepeated = (e: React.FormEvent<HTMLInputElement>) => {
+  // To debounce the validation we need to memoize it as well
+  const onPasswordValidateDebounced = useCallback(debounce(onPasswordValidate, DELAY_MEDIUM_MS), []);
+
+  const onChangePassword = (e: React.FormEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
 
-    if (e.type === EVENT_BLUR) return;
-
-    setPasswordRepeatedValue(value);
+    setPasswordValue(value);
+    setPasswordError(undefined);
     setSubmitError(undefined);
+    onPasswordValidateDebounced(value);
+  };
+
+  const onBlurPassword = async (e: React.FormEvent<HTMLInputElement>) => {
+    const { value } = e.currentTarget;
+
+    if (!value) {
+      setPasswordError('Password required');
+
+      return;
+    }
+
+    onPasswordValidate(value);
+  };
+
+  const onPasswordRepeatedValidate = (value: string) => {
+    setSubmitError(undefined);
+
+    const isValidPassword = validatePassword(value);
+
+    if (!isValidPassword) {
+      setPasswordRepeatedError('6-10 chars., digits, low and uppercase');
+
+      return;
+    }
+
+    setPasswordError(undefined);
+  };
+
+  // To debounce the validation we need to memoize it as well
+  const onPasswordRepeatedValidateDebounced = useCallback(debounce(onPasswordRepeatedValidate, DELAY_MEDIUM_MS), []);
+
+  const onChangePasswordRepeated = (e: React.FormEvent<HTMLInputElement>) => {
+    const { value } = e.currentTarget;
 
     const isSamePassword = value === passwordValue;
     if (!isSamePassword) {
@@ -71,7 +103,22 @@ const ResetPassword: React.FC = () => {
       return;
     }
 
+    setPasswordRepeatedValue(value);
     setPasswordRepeatedError(undefined);
+    setSubmitError(undefined);
+    onPasswordRepeatedValidateDebounced(value);
+  };
+
+  const onBlurPasswordRepeated = async (e: React.FormEvent<HTMLInputElement>) => {
+    const { value } = e.currentTarget;
+
+    if (!value) {
+      setPasswordRepeatedError('Repeated password required');
+
+      return;
+    }
+
+    onPasswordRepeatedValidate(value);
   };
 
   const onSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
@@ -130,9 +177,11 @@ const ResetPassword: React.FC = () => {
       passwordValue={passwordValue}
       passwordError={passwordError}
       onChangePassword={onChangePassword}
+      onBlurPassword={onBlurPassword}
       passwordRepeatedValue={passwordRepeatedValue}
       passwordRepeatedError={passwordRepeatedError}
       onChangePasswordRepeated={onChangePasswordRepeated}
+      onBlurPasswordRepeated={onBlurPasswordRepeated}
       onSubmit={onSubmit}
       submitDisabled={submitDisabled}
       submitSuccess={submitSuccess}
