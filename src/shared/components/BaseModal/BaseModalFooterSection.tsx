@@ -3,6 +3,7 @@ import React from 'react';
 import './BaseModalFooterSection.less';
 
 interface Props {
+  children:React.ReactNode
   className?: string;
 }
 

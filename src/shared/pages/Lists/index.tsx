@@ -18,7 +18,8 @@ import { selectTagsSearch } from 'Modules/Tags/selectors/selectTagsSearch';
 import { switchListModal } from 'Modules/Ui/actions/switchListModal';
 import { uiResetModalsState } from 'Modules/Ui/actions/uiResetModalsState';
 import history from 'Services/History';
-import { isDomAvailable, URLWrapper } from '@antoniodcorrea/utils';
+import { URLWrapper } from '@antoniodcorrea/utils';
+import { isDomAvailable } from '@antoniodcorrea/utils-frontend';
 import { Lists as ListsUI } from './Lists';
 
 const Lists: React.FC = () => {

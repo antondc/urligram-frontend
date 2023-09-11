@@ -5,4 +5,8 @@ import storeFactory from 'Redux/.';
 
 const store = storeFactory({});
 
-export const ProviderWrapper: React.FC = ({ children }) => <Provider store={store}>{children}</Provider>;
+interface Props {
+  children: React.ReactNode | React.ReactNode[];
+}
+
+export const ProviderWrapper: React.FC<Props> = ({ children }) => <Provider store={store}>{children}</Provider>;

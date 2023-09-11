@@ -209,7 +209,7 @@ const knobs = {
   skeleton: (): boolean => boolean('Skeleton', false),
 };
 
-export const Default: React.ReactNode = () => (
+export const Default: React.FC = () => (
   <ProviderWrapper>
     <FadeInOut valueToUpdate={knobs.skeleton()} speed="fastest" appear>
       {!knobs.skeleton() ? <UserRow {...props} /> : <UserRowSkeleton {...props} />}

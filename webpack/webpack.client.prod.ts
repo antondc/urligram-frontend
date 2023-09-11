@@ -1,20 +1,19 @@
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import webpack from 'webpack';
+import webpack, { Configuration } from 'webpack';
 import merge from 'webpack-merge';
 
-import { production } from '../config.test.json';
+import Config from '../config.test.json';
 import { ENVIRONMENT_PRODUCTION, WEBPACK_DIST, WEBPACK_SRC_CLIENT } from './constants';
 import webpackClientCommonConfig from './webpack.client.common';
 
-const webpackClientProdConfig = {
+const webpackClientProdConfig: Configuration = {
   entry: [WEBPACK_SRC_CLIENT],
   mode: 'production',
   output: {
-    filename: 'client-[hash:4].js',
+    filename: 'client-[fullhash:4].js',
     path: WEBPACK_DIST,
     publicPath: '/',
   },
-  devtool: 'none',
   stats: 'errors-only',
   module: {
     rules: [
@@ -26,17 +25,17 @@ const webpackClientProdConfig = {
     ],
   },
   plugins: [
-    ...webpackClientCommonConfig.plugins,
+    // ...webpackClientCommonConfig.plugins,
     new webpack.DefinePlugin({
       'process.env': {
-        DOMAIN: JSON.stringify(production.DOMAIN),
-        ENDPOINT_API: JSON.stringify(production.API_URL),
+        DOMAIN: JSON.stringify(Config.production.DOMAIN),
+        ENDPOINT_API: JSON.stringify(Config.production.API_URL),
         ENVIRONMENT: JSON.stringify(ENVIRONMENT_PRODUCTION),
       },
     }),
     new MiniCssExtractPlugin({
-      filename: '[name]-[hash:4].css',
-      chunkFilename: '[name]-[hash:4].css',
+      filename: '[name]-[fullhash:4].css',
+      chunkFilename: '[name]-[fullhash:4].css',
     }),
   ],
 };

@@ -20,7 +20,8 @@ import { userLoad } from 'Modules/Users/actions/userLoad';
 import { selectUserById } from 'Modules/Users/selectors/selectUserById';
 import { Routes } from 'Router/routes';
 import history from 'Services/History';
-import { isDomAvailable, LocaleFormattedDate } from '@antoniodcorrea/utils';
+import { LocaleFormattedDate } from '@antoniodcorrea/utils';
+import { isDomAvailable } from '@antoniodcorrea/utils-frontend';
 import { User as UserUi } from './User';
 
 const User: React.FC = () => {

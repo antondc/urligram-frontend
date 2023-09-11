@@ -1,19 +1,20 @@
-import webpack from 'webpack';
+import webpack, { Configuration } from 'webpack';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import merge from 'webpack-merge';
 
-import { development } from '../config.test.json';
+import Config from '../config.test.json';
 import { ENVIRONMENT_DEV, WEBPACK_ROOT, WEBPACK_SRC_CLIENT } from './constants';
 import webpackClientCommonConfig from './webpack.client.common';
 
-const webpackClientDevConfig = {
+const webpackClientDevConfig: Configuration = {
   mode: 'development',
   entry: ['webpack-hot-middleware/client', WEBPACK_SRC_CLIENT],
   output: {
-    filename: 'client-[hash:4].js',
+    filename: 'client-[fullhash:4].js',
     publicPath: WEBPACK_ROOT,
+    libraryTarget: 'umd',
   },
-  devtool: '#source-map',
+  // devtool: 'inline-source-map',
   stats: 'normal',
   module: {
     rules: [
@@ -29,8 +30,8 @@ const webpackClientDevConfig = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
-        DOMAIN: JSON.stringify(development.DOMAIN),
-        ENDPOINT_API: JSON.stringify(development.API_URL),
+        DOMAIN: JSON.stringify(Config.development.DOMAIN),
+        ENDPOINT_API: JSON.stringify(Config.development.API_URL),
         ENVIRONMENT: JSON.stringify(ENVIRONMENT_DEV),
       },
     }),

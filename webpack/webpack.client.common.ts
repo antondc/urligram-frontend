@@ -1,17 +1,20 @@
-import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
-import { CleanWebpackPlugin } from 'clean-webpack-plugin';
+// import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
 import CompressionPlugin from 'compression-webpack-plugin';
-import FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin';
 import HtmlWebPackPlugin from 'html-webpack-plugin';
 import path from 'path';
+import { Configuration } from 'webpack';
+import NodePolyfillPlugin from 'node-polyfill-webpack-plugin';
+import { WEBPACK_ROOT, WEBPACK_SRC } from './constants';
 
-import { WEBPACK_DIST, WEBPACK_ROOT, WEBPACK_SRC } from './constants';
-
-const webpackClientCommonConfig = {
+const webpackClientCommonConfig: Configuration = {
   name: 'client',
   context: WEBPACK_SRC,
   target: 'web',
-  externals: {},
+  node: {
+    // global: false,
+    __filename: false,
+    __dirname: false,
+  },
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
     alias: {
@@ -33,7 +36,7 @@ const webpackClientCommonConfig = {
     rules: [
       {
         test: /\.(js|jsx|ts|tsx)$/,
-        loader: 'ts-loader',
+        use: 'ts-loader',
         exclude: /node_modules/,
       },
       {
@@ -42,24 +45,15 @@ const webpackClientCommonConfig = {
       },
       {
         test: /\.(woff|woff2|eot|ttf)$/,
-        loader: 'file-loader',
-        options: {
-          outputPath: 'fonts/',
-          publicPath: '/fonts',
-          name: '[name].[ext]',
+        type: 'asset/resource',
+        generator: {
+          filename: 'fonts/[name].[ext]',
         },
       },
     ],
   },
   plugins: [
-    new CaseSensitivePathsPlugin(),
-    new CleanWebpackPlugin({
-      dry: false,
-      verbose: true,
-      protectWebpackAssets: false,
-      cleanOnceBeforeBuildPatterns: [path.join(WEBPACK_DIST, 'client-*'), path.join(WEBPACK_DIST, '*hot-update*')],
-      cleanAfterEveryBuildPatterns: [],
-    }),
+    // new CaseSensitivePathsPlugin(),
     new HtmlWebPackPlugin({
       baseUrl: '',
       inject: true,
@@ -72,11 +66,11 @@ const webpackClientCommonConfig = {
       body: '<%- body %>',
       data: '<%- data %>',
     }),
-    new FriendlyErrorsWebpackPlugin(),
     new CompressionPlugin({
       algorithm: 'gzip',
       test: /\.svg$|\.woff$|\.woff2$|\.ttf$|\.eot$|\.otf$|\.js$|\.css$|\.html$/,
     }),
+    new NodePolyfillPlugin(),
   ],
 };
 

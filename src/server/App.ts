@@ -65,7 +65,6 @@ app.use(logger('dev'));
 if (process.env.NODE_ENV === 'development') {
   app.use(
     webpackDevMiddleware(compiler, {
-      logLevel: 'warn',
       publicPath: WEBPACK_ROOT,
       writeToDisk: true,
     })

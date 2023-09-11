@@ -1,4 +1,4 @@
-import { isDomAvailable } from '@antoniodcorrea/utils';
+import { isDomAvailable } from '@antoniodcorrea/utils-frontend';
 
 export class CookiesWrapper {
   findCookie(cookieName: string): string | undefined {

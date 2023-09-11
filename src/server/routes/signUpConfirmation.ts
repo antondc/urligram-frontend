@@ -2,7 +2,8 @@ import express from 'express';
 
 import { UserState } from 'Modules/Users/users.types';
 import HttpClient from 'Services/HttpClient';
-import { TokenJWT, URLWrapper } from '@antoniodcorrea/utils';
+import { URLWrapper } from '@antoniodcorrea/utils';
+import { TokenJWT } from '@antoniodcorrea/utils-backend';
 
 const ROUTE_REGEX = '/:lang([a-z]{2})?/sign-up-confirmation/check';
 

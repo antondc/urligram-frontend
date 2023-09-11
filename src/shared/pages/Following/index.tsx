@@ -20,7 +20,8 @@ import { selectUsersLoading } from 'Modules/Users/selectors/selectUsersLoading';
 import { selectUsersMetaSort } from 'Modules/Users/selectors/selectUsersMetaSort';
 import { selectUsersTotalItems } from 'Modules/Users/selectors/selectUsersTotalItems';
 import history from 'Services/History';
-import { isDomAvailable, URLWrapper } from '@antoniodcorrea/utils';
+import { URLWrapper } from '@antoniodcorrea/utils';
+import { isDomAvailable } from '@antoniodcorrea/utils-frontend';
 import { Following as FollowingUI } from './Following';
 
 const Following: React.FC = () => {

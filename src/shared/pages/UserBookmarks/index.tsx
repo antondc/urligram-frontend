@@ -24,7 +24,8 @@ import { uiResetModalsState } from 'Modules/Ui/actions/uiResetModalsState';
 import { userLoad } from 'Modules/Users/actions/userLoad';
 import { selectUserById } from 'Modules/Users/selectors/selectUserById';
 import history from 'Services/History';
-import { isDomAvailable, URLWrapper } from '@antoniodcorrea/utils';
+import { URLWrapper } from '@antoniodcorrea/utils';
+import { isDomAvailable } from '@antoniodcorrea/utils-frontend';
 import { UserBookmarks as UserBookmarksUi } from './UserBookmarks';
 
 const UserBookmarks: React.FC = () => {

@@ -38,7 +38,10 @@ export const UserForm: React.FC<Props> = ({
       uploadFiles={uploadFilesToServer}
       onRemove={removeFilesFromServer}
       percentCompleted={percentCompleted}
-      accept=".jpg,.jpeg,.png"
+      accept={{
+        ['image/jpg']:[".jpg,.jpeg"],
+        ['image/png']:[".png"]
+      }}
     />
     <FadeInOut valueToUpdate={!!imageError} speed="fast">
       <BaseFormError className="UserForm-imageError">{imageError}</BaseFormError>

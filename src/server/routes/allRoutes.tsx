@@ -17,7 +17,8 @@ import { Routes, routesList, routesPathsList, routesWithoutOmmitedValues } from 
 import history from 'Services/History';
 import enhanceRouteWithParams from 'Tools/utils/url/enhanceRouteWithParams';
 import findActiveRouteKey from 'Tools/utils/url/findActiveRouteKey';
-import { QueryStringWrapper, TokenJWT } from '@antoniodcorrea/utils';
+import { QueryStringWrapper, } from '@antoniodcorrea/utils';
+import { TokenJWT } from '@antoniodcorrea/utils-backend';
 
 export type RequestParameters = {
   hostname?: string;

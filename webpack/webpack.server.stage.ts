@@ -1,25 +1,28 @@
-import webpack from 'webpack';
+import webpack, { Configuration } from 'webpack';
 import merge from 'webpack-merge';
 
-import { staging } from '../config.test.json';
+import Config from '../config.test.json';
 import { ENVIRONMENT_STAGING } from './constants';
 import webpackServerCommonConfig from './webpack.server.common';
 
-const webpackServerProdConfig = {
+const webpackServerProdConfig: Configuration = {
   name: 'server',
   mode: 'production',
   target: 'node',
-  devtool: '#source-map',
+  devtool: 'inline-source-map',
   stats: 'errors-only',
+  output: {
+    clean: true,
+  },
   plugins: [
     // Setting a variable to identify browser from server
     new webpack.DefinePlugin({
       'process.env': {
         JWT_SECRET: JSON.stringify(process.env.JWT_SECRET),
-        DOMAIN: JSON.stringify(staging.DOMAIN),
-        SERVER_PORT_HTTP: staging.PORT_HTTP,
-        SERVER_PORT_HTTPS: staging.PORT_HTTPS,
-        ENDPOINT_API: JSON.stringify(staging.API_URL),
+        DOMAIN: JSON.stringify(Config.staging.DOMAIN),
+        SERVER_PORT_HTTP: Config.staging.PORT_HTTP,
+        SERVER_PORT_HTTPS: Config.staging.PORT_HTTPS,
+        ENDPOINT_API: JSON.stringify(Config.staging.API_URL),
         ENVIRONMENT: JSON.stringify(ENVIRONMENT_STAGING),
       },
     }),

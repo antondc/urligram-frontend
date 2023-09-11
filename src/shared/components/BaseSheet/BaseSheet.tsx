@@ -7,6 +7,7 @@ import { AnimateSheet } from '@antoniodcorrea/components';
 import './BaseSheet.less';
 
 interface Props {
+  children: React.ReactNode | React.ReactNode[];
   mounted: boolean;
   onCloseClick: () => void;
 }

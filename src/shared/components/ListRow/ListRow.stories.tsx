@@ -113,6 +113,6 @@ const knobs = {
   skeleton: (): boolean => boolean('Skeleton', false),
 };
 
-export const Default: React.ReactNode = () => (
+export const Default: React.FC = () => (
   <ProviderWrapper>{!knobs.skeleton() ? <ListRow {...props} /> : <ListRowSkeleton {...props} />}</ProviderWrapper>
 );

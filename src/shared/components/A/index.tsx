@@ -7,7 +7,7 @@ import history from 'Services/History';
 import { A as ComponentsA } from '@antoniodcorrea/components';
 
 interface Props extends HTMLProps<HTMLAnchorElement> {
-  children: React.ReactNode;
+  children: React.ReactNode | React.ReactNode[];
   className?: string;
   id?: string;
   href: string;

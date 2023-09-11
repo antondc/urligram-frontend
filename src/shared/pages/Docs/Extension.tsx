@@ -2,7 +2,7 @@ import React from 'react';
 
 import Chrome from 'Assets/svg/browserChrome.svg';
 import Firefox from 'Assets/svg/browserFirefox.svg';
-import { CHROME_EXTENSION_URL, FIREFOX_EXTENSION_URL } from 'Root/config.test.json';
+import Config from 'Root/config.test.json';
 
 interface Props {
   appName: string;
@@ -29,14 +29,14 @@ export const Extension: React.FC<Props> = ({ appName, uiScreenTypeIsMobile }) =>
       <p>
         First, visit the appropriate official store of your browser by clicking the link for{' '}
         <span className="Docs-linkWithIcon">
-          <a className="Docs-link" href={FIREFOX_EXTENSION_URL} target="_blank" rel="noreferrer">
+          <a className="Docs-link" href={Config.FIREFOX_EXTENSION_URL} target="_blank" rel="noreferrer">
             Firefox
           </a>
           <Firefox className="Docs-iconFirefox" />
         </span>{' '}
         or{' '}
         <span className="Docs-linkWithIcon">
-          <a className="Docs-link" href={CHROME_EXTENSION_URL} target="_blank" rel="noreferrer">
+          <a className="Docs-link" href={Config.CHROME_EXTENSION_URL} target="_blank" rel="noreferrer">
             Chrome
           </a>
           <Chrome className="Docs-iconChrome" />

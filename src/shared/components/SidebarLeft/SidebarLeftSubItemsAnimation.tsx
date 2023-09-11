@@ -41,6 +41,7 @@ const variants = {
 };
 
 interface Props {
+  children: React.ReactNode | React.ReactNode[];
   mounted?: boolean;
 }
 

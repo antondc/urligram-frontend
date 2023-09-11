@@ -1,14 +1,13 @@
-import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
-import { CleanWebpackPlugin } from 'clean-webpack-plugin';
+// import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
 import CompressionPlugin from 'compression-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
-import FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin';
 import path from 'path';
+import { Configuration } from 'webpack';
 import nodeExternals from 'webpack-node-externals';
 
 import { WEBPACK_ASSETS, WEBPACK_DIST, WEBPACK_ROOT, WEBPACK_SRC, WEBPACK_SRC_SERVER } from './constants';
 
-const webpackServerCommonConfig = {
+const webpackServerCommonConfig: Configuration = {
   name: 'server',
   entry: [WEBPACK_SRC_SERVER],
   context: WEBPACK_SRC,
@@ -19,14 +18,11 @@ const webpackServerCommonConfig = {
     publicPath: WEBPACK_ROOT,
   },
   target: 'node',
-  node: {
-    console: false,
-    global: false,
-    process: false,
-    Buffer: false,
-    __filename: false,
-    __dirname: false,
-  },
+  // node: {
+  //   global: false,
+  //   __filename: false,
+  //   __dirname: false,
+  // },
   externals: [nodeExternals()],
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
@@ -49,7 +45,7 @@ const webpackServerCommonConfig = {
     rules: [
       {
         test: /\.(js|jsx|ts|tsx)$/,
-        loader: 'ts-loader',
+        use: 'ts-loader',
         exclude: /node_modules/,
       },
       {
@@ -63,48 +59,35 @@ const webpackServerCommonConfig = {
       },
       {
         test: /\.(woff|woff2|eot|ttf)$/,
-        loader: 'file-loader',
-        options: {
-          outputPath: 'fonts/',
-          publicPath: '/fonts',
-          name: '[name].[ext]',
+        type: 'asset/resource',
+        generator: {
+          filename: 'fonts/[name].[ext]',
         },
       },
     ],
   },
   plugins: [
-    new CaseSensitivePathsPlugin(),
-    new CleanWebpackPlugin({
-      dry: false,
-      verbose: true,
-      protectWebpackAssets: false,
-      cleanOnceBeforeBuildPatterns: [
-        path.join(WEBPACK_DIST, 'server*'),
-        path.join(WEBPACK_DIST, 'img'),
-        path.join(WEBPACK_DIST, 'svg'),
-        path.join(WEBPACK_DIST, 'favicon'),
-        path.join(WEBPACK_DIST, '*hot-update*'),
-      ],
-    }),
-    new FriendlyErrorsWebpackPlugin(),
+    // new CaseSensitivePathsPlugin(),
     new CompressionPlugin({
       algorithm: 'gzip',
       test: /\.svg$|\.woff$|\.woff2$|\.ttf$|\.eot$|\.otf$|\.js$|\.css$|\.html$/,
     }),
-    new CopyWebpackPlugin([
-      {
-        from: path.join(WEBPACK_ASSETS, 'img'),
-        to: path.join(WEBPACK_DIST, 'img'),
-      },
-      {
-        from: path.join(WEBPACK_ASSETS, 'svg'),
-        to: path.join(WEBPACK_DIST, 'svg'),
-      },
-      {
-        from: path.join(WEBPACK_ASSETS, 'favicon'),
-        to: path.join(WEBPACK_DIST, 'favicon'),
-      },
-    ]),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: path.join(WEBPACK_ASSETS, 'images'),
+          to: path.join(WEBPACK_DIST, 'img'),
+        },
+        {
+          from: path.join(WEBPACK_ASSETS, 'svg'),
+          to: path.join(WEBPACK_DIST, 'svg'),
+        },
+        {
+          from: path.join(WEBPACK_ASSETS, 'favicons'),
+          to: path.join(WEBPACK_DIST, 'favicon'),
+        },
+      ],
+    }),
   ],
 };
 

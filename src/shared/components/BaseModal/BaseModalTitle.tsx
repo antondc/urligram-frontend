@@ -3,6 +3,7 @@ import React from 'react';
 import './BaseModalTitle.less';
 
 interface Props {
+  children: React.ReactNode | React.ReactNode[];
   className?: string;
 }
 
