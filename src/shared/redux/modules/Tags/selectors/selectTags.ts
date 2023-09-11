@@ -1,9 +1,9 @@
 import { createSelector } from 'reselect';
 
 import { RootState } from 'Modules/rootType';
-import { NotesState } from '../notes.types';
+import { TagsState } from '../tags.types';
 
-export const selectNotes = createSelector(
+export const selectTags = createSelector(
   (state: RootState) => state,
-  (state): NotesState => state.Notes
+  (state): TagsState => state.Tags
 );

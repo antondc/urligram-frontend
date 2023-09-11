@@ -1,5 +1,9 @@
-import { RootState } from 'Modules/rootType';
-import { TagState } from '../tags.types';
+import { createSelector } from 'reselect';
 
-export const selectTagsCurrent = (state: RootState): TagState[] =>
-  state.Tags?.currentIds?.map((tagId) => state.Tags?.byKey[tagId]);
+import { TagsState, TagState } from '../tags.types';
+import { selectTags } from './selectTags';
+
+export const selectTagsCurrent = createSelector(
+  selectTags,
+  (Tags: TagsState): TagState[] => Tags?.currentIds?.map((tagId) => Tags?.byKey[tagId])
+);

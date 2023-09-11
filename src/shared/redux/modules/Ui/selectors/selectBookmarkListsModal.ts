@@ -1,4 +1,9 @@
-import { RootState } from 'Modules/rootType';
-import { BookmarkListsModal } from '../ui.types';
+import { createSelector } from 'reselect';
 
-export const selectBookmarkListsModal = (state: RootState): BookmarkListsModal => state.Ui?.bookmarkListsModal;
+import { BookmarkListsModal, UiState } from '../ui.types';
+import { selectUi } from './selectUi';
+
+export const selectBookmarkListsModal = createSelector(
+  selectUi,
+  (Ui: UiState): BookmarkListsModal => Ui?.bookmarkActionsIcons
+);

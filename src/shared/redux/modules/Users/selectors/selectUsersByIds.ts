@@ -1,5 +1,12 @@
-import { RootState } from 'Modules/rootType';
-import { UserState } from '../users.types';
+import { createSelector } from 'reselect';
 
-export const selectUsersByIds = (State: Partial<RootState>, { userIds }: { userIds: string[] }): UserState[] =>
-  userIds?.map((item) => State?.Users?.byKey[item]);
+import { UsersState, UserState } from '../users.types';
+import { selectUsers } from './selectUsers';
+
+const selectUsersIds = (_, { userIds }: { userIds: string[] }) => userIds;
+
+export const selectUsersByIds = createSelector(
+  selectUsers,
+  selectUsersIds,
+  (Users: UsersState, userIds: string[]): UserState[] => userIds?.map((item) => Users?.byKey[item])
+);

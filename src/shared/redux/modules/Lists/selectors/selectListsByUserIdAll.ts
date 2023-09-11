@@ -1,5 +1,13 @@
-import { RootState } from 'Modules/rootType';
-import { ListState } from '../lists.types';
+import { createSelector } from 'reselect';
 
-export const selectListsByUserIdAll = (state: RootState, { userId }: { userId: string }): ListState[] =>
-  state.Users?.byKey[userId]?.lists?.map((item) => state?.Lists?.byKey[item.id]);
+import { selectUsers } from '../../Users/selectors/selectUsers';
+import { ListState } from '../lists.types';
+import { selectLists } from './selectLists';
+
+const selectUserId = (_, { userId }: { userId: string }) => userId;
+export const selectListsByUserIdAll = createSelector(
+  selectLists,
+  selectUsers,
+  selectUserId,
+  (Lists, Users, userId): ListState[] => Users?.byKey[userId]?.lists?.map((item) => Lists?.byKey[item.id])
+);

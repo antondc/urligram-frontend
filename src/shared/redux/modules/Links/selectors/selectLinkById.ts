@@ -1,4 +1,12 @@
-import { RootState } from 'Modules/rootType';
-import { LinkState } from '../links.types';
+import { createSelector } from 'reselect';
 
-export const selectLinkById = (state: RootState, { id }: { id: number }): LinkState => state.Links?.byKey[id];
+import { LinksState, LinkState } from '../links.types';
+import { selectLinks } from './selectLinks';
+
+const selectLinkId = (_, { id }): number => id;
+
+export const selectLinkById = createSelector(
+  selectLinks,
+  selectLinkId,
+  (Links: LinksState, id: number): LinkState => Links?.byKey[id]
+);

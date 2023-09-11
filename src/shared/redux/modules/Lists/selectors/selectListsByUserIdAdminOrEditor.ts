@@ -1,11 +1,20 @@
-import { RootState } from 'Modules/rootType';
-import { ListState, ListUserRole, ListUserStatus } from '../lists.types';
+import { createSelector } from 'reselect';
 
-export const selectListsByUserIdAdminOrEditor = (state: RootState, { userId }: { userId: string }): ListState[] =>
-  state.Users?.byKey[userId]?.lists
-    .filter(
-      (item) =>
-        (item?.userRole === ListUserRole.Admin || item?.userRole === ListUserRole.Editor) &&
-        item?.userListStatus !== ListUserStatus.Pending
-    )
-    ?.map((item) => state?.Lists?.byKey[item.id]);
+import { selectUsers } from '../../Users/selectors/selectUsers';
+import { UsersState } from '../../Users/users.types';
+import { ListsState, ListState, ListUserRole, ListUserStatus } from '../lists.types';
+import { selectLists } from './selectLists';
+
+const selectUserId = (_, { userId }: { userId: string }) => userId;
+
+export const selectListsByUserIdAdminOrEditor = createSelector(
+  [selectUsers, selectLists, selectUserId],
+  (Users: UsersState, Lists: ListsState, userId): ListState[] =>
+    Users?.byKey[userId]?.lists
+      .filter(
+        (item) =>
+          (item?.userRole === ListUserRole.Admin || item?.userRole === ListUserRole.Editor) &&
+          item?.userListStatus !== ListUserStatus.Pending
+      )
+      ?.map((item) => Lists?.byKey[item.id])
+);

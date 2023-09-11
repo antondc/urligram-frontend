@@ -1,4 +1,8 @@
-import { RootState } from 'Modules/rootType';
-import { UserState } from 'Modules/Users/users.types';
+import { createSelector } from 'reselect';
 
-export const selectUsersAll = (state: RootState): UserState[] => Object.values(state.Users.byKey);
+import { UsersState, UserState } from 'Modules/Users/users.types';
+import { selectUsers } from './selectUsers';
+
+export const selectUsersAll = createSelector(selectUsers, (Users: UsersState): UserState[] =>
+  Object.values(Users.byKey)
+);

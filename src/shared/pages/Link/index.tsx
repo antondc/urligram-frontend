@@ -7,7 +7,7 @@ import { selectCurrentGlossary } from 'Modules/Languages/selectors/selectCurrent
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
 import { selectLinkById } from 'Modules/Links/selectors/selectLinkById';
 import { notesLoadByLinkId } from 'Modules/Notes/actions/notesLoadByLinkId';
-import { selectNotes } from 'Modules/Notes/selectors/selectNotes';
+import { selectNotesAll } from 'Modules/Notes/selectors/selectNotesAll';
 import { selectNotesMetaSort } from 'Modules/Notes/selectors/selectNotesMetaSort';
 import { RootState } from 'Modules/rootType';
 import { selectCurrentFullUrl } from 'Modules/Routes/selectors/selectCurrentFullUrl';
@@ -29,7 +29,7 @@ const Link: React.FC = () => {
   const linkId = useSelector(selectCurrentRouteParamLinkId);
   const link = useSelector((state: RootState) => selectLinkById(state, { id: linkId }));
   const bookmarkOrLinkTitle = bookmark?.title || link?.title || '';
-  const notes = useSelector(selectNotes);
+  const notes = useSelector(selectNotesAll);
   const users = useSelector(selectUsersCurrent);
   const currentLanguageSlug = useSelector(selectCurrentLanguageSlug);
   const currentHref = useSelector(selectCurrentFullUrl);

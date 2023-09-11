@@ -1,3 +1,9 @@
-import { RootState } from 'Modules/rootType';
+import { createSelector } from 'reselect';
 
-export const selectBookmarksCurrentIds = (state: RootState): number[] => state.Bookmarks?.currentIds;
+import { RootState } from 'Modules/rootType';
+import { BookmarksState } from '../bookmarks.types';
+
+export const selectBookmarksCurrentIds = createSelector(
+  (state: RootState): BookmarksState => state.Bookmarks,
+  (Bookmarks: BookmarksState): number[] => Bookmarks?.currentIds
+);

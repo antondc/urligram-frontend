@@ -1,4 +1,11 @@
-import { RootState } from 'Modules/rootType';
-import { ListState } from '../lists.types';
+import { createSelector } from 'reselect';
 
-export const selectListById = (state: RootState, { id }: { id: number }): ListState => state.Lists?.byKey[id];
+import { ListsState, ListState } from '../lists.types';
+import { selectLists } from './selectLists';
+
+const selectListId = (_, { id }): number => id;
+
+export const selectListById = createSelector(
+  [selectLists, selectListId],
+  (Lists: ListsState, id: number): ListState => Lists?.byKey[id]
+);

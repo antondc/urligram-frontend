@@ -1,5 +1,13 @@
-import { RootState } from 'Modules/rootType';
-import { BookmarkState } from '../bookmarks.types';
+import { createSelector } from 'reselect';
 
-export const selectBookmarksWithSimilarLinkId = (state: RootState, { linkId }: { linkId: number }): BookmarkState[] =>
-  Object.values(state.Bookmarks?.byKey).filter((item) => item?.linkId === linkId);
+import { RootState } from 'Modules/rootType';
+import { BookmarksState, BookmarkState } from '../bookmarks.types';
+
+export const selectBookmarks = (state: RootState): BookmarksState => state.Bookmarks;
+export const selectLinkId = (_, { linkId }): number => linkId;
+
+export const selectBookmarksWithSimilarLinkId = createSelector(
+  selectBookmarks,
+  selectLinkId,
+  (Bookmarks, linkId): BookmarkState[] => Object.values(Bookmarks?.byKey).filter((item) => item?.linkId === linkId)
+);

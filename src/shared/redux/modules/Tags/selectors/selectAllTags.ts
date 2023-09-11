@@ -1,4 +1,6 @@
-import { RootState } from 'Modules/rootType';
-import { TagState } from 'Modules/Tags/tags.types';
+import { createSelector } from 'reselect';
 
-export const selectTagsAll = (state: RootState): TagState[] => Object.values(state.Tags.byKey);
+import { TagState } from 'Modules/Tags/tags.types';
+import { selectTags } from './selectTags';
+
+export const selectTagsAll = createSelector(selectTags, (Tags): TagState[] => Object.values(Tags.byKey));

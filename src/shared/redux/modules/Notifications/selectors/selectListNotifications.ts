@@ -1,4 +1,9 @@
-import { RootState } from 'Modules/rootType';
-import { ListNotificationState } from '../notifications.types';
+import { createSelector } from 'reselect';
 
-export const selectListNotifications = (state: RootState): ListNotificationState[] => state.Notifications?.lists;
+import { ListNotificationState, NotificationsState } from '../notifications.types';
+import { selectNotifications } from './selectNotifications';
+
+export const selectListNotifications = createSelector(
+  selectNotifications,
+  (Notifications: NotificationsState): ListNotificationState[] => Notifications?.lists
+);
