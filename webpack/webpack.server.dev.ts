@@ -10,7 +10,7 @@ const webpackServerDevConfig: Configuration = {
   name: 'server',
   mode: 'development',
   target: 'node',
-  devtool: 'inline-source-map',
+  devtool: 'eval-cheap-module-source-map',
   stats: 'normal',
   output: {
     clean: {

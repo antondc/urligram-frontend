@@ -14,7 +14,7 @@ const webpackClientDevConfig: Configuration = {
     publicPath: WEBPACK_ROOT,
     libraryTarget: 'umd',
   },
-  // devtool: 'inline-source-map',
+  devtool: 'eval-cheap-module-source-map',
   stats: 'normal',
   module: {
     rules: [

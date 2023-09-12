@@ -9,7 +9,7 @@ const webpackServerProdConfig: Configuration = {
   name: 'server',
   mode: 'production',
   target: 'node',
-  devtool: 'inline-source-map',
+  devtool: 'eval-cheap-module-source-map',
   stats: 'errors-only',
   output: {
     clean: true,

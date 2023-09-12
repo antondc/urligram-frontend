@@ -1,9 +1,10 @@
 // import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
 import CompressionPlugin from 'compression-webpack-plugin';
 import HtmlWebPackPlugin from 'html-webpack-plugin';
+import NodePolyfillPlugin from 'node-polyfill-webpack-plugin';
 import path from 'path';
 import { Configuration } from 'webpack';
-import NodePolyfillPlugin from 'node-polyfill-webpack-plugin';
+
 import { WEBPACK_ROOT, WEBPACK_SRC } from './constants';
 
 const webpackClientCommonConfig: Configuration = {

@@ -14,7 +14,7 @@ const webpackClientProdConfig: Configuration = {
     path: WEBPACK_DIST,
     publicPath: '/',
   },
-  devtool: 'inline-source-map',
+  devtool: 'eval-cheap-module-source-map',
   stats: 'errors-only',
   module: {
     rules: [
