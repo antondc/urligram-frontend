@@ -26,7 +26,6 @@ const webpackClientDevConfig: Configuration = {
     ],
   },
   plugins: [
-    ...webpackClientCommonConfig.plugins,
     new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
       'process.env': {

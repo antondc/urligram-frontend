@@ -1,4 +1,4 @@
-// import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
+import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
 import CompressionPlugin from 'compression-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import path from 'path';
@@ -18,11 +18,6 @@ const webpackServerCommonConfig: Configuration = {
     publicPath: WEBPACK_ROOT,
   },
   target: 'node',
-  // node: {
-  //   global: false,
-  //   __filename: false,
-  //   __dirname: false,
-  // },
   externals: [nodeExternals()],
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
@@ -67,7 +62,7 @@ const webpackServerCommonConfig: Configuration = {
     ],
   },
   plugins: [
-    // new CaseSensitivePathsPlugin(),
+    new CaseSensitivePathsPlugin(),
     new CompressionPlugin({
       algorithm: 'gzip',
       test: /\.svg$|\.woff$|\.woff2$|\.ttf$|\.eot$|\.otf$|\.js$|\.css$|\.html$/,

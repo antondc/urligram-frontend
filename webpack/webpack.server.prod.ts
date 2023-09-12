@@ -5,13 +5,13 @@ import Config from '../config.test.json';
 import { ENVIRONMENT_PRODUCTION } from './constants';
 import webpackServerCommonConfig from './webpack.server.common';
 
-const webpackServerProdConfig:Configuration = {
+const webpackServerProdConfig: Configuration = {
   name: 'server',
   mode: 'production',
   target: 'node',
   stats: 'errors-only',
   output: {
-    clean: true
+    clean: true,
   },
   plugins: [
     // Setting a variable to identify browser from server

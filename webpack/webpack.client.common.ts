@@ -1,4 +1,4 @@
-// import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
+import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
 import CompressionPlugin from 'compression-webpack-plugin';
 import HtmlWebPackPlugin from 'html-webpack-plugin';
 import NodePolyfillPlugin from 'node-polyfill-webpack-plugin';
@@ -11,11 +11,6 @@ const webpackClientCommonConfig: Configuration = {
   name: 'client',
   context: WEBPACK_SRC,
   target: 'web',
-  node: {
-    // global: false,
-    __filename: false,
-    __dirname: false,
-  },
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
     alias: {
@@ -54,7 +49,7 @@ const webpackClientCommonConfig: Configuration = {
     ],
   },
   plugins: [
-    // new CaseSensitivePathsPlugin(),
+    new CaseSensitivePathsPlugin(),
     new HtmlWebPackPlugin({
       baseUrl: '',
       inject: true,

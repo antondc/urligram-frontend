@@ -25,7 +25,6 @@ const webpackClientProdConfig: Configuration = {
     ],
   },
   plugins: [
-    // ...webpackClientCommonConfig.plugins,
     new webpack.DefinePlugin({
       'process.env': {
         DOMAIN: JSON.stringify(Config.production.DOMAIN),
