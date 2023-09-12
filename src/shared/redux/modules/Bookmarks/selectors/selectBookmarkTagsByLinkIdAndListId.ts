@@ -7,11 +7,12 @@ import { BookmarksState, BookmarkState } from '../bookmarks.types';
 
 const selectBookmarksState = (state: RootState): BookmarksState => state.Bookmarks;
 const selectLists = (state: RootState): ListsState => state.Lists;
-const selectlinkIdAndListId = (_, { linkId, listId }): { linkId: number; listId: number } => ({ linkId, listId });
+const selectlinkId = (_, { linkId }): number => linkId;
+const selectlistId = (_, { listId }): number => listId;
 
 export const selectBookmarkTagsByLinkIdAndListId = createSelector(
-  [selectBookmarksState, selectLists, selectlinkIdAndListId],
-  (Bookmarks, Lists, { linkId, listId }): TagState[] => {
+  [selectBookmarksState, selectLists, selectlinkId, selectlistId],
+  (Bookmarks, Lists, linkId, listId): TagState[] => {
     if (!linkId || !listId) return [];
 
     // Select lists that share tha same provided linkId

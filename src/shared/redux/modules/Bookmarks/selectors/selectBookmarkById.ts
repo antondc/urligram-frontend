@@ -1,12 +1,11 @@
 import { createSelector } from 'reselect';
 
-import { RootState } from 'Modules/rootType';
-import { BookmarkState } from '../bookmarks.types';
+import { BookmarksState, BookmarkState } from '../bookmarks.types';
+import { selectBookmarks } from './selectBookmarks';
 
-const selectBookmarksState = (state: RootState) => state.Bookmarks;
 const selectBookmarkId = (_, { bookmarkId }): number => bookmarkId;
 
 export const selectBookmarksById = createSelector(
-  [selectBookmarksState, selectBookmarkId],
-  (Bookmarks, bookmarkId): BookmarkState => Bookmarks?.byKey[bookmarkId]
+  [selectBookmarks, selectBookmarkId],
+  (Bookmarks: BookmarksState, bookmarkId): BookmarkState => Bookmarks?.byKey[bookmarkId]
 );

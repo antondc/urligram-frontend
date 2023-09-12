@@ -1,11 +1,4 @@
-import { createSelector } from 'reselect';
-import get from 'lodash/get';
-
 import { RootState } from 'Modules/rootType';
-import { UiState } from 'Modules/Ui/ui.types';
-import { initialState } from '../ui.reducer';
+import { UiState } from '../ui.types';
 
-export const selectUi = createSelector(
-  (state: RootState) => state,
-  (state): UiState => get(state, 'Ui', initialState)
-);
+export const selectUi = (state: RootState): UiState => state.Ui;
