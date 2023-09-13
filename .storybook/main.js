@@ -1,6 +1,8 @@
 const path = require('path');
+const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
 
 module.exports = {
+  framework: '@storybook/react-webpack5',
   stories: ['../src/**/*.stories.tsx'],
   excludeStories: /.*Props$/,
   addons: [
@@ -27,19 +29,16 @@ module.exports = {
     });
 
     /* START https://github.com/storybookjs/storybook/issues/5708#issuecomment-467364602 */
+
+    config.module.rules = config.module.rules.map((data) => {
+      if (/svg\|/.test(String(data.test)))
+        data.test = /\.(ico|jpg|jpeg|png|gif|eot|otf|webp|ttf|woff|woff2|cur|ani)(\?.*)?$/;
+      return data;
+    });
+
     config.module.rules.push({
       test: /\.svg$/,
       use: ['@svgr/webpack'],
-    });
-
-    config.resolve.extensions.push('.svg');
-
-    config.module.rules.forEach(function (data, key) {
-      if (data.test.toString().indexOf('svg|') >= 0) {
-        config.module.rules[key].test = /\.(ico|jpg|jpeg|png|gif|eot|otf|webp|ttf|woff|woff2|cur|ani)(\?.*)?$/;
-
-        return false;
-      }
     });
     /* END https://github.com/storybookjs/storybook/issues/5708#issuecomment-467364602 */
 
@@ -60,6 +59,12 @@ module.exports = {
       Hooks: path.resolve(process.cwd(), 'src/shared/hooks/'),
     };
 
+    config.plugins.push(new NodePolyfillPlugin());
+
     return config;
+  },
+
+  docs: {
+    autodocs: false,
   },
 };
