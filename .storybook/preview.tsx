@@ -8,8 +8,8 @@ const customViewports = {
   Desktop: {
     name: 'Desktop',
     styles: {
-      width: '600px',
-      height: '1200px',
+      width: '1400px',
+      height: '1000px',
       padding: '0',
       border: 'none',
     },
