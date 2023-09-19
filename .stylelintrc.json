@@ -1,9 +1,11 @@
 {
-  "extends": "stylelint-config-standard",
+  "extends": ["stylelint-config-standard-less", "stylelint-config-recommended-less"],
   "plugins": ["stylelint-order"],
   "files": ["**/*.less"],
   "ignoreFiles": ["**/*.ts", "**/*.tsx"],
   "rules": {
+    "selector-class-pattern": null,
+    "selector-not-notation": "simple",
     "property-no-unknown": null,
     "color-no-invalid-hex": null,
     "no-extra-semicolons": null,
