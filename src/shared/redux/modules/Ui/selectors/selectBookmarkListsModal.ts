@@ -5,5 +5,5 @@ import { selectUi } from './selectUi';
 
 export const selectBookmarkListsModal = createSelector(
   selectUi,
-  (Ui: UiState): BookmarkListsModal => Ui?.bookmarkActionsIcons
+  (Ui: UiState): BookmarkListsModal => Ui?.bookmarkListsModal
 );
