@@ -29,7 +29,7 @@
   black-1: #272727;
   black-2: #4c4c4c;
   black-3: #999;
-  black-4: #dedede;
+  black-4: #c1c1c1;
   black-5: #f8f8f8;
   black-6: #fcfcfc;
 };
@@ -37,7 +37,7 @@
 // Exported colors
 @c-brand: @gradientColors[blue-1];
 @c-base: @gradientColors[black-1];
-@c-background: @gradientColors[yellow-6];
+@c-background: @gradientColors[black-6];
 @c-background-traslucid: fade(@gradientColors[yellow-6], 5%);
 @c-background-traslucidMedium: fade(@gradientColors[yellow-6], 30%);
 @c-background-traslucidHard: fade(@gradientColors[yellow-6], 60%);
@@ -56,6 +56,6 @@
 @c-alert: @gradientColors[yellow-1];
 @c-errorAccent: tint(@gradientColors[red-2], 10%);
 @c-error: @gradientColors[red-2];
-@c-disabled: @gradientColors[black-3];
+@c-disabled: @c-accentLight;
 @c-transparent: transparent;
 @c-shadow: fade(@gradientColors[black-1], 6%);

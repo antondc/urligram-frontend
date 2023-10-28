@@ -1,0 +1,185 @@
+@import '../../css/imports.less';
+
+@c: .BookmarkRowNewIcons;
+
+@{c} {
+  height: 100%;
+
+  &-actionsIconsWrapper {
+    display: flex;
+    align-items: center;
+    grid-area: icons;
+    height: 100%;
+
+    @media @br-tablet {
+      position: absolute;
+      grid-area: unset;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      overflow: hidden;
+      pointer-events: none;
+
+      &--mounted {
+        pointer-events: unset;
+      }
+    }
+  }
+
+  &-actionsIcons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 100%;
+
+    @media @br-tablet {
+      display: grid;
+      justify-items: unset;
+      position: absolute;
+      justify-content: space-evenly;
+      align-items: center;
+      grid-area: unset;
+      grid-auto-flow: column;
+      grid-template: unset;
+      grid-template-columns: auto;
+      grid-template-rows: 1fr;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      padding: 0 30px;
+      background: @c-background;
+      gap: 20px;
+      border-radius: 4px;
+      box-shadow: -2px 0 4px 2px @c-traslucid--light;
+    }
+  }
+
+  &-actionsIconsBackground {
+    display: none;
+
+    @media @br-tablet {
+      display: block;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: @c-traslucid;
+    }
+  }
+
+  &-actionsIconsBackgroundCloseIcon {
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    top: 10px;
+    left: 10px;
+    padding: 4px;
+    background: @c-background;
+    border-radius: 50%;
+
+    .boxShadow;
+  }
+
+  &-icon {
+    height: 13px;
+    width: 13px;
+    margin-left: 23px;
+    fill: @gradientColors[blue-1];
+    transition: fill @td-fast @ease;
+
+    &:hover {
+      fill: @gradientColors[blue-2];
+      cursor: pointer;
+    }
+
+    @media @br-tablet {
+      height: 10px;
+      width: 10px;
+    }
+  }
+
+  &-iconWrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  &-iconEdit,
+  &-iconInfo,
+  &-iconPublic {
+    justify-self: flex-start;
+    grid-area: iconEdit;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    @media @br-tablet {
+      justify-self: unset;
+      grid-area: unset;
+      height: 20px;
+      width: 20px;
+      margin-top: 0;
+      margin-right: 0;
+    }
+  }
+
+  &-iconLists {
+    display: flex;
+    justify-self: center;
+    // padding-top: 2px;
+
+    svg {
+      height: 13px;
+      width: 13px;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    @media @br-tablet {
+      justify-self: center;
+      grid-area: unset;
+      height: 18px;
+      width: 18px;
+
+      svg {
+        height: 18px;
+        width: 18px;
+      }
+    }
+  }
+
+  &-iconPublic {
+    fill: @gradientColors[blue-4];
+    transition: fill @td-fast @ease;
+
+    &:hover {
+      fill: @gradientColors[blue-1];
+    }
+
+    &--active {
+      fill: @gradientColors[blue-1];
+
+      &:hover {
+        fill: @gradientColors[blue-4];
+      }
+    }
+
+    @media @br-tablet {
+      align-self: unset;
+    }
+  }
+
+  &-iconPublicLoader {
+    &:after {
+      border-color: @gradientColors[blue-1];
+    }
+
+    span {
+      background: @gradientColors[blue-1];
+    }
+  }
+}

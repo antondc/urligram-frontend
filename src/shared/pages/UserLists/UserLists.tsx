@@ -6,9 +6,9 @@ import Cross from 'Assets/svg/cross.svg';
 import ListIcon from 'Assets/svg/list.svg';
 import Clock from 'Assets/svg/spinner6.svg';
 import User from 'Assets/svg/userFill.svg';
-import { BookmarkRowSkeletonGroup } from 'Components/BookmarkRow/BookmarkRowSkeletonGroup';
+import { BookmarkRowNewSkeletonGroup } from 'Components/BookmarkRowNew/BookmarkRowNewSkeletonGroup';
 import CardItem from 'Components/CardItem';
-import ListRow from 'Components/ListRow';
+import ListRowNew from 'Components/ListRowNew';
 import NoResults from 'Components/NoResults';
 import Pagination from 'Components/Pagination';
 import SubHeader, { SubHeaderSeparator } from 'Components/SubHeader';
@@ -94,11 +94,11 @@ export const UserLists: React.FC<Props> = ({
     </SubHeader>
     <div className="UserLists-lists">
       {listsLoading ? (
-        <BookmarkRowSkeletonGroup length={listsIds?.length || DEFAULT_PAGE_SIZE} />
+        <BookmarkRowNewSkeletonGroup length={listsIds?.length || DEFAULT_PAGE_SIZE} />
       ) : (
         listsIds?.map((id) => (
           <CardItem key={id}>
-            <ListRow id={id} />
+            <ListRowNew id={id} />
           </CardItem>
         ))
       )}

@@ -9,26 +9,23 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px;
-    background: @c-background;
-    border-radius: 8px;
-
-    .boxShadow;
+    height: 80px;
+    border-radius: 4px;
   }
 
   &-item {
     margin: 0 10px;
-    font-weight: @fw-extraBold;
-    color: @gradientColors[blue-1];
+    font-weight: @fw-semibold;
+    color:@c-accent;
     transition: opacity @td-fast @ease, text-decoration-color @td-fast @ease;
 
     &--active {
-      text-decoration-color: @gradientColors[blue-1];
+      text-decoration-color:@c-accent;
     }
 
     &:hover:not(.noClass) {
-      text-decoration-color: @gradientColors[blue-1];
-      color: @gradientColors[blue-1];
+      text-decoration-color:@c-accent;
+      color:@c-accent;
       opacity: 0.8;
     }
   }

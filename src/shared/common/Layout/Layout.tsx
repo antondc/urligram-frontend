@@ -11,7 +11,6 @@ import ResetPasswordModal from 'Components/ResetPasswordModal';
 import ScreenSizePixel from 'Components/ScreenSizePixel';
 import SignUpDisabledModal from 'Components/SignUpDisabledModal';
 import SignUpModal from 'Components/SignUpModal';
-import UserModal from 'Components/UserModal';
 import WelcomeModal from 'Components/WelcomeModal';
 import WelcomeModalError from 'Components/WelcomeModalError';
 import Router from 'Router/.';
@@ -51,7 +50,6 @@ export const Layout: React.FC<Props> = ({
     <LayoutHelperGrid />
     <Router location={location} />
     <div className="Layout-modalsAndPortals">
-      <UserModal />
       <Fade mounted={loginModalMounted} speed="fastest" position="fixed" appear>
         <LoginModal />
       </Fade>
