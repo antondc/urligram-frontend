@@ -3,10 +3,10 @@ import Helmet from 'react-helmet';
 
 import Created from 'Assets/svg/plusCircle.svg';
 import Updated from 'Assets/svg/updated.svg';
-import BookmarkRow from 'Components/BookmarkRow';
+import BookmarkRowNew from 'Components/BookmarkRowNew';
 import CardItem from 'Components/CardItem';
 import Notes from 'Components/Notes';
-import UserRow from 'Components/UserRow';
+import UserRowNew from 'Components/UserRowNew';
 import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
 import { GlossaryState } from 'Modules/Languages/languages.types';
 import { NoteState } from 'Modules/Notes/notes.types';
@@ -50,7 +50,7 @@ export const Link: React.FC<Props> = ({
     </Helmet>
     <div className="Link">
       <CardItem>
-        <BookmarkRow id={bookmark?.id} withInfoButton={false} />
+        <BookmarkRowNew id={bookmark?.id} withInfoButton={false} />
       </CardItem>
       <div className="Link-content">
         <div>
@@ -69,7 +69,7 @@ export const Link: React.FC<Props> = ({
           </CardItem>
           {users?.map((item) => (
             <CardItem key={item.id}>
-              <UserRow id={item.id} />
+              <UserRowNew id={item.id} />
             </CardItem>
           ))}
         </div>

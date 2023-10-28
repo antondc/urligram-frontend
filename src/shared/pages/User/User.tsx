@@ -2,10 +2,10 @@ import React from 'react';
 import Helmet from 'react-helmet';
 
 import A from 'Components/A';
-import BookmarkRow from 'Components/BookmarkRow';
-import { BookmarkRowSkeletonGroup } from 'Components/BookmarkRow/BookmarkRowSkeletonGroup';
+import BookmarkRowNew from 'Components/BookmarkRowNew';
+import { BookmarkRowNewSkeletonGroup } from 'Components/BookmarkRowNew/BookmarkRowNewSkeletonGroup';
 import CardItem from 'Components/CardItem';
-import ListRow from 'Components/ListRow';
+import ListRowNew from 'Components/ListRowNew';
 import NoResults from 'Components/NoResults';
 import UserForm from 'Components/UserForm';
 import UserImageWithFollow from 'Components/UserImageWithFollow';
@@ -161,11 +161,11 @@ export const User: React.FC<Props> = ({
     </CardItem>
     <div className="User-bookmarks">
       {!!bookmarksLoading ? (
-        <BookmarkRowSkeletonGroup length={5} />
+        <BookmarkRowNewSkeletonGroup length={5} />
       ) : (
         bookmarksIds?.map((id) => (
           <CardItem key={id}>
-            <BookmarkRow id={id} tagsHref={`/users/${userId}/bookmarks`} withInfoButton={isLoggedIn} />
+            <BookmarkRowNew id={id} tagsHref={`/users/${userId}/bookmarks`} withInfoButton={isLoggedIn} />
           </CardItem>
         ))
       )}
@@ -179,11 +179,11 @@ export const User: React.FC<Props> = ({
     </CardItem>
     <div className="User-lists">
       {listsLoading ? (
-        <BookmarkRowSkeletonGroup length={5} />
+        <BookmarkRowNewSkeletonGroup length={5} />
       ) : (
         listsIds?.slice(0, 5)?.map((id) => (
           <CardItem key={id}>
-            <ListRow id={id} />
+            <ListRowNew id={id} />
           </CardItem>
         ))
       )}

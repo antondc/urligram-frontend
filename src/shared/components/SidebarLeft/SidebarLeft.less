@@ -4,33 +4,27 @@
 
 @{c} {
   position: relative;
-  padding: 26px;
-  background: @c-background;
-  border-radius: 8px;
-
-
-  .boxShadow;
+  padding: 10px 20px 20px;
+  font-family: @ff-sans;
 
   &-openCloseIcon {
     display: flex;
     position: absolute;
     justify-content: center;
     align-items: center;
-    height: 25px;
-    width: 25px;
-    top: 8px;
-    right: 10px;
-    padding-left: 1px;
-    background: @gradientColors[black-5];
+    height: 20px;
+    width: 20px;
+    top: 10px;
+    right: 21px;
     transform: rotate(180deg);
     transition: border @td-fast @ease, transform @td-fast @ease;
     z-index: 1;
     border-radius: 50%;
 
     svg {
-      height: 13.5px;
-      width: 13.5px;
-      fill: @gradientColors[black-4];
+      height: 15px;
+      width: 15px;
+      fill: @c-accent;
       transition: fill @td-fast @ease;
     }
 
@@ -38,7 +32,7 @@
       cursor: pointer;
 
       svg {
-        fill: @c-accentLight;
+        fill: @c-base;
       }
     }
 
@@ -51,9 +45,9 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding: 0;
-    font-size: @fs-medium;
-    font-weight: @fw-bold;
+    padding: 35px 0 0;
+    font-size: @fs-normal;
+    font-weight: @fw-semibold;
     white-space: nowrap;
   }
 
@@ -61,9 +55,17 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 14px;
-    color: @c-accentLight;
+    padding: 7px 0;
+    color: @c-accent;
     transition: color @td-fast @ease;
+
+    &:first-of-type {
+      padding: 0 0 8px;
+    }
+
+    &:last-of-type {
+      padding: 8px 0 0;
+    }
 
     &:first-child {
       margin-top: 0;
@@ -84,38 +86,35 @@
     }
   }
 
-  &-itemIcon  {
+  &-itemIcon {
     position: relative;
     flex-shrink: 0;
-    height: 20px;
-    width: 20px;
-    margin-right: 16px;
-    fill: @c-accentLight;
+    height: 15px;
+    width: 15px;
+    margin-right: 10px;
+    fill: @c-accent;
     transition: fill @td-fast @ease;
   }
 
   &-itemIconList {
     height: 14px;
     width: 14px;
-    margin-left: 4px;
-    margin-right: 18px;
+    margin-right: 12px;
   }
 
   &-lists,
   &-users {
-    margin-top: -5px;
-    margin-left: 50px;
+    margin-left: 25px;
     padding-right: 10px;
   }
 
   &-triangle {
-    margin-right: 45px;
-    padding-right: 10px;
+    padding-right: 5px;
 
     svg {
       height: 14px;
       width: 14px;
-      fill: @c-accentLight;
+      fill: @c-accent;
       transform: rotate(90deg);
       transition: transform @td-fast @ease-outQuint, fill @td-fast @ease-outQuint;
     }
@@ -156,7 +155,7 @@
   &-divider {
     height: 2px;
     width: 100%;
-    margin: 20px 0;
+    margin: 8px 0;
     background: @gradientColors[black-5];
   }
 }

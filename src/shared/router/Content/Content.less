@@ -23,7 +23,7 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background: @gradientColors[blue-6];
+    background: @c-transparent;
     z-index: -1;
     pointer-events: none;
     user-select: none;
@@ -34,18 +34,18 @@
     align-items: flex-start;
     flex: 1;
     grid-template: 'sidebar main' auto;
-    grid-template-columns: 270px auto;
+    grid-template-columns: 230px auto;
     max-width: @lay-maxWidth;
     padding: 0 0 20px;
     transition: grid-template-columns @td-fast @ease;
-    gap: 0 34px;
+    gap: 0 20px;
 
     @media @br-desktopSmall {
       gap: 0 16px;
     }
 
     @media @br-tabletHorizontal {
-      grid-template-columns: 240px auto;
+      grid-template-columns: 230px auto;
     }
 
     @media @br-tablet {
@@ -54,14 +54,14 @@
   }
 
   &-content--sidebarLeftClosed {
-    grid-template-columns: 100px auto;
+    grid-template-columns: 60px auto;
     transition: grid-template-columns @td-fast @ease @td-fast;
   }
 
   &-sidebar {
     position: sticky;
     grid-area: sidebar;
-    top: 120px;
+    top: 100px;
 
     @media @br-tablet {
       display: none;

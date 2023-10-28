@@ -11,27 +11,23 @@ interface Props {
   loadingColors?: boolean;
 }
 
-const Logo: React.FC<Props> = ({ className, loadingBeat, loadingColors }) => {
-  const loadingBeatIfNotLoadingColors = !!loadingBeat && !loadingColors;
-
-  return (
-    <A
-      className={
-        'Logo' +
-        (loadingBeatIfNotLoadingColors ? ' Logo--loadingBeat ' : '') +
-        (loadingColors ? ' Logo--loadingColors ' : '') +
-        (className ? ' ' + className : '')
-      }
-      href={'/'}
-      frontend
-      underlined
-    >
-      <div className="Logo-icon">
-        <LogoCircle />
-      </div>
-      <h3 className="Logo-text">Urligram</h3>
-    </A>
-  );
-};
+const Logo: React.FC<Props> = ({ className, loadingBeat, loadingColors }) => (
+  <A
+    className={
+      'Logo ' +
+      (loadingBeat ? ' Logo--loadingBeat ' : '') +
+      (loadingColors ? ' Logo--loadingColors ' : '') +
+      (className ? ' ' + className : '')
+    }
+    href={'/'}
+    frontend
+    underlined
+  >
+    <div className="Logo-icon">
+      <LogoCircle />
+    </div>
+    <h3 className="Logo-text">Urligram</h3>
+  </A>
+);
 
 export default Logo;

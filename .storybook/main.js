@@ -8,8 +8,10 @@ module.exports = {
   addons: [
     '@storybook/addon-actions',
     '@storybook/addon-links',
-    '@storybook/addon-knobs/register',
+    '@storybook/addon-knobs',
     '@storybook/addon-viewport/register',
+    '@storybook/addon-backgrounds',
+    'storybook-addon-paddings',
   ],
   // https://storybook.js.org/docs/react/configure/typescript
   typescript: {

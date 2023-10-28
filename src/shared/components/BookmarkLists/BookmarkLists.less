@@ -3,6 +3,8 @@
 @c: .BookmarkLists;
 
 @{c} {
+  .default();
+
   display: flex;
   position: relative;
   flex-direction: column;
@@ -38,7 +40,7 @@
 
     @media @br-mobile {
       padding-bottom: 5px;
-      font-size: @fs-mediumBig;
+      font-size: @fs-medium;
     }
 
     &--included {
@@ -68,7 +70,7 @@
     &--recentlyUpdated {
       @{c}-icon {
         &:hover {
-          fill: @gradientColors[black-2];
+          fill: @c-accent;
           transform: unset;
         }
       }
@@ -116,7 +118,7 @@
   }
 
   &-input input {
-    color: @gradientColors[black-3];
+    color: @c-accentLight;
   }
 
   &-submit {
