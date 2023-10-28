@@ -7,8 +7,8 @@ import CardItem from 'Components/CardItem';
 import NoResults from 'Components/NoResults';
 import Pagination from 'Components/Pagination';
 import SubHeader from 'Components/SubHeader';
-import UserRow from 'Components/UserRow';
-import { UserRowSkeletonGroup } from 'Components/UserRow/UserRowSkeletonGroup';
+import UserRowNew from 'Components/UserRowNew';
+import { UserRowNewSkeletonGroup } from 'Components/UserRowNew/UserRowNewSkeletonGroup';
 import { GlossaryState } from 'Modules/Languages/languages.types';
 import { TagState } from 'Modules/Tags/tags.types';
 import { DEFAULT_PAGE_SIZE, SITE_TITLE } from 'Root/src/shared/constants';
@@ -75,11 +75,11 @@ export const Users: React.FC<Props> = ({
     />
     <div className="Users-users">
       {usersLoading ? (
-        <UserRowSkeletonGroup length={usersCurrentIds?.length || DEFAULT_PAGE_SIZE} />
+        <UserRowNewSkeletonGroup length={usersCurrentIds?.length || DEFAULT_PAGE_SIZE} />
       ) : (
         usersCurrentIds?.map((id) => (
           <CardItem key={id}>
-            <UserRow id={id} />
+            <UserRowNew id={id} />
           </CardItem>
         ))
       )}

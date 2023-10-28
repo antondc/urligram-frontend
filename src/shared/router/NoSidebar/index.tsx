@@ -6,7 +6,7 @@ import { createStructuredSelector } from 'reselect';
 
 import CookiesBanner from 'Components/CookiesBanner';
 import Footer from 'Components/Footer';
-import Header from 'Components/Header';
+import HeaderNew from 'Components/HeaderNew';
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
 import { selectPathWithoutLanguageParam } from 'Modules/Routes/selectors/selectPathWithoutLanguageParam';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
@@ -33,7 +33,7 @@ interface Props {
 const NoSidebar: React.FC<Props> = ({ loggedIn, location, defaultCurrentSlug, pathWithoutLanguageParam }) => (
   <div className="NoSidebar">
     <div className="NoSidebar-noSidebarBackground" />
-    <Header />
+    <HeaderNew />
     <CookiesBanner />
 
     <div className="NoSidebar-content">

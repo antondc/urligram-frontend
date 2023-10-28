@@ -68,7 +68,7 @@
     width: 20px;
     overflow: hidden;
     background: @c-background;
-    border: 2px solid @gradientColors[black-3];
+    border: 2px solid @c-accentLight;
     transition: border @td-fast @ease-outCustom1;
     border-radius: 50%;
 
@@ -98,7 +98,7 @@
     }
 
     &--active {
-      border: 2px solid @gradientColors[black-2];
+      border: 2px solid @c-accent;
     }
   }
 
@@ -136,13 +136,13 @@
     height: 20px;
     width: 20px;
     margin-left: 5px;
-    fill: @gradientColors[black-3];
+    fill: @c-accentLight;
     transition: fill @td-fast @ease;
   }
 
   &-iconReader,
   &-iconEditor {
-    fill: @gradientColors[black-3];
+    fill: @c-accentLight;
     pointer-events: none;
   }
 

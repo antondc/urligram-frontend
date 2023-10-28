@@ -49,6 +49,8 @@
   }
 
   &-text {
+    font-family: @ff-sans;
+    font-weight: @fw-semibold;
     transform: translateY(-1px);
 
     @media @br-tabletHorizontal {
@@ -76,7 +78,7 @@
     @{c}-icon {
       svg {
         transform-origin: 50% 50%;
-        animation: hearthBeat 2s ease infinite;
+        animation: hearth-beat 2s ease infinite;
 
         @media @br-tablet {
           animation: none;
@@ -88,25 +90,25 @@
   &--loadingColors {
     @{c}-icon {
       path[data-id-logo='red'] {
-        animation: colorsBeatRed 2s linear infinite;
+        animation: colors-beat-red 2s linear infinite;
       }
 
       path[data-id-logo='green'] {
-        animation: colorsBeatGreen 1.7s linear infinite;
+        animation: colors-beat-green 1.7s linear infinite;
       }
 
       path[data-id-logo='blue'] {
-        animation: colorsBeatBlue 2.1s linear infinite;
+        animation: colors-beat-blue 2.1s linear infinite;
       }
 
       path[data-id-logo='yellow'] {
-        animation: colorsBeatYellow 1.8s linear infinite;
+        animation: colors-beat-yellow 1.8s linear infinite;
       }
     }
   }
 }
 
-@keyframes hearthBeat {
+@keyframes hearth-beat {
   0% {
     transform: scale(1);
   }
@@ -133,7 +135,7 @@
 }
 
 // Keyframes ----
-@keyframes colorsBeatRed {
+@keyframes colors-beat-red {
   0% {
     fill: @gradientColors[red-2];
   }
@@ -159,7 +161,7 @@
   }
 }
 
-@keyframes colorsBeatGreen {
+@keyframes colors-beat-green {
   0% {
     fill: @gradientColors[green-2];
   }
@@ -185,7 +187,7 @@
   }
 }
 
-@keyframes colorsBeatBlue {
+@keyframes colors-beat-blue {
   0% {
     fill: @gradientColors[blue-2];
   }
@@ -211,7 +213,7 @@
   }
 }
 
-@keyframes colorsBeatYellow {
+@keyframes colors-beat-yellow {
   0% {
     fill: @gradientColors[yellow-2];
   }
