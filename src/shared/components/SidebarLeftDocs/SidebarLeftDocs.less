@@ -6,10 +6,9 @@
   position: relative;
   position: sticky;
   height: 100vh;
-  top: 60px;
+  top: 100px;
   padding: 26px;
-  font-size: @fs-medium;
-  background: @c-background;
+  font-size: @fs-normal;
 
   &-items {
     display: flex;
@@ -26,7 +25,7 @@
     padding: 14px;
     padding-top: 10px;
     padding-bottom: 10px;
-    font-weight: @fw-bold;
+    font-weight: @fw-semibold;
     color: @c-accentLight;
     transition: color @td-fast @ease;
 
@@ -55,7 +54,7 @@
     opacity: 0;
     transition: max-height @td-slow @ease, opacity @td-normal @ease;
 
-    &--opened  {
+    &--opened {
       max-height: 1000px;
       opacity: 1;
       transition: max-height @td-slow @ease, opacity @td-normal @ease;
@@ -67,7 +66,7 @@
     font-weight: @fw-semibold;
   }
 
-  &-itemIcon  {
+  &-itemIcon {
     position: relative;
     flex-shrink: 0;
     height: 15px;

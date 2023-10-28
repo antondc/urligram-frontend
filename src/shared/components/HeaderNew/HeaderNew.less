@@ -1,0 +1,292 @@
+@import '../../css/imports.less';
+
+@c: .HeaderNew;
+
+@{c}  {
+  position: sticky;
+  height: 100px;
+  top: 0;
+  padding:  0;
+  background: @c-background;
+  z-index: @z-index-2;
+
+  @media @br-tablet {
+    height: 70px;
+    padding: 10px 0;
+  }
+
+  &-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    z-index: @z-index-1;
+    gap: 20px;
+
+    @media @br-tablet {
+      height: 50px;
+      padding: 6px 14px 6px 12px;
+      box-shadow: none;
+      border: 2px solid @gradientColors[blue-1];
+      border-radius: 8px;
+    }
+  }
+
+  &-logo {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 250px;
+    margin-right: 34px;
+
+    @media @br-tabletHorizontal {
+      width: unset;
+    }
+
+    @media @br-tablet {
+      width: 250px;
+    }
+  }
+
+  &-circleIcon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 42px;
+    width: 42px;
+    overflow: hidden;
+    background: @gradientColors[black-5];
+    border-radius: 42px;
+  }
+
+  &-search{
+    display: flex;
+    position: relative;
+    justify-content: flex-end;
+    flex: 1;
+    height: 42px;
+
+  }
+
+  &-searchForm {
+    position: absolute;
+    height: 42px;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    transition: width @td-normal ease;
+    will-change: width;
+
+    input {
+      caret-color: @c-accent;
+
+      &::placeholder {
+        color: @c-accent;
+      }
+
+      &:hover:not(.noClass) {
+        cursor: pointer;
+      }
+    }
+
+    &--open {
+      width: 100%;
+
+      input {
+        opacity: 1;
+
+        &:hover:not(.noClass) {
+          cursor: text;
+        }
+      }
+    }
+
+    @media @br-tablet {
+      display: none;
+    }
+  }
+
+  &-input {
+    width: 100%;
+    padding: 0 20px;
+    opacity: 0;
+    background: @c-transparent;
+    border: 0;
+    outline: 0;
+
+    // display: flex;
+    // align-items: flex-end;
+    // height: 50px;
+    // width: 100%;
+
+    input {
+      //   height: 50px;
+      //   width: 100%;
+      //   padding: 0 90px 0 30px;
+      //   font-family: @ff-sans;
+      //   color: @c-accentLight;
+      //   box-sizing: border-box;
+      //   box-shadow: none;
+      //   transition: width @td-normal @ease-outCubic, outline-color @td-normal @ease-outCubic;
+
+      &::placeholder {
+        //     font-weight: @fw-semibold;
+        //     color: fade(@c-accentLight, 60%);
+      }
+
+      &:not(:placeholder-shown) :not(.noClass) ,
+      &:focus:not(.noClass){
+        //     width: 100%;
+        //     box-shadow: none;
+      }
+    }
+
+    label {
+      //   display: none;
+    }
+  }
+
+  &-searchLoupe {
+    position: absolute;
+    height: 22px;
+    width: 22px;
+    top: 10px;
+    right: 11px;
+    fill: @gradientColors[black-4];
+    transition: opacity @td-normal @ease, fill @td-fast @ease;
+    pointer-events: none;
+
+    @{c}-search--withValue & {
+      fill: @gradientColors[blue-4];
+      pointer-events: all;
+
+      &:hover {
+        fill: @gradientColors[blue-3];
+        cursor: pointer;
+      }
+    }
+  }
+
+  &-searchCross {
+    position: absolute;
+    height: 16px;
+    width: 16px;
+    top: 14px;
+    right: 47px;
+    opacity: 0;
+    fill: @gradientColors[black-4];
+    transition: opacity @td-normal @ease, fill @td-fast @ease;
+
+    @{c}-search--withValue & {
+      opacity: 1;
+      fill: @gradientColors[red-4];
+      pointer-events: all;
+
+      &:hover {
+        fill: @gradientColors[red-3];
+        cursor: pointer;
+      }
+    }
+  }
+
+  &-addBookmarkIcon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    width: 30px;
+    border: 1px solid @gradientColors[black-4];
+    transform: rotate(45deg);
+    transition: border @td-fast @ease;
+    border-radius: 50%;
+
+    svg {
+      height: 12px;
+      width: 12px;
+      fill: @gradientColors[black-4];
+      transition: fill @td-fast @ease;
+    }
+
+    @media @br-tabletHorizontal {
+      margin-right: 0;
+    }
+  }
+
+  &-addBoookmark {
+    display: flex;
+    align-items: center;
+
+    &:hover {
+      cursor: pointer;
+
+      @c-addBookmarkIcon {
+        border: 2px solid @gradientColors[blue-1];
+
+        svg {
+          fill: @gradientColors[blue-2];
+        }
+      }
+
+      @c-addBookmarkText {
+        color: @gradientColors[blue-2];
+      }
+    }
+  }
+
+  &-addBookmarkText {
+    font-size: @fs-big;
+    font-weight: @fw-bold;
+    white-space: nowrap;
+    color: @gradientColors[black-4];
+    transition: color @td-fast @ease;
+
+    @media @br-tabletHorizontal {
+      display: none;
+    }
+  }
+
+  &-userLogo {
+    fill: @gradientColors[black-4];
+  }
+
+  &-userLogo,
+  &-userImage {
+    // position: relative;
+    height: 33px;
+    width: 33px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
+
+    @media @br-tablet {
+      height: 30px;
+      width: 30px;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &-userImage {
+    box-shadow: 0 0 0 2pt @c-transparent;
+    transition: box-shadow @td-fast @ease;
+
+    &:hover {
+      box-shadow: 0 0 0 2pt @gradientColors[blue-2];
+      cursor: pointer;
+
+      @media @br-tabletHorizontal {
+        box-shadow: 0 0 0 1.5pt @gradientColors[blue-2];
+      }
+
+      @media @br-tablet {
+        box-shadow: none;
+      }
+    }
+  }
+
+  &-loader {
+    margin: 5px;
+  }
+}

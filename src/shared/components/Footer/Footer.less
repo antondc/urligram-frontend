@@ -5,11 +5,7 @@
   display: flex;
   justify-content: space-between;
   flex-shrink: 0;
-  padding: 30px 30px 30px 100px;
-  background: @c-background;
-  border-radius: 8px;
-
-  .boxShadow;
+  padding: 30px 0;
 
   @media @br-tabletHorizontal {
     padding: 30px;
@@ -36,9 +32,9 @@
   &-link {
     display: flex;
     align-items: center;
-    font-size: @fs-big;
-    font-weight: @fw-bold;
-    color: @gradientColors[black-3];
+    font-size: @fs-medium;
+    font-weight: @fw-semibold;
+    color: @c-accent;
     transition: color @td-fast @ease, text-decoration-color @td-fast @ease;
 
     &:hover:not(.noClass),
@@ -49,13 +45,13 @@
 
     @media @br-tabletHorizontal {
       font-size: @fs-medium;
-      font-weight: @fw-bold;
+      font-weight: @fw-semibold;
     }
 
     @media @br-mobile {
       padding-bottom: 5px;
       font-size: @fs-normal;
-      font-weight: @fw-bold;
+      font-weight: @fw-semibold;
 
       &:last-of-type {
         padding-bottom: 0;

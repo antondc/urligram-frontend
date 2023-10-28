@@ -8,21 +8,21 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    padding: 10px 30px 10px 20px;
+    padding: 10px 0;
     font-size: @fs-medium;
-    font-weight: @fw-extraBold;
+    font-weight: @fw-semibold;
     color: @gradientColors[black-4];
-    background: @c-background;
 
     @media @br-mobile {
-      padding: 10px 15px 10px 15px;
+      padding: 10px 15px;
     }
   }
 
   &-content {
     display: grid;
     grid-template-columns: 3fr 2fr;
-    gap: 10px;
+    gap: 50px;
+    padding-left: 24px;
 
     @media @br-tabletHorizontal {
       display: unset;

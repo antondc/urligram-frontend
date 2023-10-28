@@ -7,8 +7,8 @@ import Clock from 'Assets/svg/spinner6.svg';
 import Updated from 'Assets/svg/updated.svg';
 import User from 'Assets/svg/userFill.svg';
 import CardItem from 'Components/CardItem';
-import ListRow from 'Components/ListRow';
-import { ListRowSkeletonGroup } from 'Components/ListRow/ListSkeletonGroup';
+import ListRowNew from 'Components/ListRowNew';
+import { ListRowNewSkeletonGroup } from 'Components/ListRowNew/ListRowNewSkeletonGroup';
 import NoResults from 'Components/NoResults';
 import Pagination from 'Components/Pagination';
 import SubHeader, { SubHeaderSeparator } from 'Components/SubHeader';
@@ -96,11 +96,11 @@ export const Lists: React.FC<Props> = ({
     </SubHeader>
     <div className="Lists-lists">
       {listsIdsLoading ? (
-        <ListRowSkeletonGroup length={listsIds?.length || DEFAULT_PAGE_SIZE} />
+        <ListRowNewSkeletonGroup length={listsIds?.length || DEFAULT_PAGE_SIZE} />
       ) : (
         listsIds?.map((id) => (
           <CardItem key={id}>
-            <ListRow id={id} />
+            <ListRowNew id={id} />
           </CardItem>
         ))
       )}
