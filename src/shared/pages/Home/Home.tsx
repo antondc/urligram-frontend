@@ -3,8 +3,8 @@ import Helmet from 'react-helmet';
 
 import Bookmark from 'Assets/svg/bookmark.svg';
 import Clock from 'Assets/svg/spinner6.svg';
-import BookmarkRow from 'Components/BookmarkRow';
-import { BookmarkRowSkeletonGroup } from 'Components/BookmarkRow/BookmarkRowSkeletonGroup';
+import BookmarkRowNew from 'Components/BookmarkRowNew';
+import { BookmarkRowNewSkeletonGroup } from 'Components/BookmarkRowNew/BookmarkRowNewSkeletonGroup';
 import CardItem from 'Components/CardItem';
 import NoResults from 'Components/NoResults';
 import Pagination from 'Components/Pagination';
@@ -81,11 +81,11 @@ export const Home: React.FC<Props> = ({
       <div />
       <div className="Home-bookmarks">
         {loading ? (
-          <BookmarkRowSkeletonGroup length={bookmarksIds?.length || DEFAULT_PAGE_SIZE} />
+          <BookmarkRowNewSkeletonGroup length={bookmarksIds?.length || DEFAULT_PAGE_SIZE} />
         ) : (
           bookmarksIds?.map((id) => (
             <CardItem key={id}>
-              <BookmarkRow id={id} withInfoButton={isLoggedIn} />
+              <BookmarkRowNew id={id} withInfoButton={isLoggedIn} />
             </CardItem>
           ))
         )}

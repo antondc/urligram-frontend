@@ -7,33 +7,16 @@
   position: sticky;
   justify-content: space-between;
   align-items: center;
-  height: 60px;
+  height: 100px;
   width: 100%;
   top: 0;
-  left: 0;
-  right: 0;
-  padding-left: 20px;
-  padding-right: 40px;
   background: @c-background;
-  box-shadow: 0 0 20px 20px @c-background;
+  box-shadow: 0 10px 20px 0 @c-background;
   z-index: @z-index-2;
 
   @media @br-mobile {
     height: 50px;
     padding: 6px 4px 6px 2px;
-  }
-
-  &-logo {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    width: 250px;
-    margin-right: 34px;
-    font-size: @fs-mediumBig;
-
-    .Logo-icon  {
-      height: 35px;
-    }
   }
 
   &-separator {

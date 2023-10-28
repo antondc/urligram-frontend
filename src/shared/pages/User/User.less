@@ -6,7 +6,6 @@
   &-sectionUserForm {
     width: 100%;
     padding: 20px;
-    background: @c-background;
     border: 2px dashed @gradientColors[black-4];
   }
 
@@ -14,7 +13,6 @@
     width: 100%;
     padding: 20px;
     overflow: hidden;
-    background: @c-background;
   }
 
   &-details {
@@ -22,11 +20,11 @@
     flex-wrap: nowrap;
     justify-content: space-between;
     margin-bottom: 10px;
-    color: @gradientColors[black-2];
+    color: @c-accent;
   }
 
   &-lineDetailsLink {
-    color: @gradientColors[black-2];
+    color: @c-accent;
     transition: color @td-fast @ease;
 
     &:hover {
@@ -40,14 +38,16 @@
     align-items: bottom;
     margin-bottom: 2px;
     font-weight: @fw-semibold;
-    color: @gradientColors[black-2];
+    color: @c-accent;
   }
 
   &-detailsItemData {
     display: flex;
     flex-wrap: wrap;
     margin-bottom: 10px;
-    color: @gradientColors[black-3];
+    font-size: @fs-small;
+    font-weight: @fw-medium;
+    color: @c-accentLight;
   }
 
   &-image {
@@ -91,12 +91,11 @@
     width: 100%;
     padding: 10px 30px 10px 20px;
     font-size: @fs-medium;
-    font-weight: @fw-extraBold;
+    font-weight: @fw-semibold;
     color: @gradientColors[black-4];
-    background: @c-background;
 
     @media @br-mobile {
-      padding: 10px 15px 10px 15px;
+      padding: 10px 15px;
     }
   }
 
@@ -128,7 +127,6 @@
     justify-content: space-between;
     width: 100%;
     padding: 20px;
-    background: @c-background;
     border: 2px dashed @gradientColors[black-4];
     transition: border @td-fast @ease;
 
@@ -141,11 +139,9 @@
       }
 
       @{c}-sectionUserDeleteButton {
-        background: @c-errorAccent;
         pointer-events: all;
 
         &:hover:not(.noClass):not(.noClass) {
-          background: @gradientColors[red-1];
         }
       }
     }
@@ -170,7 +166,6 @@
 
   &-sectionUserDeleteButton {
     font-weight: @fw-semibold;
-    background: @gradientColors[black-4];
     pointer-events: none;
   }
 }

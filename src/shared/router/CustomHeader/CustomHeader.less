@@ -3,8 +3,9 @@
 @c: .CustomHeader;
 
 @{c} {
-  max-width: 2000px;
+  max-width: @lay-maxWidth;
   margin: 0 auto;
+  padding: 0 20px 20px;
 
   @media @br-mobile {
     max-width: unset;
@@ -18,7 +19,6 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background: @c-background;
     z-index: -1;
     pointer-events: none;
     user-select: none;
