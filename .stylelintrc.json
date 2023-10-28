@@ -135,6 +135,7 @@
     "indentation": 2,
     "number-leading-zero": "always",
     "number-no-trailing-zeros": true,
-    "declaration-colon-newline-after": null
+    "declaration-colon-newline-after": null,
+    "declaration-block-no-redundant-longhand-properties": null
   }
 }

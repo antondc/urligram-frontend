@@ -1,0 +1,133 @@
+@import '../../css/imports.less';
+
+@c: .BookmarkRowNewSkeleton;
+
+@{c} {
+  .default();
+
+  display: grid;
+  position: relative;
+  justify-content: space-between;
+  grid-template:
+    'title tags icons' auto
+    'description tags icons' auto
+    / 8fr 7fr auto;
+  height: 60px;
+  width: 100%;
+  padding: 10px 0 13px;
+  column-gap: 27px;
+  transition: background @td-normal @ease, border @td-normal @ease;
+
+  @media @br-tablet {
+    grid-template: unset;
+    grid-template-areas:
+      'title title bookmarker'
+      'description description .'
+      'tags tags actions';
+    grid-template-columns: 1fr 1fr 30px;
+    grid-template-rows: 25px 2fr 1fr;
+    height: 100px;
+    padding: 14px 10px 15px 13px;
+    column-gap: 20px;
+    row-gap: 0;
+  }
+
+  &-title {
+    display: flex;
+    grid-area: title;
+    height: 20px;
+    width: 100%;
+  }
+
+  &-favicon {
+    flex-shrink: 0;
+    height: 13px;
+    width: 13px;
+    max-height: unset;
+    max-width: unset;
+    min-height: unset;
+    min-width: unset;
+    margin-right: 13px;
+    border-radius: 50%;
+  }
+
+  &-titleText {
+    height: 15px;
+    width: 100%;
+  }
+
+  &-description {
+    grid-area: description;
+    height: 10px;
+    width: 80%;
+    margin-left: 26px;
+  }
+
+  &-tags {
+    display: flex;
+    align-items: center;
+    grid-area: tags;
+    min-width: 50px;
+    padding-bottom: 6px;
+    overflow: hidden;
+
+    @media @br-tablet {
+      padding-left: 27px;
+    }
+  }
+
+  &-tag {
+    height: 10px;
+    width: 40px;
+    margin-right: 20px;
+  }
+
+  &-icons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    grid-area: icons;
+    padding-bottom: 6px;
+
+    @media @br-tablet {
+      display: none;
+    }
+  }
+
+  &-icon {
+    height: 15px;
+    width: 15px;
+    min-height: 15px;
+    min-width: 15px;
+    margin-left: 29px;
+  }
+
+  &-actions {
+    display: none;
+
+    @media @br-tablet {
+      display: block;
+      justify-self: center;
+      grid-area: actions;
+      height: 20px;
+      width: 20px;
+      min-height: 20px;
+      min-width: 20px;
+      border-radius: 50%;
+    }
+  }
+
+  &-bookmarker {
+    display: none;
+
+    @media @br-tablet {
+      display: block;
+      justify-self: center;
+      grid-area: bookmarker;
+      height: 15px;
+      width: 12px;
+      min-height: 15px;
+      min-width: 12px;
+    }
+  }
+}

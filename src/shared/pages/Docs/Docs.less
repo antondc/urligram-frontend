@@ -4,7 +4,7 @@
 
 @{c} {
   display: flex;
-  background: @c-background;
+  font-family: @ff-monospace;
   user-select: none;
 
   &-sidebar {
@@ -18,8 +18,7 @@
 
   &-main {
     max-width: 800px;
-    padding: 50px;
-    padding-bottom: 80vh;
+    padding: 30px 50px 80vh;
 
     @media @br-mobile {
       padding: 20px;
@@ -45,46 +44,58 @@
   }
 
   &-section {
-    margin-top: 80px;
-    margin-bottom: 40px;
-
-    &:first-of-type {
-      margin-top: 0;
-    }
+    margin-top: 20px;
+    margin-bottom: 20px;
 
     @media @br-mobile {
       margin-top: 35px;
+    }
 
-      &:first-of-type {
-        margin-top: 55px;
-      }
+    &:first-of-type {
+      margin-top: 0;
     }
   }
 
   &-h1 {
     margin-bottom: 30px;
     font-size: @fs-big;
+
+    @media @br-mobile {
+      font-size: @fs-bigger;
+    }
   }
 
   &-h2 {
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     font-size: @fs-biggest;
     line-height: @fh-biggest;
+
+    @media @br-mobile {
+      font-size: @fs-bigger;
+    }
   }
 
   &-h3 {
-    margin-top: 40px;
+    margin-top: 20px;
     margin-bottom: 20px;
     font-size: @fs-big;
     line-height: @fh-mediumBig;
+
+    @media @br-mobile {
+      line-height: @fh-big;
+    }
   }
 
   &-h4 {
-    margin-top: 40px;
+    margin-top: 20px;
     margin-bottom: 8px;
     font-size: @fs-big;
     font-weight: @fw-semibold;
     line-height: @fh-mediumBig;
+
+    @media @br-mobile {
+      font-size: @fs-mediumBig;
+    }
   }
 
   &-paragraph {
