@@ -35,7 +35,7 @@ export const UserRowNew: React.FC<UserRowNew> = ({
   <div className="UserRowNew" data-test-id="UserRowNew" key={'UserRowNew-' + id}>
     <div className="UserRowNew-title">
       <User className="UserRowNew-titleIcon" />
-      <A href={`users/${id}`} frontend styled={false}>
+      <A className="UserRowNew-titleLink" href={`users/${id}`} frontend styled={false}>
         {name}
       </A>
     </div>

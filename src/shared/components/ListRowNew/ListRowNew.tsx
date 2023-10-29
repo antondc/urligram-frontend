@@ -31,7 +31,7 @@ export const ListRowNew: React.FC<Props> = ({
   <div className="ListRowNew" data-test-id="ListRowNew" key={id}>
     <div className="ListRowNew-title">
       <List className="ListRowNew-titleIcon" />
-      <A href={`/lists/${id}`} frontend styled={false}>
+      <A className="ListRowNew-titleLink" href={`/lists/${id}`} frontend styled={false}>
         {name}
       </A>
     </div>
