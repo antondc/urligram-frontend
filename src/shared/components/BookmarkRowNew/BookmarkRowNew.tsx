@@ -67,7 +67,14 @@ export const BookmarkRowNew: React.FC<BookmarkRowNewProps> = ({
   >
     <div className="BookmarkRowNew-title">
       <Img className="BookmarkRowNew-titleIcon" src={bookmark?.favicon} alt={bookmark?.title} title={bookmark?.title} />
-      <A href={bookmark?.url} onClick={bookmarkViewed} targetBlank underlined styled={false}>
+      <A
+        className="BookmarkRowNew-titleLink"
+        href={bookmark?.url}
+        onClick={bookmarkViewed}
+        targetBlank
+        underlined
+        styled={false}
+      >
         {bookmark?.title}
       </A>
     </div>
