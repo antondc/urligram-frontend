@@ -6,7 +6,7 @@ export const useScrollToSection = (): {
 
     if (!element) return;
 
-    const yOffset = -90;
+    const yOffset = -120;
     const yDistance = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
 
     window.scrollTo({ top: yDistance, behavior: 'smooth' });
