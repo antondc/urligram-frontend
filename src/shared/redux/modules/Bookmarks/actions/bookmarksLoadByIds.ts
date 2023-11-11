@@ -11,13 +11,13 @@ import { QueryStringWrapper, serializerFromArrayToByKey } from '@antoniodcorrea/
 import { AppThunk } from '../../..';
 
 interface Params {
-  ids: number[];
+  bookmarksIds: number[];
 }
 
 export const bookmarkLoadByIds =
-  ({ ids }: Params): AppThunk<Promise<BookmarkState[]>, BookmarksActions> =>
+  ({ bookmarksIds }: Params): AppThunk<Promise<BookmarkState[]>, BookmarksActions> =>
   async (dispatch, getState): Promise<BookmarkState[]> => {
-    if (!ids?.length) return;
+    if (!bookmarksIds?.length) return;
 
     const { Bookmarks: bookmarksBeforeRequest } = getState();
     try {
@@ -26,7 +26,7 @@ export const bookmarkLoadByIds =
         payload: bookmarksBeforeRequest,
       });
       const queryStringUpdated = QueryStringWrapper.addSearchParamsNoReplace(window.location.search, {
-        ids,
+        bookmarksIds,
       });
 
       const { data: bookmarksData } = await HttpClient.get<any, BookmarksGetApiResponse>(
@@ -34,7 +34,6 @@ export const bookmarkLoadByIds =
       );
       const { Bookmarks: bookmarksAfterResponse } = getState();
       const bookmarksArray = bookmarksData?.map((item) => item.attributes);
-      const currentBookmarksIds = bookmarksData?.map((item) => item.id);
 
       dispatch({
         type: BOOKMARKS_LOAD_BY_IDS_SUCCESS,
@@ -44,7 +43,7 @@ export const bookmarkLoadByIds =
             ...bookmarksAfterResponse.byKey,
             ...serializerFromArrayToByKey<BookmarkState, BookmarkState>({ data: bookmarksArray }),
           },
-          currentIds: currentBookmarksIds,
+          currentIds: bookmarksIds,
         },
       });
 
