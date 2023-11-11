@@ -44,7 +44,7 @@ export const listBookmarkDelete =
         },
       });
       await dispatch(listLoadById(listId));
-      await dispatch(bookmarkLoadByIds({ ids: filteredBookmarkIds }));
+      await dispatch(bookmarkLoadByIds({ bookmarksIds: filteredBookmarkIds }));
 
       return data?.attributes;
     } catch (error) {
