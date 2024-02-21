@@ -1,3 +1,5 @@
+import { UnknownAction } from 'redux';
+
 import { UserAccountType, UserLevel, UserStatus } from '../Users/users.types';
 
 export const SESSION_LOG_IN_REQUEST = 'SESSION_LOG_IN_REQUEST';
@@ -96,97 +98,97 @@ export interface SessionResetPasswordApiResponse {
 
 // Actions -----
 
-interface LogInRequestAction {
+interface LogInRequestAction extends UnknownAction {
   type: typeof SESSION_LOG_IN_REQUEST;
   payload: SessionState;
 }
 
-interface LogInSuccessAction {
+interface LogInSuccessAction extends UnknownAction {
   type: typeof SESSION_LOG_IN_SUCCESS;
   payload: SessionState;
 }
 
-interface LogInFailureAction {
+interface LogInFailureAction extends UnknownAction {
   type: typeof SESSION_LOG_IN_FAILURE;
   payload: SessionState;
 }
 
-interface LogOutRequestAction {
+interface LogOutRequestAction extends UnknownAction {
   type: typeof SESSION_LOG_OUT_REQUEST;
   payload: SessionState;
 }
 
-interface LogOutSuccessAction {
+interface LogOutSuccessAction extends UnknownAction {
   type: typeof SESSION_LOG_OUT_SUCCESS;
   payload: SessionState;
 }
 
-interface LogOutFailureAction {
+interface LogOutFailureAction extends UnknownAction {
   type: typeof SESSION_LOG_OUT_FAILURE;
   payload: SessionState;
 }
 
-interface SignUpRequestAction {
+interface SignUpRequestAction extends UnknownAction {
   type: typeof SESSION_SIGN_UP_REQUEST;
   payload: SessionState;
 }
 
-interface SignUpSucessAction {
+interface SignUpSucessAction extends UnknownAction {
   type: typeof SESSION_SIGN_UP_SUCCESS;
   payload: SessionState;
 }
 
-interface SignUpFailureAction {
+interface SignUpFailureAction extends UnknownAction {
   type: typeof SESSION_SIGN_UP_FAILURE;
   payload: SessionState;
 }
 
-interface ResetPasswordRequestAction {
+interface ResetPasswordRequestAction extends UnknownAction {
   type: typeof SESSION_RESET_PASSWORD_REQUEST;
   payload: SessionState;
 }
 
-interface ResetPasswordSucessAction {
+interface ResetPasswordSucessAction extends UnknownAction {
   type: typeof SESSION_RESET_PASSWORD_SUCCESS;
   payload: SessionState;
 }
 
-interface ResetPasswordFailureAction {
+interface ResetPasswordFailureAction extends UnknownAction {
   type: typeof SESSION_RESET_PASSWORD_FAILURE;
   payload: SessionState;
 }
 
-interface ForgotPasswordRequestAction {
+interface ForgotPasswordRequestAction extends UnknownAction {
   type: typeof SESSION_FORGOT_PASSWORD_REQUEST;
   payload: SessionState;
 }
 
-interface ForgotPasswordSuccessAction {
+interface ForgotPasswordSuccessAction extends UnknownAction {
   type: typeof SESSION_FORGOT_PASSWORD_SUCCESS;
   payload: SessionState;
 }
 
-interface ForgotPasswordFailureAction {
+interface ForgotPasswordFailureAction extends UnknownAction {
   type: typeof SESSION_FORGOT_PASSWORD_FAILURE;
   payload: SessionState;
 }
 
-interface SessionUpdateDetailsRequestAction {
+interface SessionUpdateDetailsRequestAction extends UnknownAction {
   type: typeof SESSION_UPDATE_DETAILS_REQUEST;
   payload: SessionState;
 }
 
-interface SessionUpdateDetailSuccessAction {
+interface SessionUpdateDetailSuccessAction extends UnknownAction {
   type: typeof SESSION_UPDATE_DETAILS_SUCCESS;
   payload: SessionState;
 }
 
-interface SessionUpdateDetailsFailureAction {
+interface SessionUpdateDetailsFailureAction extends UnknownAction {
   type: typeof SESSION_UPDATE_DETAILS_FAILURE;
   payload: SessionState;
 }
 
-interface SessionResetErrorsAction {
+interface SessionResetErrorsAction extends UnknownAction {
   type: typeof SESSION_RESET_ERRORS;
   payload: SessionState;
 }

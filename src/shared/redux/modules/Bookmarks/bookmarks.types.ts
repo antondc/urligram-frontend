@@ -1,3 +1,5 @@
+import { UnknownAction } from "redux";
+
 export const BOOKMARKS_LOAD_REQUEST = 'BOOKMARKS_LOAD_REQUEST';
 export const BOOKMARKS_LOAD_SUCCESS = 'BOOKMARKS_LOAD_SUCCESS';
 export const BOOKMARKS_LOAD_FAILURE = 'BOOKMARKS_LOAD_FAILURE';
@@ -119,112 +121,112 @@ export interface BookmarksGetApiResponse {
 
 // Actions -----
 
-interface BookmarksLoadRequestAction {
+interface BookmarksLoadRequestAction extends UnknownAction {
   type: typeof BOOKMARKS_LOAD_REQUEST;
   payload: BookmarksState;
 }
 
-interface BookmarksLoadSuccessAction {
+interface BookmarksLoadSuccessAction extends UnknownAction {
   type: typeof BOOKMARKS_LOAD_SUCCESS;
   payload: BookmarksState;
 }
 
-interface BookmarksLoadFailureAction {
+interface BookmarksLoadFailureAction extends UnknownAction {
   type: typeof BOOKMARKS_LOAD_FAILURE;
   payload: BookmarksState;
 }
 
-interface BookmarkCreateApiRequestAction {
+interface BookmarkCreateApiRequestAction extends UnknownAction {
   type: typeof BOOKMARK_CREATE_REQUEST;
   payload: BookmarksState;
 }
 
-interface BookmarkCreateSuccessAction {
+interface BookmarkCreateSuccessAction extends UnknownAction {
   type: typeof BOOKMARK_CREATE_SUCCESS;
   payload: BookmarksState;
 }
 
-interface BookmarkCreateFailureAction {
+interface BookmarkCreateFailureAction extends UnknownAction {
   type: typeof BOOKMARK_CREATE_FAILURE;
   payload: BookmarksState;
 }
 
-interface BookmarkUpdateRequestAction {
+interface BookmarkUpdateRequestAction extends UnknownAction {
   type: typeof BOOKMARK_UPDATE_REQUEST;
   payload: BookmarksState;
 }
 
-interface BookmarkUpdateSuccessAction {
+interface BookmarkUpdateSuccessAction extends UnknownAction {
   type: typeof BOOKMARK_UPDATE_SUCCESS;
   payload: BookmarksState;
 }
 
-interface BookmarkUpdateFailureAction {
+interface BookmarkUpdateFailureAction extends UnknownAction {
   type: typeof BOOKMARK_UPDATE_FAILURE;
   payload: BookmarksState;
 }
 
-interface BookmarkDeleteRequestAction {
+interface BookmarkDeleteRequestAction extends UnknownAction {
   type: typeof BOOKMARK_DELETE_REQUEST;
   payload: BookmarksState;
 }
 
-interface BookmarkDeleteSuccessAction {
+interface BookmarkDeleteSuccessAction extends UnknownAction {
   type: typeof BOOKMARK_DELETE_SUCCESS;
   payload: BookmarksState;
 }
 
-interface BookmarkDeleteFailureAction {
+interface BookmarkDeleteFailureAction extends UnknownAction {
   type: typeof BOOKMARK_DELETE_FAILURE;
   payload: BookmarksState;
 }
 
-interface BookmarkRecommendedRequestAction {
+interface BookmarkRecommendedRequestAction extends UnknownAction {
   type: typeof BOOKMARKS_RECOMMENDED_REQUEST;
   payload: BookmarksState;
 }
 
-interface BookmarkRecommendedSuccessAction {
+interface BookmarkRecommendedSuccessAction extends UnknownAction {
   type: typeof BOOKMARKS_RECOMMENDED_SUCCESS;
   payload: BookmarksState;
 }
 
-interface BookmarkRecommendedFailureAction {
+interface BookmarkRecommendedFailureAction extends UnknownAction {
   type: typeof BOOKMARKS_RECOMMENDED_FAILURE;
   payload: BookmarksState;
 }
 
-interface BookmarkLoadByIdRequestAction {
+interface BookmarkLoadByIdRequestAction extends UnknownAction {
   type: typeof BOOKMARK_LOAD_BY_ID_REQUEST;
   payload: BookmarksState;
 }
 
-interface BookmarkLoadByIdSuccessAction {
+interface BookmarkLoadByIdSuccessAction extends UnknownAction {
   type: typeof BOOKMARK_LOAD_BY_ID_SUCCESS;
   payload: BookmarksState;
 }
 
-interface BookmarkLoadByIdFailureAction {
+interface BookmarkLoadByIdFailureAction extends UnknownAction {
   type: typeof BOOKMARK_LOAD_BY_ID_FAILURE;
   payload: BookmarksState;
 }
 
-interface BookmarksLoadByIdsRequestAction {
+interface BookmarksLoadByIdsRequestAction extends UnknownAction {
   type: typeof BOOKMARKS_LOAD_BY_IDS_REQUEST;
   payload: BookmarksState;
 }
 
-interface BookmarksLoadByIdsSuccessAction {
+interface BookmarksLoadByIdsSuccessAction extends UnknownAction {
   type: typeof BOOKMARKS_LOAD_BY_IDS_SUCCESS;
   payload: BookmarksState;
 }
 
-interface BookmarksLoadByIdsFailureAction {
+interface BookmarksLoadByIdsFailureAction extends UnknownAction {
   type: typeof BOOKMARKS_LOAD_BY_IDS_FAILURE;
   payload: BookmarksState;
 }
 
-interface BookmarksErrorsClearAction {
+interface BookmarksErrorsClearAction extends UnknownAction {
   type: typeof BOOKMARKS_ERRORS_CLEAR;
   payload: Partial<BookmarksState>;
 }

@@ -1,3 +1,5 @@
+import { UnknownAction } from 'redux';
+
 export const LINK_LOAD_BY_ID_REQUEST = 'LINK_LOAD_BY_ID_REQUEST';
 export const LINK_LOAD_BY_ID_SUCCESS = 'LINK_LOAD_BY_ID_SUCCESS';
 export const LINK_LOAD_BY_ID_FAILURE = 'LINK_LOAD_BY_ID_FAILURE';
@@ -70,17 +72,17 @@ export interface LinkGetApiResponse {
   };
 }
 
-interface LinkLoadByIdRequest {
+interface LinkLoadByIdRequest extends UnknownAction {
   type: typeof LINK_LOAD_BY_ID_REQUEST;
   payload: LinksState;
 }
 
-interface LinkLoadByIdSuccess {
+interface LinkLoadByIdSuccess extends UnknownAction {
   type: typeof LINK_LOAD_BY_ID_SUCCESS;
   payload: LinksState;
 }
 
-interface LinkLoadByIdFailure {
+interface LinkLoadByIdFailure extends UnknownAction {
   type: typeof LINK_LOAD_BY_ID_FAILURE;
   payload: LinksState;
 }

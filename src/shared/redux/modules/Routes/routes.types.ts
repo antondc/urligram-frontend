@@ -1,3 +1,5 @@
+import { UnknownAction } from 'redux';
+
 import { Route } from 'Router/routes';
 import { Location } from 'Services/History';
 
@@ -31,7 +33,7 @@ export interface RouteState extends Route, Location {
   queryParams?: ParamsState;
 }
 
-interface PushNewRouteAction {
+interface PushNewRouteAction extends UnknownAction {
   type: typeof ROUTES_NEW_ROUTE_PUSH;
   payload: RoutesState;
 }

@@ -1,3 +1,5 @@
+import { UnknownAction } from 'redux';
+
 export const TAGS_LOAD_REQUEST = 'TAGS_LOAD_REQUEST';
 export const TAGS_LOAD_SUCCESS = 'TAGS_LOAD_SUCCESS';
 export const TAGS_LOAD_FAILURE = 'TAGS_LOAD_FAILURE';
@@ -38,32 +40,32 @@ export interface TagsLoadApiResponse {
   data: TagsLoadApiResponseItem[];
 }
 
-interface TagsLoadRequestAction {
+interface TagsLoadRequestAction extends UnknownAction {
   type: typeof TAGS_LOAD_REQUEST;
   payload: Partial<TagsState>;
 }
 
-interface ReceiveTagsAction {
+interface ReceiveTagsAction extends UnknownAction {
   type: typeof TAGS_LOAD_SUCCESS;
   payload: Partial<TagsState>;
 }
 
-interface TagsLoadFailureAction {
+interface TagsLoadFailureAction extends UnknownAction {
   type: typeof TAGS_LOAD_FAILURE;
   payload: Partial<TagsState>;
 }
 
-interface TagsLoadByUserIdRequestAction {
+interface TagsLoadByUserIdRequestAction extends UnknownAction {
   type: typeof TAGS_LOAD_BY_USER_ID_REQUEST;
   payload: Partial<TagsState>;
 }
 
-interface TagsLoadByUserIdSuccesAction {
+interface TagsLoadByUserIdSuccesAction extends UnknownAction {
   type: typeof TAGS_LOAD_BY_USER_ID_SUCCESS;
   payload: Partial<TagsState>;
 }
 
-interface TagsLoadByUserIdFailureAction {
+interface TagsLoadByUserIdFailureAction extends UnknownAction {
   type: typeof TAGS_LOAD_BY_USER_ID_FAILURE;
   payload: Partial<TagsState>;
 }

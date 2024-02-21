@@ -1,3 +1,5 @@
+import { UnknownAction } from 'redux';
+
 import { SessionState } from 'Modules/Session/session.types';
 import { ListUserRole, ListUserStatus } from '../Lists/lists.types';
 
@@ -114,82 +116,82 @@ export interface UserDeleteApiResponse {
   };
 }
 
-interface UsersLoadRequestAction {
+interface UsersLoadRequestAction extends UnknownAction {
   type: typeof USERS_LOAD_REQUEST;
   payload: Partial<UsersState>;
 }
 
-interface UsersLoadSuccessAction {
+interface UsersLoadSuccessAction extends UnknownAction {
   type: typeof USERS_LOAD_SUCCEED;
   payload: Partial<UsersState>;
 }
 
-interface UsersLoadFailureAction {
+interface UsersLoadFailureAction extends UnknownAction {
   type: typeof USERS_LOAD_FAILURE;
   payload: Partial<UsersState>;
 }
 
-interface UserLoadRequestAction {
+interface UserLoadRequestAction extends UnknownAction {
   type: typeof USER_LOAD_REQUEST;
   payload: Partial<UsersState>;
 }
 
-interface UserLoadSuccessAction {
+interface UserLoadSuccessAction extends UnknownAction {
   type: typeof USER_LOAD_SUCCEED;
   payload: Partial<UsersState>;
 }
 
-interface UserLoadFailureAction {
+interface UserLoadFailureAction extends UnknownAction {
   type: typeof USER_LOAD_FAILURE;
   payload: Partial<UsersState>;
 }
 
-interface UserFollowCreateRequestAction {
+interface UserFollowCreateRequestAction extends UnknownAction {
   type: typeof USER_FOLLOW_CREATE_REQUEST;
   payload: Partial<UsersState>;
 }
 
-interface UserFollowCreateSuccessAction {
+interface UserFollowCreateSuccessAction extends UnknownAction {
   type: typeof USER_FOLLOW_CREATE_SUCCEED;
   payload: Partial<UsersState>;
 }
 
-interface UserFollowCreateFailureAction {
+interface UserFollowCreateFailureAction extends UnknownAction {
   type: typeof USER_FOLLOW_CREATE_FAILURE;
   payload: Partial<UsersState>;
 }
 
-interface UserFollowDeleteRequestAction {
+interface UserFollowDeleteRequestAction extends UnknownAction {
   type: typeof USER_FOLLOW_DELETE_REQUEST;
   payload: Partial<UsersState>;
 }
 
-interface UserFollowDeleteSuccessAction {
+interface UserFollowDeleteSuccessAction extends UnknownAction {
   type: typeof USER_FOLLOW_DELETE_SUCCEED;
   payload: Partial<UsersState>;
 }
 
-interface UserFollowDeleteFailureAction {
+interface UserFollowDeleteFailureAction extends UnknownAction {
   type: typeof USER_FOLLOW_DELETE_FAILURE;
   payload: Partial<UsersState>;
 }
 
-interface UserUpdateDetailsAction {
+interface UserUpdateDetailsAction extends UnknownAction {
   type: typeof USER_UPDATE_DETAILS;
   payload: Partial<UsersState>;
 }
 
-interface UserDeleteRequestAction {
+interface UserDeleteRequestAction extends UnknownAction {
   type: typeof USER_DELETE_REQUEST;
   payload: Partial<UsersState>;
 }
 
-interface UserDeleteSuccessAction {
+interface UserDeleteSuccessAction extends UnknownAction {
   type: typeof USER_DELETE_SUCCEED;
   payload: Partial<UsersState>;
 }
 
-interface UserDeleteFailureAction {
+interface UserDeleteFailureAction extends UnknownAction {
   type: typeof USER_DELETE_FAILURE;
   payload: Partial<SessionState>;
 }

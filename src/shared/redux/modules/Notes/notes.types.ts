@@ -1,3 +1,5 @@
+import { UnknownAction } from 'redux';
+
 export const NOTES_LOAD_BY_LINK_ID_REQUEST = 'NOTES_LOAD_BY_LINK_ID_REQUEST';
 export const NOTES_LOAD_BY_LINK_ID_SUCCESS = 'NOTES_LOAD_BY_LINK_ID_SUCCESS';
 export const NOTES_LOAD_BY_LINK_ID_FAILURE = 'NOTES_LOAD_BY_LINK_ID_FAILURE';
@@ -32,17 +34,17 @@ export interface NotesLoadApiResponse {
   data: NotesLoadApiResponseItem[];
 }
 
-interface NotesLoadByLinkIdRequestAction {
+interface NotesLoadByLinkIdRequestAction extends UnknownAction {
   type: typeof NOTES_LOAD_BY_LINK_ID_REQUEST;
   payload: Partial<NotesState>;
 }
 
-interface NotesLoadByLinkIdSuccesAction {
+interface NotesLoadByLinkIdSuccesAction extends UnknownAction {
   type: typeof NOTES_LOAD_BY_LINK_ID_SUCCESS;
   payload: Partial<NotesState>;
 }
 
-interface NotesLoadByLinkIdFailureAction {
+interface NotesLoadByLinkIdFailureAction extends UnknownAction {
   type: typeof NOTES_LOAD_BY_LINK_ID_FAILURE;
   payload: Partial<NotesState>;
 }
