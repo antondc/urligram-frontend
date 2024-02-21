@@ -1,3 +1,5 @@
+import { UnknownAction } from 'redux';
+
 import { BookmarkGetItemResponse, BookmarkState } from '../Bookmarks/bookmarks.types';
 import { UserState } from '../Users/users.types';
 
@@ -143,137 +145,137 @@ export interface ListUpdateApiResponse {
   data: ListApiResponseItem;
 }
 
-interface ListsLoadRequestAction {
+interface ListsLoadRequestAction extends UnknownAction {
   type: typeof LISTS_LOAD_REQUEST;
   payload: Partial<ListsState>;
 }
 
-interface ListsLoadSuccessAction {
+interface ListsLoadSuccessAction extends UnknownAction {
   type: typeof LISTS_LOAD_SUCCESS;
   payload: Partial<ListsState>;
 }
 
-interface ListCreateRequestAction {
+interface ListCreateRequestAction extends UnknownAction {
   type: typeof LIST_CREATE_REQUEST;
   payload: Partial<ListsState>;
 }
 
-interface ListCreateSuccessAction {
+interface ListCreateSuccessAction extends UnknownAction {
   type: typeof LIST_CREATE_SUCCESS;
   payload: Partial<ListsState>;
 }
 
-interface ListCreateFailureAction {
+interface ListCreateFailureAction extends UnknownAction {
   type: typeof LIST_CREATE_FAILURE;
   payload: Partial<ListsState>;
 }
 
-interface ListCreateResetAction {
+interface ListCreateResetAction extends UnknownAction {
   type: typeof LIST_CREATE_RESET;
   payload: Partial<ListsState>;
 }
 
-interface ListUpdateRequestAction {
+interface ListUpdateRequestAction extends UnknownAction {
   type: typeof LIST_UPDATE_REQUEST;
   payload: Partial<ListsState>;
 }
 
-interface ListUpdateSuccessAction {
+interface ListUpdateSuccessAction extends UnknownAction {
   type: typeof LIST_UPDATE_SUCCESS;
   payload: Partial<ListsState>;
 }
 
-interface ListUpdateFailureAction {
+interface ListUpdateFailureAction extends UnknownAction {
   type: typeof LIST_UPDATE_FAILURE;
   payload: Partial<ListsState>;
 }
 
-interface ListUnfollowRequestAction {
+interface ListUnfollowRequestAction extends UnknownAction {
   type: typeof LIST_UNFOLLOW_REQUEST;
   payload: Partial<ListsState>;
 }
 
-interface ListUnfollowSuccessAction {
+interface ListUnfollowSuccessAction extends UnknownAction {
   type: typeof LIST_UNFOLLOW_SUCCESS;
   payload: Partial<ListsState>;
 }
 
-interface ListUnfollowFailureAction {
+interface ListUnfollowFailureAction extends UnknownAction {
   type: typeof LIST_UNFOLLOW_FAILURE;
   payload: Partial<ListsState>;
 }
 
-interface ListBookmarkCreateRequestAction {
+interface ListBookmarkCreateRequestAction extends UnknownAction {
   type: typeof LIST_BOOKMARK_CREATE_REQUEST;
   payload: Partial<BookmarkState>;
 }
 
-interface ListBookmarkCreateSuccessAction {
+interface ListBookmarkCreateSuccessAction extends UnknownAction {
   type: typeof LIST_BOOKMARK_CREATE_SUCCESS;
   payload: Partial<BookmarkState>;
 }
 
-interface ListBookmarkCreateFailureAction {
+interface ListBookmarkCreateFailureAction extends UnknownAction {
   type: typeof LIST_BOOKMARK_CREATE_FAILURE;
   payload: Partial<BookmarkState>;
 }
 
-interface ListBookmarkDeleteRequestAction {
+interface ListBookmarkDeleteRequestAction extends UnknownAction {
   type: typeof LIST_BOOKMARK_DELETE_REQUEST;
   payload: Partial<BookmarkState>;
 }
 
-interface ListBookmarkDeleteSuccessAction {
+interface ListBookmarkDeleteSuccessAction extends UnknownAction {
   type: typeof LIST_BOOKMARK_DELETE_SUCCESS;
   payload: Partial<BookmarkState>;
 }
 
-interface ListBookmarkDeleteFailureAction {
+interface ListBookmarkDeleteFailureAction extends UnknownAction {
   type: typeof LIST_BOOKMARK_DELETE_FAILURE;
   payload: Partial<BookmarkState>;
 }
 
-interface ListDeleteRequestAction {
+interface ListDeleteRequestAction extends UnknownAction {
   type: typeof LIST_DELETE_REQUEST;
   payload: Partial<BookmarkState>;
 }
 
-interface ListDeleteSuccessAction {
+interface ListDeleteSuccessAction extends UnknownAction {
   type: typeof LIST_DELETE_SUCCESS;
   payload: Partial<BookmarkState>;
 }
 
-interface ListDeleteFailureAction {
+interface ListDeleteFailureAction extends UnknownAction {
   type: typeof LIST_DELETE_FAILURE;
   payload: Partial<BookmarkState>;
 }
 
-interface ListUserUpsertRequestAction {
+interface ListUserUpsertRequestAction extends UnknownAction {
   type: typeof LIST_USER_UPSERT_REQUEST;
   payload: Partial<BookmarkState>;
 }
 
-interface ListUserUpsertSuccessAction {
+interface ListUserUpsertSuccessAction extends UnknownAction {
   type: typeof LIST_USER_UPSERT_SUCCESS;
   payload: Partial<BookmarkState>;
 }
 
-interface ListUserUpsertFailureAction {
+interface ListUserUpsertFailureAction extends UnknownAction {
   type: typeof LIST_USER_UPSERT_FAILURE;
   payload: Partial<BookmarkState>;
 }
 
-interface ListUserDeleteRequestAction {
+interface ListUserDeleteRequestAction extends UnknownAction {
   type: typeof LIST_USER_DELETE_REQUEST;
   payload: Partial<BookmarkState>;
 }
 
-interface ListUserDeleteSuccessAction {
+interface ListUserDeleteSuccessAction extends UnknownAction {
   type: typeof LIST_USER_DELETE_SUCCESS;
   payload: Partial<BookmarkState>;
 }
 
-interface ListUserDeleteFailureAction {
+interface ListUserDeleteFailureAction extends UnknownAction {
   type: typeof LIST_USER_DELETE_FAILURE;
   payload: Partial<BookmarkState>;
 }

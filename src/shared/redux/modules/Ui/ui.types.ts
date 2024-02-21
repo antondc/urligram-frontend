@@ -1,3 +1,5 @@
+import { UnknownAction } from 'redux';
+
 export const UI_SCREEN_TYPE_SET = 'UI_SCREEN_TYPE_SET';
 export const UI_SCREEN_DESKTOP_LOCK = 'UI_SCREEN_DESKTOP_LOCK';
 export const UI_SCREEN_DESKTOP_UNLOCK = 'UI_SCREEN_DESKTOP_UNLOCK';
@@ -116,152 +118,152 @@ export type UiState = {
   };
 };
 
-interface UiScreenTypeSet {
+interface UiScreenTypeSet extends UnknownAction {
   type: typeof UI_SCREEN_TYPE_SET;
   payload: Partial<UiState>;
 }
 
-interface UiScreenLock {
+interface UiScreenLock extends UnknownAction {
   type: typeof UI_SCREEN_DESKTOP_LOCK;
   payload: Partial<UiState>;
 }
 
-interface UiScreenUnLock {
+interface UiScreenUnLock extends UnknownAction {
   type: typeof UI_SCREEN_DESKTOP_UNLOCK;
   payload: Partial<UiState>;
 }
 
-interface UiScreenMobileLock {
+interface UiScreenMobileLock extends UnknownAction {
   type: typeof UI_SCREEN_MOBILE_LOCK;
   payload: Partial<UiState>;
 }
 
-interface UiScreenMobileUnLock {
+interface UiScreenMobileUnLock extends UnknownAction {
   type: typeof UI_SCREEN_MOBILE_UNLOCK;
   payload: Partial<UiState>;
 }
 
-interface UserModalMount {
+interface UserModalMount extends UnknownAction {
   type: typeof USER_MODAL_MOUNT;
   payload: Partial<UiState>;
 }
 
-interface UserModalUnmount {
+interface UserModalUnmount extends UnknownAction {
   type: typeof USER_MODAL_UNMOUNT;
   payload: Partial<UiState>;
 }
 
-interface SwitchLanguagesModal {
+interface SwitchLanguagesModal extends UnknownAction {
   type: typeof SWITCH_LANGUAGES_MODAL;
   payload: Partial<UiState>;
 }
 
-interface SwitchMessageModal {
+interface SwitchMessageModal extends UnknownAction {
   type: typeof SWITCH_MESSAGE_MODAL;
   payload: Partial<UiState>;
 }
 
-interface SwitchLoginModal {
+interface SwitchLoginModal extends UnknownAction {
   type: typeof SWITCH_LOGIN_MODAL;
   payload: Partial<UiState>;
 }
 
-interface SwitchWelcomeModal {
+interface SwitchWelcomeModal extends UnknownAction {
   type: typeof SWITCH_WELCOME_MODAL;
   payload: Partial<UiState>;
 }
 
-interface SwitchWelcomeModalErrorAction {
+interface SwitchWelcomeModalErrorAction extends UnknownAction {
   type: typeof SWITCH_WELCOME_MODAL_ERROR;
   payload: Partial<UiState>;
 }
 
-interface SwitchSignUpModal {
+interface SwitchSignUpModal extends UnknownAction {
   type: typeof SWITCH_SIGN_UP_MODAL;
   payload: Partial<UiState>;
 }
 
-interface SwitchForgotPasswordModal {
+interface SwitchForgotPasswordModal extends UnknownAction {
   type: typeof SWITCH_FORGOT_PASSWORD_MODAL;
   payload: Partial<UiState>;
 }
 
-interface SwitchResetPasswordModal {
+interface SwitchResetPasswordModal extends UnknownAction {
   type: typeof SWITCH_RESET_PASSWORD_MODAL;
   payload: Partial<UiState>;
 }
 
-interface SwitchBookmarkCreateModal {
+interface SwitchBookmarkCreateModal extends UnknownAction {
   type: typeof SWITCH_BOOKMARK_CREATE_MODAL;
   payload: Partial<UiState>;
 }
 
-interface SwitchBookmarkUpdateModal {
+interface SwitchBookmarkUpdateModal extends UnknownAction {
   type: typeof SWITCH_BOOKMARK_UPDATE_MODAL;
   payload: Partial<UiState>;
 }
 
-interface SwitchListModal {
+interface SwitchListModal extends UnknownAction {
   type: typeof SWITCH_LIST_MODAL;
   payload: Partial<UiState>;
 }
 
-interface BookmarkListModalsMount {
+interface BookmarkListModalsMount extends UnknownAction {
   type: typeof UI_BOOKMARK_LISTS_MODALS_MOUNT;
   payload: Partial<UiState>;
 }
 
-interface BookmarkListModalsUnmount {
+interface BookmarkListModalsUnmount extends UnknownAction {
   type: typeof UI_BOOKMARK_LISTS_MODALS_UNMOUNT;
   payload: Partial<UiState>;
 }
 
-interface BookmarkListModalsLoading {
+interface BookmarkListModalsLoading extends UnknownAction {
   type: typeof UI_BOOKMARK_LISTS_MODALS_LOADING;
   payload: Partial<UiState>;
 }
 
-interface UiNotificationViewedAction {
+interface UiNotificationViewedAction extends UnknownAction {
   type: typeof UI_NOTIFICATION_VIEWED;
   payload: UiState;
 }
 
-interface UiNotificationPushAction {
+interface UiNotificationPushAction extends UnknownAction {
   type: typeof UI_NOTIFICATION_PUSH;
   payload: UiState;
 }
 
-interface UiCloseAllModals {
+interface UiCloseAllModals extends UnknownAction {
   type: typeof UI_CLOSE_ALL_MODALS;
   payload: UiState;
 }
 
-interface SwitchListAddUserModal {
+interface SwitchListAddUserModal extends UnknownAction {
   type: typeof SWITCH_LIST_ADD_USER_MODAL;
   payload: UiState;
 }
 
-interface SwitchSignUpDisabledModal {
+interface SwitchSignUpDisabledModal extends UnknownAction {
   type: typeof SWITCH_SIGN_UP_DISABLED_MODAL;
   payload: UiState;
 }
 
-interface SwitchBookmarkActionsButtonMounted {
+interface SwitchBookmarkActionsButtonMounted extends UnknownAction {
   type: typeof UI_SWITCH_BOOKMARK_ICONS_MOUNTED;
   payload: Partial<UiState>;
 }
 
-interface SwitchBookmarkActionsButtonUnmounted {
+interface SwitchBookmarkActionsButtonUnmounted extends UnknownAction {
   type: typeof UI_SWITCH_BOOKMARK_ICONS_UNMOUNTED;
   payload: Partial<UiState>;
 }
 
-interface sidebarLeftOpen {
+interface sidebarLeftOpen extends UnknownAction {
   type: typeof UI_SIDEBAR_LEFT_OPEN;
   payload: Partial<UiState>;
 }
 
-interface sidebarLeftClose {
+interface sidebarLeftClose extends UnknownAction {
   type: typeof UI_SIDEBAR_LEFT_CLOSE;
   payload: Partial<UiState>;
 }

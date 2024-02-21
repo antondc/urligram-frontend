@@ -7,6 +7,7 @@ import { uiResetModalsState } from 'Modules/Ui/actions/uiResetModalsState';
 import './BaseModalFooterLink.less';
 
 interface Props extends HTMLProps<HTMLAnchorElement> {
+  children: React.ReactNode;
   className?: string;
   href: string;
 }

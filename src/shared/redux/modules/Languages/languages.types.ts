@@ -1,3 +1,5 @@
+import { UnknownAction } from 'redux';
+
 export const LANGUAGES_LOAD_REQUEST = 'LANGUAGES_LOAD_REQUEST';
 export const LANGUAGES_LOAD_SUCCESS = 'LANGUAGES_LOAD_SUCCESS';
 export const LANGUAGES_SWITCH_CURRENT_SUCCESS = 'LANGUAGES_SWITCH_CURRENT_SUCCESS';
@@ -129,22 +131,22 @@ export interface LanguagesApiResponse {
   data: LanguagesApiResponseItem[];
 }
 
-interface LanguagesLoadRequestAction {
+interface LanguagesLoadRequestAction extends UnknownAction {
   type: typeof LANGUAGES_LOAD_REQUEST;
   payload: Partial<LanguagesState>;
 }
 
-interface LanguagesLoadSuccessAction {
+interface LanguagesLoadSuccessAction extends UnknownAction {
   type: typeof LANGUAGES_LOAD_SUCCESS;
   payload: Partial<LanguagesState>;
 }
 
-interface LanguagesSwitchCurrentRequestAction {
+interface LanguagesSwitchCurrentRequestAction extends UnknownAction {
   type: typeof LANGUAGES_SWITCH_CURRENT_REQUEST;
   payload: Partial<LanguagesState>;
 }
 
-interface LanguagesSwitchCurrentSuccessAction {
+interface LanguagesSwitchCurrentSuccessAction extends UnknownAction {
   type: typeof LANGUAGES_SWITCH_CURRENT_SUCCESS;
   payload: Partial<LanguagesState>;
 }
