@@ -27,6 +27,7 @@ import { routesList, routesWithoutOmmitedValues } from 'Router/routes';
 import { Location } from 'Services/History';
 import enhanceRouteWithParams from 'Tools/utils/url/enhanceRouteWithParams';
 import findActiveRouteKey from 'Tools/utils/url/findActiveRouteKey';
+import { useShowPageOnLoad } from '@antoniodcorrea/components';
 import { ESCAPE_KEY_CODE } from './constants';
 import { Layout as LayoutUi } from './Layout';
 
@@ -54,22 +55,17 @@ const Layout: React.FC<Props> = ({ location }) => {
   const listModalMounted = useSelector(selectUiListModalMounted);
   const renderLoader = !!languageLoading; /* || otherVariables */
 
-  const addBodyClasses = () => {
-    document.body.classList.remove('preload'); // Preventing animations on load
-    document.body.classList.add('isLoaded'); // Showing page on load
-  };
+  useShowPageOnLoad();
 
   const testKeyDown = (e: KeyboardEvent): void => {
     if (e.key === ESCAPE_KEY_CODE) dispatch(uiResetModalsState());
   };
 
   useEffect(() => {
-    window.addEventListener('load', addBodyClasses);
-    document.addEventListener('keydown', testKeyDown);
+    window.addEventListener('keydown', testKeyDown);
 
     return () => {
-      window.removeEventListener('load', addBodyClasses);
-      document.removeEventListener('keydown', testKeyDown);
+      window.removeEventListener('keydown', testKeyDown);
     };
   }, []);
 
