@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 import Folder from 'Assets/svg/folder.svg';
+import FolderSolid from 'Assets/svg/folderSolid.svg';
 import { useScrollBeforeCallback } from 'Hooks/useScrollBeforeCallback';
 import { ListState, ListUserStatus } from 'Modules/Lists/lists.types';
 import { selectListWithNotificationsIds } from 'Modules/Lists/selectors/selectListWithNotificationsIds';
@@ -48,7 +49,11 @@ const SidebarLeftLists: React.FC<Props> = ({ lists, loading, listsShown = true }
                 }
                 onClick={() => onListClick(item?.id)}
               >
-                <Folder className="SidebarLeftLists-listIcon" />
+                {currentListId === item?.id ? (
+                  <Folder className="SidebarLeftLists-listIcon" />
+                ) : (
+                  <FolderSolid className="SidebarLeftLists-listIcon" />
+                )}
                 <span className="SidebarLeftLists-listTitle">
                   {item?.name}
                   <NotificationDot

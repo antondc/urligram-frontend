@@ -7,6 +7,9 @@ import { CustomTag } from 'Components/CustomTag';
 import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
 import { TagState } from 'Modules/Tags/tags.types';
 import { Img, Space } from '@antoniodcorrea/components';
+// TODO: PR001-199
+// import { useDraggable } from '@dnd-kit/core';
+// import { CSS } from '@dnd-kit/utilities';
 import { BookmarkRowIcons } from './BookmarkRowIcons';
 
 import './BookmarkRow.less';
@@ -56,14 +59,28 @@ export const BookmarkRow: React.FC<BookmarkRowProps> = ({
   publicLoading,
   onPublicClick,
 }) => (
+  // TODO: PR001-199
+  // const { isDragging, attributes, listeners, setNodeRef, transform } = useDraggable({
+  //   id: bookmark?.id,
+  // });
+  // const style = {
+  //   transform: CSS.Translate.toString(transform),
+  // };
+
   <div
     className={
       'BookmarkRow' +
       (recentlyCreated ? ' BookmarkRow--recentlyCreated' : '') +
       (viewPending ? ' BookmarkRow--viewPending' : '')
+      // (isDragging ? ' BookmarkRow--isDragging' : '')   // TODO: PR001-199
     }
     data-test-id="BookmarkRow"
     key={bookmark?.id}
+    // TODO: PR001-199
+    // ref={setNodeRef}
+    // style={style}
+    // {...listeners}
+    // {...attributes}
   >
     <div className="BookmarkRow-title">
       <Img className="BookmarkRow-titleIcon" src={bookmark?.favicon} alt={bookmark?.title} title={bookmark?.title} />
@@ -115,7 +132,7 @@ export const BookmarkRow: React.FC<BookmarkRowProps> = ({
     </div>
     <Bookmarker className="BookmarkRow-bookmarker" bookmarkId={bookmark?.id} listId={listId} />
     <DotsVertical
-      className={'BookmarkRow-actions' + (sessionUserBookmarkedLink ? ' BookmarkRow-actions--active' : '')}
+      className={'BookmarkRow-actions' + (sessionUserBookmarkedLink ? ' BookmarkRow-actions--isDragging' : '')}
       onClick={onMobileBookmarkActionsIconClick}
     />
     <div className="BookmarkRow-icons" onClick={bookmarkViewed}>
