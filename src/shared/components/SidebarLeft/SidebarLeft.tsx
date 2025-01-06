@@ -2,8 +2,7 @@ import React from 'react';
 
 import ArrowRight from 'Assets/svg/arrowRight.svg';
 import BookmarkFilled from 'Assets/svg/bookmarkFilled.svg';
-import FlagLeft from 'Assets/svg/flagLeft.svg';
-import FlagRight from 'Assets/svg/flagRight.svg';
+import Flag from 'Assets/svg/flag.svg';
 import FolderSolid from 'Assets/svg/folderSolid.svg';
 import Circle from 'Assets/svg/logoCircleEmpty.svg';
 import Tag from 'Assets/svg/tag.svg';
@@ -130,7 +129,13 @@ export const SidebarLeft: React.FC<Props> = ({
               'SidebarLeft-item' + (routeName === 'UserLists' && isUserPage ? ' SidebarLeft-item--active' : '')
             }
           >
-            <A className='SidebarLeft-itemLists' href={`users/${sessionId}/lists?sort=-createdAt`} styled={false} frontend scrollBeforeNavigate>
+            <A
+              className="SidebarLeft-itemLists"
+              href={`users/${sessionId}/lists?sort=-createdAt`}
+              styled={false}
+              frontend
+              scrollBeforeNavigate
+            >
               <FolderSolid className="SidebarLeft-itemIcon SidebarLeft-itemIconList" />
               <span className="SidebarLeft-itemDescription">
                 <span>{glossary.myLists}</span>
@@ -155,7 +160,7 @@ export const SidebarLeft: React.FC<Props> = ({
             frontend
             scrollBeforeNavigate
           >
-            <FlagRight className="SidebarLeft-itemIcon" />
+            <Flag className="SidebarLeft-itemIcon" />
             <span className="SidebarLeft-itemDescription">{glossary.followers}</span>
             <span
               className={'SidebarLeft-triangle' + (followersShown ? ' SidebarLeft-triangle--open' : '')}
@@ -173,7 +178,7 @@ export const SidebarLeft: React.FC<Props> = ({
             }
           >
             <A href={`users/${sessionId}/following`} styled={false} frontend scrollBeforeNavigate>
-              <FlagLeft className="SidebarLeft-itemIcon" />
+              <Flag className="SidebarLeft-itemIcon SidebarLeft-itemIconLeft" />
               <span className="SidebarLeft-itemDescription">{glossary.following}</span>
             </A>
             <span

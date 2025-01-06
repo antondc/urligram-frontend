@@ -2,7 +2,7 @@ import React from 'react';
 import Helmet from 'react-helmet';
 
 import Bookmark from 'Assets/svg/bookmarkFilled.svg';
-import FlagLeft from 'Assets/svg/flagLeft.svg';
+import Flag from 'Assets/svg/flag.svg';
 import Title from 'Assets/svg/sortTitle.svg';
 import CardItem from 'Components/CardItem';
 import NoResults from 'Components/NoResults';
@@ -61,7 +61,7 @@ export const Following: React.FC<Props> = ({
       // title props
       title={`@${user?.name}`}
       titleHref={`/users/${user?.id}`}
-      leftIcon={<FlagLeft />}
+      leftIcon={<Flag className='Following-icon' />}
       // select props
       selectPlaceholder={glossary.selectTags}
       currentQueryParamFilterTags={currentQueryParamFilterTags}
