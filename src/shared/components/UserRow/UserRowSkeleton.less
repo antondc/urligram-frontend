@@ -1,0 +1,110 @@
+@import '../../css/imports.less';
+
+@c: .UserRowSkeleton;
+
+@{c} {
+  .default();
+
+  display: grid;
+  position: relative;
+  justify-content: space-between;
+  grid-template:
+    'title tags icons' auto
+    'description tags icons' auto
+    / 5fr 7fr 1fr;
+  height: 60px;
+  width: 100%;
+  padding: 10px 0 13px;
+  column-gap: 27px;
+  transition:
+    background @td-normal @ease,
+    border @td-normal @ease;
+
+  @media @br-mobile {
+    grid-template: unset;
+    grid-template-areas:
+      'title title icons'
+      'description description .'
+      'tags tags tags';
+    grid-template-columns: 1fr 1fr 60px;
+    grid-template-rows: 25px 2fr 1fr;
+    height: 100px;
+    padding: 15px 10px 15px 13px;
+    column-gap: 0;
+    row-gap: 0;
+  }
+
+  &-title {
+    display: flex;
+    grid-area: title;
+    height: 20px;
+    width: 50%;
+  }
+
+  &-favicon {
+    flex-shrink: 0;
+    height: 13px;
+    width: 13px;
+    max-height: unset;
+    max-width: unset;
+    min-height: unset;
+    min-width: unset;
+    margin-right: 13px;
+    border-radius: 50%;
+  }
+
+  &-titleText {
+    height: 15px;
+    width: 100%;
+  }
+
+  &-description {
+    grid-area: description;
+    height: 10px;
+    width: 80%;
+    margin-left: 26px;
+
+    @media @br-mobile {
+      align-self: flex-start;
+      padding: 5px 0 0 24px;
+      line-height: @fh-nano;
+    }
+  }
+
+  &-tags {
+    display: flex;
+    align-items: center;
+    grid-area: tags;
+    min-width: 50px;
+    padding-bottom: 6px;
+    padding-left: 30px;
+    overflow: hidden;
+
+    @media @br-mobile {
+      align-self: flex-end;
+      padding: 0 0 0 24px;
+      overflow: hidden;
+    }
+  }
+
+  &-tag {
+    height: 10px;
+    width: 40px;
+    margin-right: 10px;
+  }
+
+  &-icons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-shrink: 0;
+    grid-area: icons;
+    padding-bottom: 6px;
+  }
+
+  &-image {
+    height: 38px;
+    width: 38px;
+    border-radius: 50%;
+  }
+}

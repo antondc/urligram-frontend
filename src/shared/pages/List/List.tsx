@@ -7,8 +7,8 @@ import Folder from 'Assets/svg/folder.svg';
 import PlusCircle from 'Assets/svg/plusCircle.svg';
 import Clock from 'Assets/svg/spinner6.svg';
 import A from 'Components/A';
-import BookmarkRowNew from 'Components/BookmarkRowNew';
-import { BookmarkRowNewSkeletonGroup } from 'Components/BookmarkRowNew/BookmarkRowNewSkeletonGroup';
+import BookmarkRow from 'Components/BookmarkRow';
+import { BookmarkRowSkeletonGroup } from 'Components/BookmarkRow/BookmarkRowSkeletonGroup';
 import CardItem from 'Components/CardItem';
 import ListAddUser from 'Components/ListAddUser';
 import NoResults from 'Components/NoResults';
@@ -236,11 +236,11 @@ const List: React.FC<Props> = ({
     </SubHeader>
     <div className="List-bookmarks">
       {bookmarksLoading ? (
-        <BookmarkRowNewSkeletonGroup length={bookmarksIds?.length ?? DEFAULT_PAGE_SIZE} />
+        <BookmarkRowSkeletonGroup length={bookmarksIds?.length ?? DEFAULT_PAGE_SIZE} />
       ) : (
         bookmarksIds?.map((id) => (
           <CardItem key={id}>
-            <BookmarkRowNew id={id} listId={list?.id} withInfoButton={isLoggedIn} />
+            <BookmarkRow id={id} listId={list?.id} withInfoButton={isLoggedIn} />
           </CardItem>
         ))
       )}

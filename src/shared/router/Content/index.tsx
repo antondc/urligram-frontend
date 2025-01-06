@@ -5,7 +5,7 @@ import { createStructuredSelector } from 'reselect';
 
 import CookiesBanner from 'Components/CookiesBanner';
 import Footer from 'Components/Footer';
-import HeaderNew from 'Components/HeaderNew';
+import Header from 'Components/Header';
 import SidebarLeft from 'Components/SidebarLeft';
 import { selectPathWithoutLanguageParam } from 'Modules/Routes/selectors/selectPathWithoutLanguageParam';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
@@ -40,7 +40,7 @@ const Content: React.FC<Props> = ({ location, pathWithoutLanguageParam }) => {
   return (
     <div className="Content">
       <div className="Content-contentBackground" />
-      <HeaderNew />
+      <Header />
       <CookiesBanner />
       <div className={'Content-content' + (sidebarLeftClosed ? ' Content-content--sidebarLeftClosed' : '')}>
         {/* INTENDED => <Fade classname="Content-sidebarLeft" mounted speed="fastest" delayIn={250} appear> */}

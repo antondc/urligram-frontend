@@ -1,0 +1,167 @@
+@import '../../css/imports.less';
+
+@c: .UserRow;
+
+@{c} {
+  .default();
+
+  display: grid;
+  position: relative;
+  justify-content: space-between;
+  grid-template:
+    'title tags icons' auto
+    'description tags icons' auto
+    / 7fr 6fr auto;
+  height: 60px;
+  width: 100%;
+  padding: 10px 0 13px;
+  column-gap: 27px;
+  transition:
+    background @td-normal @ease,
+    border @td-normal @ease;
+
+  @media @br-mobile {
+    grid-template: unset;
+    grid-template-areas:
+      'title title icons'
+      'description description .'
+      'tags tags .';
+    grid-template-columns: 1fr 1fr 60px;
+    grid-template-rows: 25px 2fr 1fr;
+    height: 100px;
+    padding: 10px 10px 15px 13px;
+    column-gap: 0;
+    row-gap: 0;
+  }
+
+  &-title {
+    display: flex;
+    position: relative;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: space-between;
+    grid-area: title;
+    font-size: @fs-normal;
+    font-weight: @fw-semibold;
+    line-height: initial;
+    white-space: nowrap;
+    color: @c-accent;
+    overflow: hidden;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    text-overflow: ellipsis;
+
+    .hideScrollbar;
+  }
+
+  &-titleIcon {
+    align-self: center;
+    height: 15px;
+    width: 15px;
+    margin-right: 6px;
+    fill: @c-accent;
+  }
+
+  &-titleLink {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &-description {
+    display: flex;
+    align-items: flex-end;
+    grid-area: description;
+    padding-bottom: 4px;
+    padding-left: 22px;
+    font-size: @fs-small;
+    font-weight: @fw-light;
+    line-height: 10px;
+    white-space: nowrap;
+    color: @c-accent;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    text-overflow: ellipsis;
+
+    .hideScrollbar;
+
+    @media @br-tablet {
+      align-self: center;
+      padding: 0 0 4px 22px;
+      line-height: @fh-nano;
+    }
+  }
+
+  &-tags {
+    display: flex;
+    align-items: center;
+    grid-area: tags;
+    min-width: 50px;
+    overflow-x: scroll;
+    overflow-y: visible;
+    direction: ltr;
+
+    .hideScrollbar;
+
+    @media @br-tablet {
+      align-self: flex-end;
+      padding: 0 0 0 22px;
+    }
+  }
+
+  &-tag {
+    margin-right: 10px;
+
+    @media @br-tablet {
+      margin-left: 0;
+      margin-right: 10px;
+    }
+  }
+
+  &-icons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-shrink: 0;
+    grid-area: icons;
+
+    @media @br-mobile {
+      padding: 5px 5px 0 0;
+    }
+  }
+
+  &-userImage {
+    position: relative;
+    height: 38px;
+    width: 38px;
+
+    @media @br-mobile {
+      height: 30px;
+      width: 30px;
+      top: 0;
+      right: 0;
+    }
+  }
+
+  &-image {
+    border-radius: 50%;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    object-fit: cover;
+    object-position: center;
+
+    .hoverTransition;
+  }
+
+  &-followButton {
+    position: absolute;
+    height: 14px;
+    width: 14px;
+    top: -2px;
+    right: -2px;
+    outline: 2px solid @c-background;
+    border-radius: 50%;
+  }
+}

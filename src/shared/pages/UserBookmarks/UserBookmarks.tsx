@@ -3,8 +3,8 @@ import Helmet from 'react-helmet';
 
 import Bookmark from 'Assets/svg/bookmark.svg';
 import Clock from 'Assets/svg/spinner6.svg';
-import BookmarkRowNew from 'Components/BookmarkRowNew';
-import { BookmarkRowNewSkeletonGroup } from 'Components/BookmarkRowNew/BookmarkRowNewSkeletonGroup';
+import BookmarkRow from 'Components/BookmarkRow';
+import { BookmarkRowSkeletonGroup } from 'Components/BookmarkRow/BookmarkRowSkeletonGroup';
 import CardItem from 'Components/CardItem';
 import NoResults from 'Components/NoResults';
 import Pagination from 'Components/Pagination';
@@ -88,13 +88,13 @@ export const UserBookmarks: React.FC<Props> = ({
     />
     <div className="UserBookmarks-bookmarks">
       {bookmarksLoading ? (
-        <BookmarkRowNewSkeletonGroup length={bookmarksIds?.length || DEFAULT_PAGE_SIZE} />
+        <BookmarkRowSkeletonGroup length={bookmarksIds?.length || DEFAULT_PAGE_SIZE} />
       ) : (
         bookmarksIds?.map((id) => (
           <FadeInOut valueToUpdate={bookmarksByKey[id]?.deleting} appear key={id}>
             {!bookmarksByKey[id]?.deleting && (
               <CardItem key={id}>
-                <BookmarkRowNew id={id} withInfoButton={isLoggedIn} />
+                <BookmarkRow id={id} withInfoButton={isLoggedIn} />
               </CardItem>
             )}
           </FadeInOut>

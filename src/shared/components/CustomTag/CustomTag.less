@@ -1,0 +1,21 @@
+@import '../../css/imports.less';
+
+@c: .CustomTag;
+
+@{c} {
+  font-family: @ff-sans;
+  font-size: @fs-micro;
+  font-weight: @fw-semibold;
+  text-transform: capitalize;
+  text-decoration: underline;
+  text-decoration-color: @c-transparent;
+  text-decoration-thickness: 1px;
+  white-space: nowrap;
+  color: @gradientColors[blue-1];
+  transition: text-decoration-color @td-fast @ease;
+
+  &:hover {
+    text-decoration-color: @gradientColors[blue-1];
+    cursor: pointer;
+  }
+}
