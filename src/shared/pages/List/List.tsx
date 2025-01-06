@@ -3,7 +3,7 @@ import Helmet from 'react-helmet';
 
 import Bookmark from 'Assets/svg/bookmarkFilled.svg';
 import Cross from 'Assets/svg/cross.svg';
-import ListIcon from 'Assets/svg/list.svg';
+import Folder from 'Assets/svg/folder.svg';
 import PlusCircle from 'Assets/svg/plusCircle.svg';
 import Clock from 'Assets/svg/spinner6.svg';
 import A from 'Components/A';
@@ -117,7 +117,7 @@ const List: React.FC<Props> = ({
     <SubHeader
       // title props
       title={list?.name}
-      leftIcon={<ListIcon />}
+      leftIcon={<Folder className="List-folderIcon" />}
       // select props
       selectPlaceholder={glossary.selectTags}
       currentQueryParamFilterTags={currentQueryParamFilterTags}

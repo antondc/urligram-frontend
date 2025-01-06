@@ -36,7 +36,7 @@ const SidebarLeftUsers: React.FC<Props> = ({ users, usersShown = true }) => {
               }
               onClick={() => onFollowerClick(item?.id)}
             >
-              {item?.name}
+              @{item?.name}
             </li>
           ))}
         </ul>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import Bookmark from 'Assets/svg/bookmark.svg';
+import Folder from 'Assets/svg/folder.svg';
 import { useScrollBeforeCallback } from 'Hooks/useScrollBeforeCallback';
 import { ListState, ListUserStatus } from 'Modules/Lists/lists.types';
 import { selectListWithNotificationsIds } from 'Modules/Lists/selectors/selectListWithNotificationsIds';
@@ -48,6 +48,7 @@ const SidebarLeftLists: React.FC<Props> = ({ lists, loading, listsShown = true }
                 }
                 onClick={() => onListClick(item?.id)}
               >
+                <Folder className="SidebarLeftLists-listIcon" />
                 <span className="SidebarLeftLists-listTitle">
                   {item?.name}
                   <NotificationDot
@@ -61,10 +62,6 @@ const SidebarLeftLists: React.FC<Props> = ({ lists, loading, listsShown = true }
                       (!!listHasNotifications ? ' SidebarLeftLists-dot--pending' : '')
                     }
                   />
-                </span>
-                <span className="SidebarLeftLists-listInfo">
-                  {item?.bookmarksIds?.length}
-                  <Bookmark />
                 </span>
               </li>
             );

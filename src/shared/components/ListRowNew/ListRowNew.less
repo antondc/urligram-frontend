@@ -16,7 +16,9 @@
   width: 100%;
   padding: 10px 0 13px;
   column-gap: 27px;
-  transition: background @td-normal @ease, border @td-normal @ease;
+  transition:
+    background @td-normal @ease,
+    border @td-normal @ease;
 
   @media @br-mobile {
     grid-template: unset;
@@ -55,8 +57,8 @@
 
   &-titleIcon {
     align-self: center;
-    height: 12px;
-    width: 12px;
+    height: 16px;
+    width: 16px;
     margin-right: 9px;
     fill: @c-accent;
   }

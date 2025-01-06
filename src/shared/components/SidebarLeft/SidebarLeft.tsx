@@ -4,7 +4,7 @@ import ArrowRight from 'Assets/svg/arrowRight.svg';
 import BookmarkFilled from 'Assets/svg/bookmarkFilled.svg';
 import FlagLeft from 'Assets/svg/flagLeft.svg';
 import FlagRight from 'Assets/svg/flagRight.svg';
-import List from 'Assets/svg/list.svg';
+import FolderSolid from 'Assets/svg/folderSolid.svg';
 import Circle from 'Assets/svg/logoCircleEmpty.svg';
 import Tag from 'Assets/svg/tag.svg';
 import TriangleRounded from 'Assets/svg/triangleRounded.svg';
@@ -86,7 +86,7 @@ export const SidebarLeft: React.FC<Props> = ({
           frontend
           scrollBeforeNavigate
         >
-          <List className="SidebarLeft-itemIcon SidebarLeft-itemIconList" />
+          <FolderSolid className="SidebarLeft-itemIcon SidebarLeft-itemIconList" />
           <span className="SidebarLeft-itemDescription">{glossary.lists}</span>
         </A>
         <A
@@ -130,8 +130,8 @@ export const SidebarLeft: React.FC<Props> = ({
               'SidebarLeft-item' + (routeName === 'UserLists' && isUserPage ? ' SidebarLeft-item--active' : '')
             }
           >
-            <A href={`users/${sessionId}/lists?sort=-createdAt`} styled={false} frontend scrollBeforeNavigate>
-              <List className="SidebarLeft-itemIcon SidebarLeft-itemIconList" />
+            <A className='SidebarLeft-itemLists' href={`users/${sessionId}/lists?sort=-createdAt`} styled={false} frontend scrollBeforeNavigate>
+              <FolderSolid className="SidebarLeft-itemIcon SidebarLeft-itemIconList" />
               <span className="SidebarLeft-itemDescription">
                 <span>{glossary.myLists}</span>
               </span>

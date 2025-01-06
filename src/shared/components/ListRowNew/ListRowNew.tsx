@@ -1,6 +1,6 @@
 import React from 'react';
 
-import List from 'Assets/svg/list.svg';
+import Folder from 'Assets/svg/folder.svg';
 import A from 'Components/A';
 import { TagNew } from 'Components/TagNew';
 import { ListState } from 'Modules/Lists/lists.types';
@@ -30,7 +30,7 @@ export const ListRowNew: React.FC<Props> = ({
 }) => (
   <div className="ListRowNew" data-test-id="ListRowNew" key={id}>
     <div className="ListRowNew-title">
-      <List className="ListRowNew-titleIcon" />
+      <Folder className="ListRowNew-titleIcon" />
       <A className="ListRowNew-titleLink" href={`/lists/${id}`} frontend styled={false}>
         {name}
       </A>
