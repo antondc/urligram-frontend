@@ -13,9 +13,6 @@ import {
   SWITCH_SIGN_UP_MODAL,
   SWITCH_WELCOME_MODAL,
   SWITCH_WELCOME_MODAL_ERROR,
-  UI_BOOKMARK_LISTS_MODALS_LOADING,
-  UI_BOOKMARK_LISTS_MODALS_MOUNT,
-  UI_BOOKMARK_LISTS_MODALS_UNMOUNT,
   UI_CLOSE_ALL_MODALS,
   UI_NOTIFICATION_PUSH,
   UI_NOTIFICATION_VIEWED,
@@ -95,12 +92,6 @@ export const initialState: UiState = {
     type: 'popup',
     mounted: false,
   },
-  bookmarkListsModal: {
-    type: 'modal',
-    mounted: false,
-    bookmarkId: undefined,
-    loading: false,
-  },
   bookmarkSendModals: [],
   notifications: [],
   bookmarkActionsIcons: {
@@ -132,9 +123,6 @@ export const Ui = (state = initialState, action: UiActions): UiState => {
     case SWITCH_RESET_PASSWORD_MODAL:
     case SWITCH_BOOKMARK_CREATE_MODAL:
     case SWITCH_BOOKMARK_UPDATE_MODAL:
-    case UI_BOOKMARK_LISTS_MODALS_MOUNT:
-    case UI_BOOKMARK_LISTS_MODALS_UNMOUNT:
-    case UI_BOOKMARK_LISTS_MODALS_LOADING:
     case SWITCH_SIGN_UP_DISABLED_MODAL:
     case SWITCH_LIST_MODAL:
     case UI_NOTIFICATION_VIEWED:

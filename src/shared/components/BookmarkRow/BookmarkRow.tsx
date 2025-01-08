@@ -7,9 +7,6 @@ import { CustomTag } from 'Components/CustomTag';
 import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
 import { TagState } from 'Modules/Tags/tags.types';
 import { Img, Space } from '@antoniodcorrea/components';
-// TODO: PR001-199
-// import { useDraggable } from '@dnd-kit/core';
-// import { CSS } from '@dnd-kit/utilities';
 import { BookmarkRowIcons } from './BookmarkRowIcons';
 
 import './BookmarkRow.less';
@@ -28,13 +25,15 @@ export interface BookmarkRowProps {
   tagsHref: string;
   uiScreenTypeIsMobile: boolean;
   onEdit: () => void;
-  onListsClick: () => void;
+  onListBookmarkRemove: () => void;
   onMobileBookmarkActionsIconClick: () => void;
   onMobileBookmarkActionsBackgroundClick: () => void;
   bookmarkViewed: () => void;
   bookmarkIdInAnyOfMyLists: boolean;
   publicLoading: boolean;
   onPublicClick: () => void;
+  isListPage: boolean;
+  removingFromList: boolean;
 }
 
 export const BookmarkRow: React.FC<BookmarkRowProps> = ({
@@ -51,36 +50,24 @@ export const BookmarkRow: React.FC<BookmarkRowProps> = ({
   viewPending,
   uiScreenTypeIsMobile,
   onEdit,
-  onListsClick,
+  onListBookmarkRemove,
   onMobileBookmarkActionsIconClick,
   onMobileBookmarkActionsBackgroundClick,
   bookmarkViewed,
   bookmarkIdInAnyOfMyLists,
   publicLoading,
   onPublicClick,
+  isListPage,
+  removingFromList,
 }) => (
-  // TODO: PR001-199
-  // const { isDragging, attributes, listeners, setNodeRef, transform } = useDraggable({
-  //   id: bookmark?.id,
-  // });
-  // const style = {
-  //   transform: CSS.Translate.toString(transform),
-  // };
-
   <div
     className={
       'BookmarkRow' +
       (recentlyCreated ? ' BookmarkRow--recentlyCreated' : '') +
       (viewPending ? ' BookmarkRow--viewPending' : '')
-      // (isDragging ? ' BookmarkRow--isDragging' : '')   // TODO: PR001-199
     }
     data-test-id="BookmarkRow"
     key={bookmark?.id}
-    // TODO: PR001-199
-    // ref={setNodeRef}
-    // style={style}
-    // {...listeners}
-    // {...attributes}
   >
     <div className="BookmarkRow-title">
       <Img className="BookmarkRow-titleIcon" src={bookmark?.favicon} alt={bookmark?.title} title={bookmark?.title} />
@@ -145,10 +132,12 @@ export const BookmarkRow: React.FC<BookmarkRowProps> = ({
         bookmarkIdInAnyOfMyLists={bookmarkIdInAnyOfMyLists}
         uiScreenTypeIsMobile={uiScreenTypeIsMobile}
         onEdit={onEdit}
-        onListsClick={onListsClick}
+        onListBookmarkRemove={onListBookmarkRemove}
         onMobileBookmarkActionsBackgroundClick={onMobileBookmarkActionsBackgroundClick}
         publicLoading={publicLoading}
         onPublicClick={onPublicClick}
+        isListPage={isListPage}
+        removingFromList={removingFromList}
       />
     </div>
     <div className="BookmarkRow-notification" onClick={bookmarkViewed}>

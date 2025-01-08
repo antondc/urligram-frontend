@@ -3,14 +3,13 @@ import React from 'react';
 import Cross from 'Assets/svg/cross.svg';
 import Public from 'Assets/svg/earth.svg';
 import EditCircle from 'Assets/svg/editCircle.svg';
+import Folder from 'Assets/svg/folder.svg';
 import Info from 'Assets/svg/info.svg';
-import List from 'Assets/svg/list.svg';
 import A from 'Components/A';
 import Bookmarker from 'Components/Bookmarker';
-import BookmarkListsPopOverOrSheet from 'Components/BookmarkListsPopOverOrSheet';
 import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
 import { TagState } from 'Modules/Tags/tags.types';
-import { Fade, FadeInOut, Spinner } from '@antoniodcorrea/components';
+import { Fade, FadeInOut, PlusCircleWithBackground, Spinner } from '@antoniodcorrea/components';
 
 import './BookmarkRowIcons.less';
 
@@ -26,10 +25,12 @@ interface BookmarkRowIcons extends BookmarkState {
   pathForTagLink: string;
   uiScreenTypeIsMobile: boolean;
   onEdit: () => void;
-  onListsClick: () => void;
+  onListBookmarkRemove: () => void;
   onMobileBookmarkActionsBackgroundClick: () => void;
   publicLoading: boolean;
   onPublicClick: () => void;
+  isListPage: boolean;
+  removingFromList: boolean;
 }
 
 export const BookmarkRowIcons: React.FC<Partial<BookmarkRowIcons>> = ({
@@ -40,10 +41,12 @@ export const BookmarkRowIcons: React.FC<Partial<BookmarkRowIcons>> = ({
   sessionUserBookmarkedLink,
   uiScreenTypeIsMobile,
   onEdit,
-  onListsClick,
+  onListBookmarkRemove,
   onMobileBookmarkActionsBackgroundClick,
   publicLoading,
   onPublicClick,
+  isListPage,
+  removingFromList,
 }) => (
   <div className="BookmarkRowIcons" data-test-id="BookmarkRowIcons">
     <div
@@ -98,10 +101,20 @@ export const BookmarkRowIcons: React.FC<Partial<BookmarkRowIcons>> = ({
         {!!sessionUserBookmarkedLink && (
           <EditCircle className="BookmarkRowIcons-icon BookmarkRowIcons-iconEdit" onClick={onEdit} />
         )}
-        {!!sessionUserBookmarkedLink && (
-          <div className="BookmarkRowIcons-icon BookmarkRowIcons-iconLists">
-            <List id={`BookmarkRowIcons-${bookmark?.id}`} onClick={onListsClick} />
-            <BookmarkListsPopOverOrSheet bookmarkId={bookmark?.id} />
+        {!!sessionUserBookmarkedLink && isListPage && (
+          <div className="BookmarkRowIcons-icon BookmarkRowIcons-iconFolder">
+            {!removingFromList && (
+              <>
+                <Folder className="BookmarkRowIcons-iconFolderNormal" />
+                <PlusCircleWithBackground
+                  className="BookmarkRowIcons-iconFolderRemove"
+                  onClick={onListBookmarkRemove}
+                />
+              </>
+            )}
+            {removingFromList && (
+              <Spinner className="BookmarkRowIcons-iconFolderNormal BookmarkRowIcons-iconFolderLoader" />
+            )}
           </div>
         )}
       </Fade>

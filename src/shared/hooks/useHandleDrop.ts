@@ -1,8 +1,12 @@
 import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
+import { listBookmarkCreate } from 'Modules/Lists/actions/listBookmarkCreate';
 import { monitorForElements } from '@atlaskit/pragmatic-drag-and-drop/element/adapter';
 
 export const useHandleDrop = () => {
+  const dispatch = useDispatch();
+
   useEffect(() => {
     const handleDrop = ({ source, location }) => {
       const destination = location.current.dropTargets.length;
@@ -10,26 +14,15 @@ export const useHandleDrop = () => {
         return;
       }
 
-      const draggedBookmarkDraggableId = source.data.id;
+      const bookmarkId = source.data.id;
       const [destinationColumnRecord] = location.current.dropTargets;
-      const destinationColumnId = destinationColumnRecord.data.id;
+      const listId = destinationColumnRecord.data.id;
 
-      if (!destinationColumnId) {
+      if (!listId || !bookmarkId) {
         return;
       }
 
-      alert(
-        JSON.stringify(
-          {
-            bookmarkId: draggedBookmarkDraggableId,
-            listId: destinationColumnId,
-          },
-          null,
-          2
-        )
-      );
-
-      return;
+      dispatch(listBookmarkCreate({ listId: listId, bookmarkId: bookmarkId }));
     };
 
     return monitorForElements({ onDrop: handleDrop });

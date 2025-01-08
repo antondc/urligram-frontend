@@ -24,7 +24,6 @@ import Users from 'Pages/Users';
 import UserTags from 'Pages/UserTags';
 import { Routes } from 'Router/routes';
 import { Location } from 'Services/History';
-import { DndContext } from '@dnd-kit/core';
 
 import './Content.less';
 
@@ -44,9 +43,6 @@ const Content: React.FC<Props> = ({ location, pathWithoutLanguageParam }) => {
       <Header />
       <CookiesBanner />
       <div className={'Content-content' + (sidebarLeftClosed ? ' Content-content--sidebarLeftClosed' : '')}>
-        {/* TODO: PR001-199
-        <DndContext> */}
-
         {/* INTENDED => <Fade classname="Content-sidebarLeft" mounted speed="fastest" delayIn={250} appear> */}
         <div className="Content-sidebar">
           <SidebarLeft />
@@ -69,8 +65,6 @@ const Content: React.FC<Props> = ({ location, pathWithoutLanguageParam }) => {
             <Route exact={Routes.Link.exact} path={Routes.Link.path} component={Link} />
           </Switch>
         </div>
-        {/* </DndContext> */}
-
         {/* INTENDED => </FadeInOut> */}
       </div>
       <Footer />

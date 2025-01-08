@@ -112,5 +112,5 @@ const Bookmarker: React.FC<Props> = ({ className, listId, bookmarkId, onBookmark
     />
   );
 };
-
+ 
 export default Bookmarker;

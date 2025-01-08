@@ -12,8 +12,6 @@ import { listNotificationViewed } from 'Modules/Notifications/actions/listNotifi
 import { selectNotificationByBookmarkIdAndListId } from 'Modules/Notifications/selectors/selectNotificationByBookmarkIdAndListId';
 import { RootState } from 'Modules/rootType';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
-import { bookmarkListsModalMount } from 'Modules/Ui/actions/bookmarkListsModalMount';
-import { bookmarkListsModalUnmount } from 'Modules/Ui/actions/bookmarkListsModalUnmount';
 import { switchBookmarkActionButtonsMounted } from 'Modules/Ui/actions/switchBookmarkActionButtonsMounted';
 import { switchBookmarkActionButtonsUnmounted } from 'Modules/Ui/actions/switchBookmarkActionButtonsUnmounted';
 import { switchBookmarkUpdateModal } from 'Modules/Ui/actions/switchBookmarkUpdateModal';
@@ -23,6 +21,11 @@ import { selectUiScreenTypeIsDesktop } from 'Modules/Ui/selectors/selectUiScreen
 import { selectUiScreenTypeIsMobile } from 'Modules/Ui/selectors/selectUiScreenTypeIsMobile';
 import { TIME_RECENTLY_CREATED_BOOKMARK } from 'Root/src/shared/constants';
 import { LocaleFormattedDate, unixTimeElapsed, URLWrapper } from '@antoniodcorrea/utils';
+import { listBookmarkDelete } from '../../redux/modules/Lists/actions/listBookmarkDelete';
+import { selectCurrentRoute } from '../../redux/modules/Routes/selectors/selectCurrentRoute';
+import { uiNotificationPush } from '../../redux/modules/Ui/actions/uiNotificationPush';
+import { NotificationStatus, NotificationStyle, NotificationType } from '../../redux/modules/Ui/ui.types';
+import { Routes } from '../../router/routes';
 import { BookmarkRow as BookmarkRowUi } from './BookmarkRow';
 
 interface Props {
@@ -35,6 +38,7 @@ interface Props {
 const BookmarkRow: React.FC<Props> = ({ id, listId, tagsHref = '', withInfoButton = true }) => {
   const dispatch = useDispatch();
   const [publicLoading, setPublicLoading] = useState<boolean>(false);
+  const [removingFromList, setRemovingFromList] = useState<boolean>(false);
   const slug = useSelector(selectCurrentLanguageSlug);
   const session = useSelector(selectSession);
   const bookmark = useSelector((state: RootState) => selectBookmarksById(state, { bookmarkId: id }));
@@ -44,6 +48,8 @@ const BookmarkRow: React.FC<Props> = ({ id, listId, tagsHref = '', withInfoButto
   const createdAtFormatted = date.getLocaleFormattedDate();
   const sessionUserBookmarkedLink = bookmark?.userId === session?.id;
   const domain = new URLWrapper(bookmark?.url).getDomain();
+  const currentRoute = useSelector(selectCurrentRoute);
+  const isListPage = currentRoute?.name === Routes.List.name;
 
   // If the bookmark is part of a list, display all tags from bookmarks sharing its linkId, when bookmark.userId is within list
   const tagsIfInList = useSelector((state: RootState) =>
@@ -80,9 +86,25 @@ const BookmarkRow: React.FC<Props> = ({ id, listId, tagsHref = '', withInfoButto
     await dispatch(switchBookmarkUpdateModal({ mounted: true, bookmarkId: id }));
   };
 
-  const onListsClick = () => {
-    dispatch(bookmarkListsModalUnmount());
-    dispatch(bookmarkListsModalMount({ bookmarkId: bookmark?.id }));
+  const onListBookmarkRemove = async () => {
+    try {
+      setRemovingFromList(true);
+      await dispatch(listBookmarkDelete({ bookmarkId: id, listId }));
+    } catch (error) {
+      console.log('test::error.message: ', error.message);
+
+      await dispatch(
+        uiNotificationPush({
+          bookmarkId: id,
+          type: NotificationType.BookmarkNorRemovableFromList,
+          style: NotificationStyle.Error,
+          status: NotificationStatus.Pending,
+        })
+      );
+    } finally {
+      await bookmarkLoadById({ bookmarkId: bookmark?.id });
+      setRemovingFromList(false);
+    }
   };
 
   const onPublicClick = async () => {
@@ -143,13 +165,15 @@ const BookmarkRow: React.FC<Props> = ({ id, listId, tagsHref = '', withInfoButto
         tagsHref={tagsHref}
         uiScreenTypeIsMobile={uiScreenTypeIsMobile}
         onEdit={onEdit}
-        onListsClick={onListsClick}
+        onListBookmarkRemove={onListBookmarkRemove}
         onMobileBookmarkActionsIconClick={onMobileBookmarkActionsIconClick}
         onMobileBookmarkActionsBackgroundClick={onMobileBookmarkActionsBackgroundClick}
         bookmarkViewed={bookmarkViewed}
         bookmarkIdInAnyOfMyLists={bookmarkIdInAnyOfMyLists}
         publicLoading={publicLoading}
         onPublicClick={onPublicClick}
+        isListPage={isListPage}
+        removingFromList={removingFromList}
       />
     </DraggableOrFragment>
   );

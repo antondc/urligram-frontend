@@ -43,6 +43,7 @@ export enum NotificationType {
   BookmarkDeleted = 'bookmark-deleted',
   GeneralError = 'general-error',
   LinkVoted = 'link-voted',
+  BookmarkNorRemovableFromList = 'bookmark-not-removable-from-list',
 }
 
 export enum NotificationStyle {
@@ -67,11 +68,6 @@ export type NotificationState = {
   style: NotificationStyle;
   status: NotificationStatus;
 };
-
-export type BookmarkListsModal = {
-  bookmarkId?: number;
-  loading?: boolean;
-} & UiBaseModal;
 
 type BookmarkSendModal = {
   bookmarkId?: number;
@@ -110,7 +106,6 @@ export type UiState = {
   } & UiBaseModal;
   listAddUserModal: UiBaseModal;
   signUpDisabledModal: UiBaseModal;
-  bookmarkListsModal: BookmarkListsModal;
   bookmarkSendModals: BookmarkSendModals;
   notifications?: NotificationState[];
   sidebarLeftState: {
@@ -208,21 +203,6 @@ interface SwitchListModal extends UnknownAction {
   payload: Partial<UiState>;
 }
 
-interface BookmarkListModalsMount extends UnknownAction {
-  type: typeof UI_BOOKMARK_LISTS_MODALS_MOUNT;
-  payload: Partial<UiState>;
-}
-
-interface BookmarkListModalsUnmount extends UnknownAction {
-  type: typeof UI_BOOKMARK_LISTS_MODALS_UNMOUNT;
-  payload: Partial<UiState>;
-}
-
-interface BookmarkListModalsLoading extends UnknownAction {
-  type: typeof UI_BOOKMARK_LISTS_MODALS_LOADING;
-  payload: Partial<UiState>;
-}
-
 interface UiNotificationViewedAction extends UnknownAction {
   type: typeof UI_NOTIFICATION_VIEWED;
   payload: UiState;
@@ -288,9 +268,6 @@ export type UiActions =
   | SwitchBookmarkUpdateModal
   | SwitchListModal
   | SwitchSignUpDisabledModal
-  | BookmarkListModalsMount
-  | BookmarkListModalsUnmount
-  | BookmarkListModalsLoading
   | UiNotificationViewedAction
   | UiNotificationPushAction
   | UiCloseAllModals

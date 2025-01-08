@@ -125,18 +125,62 @@
     }
   }
 
-  &-iconLists {
+  &-iconFolder {
     display: flex;
     justify-self: center;
-    // padding-top: 2px;
+    height: 13px;
+    width: 13px;
 
     svg {
+      path[data-id='inner'] {
+        fill: @c-background;
+      }
+    }
+
+    @{c}-iconFolderNormal {
+      position: absolute;
+      opacity: 1;
+      transition: opacity @td-fast @ease;
+    }
+
+    @{c}-iconFolderRemove {
+      position: absolute;
       height: 13px;
       width: 13px;
+      min-height: 13px;
+      min-width: 13px;
+      opacity: 0;
+      transform: rotate(-45deg);
+      fill: @c-error;
+      outline: 2px solid @c-transparent;
+      border-radius: 50%;
+      transition: opacity @td-fast @ease;
+
+      path[data-id='background'] {
+        fill: @c-transparent;
+      }
+    }
+
+    @{c}-iconFolderLoader {
+      height: 13px;
+      width: 13px;
+
+      &:after {
+        border-color: @gradientColors[blue-1];
+      }
+
+      span {
+        background: @gradientColors[blue-1];
+      }
     }
 
     &:hover {
-      cursor: pointer;
+      @{c}-iconFolderNormal {
+        opacity: 0;
+      }
+      @{c}-iconFolderRemove {
+        opacity: 1;
+      }
     }
 
     @media @br-tablet {

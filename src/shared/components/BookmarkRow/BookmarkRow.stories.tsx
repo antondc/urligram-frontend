@@ -82,13 +82,15 @@ const props: BookmarkRowProps = {
   tagsHref: '',
   uiScreenTypeIsMobile: true,
   onEdit: noop,
-  onListsClick: noop,
+  onListBookmarkRemove: noop,
   onMobileBookmarkActionsIconClick: noop,
   onMobileBookmarkActionsBackgroundClick: noop,
   bookmarkViewed: noop,
   bookmarkIdInAnyOfMyLists: false,
   publicLoading: false,
   onPublicClick: noop,
+  isListPage: true,
+  removingFromList: true,
 };
 
 const knobs = {

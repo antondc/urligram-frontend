@@ -8,6 +8,7 @@ import { Notification } from '@antoniodcorrea/components';
 import BookmarkCreated from './BookmarkCreated';
 import BookmarkDeleted from './BookmarkDeleted';
 import BookmarkGrabbed from './BookmarkGrabbed';
+import BookmarkNotRemovableFromList from './BookmarkNotRemovableFromList';
 import BookmarkPrivateLimitReached from './BookmarkPrivateLimitReached';
 import LinkVoted from './LinkVoted';
 
@@ -37,6 +38,7 @@ const BaseNotification: React.FC<Props> = ({ notification }) => {
         {notification?.type === NotificationType.BookmarkCreation && <BookmarkCreated notification={notification} />}
         {notification?.type === NotificationType.BookmarkDeleted && <BookmarkDeleted notification={notification} />}
         {notification?.type === NotificationType.LinkVoted && <LinkVoted notification={notification} />}
+        {notification?.type === NotificationType.BookmarkNorRemovableFromList && <BookmarkNotRemovableFromList />}
         {notification?.type === NotificationType.BookmarkPrivateLimitReached && (
           <BookmarkPrivateLimitReached notification={notification} />
         )}
