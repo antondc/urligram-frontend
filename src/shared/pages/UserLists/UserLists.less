@@ -3,6 +3,13 @@
 @c: .UserLists;
 
 @{c} {
+  &-folderIcon:not(.noClass) {
+    path[data-id='inner'] {
+      transition: fill @td-fast @ease;
+      fill: @c-background;
+    }
+  }
+
   &-addList {
     display: flex;
     align-items: center;

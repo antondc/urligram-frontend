@@ -3,7 +3,7 @@ import Helmet from 'react-helmet';
 
 import Bookmark from 'Assets/svg/bookmarkRounded.svg';
 import Cross from 'Assets/svg/cross.svg';
-import ListIcon from 'Assets/svg/list.svg';
+import Folder from 'Assets/svg/folder.svg';
 import Clock from 'Assets/svg/spinner6.svg';
 import User from 'Assets/svg/userFill.svg';
 import { BookmarkRowSkeletonGroup } from 'Components/BookmarkRow/BookmarkRowSkeletonGroup';
@@ -65,7 +65,7 @@ export const UserLists: React.FC<Props> = ({
       // title props
       title={`@${user?.name}`}
       titleHref={`/users/${user?.id}`}
-      leftIcon={<ListIcon />}
+      leftIcon={<Folder className="UserLists-folderIcon" />}
       // select props
       selectPlaceholder={glossary.selectTags}
       currentQueryParamFilterTags={currentQueryParamFilterTags}

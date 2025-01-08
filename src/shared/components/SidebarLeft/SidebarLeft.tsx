@@ -3,7 +3,7 @@ import React from 'react';
 import ArrowRight from 'Assets/svg/arrowRight.svg';
 import BookmarkFilled from 'Assets/svg/bookmarkFilled.svg';
 import Flag from 'Assets/svg/flag.svg';
-import FolderSolid from 'Assets/svg/folderSolid.svg';
+import Folder from 'Assets/svg/folder.svg';
 import Circle from 'Assets/svg/logoCircleEmpty.svg';
 import Tag from 'Assets/svg/tag.svg';
 import TriangleRounded from 'Assets/svg/triangleRounded.svg';
@@ -85,7 +85,7 @@ export const SidebarLeft: React.FC<Props> = ({
           frontend
           scrollBeforeNavigate
         >
-          <FolderSolid className="SidebarLeft-itemIcon SidebarLeft-itemIconList" />
+          <Folder className="SidebarLeft-itemIcon SidebarLeft-itemIconList" />
           <span className="SidebarLeft-itemDescription">{glossary.lists}</span>
         </A>
         <A
@@ -136,7 +136,7 @@ export const SidebarLeft: React.FC<Props> = ({
               frontend
               scrollBeforeNavigate
             >
-              <FolderSolid className="SidebarLeft-itemIcon SidebarLeft-itemIconList" />
+              <Folder className="SidebarLeft-itemIcon SidebarLeft-itemIconList" />
               <span className="SidebarLeft-itemDescription">
                 <span>{glossary.myLists}</span>
               </span>

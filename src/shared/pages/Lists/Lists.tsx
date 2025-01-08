@@ -2,7 +2,7 @@ import React from 'react';
 import Helmet from 'react-helmet';
 
 import Cross from 'Assets/svg/cross.svg';
-import FolderSolid from 'Assets/svg/folderSolid.svg';
+import Folder from 'Assets/svg/folder.svg';
 import Clock from 'Assets/svg/spinner6.svg';
 import Updated from 'Assets/svg/updated.svg';
 import User from 'Assets/svg/userFill.svg';
@@ -67,7 +67,7 @@ export const Lists: React.FC<Props> = ({
     <SubHeader
       // title props
       title={glossary.allLists}
-      leftIcon={<FolderSolid className="Lists-folderIcon" />}
+      leftIcon={<Folder className="Lists-folderIcon" />}
       // select props
       selectPlaceholder={glossary.selectTags}
       currentQueryParamFilterTags={currentQueryParamFilterTags}

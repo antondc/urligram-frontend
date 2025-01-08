@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import Draggable from 'Components/DragDrop/Draggable';
 import { bookmarkLoadById } from 'Modules/Bookmarks/actions/bookmarkLoadById';
 import { bookmarkUpdate } from 'Modules/Bookmarks/actions/bookmarkUpdate';
 import { selectBookmarksById } from 'Modules/Bookmarks/selectors/selectBookmarkById';
@@ -124,29 +125,33 @@ const BookmarkRow: React.FC<Props> = ({ id, listId, tagsHref = '', withInfoButto
   //   if (!!sessionUserBookmarkedLink) dispatch(bookmarkLoadById({ bookmarkId: sessionUserBookmarkId }));
   // }, [sessionUserBookmarkId]);
 
+  const DraggableOrFragment = sessionUserBookmarkedLink ? Draggable : 'div';
+
   return (
-    <BookmarkRowUi
-      listId={listId}
-      withInfoButton={withInfoButton}
-      bookmark={bookmark}
-      bookmarkActionIconsMounted={bookmarkActionIconsMounted}
-      tags={tags}
-      domain={domain}
-      createdAtFormatted={createdAtFormatted}
-      recentlyCreated={recentlyCreated}
-      viewPending={viewPending}
-      sessionUserBookmarkedLink={sessionUserBookmarkedLink}
-      tagsHref={tagsHref}
-      uiScreenTypeIsMobile={uiScreenTypeIsMobile}
-      onEdit={onEdit}
-      onListsClick={onListsClick}
-      onMobileBookmarkActionsIconClick={onMobileBookmarkActionsIconClick}
-      onMobileBookmarkActionsBackgroundClick={onMobileBookmarkActionsBackgroundClick}
-      bookmarkViewed={bookmarkViewed}
-      bookmarkIdInAnyOfMyLists={bookmarkIdInAnyOfMyLists}
-      publicLoading={publicLoading}
-      onPublicClick={onPublicClick}
-    />
+    <DraggableOrFragment key={id} id={id.toString()}>
+      <BookmarkRowUi
+        listId={listId}
+        withInfoButton={withInfoButton}
+        bookmark={bookmark}
+        bookmarkActionIconsMounted={bookmarkActionIconsMounted}
+        tags={tags}
+        domain={domain}
+        createdAtFormatted={createdAtFormatted}
+        recentlyCreated={recentlyCreated}
+        viewPending={viewPending}
+        sessionUserBookmarkedLink={sessionUserBookmarkedLink}
+        tagsHref={tagsHref}
+        uiScreenTypeIsMobile={uiScreenTypeIsMobile}
+        onEdit={onEdit}
+        onListsClick={onListsClick}
+        onMobileBookmarkActionsIconClick={onMobileBookmarkActionsIconClick}
+        onMobileBookmarkActionsBackgroundClick={onMobileBookmarkActionsBackgroundClick}
+        bookmarkViewed={bookmarkViewed}
+        bookmarkIdInAnyOfMyLists={bookmarkIdInAnyOfMyLists}
+        publicLoading={publicLoading}
+        onPublicClick={onPublicClick}
+      />
+    </DraggableOrFragment>
   );
 };
 

@@ -127,6 +127,7 @@
     "@antoniodcorrea/utils": "^1.0.278",
     "@antoniodcorrea/utils-backend": "^1.0.277",
     "@antoniodcorrea/utils-frontend": "^0.0.6",
+    "@atlaskit/pragmatic-drag-and-drop": "^1.4.0",
     "@redux-devtools/extension": "^3.3.0",
     "axios": "^1.5.0",
     "body-parser": "^1.18.3",

@@ -1,0 +1,65 @@
+@import '../../css/imports.less';
+
+@c: .SidebarLeftList;
+
+@{c} {
+  display: flex;
+  position: relative;
+  justify-content: flex-start;
+  height: 20px;
+  font-size: @fs-normal;
+  font-weight: @fw-medium;
+  color: @gradientColors[black-2];
+  transition: color @td-fast @ease;
+  align-items: center;
+  margin: 7px 0;
+
+  svg {
+    fill: @gradientColors[black-2];
+    transition: fill @td-fast @ease;
+  }
+
+  &:hover,
+  &--active {
+    color: @gradientColors[blue-1];
+    cursor: pointer;
+
+    svg {
+      fill: @gradientColors[blue-1];
+    }
+  }
+
+  &-listIcon {
+    width: @svgSize-normal;
+    margin-right: 6px;
+
+    &--isDraggedOver {
+      path[data-id='inner'] {
+        transition: fill @td-fast @ease;
+        fill: @c-background;
+      }
+    }
+  }
+
+  &-listTitle {
+    font-size: @fs-normal;
+    white-space: nowrap;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    text-overflow: ellipsis;
+
+    .hideScrollbar;
+  }
+
+  &-dot {
+    position: absolute;
+    top: 0;
+    right: -5px;
+    opacity: 0;
+    transition: opacity @td-slow @ease;
+
+    &--pending {
+      opacity: 1;
+    }
+  }
+}

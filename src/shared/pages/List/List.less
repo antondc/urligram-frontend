@@ -41,8 +41,10 @@
   }
 
   &-folderIcon:not(.noClass) {
-    // width: @svgSize-normal;
-    // height: @svgSize-normal;
+    path[data-id='inner'] {
+      transition: fill @td-fast @ease;
+      fill: @c-background;
+    }
   }
 
   &-notificationIconCross {

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { useHandleDrop } from 'Hooks/useHandleDrop';
 import { selectCurrentGlossary } from 'Modules/Languages/selectors/selectCurrentGlossary';
 import { listsLoadByUserId } from 'Modules/Lists/actions/listsLoadByUserId';
 import { selectListsByUserIdAll } from 'Modules/Lists/selectors/selectListsByUserIdAll';
@@ -43,6 +44,8 @@ const SidebarLeft: React.FC = () => {
   const timeMsInFourHours = Date.now() + 4 * 60 * 60 * 1000;
   const sidebarLeftClosed = useSelector(selectUiSidebarleftState);
   const isUserPage = route?.params?.userId === sessionId;
+
+  useHandleDrop();
 
   const listsClose = () => {
     setListsShown(false);
