@@ -90,9 +90,15 @@ const BookmarkRow: React.FC<Props> = ({ id, listId, tagsHref = '', withInfoButto
     try {
       setRemovingFromList(true);
       await dispatch(listBookmarkDelete({ bookmarkId: id, listId }));
+      await dispatch(
+        uiNotificationPush({
+          bookmarkId: id,
+          type: NotificationType.BookmarkRemovedFromList,
+          style: NotificationStyle.Alert,
+          status: NotificationStatus.Pending,
+        })
+      );
     } catch (error) {
-      console.log('test::error.message: ', error.message);
-
       await dispatch(
         uiNotificationPush({
           bookmarkId: id,

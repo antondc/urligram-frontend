@@ -44,6 +44,9 @@ export enum NotificationType {
   GeneralError = 'general-error',
   LinkVoted = 'link-voted',
   BookmarkNorRemovableFromList = 'bookmark-not-removable-from-list',
+  BookmarkAddedToList = 'bookmark-added-to-list',
+  BookmarkNotAddedToList = 'bookmark-not-added-to-list',
+  BookmarkRemovedFromList = 'bookmark-removed-from-list',
 }
 
 export enum NotificationStyle {
@@ -64,6 +67,8 @@ export type NotificationState = {
   listId?: number;
   bookmarkId?: number;
   linkId?: number;
+  bookmarkTitle?: string;
+  listTitle?: string;
   type: NotificationType;
   style: NotificationStyle;
   status: NotificationStatus;

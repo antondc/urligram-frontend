@@ -6,14 +6,12 @@
   margin-bottom: 5px;
 
   &-follower {
-    display: flex;
     position: relative;
-    justify-content: space-between;
     height: 20px;
+    white-space: nowrap;
     font-size: @fs-normal;
     font-weight: @fw-medium;
-    white-space: nowrap;
-    color: @gradientColors[black-4];
+    color: @gradientColors[black-2];
     overflow-x: scroll;
     overflow-y: hidden;
     transition: color @td-fast @ease;
@@ -26,6 +24,17 @@
     &--active {
       color: @gradientColors[blue-1];
       cursor: pointer;
+
+      svg {
+        fill: @gradientColors[blue-1];
+      }
     }
+  }
+
+  &-icon {
+    height: 15px;
+    width: 15px;
+    margin-right: 3px;
+    fill: @c-accent;
   }
 }

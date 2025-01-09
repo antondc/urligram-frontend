@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
+import User from 'Assets/svg/userFill.svg';
 import { selectCurrentRouteParams } from 'Modules/Routes/selectors/selectCurrentRouteParams';
 import { UserState } from 'Modules/Users/users.types';
 import history from 'Services/History';
@@ -36,7 +37,7 @@ const SidebarLeftUsers: React.FC<Props> = ({ users, usersShown = true }) => {
               }
               onClick={() => onFollowerClick(item?.id)}
             >
-              @{item?.name}
+              <User className="SidebarLeftUsers-icon" /> {item?.name}
             </li>
           ))}
         </ul>

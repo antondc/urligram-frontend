@@ -20,16 +20,8 @@ const Droppable: React.FC<Props> = ({ children, id }) => {
     return dropTargetForElements({
       element: element,
       onDragStart: () => setIsDraggedOver(true),
-      onDragEnter: () => {
-        console.log('onDragEnterSidebar');
-
-        setIsDraggedOver(true);
-      },
-      onDragLeave: () => {
-        console.log('onDragLeaveSidebar');
-
-        setIsDraggedOver(false);
-      },
+      onDragEnter: () => setIsDraggedOver(true),
+      onDragLeave: () => setIsDraggedOver(false),
       onDrop: () => setIsDraggedOver(false),
       getData: () => ({ id }),
     });

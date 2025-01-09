@@ -53,6 +53,6 @@ export const listBookmarkCreate =
         },
       });
 
-      return;
+      throw error;
     }
   };

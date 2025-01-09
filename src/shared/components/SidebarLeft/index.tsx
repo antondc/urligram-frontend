@@ -38,7 +38,7 @@ const SidebarLeft: React.FC = () => {
   const listsLoading = useSelector(selectListsLoading);
   const followers = useSelector(selectUserFollowers);
   const following = useSelector(selectUserFollowing);
-  const [listsShown, setListsShown] = useState<boolean>(true);
+  const [listsShown, setListsShown] = useState<boolean>(!!lists?.length);
   const [followersShown, setFollowersShown] = useState<boolean>(false);
   const [followingShown, setFollowingShown] = useState<boolean>(false);
   const timeMsInFourHours = Date.now() + 4 * 60 * 60 * 1000;
