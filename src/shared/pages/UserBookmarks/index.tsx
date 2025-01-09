@@ -15,7 +15,6 @@ import { selectCurrentRouteParamUserId } from 'Modules/Routes/selectors/selectCu
 import { selectCurrentRouteQueryParamFilter } from 'Modules/Routes/selectors/selectCurrentRouteQueryParamFilter';
 import { selectCurrentRouteQueryParamPage } from 'Modules/Routes/selectors/selectCurrentRouteQueryParamPage';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
-import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import { tagsSearchLoad } from 'Modules/Tags/actions/tagsSearchLoad';
 import { selectTagsAll } from 'Modules/Tags/selectors/selectAllTags';
 import { selectTagsSearch } from 'Modules/Tags/selectors/selectTagsSearch';
@@ -31,7 +30,6 @@ import { UserBookmarks as UserBookmarksUi } from './UserBookmarks';
 const UserBookmarks: React.FC = () => {
   const dispatch = useDispatch();
 
-  const isLoggedIn = useSelector(selectSessionLoggedIn);
   const glossary = useSelector(selectCurrentGlossary);
   const { scrollBeforeCallback } = useScrollBeforeCallback();
   const session = useSelector(selectSession);
@@ -85,7 +83,6 @@ const UserBookmarks: React.FC = () => {
 
   return (
     <UserBookmarksUi
-      isLoggedIn={isLoggedIn}
       glossary={glossary}
       user={user}
       bookmarksByKey={bookmarksByKey}

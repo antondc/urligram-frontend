@@ -1,7 +1,6 @@
 import omit from 'lodash/omit';
 
 import { initialBookmarksLoader } from 'Modules/Bookmarks/bookmarks.loader';
-import { initialLinkLoader } from 'Modules/Links/link.loader';
 import { initialListLoader } from 'Modules/Lists/list.loader';
 import { initialListsLoader } from 'Modules/Lists/lists.loader';
 import { tagsAllInitialLoader } from 'Modules/Tags/tags.loader';
@@ -27,7 +26,6 @@ interface RoutesInterface {
   Docs: Route;
   Tags: Route;
   Home: Route;
-  Link: Route;
   UserBookmarks: Route;
   UserLists: Route;
   Following: Route;
@@ -67,16 +65,6 @@ export const Routes: RoutesInterface = {
     auth: false,
     initialDataLoadersVisitor: [tagsAllInitialLoader],
     initialDataLoadersSession: [tagsAllInitialLoader],
-    layout: 'withLeftSidebar',
-  },
-
-  Link: {
-    name: 'Link',
-    path: '/:lang([a-z]{2})?/link/:linkId',
-    exact: true,
-    auth: true,
-    initialDataLoadersVisitor: [initialLinkLoader],
-    initialDataLoadersSession: [initialLinkLoader],
     layout: 'withLeftSidebar',
   },
 

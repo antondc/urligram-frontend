@@ -14,7 +14,6 @@ import './BookmarkRow.less';
 export interface BookmarkRowProps {
   bookmark: Partial<BookmarkState>;
   listId?: number;
-  withInfoButton: boolean;
   tags: TagState[];
   domain: string;
   bookmarkActionIconsMounted: boolean;
@@ -39,7 +38,6 @@ export interface BookmarkRowProps {
 export const BookmarkRow: React.FC<BookmarkRowProps> = ({
   bookmark,
   listId,
-  withInfoButton,
   domain,
   tags,
   bookmarkActionIconsMounted,
@@ -126,7 +124,6 @@ export const BookmarkRow: React.FC<BookmarkRowProps> = ({
       <BookmarkRowIcons
         bookmark={bookmark}
         listId={listId}
-        withInfoButton={withInfoButton}
         bookmarkActionIconsMounted={bookmarkActionIconsMounted}
         sessionUserBookmarkedLink={sessionUserBookmarkedLink}
         bookmarkIdInAnyOfMyLists={bookmarkIdInAnyOfMyLists}

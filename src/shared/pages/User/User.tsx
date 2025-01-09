@@ -17,7 +17,6 @@ import { Button, Space, Tag } from '@antoniodcorrea/components';
 import './User.less';
 
 interface Props {
-  isLoggedIn: boolean;
   glossary: GlossaryState;
   userIdIsSessionId: boolean;
   userId: string;
@@ -32,7 +31,6 @@ interface Props {
 }
 
 export const User: React.FC<Props> = ({
-  isLoggedIn,
   glossary,
   userIdIsSessionId,
   userId,
@@ -165,7 +163,7 @@ export const User: React.FC<Props> = ({
       ) : (
         bookmarksIds?.map((id) => (
           <CardItem key={id}>
-            <BookmarkRow id={id} tagsHref={`/users/${userId}/bookmarks`} withInfoButton={isLoggedIn} />
+            <BookmarkRow id={id} tagsHref={`/users/${userId}/bookmarks`} />
           </CardItem>
         ))
       )}

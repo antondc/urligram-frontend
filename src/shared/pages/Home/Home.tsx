@@ -17,7 +17,6 @@ import { SelectValue } from '@antoniodcorrea/components';
 import './Home.less';
 
 interface Props {
-  isLoggedIn: boolean;
   glossary: GlossaryState;
   currentHref: string;
   bookmarksIds: number[];
@@ -39,7 +38,6 @@ interface Props {
 }
 
 export const Home: React.FC<Props> = ({
-  isLoggedIn,
   glossary,
   currentHref,
   bookmarksIds,
@@ -85,7 +83,7 @@ export const Home: React.FC<Props> = ({
         ) : (
           bookmarksIds?.map((id) => (
             <CardItem key={id}>
-              <BookmarkRow id={id} withInfoButton={isLoggedIn} />
+              <BookmarkRow id={id} />
             </CardItem>
           ))
         )}

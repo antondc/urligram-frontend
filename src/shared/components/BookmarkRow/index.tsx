@@ -32,10 +32,9 @@ interface Props {
   id: number;
   listId?: number;
   tagsHref?: string;
-  withInfoButton?: boolean;
 }
 
-const BookmarkRow: React.FC<Props> = ({ id, listId, tagsHref = '', withInfoButton = true }) => {
+const BookmarkRow: React.FC<Props> = ({ id, listId, tagsHref = '' }) => {
   const dispatch = useDispatch();
   const [publicLoading, setPublicLoading] = useState<boolean>(false);
   const [removingFromList, setRemovingFromList] = useState<boolean>(false);
@@ -159,7 +158,6 @@ const BookmarkRow: React.FC<Props> = ({ id, listId, tagsHref = '', withInfoButto
     <DraggableOrFragment key={id} id={id.toString()}>
       <BookmarkRowUi
         listId={listId}
-        withInfoButton={withInfoButton}
         bookmark={bookmark}
         bookmarkActionIconsMounted={bookmarkActionIconsMounted}
         tags={tags}

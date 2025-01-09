@@ -4,8 +4,6 @@ import Cross from 'Assets/svg/cross.svg';
 import Public from 'Assets/svg/earth.svg';
 import EditCircle from 'Assets/svg/editCircle.svg';
 import Folder from 'Assets/svg/folder.svg';
-import Info from 'Assets/svg/info.svg';
-import A from 'Components/A';
 import Bookmarker from 'Components/Bookmarker';
 import { BookmarkState } from 'Modules/Bookmarks/bookmarks.types';
 import { TagState } from 'Modules/Tags/tags.types';
@@ -16,7 +14,6 @@ import './BookmarkRowIcons.less';
 interface BookmarkRowIcons extends BookmarkState {
   bookmark: Partial<BookmarkState>;
   listId?: number;
-  withInfoButton: boolean;
   tags: TagState[];
   bookmarkActionIconsMounted: boolean;
   sessionUserBookmarkedLink: boolean;
@@ -36,7 +33,6 @@ interface BookmarkRowIcons extends BookmarkState {
 export const BookmarkRowIcons: React.FC<Partial<BookmarkRowIcons>> = ({
   bookmark,
   listId,
-  withInfoButton,
   bookmarkActionIconsMounted,
   sessionUserBookmarkedLink,
   uiScreenTypeIsMobile,
@@ -73,16 +69,6 @@ export const BookmarkRowIcons: React.FC<Partial<BookmarkRowIcons>> = ({
         disabled={!uiScreenTypeIsMobile}
         unmountOnExit={false}
       >
-        {withInfoButton && (
-          <A
-            className="BookmarkRowIcons-iconWrapper"
-            href={`link/${bookmark?.linkId}`}
-            styled={false}
-            scrollBeforeNavigate
-          >
-            <Info className="BookmarkRowIcons-icon BookmarkRowIcons-iconInfo" />
-          </A>
-        )}
         {sessionUserBookmarkedLink && (
           <FadeInOut className="BookmarkRowIcons-iconWrapper" valueToUpdate={publicLoading} appear speed="fast">
             {publicLoading ? (

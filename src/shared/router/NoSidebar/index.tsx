@@ -43,7 +43,6 @@ const NoSidebar: React.FC<Props> = ({ loggedIn, location, defaultCurrentSlug, pa
           {/* {loggedIn && <Redirect from={Routes.SignUpConfirmation.path} to={'/' + defaultCurrentSlug + '/'} />} */}
           {loggedIn && <Redirect from={Routes.SignUp.path} to={'/' + defaultCurrentSlug + '/'} />}
           {loggedIn && <Redirect from={Routes.Login.path} to={'/' + defaultCurrentSlug + '/'} />}
-          {!loggedIn && <Redirect from={Routes.Link.path} to={Routes.Home.route} />}
 
           {/* General */}
           <Route exact={Routes.Login.exact} path={Routes.Login.path} component={Login} />

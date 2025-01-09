@@ -19,7 +19,6 @@ import { FadeInOut, SelectValue } from '@antoniodcorrea/components';
 import './UserBookmarks.less';
 
 interface Props {
-  isLoggedIn: boolean;
   glossary: GlossaryState;
   user: UserState;
   bookmarksByKey: BookmarksByKey;
@@ -44,7 +43,6 @@ interface Props {
 }
 
 export const UserBookmarks: React.FC<Props> = ({
-  isLoggedIn,
   glossary,
   user,
   bookmarksByKey,
@@ -94,7 +92,7 @@ export const UserBookmarks: React.FC<Props> = ({
           <FadeInOut valueToUpdate={bookmarksByKey[id]?.deleting} appear key={id}>
             {!bookmarksByKey[id]?.deleting && (
               <CardItem key={id}>
-                <BookmarkRow id={id} withInfoButton={isLoggedIn} />
+                <BookmarkRow id={id} />
               </CardItem>
             )}
           </FadeInOut>

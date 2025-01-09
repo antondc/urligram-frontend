@@ -58,7 +58,6 @@ const props: BookmarkRowProps = {
     bookmarkReceivedFrom: [],
     bookmarkSentTo: [],
   },
-  withInfoButton: true,
   tags: [
     {
       id: 160,

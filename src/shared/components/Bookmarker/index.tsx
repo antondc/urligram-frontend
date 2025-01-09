@@ -10,7 +10,6 @@ import { BookmarkRelated } from 'Modules/Bookmarks/bookmarks.types';
 import { selectBookmarksById } from 'Modules/Bookmarks/selectors/selectBookmarkById';
 import { listBookmarkCreate } from 'Modules/Lists/actions/listBookmarkCreate';
 import { listsLoadByUserId } from 'Modules/Lists/actions/listsLoadByUserId';
-import { notesLoadByLinkId } from 'Modules/Notes/actions/notesLoadByLinkId';
 import { RootState } from 'Modules/rootType';
 import { selectCurrentRoute } from 'Modules/Routes/selectors/selectCurrentRoute';
 import { selectCurrentRouteParams } from 'Modules/Routes/selectors/selectCurrentRouteParams';
@@ -60,7 +59,6 @@ const Bookmarker: React.FC<Props> = ({ className, listId, bookmarkId, onBookmark
       const { id: newBookmarkId } = await dispatch(bookmarkCreate(data));
       if (!!listId) await dispatch(listBookmarkCreate({ listId, bookmarkId: newBookmarkId }));
       onBookmarked && onBookmarked();
-      dispatch(notesLoadByLinkId({ linkId: parentBookmark.linkId }));
       dispatch(usersLoadByLinkId({ linkId: parentBookmark.linkId }));
     } catch (error) {
       noop();
@@ -82,7 +80,6 @@ const Bookmarker: React.FC<Props> = ({ className, listId, bookmarkId, onBookmark
         })
       );
       dispatch(listsLoadByUserId({ userId: parentBookmark?.userId, rawData: true }));
-      dispatch(notesLoadByLinkId({ linkId: parentBookmark.linkId }));
       dispatch(usersLoadByLinkId({ linkId: parentBookmark.linkId }));
 
       if (currentRoute.name === Routes.List.name && listId) {
@@ -112,5 +109,5 @@ const Bookmarker: React.FC<Props> = ({ className, listId, bookmarkId, onBookmark
     />
   );
 };
- 
+
 export default Bookmarker;

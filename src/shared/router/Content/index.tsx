@@ -13,7 +13,6 @@ import { selectUiSidebarleftState } from 'Modules/Ui/selectors/selectUiSidebarle
 import Followers from 'Pages/Followers';
 import Following from 'Pages/Following';
 import Home from 'Pages/Home';
-import Link from 'Pages/Link';
 import List from 'Pages/List';
 import Lists from 'Pages/Lists';
 import Tags from 'Pages/Tags';
@@ -62,7 +61,6 @@ const Content: React.FC<Props> = ({ location, pathWithoutLanguageParam }) => {
             <Route exact={Routes.UserLists.exact} path={Routes.UserLists.path} component={UserLists} />
             <Route exact={Routes.UserTags.exact} path={Routes.UserTags.path} component={UserTags} />
             <Route exact={Routes.Tags.exact} path={Routes.Tags.path} component={Tags} />
-            <Route exact={Routes.Link.exact} path={Routes.Link.path} component={Link} />
           </Switch>
         </div>
         {/* INTENDED => </FadeInOut> */}

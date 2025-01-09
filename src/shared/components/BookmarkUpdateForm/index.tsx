@@ -7,7 +7,6 @@ import { bookmarkUpdate } from 'Modules/Bookmarks/actions/bookmarkUpdate';
 import { selectBookmarksById } from 'Modules/Bookmarks/selectors/selectBookmarkById';
 import { selectBookmarksErrorLast } from 'Modules/Bookmarks/selectors/selectBookmarksErrorLast';
 import { selectCurrentGlossary } from 'Modules/Languages/selectors/selectCurrentGlossary';
-import { notesLoadByLinkId } from 'Modules/Notes/actions/notesLoadByLinkId';
 import { RootState } from 'Modules/rootType';
 import { tagsSearchLoad } from 'Modules/Tags/actions/tagsSearchLoad';
 import { selectTagsAll } from 'Modules/Tags/selectors/selectAllTags';
@@ -115,7 +114,6 @@ const BookmarkUpdateForm: React.FC<Props> = ({ closeModal, setLocked }) => {
 
       if (!!bookmark?.id) {
         setSubmitSuccess(true);
-        dispatch(notesLoadByLinkId({ linkId: bookmark.linkId }));
         dispatch(usersLoadByLinkId({ linkId: bookmark.linkId }));
 
         setTimeout(() => {
