@@ -29,14 +29,31 @@
     }
   }
 
+  &--isDraggedOver {
+    color: @gradientColors[blue-1];
+
+    svg {
+      path[data-id='outer'] {
+        fill: @gradientColors[blue-1];
+      }
+
+      path[data-id='inner'] {
+        fill: @c-background;
+      }
+    }
+  }
+
   &-listIcon {
     width: @svgSize-normal;
     margin-right: 6px;
 
-    &--isDraggedOver {
+    svg {
+      path[data-id='outer'] {
+        transition: fill @td-fast @ease;
+      }
+
       path[data-id='inner'] {
         transition: fill @td-fast @ease;
-        fill: @c-background;
       }
     }
   }

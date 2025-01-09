@@ -28,15 +28,14 @@ export const SidebarLeftList: React.FC<Props> = ({
 
   return (
     <li
-      className={'SidebarLeftList' + (currentListId === item?.id ? ' SidebarLeftList--active' : '')}
+      className={
+        'SidebarLeftList' +
+        (currentListId === item?.id ? ' SidebarLeftList--active' : '') +
+        (currentListId === item?.id || isDraggedOver ? ' SidebarLeftList--isDraggedOver' : '')
+      }
       onClick={() => onListClick(item?.id)}
     >
-      <Folder
-        className={
-          'SidebarLeftList-listIcon' +
-          (currentListId === item?.id || isDraggedOver ? ' SidebarLeftList-listIcon--isDraggedOver' : '')
-        }
-      />
+      <Folder className={'SidebarLeftList-listIcon'} />
       <span className="SidebarLeftList-listTitle">
         {item?.name}
         <NotificationDot
