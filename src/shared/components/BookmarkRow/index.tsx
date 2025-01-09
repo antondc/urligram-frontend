@@ -7,24 +7,25 @@ import { bookmarkUpdate } from 'Modules/Bookmarks/actions/bookmarkUpdate';
 import { selectBookmarksById } from 'Modules/Bookmarks/selectors/selectBookmarkById';
 import { selectBookmarkTagsByLinkIdAndListId } from 'Modules/Bookmarks/selectors/selectBookmarkTagsByLinkIdAndListId';
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
+import { listBookmarkDelete } from 'Modules/Lists/actions/listBookmarkDelete';
 import { selectListsByUserIdAll } from 'Modules/Lists/selectors/selectListsByUserIdAll';
 import { listNotificationViewed } from 'Modules/Notifications/actions/listNotificationViewed';
 import { selectNotificationByBookmarkIdAndListId } from 'Modules/Notifications/selectors/selectNotificationByBookmarkIdAndListId';
 import { RootState } from 'Modules/rootType';
+import { selectCurrentRoute } from 'Modules/Routes/selectors/selectCurrentRoute';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { switchBookmarkActionButtonsMounted } from 'Modules/Ui/actions/switchBookmarkActionButtonsMounted';
 import { switchBookmarkActionButtonsUnmounted } from 'Modules/Ui/actions/switchBookmarkActionButtonsUnmounted';
 import { switchBookmarkUpdateModal } from 'Modules/Ui/actions/switchBookmarkUpdateModal';
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
+import { uiNotificationPush } from 'Modules/Ui/actions/uiNotificationPush';
 import { selectBookmarkActionsIcons } from 'Modules/Ui/selectors/selectBookmarkActionsIcons';
 import { selectUiScreenTypeIsDesktop } from 'Modules/Ui/selectors/selectUiScreenTypeIsDesktop';
 import { selectUiScreenTypeIsMobile } from 'Modules/Ui/selectors/selectUiScreenTypeIsMobile';
+import { selectUiSidebarListsOpen } from 'Modules/Ui/selectors/selectUiSidebarListsOpen';
+import { NotificationStatus, NotificationStyle, NotificationType } from 'Modules/Ui/ui.types';
 import { TIME_RECENTLY_CREATED_BOOKMARK } from 'Root/src/shared/constants';
 import { LocaleFormattedDate, unixTimeElapsed, URLWrapper } from '@antoniodcorrea/utils';
-import { listBookmarkDelete } from '../../redux/modules/Lists/actions/listBookmarkDelete';
-import { selectCurrentRoute } from '../../redux/modules/Routes/selectors/selectCurrentRoute';
-import { uiNotificationPush } from '../../redux/modules/Ui/actions/uiNotificationPush';
-import { NotificationStatus, NotificationStyle, NotificationType } from '../../redux/modules/Ui/ui.types';
 import { Routes } from '../../router/routes';
 import { BookmarkRow as BookmarkRowUi } from './BookmarkRow';
 
@@ -49,6 +50,7 @@ const BookmarkRow: React.FC<Props> = ({ id, listId, tagsHref = '' }) => {
   const domain = new URLWrapper(bookmark?.url).getDomain();
   const currentRoute = useSelector(selectCurrentRoute);
   const isListPage = currentRoute?.name === Routes.List.name;
+  const sidebarListsOpen = useSelector(selectUiSidebarListsOpen);
 
   // If the bookmark is part of a list, display all tags from bookmarks sharing its linkId, when bookmark.userId is within list
   const tagsIfInList = useSelector((state: RootState) =>
@@ -152,7 +154,7 @@ const BookmarkRow: React.FC<Props> = ({ id, listId, tagsHref = '' }) => {
   //   if (!!sessionUserBookmarkedLink) dispatch(bookmarkLoadById({ bookmarkId: sessionUserBookmarkId }));
   // }, [sessionUserBookmarkId]);
 
-  const DraggableOrFragment = sessionUserBookmarkedLink ? Draggable : 'div';
+  const DraggableOrFragment = sessionUserBookmarkedLink && sidebarListsOpen ? Draggable : 'div';
 
   return (
     <DraggableOrFragment key={id} id={id.toString()}>

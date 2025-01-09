@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 
+import { defaultGlossaryState } from 'Modules/Languages/languages.reducer';
 import { ProviderWrapper } from 'Tools/storybook/provider';
 import { noop } from '@antoniodcorrea/utils';
 import { boolean, withKnobs } from '@storybook/addon-knobs';
-import { defaultGlossaryState } from '../../redux/modules/Languages/languages.reducer';
 import { Header } from './Header';
 
 export default {

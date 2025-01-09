@@ -23,6 +23,8 @@ import {
   UI_SCREEN_TYPE_SET,
   UI_SIDEBAR_LEFT_CLOSE,
   UI_SIDEBAR_LEFT_OPEN,
+  UI_SIDEBAR_LISTS_CLOSE,
+  UI_SIDEBAR_LISTS_OPEN,
   UI_SWITCH_BOOKMARK_ICONS_MOUNTED,
   UI_SWITCH_BOOKMARK_ICONS_UNMOUNTED,
   UiActions,
@@ -102,6 +104,9 @@ export const initialState: UiState = {
   sidebarLeftState: {
     closed: false,
   },
+  sidebarListsState: {
+    open: false,
+  },
 };
 
 export const Ui = (state = initialState, action: UiActions): UiState => {
@@ -133,6 +138,8 @@ export const Ui = (state = initialState, action: UiActions): UiState => {
     case UI_SWITCH_BOOKMARK_ICONS_UNMOUNTED:
     case UI_SIDEBAR_LEFT_CLOSE:
     case UI_SIDEBAR_LEFT_OPEN:
+    case UI_SIDEBAR_LISTS_CLOSE:
+    case UI_SIDEBAR_LISTS_OPEN:
       return Object.assign({}, state, action.payload);
 
     default:
