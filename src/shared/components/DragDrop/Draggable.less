@@ -7,7 +7,15 @@
     cursor: grab;
   }
 
-  &--isDragging {
-    cursor: grabbing;
+  &-base {
+    &--isDragging {
+      cursor: grabbing !important;
+    }
+  }
+
+  &-preview {
+    zoom: 0.1;
+    border: 1px @c-base dashed;
+    background: @c-background;
   }
 }
