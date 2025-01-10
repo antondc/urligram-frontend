@@ -41,6 +41,7 @@ export const SidebarLeft: React.FC<Props> = ({
   sessionId,
   glossary,
   lists,
+  listsLoading,
   listsShown,
   followingShown,
   following,
@@ -120,7 +121,8 @@ export const SidebarLeft: React.FC<Props> = ({
           </A>
           <div
             className={
-              'SidebarLeft-item' + (routeName === 'UserLists' && isUserPage ? ' SidebarLeft-item--active' : '')
+              'SidebarLeft-item SidebarLeft-itemWithSublist' +
+              (routeName === 'UserLists' && isUserPage ? ' SidebarLeft-item--active' : '')
             }
           >
             <A
@@ -143,11 +145,12 @@ export const SidebarLeft: React.FC<Props> = ({
             </span>
           </div>
           <div className="SidebarLeft-lists">
-            <SidebarLeftLists lists={lists} loading={false} listsShown={listsShown} />
+            <SidebarLeftLists lists={lists} loading={listsLoading} listsShown={listsShown} />
           </div>
           <div
             className={
-              'SidebarLeft-item' + (routeName === 'Following' && isUserPage ? ' SidebarLeft-item--active' : '')
+              'SidebarLeft-item SidebarLeft-itemWithSublist' +
+              (routeName === 'Following' && isUserPage ? ' SidebarLeft-item--active' : '')
             }
           >
             <A href={`users/${sessionId}/following`} styled={false} frontend scrollBeforeNavigate>

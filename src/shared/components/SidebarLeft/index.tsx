@@ -42,7 +42,8 @@ const SidebarLeft: React.FC = () => {
   const following = useSelector(selectUserFollowing);
   const [followingShown, setFollowingShown] = useState<boolean>(false);
   const timeMsInFourHours = Date.now() + 4 * 60 * 60 * 1000;
-  const sidebarLeftClosed = useSelector(selectUiSidebarleftState);
+  const sidebarLeftClosedState = useSelector(selectUiSidebarleftState);
+  const sidebarLeftClosed = sidebarLeftClosedState && !!lists?.length && !listsLoading;
   const isUserPage = route?.params?.userId === sessionId;
   const listsShown = useSelector(selectUiSidebarListsOpen);
 
