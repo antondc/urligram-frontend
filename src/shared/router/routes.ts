@@ -29,7 +29,6 @@ interface RoutesInterface {
   UserBookmarks: Route;
   UserLists: Route;
   Following: Route;
-  Followers: Route;
   User: Route;
   UserTags: Route;
   Users: Route;
@@ -91,16 +90,6 @@ export const Routes: RoutesInterface = {
   Following: {
     name: 'Following',
     path: '/:lang([a-z]{2})?/users/:userId/following',
-    exact: true,
-    auth: false,
-    initialDataLoadersVisitor: [],
-    initialDataLoadersSession: [],
-    layout: 'withLeftSidebar',
-  },
-
-  Followers: {
-    name: 'Followers',
-    path: '/:lang([a-z]{2})?/users/:userId/followers',
     exact: true,
     auth: false,
     initialDataLoadersVisitor: [],

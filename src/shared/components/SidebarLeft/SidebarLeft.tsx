@@ -25,9 +25,6 @@ interface Props {
   lists: ListState[];
   listsLoading: boolean;
   listsShown: boolean;
-  followersShown: boolean;
-  followers: UserState[];
-  onFollowersTriangleClick: () => void;
   followingShown: boolean;
   following: UserState[];
   onFollowingTriangleClick: () => void;
@@ -45,9 +42,6 @@ export const SidebarLeft: React.FC<Props> = ({
   glossary,
   lists,
   listsShown,
-  followersShown,
-  followers,
-  onFollowersTriangleClick,
   followingShown,
   following,
   onFollowingTriangleClick,
@@ -150,27 +144,6 @@ export const SidebarLeft: React.FC<Props> = ({
           </div>
           <div className="SidebarLeft-lists">
             <SidebarLeftLists lists={lists} loading={false} listsShown={listsShown} />
-          </div>
-          <A
-            className={
-              'SidebarLeft-item' + (routeName === 'Followers' && isUserPage ? ' SidebarLeft-item--active' : '')
-            }
-            href={`users/${sessionId}/followers`}
-            styled={false}
-            frontend
-            scrollBeforeNavigate
-          >
-            <Flag className="SidebarLeft-itemIcon" />
-            <span className="SidebarLeft-itemDescription">{glossary.followers}</span>
-            <span
-              className={'SidebarLeft-triangle' + (followersShown ? ' SidebarLeft-triangle--open' : '')}
-              onClick={onFollowersTriangleClick}
-            >
-              <TriangleRounded className="SidebarLeft-triangleIcon" />
-            </span>
-          </A>
-          <div className="SidebarLeft-users">
-            <SidebarLeftUsers users={followers} usersShown={followersShown} />
           </div>
           <div
             className={

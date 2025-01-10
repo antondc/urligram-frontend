@@ -10,7 +10,6 @@ import SidebarLeft from 'Components/SidebarLeft';
 import { selectPathWithoutLanguageParam } from 'Modules/Routes/selectors/selectPathWithoutLanguageParam';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import { selectUiSidebarleftState } from 'Modules/Ui/selectors/selectUiSidebarleftState';
-import Followers from 'Pages/Followers';
 import Following from 'Pages/Following';
 import Home from 'Pages/Home';
 import List from 'Pages/List';
@@ -56,7 +55,6 @@ const Content: React.FC<Props> = ({ location, pathWithoutLanguageParam }) => {
             <Route exact={Routes.List.exact} path={Routes.List.path} component={List} />
             <Route exact={Routes.Lists.exact} path={Routes.Lists.path} component={Lists} />
             <Route exact={Routes.Home.exact} path={Routes.Home.path} component={Home} />
-            <Route exact={Routes.Followers.exact} path={Routes.Followers.path} component={Followers} />
             <Route exact={Routes.Following.exact} path={Routes.Following.path} component={Following} />
             <Route exact={Routes.UserLists.exact} path={Routes.UserLists.path} component={UserLists} />
             <Route exact={Routes.UserTags.exact} path={Routes.UserTags.path} component={UserTags} />

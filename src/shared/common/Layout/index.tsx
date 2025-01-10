@@ -20,7 +20,6 @@ import { selectUiSignUpDisabledModalMounted } from 'Modules/Ui/selectors/selectU
 import { selectUiSignUpModalMounted } from 'Modules/Ui/selectors/selectUiSignUpModalMounted';
 import { selectUiWelcomeModalErrorMounted } from 'Modules/Ui/selectors/selectUiWelcomeModalErrorMounted';
 import { selectUiWelcomeModalMounted } from 'Modules/Ui/selectors/selectUiWelcomeModalMounted';
-import { userFollowersLoad } from 'Modules/Users/actions/userFollowersLoad';
 import { userFollowingLoad } from 'Modules/Users/actions/userFollowingLoad';
 import { userLoad } from 'Modules/Users/actions/userLoad';
 import { routesList, routesWithoutOmmitedValues } from 'Router/routes';
@@ -110,7 +109,6 @@ const Layout: React.FC<Props> = ({ location }) => {
     if (!session?.id) return;
     dispatch(userLoad(session?.id));
     dispatch(userFollowingLoad({ userId: session?.id, rawData: true }));
-    dispatch(userFollowersLoad({ userId: session?.id, rawData: true }));
     dispatch(listsLoadByUserId({ userId: session?.id, rawData: true }));
   }, [session?.id]);
 

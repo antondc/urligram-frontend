@@ -49,6 +49,10 @@ export enum NotificationType {
   BookmarkAddedToList = 'bookmark-added-to-list',
   BookmarkNotAddedToList = 'bookmark-not-added-to-list',
   BookmarkRemovedFromList = 'bookmark-removed-from-list',
+  ConnectionAdded = 'conexion-added',
+  ConnectionAddedFailed = 'conexion-added-failed',
+  ConnectionRemoved = 'conexion-removed',
+  ConnectionRemovedFailed = 'conexion-removed-failed',
 }
 
 export enum NotificationStyle {

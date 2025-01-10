@@ -15,7 +15,6 @@ import { uiSidebarListsClose } from 'Modules/Ui/actions/uiSidebarListsClose';
 import { uiSidebarListsOpen } from 'Modules/Ui/actions/uiSidebarListsOpen';
 import { selectUiSidebarleftState } from 'Modules/Ui/selectors/selectUiSidebarleftState';
 import { selectUiSidebarListsOpen } from 'Modules/Ui/selectors/selectUiSidebarListsOpen';
-import { selectUserFollowers } from 'Modules/Users/selectors/selectUserFollowers';
 import { selectUserFollowing } from 'Modules/Users/selectors/selectUserFollowing';
 import { Routes } from 'Router/routes';
 import { LocalStorageWrapper } from 'Services/LocalStorageWrapper';
@@ -40,9 +39,7 @@ const SidebarLeft: React.FC = () => {
   const route = useSelector(selectCurrentRoute);
   const lists = useSelector((state: RootState) => selectListsByUserIdAll(state, { userId: sessionId }));
   const listsLoading = useSelector(selectListsLoading);
-  const followers = useSelector(selectUserFollowers);
   const following = useSelector(selectUserFollowing);
-  const [followersShown, setFollowersShown] = useState<boolean>(false);
   const [followingShown, setFollowingShown] = useState<boolean>(false);
   const timeMsInFourHours = Date.now() + 4 * 60 * 60 * 1000;
   const sidebarLeftClosed = useSelector(selectUiSidebarleftState);
@@ -62,21 +59,13 @@ const SidebarLeft: React.FC = () => {
     localStorageWrapper.setValue('listsShown', { mounted: true }, timeMsInFourHours);
   };
 
-  const onFollowersTriangleClick = () => {
-    setFollowersShown(!followersShown);
-    setFollowingShown(false);
-    listsClose();
-  };
-
   const onFollowingTriangleClick = () => {
     setFollowingShown(!followingShown);
-    setFollowersShown(false);
     listsClose();
   };
 
   const onListsTriangleClick = () => {
     setFollowingShown(false);
-    setFollowersShown(false);
 
     if (listsShown) {
       listsClose();
@@ -92,7 +81,6 @@ const SidebarLeft: React.FC = () => {
     } else {
       dispatch(uiSidebarLeftClose());
       dispatch(uiSidebarListsClose());
-      setFollowersShown(false);
       setFollowingShown(false);
       localStorageWrapper.setValue('listsShown', { mounted: false }, timeMsInFourHours);
       localStorageWrapper.setValue('sidebarLeftState', { closed: true }, timeMsInFourHours);
@@ -148,9 +136,6 @@ const SidebarLeft: React.FC = () => {
       lists={lists}
       listsLoading={listsLoading}
       listsShown={listsShown}
-      followers={followers}
-      followersShown={followersShown}
-      onFollowersTriangleClick={onFollowersTriangleClick}
       following={following}
       followingShown={followingShown}
       onFollowingTriangleClick={onFollowingTriangleClick}

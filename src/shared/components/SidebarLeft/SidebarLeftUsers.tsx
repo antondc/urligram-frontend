@@ -18,8 +18,8 @@ const SidebarLeftUsers: React.FC<Props> = ({ users, usersShown = true }) => {
   const currentRouteParams = useSelector(selectCurrentRouteParams);
   const currentFollowerId = currentRouteParams?.userId;
 
-  const onFollowerClick = (followerId: string) => {
-    history.push(`/users/${followerId}`);
+  const onUserClick = (userId: string) => {
+    history.push(`/users/${userId}`);
   };
 
   if (!users?.length) return null;
@@ -32,10 +32,9 @@ const SidebarLeftUsers: React.FC<Props> = ({ users, usersShown = true }) => {
             <li
               key={`${item?.id}-${index}`}
               className={
-                'SidebarLeftUsers-follower' +
-                (currentFollowerId === item?.id ? ' SidebarLeftUsers-follower--active' : '')
+                'SidebarLeftUsers-user' + (currentFollowerId === item?.id ? ' SidebarLeftUsers-user--active' : '')
               }
-              onClick={() => onFollowerClick(item?.id)}
+              onClick={() => onUserClick(item?.id)}
             >
               <User className="SidebarLeftUsers-icon" /> {item?.name}
             </li>

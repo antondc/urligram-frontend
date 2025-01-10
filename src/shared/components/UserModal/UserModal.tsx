@@ -44,7 +44,6 @@ export const UserModal: React.FC<Props> = ({
     onClick={switchUserModal}
     onMouseLeave={switchUserModalOnMouseLeave}
   >
-    {/* <img className="UserModal-userLogo" src={session?.image?.original} /> */}
     <div className="UserModal-cross">
       <Cross className="UserModal-crossIcon" />
     </div>
@@ -87,19 +86,6 @@ export const UserModal: React.FC<Props> = ({
         <A className="UserModal-link" href={`users/${session?.id}/lists`} frontend underlined styled={false}>
           <List className="UserModal-icon" />
           <div className="UserModal-label">{glossary.lists}</div>
-          <ArrowRight className="UserModal-iconArrow" />
-        </A>
-      </li>
-      <li
-        className={
-          'UserModal-item' +
-          (routeName === 'Followers' && isUserPage ? ' UserModal-item--active' : '') +
-          ' UserModal-item--mobile'
-        }
-      >
-        <A className="UserModal-link" href={`users/${session?.id}/followers`} frontend underlined styled={false}>
-          <Flag className="UserModal-icon" />
-          <div className="UserModal-label">{glossary.followers}</div>
           <ArrowRight className="UserModal-iconArrow" />
         </A>
       </li>

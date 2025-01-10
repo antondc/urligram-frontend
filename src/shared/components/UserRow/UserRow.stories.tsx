@@ -43,7 +43,6 @@ const props = {
     links: '',
     myUser: '',
     users: '',
-    followers: '',
     following: '',
     since: '',
     serverError: '',

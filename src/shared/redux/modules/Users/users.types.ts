@@ -54,7 +54,6 @@ export interface UserState {
   order: number;
   createdAt: number;
   updatedAt: number;
-  followers?: string[];
   following?: string[];
   lists?: {
     id: number;

@@ -34,10 +34,6 @@ export const userFollowCreate =
           ...UsersAfterResponse,
           byKey: {
             ...UsersAfterResponse?.byKey,
-            [targetUserId]: {
-              ...UsersAfterResponse?.byKey[targetUserId],
-              followers: [...(UsersAfterResponse?.byKey[targetUserId]?.followers || []), originUserId],
-            },
             [originUserId]: {
               ...UsersAfterResponse?.byKey[originUserId],
               following: [...(UsersAfterResponse?.byKey[originUserId]?.following || []), targetUserId],
@@ -59,6 +55,6 @@ export const userFollowCreate =
         },
       });
 
-      return error;
+      throw error;
     }
   };

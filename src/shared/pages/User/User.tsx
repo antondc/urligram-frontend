@@ -111,16 +111,6 @@ export const User: React.FC<Props> = ({
         <Space />
         <Space />
         <A className="User-lineDetailsLink" href={`users/${userId}/followers`} frontend underlined styled={false}>
-          {glossary.followers}:
-          <Space />
-          {user?.followers?.length}
-          <Space />
-        </A>
-        <Space />
-        <Space />·<Space />
-        <Space />
-        <Space />
-        <A className="User-lineDetailsLink" href={`users/${userId}/followers`} frontend underlined styled={false}>
           {glossary.tags}:
           <Space />
           {user?.tags?.length}
