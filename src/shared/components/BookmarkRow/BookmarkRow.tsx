@@ -117,7 +117,7 @@ export const BookmarkRow: React.FC<BookmarkRowProps> = ({
     </div>
     <Bookmarker className="BookmarkRow-bookmarker" bookmarkId={bookmark?.id} listId={listId} />
     <DotsVertical
-      className={'BookmarkRow-actions' + (sessionUserBookmarkedLink ? ' BookmarkRow-actions--isDragging' : '')}
+      className={'BookmarkRow-actions' + (sessionUserBookmarkedLink ? ' BookmarkRow-actions--active' : '')}
       onClick={onMobileBookmarkActionsIconClick}
     />
     <div className="BookmarkRow-icons" onClick={bookmarkViewed}>
