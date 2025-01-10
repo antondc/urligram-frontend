@@ -15,21 +15,33 @@
   margin: 7px 0;
 
   svg {
-    fill: @gradientColors[black-2];
-    transition: fill @td-fast @ease;
+    path[data-id='outer'] {
+      fill: @gradientColors[black-2];
+      transition: fill @td-fast @ease;
+    }
+
+    path[data-id='inner'] {
+      fill: @gradientColors[black-2];
+      transition: fill @td-fast @ease;
+    }
   }
 
-  &:hover,
-  &--active {
+  &:hover:not(@{c}--active) {
     color: @gradientColors[blue-1];
     cursor: pointer;
 
     svg {
-      fill: @gradientColors[blue-1];
+      path[data-id='outer'] {
+        fill: @gradientColors[blue-1];
+      }
+
+      path[data-id='inner'] {
+        fill: @gradientColors[blue-1];
+      }
     }
   }
 
-  &--isDraggedOver {
+  &--active {
     color: @gradientColors[blue-1];
 
     svg {
@@ -46,16 +58,6 @@
   &-listIcon {
     width: @svgSize-normal;
     margin-right: 6px;
-
-    svg {
-      path[data-id='outer'] {
-        transition: fill @td-fast @ease;
-      }
-
-      path[data-id='inner'] {
-        transition: fill @td-fast @ease;
-      }
-    }
   }
 
   &-listTitle {
