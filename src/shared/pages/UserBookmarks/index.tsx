@@ -81,6 +81,8 @@ const UserBookmarks: React.FC = () => {
 
   useEffect(() => () => dispatch(uiResetModalsState()), []);
 
+  if (!user || !bookmarksIds) return null;
+
   return (
     <UserBookmarksUi
       glossary={glossary}

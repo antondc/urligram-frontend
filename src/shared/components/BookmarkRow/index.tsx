@@ -19,23 +19,24 @@ import { switchBookmarkActionButtonsUnmounted } from 'Modules/Ui/actions/switchB
 import { switchBookmarkUpdateModal } from 'Modules/Ui/actions/switchBookmarkUpdateModal';
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
 import { uiNotificationPush } from 'Modules/Ui/actions/uiNotificationPush';
+import { uiSidebarListsOpen } from 'Modules/Ui/actions/uiSidebarListsOpen';
 import { selectBookmarkActionsIcons } from 'Modules/Ui/selectors/selectBookmarkActionsIcons';
 import { selectUiScreenTypeIsDesktop } from 'Modules/Ui/selectors/selectUiScreenTypeIsDesktop';
 import { selectUiScreenTypeIsMobile } from 'Modules/Ui/selectors/selectUiScreenTypeIsMobile';
-import { selectUiSidebarListsOpen } from 'Modules/Ui/selectors/selectUiSidebarListsOpen';
 import { NotificationStatus, NotificationStyle, NotificationType } from 'Modules/Ui/ui.types';
 import { TIME_RECENTLY_CREATED_BOOKMARK } from 'Root/src/shared/constants';
+import { Routes } from 'Router/routes';
 import { LocaleFormattedDate, unixTimeElapsed, URLWrapper } from '@antoniodcorrea/utils';
-import { Routes } from '../../router/routes';
 import { BookmarkRow as BookmarkRowUi } from './BookmarkRow';
 
 interface Props {
   id: number;
   listId?: number;
   tagsHref?: string;
+  isDragging?: boolean;
 }
 
-const BookmarkRow: React.FC<Props> = ({ id, listId, tagsHref = '' }) => {
+const BookmarkRow: React.FC<Props> = ({ id, listId, tagsHref = '', isDragging }) => {
   const dispatch = useDispatch();
   const [publicLoading, setPublicLoading] = useState<boolean>(false);
   const [removingFromList, setRemovingFromList] = useState<boolean>(false);
@@ -50,7 +51,6 @@ const BookmarkRow: React.FC<Props> = ({ id, listId, tagsHref = '' }) => {
   const domain = new URLWrapper(bookmark?.url).getDomain();
   const currentRoute = useSelector(selectCurrentRoute);
   const isListPage = currentRoute?.name === Routes.List.name;
-  const sidebarListsOpen = useSelector(selectUiSidebarListsOpen);
 
   // If the bookmark is part of a list, display all tags from bookmarks sharing its linkId, when bookmark.userId is within list
   const tagsIfInList = useSelector((state: RootState) =>
@@ -142,6 +142,11 @@ const BookmarkRow: React.FC<Props> = ({ id, listId, tagsHref = '' }) => {
     dispatch(listNotificationViewed({ bookmarkId: bookmark?.id, listId }));
   };
 
+  // If we are dragging, open the lists sidebar
+  useEffect(() => {
+    isDragging && dispatch(uiSidebarListsOpen());
+  }, [isDragging]);
+
   useEffect(() => {
     // If we are on desktop, hide icons by default
     uiScreenTypeIsMobile && dispatch(switchBookmarkActionButtonsUnmounted());
@@ -154,35 +159,44 @@ const BookmarkRow: React.FC<Props> = ({ id, listId, tagsHref = '' }) => {
   //   if (!!sessionUserBookmarkedLink) dispatch(bookmarkLoadById({ bookmarkId: sessionUserBookmarkId }));
   // }, [sessionUserBookmarkId]);
 
-  const DraggableOrFragment = sessionUserBookmarkedLink && sidebarListsOpen ? Draggable : 'div';
+  return (
+    <BookmarkRowUi
+      listId={listId}
+      bookmark={bookmark}
+      bookmarkActionIconsMounted={bookmarkActionIconsMounted}
+      tags={tags}
+      domain={domain}
+      createdAtFormatted={createdAtFormatted}
+      recentlyCreated={recentlyCreated}
+      viewPending={viewPending}
+      sessionUserBookmarkedLink={sessionUserBookmarkedLink}
+      tagsHref={tagsHref}
+      uiScreenTypeIsMobile={uiScreenTypeIsMobile}
+      onEdit={onEdit}
+      onListBookmarkRemove={onListBookmarkRemove}
+      onMobileBookmarkActionsIconClick={onMobileBookmarkActionsIconClick}
+      onMobileBookmarkActionsBackgroundClick={onMobileBookmarkActionsBackgroundClick}
+      bookmarkViewed={bookmarkViewed}
+      bookmarkIdInAnyOfMyLists={bookmarkIdInAnyOfMyLists}
+      publicLoading={publicLoading}
+      onPublicClick={onPublicClick}
+      isListPage={isListPage}
+      removingFromList={removingFromList}
+    />
+  );
+};
+
+const DraggableBookmarkRow: React.FC<Props> = ({ id, listId, tagsHref = '' }) => {
+  const bookmark = useSelector((state: RootState) => selectBookmarksById(state, { bookmarkId: id }));
+  const session = useSelector(selectSession);
+  const sessionUserBookmarkedLink = bookmark?.userId === session?.id;
+  const DraggableOrFragment = sessionUserBookmarkedLink ? Draggable : 'div';
 
   return (
     <DraggableOrFragment key={id} id={id.toString()}>
-      <BookmarkRowUi
-        listId={listId}
-        bookmark={bookmark}
-        bookmarkActionIconsMounted={bookmarkActionIconsMounted}
-        tags={tags}
-        domain={domain}
-        createdAtFormatted={createdAtFormatted}
-        recentlyCreated={recentlyCreated}
-        viewPending={viewPending}
-        sessionUserBookmarkedLink={sessionUserBookmarkedLink}
-        tagsHref={tagsHref}
-        uiScreenTypeIsMobile={uiScreenTypeIsMobile}
-        onEdit={onEdit}
-        onListBookmarkRemove={onListBookmarkRemove}
-        onMobileBookmarkActionsIconClick={onMobileBookmarkActionsIconClick}
-        onMobileBookmarkActionsBackgroundClick={onMobileBookmarkActionsBackgroundClick}
-        bookmarkViewed={bookmarkViewed}
-        bookmarkIdInAnyOfMyLists={bookmarkIdInAnyOfMyLists}
-        publicLoading={publicLoading}
-        onPublicClick={onPublicClick}
-        isListPage={isListPage}
-        removingFromList={removingFromList}
-      />
+      <BookmarkRow id={id} listId={listId} tagsHref={tagsHref} />
     </DraggableOrFragment>
   );
 };
 
-export default BookmarkRow;
+export default DraggableBookmarkRow;

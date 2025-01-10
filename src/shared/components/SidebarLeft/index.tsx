@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { useHandleDrop } from 'Hooks/useHandleDrop';
 import { selectCurrentGlossary } from 'Modules/Languages/selectors/selectCurrentGlossary';
 import { listsLoadByUserId } from 'Modules/Lists/actions/listsLoadByUserId';
 import { selectListsByUserIdAll } from 'Modules/Lists/selectors/selectListsByUserIdAll';
@@ -20,6 +19,7 @@ import { selectUserFollowers } from 'Modules/Users/selectors/selectUserFollowers
 import { selectUserFollowing } from 'Modules/Users/selectors/selectUserFollowing';
 import { Routes } from 'Router/routes';
 import { LocalStorageWrapper } from 'Services/LocalStorageWrapper';
+import { useHandleDrop } from './hooks/useHandleDrop';
 import { SidebarLeft as SidebarLeftUi } from './SidebarLeft';
 
 type LocalStorageListsShown = {

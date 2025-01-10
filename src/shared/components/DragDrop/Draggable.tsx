@@ -19,21 +19,10 @@ export enum CardState {
   PREVIEW = 'preview',
 }
 
-export type TCardState =
-  | {
-      type: CardState.IDDLE;
-    }
-  | {
-      type: CardState.DRAGGING;
-    }
-  | {
-      type: CardState.PREVIEW;
-      container: HTMLElement;
-    };
-
 const Draggable: React.FC<Props> = ({ children, id }) => {
   const elementRef = useRef(null);
-  const [cardState, setCardState] = useState<TCardState>({ type: CardState.IDDLE });
+  const [cardState, setCardState] = useState<CardState>(CardState.IDDLE);
+  const [containerState, setContainerState] = useState<HTMLElement>(null);
 
   useEffect(() => {
     const element = elementRef.current;
@@ -45,19 +34,15 @@ const Draggable: React.FC<Props> = ({ children, id }) => {
       draggable({
         element: element,
         getInitialData: () => ({ id }),
-        onDragStart: () => setCardState({ type: CardState.DRAGGING }),
-        onDrop: () => {
-          setCardState({ type: CardState.IDDLE });
-        },
+        onDragStart: () => setCardState(CardState.DRAGGING),
+        onDrop: () => setCardState(CardState.IDDLE),
         onGenerateDragPreview({ nativeSetDragImage, location }) {
           setCustomNativeDragPreview({
             nativeSetDragImage,
             getOffset: preserveOffsetOnSource({ element, input: location.current.input }),
             render({ container }) {
-              setCardState({
-                type: CardState.PREVIEW,
-                container,
-              });
+              setContainerState(container);
+              setCardState(CardState.PREVIEW);
             },
           });
         },
@@ -65,21 +50,15 @@ const Draggable: React.FC<Props> = ({ children, id }) => {
     );
   }, [id]);
 
-  const baseElement = React.cloneElement(
-    <div className={'Draggable-base' + (cardState.type === CardState.DRAGGING ? ' Draggable-base--isDragging' : '')}>
-      {children}
-    </div>
-  );
-
-  const previewElement =
-    cardState.type === CardState.PREVIEW
-      ? createPortal(React.cloneElement(<div className="Draggable-preview">{children}</div>), cardState.container)
-      : null;
-
   return (
     <div className="Draggable" ref={elementRef}>
-      {baseElement}
-      {previewElement}
+      <div className={'Draggable-base' + (cardState === CardState.DRAGGING ? ' Draggable-base--isDragging' : '')}>
+        {React.cloneElement(children, { isDragging: cardState === CardState.DRAGGING })}
+      </div>
+
+      {cardState === CardState.PREVIEW && containerState
+        ? createPortal(<div className="Draggable-preview">{children}</div>, containerState)
+        : null}
     </div>
   );
 };

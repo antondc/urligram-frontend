@@ -2,9 +2,9 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { listBookmarkCreate } from 'Modules/Lists/actions/listBookmarkCreate';
+import { uiNotificationPush } from 'Modules/Ui/actions/uiNotificationPush';
+import { NotificationStatus, NotificationStyle, NotificationType } from 'Modules/Ui/ui.types';
 import { monitorForElements } from '@atlaskit/pragmatic-drag-and-drop/element/adapter';
-import { uiNotificationPush } from '../redux/modules/Ui/actions/uiNotificationPush';
-import { NotificationStatus, NotificationStyle, NotificationType } from '../redux/modules/Ui/ui.types';
 
 export const useHandleDrop = () => {
   const dispatch = useDispatch();
