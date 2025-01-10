@@ -3,8 +3,7 @@ import React from 'react';
 import ArrowRight from 'Assets/svg/arrowRight.svg';
 import Bookmark from 'Assets/svg/bookmark.svg';
 import Cross from 'Assets/svg/cross.svg';
-import FlagLeft from 'Assets/svg/flagLeft.svg';
-import FlagRight from 'Assets/svg/flagRight.svg';
+import Flag from 'Assets/svg/flag.svg';
 import List from 'Assets/svg/list.svg';
 import LogOut from 'Assets/svg/logOut.svg';
 import Private from 'Assets/svg/private.svg';
@@ -45,7 +44,6 @@ export const UserModal: React.FC<Props> = ({
     onClick={switchUserModal}
     onMouseLeave={switchUserModalOnMouseLeave}
   >
-    {/* <img className="UserModal-userLogo" src={session?.image?.original} /> */}
     <div className="UserModal-cross">
       <Cross className="UserModal-crossIcon" />
     </div>
@@ -94,25 +92,12 @@ export const UserModal: React.FC<Props> = ({
       <li
         className={
           'UserModal-item' +
-          (routeName === 'Followers' && isUserPage ? ' UserModal-item--active' : '') +
-          ' UserModal-item--mobile'
-        }
-      >
-        <A className="UserModal-link" href={`users/${session?.id}/followers`} frontend underlined styled={false}>
-          <FlagLeft className="UserModal-icon" />
-          <div className="UserModal-label">{glossary.followers}</div>
-          <ArrowRight className="UserModal-iconArrow" />
-        </A>
-      </li>
-      <li
-        className={
-          'UserModal-item' +
           (routeName === 'Following' && isUserPage ? ' UserModal-item--active' : '') +
           ' UserModal-item--mobile'
         }
       >
         <A className="UserModal-link" href={`users/${session?.id}/following`} frontend underlined styled={false}>
-          <FlagRight className="UserModal-icon" />
+          <Flag className="UserModal-icon" />
           <div className="UserModal-label">{glossary.following}</div>
           <ArrowRight className="UserModal-iconArrow" />
         </A>

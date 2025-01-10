@@ -120,6 +120,7 @@ export const SignUp: React.FC<Props> = ({
             error={!!submitError}
             success={submitSuccess}
             loading={submitting}
+            disabled={submitDisabled}
             grow
           />
           <FadeInOut valueToUpdate={!!submitError} speed="fast">

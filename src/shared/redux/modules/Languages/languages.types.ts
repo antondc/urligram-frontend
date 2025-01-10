@@ -20,7 +20,6 @@ export interface GlossaryState {
   links: string;
   myUser: string;
   users: string;
-  followers: string;
   following: string;
   since: string;
   serverError: string;

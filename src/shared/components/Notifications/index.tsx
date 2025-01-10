@@ -1,9 +1,9 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import BaseNotification from 'Components/BaseNotification';
 import { selectUiNotifications } from 'Modules/Ui/selectors/selectUiNotifications';
 import { NotificationStatus } from 'Modules/Ui/ui.types';
+import BaseNotification from 'Root/src/shared/components/BaseNotification';
 import { FadeInOut } from '@antoniodcorrea/components';
 
 import './Notifications.less';

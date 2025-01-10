@@ -80,6 +80,8 @@ const UserLists: React.FC = () => {
 
   useEffect(() => () => dispatch(uiResetModalsState()), []);
 
+  if (!user || !listsIds) return null;
+
   return (
     <UserListsUi
       glossary={glossary}

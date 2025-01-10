@@ -22,7 +22,6 @@ export const defaultGlossaryState = {
   links: '',
   myUser: '',
   users: '',
-  followers: '',
   following: '',
   since: '',
   serverError: '',

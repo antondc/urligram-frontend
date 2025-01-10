@@ -58,6 +58,6 @@ export const listBookmarkDelete =
         },
       });
 
-      return;
+      throw error;
     }
   };

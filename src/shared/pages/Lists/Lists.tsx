@@ -2,13 +2,13 @@ import React from 'react';
 import Helmet from 'react-helmet';
 
 import Cross from 'Assets/svg/cross.svg';
-import ListIcon from 'Assets/svg/list.svg';
+import Folder from 'Assets/svg/folder.svg';
 import Clock from 'Assets/svg/spinner6.svg';
 import Updated from 'Assets/svg/updated.svg';
 import User from 'Assets/svg/userFill.svg';
 import CardItem from 'Components/CardItem';
-import ListRowNew from 'Components/ListRowNew';
-import { ListRowNewSkeletonGroup } from 'Components/ListRowNew/ListRowNewSkeletonGroup';
+import ListRow from 'Components/ListRow';
+import { ListRowSkeletonGroup } from 'Components/ListRow/ListRowSkeletonGroup';
 import NoResults from 'Components/NoResults';
 import Pagination from 'Components/Pagination';
 import SubHeader, { SubHeaderSeparator } from 'Components/SubHeader';
@@ -67,7 +67,7 @@ export const Lists: React.FC<Props> = ({
     <SubHeader
       // title props
       title={glossary.allLists}
-      leftIcon={<ListIcon />}
+      leftIcon={<Folder className="Lists-folderIcon" />}
       // select props
       selectPlaceholder={glossary.selectTags}
       currentQueryParamFilterTags={currentQueryParamFilterTags}
@@ -96,11 +96,11 @@ export const Lists: React.FC<Props> = ({
     </SubHeader>
     <div className="Lists-lists">
       {listsIdsLoading ? (
-        <ListRowNewSkeletonGroup length={listsIds?.length || DEFAULT_PAGE_SIZE} />
+        <ListRowSkeletonGroup length={listsIds?.length || DEFAULT_PAGE_SIZE} />
       ) : (
         listsIds?.map((id) => (
           <CardItem key={id}>
-            <ListRowNew id={id} />
+            <ListRow id={id} />
           </CardItem>
         ))
       )}

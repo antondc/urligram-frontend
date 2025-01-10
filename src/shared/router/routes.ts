@@ -1,7 +1,6 @@
 import omit from 'lodash/omit';
 
 import { initialBookmarksLoader } from 'Modules/Bookmarks/bookmarks.loader';
-import { initialLinkLoader } from 'Modules/Links/link.loader';
 import { initialListLoader } from 'Modules/Lists/list.loader';
 import { initialListsLoader } from 'Modules/Lists/lists.loader';
 import { tagsAllInitialLoader } from 'Modules/Tags/tags.loader';
@@ -27,11 +26,9 @@ interface RoutesInterface {
   Docs: Route;
   Tags: Route;
   Home: Route;
-  Link: Route;
   UserBookmarks: Route;
   UserLists: Route;
   Following: Route;
-  Followers: Route;
   User: Route;
   UserTags: Route;
   Users: Route;
@@ -70,16 +67,6 @@ export const Routes: RoutesInterface = {
     layout: 'withLeftSidebar',
   },
 
-  Link: {
-    name: 'Link',
-    path: '/:lang([a-z]{2})?/link/:linkId',
-    exact: true,
-    auth: true,
-    initialDataLoadersVisitor: [initialLinkLoader],
-    initialDataLoadersSession: [initialLinkLoader],
-    layout: 'withLeftSidebar',
-  },
-
   UserBookmarks: {
     name: 'UserBookmarks',
     path: '/:lang([a-z]{2})?/users/:userId/bookmarks',
@@ -103,16 +90,6 @@ export const Routes: RoutesInterface = {
   Following: {
     name: 'Following',
     path: '/:lang([a-z]{2})?/users/:userId/following',
-    exact: true,
-    auth: false,
-    initialDataLoadersVisitor: [],
-    initialDataLoadersSession: [],
-    layout: 'withLeftSidebar',
-  },
-
-  Followers: {
-    name: 'Followers',
-    path: '/:lang([a-z]{2})?/users/:userId/followers',
     exact: true,
     auth: false,
     initialDataLoadersVisitor: [],

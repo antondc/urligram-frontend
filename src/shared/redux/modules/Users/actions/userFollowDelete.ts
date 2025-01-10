@@ -39,10 +39,6 @@ export const userFollowDelete =
           ...UsersAfterResponse,
           byKey: {
             ...UsersAfterResponse?.byKey,
-            [targetUserId]: {
-              ...UsersAfterResponse?.byKey[targetUserId],
-              followers: UsersAfterResponse?.byKey[targetUserId]?.followers?.filter((item) => item !== originUserId),
-            },
             [originUserId]: {
               ...UsersAfterResponse?.byKey[originUserId],
               following: UsersAfterResponse?.byKey[originUserId]?.following?.filter((item) => item !== targetUserId),
@@ -63,6 +59,6 @@ export const userFollowDelete =
         },
       });
 
-      return error;
+      throw error;
     }
   };

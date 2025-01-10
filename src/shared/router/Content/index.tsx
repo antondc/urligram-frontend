@@ -5,15 +5,13 @@ import { createStructuredSelector } from 'reselect';
 
 import CookiesBanner from 'Components/CookiesBanner';
 import Footer from 'Components/Footer';
-import HeaderNew from 'Components/HeaderNew';
+import Header from 'Components/Header';
 import SidebarLeft from 'Components/SidebarLeft';
 import { selectPathWithoutLanguageParam } from 'Modules/Routes/selectors/selectPathWithoutLanguageParam';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
 import { selectUiSidebarleftState } from 'Modules/Ui/selectors/selectUiSidebarleftState';
-import Followers from 'Pages/Followers';
 import Following from 'Pages/Following';
 import Home from 'Pages/Home';
-import Link from 'Pages/Link';
 import List from 'Pages/List';
 import Lists from 'Pages/Lists';
 import Tags from 'Pages/Tags';
@@ -40,7 +38,7 @@ const Content: React.FC<Props> = ({ location, pathWithoutLanguageParam }) => {
   return (
     <div className="Content">
       <div className="Content-contentBackground" />
-      <HeaderNew />
+      <Header />
       <CookiesBanner />
       <div className={'Content-content' + (sidebarLeftClosed ? ' Content-content--sidebarLeftClosed' : '')}>
         {/* INTENDED => <Fade classname="Content-sidebarLeft" mounted speed="fastest" delayIn={250} appear> */}
@@ -57,12 +55,10 @@ const Content: React.FC<Props> = ({ location, pathWithoutLanguageParam }) => {
             <Route exact={Routes.List.exact} path={Routes.List.path} component={List} />
             <Route exact={Routes.Lists.exact} path={Routes.Lists.path} component={Lists} />
             <Route exact={Routes.Home.exact} path={Routes.Home.path} component={Home} />
-            <Route exact={Routes.Followers.exact} path={Routes.Followers.path} component={Followers} />
             <Route exact={Routes.Following.exact} path={Routes.Following.path} component={Following} />
             <Route exact={Routes.UserLists.exact} path={Routes.UserLists.path} component={UserLists} />
             <Route exact={Routes.UserTags.exact} path={Routes.UserTags.path} component={UserTags} />
             <Route exact={Routes.Tags.exact} path={Routes.Tags.path} component={Tags} />
-            <Route exact={Routes.Link.exact} path={Routes.Link.path} component={Link} />
           </Switch>
         </div>
         {/* INTENDED => </FadeInOut> */}

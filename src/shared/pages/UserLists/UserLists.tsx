@@ -3,12 +3,12 @@ import Helmet from 'react-helmet';
 
 import Bookmark from 'Assets/svg/bookmarkRounded.svg';
 import Cross from 'Assets/svg/cross.svg';
-import ListIcon from 'Assets/svg/list.svg';
+import Folder from 'Assets/svg/folder.svg';
 import Clock from 'Assets/svg/spinner6.svg';
 import User from 'Assets/svg/userFill.svg';
-import { BookmarkRowNewSkeletonGroup } from 'Components/BookmarkRowNew/BookmarkRowNewSkeletonGroup';
+import { BookmarkRowSkeletonGroup } from 'Components/BookmarkRow/BookmarkRowSkeletonGroup';
 import CardItem from 'Components/CardItem';
-import ListRowNew from 'Components/ListRowNew';
+import ListRow from 'Components/ListRow';
 import NoResults from 'Components/NoResults';
 import Pagination from 'Components/Pagination';
 import SubHeader, { SubHeaderSeparator } from 'Components/SubHeader';
@@ -65,7 +65,7 @@ export const UserLists: React.FC<Props> = ({
       // title props
       title={`@${user?.name}`}
       titleHref={`/users/${user?.id}`}
-      leftIcon={<ListIcon />}
+      leftIcon={<Folder className="UserLists-folderIcon" />}
       // select props
       selectPlaceholder={glossary.selectTags}
       currentQueryParamFilterTags={currentQueryParamFilterTags}
@@ -94,11 +94,11 @@ export const UserLists: React.FC<Props> = ({
     </SubHeader>
     <div className="UserLists-lists">
       {listsLoading ? (
-        <BookmarkRowNewSkeletonGroup length={listsIds?.length || DEFAULT_PAGE_SIZE} />
+        <BookmarkRowSkeletonGroup length={listsIds?.length || DEFAULT_PAGE_SIZE} />
       ) : (
         listsIds?.map((id) => (
           <CardItem key={id}>
-            <ListRowNew id={id} />
+            <ListRow id={id} />
           </CardItem>
         ))
       )}

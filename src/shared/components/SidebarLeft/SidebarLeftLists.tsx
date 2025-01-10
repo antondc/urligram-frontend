@@ -1,14 +1,14 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import Bookmark from 'Assets/svg/bookmark.svg';
+import Droppable from 'Components/DragDrop/Droppable';
 import { useScrollBeforeCallback } from 'Hooks/useScrollBeforeCallback';
-import { ListState, ListUserStatus } from 'Modules/Lists/lists.types';
+import { ListState } from 'Modules/Lists/lists.types';
 import { selectListWithNotificationsIds } from 'Modules/Lists/selectors/selectListWithNotificationsIds';
 import { selectCurrentRouteParams } from 'Modules/Routes/selectors/selectCurrentRouteParams';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import history from 'Services/History';
-import { NotificationDot } from '@antoniodcorrea/components';
+import { SidebarLeftList } from './SidebarLeftList';
 import { SidebarLeftSubItemsAnimation } from './SidebarLeftSubItemsAnimation';
 
 import './SidebarLeftLists.less';
@@ -36,39 +36,17 @@ const SidebarLeftLists: React.FC<Props> = ({ lists, loading, listsShown = true }
     <div className="SidebarLeftLists">
       <SidebarLeftSubItemsAnimation mounted={listsShown}>
         <ul className="SidebarLeftLists-lists">
-          {lists?.map((item, index) => {
-            const sessionListMembership = item?.members?.find((item) => item?.id === session?.id);
-            const listHasNotifications = listsWithNotificationsIds.includes(item?.id);
-
-            return (
-              <li
-                key={`${item?.id}-${index}`}
-                className={
-                  'SidebarLeftLists-list' + (currentListId === item?.id ? ' SidebarLeftLists-list--active' : '')
-                }
-                onClick={() => onListClick(item?.id)}
-              >
-                <span className="SidebarLeftLists-listTitle">
-                  {item?.name}
-                  <NotificationDot
-                    type="success"
-                    size="small"
-                    className={
-                      'SidebarLeftLists-dot' +
-                      (sessionListMembership?.userListStatus === ListUserStatus.Pending
-                        ? ' SidebarLeftLists-dot--pending'
-                        : '') +
-                      (!!listHasNotifications ? ' SidebarLeftLists-dot--pending' : '')
-                    }
-                  />
-                </span>
-                <span className="SidebarLeftLists-listInfo">
-                  {item?.bookmarksIds?.length}
-                  <Bookmark />
-                </span>
-              </li>
-            );
-          })}
+          {lists?.map((item, index) => (
+            <Droppable key={index} id={item?.id}>
+              <SidebarLeftList
+                sessionId={session?.id}
+                item={item}
+                currentListId={currentListId}
+                listsWithNotificationsIds={listsWithNotificationsIds}
+                onListClick={onListClick}
+              />
+            </Droppable>
+          ))}
         </ul>
       </SidebarLeftSubItemsAnimation>
     </div>

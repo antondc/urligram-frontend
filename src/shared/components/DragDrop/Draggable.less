@@ -1,0 +1,23 @@
+@import '../../css/imports.less';
+
+@c: .Draggable;
+
+@{c} {
+  &:hover {
+    cursor: grab;
+  }
+
+  &-base {
+    &--isDragging {
+      cursor: grabbing !important;
+      opacity: 0.6;
+      transition: opacity @td-fast @ease;
+    }
+  }
+
+  &-preview {
+    zoom: 0.1;
+    border: 1px @c-base dashed;
+    background: @c-background;
+  }
+}

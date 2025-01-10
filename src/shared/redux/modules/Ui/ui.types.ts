@@ -30,6 +30,8 @@ export const UI_SWITCH_BOOKMARK_ICONS_MOUNTED = 'UI_SWITCH_BOOKMARK_ICONS_MOUNTE
 export const UI_SWITCH_BOOKMARK_ICONS_UNMOUNTED = 'UI_SWITCH_BOOKMARK_ICONS_UNMOUNTED';
 export const UI_SIDEBAR_LEFT_OPEN = 'UI_SIDEBAR_LEFT_OPEN';
 export const UI_SIDEBAR_LEFT_CLOSE = 'UI_SIDEBAR_LEFT_CLOSE';
+export const UI_SIDEBAR_LISTS_OPEN = 'UI_SIDEBAR_LISTS_OPEN';
+export const UI_SIDEBAR_LISTS_CLOSE = 'UI_SIDEBAR_LISTS_CLOSE';
 
 export type UiBaseModal = {
   type?: 'modal' | 'popup' | 'slider';
@@ -43,6 +45,14 @@ export enum NotificationType {
   BookmarkDeleted = 'bookmark-deleted',
   GeneralError = 'general-error',
   LinkVoted = 'link-voted',
+  BookmarkNorRemovableFromList = 'bookmark-not-removable-from-list',
+  BookmarkAddedToList = 'bookmark-added-to-list',
+  BookmarkNotAddedToList = 'bookmark-not-added-to-list',
+  BookmarkRemovedFromList = 'bookmark-removed-from-list',
+  ConnectionAdded = 'conexion-added',
+  ConnectionAddedFailed = 'conexion-added-failed',
+  ConnectionRemoved = 'conexion-removed',
+  ConnectionRemovedFailed = 'conexion-removed-failed',
 }
 
 export enum NotificationStyle {
@@ -63,15 +73,12 @@ export type NotificationState = {
   listId?: number;
   bookmarkId?: number;
   linkId?: number;
+  bookmarkTitle?: string;
+  listTitle?: string;
   type: NotificationType;
   style: NotificationStyle;
   status: NotificationStatus;
 };
-
-export type BookmarkListsModal = {
-  bookmarkId?: number;
-  loading?: boolean;
-} & UiBaseModal;
 
 type BookmarkSendModal = {
   bookmarkId?: number;
@@ -110,11 +117,13 @@ export type UiState = {
   } & UiBaseModal;
   listAddUserModal: UiBaseModal;
   signUpDisabledModal: UiBaseModal;
-  bookmarkListsModal: BookmarkListsModal;
   bookmarkSendModals: BookmarkSendModals;
   notifications?: NotificationState[];
   sidebarLeftState: {
     closed: boolean;
+  };
+  sidebarListsState: {
+    open: boolean;
   };
 };
 
@@ -208,21 +217,6 @@ interface SwitchListModal extends UnknownAction {
   payload: Partial<UiState>;
 }
 
-interface BookmarkListModalsMount extends UnknownAction {
-  type: typeof UI_BOOKMARK_LISTS_MODALS_MOUNT;
-  payload: Partial<UiState>;
-}
-
-interface BookmarkListModalsUnmount extends UnknownAction {
-  type: typeof UI_BOOKMARK_LISTS_MODALS_UNMOUNT;
-  payload: Partial<UiState>;
-}
-
-interface BookmarkListModalsLoading extends UnknownAction {
-  type: typeof UI_BOOKMARK_LISTS_MODALS_LOADING;
-  payload: Partial<UiState>;
-}
-
 interface UiNotificationViewedAction extends UnknownAction {
   type: typeof UI_NOTIFICATION_VIEWED;
   payload: UiState;
@@ -268,6 +262,16 @@ interface sidebarLeftClose extends UnknownAction {
   payload: Partial<UiState>;
 }
 
+interface sidebarListsOpen extends UnknownAction {
+  type: typeof UI_SIDEBAR_LISTS_OPEN;
+  payload: Partial<UiState>;
+}
+
+interface sidebarListsClose extends UnknownAction {
+  type: typeof UI_SIDEBAR_LISTS_CLOSE;
+  payload: Partial<UiState>;
+}
+
 export type UiActions =
   | UiScreenTypeSet
   | UiScreenLock
@@ -288,9 +292,6 @@ export type UiActions =
   | SwitchBookmarkUpdateModal
   | SwitchListModal
   | SwitchSignUpDisabledModal
-  | BookmarkListModalsMount
-  | BookmarkListModalsUnmount
-  | BookmarkListModalsLoading
   | UiNotificationViewedAction
   | UiNotificationPushAction
   | UiCloseAllModals
@@ -298,4 +299,6 @@ export type UiActions =
   | SwitchBookmarkActionsButtonMounted
   | SwitchBookmarkActionsButtonUnmounted
   | sidebarLeftOpen
-  | sidebarLeftClose;
+  | sidebarLeftClose
+  | sidebarListsOpen
+  | sidebarListsClose;

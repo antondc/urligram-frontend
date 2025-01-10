@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
+import User from 'Assets/svg/userFill.svg';
 import { selectCurrentRouteParams } from 'Modules/Routes/selectors/selectCurrentRouteParams';
 import { UserState } from 'Modules/Users/users.types';
 import history from 'Services/History';
@@ -17,8 +18,8 @@ const SidebarLeftUsers: React.FC<Props> = ({ users, usersShown = true }) => {
   const currentRouteParams = useSelector(selectCurrentRouteParams);
   const currentFollowerId = currentRouteParams?.userId;
 
-  const onFollowerClick = (followerId: string) => {
-    history.push(`/users/${followerId}`);
+  const onUserClick = (userId: string) => {
+    history.push(`/users/${userId}`);
   };
 
   if (!users?.length) return null;
@@ -31,12 +32,11 @@ const SidebarLeftUsers: React.FC<Props> = ({ users, usersShown = true }) => {
             <li
               key={`${item?.id}-${index}`}
               className={
-                'SidebarLeftUsers-follower' +
-                (currentFollowerId === item?.id ? ' SidebarLeftUsers-follower--active' : '')
+                'SidebarLeftUsers-user' + (currentFollowerId === item?.id ? ' SidebarLeftUsers-user--active' : '')
               }
-              onClick={() => onFollowerClick(item?.id)}
+              onClick={() => onUserClick(item?.id)}
             >
-              {item?.name}
+              <User className="SidebarLeftUsers-icon" /> {item?.name}
             </li>
           ))}
         </ul>

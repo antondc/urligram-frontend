@@ -2,9 +2,8 @@ import React from 'react';
 
 import ArrowRight from 'Assets/svg/arrowRight.svg';
 import BookmarkFilled from 'Assets/svg/bookmarkFilled.svg';
-import FlagLeft from 'Assets/svg/flagLeft.svg';
-import FlagRight from 'Assets/svg/flagRight.svg';
-import List from 'Assets/svg/list.svg';
+import Flag from 'Assets/svg/flag.svg';
+import Folder from 'Assets/svg/folder.svg';
 import Circle from 'Assets/svg/logoCircleEmpty.svg';
 import Tag from 'Assets/svg/tag.svg';
 import TriangleRounded from 'Assets/svg/triangleRounded.svg';
@@ -26,9 +25,6 @@ interface Props {
   lists: ListState[];
   listsLoading: boolean;
   listsShown: boolean;
-  followersShown: boolean;
-  followers: UserState[];
-  onFollowersTriangleClick: () => void;
   followingShown: boolean;
   following: UserState[];
   onFollowingTriangleClick: () => void;
@@ -45,10 +41,8 @@ export const SidebarLeft: React.FC<Props> = ({
   sessionId,
   glossary,
   lists,
+  listsLoading,
   listsShown,
-  followersShown,
-  followers,
-  onFollowersTriangleClick,
   followingShown,
   following,
   onFollowingTriangleClick,
@@ -86,7 +80,7 @@ export const SidebarLeft: React.FC<Props> = ({
           frontend
           scrollBeforeNavigate
         >
-          <List className="SidebarLeft-itemIcon SidebarLeft-itemIconList" />
+          <Folder className="SidebarLeft-itemIcon SidebarLeft-itemIconList" />
           <span className="SidebarLeft-itemDescription">{glossary.lists}</span>
         </A>
         <A
@@ -127,11 +121,18 @@ export const SidebarLeft: React.FC<Props> = ({
           </A>
           <div
             className={
-              'SidebarLeft-item' + (routeName === 'UserLists' && isUserPage ? ' SidebarLeft-item--active' : '')
+              'SidebarLeft-item SidebarLeft-itemWithSublist' +
+              (routeName === 'UserLists' && isUserPage ? ' SidebarLeft-item--active' : '')
             }
           >
-            <A href={`users/${sessionId}/lists?sort=-createdAt`} styled={false} frontend scrollBeforeNavigate>
-              <List className="SidebarLeft-itemIcon SidebarLeft-itemIconList" />
+            <A
+              className="SidebarLeft-itemLists"
+              href={`users/${sessionId}/lists?sort=-createdAt`}
+              styled={false}
+              frontend
+              scrollBeforeNavigate
+            >
+              <Folder className="SidebarLeft-itemIcon SidebarLeft-itemIconList" />
               <span className="SidebarLeft-itemDescription">
                 <span>{glossary.myLists}</span>
               </span>
@@ -144,36 +145,16 @@ export const SidebarLeft: React.FC<Props> = ({
             </span>
           </div>
           <div className="SidebarLeft-lists">
-            <SidebarLeftLists lists={lists} loading={false} listsShown={listsShown} />
-          </div>
-          <A
-            className={
-              'SidebarLeft-item' + (routeName === 'Followers' && isUserPage ? ' SidebarLeft-item--active' : '')
-            }
-            href={`users/${sessionId}/followers`}
-            styled={false}
-            frontend
-            scrollBeforeNavigate
-          >
-            <FlagRight className="SidebarLeft-itemIcon" />
-            <span className="SidebarLeft-itemDescription">{glossary.followers}</span>
-            <span
-              className={'SidebarLeft-triangle' + (followersShown ? ' SidebarLeft-triangle--open' : '')}
-              onClick={onFollowersTriangleClick}
-            >
-              <TriangleRounded className="SidebarLeft-triangleIcon" />
-            </span>
-          </A>
-          <div className="SidebarLeft-users">
-            <SidebarLeftUsers users={followers} usersShown={followersShown} />
+            <SidebarLeftLists lists={lists} loading={listsLoading} listsShown={listsShown} />
           </div>
           <div
             className={
-              'SidebarLeft-item' + (routeName === 'Following' && isUserPage ? ' SidebarLeft-item--active' : '')
+              'SidebarLeft-item SidebarLeft-itemWithSublist' +
+              (routeName === 'Following' && isUserPage ? ' SidebarLeft-item--active' : '')
             }
           >
             <A href={`users/${sessionId}/following`} styled={false} frontend scrollBeforeNavigate>
-              <FlagLeft className="SidebarLeft-itemIcon" />
+              <Flag className="SidebarLeft-itemIcon SidebarLeft-itemIconLeft" />
               <span className="SidebarLeft-itemDescription">{glossary.following}</span>
             </A>
             <span

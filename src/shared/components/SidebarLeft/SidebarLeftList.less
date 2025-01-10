@@ -1,0 +1,84 @@
+@import '../../css/imports.less';
+
+@c: .SidebarLeftList;
+
+@{c} {
+  display: flex;
+  position: relative;
+  justify-content: flex-start;
+  height: 20px;
+  font-size: @fs-normal;
+  font-weight: @fw-medium;
+  color: @gradientColors[black-2];
+  transition: color @td-fast @ease;
+  align-items: center;
+  margin: 7px 0;
+
+  svg {
+    path[data-id='outer'] {
+      fill: @gradientColors[black-2];
+      transition: fill @td-fast @ease;
+    }
+
+    path[data-id='inner'] {
+      fill: @gradientColors[black-2];
+      transition: fill @td-fast @ease;
+    }
+  }
+
+  &:hover:not(@{c}--active) {
+    color: @gradientColors[blue-1];
+    cursor: pointer;
+
+    svg {
+      path[data-id='outer'] {
+        fill: @gradientColors[blue-1];
+      }
+
+      path[data-id='inner'] {
+        fill: @gradientColors[blue-1];
+      }
+    }
+  }
+
+  &--active {
+    color: @gradientColors[blue-1];
+
+    svg {
+      path[data-id='outer'] {
+        fill: @gradientColors[blue-1];
+      }
+
+      path[data-id='inner'] {
+        fill: @c-background;
+      }
+    }
+  }
+
+  &-listIcon {
+    width: @svgSize-normal;
+    margin-right: 6px;
+  }
+
+  &-listTitle {
+    font-size: @fs-normal;
+    white-space: nowrap;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    text-overflow: ellipsis;
+
+    .hideScrollbar;
+  }
+
+  &-dot {
+    position: absolute;
+    top: 0;
+    right: -5px;
+    opacity: 0;
+    transition: opacity @td-slow @ease;
+
+    &--pending {
+      opacity: 1;
+    }
+  }
+}

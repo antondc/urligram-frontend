@@ -17,7 +17,9 @@
     top: 10px;
     right: 21px;
     transform: rotate(180deg);
-    transition: border @td-fast @ease, transform @td-fast @ease;
+    transition:
+      border @td-fast @ease,
+      transform @td-fast @ease;
     z-index: 1;
     border-radius: 50%;
 
@@ -96,10 +98,21 @@
     transition: fill @td-fast @ease;
   }
 
+  &-itemIconLeft {
+    transform: scaleX(-1);
+  }
+
+  &-itemLists {
+    display: flex;
+    align-items: center;
+  }
+
   &-itemIconList {
-    height: 14px;
-    width: 14px;
     margin-right: 12px;
+  }
+
+  &-itemWithSublist {
+    padding-bottom: 3px;
   }
 
   &-lists,
@@ -116,7 +129,9 @@
       width: 14px;
       fill: @c-accent;
       transform: rotate(90deg);
-      transition: transform @td-fast @ease-outQuint, fill @td-fast @ease-outQuint;
+      transition:
+        transform @td-fast @ease-outQuint,
+        fill @td-fast @ease-outQuint;
     }
 
     &--open {

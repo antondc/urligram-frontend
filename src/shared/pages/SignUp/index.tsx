@@ -77,8 +77,6 @@ const SignUp: React.FC = () => {
 
     if (!value) {
       setNameError('Name required');
-
-      return;
     }
 
     const nameLowercase = value.toLowerCase();

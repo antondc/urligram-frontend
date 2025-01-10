@@ -13,9 +13,6 @@ import {
   SWITCH_SIGN_UP_MODAL,
   SWITCH_WELCOME_MODAL,
   SWITCH_WELCOME_MODAL_ERROR,
-  UI_BOOKMARK_LISTS_MODALS_LOADING,
-  UI_BOOKMARK_LISTS_MODALS_MOUNT,
-  UI_BOOKMARK_LISTS_MODALS_UNMOUNT,
   UI_CLOSE_ALL_MODALS,
   UI_NOTIFICATION_PUSH,
   UI_NOTIFICATION_VIEWED,
@@ -26,6 +23,8 @@ import {
   UI_SCREEN_TYPE_SET,
   UI_SIDEBAR_LEFT_CLOSE,
   UI_SIDEBAR_LEFT_OPEN,
+  UI_SIDEBAR_LISTS_CLOSE,
+  UI_SIDEBAR_LISTS_OPEN,
   UI_SWITCH_BOOKMARK_ICONS_MOUNTED,
   UI_SWITCH_BOOKMARK_ICONS_UNMOUNTED,
   UiActions,
@@ -95,12 +94,6 @@ export const initialState: UiState = {
     type: 'popup',
     mounted: false,
   },
-  bookmarkListsModal: {
-    type: 'modal',
-    mounted: false,
-    bookmarkId: undefined,
-    loading: false,
-  },
   bookmarkSendModals: [],
   notifications: [],
   bookmarkActionsIcons: {
@@ -110,6 +103,9 @@ export const initialState: UiState = {
   },
   sidebarLeftState: {
     closed: false,
+  },
+  sidebarListsState: {
+    open: false,
   },
 };
 
@@ -132,9 +128,6 @@ export const Ui = (state = initialState, action: UiActions): UiState => {
     case SWITCH_RESET_PASSWORD_MODAL:
     case SWITCH_BOOKMARK_CREATE_MODAL:
     case SWITCH_BOOKMARK_UPDATE_MODAL:
-    case UI_BOOKMARK_LISTS_MODALS_MOUNT:
-    case UI_BOOKMARK_LISTS_MODALS_UNMOUNT:
-    case UI_BOOKMARK_LISTS_MODALS_LOADING:
     case SWITCH_SIGN_UP_DISABLED_MODAL:
     case SWITCH_LIST_MODAL:
     case UI_NOTIFICATION_VIEWED:
@@ -145,6 +138,8 @@ export const Ui = (state = initialState, action: UiActions): UiState => {
     case UI_SWITCH_BOOKMARK_ICONS_UNMOUNTED:
     case UI_SIDEBAR_LEFT_CLOSE:
     case UI_SIDEBAR_LEFT_OPEN:
+    case UI_SIDEBAR_LISTS_CLOSE:
+    case UI_SIDEBAR_LISTS_OPEN:
       return Object.assign({}, state, action.payload);
 
     default:

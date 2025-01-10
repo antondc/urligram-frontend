@@ -11,10 +11,14 @@ import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLo
 import { selectSessionUserId } from 'Modules/Session/selectors/selectSessionUserId';
 import { uiSidebarLeftClose } from 'Modules/Ui/actions/uiSidebarLeftClose';
 import { uiSidebarLeftOpen } from 'Modules/Ui/actions/uiSidebarLeftOpen';
+import { uiSidebarListsClose } from 'Modules/Ui/actions/uiSidebarListsClose';
+import { uiSidebarListsOpen } from 'Modules/Ui/actions/uiSidebarListsOpen';
 import { selectUiSidebarleftState } from 'Modules/Ui/selectors/selectUiSidebarleftState';
-import { selectUserFollowers } from 'Modules/Users/selectors/selectUserFollowers';
+import { selectUiSidebarListsOpen } from 'Modules/Ui/selectors/selectUiSidebarListsOpen';
 import { selectUserFollowing } from 'Modules/Users/selectors/selectUserFollowing';
+import { Routes } from 'Router/routes';
 import { LocalStorageWrapper } from 'Services/LocalStorageWrapper';
+import { useHandleDrop } from './hooks/useHandleDrop';
 import { SidebarLeft as SidebarLeftUi } from './SidebarLeft';
 
 type LocalStorageListsShown = {
@@ -35,40 +39,34 @@ const SidebarLeft: React.FC = () => {
   const route = useSelector(selectCurrentRoute);
   const lists = useSelector((state: RootState) => selectListsByUserIdAll(state, { userId: sessionId }));
   const listsLoading = useSelector(selectListsLoading);
-  const followers = useSelector(selectUserFollowers);
   const following = useSelector(selectUserFollowing);
-  const [listsShown, setListsShown] = useState<boolean>(true);
-  const [followersShown, setFollowersShown] = useState<boolean>(false);
   const [followingShown, setFollowingShown] = useState<boolean>(false);
   const timeMsInFourHours = Date.now() + 4 * 60 * 60 * 1000;
-  const sidebarLeftClosed = useSelector(selectUiSidebarleftState);
+  const sidebarLeftClosedState = useSelector(selectUiSidebarleftState);
+  const sidebarLeftClosed = sidebarLeftClosedState && !!lists?.length && !listsLoading;
   const isUserPage = route?.params?.userId === sessionId;
+  const listsShown = useSelector(selectUiSidebarListsOpen);
+
+  useHandleDrop();
 
   const listsClose = () => {
-    setListsShown(false);
+    dispatch(uiSidebarListsClose());
     localStorageWrapper.setValue('listsShown', { mounted: false }, timeMsInFourHours);
   };
 
   const listsOpen = () => {
-    setListsShown(true);
-    localStorageWrapper.setValue('listsShown', { mounted: true }, timeMsInFourHours);
-  };
+    dispatch(uiSidebarListsOpen());
 
-  const onFollowersTriangleClick = () => {
-    setFollowersShown(!followersShown);
-    setFollowingShown(false);
-    listsClose();
+    localStorageWrapper.setValue('listsShown', { mounted: true }, timeMsInFourHours);
   };
 
   const onFollowingTriangleClick = () => {
     setFollowingShown(!followingShown);
-    setFollowersShown(false);
     listsClose();
   };
 
   const onListsTriangleClick = () => {
     setFollowingShown(false);
-    setFollowersShown(false);
 
     if (listsShown) {
       listsClose();
@@ -83,8 +81,7 @@ const SidebarLeft: React.FC = () => {
       localStorageWrapper.setValue('sidebarLeftState', { closed: false }, timeMsInFourHours);
     } else {
       dispatch(uiSidebarLeftClose());
-      setListsShown(false);
-      setFollowersShown(false);
+      dispatch(uiSidebarListsClose());
       setFollowingShown(false);
       localStorageWrapper.setValue('listsShown', { mounted: false }, timeMsInFourHours);
       localStorageWrapper.setValue('sidebarLeftState', { closed: true }, timeMsInFourHours);
@@ -92,6 +89,18 @@ const SidebarLeft: React.FC = () => {
   };
 
   const itemClick = () => {};
+
+  // If we are not in one of these pages, close the lists
+  useEffect(() => {
+    if (
+      route.name === Routes.Home.name ||
+      route.name === Routes.UserBookmarks.name ||
+      route.name === Routes.List.name
+    ) {
+      return;
+    }
+    dispatch(uiSidebarListsClose());
+  }, [route.name]);
 
   useEffect(() => {
     if (!sessionId) return;
@@ -128,9 +137,6 @@ const SidebarLeft: React.FC = () => {
       lists={lists}
       listsLoading={listsLoading}
       listsShown={listsShown}
-      followers={followers}
-      followersShown={followersShown}
-      onFollowersTriangleClick={onFollowersTriangleClick}
       following={following}
       followingShown={followingShown}
       onFollowingTriangleClick={onFollowingTriangleClick}

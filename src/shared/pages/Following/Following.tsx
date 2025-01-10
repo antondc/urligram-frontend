@@ -2,14 +2,14 @@ import React from 'react';
 import Helmet from 'react-helmet';
 
 import Bookmark from 'Assets/svg/bookmarkFilled.svg';
-import FlagLeft from 'Assets/svg/flagLeft.svg';
+import Flag from 'Assets/svg/flag.svg';
 import Title from 'Assets/svg/sortTitle.svg';
 import CardItem from 'Components/CardItem';
 import NoResults from 'Components/NoResults';
 import Pagination from 'Components/Pagination';
 import SubHeader from 'Components/SubHeader';
-import UserRowNew from 'Components/UserRowNew';
-import { UserRowNewSkeletonGroup } from 'Components/UserRowNew/UserRowNewSkeletonGroup';
+import UserRow from 'Components/UserRow';
+import { UserRowSkeletonGroup } from 'Components/UserRow/UserRowSkeletonGroup';
 import { GlossaryState } from 'Modules/Languages/languages.types';
 import { TagState } from 'Modules/Tags/tags.types';
 import { UserState } from 'Modules/Users/users.types';
@@ -61,7 +61,7 @@ export const Following: React.FC<Props> = ({
       // title props
       title={`@${user?.name}`}
       titleHref={`/users/${user?.id}`}
-      leftIcon={<FlagLeft />}
+      leftIcon={<Flag className="Following-icon" />}
       // select props
       selectPlaceholder={glossary.selectTags}
       currentQueryParamFilterTags={currentQueryParamFilterTags}
@@ -83,11 +83,11 @@ export const Following: React.FC<Props> = ({
     />
     <div className="Following-following">
       {usersLoading ? (
-        <UserRowNewSkeletonGroup length={usersCurrentIds?.length || DEFAULT_PAGE_SIZE} />
+        <UserRowSkeletonGroup length={usersCurrentIds?.length || DEFAULT_PAGE_SIZE} />
       ) : (
         usersCurrentIds?.map((id) => (
           <CardItem key={id}>
-            <UserRowNew id={id} />
+            <UserRow id={id} />
           </CardItem>
         ))
       )}

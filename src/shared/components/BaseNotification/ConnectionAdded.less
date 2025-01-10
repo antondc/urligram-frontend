@@ -1,0 +1,20 @@
+@import '../../css/imports.less';
+
+@c: .ConnectionAdded;
+
+@{c} {
+  &-title {
+    font-weight: @fw-semibold;
+  }
+
+  &-text {
+    font-size: @fs-small;
+  }
+
+  &-user:not(.noClass) {
+    font-weight: @fw-medium;
+    text-decoration: none;
+
+    .hoverTransition();
+  }
+}

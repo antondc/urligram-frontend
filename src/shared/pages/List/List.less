@@ -40,6 +40,13 @@
     .hoverTransition;
   }
 
+  &-folderIcon:not(.noClass) {
+    path[data-id='inner'] {
+      transition: fill @td-fast @ease;
+      fill: @c-background;
+    }
+  }
+
   &-notificationIconCross {
     height: 14px;
     width: 14px;

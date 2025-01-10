@@ -6,7 +6,7 @@ import { createStructuredSelector } from 'reselect';
 
 import CookiesBanner from 'Components/CookiesBanner';
 import Footer from 'Components/Footer';
-import HeaderNew from 'Components/HeaderNew';
+import Header from 'Components/Header';
 import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCurrentLanguageSlug';
 import { selectPathWithoutLanguageParam } from 'Modules/Routes/selectors/selectPathWithoutLanguageParam';
 import { selectSessionLoggedIn } from 'Modules/Session/selectors/selectSessionLoggedIn';
@@ -33,7 +33,7 @@ interface Props {
 const NoSidebar: React.FC<Props> = ({ loggedIn, location, defaultCurrentSlug, pathWithoutLanguageParam }) => (
   <div className="NoSidebar">
     <div className="NoSidebar-noSidebarBackground" />
-    <HeaderNew />
+    <Header />
     <CookiesBanner />
 
     <div className="NoSidebar-content">
@@ -43,7 +43,6 @@ const NoSidebar: React.FC<Props> = ({ loggedIn, location, defaultCurrentSlug, pa
           {/* {loggedIn && <Redirect from={Routes.SignUpConfirmation.path} to={'/' + defaultCurrentSlug + '/'} />} */}
           {loggedIn && <Redirect from={Routes.SignUp.path} to={'/' + defaultCurrentSlug + '/'} />}
           {loggedIn && <Redirect from={Routes.Login.path} to={'/' + defaultCurrentSlug + '/'} />}
-          {!loggedIn && <Redirect from={Routes.Link.path} to={Routes.Home.route} />}
 
           {/* General */}
           <Route exact={Routes.Login.exact} path={Routes.Login.path} component={Login} />
