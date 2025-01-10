@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
+import { selectCurrentGlossary } from 'Modules/Languages/selectors/selectCurrentGlossary';
 import { selectSession } from 'Modules/Session/selectors/selectSession';
 import { COOKIE_POLICY_COOKIE, DELAY_SLOW_MS } from 'Root/src/shared/constants';
 import { CookiesWrapper } from 'Services/CookiesWrapper';
-import { selectCurrentGlossary } from 'Modules/Languages/selectors/selectCurrentGlossary';
 import { CookiesBanner as CookiesBannerUi } from './CookiesBanner';
 
 const CookiesBanner: React.FC = () => {
@@ -12,12 +12,11 @@ const CookiesBanner: React.FC = () => {
   const glossary = useSelector(selectCurrentGlossary);
   const cookiesWrapper = new CookiesWrapper();
   const [accepted, setAccepted] = useState<boolean>(false);
-  const [show, setShow] = useState<boolean>(!session?.id);
+  const [show, setShow] = useState<boolean>(!session?.id && accepted);
   const timeMsInNinetyDays = Date.now() + 1000 * 60 * 60 * 24 * 90;
 
   const onAccept = () => {
     const cookiesWrapper = new CookiesWrapper();
-
     cookiesWrapper.setCookie(COOKIE_POLICY_COOKIE, '1', timeMsInNinetyDays);
     setAccepted(true);
 
