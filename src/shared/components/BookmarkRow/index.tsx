@@ -19,6 +19,7 @@ import { switchBookmarkActionButtonsUnmounted } from 'Modules/Ui/actions/switchB
 import { switchBookmarkUpdateModal } from 'Modules/Ui/actions/switchBookmarkUpdateModal';
 import { switchLoginModal } from 'Modules/Ui/actions/switchLoginModal';
 import { uiNotificationPush } from 'Modules/Ui/actions/uiNotificationPush';
+import { uiSidebarLeftOpen } from 'Modules/Ui/actions/uiSidebarLeftOpen';
 import { uiSidebarListsOpen } from 'Modules/Ui/actions/uiSidebarListsOpen';
 import { selectBookmarkActionsIcons } from 'Modules/Ui/selectors/selectBookmarkActionsIcons';
 import { selectUiScreenTypeIsDesktop } from 'Modules/Ui/selectors/selectUiScreenTypeIsDesktop';
@@ -145,6 +146,7 @@ const BookmarkRow: React.FC<Props> = ({ id, listId, tagsHref = '', isDragging })
   // If we are dragging, open the lists sidebar
   useEffect(() => {
     isDragging && dispatch(uiSidebarListsOpen());
+    isDragging && dispatch(uiSidebarLeftOpen());
   }, [isDragging]);
 
   useEffect(() => {
