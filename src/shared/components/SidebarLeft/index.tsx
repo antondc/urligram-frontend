@@ -42,8 +42,7 @@ const SidebarLeft: React.FC = () => {
   const following = useSelector(selectUserFollowing);
   const [followingShown, setFollowingShown] = useState<boolean>(false);
   const timeMsInFourHours = Date.now() + 4 * 60 * 60 * 1000;
-  const sidebarLeftClosedState = useSelector(selectUiSidebarleftState);
-  const sidebarLeftClosed = sidebarLeftClosedState && !!lists?.length && !listsLoading;
+  const sidebarLeftClosed = useSelector(selectUiSidebarleftState);
   const isUserPage = route?.params?.userId === sessionId;
   const listsShown = useSelector(selectUiSidebarListsOpen);
 
@@ -103,8 +102,10 @@ const SidebarLeft: React.FC = () => {
   }, [route.name]);
 
   useEffect(() => {
-    if (!sessionId) return;
-    dispatch(listsLoadByUserId({ userId: sessionId, rawData: true }));
+    (async () => {
+      if (!sessionId) return;
+      await dispatch(listsLoadByUserId({ userId: sessionId, rawData: true }));
+    })();
   }, [sessionId]);
 
   useEffect(() => {
