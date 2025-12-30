@@ -26,9 +26,7 @@ before_script:
 
 stages:
   - github_clone
-  - install
   - test
-  - build_production
   - deploy_production
 
 cache:
