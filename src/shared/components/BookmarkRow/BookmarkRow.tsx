@@ -68,7 +68,7 @@ export const BookmarkRow: React.FC<BookmarkRowProps> = ({
     key={bookmark?.id}
   >
     <div className="BookmarkRow-title">
-      <Img className="BookmarkRow-titleIcon" src={bookmark?.favicon} alt={bookmark?.title} title={bookmark?.title} />
+      <Img className="BookmarkRow-titleIcon" src={bookmark?.favicon || bookmark?.id} alt={bookmark?.title} title={bookmark?.title} />
       <A
         className="BookmarkRow-titleLink"
         href={bookmark?.url}
