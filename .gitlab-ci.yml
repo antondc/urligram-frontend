@@ -97,7 +97,7 @@ deploy_production:
         && export NPM_TOKEN=${NPM_TOKEN}
         && cd ${SERVER_PATH_PRODUCTION}
         && nvm use --delete-prefix
-        && pm2 delete api.urligram.com || true
+        && pm2 delete urligram.com || true
         && export JWT_SECRET=${JWT_SECRET}
         && NODE_ENV=production pm2 start ./dist/server.js --name urligram.com --update-env
       "
