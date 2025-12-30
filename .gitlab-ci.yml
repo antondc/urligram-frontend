@@ -46,14 +46,6 @@ github_clone:
     - git push github --all
     - git push github --tags
 
-install:
-  stage: install
-  script:
-    - npm install --verbose -f
-  artifacts:
-    paths:
-      - node_modules/
-
 test:
   stage: test
   script:
@@ -61,13 +53,6 @@ test:
   artifacts:
     paths:
       - node_modules/
-
-build_prod:
-  stage: build_production
-  only:
-    - master
-  script:
-    - npm run prod
 
 deploy_production:
   stage: deploy_production
