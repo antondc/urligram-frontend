@@ -28,9 +28,7 @@ stages:
   - github_clone
   - install
   - test
-  - build_staging
   - build_production
-  - deploy_staging
   - deploy_production
 
 cache:
@@ -64,52 +62,12 @@ test:
     paths:
       - node_modules/
 
-build_staging:
-  stage: build_staging
-  only:
-    - staging
-  script:
-    - npm run stage
-
 build_prod:
   stage: build_production
   only:
     - master
   script:
     - npm run prod
-
-deploy_staging:
-  stage: deploy_staging
-  only:
-    - staging
-  script:
-    - ssh ${SERVER_USER}@${SERVER_ADDRESS} "
-        cd ${SERVER_PATH_STAGING}
-        && rm -rf node_modules dist/* tmp
-      "
-    - ssh ${SERVER_USER}@${SERVER_ADDRESS} "
-        cd ${SERVER_PATH_STAGING}
-        && git pull origin staging
-      "
-    - ssh ${SERVER_USER}@${SERVER_ADDRESS} "
-        source ~/.bash_profile
-        && export NPM_TOKEN=${NPM_TOKEN}
-        && export JWT_SECRET=${JWT_SECRET}
-        && cd ${SERVER_PATH_STAGING}
-        && nvm use --delete-prefix
-        && git checkout staging
-        && npm ci --verbose
-        && npm run stage
-      "
-    - ssh ${SERVER_USER}@${SERVER_ADDRESS} "
-        cd ${SERVER_PATH_STAGING}
-        && pm2 delete staging.urligram.com 2> /dev/null
-      "
-    - ssh ${SERVER_USER}@${SERVER_ADDRESS} "
-        cd ${SERVER_PATH_STAGING}
-        && export JWT_SECRET=${JWT_SECRET}
-        && NODE_ENV=staging pm2 start ./dist/server.js --name staging.urligram.com --update-env
-      "
 
 deploy_production:
   stage: deploy_production
@@ -135,11 +93,11 @@ deploy_production:
         && npm run prod
       "
     - ssh ${SERVER_USER}@${SERVER_ADDRESS} "
-        cd ${SERVER_PATH_PRODUCTION}
-        && pm2 delete urligram.com
-      "
-    - ssh ${SERVER_USER}@${SERVER_ADDRESS} "
-        cd ${SERVER_PATH_PRODUCTION}
+        source ~/.bash_profile
+        && export NPM_TOKEN=${NPM_TOKEN}
+        && cd ${SERVER_PATH_PRODUCTION}
+        && nvm use --delete-prefix
+        && pm2 delete api.urligram.com || true
         && export JWT_SECRET=${JWT_SECRET}
         && NODE_ENV=production pm2 start ./dist/server.js --name urligram.com --update-env
       "
