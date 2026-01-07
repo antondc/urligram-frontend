@@ -8,6 +8,7 @@ services:
       NODE_ENV: development
       APP_ENV: localDevelopment
     volumes:
+      - ./:/app
       - /app/node_modules
     ports:
       - "9228:9228"
