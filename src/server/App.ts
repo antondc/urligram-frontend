@@ -9,18 +9,44 @@ import https from 'https';
 import logger from 'morgan';
 import { AddressInfo } from 'net';
 import path from 'path';
-import webpack from 'webpack';
-import webpackDevMiddleware from 'webpack-dev-middleware';
-import webpackHotMiddleware from 'webpack-hot-middleware';
 
-import { WEBPACK_ROOT } from '../../webpack/constants';
-import webpackConfig from '../../webpack/webpack.client.dev';
+import { NODE_ENV_DEVELOPMENT, WEBPACK_ROOT } from 'Root/webpack/constants';
 import allRoutes from './routes/allRoutes';
 import signUpConfirmation from './routes/signUpConfirmation';
 import serveGzip from './tools/serveGzip';
 
-const compiler = webpack(webpackConfig);
 const app = express();
+
+if (process.env.NODE_ENV === NODE_ENV_DEVELOPMENT) {
+  const webpack = require('webpack');
+  const webpackDevMiddleware = require('webpack-dev-middleware');
+  const webpackHotMiddleware = require('webpack-hot-middleware');
+  const webpackConfig = require('../../webpack/webpack.client.dev');
+
+  try {
+    const compiler = webpack(webpackConfig.default);
+
+    app.use(
+      webpackDevMiddleware(compiler, {
+        publicPath: WEBPACK_ROOT,
+        writeToDisk: true,
+      })
+    );
+
+    app.use(
+      webpackHotMiddleware(compiler, {
+        log: console.log,
+        path: '/__webpack_hmr',
+        heartbeat: 10 * 1000,
+      })
+    );
+  } catch (err) {
+    console.log('---------------');
+    console.error('ERROR: Webpack dev middleware failed to start', err);
+    console.log('---------------');
+  }
+}
+
 
 // Serving static files- - - - - - - - - -
 app.use(serveGzip);
@@ -62,23 +88,6 @@ app.use(useragent.express());
 app.use(logger('dev'));
 // - - - - - - - - - - - - - - - - - - - -
 
-if (process.env.NODE_ENV === 'development') {
-  app.use(
-    webpackDevMiddleware(compiler, {
-      publicPath: WEBPACK_ROOT,
-      writeToDisk: true,
-    })
-  );
-
-  app.use(
-    webpackHotMiddleware(compiler, {
-      log: console.log,
-      path: '/__webpack_hmr',
-      heartbeat: 10 * 1000,
-    })
-  );
-}
-
 // API - - - - - - - - - - - - - - - - -
 app.use('/', signUpConfirmation);
 app.use('/', allRoutes);
@@ -97,7 +106,7 @@ app.use((err: any, req: any, res: any, next: any) => {
   const isServerErrorPage = req.path.includes('/500-server-error'); // Check if its server error to break the redirect loop
   const isUnauthorizedError = err.name === 'UnauthorizedError';
   const isNotFoundError = err.status === 404;
-  const isDevelopment = process.env.NODE_ENV === 'development';
+  const isDevelopment = process.env.NODE_ENV === NODE_ENV_DEVELOPMENT;
 
   if (err && isUnauthorizedError) {
     return res.redirect(303, '/login');
@@ -121,7 +130,6 @@ app.use((err: any, req: any, res: any, next: any) => {
 });
 
 /* - - - - - - - - - - - Server - - - - - - - - - - - - - -*/
-
 try {
   const certOptions = {
     key: fs.readFileSync(path.resolve(process.cwd(), 'src/server/ssl/private.key')),
@@ -129,17 +137,21 @@ try {
   };
   const server = https.createServer(certOptions, app);
 
-  server.listen(process.env.SERVER_PORT_HTTPS, () => {
+  server.listen(process.env.PORT_SERVER_HTTPS, () => {
     const address = server.address() as AddressInfo;
+    console.log('---------------');
     console.log('=> App listening to HTTPS on port: ' + address.port);
+    console.log('---------------');
   });
 } catch {
   console.log('=> SSL configuration files not found, skipping HTTPS server');
 } finally {
   const httpServer = http.createServer(app);
 
-  httpServer.listen(process.env.SERVER_PORT_HTTP, () => {
+  httpServer.listen(process.env.PORT_SERVER_HTTP, () => {
     const address = httpServer.address() as AddressInfo;
+    console.log('---------------');
     console.log('=> App listening to HTTP on port: ' + address.port);
+    console.log('---------------');
   });
 }

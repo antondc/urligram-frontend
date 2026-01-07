@@ -21,17 +21,18 @@ export class HttpClient {
   private static staticInstance: AxiosInstance;
   public publicInstance: AxiosInstance;
 
+
   constructor(options?: Options) {
     const credentials = options?.credentials === undefined ? true : options?.credentials;
     const axiosInstance = axios.create({
-      baseURL: process.env.ENDPOINT_API,
+      baseURL: process.env.API_URL,
       httpsAgent: new https.Agent({
         rejectUnauthorized: false,
       }),
     });
 
     if (!!options?.timeout) axiosInstance.defaults.timeout = options?.timeout;
-    axiosInstance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+    axiosInstance.defaults.headers.post['Content-Type'] = 'application/json';
     axiosInstance.defaults.paramsSerializer = this.paramsSerializer;
     axiosInstance.defaults.withCredentials = credentials;
 

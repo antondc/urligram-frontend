@@ -8,7 +8,7 @@ import {
 } from 'redux';
 import { thunk, ThunkAction } from 'redux-thunk';
 
-import { RootState } from './modules/rootType';
+import { RootState } from 'Modules/rootType';
 import { RootReducers } from './rootReducers';
 
 const middleware = [thunk];

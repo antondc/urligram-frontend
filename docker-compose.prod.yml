@@ -1,0 +1,7 @@
+services:
+  client:
+    build:
+      target: production-runtime
+    environment:
+      NODE_ENV: production
+      APP_ENV: deployProduction

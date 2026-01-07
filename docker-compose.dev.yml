@@ -1,0 +1,13 @@
+services:
+  client:
+    env_file:
+      - .env
+    build:
+      target: development-runtime
+    environment:
+      NODE_ENV: development
+      APP_ENV: localDevelopment
+    volumes:
+      - /app/node_modules
+    ports:
+      - "9228:9228"

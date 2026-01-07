@@ -4,15 +4,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useScrollToSection } from 'Hooks/useScrollToSection';
 import { uiResetModalsState } from 'Modules/Ui/actions/uiResetModalsState';
 import { selectUiScreenTypeIsMobile } from 'Modules/Ui/selectors/selectUiScreenTypeIsMobile';
-import { getConfigByEnv } from 'Root/src/shared/tools/utils/environment/getConfigByEnv';
+import { getConfigByAppEnv } from 'Root/src/shared/tools/utils/environment/getConfigByAppEnv';
 import { Docs as DocsUi } from './Docs';
 
 const Docs: React.FC = () => {
   const dispatch = useDispatch();
   const { scrollToSection } = useScrollToSection();
-  const domain = getConfigByEnv('DOMAIN');
-  const contactEmail = getConfigByEnv('CONTACT_EMAIL');
-  const appName = getConfigByEnv('APP_NAME');
+  const domain = getConfigByAppEnv('DOMAIN');
+  const contactEmail = getConfigByAppEnv('CONTACT_EMAIL');
+  const appName = getConfigByAppEnv('APP_NAME');
   const uiScreenTypeIsMobile = useSelector(selectUiScreenTypeIsMobile);
 
   const navigateToSection = (e: React.MouseEvent<HTMLElement>, hash: string) => {

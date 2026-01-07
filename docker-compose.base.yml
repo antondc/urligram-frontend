@@ -1,0 +1,17 @@
+services:
+  client:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        NPM_TOKEN: ${NPM_TOKEN}
+        API_URL: ${API_URL}
+    restart: unless-stopped
+    environment:
+      API_URL: ${API_URL}
+      PORT_SERVER_HTTP: ${PORT_SERVER_HTTP}
+      PORT_SERVER_HTTPS: ${PORT_SERVER_HTTPS}
+      JWT_SECRET: ${JWT_SECRET}
+    ports:
+      - "${PORT_SERVER_HTTP}:${PORT_SERVER_HTTP}"
+      - "${PORT_SERVER_HTTPS}:${PORT_SERVER_HTTPS}"

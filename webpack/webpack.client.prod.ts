@@ -3,12 +3,12 @@ import webpack, { Configuration } from 'webpack';
 import merge from 'webpack-merge';
 
 import Config from '../config.test.json';
-import { ENVIRONMENT_PRODUCTION, WEBPACK_DIST, WEBPACK_SRC_CLIENT } from './constants';
+import { APP_ENVIRONMENT_DEPLOY, NODE_ENV_PRODUCTION, WEBPACK_DIST, WEBPACK_SRC_CLIENT } from './constants';
 import webpackClientCommonConfig from './webpack.client.common';
 
 const webpackClientProdConfig: Configuration = {
   entry: [WEBPACK_SRC_CLIENT],
-  mode: 'production',
+  mode: NODE_ENV_PRODUCTION,
   output: {
     filename: 'client-[fullhash:4].js',
     path: WEBPACK_DIST,
@@ -26,11 +26,9 @@ const webpackClientProdConfig: Configuration = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env': {
-        DOMAIN: JSON.stringify(Config.production.DOMAIN),
-        ENDPOINT_API: JSON.stringify(Config.production.API_URL),
-        ENVIRONMENT: JSON.stringify(ENVIRONMENT_PRODUCTION),
-      },
+      'process.env.DOMAIN': JSON.stringify(Config.deployProduction.DOMAIN),
+      'process.env.API_URL': JSON.stringify(process.env.API_URL),
+      'process.env.APP_ENV': JSON.stringify(APP_ENVIRONMENT_DEPLOY),
     }),
     new MiniCssExtractPlugin({
       filename: '[name]-[fullhash:4].css',

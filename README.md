@@ -1,39 +1,47 @@
-# Frontend Starter Kit
+# Urligram web client
 
-Starter kit for frontend projects.
-
-## Install
-
-Install packages
-
-    nvm use
-    npm ci
-    npm run prod
+Web client for www.urligram.com.
 
 ## Development
+Add .env file following .env.example file.
+Run:
 
-    nvm use
-    npm ci
-    npm run dev
+    make start-dev
 
-Hot module reloading with `webpack-hot-middleware` and `webpack-dev-middleware.
+## Containers
 
-API endpoint points to staging: `https://api-staging.urligram.com/api/v1/`. For API development with both API and client dev set it temporarily to `https://dev.urligram.com:3000/api/v1/`.
-A different option is to add local IP to clients allowed on API config.test.json, and access frontend from this ip.
+Env vars are set in .env file for local development, and exported individually in production.
 
-## Docs
+- NPM_TOKEN: set only for Docker builds at `services[SERVICE_NAME].build.args.NPM_TOKEN` in`docker-compose.prod.yml`.
+- API_URL: set both for Docker builds and local development at `services[SERVICE_NAME].build.args.API_URL`, and for docker runtime at `services[SERVICE_NAME].environment.API_URL` in `docker-compose.dev.yml`; 
+- PORT_SERVER_HTTP: set for Docker runtime only at `services[SERVICE_NAME].environment.PORT_SERVER_HTTP` in `docker-compose.dev.yml`.
+- PORT_SERVER_HTTPS: set for Docker runtime only at `services[SERVICE_NAME].environment.PORT_SERVER_HTTPS` in `docker-compose.dev.yml`.
+- JWT_SECRET: set for Docker runtime only at `services[SERVICE_NAME].environment.JWT_SECRET` in `docker-compose.dev.yml`.
 
-### Data Loading
+## Injected ENV variables
+
+The following env variables are injected with Webpack at build time to the server client bundle only:
+
+- PORT_SERVER_HTTP.
+- PORT_SERVER_HTTPS.
+- JWT_SECRET.
+
+The following env variables are injected at build time to client bundle only:
+
+- API_URL.
+
+
+## Data Loading
 
 - Languages data is loaded only from server via `initialLanguagesLoader`. There are no methods to load them from frontend.
 
-### Create certificate
+## Create certificate
 
-#### Generate ssl certificates with Subject Alt Names on OSX
+### Generate ssl certificates with Subject Alt Names on OSX
 
 <https://gist.github.com/croxton/ebfb5f3ac143cd86542788f972434c96>
 
-#### Create `ssl.conf` file
+### Create `ssl.conf` file
 
       [ req ]
       default_bits       = 4096
@@ -63,11 +71,11 @@ A different option is to add local IP to clients allowed on API config.test.json
 Create a directory ./ssl for your project close to server, and place ssl.conf.
 Open this folder.
 
-#### Generate a private key
+### Generate a private key
 
     openssl genrsa -out private.key 4096
 
-#### Generate a Certificate Signing Request
+### Generate a Certificate Signing Request
 
     openssl req -new -sha256 \
         -out private.csr \
@@ -76,7 +84,7 @@ Open this folder.
 
 (You will be asked a series of questions about your certificate. Answer however you like, but for 'Common name' enter the name of your project, e.g. `my_project`)
 
-#### Now check the CSR
+### Now check the CSR
 
     openssl req -text -noout -in private.csr
 
@@ -85,7 +93,7 @@ You should see this:
     `X509v3 Subject Alternative Name: DNS:my-project.site` and
     `Signature Algorithm: sha256WithRSAEncryption`
 
-#### Generate the certificate
+### Generate the certificate
 
     openssl x509 -req \
         -sha256 \
@@ -96,13 +104,13 @@ You should see this:
         -extensions req_ext \
         -extfile ssl.conf
 
-#### Add the certificate to Mac keychain and trust it
+### Add the certificate to Mac keychain and trust it
 
     sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain private.crt
 
 (Alternatively, double click on the certificate file `private.crt` to open Keychain Access. Your project name `my_project` will be listed under the login keychain. Double click it and select 'Always trust' under the 'Trust' section.)
 
-### Pre-commit tasks
+## Pre-commit tasks
 
 Add to package.json
 
@@ -113,7 +121,7 @@ Add to package.json
           }
         },
 
-### Cookies
+## Cookies
 
 Cookies are accessed from backend only thanks to HttpOnly.
 
@@ -125,8 +133,8 @@ Cookies options are set checking if the APP referer is recognized by the API. If
           maxAge: 900000,
           httpOnly: true,
           path: '/',
-          sameSite: PRODUCTION ? 'strict' : 'none',
-          secure: DEVELOPMENT ? false : true,
+          sameSite: NODE_ENV_PRODUCTION ? 'strict' : 'none',
+          secure: NODE_ENV_DEVELOPMENT ? false : true,
         };
 
 Cookies are set in the following steps:
@@ -152,7 +160,7 @@ Cookies are set in the following steps:
 
 On `<Router/>` we have `<Redirect />` components that are loaded depending on the login status of the user, and allows or disallows to access to specific routes: `src/shared/routes/Router/index.tsx`
 
-### CSS
+## CSS
 
 Used `less`.
 The use of `css modules` is discouraged: the reason is the lack of selector nesting. Instead, a custom variant of `BEM` is used:
@@ -161,7 +169,7 @@ The use of `css modules` is discouraged: the reason is the lack of selector nest
 
 Autoprefixes are set at webpack
 
-### Webpack build
+## Webpack build
 
 Webpack building is done in parallel: client and server.
 
@@ -170,19 +178,19 @@ Webpack building is done in parallel: client and server.
     webpack.server.dev.ts
     webpack.server.prod.ts
 
-### API calls
+## API calls
 
 We use Axios, wrapped within an HttpClient singleton.
 
-### Globals
+## Globals
 
 Globals are set in globals.d.ts, see <https://stackoverflow.com/questions/12709074/how-do-you-explicitly-set-a-new-property-on-window-in-typescript/45352250#45352250>.
 
-### Enzyme
+## Enzyme
 
 Enzyme needs adapter for React 16, see: <https://github.com/Microsoft/TypeScript-React-Starter/issues/131>
 
-### React-router `<Switch />` and `location`
+## React-router `<Switch />` and `location`
 
 In previous implementation `<Swith />` and `<StaticRouter />` were receiving `location`
 
@@ -200,7 +208,7 @@ and
 
 This prop was removed, as it seems unnecessary
 
-### Thunks, client and server
+## Thunks, client and server
 
 The data is retrieved from the API via thunks.
 The thunks returns async functions to use async/await syntax. On client they are used as usual; on server, we first have to call the thunk, and then the function within it.
@@ -214,4 +222,4 @@ Copyright (c) 2020 Urligram
 
 ## Rebuild
 
-1 2 3 4 5 6 7
+1 2 3 4 5 6 7 8

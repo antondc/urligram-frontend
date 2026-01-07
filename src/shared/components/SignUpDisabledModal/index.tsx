@@ -7,14 +7,14 @@ import { selectCurrentLanguageSlug } from 'Modules/Languages/selectors/selectCur
 import { switchSignUpDisabledModal } from 'Modules/Ui/actions/switchSignUpDisabledModal';
 import { DELAY_FAST_MS } from 'Root/src/shared/constants';
 import history from 'Services/History';
-import { getConfigByEnv } from 'Tools/utils/environment/getConfigByEnv';
+import { getConfigByAppEnv } from 'Tools/utils/environment/getConfigByAppEnv';
 
 import './SignUpDisabledModal.less';
 
 const SignUpDisabledModal: React.FC = () => {
   const dispatch = useDispatch();
   const currentLanguageSlug = useSelector(selectCurrentLanguageSlug);
-  const contactEmail = getConfigByEnv('CONTACT_EMAIL');
+  const contactEmail = getConfigByAppEnv('CONTACT_EMAIL');
 
   const closeSignUpDisabledModal = () => {
     dispatch(switchSignUpDisabledModal(false));

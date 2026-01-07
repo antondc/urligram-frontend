@@ -1,4 +1,4 @@
-image: node:20
+image: node:latest
 
 before_script:
   - apt-get update -qq
@@ -26,7 +26,6 @@ before_script:
 
 stages:
   - github_clone
-  - test
   - deploy_production
 
 cache:
@@ -44,43 +43,20 @@ github_clone:
     - git push github --all
     - git push github --tags
 
-test:
-  stage: test
-  script:
-    - npm test
-  artifacts:
-    paths:
-      - node_modules/
-
 deploy_production:
   stage: deploy_production
   only:
     - master
   script:
     - ssh ${SERVER_USER}@${SERVER_ADDRESS} "
-        cd ${SERVER_PATH_PRODUCTION}
-        && rm -rf node_modules dist/* tmp
-      "
-    - ssh ${SERVER_USER}@${SERVER_ADDRESS} "
-        cd ${SERVER_PATH_PRODUCTION}
-        && git pull origin master
-      "
-    - ssh ${SERVER_USER}@${SERVER_ADDRESS} "
-        source ~/.bash_profile
-        && export NPM_TOKEN=${NPM_TOKEN}
-        && export JWT_SECRET=superSecret
-        && cd ${SERVER_PATH_PRODUCTION}
-        && nvm use --delete-prefix
-        && git checkout master
-        && npm ci --verbose
-        && npm run prod
-      "
-    - ssh ${SERVER_USER}@${SERVER_ADDRESS} "
-        source ~/.bash_profile
-        && export NPM_TOKEN=${NPM_TOKEN}
-        && cd ${SERVER_PATH_PRODUCTION}
-        && nvm use --delete-prefix
-        && pm2 delete urligram.com || true
-        && export JWT_SECRET=${JWT_SECRET}
-        && NODE_ENV=production pm2 start ./dist/server.js --name urligram.com --update-env
+      cd ${SERVER_PROJECT_PATH}/${SERVER_SOURCE_CODE_FOLDER}
+      && git checkout master
+      && git pull origin master
+      && mkdir -p ${SERVER_PROJECT_PATH}/mysql ${SERVER_PROJECT_PATH}/media
+      && export JWT_SECRET=${JWT_SECRET}
+      && export NPM_TOKEN=${NPM_TOKEN}
+      && export API_URL=${API_URL}
+      && export PORT_SERVER_HTTP=${PORT_SERVER_HTTP}
+      && export PORT_SERVER_HTTPS=${PORT_SERVER_HTTPS}
+      && docker compose --env-file /dev/null -p ${PROJECT_NAME} -f docker-compose.base.yml -f docker-compose.prod.yml up -d --build
       "

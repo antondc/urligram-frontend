@@ -3,11 +3,11 @@ import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import merge from 'webpack-merge';
 
 import Config from '../config.test.json';
-import { ENVIRONMENT_DEV, WEBPACK_ROOT, WEBPACK_SRC_CLIENT } from './constants';
+import { APP_ENV_LOCAL, NODE_ENV_DEVELOPMENT, WEBPACK_ROOT, WEBPACK_SRC_CLIENT } from './constants';
 import webpackClientCommonConfig from './webpack.client.common';
 
 const webpackClientDevConfig: Configuration = {
-  mode: 'development',
+  mode: NODE_ENV_DEVELOPMENT,
   entry: ['webpack-hot-middleware/client', WEBPACK_SRC_CLIENT],
   output: {
     filename: 'client-[fullhash:4].js',
@@ -28,11 +28,9 @@ const webpackClientDevConfig: Configuration = {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
-      'process.env': {
-        DOMAIN: JSON.stringify(Config.development.DOMAIN),
-        ENDPOINT_API: JSON.stringify(Config.development.API_URL),
-        ENVIRONMENT: JSON.stringify(ENVIRONMENT_DEV),
-      },
+      'process.env.DOMAIN': JSON.stringify(Config.localDevelopment.DOMAIN),
+      'process.env.API_URL': JSON.stringify(process.env.API_URL),
+      'process.env.APP_ENV': JSON.stringify(APP_ENV_LOCAL),
     }),
     new BundleAnalyzerPlugin({
       analyzerMode: 'static',
